@@ -105,13 +105,13 @@ describe('generatePageMapFromFilepaths()', () => {
         "docs/docs-theme/page-configuration/page.mdx",
         "docs/docs-theme/page.mdx",
         "docs/docs-theme/start/page.mdx",
-        "docs/docs-theme/theme-configuration/banner/page.mdx",
-        "docs/docs-theme/theme-configuration/footer/page.mdx",
-        "docs/docs-theme/theme-configuration/head/page.mdx",
-        "docs/docs-theme/theme-configuration/layout/page.mdx",
-        "docs/docs-theme/theme-configuration/navbar/page.mdx",
-        "docs/docs-theme/theme-configuration/not-found/page.mdx",
-        "docs/docs-theme/theme-configuration/search/page.mdx",
+        "docs/docs-theme/theme-configuration/nextra-theme-docs/footer/page.mdx",
+        "docs/docs-theme/theme-configuration/nextra-theme-docs/layout/page.mdx",
+        "docs/docs-theme/theme-configuration/nextra-theme-docs/navbar/page.mdx",
+        "docs/docs-theme/theme-configuration/nextra-theme-docs/not-found/page.mdx",
+        "docs/docs-theme/theme-configuration/nextra/banner/page.mdx",
+        "docs/docs-theme/theme-configuration/nextra/head/page.mdx",
+        "docs/docs-theme/theme-configuration/nextra/search/page.mdx",
         "docs/guide/_meta.ts",
         "docs/guide/advanced/_meta.ts",
         "docs/guide/advanced/customize-the-cascade-layers/page.mdx",
@@ -204,39 +204,51 @@ describe('generatePageMapFromFilepaths()', () => {
                   {
                     "children": [
                       {
-                        "__pagePath": "docs/docs-theme/theme-configuration/banner/page.mdx",
-                        "name": "banner",
-                        "route": "/docs/docs-theme/theme-configuration/banner",
+                        "children": [
+                          {
+                            "__pagePath": "docs/docs-theme/theme-configuration/nextra/banner/page.mdx",
+                            "name": "banner",
+                            "route": "/docs/docs-theme/theme-configuration/nextra/banner",
+                          },
+                          {
+                            "__pagePath": "docs/docs-theme/theme-configuration/nextra/head/page.mdx",
+                            "name": "head",
+                            "route": "/docs/docs-theme/theme-configuration/nextra/head",
+                          },
+                          {
+                            "__pagePath": "docs/docs-theme/theme-configuration/nextra/search/page.mdx",
+                            "name": "search",
+                            "route": "/docs/docs-theme/theme-configuration/nextra/search",
+                          },
+                        ],
+                        "name": "nextra",
+                        "route": "/docs/docs-theme/theme-configuration/nextra",
                       },
                       {
-                        "__pagePath": "docs/docs-theme/theme-configuration/footer/page.mdx",
-                        "name": "footer",
-                        "route": "/docs/docs-theme/theme-configuration/footer",
-                      },
-                      {
-                        "__pagePath": "docs/docs-theme/theme-configuration/head/page.mdx",
-                        "name": "head",
-                        "route": "/docs/docs-theme/theme-configuration/head",
-                      },
-                      {
-                        "__pagePath": "docs/docs-theme/theme-configuration/layout/page.mdx",
-                        "name": "layout",
-                        "route": "/docs/docs-theme/theme-configuration/layout",
-                      },
-                      {
-                        "__pagePath": "docs/docs-theme/theme-configuration/navbar/page.mdx",
-                        "name": "navbar",
-                        "route": "/docs/docs-theme/theme-configuration/navbar",
-                      },
-                      {
-                        "__pagePath": "docs/docs-theme/theme-configuration/not-found/page.mdx",
-                        "name": "not-found",
-                        "route": "/docs/docs-theme/theme-configuration/not-found",
-                      },
-                      {
-                        "__pagePath": "docs/docs-theme/theme-configuration/search/page.mdx",
-                        "name": "search",
-                        "route": "/docs/docs-theme/theme-configuration/search",
+                        "children": [
+                          {
+                            "__pagePath": "docs/docs-theme/theme-configuration/nextra-theme-docs/footer/page.mdx",
+                            "name": "footer",
+                            "route": "/docs/docs-theme/theme-configuration/nextra-theme-docs/footer",
+                          },
+                          {
+                            "__pagePath": "docs/docs-theme/theme-configuration/nextra-theme-docs/layout/page.mdx",
+                            "name": "layout",
+                            "route": "/docs/docs-theme/theme-configuration/nextra-theme-docs/layout",
+                          },
+                          {
+                            "__pagePath": "docs/docs-theme/theme-configuration/nextra-theme-docs/navbar/page.mdx",
+                            "name": "navbar",
+                            "route": "/docs/docs-theme/theme-configuration/nextra-theme-docs/navbar",
+                          },
+                          {
+                            "__pagePath": "docs/docs-theme/theme-configuration/nextra-theme-docs/not-found/page.mdx",
+                            "name": "not-found",
+                            "route": "/docs/docs-theme/theme-configuration/nextra-theme-docs/not-found",
+                          },
+                        ],
+                        "name": "nextra-theme-docs",
+                        "route": "/docs/docs-theme/theme-configuration/nextra-theme-docs",
                       },
                     ],
                     "name": "theme-configuration",
