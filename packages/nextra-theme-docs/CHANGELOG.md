@@ -1,5 +1,14 @@
 # nextra-theme-docs
 
+## 3.0.2
+
+### Patch Changes
+
+- 991b69a: handle empty `item.route` in `<FolderImpl` in `<Sidebar>` for
+  `item.type: 'menu'`
+- Updated dependencies [b6341f7]
+  - nextra@3.0.2
+
 ## 3.0.1
 
 ### Patch Changes

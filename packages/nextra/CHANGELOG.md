@@ -1,5 +1,12 @@
 # nextra
 
+## 3.0.2
+
+### Patch Changes
+
+- b6341f7: remove warning
+  `Watchpack Error (initial scan): Error: ENOTDIR: not a directory, scandir 'path-to-your-node_modules/next/dist/pages/_app.js'`
+
 ## 3.0.1
 
 ## 3.0.0
