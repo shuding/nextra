@@ -45,11 +45,12 @@ const config: DocsThemeConfig = {
     key: '3.0-release',
     content: (
       <div className='before:content-["🎉_"]'>
+        Nextra 3.0 is released.{' '}
         <Link
           href="https://the-guild.dev/blog/nextra-3"
           className='after:content-["_→"]'
         >
-          Nextra 3.0 is released. Read more
+          Read more
         </Link>
       </div>
     )
