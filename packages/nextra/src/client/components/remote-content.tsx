@@ -8,7 +8,6 @@ type Scope = Record<string, unknown>
 const runtime =
   process.env.NODE_ENV === 'production' ? jsxRuntime : jsxDevRuntime
 
-
 export function evaluate(compiledSource: string, scope: Scope = {}) {
   // if we're ready to render, we can assemble the component tree and let React do its thing
   // first we set up the scope which has to include the mdx custom

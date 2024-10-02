@@ -44,5 +44,5 @@ export default {
       typesetting: 'article',
       timestamp: false
     }
-  },
+  }
 }

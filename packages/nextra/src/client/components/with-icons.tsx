@@ -3,6 +3,7 @@ import {
   CPPIcon,
   CsharpIcon,
   CssIcon,
+  GoIcon,
   GraphQLIcon,
   JavaScriptIcon,
   MarkdownIcon,
@@ -38,7 +39,9 @@ const LanguageToIcon: Record<string, FC<SVGProps<SVGElement>>> = {
   rs: RustIcon,
   terraform: TerraformIcon,
   tf: TerraformIcon,
-  move: MoveIcon
+  move: MoveIcon,
+  go: GoIcon,
+  golang: GoIcon
 }
 
 export const withIcons =
@@ -50,7 +53,7 @@ export const withIcons =
 
     return (
       <Component
-        icon={Icon && <Icon height="16" className="_shrink-0" />}
+        icon={Icon && <Icon height="16" className="_max-w-6 _shrink-0" />}
         {...props}
       />
     )
