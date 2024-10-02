@@ -67,6 +67,16 @@ export async function loader(
       path.join(resolveData.descriptionFileRoot, resolveData.relativePath)
     : this.resourcePath
 
+  const currentPath = slash(mdxPath)
+
+  if (currentPath.includes('@typescript/vfs/dist/vfs.')) {
+    // Fixes https://github.com/microsoft/TypeScript-Website/pull/3022
+    // Fixes https://github.com/shuding/nextra/issues/3322#issuecomment-2384046618
+    return source
+      .replace(/String\.fromCharCode\(112, ?97, ?116, ?104\)/, '"path"')
+      .replace(/String\.fromCharCode\(102, ?115\)/, '"fs"')
+  }
+
   if (!IS_PRODUCTION && isPageMapImport) {
     return compileMetadata(source, { filePath: mdxPath })
   }

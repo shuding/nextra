@@ -16,8 +16,7 @@ import { APP_DIR } from './file-system.js'
 import {
   createAstObject,
   normalizePageRoute,
-  pageTitleFromFilename,
-  truthy
+  pageTitleFromFilename
 } from './utils.js'
 
 const fs = gracefulFs.promises
@@ -172,7 +171,7 @@ export async function collectFiles({
       })
     })
 
-  const pageMap = (await Promise.all(promises)).filter(truthy)
+  const pageMap = (await Promise.all(promises)).filter(v => !!v)
 
   return {
     // @ts-expect-error -- fixme

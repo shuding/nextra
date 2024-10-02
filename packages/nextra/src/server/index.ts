@@ -15,6 +15,8 @@ const DEFAULT_EXTENSIONS = ['js', 'jsx', 'ts', 'tsx']
 
 const AGNOSTIC_PAGE_MAP_PATH = `.next${sep}static${sep}chunks${sep}nextra-page-map`
 
+const RE_SEP = sep === '/' ? '/' : '\\\\'
+
 const nextra: Nextra = nextraConfig => {
   const { error, data: loaderOptions } =
     nextraConfigSchema.safeParse(nextraConfig)
@@ -80,6 +82,14 @@ const nextra: Nextra = nextraConfig => {
 
         const rules = config.module.rules as RuleSetRule[]
 
+        const defaultLoaderOptions = [
+          options.defaultLoaders.babel,
+          {
+            loader: 'nextra/loader',
+            options: loaderOptions
+          }
+        ]
+
         rules.push(
           {
             test: MARKDOWN_EXTENSION_REGEX,
@@ -101,10 +111,7 @@ const nextra: Nextra = nextraConfig => {
             issuer: request =>
               (!!request && !request.includes(AGNOSTIC_PAGE_MAP_PATH)) ||
               request === null,
-            use: [
-              options.defaultLoaders.babel,
-              { loader: 'nextra/loader', options: loaderOptions }
-            ]
+            use: defaultLoaderOptions
           },
           {
             // Match pages (imports without an issuer request).
@@ -117,6 +124,13 @@ const nextra: Nextra = nextraConfig => {
                 options: { ...loaderOptions, isPageImport: true }
               }
             ]
+          },
+          {
+            test: new RegExp(
+              `@typescript${RE_SEP}vfs${RE_SEP}dist${RE_SEP}vfs\\.`
+            ),
+            issuer: request => !!request,
+            use: defaultLoaderOptions
           }
         )
 

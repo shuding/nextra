@@ -38,7 +38,7 @@ import {
   remarkRemoveImports,
   remarkStaticImage
 } from './remark-plugins/index.js'
-import { logger, truthy } from './utils.js'
+import { logger } from './utils.js'
 
 const cachedCompilerForFormat: Record<
   Exclude<ProcessorOptions['format'], undefined | null>,
@@ -192,7 +192,7 @@ export async function compileMdx(
           }
         ] satisfies Pluggable,
         remarkSmartypants
-      ].filter(truthy),
+      ].filter(v => !!v),
       rehypePlugins: [
         ...(rehypePlugins || []),
         format === 'md' && [
@@ -234,7 +234,7 @@ export async function compileMdx(
               [rehypeAttachCodeMeta, { search }]
             ]),
         [rehypeExtractTocContent, { isRemoteContent }]
-      ].filter(truthy),
+      ].filter(v => !!v),
       recmaPlugins: [
         (() => (ast: Program, file) => {
           const mdxContentIndex = ast.body.findIndex(node => {
@@ -286,7 +286,7 @@ export async function compileMdx(
         }) satisfies Plugin<[], Program>,
         isRemoteContent ? recmaRewriteFunctionBody : recmaRewriteJsx,
         ...(recmaPlugins || [])
-      ].filter(truthy)
+      ].filter(v => !!v)
     })
   }
 }

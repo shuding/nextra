@@ -5,7 +5,7 @@ export default {
     'tailwindcss/nesting': {},
     tailwindcss: {},
     'postcss-lightningcss': {
-      browsers: '>= .25%'
+      browsers: '>= .25% and not dead'
     }
   }
 }

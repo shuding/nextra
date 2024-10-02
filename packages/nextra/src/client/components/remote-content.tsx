@@ -1,8 +1,13 @@
-import { jsxRuntime } from '../jsx-runtime.cjs'
+import jsxDevRuntime from 'react/jsx-dev-runtime'
+import jsxRuntime from 'react/jsx-runtime'
 import type { MDXComponents } from '../mdx.js'
 import { useMDXComponents } from '../mdx.js'
 
 type Scope = Record<string, unknown>
+
+const runtime =
+  process.env.NODE_ENV === 'production' ? jsxRuntime : jsxDevRuntime
+
 
 export function evaluate(compiledSource: string, scope: Scope = {}) {
   // if we're ready to render, we can assemble the component tree and let React do its thing
@@ -17,7 +22,7 @@ export function evaluate(compiledSource: string, scope: Scope = {}) {
   // function with the actual values.
   const hydrateFn = Reflect.construct(Function, ['$', ...keys, compiledSource])
 
-  return hydrateFn({ useMDXComponents, ...jsxRuntime }, ...values)
+  return hydrateFn({ useMDXComponents, ...runtime }, ...values)
 }
 
 export type RemoteContentProps = {
