@@ -10,8 +10,7 @@
     "jsx": "react-jsx",
     "moduleResolution": "node",
     "lib": ["ESNext", "DOM"],
-    "types": ["vitest/globals"],
-    "resolveJsonModule": true
+    "types": ["vitest/globals"]
   },
   "exclude": ["dist"]
 }

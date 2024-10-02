@@ -9,8 +9,7 @@
     "skipLibCheck": true,
     "jsx": "react-jsx",
     "moduleResolution": "Node",
-    "types": ["vitest/globals"],
-    "resolveJsonModule": true
+    "types": ["vitest/globals"]
   },
   "exclude": ["dist"]
 }
