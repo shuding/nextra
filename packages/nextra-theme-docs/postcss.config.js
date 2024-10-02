@@ -5,7 +5,7 @@ module.exports = {
     'tailwindcss/nesting': {},
     tailwindcss: {},
     'postcss-lightningcss': {
-      browsers: '>= .25% and not dead'
+      browsers: '>= .25% and not dead and not op_mini all'
     }
   }
 }
