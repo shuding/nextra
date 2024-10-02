@@ -79,8 +79,8 @@ page:
 
 ### Allowed Extensions
 
-It's possible to use the `.jsx`, `.ts` and `.tsx` extensions for `_meta` files as
-well (e.g. `_meta.ts`).
+It's possible to use the `.jsx`, `.ts` and `.tsx` extensions for `_meta` files
+as well (e.g. `_meta.ts`).
 
 ### Sorting Pages Alphabetically
 
@@ -99,7 +99,8 @@ probably need to add `exclude: ['*/_meta']{:js}` to your
 ### Allowed Keys Values
 
 The type of your `_meta` keys should be always `string` and not `number` since
-[numbers are always ordered first](https://dev.to/frehner/the-order-of-js-object-keys-458d) for JavaScript objects.
+[numbers are always ordered first](https://dev.to/frehner/the-order-of-js-object-keys-458d)
+for JavaScript objects.
 
 Following:
 
@@ -113,6 +114,7 @@ export default {
 
 Will be converted to:
 
+{/* prettier-ignore */}
 ```js filename="pages/_meta.js"
 export default {
   '1': '',
