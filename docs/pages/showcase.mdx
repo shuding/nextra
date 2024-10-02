@@ -167,7 +167,7 @@ import { Cards } from 'nextra/components'
   </Card>
 </Cards>
 
-export const Card = Object.assign(
+export const Card = /* @__PURE__ */ Object.assign(
   // Copy card component and add default props
   Cards.Card.bind(),
   {
