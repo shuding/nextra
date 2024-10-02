@@ -4,10 +4,9 @@ title: Showcase
 
 import { Cards } from 'nextra/components'
 
-{<h1 className="mt-10 mb-4 text-center text-[2.5rem] font-bold tracking-tight">Showcase</h1>}
+<h1 className="mt-10 mb-4 text-center text-[2.5rem] font-bold tracking-tight">{'Showcase'}</h1>
 
-{<p className="mb-16 text-center text-lg text-gray-500 dark:text-gray-400">Open
-source projects powered by Nextra</p>}
+<p className="mb-16 text-center text-lg text-gray-500 dark:text-gray-400">{'Open source projects powered by Nextra'}</p>
 
 <Cards>
   <Card title="Speakeasy" href="https://speakeasyapi.dev/docs">
@@ -49,10 +48,7 @@ source projects powered by Nextra</p>}
   <Card title="Edge Runtime" href="https://edge-runtime.vercel.app">
     <>![Edge Runtime preview](./showcase/edge-runtime.jpeg)</>
   </Card>
-  <Card
-    title="Livepeer"
-    href="https://docs.livepeer.org/guides/overview"
-  >
+  <Card title="Livepeer" href="https://docs.livepeer.org/guides/overview">
     <>![Livepeer preview](./showcase/livepeer.png)</>
   </Card>
   <Card title="Sound.xyz" href="https://docs.sound.xyz">
@@ -75,16 +71,10 @@ source projects powered by Nextra</p>}
   <Card title="GraphQL Hive" href="https://the-guild.dev/graphql/hive">
     <>![GraphQL Hive preview](./showcase/graphql-hive.png)</>
   </Card>
-  <Card
-    title="GraphQL Yoga"
-    href="https://the-guild.dev/graphql/yoga-server"
-  >
+  <Card title="GraphQL Yoga" href="https://the-guild.dev/graphql/yoga-server">
     <>![GraphQL Yoga preview](./showcase/graphql-yoga.png)</>
   </Card>
-  <Card
-    title="GraphQL Envelop"
-    href="https://the-guild.dev/graphql/envelop"
-  >
+  <Card title="GraphQL Envelop" href="https://the-guild.dev/graphql/envelop">
     <>![GraphQL Envelop preview](./showcase/graphql-envelop.png)</>
   </Card>
   <Card
@@ -102,46 +92,25 @@ source projects powered by Nextra</p>}
   <Card title="GraphQL Mesh" href="https://the-guild.dev/graphql/mesh">
     <>![GraphQL Mesh preview](./showcase/graphql-mesh.png)</>
   </Card>
-  <Card
-    title="GraphQL Tools"
-    href="https://the-guild.dev/graphql/tools"
-  >
+  <Card title="GraphQL Tools" href="https://the-guild.dev/graphql/tools">
     <>![GraphQL Tools preview](./showcase/graphql-tools.png)</>
   </Card>
-  <Card
-    title="GraphQL Modules"
-    href="https://the-guild.dev/graphql/modules"
-  >
+  <Card title="GraphQL Modules" href="https://the-guild.dev/graphql/modules">
     <>![GraphQL Modules preview](./showcase/graphql-modules.png)</>
   </Card>
-  <Card
-    title="GraphQL ESLint"
-    href="https://the-guild.dev/graphql/eslint"
-  >
+  <Card title="GraphQL ESLint" href="https://the-guild.dev/graphql/eslint">
     <>![GraphQL ESLint preview](./showcase/graphql-eslint.png)</>
   </Card>
-  <Card
-    title="GraphQL Config"
-    href="https://the-guild.dev/graphql/config"
-  >
+  <Card title="GraphQL Config" href="https://the-guild.dev/graphql/config">
     <>![GraphQL Config preview](./showcase/graphql-config.png)</>
   </Card>
-  <Card
-    title="GraphQL Scalars"
-    href="https://the-guild.dev/graphql/scalars"
-  >
+  <Card title="GraphQL Scalars" href="https://the-guild.dev/graphql/scalars">
     <>![GraphQL Scalars preview](./showcase/graphql-scalars.png)</>
   </Card>
-  <Card
-    title="GraphQL Shield"
-    href="https://the-guild.dev/graphql/shield"
-  >
+  <Card title="GraphQL Shield" href="https://the-guild.dev/graphql/shield">
     <>![GraphQL Shield preview](./showcase/graphql-shield.png)</>
   </Card>
-  <Card
-    title="GraphQL SOFA"
-    href="https://the-guild.dev/graphql/sofa-api"
-  >
+  <Card title="GraphQL SOFA" href="https://the-guild.dev/graphql/sofa-api">
     <>![GraphQL SOFA preview](./showcase/graphql-sofa.png)</>
   </Card>
   <Card
@@ -199,7 +168,8 @@ export const Card = Object.assign(
     defaultProps: {
       image: true,
       arrow: true,
-      target: '_blank'
+      target: '_blank',
+      rel: 'noreferrer'
     }
   }
 )

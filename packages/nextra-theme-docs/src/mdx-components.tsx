@@ -75,7 +75,8 @@ const createHeading = (
                   h4: '_mt-8 _text-xl',
                   h5: '_mt-8 _text-lg',
                   h6: '_mt-8 _text-base'
-                }[Tag]
+                }[Tag],
+                className
               )
         }
         {...props}
