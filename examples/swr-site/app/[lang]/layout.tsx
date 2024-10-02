@@ -57,12 +57,7 @@ export default async function RootLayout({ children, params: { lang } }) {
   }
 
   return (
-    <html
-      // need to set true RTL language
-      lang={lang === 'es' ? 'he' : lang}
-      dir={getDirection(lang)}
-      suppressHydrationWarning
-    >
+    <html lang={lang} dir={getDirection(lang)} suppressHydrationWarning>
       <Head
         backgroundColor={{
           dark: 'rgb(15,23,42)',
