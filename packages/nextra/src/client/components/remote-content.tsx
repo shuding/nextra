@@ -1,3 +1,4 @@
+import jsxDevRuntime from 'react/jsx-dev-runtime'
 import jsxRuntime from 'react/jsx-runtime'
 import { useData } from '../hooks/index.js'
 import type { MDXComponents } from '../mdx.js'
@@ -19,7 +20,13 @@ export function evaluate(
   // function with the actual values.
   const hydrateFn = Reflect.construct(Function, ['$', ...keys, compiledSource])
 
-  return hydrateFn({ useMDXComponents, ...jsxRuntime }, ...values)
+  return hydrateFn(
+    {
+      useMDXComponents,
+      ...(process.env.NODE_ENV === 'production' ? jsxRuntime : jsxDevRuntime)
+    },
+    ...values
+  )
 }
 
 export function RemoteContent({
