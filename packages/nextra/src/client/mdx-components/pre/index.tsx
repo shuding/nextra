@@ -1,9 +1,15 @@
 import cn from 'clsx'
 import type { ComponentProps, ReactElement, ReactNode } from 'react'
-import { classes } from '../../components/button.js'
 import { WordWrapIcon } from '../../icons/index.js'
 import { CopyToClipboard } from './copy-to-clipboard.js'
 import { ToggleWordWrapButton } from './toggle-word-wrap-button.js'
+
+export const classes = {
+  border: cn(
+    '_border _border-gray-300 dark:_border-neutral-700',
+    'contrast-more:_border-gray-900 contrast-more:dark:_border-gray-50'
+  )
+}
 
 export type PreProps = ComponentProps<'pre'> & {
   'data-filename'?: string

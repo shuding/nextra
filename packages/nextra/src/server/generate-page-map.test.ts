@@ -147,6 +147,7 @@ describe('generatePageMapFromFilepaths()', () => {
         "docs/page.mdx",
         "page.tsx",
         "showcase/page.mdx",
+        "sponsors/page.mdx",
       ]
     `)
 
@@ -459,6 +460,11 @@ describe('generatePageMapFromFilepaths()', () => {
             "__pagePath": "showcase/page.mdx",
             "name": "showcase",
             "route": "/showcase",
+          },
+          {
+            "__pagePath": "sponsors/page.mdx",
+            "name": "sponsors",
+            "route": "/sponsors",
           },
         ]
       `)

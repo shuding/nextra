@@ -1,14 +1,10 @@
+'use client'
+
 import { Button as HeadlessButton } from '@headlessui/react'
 import type { ButtonProps as HeadlessButtonProps } from '@headlessui/react'
 import cn from 'clsx'
 import type { ReactElement } from 'react'
-
-export const classes = {
-  border: cn(
-    '_border _border-gray-300 dark:_border-neutral-700',
-    'contrast-more:_border-gray-900 contrast-more:dark:_border-gray-50'
-  )
-}
+import { classes } from '../mdx-components/pre/index.js'
 
 export type ButtonProps = HeadlessButtonProps & {
   variant?: 'outline' | 'default'
