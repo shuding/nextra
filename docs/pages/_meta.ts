@@ -26,6 +26,13 @@ export default {
       typesetting: 'article'
     }
   },
+  sponsors: {
+    type: 'page',
+    title: 'Sponsors',
+    theme: {
+      typesetting: 'article'
+    }
+  },
   version: {
     type: 'menu',
     title: 'Version',
