@@ -1,5 +1,17 @@
 # nextra-theme-docs
 
+## 3.0.3
+
+### Patch Changes
+
+- 9d93caf: RTL support for the `<Steps>` component.
+- 5fbce2f: Added golang logo for code blocks.
+- Updated dependencies [82fc267]
+- Updated dependencies [edc6c29]
+- Updated dependencies [9d93caf]
+- Updated dependencies [5fbce2f]
+  - nextra@3.0.3
+
 ## 3.0.2
 
 ### Patch Changes
