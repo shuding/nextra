@@ -10,7 +10,7 @@
       @apply _absolute _size-[33px];
       @apply _border-4 _border-[rgb(var(--nextra-bg))] _bg-gray-100 dark:_bg-neutral-800;
       @apply _rounded-full _text-neutral-400 _text-base _font-normal _text-center _-indent-px;
-      @apply _mt-[3px] _ml-[-41px];
+      @apply _mt-[3px] _ms-[-41px];
       content: counter(var(--counter-id));
     }
   }
