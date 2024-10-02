@@ -56,6 +56,9 @@ the watch mode for both nextra and the theme in separated terminals.
 
 <div>
  <a href="https://speakeasyapi.dev/docs?utm_source=github&utm_campaign=nextra&utm_content=logolink">
-   <img src="/docs/pages/showcase/speakeasy.png" alt="Speakeasy" width="256">
+   <img src="/docs/pages/showcase/speakeasy.png" alt="Speakeasy preview" width="256">
+ </a>
+ <a href="https://xyflow.com?utm_source=github&utm_campaign=nextra&utm_content=logolink">
+   <img src="/docs/pages/showcase/xyflow.jpg" alt="xyflow preview" width="256">
  </a>
 </div>
