@@ -1,6 +1,4 @@
 /* eslint-env node */
-import fs from 'node:fs'
-import { createRequire } from 'node:module'
 import { join, sep } from 'node:path'
 import type { NextConfig } from 'next'
 import { fromZodError } from 'zod-validation-error'
@@ -23,8 +21,6 @@ const DEFAULT_EXTENSIONS = ['js', 'jsx', 'ts', 'tsx']
 const AGNOSTIC_PAGE_MAP_PATH = `.next${sep}static${sep}chunks${sep}nextra-page-map`
 
 const RE_SEP = sep === '/' ? '/' : '\\\\'
-
-const require = createRequire(import.meta.url)
 
 const nextra: Nextra = nextraConfig => {
   const { error } = nextraConfigSchema.safeParse(nextraConfig)
@@ -142,10 +138,6 @@ const nextra: Nextra = nextraConfig => {
         } else {
           alias[join(alias.next, 'dist', 'pages', '_app')] = appESM
         }
-        // alias[require.resolve('@typescript/vfs')] = require.resolve('@typescript/vfs/dist/vfs.esm.patched.js')
-        // alias[require.resolve('@typescript/vfs/dist/vfs.cjs.development.js')] = require.resolve('@typescript/vfs/dist/vfs.cjs.development.patched.js')
-        // alias[require.resolve('@typescript/vfs/dist/vfs.cjs.production.min.js')] = require.resolve('@typescript/vfs/dist/vfs.cjs.production.min.patched.js')
-        // alias[require.resolve('@typescript/vfs/dist/vfs.esm.js')] = require.resolve('@typescript/vfs/dist/vfs.esm.patched.js')
         const rules = config.module.rules as RuleSetRule[]
 
         if (IMPORT_FRONTMATTER) {
