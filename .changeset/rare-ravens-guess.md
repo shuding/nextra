@@ -1,7 +1,7 @@
 ---
-'nextra': minor
-'nextra-theme-docs': minor
-'nextra-theme-blog': minor
+'nextra': patch
+'nextra-theme-docs': patch
+'nextra-theme-blog': patch
 ---
 
 Added golang logo for code blocks.
