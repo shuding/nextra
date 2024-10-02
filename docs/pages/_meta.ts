@@ -11,21 +11,6 @@ export default {
     type: 'page',
     title: 'Documentation'
   },
-  showcase: {
-    type: 'page',
-    title: 'Showcase',
-    theme: {
-      typesetting: 'article',
-      layout: 'full'
-    }
-  },
-  about: {
-    type: 'page',
-    title: 'About',
-    theme: {
-      typesetting: 'article'
-    }
-  },
   version: {
     type: 'menu',
     title: 'Version',
@@ -37,7 +22,31 @@ export default {
       }
     }
   },
-  '404': {
+  about: {
+    type: 'page',
+    title: 'About',
+    theme: {
+      typesetting: 'article'
+    }
+  },
+  showcase: {
+    type: 'page',
+    title: 'Showcase',
+    theme: {
+      typesetting: 'article',
+      layout: 'full',
+      timestamp: false
+    }
+  },
+  sponsors: {
+    type: 'page',
+    title: 'Sponsors',
+    theme: {
+      typesetting: 'article',
+      timestamp: false
+    }
+  },
+  404: {
     type: 'page',
     theme: {
       timestamp: false,
