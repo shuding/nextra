@@ -25,7 +25,7 @@ export function evaluate(
   // function with the actual values.
   const hydrateFn = Reflect.construct(Function, ['$', ...keys, compiledSource])
 
-  return hydrateFn({ useMDXComponents, ...runtime }, ...values)
+  return /* @__PURE__ */ hydrateFn({ useMDXComponents, ...runtime }, ...values)
 }
 
 export function RemoteContent({
