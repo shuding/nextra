@@ -2,17 +2,15 @@
   "compilerOptions": {
     "target": "es2016",
     "module": "ESNext",
-    "declaration": false,
+    "declaration": true,
     "noEmit": true,
     "esModuleInterop": true,
     "strict": true,
     "skipLibCheck": true,
-    "allowJs": true,
     "jsx": "react-jsx",
     "moduleResolution": "node",
     "lib": ["ESNext", "DOM"],
-    "types": ["vitest/globals"],
-    "resolveJsonModule": true
+    "types": ["vitest/globals"]
   },
   "exclude": ["dist"]
 }
