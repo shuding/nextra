@@ -1,5 +1,5 @@
+import jsxRuntime from 'react/jsx-runtime'
 import { useData } from '../hooks/index.js'
-import { jsxRuntime } from '../jsx-runtime.cjs'
 import type { MDXComponents } from '../mdx.js'
 import { useMDXComponents } from '../mdx.js'
 
