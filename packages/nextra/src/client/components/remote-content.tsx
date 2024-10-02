@@ -5,11 +5,9 @@ import type { MDXComponents } from '../mdx.js'
 import { useMDXComponents } from '../mdx.js'
 
 const runtime =
-  process.env.NODE_ENV === 'production'
-    ? /* @__PURE__ */ jsxRuntime
-    : /* @__PURE__ */ jsxDevRuntime
+  process.env.NODE_ENV === 'production' ? jsxRuntime : jsxDevRuntime
 
-export function evaluate(
+export function evaluate /* @__PURE__ */(
   compiledSource: string,
   scope: Record<string, unknown> = {}
 ) {
@@ -25,7 +23,7 @@ export function evaluate(
   // function with the actual values.
   const hydrateFn = Reflect.construct(Function, ['$', ...keys, compiledSource])
 
-  return /* @__PURE__ */ hydrateFn({ useMDXComponents, ...runtime }, ...values)
+  return hydrateFn({ useMDXComponents, ...runtime }, ...values)
 }
 
 export function RemoteContent({
@@ -51,13 +49,13 @@ export function RemoteContent({
     )
   }
 
-  const MDXContent = /* @__PURE__ */ evaluate(compiledSource, scope).default
+  const MDXContent = evaluate(compiledSource, scope).default
 
   return <MDXContent components={components} />
 }
 
 RemoteContent.useTOC = (props: Record<string, unknown>) => {
   const compiledSource = useData('__nextra_dynamic_mdx')
-  const { useTOC } = /* @__PURE__ */ evaluate(compiledSource)
+  const { useTOC } = evaluate(compiledSource)
   return useTOC(props)
 }
