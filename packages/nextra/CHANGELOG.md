@@ -1,5 +1,15 @@
 # nextra
 
+## 3.0.3
+
+### Patch Changes
+
+- 82fc267: remove
+  `Critical dependency: the request of a dependency is an expression` warnings
+- edc6c29: remove `truthy()` helper function
+- 9d93caf: RTL support for the `<Steps>` component.
+- 5fbce2f: Added golang logo for code blocks.
+
 ## 3.0.2
 
 ### Patch Changes
