@@ -1,5 +1,14 @@
 # nextra-theme-docs
 
+## 4.0.0-app-router.5
+
+### Patch Changes
+
+- a15a02d: sync with nextra 3.0.3
+- Updated dependencies [659b36e]
+- Updated dependencies [a15a02d]
+  - nextra@4.0.0-app-router.5
+
 ## 4.0.0-app-router.4
 
 ### Major Changes

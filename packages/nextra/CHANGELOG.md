@@ -1,5 +1,12 @@
 # nextra
 
+## 4.0.0-app-router.5
+
+### Patch Changes
+
+- 659b36e: remove `jsx-runtime.cjs`, import runtime from 'react/jsx-runtime'
+- a15a02d: sync with nextra 3.0.3
+
 ## 4.0.0-app-router.4
 
 ## 4.0.0-app-router.3
