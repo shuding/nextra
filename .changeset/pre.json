@@ -7,6 +7,7 @@
     "nextra-theme-docs": "3.0.0"
   },
   "changesets": [
+    "breezy-dryers-raise",
     "calm-lemons-poke",
     "cuddly-eagles-tie",
     "early-mangos-compare",
@@ -21,6 +22,7 @@
     "ninety-houses-warn",
     "silly-zoos-design",
     "small-insects-count",
+    "small-pumas-repeat",
     "spotty-cobras-flash",
     "stupid-mugs-rule",
     "wet-dodos-move",
