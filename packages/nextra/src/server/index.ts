@@ -231,4 +231,3 @@ type RuleSetRule = {
 export default nextra
 
 export type * from '../types'
-
