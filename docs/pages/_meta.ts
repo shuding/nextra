@@ -35,7 +35,7 @@ export default {
     theme: {
       typesetting: 'article',
       layout: 'full',
-      timestamp: false,
+      timestamp: false
     }
   },
   sponsors: {
@@ -43,7 +43,7 @@ export default {
     title: 'Sponsors',
     theme: {
       typesetting: 'article',
-      timestamp: false,
+      timestamp: false
     }
   },
   404: {
