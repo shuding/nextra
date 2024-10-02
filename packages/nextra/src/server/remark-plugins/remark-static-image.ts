@@ -5,7 +5,6 @@ import slash from 'slash'
 import type { Plugin } from 'unified'
 import { visit } from 'unist-util-visit'
 import { EXTERNAL_URL_REGEX, PUBLIC_DIR } from '../constants.js'
-import { truthy } from '../utils.js'
 
 /**
  * @link https://github.com/vercel/next.js/blob/6cfebfb02c2a52a1f99fca59a2eac2d704d053db/packages/next/build/webpack/loaders/next-image-loader.js#L6
@@ -99,7 +98,7 @@ export const remarkStaticImage: Plugin<[], Root> = () => ast => {
             }
           }
         }
-      ].filter(truthy)
+      ].filter(v => !!v)
     })
   }
 
