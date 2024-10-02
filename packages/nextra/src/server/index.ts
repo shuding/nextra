@@ -20,6 +20,8 @@ const DEFAULT_EXTENSIONS = ['js', 'jsx', 'ts', 'tsx']
 
 const AGNOSTIC_PAGE_MAP_PATH = `.next${sep}static${sep}chunks${sep}nextra-page-map`
 
+const RE_SEP = sep === '/' ? '/' : '\\\\'
+
 const nextra: Nextra = nextraConfig => {
   const { error } = nextraConfigSchema.safeParse(nextraConfig)
   if (error) {
@@ -152,6 +154,14 @@ const nextra: Nextra = nextraConfig => {
           })
         }
 
+        const defaultLoaderOptions = [
+          options.defaultLoaders.babel,
+          {
+            loader: 'nextra/loader',
+            options: loaderOptions
+          }
+        ]
+
         rules.push(
           {
             // Match Markdown imports from non-pages. These imports have an
@@ -162,13 +172,7 @@ const nextra: Nextra = nextraConfig => {
             issuer: request =>
               (!!request && !request.includes(AGNOSTIC_PAGE_MAP_PATH)) ||
               request === null,
-            use: [
-              options.defaultLoaders.babel,
-              {
-                loader: 'nextra/loader',
-                options: loaderOptions
-              }
-            ]
+            use: defaultLoaderOptions
           },
           {
             // Match pages (imports without an issuer request).
@@ -198,15 +202,16 @@ const nextra: Nextra = nextraConfig => {
           },
           {
             // Use platform separator because /pages\/_app\./ will not work on windows
-            test: new RegExp(`pages${sep === '/' ? '/' : '\\\\'}_app\\.`),
+            test: new RegExp(`pages${RE_SEP}_app\\.`),
             issuer: request => !request,
-            use: [
-              options.defaultLoaders.babel,
-              {
-                loader: 'nextra/loader',
-                options: loaderOptions
-              }
-            ]
+            use: defaultLoaderOptions
+          },
+          {
+            test: new RegExp(
+              `@typescript${RE_SEP}vfs${RE_SEP}dist${RE_SEP}vfs\\.`
+            ),
+            issuer: request => !!request,
+            use: defaultLoaderOptions
           }
         )
 
