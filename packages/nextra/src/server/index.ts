@@ -22,6 +22,8 @@ const DEFAULT_EXTENSIONS = ['js', 'jsx', 'ts', 'tsx']
 
 const AGNOSTIC_PAGE_MAP_PATH = `.next${sep}static${sep}chunks${sep}nextra-page-map`
 
+const RE_SEP = sep === '/' ? '/' : '\\\\'
+
 const require = createRequire(import.meta.url)
 
 const nextra: Nextra = nextraConfig => {
@@ -146,8 +148,6 @@ const nextra: Nextra = nextraConfig => {
         // alias[require.resolve('@typescript/vfs/dist/vfs.esm.js')] = require.resolve('@typescript/vfs/dist/vfs.esm.patched.js')
         const rules = config.module.rules as RuleSetRule[]
 
-        patchTypeScriptVfs()
-
         if (IMPORT_FRONTMATTER) {
           rules.push({
             test: MARKDOWN_EXTENSION_REGEX,
@@ -162,6 +162,14 @@ const nextra: Nextra = nextraConfig => {
           })
         }
 
+        const defaultLoaderOptions = [
+          options.defaultLoaders.babel,
+          {
+            loader: 'nextra/loader',
+            options: loaderOptions
+          }
+        ]
+
         rules.push(
           {
             // Match Markdown imports from non-pages. These imports have an
@@ -172,13 +180,7 @@ const nextra: Nextra = nextraConfig => {
             issuer: request =>
               (!!request && !request.includes(AGNOSTIC_PAGE_MAP_PATH)) ||
               request === null,
-            use: [
-              options.defaultLoaders.babel,
-              {
-                loader: 'nextra/loader',
-                options: loaderOptions
-              }
-            ]
+            use: defaultLoaderOptions
           },
           {
             // Match pages (imports without an issuer request).
@@ -208,15 +210,16 @@ const nextra: Nextra = nextraConfig => {
           },
           {
             // Use platform separator because /pages\/_app\./ will not work on windows
-            test: new RegExp(`pages${sep === '/' ? '/' : '\\\\'}_app\\.`),
+            test: new RegExp(`pages${RE_SEP}_app\\.`),
             issuer: request => !request,
-            use: [
-              options.defaultLoaders.babel,
-              {
-                loader: 'nextra/loader',
-                options: loaderOptions
-              }
-            ]
+            use: defaultLoaderOptions
+          },
+          {
+            test: new RegExp(
+              `@typescript${RE_SEP}vfs${RE_SEP}dist${RE_SEP}vfs\\.`
+            ),
+            issuer: request => !!request,
+            use: defaultLoaderOptions
           }
         )
 
@@ -237,29 +240,3 @@ export default nextra
 
 export type * from '../types'
 
-let isTsVfsPatched = false
-
-function patchTypeScriptVfs(): void {
-  if (isTsVfsPatched) return
-  const tsVfs = require.resolve('@typescript/vfs')
-  const tsVfsDir = join(tsVfs, '..')
-
-  const paths = {
-    dev: join(tsVfsDir, 'vfs.cjs.development.js'),
-    prod: join(tsVfsDir, 'vfs.cjs.production.min.js'),
-    esm: join(tsVfsDir, 'vfs.esm.js')
-  }
-
-  for (const filePath of Object.values(paths)) {
-    const sourceCode = fs.readFileSync(filePath, 'utf8')
-    if (sourceCode.includes('String.fromCharCode')) {
-      fs.writeFileSync(
-        filePath, //.replace(/\.js$/, '.patched.js'),
-        sourceCode
-          .replace(/String\.fromCharCode\(112, ?97, ?116, ?104\)/, '"path"')
-          .replace(/String\.fromCharCode\(102, ?115\)/, '"fs"')
-      )
-    }
-  }
-  isTsVfsPatched = true
-}
