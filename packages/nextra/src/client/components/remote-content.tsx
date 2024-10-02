@@ -7,7 +7,7 @@ import { useMDXComponents } from '../mdx.js'
 const runtime =
   process.env.NODE_ENV === 'production' ? jsxRuntime : jsxDevRuntime
 
-export function evaluate /* @__PURE__ */(
+export function evaluate(
   compiledSource: string,
   scope: Record<string, unknown> = {}
 ) {
