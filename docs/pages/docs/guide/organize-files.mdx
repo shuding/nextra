@@ -77,12 +77,55 @@ page:
   </FileTree.Folder>
 </FileTree>
 
-<Callout>
-  It's also possible to use the `.jsx`, `.ts`, `.tsx` extensions for `_meta`
-  files (e.g. `_meta.ts`)
-</Callout>
+### Allowed Extensions
 
-For example, you can put this in your `pages/_meta.js` file:
+It's possible to use the `.jsx`, `.ts` and `.tsx` extensions for `_meta` files
+as well (e.g. `_meta.ts`).
+
+### Sorting Pages Alphabetically
+
+You can use ESLint's built-in `sort-keys` rule, append
+`/* eslint sort-keys: error */` comment at the top of your `_meta` file, and you
+will receive ESLint's errors about incorrect order.
+
+### Usage with `next-sitemap`
+
+If you are using
+[next-sitemap](https://github.com/iamvishnusankar/next-sitemap), you will
+probably need to add `exclude: ['*/_meta']{:js}` to your
+`next-sitemap.config.js` file, as it is
+[tricky to exclude `_meta` files from the build](https://github.com/vercel/next.js/issues/8974#issuecomment-542525837).
+
+### Allowed Keys Values
+
+The type of your `_meta` keys should be always `string` and not `number` since
+[numbers are always ordered first](https://dev.to/frehner/the-order-of-js-object-keys-458d)
+for JavaScript objects.
+
+Following:
+
+```js filename="pages/_meta.js"
+export default {
+  foo: '',
+  1992_10_21: '',
+  1: ''
+}
+```
+
+Will be converted to:
+
+{/* prettier-ignore */}
+```js filename="pages/_meta.js"
+export default {
+  '1': '',
+  '19921021': '',
+  foo: ''
+}
+```
+
+## Example
+
+Put this in your `pages/_meta.js` file:
 
 ```js filename="pages/_meta.js"
 export default {
@@ -107,18 +150,6 @@ export default {
   }
 }
 ```
-
-<Callout>
-  You can use ESLint's built-in rule sort keys with a `/* eslint sort-keys:
-  error */` comment to sort your sidebar items alphabetically.
-</Callout>
-
-<Callout type="warning">
-  If you are using
-  [next-sitemap](https://github.com/iamvishnusankar/next-sitemap), you will
-  probably need to add `exclude: ['*/_meta']` to your `next-sitemap.config.js`
-  file, as it is tricky to exclude `_meta` files from the build.
-</Callout>
 
 The extra configurations are passed to the **theme** as additional information.
 Check the corresponding pages for more information:
