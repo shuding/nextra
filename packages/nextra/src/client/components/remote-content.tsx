@@ -4,6 +4,11 @@ import { useData } from '../hooks/index.js'
 import type { MDXComponents } from '../mdx.js'
 import { useMDXComponents } from '../mdx.js'
 
+const runtime =
+  process.env.NODE_ENV === 'production'
+    ? /* @__PURE__ */ jsxRuntime
+    : /* @__PURE__ */ jsxDevRuntime
+
 export function evaluate(
   compiledSource: string,
   scope: Record<string, unknown> = {}
@@ -20,13 +25,7 @@ export function evaluate(
   // function with the actual values.
   const hydrateFn = Reflect.construct(Function, ['$', ...keys, compiledSource])
 
-  return hydrateFn(
-    {
-      useMDXComponents,
-      ...(process.env.NODE_ENV === 'production' ? jsxRuntime : jsxDevRuntime)
-    },
-    ...values
-  )
+  return hydrateFn({ useMDXComponents, ...runtime }, ...values)
 }
 
 export function RemoteContent({
