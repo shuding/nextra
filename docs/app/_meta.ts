@@ -7,22 +7,6 @@ export default {
     type: 'page',
     title: 'Documentation'
   },
-  versions: {
-    type: 'menu',
-    title: 'Versions',
-    items: {
-      '3': {
-        title: 'Nextra v3 Docs ↗',
-        href: 'https://nextra-v2-pyibc76cq-shud.vercel.app',
-        newWindow: true
-      },
-      '2': {
-        title: 'Nextra v2 Docs ↗',
-        href: 'https://nextra-v2-oe0zrpzjp-shud.vercel.app',
-        newWindow: true
-      }
-    }
-  },
   about: {
     type: 'page',
     theme: {
@@ -43,6 +27,22 @@ export default {
     theme: {
       typesetting: 'article',
       timestamp: false
+    }
+  },
+  versions: {
+    type: 'menu',
+    title: 'Versions',
+    items: {
+      _3: {
+        title: 'Nextra v3 Docs ↗',
+        href: 'https://nextra-v2-pyibc76cq-shud.vercel.app',
+        newWindow: true
+      },
+      _2: {
+        title: 'Nextra v2 Docs ↗',
+        href: 'https://nextra-v2-oe0zrpzjp-shud.vercel.app',
+        newWindow: true
+      }
     }
   }
 }
