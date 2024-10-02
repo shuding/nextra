@@ -52,7 +52,7 @@ export function Pre({
             '_border-b-0'
           )}
         >
-          {Icon && <Icon className="_h-4 _w-auto _shrink-0" />}
+          {Icon && <Icon className="_h-4 _w-auto _max-w-6 _shrink-0" />}
           <span className="_truncate">{filename}</span>
           {copyButton}
         </div>
