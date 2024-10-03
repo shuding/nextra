@@ -1,4 +1,3 @@
-export { AutoRefresh } from './auto-refresh.js'
 export { Banner } from './banner/index.js'
 export { FileTree } from './file-tree/index.js'
 export { Tabs } from './tabs/index.js'

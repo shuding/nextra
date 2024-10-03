@@ -1,7 +1,6 @@
 import { ThemeProvider } from 'next-themes'
 import type { ThemeProviderProps } from 'next-themes/dist/types'
 import { ViewTransitions } from 'next-view-transitions'
-import { AutoRefresh } from 'nextra/components'
 import type { ReactElement, ReactNode } from 'react'
 
 export function Footer({
@@ -35,9 +34,7 @@ export function Layout({
         dir="ltr"
         data-pagefind-body
       >
-        <ViewTransitions>
-          <AutoRefresh>{children}</AutoRefresh>
-        </ViewTransitions>
+        <ViewTransitions>{children}</ViewTransitions>
       </article>
     </ThemeProvider>
   )
