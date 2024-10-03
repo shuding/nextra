@@ -6,7 +6,6 @@ import { rendererRich, transformerTwoslash } from '@shikijs/twoslash'
 import { remarkMermaid } from '@theguild/remark-mermaid'
 import { remarkNpm2Yarn } from '@theguild/remark-npm2yarn'
 import type { Program } from 'estree'
-import rehypeKatex from 'rehype-katex'
 import rehypePrettyCode from 'rehype-pretty-code'
 import rehypeRaw from 'rehype-raw'
 import remarkFrontmatter from 'remark-frontmatter'
@@ -162,8 +161,8 @@ export async function compileMdx(
 
   const compiler =
     !useCachedCompiler || isRemoteContent
-      ? createCompiler()
-      : (cachedCompilerForFormat[format] ??= createCompiler())
+      ? await createCompiler()
+      : (cachedCompilerForFormat[format] ??= await createCompiler())
   const processor = compiler()
 
   try {
@@ -205,7 +204,7 @@ export async function compileMdx(
     throw error
   }
 
-  function createCompiler(): Processor {
+  async function createCompiler(): Promise<Processor> {
     return createProcessor({
       jsx,
       format,
@@ -226,7 +225,7 @@ export async function compileMdx(
         ] satisfies Pluggable,
         isRemoteContent && remarkRemoveImports,
         remarkFrontmatter, // parse and attach yaml node
-        [remarkMdxFrontMatter] satisfies Pluggable,
+        remarkMdxFrontMatter,
         remarkGfm,
         format !== 'md' &&
           ([
@@ -266,11 +265,12 @@ export async function compileMdx(
         [rehypeParseCodeMeta, { defaultShowCopyCode }],
         // Should be before `rehypePrettyCode`
         latex &&
-          (typeof latex === 'object'
-            ? latex.renderer === 'mathjax'
-              ? [rehypeBetterReactMathjax, latex.options, isRemoteContent]
-              : [rehypeKatex, latex.options]
-            : rehypeKatex),
+          (typeof latex === 'object' && latex.renderer === 'mathjax'
+            ? [rehypeBetterReactMathjax, latex.options, isRemoteContent]
+            : [
+                await import('rehype-katex').then(mod => mod.default),
+                typeof latex === 'object' ? latex.options : undefined
+              ]),
         ...(codeHighlight === false
           ? []
           : [
