@@ -1,25 +1,31 @@
-// @ts-check
-
 import fs from 'node:fs'
 import { WebSocketServer } from 'ws'
-import type { WebSocket } from 'ws'
+import type { AddressInfo, WebSocket } from 'ws'
 import { logger } from './utils.js'
 
-const CONTENT_FOLDER = 'mdx'
+// Polyfill for Promise.withResolvers
+function withResolvers<T>() {
+  let resolve: (value: T) => void
+  let reject: (reason: any) => void
+  const promise = new Promise<T>((res, rej) => {
+    resolve = res
+    reject = rej
+  })
+  return { promise, resolve: resolve!, reject: reject! }
+}
 
-export function createWsWatcher(folder: string): void {
-  fs.watch(
-    CONTENT_FOLDER,
-    { persistent: true, recursive: true },
-    (_eventType, _fileName) => {
-      for (const ws of clients) {
-        // do any pre-processing you want to do here...
-        ws.send('refresh')
-      }
-    }
-  )
+export async function createWsWatcherAndGetPort(
+  folder: string
+): Promise<number> {
+  const { promise, resolve } = withResolvers<number>()
 
-  const wss = new WebSocketServer({ port: 1337 })
+  const wss = new WebSocketServer({ port: 0 }, function (this: {
+    address: () => AddressInfo
+  }) {
+    const { port } = this.address()
+    logger.info(`ws server is listening on port: ${port}`)
+    resolve(port)
+  })
 
   const clients = new Set<WebSocket>()
 
@@ -31,4 +37,12 @@ export function createWsWatcher(folder: string): void {
       clients.delete(ws)
     })
   })
+
+  fs.watch(folder, { recursive: true }, (_eventType, _fileName) => {
+    for (const ws of clients) {
+      ws.send('refresh')
+    }
+  })
+
+  return promise
 }

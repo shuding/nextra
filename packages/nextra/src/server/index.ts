@@ -1,15 +1,17 @@
 /* eslint-env node */
-import { sep } from 'node:path'
+import path, { sep } from 'node:path'
+import { NextConfig } from 'next'
 import { fromZodError } from 'zod-validation-error'
 import type { Nextra } from '../types'
 import {
+  CWD,
   DEFAULT_LOCALES,
   MARKDOWN_EXTENSION_REGEX,
   MARKDOWN_EXTENSIONS
 } from './constants.js'
 import { nextraConfigSchema } from './schemas.js'
 import { logger } from './utils.js'
-import { createWsWatcher } from './watcher.js'
+import { createWsWatcherAndGetPort } from './watcher.js'
 import { NextraPlugin } from './webpack-plugins/index.js'
 
 const DEFAULT_EXTENSIONS = ['js', 'jsx', 'ts', 'tsx']
@@ -25,10 +27,15 @@ const nextra: Nextra = nextraConfig => {
     logger.error('Error validating nextraConfig')
     throw fromZodError(error)
   }
-  if (loaderOptions.mdxBaseDir) {
-    createWsWatcher(loaderOptions.mdxBaseDir)
-  }
-  return function withNextra(nextConfig = {}) {
+
+  return async function withNextra(nextConfig = {}): Promise<NextConfig> {
+    let wsPort = 0
+    if (loaderOptions.mdxBaseDir) {
+      wsPort = await createWsWatcherAndGetPort(
+        path.resolve(CWD, loaderOptions.mdxBaseDir)
+      )
+    }
+
     const hasI18n = !!nextConfig.i18n?.locales
 
     if (hasI18n) {
@@ -57,7 +64,8 @@ const nextra: Nextra = nextraConfig => {
         i18n: undefined,
         env: {
           ...nextConfig.env,
-          NEXTRA_DEFAULT_LOCALE: nextConfig.i18n?.defaultLocale || 'en'
+          NEXTRA_DEFAULT_LOCALE: nextConfig.i18n?.defaultLocale || 'en',
+          ...(wsPort && { NEXTRA_WS_PORT: String(wsPort) })
         }
       }),
       webpack(config, options) {

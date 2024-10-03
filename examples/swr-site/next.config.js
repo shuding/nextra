@@ -36,7 +36,7 @@ const ALLOWED_SVG_REGEX = new RegExp(`_icons${sep}.+\\.svg$`)
  * @type {import('next').NextConfig}
  */
 export default withBundleAnalyzer(
-  withNextra({
+  await withNextra({
     reactStrictMode: true,
     eslint: {
       // Warning: This allows production builds to successfully complete even if
