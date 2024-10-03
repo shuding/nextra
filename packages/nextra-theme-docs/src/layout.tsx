@@ -1,6 +1,6 @@
 /* eslint sort-keys: error */
 import { ThemeProvider } from 'next-themes'
-import { Search, SkipNavLink } from 'nextra/components'
+import { AutoRefresh, Search, SkipNavLink } from 'nextra/components'
 import type { FC, ReactElement, ReactNode } from 'react'
 import { Children, isValidElement } from 'react'
 import { z } from 'zod'
@@ -122,7 +122,7 @@ export function Layout({ children, ...themeConfig }: Props): ReactElement {
            */}
           <MobileNav />
           <SkipNavLink />
-          {newChildren}
+          <AutoRefresh>{newChildren}</AutoRefresh>
         </ConfigProvider>
       </ThemeProvider>
     </ThemeConfigProvider>
