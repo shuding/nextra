@@ -8,7 +8,7 @@
     "strict": true,
     "skipLibCheck": true,
     "jsx": "react-jsx",
-    "lib": ["es2023", "dom"],
+    "lib": ["esnext", "dom"],
     "moduleResolution": "node",
     "types": ["vitest/globals"],
     "paths": {
