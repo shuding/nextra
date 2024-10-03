@@ -40,7 +40,7 @@ const nextra: Nextra = nextraConfig => {
 
     if (hasI18n) {
       logger.info(
-        'You have Next.js i18n enabled, read here https://nextjs.org/docs/advanced-features/i18n-routing for the docs.'
+        'You have Next.js i18n enabled, read here https://nextjs.org/docs/app/building-your-application/routing/internationalization for the docs.'
       )
     }
 
