@@ -9,7 +9,6 @@ import { useEffect } from 'react'
 
 export const AutoRefresh: FC<{ children: ReactNode }> = ({ children }) => {
   const port = process.env.NEXTRA_WS_PORT
-  console.log({ port })
   if (process.env.NODE_ENV === 'production' || !port) {
     return children
   }
