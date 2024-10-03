@@ -288,33 +288,50 @@ export async function collectPageMap({
           init: pageMapAst
         }
       ]
+    },
+    {
+      type: 'ExportNamedDeclaration',
+      declaration: {
+        type: 'VariableDeclaration',
+        declarations: [
+          {
+            type: 'VariableDeclarator',
+            id: { type: 'Identifier', name: 'RouteToPage' },
+            init: {
+              type: 'ObjectExpression',
+              properties: [
+                {
+                  type: 'Property',
+                  method: false,
+                  shorthand: false,
+                  computed: false,
+                  key: { type: 'Literal', value: 'foo', raw: "'foo'" },
+                  value: {
+                    type: 'ArrowFunctionExpression',
+                    expression: true,
+                    generator: false,
+                    async: false,
+                    params: [],
+                    body: {
+                      type: 'CallExpression',
+                      callee: { type: 'Identifier', name: 'require' },
+                      arguments: [
+                        { type: 'Literal', value: 'bar', raw: "'bar'" }
+                      ],
+                      optional: false
+                    }
+                  },
+                  kind: 'init'
+                }
+              ]
+            }
+          }
+        ],
+        kind: 'const'
+      },
+      specifiers: []
     }
   ]
-
-  // let footer = ''
-
-  // if (dynamicMetaImports.length) {
-  //   body.push({
-  //     type: 'VariableDeclaration',
-  //     kind: 'const',
-  //     declarations: [
-  //       {
-  //         type: 'VariableDeclarator',
-  //         id: { type: 'Identifier', name: 'dynamicMetaModules' },
-  //         init: {
-  //           type: 'ObjectExpression',
-  //           properties: dynamicMetaImports
-  //             // localeCompare to avoid race condition
-  //             .sort((a, b) => a.route.localeCompare(b.route))
-  //             .map(({ importName, route }) => ({
-  //               ...DEFAULT_PROPERTY_PROPS,
-  //               key: { type: 'Literal', value: route },
-  //               value: { type: 'Identifier', name: importName }
-  //             }))
-  //         }
-  //       }
-  //     ]
-  //   })
 
   const result = toJs({
     type: 'Program',
