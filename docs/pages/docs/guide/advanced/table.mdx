@@ -2,6 +2,9 @@ import { Callout, Steps } from 'nextra/components'
 
 # Rendering Tables
 
+This guide covers different ways to render tables in MDX, including GFM syntax,
+literal HTML tag, and dynamic JavaScript expressions.
+
 ## GFM syntax
 
 In Markdown, it is preferable to write tables via
@@ -143,7 +146,8 @@ Table looks different compared to [GFM syntax table](#gfm-syntax):
 
 ### Why This Happens
 
-Currently, [MDX](https://mdxjs.com/docs/using-mdx/#components) doesn't replace literal HTML elements with `<MDXProvider />{:jsx}`.
+[MDX](https://mdxjs.com/docs/using-mdx/#components) doesn't replace literal HTML
+elements with `<MDXProvider />{:jsx}`.
 
 Adam Wathan, creator of Tailwind CSS submitted
 [an issue](https://github.com/mdx-js/mdx/issues/821) in MDX2 to have some _an
@@ -167,27 +171,17 @@ Just wrap your table with curly braces `{` and `}`, e.g.
 </table>}
 ```
 
-Alternatively, you can define a custom table component to use in your MDX file:
+Alternatively, create a reusable table component:
 
 ```mdx filename="MDX"
 export function Table({ columns, data }) {
-  return (
-    <table>
-      {/* ... */}
-    </table>
-  )
+  return <table>{/* ... */}</table>
 }
 
-<Table
-  columns={...}
-  data={...}
-/>
+<Table columns={...} data={...} />
 ```
 
-{/**
- * Currently, remark-mdx-disable-explicit-jsx seems to be no longer maintained,
- * and I'm not sure if it's compatible with MDX3."
-*/}
+{/* prettier-ignore */}
 {/* #### Changing Default Behaviour
 
 If this thing is still confusing for you, and you want to use regular literal
