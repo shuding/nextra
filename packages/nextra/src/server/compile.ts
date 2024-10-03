@@ -226,7 +226,7 @@ export async function compileMdx(
         ] satisfies Pluggable,
         isRemoteContent && remarkRemoveImports,
         remarkFrontmatter, // parse and attach yaml node
-        [remarkMdxFrontMatter] satisfies Pluggable,
+        remarkMdxFrontMatter,
         remarkGfm,
         format !== 'md' &&
           ([
@@ -278,16 +278,12 @@ export async function compileMdx(
                 rehypePrettyCode,
                 {
                   ...DEFAULT_REHYPE_PRETTY_CODE_OPTIONS,
-                  // TODO: For some reason I get Error: Cannot find module 'path' in remote content,
-                  // disable twoslash temporarily
-                  transformers: isRemoteContent
-                    ? []
-                    : [
-                        transformerTwoslash({
-                          renderer: rendererRich(),
-                          explicitTrigger: true
-                        })
-                      ],
+                  transformers: [
+                    transformerTwoslash({
+                      renderer: rendererRich(),
+                      explicitTrigger: true
+                    })
+                  ],
                   ...rehypePrettyCodeOptions
                 }
               ] as any,
