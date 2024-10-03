@@ -295,35 +295,31 @@ export async function collectPageMap({
       specifiers: [],
       declaration: {
         type: 'VariableDeclaration',
+        kind: 'const',
         declarations: [
           {
             type: 'VariableDeclarator',
             id: { type: 'Identifier', name: 'RouteToPage' },
             init: {
               type: 'ObjectExpression',
-              properties: [
-                {
-                  ...DEFAULT_PROPERTY_PROPS,
-                  key: { type: 'Literal', value: 'foo11' },
-                  value: {
-                    type: 'ArrowFunctionExpression',
-                    expression: true,
-                    params: [],
-                    body: {
-                      type: 'CallExpression',
-                      optional: false,
-                      callee: { type: 'Identifier', name: 'require' },
-                      arguments: [
-                        { type: 'Literal', value: 'bar11' }
-                      ]
-                    }
+              properties: Object.entries(mdxPages).map(([key, value]) => ({
+                ...DEFAULT_PROPERTY_PROPS,
+                key: { type: 'Literal', value: key },
+                value: {
+                  type: 'ArrowFunctionExpression',
+                  expression: true,
+                  params: [],
+                  body: {
+                    type: 'CallExpression',
+                    optional: false,
+                    callee: { type: 'Identifier', name: 'require' },
+                    arguments: [{ type: 'Literal', value }]
                   }
                 }
-              ]
+              }))
             }
           }
-        ],
-        kind: 'const'
+        ]
       }
     }
   ]
