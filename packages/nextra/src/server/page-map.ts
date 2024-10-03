@@ -9,6 +9,7 @@ import type { PageMapItem } from '../types'
 import {
   CHUNKS_DIR,
   CWD,
+  DEFAULT_PROPERTY_PROPS,
   MARKDOWN_EXTENSION_REGEX,
   META_REGEX
 } from './constants.js'
@@ -291,6 +292,7 @@ export async function collectPageMap({
     },
     {
       type: 'ExportNamedDeclaration',
+      specifiers: [],
       declaration: {
         type: 'VariableDeclaration',
         declarations: [
@@ -301,35 +303,28 @@ export async function collectPageMap({
               type: 'ObjectExpression',
               properties: [
                 {
-                  type: 'Property',
-                  method: false,
-                  shorthand: false,
-                  computed: false,
-                  key: { type: 'Literal', value: 'foo', raw: "'foo'" },
+                  ...DEFAULT_PROPERTY_PROPS,
+                  key: { type: 'Literal', value: 'foo11' },
                   value: {
                     type: 'ArrowFunctionExpression',
                     expression: true,
-                    generator: false,
-                    async: false,
                     params: [],
                     body: {
                       type: 'CallExpression',
+                      optional: false,
                       callee: { type: 'Identifier', name: 'require' },
                       arguments: [
-                        { type: 'Literal', value: 'bar', raw: "'bar'" }
-                      ],
-                      optional: false
+                        { type: 'Literal', value: 'bar11' }
+                      ]
                     }
-                  },
-                  kind: 'init'
+                  }
                 }
               ]
             }
           }
         ],
         kind: 'const'
-      },
-      specifiers: []
+      }
     }
   ]
 
