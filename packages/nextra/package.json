@@ -143,13 +143,15 @@
     "@types/mdast": "^4.0.4",
     "@types/react": "^18.3.3",
     "@types/webpack": "^5.28.5",
+    "@types/ws": "^8.5.12",
     "@vitejs/plugin-react": "^4.3.1",
     "esbuild-plugin-svgr": "^2.1.0",
     "next": "^14.2.5",
     "react": "^19.0.0-rc.0",
     "react-dom": "^19.0.0-rc.0",
     "unified": "^11.0.5",
-    "vitest": "^2.0.4"
+    "vitest": "^2.0.4",
+    "ws": "^8.18.0"
   },
   "sideEffects": false
 }

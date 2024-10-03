@@ -9,6 +9,7 @@ import {
 } from './constants.js'
 import { nextraConfigSchema } from './schemas.js'
 import { logger } from './utils.js'
+import { createWsWatcher } from './watcher.js'
 import { NextraPlugin } from './webpack-plugins/index.js'
 
 const DEFAULT_EXTENSIONS = ['js', 'jsx', 'ts', 'tsx']
@@ -23,6 +24,9 @@ const nextra: Nextra = nextraConfig => {
   if (error) {
     logger.error('Error validating nextraConfig')
     throw fromZodError(error)
+  }
+  if (loaderOptions.mdxBaseDir) {
+    createWsWatcher(loaderOptions.mdxBaseDir)
   }
   return function withNextra(nextConfig = {}) {
     const hasI18n = !!nextConfig.i18n?.locales

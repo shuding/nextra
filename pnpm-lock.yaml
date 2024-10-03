@@ -251,9 +251,6 @@ importers:
       tailwindcss:
         specifier: ^3.4.1
         version: 3.4.13
-      ws:
-        specifier: ^8.18.0
-        version: 8.18.0
     dependenciesMeta:
       nextra:
         injected: true
@@ -389,6 +386,9 @@ importers:
       '@types/webpack':
         specifier: ^5.28.5
         version: 5.28.5(esbuild@0.24.0)
+      '@types/ws':
+        specifier: ^8.5.12
+        version: 8.5.12
       '@vitejs/plugin-react':
         specifier: ^4.3.1
         version: 4.3.1(vite@5.4.8)
@@ -410,6 +410,9 @@ importers:
       vitest:
         specifier: ^2.0.4
         version: 2.1.1(jsdom@25.0.1)
+      ws:
+        specifier: ^8.18.0
+        version: 8.18.0
 
   packages/nextra-theme-blog:
     dependencies:
@@ -4947,6 +4950,12 @@ packages:
       - esbuild
       - uglify-js
       - webpack-cli
+    dev: true
+
+  /@types/ws@8.5.12:
+    resolution: {integrity: sha512-3tPRkv1EtkDpzlgyKyI8pGsGZAGPEaXeu0DOj5DI25Ja91bdAYddYHbADRYVrZMRbfW+1l5YwXVDKohDJNQxkQ==}
+    dependencies:
+      '@types/node': 20.16.10
     dev: true
 
   /@typescript-eslint/eslint-plugin@7.16.1(@typescript-eslint/parser@8.7.0)(eslint@9.11.1)(typescript@5.6.2):
