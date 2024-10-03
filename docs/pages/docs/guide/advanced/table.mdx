@@ -138,14 +138,12 @@ will be rendered as:
 Table looks different compared to [GFM syntax table](#gfm-syntax):
 
 1. only children of table body `<tbody />{:jsx}` is styled
-
-2. table header is unstyled
-
-3. table doesn't have margin top
+1. table header is unstyled
+1. table doesn't have margin top
 
 ### Why This Happens
 
-MDX2 doesn't replace literal HTML elements with `<MDXProvider />{:jsx}`.
+Currently, [MDX](https://mdxjs.com/docs/using-mdx/#components) doesn't replace literal HTML elements with `<MDXProvider />{:jsx}`.
 
 Adam Wathan, creator of Tailwind CSS submitted
 [an issue](https://github.com/mdx-js/mdx/issues/821) in MDX2 to have some _an
@@ -160,8 +158,6 @@ margin-top aka `mt-6`.
 
 ### Ways to Fix It
 
-#### One-Time Fix
-
 Just wrap your table with curly braces `{` and `}`, e.g.
 
 {/* prettier-ignore */}
@@ -171,7 +167,28 @@ Just wrap your table with curly braces `{` and `}`, e.g.
 </table>}
 ```
 
-#### Changing Default Behaviour
+Alternatively, you can define a custom table component to use in your MDX file:
+
+```mdx filename="MDX"
+export function Table({ columns, data }) {
+  return (
+    <table>
+      {/* ... */}
+    </table>
+  )
+}
+
+<Table
+  columns={...}
+  data={...}
+/>
+```
+
+{/**
+ * Currently, remark-mdx-disable-explicit-jsx seems to be no longer maintained,
+ * and I'm not sure if it's compatible with MDX3."
+*/}
+{/* #### Changing Default Behaviour
 
 If this thing is still confusing for you, and you want to use regular literal
 HTML elements for your tables, do the following:
@@ -207,4 +224,4 @@ const withNextra = nextra({
 export default withNextra()
 ```
 
-</Steps>
+</Steps> */}
