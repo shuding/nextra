@@ -10,7 +10,7 @@ CSS into a specified cascade layer:
 
 <Steps>
 
-### Install `postcss-import`
+## Install `postcss-import`
 
 Install `postcss-import` and add it to `postcss.config.js`:
 
@@ -23,7 +23,7 @@ module.exports = {
 }
 ```
 
-### Disable Automatic Import of the Nextra Official Theme CSS
+## Disable Automatic Import of the Nextra Official Theme CSS
 
 Nextra by default automatically imports the official theme CSS. You can disable
 this behavior by setting `autoImportThemeStyle: false` in the Nextra
@@ -37,7 +37,7 @@ const withNextra = nextra({
 })
 ```
 
-### Set Up the Cascade Layers
+## Set Up the Cascade Layers
 
 In your CSS file (e.g. `styles.css`), import the `nextra-docs-theme` CSS and
 specify the layers:
@@ -52,7 +52,7 @@ specify the layers:
 }
 ```
 
-### Import Your CSS File
+## Import Your CSS File
 
 Create a `pages/_app.jsx` file and import your CSS files there:
 
