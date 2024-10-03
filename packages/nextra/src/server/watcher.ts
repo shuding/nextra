@@ -30,7 +30,6 @@ export async function createWsWatcherAndGetPort(
   const clients = new Set<WebSocket>()
 
   wss.on('connection', ws => {
-    console.log('adding client', clients.size)
     clients.add(ws)
     ws.on('error', logger.error)
     ws.on('close', () => {
