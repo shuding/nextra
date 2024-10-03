@@ -1,4 +1,4 @@
-import fs from 'node:fs'
+import fs from 'graceful-fs'
 import { WebSocketServer } from 'ws'
 import type { AddressInfo, WebSocket } from 'ws'
 import { logger } from './utils.js'
@@ -14,18 +14,22 @@ function withResolvers<T>() {
   return { promise, resolve: resolve!, reject: reject! }
 }
 
+// Based on https://www.steveruiz.me/posts/nextjs-refresh-content
+// and https://github.com/gaearon/overreacted.io/pull/797
 export async function createWsWatcherAndGetPort(
   folder: string
 ): Promise<number> {
   const { promise, resolve } = withResolvers<number>()
 
-  const wss = new WebSocketServer({ port: 0 }, function (this: {
-    address: () => AddressInfo
-  }) {
-    const { port } = this.address()
-    logger.info(`ws server is listening on port: ${port}`)
-    resolve(port)
-  })
+  const wss = new WebSocketServer(
+    // to get random port
+    { port: 0 },
+    function (this: { address: () => AddressInfo }) {
+      const { port } = this.address()
+      logger.info(`ws server is listening on port: ${port}`)
+      resolve(port)
+    }
+  )
 
   const clients = new Set<WebSocket>()
 

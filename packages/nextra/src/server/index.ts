@@ -1,6 +1,6 @@
 /* eslint-env node */
 import path, { sep } from 'node:path'
-import { NextConfig } from 'next'
+import type { NextConfig } from 'next'
 import { fromZodError } from 'zod-validation-error'
 import type { Nextra } from '../types'
 import {

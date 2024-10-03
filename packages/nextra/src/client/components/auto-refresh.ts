@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks, react-hooks/exhaustive-deps -- dev code will be removed from production build */
 'use client'
 
 // Based on https://www.steveruiz.me/posts/nextjs-refresh-content
@@ -7,16 +8,14 @@ import type { FC, ReactNode } from 'react'
 import { useEffect } from 'react'
 
 export const AutoRefresh: FC<{ children: ReactNode }> = ({ children }) => {
-  if (process.env.NODE_ENV === 'production') {
+  const port = process.env.NEXTRA_WS_PORT
+  console.log({ port })
+  if (process.env.NODE_ENV === 'production' || !port) {
     return children
   }
-
-  // eslint-disable-next-line react-hooks/rules-of-hooks -- this code will be removed from production
   const router = useRouter()
-
-  // eslint-disable-next-line react-hooks/rules-of-hooks -- this code will be removed from production
   useEffect(() => {
-    const ws = new WebSocket(`ws://localhost:${process.env.NEXTRA_WS_PORT}`)
+    const ws = new WebSocket(`ws://localhost:${port}`)
     ws.onmessage = event => {
       if (event.data === 'refresh') {
         router.refresh()
@@ -25,7 +24,7 @@ export const AutoRefresh: FC<{ children: ReactNode }> = ({ children }) => {
     return () => {
       ws.close()
     }
-  }, [router])
+  }, [])
 
   return children
 }
