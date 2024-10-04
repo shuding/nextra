@@ -232,7 +232,7 @@ export async function collectPageMap({
   pageMap: PageMapItem[]
   mdxPages: Record<string, string>
   fromAppDir: boolean
-}): Promise<string> {
+}): Promise<void> {
   const someImports: Import[] = []
   const pageMapAst = convertPageMapToAst(
     pageMap,
@@ -312,8 +312,13 @@ export async function collectPageMap({
                   body: {
                     type: 'CallExpression',
                     optional: false,
-                    callee: { type: 'Identifier', name: 'require' },
-                    arguments: [{ type: 'Literal', value }]
+                    callee: { type: 'Identifier', name: 'import' },
+                    arguments: [
+                      {
+                        type: 'Literal',
+                        value: getImportPath(locale ? [locale, value] : [value])
+                      }
+                    ]
                   }
                 }
               }))
@@ -330,10 +335,24 @@ export async function collectPageMap({
     body
   })
 
-  return `import { normalizePageMap } from 'nextra/page-map'
-${result.value}
+  const routeToPageMap = result.value.slice(
+    result.value.indexOf('export const RouteToPage'),
+    -1
+  )
+  await fs.writeFile(
+    path.join(CHUNKS_DIR, `nextra-pages-${locale}.mjs`),
+    routeToPageMap
+  )
+
+  const rawJs = `import { normalizePageMap } from 'nextra/page-map'
+${result.value.split('export const RouteToPage')[0]}
   
 export const pageMap = normalizePageMap(_pageMap)
 
 export const RouteToFilepath = ${JSON.stringify(mdxPages, null, 2)}`
+
+  await fs.writeFile(
+    path.join(CHUNKS_DIR, `nextra-page-map-${locale}.mjs`),
+    rawJs
+  )
 }

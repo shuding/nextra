@@ -1,5 +1,6 @@
 /* eslint-env node */
 import { sep } from 'node:path'
+import { notFound } from 'next/navigation.js'
 import { fromZodError } from 'zod-validation-error'
 import type { Nextra } from '../types'
 import {
@@ -150,3 +151,16 @@ type RuleSetRule = {
 export default nextra
 
 export type * from '../types'
+
+export async function importPage(pathSegments: string[] = [], locale = '') {
+  const { RouteToPage } = await import(
+    `private-dot-next/static/chunks/nextra-pages-${locale}.mjs`
+  )
+  const pageImport = RouteToPage[pathSegments.join('/')]
+  try {
+    return await pageImport()
+  } catch (error) {
+    logger.error(error)
+    notFound()
+  }
+}
