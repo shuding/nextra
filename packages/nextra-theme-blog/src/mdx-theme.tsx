@@ -56,7 +56,6 @@ function HeadingLink({
 }
 
 const EXTERNAL_HREF_REGEX = /https?:\/\//
-const ID_HREF_REGEX = /^#/
 
 const A = ({ children, href = '', ...props }: ComponentProps<'a'>) => {
   if (EXTERNAL_HREF_REGEX.test(href)) {
@@ -66,7 +65,7 @@ const A = ({ children, href = '', ...props }: ComponentProps<'a'>) => {
       </a>
     )
   }
-  const ComponentToUse = ID_HREF_REGEX.test(href) ? 'a' : Link
+  const ComponentToUse = href.startsWith('#') ? 'a' : Link
   return (
     <ComponentToUse href={href} {...props}>
       {children}
