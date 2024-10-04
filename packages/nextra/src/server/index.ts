@@ -157,11 +157,12 @@ export async function importPage(pathSegments: string[] = [], locale = '') {
   const { RouteToPage } = await import(
     `private-dot-next/static/chunks/nextra-pages-${locale}.mjs`
   )
-  const pageImport = RouteToPage[pathSegments.join('/')]
+  const pagePath = pathSegments.join('/')
+  const pageImport = RouteToPage[pagePath]
   try {
     return await pageImport()
   } catch (error) {
-    logger.error(error)
+    logger.error('Error while loading', pagePath, error)
     notFound()
   }
 }

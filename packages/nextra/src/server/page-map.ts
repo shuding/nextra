@@ -277,80 +277,81 @@ export async function collectPageMap({
       ]
     }))
 
-  const body: Parameters<typeof toJs>[0]['body'] = [
-    ...metaImportsAST,
-    {
-      type: 'VariableDeclaration',
-      kind: 'const',
-      declarations: [
-        {
-          type: 'VariableDeclarator',
-          id: { type: 'Identifier', name: '_pageMap' },
-          init: pageMapAst
-        }
-      ]
-    },
-    {
-      type: 'ExportNamedDeclaration',
-      specifiers: [],
-      declaration: {
+  const pageMapResult = toJs({
+    type: 'Program',
+    sourceType: 'module',
+    body: [
+      ...metaImportsAST,
+      {
         type: 'VariableDeclaration',
         kind: 'const',
         declarations: [
           {
             type: 'VariableDeclarator',
-            id: { type: 'Identifier', name: 'RouteToPage' },
-            init: {
-              type: 'ObjectExpression',
-              properties: Object.entries(mdxPages)
-                .sort((a, b) => a[0].localeCompare(b[0]))
-                .map(([key, value]) => ({
-                  ...DEFAULT_PROPERTY_PROPS,
-                  key: { type: 'Literal', value: key },
-                  value: {
-                    type: 'ArrowFunctionExpression',
-                    expression: true,
-                    params: [],
-                    body: {
-                      type: 'CallExpression',
-                      optional: false,
-                      callee: { type: 'Identifier', name: 'import' },
-                      arguments: [
-                        {
-                          type: 'Literal',
-                          value: getImportPath(
-                            locale ? [locale, value] : [value]
-                          )
-                        }
-                      ]
-                    }
-                  }
-                }))
-            }
+            id: { type: 'Identifier', name: '_pageMap' },
+            init: pageMapAst
           }
         ]
       }
-    }
-  ]
-
-  const result = toJs({
-    type: 'Program',
-    sourceType: 'module',
-    body
+    ]
   })
 
-  const routeToPageMap = result.value.slice(
-    result.value.indexOf('export const RouteToPage'),
-    -1
-  )
+  const pagesResult = toJs({
+    type: 'Program',
+    sourceType: 'module',
+    body: [
+      {
+        type: 'ExportNamedDeclaration',
+        specifiers: [],
+        declaration: {
+          type: 'VariableDeclaration',
+          kind: 'const',
+          declarations: [
+            {
+              type: 'VariableDeclarator',
+              id: { type: 'Identifier', name: 'RouteToPage' },
+              init: {
+                type: 'ObjectExpression',
+                properties: Object.entries(mdxPages)
+                  .sort((a, b) => a[0].localeCompare(b[0]))
+                  .map(([key, value]) => ({
+                    ...DEFAULT_PROPERTY_PROPS,
+                    key: { type: 'Literal', value: key },
+                    value: {
+                      type: 'ArrowFunctionExpression',
+                      expression: true,
+                      params: [],
+                      body: {
+                        type: 'CallExpression',
+                        optional: false,
+                        callee: { type: 'Identifier', name: 'import' },
+                        arguments: [
+                          {
+                            type: 'Literal',
+                            value: getImportPath(
+                              locale ? [locale, value] : [value]
+                            )
+                          }
+                        ]
+                      }
+                    }
+                  }))
+              }
+            }
+          ]
+        }
+      }
+    ]
+  })
+
   await fs.writeFile(
     path.join(CHUNKS_DIR, `nextra-pages-${locale}.mjs`),
-    routeToPageMap
+    pagesResult.value
   )
 
   const rawJs = `import { normalizePageMap } from 'nextra/page-map'
-${result.value.split('export const RouteToPage')[0]}
-  
+${pageMapResult.value}
+
 export const pageMap = normalizePageMap(_pageMap)`
 
   await fs.writeFile(
