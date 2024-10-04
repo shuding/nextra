@@ -302,26 +302,30 @@ export async function collectPageMap({
             id: { type: 'Identifier', name: 'RouteToPage' },
             init: {
               type: 'ObjectExpression',
-              properties: Object.entries(mdxPages).map(([key, value]) => ({
-                ...DEFAULT_PROPERTY_PROPS,
-                key: { type: 'Literal', value: key },
-                value: {
-                  type: 'ArrowFunctionExpression',
-                  expression: true,
-                  params: [],
-                  body: {
-                    type: 'CallExpression',
-                    optional: false,
-                    callee: { type: 'Identifier', name: 'import' },
-                    arguments: [
-                      {
-                        type: 'Literal',
-                        value: getImportPath(locale ? [locale, value] : [value])
-                      }
-                    ]
+              properties: Object.entries(mdxPages)
+                .sort((a, b) => a[0].localeCompare(b[0]))
+                .map(([key, value]) => ({
+                  ...DEFAULT_PROPERTY_PROPS,
+                  key: { type: 'Literal', value: key },
+                  value: {
+                    type: 'ArrowFunctionExpression',
+                    expression: true,
+                    params: [],
+                    body: {
+                      type: 'CallExpression',
+                      optional: false,
+                      callee: { type: 'Identifier', name: 'import' },
+                      arguments: [
+                        {
+                          type: 'Literal',
+                          value: getImportPath(
+                            locale ? [locale, value] : [value]
+                          )
+                        }
+                      ]
+                    }
                   }
-                }
-              }))
+                }))
             }
           }
         ]
@@ -347,9 +351,7 @@ export async function collectPageMap({
   const rawJs = `import { normalizePageMap } from 'nextra/page-map'
 ${result.value.split('export const RouteToPage')[0]}
   
-export const pageMap = normalizePageMap(_pageMap)
-
-export const RouteToFilepath = ${JSON.stringify(mdxPages, null, 2)}`
+export const pageMap = normalizePageMap(_pageMap)`
 
   await fs.writeFile(
     path.join(CHUNKS_DIR, `nextra-page-map-${locale}.mjs`),

@@ -110,8 +110,9 @@ const nextra: Nextra = nextraConfig => {
             // runtime import call such as `import('...')`.
             test: MARKDOWN_EXTENSION_REGEX,
             issuer: request =>
-              (!!request && !request.includes(AGNOSTIC_PAGE_MAP_PATH)) ||
-              request === null,
+              (request
+                ? !request.includes(AGNOSTIC_PAGE_MAP_PATH)
+                : request === null),
             use: defaultLoaderOptions
           },
           {
@@ -163,4 +164,11 @@ export async function importPage(pathSegments: string[] = [], locale = '') {
     logger.error(error)
     notFound()
   }
+}
+
+export async function getPagesPaths(locale = '') {
+  const { RouteToPage } = await import(
+    `private-dot-next/static/chunks/nextra-pages-${locale}.mjs`
+  )
+  return Object.keys(RouteToPage)
 }

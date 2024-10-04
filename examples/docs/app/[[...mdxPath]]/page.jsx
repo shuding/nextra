@@ -1,12 +1,11 @@
 /* eslint-env node */
 /* eslint-disable react-hooks/rules-of-hooks -- false positive, useMDXComponents/useTOC are not react hooks */
 
-import { importPage } from 'nextra'
+import { getPagesPaths, importPage } from 'nextra'
 import { useMDXComponents } from 'nextra-theme-docs'
-import { RouteToPage } from 'private-dot-next/static/chunks/nextra-pages-.mjs'
 
-export function generateStaticParams() {
-  return Object.keys(RouteToPage).map(mdxPath => ({
+export async function generateStaticParams() {
+  return (await getPagesPaths()).map(mdxPath => ({
     mdxPath: mdxPath.split('/')
   }))
 }
