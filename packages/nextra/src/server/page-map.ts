@@ -301,52 +301,50 @@ export async function collectPageMap({
     sourceType: 'module',
     body: [
       {
-        type: 'ExportNamedDeclaration',
-        specifiers: [],
-        declaration: {
-          type: 'VariableDeclaration',
-          kind: 'const',
-          declarations: [
-            {
-              type: 'VariableDeclarator',
-              id: { type: 'Identifier', name: 'RouteToPage' },
-              init: {
-                type: 'ObjectExpression',
-                properties: Object.entries(mdxPages)
-                  .sort((a, b) => a[0].localeCompare(b[0]))
-                  .map(([key, value]) => ({
-                    ...DEFAULT_PROPERTY_PROPS,
-                    key: { type: 'Literal', value: key },
-                    value: {
-                      type: 'ArrowFunctionExpression',
-                      expression: true,
-                      params: [],
-                      body: {
-                        type: 'CallExpression',
-                        optional: false,
-                        callee: { type: 'Identifier', name: 'import' },
-                        arguments: [
-                          {
-                            type: 'Literal',
-                            value: getImportPath(
-                              locale ? [locale, value] : [value]
-                            )
-                          }
-                        ]
-                      }
+        type: 'VariableDeclaration',
+        kind: 'const',
+        declarations: [
+          {
+            type: 'VariableDeclarator',
+            id: { type: 'Identifier', name: 'RouteToPage' },
+            init: {
+              type: 'ObjectExpression',
+              properties: Object.entries(mdxPages)
+                .sort((a, b) => a[0].localeCompare(b[0]))
+                .map(([key, value]) => ({
+                  ...DEFAULT_PROPERTY_PROPS,
+                  key: { type: 'Literal', value: key },
+                  value: {
+                    type: 'ArrowFunctionExpression',
+                    expression: true,
+                    params: [],
+                    body: {
+                      type: 'CallExpression',
+                      optional: false,
+                      callee: { type: 'Identifier', name: 'import' },
+                      arguments: [
+                        {
+                          type: 'Literal',
+                          value: path.join(
+                            'private-next-root-dir',
+                            'mdx',
+                            value
+                          )
+                        }
+                      ]
                     }
-                  }))
-              }
+                  }
+                }))
             }
-          ]
-        }
+          }
+        ]
       }
     ]
   })
 
   await fs.writeFile(
     path.join(CHUNKS_DIR, `nextra-pages-${locale}.mjs`),
-    pagesResult.value
+    `export ${pagesResult.value}`
   )
 
   const rawJs = `import { normalizePageMap } from 'nextra/page-map'

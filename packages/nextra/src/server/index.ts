@@ -152,24 +152,3 @@ type RuleSetRule = {
 export default nextra
 
 export type * from '../types'
-
-export async function importPage(pathSegments: string[] = [], locale = '') {
-  const { RouteToPage } = await import(
-    `private-dot-next/static/chunks/nextra-pages-${locale}.mjs`
-  )
-  const pagePath = pathSegments.join('/')
-  const pageImport = RouteToPage[pagePath]
-  try {
-    return await pageImport()
-  } catch (error) {
-    logger.error('Error while loading', pagePath, error)
-    notFound()
-  }
-}
-
-export async function getPagesPaths(locale = '') {
-  const { RouteToPage } = await import(
-    `private-dot-next/static/chunks/nextra-pages-${locale}.mjs`
-  )
-  return Object.keys(RouteToPage)
-}
