@@ -4,6 +4,8 @@ import NextLink from 'next/link'
 import type { ComponentProps, ReactElement } from 'react'
 import { forwardRef } from 'react'
 
+const ID_HREF_REGEX = /^#/
+
 export type AnchorProps = ComponentProps<'a'> & {
   newWindow?: boolean
 }
@@ -14,7 +16,8 @@ export const Anchor = forwardRef<HTMLAnchorElement, AnchorProps>(
     // ref is used in <NavbarMenu />
     forwardedRef
   ): ReactElement => {
-    const ComponentToUse = newWindow ? 'a' : NextLink
+    const ComponentToUse =
+      newWindow || ID_HREF_REGEX.test(href) ? 'a' : NextLink
     return (
       <ComponentToUse
         {...props}
