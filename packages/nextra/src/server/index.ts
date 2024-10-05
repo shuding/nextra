@@ -165,11 +165,10 @@ const nextra: Nextra = nextraConfig => {
               },
               {
                 // Match Markdown imports from non-pages. These imports have an
-                // issuer, which can be anything as long as it's not empty.
-                // When the issuer is null, it means that it can be imported via a
+                // issuer, which can be anything as long as it's not empty string.
+                // When the issuer is `null`, it means that it can be imported via a
                 // runtime import call such as `import('...')`.
-                issuer: request =>
-                  request === null || !request.includes(AGNOSTIC_PAGE_MAP_PATH),
+                issuer: request => !request?.includes(AGNOSTIC_PAGE_MAP_PATH),
                 use: defaultLoaderOptions
               }
             ]
