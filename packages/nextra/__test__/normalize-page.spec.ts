@@ -1,5 +1,5 @@
+import fs from 'node:fs/promises'
 import path from 'node:path'
-import { evaluate } from '../src/client/components/remote-content.js'
 import { normalizePages } from '../src/client/normalize-pages.js'
 import { cnPageMap, usPageMap } from './fixture/page-maps/page-map.js'
 
@@ -185,17 +185,18 @@ describe('normalize-page', () => {
       'hidden-route-should-have-theme-context'
     )
     vi.doMock('../src/server/file-system.ts', () => ({ PAGES_DIR: dir }))
+    vi.doMock('../src/server/constants.ts', async () => ({
+      ...(await vi.importActual('../src/server/constants.ts')),
+      CHUNKS_DIR: dir
+    }))
     const { collectPageMap } = await import('../src/server/page-map')
 
     const result = await collectPageMap({ dir })
-    const res = result
-      .replace(/.+/, '')
-      .replace('export const pageMap =', 'return')
+    await fs.writeFile(path.join(dir, 'generated-page-map.ts'), result)
 
-    const { default: metaJs } = await import(
-      './fixture/page-maps/hidden-route-should-have-theme-context/1-level/2-level/_meta'
+    const { pageMap } = await import(
+      './fixture/page-maps/hidden-route-should-have-theme-context/generated-page-map'
     )
-    const pageMap = evaluate(res, { _1_level_2_level_meta: metaJs })
 
     expect(pageMap).toEqual([
       {
