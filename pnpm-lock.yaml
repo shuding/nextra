@@ -75,8 +75,8 @@ importers:
         specifier: 3.17.3
         version: 3.17.3(patch_hash=quqasx3lkw2fskc7xdiwuschla)(tailwindcss@3.4.13)
       eslint-plugin-typescript-sort-keys:
-        specifier: 3.2.0
-        version: 3.2.0(@typescript-eslint/parser@8.8.0)(eslint@9.12.0)(typescript@5.6.2)
+        specifier: 3.3.0
+        version: 3.3.0(@typescript-eslint/parser@8.8.0)(eslint@9.12.0)(typescript@5.6.2)
       eslint-plugin-unicorn:
         specifier: 56.0.0
         version: 56.0.0(eslint@9.12.0)
@@ -6686,11 +6686,11 @@ packages:
     dev: true
     patched: true
 
-  /eslint-plugin-typescript-sort-keys@3.2.0(@typescript-eslint/parser@8.8.0)(eslint@9.12.0)(typescript@5.6.2):
-    resolution: {integrity: sha512-GutszvriaVtwmn7pQjuj9/9o0iXhD7XZs0/424+zsozdRr/fdg5e8206t478Vnqnqi1GjuxcAolj1kf74KnhPA==}
+  /eslint-plugin-typescript-sort-keys@3.3.0(@typescript-eslint/parser@8.8.0)(eslint@9.12.0)(typescript@5.6.2):
+    resolution: {integrity: sha512-bRW3Rc/VNdrSP9OoY5wgjjaXCOOkZKpzvl/Mk6l8Sg8CMehVIcg9K4y33l+ZcZiknpl0aR6rKusxuCJNGZWmVw==}
     engines: {node: '>= 16'}
     peerDependencies:
-      '@typescript-eslint/parser': ^6 || ^7
+      '@typescript-eslint/parser': '>=6'
       eslint: ^7 || ^8
       typescript: ^3 || ^4 || ^5
     dependencies:
