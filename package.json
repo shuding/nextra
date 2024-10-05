@@ -22,7 +22,7 @@
     "version": "changeset version"
   },
   "devDependencies": {
-    "@changesets/cli": "2.27.8",
+    "@changesets/cli": "2.27.9",
     "@ianvs/prettier-plugin-sort-imports": "4.3.1",
     "@next/eslint-plugin-next": "14.2.13",
     "@rollup/plugin-alias": "^5.0.0",
