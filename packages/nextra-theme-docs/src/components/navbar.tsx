@@ -127,47 +127,51 @@ export function Navbar({ items }: NavBarProps): ReactElement {
             {renderComponent(themeConfig.logo)}
           </div>
         )}
-        {items.map(pageOrMenu => {
-          if (pageOrMenu.display === 'hidden') return null
+        <div className="_flex _gap-4 _overflow-x-auto nextra-scrollbar _py-1.5">
+          {items.map(pageOrMenu => {
+            if (pageOrMenu.display === 'hidden') return null
 
-          if (pageOrMenu.type === 'menu') {
-            const menu = pageOrMenu as MenuItem
+            if (pageOrMenu.type === 'menu') {
+              const menu = pageOrMenu as MenuItem
+              return (
+                <NavbarMenu key={menu.title} menu={menu}>
+                  {menu.title}
+                  <ArrowRightIcon className="_h-3.5 *:_origin-center *:_transition-transform *:_rotate-90" />
+                </NavbarMenu>
+              )
+            }
+            const page = pageOrMenu as PageItem
+            let href = page.href || page.route || '#'
+
+            // If it's a directory
+            if (page.children) {
+              href =
+                (page.withIndexPage ? page.route : page.firstChildRoute) || href
+            }
+
+            const isActive =
+              page.route === activeRoute ||
+              activeRoute.startsWith(page.route + '/')
+
             return (
-              <NavbarMenu key={menu.title} menu={menu}>
-                {menu.title}
-                <ArrowRightIcon className="_h-3.5 *:_origin-center *:_transition-transform *:_rotate-90" />
-              </NavbarMenu>
+              <Anchor
+                href={href}
+                key={href}
+                className={cn(
+                  classes.link,
+                  'max-md:_hidden _whitespace-nowrap',
+                  !isActive || page.newWindow
+                    ? classes.inactive
+                    : classes.active
+                )}
+                newWindow={page.newWindow}
+                aria-current={!page.newWindow && isActive}
+              >
+                {page.title}
+              </Anchor>
             )
-          }
-          const page = pageOrMenu as PageItem
-          let href = page.href || page.route || '#'
-
-          // If it's a directory
-          if (page.children) {
-            href =
-              (page.withIndexPage ? page.route : page.firstChildRoute) || href
-          }
-
-          const isActive =
-            page.route === activeRoute ||
-            activeRoute.startsWith(page.route + '/')
-
-          return (
-            <Anchor
-              href={href}
-              key={href}
-              className={cn(
-                classes.link,
-                'max-md:_hidden _whitespace-nowrap',
-                !isActive || page.newWindow ? classes.inactive : classes.active
-              )}
-              newWindow={page.newWindow}
-              aria-current={!page.newWindow && isActive}
-            >
-              {page.title}
-            </Anchor>
-          )
-        })}
+          })}
+        </div>
 
         {process.env.NEXTRA_SEARCH &&
           renderComponent(themeConfig.search.component, {
