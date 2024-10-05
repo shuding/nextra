@@ -65,10 +65,11 @@ const A = ({ children, href = '', ...props }: ComponentProps<'a'>) => {
       </a>
     )
   }
+  const ComponentToUse = href.startsWith('#') ? 'a' : Link
   return (
-    <Link href={href} {...props}>
+    <ComponentToUse href={href} {...props}>
       {children}
-    </Link>
+    </ComponentToUse>
   )
 }
 
