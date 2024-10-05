@@ -11,9 +11,9 @@ export default {
     type: 'page',
     title: 'Documentation'
   },
-  version: {
+  versions: {
     type: 'menu',
-    title: 'Version',
+    title: 'Versions',
     items: {
       2: {
         title: 'Nextra v2 Docs ↗',
