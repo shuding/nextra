@@ -169,9 +169,7 @@ const nextra: Nextra = nextraConfig => {
                 // When the issuer is null, it means that it can be imported via a
                 // runtime import call such as `import('...')`.
                 issuer: request =>
-                  request
-                    ? !request.includes(AGNOSTIC_PAGE_MAP_PATH)
-                    : request === null,
+                  request === null || !request.includes(AGNOSTIC_PAGE_MAP_PATH),
                 use: defaultLoaderOptions
               }
             ]
