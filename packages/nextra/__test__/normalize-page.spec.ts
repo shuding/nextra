@@ -229,5 +229,11 @@ describe('normalize-page', () => {
         ]
       }
     ])
+
+    const result2 = normalizePages({
+      list: pageMap,
+      route: '/1-level/2-level/foo'
+    })
+    expect(result2).toMatchSnapshot()
   })
 })
