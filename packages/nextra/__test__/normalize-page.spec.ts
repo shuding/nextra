@@ -1,3 +1,5 @@
+import path from 'node:path'
+import { evaluate } from '../src/client/components/remote-content.js'
 import { normalizePages } from '../src/client/normalize-pages.js'
 import { cnPageMap, usPageMap } from './fixture/page-maps/page-map.js'
 
@@ -173,5 +175,59 @@ describe('normalize-page', () => {
         },
       ]
     `)
+  })
+
+  it.only('should keep themeContext for hidden route', async () => {
+    const dir = path.join(
+      __dirname,
+      'fixture',
+      'page-maps',
+      'hidden-route-should-have-theme-context'
+    )
+    vi.doMock('../src/server/file-system.ts', () => ({ PAGES_DIR: dir }))
+    const { collectPageMap } = await import('../src/server/page-map')
+
+    const result = await collectPageMap({ dir })
+    const res = result
+      .replace(/.+/, '')
+      .replace('export const pageMap =', 'return')
+
+    const { default: metaJs } = await import(
+      './fixture/page-maps/hidden-route-should-have-theme-context/1-level/2-level/_meta'
+    )
+    const pageMap = evaluate(res, { _1_level_2_level_meta: metaJs })
+
+    expect(pageMap).toEqual([
+      {
+        name: '1-level',
+        route: '/1-level',
+        children: [
+          {
+            name: '2-level',
+            route: '/1-level/2-level',
+            children: [
+              {
+                data: {
+                  foo: {
+                    theme: {
+                      layout: 'full',
+                      sidebar: false,
+                      toc: false
+                    }
+                  }
+                }
+              },
+              {
+                name: 'foo',
+                route: '/1-level/2-level/foo',
+                frontMatter: {
+                  sidebarTitle: 'Foo'
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ])
   })
 })
