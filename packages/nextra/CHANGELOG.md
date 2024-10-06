@@ -44,6 +44,15 @@
   Router, something may be broken, check
   https://github.com/shuding/nextra/tree/v4-v2/examples for the migration guide
 
+## 3.0.4
+
+### Patch Changes
+
+- 84a8a41: use 3 nextra's webpack loaders instead of 4
+- 659b36e: remove `jsx-runtime.cjs`, import runtime from 'react/jsx-runtime'
+- 84fc255: should get right `activeType`, `activeThemeContext` even when some
+  parent has `display: 'hidden'`
+
 ## 3.0.3
 
 ### Patch Changes

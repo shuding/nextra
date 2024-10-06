@@ -127,19 +127,11 @@ export async function collectFiles({
       // add concurrency because folder can contain a lot of files
       return limit(async () => {
         if (MARKDOWN_EXTENSION_REGEX.test(ext)) {
-          // let frontMatter: Expression
-
-          // if (IMPORT_FRONTMATTER) {
-          // const importName = cleanFileName(filePath)
-          // imports.push({ importName, filePath })
-          // frontMatter = { type: 'Identifier', name: importName }
-          // } else {
           const content = await fs.readFile(filePath, 'utf8')
           const { data } = grayMatter(content)
           if (!data.title) {
             data.sidebarTitle = pageTitleFromFilename(name)
           }
-          // }
 
           return {
             name,
@@ -244,7 +236,7 @@ export async function collectPageMap({
    * https://github.com/nodejs/node/issues/31710
    */
   function getImportPath(filePaths: string[]) {
-    return slash(
+    const importPath =  slash(
       path.relative(
         CHUNKS_DIR,
         fromAppDir
@@ -252,6 +244,7 @@ export async function collectPageMap({
           : path.join(process.cwd(), 'mdx', ...filePaths)
       )
     )
+    return importPath.startsWith('.') ? importPath : `./${importPath}`
   }
 
   const metaImportsAST: ImportDeclaration[] = someImports
