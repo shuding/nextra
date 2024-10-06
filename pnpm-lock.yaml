@@ -295,21 +295,12 @@ importers:
       github-slugger:
         specifier: ^2.0.0
         version: 2.0.0
-      graceful-fs:
-        specifier: ^4.2.11
-        version: 4.2.11
-      gray-matter:
-        specifier: ^4.0.3
-        version: 4.0.3
       hast-util-to-estree:
         specifier: ^3.1.0
         version: 3.1.0
       katex:
         specifier: ^0.16.9
         version: 0.16.11
-      p-limit:
-        specifier: ^6.0.0
-        version: 6.1.0
       rehype-katex:
         specifier: ^7.0.0
         version: 7.0.1
@@ -368,9 +359,6 @@ importers:
       '@types/estree':
         specifier: ^1.0.5
         version: 1.0.6
-      '@types/graceful-fs':
-        specifier: ^4.1.9
-        version: 4.1.9
       '@types/hast':
         specifier: ^3.0.4
         version: 3.0.4
@@ -4243,12 +4231,6 @@ packages:
 
   /@types/estree@1.0.6:
     resolution: {integrity: sha512-AYnb1nQyY49te+VRAVgmzfcgjYS91mY5P0TKUDCLEM+gNnA+3T6rWITXRLYCpahpqSQbN5cE+gHpnPyXjHWxcw==}
-
-  /@types/graceful-fs@4.1.9:
-    resolution: {integrity: sha512-olP3sd1qOEe5dXTSaFvQG+02VdRXcdytWLAZsAq1PecU8uqQAhkrnbli7DagjtXKW/Bl7YJbUsa8MPcuc8LHEQ==}
-    dependencies:
-      '@types/node': 20.16.10
-    dev: true
 
   /@types/hast@3.0.4:
     resolution: {integrity: sha512-WPs+bbQw5aCj+x6laNGWLH3wviHtoCv/P3+otBhbOhJgG8qtpdAMlTCxLtsTWA7LH1Oh/bFCHsBn0TPS5m30EQ==}

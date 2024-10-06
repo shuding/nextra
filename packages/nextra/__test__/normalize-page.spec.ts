@@ -1,9 +1,9 @@
 import fs from 'node:fs/promises'
 import path from 'node:path'
 import { normalizePages } from '../src/client/normalize-pages.js'
+import { generatePageMapFromFilepaths } from '../src/server/generate-page-map.js'
 import { normalizePageMap } from '../src/server/normalize-page-map.js'
 import { cnPageMap, usPageMap } from './fixture/page-maps/page-map.js'
-import { generatePageMapFromFilepaths } from '../src/server/generate-page-map.js'
 
 describe('normalize-page', () => {
   it('zh-CN home', () => {
@@ -140,7 +140,9 @@ describe('normalize-page', () => {
       ...(await vi.importActual('../src/server/constants.ts')),
       CHUNKS_DIR: dir
     }))
-    const { getFilepaths, collectPageMap } = await import('../src/server/page-map.js')
+    const { getFilepaths, collectPageMap } = await import(
+      '../src/server/page-map.js'
+    )
 
     const relativePaths = await getFilepaths({ dir })
 
@@ -152,10 +154,10 @@ describe('normalize-page', () => {
       fromAppDir: false
     })
 
-    await fs.writeFile(path.join(dir, 'generated-page-map.ts'), '// @ts-nocheck\n' + rawJs.replaceAll(
-      '../../../../mdx/',
-      './'
-    ))
+    await fs.writeFile(
+      path.join(dir, 'generated-page-map.ts'),
+      '// @ts-nocheck\n' + rawJs.replaceAll('../../../../mdx/', './')
+    )
 
     return
 

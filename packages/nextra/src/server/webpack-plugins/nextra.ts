@@ -1,5 +1,5 @@
+import fs from 'node:fs/promises'
 import path from 'node:path'
-import gracefulFs from 'graceful-fs'
 import type { Compiler } from 'webpack'
 import type { NextraConfig } from '../../types'
 import { CHUNKS_DIR, IS_PRODUCTION } from '../constants.js'
@@ -9,8 +9,6 @@ import {
   getFilepaths
 } from '../generate-page-map.js'
 import { collectPageMap } from '../page-map.js'
-
-const fs = gracefulFs.promises
 
 let isSaved = false
 

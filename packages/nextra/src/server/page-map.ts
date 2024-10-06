@@ -1,43 +1,15 @@
 import path from 'node:path'
 import type { ArrayExpression, ImportDeclaration } from 'estree'
 import { toJs } from 'estree-util-to-js'
-import gracefulFs from 'graceful-fs'
-import grayMatter from 'gray-matter'
-import pLimit from 'p-limit'
 import slash from 'slash'
 import type { PageMapItem } from '../types'
-import {
-  CHUNKS_DIR,
-  CWD,
-  MARKDOWN_EXTENSION_REGEX,
-  META_REGEX
-} from './constants.js'
+import { CHUNKS_DIR, META_REGEX } from './constants.js'
 import { APP_DIR } from './file-system.js'
-import {
-  createAstObject,
-  normalizePageRoute,
-  pageTitleFromFilename
-} from './utils.js'
-
-const fs = gracefulFs.promises
-
-const limit = pLimit(20)
+import { createAstObject } from './utils.js'
 
 type Import = {
   importName: string
   filePath: string
-}
-type DynamicImport = {
-  importName: string
-  route: string
-}
-
-type CollectFilesOptions = {
-  dir: string
-  route: string
-  imports?: Import[]
-  dynamicMetaImports?: DynamicImport[]
-  isFollowingSymlink: boolean
 }
 
 export {
@@ -113,7 +85,6 @@ function getImportPath(filePaths: string[], fromAppDir = false): string {
   return importPath.startsWith('.') ? importPath : `./${importPath}`
 }
 
-
 export async function collectPageMap({
   locale = '',
   pageMap,
@@ -139,7 +110,10 @@ export async function collectPageMap({
       type: 'ImportDeclaration',
       source: {
         type: 'Literal',
-        value: getImportPath(locale ? [locale, filePath] : [filePath], fromAppDir)
+        value: getImportPath(
+          locale ? [locale, filePath] : [filePath],
+          fromAppDir
+        )
       },
       specifiers: [
         {
@@ -168,31 +142,6 @@ export async function collectPageMap({
       ]
     }
   ]
-
-  // let footer = ''
-
-  // if (dynamicMetaImports.length) {
-  //   body.push({
-  //     type: 'VariableDeclaration',
-  //     kind: 'const',
-  //     declarations: [
-  //       {
-  //         type: 'VariableDeclarator',
-  //         id: { type: 'Identifier', name: 'dynamicMetaModules' },
-  //         init: {
-  //           type: 'ObjectExpression',
-  //           properties: dynamicMetaImports
-  //             // localeCompare to avoid race condition
-  //             .sort((a, b) => a.route.localeCompare(b.route))
-  //             .map(({ importName, route }) => ({
-  //               ...DEFAULT_PROPERTY_PROPS,
-  //               key: { type: 'Literal', value: route },
-  //               value: { type: 'Identifier', name: importName }
-  //             }))
-  //         }
-  //       }
-  //     ]
-  //   })
 
   const result = toJs({
     type: 'Program',

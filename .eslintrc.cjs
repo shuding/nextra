@@ -293,22 +293,6 @@ module.exports = {
       }
     },
     {
-      files: 'packages/nextra/src/**',
-      rules: {
-        'no-restricted-imports': [
-          'error',
-          {
-            patterns: [
-              {
-                group: ['fs', 'node:fs'],
-                message: 'Use `graceful-fs` instead'
-              }
-            ]
-          }
-        ]
-      }
-    },
-    {
       files: ['**/*.d.ts'],
       rules: {
         'no-var': 'off'
