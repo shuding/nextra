@@ -1579,39 +1579,7 @@ exports[`normalize-page > should keep themeContext for hidden route 1`] = `
   "activeIndex": 0,
   "activePath": [
     {
-      "children": [
-        {
-          "children": [
-            {
-              "frontMatter": {
-                "sidebarTitle": "Foo",
-              },
-              "name": "foo",
-              "route": "/1-level/2-level/foo",
-              "theme": {
-                "layout": "full",
-                "sidebar": false,
-                "toc": false,
-              },
-              "title": "Foo",
-              "type": "doc",
-            },
-          ],
-          "name": "2-level",
-          "route": "/1-level/2-level",
-          "title": "2-level",
-          "type": "doc",
-        },
-        {
-          "frontMatter": {
-            "sidebarTitle": "Qux",
-          },
-          "name": "qux",
-          "route": "/1-level/qux",
-          "title": "Qux",
-          "type": "doc",
-        },
-      ],
+      "children": [],
       "display": "hidden",
       "name": "1-level",
       "route": "/1-level",
@@ -1670,58 +1638,8 @@ exports[`normalize-page > should keep themeContext for hidden route 1`] = `
   "activeType": "doc",
   "directories": [],
   "docsDirectories": [],
-  "flatDirectories": [
-    {
-      "frontMatter": {
-        "sidebarTitle": "Foo",
-      },
-      "name": "foo",
-      "route": "/1-level/2-level/foo",
-      "theme": {
-        "layout": "full",
-        "sidebar": false,
-        "toc": false,
-      },
-      "title": "Foo",
-      "type": "doc",
-    },
-    {
-      "frontMatter": {
-        "sidebarTitle": "Qux",
-      },
-      "name": "qux",
-      "route": "/1-level/qux",
-      "title": "Qux",
-      "type": "doc",
-    },
-  ],
-  "flatDocsDirectories": [
-    {
-      "frontMatter": {
-        "sidebarTitle": "Foo",
-      },
-      "isUnderCurrentDocsTree": true,
-      "name": "foo",
-      "route": "/1-level/2-level/foo",
-      "theme": {
-        "layout": "full",
-        "sidebar": false,
-        "toc": false,
-      },
-      "title": "Foo",
-      "type": "doc",
-    },
-    {
-      "frontMatter": {
-        "sidebarTitle": "Qux",
-      },
-      "isUnderCurrentDocsTree": true,
-      "name": "qux",
-      "route": "/1-level/qux",
-      "title": "Qux",
-      "type": "doc",
-    },
-  ],
+  "flatDirectories": [],
+  "flatDocsDirectories": [],
   "topLevelNavbarItems": [],
 }
 `;
