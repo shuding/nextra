@@ -299,9 +299,11 @@ export function normalizePages({
           activeIndex = flatDocsDirectories.length
       }
     }
-    if (display === 'hidden' || ERROR_ROUTES.has(currentItem.route)) {
+    if (ERROR_ROUTES.has(currentItem.route)) {
       continue
     }
+
+    const isHidden = display === 'hidden'
 
     // If this item has children
     if (normalizedChildren) {
@@ -312,6 +314,9 @@ export function normalizePages({
       ) {
         activeThemeContext = normalizedChildren.activeThemeContext
         activeType = normalizedChildren.activeType
+        if (isHidden) {
+          continue
+        }
         activePath = [
           item,
           // Do not include folder which shows only his children
@@ -370,6 +375,9 @@ export function normalizePages({
         item.children.push(...normalizedChildren.directories)
       }
     } else {
+      if (isHidden) {
+        continue
+      }
       flatDirectories.push(item)
       switch (type) {
         case 'page':
@@ -384,6 +392,10 @@ export function normalizePages({
           }
         }
       }
+    }
+
+    if (isHidden) {
+      continue
     }
 
     if (type === 'doc' && display === 'children') {
