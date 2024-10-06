@@ -217,6 +217,7 @@ describe('normalize-page', () => {
               {
                 data: {
                   foo: {
+                    type: 'page',
                     theme: {
                       layout: 'full',
                       sidebar: false,

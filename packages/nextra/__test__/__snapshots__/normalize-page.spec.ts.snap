@@ -1590,7 +1590,7 @@ exports[`normalize-page > should keep themeContext for hidden route 1`] = `
     "toc": false,
     "typesetting": "default",
   },
-  "activeType": "doc",
+  "activeType": "page",
   "directories": [],
   "docsDirectories": [],
   "flatDirectories": [],
