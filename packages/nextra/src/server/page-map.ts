@@ -170,7 +170,9 @@ async function collectFiles({
  * https://github.com/nodejs/node/issues/31710
  */
 function getImportPath(filePath: string) {
-  return slash(path.relative(CHUNKS_DIR, filePath))
+  const importPath = slash(path.relative(CHUNKS_DIR, filePath))
+
+  return importPath.startsWith('.') ? importPath : `./${importPath}`
 }
 
 function convertPageMapToAst(pageMap: PageMapItem[]): ArrayExpression {

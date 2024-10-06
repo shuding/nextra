@@ -1574,6 +1574,31 @@ exports[`normalize-page > en-US home 1`] = `
 }
 `;
 
+exports[`normalize-page > should keep \`activeThemeContext\`, \`activeType\` for hidden route 1`] = `
+{
+  "activeIndex": 0,
+  "activePath": [],
+  "activeThemeContext": {
+    "breadcrumb": true,
+    "collapsed": false,
+    "footer": true,
+    "layout": "full",
+    "navbar": true,
+    "pagination": true,
+    "sidebar": false,
+    "timestamp": true,
+    "toc": false,
+    "typesetting": "article",
+  },
+  "activeType": "page",
+  "directories": [],
+  "docsDirectories": [],
+  "flatDirectories": [],
+  "flatDocsDirectories": [],
+  "topLevelNavbarItems": [],
+}
+`;
+
 exports[`normalize-page > zh-CN getting-started 1`] = `
 {
   "activeIndex": 0,
