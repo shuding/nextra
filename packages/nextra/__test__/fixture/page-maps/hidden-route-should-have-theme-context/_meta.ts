@@ -1,5 +1,5 @@
 export default {
   '*': {
-    display: 'hidden'
+    display: 'normal'
   }
 }

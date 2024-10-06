@@ -202,7 +202,7 @@ describe('normalize-page', () => {
       {
         data: {
           '*': {
-            display: 'hidden'
+            display: 'normal'
           }
         }
       },
