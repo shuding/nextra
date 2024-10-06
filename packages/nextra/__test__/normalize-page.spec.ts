@@ -233,8 +233,22 @@ describe('normalize-page', () => {
                 }
               }
             ]
+          },
+          {
+            name: 'qux',
+            route: '/1-level/qux',
+            frontMatter: {
+              sidebarTitle: 'Qux'
+            }
           }
         ]
+      },
+      {
+        name: 'bar',
+        route: '/bar',
+        frontMatter: {
+          sidebarTitle: 'Bar'
+        }
       }
     ])
 
