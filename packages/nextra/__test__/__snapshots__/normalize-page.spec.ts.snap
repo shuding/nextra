@@ -1612,7 +1612,7 @@ exports[`normalize-page > should keep themeContext for hidden route 1`] = `
           "type": "doc",
         },
       ],
-      "display": "normal",
+      "display": "hidden",
       "name": "1-level",
       "route": "/1-level",
       "title": "1-level",
@@ -1668,115 +1668,8 @@ exports[`normalize-page > should keep themeContext for hidden route 1`] = `
     "typesetting": "default",
   },
   "activeType": "doc",
-  "directories": [
-    {
-      "children": [
-        {
-          "children": [
-            {
-              "frontMatter": {
-                "sidebarTitle": "Foo",
-              },
-              "name": "foo",
-              "route": "/1-level/2-level/foo",
-              "theme": {
-                "layout": "full",
-                "sidebar": false,
-                "toc": false,
-              },
-              "title": "Foo",
-              "type": "doc",
-            },
-          ],
-          "name": "2-level",
-          "route": "/1-level/2-level",
-          "title": "2-level",
-          "type": "doc",
-        },
-        {
-          "frontMatter": {
-            "sidebarTitle": "Qux",
-          },
-          "name": "qux",
-          "route": "/1-level/qux",
-          "title": "Qux",
-          "type": "doc",
-        },
-      ],
-      "display": "normal",
-      "name": "1-level",
-      "route": "/1-level",
-      "title": "1-level",
-      "type": "doc",
-    },
-    {
-      "display": "normal",
-      "frontMatter": {
-        "sidebarTitle": "Bar",
-      },
-      "name": "bar",
-      "route": "/bar",
-      "title": "Bar",
-      "type": "doc",
-    },
-  ],
-  "docsDirectories": [
-    {
-      "children": [
-        {
-          "children": [
-            {
-              "frontMatter": {
-                "sidebarTitle": "Foo",
-              },
-              "isUnderCurrentDocsTree": true,
-              "name": "foo",
-              "route": "/1-level/2-level/foo",
-              "theme": {
-                "layout": "full",
-                "sidebar": false,
-                "toc": false,
-              },
-              "title": "Foo",
-              "type": "doc",
-            },
-          ],
-          "isUnderCurrentDocsTree": true,
-          "name": "2-level",
-          "route": "/1-level/2-level",
-          "title": "2-level",
-          "type": "doc",
-        },
-        {
-          "frontMatter": {
-            "sidebarTitle": "Qux",
-          },
-          "isUnderCurrentDocsTree": true,
-          "name": "qux",
-          "route": "/1-level/qux",
-          "title": "Qux",
-          "type": "doc",
-        },
-      ],
-      "display": "normal",
-      "isUnderCurrentDocsTree": true,
-      "name": "1-level",
-      "route": "/1-level",
-      "title": "1-level",
-      "type": "doc",
-    },
-    {
-      "display": "normal",
-      "frontMatter": {
-        "sidebarTitle": "Bar",
-      },
-      "isUnderCurrentDocsTree": true,
-      "name": "bar",
-      "route": "/bar",
-      "title": "Bar",
-      "type": "doc",
-    },
-  ],
+  "directories": [],
+  "docsDirectories": [],
   "flatDirectories": [
     {
       "frontMatter": {
@@ -1802,7 +1695,7 @@ exports[`normalize-page > should keep themeContext for hidden route 1`] = `
       "type": "doc",
     },
     {
-      "display": "normal",
+      "display": "hidden",
       "frontMatter": {
         "sidebarTitle": "Bar",
       },
@@ -1839,7 +1732,7 @@ exports[`normalize-page > should keep themeContext for hidden route 1`] = `
       "type": "doc",
     },
     {
-      "display": "normal",
+      "display": "hidden",
       "frontMatter": {
         "sidebarTitle": "Bar",
       },
