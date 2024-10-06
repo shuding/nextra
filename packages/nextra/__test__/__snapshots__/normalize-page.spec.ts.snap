@@ -1574,7 +1574,7 @@ exports[`normalize-page > en-US home 1`] = `
 }
 `;
 
-exports[`normalize-page > should keep themeContext for hidden route 1`] = `
+exports[`normalize-page > should keep \`activeThemeContext\`, \`activeType\` for hidden route 1`] = `
 {
   "activeIndex": 0,
   "activePath": [],

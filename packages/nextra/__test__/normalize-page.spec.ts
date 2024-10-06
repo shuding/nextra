@@ -177,7 +177,7 @@ describe('normalize-page', () => {
     `)
   })
 
-  it.only('should keep themeContext for hidden route', async () => {
+  it('should keep `activeThemeContext`, `activeType` for hidden route', async () => {
     const dir = path.join(
       __dirname,
       'fixture',
