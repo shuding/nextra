@@ -45,12 +45,16 @@ export class NextraPlugin {
 
           const { pageMap, mdxPages } =
             generatePageMapFromFilepaths(relativePaths)
-          await collectPageMap({
+          const rawJs = await collectPageMap({
             locale,
             pageMap,
             mdxPages,
             fromAppDir: !mdxBaseDir
           })
+          await fs.writeFile(
+            path.join(CHUNKS_DIR, `nextra-page-map-${locale}.mjs`),
+            rawJs
+          )
         }
         isSaved = true
         callback()

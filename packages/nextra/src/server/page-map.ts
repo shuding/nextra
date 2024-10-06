@@ -3,7 +3,7 @@ import type { ArrayExpression, ImportDeclaration } from 'estree'
 import { toJs } from 'estree-util-to-js'
 import slash from 'slash'
 import type { PageMapItem } from '../types'
-import { CHUNKS_DIR, META_REGEX, DEFAULT_PROPERTY_PROPS } from './constants.js'
+import { CHUNKS_DIR, META_REGEX } from './constants.js'
 import { APP_DIR } from './file-system.js'
 import { createAstObject } from './utils.js'
 
@@ -95,7 +95,7 @@ export async function collectPageMap({
   pageMap: PageMapItem[]
   mdxPages: Record<string, string>
   fromAppDir: boolean
-}): Promise<void> {
+}): Promise<string> {
   const someImports: Import[] = []
   const pageMapAst = convertPageMapToAst(
     pageMap,
@@ -147,64 +147,11 @@ export async function collectPageMap({
     ]
   })
 
-  const pagesResult = toJs({
-    type: 'Program',
-    sourceType: 'module',
-    body: [
-      {
-        type: 'VariableDeclaration',
-        kind: 'const',
-        declarations: [
-          {
-            type: 'VariableDeclarator',
-            id: { type: 'Identifier', name: 'RouteToPage' },
-            init: {
-              type: 'ObjectExpression',
-              properties: Object.entries(mdxPages)
-                .sort((a, b) => a[0].localeCompare(b[0]))
-                .map(([key, value]) => ({
-                  ...DEFAULT_PROPERTY_PROPS,
-                  key: { type: 'Literal', value: key },
-                  value: {
-                    type: 'ArrowFunctionExpression',
-                    expression: true,
-                    params: [],
-                    body: {
-                      type: 'CallExpression',
-                      optional: false,
-                      callee: { type: 'Identifier', name: 'import' },
-                      arguments: [
-                        {
-                          type: 'Literal',
-                          value: path.join(
-                            'private-next-root-dir',
-                            'mdx',
-                            value
-                          )
-                        }
-                      ]
-                    }
-                  }
-                }))
-            }
-          }
-        ]
-      }
-    ]
-  })
-
-  await fs.writeFile(
-    path.join(CHUNKS_DIR, `nextra-pages-${locale}.mjs`),
-    `export ${pagesResult.value}`
-  )
-
   const rawJs = `import { normalizePageMap } from 'nextra/page-map'
 ${pageMapResult.value}
 
-export const pageMap = normalizePageMap(_pageMap)`
+export const pageMap = normalizePageMap(_pageMap)
 
-  await fs.writeFile(
-    path.join(CHUNKS_DIR, `nextra-page-map-${locale}.mjs`),
-    rawJs
-  )
+export const RouteToFilepath = ${JSON.stringify(mdxPages, null, 2)}`
+  return rawJs
 }

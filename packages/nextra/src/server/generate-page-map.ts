@@ -30,8 +30,8 @@ export async function getFilepaths({
 }
 
 export function generatePageMapFromFilepaths(filepaths: string[]): any {
-  const mdxPages: Record<string, string> = {}
-  const metaFiles: Record<string, string> = {}
+  const mdxPages: Record<string, string> = Object.create(null)
+  const metaFiles: Record<string, string> = Object.create(null)
 
   for (const r of filepaths) {
     const pathInfo = path.parse(r)
@@ -96,5 +96,10 @@ export function generatePageMapFromFilepaths(filepaths: string[]): any {
 
   const pageMap = getPageMap(obj, [])
 
-  return { pageMap, mdxPages }
+  return {
+    pageMap,
+    mdxPages: Object.fromEntries(
+      Object.entries(mdxPages).sort((a, b) => a[0].localeCompare(b[0]))
+    )
+  }
 }
