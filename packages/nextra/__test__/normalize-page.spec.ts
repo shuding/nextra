@@ -200,6 +200,13 @@ describe('normalize-page', () => {
 
     expect(pageMap).toEqual([
       {
+        data: {
+          '*': {
+            display: 'hidden'
+          }
+        }
+      },
+      {
         name: '1-level',
         route: '/1-level',
         children: [

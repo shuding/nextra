@@ -50,9 +50,9 @@
   "peerDependencies": {
     "next": ">=13",
     "nextra": "workspace:*",
-    "react": ">=18.0.0",
+    "react": ">=18",
     "react-cusdis": "^2.1.3",
-    "react-dom": ">=18.0.0"
+    "react-dom": ">=18"
   },
   "peerDependenciesMeta": {
     "react-cusdis": {
