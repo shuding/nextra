@@ -1,5 +1,19 @@
 # nextra-theme-docs
 
+## 3.0.4
+
+### Patch Changes
+
+- 84fc255: should get right `activeType`, `activeThemeContext` even when some
+  parent has `display: 'hidden'`
+- 9b6595d: Ensure the jump link behavior is consistent in Markdown.
+- f3a5575: add a scrollbar for nav links in the header when they exceed
+  available free space
+- Updated dependencies [84a8a41]
+- Updated dependencies [659b36e]
+- Updated dependencies [84fc255]
+  - nextra@3.0.4
+
 ## 3.0.3
 
 ### Patch Changes
