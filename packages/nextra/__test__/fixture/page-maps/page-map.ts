@@ -92,7 +92,6 @@ export const cnPageMap: PageMapItem[] = [
           pagination: '分页',
           prefetching: '预请求',
           'with-nextjs': 'Next.js SSG 和 SSR',
-          typescript: 'Typescript',
           suspense: 'Suspense',
           middleware: '中间件',
           advanced: '高级',
@@ -174,8 +173,7 @@ export const cnPageMap: PageMapItem[] = [
           basic: '基本用法',
           auth: '身份验证',
           'infinite-loading': '无限加载',
-          'error-handling': '错误处理',
-          ssr: 'Next.js SSR'
+          'error-handling': '错误处理'
         }
       }
     ],

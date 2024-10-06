@@ -1,19 +1,13 @@
 import type { Heading as MDASTHeading } from 'mdast'
-import type { NextConfig } from 'next'
-import type { FC, ReactNode } from 'react'
+import type { Metadata, NextConfig } from 'next'
+import type { FC, ReactElement, ReactNode } from 'react'
 import type { z } from 'zod'
 import type { NEXTRA_INTERNAL } from './constants.js'
-import type {
-  mathJaxOptionsSchema,
-  nextraConfigSchema,
-  searchSchema
-} from './server/schemas'
+import type { mathJaxOptionsSchema, nextraConfigSchema } from './server/schemas'
 
 export interface LoaderOptions extends NextraConfig {
   isPageImport?: boolean
   isPageMapImport?: boolean
-  isMetaFile?: boolean
-  locales: string[]
 }
 
 export interface Folder<FileType = PageMapItem> {
@@ -60,18 +54,17 @@ export type Page = (MdxFile | Folder<Page>) & {
 
 export type Heading = {
   depth: Exclude<MDASTHeading['depth'], 1>
-  value: string
+  value: string | ReactElement
   id: string
 }
 
-export type PageOpts<FrontMatterType = FrontMatter> = {
-  filePath: string
-  frontMatter: FrontMatterType
-  pageMap: PageMapItem[]
+export type PageOpts = {
   title: string
-  hasJsxInH1?: boolean
-  timestamp?: number
-  readingTime?: ReadingTime
+  metadata: Metadata & {
+    filePath: string
+    timestamp?: number
+    readingTime?: ReadingTime
+  }
 }
 
 export type ReadingTime = {
@@ -80,8 +73,6 @@ export type ReadingTime = {
   time: number
   words: number
 }
-
-export type Search = z.infer<typeof searchSchema>
 
 export type NextraConfig = z.infer<typeof nextraConfigSchema>
 
@@ -93,20 +84,18 @@ export type Nextra = (
 
 export type ThemeConfig = any | null
 
-export type NextraThemeLayoutProps<
-  TFrontMatter = FrontMatter,
-  TThemeConfig = ThemeConfig
-> = {
-  pageOpts: PageOpts<TFrontMatter>
-  pageProps: any
+export type NextraThemeLayoutProps<TThemeConfig = ThemeConfig> = {
+  pageMap: PageMapItem[]
   themeConfig: TThemeConfig
   children: ReactNode
 }
 
-export type NextraMDXContent = FC<{
-  toc: Heading[]
-  children: ReactNode
-}>
+export type MDXWrapper = FC<
+  {
+    toc: Heading[]
+    children: ReactNode
+  } & PageOpts
+>
 
 export type UseTOC = (props: Record<string, any>) => Heading[]
 
@@ -117,8 +106,7 @@ export type NextraInternalGlobal = typeof globalThis & {
     context: Record<
       string,
       {
-        Content: NextraMDXContent
-        pageOpts: PageOpts
+        Content: MDXWrapper
         useTOC: UseTOC
       }
     >
@@ -128,12 +116,3 @@ export type NextraInternalGlobal = typeof globalThis & {
 }
 
 export type DynamicMetaDescriptor = Record<string, () => any>
-
-export type StructurizedData = Record<string, string>
-
-export type SearchData = {
-  [route: string]: {
-    title: string
-    data: StructurizedData
-  }
-}

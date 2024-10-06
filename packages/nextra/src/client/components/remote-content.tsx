@@ -1,16 +1,14 @@
 import jsxDevRuntime from 'react/jsx-dev-runtime'
 import jsxRuntime from 'react/jsx-runtime'
-import { useData } from '../hooks/index.js'
 import type { MDXComponents } from '../mdx.js'
 import { useMDXComponents } from '../mdx.js'
+
+type Scope = Record<string, unknown>
 
 const runtime =
   process.env.NODE_ENV === 'production' ? jsxRuntime : jsxDevRuntime
 
-export function evaluate(
-  compiledSource: string,
-  scope: Record<string, unknown> = {}
-) {
+export function evaluate(compiledSource: string, scope: Scope = {}) {
   // if we're ready to render, we can assemble the component tree and let React do its thing
   // first we set up the scope which has to include the mdx custom
   // create element function as well as any components we're using
@@ -26,36 +24,27 @@ export function evaluate(
   return hydrateFn({ useMDXComponents, ...runtime }, ...values)
 }
 
-export function RemoteContent({
-  scope,
-  components
-}: {
+export type RemoteContentProps = {
   /**
    * An object mapping names to React components.
    * The key used will be the name accessible to MDX.
    *
-   * @example `{ ComponentName: Component }` will be accessible in the MDX as `<ComponentName/>`.
+   * @example `{ ComponentName: Component }` will be accessible in the MDX as `<ComponentName>`.
    */
   components?: MDXComponents
   /**
    * Pass-through variables for use in the MDX content
    */
-  scope?: Record<string, unknown>
-}) {
-  const compiledSource = useData('__nextra_dynamic_mdx')
-  if (!compiledSource) {
-    throw new Error(
-      'RemoteContent must be used together with the `buildDynamicMDX` API'
-    )
-  }
+  scope?: Scope
+  compiledSource: string
+}
 
+export function RemoteContent({
+  scope,
+  components,
+  compiledSource
+}: RemoteContentProps) {
   const MDXContent = evaluate(compiledSource, scope).default
 
   return <MDXContent components={components} />
-}
-
-RemoteContent.useTOC = (props: Record<string, unknown>) => {
-  const compiledSource = useData('__nextra_dynamic_mdx')
-  const { useTOC } = evaluate(compiledSource)
-  return useTOC(props)
 }

@@ -1,13 +1,13 @@
+'use client'
+
 import { Button as HeadlessButton } from '@headlessui/react'
-import type { ButtonProps } from '@headlessui/react'
+import type { ButtonProps as HeadlessButtonProps } from '@headlessui/react'
 import cn from 'clsx'
 import type { ReactElement } from 'react'
+import { classes } from '../mdx-components/pre/index.js'
 
-export const classes = {
-  border: cn(
-    '_border _border-gray-300 dark:_border-neutral-700',
-    'contrast-more:_border-gray-900 contrast-more:dark:_border-gray-50'
-  )
+export type ButtonProps = HeadlessButtonProps & {
+  variant?: 'outline' | 'default'
 }
 
 export function Button({
@@ -15,15 +15,13 @@ export function Button({
   className,
   variant = 'default',
   ...props
-}: ButtonProps & {
-  variant?: 'outline' | 'default'
-}): ReactElement {
+}: ButtonProps): ReactElement {
   return (
     <HeadlessButton
       className={args =>
         cn(
           '_transition',
-          args.focus && 'nextra-focusable',
+          args.focus && 'nextra-focus',
           variant === 'outline' && [classes.border, '_rounded-md _p-1.5'],
           typeof className === 'function' ? className(args) : className
         )

@@ -1,177 +1,5 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`normalize-page > /404 page 1`] = `
-{
-  "activeIndex": 0,
-  "activePath": [],
-  "activeThemeContext": {
-    "breadcrumb": true,
-    "collapsed": false,
-    "footer": true,
-    "layout": "default",
-    "navbar": true,
-    "pagination": true,
-    "sidebar": true,
-    "timestamp": true,
-    "toc": true,
-    "typesetting": "default",
-  },
-  "activeType": undefined,
-  "directories": [
-    {
-      "name": "index",
-      "route": "/",
-      "title": "Introduction",
-      "type": "doc",
-    },
-    {
-      "name": "get-started",
-      "route": "/get-started",
-      "title": "Get Started",
-      "type": "doc",
-    },
-  ],
-  "docsDirectories": [
-    {
-      "isUnderCurrentDocsTree": true,
-      "name": "index",
-      "route": "/",
-      "title": "Introduction",
-      "type": "doc",
-    },
-    {
-      "isUnderCurrentDocsTree": true,
-      "name": "get-started",
-      "route": "/get-started",
-      "title": "Get Started",
-      "type": "doc",
-    },
-  ],
-  "flatDirectories": [
-    {
-      "name": "index",
-      "route": "/",
-      "title": "Introduction",
-      "type": "doc",
-    },
-    {
-      "name": "get-started",
-      "route": "/get-started",
-      "title": "Get Started",
-      "type": "doc",
-    },
-  ],
-  "flatDocsDirectories": [
-    {
-      "isUnderCurrentDocsTree": true,
-      "name": "index",
-      "route": "/",
-      "title": "Introduction",
-      "type": "doc",
-    },
-    {
-      "isUnderCurrentDocsTree": true,
-      "name": "get-started",
-      "route": "/get-started",
-      "title": "Get Started",
-      "type": "doc",
-    },
-  ],
-  "topLevelNavbarItems": [],
-}
-`;
-
-exports[`normalize-page > /500 page 1`] = `
-{
-  "activeIndex": 0,
-  "activePath": [
-    {
-      "name": "500",
-      "route": "/500",
-      "theme": {
-        "layout": "raw",
-      },
-      "title": "500",
-      "type": "page",
-    },
-  ],
-  "activeThemeContext": {
-    "breadcrumb": true,
-    "collapsed": false,
-    "footer": true,
-    "layout": "raw",
-    "navbar": true,
-    "pagination": true,
-    "sidebar": true,
-    "timestamp": true,
-    "toc": true,
-    "typesetting": "default",
-  },
-  "activeType": "page",
-  "directories": [
-    {
-      "name": "index",
-      "route": "/",
-      "title": "Introduction",
-      "type": "doc",
-    },
-    {
-      "name": "get-started",
-      "route": "/get-started",
-      "title": "Get Started",
-      "type": "doc",
-    },
-  ],
-  "docsDirectories": [
-    {
-      "isUnderCurrentDocsTree": true,
-      "name": "index",
-      "route": "/",
-      "title": "Introduction",
-      "type": "doc",
-    },
-    {
-      "isUnderCurrentDocsTree": true,
-      "name": "get-started",
-      "route": "/get-started",
-      "title": "Get Started",
-      "type": "doc",
-    },
-  ],
-  "flatDirectories": [
-    {
-      "name": "index",
-      "route": "/",
-      "title": "Introduction",
-      "type": "doc",
-    },
-    {
-      "name": "get-started",
-      "route": "/get-started",
-      "title": "Get Started",
-      "type": "doc",
-    },
-  ],
-  "flatDocsDirectories": [
-    {
-      "isUnderCurrentDocsTree": true,
-      "name": "index",
-      "route": "/",
-      "title": "Introduction",
-      "type": "doc",
-    },
-    {
-      "isUnderCurrentDocsTree": true,
-      "name": "get-started",
-      "route": "/get-started",
-      "title": "Get Started",
-      "type": "doc",
-    },
-  ],
-  "topLevelNavbarItems": [],
-}
-`;
-
 exports[`normalize-page > en-US getting-started 1`] = `
 {
   "activeIndex": 0,
@@ -1678,12 +1506,6 @@ exports[`normalize-page > zh-CN getting-started 1`] = `
           "type": "doc",
         },
         {
-          "name": "typescript",
-          "route": "",
-          "title": "Typescript",
-          "type": "doc",
-        },
-        {
           "name": "suspense",
           "route": "/docs/suspense",
           "title": "Suspense",
@@ -1839,12 +1661,6 @@ exports[`normalize-page > zh-CN getting-started 1`] = `
           "type": "doc",
         },
         {
-          "name": "typescript",
-          "route": "",
-          "title": "Typescript",
-          "type": "doc",
-        },
-        {
           "name": "suspense",
           "route": "/docs/suspense",
           "title": "Suspense",
@@ -1934,11 +1750,6 @@ exports[`normalize-page > zh-CN getting-started 1`] = `
           "name": "error-handling",
           "route": "/examples/error-handling",
           "title": "错误处理",
-          "type": "doc",
-        },
-        {
-          "name": "ssr",
-          "title": "Next.js SSR",
           "type": "doc",
         },
       ],
@@ -2051,12 +1862,6 @@ exports[`normalize-page > zh-CN getting-started 1`] = `
       "type": "doc",
     },
     {
-      "name": "typescript",
-      "route": "",
-      "title": "Typescript",
-      "type": "doc",
-    },
-    {
       "name": "suspense",
       "route": "/docs/suspense",
       "title": "Suspense",
@@ -2130,11 +1935,6 @@ exports[`normalize-page > zh-CN getting-started 1`] = `
       "name": "error-handling",
       "route": "/examples/error-handling",
       "title": "错误处理",
-      "type": "doc",
-    },
-    {
-      "name": "ssr",
-      "title": "Next.js SSR",
       "type": "doc",
     },
     {
@@ -2235,13 +2035,6 @@ exports[`normalize-page > zh-CN getting-started 1`] = `
     },
     {
       "isUnderCurrentDocsTree": true,
-      "name": "typescript",
-      "route": "",
-      "title": "Typescript",
-      "type": "doc",
-    },
-    {
-      "isUnderCurrentDocsTree": true,
       "name": "suspense",
       "route": "/docs/suspense",
       "title": "Suspense",
@@ -2324,12 +2117,6 @@ exports[`normalize-page > zh-CN getting-started 1`] = `
       "name": "error-handling",
       "route": "/examples/error-handling",
       "title": "错误处理",
-      "type": "doc",
-    },
-    {
-      "isUnderCurrentDocsTree": true,
-      "name": "ssr",
-      "title": "Next.js SSR",
       "type": "doc",
     },
     {
@@ -2462,12 +2249,6 @@ exports[`normalize-page > zh-CN home 1`] = `
           "type": "doc",
         },
         {
-          "name": "typescript",
-          "route": "",
-          "title": "Typescript",
-          "type": "doc",
-        },
-        {
           "name": "suspense",
           "route": "/docs/suspense",
           "title": "Suspense",
@@ -2557,11 +2338,6 @@ exports[`normalize-page > zh-CN home 1`] = `
           "name": "error-handling",
           "route": "/examples/error-handling",
           "title": "错误处理",
-          "type": "doc",
-        },
-        {
-          "name": "ssr",
-          "title": "Next.js SSR",
           "type": "doc",
         },
       ],
@@ -2674,12 +2450,6 @@ exports[`normalize-page > zh-CN home 1`] = `
       "type": "doc",
     },
     {
-      "name": "typescript",
-      "route": "",
-      "title": "Typescript",
-      "type": "doc",
-    },
-    {
       "name": "suspense",
       "route": "/docs/suspense",
       "title": "Suspense",
@@ -2753,11 +2523,6 @@ exports[`normalize-page > zh-CN home 1`] = `
       "name": "error-handling",
       "route": "/examples/error-handling",
       "title": "错误处理",
-      "type": "doc",
-    },
-    {
-      "name": "ssr",
-      "title": "Next.js SSR",
       "type": "doc",
     },
     {
@@ -2858,13 +2623,6 @@ exports[`normalize-page > zh-CN home 1`] = `
     },
     {
       "isUnderCurrentDocsTree": true,
-      "name": "typescript",
-      "route": "",
-      "title": "Typescript",
-      "type": "doc",
-    },
-    {
-      "isUnderCurrentDocsTree": true,
       "name": "suspense",
       "route": "/docs/suspense",
       "title": "Suspense",
@@ -2947,12 +2705,6 @@ exports[`normalize-page > zh-CN home 1`] = `
       "name": "error-handling",
       "route": "/examples/error-handling",
       "title": "错误处理",
-      "type": "doc",
-    },
-    {
-      "isUnderCurrentDocsTree": true,
-      "name": "ssr",
-      "title": "Next.js SSR",
       "type": "doc",
     },
     {

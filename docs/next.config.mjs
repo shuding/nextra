@@ -1,13 +1,14 @@
 import path from 'node:path'
 import nextra from 'nextra'
 
+/**
+ * @type {import('nextra').NextraConfig}
+ */
 const withNextra = nextra({
-  theme: 'nextra-theme-docs',
-  themeConfig: './theme.config.tsx',
-  latex: true,
-  search: {
-    codeblocks: false
+  mdxOptions: {
+    providerImportSource: 'nextra-theme-docs'
   },
+  latex: true,
   defaultShowCopyCode: true
 })
 
@@ -15,6 +16,9 @@ const sep = path.sep === '/' ? '/' : '\\\\'
 
 const ALLOWED_SVG_REGEX = new RegExp(`components${sep}icons${sep}.+\\.svg$`)
 
+/**
+ * @type {import('next').NextConfig}
+ */
 export default withNextra({
   reactStrictMode: true,
   eslint: {
@@ -28,13 +32,18 @@ export default withNextra({
       permanent: true
     },
     {
-      source: '/docs/docs-theme/built-ins/:slug(callout|steps|tabs)',
+      source: '/docs/docs-theme/built-ins/:slug(callout|steps|tabs|bleed)',
       destination: '/docs/guide/built-ins/:slug',
       permanent: true
     },
     {
       source: '/docs/docs-theme/api/use-config',
       destination: '/docs/docs-theme/api',
+      permanent: true
+    },
+    {
+      source: '/docs/docs-theme/built-ins',
+      destination: '/docs/guide/built-ins',
       permanent: true
     }
   ],
@@ -46,11 +55,20 @@ export default withNextra({
 
     config.module.rules.push({
       test: ALLOWED_SVG_REGEX,
-      use: ['@svgr/webpack']
+      use: [
+        {
+          loader: '@svgr/webpack',
+          options: {
+            svgoConfig: {
+              plugins: ['removeXMLNS']
+            }
+          }
+        }
+      ]
     })
     return config
   },
   experimental: {
-    optimizePackageImports: ['@components/icons']
+    optimizePackageImports: ['@components/icons', 'nextra/components']
   }
 })

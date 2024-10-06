@@ -20,8 +20,8 @@ export default foo`,
       "/*@jsxRuntime automatic*/
       /*@jsxImportSource react*/
       import { useMDXComponents as _provideComponents } from 'nextra/mdx'
-      const title = ''
-      const frontMatter = {}
+      export const title = ''
+      export const metadata = {}
       import foo from './foo'
       const MDXLayout = foo
       export function useTOC(props) {
@@ -47,8 +47,8 @@ export { foo as default } from './foo'`,
       "/*@jsxRuntime automatic*/
       /*@jsxImportSource react*/
       import { useMDXComponents as _provideComponents } from 'nextra/mdx'
-      const title = ''
-      const frontMatter = {}
+      export const title = ''
+      export const metadata = {}
       import { foo as MDXLayout } from './foo'
       export function useTOC(props) {
         return [
@@ -87,7 +87,7 @@ export const TagName = () => {
   return tag || null
 }
 
-# Posts Tagged with “<TagName/>”
+# Posts Tagged with "<TagName/>"
     `,
       { mdxOptions }
     )
@@ -114,8 +114,10 @@ export const TagName = () => {
       "/*@jsxRuntime automatic*/
       /*@jsxImportSource react*/
       import { useMDXComponents as _provideComponents } from 'nextra/mdx'
-      const title = 'My Header'
-      const frontMatter = {}
+      export const title = 'My Header'
+      export const metadata = {
+        title: 'My Header'
+      }
       export function useTOC(props) {
         return [
           {
@@ -189,8 +191,8 @@ export const TagName = () => {
       "/*@jsxRuntime automatic*/
       /*@jsxImportSource react*/
       import { useMDXComponents as _provideComponents } from 'nextra/mdx'
-      const title = ''
-      const frontMatter = {}
+      export const title = ''
+      export const metadata = {}
       export function useTOC(props) {
         return [
           {
@@ -251,8 +253,8 @@ import Last from './three.mdx'
       "/*@jsxRuntime automatic*/
       /*@jsxImportSource react*/
       import { useMDXComponents as _provideComponents } from 'nextra/mdx'
-      const title = ''
-      const frontMatter = {}
+      export const title = ''
+      export const metadata = {}
       import FromMdx, { useTOC as useTOC0 } from './one.mdx'
       import FromMarkdown, { useTOC as useTOC1 } from './two.md'
       import IgnoreMe from './foo'
@@ -478,7 +480,8 @@ describe('Code block', () => {
   describe('Filename', () => {
     it('attach with "codeHighlight: true" by default', async () => {
       const { result } = await compileMdx('```text filename="test.js"\n```', {
-        mdxOptions
+        mdxOptions,
+        search: true
       })
       expect(result).toMatch(
         '<_components.pre tabIndex="0" data-language="text" data-word-wrap="" data-filename="test.js">'
@@ -523,7 +526,8 @@ describe('Code block', () => {
         it('attach with "copy"', async () => {
           const { result } = await compileMdx('```js copy\n```', {
             mdxOptions,
-            codeHighlight
+            codeHighlight,
+            search: true
           })
           expect(result).toMatch('data-word-wrap="" data-copy="">')
         })
@@ -532,7 +536,8 @@ describe('Code block', () => {
           const { result } = await compileMdx('```js\n```', {
             mdxOptions,
             defaultShowCopyCode: true,
-            codeHighlight
+            codeHighlight,
+            search: true
           })
           expect(result).toMatch('data-word-wrap="" data-copy="">')
         })

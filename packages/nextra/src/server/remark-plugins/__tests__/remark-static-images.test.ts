@@ -25,8 +25,8 @@ describe('remarkStaticImages', () => {
       import { useMDXComponents as _provideComponents } from 'nextra/mdx'
       import __img0 from '../foo.png'
       import __img1 from '../bar.jpeg'
-      const title = ''
-      const frontMatter = {}
+      export const title = ''
+      export const metadata = {}
       export function useTOC(props) {
         return []
       }
@@ -87,8 +87,8 @@ describe('remarkStaticImages', () => {
       import { useMDXComponents as _provideComponents } from 'nextra/mdx'
       import __img0 from '../foo.png'
       import __img1 from './bar.svg'
-      const title = ''
-      const frontMatter = {}
+      export const title = ''
+      export const metadata = {}
       export function useTOC(props) {
         return []
       }

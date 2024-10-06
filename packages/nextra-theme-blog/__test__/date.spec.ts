@@ -1,5 +1,10 @@
 import { describe, expect, it } from 'vitest'
-import { isValidDate } from '../src/utils/date'
+import { isValidDate } from '../src/mdx-components'
+
+// Fixes Error: Failed to resolve import "./pagefind/pagefind.js" from "../nextra/dist/client/components/search.js". Does the file exist?
+vi.mock('../../nextra/dist/client/components/search.js', () => ({}))
+// Fixes Error: Cannot find module '../next-view-transitions/dist/index.js Did you mean to import "next/link.js"?
+vi.mock('next-view-transitions', () => ({}))
 
 describe('date', () => {
   describe('isValidDate()', () => {

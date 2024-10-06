@@ -18,7 +18,7 @@ export const Anchor = forwardRef<HTMLAnchorElement, AnchorProps>(
     return (
       <ComponentToUse
         {...props}
-        className={cn('nextra-focus', props.className)}
+        className={cn('focus-visible:nextra-focus', props.className)}
         ref={forwardedRef}
         href={href}
         {...(newWindow && {

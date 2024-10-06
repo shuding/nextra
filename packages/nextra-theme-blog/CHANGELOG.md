@@ -1,5 +1,81 @@
 # nextra-theme-blog
 
+## 4.0.0-app-router.5
+
+### Patch Changes
+
+- a15a02d: sync with nextra 3.0.3
+- Updated dependencies [659b36e]
+- Updated dependencies [a15a02d]
+  - nextra@4.0.0-app-router.5
+
+## 4.0.0-app-router.4
+
+### Patch Changes
+
+- nextra@4.0.0-app-router.4
+
+## 4.0.0-app-router.3
+
+### Major Changes
+
+- 1e77fab: move `<Collapse>`, `<Details>`, `<Summary>`, `<SkipNavContent>`,
+  `SkipNavLink`, `<Select>` and `<Bleed>` from `nextra-theme-docs` to
+  `nextra/components`
+
+### Minor Changes
+
+- 1e77fab: use `next-view-transitions` for transition in `nextra-theme-blog`
+
+### Patch Changes
+
+- 1e77fab: fix edit on github and last updated at for catch all routes
+- Updated dependencies [1e77fab]
+- Updated dependencies [1e77fab]
+- Updated dependencies [1e77fab]
+- Updated dependencies [1e77fab]
+  - nextra@4.0.0-app-router.3
+
+## 4.0.0-app-router.2
+
+### Major Changes
+
+- 8ef0f58: move `<Head>` component in `nextra/components`
+
+### Minor Changes
+
+- 8ef0f58: add `nextThemes` prop in `<Layout>` component
+
+### Patch Changes
+
+- Updated dependencies [215aa08]
+- Updated dependencies [8ef0f58]
+  - nextra@4.0.0-app-router.2
+
+## 4.0.0-app-router.1
+
+### Major Changes
+
+- 26851b5: migrate search from Flexsearch to Pagefind
+
+### Patch Changes
+
+- Updated dependencies [26851b5]
+  - nextra@4.0.0-app-router.1
+
+## 4.0.0-app-router.0
+
+### Major Changes
+
+- 99f34d3: The initial version which supports App Router instead of Pages
+  Router, something may be broken, check
+  https://github.com/shuding/nextra/tree/v4-v2/examples for the migration guide
+
+### Patch Changes
+
+- Updated dependencies [99f34d3]
+  - nextra@4.0.0-app-router.0
+
 ## 3.0.4
 
 ### Patch Changes

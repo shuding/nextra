@@ -1,0 +1,31 @@
+{
+  "mode": "pre",
+  "tag": "app-router",
+  "initialVersions": {
+    "nextra": "3.0.0",
+    "nextra-theme-blog": "3.0.0",
+    "nextra-theme-docs": "3.0.0"
+  },
+  "changesets": [
+    "breezy-dryers-raise",
+    "calm-lemons-poke",
+    "cuddly-eagles-tie",
+    "early-mangos-compare",
+    "few-apples-breathe",
+    "green-crews-add",
+    "grumpy-coats-kneel",
+    "kind-chairs-travel",
+    "large-numbers-occur",
+    "lazy-cycles-doubt",
+    "lazy-jeans-bake",
+    "lemon-ducks-sniff",
+    "ninety-houses-warn",
+    "silly-zoos-design",
+    "small-insects-count",
+    "small-pumas-repeat",
+    "spotty-cobras-flash",
+    "stupid-mugs-rule",
+    "wet-dodos-move",
+    "wild-plums-brake"
+  ]
+}

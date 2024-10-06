@@ -1,5 +1,132 @@
 # nextra-theme-docs
 
+## 4.0.0-app-router.5
+
+### Patch Changes
+
+- a15a02d: sync with nextra 3.0.3
+- Updated dependencies [659b36e]
+- Updated dependencies [a15a02d]
+  - nextra@4.0.0-app-router.5
+
+## 4.0.0-app-router.4
+
+### Major Changes
+
+- 17e6da5: remove `i18n.direction` option
+- 0faa569: replace `gitTimestamp` option with `lastUpdated`
+
+  replace `editLink.content` option with `editLink`
+
+- 17e6da5: document removed theme config options
+
+  - `main`
+  - `direction`
+  - `toc.component`
+  - `themeSwitch.component`
+  - `themeSwitch.useOptions`
+  - `search.component`
+  - `feedback.useLink`
+  - `banner.dismissible`
+  - `banner.key`
+  - `banner.content`
+  - `footer.content`
+  - `footer.component`
+  - `head`
+  - `navbar.component`
+  - `navbar.extraContent`
+  - `project.link`
+  - `project.icon`
+  - `chat.link`
+  - `chat.icon`
+  - `search.emptyResult`
+  - `search.loading`
+  - `search.errorText`
+  - `search.placeholder`
+  - `search.className`
+
+  refactor `themeSwitch.useOptions` to `themeSwitch` option
+
+  refactor `editLink.content` to `editLink` option
+
+  rename Search prop `error` to `errorText`
+
+### Patch Changes
+
+- nextra@4.0.0-app-router.4
+
+## 4.0.0-app-router.3
+
+### Major Changes
+
+- 1e77fab: move `<Collapse>`, `<Details>`, `<Summary>`, `<SkipNavContent>`,
+  `SkipNavLink`, `<Select>` and `<Bleed>` from `nextra-theme-docs` to
+  `nextra/components`
+- 1e77fab: remove `renderComponent` and `renderString`
+
+### Patch Changes
+
+- 1e77fab: fix edit on github and last updated at for catch all routes
+- Updated dependencies [1e77fab]
+- Updated dependencies [1e77fab]
+- Updated dependencies [1e77fab]
+- Updated dependencies [1e77fab]
+  - nextra@4.0.0-app-router.3
+
+## 4.0.0-app-router.2
+
+### Major Changes
+
+- 215aa08: fix focusing on first search result item
+- 1c83931: remove `navbar` and `footer` props, pass `<Navbar>` and `<Footer>` as
+  children of `<Layout>`
+- 724f851: migrate from react context to zustand
+- 8ef0f58: move `<Head>` component in `nextra/components`
+- ee4a467: remove `feedback.useLink` and `editLink.component` option, remove
+  `themeConfig` prop on `<Layout>` component
+
+  change `gitTimestamp` option to boolean
+
+  remove `nextraCofig.transform` option
+
+- 62f1553: support `<Head>`'s `backgroundColor.dark/light` props colors in
+  `rgb(...,...,...)` and `#RRGGBB` formats
+
+### Minor Changes
+
+- 8f90ed5: refactor `useMenuActions` to `setMenu`, `useFocusedRouteActions` to
+  `setFocusedRoute`
+
+### Patch Changes
+
+- Updated dependencies [215aa08]
+- Updated dependencies [8ef0f58]
+  - nextra@4.0.0-app-router.2
+
+## 4.0.0-app-router.1
+
+### Major Changes
+
+- 26851b5: migrate search from Flexsearch to Pagefind
+
+### Patch Changes
+
+- Updated dependencies [26851b5]
+  - nextra@4.0.0-app-router.1
+
+## 4.0.0-app-router.0
+
+### Major Changes
+
+- 99f34d3: The initial version which supports App Router instead of Pages
+  Router, something may be broken, check
+  https://github.com/shuding/nextra/tree/v4-v2/examples for the migration guide
+
+### Patch Changes
+
+- Updated dependencies [99f34d3]
+  - nextra@4.0.0-app-router.0
+
 ## 3.0.4
 
 ### Patch Changes
@@ -170,7 +297,7 @@
 - a8c2196: use dynamic import for loading `mermaid`
 - 0b5cc9d: make nextra compatible with windows
 - 7b0b7e9: fix page scroll jump while entering characters in the search input
-- 45471df: fix “Scroll to top” is not supposed to be interactable when it is
+- 45471df: fix "Scroll to top" is not supposed to be interactable when it is
   hidden.
 
   `display:children` doesn't collapse breadcrumbs
@@ -675,7 +802,7 @@
 
 ### Patch Changes
 
-- 45471df5: fix “Scroll to top” is not supposed to be interactable when it is
+- 45471df5: fix "Scroll to top" is not supposed to be interactable when it is
   hidden.
 
   `display:children` doesn't collapse breadcrumbs

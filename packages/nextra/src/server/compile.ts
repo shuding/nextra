@@ -15,19 +15,8 @@ import remarkMath from 'remark-math'
 import remarkReadingTime from 'remark-reading-time'
 import remarkSmartypants from 'remark-smartypants'
 import type { Pluggable, Plugin } from 'unified'
-import type {
-  FrontMatter,
-  LoaderOptions,
-  PageOpts,
-  ReadingTime,
-  StructurizedData
-} from '../types'
-import {
-  CWD,
-  DEFAULT_LOCALE,
-  ERROR_ROUTES,
-  MARKDOWN_URL_EXTENSION_REGEX
-} from './constants.js'
+import type { FrontMatter, LoaderOptions, ReadingTime } from '../types'
+import { CWD, MARKDOWN_URL_EXTENSION_REGEX } from './constants.js'
 import {
   recmaRewriteFunctionBody,
   recmaRewriteJsx
@@ -37,7 +26,6 @@ import {
   rehypeAttachCodeMeta,
   rehypeBetterReactMathjax,
   rehypeExtractTocContent,
-  rehypeIcon,
   rehypeParseCodeMeta
 } from './rehype-plugins/index.js'
 import {
@@ -48,8 +36,7 @@ import {
   remarkMdxFrontMatter,
   remarkMdxTitle,
   remarkRemoveImports,
-  remarkStaticImage,
-  remarkStructurize
+  remarkStaticImage
 } from './remark-plugins/index.js'
 import { logger } from './utils.js'
 
@@ -61,10 +48,6 @@ const cachedCompilerForFormat: Record<
 type MdxOptions = LoaderOptions['mdxOptions'] &
   Pick<ProcessorOptions, 'jsx' | 'outputFormat'>
 
-// @ts-expect-error -- Without bind is unable to use `remarkLinkRewrite` with `buildDynamicMDX`
-// because we already use `remarkLinkRewrite` function to remove .mdx? extensions
-const clonedRemarkLinkRewrite = remarkLinkRewrite.bind(null)
-
 type CompileMdxOptions = Pick<
   LoaderOptions,
   | 'staticImage'
@@ -75,12 +58,9 @@ type CompileMdxOptions = Pick<
   | 'codeHighlight'
 > & {
   mdxOptions?: MdxOptions
-  route?: string
-  locale?: string
   filePath?: string
   useCachedCompiler?: boolean
   isPageImport?: boolean
-  isPageMapImport?: boolean
 }
 
 export async function compileMdx(
@@ -92,61 +72,27 @@ export async function compileMdx(
     latex,
     codeHighlight,
     defaultShowCopyCode,
-    route = '',
-    locale,
     mdxOptions = {},
     filePath = '',
     useCachedCompiler,
-    isPageImport = true,
-    isPageMapImport
-  }: CompileMdxOptions = {}
+    isPageImport = true
+  }: Partial<CompileMdxOptions> = {}
 ) {
   const {
     jsx = false,
     format: _format = 'mdx',
     outputFormat = 'function-body',
+    providerImportSource = 'nextra/mdx',
     remarkPlugins,
     rehypePlugins,
     recmaPlugins,
     rehypePrettyCodeOptions
-  }: MdxOptions = mdxOptions
+  } = mdxOptions
 
   const format =
     _format === 'detect' ? (filePath.endsWith('.mdx') ? 'mdx' : 'md') : _format
 
   const fileCompatible = filePath ? { value: source, path: filePath } : source
-  if (isPageMapImport) {
-    const compiler = createProcessor({
-      format,
-      remarkPlugins: [
-        remarkFrontmatter, // parse and attach yaml node
-        remarkMdxFrontMatter
-      ]
-    })
-    const vFile = await compiler.process(fileCompatible)
-    const content = vFile.toString()
-
-    const index = content.lastIndexOf('function _createMdxContent(props) {')
-    const result = content.slice(0, index)
-
-    return { result } as any
-  }
-
-  let searchIndexKey: string | null = null
-  if (ERROR_ROUTES.has(route)) {
-    /* skip */
-  } else if (typeof search === 'object') {
-    if (search.indexKey) {
-      searchIndexKey = search.indexKey(filePath, route, locale)
-      if (searchIndexKey === '') {
-        searchIndexKey = locale || DEFAULT_LOCALE
-      }
-    } else {
-      searchIndexKey = locale || DEFAULT_LOCALE
-    }
-  } else if (search) {
-    searchIndexKey = locale || DEFAULT_LOCALE
-  }
 
   // https://github.com/shuding/nextra/issues/1303
   const isFileOutsideCWD =
@@ -171,13 +117,11 @@ export async function compileMdx(
 
     const data = vFile.data as {
       readingTime?: ReadingTime
-      structurizedData: StructurizedData
       title?: string
       frontMatter: FrontMatter
-    } & Pick<PageOpts, 'hasJsxInH1'>
+    }
 
-    const { readingTime, structurizedData, title, frontMatter, hasJsxInH1 } =
-      data
+    const { readingTime, title, frontMatter } = data
     // https://github.com/shuding/nextra/issues/1032
     const result = String(vFile).replaceAll('__esModule', '_\\_esModule')
 
@@ -195,9 +139,7 @@ export async function compileMdx(
     return {
       result,
       title,
-      ...(hasJsxInH1 && { hasJsxInH1 }),
       ...(readingTime && { readingTime }),
-      ...(searchIndexKey !== null && { searchIndexKey, structurizedData }),
       frontMatter
     }
   } catch (error) {
@@ -210,7 +152,7 @@ export async function compileMdx(
       jsx,
       format,
       outputFormat,
-      providerImportSource: 'nextra/mdx',
+      providerImportSource,
       // Fix TypeError: _jsx is not a function for remote content
       development: process.env.NODE_ENV === 'development',
       remarkPlugins: [
@@ -237,14 +179,12 @@ export async function compileMdx(
         remarkCustomHeadingId,
         remarkMdxTitle,
         [remarkHeadings, { isRemoteContent }] satisfies Pluggable,
-        // structurize should be before `remarkHeadings` because we attach #id attribute to heading node
-        search && ([remarkStructurize, search] satisfies Pluggable),
         staticImage && remarkStaticImage,
         readingTime && remarkReadingTime,
         latex && remarkMath,
         // Remove the markdown file extension from links
         [
-          clonedRemarkLinkRewrite,
+          remarkLinkRewrite,
           {
             pattern: MARKDOWN_URL_EXTENSION_REGEX,
             replace: '',
@@ -256,7 +196,7 @@ export async function compileMdx(
       rehypePlugins: [
         ...(rehypePlugins || []),
         format === 'md' && [
-          // To render <details /> and <summary /> correctly
+          // To render `<details>` and `<summary>` correctly
           rehypeRaw,
           // fix Error: Cannot compile `mdxjsEsm` node for npm2yarn and mermaid
           {
@@ -291,8 +231,7 @@ export async function compileMdx(
                   ...rehypePrettyCodeOptions
                 }
               ] as any,
-              !isRemoteContent && rehypeIcon,
-              rehypeAttachCodeMeta
+              [rehypeAttachCodeMeta, { search }]
             ]),
         [rehypeExtractTocContent, { isRemoteContent }]
       ].filter(v => !!v),
@@ -321,29 +260,29 @@ export async function compileMdx(
             !!mdxContentArgument &&
             mdxContentArgument.openingElement.name.name === 'MDXLayout'
 
-          const localExports = new Set(['title', 'frontMatter' /* 'useTOC' */])
-
-          for (const node of ast.body) {
-            if (node.type === 'ExportNamedDeclaration') {
-              let varName: string
-              const { declaration } = node
-              if (!declaration) {
-                // skip for `export ... from '...'` declaration
-                continue
-              } else if (declaration.type === 'VariableDeclaration') {
-                const [{ id }] = declaration.declarations
-                varName = (id as any).name
-              } else if (declaration.type === 'FunctionDeclaration') {
-                varName = declaration.id.name
-              } else {
-                throw new Error(`\`${declaration.type}\` unsupported.`)
-              }
-
-              if (localExports.has(varName)) {
-                Object.assign(node, node.declaration)
-              }
-            }
-          }
+          // const localExports = new Set(['title', 'metadata', 'useTOC'])
+          //
+          // for (const node of ast.body) {
+          //   if (node.type === 'ExportNamedDeclaration') {
+          //     let varName: string
+          //     const { declaration } = node
+          //     if (!declaration) {
+          //       // skip for `export ... from '...'` declaration
+          //       continue
+          //     } else if (declaration.type === 'VariableDeclaration') {
+          //       const [{ id }] = declaration.declarations
+          //       varName = (id as any).name
+          //     } else if (declaration.type === 'FunctionDeclaration') {
+          //       varName = declaration.id.name
+          //     } else {
+          //       throw new Error(`\`${declaration.type}\` unsupported.`)
+          //     }
+          //
+          //     if (localExports.has(varName)) {
+          //       Object.assign(node, node.declaration)
+          //     }
+          //   }
+          // }
         }) satisfies Plugin<[], Program>,
         isRemoteContent ? recmaRewriteFunctionBody : recmaRewriteJsx,
         ...(recmaPlugins || [])

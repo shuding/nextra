@@ -1,5 +1,49 @@
 # nextra
 
+## 4.0.0-app-router.5
+
+### Patch Changes
+
+- 659b36e: remove `jsx-runtime.cjs`, import runtime from 'react/jsx-runtime'
+- a15a02d: sync with nextra 3.0.3
+
+## 4.0.0-app-router.4
+
+## 4.0.0-app-router.3
+
+### Major Changes
+
+- 1e77fab: move `<Collapse>`, `<Details>`, `<Summary>`, `<SkipNavContent>`,
+  `SkipNavLink`, `<Select>` and `<Bleed>` from `nextra-theme-docs` to
+  `nextra/components`
+- 1e77fab: remove `nextra/remote`, `nextra/schemas` and `nextra/remark-plugins`
+- 1e77fab: remove `renderComponent` and `renderString`
+
+### Patch Changes
+
+- 1e77fab: fix edit on github and last updated at for catch all routes
+
+## 4.0.0-app-router.2
+
+### Major Changes
+
+- 215aa08: fix focusing on first search result item
+- 8ef0f58: move `<Head>` component in `nextra/components`
+
+## 4.0.0-app-router.1
+
+### Major Changes
+
+- 26851b5: migrate search from Flexsearch to Pagefind
+
+## 4.0.0-app-router.0
+
+### Major Changes
+
+- 99f34d3: The initial version which supports App Router instead of Pages
+  Router, something may be broken, check
+  https://github.com/shuding/nextra/tree/v4-v2/examples for the migration guide
+
 ## 3.0.4
 
 ### Patch Changes
