@@ -57,12 +57,13 @@ const nextra: Nextra = nextraConfig => {
         ...(nextConfig.pageExtensions || DEFAULT_EXTENSIONS),
         ...MARKDOWN_EXTENSIONS
       ],
-      env: {
-        ...nextConfig.env,
-        ...(hasI18n && {
+      ...(hasI18n && {
+        i18n: undefined,
+        env: {
+          ...nextConfig.env,
           NEXTRA_DEFAULT_LOCALE: nextConfig.i18n?.defaultLocale || 'en'
-        })
-      },
+        }
+      }),
       webpack(config, options) {
         if (options.nextRuntime !== 'edge' && options.isServer) {
           config.plugins ||= []
