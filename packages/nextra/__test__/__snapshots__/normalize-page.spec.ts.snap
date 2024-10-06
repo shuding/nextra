@@ -1694,16 +1694,6 @@ exports[`normalize-page > should keep themeContext for hidden route 1`] = `
       "title": "Qux",
       "type": "doc",
     },
-    {
-      "display": "hidden",
-      "frontMatter": {
-        "sidebarTitle": "Bar",
-      },
-      "name": "bar",
-      "route": "/bar",
-      "title": "Bar",
-      "type": "doc",
-    },
   ],
   "flatDocsDirectories": [
     {
@@ -1729,17 +1719,6 @@ exports[`normalize-page > should keep themeContext for hidden route 1`] = `
       "name": "qux",
       "route": "/1-level/qux",
       "title": "Qux",
-      "type": "doc",
-    },
-    {
-      "display": "hidden",
-      "frontMatter": {
-        "sidebarTitle": "Bar",
-      },
-      "isUnderCurrentDocsTree": true,
-      "name": "bar",
-      "route": "/bar",
-      "title": "Bar",
       "type": "doc",
     },
   ],
