@@ -36,10 +36,6 @@
       "import": "./dist/server/page-map.js",
       "types": "./dist/server/page-map.d.ts"
     },
-    "./pages": {
-      "import": "./dist/server/pages.js",
-      "types": "./dist/server/pages.d.ts"
-    },
     "./*": {
       "import": "./dist/client/*.js",
       "types": "./dist/client/*.d.ts"
@@ -52,7 +48,7 @@
         "./dist/server/page-map.d.ts"
       ],
       "pages": [
-        "./dist/server/pages.d.ts"
+        "./dist/client/pages.d.ts"
       ],
       "compile": [
         "./dist/server/compile.d.ts"

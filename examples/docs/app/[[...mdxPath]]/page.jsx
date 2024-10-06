@@ -1,8 +1,8 @@
 /* eslint-env node */
 /* eslint-disable react-hooks/rules-of-hooks -- false positive, useMDXComponents/useTOC are not react hooks */
 
-import { getPagesPaths, importPage } from 'nextra/pages'
 import { useMDXComponents } from 'nextra-theme-docs'
+import { getPagesPaths, importPage } from 'nextra/pages'
 
 export async function generateStaticParams() {
   return (await getPagesPaths()).map(mdxPath => ({
@@ -16,12 +16,8 @@ export async function generateMetadata({ params: { mdxPath } }) {
 }
 
 export default async function Page({ params: { mdxPath } }) {
-  const {
-    default: MDXContent,
-    useTOC,
-    metadata,
-    title
-  } = await importPage(mdxPath)
+  const result = await importPage(mdxPath)
+  const { default: MDXContent, useTOC, metadata, title } = result
 
   const Wrapper = useMDXComponents().wrapper
 
