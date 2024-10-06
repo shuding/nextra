@@ -189,13 +189,13 @@ describe('normalize-page', () => {
       ...(await vi.importActual('../src/server/constants.ts')),
       CHUNKS_DIR: dir
     }))
-    const { collectPageMap } = await import('../src/server/page-map')
+    const { collectPageMap } = await import('../src/server/page-map.js')
 
     const result = await collectPageMap({ dir })
     await fs.writeFile(path.join(dir, 'generated-page-map.ts'), result)
 
     const { pageMap } = await import(
-      './fixture/page-maps/hidden-route-should-have-theme-context/generated-page-map'
+      './fixture/page-maps/hidden-route-should-have-theme-context/generated-page-map.js'
     )
 
     expect(pageMap).toEqual([
