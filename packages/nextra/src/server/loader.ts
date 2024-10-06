@@ -78,6 +78,7 @@ export async function loader(
   }
 
   if (!IS_PRODUCTION && isPageMapImport) {
+  if (isPageMapImport) {
     return compileMetadata(source, { filePath: mdxPath })
   }
 
