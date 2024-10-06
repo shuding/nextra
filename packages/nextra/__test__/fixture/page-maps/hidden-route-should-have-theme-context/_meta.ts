@@ -1,5 +1,8 @@
 export default {
   '*': {
-    display: 'hidden'
+    display: 'hidden',
+    theme: {
+      typesetting: 'article'
+    }
   }
 }

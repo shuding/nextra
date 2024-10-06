@@ -1588,7 +1588,7 @@ exports[`normalize-page > should keep themeContext for hidden route 1`] = `
     "sidebar": false,
     "timestamp": true,
     "toc": false,
-    "typesetting": "default",
+    "typesetting": "article",
   },
   "activeType": "page",
   "directories": [],

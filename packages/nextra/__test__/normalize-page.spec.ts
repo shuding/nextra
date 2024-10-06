@@ -202,7 +202,10 @@ describe('normalize-page', () => {
       {
         data: {
           '*': {
-            display: 'hidden'
+            display: 'hidden',
+            theme: {
+              typesetting: 'article'
+            }
           }
         }
       },
