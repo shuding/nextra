@@ -14,7 +14,11 @@ const TAILWIND_CONFIG = {
 module.exports = {
   root: true,
   reportUnusedDisableDirectives: true,
-  ignorePatterns: ['next-env.d.ts', 'generated-page-map.js'],
+  ignorePatterns: [
+    'next-env.d.ts',
+    'generated-page-map.js',
+    'generated-page-map.ts'
+  ],
   overrides: [
     // Rules for all files
     {
@@ -286,22 +290,6 @@ module.exports = {
       rules: {
         // disable rule because we don't have pagesDir in above folders
         '@next/next/no-html-link-for-pages': 'off'
-      }
-    },
-    {
-      files: 'packages/nextra/src/**',
-      rules: {
-        'no-restricted-imports': [
-          'error',
-          {
-            patterns: [
-              {
-                group: ['fs', 'node:fs'],
-                message: 'Use `graceful-fs` instead'
-              }
-            ]
-          }
-        ]
       }
     },
     {

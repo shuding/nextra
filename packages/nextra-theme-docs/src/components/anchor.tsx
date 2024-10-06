@@ -14,7 +14,7 @@ export const Anchor = forwardRef<HTMLAnchorElement, AnchorProps>(
     // ref is used in <NavbarMenu />
     forwardedRef
   ): ReactElement => {
-    const ComponentToUse = newWindow ? 'a' : NextLink
+    const ComponentToUse = newWindow || href.startsWith('#') ? 'a' : NextLink
     return (
       <ComponentToUse
         {...props}

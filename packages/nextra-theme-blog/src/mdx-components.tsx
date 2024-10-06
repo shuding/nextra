@@ -56,7 +56,8 @@ export const useMDXComponents: UseMDXComponents = components => ({
     if (EXTERNAL_HREF_REGEX.test(href)) {
       return <a href={href} target="_blank" rel="noreferrer" {...props} />
     }
-    return <Link href={href} {...props} />
+    const ComponentToUse = href.startsWith('#') ? 'a' : Link
+    return <ComponentToUse href={href} {...props} />
   },
   code: Code,
   details: Details,

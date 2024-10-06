@@ -1,5 +1,6 @@
 /* eslint-env node */
 import { sep } from 'node:path'
+import type { RuleSetRule } from 'webpack'
 import { notFound } from 'next/navigation.js'
 import { fromZodError } from 'zod-validation-error'
 import type { Nextra } from '../types'
@@ -94,36 +95,35 @@ const nextra: Nextra = nextraConfig => {
         rules.push(
           {
             test: MARKDOWN_EXTENSION_REGEX,
-            issuer: request => request?.includes(AGNOSTIC_PAGE_MAP_PATH),
-            use: [
-              options.defaultLoaders.babel,
+            oneOf: [
               {
-                loader: 'nextra/loader',
-                options: { ...loaderOptions, isPageMapImport: true }
-              }
-            ]
-          },
-          {
-            // Match Markdown imports from non-pages. These imports have an
-            // issuer, which can be anything as long as it's not empty.
-            // When the issuer is null, it means that it can be imported via a
-            // runtime import call such as `import('...')`.
-            test: MARKDOWN_EXTENSION_REGEX,
-            issuer: request =>
-              (request
-                ? !request.includes(AGNOSTIC_PAGE_MAP_PATH)
-                : request === null),
-            use: defaultLoaderOptions
-          },
-          {
-            // Match pages (imports without an issuer request).
-            test: MARKDOWN_EXTENSION_REGEX,
-            issuer: request => request === '',
-            use: [
-              options.defaultLoaders.babel,
+                issuer: request => request?.includes(AGNOSTIC_PAGE_MAP_PATH),
+                use: [
+                  options.defaultLoaders.babel,
+                  {
+                    loader: 'nextra/loader',
+                    options: { ...loaderOptions, isPageMapImport: true }
+                  }
+                ]
+              },
               {
-                loader: 'nextra/loader',
-                options: { ...loaderOptions, isPageImport: true }
+                // Match pages (imports without an issuer request).
+                issuer: request => request === '',
+                use: [
+                  options.defaultLoaders.babel,
+                  {
+                    loader: 'nextra/loader',
+                    options: { ...loaderOptions, isPageImport: true }
+                  }
+                ]
+              },
+              {
+                // Match Markdown imports from non-pages. These imports have an
+                // issuer, which can be anything as long as it's not empty string.
+                // When the issuer is `null`, it means that it can be imported via a
+                // runtime import call such as `import('...')`.
+                issuer: request => request === null || !!request,
+                use: defaultLoaderOptions
               }
             ]
           },
@@ -140,13 +140,6 @@ const nextra: Nextra = nextraConfig => {
       }
     }
   }
-}
-
-// TODO: take this type from webpack directly
-type RuleSetRule = {
-  issuer: (value: string) => boolean
-  test: RegExp
-  use: unknown[]
 }
 
 export default nextra

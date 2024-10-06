@@ -2,6 +2,9 @@ import { Callout, Steps } from 'nextra/components'
 
 # Rendering Tables
 
+This guide covers different ways to render tables in MDX, including GFM syntax,
+literal HTML tag, and dynamic JavaScript expressions.
+
 ## GFM syntax
 
 In Markdown, it is preferable to write tables via
@@ -138,14 +141,13 @@ will be rendered as:
 Table looks different compared to [GFM syntax table](#gfm-syntax):
 
 1. only children of table body `<tbody />{:jsx}` is styled
-
-2. table header is unstyled
-
-3. table doesn't have margin top
+1. table header is unstyled
+1. table doesn't have margin top
 
 ### Why This Happens
 
-MDX2 doesn't replace literal HTML elements with `<MDXProvider />{:jsx}`.
+[MDX](https://mdxjs.com/docs/using-mdx/#components) doesn't replace literal HTML
+elements with `<MDXProvider />{:jsx}`.
 
 Adam Wathan, creator of Tailwind CSS submitted
 [an issue](https://github.com/mdx-js/mdx/issues/821) in MDX2 to have some _an
@@ -158,9 +160,9 @@ components `<tr />{:jsx}`, `<th />{:jsx}` and `<td />{:jsx}`, for the same
 reason `<table />{:jsx}` literal is not replaced and doesn't have default
 margin-top aka `mt-6`.
 
-### Ways to Fix It
+## Ways to Fix It
 
-#### One-Time Fix
+### One-Time Fix
 
 Just wrap your table with curly braces `{` and `}`, e.g.
 
@@ -171,19 +173,29 @@ Just wrap your table with curly braces `{` and `}`, e.g.
 </table>}
 ```
 
-#### Changing Default Behaviour
+Alternatively, create a reusable table component:
+
+```mdx filename="MDX"
+export function Table({ columns, data }) {
+  return <table>{/* ... */}</table>
+}
+
+<Table columns={...} data={...} />
+```
+
+### Changing Default Behaviour
 
 If this thing is still confusing for you, and you want to use regular literal
 HTML elements for your tables, do the following:
 
 <Steps>
-### Install `remark-mdx-disable-explicit-jsx` package
+#### Install `remark-mdx-disable-explicit-jsx` package
 
 ```sh npm2yarn
 npm i remark-mdx-disable-explicit-jsx
 ```
 
-### Setup
+#### Setup
 
 Configure plugin in `nextra` function inside `next.config.mjs` file
 
