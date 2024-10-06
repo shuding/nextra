@@ -1,5 +1,15 @@
 # nextra-theme-blog
 
+## 3.0.4
+
+### Patch Changes
+
+- 9b6595d: Ensure the jump link behavior is consistent in Markdown.
+- Updated dependencies [84a8a41]
+- Updated dependencies [659b36e]
+- Updated dependencies [84fc255]
+  - nextra@3.0.4
+
 ## 3.0.3
 
 ### Patch Changes
