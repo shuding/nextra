@@ -1577,52 +1577,7 @@ exports[`normalize-page > en-US home 1`] = `
 exports[`normalize-page > should keep themeContext for hidden route 1`] = `
 {
   "activeIndex": 0,
-  "activePath": [
-    {
-      "children": [],
-      "display": "hidden",
-      "name": "1-level",
-      "route": "/1-level",
-      "title": "1-level",
-      "type": "doc",
-    },
-    {
-      "children": [
-        {
-          "frontMatter": {
-            "sidebarTitle": "Foo",
-          },
-          "name": "foo",
-          "route": "/1-level/2-level/foo",
-          "theme": {
-            "layout": "full",
-            "sidebar": false,
-            "toc": false,
-          },
-          "title": "Foo",
-          "type": "doc",
-        },
-      ],
-      "name": "2-level",
-      "route": "/1-level/2-level",
-      "title": "2-level",
-      "type": "doc",
-    },
-    {
-      "frontMatter": {
-        "sidebarTitle": "Foo",
-      },
-      "name": "foo",
-      "route": "/1-level/2-level/foo",
-      "theme": {
-        "layout": "full",
-        "sidebar": false,
-        "toc": false,
-      },
-      "title": "Foo",
-      "type": "doc",
-    },
-  ],
+  "activePath": [],
   "activeThemeContext": {
     "breadcrumb": true,
     "collapsed": false,
