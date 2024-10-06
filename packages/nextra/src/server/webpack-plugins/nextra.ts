@@ -40,15 +40,6 @@ export class NextraPlugin {
 
       try {
         for (const locale of locales) {
-          // const route = `/${locale}`
-          // const dir = path.join(APP_DIR, locale)
-
-          // const { pageMap, imports, dynamicMetaImports } = await collectFiles({
-          //   dir,
-          //   route,
-          //   isFollowingSymlink: false
-          // })
-
           const relativePaths = await getFilepaths({
             dir: mdxBaseDir ? path.join(mdxBaseDir, locale) : APP_DIR,
             isAppDir: !mdxBaseDir

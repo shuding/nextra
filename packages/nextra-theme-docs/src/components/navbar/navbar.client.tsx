@@ -106,43 +106,46 @@ export function ClientNavbar({
 
   return (
     <>
-      {items.map(page => {
-        if (page.display === 'hidden') return
-        if (isMenu(page)) {
+      <div className="_flex _gap-4 _overflow-x-auto nextra-scrollbar _py-1.5">
+        {items.map(page => {
+          if (page.display === 'hidden') return
+          if (isMenu(page)) {
+            return (
+              <NavbarMenu key={page.title} menu={page}>
+                {page.title}
+              </NavbarMenu>
+            )
+          }
+          let href = page.href || page.route || '#'
+
+          // If it's a directory
+          if (page.children) {
+            href =
+              (page.withIndexPage ? page.route : page.firstChildRoute) || href
+          }
+
+          const isActive =
+            page.route === activeRoute ||
+            activeRoute.startsWith(page.route + '/')
+
           return (
-            <NavbarMenu key={page.title} menu={page}>
+            <Anchor
+              href={href}
+              key={href}
+              className={cn(
+                classes.link,
+                !isActive || page.newWindow
+                  ? classes.inactive
+                  : '_font-medium _subpixel-antialiased'
+              )}
+              newWindow={page.newWindow}
+              aria-current={!page.newWindow && isActive}
+            >
               {page.title}
-            </NavbarMenu>
+            </Anchor>
           )
-        }
-        let href = page.href || page.route || '#'
-
-        // If it's a directory
-        if (page.children) {
-          href =
-            (page.withIndexPage ? page.route : page.firstChildRoute) || href
-        }
-
-        const isActive =
-          page.route === activeRoute || activeRoute.startsWith(page.route + '/')
-
-        return (
-          <Anchor
-            href={href}
-            key={href}
-            className={cn(
-              classes.link,
-              !isActive || page.newWindow
-                ? classes.inactive
-                : '_font-medium _subpixel-antialiased'
-            )}
-            newWindow={page.newWindow}
-            aria-current={!page.newWindow && isActive}
-          >
-            {page.title}
-          </Anchor>
-        )
-      })}
+        })}
+      </div>
       {themeConfig.search && (
         <div className="max-md:_hidden">{themeConfig.search}</div>
       )}

@@ -58,122 +58,6 @@ function cleanFileName(name: string): string {
   )
 }
 
-export async function collectFiles({
-  dir,
-  route,
-  imports = [],
-  dynamicMetaImports = [],
-  isFollowingSymlink
-}: CollectFilesOptions): Promise<{
-  pageMap: PageMapItem[]
-  imports: Import[]
-  dynamicMetaImports: DynamicImport[]
-  hasDynamicPage: boolean
-}> {
-  const files = await fs.readdir(dir, { withFileTypes: true })
-
-  let hasDynamicPage = false
-
-  const promises = files
-    // localeCompare is needed because order on Windows is different and test on CI fails
-    .sort((a, b) => a.name.localeCompare(b.name))
-    .map(async f => {
-      const filePath = path.join(dir, f.name)
-
-      let isDirectory = f.isDirectory()
-
-      const isSymlinked = isFollowingSymlink || f.isSymbolicLink()
-      if (isSymlinked) {
-        const stats = await fs.stat(filePath)
-        if (stats.isDirectory()) {
-          isDirectory = true
-        }
-      }
-
-      const { name, ext } = path.parse(filePath)
-
-      // We need to filter out dynamic routes, because we can't get all the
-      // paths statically from here — they'll be generated separately.
-      if (name.startsWith('[')) {
-        hasDynamicPage = true
-        return
-      }
-
-      const fileRoute = normalizePageRoute(
-        route,
-        // Directory could have dot, e.g. graphql-eslint-3.14
-        isDirectory ? name + ext : name
-      )
-
-      if (isDirectory) {
-        if (fileRoute === '/api') return
-        const { pageMap: children, hasDynamicPage } = await collectFiles({
-          dir: filePath,
-          route: fileRoute,
-          imports,
-          dynamicMetaImports,
-          isFollowingSymlink
-        })
-
-        if (!children.length && !hasDynamicPage) return
-
-        return {
-          name: f.name,
-          route: fileRoute,
-          children
-        }
-      }
-
-      // add concurrency because folder can contain a lot of files
-      return limit(async () => {
-        if (MARKDOWN_EXTENSION_REGEX.test(ext)) {
-          const content = await fs.readFile(filePath, 'utf8')
-          const { data } = grayMatter(content)
-          if (!data.title) {
-            data.sidebarTitle = pageTitleFromFilename(name)
-          }
-
-          return {
-            name,
-            route: fileRoute,
-            frontMatter: data
-          }
-        }
-
-        const fileName = name + ext
-        const isMetaJs = META_REGEX.test(fileName)
-
-        if (fileName === '_meta.json') {
-          throw new Error(
-            'Support of "_meta.json" was removed, use "_meta.{js,jsx,ts,tsx}" instead. ' +
-              `Refactor following file "${path.relative(CWD, filePath)}".`
-          )
-        }
-
-        if (isMetaJs) {
-          const importName = cleanFileName(filePath)
-          imports.push({ importName, filePath })
-
-          if (hasDynamicPage) {
-            dynamicMetaImports.push({ importName, route })
-            return
-          }
-          return { data: importName }
-        }
-      })
-    })
-
-  const pageMap = (await Promise.all(promises)).filter(v => !!v)
-
-  return {
-    // @ts-expect-error -- fixme
-    pageMap,
-    imports,
-    dynamicMetaImports,
-    hasDynamicPage
-  }
-}
-
 function convertPageMapToAst(
   pageMap: PageMapItem[],
   imports: Import[]
@@ -213,6 +97,23 @@ function convertPageMapToAst(
   return { type: 'ArrayExpression', elements }
 }
 
+/*
+ * Use relative path instead of absolute, because it's fails on Windows
+ * https://github.com/nodejs/node/issues/31710
+ */
+function getImportPath(filePaths: string[], fromAppDir = false): string {
+  const importPath = slash(
+    path.relative(
+      CHUNKS_DIR,
+      fromAppDir
+        ? path.join(APP_DIR, ...filePaths)
+        : path.join(process.cwd(), 'mdx', ...filePaths)
+    )
+  )
+  return importPath.startsWith('.') ? importPath : `./${importPath}`
+}
+
+
 export async function collectPageMap({
   locale = '',
   pageMap,
@@ -231,22 +132,6 @@ export async function collectPageMap({
     // transformPageMap ? transformPageMap(pageMap, locale) : pageMap
   )
 
-  /*
-   * Use relative path instead of absolute, because it's fails on Windows
-   * https://github.com/nodejs/node/issues/31710
-   */
-  function getImportPath(filePaths: string[]) {
-    const importPath =  slash(
-      path.relative(
-        CHUNKS_DIR,
-        fromAppDir
-          ? path.join(APP_DIR, ...filePaths)
-          : path.join(process.cwd(), 'mdx', ...filePaths)
-      )
-    )
-    return importPath.startsWith('.') ? importPath : `./${importPath}`
-  }
-
   const metaImportsAST: ImportDeclaration[] = someImports
     // localeCompare to avoid race condition
     .sort((a, b) => a.filePath.localeCompare(b.filePath))
@@ -254,7 +139,7 @@ export async function collectPageMap({
       type: 'ImportDeclaration',
       source: {
         type: 'Literal',
-        value: getImportPath(locale ? [locale, filePath] : [filePath])
+        value: getImportPath(locale ? [locale, filePath] : [filePath], fromAppDir)
       },
       specifiers: [
         {

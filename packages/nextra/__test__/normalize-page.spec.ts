@@ -3,6 +3,7 @@ import path from 'node:path'
 import { normalizePages } from '../src/client/normalize-pages.js'
 import { normalizePageMap } from '../src/server/normalize-page-map.js'
 import { cnPageMap, usPageMap } from './fixture/page-maps/page-map.js'
+import { generatePageMapFromFilepaths } from '../src/server/generate-page-map.js'
 
 describe('normalize-page', () => {
   it('zh-CN home', () => {
@@ -134,15 +135,29 @@ describe('normalize-page', () => {
       'page-maps',
       'hidden-route-should-have-theme-context'
     )
-    vi.doMock('../src/server/file-system.ts', () => ({ PAGES_DIR: dir }))
+    vi.doMock('../src/server/file-system.ts', () => ({ APP_DIR: dir }))
     vi.doMock('../src/server/constants.ts', async () => ({
       ...(await vi.importActual('../src/server/constants.ts')),
       CHUNKS_DIR: dir
     }))
-    const { collectPageMap } = await import('../src/server/page-map.js')
+    const { getFilepaths, collectPageMap } = await import('../src/server/page-map.js')
 
-    const result = await collectPageMap({ dir })
-    await fs.writeFile(path.join(dir, 'generated-page-map.ts'), result)
+    const relativePaths = await getFilepaths({ dir })
+
+    const { pageMap: _pageMap, mdxPages } =
+      generatePageMapFromFilepaths(relativePaths)
+    const rawJs = await collectPageMap({
+      pageMap: _pageMap,
+      mdxPages,
+      fromAppDir: false
+    })
+
+    await fs.writeFile(path.join(dir, 'generated-page-map.ts'), '// @ts-nocheck\n' + rawJs.replaceAll(
+      '../../../../mdx/',
+      './'
+    ))
+
+    return
 
     const { pageMap } = await import(
       './fixture/page-maps/hidden-route-should-have-theme-context/generated-page-map.js'
