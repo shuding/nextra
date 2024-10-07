@@ -128,31 +128,30 @@ export async function collectPageMap({
       ]
     }))
 
-  const body: Parameters<typeof toJs>[0]['body'] = [
-    ...metaImportsAST,
-    {
-      type: 'VariableDeclaration',
-      kind: 'const',
-      declarations: [
-        {
-          type: 'VariableDeclarator',
-          id: { type: 'Identifier', name: '_pageMap' },
-          init: pageMapAst
-        }
-      ]
-    }
-  ]
-
-  const result = toJs({
+  const pageMapResult = toJs({
     type: 'Program',
     sourceType: 'module',
-    body
+    body: [
+      ...metaImportsAST,
+      {
+        type: 'VariableDeclaration',
+        kind: 'const',
+        declarations: [
+          {
+            type: 'VariableDeclarator',
+            id: { type: 'Identifier', name: '_pageMap' },
+            init: pageMapAst
+          }
+        ]
+      }
+    ]
   })
 
-  return `import { normalizePageMap } from 'nextra/page-map'
-${result.value}
-  
+  const rawJs = `import { normalizePageMap } from 'nextra/page-map'
+${pageMapResult.value}
+
 export const pageMap = normalizePageMap(_pageMap)
 
 export const RouteToFilepath = ${JSON.stringify(mdxPages, null, 2)}`
+  return rawJs
 }

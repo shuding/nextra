@@ -31,11 +31,10 @@ const _pageMap = [{
   frontMatter: bar
 }];
 
-  
 export const pageMap = normalizePageMap(_pageMap)
 
 export const RouteToFilepath = {
-  "bar": "bar.md",
+  "1-level/2-level/foo": "1-level/2-level/foo.md",
   "1-level/qux": "1-level/qux.md",
-  "1-level/2-level/foo": "1-level/2-level/foo.md"
+  "bar": "bar.md"
 }

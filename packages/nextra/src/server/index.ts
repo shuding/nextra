@@ -1,10 +1,11 @@
 /* eslint-env node */
-import { sep } from 'node:path'
+import path from 'node:path'
 import type { RuleSetRule } from 'webpack'
 import { fromZodError } from 'zod-validation-error'
 import type { Nextra } from '../types'
 import {
   DEFAULT_LOCALES,
+  IS_PRODUCTION,
   MARKDOWN_EXTENSION_REGEX,
   MARKDOWN_EXTENSIONS
 } from './constants.js'
@@ -14,9 +15,14 @@ import { NextraPlugin } from './webpack-plugins/index.js'
 
 const DEFAULT_EXTENSIONS = ['js', 'jsx', 'ts', 'tsx']
 
-const AGNOSTIC_PAGE_MAP_PATH = `.next${sep}static${sep}chunks${sep}nextra-page-map`
+const SEP_RE = path.sep === '/' ? '/' : '\\\\'
 
-const RE_SEP = sep === '/' ? '/' : '\\\\'
+const PAGE_MAP_RE = new RegExp(
+  `.next${SEP_RE}static${SEP_RE}chunks${SEP_RE}nextra-page-map`
+)
+const TYPESCRIPT_VFS_RE = new RegExp(
+  `@typescript${SEP_RE}vfs${SEP_RE}dist${SEP_RE}vfs\\.`
+)
 
 const nextra: Nextra = nextraConfig => {
   const { error, data: loaderOptions } =
@@ -25,12 +31,13 @@ const nextra: Nextra = nextraConfig => {
     logger.error('Error validating nextraConfig')
     throw fromZodError(error)
   }
+
   return function withNextra(nextConfig = {}) {
     const hasI18n = !!nextConfig.i18n?.locales
 
     if (hasI18n) {
       logger.info(
-        'You have Next.js i18n enabled, read here https://nextjs.org/docs/advanced-features/i18n-routing for the docs.'
+        'You have Next.js i18n enabled, read here https://nextjs.org/docs/app/building-your-application/routing/internationalization for the docs.'
       )
     }
 
@@ -95,8 +102,8 @@ const nextra: Nextra = nextraConfig => {
           {
             test: MARKDOWN_EXTENSION_REGEX,
             oneOf: [
-              {
-                issuer: request => request?.includes(AGNOSTIC_PAGE_MAP_PATH),
+              !IS_PRODUCTION && {
+                issuer: PAGE_MAP_RE,
                 use: [
                   options.defaultLoaders.babel,
                   {
@@ -127,9 +134,7 @@ const nextra: Nextra = nextraConfig => {
             ]
           },
           {
-            test: new RegExp(
-              `@typescript${RE_SEP}vfs${RE_SEP}dist${RE_SEP}vfs\\.`
-            ),
+            test: TYPESCRIPT_VFS_RE,
             issuer: request => !!request,
             use: defaultLoaderOptions
           }

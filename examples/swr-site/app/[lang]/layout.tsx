@@ -5,6 +5,7 @@ import {
   Footer,
   LastUpdated,
   Layout,
+  Link,
   LocaleSwitch,
   Navbar
 } from 'nextra-theme-docs'
@@ -92,7 +93,9 @@ export default async function RootLayout({ children, params: { lang } }) {
             system: dictionary.system
           }}
         >
-          <Banner storageKey="swr-2">SWR 2.0 is out! Read more →</Banner>
+          <Banner storageKey="swr-2">
+            SWR 2.0 is out! <Link href="#">Read more →</Link>
+          </Banner>
           <Navbar
             logo={
               <>

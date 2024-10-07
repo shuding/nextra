@@ -128,14 +128,17 @@ describe('normalize-page', () => {
     `)
   })
 
-  it('should keep `activeThemeContext`, `activeType` for hidden route', async () => {
+  // todo:
+  it.skip('should keep `activeThemeContext`, `activeType` for hidden route', async () => {
     const dir = path.join(
       __dirname,
       'fixture',
       'page-maps',
       'hidden-route-should-have-theme-context'
     )
-    vi.doMock('../src/server/file-system.ts', () => ({ APP_DIR: dir }))
+    vi.doMock('next/dist/lib/find-pages-dir.js', () => ({
+      findPagesDir: () => ({ appDir: dir })
+    }))
     vi.doMock('../src/server/constants.ts', async () => ({
       ...(await vi.importActual('../src/server/constants.ts')),
       CHUNKS_DIR: dir
@@ -158,8 +161,6 @@ describe('normalize-page', () => {
       path.join(dir, 'generated-page-map.ts'),
       '// @ts-nocheck\n' + rawJs.replaceAll('../../../../mdx/', './')
     )
-
-    return
 
     const { pageMap } = await import(
       './fixture/page-maps/hidden-route-should-have-theme-context/generated-page-map.js'

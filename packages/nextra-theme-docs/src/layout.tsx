@@ -106,10 +106,12 @@ export function Layout({ children, ...themeConfig }: Props): ReactElement {
   const newChildren = Children.toArray(children)
 
   if (!newChildren.some(child => hasTypeOf(child, Navbar))) {
-    newChildren.unshift(<Navbar />)
+    newChildren.unshift(<Navbar key={0} />)
   }
   if (!newChildren.some(child => hasTypeOf(child, Footer))) {
-    newChildren.push(<Footer>MIT {new Date().getFullYear()} © Nextra.</Footer>)
+    newChildren.push(
+      <Footer key={1}>MIT {new Date().getFullYear()} © Nextra.</Footer>
+    )
   }
 
   return (
