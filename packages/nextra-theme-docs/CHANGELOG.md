@@ -1,5 +1,12 @@
 # nextra-theme-docs
 
+## 3.0.5
+
+### Patch Changes
+
+- 3aac732: Add `.nextra-search-results` class back
+  - nextra@3.0.5
+
 ## 3.0.4
 
 ### Patch Changes

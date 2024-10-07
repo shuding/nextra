@@ -1,5 +1,11 @@
 # nextra-theme-blog
 
+## 3.0.5
+
+### Patch Changes
+
+- nextra@3.0.5
+
 ## 3.0.4
 
 ### Patch Changes
