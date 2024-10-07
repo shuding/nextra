@@ -59,7 +59,7 @@ If the documentation is inside a monorepo, a subfolder, or a different branch of
 the repository, you can simply set the `docsRepositoryBase` to the root path of
 the `pages/` folder of your docs. For example:
 
-```js
+```js filename="theme.config.jsx"
 export default {
   docsRepositoryBase: 'https://github.com/shuding/nextra/tree/main/docs'
 }
@@ -85,7 +85,7 @@ favicon, etc.
 If you have only static head tags, it’s easy to directly put them in `head`. For
 example:
 
-```jsx
+```jsx filename="theme.config.jsx"
 export default {
   head: (
     <>
@@ -102,7 +102,7 @@ export default {
 You can also use a _function component_ as `head` to dynamically generate the
 head tags based on the current page’s front matter. For example:
 
-```jsx
+```jsx filename="theme.config.jsx"
 import { useRouter } from 'next/router'
 import { useConfig } from 'nextra-theme-docs'
 
@@ -189,7 +189,7 @@ function component.
   ↗](https://stackblitz.com/edit/nextra-2-docs-yrlccm?file=theme.config.jsx)
 </div>
 
-```jsx
+```jsx filename="theme.config.jsx"
 export default {
   logo: (
     <>
@@ -228,7 +228,7 @@ import projectLinkImage from 'public/assets/docs/project-link.png'
 
 <Screenshot src={projectLinkImage} alt="Project link" full />
 
-```jsx
+```jsx filename="theme.config.jsx"
 export default {
   project: {
     link: 'https://gitlab.com/inkscape/inkscape',
@@ -261,7 +261,7 @@ navbar.
 You can configure `chat.link` and `chat.icon` to customize the chat link, for
 example make it link to your Twitter account:
 
-```jsx
+```jsx filename="theme.config.jsx"
 export default {
   chat: {
     link: 'https://twitter.com/shuding_',
@@ -328,7 +328,7 @@ import bannerImage from 'public/assets/docs/banner.png'
 
 <Screenshot src={bannerImage} alt="Banner" />
 
-```jsx
+```jsx filename="theme.config.jsx"
 export default {
   banner: {
     key: '2.0-release',
@@ -529,7 +529,7 @@ import navigationImage from 'public/assets/docs/navigation.png'
 
 <Screenshot src={navigationImage} alt="Navigation" full />
 
-```jsx
+```jsx filename="theme.config.jsx"
 export default {
   navigation: {
     prev: true,
@@ -572,7 +572,7 @@ default footer, or fully customize it with a custom component.
 You can add some simple content, such as copyright information to the default
 footer:
 
-```jsx
+```jsx filename="theme.config.jsx"
 export default {
   footer: {
     text: (
@@ -603,7 +603,7 @@ export default {
 
 You are able to customize the option names for localization or other purposes:
 
-```jsx
+```jsx filename="theme.config.jsx"
 export default {
   themeSwitch: {
     useOptions() {
