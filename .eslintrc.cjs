@@ -152,7 +152,8 @@ module.exports = {
             'nextra-breadcrumb',
             'nextra-bleed',
             'nextra-menu-desktop',
-            'nextra-menu-mobile'
+            'nextra-menu-mobile',
+            'nextra-search-results'
           ]
         }
       },
