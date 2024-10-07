@@ -173,6 +173,7 @@ export function Search({
         anchor={{ to: 'top end', gap: 10, padding: 16 }}
         className={({ open }) =>
           cn(
+            'nextra-search-results', // for userspace styling
             'nextra-scrollbar max-md:_h-full',
             '_border _border-gray-200 _text-gray-100 dark:_border-neutral-800',
             '_z-20 _rounded-xl _py-2.5 _shadow-xl',
