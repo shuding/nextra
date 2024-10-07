@@ -1,5 +1,12 @@
 # nextra-theme-docs
 
+## 3.0.6
+
+### Patch Changes
+
+- 4ed7b4b: remove extra horizontal margin spacing in toc
+  - nextra@3.0.6
+
 ## 3.0.5
 
 ### Patch Changes
