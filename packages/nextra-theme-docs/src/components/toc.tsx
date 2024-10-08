@@ -48,7 +48,7 @@ export function TOC({ toc, filePath }: TOCProps): ReactElement {
         behavior: 'smooth',
         block: 'center',
         inline: 'center',
-        scrollMode: 'always',
+        scrollMode: 'if-needed',
         boundary: tocRef.current!.parentElement
       })
     }
@@ -57,12 +57,18 @@ export function TOC({ toc, filePath }: TOCProps): ReactElement {
   return (
     <div
       className={cn(
-        'nextra-scrollbar _sticky _top-16 _overflow-y-auto _px-4 _pt-6 _text-sm [hyphens:auto]',
+        '_grid _grid-rows-[1fr_min-content]', // 1fr: scrollbar, min-content: toc footer
+        '_sticky _top-16 _pt-6 _text-sm [hyphens:auto]',
         '_max-h-[calc(100vh-var(--nextra-navbar-height)-env(safe-area-inset-bottom))]'
       )}
     >
       {hasHeadings && (
-        <>
+        <div
+          className={cn(
+            'nextra-scrollbar _overflow-y-auto _px-4',
+            '_pb-6' // for toc footer shadow
+          )}
+        >
           <p className="_mb-4 _font-semibold _tracking-tight">
             {renderComponent(themeConfig.toc.title)}
           </p>
@@ -92,15 +98,15 @@ export function TOC({ toc, filePath }: TOCProps): ReactElement {
               </li>
             ))}
           </ul>
-        </>
+        </div>
       )}
 
       {hasMetaInfo && (
         <div
           className={cn(
-            hasHeadings && 'nextra-toc-footer _mt-8 _pt-8',
-            '_sticky _bottom-0 _flex _flex-col _items-start _gap-2 _pb-8',
-            '_-mx-1 _px-1' // to hide focused toc links
+            hasHeadings && 'nextra-toc-footer',
+            '_flex _flex-col _items-start _gap-2 _py-8 _px-1',
+            '_mx-3' // for toc-footer border top width
           )}
         >
           {themeConfig.feedback.content ? (
