@@ -297,6 +297,7 @@ export async function compileMdx(
         [rehypeExtractTocContent, { isRemoteContent }]
       ].filter(v => !!v),
       recmaPlugins: [
+        ...(recmaPlugins || []),
         (() => (ast: Program, file) => {
           const mdxContentIndex = ast.body.findIndex(node => {
             if (node.type === 'ExportDefaultDeclaration') {
@@ -345,8 +346,7 @@ export async function compileMdx(
             }
           }
         }) satisfies Plugin<[], Program>,
-        isRemoteContent ? recmaRewriteFunctionBody : recmaRewriteJsx,
-        ...(recmaPlugins || [])
+        isRemoteContent ? recmaRewriteFunctionBody : recmaRewriteJsx
       ].filter(v => !!v)
     })
   }
