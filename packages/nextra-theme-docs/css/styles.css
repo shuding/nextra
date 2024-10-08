@@ -136,7 +136,6 @@ body {
 
 body,
 .nextra-nav-container-blur,
-.nextra-toc-footer,
 .nextra-sidebar-footer {
   @apply _bg-[rgb(var(--nextra-bg))];
 }
