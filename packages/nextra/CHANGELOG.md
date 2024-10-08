@@ -1,5 +1,11 @@
 # nextra
 
+## 3.0.7
+
+### Patch Changes
+
+- 4bbc1fe: apply user's `recmaPlugins` first
+
 ## 3.0.6
 
 ## 3.0.5
