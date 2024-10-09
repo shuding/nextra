@@ -184,6 +184,7 @@ function Summary({
       className={cn(
         'nextra-focus',
         '_flex _items-center _cursor-pointer _p-1 _transition-colors hover:_bg-gray-100 dark:hover:_bg-neutral-800',
+        '[&::-webkit-details-marker]:_hidden', // Safari
         // display: flex removes whitespace when `<summary>` contains text with other elements, like `foo <strong>bar</strong>`
         '_whitespace-pre-wrap',
         '_select-none',
