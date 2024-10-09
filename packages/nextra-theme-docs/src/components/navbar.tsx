@@ -53,7 +53,7 @@ function NavbarMenu({
           cn(
             classes.link,
             classes.inactive,
-            'max-md:_hidden _items-center _whitespace-nowrap _rounded _flex _gap-1.5',
+            'max-md:_hidden _items-center _whitespace-nowrap _flex _gap-1.5 _ring-inset',
             focus && 'nextra-focusable'
           )
         }
@@ -159,7 +159,7 @@ export function Navbar({ items }: NavBarProps): ReactElement {
                 key={href}
                 className={cn(
                   classes.link,
-                  'max-md:_hidden _whitespace-nowrap',
+                  'max-md:_hidden _whitespace-nowrap _ring-inset',
                   !isActive || page.newWindow
                     ? classes.inactive
                     : classes.active
