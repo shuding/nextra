@@ -49,7 +49,7 @@ export function TOC({ toc, filePath }: TOCProps): ReactElement {
         block: 'center',
         inline: 'center',
         scrollMode: 'if-needed',
-        boundary: tocRef.current!.parentElement
+        boundary: tocRef.current
       })
     }
   }, [activeSlug])
