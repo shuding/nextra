@@ -1,27 +1,24 @@
 .nextra-scrollbar {
   scrollbar-width: thin; /* Firefox */
-  scrollbar-color: oklch(55.55% 0 0 / 40%) transparent; /* Firefox */
-
+  scrollbar-color: rgba(115, 115, 115, 0.4) transparent; /* Firefox */
   scrollbar-gutter: stable;
+
   &::-webkit-scrollbar {
     @apply _size-3;
   }
+
   &::-webkit-scrollbar-track {
     @apply _bg-transparent;
   }
+
   &::-webkit-scrollbar-thumb {
     @apply _rounded-[10px];
-  }
-  &:hover::-webkit-scrollbar-thumb {
-    border: 3px solid transparent;
-    background-color: var(--tw-shadow-color);
-    background-clip: content-box;
-    @apply _shadow-neutral-500/20 hover:_shadow-neutral-500/40;
-  }
 
-  @media (max-width: 767px) {
-    .nextra-container & {
-      scrollbar-gutter: auto;
+    &:hover {
+      border: 3px solid transparent;
+      background-color: var(--tw-shadow-color);
+      background-clip: content-box;
+      @apply _shadow-neutral-500/20 hover:_shadow-neutral-500/40;
     }
   }
 }

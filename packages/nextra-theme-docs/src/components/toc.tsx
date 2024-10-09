@@ -48,8 +48,8 @@ export function TOC({ toc, filePath }: TOCProps): ReactElement {
         behavior: 'smooth',
         block: 'center',
         inline: 'center',
-        scrollMode: 'always',
-        boundary: tocRef.current!.parentElement
+        scrollMode: 'if-needed',
+        boundary: tocRef.current
       })
     }
   }, [activeSlug])
@@ -57,16 +57,29 @@ export function TOC({ toc, filePath }: TOCProps): ReactElement {
   return (
     <div
       className={cn(
-        'nextra-scrollbar _sticky _top-16 _overflow-y-auto _px-4 _pt-6 _text-sm [hyphens:auto]',
-        '_max-h-[calc(100vh-var(--nextra-navbar-height)-env(safe-area-inset-bottom))]'
+        hasHeadings && '_grid _grid-rows-[min-content_1fr_min-content]', // 1fr: toc headings, min-content: title/footer
+        '_sticky _top-[--nextra-navbar-height] _pt-6 _text-sm',
+        '_max-h-[calc(100vh-var(--nextra-navbar-height))]'
       )}
     >
       {hasHeadings && (
         <>
-          <p className="_mb-4 _font-semibold _tracking-tight">
+          <p
+            className={cn(
+              '_mx-4', // use margin instead padding to not have shadow on scrollbar
+              '_font-semibold _tracking-tight',
+              '_pb-2 _shadow-[0_12px_16px_rgb(var(--nextra-bg))] contrast-more:_shadow-none _z-[1]'
+            )}
+          >
             {renderComponent(themeConfig.toc.title)}
           </p>
-          <ul ref={tocRef}>
+          <ul
+            ref={tocRef}
+            className={cn(
+              '_px-4 nextra-scrollbar _overscroll-y-contain _overflow-y-auto _hyphens-auto',
+              '_py-1.5' // for title/footer shadow
+            )}
+          >
             {toc.map(({ id, value, depth }) => (
               <li className="_my-2 _scroll-my-6 _scroll-py-6" key={id}>
                 <a
@@ -75,10 +88,10 @@ export function TOC({ toc, filePath }: TOCProps): ReactElement {
                     'nextra-focus',
                     {
                       2: '_font-semibold',
-                      3: 'ltr:_ml-4 rtl:_mr-4',
-                      4: 'ltr:_ml-8 rtl:_mr-8',
-                      5: 'ltr:_ml-12 rtl:_mr-12',
-                      6: 'ltr:_ml-16 rtl:_mr-16'
+                      3: '_ms-4',
+                      4: '_ms-8',
+                      5: '_ms-12',
+                      6: '_ms-16'
                     }[depth],
                     '_block _transition-colors _subpixel-antialiased',
                     activeAnchor[id]?.isActive
@@ -98,9 +111,9 @@ export function TOC({ toc, filePath }: TOCProps): ReactElement {
       {hasMetaInfo && (
         <div
           className={cn(
-            hasHeadings && 'nextra-toc-footer _mt-8 _pt-8',
-            '_sticky _bottom-0 _flex _flex-col _items-start _gap-2 _pb-8',
-            '_-mx-1 _px-1' // to hide focused toc links
+            hasHeadings && 'nextra-toc-footer _pt-4',
+            '_flex _flex-col _items-start _gap-2 _pb-4',
+            '_mx-4' // for border top width
           )}
         >
           {themeConfig.feedback.content ? (
