@@ -1,5 +1,16 @@
 # nextra-theme-docs
 
+## 3.0.8
+
+### Patch Changes
+
+- 72c84eb: add `max-md:_overflow-hidden` instead of `_overflow-hidden` when
+  hamburger is clicked
+- 1530239: hide `<summary>` marker on Safari
+- 210d68a: trigger scrolling when the TOC item is outside the viewport
+- bf04f96: add ring-inset for navbar links
+  - nextra@3.0.8
+
 ## 3.0.7
 
 ### Patch Changes
