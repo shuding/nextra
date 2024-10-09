@@ -66,7 +66,7 @@ export function ConfigProvider({
 
   useEffect(() => {
     // Lock background scroll when menu is opened
-    document.body.classList.toggle('_overflow-hidden', menu)
+    document.body.classList.toggle('max-md:_overflow-hidden', menu)
   }, [menu])
 
   useEffect(() => {
