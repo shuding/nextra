@@ -35,5 +35,5 @@
       matchPackageNames: ['remark-math', 'rehype-katex']
     }
   ],
-  baseBranches: ['v4-v2']
+  baseBranches: ['main']
 }
