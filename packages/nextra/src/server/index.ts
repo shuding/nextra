@@ -193,13 +193,6 @@ const nextra: Nextra = nextraConfig => {
             issuer: request => !request,
             use: defaultLoaderOptions
           },
-          {
-            test: new RegExp(
-              `@typescript${RE_SEP}vfs${RE_SEP}dist${RE_SEP}vfs\\.`
-            ),
-            issuer: request => !!request,
-            use: defaultLoaderOptions
-          }
         )
 
         return nextConfig.webpack?.(config, options) || config
