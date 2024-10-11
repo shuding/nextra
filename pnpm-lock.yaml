@@ -70,8 +70,8 @@ importers:
         specifier: 3.2.0
         version: 3.2.0(@typescript-eslint/parser@8.6.0)(eslint@9.11.0)(typescript@5.6.2)
       eslint-plugin-unicorn:
-        specifier: 55.0.0
-        version: 55.0.0(eslint@9.11.0)
+        specifier: 56.0.0
+        version: 56.0.0(eslint@9.11.0)
       prettier:
         specifier: 3.3.3
         version: 3.3.3
@@ -156,7 +156,7 @@ importers:
         version: file:packages/nextra(@types/react@18.3.10)(next@14.2.13)(react-dom@18.3.1)(react@18.3.1)(typescript@5.6.2)
       nextra-theme-blog:
         specifier: workspace:*
-        version: file:packages/nextra-theme-blog(next@14.2.13)(nextra@3.0.0)(react-dom@18.3.1)(react@18.3.1)
+        version: file:packages/nextra-theme-blog(next@14.2.13)(nextra@3.0.8)(react-dom@18.3.1)(react@18.3.1)
       react:
         specifier: ^18.2.0
         version: 18.3.1
@@ -179,7 +179,7 @@ importers:
         version: file:packages/nextra(@types/react@18.3.10)(next@14.2.13)(react-dom@18.3.1)(react@18.3.1)(typescript@5.6.2)
       nextra-theme-docs:
         specifier: workspace:*
-        version: file:packages/nextra-theme-docs(next@14.2.13)(nextra@3.0.0)(react-dom@18.3.1)(react@18.3.1)
+        version: file:packages/nextra-theme-docs(next@14.2.13)(nextra@3.0.8)(react-dom@18.3.1)(react@18.3.1)
       react:
         specifier: ^18.2.0
         version: 18.3.1
@@ -205,7 +205,7 @@ importers:
         version: file:packages/nextra(@types/react@18.3.10)(next@14.2.13)(react-dom@18.3.1)(react@18.3.1)(typescript@5.6.2)
       nextra-theme-docs:
         specifier: workspace:*
-        version: file:packages/nextra-theme-docs(next@14.2.13)(nextra@3.0.0)(react-dom@18.3.1)(react@18.3.1)
+        version: file:packages/nextra-theme-docs(next@14.2.13)(nextra@3.0.8)(react-dom@18.3.1)(react@18.3.1)
       react:
         specifier: ^18.2.0
         version: 18.3.1
@@ -6524,7 +6524,7 @@ packages:
     engines: {node: ^6 || ^7 || ^8 || ^9 || ^10 || ^11 || ^12 || >=13.7}
     hasBin: true
     dependencies:
-      caniuse-lite: 1.0.30001646
+      caniuse-lite: 1.0.30001664
       electron-to-chromium: 1.5.4
       node-releases: 2.0.18
       update-browserslist-db: 1.1.0(browserslist@4.23.3)
@@ -6596,6 +6596,7 @@ packages:
 
   /caniuse-lite@1.0.30001646:
     resolution: {integrity: sha512-dRg00gudiBDDTmUhClSdv3hqRfpbOnU28IpI1T6PBTLWa+kOj0681C8uML3PifYfREuBrVjDGhL3adYpBT6spw==}
+    dev: true
 
   /caniuse-lite@1.0.30001664:
     resolution: {integrity: sha512-AmE7k4dXiNKQipgn7a2xg558IRqPN3jMQY/rOsbxDhrd0tyChwbITBfiwtnqz8bi2M5mIWbxAYBvk7W7QBUS2g==}
@@ -6857,6 +6858,12 @@ packages:
 
   /core-js-compat@3.37.1:
     resolution: {integrity: sha512-9TNiImhKvQqSUkOvk/mMRZzOANTiEVC7WaBNhHcKM7x+/5E1l5NvsysR19zuDQScE8k+kfQXWRN3AtS/eOSHpg==}
+    dependencies:
+      browserslist: 4.23.3
+    dev: true
+
+  /core-js-compat@3.38.1:
+    resolution: {integrity: sha512-JRH6gfXxGmrzF3tZ57lFx97YARxCXPaMzPo6jELZhv88pBH5VXpQ+y0znKGlFnzuaihqhLbefxSJxWJMPtfDzw==}
     dependencies:
       browserslist: 4.23.3
     dev: true
@@ -8032,8 +8039,8 @@ packages:
       - supports-color
     dev: true
 
-  /eslint-plugin-unicorn@55.0.0(eslint@9.11.0):
-    resolution: {integrity: sha512-n3AKiVpY2/uDcGrS3+QsYDkjPfaOrNrsfQxU9nt5nitd9KuvVXrfAvgCO9DYPSfap+Gqjw9EOrXIsBp5tlHZjA==}
+  /eslint-plugin-unicorn@56.0.0(eslint@9.11.0):
+    resolution: {integrity: sha512-aXpddVz/PQMmd69uxO98PA4iidiVNvA0xOtbpUoz1WhBd4RxOQQYqN618v68drY0hmy5uU2jy1bheKEVWBjlPw==}
     engines: {node: '>=18.18'}
     peerDependencies:
       eslint: '>=8.56.0'
@@ -8042,10 +8049,10 @@ packages:
       '@eslint-community/eslint-utils': 4.4.0(eslint@9.11.0)
       ci-info: 4.0.0
       clean-regexp: 1.0.0
-      core-js-compat: 3.37.1
+      core-js-compat: 3.38.1
       eslint: 9.11.0
-      esquery: 1.5.0
-      globals: 15.8.0
+      esquery: 1.6.0
+      globals: 15.11.0
       indent-string: 4.0.0
       is-builtin-module: 3.2.1
       jsesc: 3.0.2
@@ -8192,6 +8199,13 @@ packages:
 
   /esquery@1.5.0:
     resolution: {integrity: sha512-YQLXUplAwJgCydQ78IMJywZCceoqk1oH01OERdSAJc/7U2AylwjhSCLDEtqwg811idIS/9fIU5GjG73IgjKMVg==}
+    engines: {node: '>=0.10'}
+    dependencies:
+      estraverse: 5.3.0
+    dev: true
+
+  /esquery@1.6.0:
+    resolution: {integrity: sha512-ca9pw9fomFcKPvFLXhBKUK90ZvGibiGOvRJNbjljY7s7uq/5YO4BOzcYtJqExdx99rF6aAcnRxHmcUHcz6sQsg==}
     engines: {node: '>=0.10'}
     dependencies:
       estraverse: 5.3.0
@@ -8674,8 +8688,8 @@ packages:
     engines: {node: '>=18'}
     dev: true
 
-  /globals@15.8.0:
-    resolution: {integrity: sha512-VZAJ4cewHTExBWDHR6yptdIBlx9YSSZuwojj9Nt5mBRXQzrKakDsVKQ1J63sklLvzAJm0X5+RpO4i3Y2hcOnFw==}
+  /globals@15.11.0:
+    resolution: {integrity: sha512-yeyNSjdbyVaWurlwCpcA6XNBrHTMIeDdj0/hnvX/OLJ9ekOXYbLsLinH/MucQyGvNnXhidTdNhTtJaffL2sMfw==}
     engines: {node: '>=18'}
     dev: true
 
@@ -13935,8 +13949,8 @@ packages:
     engines: {node: '>=18'}
     peerDependencies:
       next: 14.2.13
-      react: '>=18.0.0'
-      react-dom: '>=18.0.0'
+      react: '>=18'
+      react-dom: '>=18'
     dependencies:
       '@headlessui/react': 2.1.3(react-dom@18.3.1)(react@18.3.1)
       '@mdx-js/mdx': 3.0.1
@@ -13980,16 +13994,16 @@ packages:
       - typescript
     dev: false
 
-  file:packages/nextra-theme-blog(next@14.2.13)(nextra@3.0.0)(react-dom@18.3.1)(react@18.3.1):
+  file:packages/nextra-theme-blog(next@14.2.13)(nextra@3.0.8)(react-dom@18.3.1)(react@18.3.1):
     resolution: {directory: packages/nextra-theme-blog, type: directory}
     id: file:packages/nextra-theme-blog
     name: nextra-theme-blog
     peerDependencies:
       next: 14.2.13
       nextra: workspace:*
-      react: '>=18.0.0'
+      react: '>=18'
       react-cusdis: ^2.1.3
-      react-dom: '>=18.0.0'
+      react-dom: '>=18'
     peerDependenciesMeta:
       react-cusdis:
         optional: true
@@ -14001,15 +14015,15 @@ packages:
       react-dom: 18.3.1(react@18.3.1)
     dev: false
 
-  file:packages/nextra-theme-docs(next@14.2.13)(nextra@3.0.0)(react-dom@18.3.1)(react@18.3.1):
+  file:packages/nextra-theme-docs(next@14.2.13)(nextra@3.0.8)(react-dom@18.3.1)(react@18.3.1):
     resolution: {directory: packages/nextra-theme-docs, type: directory}
     id: file:packages/nextra-theme-docs
     name: nextra-theme-docs
     peerDependencies:
       next: 14.2.13
       nextra: workspace:*
-      react: '>=18.0.0'
-      react-dom: '>=18.0.0'
+      react: '>=18'
+      react-dom: '>=18'
     dependencies:
       '@headlessui/react': 2.1.3(react-dom@18.3.1)(react@18.3.1)
       clsx: 2.1.1
