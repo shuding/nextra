@@ -1,5 +1,51 @@
 # nextra-theme-docs
 
+## 3.0.8
+
+### Patch Changes
+
+- 72c84eb: add `max-md:_overflow-hidden` instead of `_overflow-hidden` when
+  hamburger is clicked
+- 1530239: hide `<summary>` marker on Safari
+- 210d68a: trigger scrolling when the TOC item is outside the viewport
+- bf04f96: add ring-inset for navbar links
+  - nextra@3.0.8
+
+## 3.0.7
+
+### Patch Changes
+
+- Updated dependencies [4bbc1fe]
+  - nextra@3.0.7
+
+## 3.0.6
+
+### Patch Changes
+
+- 4ed7b4b: remove extra horizontal margin spacing in toc
+  - nextra@3.0.6
+
+## 3.0.5
+
+### Patch Changes
+
+- 3aac732: Add `.nextra-search-results` class back
+  - nextra@3.0.5
+
+## 3.0.4
+
+### Patch Changes
+
+- 84fc255: should get right `activeType`, `activeThemeContext` even when some
+  parent has `display: 'hidden'`
+- 9b6595d: Ensure the jump link behavior is consistent in Markdown.
+- f3a5575: add a scrollbar for nav links in the header when they exceed
+  available free space
+- Updated dependencies [84a8a41]
+- Updated dependencies [659b36e]
+- Updated dependencies [84fc255]
+  - nextra@3.0.4
+
 ## 3.0.3
 
 ### Patch Changes

@@ -1,6 +1,6 @@
 {
   "name": "nextra-theme-docs",
-  "version": "3.0.3",
+  "version": "3.0.8",
   "description": "A Nextra theme for documentation sites.",
   "repository": "https://github.com/shuding/nextra",
   "author": "Shu Ding <g@shud.in>",
@@ -32,8 +32,8 @@
   "peerDependencies": {
     "next": ">=13",
     "nextra": "workspace:*",
-    "react": ">=18.0.0",
-    "react-dom": ">=18.0.0"
+    "react": ">=18",
+    "react-dom": ">=18"
   },
   "dependencies": {
     "@headlessui/react": "^2.1.2",

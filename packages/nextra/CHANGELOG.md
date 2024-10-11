@@ -1,5 +1,26 @@
 # nextra
 
+## 3.0.8
+
+## 3.0.7
+
+### Patch Changes
+
+- 4bbc1fe: apply user's `recmaPlugins` first
+
+## 3.0.6
+
+## 3.0.5
+
+## 3.0.4
+
+### Patch Changes
+
+- 84a8a41: use 3 nextra's webpack loaders instead of 4
+- 659b36e: remove `jsx-runtime.cjs`, import runtime from 'react/jsx-runtime'
+- 84fc255: should get right `activeType`, `activeThemeContext` even when some
+  parent has `display: 'hidden'`
+
 ## 3.0.3
 
 ### Patch Changes

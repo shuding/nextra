@@ -1,26 +1,20 @@
 import { Button, Cards } from 'nextra/components'
 import { Card } from './showcase.mdx'
 
-<h1 className="mb-4 mt-10 text-center text-[2.5rem] font-bold tracking-tight">
-  {'Sponsors'}
-</h1>
-
-<p className="text-center text-lg text-gray-500 dark:text-gray-400">
-  {'Your sponsorship means a lot to open source projects, including Nextra'}
-</p>
-
-<Button
-  className="mx-auto mb-16 mt-6 block w-fit px-6 hover:!no-underline"
-  variant="outline"
-  href="https://github.com/sponsors/dimaMachina"
-  as="a"
-  target="_blank"
-  rel="noreferrer"
->
-  {'Support Nextra'}
-</Button>
-
-{/* <h2 className="text-center">Organization Sponsors</h2> */}
+<div className="mb-16 mt-10 text-center">
+  # Sponsors
+  <br />
+  <Button
+    className="!px-6 hover:!no-underline"
+    variant="outline"
+    href="https://github.com/sponsors/dimaMachina"
+    as="a"
+    target="_blank"
+    rel="noreferrer"
+  >
+    {'Become a Sponsor'}
+  </Button>
+</div>
 
 <Cards num={2} className="hover:[&_a]:!no-underline">
   <Card

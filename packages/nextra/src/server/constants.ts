@@ -41,10 +41,6 @@ export const EXTERNAL_URL_REGEX = /^https?:\/\//
 
 export const DEFAULT_LOCALES = ['']
 
-// Experimental, need to deep dive why bundle becomes bigger and there is full
-// reload while navigating between pages every time
-export const IMPORT_FRONTMATTER = false
-
 export const DEFAULT_PROPERTY_PROPS = {
   type: 'Property',
   kind: 'init',
