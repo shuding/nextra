@@ -2,7 +2,6 @@ import path from 'node:path'
 import type { ProcessorOptions } from '@mdx-js/mdx'
 import { createProcessor } from '@mdx-js/mdx'
 import type { Processor } from '@mdx-js/mdx/lib/core'
-import { rendererRich, transformerTwoslash } from '@shikijs/twoslash'
 import { remarkMermaid } from '@theguild/remark-mermaid'
 import { remarkNpm2Yarn } from '@theguild/remark-npm2yarn'
 import type { Program } from 'estree'
@@ -162,8 +161,8 @@ export async function compileMdx(
 
   const compiler =
     !useCachedCompiler || isRemoteContent
-      ? createCompiler()
-      : (cachedCompilerForFormat[format] ??= createCompiler())
+      ? await createCompiler()
+      : (cachedCompilerForFormat[format] ??= await createCompiler())
   const processor = compiler()
 
   try {
@@ -205,7 +204,30 @@ export async function compileMdx(
     throw error
   }
 
-  function createCompiler(): Processor {
+  async function getTransformers() {
+    // Disable twoslash in browser
+    if (typeof window !== 'undefined') {
+      return []
+    }
+
+    // TODO: For some reason I get Error: Cannot find module 'path' in remote content,
+    // disable twoslash temporarily
+    if (isRemoteContent) {
+      return []
+    }
+    const { rendererRich, transformerTwoslash } = await import(
+      '@shikijs/twoslash'
+    )
+
+    return [
+      transformerTwoslash({
+        renderer: rendererRich(),
+        explicitTrigger: true
+      })
+    ]
+  }
+
+  async function createCompiler(): Promise<Processor> {
     return createProcessor({
       jsx,
       format,
@@ -278,16 +300,7 @@ export async function compileMdx(
                 rehypePrettyCode,
                 {
                   ...DEFAULT_REHYPE_PRETTY_CODE_OPTIONS,
-                  // TODO: For some reason I get Error: Cannot find module 'path' in remote content,
-                  // disable twoslash temporarily
-                  transformers: isRemoteContent
-                    ? []
-                    : [
-                        transformerTwoslash({
-                          renderer: rendererRich(),
-                          explicitTrigger: true
-                        })
-                      ],
+                  transformers: await getTransformers(),
                   ...rehypePrettyCodeOptions
                 }
               ] as any,
