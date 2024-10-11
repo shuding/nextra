@@ -158,7 +158,6 @@ export async function compileMdx(
   }
 
   const isRemoteContent = outputFormat === 'function-body'
-  const transformers = await getTransformers()
 
   const compiler =
     !useCachedCompiler || isRemoteContent
@@ -203,23 +202,6 @@ export async function compileMdx(
   } catch (error) {
     console.error(`[nextra] Error compiling ${filePath}.`)
     throw error
-  }
-
-  async function getTransformers() {
-    // Disable twoslash in browser
-    if (typeof window !== 'undefined') {
-      return []
-    }
-    const { rendererRich, transformerTwoslash } = await import(
-      '@shikijs/twoslash'
-    )
-
-    return [
-      transformerTwoslash({
-        renderer: rendererRich(),
-        explicitTrigger: true
-      })
-    ]
   }
 
   function createCompiler(): Processor {
@@ -295,7 +277,6 @@ export async function compileMdx(
                 rehypePrettyCode,
                 {
                   ...DEFAULT_REHYPE_PRETTY_CODE_OPTIONS,
-                  transformers,
                   ...rehypePrettyCodeOptions
                 }
               ] as any,

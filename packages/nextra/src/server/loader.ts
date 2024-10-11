@@ -1,4 +1,5 @@
 import path from 'node:path'
+import { rendererRich, transformerTwoslash } from '@shikijs/twoslash'
 import slash from 'slash'
 import type { LoaderContext } from 'webpack'
 import type { LoaderOptions, PageOpts } from '../types'
@@ -164,7 +165,16 @@ ${themeConfigImport && '__nextra_internal__.themeConfig = __themeConfig'}`
       ...mdxOptions,
       jsx: true,
       outputFormat: 'program',
-      format: 'detect'
+      format: 'detect',
+      rehypePrettyCodeOptions: {
+        transformers: [
+          transformerTwoslash({
+            renderer: rendererRich(),
+            explicitTrigger: true
+          })
+        ],
+        ...mdxOptions?.rehypePrettyCodeOptions
+      }
     },
     readingTime: _readingTime,
     defaultShowCopyCode,
