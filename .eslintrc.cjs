@@ -161,7 +161,6 @@ module.exports = {
             'nextra-breadcrumb',
             'nextra-menu-desktop',
             'nextra-menu-mobile',
-            'nextra-search-results',
             'nextra-toc'
           ]
         }
@@ -212,7 +211,8 @@ module.exports = {
             'nextra-code',
             'nextra-filetree',
             'nextra-bleed',
-            'nextra-skip-nav'
+            'nextra-skip-nav',
+            'nextra-search-results'
           ]
         }
       },
