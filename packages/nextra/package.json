@@ -10,7 +10,10 @@
   },
   "exports": {
     "./package.json": "./package.json",
-    ".": "./dist/server/index.js",
+    ".": {
+      "import": "./dist/server/index.js",
+      "types": "./dist/server/index.d.ts"
+    },
     "./loader": "./loader.cjs",
     "./components": {
       "import": "./dist/client/components/index.js",
