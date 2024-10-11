@@ -1,5 +1,13 @@
 # nextra
 
+## 3.0.9
+
+### Patch Changes
+
+- f9cc160: - fix `Module not found: Can't resolve 'module'` in yarn@4.5.0
+
+  - disable `twoslash` in browser because he never worked in this environment
+
 ## 3.0.8
 
 ## 3.0.7
