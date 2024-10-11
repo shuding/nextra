@@ -40,7 +40,10 @@ export function Playground({
   useEffect(() => {
     async function doCompile() {
       // Importing in useEffect to not increase global bundle size
-      const { compileMdx } = await import('../../server/compile.js')
+      const { compileMdx } = await import(
+        // fixes Module not found: Can't resolve 'module' https://github.com/shuding/nextra/issues/3410
+        /* webpackIgnore: true */ '../../server/compile.js'
+      )
       try {
         const mdx = await compileMdx(source)
         setCompiledSource(mdx.result)
