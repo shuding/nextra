@@ -52,13 +52,13 @@
     "overrides": {
       "vite": "5.4.8",
       "esbuild": "0.24.0",
-      "next": "14.2.13",
+      "next": "14.2.15",
       "react": "18.3.1",
       "react-dom": "18.3.1"
     },
     "patchedDependencies": {
       "eslint-plugin-deprecation@3.0.0": "patches/eslint-plugin-deprecation@3.0.0.patch",
-      "next@14.2.13": "patches/next@13.5.6.patch",
+      "next@14.2.15": "patches/next@13.5.6.patch",
       "eslint-plugin-tailwindcss@3.17.3": "patches/eslint-plugin-tailwindcss.patch",
       "tsup@8.3.0": "patches/tsup.patch",
       "@changesets/assemble-release-plan@6.0.4": "patches/@changesets__assemble-release-plan.patch"
