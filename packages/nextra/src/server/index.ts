@@ -16,8 +16,6 @@ const DEFAULT_EXTENSIONS = ['js', 'jsx', 'ts', 'tsx']
 
 const AGNOSTIC_PAGE_MAP_PATH = `.next${sep}static${sep}chunks${sep}nextra-page-map`
 
-const RE_SEP = sep === '/' ? '/' : '\\\\'
-
 const nextra: Nextra = nextraConfig => {
   const { error, data: loaderOptions } =
     nextraConfigSchema.safeParse(nextraConfig)
