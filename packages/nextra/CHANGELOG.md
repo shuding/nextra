@@ -1,5 +1,20 @@
 # nextra
 
+## 3.0.10
+
+### Patch Changes
+
+- 31de764: another attempt to fix:
+
+  ```
+  Failed to compile.
+
+  ./node_modules/typescript/lib/typescript.js
+  Module not found: Can't resolve 'module'
+  ```
+
+- 161d350: fix `Could not find a declaration file for module 'nextra'`
+
 ## 3.0.9
 
 ### Patch Changes
