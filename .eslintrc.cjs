@@ -161,6 +161,7 @@ module.exports = {
             'nextra-breadcrumb',
             'nextra-menu-desktop',
             'nextra-menu-mobile',
+            'nextra-search-results',
             'nextra-toc'
           ]
         }
