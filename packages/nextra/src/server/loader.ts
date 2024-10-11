@@ -1,4 +1,5 @@
 import path from 'node:path'
+import { rendererRich, transformerTwoslash } from '@shikijs/twoslash'
 import slash from 'slash'
 import type { LoaderContext } from 'webpack'
 import type { LoaderOptions, PageOpts } from '../types'
@@ -83,14 +84,6 @@ export async function loader(
 
   const currentPath = slash(mdxPath)
 
-  if (currentPath.includes('@typescript/vfs/dist/vfs.')) {
-    // Fixes https://github.com/microsoft/TypeScript-Website/pull/3022
-    // Fixes https://github.com/shuding/nextra/issues/3322#issuecomment-2384046618
-    return source
-      .replace(/String\.fromCharCode\(112, ?97, ?116, ?104\)/, '"path"')
-      .replace(/String\.fromCharCode\(102, ?115\)/, '"fs"')
-  }
-
   if (currentPath.includes('/pages/api/')) {
     logger.warn(
       `Ignoring ${currentPath} because it is located in the "pages/api" folder.`
@@ -164,7 +157,16 @@ ${themeConfigImport && '__nextra_internal__.themeConfig = __themeConfig'}`
       ...mdxOptions,
       jsx: true,
       outputFormat: 'program',
-      format: 'detect'
+      format: 'detect',
+      rehypePrettyCodeOptions: {
+        transformers: [
+          transformerTwoslash({
+            renderer: rendererRich(),
+            explicitTrigger: true
+          })
+        ],
+        ...mdxOptions?.rehypePrettyCodeOptions
+      }
     },
     readingTime: _readingTime,
     defaultShowCopyCode,

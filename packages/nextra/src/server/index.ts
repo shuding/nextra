@@ -192,13 +192,6 @@ const nextra: Nextra = nextraConfig => {
             test: new RegExp(`pages${RE_SEP}_app\\.`),
             issuer: request => !request,
             use: defaultLoaderOptions
-          },
-          {
-            test: new RegExp(
-              `@typescript${RE_SEP}vfs${RE_SEP}dist${RE_SEP}vfs\\.`
-            ),
-            issuer: request => !!request,
-            use: defaultLoaderOptions
           }
         )
 
