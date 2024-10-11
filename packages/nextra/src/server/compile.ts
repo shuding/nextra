@@ -158,11 +158,12 @@ export async function compileMdx(
   }
 
   const isRemoteContent = outputFormat === 'function-body'
+  const transformers = await getTransformers()
 
   const compiler =
     !useCachedCompiler || isRemoteContent
-      ? await createCompiler()
-      : (cachedCompilerForFormat[format] ??= await createCompiler())
+      ? createCompiler()
+      : (cachedCompilerForFormat[format] ??= createCompiler())
   const processor = compiler()
 
   try {
@@ -227,7 +228,7 @@ export async function compileMdx(
     ]
   }
 
-  async function createCompiler(): Promise<Processor> {
+  function createCompiler(): Processor {
     return createProcessor({
       jsx,
       format,
@@ -300,7 +301,7 @@ export async function compileMdx(
                 rehypePrettyCode,
                 {
                   ...DEFAULT_REHYPE_PRETTY_CODE_OPTIONS,
-                  transformers: await getTransformers(),
+                  transformers,
                   ...rehypePrettyCodeOptions
                 }
               ] as any,
