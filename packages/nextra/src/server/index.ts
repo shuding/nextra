@@ -192,7 +192,7 @@ const nextra: Nextra = nextraConfig => {
             test: new RegExp(`pages${RE_SEP}_app\\.`),
             issuer: request => !request,
             use: defaultLoaderOptions
-          },
+          }
         )
 
         return nextConfig.webpack?.(config, options) || config
