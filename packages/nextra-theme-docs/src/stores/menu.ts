@@ -13,7 +13,7 @@ export const setMenu: Dispatch<SetStateAction<boolean>> = fn => {
   useMenuStore.setState(state => {
     const hasMenu = typeof fn === 'function' ? fn(state.hasMenu) : fn
     // Lock background scroll when menu is opened
-    document.body.classList.toggle('_overflow-hidden', hasMenu)
+    document.body.classList.toggle('max-md:_overflow-hidden', hasMenu)
     return { hasMenu }
   })
 }
