@@ -2,7 +2,6 @@ import path from 'node:path'
 import type { ProcessorOptions } from '@mdx-js/mdx'
 import { createProcessor } from '@mdx-js/mdx'
 import type { Processor } from '@mdx-js/mdx/lib/core'
-import { rendererRich, transformerTwoslash } from '@shikijs/twoslash'
 import { remarkMermaid } from '@theguild/remark-mermaid'
 import { remarkNpm2Yarn } from '@theguild/remark-npm2yarn'
 import type { Program } from 'estree'
@@ -159,6 +158,7 @@ export async function compileMdx(
   }
 
   const isRemoteContent = outputFormat === 'function-body'
+  const transformers = await getTransformers()
 
   const compiler =
     !useCachedCompiler || isRemoteContent
@@ -203,6 +203,29 @@ export async function compileMdx(
   } catch (error) {
     console.error(`[nextra] Error compiling ${filePath}.`)
     throw error
+  }
+
+  async function getTransformers() {
+    // Disable twoslash in browser
+    if (typeof window !== 'undefined') {
+      return []
+    }
+
+    // TODO: For some reason I get Error: Cannot find module 'path' in remote content,
+    // disable twoslash temporarily
+    if (isRemoteContent) {
+      return []
+    }
+    const { rendererRich, transformerTwoslash } = await import(
+      '@shikijs/twoslash'
+    )
+
+    return [
+      transformerTwoslash({
+        renderer: rendererRich(),
+        explicitTrigger: true
+      })
+    ]
   }
 
   function createCompiler(): Processor {
@@ -278,16 +301,7 @@ export async function compileMdx(
                 rehypePrettyCode,
                 {
                   ...DEFAULT_REHYPE_PRETTY_CODE_OPTIONS,
-                  // TODO: For some reason I get Error: Cannot find module 'path' in remote content,
-                  // disable twoslash temporarily
-                  transformers: isRemoteContent
-                    ? []
-                    : [
-                        transformerTwoslash({
-                          renderer: rendererRich(),
-                          explicitTrigger: true
-                        })
-                      ],
+                  transformers,
                   ...rehypePrettyCodeOptions
                 }
               ] as any,
