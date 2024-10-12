@@ -5,7 +5,7 @@
 import path from 'path'
 import type { Property } from 'estree'
 
-export { MARKDOWN_EXTENSION_REGEX, DEFAULT_LOCALE } from '../constants.js'
+export { MARKDOWN_EXTENSION_RE, DEFAULT_LOCALE } from '../constants.js'
 
 export const CWD = process.cwd()
 
@@ -13,15 +13,15 @@ export const PUBLIC_DIR = path.join(CWD, 'public')
 
 export const CHUNKS_DIR = path.join(CWD, '.next', 'static', 'chunks')
 
-export const MARKDOWN_URL_EXTENSION_REGEX = /\.mdx?(?:(?=[#?])|$)/
+export const MARKDOWN_URL_EXTENSION_RE = /\.mdx?(?:(?=[#?])|$)/
 
 export const IS_PRODUCTION = process.env.NODE_ENV === 'production'
 
-export const META_REGEX = /_meta\.[jt]sx?$/
+export const META_RE = /_meta\.[jt]sx?$/
 
 export const MARKDOWN_EXTENSIONS = ['md', 'mdx'] as const
 
-export const EXTERNAL_URL_REGEX = /^https?:\/\//
+export const EXTERNAL_URL_RE = /^https?:\/\//
 
 export const DEFAULT_LOCALES = ['']
 
@@ -33,4 +33,4 @@ export const DEFAULT_PROPERTY_PROPS = {
   computed: false
 } satisfies Omit<Property, 'key' | 'value'>
 
-export const TOC_HEADING_REGEX = /^h[2-6]$/
+export const TOC_HEADING_RE = /^h[2-6]$/

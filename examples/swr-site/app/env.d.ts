@@ -9,6 +9,5 @@ declare module '*.mdx' {
 
 declare module '.next/static/chunks/nextra-page-map-*.mjs' {
   import type { PageMapItem } from 'nextra'
-  export const RouteToFilepath: Record<string, string>
   export const pageMap: PageMapItem[]
 }

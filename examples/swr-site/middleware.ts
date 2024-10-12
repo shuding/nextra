@@ -6,7 +6,7 @@ import { i18n } from './app/_dictionaries/i18n-config'
 
 const { locales, defaultLocale } = i18n
 
-const HAS_LOCALE_REGEX = new RegExp(`^\\/(${locales.join('|')})(\\/|$)`)
+const HAS_LOCALE_RE = new RegExp(`^\\/(${locales.join('|')})(\\/|$)`)
 
 const COOKIE_NAME = 'NEXT_LOCALE'
 
@@ -24,7 +24,7 @@ export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl
 
   // Check if there is any supported locale in the pathname
-  const pathnameHasLocale = HAS_LOCALE_REGEX.test(pathname)
+  const pathnameHasLocale = HAS_LOCALE_RE.test(pathname)
   const cookieLocale = request.cookies.get(COOKIE_NAME)?.value
 
   // Redirect if there is no locale
@@ -36,7 +36,7 @@ export function middleware(request: NextRequest) {
     return NextResponse.redirect(new URL(`/${locale}${pathname}`, request.url))
   }
 
-  const requestLocale = pathname.split('/')[1]
+  const requestLocale = pathname.split('/', 2)[1]
 
   if (requestLocale !== cookieLocale) {
     const response = NextResponse.next()

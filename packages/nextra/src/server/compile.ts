@@ -15,7 +15,7 @@ import remarkReadingTime from 'remark-reading-time'
 import remarkSmartypants from 'remark-smartypants'
 import type { Pluggable, Plugin } from 'unified'
 import type { FrontMatter, LoaderOptions, ReadingTime } from '../types'
-import { CWD, MARKDOWN_URL_EXTENSION_REGEX } from './constants.js'
+import { CWD, MARKDOWN_URL_EXTENSION_RE } from './constants.js'
 import {
   recmaRewriteFunctionBody,
   recmaRewriteJsx
@@ -185,7 +185,7 @@ export async function compileMdx(
         [
           remarkLinkRewrite,
           {
-            pattern: MARKDOWN_URL_EXTENSION_REGEX,
+            pattern: MARKDOWN_URL_EXTENSION_RE,
             replace: '',
             excludeExternalLinks: true
           }

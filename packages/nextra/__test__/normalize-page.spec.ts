@@ -135,7 +135,9 @@ describe('normalize-page', () => {
       'page-maps',
       'hidden-route-should-have-theme-context'
     )
-    vi.doMock('../src/server/file-system.ts', () => ({ APP_DIR: dir }))
+    vi.doMock('next/dist/lib/find-pages-dir.js', () => ({
+      findPagesDir: () => ({ appDir: dir })
+    }))
     vi.doMock('../src/server/constants.ts', async () => ({
       ...(await vi.importActual('../src/server/constants.ts')),
       CHUNKS_DIR: dir
@@ -158,8 +160,6 @@ describe('normalize-page', () => {
       path.join(dir, 'generated-page-map.ts'),
       '// @ts-nocheck\n' + rawJs.replaceAll('../../../../mdx/', './')
     )
-
-    return
 
     const { pageMap } = await import(
       './fixture/page-maps/hidden-route-should-have-theme-context/generated-page-map.js'
@@ -199,27 +199,21 @@ describe('normalize-page', () => {
               {
                 name: 'foo',
                 route: '/1-level/2-level/foo',
-                frontMatter: {
-                  sidebarTitle: 'Foo'
-                }
+                frontMatter: undefined
               }
             ]
           },
           {
             name: 'qux',
             route: '/1-level/qux',
-            frontMatter: {
-              sidebarTitle: 'Qux'
-            }
+            frontMatter: undefined
           }
         ]
       },
       {
         name: 'bar',
         route: '/bar',
-        frontMatter: {
-          sidebarTitle: 'Bar'
-        }
+        frontMatter: undefined
       }
     ])
 

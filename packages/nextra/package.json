@@ -50,6 +50,9 @@
       "page-map": [
         "./dist/server/page-map.d.ts"
       ],
+      "pages": [
+        "./dist/client/pages.d.ts"
+      ],
       "compile": [
         "./dist/server/compile.d.ts"
       ],

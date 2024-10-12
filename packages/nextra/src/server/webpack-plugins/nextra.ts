@@ -51,7 +51,6 @@ export class NextraPlugin {
             mdxPages,
             fromAppDir: !mdxBaseDir
           })
-
           await fs.writeFile(
             path.join(CHUNKS_DIR, `nextra-page-map-${locale}.mjs`),
             rawJs

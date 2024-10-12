@@ -5,7 +5,7 @@ import type { LoaderContext } from 'webpack'
 import type { LoaderOptions, PageOpts } from '../types'
 import { compileMetadata } from './compile-metadata.js'
 import { compileMdx } from './compile.js'
-import { CWD, IS_PRODUCTION } from './constants.js'
+import { CWD } from './constants.js'
 import { logger } from './utils.js'
 
 const initGitRepo = (async () => {
@@ -68,7 +68,7 @@ export async function loader(
       path.join(resolveData.descriptionFileRoot, resolveData.relativePath)
     : this.resourcePath
 
-  if (!IS_PRODUCTION && isPageMapImport) {
+  if (isPageMapImport) {
     return compileMetadata(source, { filePath: mdxPath })
   }
 

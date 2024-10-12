@@ -114,5 +114,3 @@ export type NextraInternalGlobal = typeof globalThis & {
     themeConfig?: ThemeConfig
   }
 }
-
-export type DynamicMetaDescriptor = Record<string, () => any>

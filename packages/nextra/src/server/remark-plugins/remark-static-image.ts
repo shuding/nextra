@@ -4,7 +4,7 @@ import type { Definition, Image, ImageReference, Root } from 'mdast'
 import slash from 'slash'
 import type { Plugin } from 'unified'
 import { visit } from 'unist-util-visit'
-import { EXTERNAL_URL_REGEX, PUBLIC_DIR } from '../constants.js'
+import { EXTERNAL_URL_RE, PUBLIC_DIR } from '../constants.js'
 
 /**
  * @link https://github.com/vercel/next.js/blob/6cfebfb02c2a52a1f99fca59a2eac2d704d053db/packages/next/build/webpack/loaders/next-image-loader.js#L6
@@ -41,7 +41,7 @@ export const remarkStaticImage: Plugin<[], Root> = () => ast => {
       return
     }
 
-    if (EXTERNAL_URL_REGEX.test(url)) {
+    if (EXTERNAL_URL_RE.test(url)) {
       // do nothing with images with external url
       return
     }

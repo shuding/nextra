@@ -85,6 +85,14 @@ function sortFolder(pageMap: PageMapItem[] | Folder) {
         }
         metaKeyIndex = index
         extendedItem = { ...meta[item.name], ...item }
+
+        // TODO: improve this to avoid using `delete` and pick only needed properties
+        // @ts-expect-error
+        delete extendedItem.type
+        // @ts-expect-error
+        delete extendedItem.theme
+        // @ts-expect-error
+        delete extendedItem.display
       }
       items.push(extendedItem || item)
       return items

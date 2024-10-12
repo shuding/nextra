@@ -15,11 +15,11 @@ import { DEFAULT_COMPONENTS } from 'nextra/mdx'
 import type { ComponentProps } from 'react'
 import { Meta } from './components/meta'
 
-const DATE_REGEX = /^\d{4}-\d{2}-\d{2}(T\d{2}:\d{2})?(:\d{2}\.\d{3}Z)?$/
-const DATE_REGEX_WITH_SLASH = /^\d{4}\/\d{1,2}\/\d{1,2}( \d{1,2}:\d{1,2})?$/
+const DATE_RE = /^\d{4}-\d{2}-\d{2}(T\d{2}:\d{2})?(:\d{2}\.\d{3}Z)?$/
+const DATE_RE_WITH_SLASH = /^\d{4}\/\d{1,2}\/\d{1,2}( \d{1,2}:\d{1,2})?$/
 
 export const isValidDate = (date: string): boolean =>
-  DATE_REGEX.test(date) || DATE_REGEX_WITH_SLASH.test(date)
+  DATE_RE.test(date) || DATE_RE_WITH_SLASH.test(date)
 
 const createHeading = (Tag: `h${2 | 3 | 4 | 5 | 6}`) =>
   function HeadingLink({
@@ -47,13 +47,13 @@ const createHeading = (Tag: `h${2 | 3 | 4 | 5 | 6}`) =>
     )
   }
 
-const EXTERNAL_HREF_REGEX = /^https?:\/\//
+const EXTERNAL_HREF_RE = /^https?:\/\//
 
 /* eslint sort-keys: error */
 export const useMDXComponents: UseMDXComponents = components => ({
   ...DEFAULT_COMPONENTS,
   a({ href = '', ...props }) {
-    if (EXTERNAL_HREF_REGEX.test(href)) {
+    if (EXTERNAL_HREF_RE.test(href)) {
       return <a href={href} target="_blank" rel="noreferrer" {...props} />
     }
     const ComponentToUse = href.startsWith('#') ? 'a' : Link

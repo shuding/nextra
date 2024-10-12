@@ -59,7 +59,12 @@ export default async function RootLayout({
   const { pageMap } = await import('.next/static/chunks/nextra-page-map-.mjs')
 
   return (
-    <html lang="en" dir="ltr" suppressHydrationWarning>
+    <html
+      lang="en"
+      dir="ltr"
+      suppressHydrationWarning
+      className="nextra-scrollbar"
+    >
       <Head />
       <body>
         <Layout
