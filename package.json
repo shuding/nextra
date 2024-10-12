@@ -51,7 +51,7 @@
     "overrides": {
       "vite": "5.4.8",
       "esbuild": "0.24.0",
-      "next": "14.2.13"
+      "next": "14.2.15"
     },
     "patchedDependencies": {
       "@changesets/assemble-release-plan@6.0.4": "patches/@changesets__assemble-release-plan.patch",
