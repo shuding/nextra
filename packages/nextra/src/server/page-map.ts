@@ -3,7 +3,7 @@ import type { ArrayExpression, ImportDeclaration } from 'estree'
 import { toJs } from 'estree-util-to-js'
 import slash from 'slash'
 import type { PageMapItem } from '../types'
-import { CHUNKS_DIR, META_REGEX } from './constants.js'
+import { CHUNKS_DIR, META_RE } from './constants.js'
 import { APP_DIR } from './file-system.js'
 import { createAstObject } from './utils.js'
 
@@ -118,7 +118,7 @@ export async function collectPageMap({
       specifiers: [
         {
           local: { type: 'Identifier', name: importName },
-          ...(META_REGEX.test(filePath)
+          ...(META_RE.test(filePath)
             ? { type: 'ImportDefaultSpecifier' }
             : {
                 type: 'ImportSpecifier',

@@ -68,7 +68,6 @@ export async function loader(
       path.join(resolveData.descriptionFileRoot, resolveData.relativePath)
     : this.resourcePath
 
-  if (!IS_PRODUCTION && isPageMapImport) {
   if (isPageMapImport) {
     return compileMetadata(source, { filePath: mdxPath })
   }
