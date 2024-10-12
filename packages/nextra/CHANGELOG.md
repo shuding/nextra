@@ -1,5 +1,13 @@
 # nextra
 
+## 4.0.0-app-router.6
+
+### Patch Changes
+
+- 2092d5e: enable page reload of catch-all routes `app/[[...slug]].jsx` on
+  content change
+- a97e5cf: sync with nextra 3.0.10
+
 ## 4.0.0-app-router.5
 
 ### Patch Changes
