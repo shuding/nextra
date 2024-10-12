@@ -149,9 +149,9 @@ export async function collectPageMap({
 
   const rawJs = `import { normalizePageMap } from 'nextra/page-map'
 ${pageMapResult.value}
-
 export const pageMap = normalizePageMap(_pageMap)
 
-export const RouteToFilepath = ${JSON.stringify(mdxPages, null, 2)}`
+export const RouteToFilepath = ${JSON.stringify(mdxPages, null, 2)}
+`
   return rawJs
 }

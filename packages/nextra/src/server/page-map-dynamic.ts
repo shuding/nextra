@@ -1,18 +1,11 @@
-import { NEXTRA_INTERNAL } from '../constants.js'
 import type {
   DynamicFolder,
   DynamicMeta,
-  DynamicMetaDescriptor,
   DynamicMetaItem,
   DynamicMetaJsonFile,
-  Folder,
-  NextraInternalGlobal,
-  PageMapItem
+  Folder
 } from '../types'
-import { findFolder } from '../utils.js'
 import { normalizePageRoute, pageTitleFromFilename } from './utils.js'
-
-const cachedResolvedPageMap: Record<string, PageMapItem[]> = Object.create(null)
 
 function isFolder(value: DynamicMetaItem): value is DynamicFolder {
   return !!value && typeof value === 'object' && value.type === 'folder'
@@ -77,32 +70,3 @@ export function collectCatchAllRoutes(
     children: result
   }
 }
-
-export const resolvePageMap =
-  (locale: string, dynamicMetaModules: DynamicMetaDescriptor) => async () => {
-    const __nextra_internal__ = (globalThis as NextraInternalGlobal)[
-      NEXTRA_INTERNAL
-    ]
-    if (
-      process.env.NODE_ENV === 'production' &&
-      cachedResolvedPageMap[locale]
-    ) {
-      return cachedResolvedPageMap[locale]
-    }
-    const { pageMap } = locale
-      ? Object.entries(__nextra_internal__.context)
-          // Fix race condition. Find a better way to get pageMap?
-          // @ts-expect-error -- fixme
-          .find(([route]) => route.startsWith(`/${locale}/`))![1].pageOpts
-      : __nextra_internal__
-    const result = await Promise.all(
-      Object.entries(dynamicMetaModules).map(async ([route, metaFunction]) => {
-        const paths = route.split('/').slice(locale ? 2 : 1)
-        const folder = findFolder(pageMap, paths)
-        const metaData = await metaFunction()
-        return collectCatchAllRoutes(folder, { data: metaData })
-      })
-    )
-
-    return (cachedResolvedPageMap[locale] = result)
-  }

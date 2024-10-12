@@ -128,8 +128,7 @@ describe('normalize-page', () => {
     `)
   })
 
-  // todo:
-  it.skip('should keep `activeThemeContext`, `activeType` for hidden route', async () => {
+  it('should keep `activeThemeContext`, `activeType` for hidden route', async () => {
     const dir = path.join(
       __dirname,
       'fixture',
@@ -200,27 +199,21 @@ describe('normalize-page', () => {
               {
                 name: 'foo',
                 route: '/1-level/2-level/foo',
-                frontMatter: {
-                  sidebarTitle: 'Foo'
-                }
+                frontMatter: undefined
               }
             ]
           },
           {
             name: 'qux',
             route: '/1-level/qux',
-            frontMatter: {
-              sidebarTitle: 'Qux'
-            }
+            frontMatter: undefined
           }
         ]
       },
       {
         name: 'bar',
         route: '/bar',
-        frontMatter: {
-          sidebarTitle: 'Bar'
-        }
+        frontMatter: undefined
       }
     ])
 
