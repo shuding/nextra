@@ -18,10 +18,8 @@ export async function generateStaticParams() {
   return result
 }
 
-export async function generateMetadata({
-  params: { mdxPath, lang }
-}: PageProps) {
-  const { metadata } = await importPage(mdxPath, lang)
+export async function generateMetadata({ params }: PageProps) {
+  const { metadata } = await importPage(params.mdxPath, params.lang)
   return metadata
 }
 
@@ -32,15 +30,14 @@ type PageProps = {
   }
 }
 
-export default async function Page(pageProps: PageProps) {
-  const { mdxPath, lang } = pageProps.params
-  const result = await importPage(mdxPath, lang)
+export default async function Page({ params }: PageProps) {
+  const result = await importPage(params.mdxPath, params.lang)
   const { default: MDXContent, useTOC, metadata, title } = result
   const Wrapper = useMDXComponents().wrapper
 
   return (
     <Wrapper toc={useTOC()} metadata={metadata} title={title}>
-      <MDXContent {...pageProps} />
+      <MDXContent />
     </Wrapper>
   )
 }

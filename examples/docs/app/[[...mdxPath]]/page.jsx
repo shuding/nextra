@@ -9,13 +9,13 @@ export async function generateStaticParams() {
   }))
 }
 
-export async function generateMetadata({ params: { mdxPath } }) {
-  const { metadata } = await importPage(mdxPath)
+export async function generateMetadata({ params }) {
+  const { metadata } = await importPage(params.mdxPath)
   return metadata
 }
 
-export default async function Page({ params: { mdxPath } }) {
-  const result = await importPage(mdxPath)
+export default async function Page({ params }) {
+  const result = await importPage(params.mdxPath)
   const { default: MDXContent, useTOC, metadata, title } = result
 
   const Wrapper = useMDXComponents().wrapper
