@@ -17,7 +17,7 @@ import { Anchor } from '../anchor'
 
 const classes = {
   link: cn(
-    '_text-sm contrast-more:_text-gray-700 contrast-more:dark:_text-gray-100 max-md:_hidden _whitespace-nowrap'
+    '_text-sm contrast-more:_text-gray-700 contrast-more:dark:_text-gray-100 max-md:_hidden _whitespace-nowrap _ring-inset'
   ),
   inactive: cn(
     '_text-gray-600 hover:_text-gray-800 dark:_text-gray-400 dark:hover:_text-gray-200'
