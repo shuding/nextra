@@ -13,7 +13,7 @@ export async function importPage(pathSegments: string[] = [], locale = '') {
       `private-next-root-dir/mdx/${locale && `${locale}/`}${pagePath}`
     )
   } catch (error) {
-    logger.error('Error while loading', { pathSegments}, error)
+    logger.error('Error while loading', { pathSegments }, error)
     notFound()
   }
 }
@@ -29,7 +29,8 @@ async function getRoutes(locale = '') {
 export const generateStaticParamsFor =
   (segmentKey: string, localeSegmentKey = 'lang') =>
   async () => {
-    const locales = JSON.parse(process.env.NEXTRA_LOCALES!) as string[]
+    const envLocales = process.env.NEXTRA_LOCALES
+    const locales = envLocales ? (JSON.parse(envLocales) as string[]) : ['']
     const result = []
 
     for (const locale of locales) {
@@ -37,7 +38,7 @@ export const generateStaticParamsFor =
 
       result.push(
         ...routes.map(route => ({
-          [localeSegmentKey]: locale,
+          ...(locale && { [localeSegmentKey]: locale }),
           [segmentKey]: route.split('/')
         }))
       )
