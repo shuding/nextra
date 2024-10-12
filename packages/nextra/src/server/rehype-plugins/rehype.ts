@@ -79,8 +79,8 @@ export const rehypeAttachCodeMeta: Plugin<[], Root> = () => ast => {
         'data-rehype-pretty-code-figure' in node.properties
       if (!isRehypePrettyCode) return
 
-      // remove <figure data-rehype-pretty-code-figure /> element that wraps <pre /> element
-      // because we'll wrap with our own <div />
+      // remove <figure data-rehype-pretty-code-figure> element that wraps <pre> element
+      // because we'll wrap with our own <div>
       const preEl: PreElement = Object.assign(node, node.children[0])
       delete preEl.properties['data-theme']
 
