@@ -88,7 +88,8 @@ const nextra: Nextra = nextraConfig => {
         ...nextConfig.env,
         ...(hasI18n && {
           NEXTRA_DEFAULT_LOCALE:
-            nextConfig.i18n?.defaultLocale || DEFAULT_LOCALE
+            nextConfig.i18n?.defaultLocale || DEFAULT_LOCALE,
+          NEXTRA_LOCALES: JSON.stringify(nextConfig.i18n?.locales)
         }),
         NEXTRA_SEARCH: String(!!loaderOptions.search)
       },
