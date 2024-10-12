@@ -1,5 +1,5 @@
 import { notFound } from 'next/navigation'
-import { logger } from '../server/utils'
+import { logger } from '../server/utils.js'
 
 export async function importPage(pathSegments: string[] = [], locale = '') {
   const { RouteToFilepath } = await import(
@@ -8,7 +8,7 @@ export async function importPage(pathSegments: string[] = [], locale = '') {
 
   const pagePath = RouteToFilepath[pathSegments.join('/')]
   try {
-    // Require statement enables Fast Refresh
+    // eslint-disable-next-line @typescript-eslint/no-require-imports -- Require statement enables Fast Refresh
     return require(
       `private-next-root-dir/mdx/${locale && `${locale}/`}${pagePath}`
     )
