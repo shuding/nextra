@@ -53,6 +53,26 @@ i18n: [
 ]
 ```
 
+## Automatically Detect and Redirect to the User-Selected Language (Optional)
+
+It's possible to automatically detect the user's preferred language and redirect to the corresponding language version of the site.
+To do this, create `middleware.js` file in the root of your project and export Nextra's `middleware` function from `nextra/locales`:
+
+```js filename="middleware.js"
+export { middleware } from 'nextra/locales'
+
+export const config = {
+  // Matcher ignoring `/_next/` and `/api/`
+  matcher: [
+    '/((?!api|_next/static|_next/image|favicon.ico|icon.svg|apple-icon.png|manifest).*)'
+  ]
+}
+```
+
+<Callout type="warning">
+  **Note**: this will not work for i18n sites which is statically exported via `output: "export"`.
+</Callout>
+
 </Steps>
 
 ## Custom 404 Page
