@@ -44,6 +44,41 @@
   Router, something may be broken, check
   https://github.com/shuding/nextra/tree/v4-v2/examples for the migration guide
 
+## 3.0.10
+
+### Patch Changes
+
+- 31de764: another attempt to fix:
+
+  ```
+  Failed to compile.
+
+  ./node_modules/typescript/lib/typescript.js
+  Module not found: Can't resolve 'module'
+  ```
+
+- 161d350: fix `Could not find a declaration file for module 'nextra'`
+
+## 3.0.9
+
+### Patch Changes
+
+- f9cc160: - fix `Module not found: Can't resolve 'module'` in yarn@4.5.0
+
+  - disable `twoslash` in browser because he never worked in this environment
+
+## 3.0.8
+
+## 3.0.7
+
+### Patch Changes
+
+- 4bbc1fe: apply user's `recmaPlugins` first
+
+## 3.0.6
+
+## 3.0.5
+
 ## 3.0.4
 
 ### Patch Changes

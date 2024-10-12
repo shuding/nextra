@@ -127,6 +127,53 @@
 - Updated dependencies [99f34d3]
   - nextra@4.0.0-app-router.0
 
+## 3.0.10
+
+### Patch Changes
+
+- Updated dependencies [31de764]
+- Updated dependencies [161d350]
+  - nextra@3.0.10
+
+## 3.0.9
+
+### Patch Changes
+
+- Updated dependencies [f9cc160]
+  - nextra@3.0.9
+
+## 3.0.8
+
+### Patch Changes
+
+- 72c84eb: add `max-md:_overflow-hidden` instead of `_overflow-hidden` when
+  hamburger is clicked
+- 1530239: hide `<summary>` marker on Safari
+- 210d68a: trigger scrolling when the TOC item is outside the viewport
+- bf04f96: add ring-inset for navbar links
+  - nextra@3.0.8
+
+## 3.0.7
+
+### Patch Changes
+
+- Updated dependencies [4bbc1fe]
+  - nextra@3.0.7
+
+## 3.0.6
+
+### Patch Changes
+
+- 4ed7b4b: remove extra horizontal margin spacing in toc
+  - nextra@3.0.6
+
+## 3.0.5
+
+### Patch Changes
+
+- 3aac732: Add `.nextra-search-results` class back
+  - nextra@3.0.5
+
 ## 3.0.4
 
 ### Patch Changes

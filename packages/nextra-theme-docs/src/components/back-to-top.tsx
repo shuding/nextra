@@ -35,6 +35,7 @@ export function BackToTop({
       className={({ disabled }) =>
         cn(
           '_flex _items-center _gap-1.5',
+          '_whitespace-nowrap', // Safari
           disabled ? '_opacity-0' : '_opacity-100',
           className
         )

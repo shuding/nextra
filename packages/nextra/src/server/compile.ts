@@ -2,7 +2,6 @@ import path from 'node:path'
 import type { ProcessorOptions } from '@mdx-js/mdx'
 import { createProcessor } from '@mdx-js/mdx'
 import type { Processor } from '@mdx-js/mdx/lib/core'
-import { rendererRich, transformerTwoslash } from '@shikijs/twoslash'
 import { remarkMermaid } from '@theguild/remark-mermaid'
 import { remarkNpm2Yarn } from '@theguild/remark-npm2yarn'
 import type { Program } from 'estree'
@@ -168,7 +167,7 @@ export async function compileMdx(
         ] satisfies Pluggable,
         isRemoteContent && remarkRemoveImports,
         remarkFrontmatter, // parse and attach yaml node
-        [remarkMdxFrontMatter] satisfies Pluggable,
+        remarkMdxFrontMatter,
         remarkGfm,
         format !== 'md' &&
           ([
@@ -218,16 +217,6 @@ export async function compileMdx(
                 rehypePrettyCode,
                 {
                   ...DEFAULT_REHYPE_PRETTY_CODE_OPTIONS,
-                  // TODO: For some reason I get Error: Cannot find module 'path' in remote content,
-                  // disable twoslash temporarily
-                  transformers: isRemoteContent
-                    ? []
-                    : [
-                        transformerTwoslash({
-                          renderer: rendererRich(),
-                          explicitTrigger: true
-                        })
-                      ],
                   ...rehypePrettyCodeOptions
                 }
               ] as any,
@@ -236,6 +225,7 @@ export async function compileMdx(
         [rehypeExtractTocContent, { isRemoteContent }]
       ].filter(v => !!v),
       recmaPlugins: [
+        ...(recmaPlugins || []),
         (() => (ast: Program, file) => {
           const mdxContentIndex = ast.body.findIndex(node => {
             if (node.type === 'ExportDefaultDeclaration') {
@@ -284,8 +274,7 @@ export async function compileMdx(
           //   }
           // }
         }) satisfies Plugin<[], Program>,
-        isRemoteContent ? recmaRewriteFunctionBody : recmaRewriteJsx,
-        ...(recmaPlugins || [])
+        isRemoteContent ? recmaRewriteFunctionBody : recmaRewriteJsx
       ].filter(v => !!v)
     })
   }

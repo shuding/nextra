@@ -20,9 +20,6 @@ const SEP_RE = path.sep === '/' ? '/' : '\\\\'
 const PAGE_MAP_RE = new RegExp(
   `.next${SEP_RE}static${SEP_RE}chunks${SEP_RE}nextra-page-map`
 )
-const TYPESCRIPT_VFS_RE = new RegExp(
-  `@typescript${SEP_RE}vfs${SEP_RE}dist${SEP_RE}vfs\\.`
-)
 
 const nextra: Nextra = nextraConfig => {
   const { error, data: loaderOptions } =
@@ -133,11 +130,6 @@ const nextra: Nextra = nextraConfig => {
               }
             ]
           },
-          {
-            test: TYPESCRIPT_VFS_RE,
-            issuer: request => !!request,
-            use: defaultLoaderOptions
-          }
         )
 
         return nextConfig.webpack?.(config, options) || config
