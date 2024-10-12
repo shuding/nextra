@@ -53,12 +53,14 @@ i18n: [
 ]
 ```
 
-## Automatically Detect and Redirect to the User-Selected Language (Optional)
+## Automatically Detect and Redirect to User-Selected Language (Optional)
 
-It's possible to automatically detect the user's preferred language and redirect to the corresponding language version of the site.
-To do this, create `middleware.js` file in the root of your project and export Nextra's `middleware` function from `nextra/locales`:
+You can automatically detect the user's preferred language and redirect them to
+the corresponding version of the site. To achieve this, create a `middleware.js`
+file in the root of your project and export Nextra’s middleware function from
+`nextra/locales`:
 
-```js filename="middleware.js"
+```js filename="middleware.js" {1}
 export { middleware } from 'nextra/locales'
 
 export const config = {
@@ -70,7 +72,8 @@ export const config = {
 ```
 
 <Callout type="warning">
-  **Note**: this will not work for i18n sites which is statically exported via `output: "export"`.
+  **Note**: This approach will not work for i18n sites that are statically
+  exported with `output: "export"` in `nextConfig`.
 </Callout>
 
 </Steps>
