@@ -1,22 +1,9 @@
 /* eslint-disable react-hooks/rules-of-hooks -- false positive, useMDXComponents/useTOC are not react hooks */
 
 import { useMDXComponents } from 'nextra-theme-docs'
-import { getPagesPaths, importPage } from 'nextra/pages'
+import { generateStaticParamsFor, importPage } from 'nextra/pages'
 
-export async function generateStaticParams() {
-  const en = await getPagesPaths('en')
-  const es = await getPagesPaths('es')
-  const ru = await getPagesPaths('ru')
-
-  const result = Object.entries({ en, es, ru }).flatMap(([lang, routes]) => {
-    return routes.map(mdxPath => ({
-      lang,
-      ...(mdxPath && { mdxPath: mdxPath.split('/') })
-    }))
-  })
-
-  return result
-}
+export const generateStaticParams = generateStaticParamsFor('mdxPath')
 
 export async function generateMetadata({ params }: PageProps) {
   const { metadata } = await importPage(params.mdxPath, params.lang)
