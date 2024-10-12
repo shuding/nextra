@@ -49,13 +49,12 @@ export const rehypeParseCodeMeta: Plugin<
   ast => {
     visit(ast, { tagName: 'pre' }, (node: PreElement) => {
       const [codeEl] = node.children as Element[]
-      // @ts-expect-error fixme
       const { meta = '' } = codeEl.data || {}
 
-      node.__filename = meta.match(CODE_BLOCK_FILENAME_REGEX)?.[1]
+      node.__filename = meta!.match(CODE_BLOCK_FILENAME_REGEX)?.[1]
       node.properties['data-filename'] = node.__filename
 
-      node.__hasWordWrap = meta.includes('word-wrap=false') ? false : true
+      node.__hasWordWrap = !meta!.includes('word-wrap=false')
       if (node.__hasWordWrap) {
         node.properties['data-word-wrap'] = ''
       }
@@ -101,9 +100,12 @@ export const rehypeAttachCodeMeta: Plugin<[], Root> = () => ast => {
         }
         // @ts-expect-error fixme
         if (preEl.type === 'mdxJsxFlowElement') {
-          if (node.properties.className === undefined)
+          if (node.properties.className === undefined) {
             delete node.properties.className
-          if (node.properties.style === undefined) delete node.properties.style
+          }
+          if (node.properties.style === undefined) {
+            delete node.properties.style
+          }
           // @ts-expect-error fixme
           preEl.attributes.push(
             ...Object.entries(node.properties).map(([name, value]) => ({
