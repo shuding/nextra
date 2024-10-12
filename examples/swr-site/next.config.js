@@ -30,7 +30,7 @@ const withBundleAnalyzer = bundleAnalyzer({
 
 const sep = path.sep === '/' ? '/' : '\\\\'
 
-const ALLOWED_SVG_REGEX = new RegExp(`_icons${sep}.+\\.svg$`)
+const ALLOWED_SVG_RE = new RegExp(`_icons${sep}.+\\.svg$`)
 
 /**
  * @type {import('next').NextConfig}
@@ -58,10 +58,10 @@ export default withBundleAnalyzer(
       const fileLoaderRule = config.module.rules.find(rule =>
         rule.test?.test?.('.svg')
       )
-      fileLoaderRule.exclude = ALLOWED_SVG_REGEX
+      fileLoaderRule.exclude = ALLOWED_SVG_RE
 
       config.module.rules.push({
-        test: ALLOWED_SVG_REGEX,
+        test: ALLOWED_SVG_RE,
         use: ['@svgr/webpack']
       })
       return config
