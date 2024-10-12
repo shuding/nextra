@@ -8,13 +8,10 @@ export async function importPage(pathSegments: string[] = [], locale = '') {
 
   const pagePath = RouteToFilepath[pathSegments.join('/')]
   try {
-    // logger.info('Importing page', [pagePath])
-    return process.env.NODE_ENV === 'production'
-      ? import(`private-next-root-dir/mdx/${locale && `${locale}/`}${pagePath}`)
-      : // Require statement enables Fast Refresh
-        require(
-          `private-next-root-dir/mdx/${locale && `${locale}/`}${pagePath}`
-        )
+    // Require statement enables Fast Refresh
+    return require(
+      `private-next-root-dir/mdx/${locale && `${locale}/`}${pagePath}`
+    )
   } catch (error) {
     logger.error('Error while loading', pagePath, error)
     notFound()

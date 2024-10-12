@@ -3,7 +3,7 @@ import type { Parent, Root } from 'mdast'
 import type { Plugin } from 'unified'
 import { visit } from 'unist-util-visit'
 import type { Heading } from '../../types'
-import { MARKDOWN_EXTENSION_REGEX } from '../constants.js'
+import { MARKDOWN_EXTENSION_RE } from '../constants.js'
 import type { HProperties } from './remark-custom-heading-id'
 
 export const getFlattenedValue = (node: Parent): string =>
@@ -65,7 +65,7 @@ export const remarkHeadings: Plugin<
           for (const child of (node as any).data.estree.body) {
             if (child.type !== 'ImportDeclaration') continue
             const importPath = child.source.value
-            const isMdxImport = MARKDOWN_EXTENSION_REGEX.test(importPath)
+            const isMdxImport = MARKDOWN_EXTENSION_RE.test(importPath)
             if (!isMdxImport) continue
 
             const componentName = child.specifiers.find(
