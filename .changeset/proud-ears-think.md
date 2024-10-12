@@ -4,4 +4,4 @@
 'nextra': patch
 ---
 
-add refresh page when markdown content changed
+enable page reload of catch-all routes `app/[[...slug]].jsx` on content change
