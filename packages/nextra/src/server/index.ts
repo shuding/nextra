@@ -93,17 +93,17 @@ const nextra: Nextra = nextraConfig => {
             ...(IS_PRODUCTION
               ? []
               : [
-                {
-                  issuer: PAGE_MAP_RE,
-                  use: [
-                    options.defaultLoaders.babel,
-                    {
-                      loader: 'nextra/loader',
-                      options: { ...loaderOptions, isPageMapImport: true }
-                    }
-                  ]
-                }
-              ]),
+                  {
+                    issuer: PAGE_MAP_RE,
+                    use: [
+                      options.defaultLoaders.babel,
+                      {
+                        loader: 'nextra/loader',
+                        options: { ...loaderOptions, isPageMapImport: true }
+                      }
+                    ]
+                  }
+                ]),
             {
               // Match pages (imports without an issuer request).
               issuer: request => request === '',
