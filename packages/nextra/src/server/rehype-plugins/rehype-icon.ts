@@ -110,6 +110,7 @@ export const rehypeIcon: Plugin<[], Root> =
       for (const { data } of imports) {
         const [{ specifiers }] = (data as any).estree.body
         const isMatch = (specifiers as ImportSpecifier[]).some(
+          // @ts-expect-error
           spec => spec.imported.name === iconName
         )
         if (isMatch) {
