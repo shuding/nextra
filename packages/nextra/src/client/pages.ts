@@ -13,7 +13,7 @@ export async function importPage(pathSegments: string[] = [], locale = '') {
       `private-next-root-dir/mdx/${locale && `${locale}/`}${pagePath}`
     )
   } catch (error) {
-    logger.error('Error while loading', pagePath, error)
+    logger.error('Error while loading', { pathSegments}, error)
     notFound()
   }
 }
