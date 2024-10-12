@@ -4,13 +4,6 @@
   schedule: ['every weekend'],
   packageRules: [
     {
-      matchPackageNames: [
-        'eslint-plugin-react-hooks',
-        'eslint-plugin-tailwindcss'
-      ],
-      enabled: false
-    },
-    {
       groupName: 'lint',
       matchPackageNames: [
         '@next/eslint-plugin-next',
@@ -18,15 +11,17 @@
         '@typescript-eslint/parser',
         'eslint',
         'eslint-config-prettier',
+        'eslint-plugin-deprecation',
         'eslint-plugin-import',
         'eslint-plugin-react',
-        // 'eslint-plugin-react-hooks',
+        'eslint-plugin-react-hooks',
+        'eslint-plugin-sonarjs',
         // 'eslint-plugin-tailwindcss',
         'eslint-plugin-typescript-sort-keys',
         'eslint-plugin-unicorn',
         'prettier',
-        'prettier-plugin-tailwindcss',
         'prettier-plugin-pkg',
+        'prettier-plugin-tailwindcss',
         '@ianvs/prettier-plugin-sort-imports'
       ]
     },

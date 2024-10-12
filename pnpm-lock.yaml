@@ -58,8 +58,8 @@ importers:
         specifier: 7.37.1
         version: 7.37.1(eslint@9.12.0)
       eslint-plugin-react-hooks:
-        specifier: 5.1.0-rc-14a4699f-20240725
-        version: 5.1.0-rc-14a4699f-20240725(eslint@9.12.0)
+        specifier: 5.0.0
+        version: 5.0.0(eslint@9.12.0)
       eslint-plugin-sonarjs:
         specifier: ^2.0.0
         version: 2.0.3(@typescript-eslint/parser@8.8.1)(eslint@9.12.0)
@@ -8166,8 +8166,8 @@ packages:
       eslint: 9.12.0
     dev: true
 
-  /eslint-plugin-react-hooks@5.1.0-rc-14a4699f-20240725(eslint@9.12.0):
-    resolution: {integrity: sha512-o7XiCRg42hxbpGPCO+LFMh55fMGc2yv0DK9pYaO61KZx9PtW3XXSCO4Ch4IBZHDYnzhrWY7FHKsfoTtSdPTXoA==}
+  /eslint-plugin-react-hooks@5.0.0(eslint@9.12.0):
+    resolution: {integrity: sha512-hIOwI+5hYGpJEc4uPRmz2ulCjAGD/N13Lukkh8cLV0i2IRk/bdZDYjgLVHj+U9Z704kLIdIO6iueGvxNur0sgw==}
     engines: {node: '>=10'}
     peerDependencies:
       eslint: ^3.0.0 || ^4.0.0 || ^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0-0 || ^9.0.0
