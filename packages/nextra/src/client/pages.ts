@@ -18,14 +18,6 @@ export async function importPage(pathSegments: string[] = [], locale = '') {
   }
 }
 
-async function getRoutes(locale = '') {
-  const { RouteToFilepath } = await import(
-    `private-dot-next/static/chunks/nextra-page-map-${locale}.mjs`
-  )
-
-  return Object.keys(RouteToFilepath)
-}
-
 export const generateStaticParamsFor =
   (segmentKey: string, localeSegmentKey = 'lang') =>
   async () => {
@@ -34,7 +26,10 @@ export const generateStaticParamsFor =
     const result = []
 
     for (const locale of locales) {
-      const routes = await getRoutes(locale)
+      const { RouteToFilepath } = await import(
+        `private-dot-next/static/chunks/nextra-page-map-${locale}.mjs`
+      )
+      const routes = Object.keys(RouteToFilepath)
 
       result.push(
         ...routes.map(route => ({
