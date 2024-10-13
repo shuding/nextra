@@ -52,6 +52,14 @@
   Router, something may be broken, check
   https://github.com/shuding/nextra/tree/v4-v2/examples for the migration guide
 
+## 3.0.11
+
+### Patch Changes
+
+- e0a9303: add `nextra/locales` middleware which can be exported from
+  `root-of-your-project/middleware.{js,ts}` file to detect and redirect to the
+  user-selected language for i18n websites
+
 ## 3.0.10
 
 ### Patch Changes

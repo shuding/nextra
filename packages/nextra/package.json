@@ -31,6 +31,10 @@
       "import": "./dist/server/compile.js",
       "types": "./dist/server/compile.d.ts"
     },
+    "./locales": {
+      "import": "./dist/server/locales.js",
+      "types": "./dist/server/locales.d.ts"
+    },
     "./fetch-filepaths-from-github": {
       "import": "./dist/server/fetch-filepaths-from-github.js",
       "types": "./dist/server/fetch-filepaths-from-github.d.ts"
@@ -58,6 +62,9 @@
       ],
       "fetch-filepaths-from-github": [
         "./dist/server/fetch-filepaths-from-github.d.ts"
+      ],
+      "locales": [
+        "./dist/server/locales.d.ts"
       ],
       "catch-all": [
         "./dist/client/catch-all.d.ts"
@@ -105,6 +112,7 @@
     "react-dom": ">=18"
   },
   "dependencies": {
+    "@formatjs/intl-localematcher": "^0.5.4",
     "@headlessui/react": "^2.1.2",
     "@mdx-js/mdx": "^3.0.0",
     "@mdx-js/react": "^3.0.0",
@@ -120,6 +128,7 @@
     "github-slugger": "^2.0.0",
     "hast-util-to-estree": "^3.1.0",
     "katex": "^0.16.9",
+    "negotiator": "^0.6.3",
     "rehype-katex": "^7.0.0",
     "rehype-pretty-code": "0.14.0",
     "rehype-raw": "^7.0.0",
@@ -143,6 +152,7 @@
     "@types/estree": "^1.0.5",
     "@types/hast": "^3.0.4",
     "@types/mdast": "^4.0.4",
+    "@types/negotiator": "^0.6.3",
     "@types/react": "^18.3.3",
     "@types/webpack": "^5.28.5",
     "@vitejs/plugin-react": "^4.3.1",

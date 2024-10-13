@@ -53,4 +53,40 @@ i18n: [
 ]
 ```
 
+## Automatically Detect and Redirect to User-Selected Language (Optional)
+
+You can automatically detect the user's preferred language and redirect them to
+the corresponding version of the site. To achieve this, create a `middleware.js`
+file in the root of your project and export Nextra's middleware function from
+`nextra/locales`:
+
+```js filename="middleware.js" {1}
+export { middleware } from 'nextra/locales'
+
+export const config = {
+  // Matcher ignoring `/_next/` and `/api/`
+  matcher: [
+    '/((?!api|_next/static|_next/image|favicon.ico|icon.svg|apple-icon.png|manifest).*)'
+  ]
+}
+```
+
+<Callout type="warning">
+  **Note**: This approach will not work for i18n sites that are statically
+  exported with `output: "export"` in `nextConfig`.
+</Callout>
+
+## Custom 404 Page (Optional)
+
+In **Nextra 3**, it's not possible to create a `404.mdx` page for an i18n
+website that uses a shared theme layout. However, you can implement a `404.jsx`
+page with translations. You can refer to the
+[SWR i18n example](https://github.com/shuding/nextra/blob/d54cc8f5df63542f51ff4443a769cebda03f0a23/examples/swr-site/pages/404.tsx)
+for guidance on how to do this.
+
+In **Nextra 4**, you can have a custom `not-found.jsx` with translations for an
+i18n website that uses a shared theme layout. For guidance on implementing this,
+you can check out the
+[SWR i18n example](https://github.com/shuding/nextra/blob/c9d0ffc8687644401412b8adc34af220cccddf82/examples/swr-site/app/%5Blang%5D/not-found.ts).
+
 </Steps>

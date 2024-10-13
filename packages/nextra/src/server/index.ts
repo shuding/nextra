@@ -59,7 +59,7 @@ const nextra: Nextra = nextraConfig => {
         env: {
           ...nextConfig.env,
           NEXTRA_DEFAULT_LOCALE: nextConfig.i18n?.defaultLocale || 'en',
-          NEXTRA_LOCALES: JSON.stringify(nextConfig.i18n?.locales || [])
+          NEXTRA_LOCALES: JSON.stringify(nextConfig.i18n?.locales)
         }
       }),
       webpack(config, options) {
