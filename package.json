@@ -5,9 +5,6 @@
   "scripts": {
     "build": "turbo run build --filter=./packages/\\*",
     "build:all": "turbo run build",
-    "build:core": "pnpm build --filter=nextra",
-    "build:theme-blog": "pnpm build --filter=nextra-theme-blog",
-    "build:theme-docs": "pnpm build --filter=nextra-theme-docs",
     "clean": "turbo run clean",
     "dev:core": "turbo run dev --filter=nextra... --filter=!docs",
     "dev:theme-blog": "turbo run dev --filter=example-blog... --filter=!docs",
