@@ -41,11 +41,11 @@ const classes = {
     '_bg-primary-100 _font-semibold _text-primary-800 dark:_bg-primary-400/10 dark:_text-primary-600',
     'contrast-more:_border-primary-500 contrast-more:dark:_border-primary-500'
   ),
-  list: cn('_flex _flex-col _gap-1'),
+  list: cn('_grid _gap-1'),
   border: cn(
     '_relative before:_absolute before:_inset-y-1',
     'before:_w-px before:_bg-gray-200 before:_content-[""] dark:before:_bg-neutral-800',
-    '_ps-3 before:_start-0'
+    '_ps-3 before:_start-0 _pt-1 _ms-3'
   ),
   aside: cn(
     'nextra-sidebar _flex _flex-col',
@@ -163,18 +163,8 @@ function Folder({ item, anchors, onFocus, level }: FolderProps): ReactElement {
           if (clickedToggleIcon) {
             event.preventDefault()
           }
-          if (isLink) {
-            // If it's focused, we toggle it. Otherwise, always open it.
-            if (active || clickedToggleIcon) {
-              TreeState[item.route] = !open
-            } else {
-              TreeState[item.route] = true
-            }
-            rerender({})
-            return
-          }
-          if (active) return
-          TreeState[item.route] = !open
+          // If it's focused, we toggle it. Otherwise, always open it.
+          TreeState[item.route] = active || clickedToggleIcon ? !open : true
           rerender({})
         }}
         onFocus={onFocus}
@@ -193,7 +183,7 @@ function Folder({ item, anchors, onFocus, level }: FolderProps): ReactElement {
       {Array.isArray(item.children) && (
         <Collapse isOpen={open}>
           <Menu
-            className={cn(classes.border, '_pt-1 _ms-3')}
+            className={classes.border}
             directories={item.children}
             base={item.route}
             anchors={anchors}
@@ -236,7 +226,7 @@ function File({
   onFocus: FocusEventHandler
 }): ReactElement {
   const route = useFSRoute()
-  // It is possible that the item doesn't have any route - for example an external link.
+  // It is possible that the item doesn't have any route - for example, an external link.
   const active = item.route && [route, route + '/'].includes(item.route + '/')
   const activeSlug = useActiveAnchor()
 
@@ -255,7 +245,7 @@ function File({
         {item.title}
       </Anchor>
       {active && anchors.length > 0 && (
-        <ul className={cn(classes.list, classes.border, '_ms-3 _mt-1')}>
+        <ul className={cn(classes.list, classes.border)}>
           {anchors.map(({ id, value }) => (
             <li key={id}>
               <a
