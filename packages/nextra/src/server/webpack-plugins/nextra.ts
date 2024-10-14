@@ -2,7 +2,7 @@ import fs from 'node:fs/promises'
 import path from 'node:path'
 import type { Compiler } from 'webpack'
 import type { NextraConfig } from '../../types'
-import { CHUNKS_DIR, IS_PRODUCTION } from '../constants.js'
+import { CWD, IS_PRODUCTION } from '../constants.js'
 import { APP_DIR } from '../file-system.js'
 import {
   generatePageMapFromFilepaths,
@@ -11,6 +11,8 @@ import {
 import { collectPageMap } from '../page-map.js'
 
 let isSaved = false
+
+const CHUNKS_DIR = path.join(CWD, '.next', 'static', 'chunks')
 
 export class NextraPlugin {
   constructor(

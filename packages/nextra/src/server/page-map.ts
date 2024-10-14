@@ -3,7 +3,7 @@ import type { ArrayExpression, ImportDeclaration } from 'estree'
 import { toJs } from 'estree-util-to-js'
 import slash from 'slash'
 import type { PageMapItem } from '../types'
-import { CHUNKS_DIR, META_RE } from './constants.js'
+import { META_RE } from './constants.js'
 import { APP_DIR } from './file-system.js'
 import { createAstObject } from './utils.js'
 
@@ -22,7 +22,7 @@ function cleanFileName(name: string): string {
   return (
     path
       .relative(APP_DIR, name)
-      .replace(/\.([jt]sx?|json|mdx?)$/, '')
+      .replace(/\.([jt]sx?|mdx?)$/, '')
       .replaceAll(/[\W_]+/g, '_')
       .replace(/^_/, '')
       // Variable can't start with number
@@ -74,15 +74,13 @@ function convertPageMapToAst(
  * https://github.com/nodejs/node/issues/31710
  */
 function getImportPath(filePaths: string[], fromAppDir = false): string {
-  const importPath = slash(
-    path.relative(
-      CHUNKS_DIR,
-      fromAppDir
-        ? path.join(APP_DIR, ...filePaths)
-        : path.join(process.cwd(), 'mdx', ...filePaths)
-    )
+  const importPath = path.join(
+    ...(fromAppDir
+      ? ['private-next-app-dir']
+      : ['private-next-root-dir', 'content']),
+    ...filePaths
   )
-  return importPath.startsWith('.') ? importPath : `./${importPath}`
+  return slash(importPath)
 }
 
 export async function collectPageMap({
