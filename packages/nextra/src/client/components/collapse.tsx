@@ -2,7 +2,7 @@
 
 import cn from 'clsx'
 import type { ReactElement, ReactNode } from 'react'
-import { useEffect, useRef } from 'react'
+import { Children, useEffect, useMemo, useRef } from 'react'
 
 export function Collapse({
   children,
@@ -60,7 +60,11 @@ export function Collapse({
   useEffect(() => {
     initialRender.current = false
   }, [])
-
+  // Add inner <div> only if children.length != 1
+  const newChildren = useMemo(
+    () => (Children.count(children) === 1 ? children : <div>{children}</div>),
+    [children]
+  )
   return (
     <div
       ref={containerRef}
@@ -73,7 +77,7 @@ export function Collapse({
         transitionDuration: (isOpen ? openDuration : closeDuration) + 'ms'
       }}
     >
-      <div>{children}</div>
+      {newChildren}
     </div>
   )
 }
