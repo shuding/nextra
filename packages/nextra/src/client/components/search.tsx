@@ -38,19 +38,36 @@ type SearchProps = {
 
 const INPUTS = new Set(['input', 'select', 'button', 'textarea'])
 
+const DEV_SEARCH_NOTICE = (
+  <>
+    Search is not available in development because Nextra&nbsp;4 uses Pagefind
+    package which indexes built .html files rather than .md/.mdx content.
+    <div className="_mt-2">
+      If you really need to test search during development, follow these steps:
+      <ol className="_mt-2 _list-decimal">
+        <li>Build your app with `next build`</li>
+        <li>
+          Copy `.next/static/chunks/pagefind` folder to a different location
+        </li>
+        <li>Start your app in dev mode using `next dev`</li>
+        <li>
+          Copy `pagefind` folder into `.next/static/chunks/<b>app</b>` or
+          `.next/static/chunks/<b>app/[lang]</b>` for i18n website
+        </li>
+      </ol>
+    </div>
+  </>
+)
+
 export function Search({
   className,
-  emptyResult = (
-    <span className="_block _select-none _p-8 _text-center _text-sm _text-gray-400">
-      No results found.
-    </span>
-  ),
+  emptyResult = 'No results found.',
   errorText = 'Failed to load search index.',
   loading = 'Loading…',
   placeholder = 'Search documentation…'
 }: SearchProps): ReactElement {
-  const [isLoading, setIsLoading] = useState(false)
-  const [error, setError] = useState<Error | null>(null)
+  const [isLoading, setIsLoading] = useState(true)
+  const [error, setError] = useState<ReactElement | string>('')
   const [results, setResults] = useState<PagefindResult[]>([])
   const [search, setSearch] = useState('')
 
@@ -59,13 +76,13 @@ export function Search({
 
     if (!value) {
       setResults([])
-      setError(null)
+      setError('')
       return
     }
 
     if (!window.pagefind) {
       setIsLoading(true)
-      setError(null)
+      setError('')
       try {
         window.pagefind = await import(
           // @ts-expect-error pagefind.js generated after build
@@ -76,7 +93,14 @@ export function Search({
           // ... more search options
         })
       } catch (error) {
-        setError(error as Error)
+        const message =
+          error instanceof Error
+            ? process.env.NODE_ENV !== 'production' &&
+              error.message.includes('Failed to fetch')
+              ? DEV_SEARCH_NOTICE // This error will be tree-shaked in production
+              : `${error.constructor.name}: ${error.message}`
+            : String(error)
+        setError(message)
         setIsLoading(false)
         return
       }
@@ -229,7 +253,10 @@ export function Search({
             'motion-reduce:_transition-none _transition-opacity',
             open ? '_opacity-100' : '_opacity-0',
             error || isLoading || !results.length
-              ? 'md:_h-[100px]'
+              ? [
+                  'md:_min-h-24 _grow _flex _justify-center _text-sm _gap-2 _px-8',
+                  error ? '_text-red-500' : '_text-gray-400 _items-center'
+                ]
               : // headlessui adds max-height as style, use !important to override
                 'md:!_max-h-[min(calc(100vh-5rem),400px)]',
             '_w-full md:_w-[576px]',
@@ -238,17 +265,18 @@ export function Search({
         }
       >
         {error ? (
-          <div className="_h-full _flex _items-center _justify-center _gap-2 _px-8 _text-sm _text-red-500">
+          <>
             <InformationCircleIcon height="20" className="_shrink-0" />
-            {errorText}
-            <br />
-            {error.constructor.name}: {error.message}
-          </div>
+            <div className="_grid">
+              <b className="_mb-2">{errorText}</b>
+              {error}
+            </div>
+          </>
         ) : isLoading ? (
-          <div className="_h-full _flex _items-center _justify-center _gap-2 _px-8 _text-sm _text-gray-400">
+          <>
             <SpinnerIcon height="20" className="_shrink-0 _animate-spin" />
             {loading}
-          </div>
+          </>
         ) : results.length ? (
           results.map(searchResult => (
             <Result key={searchResult.url} data={searchResult} />
