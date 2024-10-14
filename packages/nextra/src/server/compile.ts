@@ -81,7 +81,6 @@ export async function compileMdx(
     jsx = false,
     format: _format = 'mdx',
     outputFormat = 'function-body',
-    providerImportSource = 'nextra/mdx',
     remarkPlugins,
     rehypePlugins,
     recmaPlugins,
@@ -151,7 +150,7 @@ export async function compileMdx(
       jsx,
       format,
       outputFormat,
-      providerImportSource,
+      providerImportSource: 'next-mdx-import-source-file',
       // Fix TypeError: _jsx is not a function for remote content
       development: process.env.NODE_ENV === 'development',
       remarkPlugins: [

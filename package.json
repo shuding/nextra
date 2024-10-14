@@ -6,7 +6,6 @@
     "build": "turbo run build --filter=./packages/\\*",
     "build:all": "turbo run build",
     "clean": "turbo run clean",
-    "dev:core": "turbo run dev --filter=nextra... --filter=!docs",
     "dev:theme-blog": "turbo run dev --filter=example-blog... --filter=!docs",
     "dev:theme-docs": "turbo run dev --filter=example-docs... --filter=!docs",
     "dev:theme-i18n": "turbo run dev --filter=swr-site... --filter=!docs",

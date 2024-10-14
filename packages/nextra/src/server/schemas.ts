@@ -58,7 +58,6 @@ export const nextraConfigSchema = z.strictObject({
     z.custom<(pageMap: PageMapItem[], locale: string) => PageMapItem[]>(),
   mdxOptions: z
     .strictObject({
-      providerImportSource: z.string().optional(),
       rehypePlugins: z.custom<ProcessorOptions['rehypePlugins']>(),
       remarkPlugins: z.custom<ProcessorOptions['remarkPlugins']>(),
       recmaPlugins: z.custom<ProcessorOptions['recmaPlugins']>(),
