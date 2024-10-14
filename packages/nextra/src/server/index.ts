@@ -64,11 +64,10 @@ const nextra: Nextra = nextraConfig => {
       }),
       webpack(config, options) {
         if (options.nextRuntime !== 'edge' && options.isServer) {
-          config.plugins ||= []
           config.plugins.push(
             new NextraPlugin({
               locales: nextConfig.i18n?.locales || DEFAULT_LOCALES,
-              mdxBaseDir: loaderOptions.mdxBaseDir
+              useContentDir: loaderOptions.useContentDir
               // transformPageMap: nextraConfig.transformPageMap
             })
           )
@@ -85,10 +84,7 @@ const nextra: Nextra = nextraConfig => {
             )
           }
         }
-
-        const rules = config.module.rules as RuleSetRule[]
-
-        rules.push({
+        config.module.rules.push({
           test: MARKDOWN_EXTENSION_RE,
           oneOf: [
             ...(IS_PRODUCTION
@@ -131,7 +127,7 @@ const nextra: Nextra = nextraConfig => {
               ]
             }
           ]
-        })
+        } satisfies RuleSetRule)
 
         return nextConfig.webpack?.(config, options) || config
       }

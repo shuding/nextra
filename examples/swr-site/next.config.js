@@ -18,7 +18,7 @@ const withNextra = nextra({
     return pageMap
   },
   latex: true,
-  mdxBaseDir: './mdx',
+  useContentDir: true,
   mdxOptions: {
     providerImportSource: 'nextra-theme-docs'
   }

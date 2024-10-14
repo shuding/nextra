@@ -2,16 +2,11 @@
  * Benefit of server/constants - do not include unneeded `path` polyfill in client bundle,
  * while importing constants in client file
  */
-import path from 'path'
 import type { Property } from 'estree'
 
 export { MARKDOWN_EXTENSION_RE, DEFAULT_LOCALE } from '../constants.js'
 
 export const CWD = process.cwd()
-
-export const PUBLIC_DIR = path.join(CWD, 'public')
-
-export const CHUNKS_DIR = path.join(CWD, '.next', 'static', 'chunks')
 
 export const MARKDOWN_URL_EXTENSION_RE = /\.mdx?(?:(?=[#?])|$)/
 

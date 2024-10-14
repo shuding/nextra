@@ -10,7 +10,7 @@ export async function importPage(pathSegments: string[] = [], locale = '') {
   try {
     // eslint-disable-next-line @typescript-eslint/no-require-imports -- Require statement enables Fast Refresh
     return require(
-      `private-next-root-dir/mdx/${locale && `${locale}/`}${pagePath}`
+      `private-next-root-dir/content/${locale && `${locale}/`}${pagePath}`
     )
   } catch (error) {
     logger.error('Error while loading', { pathSegments }, error)

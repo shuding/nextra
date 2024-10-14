@@ -1,7 +1,7 @@
 import cn from 'clsx'
 import type { ReactElement, ReactNode } from 'react'
 import { XIcon } from '../../icons/index.js'
-import { CloseBannerButton } from './close-banner-button.js'
+import { CloseBannerButton } from './index.client.js'
 
 const CLASS_NAME = 'nextra-banner'
 

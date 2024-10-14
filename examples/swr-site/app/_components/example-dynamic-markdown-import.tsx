@@ -8,9 +8,9 @@ export function ExampleDynamicMarkdownImport() {
   const Page = dynamic(
     () => {
       if (pageOne) {
-        return import('../../mdx/en/docs/advanced/more/tree/one.mdx')
+        return import('../../content/en/docs/advanced/more/tree/one.mdx')
       }
-      return import('../../mdx/en/docs/advanced/more/tree/two.mdx')
+      return import('../../content/en/docs/advanced/more/tree/two.mdx')
     },
     { loading: () => <p>Loading...</p> }
   )

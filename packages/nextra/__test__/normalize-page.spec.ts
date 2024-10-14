@@ -158,7 +158,8 @@ describe('normalize-page', () => {
 
     await fs.writeFile(
       path.join(dir, 'generated-page-map.ts'),
-      '// @ts-nocheck\n' + rawJs.replaceAll('../../../../mdx/', './')
+      '// @ts-nocheck\n' +
+        rawJs.replaceAll('private-next-root-dir/content/', './')
     )
 
     const { pageMap } = await import(
