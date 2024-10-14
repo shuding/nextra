@@ -17,13 +17,13 @@ export class NextraPlugin {
     private config: {
       locales: string[]
       transformPageMap?: NextraConfig['transformPageMap']
-      mdxBaseDir?: NextraConfig['mdxBaseDir']
+      useContentDir?: NextraConfig['useContentDir']
     }
   ) {}
 
   apply(compiler: Compiler) {
     const pluginName = this.constructor.name
-    const { locales, mdxBaseDir } = this.config
+    const { locales, useContentDir } = this.config
 
     compiler.hooks.beforeCompile.tapAsync(pluginName, async (_, callback) => {
       if (IS_PRODUCTION && isSaved) {
@@ -39,8 +39,8 @@ export class NextraPlugin {
       try {
         for (const locale of locales) {
           const relativePaths = await getFilepaths({
-            dir: mdxBaseDir ? path.join(mdxBaseDir, locale) : APP_DIR,
-            isAppDir: !mdxBaseDir
+            dir: useContentDir ? path.join('content', locale) : APP_DIR,
+            isAppDir: !useContentDir
           })
 
           const { pageMap, mdxPages } =
@@ -49,7 +49,7 @@ export class NextraPlugin {
             locale,
             pageMap,
             mdxPages,
-            fromAppDir: !mdxBaseDir
+            fromAppDir: !useContentDir
           })
           await fs.writeFile(
             path.join(CHUNKS_DIR, `nextra-page-map-${locale}.mjs`),

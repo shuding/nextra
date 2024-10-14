@@ -66,7 +66,7 @@ export const nextraConfigSchema = z.strictObject({
       rehypePrettyCodeOptions: z.custom<RehypePrettyCodeOptions>().optional()
     })
     .optional(),
-  mdxBaseDir: z.string().optional()
+  useContentDir: z.boolean().optional()
 })
 
 export const pageThemeSchema = z.strictObject({
