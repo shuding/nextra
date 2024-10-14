@@ -76,10 +76,7 @@ export default async function RootLayout({
           <Banner storageKey="4.0-release">
             <div className='before:content-["🎉_"]'>
               Nextra 4.0 is released.{' '}
-              <Link
-                href="https://the-guild.dev/blog/nextra-3"
-                className='after:content-["_→"]'
-              >
+              <Link href="#" className='after:content-["_→"]'>
                 Read more
               </Link>
             </div>
