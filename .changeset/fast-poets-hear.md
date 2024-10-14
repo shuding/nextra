@@ -2,4 +2,4 @@
 'nextra-theme-docs': patch
 ---
 
-simplify-the-class-name-of-the-sidebar-file-item
+Simplify the class-name of the sidebar file item
