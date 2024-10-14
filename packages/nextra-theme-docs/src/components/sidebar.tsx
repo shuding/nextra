@@ -245,7 +245,7 @@ function File({
   }
 
   return (
-    <li className={cn(classes.list, { active })}>
+    <li className={cn({ active })}>
       <Anchor
         href={(item as PageItem).href || item.route}
         newWindow={(item as PageItem).newWindow}
@@ -255,7 +255,7 @@ function File({
         {item.title}
       </Anchor>
       {active && anchors.length > 0 && (
-        <ul className={cn(classes.list, classes.border, '_ms-3')}>
+        <ul className={cn(classes.list, classes.border, '_ms-3 _mt-1')}>
           {anchors.map(({ id, value }) => (
             <li key={id}>
               <a
