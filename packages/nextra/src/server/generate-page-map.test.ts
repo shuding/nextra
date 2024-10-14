@@ -472,7 +472,10 @@ describe('generatePageMapFromFilepaths()', () => {
 
   it('should work for docs example', async () => {
     const cwd = path.join(process.cwd(), '..', '..', 'examples', 'docs')
-    const pagePaths = await getFilepaths({ dir: path.join(cwd, 'content'), cwd })
+    const pagePaths = await getFilepaths({
+      dir: path.join(cwd, 'content'),
+      cwd
+    })
     expect(pagePaths.sort((a, b) => a.localeCompare(b))).toMatchInlineSnapshot(`
       [
         "_meta.js",
