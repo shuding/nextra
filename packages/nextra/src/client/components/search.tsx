@@ -42,20 +42,20 @@ const DEV_SEARCH_NOTICE = (
   <>
     Search is not available in development because Nextra&nbsp;4 uses Pagefind
     package which indexes built .html files rather than .md/.mdx content.
-    <div className="_mt-2">
+    <p className="_mt-2">
       If you really need to test search during development, follow these steps:
-      <ol className="_mt-2 _list-decimal">
-        <li>Build your app with `next build`</li>
-        <li>
-          Copy `.next/static/chunks/pagefind` folder to a different location
-        </li>
-        <li>Start your app in dev mode using `next dev`</li>
-        <li>
-          Copy `pagefind` folder into `.next/static/chunks/<b>app</b>` or
-          `.next/static/chunks/<b>app/[lang]</b>` for i18n website
-        </li>
-      </ol>
-    </div>
+    </p>
+    <ol className="_mt-2 _list-decimal">
+      <li>Build your app with `next build`</li>
+      <li>
+        Copy `.next/static/chunks/pagefind` folder to a different location
+      </li>
+      <li>Start your app in dev mode using `next dev`</li>
+      <li>
+        Copy `pagefind` folder into `.next/static/chunks/<b>app</b>` or
+        `.next/static/chunks/<b>app/[lang]</b>` for i18n website
+      </li>
+    </ol>
   </>
 )
 
@@ -254,7 +254,7 @@ export function Search({
             open ? '_opacity-100' : '_opacity-0',
             error || isLoading || !results.length
               ? [
-                  'md:_min-h-24 _grow _flex _justify-center _text-sm _gap-2 _px-8',
+                  'md:_min-h-28 _grow _flex _justify-center _text-sm _gap-2 _px-8',
                   error ? '_text-red-500' : '_text-gray-400 _items-center'
                 ]
               : // headlessui adds max-height as style, use !important to override
