@@ -255,7 +255,9 @@ export function Search({
             error || isLoading || !results.length
               ? [
                   'md:_min-h-28 _grow _flex _justify-center _text-sm _gap-2 _px-8',
-                  error ? '_text-red-500' : '_text-gray-400 _items-center'
+                  error
+                    ? '_text-red-500 _items-start'
+                    : '_text-gray-400 _items-center'
                 ]
               : // headlessui adds max-height as style, use !important to override
                 'md:!_max-h-[min(calc(100vh-5rem),400px)]',
