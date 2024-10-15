@@ -1,5 +1,6 @@
 import { Link } from 'next-view-transitions'
 import {
+  Callout,
   Code,
   Details,
   Pre,
@@ -8,6 +9,7 @@ import {
   Td,
   Th,
   Tr,
+  withGitHubAlert,
   withIcons
 } from 'nextra/components'
 import type { UseMDXComponents } from 'nextra/mdx'
@@ -49,6 +51,20 @@ const createHeading = (Tag: `h${2 | 3 | 4 | 5 | 6}`) =>
 
 const EXTERNAL_HREF_RE = /^https?:\/\//
 
+const Blockquote = withGitHubAlert('blockquote', ({ type, ...props }) => {
+  const calloutType = (
+    {
+      caution: 'error',
+      important: 'error', // TODO
+      note: 'info',
+      tip: 'default',
+      warning: 'warning'
+    } as const
+  )[type]
+
+  return <Callout type={calloutType} {...props} />
+})
+
 /* eslint sort-keys: error */
 export const useMDXComponents: UseMDXComponents = components => ({
   ...DEFAULT_COMPONENTS,
@@ -59,6 +75,8 @@ export const useMDXComponents: UseMDXComponents = components => ({
     const ComponentToUse = href.startsWith('#') ? 'a' : Link
     return <ComponentToUse href={href} {...props} />
   },
+  // @ts-expect-error -- fix me
+  blockquote: Blockquote,
   code: Code,
   details: Details,
   h2: createHeading('h2'),
