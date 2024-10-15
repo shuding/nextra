@@ -300,9 +300,9 @@ function Result({ data }: { data: PagefindResult }) {
       >
         {data.meta.title}
       </div>
-      {data.sub_results.map(subResult => (
+      {data.sub_results.map((subResult, index) => (
         <ComboboxOption
-          key={subResult.url}
+          key={`${subResult.url}:${index}`}
           as={NextLink}
           value={subResult}
           href={subResult.url}
