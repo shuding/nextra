@@ -1,4 +1,4 @@
-import type { FC, ReactElement, SVGProps } from 'react'
+import type { FC, SVGProps } from 'react'
 import {
   CPPIcon,
   CsharpIcon,
@@ -19,7 +19,7 @@ import type { PreProps } from '../mdx-components/pre/index.js'
 
 type T = Record<string, FC<SVGProps<SVGElement>>>
 
-export function withIcons(Component: FC, obj?: T) {
+export function withIcons(Component: FC, obj?: T): FC<PreProps> {
   const LanguageToIcon: T = {
     js: JavaScriptIcon,
     jsx: JavaScriptIcon,
@@ -48,7 +48,7 @@ export function withIcons(Component: FC, obj?: T) {
     ...obj
   }
 
-  return function Pre(props: PreProps): ReactElement {
+  return function Pre(props) {
     const language = props['data-language']
     const Icon = language && LanguageToIcon[language]
 

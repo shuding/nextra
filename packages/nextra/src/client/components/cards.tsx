@@ -1,21 +1,14 @@
 import cn from 'clsx'
 import NextLink from 'next/link'
-import type { ComponentProps, ReactElement, ReactNode } from 'react'
+import type { ComponentProps, FC, ReactElement, ReactNode } from 'react'
 
-function Card({
-  children,
-  title,
-  icon,
-  arrow,
-  href,
-  ...props
-}: {
+const Card: FC<{
   title: string
   icon?: ReactElement
   arrow?: boolean
   href: string
   children?: ReactNode
-}) {
+}> = ({ children, title, icon, arrow, href, ...props }) => {
   return (
     <NextLink
       href={href}
@@ -49,13 +42,13 @@ function Card({
   )
 }
 
-function _Cards({
+const _Cards: FC<{ num?: number } & ComponentProps<'div'>> = ({
   children,
   num = 3,
   className,
   style,
   ...props
-}: { num?: number } & ComponentProps<'div'>) {
+}) => {
   return (
     <div
       className={cn(

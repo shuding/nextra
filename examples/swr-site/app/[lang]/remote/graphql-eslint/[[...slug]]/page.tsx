@@ -37,7 +37,6 @@ export default async function Page({ params: { slug = [] } }) {
     $Tabs: Tabs,
     Callout
   })
-
   return (
     <Wrapper toc={useTOC()} {...props}>
       <MDXContent components={components} />

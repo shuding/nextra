@@ -3,7 +3,7 @@
 import type { PageMapItem } from 'nextra'
 import { useFSRoute } from 'nextra/hooks'
 import { normalizePages } from 'nextra/normalize-pages'
-import type { ReactElement, ReactNode } from 'react'
+import type { FC, ReactNode } from 'react'
 import { Children, createContext, useContext, useEffect, useState } from 'react'
 import { createStore } from 'zustand'
 import type { StoreApi } from 'zustand'
@@ -43,13 +43,10 @@ function getStore(list: PageMapItem[], route: string) {
   }
 }
 
-export function ConfigProvider({
-  children,
-  pageMap
-}: {
+export const ConfigProvider: FC<{
   children: ReactNode
   pageMap: PageMapItem[]
-}): ReactElement {
+}> = ({ children, pageMap }) => {
   const pathname = useFSRoute()
 
   const [store] = useState(() =>

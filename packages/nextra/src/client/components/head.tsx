@@ -1,4 +1,4 @@
-import type { ReactElement, ReactNode } from 'react'
+import type { FC, ReactNode } from 'react'
 import { z } from 'zod'
 import { fromZodError } from 'zod-validation-error'
 
@@ -57,7 +57,7 @@ type HeadProps = Partial<z.infer<typeof headSchema>> & {
   children?: ReactNode
 }
 
-export function Head({ children, ...props }: HeadProps): ReactElement {
+const _Head: FC<HeadProps> = ({ children, ...props }) => {
   const { data, error } = headSchema.safeParse(props)
   if (error) {
     throw fromZodError(error)
@@ -101,9 +101,11 @@ function makePrimaryColor(l: number) {
   return `hsl(var(--nextra-primary-hue) var(--nextra-primary-saturation) ${l}%)`
 }
 
-Head.viewport = {
-  themeColor: [
-    { media: '(prefers-color-scheme: light)', color: '#fff' },
-    { media: '(prefers-color-scheme: dark)', color: '#111' }
-  ]
-}
+export const Head = Object.assign(_Head, {
+  viewport: {
+    themeColor: [
+      { media: '(prefers-color-scheme: light)', color: '#fff' },
+      { media: '(prefers-color-scheme: dark)', color: '#111' }
+    ]
+  }
+})

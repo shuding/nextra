@@ -1,6 +1,6 @@
 'use client'
 
-import type { ReactElement, ReactNode } from 'react'
+import type { FC, ReactNode } from 'react'
 import { Button } from '../../components/button.js'
 
 function toggleWordWrap() {
@@ -13,11 +13,9 @@ function toggleWordWrap() {
   }
 }
 
-export function ToggleWordWrapButton({
-  children
-}: {
+export const ToggleWordWrapButton: FC<{
   children: ReactNode
-}): ReactElement {
+}> = ({ children }) => {
   return (
     <Button
       onClick={toggleWordWrap}

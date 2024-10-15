@@ -2,9 +2,8 @@ import cn from 'clsx'
 // eslint-disable-next-line no-restricted-imports -- since we don't need newWindow prop
 import NextLink from 'next/link'
 import { DiscordIcon, GitHubIcon } from 'nextra/icons'
-import type { ReactElement, ReactNode } from 'react'
-import { Anchor } from '../anchor'
-import { ClientNavbar } from './navbar.client'
+import type { FC, ReactNode } from 'react'
+import { ClientNavbar } from './index.client'
 
 type NavbarProps = {
   children?: ReactNode
@@ -16,7 +15,7 @@ type NavbarProps = {
   chatIcon?: ReactNode
 }
 
-export function Navbar({
+export const Navbar: FC<NavbarProps> = ({
   children,
   logoLink = true,
   logo = (
@@ -31,12 +30,12 @@ export function Navbar({
   projectIcon = <GitHubIcon height="24" />,
   chatLink,
   chatIcon = <DiscordIcon width="24" />
-}: NavbarProps): ReactElement {
+}) => {
   return (
     <header
       className={cn(
         'nextra-navbar _sticky _top-0 _z-20 _w-full _bg-transparent print:_hidden',
-        String.raw`max-md:[.nextra-banner:not(.\_hidden)~&]:_top-10`
+        'max-md:[.nextra-banner:not(.\\_hidden)~&]:_top-10'
       )}
     >
       <div
@@ -66,14 +65,24 @@ export function Navbar({
         )}
         <ClientNavbar>
           {projectLink && (
-            <Anchor href={projectLink} newWindow>
+            <a
+              href={projectLink}
+              target="_blank"
+              rel="noreferrer"
+              className="focus-visible:nextra-focus"
+            >
               {projectIcon}
-            </Anchor>
+            </a>
           )}
           {chatLink && (
-            <Anchor href={chatLink} newWindow>
+            <a
+              href={chatLink}
+              target="_blank"
+              rel="noreferrer"
+              className="focus-visible:nextra-focus"
+            >
               {chatIcon}
-            </Anchor>
+            </a>
           )}
           {children}
         </ClientNavbar>

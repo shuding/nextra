@@ -1,6 +1,6 @@
 import cn from 'clsx'
 import type { ComponentProps, FC } from 'react'
-import { HeadingAnchor } from './heading-anchor'
+import { HeadingAnchor } from './heading-anchor.client'
 
 const createHeading = (
   Tag: `h${1 | 2 | 3 | 4 | 5 | 6}`

@@ -1,13 +1,10 @@
 import cn from 'clsx'
-import type { ReactElement, ReactNode } from 'react'
+import type { FC, ReactNode } from 'react'
 
-export function Bleed({
-  full,
-  children
-}: {
+export const Bleed: FC<{
   full: boolean
   children: ReactNode
-}): ReactElement {
+}> = ({ full, children }) => {
   return (
     <div
       className={cn(

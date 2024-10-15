@@ -1,21 +1,10 @@
 import cn from 'clsx'
-import { Anchor } from '../components'
-import type { AnchorProps } from '../components/anchor'
+import { Anchor } from 'nextra/mdx'
 
-const EXTERNAL_HREF_RE = /^https?:\/\//
-
-// TODO: use remark plugin which adds target="_blank" to external links
-export const Link = ({
-  href = '',
-  newWindow = EXTERNAL_HREF_RE.test(href),
-  className,
-  ...props
-}: AnchorProps) => (
+export const Link: typeof Anchor = ({ className, ...props }) => (
   <Anchor
-    href={href}
-    newWindow={newWindow}
     className={cn(
-      '_text-primary-600 _underline _decoration-from-font [text-underline-position:from-font]',
+      'focus-visible:nextra-focus _text-primary-600 _underline _decoration-from-font [text-underline-position:from-font]',
       className
     )}
     {...props}

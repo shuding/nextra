@@ -2,7 +2,7 @@
 
 import cn from 'clsx'
 import type { Heading } from 'nextra'
-import type { ReactElement } from 'react'
+import type { FC } from 'react'
 import { useEffect, useRef } from 'react'
 import scrollIntoView from 'scroll-into-view-if-needed'
 import { useActiveAnchor, useThemeConfig } from '../stores'
@@ -23,7 +23,7 @@ const linkClassName = cn(
   'contrast-more:_text-gray-700 contrast-more:dark:_text-gray-100'
 )
 
-export function TOC({ toc, filePath, pageTitle }: TOCProps): ReactElement {
+export const TOC: FC<TOCProps> = ({ toc, filePath, pageTitle }) => {
   const activeSlug = useActiveAnchor()
   const tocRef = useRef<HTMLUListElement>(null!)
   const themeConfig = useThemeConfig()

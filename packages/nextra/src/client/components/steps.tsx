@@ -1,13 +1,13 @@
 import cn from 'clsx'
-import type { ComponentProps, CSSProperties, ReactElement } from 'react'
+import type { ComponentProps, CSSProperties, FC } from 'react'
 import { useId } from 'react'
 
-export function Steps({
+export const Steps: FC<ComponentProps<'div'>> = ({
   children,
   className,
   style,
   ...props
-}: ComponentProps<'div'>): ReactElement {
+}) => {
   const id = useId().replaceAll(':', '')
   return (
     <div

@@ -2,14 +2,14 @@
 
 import { Link } from 'next-view-transitions'
 import { usePathname } from 'next/navigation'
-import type { ReactElement, ReactNode } from 'react'
+import type { FC, ReactNode } from 'react'
 
 type NavbarProps = {
   navs?: { name: string; url: string }[]
   children?: ReactNode
 }
 
-export function Navbar({ navs, children }: NavbarProps): ReactElement {
+export const Navbar: FC<NavbarProps> = ({ navs, children }) => {
   const pathname = usePathname()
 
   return (

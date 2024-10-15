@@ -97,7 +97,7 @@ const hasTypeOf = (child: unknown, ComponentOf: FC) =>
   'type' in child &&
   child.type === ComponentOf
 
-export function Layout({ children, ...themeConfig }: Props): ReactElement {
+export const Layout: FC<Props> = ({ children, ...themeConfig }) => {
   const { data, error } = theme.safeParse(themeConfig)
   if (error) {
     throw fromZodError(error)

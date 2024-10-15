@@ -39,7 +39,6 @@ export default async function Page({ params: { slug = [] } }) {
     Tab: Tabs.Tab,
     PackageCmd: () => null
   })
-
   return (
     <Wrapper toc={useTOC()} {...props}>
       <MDXContent components={components} />

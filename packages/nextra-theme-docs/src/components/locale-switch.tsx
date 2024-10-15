@@ -4,7 +4,7 @@ import { addBasePath } from 'next/dist/client/add-base-path'
 import { usePathname } from 'next/navigation'
 import { Select } from 'nextra/components'
 import { GlobeIcon } from 'nextra/icons'
-import type { ReactElement } from 'react'
+import type { FC } from 'react'
 import { useThemeConfig } from '../stores'
 
 const ONE_YEAR = 365 * 24 * 60 * 60 * 1_000
@@ -14,10 +14,7 @@ interface LocaleSwitchProps {
   className?: string
 }
 
-export function LocaleSwitch({
-  lite,
-  className
-}: LocaleSwitchProps): ReactElement | null {
+export const LocaleSwitch: FC<LocaleSwitchProps> = ({ lite, className }) => {
   const { i18n } = useThemeConfig()
   const pathname = usePathname()
   if (!i18n.length) return null

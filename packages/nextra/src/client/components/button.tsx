@@ -3,19 +3,19 @@
 import { Button as HeadlessButton } from '@headlessui/react'
 import type { ButtonProps as HeadlessButtonProps } from '@headlessui/react'
 import cn from 'clsx'
-import type { ReactElement } from 'react'
+import type { FC } from 'react'
 import { classes } from '../mdx-components/pre/index.js'
 
 export type ButtonProps = HeadlessButtonProps & {
   variant?: 'outline' | 'default'
 }
 
-export function Button({
+export const Button: FC<ButtonProps> = ({
   children,
   className,
   variant = 'default',
   ...props
-}: ButtonProps): ReactElement {
+}) => {
   return (
     <HeadlessButton
       className={args =>

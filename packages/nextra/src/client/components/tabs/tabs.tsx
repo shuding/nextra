@@ -9,7 +9,7 @@ import {
 } from '@headlessui/react'
 import type { TabPanelProps } from '@headlessui/react'
 import cn from 'clsx'
-import type { ReactElement, ReactNode } from 'react'
+import type { FC, ReactElement, ReactNode } from 'react'
 import { useCallback, useEffect, useState } from 'react'
 
 type TabItem = string | ReactElement
@@ -23,21 +23,21 @@ function isTabObjectItem(item: unknown): item is TabObjectItem {
   return !!item && typeof item === 'object' && 'label' in item
 }
 
-export function Tabs({
-  items,
-  selectedIndex: _selectedIndex,
-  defaultIndex = 0,
-  onChange,
-  children,
-  storageKey
-}: {
+export const Tabs: FC<{
   items: (TabItem | TabObjectItem)[]
   selectedIndex?: number
   defaultIndex?: number
   onChange?: (index: number) => void
   children: ReactNode
   storageKey?: string
-}): ReactElement {
+}> = ({
+  items,
+  selectedIndex: _selectedIndex,
+  defaultIndex = 0,
+  onChange,
+  children,
+  storageKey
+}) => {
   const [selectedIndex, setSelectedIndex] = useState(defaultIndex)
 
   useEffect(() => {
@@ -131,12 +131,12 @@ export function Tabs({
   )
 }
 
-export function Tab({
+export const Tab: FC<TabPanelProps> = ({
   children,
   // For SEO display all the Panel in the DOM and set `display: none;` for those that are not selected
   unmount = false,
   ...props
-}: TabPanelProps): ReactElement {
+}) => {
   return (
     <TabPanel
       {...props}

@@ -1,13 +1,13 @@
 import { ThemeProvider } from 'next-themes'
 import type { ThemeProviderProps } from 'next-themes/dist/types'
 import { ViewTransitions } from 'next-view-transitions'
-import type { ReactElement, ReactNode } from 'react'
+import type { FC, ReactNode } from 'react'
 
-export function Footer({
-  children = `CC BY-NC 4.0 ${new Date().getFullYear()} © Shu Ding.`
-}: {
+export const Footer: FC<{
   children?: ReactNode
-}): ReactElement {
+}> = ({
+  children = `CC BY-NC 4.0 ${new Date().getFullYear()} © Shu Ding.`
+}) => {
   return (
     <small className="_mt-32 _block" data-pagefind-ignore="all">
       {children}
@@ -15,13 +15,10 @@ export function Footer({
   )
 }
 
-export function Layout({
-  children,
-  nextThemes
-}: {
+export const Layout: FC<{
   children: ReactNode
   nextThemes: Omit<ThemeProviderProps, 'children'>
-}): ReactElement {
+}> = ({ children, nextThemes }) => {
   return (
     <ThemeProvider
       attribute="class"

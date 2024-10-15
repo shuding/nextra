@@ -7,7 +7,7 @@ import {
   ListboxOptions
 } from '@headlessui/react'
 import cn from 'clsx'
-import type { Dispatch, ReactElement, ReactNode } from 'react'
+import type { Dispatch, FC, ReactNode } from 'react'
 import { Fragment } from 'react'
 import { CheckIcon } from '../icons/index.js'
 
@@ -25,14 +25,14 @@ interface MenuProps {
   className?: string
 }
 
-export function Select({
+export const Select: FC<MenuProps> = ({
   options,
   onChange,
   selectedOption,
   value,
   title,
   className
-}: MenuProps): ReactElement {
+}) => {
   return (
     <Listbox value={value} onChange={onChange}>
       <ListboxButton

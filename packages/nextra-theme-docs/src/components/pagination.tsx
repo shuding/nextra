@@ -3,7 +3,7 @@ import cn from 'clsx'
 import NextLink from 'next/link'
 import { ArrowRightIcon } from 'nextra/icons'
 import type { Item } from 'nextra/normalize-pages'
-import type { ReactElement } from 'react'
+import type { FC } from 'react'
 import { useThemeConfig } from '../stores'
 
 interface NavLinkProps {
@@ -21,10 +21,10 @@ const classes = {
   icon: cn('_inline _shrink-0')
 }
 
-export function Pagination({
+export const Pagination: FC<NavLinkProps> = ({
   flatDocsDirectories,
   currentIndex
-}: NavLinkProps): ReactElement | null {
+}) => {
   const { navigation } = useThemeConfig()
 
   let prev = navigation.prev && flatDocsDirectories[currentIndex - 1]

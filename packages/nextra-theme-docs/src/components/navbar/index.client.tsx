@@ -11,7 +11,7 @@ import { Button } from 'nextra/components'
 import { useFSRoute } from 'nextra/hooks'
 import { ArrowRightIcon, MenuIcon } from 'nextra/icons'
 import type { MenuItem } from 'nextra/normalize-pages'
-import type { ReactElement, ReactNode } from 'react'
+import type { FC, ReactNode } from 'react'
 import { setMenu, useConfig, useMenu, useThemeConfig } from '../../stores'
 import { Anchor } from '../anchor'
 
@@ -24,13 +24,10 @@ const classes = {
   )
 }
 
-function NavbarMenu({
-  menu,
-  children
-}: {
+const NavbarMenu: FC<{
   menu: MenuItem
   children: ReactNode
-}): ReactElement {
+}> = ({ menu, children }) => {
   const routes = Object.fromEntries(
     (menu.children || []).map(route => [route.name, route])
   )
@@ -93,11 +90,9 @@ function NavbarMenu({
 
 const isMenu = (page: any): page is MenuItem => page.type === 'menu'
 
-export function ClientNavbar({
-  children
-}: {
-  children?: ReactNode
-}): ReactElement {
+export const ClientNavbar: FC<{
+  children: ReactNode
+}> = ({ children }) => {
   const items = useConfig().normalizePagesResult.topLevelNavbarItems
   const themeConfig = useThemeConfig()
 

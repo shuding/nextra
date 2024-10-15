@@ -7,7 +7,7 @@ import { Button, Collapse } from 'nextra/components'
 import { useFSRoute } from 'nextra/hooks'
 import { ArrowRightIcon, ExpandIcon } from 'nextra/icons'
 import type { Item, MenuItem, PageItem } from 'nextra/normalize-pages'
-import type { FocusEventHandler, ReactElement } from 'react'
+import type { FC, FocusEventHandler } from 'react'
 import { useEffect, useId, useMemo, useRef, useState } from 'react'
 import scrollIntoView from 'scroll-into-view-if-needed'
 import {
@@ -71,7 +71,7 @@ type FolderProps = {
   level: number
 }
 
-function Folder({ item, anchors, onFocus, level }: FolderProps): ReactElement {
+const Folder: FC<FolderProps> = ({ item, anchors, onFocus, level }) => {
   const routeOriginal = useFSRoute()
   const [route] = routeOriginal.split('#')
   const hasRoute = !!item.route // for item.type === 'menu' will be ''
@@ -163,8 +163,7 @@ function Folder({ item, anchors, onFocus, level }: FolderProps): ReactElement {
           if (clickedToggleIcon) {
             event.preventDefault()
           }
-          // If it's focused, we toggle it. Otherwise, always open it.
-          TreeState[item.route] = active || clickedToggleIcon ? !open : true
+          TreeState[item.route] = !open
           rerender({})
         }}
         onFocus={onFocus}
@@ -195,7 +194,7 @@ function Folder({ item, anchors, onFocus, level }: FolderProps): ReactElement {
   )
 }
 
-function Separator({ title }: { title: string }): ReactElement {
+const Separator: FC<{ title: string }> = ({ title }) => {
   return (
     <li
       className={cn(
@@ -216,15 +215,11 @@ const handleClick = () => {
   setMenu(false)
 }
 
-function File({
-  item,
-  anchors,
-  onFocus
-}: {
+const File: FC<{
   item: PageItem | Item
   anchors: Heading[]
   onFocus: FocusEventHandler
-}): ReactElement {
+}> = ({ item, anchors, onFocus }) => {
   const route = useFSRoute()
   // It is possible that the item doesn't have any route - for example, an external link.
   const active = item.route && [route, route + '/'].includes(item.route + '/')
@@ -284,13 +279,13 @@ const handleFocus: FocusEventHandler = event => {
   setFocusedRoute(route)
 }
 
-function Menu({
+const Menu: FC<MenuProps> = ({
   directories,
   anchors,
   className,
   onlyCurrentDocs,
   level
-}: MenuProps): ReactElement {
+}) => {
   return (
     <ul className={cn(classes.list, className)}>
       {directories.map(item => {
@@ -316,7 +311,7 @@ function Menu({
   )
 }
 
-export function MobileNav() {
+export const MobileNav: FC = () => {
   const { directories } = useConfig().normalizePagesResult
   const toc = useToc()
 
@@ -405,7 +400,7 @@ export function MobileNav() {
   )
 }
 
-export function Sidebar({ toc }: { toc: Heading[] }): ReactElement {
+export const Sidebar: FC<{ toc: Heading[] }> = ({ toc }) => {
   const { normalizePagesResult, hideSidebar } = useConfig()
   const [isExpanded, setIsExpanded] = useState(true)
   const [showToggleAnimation, setToggleAnimation] = useState(false)
@@ -462,7 +457,7 @@ export function Sidebar({ toc }: { toc: Heading[] }): ReactElement {
           )}
           ref={sidebarRef}
         >
-          {/* without asPopover check <Collapse />'s inner.clientWidth on `layout: "raw"` will be 0 and element will not have width on initial loading */}
+          {/* without !hideSidebar check <Collapse />'s inner.clientWidth on `layout: "raw"` will be 0 and element will not have width on initial loading */}
           {(!hideSidebar || !isExpanded) && (
             <Collapse isOpen={isExpanded} horizontal>
               <Menu

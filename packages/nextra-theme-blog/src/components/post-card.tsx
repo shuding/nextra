@@ -1,5 +1,5 @@
 import { Link } from 'next-view-transitions'
-import type { ReactElement } from 'react'
+import type { FC } from 'react'
 import type { BlogMetadata } from '../types'
 
 type PostCardProps = {
@@ -10,10 +10,10 @@ type PostCardProps = {
   readMore?: string
 }
 
-export function PostCard({
+export const PostCard: FC<PostCardProps> = ({
   post,
   readMore = 'Read More →'
-}: PostCardProps): ReactElement {
+}) => {
   const { description, date, title } = post.frontMatter
   const dateObj = date && new Date(date)
   return (
