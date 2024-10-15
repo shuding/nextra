@@ -1,6 +1,6 @@
 import type { ReactElement, ReactNode } from 'react'
 import { H1 } from '../../mdx-components/heading'
-import { NotFoundLink } from './404.client'
+import { NotFoundLink } from './index.client'
 
 type NotFoundPageProps = {
   content?: ReactNode

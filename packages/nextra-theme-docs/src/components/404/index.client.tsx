@@ -25,7 +25,6 @@ export function NotFoundLink({
         title: `Found broken \`${mounted ? pathname : ''}\` link. Please fix!`,
         labels
       })}
-      newWindow
     >
       {children}
     </Link>
