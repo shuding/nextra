@@ -120,7 +120,7 @@ describe('LaTeX', () => {
       expect(clean(result)).resolves.toMatchInlineSnapshot(`
         "/*@jsxRuntime automatic*/
         /*@jsxImportSource react*/
-        import { useMDXComponents as _provideComponents } from 'nextra/mdx'
+        import { useMDXComponents as _provideComponents } from 'next-mdx-import-source-file'
         export const title = ''
         export const metadata = {}
         import { MathJax, MathJaxContext } from 'nextra/components'
@@ -152,7 +152,7 @@ describe('LaTeX', () => {
       expect(clean(result)).resolves.toMatchInlineSnapshot(`
         "/*@jsxRuntime automatic*/
         /*@jsxImportSource react*/
-        import { useMDXComponents as _provideComponents } from 'nextra/mdx'
+        import { useMDXComponents as _provideComponents } from 'next-mdx-import-source-file'
         export const title = ''
         export const metadata = {}
         import { MathJax, MathJaxContext } from 'nextra/components'
@@ -184,7 +184,7 @@ ${MATH_LANG}`
       expect(clean(result)).resolves.toMatchInlineSnapshot(`
         "/*@jsxRuntime automatic*/
         /*@jsxImportSource react*/
-        import { useMDXComponents as _provideComponents } from 'nextra/mdx'
+        import { useMDXComponents as _provideComponents } from 'next-mdx-import-source-file'
         export const title = ''
         export const metadata = {}
         import foo from 'foo'
