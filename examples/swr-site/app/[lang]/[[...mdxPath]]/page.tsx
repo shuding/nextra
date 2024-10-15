@@ -21,8 +21,7 @@ export default async function Page(props: PageProps) {
   const { mdxPath, lang } = props.params
   const result = await importPage(mdxPath, lang)
   const { default: MDXContent, useTOC, metadata, title } = result
-  // TODO: fixme
-  const Wrapper = useMDXComponents().wrapper!
+  const Wrapper = useMDXComponents().wrapper
 
   return (
     <Wrapper toc={useTOC()} metadata={metadata} title={title}>

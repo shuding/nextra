@@ -5,7 +5,11 @@ import type { ComponentProps, FC, JSX } from 'react'
 import type { MDXWrapper } from '../types'
 import { LinkArrowIcon } from './icons/index.js'
 
-export type MDXComponents = {
+interface NestedMDXComponents {
+  [key: string]: NestedMDXComponents | FC<any> | keyof JSX.IntrinsicElements
+}
+
+export type MDXComponents = NestedMDXComponents & {
   [Key in keyof JSX.IntrinsicElements]?:
     | FC<ComponentProps<Key>>
     | keyof JSX.IntrinsicElements
@@ -15,7 +19,7 @@ export type MDXComponents = {
 
 const EXTERNAL_HREF_RE = /^https?:\/\//
 
-export const Anchor = ({ href = '', ...props }: ComponentProps<'a'>) => {
+export const Anchor: FC<ComponentProps<'a'>> = ({ href = '', ...props }) => {
   if (EXTERNAL_HREF_RE.test(href)) {
     return (
       <a href={href} target="_blank" rel="noreferrer" {...props}>
@@ -31,7 +35,7 @@ export const Anchor = ({ href = '', ...props }: ComponentProps<'a'>) => {
   return <ComponentToUse href={href} {...props} />
 }
 
-export function useMDXComponents(components?: MDXComponents): MDXComponents {
+export function useMDXComponents(components?: Readonly<MDXComponents>) {
   return {
     img: props =>
       createElement(
@@ -40,5 +44,5 @@ export function useMDXComponents(components?: MDXComponents): MDXComponents {
       ),
     a: Anchor,
     ...components
-  }
+  } satisfies MDXComponents
 }

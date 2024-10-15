@@ -33,14 +33,10 @@ export default async function Page({ params: { slug = [] } }) {
 
   const { default: MDXContent, useTOC, ...props } = evaluate(result)
 
-  const { wrapper, ...components } = useMDXComponents({
-    // @ts-expect-error fixme
+  const { wrapper: Wrapper, ...components } = useMDXComponents({
     $Tabs: Tabs,
     Callout
   })
-  // TODO: fixme
-  const Wrapper = wrapper!
-
   return (
     <Wrapper toc={useTOC()} {...props}>
       <MDXContent components={components} />

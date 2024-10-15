@@ -54,15 +54,18 @@ const Blockquote = withGitHubAlert(({ type, ...props }) => {
   return <Callout type={calloutType} {...props} />
 })
 
-type BlogMDXComponents = MDXComponents & {
-  DateFormatter?: FC<{ date: Date }>
-}
+type BlogMDXComponents = Readonly<
+  MDXComponents & {
+    DateFormatter?: FC<{ date: Date }>
+  }
+>
+
+const DEFAULT_COMPONENTS = useNextraMDXComponents()
 
 /* eslint sort-keys: error */
-export const useMDXComponents: typeof useNextraMDXComponents = (
-  components: BlogMDXComponents = {}
-) =>
-  useNextraMDXComponents({
+export const useMDXComponents = (components: BlogMDXComponents = {}) =>
+  ({
+    ...DEFAULT_COMPONENTS,
     blockquote: Blockquote,
     code: Code,
     details: Details,
@@ -103,4 +106,4 @@ export const useMDXComponents: typeof useNextraMDXComponents = (
       )
     },
     ...components
-  })
+  }) satisfies BlogMDXComponents

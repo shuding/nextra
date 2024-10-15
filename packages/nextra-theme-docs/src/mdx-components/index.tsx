@@ -14,6 +14,7 @@ import {
   withIcons
 } from 'nextra/components'
 import { useMDXComponents as useNextraMDXComponents } from 'nextra/mdx'
+import type { MDXComponents } from 'nextra/mdx'
 import { removeLinks } from 'nextra/remove-links'
 import type { ComponentProps, FC } from 'react'
 import { Sidebar } from '../components'
@@ -31,9 +32,12 @@ const Blockquote: FC<ComponentProps<'blockquote'>> = props => (
   />
 )
 
+const DEFAULT_COMPONENTS = useNextraMDXComponents()
+
 /* eslint sort-keys: error */
-export const useMDXComponents: typeof useNextraMDXComponents = components =>
-  useNextraMDXComponents({
+export const useMDXComponents = (components?: Readonly<MDXComponents>) =>
+  ({
+    ...DEFAULT_COMPONENTS,
     a: Link,
     blockquote: withGitHubAlert(({ type, ...props }) => {
       const calloutType = (
@@ -116,4 +120,4 @@ export const useMDXComponents: typeof useNextraMDXComponents = components =>
       )
     },
     ...components
-  })
+  }) satisfies MDXComponents
