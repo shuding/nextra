@@ -3,16 +3,13 @@
 import { useTheme } from 'next-themes'
 import { usePathname } from 'next/navigation'
 import { useMounted } from 'nextra/hooks'
-import type { ReactElement } from 'react'
+import type { FC } from 'react'
 import { useEffect } from 'react'
 
-export function Comments({
-  appId,
-  host = 'https://cusdis.com'
-}: {
+export const Comments: FC<{
   appId: string
   host?: string
-}): ReactElement | null {
+}> = ({ appId, host = 'https://cusdis.com' }) => {
   const pathname = usePathname()
   const { resolvedTheme } = useTheme()
   const mounted = useMounted()

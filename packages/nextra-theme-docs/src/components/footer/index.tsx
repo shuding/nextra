@@ -1,13 +1,13 @@
 import cn from 'clsx'
-import type { ComponentProps, ReactElement } from 'react'
+import type { ComponentProps, FC } from 'react'
 import { LocaleSwitch } from '../locale-switch'
 import { ThemeSwitch } from '../theme-switch'
 import { Switchers } from './switchers'
 
-export function Footer({
-  children,
-  className
-}: ComponentProps<'footer'>): ReactElement {
+export const Footer: FC<ComponentProps<'footer'>> = ({
+  className,
+  ...props
+}) => {
   return (
     <div className="_bg-gray-100 _pb-[env(safe-area-inset-bottom)] dark:_bg-neutral-900 print:_bg-transparent">
       <Switchers>
@@ -23,9 +23,8 @@ export function Footer({
           '_pl-[max(env(safe-area-inset-left),1.5rem)] _pr-[max(env(safe-area-inset-right),1.5rem)]',
           className
         )}
-      >
-        {children}
-      </footer>
+        {...props}
+      />
     </div>
   )
 }

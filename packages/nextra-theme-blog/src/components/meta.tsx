@@ -1,15 +1,15 @@
 import { Link } from 'next-view-transitions'
-import type { ReactElement, ReactNode } from 'react'
+import type { FC, ReactNode } from 'react'
 import type { BlogMetadata } from '../types'
 import { GoBack } from './go-back'
 
-export function Meta({
+export const Meta: FC<BlogMetadata & { children: ReactNode }> = ({
   author,
   tags,
   date,
   readingTime,
   children
-}: BlogMetadata & { children?: ReactNode }): ReactElement {
+}) => {
   const tagsEl = tags?.map(t => (
     <Link key={t} href={`/tags/${t}`} className="nextra-tag">
       {t}

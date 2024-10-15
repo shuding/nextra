@@ -2,7 +2,7 @@ import cn from 'clsx'
 // eslint-disable-next-line no-restricted-imports -- since we don't need newWindow prop
 import NextLink from 'next/link'
 import { DiscordIcon, GitHubIcon } from 'nextra/icons'
-import type { ReactElement, ReactNode } from 'react'
+import type { FC, ReactNode } from 'react'
 import { ClientNavbar } from './index.client'
 
 type NavbarProps = {
@@ -15,7 +15,7 @@ type NavbarProps = {
   chatIcon?: ReactNode
 }
 
-export function Navbar({
+export const Navbar: FC<NavbarProps> = ({
   children,
   logoLink = true,
   logo = (
@@ -30,7 +30,7 @@ export function Navbar({
   projectIcon = <GitHubIcon height="24" />,
   chatLink,
   chatIcon = <DiscordIcon width="24" />
-}: NavbarProps): ReactElement {
+}) => {
   return (
     <header
       className={cn(

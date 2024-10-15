@@ -4,7 +4,7 @@ import { useTheme } from 'next-themes'
 import { Select } from 'nextra/components'
 import { useMounted } from 'nextra/hooks'
 import { MoonIcon, SunIcon } from 'nextra/icons'
-import type { ReactElement } from 'react'
+import type { FC } from 'react'
 import { useThemeConfig } from '../stores'
 
 type ThemeSwitchProps = {
@@ -12,10 +12,7 @@ type ThemeSwitchProps = {
   className?: string
 }
 
-export function ThemeSwitch({
-  lite,
-  className
-}: ThemeSwitchProps): ReactElement | null {
+export const ThemeSwitch: FC<ThemeSwitchProps> = ({ lite, className }) => {
   const { setTheme, resolvedTheme, theme } = useTheme()
   const mounted = useMounted()
   const { darkMode, themeSwitch } = useThemeConfig()
