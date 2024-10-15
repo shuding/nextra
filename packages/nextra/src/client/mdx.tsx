@@ -1,7 +1,8 @@
 import type { MDXComponents as _MDXComponents } from '@mdx-js/react/lib'
 import Image, { type ImageProps } from 'next/image'
 import Link from 'next/link'
-import { ComponentProps, createElement } from 'react'
+import { createElement } from 'react'
+import type { ComponentProps } from 'react'
 import type { MDXWrapper } from '../types'
 import { LinkArrowIcon } from './icons/index.js'
 
