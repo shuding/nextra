@@ -104,6 +104,13 @@
 - Updated dependencies [99f34d3]
   - nextra@4.0.0-app-router.0
 
+## 3.0.12
+
+### Patch Changes
+
+- Updated dependencies [7e0093f]
+  - nextra@3.0.12
+
 ## 3.0.11
 
 ### Patch Changes

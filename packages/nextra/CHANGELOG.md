@@ -64,6 +64,13 @@
   Router, something may be broken, check
   https://github.com/shuding/nextra/tree/v4-v2/examples for the migration guide
 
+## 3.0.12
+
+### Patch Changes
+
+- 7e0093f: Fix `nextra/locales` middleware, redirect to the docs URL relative to
+  the `/<basePath>`.
+
 ## 3.0.11
 
 ### Patch Changes
