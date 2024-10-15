@@ -43,7 +43,7 @@ const createHeading = (Tag: `h${2 | 3 | 4 | 5 | 6}`) =>
       </Tag>
     )
   }
-const Blockquote = withGitHubAlert('blockquote', ({ type, ...props }) => {
+const Blockquote = withGitHubAlert(({ type, ...props }) => {
   const calloutType = (
     {
       caution: 'error',
@@ -66,7 +66,7 @@ export const useMDXComponents: typeof useNextraMDXComponents = (
   components: BlogMDXComponents = {}
 ) =>
   useNextraMDXComponents({
-    // @ts-expect-error -- fix me
+    // @ts-expect-error -- fixme
     blockquote: Blockquote,
     code: Code,
     details: Details,

@@ -36,7 +36,7 @@ export const useMDXComponents: typeof useNextraMDXComponents = components =>
   useNextraMDXComponents({
     a: Link,
     // @ts-expect-error -- fix me
-    blockquote: withGitHubAlert(Blockquote, ({ type, ...props }) => {
+    blockquote: withGitHubAlert(({ type, ...props }) => {
       const calloutType = (
         {
           caution: 'error',
@@ -48,7 +48,7 @@ export const useMDXComponents: typeof useNextraMDXComponents = components =>
       )[type]
 
       return <Callout type={calloutType} {...props} />
-    }),
+    }, Blockquote),
     code: Code,
     details: Details,
     h1: H1,

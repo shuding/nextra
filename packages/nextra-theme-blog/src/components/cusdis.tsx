@@ -15,20 +15,22 @@ export function Comments({
 }): ReactElement | null {
   const pathname = usePathname()
   const { resolvedTheme } = useTheme()
-  const theme = resolvedTheme === 'dark' ? 'dark' : 'light'
   const mounted = useMounted()
 
   useEffect(() => {
     try {
       // update the theme for the cusdis iframe when theme changed
-      window.CUSDIS?.setTheme(theme)
+      window.CUSDIS?.setTheme(resolvedTheme as 'dark' | 'light')
     } catch (error) {
       console.error(error)
     }
-  }, [theme])
+  }, [resolvedTheme])
 
   if (!appId) {
     console.warn('[nextra/cusdis] `appId` is required')
+    return null
+  }
+  if (!mounted) {
     return null
   }
 
@@ -40,9 +42,10 @@ export function Comments({
       data-app-id={appId}
       data-page-id={pathname}
       data-page-url={pathname}
-      data-page-title={mounted && document.title}
+      data-page-title={document.title}
+      data-theme={resolvedTheme}
     >
-      {mounted && <script async src="https://cusdis.com/js/cusdis.es.js" />}
+      <script async src="https://cusdis.com/js/cusdis.es.js" />
     </div>
   )
 }

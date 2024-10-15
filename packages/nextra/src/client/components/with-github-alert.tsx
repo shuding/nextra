@@ -1,6 +1,6 @@
 import type { ComponentProps, FC, ReactNode } from 'react'
 
-type Comp = FC<ComponentProps<'blockquote'>>
+type BlockquoteType = FC<ComponentProps<'blockquote'>>
 type T = (typeof GITHUB_ALERTS)[number]
 
 const GITHUB_ALERT_RE = /^\s*\[!(?<name>.*?)]\s*$/
@@ -16,10 +16,10 @@ const GITHUB_ALERTS = [
 const GITHUB_ALERT_TYPES = new Set<string>(GITHUB_ALERTS)
 
 export function withGitHubAlert(
-  Blockquote: Comp | string,
-  fn: FC<{ type: T; children: ReactNode }>
-): Comp {
-  return function HOC(props) {
+  fn: FC<{ type: T; children: ReactNode }>,
+  Component: BlockquoteType | 'blockquote' = 'blockquote'
+): BlockquoteType {
+  return function Blockquote(props) {
     if (Array.isArray(props.children)) {
       const str = props.children[1].props.children
       if (typeof str === 'string') {
@@ -41,10 +41,6 @@ export function withGitHubAlert(
       }
     }
 
-    return typeof Blockquote === 'string' ? (
-      Blockquote
-    ) : (
-      <Blockquote {...props} />
-    )
+    return <Component {...props} />
   }
 }
