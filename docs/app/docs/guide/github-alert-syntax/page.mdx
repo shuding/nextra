@@ -1,8 +1,12 @@
 # GitHub Alert Syntax
 
+`nextra-theme-docs` and `nextra-theme-blog` support replacing
+[GitHub alert syntax](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax#alerts)
+with `<Callout>` component for `.md`/`.mdx` files.
+
 ## Usage
 
-```md
+```md filename="Markdown"
 > [!NOTE]
 >
 > Useful information that users should know, even when skimming content.
@@ -45,3 +49,38 @@
 > [!CAUTION]
 >
 > Advises about risks or negative outcomes of certain actions.
+
+## Usage with Your Own Theme
+
+If you want to benefit this feature with your own theme and your own `<Callout>` component:
+
+import { Steps } from 'nextra/components'
+
+<Steps>
+
+### Create a `Blockquote` Component
+
+Import `withGitHubAlert` from `nextra/component` and create `Blockquote` component by calling `withGitHubAlert`
+function, where 1st argument your regular `<blockquote>` component and 2nd argument React HOC
+component which will be called when matching GitHub alert syntax, where `type` prop is `'note' | 'tip' | 'important' | 'warning' | 'caution'{:ts}`
+
+```jsx
+import { withGitHubAlert } from 'nextra/components'
+
+const Blockquote = withGitHubAlert(MyBlockquoteComponent, ({ type, ...props }) => {
+  return <MyCalloutComponent type={type} {...props} />
+})
+```
+
+### Provide `Blockquote` to `useMDXComponents`
+
+```jsx filename="my-mdx-components.js"
+export function useMDXComponents(components) {
+  return {
+    blockquote: Blockquote,
+    ...components
+  }
+}
+```
+
+</Steps>
