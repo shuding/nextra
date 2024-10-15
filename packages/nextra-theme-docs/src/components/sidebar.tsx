@@ -407,7 +407,7 @@ export function MobileNav() {
 
 export function Sidebar({ toc }: { toc: Heading[] }): ReactElement {
   const { normalizePagesResult, hideSidebar } = useConfig()
-  const [showSidebar, setSidebar] = useState(true)
+  const [isExpanded, setIsExpanded] = useState(true)
   const [showToggleAnimation, setToggleAnimation] = useState(false)
   const sidebarRef = useRef<HTMLDivElement>(null)
   const anchors = useMemo(() => toc.filter(v => v.depth === 2), [toc])
@@ -443,20 +443,20 @@ export function Sidebar({ toc }: { toc: Heading[] }): ReactElement {
           classes.aside,
           'max-md:_hidden',
           '_top-[--nextra-navbar-height] _shrink-0',
-          showSidebar ? '_w-64' : '_w-20',
+          isExpanded ? '_w-64' : '_w-20',
           hideSidebar ? '_hidden' : '_sticky _self-start'
         )}
       >
         <div
           className={cn(
             classes.wrapper,
-            showSidebar ? 'nextra-scrollbar' : 'no-scrollbar'
+            isExpanded ? 'nextra-scrollbar' : 'no-scrollbar'
           )}
           ref={sidebarRef}
         >
           {/* without asPopover check <Collapse />'s inner.clientWidth on `layout: "raw"` will be 0 and element will not have width on initial loading */}
-          {(!hideSidebar || !showSidebar) && (
-            <Collapse isOpen={showSidebar} horizontal>
+          {(!hideSidebar || !isExpanded) && (
+            <Collapse isOpen={isExpanded} horizontal>
               <Menu
                 className="nextra-menu-desktop"
                 // The sidebar menu, shows only the docs directories.
@@ -475,28 +475,28 @@ export function Sidebar({ toc }: { toc: Heading[] }): ReactElement {
           <div
             className={cn(
               classes.bottomMenu,
-              showSidebar
+              isExpanded
                 ? [hasI18n && '_justify-end', '_border-t']
                 : '_py-4 _flex-wrap _justify-center',
               showToggleAnimation && [
                 '*:_opacity-0',
-                showSidebar
+                isExpanded
                   ? '*:_animate-[nextra-fadein_1s_ease_.2s_forwards]'
                   : '*:_animate-[nextra-fadein2_1s_ease_.2s_forwards]'
               ]
             )}
           >
             <LocaleSwitch
-              lite={!showSidebar}
-              className={showSidebar ? '_grow' : 'max-md:_grow'}
+              lite={!isExpanded}
+              className={isExpanded ? '_grow' : 'max-md:_grow'}
             />
             <ThemeSwitch
-              lite={!showSidebar || hasI18n}
-              className={!showSidebar || hasI18n ? '' : '_grow'}
+              lite={!isExpanded || hasI18n}
+              className={!isExpanded || hasI18n ? '' : '_grow'}
             />
             {themeConfig.sidebar.toggleButton && (
               <Button
-                title={showSidebar ? 'Hide sidebar' : 'Show sidebar'}
+                title={isExpanded ? 'Collapse sidebar' : 'Expand sidebar'}
                 className={({ hover }) =>
                   cn(
                     '_rounded-md _p-2',
@@ -506,14 +506,14 @@ export function Sidebar({ toc }: { toc: Heading[] }): ReactElement {
                   )
                 }
                 onClick={() => {
-                  setSidebar(prev => !prev)
+                  setIsExpanded(prev => !prev)
                   setToggleAnimation(true)
                 }}
               >
                 <ExpandIcon
                   height="12"
                   className={cn(
-                    !showSidebar && 'first:*:_origin-[35%] first:*:_rotate-180'
+                    !isExpanded && 'first:*:_origin-[35%] first:*:_rotate-180'
                   )}
                 />
               </Button>
