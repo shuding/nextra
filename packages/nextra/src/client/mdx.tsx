@@ -27,9 +27,8 @@ export const Anchor = ({ href = '', ...props }: ComponentProps<'a'>) => {
   return <ComponentToUse href={href} {...props} />
 }
 
-export function useMDXComponents(components?: MDXComponents) {
+export function useMDXComponents(components?: MDXComponents): MDXComponents {
   return {
-    // @ts-expect-error -- fix me
     img: props =>
       createElement(
         typeof props.src === 'object' ? Image : 'img',

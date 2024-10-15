@@ -90,12 +90,12 @@ export type NextraThemeLayoutProps<TThemeConfig = ThemeConfig> = {
   children: ReactNode
 }
 
-export type MDXWrapper = FC<
-  {
+export type MDXWrapper = (
+  props: {
     toc: Heading[]
     children: ReactNode
   } & PageOpts
->
+) => ReactElement
 
 export type UseTOC = (props: Record<string, any>) => Heading[]
 
