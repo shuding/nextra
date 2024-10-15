@@ -1,7 +1,7 @@
+import { getPageMap } from 'nextra/pages'
+
 export async function getPosts() {
-  const { pageMap } = await import(
-    '../../.next/static/chunks/nextra-page-map-.mjs'
-  )
+  const pageMap = await getPageMap()
   return pageMap
     .find(item => item.route === '/posts')
     .children.filter(post => !post.frontMatter.draft && post.name !== 'index')
