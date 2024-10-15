@@ -23,3 +23,7 @@ declare module '*.svg' {
   import type { FC, SVGProps } from 'react'
   export const ReactComponent: FC<SVGProps<SVGElement>>
 }
+
+declare module 'next-mdx-import-source-file' {
+  export { useMDXComponents } from 'nextra/mdx'
+}

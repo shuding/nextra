@@ -3,7 +3,6 @@ export const metadata = {
 }
 
 import { CardsIcon, OneIcon, WarningIcon, BoxIcon } from '@components/icons'
-import { useMDXComponents } from 'nextra-theme-docs'
 import { compileMdx } from 'nextra/compile'
 import { Cards, RemoteContent } from 'nextra/components'
 
@@ -75,8 +74,7 @@ ${mdx2}
 ~~~mdx filename="MDX"
 ${mdx2}
 ~~~`)
-  const components = useMDXComponents({ Cards, CardsIcon, OneIcon, WarningIcon, BoxIcon })
-  return <RemoteContent compiledSource={result} components={components}  />
+  return <RemoteContent compiledSource={result} components={{ Cards, CardsIcon, OneIcon, WarningIcon, BoxIcon }}  />
 }
 
 <CardsPage />

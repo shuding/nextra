@@ -1,7 +1,7 @@
+import { useMDXComponents } from 'next-mdx-import-source-file'
 import jsxDevRuntime from 'react/jsx-dev-runtime'
 import jsxRuntime from 'react/jsx-runtime'
 import type { MDXComponents } from '../mdx.js'
-import { useMDXComponents } from '../mdx.js'
 
 type Scope = Record<string, unknown>
 
