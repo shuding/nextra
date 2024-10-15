@@ -44,6 +44,10 @@ export function withGitHubAlert(
       }
     }
 
-    return typeof Blockquote === 'string' ? Blockquote : <Blockquote {...props} />
+    return typeof Blockquote === 'string' ? (
+      Blockquote
+    ) : (
+      <Blockquote {...props} />
+    )
   }
 }

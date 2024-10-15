@@ -1,5 +1,6 @@
 import { Link } from 'next-view-transitions'
 import {
+  Callout,
   Code,
   Details,
   Pre,
@@ -8,9 +9,8 @@ import {
   Td,
   Th,
   Tr,
-  withIcons,
   withGitHubAlert,
-  Callout
+  withIcons
 } from 'nextra/components'
 import type { UseMDXComponents } from 'nextra/mdx'
 import { DEFAULT_COMPONENTS } from 'nextra/mdx'
