@@ -61,6 +61,10 @@ export default async function RootLayout({ children, params: { lang } }) {
           dark: 'rgb(15,23,42)',
           light: 'rgb(254, 252, 232)'
         }}
+        color={{
+          hue: { dark: 120, light: 0 },
+          saturation: { dark: 100, light: 100 }
+        }}
       />
       <body>
         <Layout
