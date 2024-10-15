@@ -153,3 +153,10 @@ export const RouteToFilepath = ${JSON.stringify(mdxPages, null, 2)}
 `
   return rawJs
 }
+
+export async function getPageMap(locale = '') {
+  const { pageMap } = await import(
+    `private-dot-next/static/chunks/nextra-page-map-${locale}.mjs`
+  )
+  return pageMap
+}
