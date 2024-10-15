@@ -1,5 +1,14 @@
 # nextra-theme-docs
 
+## 3.0.12
+
+### Patch Changes
+
+- 7e0093f: Fix `nextra/locales` middleware, redirect to the docs URL relative to
+  the `/<basePath>`.
+- Updated dependencies [7e0093f]
+  - nextra@3.0.12
+
 ## 3.0.11
 
 ### Patch Changes
