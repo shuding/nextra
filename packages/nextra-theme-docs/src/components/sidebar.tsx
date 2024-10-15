@@ -8,7 +8,7 @@ import { useFSRoute } from 'nextra/hooks'
 import { ArrowRightIcon, ExpandIcon } from 'nextra/icons'
 import type { Item, MenuItem, PageItem } from 'nextra/normalize-pages'
 import type { FocusEventHandler, ReactElement } from 'react'
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState, useId } from 'react'
 import scrollIntoView from 'scroll-into-view-if-needed'
 import {
   setFocusedRoute,
@@ -410,6 +410,7 @@ export function Sidebar({ toc }: { toc: Heading[] }): ReactElement {
   const [isExpanded, setIsExpanded] = useState(true)
   const [showToggleAnimation, setToggleAnimation] = useState(false)
   const sidebarRef = useRef<HTMLDivElement>(null)
+  const sidebarControlsId = useId()
 
   const { docsDirectories, activeThemeContext } = normalizePagesResult
   const includePlaceholder = activeThemeContext.layout === 'default'
@@ -443,6 +444,7 @@ export function Sidebar({ toc }: { toc: Heading[] }): ReactElement {
         <div className="max-xl:_hidden _h-0 _w-64 _shrink-0" />
       )}
       <aside
+        id={sidebarControlsId}
         className={cn(
           classes.aside,
           'max-md:_hidden',
@@ -498,6 +500,8 @@ export function Sidebar({ toc }: { toc: Heading[] }): ReactElement {
             />
             {themeConfig.sidebar.toggleButton && (
               <Button
+                aria-expanded={isExpanded}
+                aria-controls={sidebarControlsId}
                 title={isExpanded ? 'Collapse sidebar' : 'Expand sidebar'}
                 className={({ hover }) =>
                   cn(
