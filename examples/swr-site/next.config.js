@@ -18,10 +18,7 @@ const withNextra = nextra({
     return pageMap
   },
   latex: true,
-  useContentDir: true,
-  mdxOptions: {
-    providerImportSource: 'nextra-theme-docs'
-  }
+  useContentDir: true
 })
 
 const withBundleAnalyzer = bundleAnalyzer({

@@ -13,7 +13,10 @@ export default async function RootLayout({ children }) {
       <body>
         <Banner storageKey="4.0-release">
           <a href="https://nextra.site" target="_blank" rel="noreferrer">
-            🎉 Nextra 4.0 is released. Read more →
+            🎉 Nextra 4.0 is released.{' '}
+            <a href="#" className="_text-primary-600">
+              Read more →
+            </a>
           </a>
         </Banner>
 

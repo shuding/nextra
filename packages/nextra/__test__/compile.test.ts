@@ -19,7 +19,7 @@ export default foo`,
     expect(clean(result)).resolves.toMatchInlineSnapshot(`
       "/*@jsxRuntime automatic*/
       /*@jsxImportSource react*/
-      import { useMDXComponents as _provideComponents } from 'nextra/mdx'
+      import { useMDXComponents as _provideComponents } from 'next-mdx-import-source-file'
       export const title = ''
       export const metadata = {}
       import foo from './foo'
@@ -46,7 +46,7 @@ export { foo as default } from './foo'`,
     expect(clean(result)).resolves.toMatchInlineSnapshot(`
       "/*@jsxRuntime automatic*/
       /*@jsxImportSource react*/
-      import { useMDXComponents as _provideComponents } from 'nextra/mdx'
+      import { useMDXComponents as _provideComponents } from 'next-mdx-import-source-file'
       export const title = ''
       export const metadata = {}
       import { foo as MDXLayout } from './foo'
@@ -113,7 +113,7 @@ export const TagName = () => {
     expect(clean(result)).resolves.toMatchInlineSnapshot(`
       "/*@jsxRuntime automatic*/
       /*@jsxImportSource react*/
-      import { useMDXComponents as _provideComponents } from 'nextra/mdx'
+      import { useMDXComponents as _provideComponents } from 'next-mdx-import-source-file'
       export const title = 'My Header'
       export const metadata = {
         title: 'My Header'
@@ -190,7 +190,7 @@ export const TagName = () => {
     expect(clean(result)).resolves.toMatchInlineSnapshot(`
       "/*@jsxRuntime automatic*/
       /*@jsxImportSource react*/
-      import { useMDXComponents as _provideComponents } from 'nextra/mdx'
+      import { useMDXComponents as _provideComponents } from 'next-mdx-import-source-file'
       export const title = ''
       export const metadata = {}
       export function useTOC(props) {
@@ -252,7 +252,7 @@ import Last from './three.mdx'
     expect(clean(result)).resolves.toMatchInlineSnapshot(`
       "/*@jsxRuntime automatic*/
       /*@jsxImportSource react*/
-      import { useMDXComponents as _provideComponents } from 'nextra/mdx'
+      import { useMDXComponents as _provideComponents } from 'next-mdx-import-source-file'
       export const title = ''
       export const metadata = {}
       import FromMdx, { useTOC as useTOC0 } from './one.mdx'

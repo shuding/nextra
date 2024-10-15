@@ -5,9 +5,6 @@ import nextra from 'nextra'
  * @type {import('nextra').NextraConfig}
  */
 const withNextra = nextra({
-  mdxOptions: {
-    providerImportSource: 'nextra-theme-docs'
-  },
   latex: true,
   defaultShowCopyCode: true
 })

@@ -84,6 +84,11 @@ const nextra: Nextra = nextraConfig => {
             )
           }
         }
+        config.resolve.alias['next-mdx-import-source-file'] = [
+          'private-next-root-dir/src/mdx-components',
+          'private-next-root-dir/mdx-components',
+          'nextra/mdx'
+        ]
         config.module.rules.push({
           test: MARKDOWN_EXTENSION_RE,
           oneOf: [
