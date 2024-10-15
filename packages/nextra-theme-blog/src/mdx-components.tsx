@@ -66,7 +66,6 @@ export const useMDXComponents: typeof useNextraMDXComponents = (
   components: BlogMDXComponents = {}
 ) =>
   useNextraMDXComponents({
-    // @ts-expect-error -- fixme
     blockquote: Blockquote,
     code: Code,
     details: Details,

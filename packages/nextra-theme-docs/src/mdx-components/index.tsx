@@ -35,7 +35,6 @@ const Blockquote: FC<ComponentProps<'blockquote'>> = props => (
 export const useMDXComponents: typeof useNextraMDXComponents = components =>
   useNextraMDXComponents({
     a: Link,
-    // @ts-expect-error -- fix me
     blockquote: withGitHubAlert(({ type, ...props }) => {
       const calloutType = (
         {

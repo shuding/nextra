@@ -14,7 +14,7 @@ export function HOC_MDXWrapper(
   useTOC: UseTOC,
   pageOpts: PageOpts
 ): FC {
-  return function MDXWrapper(props): ReactElement {
+  return function MDXWrapper(props) {
     const { wrapper: Wrapper } = useMDXComponents()
     // @ts-expect-error -- fixme
     const children = createElement(MDXContent, props)

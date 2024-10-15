@@ -1,12 +1,15 @@
-import type { MDXComponents as _MDXComponents } from '@mdx-js/react/lib'
 import Image, { type ImageProps } from 'next/image'
 import Link from 'next/link'
 import { createElement } from 'react'
-import type { ComponentProps } from 'react'
+import type { ComponentProps, FC, JSX } from 'react'
 import type { MDXWrapper } from '../types'
 import { LinkArrowIcon } from './icons/index.js'
 
-export type MDXComponents = Omit<_MDXComponents, 'wrapper'> & {
+export type MDXComponents = {
+  [Key in keyof JSX.IntrinsicElements]?:
+    | FC<ComponentProps<Key>>
+    | keyof JSX.IntrinsicElements
+} & {
   wrapper?: MDXWrapper
 }
 
