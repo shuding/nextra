@@ -1,6 +1,6 @@
 import { match as matchLocale } from '@formatjs/intl-localematcher'
 import Negotiator from 'negotiator'
-import { addBasePath } from 'next/dist/esm/client/add-base-path.js'
+import { addBasePath } from 'next/dist/client/add-base-path'
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 
