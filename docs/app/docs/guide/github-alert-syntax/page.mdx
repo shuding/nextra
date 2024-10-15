@@ -62,12 +62,12 @@ import { Steps } from 'nextra/components'
 ### Create a `<Blockquote>` Component
 
 To create a `<Blockquote>` component, start by importing `withGitHubAlert` from
-`nextra/components`. You should then create the `<Blockquote>` component by invoking the
-`withGitHubAlert` function.
+`nextra/components`. You should then create the `<Blockquote>` component by
+invoking the `withGitHubAlert` function.
 
-The first argument should be your standard
-`<blockquote>` component, and the second argument should be a React HOC component
-that handles the GitHub alert syntax.
+The first argument should be your standard `<blockquote>` component, and the
+second argument should be a React HOC component that handles the GitHub alert
+syntax.
 
 The `type` prop can be one of the following:
 `'note' | 'tip' | 'important' | 'warning' | 'caution'{:ts}`.
@@ -85,7 +85,8 @@ const Blockquote = withGitHubAlert(
 
 ### Provide `<Blockquote>` to `useMDXComponents`
 
-To make the `<Blockquote>` component available, you can integrate it into the `useMDXComponents` function:
+To make the `<Blockquote>` component available, you can integrate it into the
+`useMDXComponents` function:
 
 ```jsx filename="my-mdx-components.js"
 export function useMDXComponents(components) {
