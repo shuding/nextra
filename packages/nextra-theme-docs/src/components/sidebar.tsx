@@ -8,7 +8,7 @@ import { useFSRoute } from 'nextra/hooks'
 import { ArrowRightIcon, ExpandIcon } from 'nextra/icons'
 import type { Item, MenuItem, PageItem } from 'nextra/normalize-pages'
 import type { FocusEventHandler, ReactElement } from 'react'
-import { useEffect, useMemo, useRef, useState, useId } from 'react'
+import { useEffect, useId, useMemo, useRef, useState } from 'react'
 import scrollIntoView from 'scroll-into-view-if-needed'
 import {
   setFocusedRoute,
@@ -429,11 +429,13 @@ export function Sidebar({ toc }: { toc: Heading[] }): ReactElement {
   }, [])
 
   const themeConfig = useThemeConfig()
-  const anchors = useMemo(() => (
-    // When the viewport size is larger than `md`, hide the anchors in
-    // the sidebar when `floatTOC` is enabled.
-    themeConfig.toc.float ? [] : toc.filter(v => v.depth === 2)
-  ), [themeConfig.toc.float, toc])
+  const anchors = useMemo(
+    () =>
+      // When the viewport size is larger than `md`, hide the anchors in
+      // the sidebar when `floatTOC` is enabled.
+      themeConfig.toc.float ? [] : toc.filter(v => v.depth === 2),
+    [themeConfig.toc.float, toc]
+  )
   const hasI18n = themeConfig.i18n.length > 0
   const hasMenu =
     themeConfig.darkMode || hasI18n || themeConfig.sidebar.toggleButton
