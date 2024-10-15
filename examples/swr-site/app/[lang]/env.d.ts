@@ -6,8 +6,3 @@ declare module '*.mdx' {
   }>
   export default ReactComponent
 }
-
-declare module '.next/static/chunks/nextra-page-map-*.mjs' {
-  import type { PageMapItem } from 'nextra'
-  export const pageMap: PageMapItem[]
-}

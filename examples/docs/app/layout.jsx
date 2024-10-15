@@ -1,6 +1,7 @@
 /* eslint-env node */
 import { Layout, Navbar } from 'nextra-theme-docs'
 import { Banner, Head } from 'nextra/components'
+import { getPageMap } from 'nextra/page-map'
 
 export const { viewport } = Head
 
@@ -25,10 +26,6 @@ export const metadata = {
 }
 
 export default async function RootLayout({ children }) {
-  const { pageMap } = await import(
-    '../.next/static/chunks/nextra-page-map-.mjs'
-  )
-
   return (
     <html lang="en" dir="ltr" suppressHydrationWarning>
       <Head faviconGlyph="✦" />
@@ -37,7 +34,7 @@ export default async function RootLayout({ children }) {
           editLink="Edit this page on GitHub"
           docsRepositoryBase="https://github.com/shuding/nextra/blob/core/examples/docs"
           sidebar={{ defaultMenuCollapseLevel: 1 }}
-          pageMap={pageMap}
+          pageMap={await getPageMap()}
         >
           <Banner storageKey="Nextra 2">Nextra 2 Alpha</Banner>
           <Navbar

@@ -2,6 +2,7 @@ import { NextraLogo, VercelLogo } from '@components/icons'
 import type { Metadata, Viewport } from 'next'
 import { Footer, Layout, Link, Navbar } from 'nextra-theme-docs'
 import { Banner, Head } from 'nextra/components'
+import { getPageMap } from 'nextra/page-map'
 import type { ReactNode } from 'react'
 import './globals.css'
 import cn from 'clsx'
@@ -56,8 +57,6 @@ export default async function RootLayout({
 }: {
   children: ReactNode
 }) {
-  const { pageMap } = await import('.next/static/chunks/nextra-page-map-.mjs')
-
   return (
     <html
       lang="en"
@@ -68,7 +67,7 @@ export default async function RootLayout({
       <Head />
       <body>
         <Layout
-          pageMap={pageMap}
+          pageMap={await getPageMap()}
           docsRepositoryBase="https://github.com/shuding/nextra/tree/main/docs"
           editLink="Edit this page on GitHub →"
           sidebar={{ defaultMenuCollapseLevel: 1 }}
