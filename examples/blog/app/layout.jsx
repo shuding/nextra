@@ -12,11 +12,9 @@ export default async function RootLayout({ children }) {
       <Head backgroundColor={{ dark: '#0f172a', light: '#fefce8' }} />
       <body>
         <Banner storageKey="4.0-release">
-          <a href="https://nextra.site" target="_blank" rel="noreferrer">
-            🎉 Nextra 4.0 is released.{' '}
-            <a href="#" className="_text-primary-600">
-              Read more →
-            </a>
+          🎉 Nextra 4.0 is released.{' '}
+          <a href="#" className="_text-primary-600">
+            Read more →
           </a>
         </Banner>
 

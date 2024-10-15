@@ -15,7 +15,7 @@ const GITHUB_ALERTS = [
 const GITHUB_ALERT_TYPES = new Set(GITHUB_ALERTS)
 
 export function withGitHubAlert(
-  Blockquote: T,
+  Blockquote: T | string,
   fn: FC<{
     type: (typeof GITHUB_ALERTS)[number]
     children: ReactNode
@@ -44,6 +44,6 @@ export function withGitHubAlert(
       }
     }
 
-    return <Blockquote {...props} />
+    return typeof Blockquote === 'string' ? Blockquote : <Blockquote {...props} />
   }
 }

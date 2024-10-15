@@ -8,7 +8,9 @@ import {
   Td,
   Th,
   Tr,
-  withIcons
+  withIcons,
+  withGitHubAlert,
+  Callout
 } from 'nextra/components'
 import type { UseMDXComponents } from 'nextra/mdx'
 import { DEFAULT_COMPONENTS } from 'nextra/mdx'
@@ -49,6 +51,20 @@ const createHeading = (Tag: `h${2 | 3 | 4 | 5 | 6}`) =>
 
 const EXTERNAL_HREF_RE = /^https?:\/\//
 
+const Blockquote = withGitHubAlert('blockquote', ({ type, ...props }) => {
+  const calloutType = (
+    {
+      note: 'info',
+      tip: 'default',
+      important: 'error', // TODO
+      warning: 'warning',
+      caution: 'error'
+    } as const
+  )[type]
+
+  return <Callout type={calloutType} {...props} />
+})
+
 /* eslint sort-keys: error */
 export const useMDXComponents: UseMDXComponents = components => ({
   ...DEFAULT_COMPONENTS,
@@ -59,6 +75,8 @@ export const useMDXComponents: UseMDXComponents = components => ({
     const ComponentToUse = href.startsWith('#') ? 'a' : Link
     return <ComponentToUse href={href} {...props} />
   },
+  // @ts-expect-error -- fix me
+  blockquote: Blockquote,
   code: Code,
   details: Details,
   h2: createHeading('h2'),
