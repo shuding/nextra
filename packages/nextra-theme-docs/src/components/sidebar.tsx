@@ -410,7 +410,6 @@ export function Sidebar({ toc }: { toc: Heading[] }): ReactElement {
   const [isExpanded, setIsExpanded] = useState(true)
   const [showToggleAnimation, setToggleAnimation] = useState(false)
   const sidebarRef = useRef<HTMLDivElement>(null)
-  const anchors = useMemo(() => toc.filter(v => v.depth === 2), [toc])
 
   const { docsDirectories, activeThemeContext } = normalizePagesResult
   const includePlaceholder = activeThemeContext.layout === 'default'
@@ -429,6 +428,11 @@ export function Sidebar({ toc }: { toc: Heading[] }): ReactElement {
   }, [])
 
   const themeConfig = useThemeConfig()
+  const anchors = useMemo(() => (
+    // When the viewport size is larger than `md`, hide the anchors in
+    // the sidebar when `floatTOC` is enabled.
+    themeConfig.toc.float ? [] : toc.filter(v => v.depth === 2)
+  ), [themeConfig.toc.float, toc])
   const hasI18n = themeConfig.i18n.length > 0
   const hasMenu =
     themeConfig.darkMode || hasI18n || themeConfig.sidebar.toggleButton
@@ -461,9 +465,7 @@ export function Sidebar({ toc }: { toc: Heading[] }): ReactElement {
                 className="nextra-menu-desktop"
                 // The sidebar menu, shows only the docs directories.
                 directories={docsDirectories}
-                // When the viewport size is larger than `md`, hide the anchors in
-                // the sidebar when `floatTOC` is enabled.
-                anchors={themeConfig.toc.float ? [] : anchors}
+                anchors={anchors}
                 onlyCurrentDocs
                 level={0}
               />
