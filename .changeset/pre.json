@@ -7,9 +7,13 @@
     "nextra-theme-docs": "3.0.0"
   },
   "changesets": [
+    "calm-dolphins-swim",
     "calm-lemons-poke",
+    "cool-shrimps-fetch",
     "cuddly-eagles-tie",
+    "cyan-comics-drive",
     "early-mangos-compare",
+    "fast-poets-hear",
     "few-apples-breathe",
     "green-crews-add",
     "grumpy-coats-kneel",
@@ -26,6 +30,7 @@
     "small-pumas-repeat",
     "spotty-cobras-flash",
     "stupid-mugs-rule",
+    "tricky-cougars-tell",
     "wet-dodos-move",
     "wild-plums-brake"
   ]
