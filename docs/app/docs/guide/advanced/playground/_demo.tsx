@@ -80,6 +80,7 @@ Z --> G
             </div>
           }
           source={rawMdx}
+          // @ts-expect-error fixme
           components={{ Mermaid, $Tabs: Tabs }}
         />
       </div>
