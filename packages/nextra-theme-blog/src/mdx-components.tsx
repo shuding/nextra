@@ -54,11 +54,11 @@ const EXTERNAL_HREF_RE = /^https?:\/\//
 const Blockquote = withGitHubAlert('blockquote', ({ type, ...props }) => {
   const calloutType = (
     {
+      caution: 'error',
+      important: 'error', // TODO
       note: 'info',
       tip: 'default',
-      important: 'error', // TODO
-      warning: 'warning',
-      caution: 'error'
+      warning: 'warning'
     } as const
   )[type]
 

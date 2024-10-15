@@ -1,6 +1,7 @@
 import type { ComponentProps, FC, ReactNode } from 'react'
 
-type T = FC<ComponentProps<'blockquote'>>
+type Comp = FC<ComponentProps<'blockquote'>>
+type T = (typeof GITHUB_ALERTS)[number]
 
 const GITHUB_ALERT_RE = /^\s*\[!(?<name>.*?)]\s*$/
 
@@ -12,35 +13,31 @@ const GITHUB_ALERTS = [
   'caution'
 ] as const
 
-const GITHUB_ALERT_TYPES = new Set(GITHUB_ALERTS)
+const GITHUB_ALERT_TYPES = new Set<string>(GITHUB_ALERTS)
 
 export function withGitHubAlert(
-  Blockquote: T | string,
-  fn: FC<{
-    type: (typeof GITHUB_ALERTS)[number]
-    children: ReactNode
-  }>
-): T {
-  return props => {
+  Blockquote: Comp | string,
+  fn: FC<{ type: T; children: ReactNode }>
+): Comp {
+  return function HOC(props) {
     if (Array.isArray(props.children)) {
-      const el = props.children[1]
-      const content = typeof el === 'object' && el.props.children
-      const alertName = content
-        .match(GITHUB_ALERT_RE)
-        ?.groups?.name.toLowerCase()
+      const str = props.children[1].props.children
+      if (typeof str === 'string') {
+        const alertName = str.match(GITHUB_ALERT_RE)?.groups?.name.toLowerCase()
 
-      if (GITHUB_ALERT_TYPES.has(alertName)) {
-        return fn({
-          ...props,
-          type: alertName,
-          children: [
-            <b key={0}>
-              {alertName[0].toUpperCase()}
-              {alertName.slice(1)}
-            </b>,
-            ...props.children.slice(2)
-          ]
-        })
+        if (alertName && GITHUB_ALERT_TYPES.has(alertName)) {
+          return fn({
+            ...props,
+            type: alertName as T,
+            children: [
+              <b key={0}>
+                {alertName[0].toUpperCase()}
+                {alertName.slice(1)}
+              </b>,
+              ...props.children.slice(2)
+            ]
+          })
+        }
       }
     }
 
