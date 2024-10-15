@@ -18,13 +18,10 @@ import { Meta } from './components/meta'
 import { isValidDate } from './is-valid-date'
 import type { BlogMetadata } from './types'
 
-const createHeading = (Tag: `h${2 | 3 | 4 | 5 | 6}`) =>
-  function HeadingLink({
-    children,
-    id,
-    className,
-    ...props
-  }: ComponentProps<typeof Tag>) {
+const createHeading = (
+  Tag: `h${2 | 3 | 4 | 5 | 6}`
+): FC<ComponentProps<typeof Tag>> =>
+  function HeadingLink({ children, id, className, ...props }) {
     return (
       <Tag
         id={id}

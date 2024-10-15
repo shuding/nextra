@@ -1,14 +1,11 @@
 import cn from 'clsx'
-import type { ComponentProps } from 'react'
+import type { ComponentProps, FC } from 'react'
 import { HeadingAnchor } from './heading-anchor.client'
 
-const createHeading = (Tag: `h${1 | 2 | 3 | 4 | 5 | 6}`) =>
-  function Heading({
-    children,
-    id,
-    className,
-    ...props
-  }: ComponentProps<typeof Tag>) {
+const createHeading = (
+  Tag: `h${1 | 2 | 3 | 4 | 5 | 6}`
+): FC<ComponentProps<typeof Tag>> =>
+  function Heading({ children, id, className, ...props }) {
     const _class = // can be added by footnotes
       className === 'sr-only'
         ? '_sr-only'
