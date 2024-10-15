@@ -9,6 +9,7 @@ export default {
   'custom-css': '',
   'static-exports': '',
   search: '',
+  'github-alert-syntax': '',
   'built-ins': 'Built-ins Components',
   advanced: ''
 }
