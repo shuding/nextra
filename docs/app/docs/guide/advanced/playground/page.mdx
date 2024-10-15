@@ -30,22 +30,3 @@ import { Playground } from 'nextra/components'
   fallback={<div>Loading playground...</div>}
 />
 ```
-
-## Usage with `nextra-theme-docs`/ `nextra-theme-blog`
-
-To avoid have unstyled elements, import `useMDXComponents` from corresponding
-theme, call it and pass returned components in `components` prop, your custom
-components can be passed in first argument:
-
-```mdx {1,6-8}
-import { useMDXComponents } from 'nextra-theme-docs'
-import { Playground } from 'nextra/components'
-
-<Playground
-  source="## Hello world"
-  components={useMDXComponents({
-    h2: props => <h2 {...props} className="myClass" />
-  })}
-  fallback={<div>Loading playground...</div>}
-/>
-```

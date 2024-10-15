@@ -1,4 +1,3 @@
-import { useMDXComponents } from 'nextra-theme-docs'
 import { compileMdx } from 'nextra/compile'
 import { Mermaid, RemoteContent } from 'nextra/components'
 
@@ -43,8 +42,5 @@ Z --> G;
 ${mermaidCodeblock}
 ~~~
 `)
-
-  const components = useMDXComponents({ Mermaid })
-
-  return <RemoteContent compiledSource={result} components={components} />
+  return <RemoteContent compiledSource={result} components={{ Mermaid }} />
 }

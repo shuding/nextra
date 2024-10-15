@@ -16,12 +16,7 @@ import type { UseMDXComponents } from 'nextra/mdx'
 import { DEFAULT_COMPONENTS } from 'nextra/mdx'
 import type { ComponentProps } from 'react'
 import { Meta } from './components/meta'
-
-const DATE_RE = /^\d{4}-\d{2}-\d{2}(T\d{2}:\d{2})?(:\d{2}\.\d{3}Z)?$/
-const DATE_RE_WITH_SLASH = /^\d{4}\/\d{1,2}\/\d{1,2}( \d{1,2}:\d{1,2})?$/
-
-export const isValidDate = (date: string): boolean =>
-  DATE_RE.test(date) || DATE_RE_WITH_SLASH.test(date)
+import { isValidDate } from './is-valid-date'
 
 const createHeading = (Tag: `h${2 | 3 | 4 | 5 | 6}`) =>
   function HeadingLink({

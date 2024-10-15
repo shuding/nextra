@@ -1,6 +1,5 @@
 'use client'
 
-import { useMDXComponents } from 'nextra-theme-docs'
 import { Code, Mermaid, Playground, Pre, Tabs } from 'nextra/components'
 import { MdxIcon } from 'nextra/icons'
 import { useCallback, useEffect, useRef, useState } from 'react'
@@ -81,7 +80,7 @@ Z --> G
             </div>
           }
           source={rawMdx}
-          components={useMDXComponents({ Mermaid, $Tabs: Tabs })}
+          components={{ Mermaid, $Tabs: Tabs }}
         />
       </div>
     </div>

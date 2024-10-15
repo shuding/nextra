@@ -1,4 +1,3 @@
-import { useMDXComponents } from 'nextra-theme-docs'
 import { compileMdx } from 'nextra/compile'
 import { RemoteContent, Tabs } from 'nextra/components'
 
@@ -27,8 +26,5 @@ npm i -D @graphql-eslint/eslint-plugin
 ~~~md filename="Markdown" /npm2yarn/
 ${codeBlock}
 ~~~`)
-  return <RemoteContent
-    compiledSource={result}
-    components={useMDXComponents({ $Tabs: Tabs })}
-  />
+  return <RemoteContent compiledSource={result} components={{ $Tabs: Tabs }} />
 }
