@@ -212,7 +212,7 @@ export const Link = ({ href = '', className, ...props }: AnchorProps) => (
     href={href}
     newWindow={EXTERNAL_HREF_REGEX.test(href)}
     className={cn(
-      '_text-primary-600 _underline _decoration-from-font [text-underline-position:from-font]',
+      '_text-primary-600 _underline hover:_no-underline _decoration-from-font [text-underline-position:from-font]',
       className
     )}
     {...props}
