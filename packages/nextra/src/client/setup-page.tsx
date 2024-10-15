@@ -6,11 +6,11 @@
 import type { FC, ReactElement } from 'react'
 import { createElement } from 'react'
 import type { MDXWrapper, PageOpts, UseTOC } from '../types'
-import type { UseMDXComponents } from './mdx.js'
+import type { useMDXComponents as _useMDXComponents } from './mdx.js'
 
 export function HOC_MDXWrapper(
   MDXContent: MDXWrapper,
-  useMDXComponents: UseMDXComponents,
+  useMDXComponents: typeof _useMDXComponents,
   useTOC: UseTOC,
   pageOpts: PageOpts
 ): FC {
