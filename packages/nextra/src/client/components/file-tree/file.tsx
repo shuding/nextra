@@ -1,5 +1,5 @@
 import cn from 'clsx'
-import type { ReactElement } from 'react'
+import type { FC, ReactElement } from 'react'
 import { FileIcon } from '../../icons/index.js'
 
 export type FileProps = {
@@ -7,7 +7,7 @@ export type FileProps = {
   active?: boolean
 }
 
-export const File = ({ name, active }: FileProps) => (
+export const File: FC<FileProps> = ({ name, active }) => (
   <li
     className={cn(
       '_flex _items-center _gap-1 _break-all',

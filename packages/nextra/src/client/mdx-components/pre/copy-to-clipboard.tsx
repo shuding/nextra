@@ -1,11 +1,11 @@
 'use client'
 
-import type { ComponentProps, ReactElement } from 'react'
+import type { ComponentProps, FC } from 'react'
 import { useCallback, useEffect, useState } from 'react'
 import { Button } from '../../components/button.js'
 import { CheckIcon, CopyIcon } from '../../icons/index.js'
 
-export function CopyToClipboard(props: ComponentProps<'button'>): ReactElement {
+export const CopyToClipboard: FC<ComponentProps<'button'>> = props => {
   const [isCopied, setCopied] = useState(false)
 
   useEffect(() => {

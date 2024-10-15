@@ -9,7 +9,7 @@ import {
 import cn from 'clsx'
 import NextLink from 'next/link'
 import { useRouter } from 'next/navigation'
-import type { FocusEventHandler, ReactElement, SyntheticEvent } from 'react'
+import type { FC, FocusEventHandler, ReactElement, SyntheticEvent } from 'react'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { useMounted } from '../hooks/index.js'
 import { InformationCircleIcon, SpinnerIcon } from '../icons/index.js'
@@ -59,13 +59,13 @@ const DEV_SEARCH_NOTICE = (
   </>
 )
 
-export function Search({
+export const Search: FC<SearchProps> = ({
   className,
   emptyResult = 'No results found.',
   errorText = 'Failed to load search index.',
   loading = 'Loading…',
   placeholder = 'Search documentation…'
-}: SearchProps): ReactElement {
+}) => {
   const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState<ReactElement | string>('')
   const [results, setResults] = useState<PagefindResult[]>([])

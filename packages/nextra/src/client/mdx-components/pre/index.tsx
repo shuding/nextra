@@ -1,5 +1,5 @@
 import cn from 'clsx'
-import type { ComponentProps, ReactElement, ReactNode } from 'react'
+import type { ComponentProps, FC, ReactNode } from 'react'
 import { WordWrapIcon } from '../../icons/index.js'
 import { CopyToClipboard } from './copy-to-clipboard.js'
 import { ToggleWordWrapButton } from './toggle-word-wrap-button.js'
@@ -20,7 +20,7 @@ export type PreProps = ComponentProps<'pre'> & {
   icon?: ReactNode
 }
 
-export function Pre({
+export const Pre: FC<PreProps> = ({
   children,
   className,
   'data-filename': filename,
@@ -30,7 +30,7 @@ export function Pre({
   'data-pagefind-ignore': pagefindIgnore,
   icon,
   ...props
-}: PreProps): ReactElement {
+}) => {
   const copyButton = copy === '' && (
     <CopyToClipboard className={filename ? '_ms-auto' : ''} />
   )

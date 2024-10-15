@@ -1,5 +1,5 @@
 import cn from 'clsx'
-import type { ReactElement, ReactNode } from 'react'
+import type { FC, ReactElement, ReactNode } from 'react'
 import { InformationCircleIcon } from '../icons/index.js'
 
 const TypeToEmoji = {
@@ -32,11 +32,11 @@ type CalloutProps = {
   children: ReactNode
 }
 
-export function Callout({
+export const Callout: FC<CalloutProps> = ({
   children,
   type = 'default',
   emoji = TypeToEmoji[type]
-}: CalloutProps): ReactElement {
+}) => {
   return (
     <div
       className={cn(

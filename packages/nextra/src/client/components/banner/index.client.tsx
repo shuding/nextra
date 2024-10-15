@@ -1,16 +1,13 @@
 'use client'
 
 import cn from 'clsx'
-import type { ReactElement, ReactNode } from 'react'
+import type { FC, ReactNode } from 'react'
 import { Button } from '../button.js'
 
-export function CloseBannerButton({
-  storageKey,
-  children
-}: {
+export const CloseBannerButton: FC<{
   storageKey: string
   children: ReactNode
-}): ReactElement {
+}> = ({ storageKey, children }) => {
   return (
     <Button
       aria-label="Dismiss banner"

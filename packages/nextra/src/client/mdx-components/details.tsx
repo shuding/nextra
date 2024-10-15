@@ -1,7 +1,7 @@
 'use client'
 
 import cn from 'clsx'
-import type { ComponentProps, ReactElement, ReactNode } from 'react'
+import type { ComponentProps, FC, ReactNode } from 'react'
 import {
   Children,
   cloneElement,
@@ -12,12 +12,12 @@ import {
 } from 'react'
 import { Collapse } from '../components/collapse.js'
 
-export function Details({
+export const Details: FC<ComponentProps<'details'>> = ({
   children,
   open,
   className,
   ...props
-}: ComponentProps<'details'>): ReactElement {
+}) => {
   const [isOpen, setIsOpen] = useState(!!open)
   // To animate the close animation we have to delay the DOM node state here.
   const [delayedOpenState, setDelayedOpenState] = useState(isOpen)

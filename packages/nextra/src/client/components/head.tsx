@@ -1,4 +1,4 @@
-import type { ReactElement, ReactNode } from 'react'
+import type { FC, ReactNode } from 'react'
 import { z } from 'zod'
 import { fromZodError } from 'zod-validation-error'
 
@@ -57,7 +57,7 @@ type HeadProps = Partial<z.infer<typeof headSchema>> & {
   children?: ReactNode
 }
 
-export function Head({ children, ...props }: HeadProps): ReactElement {
+export const Head: FC<HeadProps> = ({ children, ...props }) => {
   const { data, error } = headSchema.safeParse(props)
   if (error) {
     throw fromZodError(error)

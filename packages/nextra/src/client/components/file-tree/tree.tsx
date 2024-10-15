@@ -1,7 +1,7 @@
 import cn from 'clsx'
-import type { ReactElement, ReactNode } from 'react'
+import type { FC, ReactNode } from 'react'
 
-export function Tree({ children }: { children: ReactNode }): ReactElement {
+export const Tree: FC<{ children: ReactNode }> = ({ children }) => {
   return (
     <ul
       className={cn(

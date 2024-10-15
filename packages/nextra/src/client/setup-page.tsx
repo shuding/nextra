@@ -3,7 +3,7 @@
  * This file should be never used directly, only in loader.ts
  */
 
-import type { FC, ReactElement } from 'react'
+import type { FC } from 'react'
 import { createElement } from 'react'
 import type { MDXWrapper, PageOpts, UseTOC } from '../types'
 import type { useMDXComponents as _useMDXComponents } from './mdx.js'

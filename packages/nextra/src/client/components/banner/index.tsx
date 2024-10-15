@@ -1,19 +1,15 @@
 import cn from 'clsx'
-import type { ReactElement, ReactNode } from 'react'
+import type { FC, ReactNode } from 'react'
 import { XIcon } from '../../icons/index.js'
 import { CloseBannerButton } from './index.client.js'
 
 const CLASS_NAME = 'nextra-banner'
 
-export function Banner({
-  children,
-  dismissible = true,
-  storageKey = 'nextra-banner'
-}: {
+export const Banner: FC<{
   children: ReactNode
   dismissible?: boolean
   storageKey?: string
-}): ReactElement | null {
+}> = ({ children, dismissible = true, storageKey = 'nextra-banner' }) => {
   if (!children) {
     return null
   }
