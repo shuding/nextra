@@ -8,7 +8,7 @@ import { useFSRoute } from 'nextra/hooks'
 import { ArrowRightIcon, ExpandIcon } from 'nextra/icons'
 import type { Item, MenuItem, PageItem } from 'nextra/normalize-pages'
 import type { FocusEventHandler, ReactElement } from 'react'
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { useEffect, useId, useMemo, useRef, useState } from 'react'
 import scrollIntoView from 'scroll-into-view-if-needed'
 import {
   setFocusedRoute,
@@ -407,10 +407,10 @@ export function MobileNav() {
 
 export function Sidebar({ toc }: { toc: Heading[] }): ReactElement {
   const { normalizePagesResult, hideSidebar } = useConfig()
-  const [showSidebar, setSidebar] = useState(true)
+  const [isExpanded, setIsExpanded] = useState(true)
   const [showToggleAnimation, setToggleAnimation] = useState(false)
   const sidebarRef = useRef<HTMLDivElement>(null)
-  const anchors = useMemo(() => toc.filter(v => v.depth === 2), [toc])
+  const sidebarControlsId = useId()
 
   const { docsDirectories, activeThemeContext } = normalizePagesResult
   const includePlaceholder = activeThemeContext.layout === 'default'
@@ -429,6 +429,13 @@ export function Sidebar({ toc }: { toc: Heading[] }): ReactElement {
   }, [])
 
   const themeConfig = useThemeConfig()
+  const anchors = useMemo(
+    () =>
+      // When the viewport size is larger than `md`, hide the anchors in
+      // the sidebar when `floatTOC` is enabled.
+      themeConfig.toc.float ? [] : toc.filter(v => v.depth === 2),
+    [themeConfig.toc.float, toc]
+  )
   const hasI18n = themeConfig.i18n.length > 0
   const hasMenu =
     themeConfig.darkMode || hasI18n || themeConfig.sidebar.toggleButton
@@ -439,31 +446,30 @@ export function Sidebar({ toc }: { toc: Heading[] }): ReactElement {
         <div className="max-xl:_hidden _h-0 _w-64 _shrink-0" />
       )}
       <aside
+        id={sidebarControlsId}
         className={cn(
           classes.aside,
           'max-md:_hidden',
           '_top-[--nextra-navbar-height] _shrink-0',
-          showSidebar ? '_w-64' : '_w-20',
+          isExpanded ? '_w-64' : '_w-20',
           hideSidebar ? '_hidden' : '_sticky _self-start'
         )}
       >
         <div
           className={cn(
             classes.wrapper,
-            showSidebar ? 'nextra-scrollbar' : 'no-scrollbar'
+            isExpanded ? 'nextra-scrollbar' : 'no-scrollbar'
           )}
           ref={sidebarRef}
         >
           {/* without asPopover check <Collapse />'s inner.clientWidth on `layout: "raw"` will be 0 and element will not have width on initial loading */}
-          {(!hideSidebar || !showSidebar) && (
-            <Collapse isOpen={showSidebar} horizontal>
+          {(!hideSidebar || !isExpanded) && (
+            <Collapse isOpen={isExpanded} horizontal>
               <Menu
                 className="nextra-menu-desktop"
                 // The sidebar menu, shows only the docs directories.
                 directories={docsDirectories}
-                // When the viewport size is larger than `md`, hide the anchors in
-                // the sidebar when `floatTOC` is enabled.
-                anchors={themeConfig.toc.float ? [] : anchors}
+                anchors={anchors}
                 onlyCurrentDocs
                 level={0}
               />
@@ -475,28 +481,30 @@ export function Sidebar({ toc }: { toc: Heading[] }): ReactElement {
           <div
             className={cn(
               classes.bottomMenu,
-              showSidebar
+              isExpanded
                 ? [hasI18n && '_justify-end', '_border-t']
                 : '_py-4 _flex-wrap _justify-center',
               showToggleAnimation && [
                 '*:_opacity-0',
-                showSidebar
+                isExpanded
                   ? '*:_animate-[nextra-fadein_1s_ease_.2s_forwards]'
                   : '*:_animate-[nextra-fadein2_1s_ease_.2s_forwards]'
               ]
             )}
           >
             <LocaleSwitch
-              lite={!showSidebar}
-              className={showSidebar ? '_grow' : 'max-md:_grow'}
+              lite={!isExpanded}
+              className={isExpanded ? '_grow' : 'max-md:_grow'}
             />
             <ThemeSwitch
-              lite={!showSidebar || hasI18n}
-              className={!showSidebar || hasI18n ? '' : '_grow'}
+              lite={!isExpanded || hasI18n}
+              className={!isExpanded || hasI18n ? '' : '_grow'}
             />
             {themeConfig.sidebar.toggleButton && (
               <Button
-                title={showSidebar ? 'Hide sidebar' : 'Show sidebar'}
+                aria-expanded={isExpanded}
+                aria-controls={sidebarControlsId}
+                title={isExpanded ? 'Collapse sidebar' : 'Expand sidebar'}
                 className={({ hover }) =>
                   cn(
                     '_rounded-md _p-2',
@@ -506,14 +514,14 @@ export function Sidebar({ toc }: { toc: Heading[] }): ReactElement {
                   )
                 }
                 onClick={() => {
-                  setSidebar(prev => !prev)
+                  setIsExpanded(prev => !prev)
                   setToggleAnimation(true)
                 }}
               >
                 <ExpandIcon
                   height="12"
                   className={cn(
-                    !showSidebar && 'first:*:_origin-[35%] first:*:_rotate-180'
+                    !isExpanded && 'first:*:_origin-[35%] first:*:_rotate-180'
                   )}
                 />
               </Button>
