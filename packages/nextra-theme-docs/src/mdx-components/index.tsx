@@ -1,5 +1,6 @@
 import cn from 'clsx'
 import {
+  Callout,
   Code,
   Details,
   Pre,
@@ -8,28 +9,44 @@ import {
   Td,
   Th,
   Tr,
+  withGitHubAlert,
   withIcons
 } from 'nextra/components'
 import type { MDXComponents } from 'nextra/mdx'
 import { DEFAULT_COMPONENTS } from 'nextra/mdx'
+import type { ComponentProps, FC } from 'react'
 import { H1, H2, H3, H4, H5, H6 } from './heading'
 import { Link } from './link'
 import { Wrapper } from './wrapper'
+
+const Blockquote: FC<ComponentProps<'blockquote'>> = props => (
+  <blockquote
+    className={cn(
+      '[&:not(:first-child)]:_mt-6 _border-gray-300 _italic _text-gray-700 dark:_border-gray-700 dark:_text-gray-400',
+      '_border-s-2 _ps-6'
+    )}
+    {...props}
+  />
+)
 
 /* eslint sort-keys: error */
 export function useMDXComponents(components?: any) {
   return {
     ...DEFAULT_COMPONENTS,
     a: Link,
-    blockquote: props => (
-      <blockquote
-        className={cn(
-          '[&:not(:first-child)]:_mt-6 _border-gray-300 _italic _text-gray-700 dark:_border-gray-700 dark:_text-gray-400',
-          '_border-s-2 _ps-6'
-        )}
-        {...props}
-      />
-    ),
+    blockquote: withGitHubAlert(Blockquote, ({ type, ...props }) => {
+      const calloutType = (
+        {
+          caution: 'error',
+          important: 'error', // TODO
+          note: 'info',
+          tip: 'default',
+          warning: 'warning'
+        } as const
+      )[type]
+
+      return <Callout type={calloutType} {...props} />
+    }),
     code: Code,
     details: Details,
     h1: H1,

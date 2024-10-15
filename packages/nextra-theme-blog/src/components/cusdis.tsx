@@ -5,21 +5,19 @@ import { usePathname } from 'next/navigation'
 import { useMounted } from 'nextra/hooks'
 import type { ReactElement } from 'react'
 import { useEffect } from 'react'
-import { ReactCusdis } from 'react-cusdis'
 
 export function Comments({
   appId,
-  host = 'https://cusdis.com',
-  lang
+  host = 'https://cusdis.com'
 }: {
   appId: string
   host?: string
-  lang: string
-}): ReactElement | false {
+}): ReactElement | null {
   const pathname = usePathname()
   const { resolvedTheme } = useTheme()
   const theme = resolvedTheme === 'dark' ? 'dark' : 'light'
   const mounted = useMounted()
+
   useEffect(() => {
     try {
       // update the theme for the cusdis iframe when theme changed
@@ -31,21 +29,20 @@ export function Comments({
 
   if (!appId) {
     console.warn('[nextra/cusdis] `appId` is required')
-    return false
+    return null
   }
+
   return (
-    mounted && (
-      <ReactCusdis
-        lang={lang}
-        style={{ marginTop: '4rem' }}
-        attrs={{
-          host,
-          appId,
-          pageId: pathname,
-          pageTitle: document.title,
-          theme
-        }}
-      />
-    )
+    <div
+      style={{ marginTop: '4rem' }}
+      id="cusdis_thread"
+      data-host={host}
+      data-app-id={appId}
+      data-page-id={pathname}
+      data-page-url={pathname}
+      data-page-title={mounted && document.title}
+    >
+      {mounted && <script async src="https://cusdis.com/js/cusdis.es.js" />}
+    </div>
   )
 }
