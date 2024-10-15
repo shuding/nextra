@@ -57,11 +57,13 @@ const Blockquote = withGitHubAlert('blockquote', ({ type, ...props }) => {
   return <Callout type={calloutType} {...props} />
 })
 
+type BlogMDXComponents = MDXComponents & {
+  DateFormatter?: FC<{ date: Date }>
+}
+
 /* eslint sort-keys: error */
 export const useMDXComponents: typeof useNextraMDXComponents = (
-  components?: MDXComponents & {
-    DateFormatter?: FC<{ date: Date }>
-  }
+  components: BlogMDXComponents = {}
 ) =>
   useNextraMDXComponents({
     // @ts-expect-error -- fix me
@@ -87,8 +89,7 @@ export const useMDXComponents: typeof useNextraMDXComponents = (
         )
       }
       const dateObj = date && new Date(date)
-
-      const DateFormatter = components?.DateFormatter
+      const { DateFormatter } = components
 
       return (
         <>
