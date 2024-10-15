@@ -11,7 +11,7 @@ import {
   withGitHubAlert,
   withIcons
 } from 'nextra/components'
-import { useMDXComponents as useNextraMDXComponents } from 'nextra/mdx'
+import { useMDXComponents as getNextraMDXComponents } from 'nextra/mdx'
 import type { MDXComponents } from 'nextra/mdx'
 import type { ComponentProps, FC } from 'react'
 import { Meta } from './components/meta'
@@ -60,7 +60,7 @@ type BlogMDXComponents = Readonly<
   }
 >
 
-const DEFAULT_COMPONENTS = useNextraMDXComponents()
+const DEFAULT_COMPONENTS = getNextraMDXComponents()
 
 /* eslint sort-keys: error */
 export const useMDXComponents = (components: BlogMDXComponents = {}) =>
