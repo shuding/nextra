@@ -19,9 +19,6 @@ const withNextra = nextra({
   },
   latex: true,
   useContentDir: true,
-  mdxOptions: {
-    providerImportSource: 'nextra-theme-docs'
-  }
 })
 
 const withBundleAnalyzer = bundleAnalyzer({

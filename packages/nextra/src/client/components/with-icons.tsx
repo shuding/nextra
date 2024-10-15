@@ -17,37 +17,38 @@ import {
 } from '../icons/index.js'
 import type { PreProps } from '../mdx-components/pre/index.js'
 
-const LanguageToIcon: Record<string, FC<SVGProps<SVGElement>>> = {
-  js: JavaScriptIcon,
-  jsx: JavaScriptIcon,
-  ts: TypeScriptIcon,
-  tsx: TypeScriptIcon,
-  md: MarkdownIcon,
-  mdx: MdxIcon,
-  sh: TerminalIcon,
-  bash: TerminalIcon,
-  css: CssIcon,
-  'c++': CPPIcon,
-  cpp: CPPIcon,
-  csharp: CsharpIcon,
-  cs: CsharpIcon,
-  'c#': CsharpIcon,
-  graphql: GraphQLIcon,
-  python: PythonIcon,
-  py: PythonIcon,
-  rust: RustIcon,
-  rs: RustIcon,
-  terraform: TerraformIcon,
-  tf: TerraformIcon,
-  move: MoveIcon,
-  go: GoIcon,
-  golang: GoIcon
-}
+type T = Record<string, FC<SVGProps<SVGElement>>>
 
-export const withIcons =
-  (Component: FC) =>
-  // eslint-disable-next-line react/display-name -- HOC
-  (props: PreProps): ReactElement => {
+export function withIcons(Component: FC, obj?: T) {
+  const LanguageToIcon: T = {
+    js: JavaScriptIcon,
+    jsx: JavaScriptIcon,
+    ts: TypeScriptIcon,
+    tsx: TypeScriptIcon,
+    md: MarkdownIcon,
+    mdx: MdxIcon,
+    sh: TerminalIcon,
+    bash: TerminalIcon,
+    css: CssIcon,
+    'c++': CPPIcon,
+    cpp: CPPIcon,
+    csharp: CsharpIcon,
+    cs: CsharpIcon,
+    'c#': CsharpIcon,
+    graphql: GraphQLIcon,
+    python: PythonIcon,
+    py: PythonIcon,
+    rust: RustIcon,
+    rs: RustIcon,
+    terraform: TerraformIcon,
+    tf: TerraformIcon,
+    move: MoveIcon,
+    go: GoIcon,
+    golang: GoIcon,
+    ...obj
+  }
+
+  return function Pre(props: PreProps): ReactElement {
     const language = props['data-language']
     const Icon = language && LanguageToIcon[language]
 
@@ -58,3 +59,4 @@ export const withIcons =
       />
     )
   }
+}
