@@ -43,7 +43,7 @@ export default {
     }
   },
   github_link: {
-    title: 'GitHub 🐙 ↗',
+    title: 'GitHub 🐙',
     href: 'https://github.com/shuding/nextra',
     newWindow: true
   },

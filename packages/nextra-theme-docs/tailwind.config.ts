@@ -12,7 +12,7 @@ const makePrimaryColor: any =
 export default {
   prefix: '_',
   content: [
-    './src/**/*.tsx',
+    './src/**/*.{ts,tsx}',
     '../nextra/src/client/icons/*.svg',
     '../nextra/src/client/mdx.tsx',
     '../nextra/src/client/{components,mdx-components}/**/*.tsx'

@@ -163,8 +163,7 @@ function Folder({ item, anchors, onFocus, level }: FolderProps): ReactElement {
           if (clickedToggleIcon) {
             event.preventDefault()
           }
-          // If it's focused, we toggle it. Otherwise, always open it.
-          TreeState[item.route] = active || clickedToggleIcon ? !open : true
+          TreeState[item.route] = !open
           rerender({})
         }}
         onFocus={onFocus}
@@ -462,7 +461,7 @@ export function Sidebar({ toc }: { toc: Heading[] }): ReactElement {
           )}
           ref={sidebarRef}
         >
-          {/* without asPopover check <Collapse />'s inner.clientWidth on `layout: "raw"` will be 0 and element will not have width on initial loading */}
+          {/* without !hideSidebar check <Collapse />'s inner.clientWidth on `layout: "raw"` will be 0 and element will not have width on initial loading */}
           {(!hideSidebar || !isExpanded) && (
             <Collapse isOpen={isExpanded} horizontal>
               <Menu

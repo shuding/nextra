@@ -50,7 +50,7 @@ export default {
   },
   nextra_link: {
     type: 'page',
-    title: 'Nextra ↗',
+    title: 'Nextra',
     href: 'https://github.com/shuding/nextra',
     newWindow: true
   }
