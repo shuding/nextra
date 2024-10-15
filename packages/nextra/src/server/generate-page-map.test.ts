@@ -134,6 +134,7 @@ describe('generatePageMapFromFilepaths()', () => {
         "docs/guide/built-ins/steps/page.mdx",
         "docs/guide/built-ins/tabs/page.mdx",
         "docs/guide/custom-css/page.mdx",
+        "docs/guide/github-alert-syntax/page.mdx",
         "docs/guide/i18n/page.mdx",
         "docs/guide/image/page.mdx",
         "docs/guide/link/page.mdx",
@@ -376,6 +377,11 @@ describe('generatePageMapFromFilepaths()', () => {
                     "__pagePath": "docs/guide/custom-css/page.mdx",
                     "name": "custom-css",
                     "route": "/docs/guide/custom-css",
+                  },
+                  {
+                    "__pagePath": "docs/guide/github-alert-syntax/page.mdx",
+                    "name": "github-alert-syntax",
+                    "route": "/docs/guide/github-alert-syntax",
                   },
                   {
                     "__pagePath": "docs/guide/i18n/page.mdx",
