@@ -52,7 +52,8 @@ with `<Callout>` component for `.md`/`.mdx` files.
 
 ## Usage with Your Own Theme
 
-If you want to benefit this feature with your own theme and your own `<Callout>` component:
+If you want to benefit this feature with your own theme and your own `<Callout>`
+component:
 
 import { Steps } from 'nextra/components'
 
@@ -60,16 +61,21 @@ import { Steps } from 'nextra/components'
 
 ### Create a `Blockquote` Component
 
-Import `withGitHubAlert` from `nextra/component` and create `Blockquote` component by calling `withGitHubAlert`
-function, where 1st argument your regular `<blockquote>` component and 2nd argument React HOC
-component which will be called when matching GitHub alert syntax, where `type` prop is `'note' | 'tip' | 'important' | 'warning' | 'caution'{:ts}`
+Import `withGitHubAlert` from `nextra/component` and create `Blockquote`
+component by calling `withGitHubAlert` function, where 1st argument your regular
+`<blockquote>` component and 2nd argument React HOC component which will be
+called when matching GitHub alert syntax, where `type` prop is
+`'note' | 'tip' | 'important' | 'warning' | 'caution'{:ts}`
 
 ```jsx
 import { withGitHubAlert } from 'nextra/components'
 
-const Blockquote = withGitHubAlert(MyBlockquoteComponent, ({ type, ...props }) => {
-  return <MyCalloutComponent type={type} {...props} />
-})
+const Blockquote = withGitHubAlert(
+  MyBlockquoteComponent,
+  ({ type, ...props }) => {
+    return <MyCalloutComponent type={type} {...props} />
+  }
+)
 ```
 
 ### Provide `Blockquote` to `useMDXComponents`
