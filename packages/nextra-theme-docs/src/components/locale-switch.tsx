@@ -1,4 +1,4 @@
-import { addBasePath } from 'next/dist/client/add-base-path'
+import { addBasePath } from 'next/dist/esm/client/add-base-path.js'
 import { useRouter } from 'nextra/hooks'
 import { GlobeIcon } from 'nextra/icons'
 import type { ReactElement } from 'react'

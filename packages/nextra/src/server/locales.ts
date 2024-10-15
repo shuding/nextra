@@ -1,5 +1,6 @@
 import { match as matchLocale } from '@formatjs/intl-localematcher'
 import Negotiator from 'negotiator'
+import { addBasePath } from 'next/dist/esm/client/add-base-path.js'
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 
@@ -35,9 +36,10 @@ export function middleware(request: NextRequest) {
   if (!pathnameHasLocale) {
     const locale = cookieLocale || getHeadersLocale(request)
 
+    const url = addBasePath(`/${locale}${pathname}`)
     // e.g. incoming request is /products
     // The new URL is now /en-US/products
-    return NextResponse.redirect(new URL(`/${locale}${pathname}`, request.url))
+    return NextResponse.redirect(new URL(url, request.url))
   }
 
   const requestLocale = pathname.split('/', 2)[1]
