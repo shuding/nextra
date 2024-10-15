@@ -4,7 +4,7 @@ import NextLink from 'next/link'
 import type { ComponentProps, ReactElement } from 'react'
 import { forwardRef } from 'react'
 
-export type AnchorProps = ComponentProps<'a'> & {
+type AnchorProps = ComponentProps<'a'> & {
   newWindow?: boolean
 }
 
