@@ -18,7 +18,7 @@ const withNextra = nextra({
     return pageMap
   },
   latex: true,
-  useContentDir: true,
+  useContentDir: true
 })
 
 const withBundleAnalyzer = bundleAnalyzer({
