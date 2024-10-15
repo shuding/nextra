@@ -62,7 +62,15 @@ export function Collapse({
   }, [])
   // Add inner <div> only if children.length != 1
   const newChildren = useMemo(
-    () => (Children.count(children) === 1 ? children : <div>{children}</div>),
+    () =>
+      Children.count(children) === 1 &&
+      children &&
+      typeof children === 'object' &&
+      'type' in children ? (
+        children
+      ) : (
+        <div>{children}</div>
+      ),
     [children]
   )
   return (
