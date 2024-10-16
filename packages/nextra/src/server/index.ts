@@ -3,14 +3,9 @@ import path from 'node:path'
 import type { RuleSetRule } from 'webpack'
 import { fromZodError } from 'zod-validation-error'
 import type { Nextra } from '../types'
-import {
-  DEFAULT_LOCALES,
-  MARKDOWN_EXTENSION_RE,
-  MARKDOWN_EXTENSIONS
-} from './constants.js'
+import { MARKDOWN_EXTENSION_RE, MARKDOWN_EXTENSIONS } from './constants.js'
 import { nextraConfigSchema } from './schemas.js'
 import { logger } from './utils.js'
-import { NextraPlugin } from './webpack-plugins/index.js'
 
 const DEFAULT_EXTENSIONS = ['js', 'jsx', 'ts', 'tsx']
 
@@ -106,16 +101,6 @@ const nextra: Nextra = nextraConfig => {
         }
       },
       webpack(config, options) {
-        if (options.nextRuntime !== 'edge' && options.isServer) {
-          config.plugins.push(
-            new NextraPlugin({
-              locales: nextConfig.i18n?.locales || DEFAULT_LOCALES,
-              useContentDir: loaderOptions.useContentDir
-              // transformPageMap: nextraConfig.transformPageMap
-            })
-          )
-        }
-
         // Fixes https://github.com/vercel/next.js/issues/55872
         if (config.watchOptions.ignored instanceof RegExp) {
           const ignored = config.watchOptions.ignored.source
