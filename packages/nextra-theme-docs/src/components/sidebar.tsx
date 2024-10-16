@@ -7,8 +7,8 @@ import { Button, Collapse } from 'nextra/components'
 import { useFSRoute } from 'nextra/hooks'
 import { ArrowRightIcon, ExpandIcon } from 'nextra/icons'
 import type { Item, MenuItem, PageItem } from 'nextra/normalize-pages'
-import type { FC, FocusEventHandler } from 'react'
-import { useEffect, useId, useMemo, useRef, useState } from 'react'
+import type { FC, FocusEventHandler, MouseEventHandler } from 'react'
+import { useCallback, useEffect, useId, useMemo, useRef, useState } from 'react'
 import scrollIntoView from 'scroll-into-view-if-needed'
 import {
   setFocusedRoute,
@@ -95,7 +95,21 @@ const Folder: FC<FolderProps> = ({ item, anchors, onFocus, level }) => {
           : level < themeConfig.sidebar.defaultMenuCollapseLevel)
       : TreeState[item.route] || focusedRouteInside
 
-  const rerender = useState({})[1]
+  const [, rerender] = useState<object>()
+
+  const onClick: MouseEventHandler = useCallback(event => {
+    const el = event.currentTarget
+    const isClickOnIcon =
+      el /* will be always <a> or <button> */ !==
+      event.target /* can be <svg> or <path> */
+    if (!isClickOnIcon) {
+      event.preventDefault()
+    }
+    const isOpen = el.hasAttribute('data-open')
+    const route = el.getAttribute('href') || el.getAttribute('data-href')!
+    TreeState[route] = !isOpen
+    rerender({})
+  }, [])
 
   useEffect(() => {
     function updateTreeState() {
@@ -156,16 +170,8 @@ const Folder: FC<FolderProps> = ({ item, anchors, onFocus, level }) => {
           classes.link,
           active ? classes.active : classes.inactive
         )}
-        onClick={event => {
-          const clickedToggleIcon = ['svg', 'path'].includes(
-            event.currentTarget.tagName.toLowerCase()
-          )
-          if (clickedToggleIcon) {
-            event.preventDefault()
-          }
-          TreeState[item.route] = !open
-          rerender({})
-        }}
+        data-open={open ? '' : undefined}
+        onClick={onClick}
         onFocus={onFocus}
       >
         {item.title}
@@ -273,9 +279,7 @@ interface MenuProps {
 
 const handleFocus: FocusEventHandler = event => {
   const route =
-    event.target.getAttribute('href') ||
-    event.target.getAttribute('data-href') ||
-    ''
+    event.target.getAttribute('href') || event.target.getAttribute('data-href')!
   setFocusedRoute(route)
 }
 
