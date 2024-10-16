@@ -3,12 +3,12 @@ import path from 'node:path'
 import type { Compiler } from 'webpack'
 import type { NextraConfig } from '../../types'
 import { CWD, IS_PRODUCTION } from '../constants.js'
-import { APP_DIR } from '../file-system.js'
-import {
-  generatePageMapFromFilepaths,
-  getFilepaths
-} from '../generate-page-map.js'
-import { collectPageMap } from '../page-map.js'
+// import { APP_DIR } from '../file-system.js'
+// import {
+//   generatePageMapFromFilepaths,
+//   getFilepaths
+// } from '../generate-page-map.js'
+// import { collectPageMap } from '../page-map.js'
 
 let isSaved = false
 
@@ -25,7 +25,7 @@ export class NextraPlugin {
 
   apply(compiler: Compiler) {
     const pluginName = this.constructor.name
-    const { locales, useContentDir } = this.config
+    const { locales } = this.config
 
     compiler.hooks.beforeCompile.tapAsync(pluginName, async (_, callback) => {
       if (IS_PRODUCTION && isSaved) {
@@ -40,22 +40,22 @@ export class NextraPlugin {
 
       try {
         for (const locale of locales) {
-          const relativePaths = await getFilepaths({
-            dir: useContentDir ? path.join('content', locale) : APP_DIR,
-            isAppDir: !useContentDir
-          })
-
-          const { pageMap, mdxPages } =
-            generatePageMapFromFilepaths(relativePaths)
-          const rawJs = await collectPageMap({
-            locale,
-            pageMap,
-            mdxPages,
-            fromAppDir: !useContentDir
-          })
+          // const relativePaths = await getFilepaths({
+          //   dir: useContentDir ? path.join('content', locale) : APP_DIR,
+          //   isAppDir: !useContentDir
+          // })
+          //
+          // const { pageMap, mdxPages } =
+          //   generatePageMapFromFilepaths(relativePaths)
+          // const rawJs = await collectPageMap({
+          //   locale,
+          //   pageMap,
+          //   mdxPages,
+          //   fromAppDir: !useContentDir
+          // })
           await fs.writeFile(
             path.join(CHUNKS_DIR, `nextra-page-map-${locale}.mjs`),
-            rawJs
+            ''
           )
         }
         isSaved = true

@@ -6,6 +6,9 @@ import type { LoaderOptions, PageOpts } from '../types'
 import { compileMetadata } from './compile-metadata.js'
 import { compileMdx } from './compile.js'
 import { CWD } from './constants.js'
+import { APP_DIR } from './file-system.js'
+import { generatePageMapFromFilepaths, getFilepaths } from './generate-page-map.js'
+import { collectPageMap } from './page-map.js'
 import { logger } from './utils.js'
 
 const initGitRepo = (async () => {
@@ -53,7 +56,8 @@ export async function loader(
     readingTime: _readingTime,
     latex,
     codeHighlight,
-    mdxOptions
+    mdxOptions,
+    useContentDir
   } = this.getOptions()
 
   const resolveData = this._module?.resourceResolveData
@@ -67,6 +71,27 @@ export async function loader(
        */
       path.join(resolveData.descriptionFileRoot, resolveData.relativePath)
     : this.resourcePath
+
+  const fileName = path.parse(mdxPath).name
+  if (fileName.startsWith('nextra-page-map-')) {
+    const locale = fileName.replace('nextra-page-map-', '')
+    const relativePaths = await getFilepaths({
+      dir: useContentDir ? path.join('content', locale) : APP_DIR,
+      isAppDir: !useContentDir
+    })
+
+    const { pageMap, mdxPages } = generatePageMapFromFilepaths(relativePaths)
+    const rawJs = await collectPageMap({
+      locale,
+      pageMap,
+      mdxPages,
+      fromAppDir: !useContentDir
+    })
+    // console.log(rawJs)
+    return rawJs
+  }
+
+  // console.log({ fileName })
 
   if (isPageMapImport) {
     return compileMetadata(source, { filePath: mdxPath })

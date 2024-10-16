@@ -89,50 +89,66 @@ const nextra: Nextra = nextraConfig => {
           'private-next-root-dir/mdx-components',
           'nextra/mdx'
         ]
-        config.module.rules.push({
-          test: MARKDOWN_EXTENSION_RE,
-          oneOf: [
-            ...(IS_PRODUCTION
-              ? []
-              : [
+        const rules = config.module.rules as RuleSetRule[]
+
+        rules.push(
+          {
+            test: PAGE_MAP_RE,
+            // @ts-expect-error
+            issuer: request => console.log({ request }) || true,
+            use: [
+              options.defaultLoaders.babel,
+              {
+                loader: 'nextra/loader',
+                options: loaderOptions
+              }
+            ]
+          },
+          {
+            test: MARKDOWN_EXTENSION_RE,
+            oneOf: [
+              ...(IS_PRODUCTION
+                ? []
+                : [
+                    {
+                      issuer: PAGE_MAP_RE,
+                      use: [
+                        options.defaultLoaders.babel,
+                        {
+                          loader: 'nextra/loader',
+                          options: { ...loaderOptions, isPageMapImport: true }
+                        }
+                      ]
+                    }
+                  ]),
+              {
+                // Match pages (imports without an issuer request).
+                issuer: request => request === '',
+                use: [
+                  options.defaultLoaders.babel,
                   {
-                    issuer: PAGE_MAP_RE,
-                    use: [
-                      options.defaultLoaders.babel,
-                      {
-                        loader: 'nextra/loader',
-                        options: { ...loaderOptions, isPageMapImport: true }
-                      }
-                    ]
+                    loader: 'nextra/loader',
+                    options: { ...loaderOptions, isPageImport: true }
                   }
-                ]),
-            {
-              // Match pages (imports without an issuer request).
-              issuer: request => request === '',
-              use: [
-                options.defaultLoaders.babel,
-                {
-                  loader: 'nextra/loader',
-                  options: { ...loaderOptions, isPageImport: true }
-                }
-              ]
-            },
-            {
-              // Match Markdown imports from non-pages. These imports have an
-              // issuer, which can be anything as long as it's not empty string.
-              // When the issuer is `null`, it means that it can be imported via a
-              // runtime import call such as `import('...')`.
-              issuer: request => request === null || !!request,
-              use: [
-                options.defaultLoaders.babel,
-                {
-                  loader: 'nextra/loader',
-                  options: loaderOptions
-                }
-              ]
-            }
-          ]
-        } satisfies RuleSetRule)
+                ]
+              },
+              {
+                // Match Markdown imports from non-pages. These imports have an
+                // issuer, which can be anything as long as it's not empty string.
+                // When the issuer is `null`, it means that it can be imported via a
+                // runtime import call such as `import('...')`.
+                issuer: request => request === null || !!request,
+                use: [
+                  options.defaultLoaders.babel,
+                  {
+                    loader: 'nextra/loader',
+                    options: loaderOptions
+                  }
+                ]
+              }
+            ]
+          }
+        )
 
         return nextConfig.webpack?.(config, options) || config
       }
