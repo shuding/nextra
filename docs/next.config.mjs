@@ -66,6 +66,14 @@ export default withNextra({
     return config
   },
   experimental: {
-    optimizePackageImports: ['@components/icons', 'nextra/components']
-  }
+    optimizePackageImports: ['@components/icons', 'nextra/components'],
+    turbo: {
+      rules: {
+        './components/icons/*.svg': {
+          loaders: ['@svgr/webpack'],
+          as: '*.js'
+        }
+      }
+    }
+  },
 })

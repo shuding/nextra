@@ -5,7 +5,7 @@
   "private": true,
   "scripts": {
     "build": "next build",
-    "dev": "next",
+    "dev": "next --turbo",
     "postbuild": "pagefind --site .next/server/app --output-path .next/static/chunks/pagefind",
     "start": "next start"
   },
@@ -18,7 +18,8 @@
     "nextra-theme-docs": "workspace:*",
     "react": "^19.0.0-rc.0",
     "react-dom": "^19.0.0-rc.0",
-    "sharp": "^0.33.0"
+    "sharp": "^0.33.0",
+    "shiki": "1.17.0"
   },
   "devDependencies": {
     "@svgr/webpack": "^8.0.1",
