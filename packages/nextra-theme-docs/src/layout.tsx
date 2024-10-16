@@ -23,7 +23,7 @@ const theme = z.strictObject({
   editLink: stringOrElement.default('Edit this page'),
   feedback: z
     .strictObject({
-      content: stringOrElement.default('Question? Give us feedback →'),
+      content: stringOrElement.default('Question? Give us feedback'),
       labels: z.string().default('feedback')
     })
     .default({}),

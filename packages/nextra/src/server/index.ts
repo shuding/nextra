@@ -83,6 +83,7 @@ const nextra: Nextra = nextraConfig => {
               as: '*.tsx',
               loaders: [pageImportLoader as any]
             },
+            // Order matter here, pages match first -> after partial files
             '*.{md,mdx}': {
               as: '*.tsx',
               loaders: [loader as any]
@@ -93,10 +94,11 @@ const nextra: Nextra = nextraConfig => {
           },
           resolveAlias: {
             ...nextConfig.experimental?.turbo?.resolveAlias,
-            'next-mdx-import-source-file':
-              '@vercel/turbopack-next/mdx-import-source',
-            'private-next-root-dir/nextra-page-map.js': './nextra-page-map.js'
-          }
+            // TODO: resolving .jsx/.tsx doesn't work for some reason
+            'next-mdx-import-source-file': './mdx-components', // '@vercel/turbopack-next/mdx-import-source'
+            'private-next-app-dir/*': './app/*',
+            'private-next-root-dir/*': './*'
+          },
         }
       },
       webpack(config, options) {

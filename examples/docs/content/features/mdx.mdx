@@ -1,3 +1,6 @@
+import { compileMdx } from 'nextra/compile'
+import { RemoteContent, Callout } from 'nextra/components'
+
 # MDX
 
 With Nextra, all your `.md` and `.mdx` files under the pages directory will be
@@ -7,8 +10,8 @@ with React component support.
 You can use import and use React components inside your Markdown files like
 this:
 
-```mdx filename="example.mdx"
-import { Callout } from 'nextra/components'
+export async function Demo() {
+  const mdx = `import { Callout } from 'nextra/components'
 
 **Markdown With React Components**
 
@@ -17,32 +20,25 @@ import { Callout } from 'nextra/components'
   receives an MDX string and outputs a _JSX string_. It does this by parsing the
   MDX document to a syntax tree and then generates a JSX document from that
   tree.
-</Callout>
-```
+</Callout>`
+
+  const { result } = await compileMdx(`~~~mdx filename="example.mdx"
+${mdx}
+~~~
 
 Generates:
 
-import { Callout } from 'nextra/components'
+${mdx}`)
+  return <RemoteContent compiledSource={result} components={{ Callout }} />
+}
 
-<div className="p-4 border border-gray-200 dark:border-gray-900 rounded mt-6">
-**Markdown With React Components**
+<Demo />
 
-<Callout emoji="✅">
-  **MDX** (the library), at its core, transforms MDX (the syntax) to JSX. It
-  receives an MDX string and outputs a _JSX string_. It does this by parsing the
-  MDX document to a syntax tree and then generates a JSX document from that
-  tree.
-</Callout>
-</div>
-
-## Heading
-
-<br />
+## Headings
 
 # **Hello**, This Is a _Title_ Inside `h1`
 
-<h2>**Hello**, This Is a _Title_ Inside `h2`</h2>
-{/* using html tag to avoid being rendered in the sidebar */}
+## **Hello**, This Is a _Title_ Inside `h2`
 
 ### **Hello**, This Is a _Title_ Inside `h3`
 
@@ -55,8 +51,8 @@ import { Callout } from 'nextra/components'
 ## List
 
 1. one
-2. two
-3. three
+1. two
+1. three
 
 - one
 - two
