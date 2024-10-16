@@ -4,7 +4,7 @@ import type { Definition, Image, ImageReference, Root } from 'mdast'
 import slash from 'slash'
 import type { Plugin } from 'unified'
 import { visit } from 'unist-util-visit'
-import { EXTERNAL_URL_RE } from '../constants.js'
+import { CWD, EXTERNAL_URL_RE } from '../constants.js'
 
 /**
  * @link https://github.com/vercel/next.js/blob/6cfebfb02c2a52a1f99fca59a2eac2d704d053db/packages/next/build/webpack/loaders/next-image-loader.js#L6
@@ -16,7 +16,7 @@ const VARIABLE_PREFIX = '__img'
 
 // Based on the remark-embed-images project
 // https://github.com/remarkjs/remark-embed-images
-export const remarkStaticImage: Plugin<[], Root> = () => ast => {
+export const remarkStaticImage: Plugin<[], Root> = () => (ast, file) => {
   const definitionNodes: Definition[] = []
 
   const imageImports = new Set<string>()
@@ -45,9 +45,13 @@ export const remarkStaticImage: Plugin<[], Root> = () => ast => {
       // do nothing with images with external url
       return
     }
-
+    const filePath = file.history[0]
+    const relative = path.relative(
+      path.dirname(filePath),
+      path.join(CWD, 'public', url)
+    )
     if (url.startsWith('/')) {
-      const urlPath = path.join('private-next-root-dir', 'public', url)
+      const urlPath = relative
       url = slash(urlPath)
     }
     imageImports.add(url)
