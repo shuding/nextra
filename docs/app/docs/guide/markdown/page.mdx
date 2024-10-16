@@ -1,3 +1,6 @@
+import { Shadow } from '@components/utils/shadow'
+import { Counter } from './_counter'
+
 # Markdown
 
 ## MDX
@@ -28,11 +31,6 @@ export function Counter({ children }) {
 ```
 
 Generates:
-
-import { StarsIcon } from '@components/icons'
-import { Shadow } from '@components/utils/shadow'
-import { Cards } from 'nextra/components'
-import { Counter } from './_counter'
 
 <div className="mt-6 rounded-xl border border-gray-200 p-4 dark:border-gray-900">
   <Shadow mode="open">
@@ -92,7 +90,7 @@ Visit https://nextjs.org.
 Visit https://nextjs.org.
 ```
 
-### Custom Heading Id
+### Custom Heading ID
 
 You can specify custom heading id using the format `## My heading [#custom-id]`.
 For example:
