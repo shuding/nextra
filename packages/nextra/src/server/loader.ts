@@ -75,7 +75,6 @@ export async function loader(
       path.join(resolveData.descriptionFileRoot, resolveData.relativePath)
     : this.resourcePath
   if (isPageMapImport) {
-    const locale = ''
     const locale = this.resourceQuery.replace('?locale=', '')
     const relativePaths = await getFilepaths({
       dir: useContentDir ? path.join('content', locale) : APP_DIR,

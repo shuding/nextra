@@ -98,7 +98,7 @@ const nextra: Nextra = nextraConfig => {
             'next-mdx-import-source-file': './mdx-components', // '@vercel/turbopack-next/mdx-import-source'
             'private-next-app-dir/*': './app/*',
             'private-next-root-dir/*': './*'
-          },
+          }
         }
       },
       webpack(config, options) {
@@ -123,7 +123,6 @@ const nextra: Nextra = nextraConfig => {
         rules.push(
           {
             test: PAGE_MAP_RE,
-            use: [options.defaultLoaders.babel, loader]
             use: [options.defaultLoaders.babel, pageMapLoader]
           },
           {
