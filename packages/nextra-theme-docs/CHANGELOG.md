@@ -1,5 +1,20 @@
 # nextra-theme-docs
 
+## 4.0.0-app-router.8
+
+### Patch Changes
+
+- 3ce535b: Add aria attrs to the sidebar collapse button
+- 9832af9: add ↗ char for external links
+- ec39959: Use `primaryColor` for `::selection` styles
+- 875842b: support `GitHub Alert Syntax`
+- 47c62c8: fix click on the arrow icon in the folder item in the Sidebar, was
+  always consider clicked on `<a>` or `<button>` due `event.currentTarget`
+- Updated dependencies [9832af9]
+- Updated dependencies [ec39959]
+- Updated dependencies [875842b]
+  - nextra@4.0.0-app-router.8
+
 ## 4.0.0-app-router.7
 
 ### Patch Changes
