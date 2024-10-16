@@ -1,5 +1,19 @@
 # nextra-theme-blog
 
+## 4.0.0-app-router.8
+
+### Patch Changes
+
+- 875842b: remove `react-cusdis` dependency, use
+  https://cusdis.com/doc#/advanced/sdk directly
+- 9832af9: add ↗ char for external links
+- ec39959: Use `primaryColor` for `::selection` styles
+- 875842b: support `GitHub Alert Syntax`
+- Updated dependencies [9832af9]
+- Updated dependencies [ec39959]
+- Updated dependencies [875842b]
+  - nextra@4.0.0-app-router.8
+
 ## 4.0.0-app-router.7
 
 ### Patch Changes

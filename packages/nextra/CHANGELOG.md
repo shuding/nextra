@@ -1,5 +1,13 @@
 # nextra
 
+## 4.0.0-app-router.8
+
+### Patch Changes
+
+- 9832af9: add ↗ char for external links
+- ec39959: Use `primaryColor` for `::selection` styles
+- 875842b: support `GitHub Alert Syntax`
+
 ## 4.0.0-app-router.7
 
 ### Patch Changes
