@@ -3,7 +3,7 @@ import { logger } from '../server/utils.js'
 
 export async function importPage(pathSegments: string[] = [], locale = '') {
   const { RouteToFilepath } = await import(
-    `./page-map-placeholder.js${locale && `?locale=${locale}`}`
+    `../server/page-map-placeholder.js${locale && `?locale=${locale}`}`
   )
 
   const pagePath = RouteToFilepath[pathSegments.join('/')]
@@ -27,7 +27,7 @@ export const generateStaticParamsFor =
 
     for (const locale of locales) {
       const { RouteToFilepath } = await import(
-        `./page-map-placeholder.js${locale && `?locale=${locale}`}`
+        `../server/page-map-placeholder.js${locale && `?locale=${locale}`}`
       )
       const routes = Object.keys(RouteToFilepath)
 

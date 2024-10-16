@@ -1,6 +1,5 @@
 import { compileMdx } from 'nextra/compile'
 import {
-  Callout,
   MathJax,
   MathJaxContext,
   RemoteContent
@@ -67,11 +66,11 @@ will be rendered as:
 You can still use [Markdown and MDX syntax](../markdown) in the same line as
 your LaTeX expression.
 
-<Callout>
-  If you want to display `$` in your content instead of rendering it as an
-  equation, you can escape it with a backslash (`\`). For example `\$e = mc^2\$`
-  will be rendered as \$e = mc^2\$.
-</Callout>
+> [!TIP]
+>
+>  If you want to display `$` in your content instead of rendering it as an
+>  equation, you can escape it with a backslash (`\`). For example `\$e = mc^2\$`
+>  will be rendered as \$e = mc^2\$.
 
 ## API
 

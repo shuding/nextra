@@ -1,10 +1,10 @@
-import { Callout, Steps } from 'nextra/components'
+import { Steps } from 'nextra/components'
 
 # Next.js I18n
 
-<Callout emoji="⚠️">
-  This feature is only available in `nextra-theme-docs`.
-</Callout>
+> [!WARNING]
+>
+>  This feature is only available in `nextra-theme-docs`.
 
 Nextra supports
 [Next.js Internationalized Routing](https://nextjs.org/docs/advanced-features/i18n-routing)
@@ -32,12 +32,13 @@ export default withNextra({
 })
 ```
 
-<Callout type="info">
-  **Note**: You can use any format of [UTS Locale
-  Identifiers](https://www.unicode.org/reports/tr35/tr35-59/tr35.html#Identifiers)
-  for defining your locales in the `next.config` file, e.g. language with region
-  format `en-US` (English as spoken in the United States).
-</Callout>
+> [!NOTE]
+>
+>  You can use any format of [UTS Locale
+>  Identifiers](https://www.unicode.org/reports/tr35/tr35-59/tr35.html#Identifiers)
+>  for defining your locales in the `next.config` file, e.g. language with region
+>  format `en-US` (English as spoken in the United States).
+
 
 ## Configure the Docs Theme
 
@@ -71,10 +72,11 @@ export const config = {
 }
 ```
 
-<Callout type="warning">
-  **Note**: This approach will not work for i18n sites that are statically
-  exported with `output: "export"` in `nextConfig`.
-</Callout>
+> [!WARNING]
+>
+>  This approach will not work for i18n sites that are statically
+>  exported with `output: "export"` in `nextConfig`.
+
 
 ## Custom 404 Page (Optional)
 

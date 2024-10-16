@@ -16,9 +16,7 @@
     "module": "esnext",
     "resolveJsonModule": true,
     "paths": {
-      "@components/*": ["components/*"],
-      "private-next-app-dir/*": ["app/*"],
-      "private-next-root-dir/*": ["./*"]
+      "@components/*": ["components/*"]
     },
     "plugins": [
       {

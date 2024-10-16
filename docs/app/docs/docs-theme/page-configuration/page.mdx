@@ -1,3 +1,7 @@
+import { Screenshot } from 'components/screenshot'
+import { Video } from 'components/video'
+import { FileTree } from 'nextra/components'
+
 # Page Configuration
 
 In Nextra, the site and page structure can be configured via the co-located
@@ -7,14 +11,11 @@ customize it further.
 Those configurations affect the overall layout of the theme, especially the
 navigation bar and the sidebar.
 
-import { Screenshot } from 'components/screenshot'
-import { Video } from 'components/video'
-import { Callout, FileTree } from 'nextra/components'
+> [!NOTE]
+>
+>  Read more about Nextra's `_meta.js` files
+>  [here](/docs/guide/organize-files#_metajs).
 
-<Callout>
-  Read more about Nextra's `_meta.js` files
-  [here](/docs/guide/organize-files#_metajs).
-</Callout>
 
 ## Pages
 
@@ -41,11 +42,12 @@ export default {
 }
 ```
 
-<Callout>
-  If any routes are not listed in the `_meta.js` file, they will be appended to
-  the end of the sidebar and sorted alphabetically, and the title will be
-  formatted with [Title](https://title.sh).
-</Callout>
+> [!NOTE]
+>
+>  If any routes are not listed in the `_meta.js` file, they will be appended to
+>  the end of the sidebar and sorted alphabetically, and the title will be
+>  formatted with [Title](https://title.sh).
+
 
 ## Folders
 
@@ -150,9 +152,9 @@ export default {
 }
 ```
 
-<Callout>
-  You can use this option to link to relative internal links too.
-</Callout>
+> [!TIP]
+>
+>  You can use this option to link to relative internal links too.
 
 ## Hidden Routes
 
@@ -328,10 +330,10 @@ export default {
 }
 ```
 
-<Callout type="info">
-  Use JSX elements to change the look of titles and separator lines in the
-  sidebar.
-</Callout>
+> [!TIP]
+>
+> Use JSX elements to change the look of titles and separator lines in the
+>  sidebar.
 
 ## Advanced
 
