@@ -1,7 +1,15 @@
 # Usage with Turbopack `next dev --turbo`
 
-1. mention `.jsx`/`.tsx` extension doesn't work for `mdx-components` file
+1. mention `.jsx`/`.tsx` (and even `.ts` for someone?) extension doesn't work for `mdx-components` file
 1. mention installation `shiki` as dependency if using `compileMdx` somewhere
    (version should match Nextra's version)
 1. mention relative images fails to load on development mode (Turbopack bug, not
    affect production, since Webpack is still used there)
+1. mention about serializable options only
+
+```
+Error: loader nextra/loader for match "./{src/app,app}/**/page.{md,mdx}" does not have serializable options.
+Ensure that options passed are plain JavaScript objects and values.
+```
+
+1. fix resourceQuery `?locale=` for Webpack throws error

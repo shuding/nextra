@@ -124,6 +124,7 @@ const nextra: Nextra = nextraConfig => {
           {
             test: PAGE_MAP_RE,
             use: [options.defaultLoaders.babel, loader]
+            use: [options.defaultLoaders.babel, pageMapLoader]
           },
           {
             test: MARKDOWN_EXTENSION_RE,

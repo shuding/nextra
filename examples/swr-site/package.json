@@ -9,7 +9,7 @@
     "build": "next build",
     "clean": "rimraf .next .turbo",
     "debug": "NODE_OPTIONS='--inspect' next dev",
-    "dev": "next",
+    "dev": "next --turbo",
     "postbuild": "pagefind --site .next/server/app --output-path .next/static/chunks/pagefind",
     "prebuild": "node nextra-remote-filepaths/fetch.js",
     "predev": "pnpm prebuild",
@@ -23,7 +23,8 @@
     "nextra-theme-docs": "workspace:*",
     "react": "^19.0.0-rc.0",
     "react-dom": "^19.0.0-rc.0",
-    "react-intersection-observer": "^8.26.2"
+    "react-intersection-observer": "^8.26.2",
+    "shiki": "1.17.0"
   },
   "dependenciesMeta": {
     "nextra": {

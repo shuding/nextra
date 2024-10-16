@@ -232,6 +232,9 @@ importers:
       react-intersection-observer:
         specifier: ^8.26.2
         version: 8.34.0(react@18.3.1)
+      shiki:
+        specifier: 1.17.0
+        version: 1.17.0
     devDependencies:
       '@next/bundle-analyzer':
         specifier: ^14.2.13
@@ -5077,7 +5080,7 @@ packages:
     resolution: {integrity: sha512-nsXzJGLQ0fhKmA4Gwt1cF7vC8VuZ1HSDrTRuj48h/qDeX/TzmOlTDXQ3uPtyuhyg/2rbZRzNhN8UFU4fSnQfXg==}
     dependencies:
       '@shikijs/types': 1.17.0
-      '@shikijs/vscode-textmate': 9.2.2
+      '@shikijs/vscode-textmate': 9.3.0
     dev: false
 
   /@shikijs/twoslash@1.1.2(typescript@5.6.3):
@@ -5106,10 +5109,6 @@ packages:
     dependencies:
       '@shikijs/vscode-textmate': 9.3.0
       '@types/hast': 3.0.4
-    dev: false
-
-  /@shikijs/vscode-textmate@9.2.2:
-    resolution: {integrity: sha512-TMp15K+GGYrWlZM8+Lnj9EaHEFmOen0WJBrfa17hF7taDOYthuPPV0GWzfd/9iMij0akS/8Yw2ikquH7uVi/fg==}
     dev: false
 
   /@shikijs/vscode-textmate@9.3.0:
