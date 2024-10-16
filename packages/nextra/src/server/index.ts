@@ -12,7 +12,7 @@ const DEFAULT_EXTENSIONS = ['js', 'jsx', 'ts', 'tsx']
 const SEP_RE = path.sep === '/' ? '/' : '\\\\'
 
 const PAGE_MAP_RE = new RegExp(
-  `.next${SEP_RE}static${SEP_RE}chunks${SEP_RE}nextra-page-map`
+  `nextra${SEP_RE}dist${SEP_RE}client${SEP_RE}page-map-placeholder`
 )
 
 const nextra: Nextra = nextraConfig => {
@@ -21,6 +21,22 @@ const nextra: Nextra = nextraConfig => {
   if (error) {
     logger.error('Error validating nextraConfig')
     throw fromZodError(error)
+  }
+
+  const loader = {
+    loader: 'nextra/loader',
+    options: loaderOptions
+  }
+  const pageImportLoader = {
+    loader: 'nextra/loader',
+    options: { ...loaderOptions, isPageImport: true }
+  }
+  const pageMapLoader = {
+    loader: 'nextra/loader',
+    options: {
+      useContentDir: loaderOptions.useContentDir ?? false,
+      isPageMapImport: true
+    }
   }
 
   return function withNextra(nextConfig = {}) {
@@ -37,15 +53,6 @@ const nextra: Nextra = nextraConfig => {
     // )
     //
     // optimizedImports.add('nextra/components')
-
-    const loader = {
-      loader: 'nextra/loader',
-      options: loaderOptions
-    }
-    const pageImportLoader = {
-      loader: 'nextra/loader',
-      options: { ...loaderOptions, isPageImport: true }
-    }
 
     return {
       ...nextConfig,
@@ -80,16 +87,8 @@ const nextra: Nextra = nextraConfig => {
               as: '*.tsx',
               loaders: [loader as any]
             },
-            './nextra-page-map.js': {
-              loaders: [
-                {
-                  loader: 'nextra/loader',
-                  options: {
-                    useContentDir: loaderOptions.useContentDir ?? false,
-                    isPageMapImport: true
-                  }
-                }
-              ]
+            '**/nextra/dist/client/page-map-placeholder.js': {
+              loaders: [pageMapLoader]
             }
           },
           resolveAlias: {

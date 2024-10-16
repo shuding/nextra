@@ -40,7 +40,7 @@ export const Anchor: FC<ComponentProps<'a'>> = ({ href = '', ...props }) => {
 
 export function useMDXComponents(components?: Readonly<MDXComponents>) {
   return {
-    img: props => {
+    img(props) {
       if (
         process.env.NODE_ENV !== 'production' &&
         typeof props.src === 'object' &&
@@ -48,7 +48,7 @@ export function useMDXComponents(components?: Readonly<MDXComponents>) {
       ) {
         console.error(
           `[nextra] Failed to load blur image "${(props.src as any).src}" due missing "src.blurDataURL" value.
-This is turbopack bug, which will not occurs on production (since webpack is used for "next build" command).`
+This is Turbopack bug, which will not occurs on production (since Webpack is used for "next build" command).`
         )
         return <img {...props} src={(props.src as any).src} />
       }
