@@ -5,7 +5,6 @@ import { fromZodError } from 'zod-validation-error'
 import type { Nextra } from '../types'
 import {
   DEFAULT_LOCALES,
-  IS_PRODUCTION,
   MARKDOWN_EXTENSION_RE,
   MARKDOWN_EXTENSIONS
 } from './constants.js'
@@ -44,6 +43,15 @@ const nextra: Nextra = nextraConfig => {
     //
     // optimizedImports.add('nextra/components')
 
+    const loader = {
+      loader: 'nextra/loader',
+      options: loaderOptions
+    }
+    const pageImportLoader = {
+      loader: 'nextra/loader',
+      options: { ...loaderOptions, isPageImport: true }
+    }
+
     return {
       ...nextConfig,
       // experimental: {
@@ -62,6 +70,41 @@ const nextra: Nextra = nextraConfig => {
           NEXTRA_LOCALES: JSON.stringify(nextConfig.i18n?.locales)
         }
       }),
+      experimental: {
+        ...nextConfig.experimental,
+        // optimizePackageImports: [...optimizedImports]
+        turbo: {
+          ...nextConfig.experimental?.turbo,
+          rules: {
+            ...nextConfig.experimental?.turbo?.rules,
+            './{src/app,app}/**/page.{md,mdx}': {
+              as: '*.tsx',
+              loaders: [pageImportLoader as any]
+            },
+            '*.{md,mdx}': {
+              as: '*.tsx',
+              loaders: [loader as any]
+            },
+            './nextra-page-map.js': {
+              loaders: [
+                {
+                  loader: 'nextra/loader',
+                  options: {
+                    useContentDir: loaderOptions.useContentDir ?? false,
+                    isPageMapImport: true
+                  }
+                }
+              ]
+            }
+          },
+          resolveAlias: {
+            ...nextConfig.experimental?.turbo?.resolveAlias,
+            'next-mdx-import-source-file':
+              '@vercel/turbopack-next/mdx-import-source',
+            'private-next-root-dir/nextra-page-map.js': './nextra-page-map.js'
+          }
+        }
+      },
       webpack(config, options) {
         if (options.nextRuntime !== 'edge' && options.isServer) {
           config.plugins.push(
@@ -94,43 +137,15 @@ const nextra: Nextra = nextraConfig => {
         rules.push(
           {
             test: PAGE_MAP_RE,
-            // @ts-expect-error
-            issuer: request => console.log({ request }) || true,
-            use: [
-              options.defaultLoaders.babel,
-              {
-                loader: 'nextra/loader',
-                options: loaderOptions
-              }
-            ]
+            use: [options.defaultLoaders.babel, loader]
           },
           {
             test: MARKDOWN_EXTENSION_RE,
             oneOf: [
-              ...(IS_PRODUCTION
-                ? []
-                : [
-                    {
-                      issuer: PAGE_MAP_RE,
-                      use: [
-                        options.defaultLoaders.babel,
-                        {
-                          loader: 'nextra/loader',
-                          options: { ...loaderOptions, isPageMapImport: true }
-                        }
-                      ]
-                    }
-                  ]),
               {
                 // Match pages (imports without an issuer request).
                 issuer: request => request === '',
-                use: [
-                  options.defaultLoaders.babel,
-                  {
-                    loader: 'nextra/loader',
-                    options: { ...loaderOptions, isPageImport: true }
-                  }
-                ]
+                use: [options.defaultLoaders.babel, pageImportLoader]
               },
               {
                 // Match Markdown imports from non-pages. These imports have an
@@ -138,13 +153,7 @@ const nextra: Nextra = nextraConfig => {
                 // When the issuer is `null`, it means that it can be imported via a
                 // runtime import call such as `import('...')`.
                 issuer: request => request === null || !!request,
-                use: [
-                  options.defaultLoaders.babel,
-                  {
-                    loader: 'nextra/loader',
-                    options: loaderOptions
-                  }
-                ]
+                use: [options.defaultLoaders.babel, loader]
               }
             ]
           }

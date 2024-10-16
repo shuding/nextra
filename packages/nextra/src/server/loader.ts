@@ -3,11 +3,13 @@ import { rendererRich, transformerTwoslash } from '@shikijs/twoslash'
 import slash from 'slash'
 import type { LoaderContext } from 'webpack'
 import type { LoaderOptions, PageOpts } from '../types'
-import { compileMetadata } from './compile-metadata.js'
 import { compileMdx } from './compile.js'
 import { CWD } from './constants.js'
 import { APP_DIR } from './file-system.js'
-import { generatePageMapFromFilepaths, getFilepaths } from './generate-page-map.js'
+import {
+  generatePageMapFromFilepaths,
+  getFilepaths
+} from './generate-page-map.js'
 import { collectPageMap } from './page-map.js'
 import { logger } from './utils.js'
 
@@ -47,6 +49,7 @@ export async function loader(
   this: LoaderContext<LoaderOptions>,
   source: string
 ): Promise<string> {
+  // this.cacheable(true)
   const {
     isPageImport = false,
     isPageMapImport,
@@ -71,10 +74,8 @@ export async function loader(
        */
       path.join(resolveData.descriptionFileRoot, resolveData.relativePath)
     : this.resourcePath
-
-  const fileName = path.parse(mdxPath).name
-  if (fileName.startsWith('nextra-page-map-')) {
-    const locale = fileName.replace('nextra-page-map-', '')
+  if (isPageMapImport) {
+    const locale = ''
     const relativePaths = await getFilepaths({
       dir: useContentDir ? path.join('content', locale) : APP_DIR,
       isAppDir: !useContentDir
@@ -87,16 +88,8 @@ export async function loader(
       mdxPages,
       fromAppDir: !useContentDir
     })
-    // console.log(rawJs)
     return rawJs
   }
-
-  // console.log({ fileName })
-
-  if (isPageMapImport) {
-    return compileMetadata(source, { filePath: mdxPath })
-  }
-
   const { result, readingTime } = await compileMdx(source, {
     mdxOptions: {
       ...mdxOptions,
@@ -149,16 +142,13 @@ export async function loader(
 ${enhancedMetadata}
 export default MDXLayout`
   }
-  const rawJs = `
-import { HOC_MDXWrapper } from 'nextra/setup-page'
+  const rawJs = `import { HOC_MDXWrapper } from 'nextra/setup-page'
 ${result}
 
 ${enhancedMetadata}
 export default HOC_MDXWrapper(
   MDXLayout,
-  _provideComponents,
-  useTOC,
-  {metadata, title}
+  {metadata, title, toc:useTOC()}
 )`
   return rawJs
 }
