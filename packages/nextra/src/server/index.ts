@@ -12,7 +12,7 @@ const DEFAULT_EXTENSIONS = ['js', 'jsx', 'ts', 'tsx']
 const SEP_RE = path.sep === '/' ? '/' : '\\\\'
 
 const PAGE_MAP_RE = new RegExp(
-  `nextra${SEP_RE}dist${SEP_RE}client${SEP_RE}page-map-placeholder`
+  `nextra${SEP_RE}dist${SEP_RE}server${SEP_RE}page-map-placeholder`
 )
 
 const nextra: Nextra = nextraConfig => {
@@ -87,7 +87,7 @@ const nextra: Nextra = nextraConfig => {
               as: '*.tsx',
               loaders: [loader as any]
             },
-            '**/nextra/dist/client/page-map-placeholder.js': {
+            '**/nextra/dist/server/page-map-placeholder.js': {
               loaders: [pageMapLoader]
             }
           },
