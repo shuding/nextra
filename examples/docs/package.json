@@ -6,14 +6,15 @@
     "build": "next build",
     "clean": "rimraf .next .turbo",
     "dev": "next",
+    "postbuild": "pagefind --site .next/server/app --output-path .next/static/chunks/pagefind",
     "start": "next start"
   },
   "dependencies": {
     "next": "^14.2.5",
     "nextra": "workspace:*",
     "nextra-theme-docs": "workspace:*",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react": "^19.0.0-rc.0",
+    "react-dom": "^19.0.0-rc.0"
   },
   "dependenciesMeta": {
     "nextra": {

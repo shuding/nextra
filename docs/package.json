@@ -6,17 +6,18 @@
   "scripts": {
     "build": "next build",
     "dev": "next",
+    "postbuild": "pagefind --site .next/server/app --output-path .next/static/chunks/pagefind",
     "start": "next start"
   },
   "dependencies": {
-    "@vercel/og": "^0.6.0",
-    "clsx": "^2.0.0",
-    "framer-motion": "^11.0.0",
+    "clsx": "^2.1.0",
+    "fast-glob": "^3.3.2",
+    "framer-motion": "^11.5.4",
     "next": "^14.2.5",
     "nextra": "workspace:*",
     "nextra-theme-docs": "workspace:*",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
+    "react": "^19.0.0-rc.0",
+    "react-dom": "^19.0.0-rc.0",
     "sharp": "^0.33.0"
   },
   "devDependencies": {

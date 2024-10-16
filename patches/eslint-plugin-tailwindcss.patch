@@ -1,0 +1,32 @@
+diff --git a/lib/util/customConfig.js b/lib/util/customConfig.js
+index 9bc6a40330df0a9a4318685ebb750f9c1c4dbd0b..bc6e15b5684e14aa9c38d15444cd53df17b95f63 100644
+--- a/lib/util/customConfig.js
++++ b/lib/util/customConfig.js
+@@ -31,7 +31,8 @@ function requireUncached(module) {
+   }
+ }
+ 
+-function loadConfig(config) {
++// https://github.com/francoismassart/eslint-plugin-tailwindcss/pull/357
++function loadConfig(config, options) {
+   let loadedConfig = null;
+   if (typeof config === 'string') {
+     const resolvedPath = path.isAbsolute(config) ? config : path.join(path.resolve(), config);
+@@ -39,7 +40,7 @@ function loadConfig(config) {
+       const stats = fs.statSync(resolvedPath);
+       if (stats === null) {
+         loadedConfig = {};
+-      } else if (lastModifiedDate !== stats.mtime) {
++      } else if (options.newConfig || lastModifiedDate !== stats.mtime) {
+         lastModifiedDate = stats.mtime;
+         loadedConfig = requireUncached(resolvedPath);
+       } else {
+@@ -76,7 +77,7 @@ function resolve(twConfig) {
+   if (newConfig || expired) {
+     previousConfig = twConfig;
+     lastCheck = now;
+-    const userConfig = loadConfig(twConfig);
++    const userConfig = loadConfig(twConfig, { newConfig });
+     // userConfig is null when config file was not modified
+     if (userConfig !== null) {
+       mergedConfig = resolveConfig(userConfig);

@@ -1,5 +1,178 @@
 # nextra-theme-docs
 
+## 4.0.0-app-router.8
+
+### Patch Changes
+
+- 3ce535b: Add aria attrs to the sidebar collapse button
+- 9832af9: add ↗ char for external links
+- ec39959: Use `primaryColor` for `::selection` styles
+- 875842b: support `GitHub Alert Syntax`
+- 47c62c8: fix click on the arrow icon in the folder item in the Sidebar, was
+  always consider clicked on `<a>` or `<button>` due `event.currentTarget`
+- Updated dependencies [9832af9]
+- Updated dependencies [ec39959]
+- Updated dependencies [875842b]
+  - nextra@4.0.0-app-router.8
+
+## 4.0.0-app-router.7
+
+### Patch Changes
+
+- 5201e5f: add helpful error message about not available search on development
+  mode
+- 3ac2c32: add `getPageMap` helper function from `nextra/page-map`
+- b4ca36d: - allow override/add additional icons for code blocks
+  - remove `nextraConfig.mdxOptions.providerImportSource` option in favour of
+    `mdx-components` file
+- 73726ec: - Simplify the class-name of the sidebar file item
+  - fix unclosable active folder when it's `<button>` element and not `<a>`
+  - improve `<Collapse>` to add inner `<div>` only if children != 1
+- 4768dee: replace `nextraConfig.mdxBaseDir: string` by `useContentDir: boolean`
+- Updated dependencies [5201e5f]
+- Updated dependencies [3ac2c32]
+- Updated dependencies [b4ca36d]
+- Updated dependencies [4768dee]
+  - nextra@4.0.0-app-router.7
+
+## 4.0.0-app-router.6
+
+### Patch Changes
+
+- 2092d5e: enable page reload of catch-all routes `app/[[...slug]].jsx` on
+  content change
+- a97e5cf: sync with nextra 3.0.10
+- Updated dependencies [2092d5e]
+- Updated dependencies [a97e5cf]
+  - nextra@4.0.0-app-router.6
+
+## 4.0.0-app-router.5
+
+### Patch Changes
+
+- a15a02d: sync with nextra 3.0.3
+- Updated dependencies [659b36e]
+- Updated dependencies [a15a02d]
+  - nextra@4.0.0-app-router.5
+
+## 4.0.0-app-router.4
+
+### Major Changes
+
+- 17e6da5: remove `i18n.direction` option
+- 0faa569: replace `gitTimestamp` option with `lastUpdated`
+
+  replace `editLink.content` option with `editLink`
+
+- 17e6da5: document removed theme config options
+
+  - `main`
+  - `direction`
+  - `toc.component`
+  - `themeSwitch.component`
+  - `themeSwitch.useOptions`
+  - `search.component`
+  - `feedback.useLink`
+  - `banner.dismissible`
+  - `banner.key`
+  - `banner.content`
+  - `footer.content`
+  - `footer.component`
+  - `head`
+  - `navbar.component`
+  - `navbar.extraContent`
+  - `project.link`
+  - `project.icon`
+  - `chat.link`
+  - `chat.icon`
+  - `search.emptyResult`
+  - `search.loading`
+  - `search.errorText`
+  - `search.placeholder`
+  - `search.className`
+
+  refactor `themeSwitch.useOptions` to `themeSwitch` option
+
+  refactor `editLink.content` to `editLink` option
+
+  rename Search prop `error` to `errorText`
+
+### Patch Changes
+
+- nextra@4.0.0-app-router.4
+
+## 4.0.0-app-router.3
+
+### Major Changes
+
+- 1e77fab: move `<Collapse>`, `<Details>`, `<Summary>`, `<SkipNavContent>`,
+  `SkipNavLink`, `<Select>` and `<Bleed>` from `nextra-theme-docs` to
+  `nextra/components`
+- 1e77fab: remove `renderComponent` and `renderString`
+
+### Patch Changes
+
+- 1e77fab: fix edit on github and last updated at for catch all routes
+- Updated dependencies [1e77fab]
+- Updated dependencies [1e77fab]
+- Updated dependencies [1e77fab]
+- Updated dependencies [1e77fab]
+  - nextra@4.0.0-app-router.3
+
+## 4.0.0-app-router.2
+
+### Major Changes
+
+- 215aa08: fix focusing on first search result item
+- 1c83931: remove `navbar` and `footer` props, pass `<Navbar>` and `<Footer>` as
+  children of `<Layout>`
+- 724f851: migrate from react context to zustand
+- 8ef0f58: move `<Head>` component in `nextra/components`
+- ee4a467: remove `feedback.useLink` and `editLink.component` option, remove
+  `themeConfig` prop on `<Layout>` component
+
+  change `gitTimestamp` option to boolean
+
+  remove `nextraCofig.transform` option
+
+- 62f1553: support `<Head>`'s `backgroundColor.dark/light` props colors in
+  `rgb(...,...,...)` and `#RRGGBB` formats
+
+### Minor Changes
+
+- 8f90ed5: refactor `useMenuActions` to `setMenu`, `useFocusedRouteActions` to
+  `setFocusedRoute`
+
+### Patch Changes
+
+- Updated dependencies [215aa08]
+- Updated dependencies [8ef0f58]
+  - nextra@4.0.0-app-router.2
+
+## 4.0.0-app-router.1
+
+### Major Changes
+
+- 26851b5: migrate search from Flexsearch to Pagefind
+
+### Patch Changes
+
+- Updated dependencies [26851b5]
+  - nextra@4.0.0-app-router.1
+
+## 4.0.0-app-router.0
+
+### Major Changes
+
+- 99f34d3: The initial version which supports App Router instead of Pages
+  Router, something may be broken, check
+  https://github.com/shuding/nextra/tree/v4-v2/examples for the migration guide
+
+### Patch Changes
+
+- Updated dependencies [99f34d3]
+  - nextra@4.0.0-app-router.0
+
 ## 3.0.13
 
 ### Patch Changes
@@ -245,7 +418,7 @@
 - a8c2196: use dynamic import for loading `mermaid`
 - 0b5cc9d: make nextra compatible with windows
 - 7b0b7e9: fix page scroll jump while entering characters in the search input
-- 45471df: fix “Scroll to top” is not supposed to be interactable when it is
+- 45471df: fix "Scroll to top" is not supposed to be interactable when it is
   hidden.
 
   `display:children` doesn't collapse breadcrumbs
@@ -750,7 +923,7 @@
 
 ### Patch Changes
 
-- 45471df5: fix “Scroll to top” is not supposed to be interactable when it is
+- 45471df5: fix "Scroll to top" is not supposed to be interactable when it is
   hidden.
 
   `display:children` doesn't collapse breadcrumbs

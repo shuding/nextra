@@ -3,7 +3,7 @@ import type { Parent, Root } from 'mdast'
 import type { Plugin } from 'unified'
 import { visit } from 'unist-util-visit'
 import type { Heading } from '../../types'
-import { MARKDOWN_EXTENSION_REGEX } from '../constants.js'
+import { MARKDOWN_EXTENSION_RE } from '../constants.js'
 import type { HProperties } from './remark-custom-heading-id'
 
 export const getFlattenedValue = (node: Parent): string =>
@@ -24,7 +24,6 @@ export const remarkHeadings: Plugin<
   Root
 > = ({ exportName = 'useTOC', isRemoteContent }) => {
   const headings: (Heading | string)[] = []
-  let hasJsxInH1: boolean
 
   const slugger = new Slugger()
   return (ast, file) => {
@@ -43,12 +42,6 @@ export const remarkHeadings: Plugin<
       (node, _index, parent) => {
         if (node.type === 'heading') {
           if (node.depth === 1) {
-            const hasJsx = node.children.some(
-              (child: { type: string }) => child.type === 'mdxJsxTextElement'
-            )
-            if (hasJsx) {
-              hasJsxInH1 = true
-            }
             return
           }
 
@@ -72,7 +65,7 @@ export const remarkHeadings: Plugin<
           for (const child of (node as any).data.estree.body) {
             if (child.type !== 'ImportDeclaration') continue
             const importPath = child.source.value
-            const isMdxImport = MARKDOWN_EXTENSION_REGEX.test(importPath)
+            const isMdxImport = MARKDOWN_EXTENSION_RE.test(importPath)
             if (!isMdxImport) continue
 
             const componentName = child.specifiers.find(
@@ -101,7 +94,6 @@ export const remarkHeadings: Plugin<
       }
     )
 
-    file.data.hasJsxInH1 = hasJsxInH1
     file.data.toc = headings
   }
 }

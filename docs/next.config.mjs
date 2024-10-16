@@ -1,20 +1,21 @@
 import path from 'node:path'
 import nextra from 'nextra'
 
+/**
+ * @type {import('nextra').NextraConfig}
+ */
 const withNextra = nextra({
-  theme: 'nextra-theme-docs',
-  themeConfig: './theme.config.tsx',
   latex: true,
-  search: {
-    codeblocks: false
-  },
   defaultShowCopyCode: true
 })
 
 const sep = path.sep === '/' ? '/' : '\\\\'
 
-const ALLOWED_SVG_REGEX = new RegExp(`components${sep}icons${sep}.+\\.svg$`)
+const ALLOWED_SVG_RE = new RegExp(`components${sep}icons${sep}.+\\.svg$`)
 
+/**
+ * @type {import('next').NextConfig}
+ */
 export default withNextra({
   reactStrictMode: true,
   eslint: {
@@ -28,7 +29,7 @@ export default withNextra({
       permanent: true
     },
     {
-      source: '/docs/docs-theme/built-ins/:slug(callout|steps|tabs)',
+      source: '/docs/docs-theme/built-ins/:slug(callout|steps|tabs|bleed)',
       destination: '/docs/guide/built-ins/:slug',
       permanent: true
     },
@@ -36,21 +37,35 @@ export default withNextra({
       source: '/docs/docs-theme/api/use-config',
       destination: '/docs/docs-theme/api',
       permanent: true
+    },
+    {
+      source: '/docs/docs-theme/built-ins',
+      destination: '/docs/guide/built-ins',
+      permanent: true
     }
   ],
   webpack(config) {
     const fileLoaderRule = config.module.rules.find(rule =>
       rule.test?.test?.('.svg')
     )
-    fileLoaderRule.exclude = ALLOWED_SVG_REGEX
+    fileLoaderRule.exclude = ALLOWED_SVG_RE
 
     config.module.rules.push({
-      test: ALLOWED_SVG_REGEX,
-      use: ['@svgr/webpack']
+      test: ALLOWED_SVG_RE,
+      use: [
+        {
+          loader: '@svgr/webpack',
+          options: {
+            svgoConfig: {
+              plugins: ['removeXMLNS']
+            }
+          }
+        }
+      ]
     })
     return config
   },
   experimental: {
-    optimizePackageImports: ['@components/icons']
+    optimizePackageImports: ['@components/icons', 'nextra/components']
   }
 })

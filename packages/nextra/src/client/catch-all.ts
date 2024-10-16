@@ -1,4 +1,4 @@
-import { MARKDOWN_EXTENSION_REGEX } from '../constants.js'
+import { MARKDOWN_EXTENSION_RE } from '../constants.js'
 import type { DynamicFolder, DynamicMeta } from '../types'
 
 function appendSlashForFolders(obj: DynamicMeta): DynamicMeta {
@@ -18,7 +18,7 @@ export function createCatchAllMeta(
   const metaMap: DynamicMeta = appendSlashForFolders(customMeta)
 
   const paths = filePaths.map(filePath =>
-    filePath.replace(MARKDOWN_EXTENSION_REGEX, '').split('/')
+    filePath.replace(MARKDOWN_EXTENSION_RE, '').split('/')
   )
 
   for (const path of paths) {

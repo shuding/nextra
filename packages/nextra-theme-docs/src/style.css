@@ -1,0 +1,72 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+@import 'nextra/styles/code-block.css';
+@import 'nextra/styles/subheading-anchor.css';
+@import 'nextra/styles/scrollbar.css';
+@import 'nextra/styles/steps.css';
+@import 'nextra/styles/cards.css';
+@import '../css/hamburger.css';
+@import '../css/typesetting-article.css';
+
+html {
+  --nextra-navbar-height: 64px;
+  --nextra-menu-height: 3.75rem;
+  --nextra-banner-height: 2.5rem;
+
+  @apply _antialiased _text-base _bg-[rgb(var(--nextra-bg))];
+  font-feature-settings:
+    'rlig' 1,
+    'calt' 1,
+    'ss01' 1;
+  -webkit-tap-highlight-color: transparent;
+
+  &:not(:has(*:focus)) {
+    /* adding `:not` with `:has` otherwise page jumps while focusing or while tapping in input https://github.com/shuding/nextra/issues/2840 */
+    @apply _scroll-pt-[--nextra-navbar-height];
+  }
+}
+
+@layer components {
+  .nextra-focus {
+    @apply focus-visible:_outline-none _ring-2 _ring-primary-200 _ring-offset-1 _ring-offset-primary-300 dark:_ring-primary-800 dark:_ring-offset-primary-700;
+  }
+}
+
+.contains-task-list {
+  @apply _mt-6;
+
+  input[type='checkbox'] {
+    @apply _me-1;
+  }
+}
+
+.footnotes a[data-footnote-backref] {
+  font-family: initial;
+}
+
+@keyframes nextra-fadein {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes nextra-fadein2 {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.nextra-toc-footer,
+.nextra-sidebar-footer {
+  @apply _bg-[rgb(var(--nextra-bg))];
+  @apply _border-t dark:_border-neutral-800;
+  @apply contrast-more:_shadow-none contrast-more:_border-neutral-400 contrast-more:dark:_border-neutral-400;
+  @apply _shadow-[0_-12px_16px_rgb(var(--nextra-bg))];
+}

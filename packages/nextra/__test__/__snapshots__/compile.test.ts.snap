@@ -3,9 +3,11 @@
 exports[`Process heading > code-h1 1`] = `
 "/*@jsxRuntime automatic*/
 /*@jsxImportSource react*/
-import { useMDXComponents as _provideComponents } from 'nextra/mdx'
-const title = 'codegen.yml'
-const frontMatter = {}
+import { useMDXComponents as _provideComponents } from 'next-mdx-import-source-file'
+export const title = 'codegen.yml'
+export const metadata = {
+  title: 'codegen.yml'
+}
 export function useTOC(props) {
   return []
 }
@@ -28,9 +30,11 @@ function MDXLayout(props) {
 exports[`Process heading > code-with-text-h1 1`] = `
 "/*@jsxRuntime automatic*/
 /*@jsxImportSource react*/
-import { useMDXComponents as _provideComponents } from 'nextra/mdx'
-const title = 'codegen.yml file'
-const frontMatter = {}
+import { useMDXComponents as _provideComponents } from 'next-mdx-import-source-file'
+export const title = 'codegen.yml file'
+export const metadata = {
+  title: 'codegen.yml file'
+}
 export function useTOC(props) {
   return []
 }
@@ -54,12 +58,13 @@ function MDXLayout(props) {
 exports[`Process heading > dynamic-h1 1`] = `
 {
   "frontMatter": {},
-  "hasJsxInH1": true,
   "result": "/*@jsxRuntime automatic*/
 /*@jsxImportSource react*/
-import { useMDXComponents as _provideComponents } from 'nextra/mdx'
-const title = 'Posts Tagged with “”'
-const frontMatter = {}
+import { useMDXComponents as _provideComponents } from 'next-mdx-import-source-file'
+export const title = 'Posts Tagged with ""'
+export const metadata = {
+  title: 'Posts Tagged with ""'
+}
 import { useRouter } from 'next/router'
 export const TagName = () => {
   const { tag } = useRouter().query
@@ -76,23 +81,23 @@ function MDXLayout(props) {
   }
   return (
     <_components.h1>
-      {'Posts Tagged with “'}
+      {'Posts Tagged with "'}
       <TagName />
-      {'”'}
+      {'"'}
     </_components.h1>
   )
 }
 ",
-  "title": "Posts Tagged with “”",
+  "title": "Posts Tagged with """,
 }
 `;
 
 exports[`Process heading > no-h1 1`] = `
 "/*@jsxRuntime automatic*/
 /*@jsxImportSource react*/
-import { useMDXComponents as _provideComponents } from 'nextra/mdx'
-const title = ''
-const frontMatter = {}
+import { useMDXComponents as _provideComponents } from 'next-mdx-import-source-file'
+export const title = ''
+export const metadata = {}
 export function useTOC(props) {
   return [
     {
@@ -117,9 +122,11 @@ function MDXLayout(props) {
 exports[`Process heading > static-h1 1`] = `
 "/*@jsxRuntime automatic*/
 /*@jsxImportSource react*/
-import { useMDXComponents as _provideComponents } from 'nextra/mdx'
-const title = 'Hello World'
-const frontMatter = {}
+import { useMDXComponents as _provideComponents } from 'next-mdx-import-source-file'
+export const title = 'Hello World'
+export const metadata = {
+  title: 'Hello World'
+}
 export function useTOC(props) {
   return []
 }

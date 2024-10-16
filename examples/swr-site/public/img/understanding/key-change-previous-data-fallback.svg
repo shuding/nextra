@@ -1,12 +1,9 @@
 <svg
-  version="1.1"
   xmlns="http://www.w3.org/2000/svg"
   viewBox="0 0 1230.9077358360364 438.33413843075004"
   width="2461.815471672073"
   height="876.6682768615001"
 >
-  <!-- svg-source:excalidraw -->
-
   <defs>
     <style>
       @font-face {
@@ -25,7 +22,7 @@
     width="1230.9077358360364"
     height="438.33413843075004"
     fill="#ffffff"
-  ></rect>
+  />
   <g
     stroke-linecap="round"
     transform="translate(113.54393872961202 262.0578144833253) rotate(0 86.5 37)"
@@ -35,7 +32,7 @@
       stroke="#000000"
       stroke-width="1"
       fill="none"
-    ></path>
+    />
   </g>
   <g
     transform="translate(153.54393872961202 283.5578144833253) rotate(0 49 13)"
@@ -62,14 +59,14 @@
       stroke="#fab005"
       stroke-width="0.5"
       fill="none"
-    ></path>
+    />
     <path
       d="M-1.5 -1.24 C40.14 0.19, 80.21 -2.3, 171.19 0.4 M174.44 -1.21 C172.61 21.79, 170.48 40.18, 173.37 56.27 M174.86 54.48 C124.37 55.98, 73.18 53.69, -1.6 57.22 M1.3 54.78 C-1.88 35.68, -2.2 15.96, -1.83 -0.58"
       stroke="#c92a2a"
       stroke-width="1.5"
       fill="none"
       stroke-dasharray="1.5 7"
-    ></path>
+    />
   </g>
   <g
     transform="translate(117.04393872961202 196.05781448332527) rotate(0 81.5 12)"
@@ -96,14 +93,14 @@
       stroke="#15aabf"
       stroke-width="0.5"
       fill="none"
-    ></path>
+    />
     <path
       d="M0.69 1.48 C66.13 0.07, 127.85 1.47, 174.42 -1.89 M173.14 1.01 C171.31 8.47, 173.68 19.97, 172.74 43.43 M174 42.6 C126.71 38.99, 79.9 41.9, 1.02 43.48 M-1.47 41.34 C-2.06 28.73, -2.1 16.35, 0.54 1.27"
       stroke="#1864ab"
       stroke-width="1.5"
       fill="none"
       stroke-dasharray="1.5 7"
-    ></path>
+    />
   </g>
   <g
     transform="translate(117.04393872961202 117.05781448332527) rotate(0 81.5 12)"
@@ -131,7 +128,7 @@
         stroke-width="1.5"
         fill="none"
         stroke-dasharray="1.5 7"
-      ></path>
+      />
     </g>
     <g
       transform="translate(117.54393872961202 371.0578144833253) rotate(0 82.14286527819934 0.8305882160771034)"
@@ -142,7 +139,7 @@
         stroke-width="1.5"
         fill="none"
         stroke-dasharray="1.5 5"
-      ></path>
+      />
     </g>
     <g
       transform="translate(117.54393872961202 371.0578144833253) rotate(0 82.14286527819934 0.8305882160771034)"
@@ -153,7 +150,7 @@
         stroke-width="1.5"
         fill="none"
         stroke-dasharray="1.5 5"
-      ></path>
+      />
     </g>
   </g>
   <g
@@ -181,7 +178,7 @@
       stroke="#000000"
       stroke-width="1"
       fill="none"
-    ></path>
+    />
   </g>
   <g
     transform="translate(370.543938729612 283.5578144833253) rotate(0 36.50000000000006 13)"
@@ -209,7 +206,7 @@
         stroke-width="1.5"
         fill="none"
         stroke-dasharray="1.5 7"
-      ></path>
+      />
     </g>
     <g
       transform="translate(543.5439387296119 359.0578144833253) rotate(0 83.55118463225665 1.033383659646006)"
@@ -220,7 +217,7 @@
         stroke-width="1.5"
         fill="none"
         stroke-dasharray="1.5 5"
-      ></path>
+      />
     </g>
     <g
       transform="translate(543.5439387296119 359.0578144833253) rotate(0 83.55118463225665 1.033383659646006)"
@@ -231,7 +228,7 @@
         stroke-width="1.5"
         fill="none"
         stroke-dasharray="1.5 5"
-      ></path>
+      />
     </g>
   </g>
   <g
@@ -243,14 +240,14 @@
       stroke="#fab005"
       stroke-width="0.5"
       fill="none"
-    ></path>
+    />
     <path
       d="M-1.89 -1.31 C37.72 -2.44, 72.7 -0.22, 171.01 -1.38 M174.43 -0.71 C174.93 16.01, 174.08 35.65, 172.46 53.3 M174.48 54.97 C136.25 54.66, 95.43 55.22, -1.78 54.27 M1.27 56.34 C-1.44 41.6, 2.04 31.26, -0.25 -0.17"
       stroke="#c92a2a"
       stroke-width="1.5"
       fill="none"
       stroke-dasharray="1.5 7"
-    ></path>
+    />
   </g>
   <g
     transform="translate(831.0439387296121 189.55781448332527) rotate(0 81.5 12)"
@@ -277,7 +274,7 @@
       stroke="#000000"
       stroke-width="1"
       fill="none"
-    ></path>
+    />
   </g>
   <g
     transform="translate(32.941410508827744 23.528187249032726) rotate(0 199.00000000000006 13)"
@@ -305,7 +302,7 @@
         stroke-width="1.5"
         fill="none"
         stroke-dasharray="1.5 7"
-      ></path>
+      />
     </g>
   </g>
   <g
@@ -349,14 +346,14 @@
       stroke="#fab005"
       stroke-width="0.5"
       fill="none"
-    ></path>
+    />
     <path
       d="M-1.38 0.37 C53.41 1.46, 107.71 1.01, 174.86 -1.52 M171.3 -1.6 C174.39 20.63, 174.65 39.19, 174.3 54.78 M172.27 54.17 C133.21 54.99, 95.86 55.8, -1.6 54.07 M-0.17 54.45 C-0.63 32.18, 0.28 10.52, -1.25 1.88"
       stroke="#c92a2a"
       stroke-width="1.5"
       fill="none"
       stroke-dasharray="1.5 7"
-    ></path>
+    />
   </g>
   <g
     transform="translate(545.5439387296119 189.05781448332527) rotate(0 81.5 12)"
@@ -383,14 +380,14 @@
       stroke="#15aabf"
       stroke-width="0.5"
       fill="none"
-    ></path>
+    />
     <path
       d="M0.27 -0.26 C36.08 -1.03, 71.16 -1.84, 174 0.6 M174.22 1.02 C174.13 11.43, 173.95 21.71, 171.53 41.34 M172.42 42.54 C137.8 41.76, 98.45 38.49, 1.88 41.21 M-0.86 40.23 C0.09 28.55, -1.21 19.72, 0.22 -1.66"
       stroke="#1864ab"
       stroke-width="1.5"
       fill="none"
       stroke-dasharray="1.5 7"
-    ></path>
+    />
   </g>
   <g
     transform="translate(542.5439387296119 110.05781448332527) rotate(0 81.5 12)"
@@ -433,7 +430,7 @@
       stroke="#000000"
       stroke-width="1"
       fill="none"
-    ></path>
+    />
   </g>
   <g transform="translate(843.0439387296121 281.5578144833253) rotate(0 41 13)">
     <text
@@ -459,7 +456,7 @@
         stroke-width="1.5"
         fill="none"
         stroke-dasharray="1.5 7"
-      ></path>
+      />
     </g>
   </g>
   <g
@@ -487,7 +484,7 @@
       stroke="#000000"
       stroke-width="1"
       fill="none"
-    ></path>
+    />
   </g>
   <g
     transform="translate(1062.0439387296121 278.5578144833253) rotate(0 62 13)"
@@ -531,6 +528,6 @@
       stroke-width="1.5"
       fill="none"
       stroke-dasharray="1.5 7"
-    ></path>
+    />
   </g>
 </svg>

@@ -10,6 +10,7 @@
     "clean": "rimraf .next .turbo",
     "debug": "NODE_OPTIONS='--inspect' next dev",
     "dev": "next",
+    "postbuild": "pagefind --site .next/server/app --output-path .next/static/chunks/pagefind",
     "prebuild": "node nextra-remote-filepaths/fetch.js",
     "predev": "pnpm prebuild",
     "start": "next start",
@@ -20,8 +21,8 @@
     "next": "^14.2.5",
     "nextra": "workspace:*",
     "nextra-theme-docs": "workspace:*",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
+    "react": "^19.0.0-rc.0",
+    "react-dom": "^19.0.0-rc.0",
     "react-intersection-observer": "^8.26.2"
   },
   "dependenciesMeta": {
@@ -33,7 +34,7 @@
     }
   },
   "devDependencies": {
-    "@next/bundle-analyzer": "^13.4.19",
+    "@next/bundle-analyzer": "^14.2.13",
     "autoprefixer": "^10.4.16",
     "postcss": "^8.4.33",
     "postcss-import": "^16.0.0",
@@ -42,10 +43,5 @@
   "browserslist": [
     ">= .25%",
     "not dead"
-  ],
-  "nextBundleAnalysis": {
-    "budget": 358400,
-    "budgetPercentIncreaseRed": 20,
-    "showDetails": true
-  }
+  ]
 }

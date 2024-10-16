@@ -1,17 +1,19 @@
+'use client'
+
 import cn from 'clsx'
 import type { Heading } from 'nextra'
-import { removeLinks } from 'nextra/remove-links'
-import type { ReactElement } from 'react'
+import type { FC } from 'react'
 import { useEffect, useRef } from 'react'
 import scrollIntoView from 'scroll-into-view-if-needed'
-import { useActiveAnchor, useThemeConfig } from '../contexts'
-import { renderComponent } from '../utils'
+import { useActiveAnchor, useThemeConfig } from '../stores'
+import { getGitIssueUrl, gitUrlParse } from '../utils'
 import { Anchor } from './anchor'
 import { BackToTop } from './back-to-top'
 
-export type TOCProps = {
+type TOCProps = {
   toc: Heading[]
   filePath: string
+  pageTitle: string
 }
 
 const linkClassName = cn(
@@ -21,22 +23,19 @@ const linkClassName = cn(
   'contrast-more:_text-gray-700 contrast-more:dark:_text-gray-100'
 )
 
-export function TOC({ toc, filePath }: TOCProps): ReactElement {
-  const activeAnchor = useActiveAnchor()
-  const tocRef = useRef<HTMLUListElement>(null)
+export const TOC: FC<TOCProps> = ({ toc, filePath, pageTitle }) => {
+  const activeSlug = useActiveAnchor()
+  const tocRef = useRef<HTMLUListElement>(null!)
   const themeConfig = useThemeConfig()
 
   const hasHeadings = toc.length > 0
   const hasMetaInfo = Boolean(
     themeConfig.feedback.content ||
-      themeConfig.editLink.component ||
+      themeConfig.editLink ||
       themeConfig.toc.extraContent ||
       themeConfig.toc.backToTop
   )
 
-  const activeSlug = Object.entries(activeAnchor).find(
-    ([, { isActive }]) => isActive
-  )?.[0]
   const activeIndex = toc.findIndex(({ id }) => id === activeSlug)
 
   useEffect(() => {
@@ -71,7 +70,7 @@ export function TOC({ toc, filePath }: TOCProps): ReactElement {
               '_pb-2 _shadow-[0_12px_16px_rgb(var(--nextra-bg))] contrast-more:_shadow-none _z-[1]'
             )}
           >
-            {renderComponent(themeConfig.toc.title)}
+            {themeConfig.toc.title}
           </p>
           <ul
             ref={tocRef}
@@ -85,7 +84,7 @@ export function TOC({ toc, filePath }: TOCProps): ReactElement {
                 <a
                   href={`#${id}`}
                   className={cn(
-                    'nextra-focus',
+                    'focus-visible:nextra-focus',
                     {
                       2: '_font-semibold',
                       3: '_ms-4',
@@ -94,13 +93,13 @@ export function TOC({ toc, filePath }: TOCProps): ReactElement {
                       6: '_ms-16'
                     }[depth],
                     '_block _transition-colors _subpixel-antialiased',
-                    activeAnchor[id]?.isActive
+                    id === activeSlug
                       ? '_text-primary-600 contrast-more:!_text-primary-600'
                       : '_text-gray-500 hover:_text-gray-900 dark:_text-gray-400 dark:hover:_text-gray-300',
                     'contrast-more:_text-gray-900 contrast-more:_underline contrast-more:dark:_text-gray-50 _break-words'
                   )}
                 >
-                  {removeLinks(value)}
+                  {value}
                 </a>
               </li>
             ))}
@@ -116,27 +115,34 @@ export function TOC({ toc, filePath }: TOCProps): ReactElement {
             '_mx-4' // for border top width
           )}
         >
-          {themeConfig.feedback.content ? (
+          {themeConfig.feedback.content && (
             <Anchor
               className={linkClassName}
-              href={themeConfig.feedback.useLink()}
+              href={getGitIssueUrl({
+                labels: themeConfig.feedback.labels,
+                repository: themeConfig.docsRepositoryBase,
+                title: `Feedback for “${pageTitle}”`
+              })}
               newWindow
             >
-              {renderComponent(themeConfig.feedback.content)}
+              {themeConfig.feedback.content}
             </Anchor>
-          ) : null}
+          )}
 
-          {renderComponent(themeConfig.editLink.component, {
-            filePath,
-            className: linkClassName,
-            children: renderComponent(themeConfig.editLink.content)
-          })}
+          {themeConfig.editLink && (
+            <Anchor
+              className={linkClassName}
+              href={`${gitUrlParse(themeConfig.docsRepositoryBase).href}/${filePath}`}
+            >
+              {themeConfig.editLink}
+            </Anchor>
+          )}
 
-          {renderComponent(themeConfig.toc.extraContent)}
+          {themeConfig.toc.extraContent}
 
           {themeConfig.toc.backToTop && (
             <BackToTop className={linkClassName} hidden={activeIndex < 2}>
-              {renderComponent(themeConfig.toc.backToTop)}
+              {themeConfig.toc.backToTop}
             </BackToTop>
           )}
         </div>
