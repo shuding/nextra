@@ -1,5 +1,5 @@
 import { compileMdx } from 'nextra/compile'
-import { RemoteContent, Callout } from 'nextra/components'
+import { Callout, RemoteContent } from 'nextra/components'
 
 # MDX
 
@@ -21,7 +21,6 @@ export async function Demo() {
   MDX document to a syntax tree and then generates a JSX document from that
   tree.
 </Callout>`
-
   const { result } = await compileMdx(`~~~mdx filename="example.mdx"
 ${mdx}
 ~~~
