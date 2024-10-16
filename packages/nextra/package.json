@@ -9,6 +9,7 @@
     "node": ">=18"
   },
   "exports": {
+    "./katex.css": "./styles/katex.css",
     "./package.json": "./package.json",
     ".": {
       "import": "./dist/server/index.js",
