@@ -1,5 +1,17 @@
 # nextra-theme-docs
 
+## 3.0.13
+
+### Patch Changes
+
+- f1815ac: From an accessibility POV (WCAG G13) there's a need of additional
+  visual differentiation factor for hovers. Article achieves this but mdx
+  doesn't.
+
+  So changing the mdx link behaviour so on hover the underline disappears.
+
+  - nextra@3.0.13
+
 ## 3.0.12
 
 ### Patch Changes
