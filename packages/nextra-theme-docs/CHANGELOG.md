@@ -1,5 +1,24 @@
 # nextra-theme-docs
 
+## 3.0.14
+
+### Patch Changes
+
+- 9794e9e: Fix `frontMatter.sidebarTitle` didn't affect without
+  `frontMatter.title` set
+
+  now priority for sidebar title is:
+
+  1. `title` property from `_meta` file
+  1. `frontMatter.sidebarTitle`
+  1. `frontMatter.title`
+  1. formatted with [Title](https://title.sh) based on filename
+
+- Updated dependencies [6454938]
+- Updated dependencies [9794e9e]
+- Updated dependencies [9794e9e]
+  - nextra@3.0.14
+
 ## 3.0.13
 
 ### Patch Changes
