@@ -151,7 +151,6 @@ export function normalizePages({
   // Page directories
   const topLevelNavbarItems: (PageItem | MenuItem)[] = []
 
-  let activeType: string | undefined
   let activeIndex = 0
   let activeThemeContext = pageThemeContext
   let activePath: Item[] = []
@@ -159,6 +158,8 @@ export function normalizePages({
   let metaKeyIndex = -1
 
   const fallbackMeta = meta['*'] || {}
+  let activeType: string | undefined = fallbackMeta.type
+
   delete fallbackMeta.title
   delete fallbackMeta.href
 
