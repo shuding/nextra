@@ -140,15 +140,10 @@ const nextra: Nextra = nextraConfig => {
             appESM
           ]
         } else {
-          alias[
-            join(
-              require.resolve('next/package.json'),
-              '..',
-              'dist',
-              'pages',
-              '_app'
-            )
-          ] = appESM
+          const nextAlias = alias.next
+          if (nextAlias) {
+            alias[join(alias.next, 'dist', 'pages', '_app')] = appESM
+          }
         }
         const rules = config.module.rules as RuleSetRule[]
 
