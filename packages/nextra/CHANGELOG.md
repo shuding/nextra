@@ -1,5 +1,11 @@
 # nextra
 
+## 3.0.15
+
+### Patch Changes
+
+- bd498c6: fix compatibility with Next.js `15.0.0-rc.1`
+
 ## 3.0.14
 
 ### Patch Changes
