@@ -16,7 +16,7 @@ code.nextra-code:not([class*='twoslash-']) {
   }
 }
 
-pre code:not([class*='twoslash-']) {
+pre code.nextra-code:not([class*='twoslash-']) {
   @apply _grid _text-sm;
 
   &[data-line-numbers] > span {
