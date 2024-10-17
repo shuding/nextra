@@ -1,5 +1,4 @@
 /* eslint-env node */
-import { createRequire } from 'node:module'
 import { join, sep } from 'node:path'
 import type { NextConfig } from 'next'
 import type { RuleSetRule } from 'webpack'
@@ -16,8 +15,6 @@ import {
 import { nextraConfigSchema } from './schemas.js'
 import { logger } from './utils.js'
 import { NextraPlugin, NextraSearchPlugin } from './webpack-plugins/index.js'
-
-const require = createRequire(import.meta.url)
 
 const DEFAULT_EXTENSIONS = ['js', 'jsx', 'ts', 'tsx']
 
