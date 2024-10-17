@@ -151,17 +151,17 @@ export function normalizePages({
   // Page directories
   const topLevelNavbarItems: (PageItem | MenuItem)[] = []
 
+  const { title: _title, href: _href, ...fallbackMeta } = meta['*'] || {}
+
+  let activeType: string = fallbackMeta.type
   let activeIndex = 0
-  let activeThemeContext = pageThemeContext
+  let activeThemeContext = {
+    ...pageThemeContext,
+    ...fallbackMeta.theme
+  }
   let activePath: Item[] = []
 
   let metaKeyIndex = -1
-
-  const fallbackMeta = meta['*'] || {}
-  let activeType: string | undefined = fallbackMeta.type
-
-  delete fallbackMeta.title
-  delete fallbackMeta.href
 
   // Normalize items based on files and _meta.json.
   const items = list
@@ -227,7 +227,6 @@ export function normalizePages({
       }
       continue
     }
-
     // Get the item's meta information.
     const extendedMeta = extendMeta(
       meta[currentItem.name],

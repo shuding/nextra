@@ -307,7 +307,7 @@ describe('normalize-page', () => {
                 type: 'page',
                 theme: {
                   layout: 'default',
-                  toc: true
+                  toc: false
                 }
               }
             }
@@ -325,7 +325,7 @@ describe('normalize-page', () => {
 
     const { activeType, activeIndex, activeThemeContext } = normalizePages({
       list: pageMap,
-      route: '/1-level/foo'
+      route: '/1-level/not-exist'
     })
     expect({ activeType, activeIndex, activeThemeContext }).toEqual({
       activeType: 'page',
@@ -339,7 +339,7 @@ describe('normalize-page', () => {
         pagination: true,
         sidebar: true,
         timestamp: true,
-        toc: true,
+        toc: false,
         typesetting: 'default'
       }
     })
