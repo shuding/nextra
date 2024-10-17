@@ -6,6 +6,7 @@
   "author": "Shu Ding <g@shud.in>",
   "license": "MIT",
   "exports": {
+    "./style.css": "./dist/style.css",
     ".": {
       "import": "./dist/index.js",
       "types": "./dist/index.d.mts"

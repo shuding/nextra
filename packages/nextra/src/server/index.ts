@@ -3,22 +3,16 @@ import path from 'node:path'
 import type { RuleSetRule } from 'webpack'
 import { fromZodError } from 'zod-validation-error'
 import type { Nextra } from '../types'
-import {
-  DEFAULT_LOCALES,
-  IS_PRODUCTION,
-  MARKDOWN_EXTENSION_RE,
-  MARKDOWN_EXTENSIONS
-} from './constants.js'
+import { MARKDOWN_EXTENSION_RE, MARKDOWN_EXTENSIONS } from './constants.js'
 import { nextraConfigSchema } from './schemas.js'
 import { logger } from './utils.js'
-import { NextraPlugin } from './webpack-plugins/index.js'
 
 const DEFAULT_EXTENSIONS = ['js', 'jsx', 'ts', 'tsx']
 
 const SEP_RE = path.sep === '/' ? '/' : '\\\\'
 
 const PAGE_MAP_RE = new RegExp(
-  `.next${SEP_RE}static${SEP_RE}chunks${SEP_RE}nextra-page-map`
+  `nextra${SEP_RE}dist${SEP_RE}server${SEP_RE}page-map-placeholder`
 )
 
 const nextra: Nextra = nextraConfig => {
@@ -29,6 +23,22 @@ const nextra: Nextra = nextraConfig => {
     throw fromZodError(error)
   }
 
+  const loader = {
+    loader: 'nextra/loader',
+    options: loaderOptions
+  }
+  const pageImportLoader = {
+    loader: 'nextra/loader',
+    options: { ...loaderOptions, isPageImport: true }
+  }
+  const pageMapLoader = {
+    loader: 'nextra/loader',
+    options: {
+      useContentDir: loaderOptions.useContentDir ?? false,
+      isPageMapImport: true
+    }
+  }
+
   return function withNextra(nextConfig = {}) {
     const hasI18n = !!nextConfig.i18n?.locales
 
@@ -37,15 +47,20 @@ const nextra: Nextra = nextraConfig => {
         'You have Next.js i18n enabled, read here https://nextjs.org/docs/app/building-your-application/routing/internationalization for the docs.'
       )
     }
-
     // const optimizedImports = new Set(
     //   nextConfig.experimental?.optimizePackageImports || []
     // )
     //
     // optimizedImports.add('nextra/components')
-
     return {
       ...nextConfig,
+      transpilePackages: [
+        // To import ESM-only packages with `next dev --turbo`. Source: https://github.com/vercel/next.js/issues/63318#issuecomment-2079677098
+        ...(process.env.npm_lifecycle_script!.includes('--turbo')
+          ? ['shiki']
+          : []),
+        ...(nextConfig.transpilePackages || [])
+      ],
       // experimental: {
       //   ...nextConfig.experimental,
       //   optimizePackageImports: [...optimizedImports]
@@ -62,17 +77,36 @@ const nextra: Nextra = nextraConfig => {
           NEXTRA_LOCALES: JSON.stringify(nextConfig.i18n?.locales)
         }
       }),
-      webpack(config, options) {
-        if (options.nextRuntime !== 'edge' && options.isServer) {
-          config.plugins.push(
-            new NextraPlugin({
-              locales: nextConfig.i18n?.locales || DEFAULT_LOCALES,
-              useContentDir: loaderOptions.useContentDir
-              // transformPageMap: nextraConfig.transformPageMap
-            })
-          )
+      experimental: {
+        ...nextConfig.experimental,
+        // optimizePackageImports: [...optimizedImports]
+        turbo: {
+          ...nextConfig.experimental?.turbo,
+          rules: {
+            ...nextConfig.experimental?.turbo?.rules,
+            './{src/app,app}/**/page.{md,mdx}': {
+              as: '*.tsx',
+              loaders: [pageImportLoader as any]
+            },
+            // Order matter here, pages match first -> after partial files
+            '*.{md,mdx}': {
+              as: '*.tsx',
+              loaders: [loader as any]
+            },
+            '**/nextra/dist/server/page-map-placeholder.js': {
+              loaders: [pageMapLoader]
+            }
+          },
+          resolveAlias: {
+            ...nextConfig.experimental?.turbo?.resolveAlias,
+            // TODO: resolving .jsx/.tsx doesn't work for some reason
+            'next-mdx-import-source-file': './mdx-components', // '@vercel/turbopack-next/mdx-import-source'
+            'private-next-app-dir/*': './app/*',
+            'private-next-root-dir/*': './*'
+          }
         }
-
+      },
+      webpack(config, options) {
         // Fixes https://github.com/vercel/next.js/issues/55872
         if (config.watchOptions.ignored instanceof RegExp) {
           const ignored = config.watchOptions.ignored.source
@@ -89,50 +123,32 @@ const nextra: Nextra = nextraConfig => {
           'private-next-root-dir/mdx-components',
           'nextra/mdx'
         ]
-        config.module.rules.push({
-          test: MARKDOWN_EXTENSION_RE,
-          oneOf: [
-            ...(IS_PRODUCTION
-              ? []
-              : [
-                  {
-                    issuer: PAGE_MAP_RE,
-                    use: [
-                      options.defaultLoaders.babel,
-                      {
-                        loader: 'nextra/loader',
-                        options: { ...loaderOptions, isPageMapImport: true }
-                      }
-                    ]
-                  }
-                ]),
-            {
-              // Match pages (imports without an issuer request).
-              issuer: request => request === '',
-              use: [
-                options.defaultLoaders.babel,
-                {
-                  loader: 'nextra/loader',
-                  options: { ...loaderOptions, isPageImport: true }
-                }
-              ]
-            },
-            {
-              // Match Markdown imports from non-pages. These imports have an
-              // issuer, which can be anything as long as it's not empty string.
-              // When the issuer is `null`, it means that it can be imported via a
-              // runtime import call such as `import('...')`.
-              issuer: request => request === null || !!request,
-              use: [
-                options.defaultLoaders.babel,
-                {
-                  loader: 'nextra/loader',
-                  options: loaderOptions
-                }
-              ]
-            }
-          ]
-        } satisfies RuleSetRule)
+        const rules = config.module.rules as RuleSetRule[]
+
+        rules.push(
+          {
+            test: PAGE_MAP_RE,
+            use: [options.defaultLoaders.babel, pageMapLoader]
+          },
+          {
+            test: MARKDOWN_EXTENSION_RE,
+            oneOf: [
+              {
+                // Match pages (imports without an issuer request).
+                issuer: request => request === '',
+                use: [options.defaultLoaders.babel, pageImportLoader]
+              },
+              {
+                // Match Markdown imports from non-pages. These imports have an
+                // issuer, which can be anything as long as it's not empty string.
+                // When the issuer is `null`, it means that it can be imported via a
+                // runtime import call such as `import('...')`.
+                issuer: request => request === null || !!request,
+                use: [options.defaultLoaders.babel, loader]
+              }
+            ]
+          }
+        )
 
         return nextConfig.webpack?.(config, options) || config
       }

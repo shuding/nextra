@@ -4,19 +4,6 @@ import nextra from 'nextra'
 
 const withNextra = nextra({
   defaultShowCopyCode: true,
-  transformPageMap(pageMap, locale) {
-    if (locale === 'en') {
-      pageMap = [
-        ...pageMap,
-        {
-          name: 'virtual-page',
-          route: '/en/virtual-page',
-          frontMatter: { sidebarTitle: 'Virtual Page' }
-        }
-      ]
-    }
-    return pageMap
-  },
   latex: true,
   useContentDir: true
 })
@@ -67,7 +54,15 @@ export default withBundleAnalyzer(
       optimizePackageImports: [
         '@app/_icons'
         // 'nextra/components',
-      ]
+      ],
+      turbo: {
+        rules: {
+          './app/_icons/*.svg': {
+            loaders: ['@svgr/webpack'],
+            as: '*.js'
+          }
+        }
+      }
     }
   })
 )

@@ -6,6 +6,7 @@ import { getPageMap } from 'nextra/page-map'
 import type { ReactNode } from 'react'
 import './globals.css'
 import cn from 'clsx'
+import 'nextra-theme-docs/style.css'
 
 export const viewport: Viewport = Head.viewport
 
