@@ -47,15 +47,20 @@ const nextra: Nextra = nextraConfig => {
         'You have Next.js i18n enabled, read here https://nextjs.org/docs/app/building-your-application/routing/internationalization for the docs.'
       )
     }
-
     // const optimizedImports = new Set(
     //   nextConfig.experimental?.optimizePackageImports || []
     // )
     //
     // optimizedImports.add('nextra/components')
-
     return {
       ...nextConfig,
+      transpilePackages: [
+        // To import ESM-only packages with `next dev --turbo`. Source: https://github.com/vercel/next.js/issues/63318#issuecomment-2079677098
+        ...(process.env.npm_lifecycle_script!.includes('--turbo')
+          ? ['shiki']
+          : []),
+        ...(nextConfig.transpilePackages || [])
+      ],
       // experimental: {
       //   ...nextConfig.experimental,
       //   optimizePackageImports: [...optimizedImports]

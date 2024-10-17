@@ -23,8 +23,7 @@
     "nextra-theme-docs": "workspace:*",
     "react": "^19.0.0-rc.0",
     "react-dom": "^19.0.0-rc.0",
-    "react-intersection-observer": "^8.26.2",
-    "shiki": "1.17.0"
+    "react-intersection-observer": "^8.26.2"
   },
   "dependenciesMeta": {
     "nextra": {
