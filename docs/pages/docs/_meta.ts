@@ -1,5 +1,5 @@
 export default {
-  index: 'Introduction',
+  index: '',
   guide: '',
   '-- Themes': {
     type: 'separator',

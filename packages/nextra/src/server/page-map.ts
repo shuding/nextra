@@ -121,7 +121,7 @@ async function collectFiles({
           const content = await fs.readFile(filePath, 'utf8')
           const { data } = grayMatter(content)
           if (!data.title) {
-            data.sidebarTitle = pageTitleFromFilename(name)
+            data.sidebarTitle ||= pageTitleFromFilename(name)
           }
 
           return {
