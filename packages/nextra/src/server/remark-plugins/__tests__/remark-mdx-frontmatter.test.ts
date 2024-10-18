@@ -1,7 +1,7 @@
 import { compile } from '@mdx-js/mdx'
-import type { VFile } from '@mdx-js/mdx/lib/compile'
 import remarkFrontmatter from 'remark-frontmatter'
 import { clean } from '../../../../__test__/test-utils.js'
+import type { VFile } from '../../../../__test__/test-utils.js'
 import { remarkMdxFrontMatter } from '../remark-mdx-frontmatter.js'
 
 function process(content: string): Promise<VFile> {
