@@ -1,7 +1,8 @@
 import { useMDXComponents as originalUseMDXComponents } from '@mdx-js/react'
-import type { MDXComponents } from '@mdx-js/react/lib'
 import Image, { type ImageProps } from 'next/image'
 import { createElement } from 'react'
+
+type MDXComponents = ReturnType<typeof originalUseMDXComponents>
 
 const DEFAULT_COMPONENTS = {
   img: props =>
