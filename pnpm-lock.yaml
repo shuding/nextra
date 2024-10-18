@@ -5,8 +5,7 @@ settings:
   excludeLinksFromLockfile: false
 
 overrides:
-  vite: 5.4.9
-  esbuild: 0.24.0
+  esbuild: ^0.24.0
   next: 15.0.0-rc.1
 
 patchedDependencies:
@@ -256,7 +255,7 @@ importers:
         version: 0.1.19
       '@shikijs/twoslash':
         specifier: ^1.0.0
-        version: 1.17.0(typescript@5.6.3)
+        version: 1.22.0(typescript@5.6.3)
       '@theguild/remark-mermaid':
         specifier: ^0.1.3
         version: 0.1.3(react@18.3.1)
@@ -301,7 +300,7 @@ importers:
         version: 7.0.1
       rehype-pretty-code:
         specifier: 0.14.0
-        version: 0.14.0(shiki@1.17.0)
+        version: 0.14.0(shiki@1.22.0)
       rehype-raw:
         specifier: ^7.0.0
         version: 7.0.0
@@ -322,7 +321,7 @@ importers:
         version: 3.0.2
       shiki:
         specifier: ^1.0.0
-        version: 1.17.0
+        version: 1.22.0
       slash:
         specifier: ^5.1.0
         version: 5.1.0
@@ -4431,52 +4430,52 @@ packages:
     resolution: {integrity: sha512-zt6OdqaDoOnJ1ZYsCYGt9YmWzDXl4vQdKTyJev62gFhRGKdx7mcT54V9KIjg+d2wi9EXsPvAPKe7i7WjfVWB8g==}
     dev: true
 
-  /@shikijs/core@1.17.0:
-    resolution: {integrity: sha512-Mkk4Mp4bNnW1kytU8I7S5PK5teNSe0iKlfqxPss4sdwnlcU8a2N62Z3te2gVmZfU9t1HF6L3wyWuM43IvEeEsg==}
+  /@shikijs/core@1.22.0:
+    resolution: {integrity: sha512-S8sMe4q71TJAW+qG93s5VaiihujRK6rqDFqBnxqvga/3LvqHEnxqBIOPkt//IdXVtHkQWKu4nOQNk0uBGicU7Q==}
     dependencies:
-      '@shikijs/engine-javascript': 1.17.0
-      '@shikijs/engine-oniguruma': 1.17.0
-      '@shikijs/types': 1.17.0
-      '@shikijs/vscode-textmate': 9.2.2
+      '@shikijs/engine-javascript': 1.22.0
+      '@shikijs/engine-oniguruma': 1.22.0
+      '@shikijs/types': 1.22.0
+      '@shikijs/vscode-textmate': 9.3.0
       '@types/hast': 3.0.4
-      hast-util-to-html: 9.0.2
+      hast-util-to-html: 9.0.3
     dev: false
 
-  /@shikijs/engine-javascript@1.17.0:
-    resolution: {integrity: sha512-EiBVlxmzJZdC2ypzn8k+vxLngbBNgHLS4RilwrFOABGRc72kUZubbD/6Chrq2RcVtD3yq1GtiiIdFMGd9BTX3Q==}
+  /@shikijs/engine-javascript@1.22.0:
+    resolution: {integrity: sha512-AeEtF4Gcck2dwBqCFUKYfsCq0s+eEbCEbkUuFou53NZ0sTGnJnJ/05KHQFZxpii5HMXbocV9URYVowOP2wH5kw==}
     dependencies:
-      '@shikijs/types': 1.17.0
-      oniguruma-to-js: 0.3.3
-      regex: 4.3.2
+      '@shikijs/types': 1.22.0
+      '@shikijs/vscode-textmate': 9.3.0
+      oniguruma-to-js: 0.4.3
     dev: false
 
-  /@shikijs/engine-oniguruma@1.17.0:
-    resolution: {integrity: sha512-nsXzJGLQ0fhKmA4Gwt1cF7vC8VuZ1HSDrTRuj48h/qDeX/TzmOlTDXQ3uPtyuhyg/2rbZRzNhN8UFU4fSnQfXg==}
+  /@shikijs/engine-oniguruma@1.22.0:
+    resolution: {integrity: sha512-5iBVjhu/DYs1HB0BKsRRFipRrD7rqjxlWTj4F2Pf+nQSPqc3kcyqFFeZXnBMzDf0HdqaFVvhDRAGiYNvyLP+Mw==}
     dependencies:
-      '@shikijs/types': 1.17.0
-      '@shikijs/vscode-textmate': 9.2.2
+      '@shikijs/types': 1.22.0
+      '@shikijs/vscode-textmate': 9.3.0
     dev: false
 
-  /@shikijs/twoslash@1.17.0(typescript@5.6.3):
-    resolution: {integrity: sha512-CqXVLRbX5D/bN9OAWNVAxkjF1ZpqyzD6jHtKYor+rxvqz2QXK57taWo4IHa1s9APHpgGidMNxXVZZ5eN8uZnlg==}
+  /@shikijs/twoslash@1.22.0(typescript@5.6.3):
+    resolution: {integrity: sha512-r5F/x4GTh18XzhAREehgT9lCDFZlISBSIsOFZQQaqjiOLG81PIqJN1I1D6XY58UN9OJt+3mffuKq19K4FOJKJA==}
     dependencies:
-      '@shikijs/core': 1.17.0
-      '@shikijs/types': 1.17.0
-      twoslash: 0.2.11(typescript@5.6.3)
+      '@shikijs/core': 1.22.0
+      '@shikijs/types': 1.22.0
+      twoslash: 0.2.12(typescript@5.6.3)
     transitivePeerDependencies:
       - supports-color
       - typescript
     dev: false
 
-  /@shikijs/types@1.17.0:
-    resolution: {integrity: sha512-Tvu2pA69lbpXB+MmgIaROP1tio8y0uYvKb5Foh3q0TJBTAJuaoa5eDEtS/0LquyveacsiVrYF4uEZILju+7Ybg==}
+  /@shikijs/types@1.22.0:
+    resolution: {integrity: sha512-Fw/Nr7FGFhlQqHfxzZY8Cwtwk5E9nKDUgeLjZgt3UuhcM3yJR9xj3ZGNravZZok8XmEZMiYkSMTPlPkULB8nww==}
     dependencies:
-      '@shikijs/vscode-textmate': 9.2.2
+      '@shikijs/vscode-textmate': 9.3.0
       '@types/hast': 3.0.4
     dev: false
 
-  /@shikijs/vscode-textmate@9.2.2:
-    resolution: {integrity: sha512-TMp15K+GGYrWlZM8+Lnj9EaHEFmOen0WJBrfa17hF7taDOYthuPPV0GWzfd/9iMij0akS/8Yw2ikquH7uVi/fg==}
+  /@shikijs/vscode-textmate@9.3.0:
+    resolution: {integrity: sha512-jn7/7ky30idSkd/O5yDBfAnVt+JJpepofP/POZ1iMOxK59cOfqIgg/Dj0eFsjOTMw+4ycJN0uhZH/Eb0bs/EUA==}
     dev: false
 
   /@shuding/opentype.js@1.4.0-beta.0:
@@ -5314,7 +5313,7 @@ packages:
     resolution: {integrity: sha512-hieu+o05v4glEBucTcKMK3dlES0OeJlD9YVOAPraVMOInBCwzumaIFiUjr4bHK7NPgnAHgiskUoceKercrN8vg==}
     engines: {node: ^14.18.0 || >=16.0.0}
     peerDependencies:
-      vite: 5.4.9
+      vite: ^4.2.0 || ^5.0.0
     dependencies:
       '@babel/core': 7.25.8
       '@babel/plugin-transform-react-jsx-self': 7.25.7(@babel/core@7.25.8)
@@ -5340,7 +5339,7 @@ packages:
     peerDependencies:
       '@vitest/spy': 2.1.3
       msw: ^2.3.5
-      vite: 5.4.9
+      vite: ^5.0.0
     peerDependenciesMeta:
       msw:
         optional: true
@@ -5937,7 +5936,7 @@ packages:
     resolution: {integrity: sha512-GuziW3fSSmopcx4KRymQEJVbZUfqlCqcq7dvs6TYwKRZiegK/2buMxQTPs6MGlNv50wms1699qYO54R8XfRX4w==}
     engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
     peerDependencies:
-      esbuild: 0.24.0
+      esbuild: ^0.24.0
     dependencies:
       esbuild: 0.24.0
       load-tsconfig: 0.2.3
@@ -7104,7 +7103,7 @@ packages:
   /esbuild-plugin-svgr@3.0.0(esbuild@0.24.0)(typescript@5.6.3):
     resolution: {integrity: sha512-8/YuGHKoNVKdcV8HUGFQtAJ16agxzemcX9IvcQvaVKuXqIBDvc5IV9nlPyyHcrgr+IvyKBcljO4wjxrh24DSAQ==}
     peerDependencies:
-      esbuild: 0.24.0
+      esbuild: ^0.24.0
     dependencies:
       '@svgr/core': 8.1.0(typescript@5.6.3)
       '@svgr/plugin-jsx': 8.1.0(@svgr/core@8.1.0)
@@ -8300,8 +8299,8 @@ packages:
       - supports-color
     dev: false
 
-  /hast-util-to-html@9.0.2:
-    resolution: {integrity: sha512-RP5wNpj5nm1Z8cloDv4Sl4RS8jH5HYa0v93YB6Wb4poEzgMo/dAAL0KcT4974dCjcNG5pkLqTImeFHHCwwfY3g==}
+  /hast-util-to-html@9.0.3:
+    resolution: {integrity: sha512-M17uBDzMJ9RPCqLMO92gNNUDuBSq10a25SDBI08iCCxmorf4Yy6sYHK57n9WAbRAAaU+DuR4W6GN9K4DFZesYg==}
     dependencies:
       '@types/hast': 3.0.4
       '@types/unist': 3.0.3
@@ -10254,8 +10253,10 @@ packages:
       mimic-fn: 2.1.0
     dev: true
 
-  /oniguruma-to-js@0.3.3:
-    resolution: {integrity: sha512-m90/WEhgs8g4BxG37+Nu3YrMfJDs2YXtYtIllhsEPR+wP3+K4EZk6dDUvy2v2K4MNFDDOYKL4/yqYPXDqyozTQ==}
+  /oniguruma-to-js@0.4.3:
+    resolution: {integrity: sha512-X0jWUcAlxORhOqqBREgPMgnshB7ZGYszBNspP+tS9hPD3l13CdaXcHbgImoHUHlrvGx/7AvFEkTRhAGYh+jzjQ==}
+    dependencies:
+      regex: 4.3.2
     dev: false
 
   /opener@1.5.2:
@@ -11097,7 +11098,7 @@ packages:
       unified: 11.0.5
     dev: false
 
-  /rehype-pretty-code@0.14.0(shiki@1.17.0):
+  /rehype-pretty-code@0.14.0(shiki@1.22.0):
     resolution: {integrity: sha512-hBeKF/Wkkf3zyUS8lal9RCUuhypDWLQc+h9UrP9Pav25FUm/AQAVh4m5gdvJxh4Oz+U+xKvdsV01p1LdvsZTiQ==}
     engines: {node: '>=18'}
     peerDependencies:
@@ -11107,7 +11108,7 @@ packages:
       hast-util-to-string: 3.0.0
       parse-numeric-range: 1.3.0
       rehype-parse: 9.0.0
-      shiki: 1.17.0
+      shiki: 1.22.0
       unified: 11.0.5
       unist-util-visit: 5.0.0
     dev: false
@@ -11548,12 +11549,14 @@ packages:
     resolution: {integrity: sha512-6j1W9l1iAs/4xYBI1SYOVZyFcCis9b4KCLQ8fgAGG07QvzaRLVVRQvAy85yNmmZSjYjg4MWh4gNvlPujU/5LpA==}
     dev: true
 
-  /shiki@1.17.0:
-    resolution: {integrity: sha512-VZf8cPShRwfzPcaswv81+YP7qJEoFwRT+Ehy6bizim7M0zG9bk8Egug550C+xS9g7rKIOPhzAlp2uEyuCxbk/A==}
+  /shiki@1.22.0:
+    resolution: {integrity: sha512-/t5LlhNs+UOKQCYBtl5ZsH/Vclz73GIqT2yQsCBygr8L/ppTdmpL4w3kPLoZJbMKVWtoG77Ue1feOjZfDxvMkw==}
     dependencies:
-      '@shikijs/core': 1.17.0
-      '@shikijs/types': 1.17.0
-      '@shikijs/vscode-textmate': 9.2.2
+      '@shikijs/core': 1.22.0
+      '@shikijs/engine-javascript': 1.22.0
+      '@shikijs/engine-oniguruma': 1.22.0
+      '@shikijs/types': 1.22.0
+      '@shikijs/vscode-textmate': 9.3.0
       '@types/hast': 3.0.4
     dev: false
 
@@ -12341,17 +12344,17 @@ packages:
       turbo-windows-arm64: 2.1.3
     dev: true
 
-  /twoslash-protocol@0.2.11:
-    resolution: {integrity: sha512-rp+nkOWbKfJnBTDZtnIaBGjnU+4CaMhqu6db2UU7byU96rH8X4hao4BOxYw6jdZc85Lhv5pOfcjgfHeQyLzndQ==}
+  /twoslash-protocol@0.2.12:
+    resolution: {integrity: sha512-5qZLXVYfZ9ABdjqbvPc4RWMr7PrpPaaDSeaYY55vl/w1j6H6kzsWK/urAEIXlzYlyrFmyz1UbwIt+AA0ck+wbg==}
     dev: false
 
-  /twoslash@0.2.11(typescript@5.6.3):
-    resolution: {integrity: sha512-392Qkcu5sD2hROLZ+XPywChreDGJ8Yu5nnK/Moxfti/R39q0Q39MaV7iHjz92B5qucyjsQFnKMdYIzafX5T8dg==}
+  /twoslash@0.2.12(typescript@5.6.3):
+    resolution: {integrity: sha512-tEHPASMqi7kqwfJbkk7hc/4EhlrKCSLcur+TcvYki3vhIfaRMXnXjaYFgXpoZRbT6GdprD4tGuVBEmTpUgLBsw==}
     peerDependencies:
       typescript: '*'
     dependencies:
       '@typescript/vfs': 1.6.0(typescript@5.6.3)
-      twoslash-protocol: 0.2.11
+      twoslash-protocol: 0.2.12
       typescript: 5.6.3
     transitivePeerDependencies:
       - supports-color
@@ -13144,7 +13147,7 @@ packages:
       '@mdx-js/mdx': 3.1.0(acorn@8.13.0)
       '@mdx-js/react': 3.1.0(@types/react@18.3.11)(react@18.3.1)
       '@napi-rs/simple-git': 0.1.19
-      '@shikijs/twoslash': 1.17.0(typescript@5.6.3)
+      '@shikijs/twoslash': 1.22.0(typescript@5.6.3)
       '@theguild/remark-mermaid': 0.1.3(react@18.3.1)
       '@theguild/remark-npm2yarn': 0.3.2
       better-react-mathjax: 2.0.3(react@18.3.1)
@@ -13162,14 +13165,14 @@ packages:
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
       rehype-katex: 7.0.1
-      rehype-pretty-code: 0.14.0(shiki@1.17.0)
+      rehype-pretty-code: 0.14.0(shiki@1.22.0)
       rehype-raw: 7.0.0
       remark-frontmatter: 5.0.0
       remark-gfm: 4.0.0
       remark-math: 6.0.0
       remark-reading-time: 2.0.1
       remark-smartypants: 3.0.2
-      shiki: 1.17.0
+      shiki: 1.22.0
       slash: 5.1.0
       title: 3.5.3
       unist-util-remove: 4.0.0
