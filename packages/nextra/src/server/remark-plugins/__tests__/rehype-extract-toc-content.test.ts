@@ -194,13 +194,7 @@ export const frontMatter = {
       import { useMDXComponents as _provideComponents } from 'nextra/mdx'
       const title = 'Heading 1'
       export const myVar = 'interpolated'
-      export const Test = () => {
-        const _components = {
-          span: 'span',
-          ..._provideComponents()
-        }
-        return <_components.span>Hello</_components.span>
-      }
+      export const Test = () => <span>Hello</span>
       const frontMatter = {
         test: 'extract toc content'
       }
