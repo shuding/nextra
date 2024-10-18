@@ -49,6 +49,7 @@
   },
   "pnpm": {
     "overrides": {
+      "esbuild": "^0.24.0",
       "next": "15.0.0-rc.1"
     },
     "patchedDependencies": {
