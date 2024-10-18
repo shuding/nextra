@@ -1,5 +1,7 @@
-import type { VFile } from '@mdx-js/mdx/lib/compile'
+import type { compileSync } from '@mdx-js/mdx'
 import prettier from 'prettier'
+
+export type VFile = ReturnType<typeof compileSync>
 
 export async function clean(content: VFile | string): Promise<string> {
   if (typeof content !== 'string') {
