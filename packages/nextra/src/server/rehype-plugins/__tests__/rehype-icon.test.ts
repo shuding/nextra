@@ -1,7 +1,6 @@
 import { compile } from '@mdx-js/mdx'
 import rehypePrettyCode from 'rehype-pretty-code'
 import { clean } from '../../../../__test__/test-utils.js'
-import type { VFile } from '../../../../__test__/test-utils.js'
 import {
   DEFAULT_REHYPE_PRETTY_CODE_OPTIONS,
   rehypeAttachCodeMeta,
@@ -10,7 +9,7 @@ import {
 } from '../index.js'
 import { REHYPE_ICON_DEFAULT_REPLACES } from '../rehype-icon.js'
 
-function process(content: string): Promise<VFile> {
+function process(content: string) {
   return compile(content, {
     jsx: true,
     rehypePlugins: [
@@ -31,7 +30,7 @@ describe('rehypeIcon', () => {
     const raw = createCodeBlock('css', 'css')
 
     const file = await process(raw)
-    expect(clean(file)).resolves.toMatchInlineSnapshot(`
+    expect(clean(String(file))).resolves.toMatchInlineSnapshot(`
       "/*@jsxRuntime automatic*/
       /*@jsxImportSource react*/
       import { CssIcon } from 'nextra/icons'
@@ -75,7 +74,7 @@ describe('rehypeIcon', () => {
     const raw = createCodeBlock(...Object.keys(REHYPE_ICON_DEFAULT_REPLACES))
 
     const file = await process(raw)
-    expect(clean(file)).resolves.toMatchInlineSnapshot(`
+    expect(clean(String(file))).resolves.toMatchInlineSnapshot(`
       "/*@jsxRuntime automatic*/
       /*@jsxImportSource react*/
       import { JavaScriptIcon } from 'nextra/icons'

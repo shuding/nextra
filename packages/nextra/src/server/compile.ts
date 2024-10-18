@@ -100,7 +100,15 @@ export async function compileMdx(
     isPageImport = true,
     isPageMapImport
   }: CompileMdxOptions = {}
-) {
+): Promise<{
+  result: string
+  frontMatter: FrontMatter
+  title?: string
+  hasJsxInH1?: true
+  readingTime?: ReadingTime
+  searchIndexKey?: string
+  structurizedData?: StructurizedData
+}> {
   const {
     jsx = false,
     format: _format = 'mdx',
