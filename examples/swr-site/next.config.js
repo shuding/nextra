@@ -1,22 +1,8 @@
-import path from 'node:path'
 import bundleAnalyzer from '@next/bundle-analyzer'
 import nextra from 'nextra'
 
 const withNextra = nextra({
   defaultShowCopyCode: true,
-  transformPageMap(pageMap, locale) {
-    if (locale === 'en') {
-      pageMap = [
-        ...pageMap,
-        {
-          name: 'virtual-page',
-          route: '/en/virtual-page',
-          frontMatter: { sidebarTitle: 'Virtual Page' }
-        }
-      ]
-    }
-    return pageMap
-  },
   latex: true,
   useContentDir: true
 })
@@ -24,10 +10,6 @@ const withNextra = nextra({
 const withBundleAnalyzer = bundleAnalyzer({
   enabled: process.env.ANALYZE === 'true'
 })
-
-const sep = path.sep === '/' ? '/' : '\\\\'
-
-const ALLOWED_SVG_RE = new RegExp(`_icons${sep}.+\\.svg$`)
 
 /**
  * @type {import('next').NextConfig}
@@ -52,21 +34,26 @@ export default withBundleAnalyzer(
       }
     ],
     webpack(config) {
-      const fileLoaderRule = config.module.rules.find(rule =>
-        rule.test?.test?.('.svg')
+      // rule.exclude doesn't work starting from Next.js 15
+      const { test: _test, ...imageLoaderOptions } = config.module.rules.find(
+        rule => rule.test?.test?.('.svg')
       )
-      fileLoaderRule.exclude = ALLOWED_SVG_RE
-
       config.module.rules.push({
-        test: ALLOWED_SVG_RE,
-        use: ['@svgr/webpack']
+        test: /\.svg$/,
+        oneOf: [
+          {
+            resourceQuery: /svgr/,
+            use: ['@svgr/webpack']
+          },
+          imageLoaderOptions
+        ]
       })
       return config
     },
     experimental: {
       optimizePackageImports: [
-        '@app/_icons'
-        // 'nextra/components',
+        // '@app/_icons'
+        'nextra/components'
       ]
     }
   })

@@ -49,16 +49,7 @@ export default withNextra({
       oneOf: [
         {
           resourceQuery: /svgr/,
-          use: [
-            {
-              loader: '@svgr/webpack',
-              options: {
-                svgoConfig: {
-                  plugins: ['removeXMLNS']
-                }
-              }
-            }
-          ]
+          use: ['@svgr/webpack']
         },
         imageLoaderOptions
       ]
