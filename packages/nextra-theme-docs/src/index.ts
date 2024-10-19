@@ -1,5 +1,3 @@
-import './style.css'
-
 export { useTheme } from 'next-themes'
 export { useThemeConfig, useConfig, useMenu } from './stores'
 export { useMDXComponents } from './mdx-components'
