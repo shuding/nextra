@@ -6,6 +6,7 @@ import { getPageMap } from 'nextra/page-map'
 import type { ReactNode } from 'react'
 import './globals.css'
 import cn from 'clsx'
+import 'nextra-theme-docs/style.css'
 
 export const viewport: Viewport = Head.viewport
 
@@ -57,6 +58,15 @@ export default async function RootLayout({
 }: {
   children: ReactNode
 }) {
+  const logo = (
+    <NextraLogo
+      height="20"
+      className={cn(
+        '[mask-position:0] [mask-size:400%] [mask-image:linear-gradient(60deg,#000_25%,rgba(0,0,0,.2)_50%,#000_75%)]',
+        'hover:[mask-position:100%] hover:[transition:mask-position_1s_ease]'
+      )}
+    />
+  )
   return (
     <html
       lang="en"
@@ -80,18 +90,7 @@ export default async function RootLayout({
               </Link>
             </div>
           </Banner>
-          <Navbar
-            logo={
-              <NextraLogo
-                height="20"
-                className={cn(
-                  '[mask-position:0] [mask-size:400%] [mask-image:linear-gradient(60deg,#000_25%,rgba(0,0,0,.2)_50%,#000_75%)]',
-                  'hover:[mask-position:100%] hover:[transition:mask-position_1s_ease]'
-                )}
-              />
-            }
-            projectLink="https://github.com/shuding/nextra"
-          />
+          <Navbar logo={logo} projectLink="https://github.com/shuding/nextra" />
           {children}
           <Footer className="flex-col items-center md:items-start">
             <a
