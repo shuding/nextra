@@ -1,9 +1,9 @@
 /* eslint-disable react-hooks/rules-of-hooks -- false positive, useMDXComponents/useTOC are not react hooks */
 import { notFound } from 'next/navigation'
-import { useMDXComponents } from 'nextra-theme-docs'
 import { compileMdx } from 'nextra/compile'
 import { Callout, evaluate, Tabs } from 'nextra/components'
 import { generatePageMapFromFilepaths } from 'nextra/page-map'
+import { useMDXComponents } from '../../../../../mdx-components'
 import json from '../../../../../nextra-remote-filepaths/graphql-eslint.json'
 
 const { branch, docsPath, filePaths, repo, user } = json
@@ -16,8 +16,9 @@ const res = generatePageMapFromFilepaths(
 
 export const pageMap = res.pageMap[0].children
 
-export default async function Page({ params: { slug = [] } }) {
-  const route = slug.join('/')
+export default async function Page(props) {
+  const params = await props.params
+  const route = (params.slug || []).join('/')
   const filePath = mdxPages[route]
 
   if (!filePath) {
@@ -31,14 +32,14 @@ export default async function Page({ params: { slug = [] } }) {
     filePath
   })
 
-  const { default: MDXContent, useTOC, ...props } = evaluate(result)
+  const { default: MDXContent, useTOC, metadata, title } = evaluate(result)
 
   const { wrapper: Wrapper, ...components } = useMDXComponents({
     $Tabs: Tabs,
     Callout
   })
   return (
-    <Wrapper toc={useTOC()} {...props}>
+    <Wrapper toc={useTOC()} metadata={metadata} title={title}>
       <MDXContent components={components} />
     </Wrapper>
   )

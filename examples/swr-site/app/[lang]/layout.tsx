@@ -42,7 +42,8 @@ export const metadata: Metadata = {
   }
 }
 
-export default async function RootLayout({ children, params: { lang } }) {
+export default async function RootLayout({ children, params }) {
+  const { lang } = await params
   const dictionary = await getDictionary(lang)
   let pageMap = await getPageMap(lang)
 

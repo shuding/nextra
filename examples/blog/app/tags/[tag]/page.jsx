@@ -1,7 +1,8 @@
 import { PostCard } from 'nextra-theme-blog'
 import { getPosts, getTags } from '../../posts/get-posts'
 
-export function generateMetadata({ params }) {
+export async function generateMetadata(props) {
+  const params = await props.params
   return {
     title: `Posts Tagged with “${decodeURIComponent(params.tag)}”`
   }
@@ -12,7 +13,8 @@ export async function generateStaticParams() {
   return [...new Set(allTags)].map(tag => ({ tag }))
 }
 
-export default async function TagPage({ params }) {
+export default async function TagPage(props) {
+  const params = await props.params
   return (
     <>
       <h1>{generateMetadata({ params }).title}</h1>
