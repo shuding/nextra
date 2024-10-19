@@ -6,14 +6,15 @@
         // Run `build` in workspaces I depend on first
         "^build"
       ],
-      "outputs": ["dist/**", ".next/**", "loader.js"]
+      "outputs": ["dist/**", ".next/**"]
     },
     "test": {},
     "types:check": {
       "dependsOn": [
         // Run `build` in workspaces I depend on first
         "^build"
-      ]
+      ],
+      "outputs": ["dist/**"]
     },
     "clean": {
       "cache": false

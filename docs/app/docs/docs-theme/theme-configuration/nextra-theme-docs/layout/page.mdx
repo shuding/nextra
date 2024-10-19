@@ -238,6 +238,24 @@ export default {
 
 <ToggleVisibilitySection element="`<Sidebar>`" property="sidebar" />
 
+### Customize Sidebar with Front Matter
+
+In addition, you can customize the sidebar title using the `sidebarTitle`
+property in your front matter:
+
+```mdx filename="pages/getting-started.mdx"
+---
+sidebarTitle: Getting Started 🚀
+---
+```
+
+The priority of the sidebar title is as follows:
+
+1. `title` property from `_meta.js` file
+1. Front matter `sidebarTitle`
+1. Front matter `title`
+1. Filename of the page formatted with [Title](https://title.sh)
+
 ## Theme Switch
 
 <Table>

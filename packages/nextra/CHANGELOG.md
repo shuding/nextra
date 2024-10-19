@@ -72,6 +72,30 @@
   Router, something may be broken, check
   https://github.com/shuding/nextra/tree/v4-v2/examples for the migration guide
 
+## 3.0.15
+
+### Patch Changes
+
+- bd498c6: fix compatibility with Next.js `15.0.0-rc.1`
+
+## 3.0.14
+
+### Patch Changes
+
+- 6454938: update css selectors for `code`, use `code.nextra-code`
+- 9794e9e: update package version range for `@theguild/remark-mermaid` to be at
+  least `^0.1.3`
+  https://github.com/nextauthjs/next-auth/pull/12029#discussion_r1801785960
+- 9794e9e: Fix `frontMatter.sidebarTitle` didn't affect without
+  `frontMatter.title` set
+
+  now priority for sidebar title is:
+
+  1. `title` property from `_meta` file
+  1. `frontMatter.sidebarTitle`
+  1. `frontMatter.title`
+  1. formatted with [Title](https://title.sh) based on filename
+
 ## 3.0.13
 
 ## 3.0.12

@@ -50,7 +50,6 @@ export const rehypeParseCodeMeta: Plugin<
   ast => {
     visit(ast, { tagName: 'pre' }, (node: PreElement) => {
       const [codeEl] = node.children as Element[]
-      // @ts-expect-error fixme: Property 'meta' does not exist on type 'ElementData'
       const { meta = '' } = codeEl.data || {}
 
       node.__filename = meta!.match(CODE_BLOCK_FILENAME_RE)?.[1]
