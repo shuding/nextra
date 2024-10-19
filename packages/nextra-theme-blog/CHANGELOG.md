@@ -1,5 +1,23 @@
 # nextra-theme-blog
 
+## 4.0.0-app-router.9
+
+### Patch Changes
+
+- 2c8a8ab: - sync with nextra 3.0.15
+
+  - bump to Next 15
+  - remove importing of `style.css` in themes, you need to import now manually
+    by
+
+  ```js
+  import 'nextra-theme-docs/style.css' // for docs theme
+  import 'nextra-theme-blog/style.css' // for blog theme
+  ```
+
+- Updated dependencies [2c8a8ab]
+  - nextra@4.0.0-app-router.9
+
 ## 4.0.0-app-router.8
 
 ### Patch Changes
