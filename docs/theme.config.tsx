@@ -66,7 +66,7 @@ const config: DocsThemeConfig = {
     const isDefault = route === '/' || !config.title
     const image =
       'https://nextra.site/' +
-      (isDefault ? 'og.jpeg' : `api/og?title=${config.title}`)
+      (isDefault ? 'og.jpeg' : `/og?title=${config.title}`)
 
     const description =
       config.frontMatter.description ||
