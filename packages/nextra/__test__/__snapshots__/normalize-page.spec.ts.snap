@@ -88,9 +88,6 @@ exports[`normalize-page > /500 page 1`] = `
     {
       "name": "500",
       "route": "/500",
-      "theme": {
-        "layout": "raw",
-      },
       "title": "500",
       "type": "page",
     },
@@ -331,7 +328,6 @@ exports[`normalize-page > en-US getting-started 1`] = `
       "frontMatter": {
         "title": "React Hooks for Data Fetching",
       },
-      "hidden": true,
       "name": "index",
       "route": "/",
       "title": "Introduction",
@@ -550,7 +546,6 @@ exports[`normalize-page > en-US getting-started 1`] = `
       "frontMatter": {
         "title": "React Hooks for Data Fetching",
       },
-      "hidden": true,
       "name": "index",
       "route": "/",
       "title": "Introduction",
@@ -944,7 +939,6 @@ exports[`normalize-page > en-US home 1`] = `
       "frontMatter": {
         "title": "React Hooks for Data Fetching",
       },
-      "hidden": true,
       "name": "index",
       "route": "/",
       "title": "Introduction",
@@ -969,7 +963,6 @@ exports[`normalize-page > en-US home 1`] = `
       "frontMatter": {
         "title": "React Hooks for Data Fetching",
       },
-      "hidden": true,
       "name": "index",
       "route": "/",
       "title": "Introduction",
@@ -1188,7 +1181,6 @@ exports[`normalize-page > en-US home 1`] = `
       "frontMatter": {
         "title": "React Hooks for Data Fetching",
       },
-      "hidden": true,
       "name": "index",
       "route": "/",
       "title": "Introduction",
@@ -1679,7 +1671,6 @@ exports[`normalize-page > zh-CN getting-started 1`] = `
         },
         {
           "name": "typescript",
-          "route": "",
           "title": "Typescript",
           "type": "doc",
         },
@@ -1758,7 +1749,6 @@ exports[`normalize-page > zh-CN getting-started 1`] = `
       "frontMatter": {
         "title": "用于数据请求的 React Hooks 库",
       },
-      "hidden": true,
       "name": "index",
       "route": "/",
       "title": "简介",
@@ -1840,7 +1830,6 @@ exports[`normalize-page > zh-CN getting-started 1`] = `
         },
         {
           "name": "typescript",
-          "route": "",
           "title": "Typescript",
           "type": "doc",
         },
@@ -1972,7 +1961,6 @@ exports[`normalize-page > zh-CN getting-started 1`] = `
       "frontMatter": {
         "title": "用于数据请求的 React Hooks 库",
       },
-      "hidden": true,
       "name": "index",
       "route": "/",
       "title": "简介",
@@ -2052,7 +2040,6 @@ exports[`normalize-page > zh-CN getting-started 1`] = `
     },
     {
       "name": "typescript",
-      "route": "",
       "title": "Typescript",
       "type": "doc",
     },
@@ -2236,7 +2223,6 @@ exports[`normalize-page > zh-CN getting-started 1`] = `
     {
       "isUnderCurrentDocsTree": true,
       "name": "typescript",
-      "route": "",
       "title": "Typescript",
       "type": "doc",
     },
@@ -2356,7 +2342,6 @@ exports[`normalize-page > zh-CN home 1`] = `
       "frontMatter": {
         "title": "用于数据请求的 React Hooks 库",
       },
-      "hidden": true,
       "name": "index",
       "route": "/",
       "title": "简介",
@@ -2381,7 +2366,6 @@ exports[`normalize-page > zh-CN home 1`] = `
       "frontMatter": {
         "title": "用于数据请求的 React Hooks 库",
       },
-      "hidden": true,
       "name": "index",
       "route": "/",
       "title": "简介",
@@ -2463,7 +2447,6 @@ exports[`normalize-page > zh-CN home 1`] = `
         },
         {
           "name": "typescript",
-          "route": "",
           "title": "Typescript",
           "type": "doc",
         },
@@ -2595,7 +2578,6 @@ exports[`normalize-page > zh-CN home 1`] = `
       "frontMatter": {
         "title": "用于数据请求的 React Hooks 库",
       },
-      "hidden": true,
       "name": "index",
       "route": "/",
       "title": "简介",
@@ -2675,7 +2657,6 @@ exports[`normalize-page > zh-CN home 1`] = `
     },
     {
       "name": "typescript",
-      "route": "",
       "title": "Typescript",
       "type": "doc",
     },
@@ -2859,7 +2840,6 @@ exports[`normalize-page > zh-CN home 1`] = `
     {
       "isUnderCurrentDocsTree": true,
       "name": "typescript",
-      "route": "",
       "title": "Typescript",
       "type": "doc",
     },
