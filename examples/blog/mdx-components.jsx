@@ -21,7 +21,6 @@ const blogComponents = getBlogMDXComponents({
     })}`
 })
 
-// In case you want to overwrite some of the components
 export function useMDXComponents(components) {
   return {
     ...blogComponents,
