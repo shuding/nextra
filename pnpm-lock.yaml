@@ -370,7 +370,7 @@ importers:
         version: 5.28.5(esbuild@0.24.0)
       '@vitejs/plugin-react':
         specifier: ^4.3.1
-        version: 4.3.2(vite@5.4.9)
+        version: 4.3.3(vite@5.4.9)
       esbuild-plugin-svgr:
         specifier: ^3.0.0
         version: 3.0.0(esbuild@0.24.0)(typescript@5.6.3)
@@ -483,7 +483,7 @@ importers:
         version: 18.3.1
       '@vitejs/plugin-react':
         specifier: ^4.1.0
-        version: 4.3.2(vite@5.4.9)
+        version: 4.3.3(vite@5.4.9)
       concurrently:
         specifier: ^9.0.0
         version: 9.0.1
@@ -5290,8 +5290,8 @@ packages:
     resolution: {integrity: sha512-zuVdFrMJiuCDQUMCzQaD6KL28MjnqqN8XnAqiEq9PNm/hCPTSGfrXCOfwj1ow4LFb/tNymJPwsNbVePc1xFqrQ==}
     dev: false
 
-  /@vitejs/plugin-react@4.3.2(vite@5.4.9):
-    resolution: {integrity: sha512-hieu+o05v4glEBucTcKMK3dlES0OeJlD9YVOAPraVMOInBCwzumaIFiUjr4bHK7NPgnAHgiskUoceKercrN8vg==}
+  /@vitejs/plugin-react@4.3.3(vite@5.4.9):
+    resolution: {integrity: sha512-NooDe9GpHGqNns1i8XDERg0Vsg5SSYRhRxxyTGogUdkdNt47jal+fbuYi+Yfq6pzRCKXyoPcWisfxE6RIM3GKA==}
     engines: {node: ^14.18.0 || >=16.0.0}
     peerDependencies:
       vite: ^4.2.0 || ^5.0.0
