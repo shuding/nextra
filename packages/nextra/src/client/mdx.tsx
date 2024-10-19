@@ -21,13 +21,16 @@ const EXTERNAL_HREF_RE = /^https?:\/\//
 
 export const Anchor: FC<ComponentProps<'a'>> = ({ href = '', ...props }) => {
   if (EXTERNAL_HREF_RE.test(href)) {
+    const { children } = props
     return (
       <a href={href} target="_blank" rel="noreferrer" {...props}>
-        {props.children}
-        <LinkArrowIcon
-          height="16"
-          className="_inline _ps-0.5 _align-baseline"
-        />
+        {children}
+        {typeof (children as any).type !== 'function' && (
+          <LinkArrowIcon
+            height="16"
+            className="_inline _ps-0.5 _align-baseline"
+          />
+        )}
       </a>
     )
   }

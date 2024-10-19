@@ -16,13 +16,5 @@
     "nextra-theme-blog": "workspace:*",
     "react": "18.3.1",
     "react-dom": "18.3.1"
-  },
-  "dependenciesMeta": {
-    "nextra": {
-      "injected": true
-    },
-    "nextra-theme-blog": {
-      "injected": true
-    }
   }
 }

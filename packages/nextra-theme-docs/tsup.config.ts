@@ -10,7 +10,6 @@ export const defaultEntry = [
 export default defineConfig({
   name: 'nextra-theme-docs',
   entry: [...defaultEntry, 'src/style.css'],
-  external: ['nextra'],
   format: 'esm',
   dts: true,
   outExtension: () => ({ js: '.js' }),

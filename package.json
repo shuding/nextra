@@ -48,13 +48,13 @@
   "pnpm": {
     "overrides": {
       "esbuild": "^0.24.0",
-      "next": "14.2.15"
+      "next": "15.0.0-canary.199"
     },
     "patchedDependencies": {
       "@changesets/assemble-release-plan@6.0.4": "patches/@changesets__assemble-release-plan.patch",
       "tsup@8.3.0": "patches/tsup.patch",
       "eslint-plugin-deprecation@3.0.0": "patches/eslint-plugin-deprecation.patch",
-      "next@14.2.15": "patches/next@13.5.6.patch",
+      "next@15.0.0-canary.199": "patches/next@13.5.6.patch",
       "eslint-plugin-tailwindcss@3.17.3": "patches/eslint-plugin-tailwindcss.patch"
     }
   }
