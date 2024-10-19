@@ -1,5 +1,77 @@
 # nextra
 
+## 4.0.0-app-router.8
+
+### Patch Changes
+
+- 9832af9: add ↗ char for external links
+- ec39959: Use `primaryColor` for `::selection` styles
+- 875842b: support `GitHub Alert Syntax`
+
+## 4.0.0-app-router.7
+
+### Patch Changes
+
+- 5201e5f: add helpful error message about not available search on development
+  mode
+- 3ac2c32: add `getPageMap` helper function from `nextra/page-map`
+- b4ca36d: - allow override/add additional icons for code blocks
+  - remove `nextraConfig.mdxOptions.providerImportSource` option in favour of
+    `mdx-components` file
+- 4768dee: replace `nextraConfig.mdxBaseDir: string` by `useContentDir: boolean`
+
+## 4.0.0-app-router.6
+
+### Patch Changes
+
+- 2092d5e: enable page reload of catch-all routes `app/[[...slug]].jsx` on
+  content change
+- a97e5cf: sync with nextra 3.0.10
+
+## 4.0.0-app-router.5
+
+### Patch Changes
+
+- 659b36e: remove `jsx-runtime.cjs`, import runtime from 'react/jsx-runtime'
+- a15a02d: sync with nextra 3.0.3
+
+## 4.0.0-app-router.4
+
+## 4.0.0-app-router.3
+
+### Major Changes
+
+- 1e77fab: move `<Collapse>`, `<Details>`, `<Summary>`, `<SkipNavContent>`,
+  `SkipNavLink`, `<Select>` and `<Bleed>` from `nextra-theme-docs` to
+  `nextra/components`
+- 1e77fab: remove `nextra/remote`, `nextra/schemas` and `nextra/remark-plugins`
+- 1e77fab: remove `renderComponent` and `renderString`
+
+### Patch Changes
+
+- 1e77fab: fix edit on github and last updated at for catch all routes
+
+## 4.0.0-app-router.2
+
+### Major Changes
+
+- 215aa08: fix focusing on first search result item
+- 8ef0f58: move `<Head>` component in `nextra/components`
+
+## 4.0.0-app-router.1
+
+### Major Changes
+
+- 26851b5: migrate search from Flexsearch to Pagefind
+
+## 4.0.0-app-router.0
+
+### Major Changes
+
+- 99f34d3: The initial version which supports App Router instead of Pages
+  Router, something may be broken, check
+  https://github.com/shuding/nextra/tree/v4-v2/examples for the migration guide
+
 ## 3.0.15
 
 ### Patch Changes

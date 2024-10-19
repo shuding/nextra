@@ -1,12 +1,10 @@
 import type { z } from 'zod'
-import { ERROR_ROUTES } from '../constants.js'
 import type {
   displaySchema,
   menuItemSchema,
   pageThemeSchema
 } from '../server/schemas'
-import type { Folder, MdxFile, PageMapItem } from '../types'
-import { isMeta } from './utils.js'
+import type { Folder, FrontMatter, MdxFile, PageMapItem } from '../types'
 
 const DEFAULT_PAGE_THEME: PageTheme = {
   breadcrumb: true,
@@ -27,13 +25,10 @@ type Display = z.infer<typeof displaySchema>
 type IMenuItem = z.infer<typeof menuItemSchema>
 
 function extendMeta(
-  _meta: string | Record<string, any> = {},
-  fallback: Record<string, any>,
-  metadata: Record<string, any>
+  fallback: Record<string, any> = {},
+  _meta: Record<string, any> = {},
+  metadata: Record<string, any> = {}
 ): Record<string, any> {
-  if (typeof _meta === 'string') {
-    _meta = { title: _meta }
-  }
   const theme: PageTheme = {
     ...fallback.theme,
     ..._meta.theme,
@@ -120,24 +115,6 @@ export function normalizePages({
   underCurrentDocsRoot?: boolean
   pageThemeContext?: PageTheme
 }): NormalizedResult {
-  let _meta: Record<string, any> | undefined
-  for (const item of list) {
-    if (isMeta(item)) {
-      _meta = item.data
-      break
-    }
-  }
-  const meta = _meta || {}
-  const metaKeys = Object.keys(meta)
-
-  for (const key of metaKeys) {
-    if (typeof meta[key] === 'string') {
-      meta[key] = {
-        title: meta[key]
-      }
-    }
-  }
-
   // All directories
   // - directories: all directories in the tree structure
   // - flatDirectories: all directories in the flat structure, used by search and footer navigation
@@ -156,61 +133,19 @@ export function normalizePages({
   let activeThemeContext = pageThemeContext
   let activePath: Item[] = []
 
-  let metaKeyIndex = -1
-
-  const fallbackMeta = meta['*'] || {}
-  delete fallbackMeta.title
-  delete fallbackMeta.href
+  const meta =
+    'data' in list[0]
+      ? (list[0].data as Record<string, Record<string, any> | undefined>)
+      : {}
 
   // Normalize items based on files and _meta.json.
-  const items = list
-    .filter(
-      (a): a is MdxFile | Folder =>
-        !isMeta(a) &&
-        // not hidden routes
-        !a.name.startsWith('_')
-    )
-    .sort((a, b) => {
-      const indexA = metaKeys.indexOf(a.name)
-      const indexB = metaKeys.indexOf(b.name)
-      if (indexA === -1 && indexB === -1) return a.name < b.name ? -1 : 1
-      if (indexA === -1) return 1
-      if (indexB === -1) return -1
-      return indexA - indexB
-    })
-    .flatMap(item => {
-      const items = []
-      const index = metaKeys.indexOf(item.name)
-      let extendedItem
-      if (index !== -1) {
-        // Fill all skipped items in meta.
-        for (let i = metaKeyIndex + 1; i < index; i++) {
-          const key = metaKeys[i]
-          if (key !== '*') {
-            items.push({
-              name: key,
-              route: '',
-              ...meta[key]
-            })
-          }
-        }
-        metaKeyIndex = index
-        extendedItem = { ...meta[item.name], ...item }
-      }
-      items.push(extendedItem || item)
-      return items
-    })
-
-  // Fill all skipped items in meta.
-  for (let i = metaKeyIndex + 1; i < metaKeys.length; i++) {
-    const key = metaKeys[i]
-    if (key !== '*') {
-      items.push({
-        name: key,
-        ...meta[key]
+  const items = ('data' in list[0] ? list.slice(1) : list) as (
+    | (Folder & {
+        withIndexPage?: true
+        frontMatter: FrontMatter
       })
-    }
-  }
+    | MdxFile
+  )[]
 
   for (let i = 0; i < items.length; i++) {
     const currentItem = items[i]
@@ -222,19 +157,17 @@ export function normalizePages({
       items[i + 1] = {
         ...nextItem,
         withIndexPage: true,
-        children: nextItem.children || currentItem.children
+        children:
+          (nextItem as Folder).children || (currentItem as Folder).children
       }
       continue
     }
 
     // Get the item's meta information.
     const extendedMeta = extendMeta(
+      meta['*'],
       meta[currentItem.name],
-      fallbackMeta,
-      list.find(
-        (item): item is MdxFile =>
-          'frontMatter' in item && item.name === currentItem.name
-      )?.frontMatter || {}
+      currentItem.frontMatter
     )
     const { display, type = 'doc' } = extendedMeta
     const extendedPageThemeContext = {
@@ -245,8 +178,8 @@ export function normalizePages({
     // If the doc is under the active page root.
     const isCurrentDocsTree = route.startsWith(docsRoot)
 
-    const normalizedChildren: undefined | NormalizedResult =
-      currentItem.children &&
+    const normalizedChildren: false | NormalizedResult =
+      'children' in currentItem &&
       normalizePages({
         list: currentItem.children,
         route,
@@ -299,10 +232,6 @@ export function normalizePages({
           activeIndex = flatDocsDirectories.length
       }
     }
-    if (ERROR_ROUTES.has(currentItem.route)) {
-      continue
-    }
-
     const isHidden = display === 'hidden'
 
     // If this item has children
@@ -336,7 +265,7 @@ export function normalizePages({
               flatDocsDirectories.length + normalizedChildren.activeIndex
             break
         }
-        if (currentItem.withIndexPage && type === 'doc') {
+        if ((currentItem as Item).withIndexPage && type === 'doc') {
           activeIndex++
         }
       }

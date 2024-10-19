@@ -1,5 +1,123 @@
 # nextra-theme-blog
 
+## 4.0.0-app-router.8
+
+### Patch Changes
+
+- 875842b: remove `react-cusdis` dependency, use
+  https://cusdis.com/doc#/advanced/sdk directly
+- 9832af9: add ↗ char for external links
+- ec39959: Use `primaryColor` for `::selection` styles
+- 875842b: support `GitHub Alert Syntax`
+- Updated dependencies [9832af9]
+- Updated dependencies [ec39959]
+- Updated dependencies [875842b]
+  - nextra@4.0.0-app-router.8
+
+## 4.0.0-app-router.7
+
+### Patch Changes
+
+- 5201e5f: add helpful error message about not available search on development
+  mode
+- 3ac2c32: add `getPageMap` helper function from `nextra/page-map`
+- b4ca36d: - allow override/add additional icons for code blocks
+  - remove `nextraConfig.mdxOptions.providerImportSource` option in favour of
+    `mdx-components` file
+- 4768dee: replace `nextraConfig.mdxBaseDir: string` by `useContentDir: boolean`
+- Updated dependencies [5201e5f]
+- Updated dependencies [3ac2c32]
+- Updated dependencies [b4ca36d]
+- Updated dependencies [4768dee]
+  - nextra@4.0.0-app-router.7
+
+## 4.0.0-app-router.6
+
+### Patch Changes
+
+- 2092d5e: enable page reload of catch-all routes `app/[[...slug]].jsx` on
+  content change
+- a97e5cf: sync with nextra 3.0.10
+- Updated dependencies [2092d5e]
+- Updated dependencies [a97e5cf]
+  - nextra@4.0.0-app-router.6
+
+## 4.0.0-app-router.5
+
+### Patch Changes
+
+- a15a02d: sync with nextra 3.0.3
+- Updated dependencies [659b36e]
+- Updated dependencies [a15a02d]
+  - nextra@4.0.0-app-router.5
+
+## 4.0.0-app-router.4
+
+### Patch Changes
+
+- nextra@4.0.0-app-router.4
+
+## 4.0.0-app-router.3
+
+### Major Changes
+
+- 1e77fab: move `<Collapse>`, `<Details>`, `<Summary>`, `<SkipNavContent>`,
+  `SkipNavLink`, `<Select>` and `<Bleed>` from `nextra-theme-docs` to
+  `nextra/components`
+
+### Minor Changes
+
+- 1e77fab: use `next-view-transitions` for transition in `nextra-theme-blog`
+
+### Patch Changes
+
+- 1e77fab: fix edit on github and last updated at for catch all routes
+- Updated dependencies [1e77fab]
+- Updated dependencies [1e77fab]
+- Updated dependencies [1e77fab]
+- Updated dependencies [1e77fab]
+  - nextra@4.0.0-app-router.3
+
+## 4.0.0-app-router.2
+
+### Major Changes
+
+- 8ef0f58: move `<Head>` component in `nextra/components`
+
+### Minor Changes
+
+- 8ef0f58: add `nextThemes` prop in `<Layout>` component
+
+### Patch Changes
+
+- Updated dependencies [215aa08]
+- Updated dependencies [8ef0f58]
+  - nextra@4.0.0-app-router.2
+
+## 4.0.0-app-router.1
+
+### Major Changes
+
+- 26851b5: migrate search from Flexsearch to Pagefind
+
+### Patch Changes
+
+- Updated dependencies [26851b5]
+  - nextra@4.0.0-app-router.1
+
+## 4.0.0-app-router.0
+
+### Major Changes
+
+- 99f34d3: The initial version which supports App Router instead of Pages
+  Router, something may be broken, check
+  https://github.com/shuding/nextra/tree/v4-v2/examples for the migration guide
+
+### Patch Changes
+
+- Updated dependencies [99f34d3]
+  - nextra@4.0.0-app-router.0
+
 ## 3.0.15
 
 ### Patch Changes

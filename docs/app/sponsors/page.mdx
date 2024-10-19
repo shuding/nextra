@@ -1,0 +1,32 @@
+import { Button, Cards } from 'nextra/components'
+import { Card } from '../showcase/page.mdx'
+
+<div className="mb-16 mt-10 text-center">
+  # Sponsors
+  <br />
+  <Button
+    className="!px-6 hover:!no-underline"
+    variant="outline"
+    href="https://github.com/sponsors/dimaMachina"
+    as="a"
+    target="_blank"
+    rel="noreferrer"
+  >
+    {'Become a Sponsor'}
+  </Button>
+</div>
+
+<Cards num={2} className="hover:[&_a]:!no-underline">
+  <Card
+    title="Speakeasy"
+    href="https://speakeasyapi.dev/docs?utm_source=nextra.site&utm_campaign=nextra&utm_content=logolink"
+  >
+    <>![Speakeasy preview](../showcase/_logos/speakeasy.png)</>
+  </Card>
+  <Card
+    title="xyflow"
+    href="https://xyflow.com?utm_source=nextra.site&utm_campaign=nextra&utm_content=logolink"
+  >
+    <>![xyflow preview](../showcase/_logos/xyflow.jpg)</>
+  </Card>
+</Cards>

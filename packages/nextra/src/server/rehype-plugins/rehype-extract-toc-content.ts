@@ -4,7 +4,7 @@ import { toEstree } from 'hast-util-to-estree'
 import type { Plugin } from 'unified'
 import { visit } from 'unist-util-visit'
 import type { Heading } from '../../types'
-import { TOC_HEADING_REGEX } from '../constants.js'
+import { TOC_HEADING_RE } from '../constants.js'
 import { createAstObject } from '../utils.js'
 
 export const rehypeExtractTocContent: Plugin<
@@ -20,7 +20,7 @@ export const rehypeExtractTocContent: Plugin<
     const idSet = new Set((file.data.toc as Heading[]).map(({ id }) => id))
 
     visit(ast, 'element', (node: Element) => {
-      if (!TOC_HEADING_REGEX.test(node.tagName)) return
+      if (!TOC_HEADING_RE.test(node.tagName)) return
 
       const { id } = node.properties
       if (typeof id === 'string' && idSet.has(id)) {

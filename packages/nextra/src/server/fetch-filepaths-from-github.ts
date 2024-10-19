@@ -1,4 +1,3 @@
-// eslint-disable-next-line no-restricted-imports
 import fs from 'node:fs/promises'
 
 type Params = {

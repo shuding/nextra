@@ -1,0 +1,219 @@
+import { Callout, Steps } from 'nextra/components'
+
+# Comienza
+
+<details>
+  <summary>**111** 111</summary>
+  content line 1 some more content
+  <details>
+    <summary>**222** 222</summary>
+    content line 2 some more content
+    <details>
+      <summary>**333** 333</summary>
+      content line 3 some more content
+    </details>
+  </details>
+</details>
+
+## Instalación
+
+<Steps>
+
+### Dentro del directorio de su proyecto React, ejecute lo siguiente:
+
+```sh npm2yarn
+npm i swr
+```
+
+</Steps>
+
+## Inicio rápido
+
+Para APIs RESTFul normales con datos JSON, primero necesita crear una función
+`fethcer`, que no es más que una envoltura del `fetch` nativo:
+
+```jsx
+const fetcher = (...args) => fetch(...args).then(res => res.json())
+```
+
+<Callout>
+  Si tu quieres usar API GraphQL o librerías como Axios, puedes crear tu propia
+  función fetcher. Consulta [aqui](/docs/data-fetching) para ver más ejemplos.
+</Callout>
+
+Luego puede importar `useSWR` y empezar a usarlo dentro de cualquier componente
+de la función:
+
+```jsx
+import useSWR from 'swr'
+
+function Profile() {
+  const { data, error } = useSWR('/api/user/123', fetcher)
+
+  if (error) return <div>failed to load</div>
+  if (!data) return <div>loading...</div>
+
+  // renderizar datos
+  return <div>hello {data.name}!</div>
+}
+```
+
+Normalmente, hay 3 estados posibles de una solicitud: "loading", "ready", o
+"error". Puedes utilizar el valor `data` y `error` para determinar el estadado
+actual de la solicitud, y devolver la UI correspondiente.
+
+## Hágalo reutilizable
+
+Cuando construye una aplicación web, es posible que haya que reutilizar los
+datos en muchos lugares de la UI. Es increíblemente fácil crear hooks de datos
+reutilizables sobre SWR:
+
+```jsx
+function useUser(id) {
+  const { data, error } = useSWR(`/api/user/${id}`, fetcher)
+
+  return {
+    user: data,
+    isLoading: !error && !data,
+    isError: error
+  }
+}
+```
+
+Y utilícelo en sus componentes:
+
+```jsx
+function Avatar({ id }) {
+  const { user, isLoading, isError } = useUser(id)
+
+  if (isLoading) return <Spinner />
+  if (isError) return <Error />
+  return <img src={user.avatar} />
+}
+```
+
+Al adoptar este patrón, puede olvidarse del **fetching** de datos de forma
+imperativa: inicie la solicitud, actualice el estado de carga, y devuelve el
+resultado final. En cambio, su código es más declarativo: solo hay que
+especificar qué datos utiliza el componente.
+
+## Ejemplo
+
+En un ejemplo del mundo real, nuestro sitio web muestra una barra de navegación
+y el contenido, ambos dependen del `user`:
+
+import { WelcomeImage } from '@app/_icons'
+
+<WelcomeImage className="mt-6 dark:invert" />
+
+Tradicionalmente, obtenemos los datos una vez utilizando `useEffect` en el
+componente de nivel superiror, y pasarlo a los componentes hijos a través de
+props (fíjate que por ahora no manejamos el estado de error):
+
+```jsx {7-11,17,18,27}
+// componente de la página
+
+function Page() {
+  const [user, setUser] = useState(null)
+
+  // obtener datos
+  useEffect(() => {
+    fetch('/api/user')
+      .then(res => res.json())
+      .then(data => setUser(data))
+  }, [])
+
+  // estado de carga global
+  if (!user) return <Spinner />
+
+  return (
+    <div>
+      <Navbar user={user} />
+      <Content user={user} />
+    </div>
+  )
+}
+
+// componentes hijos
+
+function Navbar({ user }) {
+  return (
+    <div>
+      ...
+      <Avatar user={user} />
+    </div>
+  )
+}
+
+function Content({ user }) {
+  return <h1>Welcome back, {user.name}</h1>
+}
+
+function Avatar({ user }) {
+  return <img src={user.avatar} alt={user.name} />
+}
+```
+
+Por lo general, necesitamos mantener todos los datos que se obtienen en el
+componente de nivel superiror y añadir las props a cada componente dentro del
+árbol. El código será más difícil de mantener si añadimos más dependencia de
+datos a la página.
+
+Aunque podamos evitar pasar props usando
+[Context](https://reactjs.org/docs/context.html), sigue existiendo problema con
+el contenido dinámico: Los componentes dentro del contenido de la página pueden
+ser dinámicos, y componente de nivel superiror puede no saber qué datos
+necesitarán sus componentes hijos.
+
+SWR resuelve el problema perfectamente, Con el hook `useUser` que acabamos de
+crear, el código puede ser refactorizado a:
+
+```jsx {20,26}
+// componente de la página
+
+function Page() {
+  return (
+    <div>
+      <Navbar />
+      <Content />
+    </div>
+  )
+}
+
+// componentes hijos
+
+function Navbar() {
+  return (
+    <div>
+      ...
+      <Avatar />
+    </div>
+  )
+}
+
+function Content() {
+  const { user, isLoading } = useUser()
+  if (isLoading) return <Spinner />
+  return <h1>Welcome back, {user.name}</h1>
+}
+
+function Avatar() {
+  const { user, isLoading } = useUser()
+  if (isLoading) return <Spinner />
+  return <img src={user.avatar} alt={user.name} />
+}
+```
+
+Los datos ahora estan vinculados a los componentes que los necesitan, y todos
+los componentes son independientes entre sí. Todo los componentes padre no
+necesitan saber nada sobre los datos o el paso del mismo. Sólo se renderizaran.
+El código es mucho más sencillo y fácil de mantener ahora.
+
+Lo más bonito es que sólo se enviará **1 request** a la API, porque utilizan la
+misma clave de SWR y la solicitud se **desduplica**, se almacena en **caché** y
+se **comparte** automáticamente.
+
+También, la aplicación tiene ahora la capacidad de volver a obtener los datos
+cuando [el usuario se centra o se reconecta a la red!](/docs/revalidation) Esto
+significa que, cuando el laptop del usuario se despierte de la suspeción o
+cambie de pestaña del navegador, los datos se actualizarán automáticamente.
