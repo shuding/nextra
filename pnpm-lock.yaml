@@ -90,8 +90,8 @@ importers:
         specifier: ^4.19.1
         version: 4.19.1
       turbo:
-        specifier: 2.2.0
-        version: 2.2.0
+        specifier: 2.2.1
+        version: 2.2.1
       typescript:
         specifier: 5.6.3
         version: 5.6.3
@@ -146,7 +146,7 @@ importers:
     dependencies:
       next:
         specifier: 15.0.0-rc.1
-        version: 15.0.0-rc.1(@babel/core@7.25.8)(react-dom@18.3.1)(react@18.3.1)
+        version: 15.0.0-rc.1(@babel/core@7.25.2)(react-dom@18.3.1)(react@18.3.1)
       nextra:
         specifier: workspace:*
         version: file:packages/nextra(@types/react@18.3.11)(acorn@8.13.0)(next@15.0.0-rc.1)(react-dom@18.3.1)(react@18.3.1)(typescript@5.6.3)
@@ -169,7 +169,7 @@ importers:
     dependencies:
       next:
         specifier: 15.0.0-rc.1
-        version: 15.0.0-rc.1(@babel/core@7.25.8)(react-dom@18.3.1)(react@18.3.1)
+        version: 15.0.0-rc.1(@babel/core@7.25.2)(react-dom@18.3.1)(react@18.3.1)
       nextra:
         specifier: workspace:*
         version: file:packages/nextra(@types/react@18.3.11)(acorn@8.13.0)(next@15.0.0-rc.1)(react-dom@18.3.1)(react@18.3.1)(typescript@5.6.3)
@@ -195,7 +195,7 @@ importers:
         version: 7.4.0(react@18.3.1)
       next:
         specifier: 15.0.0-rc.1
-        version: 15.0.0-rc.1(@babel/core@7.25.8)(react-dom@18.3.1)(react@18.3.1)
+        version: 15.0.0-rc.1(@babel/core@7.25.2)(react-dom@18.3.1)(react@18.3.1)
       nextra:
         specifier: workspace:*
         version: file:packages/nextra(@types/react@18.3.11)(acorn@8.13.0)(next@15.0.0-rc.1)(react-dom@18.3.1)(react@18.3.1)(typescript@5.6.3)
@@ -413,7 +413,7 @@ importers:
         version: 9.0.1
       next:
         specifier: 15.0.0-rc.1
-        version: 15.0.0-rc.1(@babel/core@7.25.8)(react-dom@18.3.1)(react@18.3.1)
+        version: 15.0.0-rc.1(@babel/core@7.25.2)(react-dom@18.3.1)(react@18.3.1)
       nextra:
         specifier: workspace:*
         version: link:../nextra
@@ -578,7 +578,6 @@ packages:
       semver: 6.3.1
     transitivePeerDependencies:
       - supports-color
-    dev: true
 
   /@babel/core@7.25.8:
     resolution: {integrity: sha512-Oixnb+DzmRT30qu9d3tJSQkxuygWm32DFykT4bRoORPa9hZ/L4KhVB/XiRm6KG+roIEM7DBQlmg27kw2HZkdZg==}
@@ -774,7 +773,6 @@ packages:
       '@babel/traverse': 7.25.7
     transitivePeerDependencies:
       - supports-color
-    dev: true
 
   /@babel/helper-module-transforms@7.25.7(@babel/core@7.25.8):
     resolution: {integrity: sha512-k/6f8dKG3yDz/qCwSM+RKovjMix563SLxQFo0UhRNo239SP6n9u5/eLtKD6EAjwta2JHJ49CsD8pms2HdNiMMQ==}
@@ -9937,6 +9935,50 @@ packages:
       react-dom: 18.3.1(react@18.3.1)
     dev: false
 
+  /next@15.0.0-rc.1(@babel/core@7.25.2)(react-dom@18.3.1)(react@18.3.1):
+    resolution: {integrity: sha512-MUoMUM7u6lh5zx1fRbze2jGESj4VIqc0dplx03wN5cLbpW3RhrVD7I3+sDW1khJxi+bayAZuGx03R5qNV9y/EA==}
+    engines: {node: '>=18.18.0'}
+    hasBin: true
+    peerDependencies:
+      '@opentelemetry/api': ^1.1.0
+      '@playwright/test': ^1.41.2
+      babel-plugin-react-compiler: '*'
+      react: ^18.2.0 || 19.0.0-rc-cd22717c-20241013
+      react-dom: ^18.2.0 || 19.0.0-rc-cd22717c-20241013
+      sass: ^1.3.0
+    peerDependenciesMeta:
+      '@opentelemetry/api':
+        optional: true
+      '@playwright/test':
+        optional: true
+      babel-plugin-react-compiler:
+        optional: true
+      sass:
+        optional: true
+    dependencies:
+      '@next/env': 15.0.0-rc.1
+      '@swc/counter': 0.1.3
+      '@swc/helpers': 0.5.13
+      busboy: 1.6.0
+      caniuse-lite: 1.0.30001668
+      postcss: 8.4.31
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
+      styled-jsx: 5.1.6(@babel/core@7.25.2)(react@18.3.1)
+    optionalDependencies:
+      '@next/swc-darwin-arm64': 15.0.0-rc.1
+      '@next/swc-darwin-x64': 15.0.0-rc.1
+      '@next/swc-linux-arm64-gnu': 15.0.0-rc.1
+      '@next/swc-linux-arm64-musl': 15.0.0-rc.1
+      '@next/swc-linux-x64-gnu': 15.0.0-rc.1
+      '@next/swc-linux-x64-musl': 15.0.0-rc.1
+      '@next/swc-win32-arm64-msvc': 15.0.0-rc.1
+      '@next/swc-win32-x64-msvc': 15.0.0-rc.1
+      sharp: 0.33.5
+    transitivePeerDependencies:
+      - '@babel/core'
+      - babel-plugin-macros
+
   /next@15.0.0-rc.1(@babel/core@7.25.8)(react-dom@18.3.1)(react@18.3.1):
     resolution: {integrity: sha512-MUoMUM7u6lh5zx1fRbze2jGESj4VIqc0dplx03wN5cLbpW3RhrVD7I3+sDW1khJxi+bayAZuGx03R5qNV9y/EA==}
     engines: {node: '>=18.18.0'}
@@ -11701,6 +11743,23 @@ packages:
       inline-style-parser: 0.2.4
     dev: false
 
+  /styled-jsx@5.1.6(@babel/core@7.25.2)(react@18.3.1):
+    resolution: {integrity: sha512-qSVyDTeMotdvQYoHWLNGwRFJHC+i+ZvdBRYosOFgC+Wg1vx4frN2/RG/NA7SYqqvKNLf39P2LSRA2pu6n0XYZA==}
+    engines: {node: '>= 12.0.0'}
+    peerDependencies:
+      '@babel/core': '*'
+      babel-plugin-macros: '*'
+      react: '>= 16.8.0 || 17.x.x || ^18.0.0-0 || ^19.0.0-0'
+    peerDependenciesMeta:
+      '@babel/core':
+        optional: true
+      babel-plugin-macros:
+        optional: true
+    dependencies:
+      '@babel/core': 7.25.2
+      client-only: 0.0.1
+      react: 18.3.1
+
   /styled-jsx@5.1.6(@babel/core@7.25.8)(react@18.3.1):
     resolution: {integrity: sha512-qSVyDTeMotdvQYoHWLNGwRFJHC+i+ZvdBRYosOFgC+Wg1vx4frN2/RG/NA7SYqqvKNLf39P2LSRA2pu6n0XYZA==}
     engines: {node: '>= 12.0.0'}
@@ -12112,64 +12171,64 @@ packages:
       fsevents: 2.3.3
     dev: true
 
-  /turbo-darwin-64@2.2.0:
-    resolution: {integrity: sha512-mJK+7hpvGsxyXfx2UTdewisXGIikRORoj25OKagsNw7dE7D1j0HnfWrjguIshlmFoQu18E5ipbdUAzjHdQGPkg==}
+  /turbo-darwin-64@2.2.1:
+    resolution: {integrity: sha512-jltMdSQ+7rQDVaorjW729PCw6fwAn1MgZSdoa0Gil7GZCOF3SnR/ok0uJw6G5mdm6F5XM8ZTlz+mdGzBLuBRaA==}
     cpu: [x64]
     os: [darwin]
     requiresBuild: true
     dev: true
     optional: true
 
-  /turbo-darwin-arm64@2.2.0:
-    resolution: {integrity: sha512-uStU2I1aMSj8/ord3gNXdr/k1Xk+pflfMPS4d/oQUAPld8L9plbQ8JSgoXsFoJYyU9vhTeXkjLkpnQxXoGnb9w==}
+  /turbo-darwin-arm64@2.2.1:
+    resolution: {integrity: sha512-RHW0c1NonsJXXlutlZeunmhLanf0/WbeizFfYgWuTEaJE4MbbhyD/RG4Fm/7iob5kxQ4Es2TzfDPqyMqpIO0GA==}
     cpu: [arm64]
     os: [darwin]
     requiresBuild: true
     dev: true
     optional: true
 
-  /turbo-linux-64@2.2.0:
-    resolution: {integrity: sha512-dVy/hquEDBy7trsSb5TynDGeS2iqcI9QTfC2kLZnsgPo6WWURXESN+AFChGxgZ2yp2CKrj5eZhnHdtRbP0a5EQ==}
+  /turbo-linux-64@2.2.1:
+    resolution: {integrity: sha512-RasrjV+i2B90hoR8r6B2Btf2/ebNT5MJbhkpY0G1EN06E1IkjCKfAXj/1Dwmjy9+Zo0NC2r69L3HxRrtpar8jQ==}
     cpu: [x64]
     os: [linux]
     requiresBuild: true
     dev: true
     optional: true
 
-  /turbo-linux-arm64@2.2.0:
-    resolution: {integrity: sha512-YuCmCBQsvH8RZGDBqFXOm49UY3mJFRahQ7J8IT4KQX3O8zIPTu84715ILUTznElhlYY7IKoqfenovVzYFzEbMQ==}
+  /turbo-linux-arm64@2.2.1:
+    resolution: {integrity: sha512-LNkUUJuu1gNkhlo7Ky/zilXEiajLoGlWLiKT1XV5neEf+x1s+aU9Hzd/+HhSVMiyI8l7z6zLbrM1a6+v4co/SQ==}
     cpu: [arm64]
     os: [linux]
     requiresBuild: true
     dev: true
     optional: true
 
-  /turbo-windows-64@2.2.0:
-    resolution: {integrity: sha512-6WegPi7hEbKuQXR/VGJXGO0jV9tm+dyRNH6e3Edb3DMaa8ThnzfjxMmrvQwLbGgMNvjBRBEKAHhOAnE6FXdPew==}
+  /turbo-windows-64@2.2.1:
+    resolution: {integrity: sha512-Mn5tlFrLzlQ6tW6wTWNlyT1osXuDUg0VT1VAjRpmRXlK2Zi3oKVVG0rs0nkkq4rmuheryD1xyuGPN9nFKbAn/A==}
     cpu: [x64]
     os: [win32]
     requiresBuild: true
     dev: true
     optional: true
 
-  /turbo-windows-arm64@2.2.0:
-    resolution: {integrity: sha512-kmk+A3aUy4dWhTVzW1itrWRtIilv4dFNRThfucBNYRL4Huyug+8qdX51iJjKyHMi0x51rcND62lukWWtFZhCSA==}
+  /turbo-windows-arm64@2.2.1:
+    resolution: {integrity: sha512-bvYOJ3SMN00yiem+uAqwRMbUMau/KiMzJYxnD0YkFo6INc08z8gZi5g0GLZAR7g/L3JegktX3UQW2cJvryjvLg==}
     cpu: [arm64]
     os: [win32]
     requiresBuild: true
     dev: true
     optional: true
 
-  /turbo@2.2.0:
-    resolution: {integrity: sha512-uyr+tFAKDKWIpihuUVYpEvuzQ3Pc+kICf0fbRzzc/86ram74azvwTXplzRQ+BUv8zTjwIRKNhrH5L4q0rgJyMw==}
+  /turbo@2.2.1:
+    resolution: {integrity: sha512-clZFkh6U6NpsLKBVZYRjlZjRTfju1Z5STqvFVaOGu5443uM75alJe1nCYH9pQ9YJoiOvXAqA2rDHWN5kLS9JMg==}
     hasBin: true
     optionalDependencies:
-      turbo-darwin-64: 2.2.0
-      turbo-darwin-arm64: 2.2.0
-      turbo-linux-64: 2.2.0
-      turbo-linux-arm64: 2.2.0
-      turbo-windows-64: 2.2.0
-      turbo-windows-arm64: 2.2.0
+      turbo-darwin-64: 2.2.1
+      turbo-darwin-arm64: 2.2.1
+      turbo-linux-64: 2.2.1
+      turbo-linux-arm64: 2.2.1
+      turbo-windows-64: 2.2.1
+      turbo-windows-arm64: 2.2.1
     dev: true
 
   /twoslash-protocol@0.2.12:
@@ -12982,7 +13041,7 @@ packages:
       hast-util-to-estree: 3.1.0
       katex: 0.16.11
       negotiator: 1.0.0
-      next: 15.0.0-rc.1(@babel/core@7.25.8)(react-dom@18.3.1)(react@18.3.1)
+      next: 15.0.0-rc.1(@babel/core@7.25.2)(react-dom@18.3.1)(react@18.3.1)
       p-limit: 6.1.0
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
@@ -13023,7 +13082,7 @@ packages:
       react-cusdis:
         optional: true
     dependencies:
-      next: 15.0.0-rc.1(@babel/core@7.25.8)(react-dom@18.3.1)(react@18.3.1)
+      next: 15.0.0-rc.1(@babel/core@7.25.2)(react-dom@18.3.1)(react@18.3.1)
       next-themes: 0.3.0(react-dom@18.3.1)(react@18.3.1)
       nextra: file:packages/nextra(@types/react@18.3.11)(acorn@8.13.0)(next@15.0.0-rc.1)(react-dom@18.3.1)(react@18.3.1)(typescript@5.6.3)
       react: 18.3.1
@@ -13044,7 +13103,7 @@ packages:
       clsx: 2.1.1
       escape-string-regexp: 5.0.0
       flexsearch: 0.7.43
-      next: 15.0.0-rc.1(@babel/core@7.25.8)(react-dom@18.3.1)(react@18.3.1)
+      next: 15.0.0-rc.1(@babel/core@7.25.2)(react-dom@18.3.1)(react@18.3.1)
       next-themes: 0.3.0(react-dom@18.3.1)(react@18.3.1)
       nextra: file:packages/nextra(@types/react@18.3.11)(acorn@8.13.0)(next@15.0.0-rc.1)(react-dom@18.3.1)(react@18.3.1)(typescript@5.6.3)
       react: 18.3.1
