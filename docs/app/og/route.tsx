@@ -1,3 +1,4 @@
+/* eslint react/no-unknown-property: ['error', { ignore: ['tw'] }] */
 import { NextraLogo } from '@components/icons'
 import { ImageResponse } from 'next/og'
 
