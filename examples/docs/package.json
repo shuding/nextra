@@ -15,5 +15,13 @@
     "nextra-theme-docs": "workspace:*",
     "react": "18.3.1",
     "react-dom": "18.3.1"
+  },
+  "dependenciesMeta": {
+    "nextra": {
+      "injected": true
+    },
+    "nextra-theme-docs": {
+      "injected": true
+    }
   }
 }

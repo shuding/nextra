@@ -179,16 +179,21 @@ importers:
         version: 15.0.0-canary.199(patch_hash=ih2n7uyu6sqdsauhnxm6ovrrua)(@babel/core@7.25.2)(react-dom@18.3.1)(react@18.3.1)
       nextra:
         specifier: workspace:*
-        version: link:../../packages/nextra
+        version: file:packages/nextra(@types/react@18.3.11)(acorn@8.13.0)(next@15.0.0-canary.199)(react-dom@18.3.1)(react@18.3.1)(typescript@5.6.3)
       nextra-theme-docs:
         specifier: workspace:*
-        version: link:../../packages/nextra-theme-docs
+        version: file:packages/nextra-theme-docs(@types/react@18.3.11)(next@15.0.0-canary.199)(nextra@4.0.0-app-router.8)(react-dom@18.3.1)(react@18.3.1)
       react:
         specifier: 18.3.1
         version: 18.3.1
       react-dom:
         specifier: 18.3.1
         version: 18.3.1(react@18.3.1)
+    dependenciesMeta:
+      nextra:
+        injected: true
+      nextra-theme-docs:
+        injected: true
 
   examples/swr-site:
     dependencies:
@@ -2342,8 +2347,8 @@ packages:
       '@babel/helper-plugin-utils': 7.25.7
     dev: true
 
-  /@babel/plugin-transform-react-display-name@7.24.7(@babel/core@7.25.2):
-    resolution: {integrity: sha512-H/Snz9PFxKsS1JLI4dJLtnJgCJRoo0AUm3chP6NYr+9En1JMKloheEiLIhlp5MDVznWo+H3AAC1Mc8lmUEpsgg==}
+  /@babel/plugin-transform-react-display-name@7.25.7(@babel/core@7.25.2):
+    resolution: {integrity: sha512-r0QY7NVU8OnrwE+w2IWiRom0wwsTbjx4+xH2RTd7AVdof3uurXOF+/mXHQDRk+2jIvWgSaCHKMgggfvM4dyUGA==}
     engines: {node: '>=6.9.0'}
     peerDependencies:
       '@babel/core': ^7.0.0-0
@@ -2352,8 +2357,8 @@ packages:
       '@babel/helper-plugin-utils': 7.25.7
     dev: true
 
-  /@babel/plugin-transform-react-display-name@7.24.7(@babel/core@7.25.8):
-    resolution: {integrity: sha512-H/Snz9PFxKsS1JLI4dJLtnJgCJRoo0AUm3chP6NYr+9En1JMKloheEiLIhlp5MDVznWo+H3AAC1Mc8lmUEpsgg==}
+  /@babel/plugin-transform-react-display-name@7.25.7(@babel/core@7.25.8):
+    resolution: {integrity: sha512-r0QY7NVU8OnrwE+w2IWiRom0wwsTbjx4+xH2RTd7AVdof3uurXOF+/mXHQDRk+2jIvWgSaCHKMgggfvM4dyUGA==}
     engines: {node: '>=6.9.0'}
     peerDependencies:
       '@babel/core': ^7.0.0-0
@@ -2362,26 +2367,26 @@ packages:
       '@babel/helper-plugin-utils': 7.25.7
     dev: true
 
-  /@babel/plugin-transform-react-jsx-development@7.24.7(@babel/core@7.25.2):
-    resolution: {integrity: sha512-QG9EnzoGn+Qar7rxuW+ZOsbWOt56FvvI93xInqsZDC5fsekx1AlIO4KIJ5M+D0p0SqSH156EpmZyXq630B8OlQ==}
+  /@babel/plugin-transform-react-jsx-development@7.25.7(@babel/core@7.25.2):
+    resolution: {integrity: sha512-5yd3lH1PWxzW6IZj+p+Y4OLQzz0/LzlOG8vGqonHfVR3euf1vyzyMUJk9Ac+m97BH46mFc/98t9PmYLyvgL3qg==}
     engines: {node: '>=6.9.0'}
     peerDependencies:
       '@babel/core': ^7.0.0-0
     dependencies:
       '@babel/core': 7.25.2
-      '@babel/plugin-transform-react-jsx': 7.24.7(@babel/core@7.25.2)
+      '@babel/plugin-transform-react-jsx': 7.25.7(@babel/core@7.25.2)
     transitivePeerDependencies:
       - supports-color
     dev: true
 
-  /@babel/plugin-transform-react-jsx-development@7.24.7(@babel/core@7.25.8):
-    resolution: {integrity: sha512-QG9EnzoGn+Qar7rxuW+ZOsbWOt56FvvI93xInqsZDC5fsekx1AlIO4KIJ5M+D0p0SqSH156EpmZyXq630B8OlQ==}
+  /@babel/plugin-transform-react-jsx-development@7.25.7(@babel/core@7.25.8):
+    resolution: {integrity: sha512-5yd3lH1PWxzW6IZj+p+Y4OLQzz0/LzlOG8vGqonHfVR3euf1vyzyMUJk9Ac+m97BH46mFc/98t9PmYLyvgL3qg==}
     engines: {node: '>=6.9.0'}
     peerDependencies:
       '@babel/core': ^7.0.0-0
     dependencies:
       '@babel/core': 7.25.8
-      '@babel/plugin-transform-react-jsx': 7.24.7(@babel/core@7.25.8)
+      '@babel/plugin-transform-react-jsx': 7.25.7(@babel/core@7.25.8)
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -2406,8 +2411,8 @@ packages:
       '@babel/helper-plugin-utils': 7.25.7
     dev: true
 
-  /@babel/plugin-transform-react-jsx@7.24.7(@babel/core@7.25.2):
-    resolution: {integrity: sha512-+Dj06GDZEFRYvclU6k4bme55GKBEWUmByM/eoKuqg4zTNQHiApWRhQph5fxQB2wAEFvRzL1tOEj1RJ19wJrhoA==}
+  /@babel/plugin-transform-react-jsx@7.25.7(@babel/core@7.25.2):
+    resolution: {integrity: sha512-vILAg5nwGlR9EXE8JIOX4NHXd49lrYbN8hnjffDtoULwpL9hUx/N55nqh2qd0q6FyNDfjl9V79ecKGvFbcSA0Q==}
     engines: {node: '>=6.9.0'}
     peerDependencies:
       '@babel/core': ^7.0.0-0
@@ -2422,8 +2427,8 @@ packages:
       - supports-color
     dev: true
 
-  /@babel/plugin-transform-react-jsx@7.24.7(@babel/core@7.25.8):
-    resolution: {integrity: sha512-+Dj06GDZEFRYvclU6k4bme55GKBEWUmByM/eoKuqg4zTNQHiApWRhQph5fxQB2wAEFvRzL1tOEj1RJ19wJrhoA==}
+  /@babel/plugin-transform-react-jsx@7.25.7(@babel/core@7.25.8):
+    resolution: {integrity: sha512-vILAg5nwGlR9EXE8JIOX4NHXd49lrYbN8hnjffDtoULwpL9hUx/N55nqh2qd0q6FyNDfjl9V79ecKGvFbcSA0Q==}
     engines: {node: '>=6.9.0'}
     peerDependencies:
       '@babel/core': ^7.0.0-0
@@ -2438,8 +2443,8 @@ packages:
       - supports-color
     dev: true
 
-  /@babel/plugin-transform-react-pure-annotations@7.24.7(@babel/core@7.25.2):
-    resolution: {integrity: sha512-PLgBVk3fzbmEjBJ/u8kFzOqS9tUeDjiaWud/rRym/yjCo/M9cASPlnrd2ZmmZpQT40fOOrvR8jh+n8jikrOhNA==}
+  /@babel/plugin-transform-react-pure-annotations@7.25.7(@babel/core@7.25.2):
+    resolution: {integrity: sha512-6YTHJ7yjjgYqGc8S+CbEXhLICODk0Tn92j+vNJo07HFk9t3bjFgAKxPLFhHwF2NjmQVSI1zBRfBWUeVBa2osfA==}
     engines: {node: '>=6.9.0'}
     peerDependencies:
       '@babel/core': ^7.0.0-0
@@ -2449,8 +2454,8 @@ packages:
       '@babel/helper-plugin-utils': 7.25.7
     dev: true
 
-  /@babel/plugin-transform-react-pure-annotations@7.24.7(@babel/core@7.25.8):
-    resolution: {integrity: sha512-PLgBVk3fzbmEjBJ/u8kFzOqS9tUeDjiaWud/rRym/yjCo/M9cASPlnrd2ZmmZpQT40fOOrvR8jh+n8jikrOhNA==}
+  /@babel/plugin-transform-react-pure-annotations@7.25.7(@babel/core@7.25.8):
+    resolution: {integrity: sha512-6YTHJ7yjjgYqGc8S+CbEXhLICODk0Tn92j+vNJo07HFk9t3bjFgAKxPLFhHwF2NjmQVSI1zBRfBWUeVBa2osfA==}
     engines: {node: '>=6.9.0'}
     peerDependencies:
       '@babel/core': ^7.0.0-0
@@ -2940,10 +2945,10 @@ packages:
       '@babel/core': 7.25.2
       '@babel/helper-plugin-utils': 7.25.7
       '@babel/helper-validator-option': 7.25.7
-      '@babel/plugin-transform-react-display-name': 7.24.7(@babel/core@7.25.2)
-      '@babel/plugin-transform-react-jsx': 7.24.7(@babel/core@7.25.2)
-      '@babel/plugin-transform-react-jsx-development': 7.24.7(@babel/core@7.25.2)
-      '@babel/plugin-transform-react-pure-annotations': 7.24.7(@babel/core@7.25.2)
+      '@babel/plugin-transform-react-display-name': 7.25.7(@babel/core@7.25.2)
+      '@babel/plugin-transform-react-jsx': 7.25.7(@babel/core@7.25.2)
+      '@babel/plugin-transform-react-jsx-development': 7.25.7(@babel/core@7.25.2)
+      '@babel/plugin-transform-react-pure-annotations': 7.25.7(@babel/core@7.25.2)
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -2957,10 +2962,10 @@ packages:
       '@babel/core': 7.25.8
       '@babel/helper-plugin-utils': 7.25.7
       '@babel/helper-validator-option': 7.25.7
-      '@babel/plugin-transform-react-display-name': 7.24.7(@babel/core@7.25.8)
-      '@babel/plugin-transform-react-jsx': 7.24.7(@babel/core@7.25.8)
-      '@babel/plugin-transform-react-jsx-development': 7.24.7(@babel/core@7.25.8)
-      '@babel/plugin-transform-react-pure-annotations': 7.24.7(@babel/core@7.25.8)
+      '@babel/plugin-transform-react-display-name': 7.25.7(@babel/core@7.25.8)
+      '@babel/plugin-transform-react-jsx': 7.25.7(@babel/core@7.25.8)
+      '@babel/plugin-transform-react-jsx-development': 7.25.7(@babel/core@7.25.8)
+      '@babel/plugin-transform-react-pure-annotations': 7.25.7(@babel/core@7.25.8)
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -12804,4 +12809,83 @@ packages:
 
   /zwitch@2.0.4:
     resolution: {integrity: sha512-bXE4cR/kVZhKZX/RjPEflHaKVhUVl85noU3v6b8apfQEc1x4A+zBxjZ4lN8LqGd6WZ3dl98pY4o717VFmoPp+A==}
+    dev: false
+
+  file:packages/nextra(@types/react@18.3.11)(acorn@8.13.0)(next@15.0.0-canary.199)(react-dom@18.3.1)(react@18.3.1)(typescript@5.6.3):
+    resolution: {directory: packages/nextra, type: directory}
+    id: file:packages/nextra
+    name: nextra
+    engines: {node: '>=18'}
+    peerDependencies:
+      next: 15.0.0-canary.199
+      react: '>=18'
+      react-dom: '>=18'
+    dependencies:
+      '@formatjs/intl-localematcher': 0.5.5
+      '@headlessui/react': 2.1.10(react-dom@18.3.1)(react@18.3.1)
+      '@mdx-js/mdx': 3.1.0(acorn@8.13.0)
+      '@mdx-js/react': 3.1.0(@types/react@18.3.11)(react@18.3.1)
+      '@napi-rs/simple-git': 0.1.19
+      '@shikijs/twoslash': 1.20.0(typescript@5.6.3)
+      '@theguild/remark-mermaid': 0.1.3(react@18.3.1)
+      '@theguild/remark-npm2yarn': 0.3.2
+      better-react-mathjax: 2.0.3(react@18.3.1)
+      clsx: 2.1.1
+      estree-util-to-js: 2.0.0
+      estree-util-value-to-estree: 3.1.2
+      fast-glob: 3.3.2
+      github-slugger: 2.0.0
+      hast-util-to-estree: 3.1.0
+      katex: 0.16.11
+      negotiator: 1.0.0
+      next: 15.0.0-canary.199(patch_hash=ih2n7uyu6sqdsauhnxm6ovrrua)(@babel/core@7.25.2)(react-dom@18.3.1)(react@18.3.1)
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
+      rehype-katex: 7.0.1
+      rehype-pretty-code: 0.14.0(shiki@1.20.0)
+      rehype-raw: 7.0.0
+      remark-frontmatter: 5.0.0
+      remark-gfm: 4.0.0
+      remark-math: 6.0.0
+      remark-reading-time: 2.0.1
+      remark-smartypants: 3.0.2
+      shiki: 1.20.0
+      slash: 5.1.0
+      title: 3.5.3
+      unist-util-remove: 4.0.0
+      unist-util-visit: 5.0.0
+      yaml: 2.6.0
+      zod: 3.23.8
+      zod-validation-error: 3.4.0(zod@3.23.8)
+    transitivePeerDependencies:
+      - '@types/react'
+      - acorn
+      - supports-color
+      - typescript
+    dev: false
+
+  file:packages/nextra-theme-docs(@types/react@18.3.11)(next@15.0.0-canary.199)(nextra@4.0.0-app-router.8)(react-dom@18.3.1)(react@18.3.1):
+    resolution: {directory: packages/nextra-theme-docs, type: directory}
+    id: file:packages/nextra-theme-docs
+    name: nextra-theme-docs
+    peerDependencies:
+      next: 15.0.0-canary.199
+      nextra: workspace:*
+      react: '>=18'
+      react-dom: '>=18'
+    dependencies:
+      '@headlessui/react': 2.1.10(react-dom@18.3.1)(react@18.3.1)
+      clsx: 2.1.1
+      next: 15.0.0-canary.199(patch_hash=ih2n7uyu6sqdsauhnxm6ovrrua)(@babel/core@7.25.2)(react-dom@18.3.1)(react@18.3.1)
+      next-themes: 0.3.0(react-dom@18.3.1)(react@18.3.1)
+      nextra: file:packages/nextra(@types/react@18.3.11)(acorn@8.13.0)(next@15.0.0-canary.199)(react-dom@18.3.1)(react@18.3.1)(typescript@5.6.3)
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
+      scroll-into-view-if-needed: 3.1.0
+      zod: 3.23.8
+      zod-validation-error: 3.4.0(zod@3.23.8)
+      zustand: 4.5.5(@types/react@18.3.11)(react@18.3.1)
+    transitivePeerDependencies:
+      - '@types/react'
+      - immer
     dev: false
