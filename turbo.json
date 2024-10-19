@@ -8,7 +8,9 @@
       ],
       "outputs": ["dist/**", ".next/**"]
     },
-    "test": {},
+    "test": {
+      "outputs": ["dist/**"]
+    },
     "types:check": {
       "dependsOn": [
         // Run `build` in workspaces I depend on first
