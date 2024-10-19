@@ -1,0 +1,10 @@
+{
+  "mode": "pre",
+  "tag": "canary",
+  "initialVersions": {
+    "nextra": "3.1.0",
+    "nextra-theme-blog": "3.1.0",
+    "nextra-theme-docs": "3.1.0"
+  },
+  "changesets": []
+}
