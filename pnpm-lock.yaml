@@ -291,7 +291,7 @@ importers:
         version: 0.16.11
       negotiator:
         specifier: ^0.6.3
-        version: 0.6.3
+        version: 0.6.4
       p-limit:
         specifier: ^6.0.0
         version: 6.1.0
@@ -10002,6 +10002,11 @@ packages:
 
   /negotiator@0.6.3:
     resolution: {integrity: sha512-+EUsqGPLsM+j/zdChZjsnX51g4XrHFOIXwfnCVPGlQk/k5giakcKsuxCObBRu6DSm9opw/O6slWbJdghQM4bBg==}
+    engines: {node: '>= 0.6'}
+    dev: false
+
+  /negotiator@0.6.4:
+    resolution: {integrity: sha512-myRT3DiWPHqho5PrJaIRyaMv2kgYf0mUVgBNOYMuCH5Ki1yEiQaf/ZJuQ62nvpc44wL5WDbTX7yGJi1Neevw8w==}
     engines: {node: '>= 0.6'}
     dev: false
 
