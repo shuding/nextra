@@ -384,6 +384,9 @@ describe('normalize-page', () => {
         },
         {
           "items": {
+            "---": {
+              "type": "separator",
+            },
             "nextra": {
               "href": "https://nextra.site",
               "title": "Nextra",
