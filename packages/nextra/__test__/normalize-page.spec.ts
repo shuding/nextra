@@ -325,12 +325,12 @@ describe('normalize-page', () => {
     })
   })
 
-  it.only('should initialize `activeType` from `*`', async () => {
+  it.only('should respect order for `type: "separator"`, `type: "menu"` and item with `href`', async () => {
     const dir = path.join(
       __dirname,
       'fixture',
       'page-maps',
-      'active-type-should-be-initialized-from-star'
+      'respect-order-for-type-separator-menu-and-item-with-href'
     )
     vi.doMock('../src/server/file-system.ts', () => ({ PAGES_DIR: dir }))
     vi.doMock('../src/server/constants.ts', async () => ({
@@ -343,65 +343,107 @@ describe('normalize-page', () => {
     await fs.writeFile(path.join(dir, 'generated-page-map.ts'), result)
 
     const { pageMap } = await import(
-      './fixture/page-maps/active-type-should-be-initialized-from-star/generated-page-map.js'
-      )
+      './fixture/page-maps/respect-order-for-type-separator-menu-and-item-with-href/generated-page-map.js'
+    )
 
-    expect(pageMap).toEqual([
-      {
-        data: {
-          '1-level': {
-            display: 'hidden',
-            theme: {
-              layout: 'full'
-            }
-          }
-        }
-      },
-      {
-        name: '1-level',
-        route: '/1-level',
-        children: [
-          {
-            data: {
-              '*': {
-                type: 'page',
-                theme: {
-                  layout: 'default',
-                  toc: false
-                }
-              }
-            }
-          },
-          {
-            name: 'foo',
-            route: '/1-level/foo',
-            frontMatter: {
-              sidebarTitle: 'Foo'
-            }
-          }
-        ]
-      }
-    ])
-
-    const { activeType, activeIndex, activeThemeContext } = normalizePages({
+    const normalizedResult = normalizePages({
       list: pageMap,
-      route: '/1-level/not-exist'
+      route: '/one/two/qux'
     })
-    expect({ activeType, activeIndex, activeThemeContext }).toEqual({
-      activeType: 'page',
-      activeIndex: 0,
-      activeThemeContext: {
-        breadcrumb: true,
-        collapsed: false,
-        footer: true,
-        layout: 'default',
-        navbar: true,
-        pagination: true,
-        sidebar: true,
-        timestamp: true,
-        toc: false,
-        typesetting: 'default'
-      }
-    })
+    expect(normalizedResult.docsDirectories).toMatchInlineSnapshot(`
+      [
+        {
+          "children": [
+            {
+              "children": [
+                {
+                  "items": {
+                    "nextra": {
+                      "href": "https://nextra.site",
+                      "title": "Nextra",
+                    },
+                  },
+                  "name": "menu",
+                  "title": "menu",
+                  "type": "menu",
+                },
+                {
+                  "isUnderCurrentDocsTree": true,
+                  "name": "---",
+                  "type": "separator",
+                },
+                {
+                  "frontMatter": {
+                    "sidebarTitle": "Qux",
+                  },
+                  "isUnderCurrentDocsTree": true,
+                  "name": "qux",
+                  "route": "/one/two/qux",
+                  "title": "Qux",
+                  "type": "doc",
+                },
+                {
+                  "href": "https://nextra.site",
+                  "isUnderCurrentDocsTree": true,
+                  "name": "nextra",
+                  "title": "Nextra",
+                  "type": "doc",
+                },
+                {
+                  "frontMatter": {
+                    "sidebarTitle": "1 One",
+                  },
+                  "isUnderCurrentDocsTree": true,
+                  "name": "1-one",
+                  "route": "/one/two/1-one",
+                  "title": "1 One",
+                  "type": "doc",
+                },
+                {
+                  "frontMatter": {
+                    "sidebarTitle": "2024",
+                  },
+                  "isUnderCurrentDocsTree": true,
+                  "name": "2024",
+                  "route": "/one/two/2024",
+                  "title": "2024",
+                  "type": "doc",
+                },
+                {
+                  "frontMatter": {
+                    "sidebarTitle": "Foo",
+                  },
+                  "isUnderCurrentDocsTree": true,
+                  "name": "foo",
+                  "route": "/one/two/foo",
+                  "title": "Foo",
+                  "type": "doc",
+                },
+                {
+                  "frontMatter": {
+                    "sidebarTitle": "One",
+                  },
+                  "isUnderCurrentDocsTree": true,
+                  "name": "one",
+                  "route": "/one/two/one",
+                  "title": "One",
+                  "type": "doc",
+                },
+              ],
+              "isUnderCurrentDocsTree": true,
+              "name": "two",
+              "route": "/one/two",
+              "title": "two",
+              "type": "doc",
+            },
+          ],
+          "isUnderCurrentDocsTree": true,
+          "name": "one",
+          "route": "/one",
+          "title": "one",
+          "type": "doc",
+        },
+      ]
+    `)
   })
 })
