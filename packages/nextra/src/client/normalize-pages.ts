@@ -146,30 +146,6 @@ export function normalizePages({
     }
     items.push(item)
   }
-
-  // All directories
-  // - directories: all directories in the tree structure
-  // - flatDirectories: all directories in the flat structure, used by search and footer navigation
-  const directories: Item[] = []
-  const flatDirectories: Item[] = []
-
-  // Docs directories
-  const docsDirectories: DocsItem[] = []
-  const flatDocsDirectories: DocsItem[] = []
-
-  // Page directories
-  const topLevelNavbarItems: (PageItem | MenuItem)[] = []
-
-  const { title: _title, href: _href, ...fallbackMeta } = meta['*'] || {}
-
-  let activeType: string = fallbackMeta.type
-  let activeIndex = 0
-  let activeThemeContext = {
-    ...pageThemeContext,
-    ...fallbackMeta.theme
-  }
-  let activePath: Item[] = []
-
   // Normalize items based on files and _meta.json.
   items.sort((a, b) => {
     const indexA = metaKeys.indexOf(a.name)
@@ -207,6 +183,29 @@ The field key "${metaKey}" in \`_meta\` file refers to a page that cannot be fou
       { name: metaKey, ...meta[metaKey] }
     )
   }
+
+  // All directories
+  // - directories: all directories in the tree structure
+  // - flatDirectories: all directories in the flat structure, used by search and footer navigation
+  const directories: Item[] = []
+  const flatDirectories: Item[] = []
+
+  // Docs directories
+  const docsDirectories: DocsItem[] = []
+  const flatDocsDirectories: DocsItem[] = []
+
+  // Page directories
+  const topLevelNavbarItems: (PageItem | MenuItem)[] = []
+
+  const { title: _title, href: _href, ...fallbackMeta } = meta['*'] || {}
+
+  let activeType: string = fallbackMeta.type
+  let activeIndex = 0
+  let activeThemeContext = {
+    ...pageThemeContext,
+    ...fallbackMeta.theme
+  }
+  let activePath: Item[] = []
 
   for (const currentItem of items) {
     // Get the item's meta information.
