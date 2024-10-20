@@ -186,18 +186,10 @@ export const cnPageMap: PageMapItem[] = [
   },
   {
     data: {
-      index: {
-        title: '简介'
-      },
-      docs: {
-        title: '文档'
-      },
-      examples: {
-        title: '示例'
-      },
-      blog: {
-        title: '博客'
-      }
+      index: '简介',
+      docs: '文档',
+      examples: '示例',
+      blog: '博客'
     }
   }
 ]
@@ -399,18 +391,10 @@ export const usPageMap: PageMapItem[] = [
   },
   {
     data: {
-      index: {
-        title: 'Introduction'
-      },
-      docs: {
-        title: 'Docs'
-      },
-      examples: {
-        title: 'Examples'
-      },
-      blog: {
-        title: 'Blog'
-      }
+      index: 'Introduction',
+      docs: 'Docs',
+      examples: 'Examples',
+      blog: 'Blog'
     }
   }
 ]
