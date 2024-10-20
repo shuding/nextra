@@ -11,9 +11,7 @@ export default {
   pagination: 'Paginación',
   prefetching: 'Prefetching',
   'with-nextjs': 'Next.js SSG and SSR',
-  typescript: 'Typescript',
   suspense: 'Suspense',
-  middleware: 'Middleware',
   advanced: 'Avanzado',
   'change-log': 'Registro de cambios',
   'wrap-toc-items': 'Ajustar elementos de la tabla de contenido'

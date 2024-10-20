@@ -128,7 +128,7 @@ export function normalizePages({
     }
   }
   const meta = _meta || {}
-  const metaKeys = Object.keys(meta)
+  const metaKeys = Object.keys(meta).filter(key => key !== '*')
 
   for (const key of metaKeys) {
     if (typeof meta[key] === 'string') {
@@ -188,10 +188,25 @@ export function normalizePages({
       return [currentItem]
     })
 
-  for (const [index, metaKey] of metaKeys
-    .filter(key => key !== '*')
-    .entries()) {
+  for (const [index, metaKey] of metaKeys.entries()) {
     if (items.some(item => item.name === metaKey)) continue
+
+    // Validate only on server, will be tree shaked in client build
+    if (typeof window === 'undefined') {
+      const metaItem = meta[metaKey]
+      const isValid =
+        metaItem.type === 'separator' ||
+        metaItem.type === 'menu' ||
+        metaItem.href
+
+      if (!isValid) {
+        throw new Error(
+          `Validation of "_meta" file has failed.
+The field key "${metaKey}" in \`_meta\` file refers to a page that cannot be found, remove this key from "_meta" file.`
+        )
+      }
+    }
+
     const currentItem = items[index]
     if (currentItem && currentItem.name === metaKey) continue
     items.splice(
