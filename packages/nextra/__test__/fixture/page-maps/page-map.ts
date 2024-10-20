@@ -141,32 +141,28 @@ export const cnPageMap: PageMapItem[] = [
         name: 'auth',
         route: '/examples/auth',
         frontMatter: {
-          title: '身份验证',
-          full: true
+          title: '身份验证'
         }
       },
       {
         name: 'basic',
         route: '/examples/basic',
         frontMatter: {
-          title: '基本用法',
-          full: true
+          title: '基本用法'
         }
       },
       {
         name: 'error-handling',
         route: '/examples/error-handling',
         frontMatter: {
-          title: '错误处理',
-          full: true
+          title: '错误处理'
         }
       },
       {
         name: 'infinite-loading',
         route: '/examples/infinite-loading',
         frontMatter: {
-          title: '无限加载',
-          full: true
+          title: '无限加载'
         }
       },
       {
@@ -191,21 +187,16 @@ export const cnPageMap: PageMapItem[] = [
   {
     data: {
       index: {
-        title: '简介',
-        type: 'nav',
-        hidden: true
+        title: '简介'
       },
       docs: {
-        title: '文档',
-        type: 'nav'
+        title: '文档'
       },
       examples: {
-        title: '示例',
-        type: 'nav'
+        title: '示例'
       },
       blog: {
-        title: '博客',
-        type: 'nav'
+        title: '博客'
       }
     }
   }
@@ -356,32 +347,28 @@ export const usPageMap: PageMapItem[] = [
         name: 'auth',
         route: '/examples/auth',
         frontMatter: {
-          title: 'Authentication',
-          full: true
+          title: 'Authentication'
         }
       },
       {
         name: 'basic',
         route: '/examples/basic',
         frontMatter: {
-          title: 'Basic Usage',
-          full: true
+          title: 'Basic Usage'
         }
       },
       {
         name: 'error-handling',
         route: '/examples/error-handling',
         frontMatter: {
-          title: 'Error Handling',
-          full: true
+          title: 'Error Handling'
         }
       },
       {
         name: 'infinite-loading',
         route: '/examples/infinite-loading',
         frontMatter: {
-          title: 'Infinite Loading',
-          full: true
+          title: 'Infinite Loading'
         }
       },
       {
@@ -397,8 +384,7 @@ export const usPageMap: PageMapItem[] = [
         name: 'ssr',
         route: '/examples/ssr',
         frontMatter: {
-          title: 'Next.js SSR',
-          full: true
+          title: 'Next.js SSR'
         }
       }
     ],
@@ -414,21 +400,16 @@ export const usPageMap: PageMapItem[] = [
   {
     data: {
       index: {
-        title: 'Introduction',
-        type: 'nav',
-        hidden: true
+        title: 'Introduction'
       },
       docs: {
-        title: 'Docs',
-        type: 'nav'
+        title: 'Docs'
       },
       examples: {
-        title: 'Examples',
-        type: 'nav'
+        title: 'Examples'
       },
       blog: {
-        title: 'Blog',
-        type: 'nav'
+        title: 'Blog'
       }
     }
   }
