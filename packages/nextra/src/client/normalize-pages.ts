@@ -328,9 +328,8 @@ The field key "${metaKey}" in \`_meta\` file refers to a page that cannot be fou
 
           // If it's a page with children inside, we inject itself as a page too.
           if (normalizedChildren.flatDirectories.length) {
-            pageItem.firstChildRoute = findFirstRoute(
-              normalizedChildren.flatDirectories
-            )
+            const route = findFirstRoute(normalizedChildren.flatDirectories)
+            if (route) pageItem.firstChildRoute = route
             topLevelNavbarItems.push(pageItem)
           } else if (pageItem.withIndexPage) {
             topLevelNavbarItems.push(pageItem)
