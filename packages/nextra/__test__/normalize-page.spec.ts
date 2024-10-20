@@ -325,7 +325,7 @@ describe('normalize-page', () => {
     })
   })
 
-  it.only('should respect order for `type: "separator"`, `type: "menu"` and item with `href`', async () => {
+  it('should respect order for `type: "separator"`, `type: "menu"` and item with `href`', async () => {
     const dir = path.join(
       __dirname,
       'fixture',
