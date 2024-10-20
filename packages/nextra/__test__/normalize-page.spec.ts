@@ -368,6 +368,15 @@ describe('normalize-page', () => {
           "children": [
             {
               "frontMatter": {
+                "sidebarTitle": "Not Specified",
+              },
+              "name": "not-specified",
+              "route": "/mix/not-specified",
+              "title": "Not Specified",
+              "type": "doc",
+            },
+            {
+              "frontMatter": {
                 "sidebarTitle": "Qux",
               },
               "name": "qux",
@@ -376,7 +385,7 @@ describe('normalize-page', () => {
               "type": "doc",
             },
           ],
-          "firstChildRoute": "/mix/qux",
+          "firstChildRoute": "/mix/not-specified",
           "name": "mix",
           "route": "/mix",
           "title": "mix",

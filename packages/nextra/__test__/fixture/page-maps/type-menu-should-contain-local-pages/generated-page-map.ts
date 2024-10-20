@@ -5,6 +5,12 @@ export const pageMap = [{
   name: "mix",
   route: "/mix",
   children: [{
+    name: "not-specified",
+    route: "/mix/not-specified",
+    frontMatter: {
+      "sidebarTitle": "Not Specified"
+    }
+  }, {
     name: "qux",
     route: "/mix/qux",
     frontMatter: {
