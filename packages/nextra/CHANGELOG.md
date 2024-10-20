@@ -1,5 +1,12 @@
 # nextra
 
+## 3.1.0-canary.0
+
+### Minor Changes
+
+- fec399a: fix `type: 'separator'`, `type: 'menu'` and `item` with `href` not
+  respecting order when not all pages specified in `_meta` file
+
 ## 3.0.15
 
 ### Patch Changes

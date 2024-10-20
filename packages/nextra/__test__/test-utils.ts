@@ -1,11 +1,6 @@
-import type { VFile } from '@mdx-js/mdx/lib/compile'
 import prettier from 'prettier'
 
-export async function clean(content: VFile | string): Promise<string> {
-  if (typeof content !== 'string') {
-    content = String(content)
-  }
-
+export function clean(content: string): Promise<string> {
   return prettier.format(content, {
     parser: 'typescript',
     semi: false,

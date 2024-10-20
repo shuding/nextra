@@ -128,7 +128,7 @@ export function normalizePages({
     }
   }
   const meta = _meta || {}
-  const metaKeys = Object.keys(meta)
+  const metaKeys = Object.keys(meta).filter(key => key !== '*')
 
   for (const key of metaKeys) {
     if (typeof meta[key] === 'string') {
@@ -161,16 +161,9 @@ export function normalizePages({
   }
   let activePath: Item[] = []
 
-  let metaKeyIndex = -1
-
   // Normalize items based on files and _meta.json.
-  const items = list
-    .filter(
-      (a): a is MdxFile | Folder =>
-        !isMeta(a) &&
-        // not hidden routes
-        !a.name.startsWith('_')
-    )
+  const items: any[] = list
+    .filter((a): a is MdxFile | Folder => !isMeta(a))
     .sort((a, b) => {
       const indexA = metaKeys.indexOf(a.name)
       const indexB = metaKeys.indexOf(b.name)
@@ -179,54 +172,52 @@ export function normalizePages({
       if (indexB === -1) return -1
       return indexA - indexB
     })
-    .flatMap(item => {
-      const items = []
-      const index = metaKeys.indexOf(item.name)
-      let extendedItem
-      if (index !== -1) {
-        // Fill all skipped items in meta.
-        for (let i = metaKeyIndex + 1; i < index; i++) {
-          const key = metaKeys[i]
-          if (key !== '*') {
-            items.push({
-              name: key,
-              route: '',
-              ...meta[key]
-            })
-          }
+    .flatMap((currentItem, index, list) => {
+      const nextItem = list[index + 1]
+      // If there are two items with the same name, they must be a directory and a
+      // page. In that case we merge them, and use the page's link.
+      if (nextItem && nextItem.name == currentItem.name) {
+        list[index + 1] = {
+          ...nextItem,
+          // @ts-expect-error fixme
+          withIndexPage: true,
+          // @ts-expect-error fixme
+          children: nextItem.children || currentItem.children
         }
-        metaKeyIndex = index
-        extendedItem = { ...meta[item.name], ...item }
+        return []
       }
-      items.push(extendedItem || item)
-      return items
+      return [currentItem]
     })
 
-  // Fill all skipped items in meta.
-  for (let i = metaKeyIndex + 1; i < metaKeys.length; i++) {
-    const key = metaKeys[i]
-    if (key !== '*') {
-      items.push({
-        name: key,
-        ...meta[key]
-      })
+  for (const [index, metaKey] of metaKeys.entries()) {
+    if (items.some(item => item.name === metaKey)) continue
+
+    // Validate only on server, will be tree shaked in client build
+    if (typeof window === 'undefined') {
+      const metaItem = meta[metaKey]
+      const isValid =
+        metaItem.type === 'separator' ||
+        metaItem.type === 'menu' ||
+        metaItem.href
+
+      if (!isValid) {
+        throw new Error(
+          `Validation of "_meta" file has failed.
+The field key "${metaKey}" in \`_meta\` file refers to a page that cannot be found, remove this key from "_meta" file.`
+        )
+      }
     }
+
+    const currentItem = items[index]
+    if (currentItem && currentItem.name === metaKey) continue
+    items.splice(
+      index, // index at which to start changing the array
+      0, // remove zero items
+      { name: metaKey, ...meta[metaKey] }
+    )
   }
 
-  for (let i = 0; i < items.length; i++) {
-    const currentItem = items[i]
-    const nextItem = items[i + 1]
-
-    // If there are two items with the same name, they must be a directory and a
-    // page. In that case we merge them, and use the page's link.
-    if (nextItem && nextItem.name == currentItem.name) {
-      items[i + 1] = {
-        ...nextItem,
-        withIndexPage: true,
-        children: nextItem.children || currentItem.children
-      }
-      continue
-    }
+  for (const currentItem of items) {
     // Get the item's meta information.
     const extendedMeta = extendMeta(
       meta[currentItem.name],

@@ -1,0 +1,12 @@
+{
+  "mode": "pre",
+  "tag": "canary",
+  "initialVersions": {
+    "nextra": "3.0.15",
+    "nextra-theme-blog": "3.0.15",
+    "nextra-theme-docs": "3.0.15"
+  },
+  "changesets": [
+    "chilly-otters-glow"
+  ]
+}

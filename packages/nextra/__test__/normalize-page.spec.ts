@@ -1,25 +1,9 @@
 import fs from 'node:fs/promises'
 import path from 'node:path'
 import { normalizePages } from '../src/client/normalize-pages.js'
-import { cnPageMap, usPageMap } from './fixture/page-maps/page-map.js'
+import { usPageMap } from './fixture/page-maps/page-map.js'
 
 describe('normalize-page', () => {
-  it('zh-CN home', () => {
-    const result = normalizePages({
-      list: cnPageMap,
-      route: '/'
-    })
-    expect(result).toMatchSnapshot()
-  })
-
-  it('zh-CN getting-started', () => {
-    const result = normalizePages({
-      list: cnPageMap,
-      route: '/docs/getting-started'
-    })
-    expect(result).toMatchSnapshot()
-  })
-
   it('en-US home', () => {
     const result = normalizePages({
       list: usPageMap,
@@ -140,13 +124,11 @@ describe('normalize-page', () => {
       [
         {
           "name": "docs",
-          "route": "",
           "title": "Documentation",
           "type": "page",
         },
         {
           "name": "explorers",
-          "route": "",
           "title": "Explorers",
           "type": "menu",
         },
@@ -158,7 +140,6 @@ describe('normalize-page', () => {
         },
         {
           "name": "explorers2",
-          "route": "",
           "title": "Explorers2",
           "type": "menu",
         },
