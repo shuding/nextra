@@ -362,7 +362,45 @@ describe('normalize-page', () => {
       list: pageMap,
       route: '/one/bar'
     })
-    console.log(normalizedResult)
-    // expect(normalizedResult.docsDirectories).toMatchInlineSnapshot()
+    expect(normalizedResult.topLevelNavbarItems).toMatchInlineSnapshot(`
+      [
+        {
+          "children": [
+            {
+              "frontMatter": {
+                "sidebarTitle": "Bar",
+              },
+              "name": "bar",
+              "route": "/one/bar",
+              "title": "Bar",
+              "type": "doc",
+            },
+            {
+              "frontMatter": {
+                "sidebarTitle": "Foo",
+              },
+              "name": "foo",
+              "route": "/one/foo",
+              "title": "Foo",
+              "type": "doc",
+            },
+            {
+              "frontMatter": {
+                "sidebarTitle": "Qux",
+              },
+              "name": "qux",
+              "route": "/one/qux",
+              "title": "Qux",
+              "type": "doc",
+            },
+          ],
+          "firstChildRoute": "/one/bar",
+          "name": "one",
+          "route": "/one",
+          "title": "One",
+          "type": "menu",
+        },
+      ]
+    `)
   })
 })
