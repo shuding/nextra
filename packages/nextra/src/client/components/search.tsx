@@ -76,6 +76,7 @@ export const Search: FC<SearchProps> = ({
   const [error, setError] = useState<ReactElement | string>('')
   const [results, setResults] = useState<PagefindResult[]>([])
   const [search, setSearch] = useState('')
+  // https://github.com/shuding/nextra/pull/3514
   // defer pagefind results update for prioritizing user input state
   const deferredSearch = useDeferredValue(search)
 

@@ -1,5 +1,13 @@
 # nextra-theme-blog
 
+## 4.0.0-app-router.10
+
+### Patch Changes
+
+- 8b1a7c9: defer pagefind results update for prioritizing the user input state
+- Updated dependencies [8b1a7c9]
+  - nextra@4.0.0-app-router.10
+
 ## 4.0.0-app-router.9
 
 ### Patch Changes
