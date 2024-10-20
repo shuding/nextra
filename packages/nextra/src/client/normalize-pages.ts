@@ -161,7 +161,7 @@ export function normalizePages({
   delete fallbackMeta.href
 
   // Normalize items based on files and _meta.json.
-  let items: any[] = list
+  const items: any[] = list
     .filter((a): a is MdxFile | Folder => !isMeta(a))
     .sort((a, b) => {
       const indexA = metaKeys.indexOf(a.name)
