@@ -245,7 +245,6 @@ describe('normalize-page', () => {
     expect(result2).toMatchSnapshot()
   })
 
-  // https://github.com/shuding/nextra/issues/3481
   it('should initialize `activeType` from `*`', async () => {
     const dir = path.join(
       __dirname,
