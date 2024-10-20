@@ -41,7 +41,7 @@ function cleanFileName(name: string): string {
   return (
     path
       .relative(PAGES_DIR, name)
-      .replace(/\.([jt]sx?|json|mdx?)$/, '')
+      .replace(/\.([jt]sx?|mdx?)$/, '')
       .replaceAll(/[\W_]+/g, '_')
       .replace(/^_/, '')
       // Variable can't start with number
