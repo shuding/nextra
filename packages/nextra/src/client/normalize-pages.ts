@@ -6,7 +6,6 @@ import type {
   pageThemeSchema
 } from '../server/schemas'
 import type { Folder, MdxFile, PageMapItem } from '../types'
-import { isMeta } from './utils.js'
 
 const DEFAULT_PAGE_THEME: PageTheme = {
   breadcrumb: true,
@@ -119,7 +118,7 @@ export function normalizePages({
 }): NormalizedResult {
   let _meta: Record<string, any> | undefined
   for (const item of list) {
-    if (isMeta(item)) {
+    if ('data' in item) {
       _meta = item.data
       break
     }
