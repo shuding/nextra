@@ -148,12 +148,13 @@ export function normalizePages({
   }
   // Normalize items based on files and _meta.json.
   items.sort((a, b) => {
-    const indexA = metaKeys.indexOf(a.name)
-    const indexB = metaKeys.indexOf(b.name)
-    if (indexA === -1 && indexB === -1) return a.name < b.name ? -1 : 1
-    if (indexA === -1) return 1
-    if (indexB === -1) return -1
-    return indexA - indexB
+    if (metaKeys.indexOf(a.name) === -1) {
+      if (metaKeys.indexOf(b.name) === -1) {
+        return a.name - b.name
+      }
+      return 1
+    }
+    return -1
   })
 
   for (const [index, metaKey] of metaKeys.entries()) {
