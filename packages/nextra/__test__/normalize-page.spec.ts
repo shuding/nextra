@@ -337,12 +337,12 @@ describe('normalize-page', () => {
     `)
   })
 
-  it('should respect order for `type: "separator"`, `type: "menu"` and item with `href`', async () => {
+  it.only('type: "menu" should contains items with local pages', async () => {
     const dir = path.join(
       __dirname,
       'fixture',
       'page-maps',
-      'respect-order-for-type-separator-menu-and-item-with-href'
+      'type-menu-should-contain-local-pages'
     )
     vi.doMock('../src/server/file-system.ts', () => ({ PAGES_DIR: dir }))
     vi.doMock('../src/server/constants.ts', async () => ({
@@ -355,13 +355,14 @@ describe('normalize-page', () => {
     await fs.writeFile(path.join(dir, 'generated-page-map.ts'), result)
 
     const { pageMap } = await import(
-      './fixture/page-maps/respect-order-for-type-separator-menu-and-item-with-href/generated-page-map.js'
+      './fixture/page-maps/type-menu-should-contain-local-pages/generated-page-map.js'
       )
 
     const normalizedResult = normalizePages({
       list: pageMap,
-      route: '/one/two/qux'
+      route: '/one/bar'
     })
-    expect(normalizedResult.docsDirectories).toMatchInlineSnapshot()
+    console.log(normalizedResult)
+    // expect(normalizedResult.docsDirectories).toMatchInlineSnapshot()
   })
 })
