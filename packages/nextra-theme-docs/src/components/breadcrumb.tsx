@@ -19,9 +19,9 @@ export function Breadcrumb({
           ? ''
           : item.withIndexPage
             ? item.route
-            : item.children![0].route === activePath.at(index + 1)?.route
+            : item.children[0].route === activePath.at(index + 1)?.route
               ? ''
-              : item.children![0].route
+              : item.children[0].route
 
         const ComponentToUse = href ? NextLink : 'span'
 
