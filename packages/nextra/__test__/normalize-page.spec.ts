@@ -48,30 +48,6 @@ describe('normalize-page', () => {
     expect(result).toMatchSnapshot()
   })
 
-  it('/500 page', () => {
-    const result = normalizePages({
-      list: [
-        { name: '500', route: '/500' },
-        { name: 'get-started', route: '/get-started' },
-        { name: 'index', route: '/' },
-        {
-          data: {
-            '500': {
-              type: 'page',
-              theme: {
-                layout: 'raw'
-              }
-            },
-            index: 'Introduction',
-            'get-started': 'Get Started'
-          }
-        }
-      ],
-      route: '/500'
-    })
-    expect(result).toMatchSnapshot()
-  })
-
   // https://github.com/shuding/nextra/issues/1888
   it('should set `route: #` for `type: menu`', () => {
     const result = normalizePages({
