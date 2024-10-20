@@ -134,6 +134,7 @@ module.exports = {
         projectService: true
       },
       rules: {
+        '@typescript-eslint/await-thenable': 'error',
         '@typescript-eslint/no-unnecessary-type-assertion': 'error',
         '@typescript-eslint/consistent-type-imports': 'error',
         '@typescript-eslint/non-nullable-type-assertion-style': 'error',
