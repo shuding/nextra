@@ -53,14 +53,7 @@ const DEV_SEARCH_NOTICE = (
     </p>
     <ol className="_mt-2 _list-decimal">
       <li>Build your app with `next build`</li>
-      <li>
-        Copy `.next/static/chunks/pagefind` folder to a different location
-      </li>
-      <li>Start your app in dev mode using `next dev`</li>
-      <li>
-        Copy `pagefind` folder into `.next/static/chunks/<b>app</b>` or
-        `.next/static/chunks/<b>app/[lang]</b>` for i18n website
-      </li>
+      <li>Restart your app in dev mode using `next dev`</li>
     </ol>
   </>
 )
