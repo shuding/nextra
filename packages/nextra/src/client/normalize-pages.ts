@@ -5,7 +5,7 @@ import type {
   menuItemSchema,
   pageThemeSchema
 } from '../server/schemas'
-import type { Folder, MdxFile, PageMapItem } from '../types'
+import type { Folder, MdxFile, MetaJsonFile, PageMapItem } from '../types'
 
 const DEFAULT_PAGE_THEME: PageTheme = {
   breadcrumb: true,
@@ -24,11 +24,12 @@ export type PageTheme = z.infer<typeof pageThemeSchema>
 
 type Display = z.infer<typeof displaySchema>
 type IMenuItem = z.infer<typeof menuItemSchema>
+type MetaType = Record<string, any>
 
 function extendMeta(
-  _meta: Record<string, any> = {},
-  fallback: Record<string, any>,
-  metadata: Record<string, any> = {}
+  _meta: MetaType = {},
+  fallback: MetaType,
+  metadata: MetaType = {}
 ): Record<string, any> {
   const theme: PageTheme = {
     ...fallback.theme,
@@ -116,22 +117,34 @@ export function normalizePages({
   underCurrentDocsRoot?: boolean
   pageThemeContext?: PageTheme
 }): NormalizedResult {
-  let _meta: Record<string, any> | undefined
-  for (const item of list) {
-    if ('data' in item) {
-      _meta = item.data
-      break
-    }
-  }
-  const meta = _meta || {}
-  const metaKeys = Object.keys(meta).filter(key => key !== '*')
+  let meta: MetaType = {}
+  let metaKeys: (keyof MetaType)[] = []
+  const items: any[] = []
 
-  for (const key of metaKeys) {
-    if (typeof meta[key] === 'string') {
-      meta[key] = {
-        title: meta[key]
+  for (const [index, item] of list.entries()) {
+    if ('data' in item) {
+      meta = item.data
+      metaKeys = Object.keys(meta).filter(key => key !== '*')
+      for (const key of metaKeys) {
+        if (typeof meta[key] !== 'string') continue
+        meta[key] = { title: meta[key] }
       }
+      continue
     }
+    const prevItem = list[index - 1] as Exclude<PageMapItem, MetaJsonFile>
+
+    // If there are two items with the same name, they must be a directory and a
+    // page. In that case we merge them, and use the page's link.
+    if (prevItem && prevItem.name === item.name) {
+      items[items.length - 1] = {
+        ...prevItem,
+        withIndexPage: true,
+        // @ts-expect-error fixme
+        frontMatter: item.frontMatter
+      }
+      continue
+    }
+    items.push(item)
   }
 
   // All directories
@@ -158,32 +171,14 @@ export function normalizePages({
   let activePath: Item[] = []
 
   // Normalize items based on files and _meta.json.
-  const items: any[] = list
-    .filter((a): a is MdxFile | Folder => !('data' in a))
-    .sort((a, b) => {
-      const indexA = metaKeys.indexOf(a.name)
-      const indexB = metaKeys.indexOf(b.name)
-      if (indexA === -1 && indexB === -1) return a.name < b.name ? -1 : 1
-      if (indexA === -1) return 1
-      if (indexB === -1) return -1
-      return indexA - indexB
-    })
-    .flatMap((currentItem, index, list) => {
-      const nextItem = list[index + 1]
-      // If there are two items with the same name, they must be a directory and a
-      // page. In that case we merge them, and use the page's link.
-      if (nextItem && nextItem.name === currentItem.name) {
-        list[index + 1] = {
-          ...currentItem,
-          // @ts-expect-error fixme
-          withIndexPage: true,
-          // @ts-expect-error fixme
-          frontMatter: nextItem.frontMatter
-        }
-        return []
-      }
-      return [currentItem]
-    })
+  items.sort((a, b) => {
+    const indexA = metaKeys.indexOf(a.name)
+    const indexB = metaKeys.indexOf(b.name)
+    if (indexA === -1 && indexB === -1) return a.name < b.name ? -1 : 1
+    if (indexA === -1) return 1
+    if (indexB === -1) return -1
+    return indexA - indexB
+  })
 
   for (const [index, metaKey] of metaKeys.entries()) {
     if (items.some(item => item.name === metaKey)) continue
