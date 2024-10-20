@@ -10,7 +10,13 @@ import cn from 'clsx'
 import NextLink from 'next/link'
 import { useRouter } from 'next/navigation'
 import type { FC, FocusEventHandler, ReactElement, SyntheticEvent } from 'react'
-import { useCallback, useEffect, useRef, useState } from 'react'
+import {
+  useCallback,
+  useDeferredValue,
+  useEffect,
+  useRef,
+  useState
+} from 'react'
 import { useMounted } from '../hooks/index.js'
 import { InformationCircleIcon, SpinnerIcon } from '../icons/index.js'
 
@@ -70,10 +76,10 @@ export const Search: FC<SearchProps> = ({
   const [error, setError] = useState<ReactElement | string>('')
   const [results, setResults] = useState<PagefindResult[]>([])
   const [search, setSearch] = useState('')
+  // defer pagefind results update for prioritizing user input state
+  const deferredSearch = useDeferredValue(search)
 
-  const onChange = useCallback(async (value: string) => {
-    setSearch(value)
-
+  const handleSearch = useCallback(async (value: string) => {
     if (!value) {
       setResults([])
       setError('')
@@ -120,6 +126,10 @@ export const Search: FC<SearchProps> = ({
     )
     setIsLoading(false)
   }, [])
+
+  useEffect(() => {
+    handleSearch(deferredSearch)
+  }, [handleSearch, deferredSearch])
 
   const router = useRouter()
   const [focused, setFocused] = useState(false)
@@ -184,22 +194,21 @@ export const Search: FC<SearchProps> = ({
   const handleChange = useCallback(
     (event: SyntheticEvent<HTMLInputElement>) => {
       const { value } = event.currentTarget
-      onChange(value)
+      setSearch(value)
     },
-    [onChange]
+    []
   )
 
   const handleSelect = useCallback(
-    async (searchResult: PagefindResult | null) => {
+    (searchResult: PagefindResult | null) => {
       if (!searchResult) return
       // Calling before navigation so selector `html:not(:has(*:focus))` in styles.css will work,
       // and we'll have padding top since input is not focused
       inputRef.current?.blur()
-      await router.push(searchResult.url)
-      // Clear input after navigation completes
-      onChange('')
+      router.push(searchResult.url)
+      setSearch('')
     },
-    [router, onChange]
+    [router]
   )
 
   return (
@@ -284,7 +293,7 @@ export const Search: FC<SearchProps> = ({
             <Result key={searchResult.url} data={searchResult} />
           ))
         ) : (
-          search && emptyResult
+          deferredSearch && emptyResult
         )}
       </ComboboxOptions>
     </Combobox>
