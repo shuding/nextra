@@ -368,6 +368,35 @@ describe('normalize-page', () => {
           "children": [
             {
               "frontMatter": {
+                "sidebarTitle": "Qux",
+              },
+              "name": "qux",
+              "route": "/mix/qux",
+              "title": "Qux",
+              "type": "doc",
+            },
+          ],
+          "firstChildRoute": "/mix/qux",
+          "name": "mix",
+          "route": "/mix",
+          "title": "mix",
+          "type": "menu",
+        },
+        {
+          "items": {
+            "nextra": {
+              "href": "https://nextra.site",
+              "title": "Nextra",
+            },
+          },
+          "name": "hrefOnly",
+          "title": "Two",
+          "type": "menu",
+        },
+        {
+          "children": [
+            {
+              "frontMatter": {
                 "sidebarTitle": "Bar",
               },
               "name": "bar",
@@ -382,15 +411,6 @@ describe('normalize-page', () => {
               "name": "foo",
               "route": "/one/foo",
               "title": "Foo",
-              "type": "doc",
-            },
-            {
-              "frontMatter": {
-                "sidebarTitle": "Qux",
-              },
-              "name": "qux",
-              "route": "/one/qux",
-              "title": "Qux",
               "type": "doc",
             },
           ],

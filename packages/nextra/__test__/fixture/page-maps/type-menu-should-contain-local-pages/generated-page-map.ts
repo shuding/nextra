@@ -2,6 +2,16 @@ import meta from "./_meta.ts";
 export const pageMap = [{
   data: meta
 }, {
+  name: "mix",
+  route: "/mix",
+  children: [{
+    name: "qux",
+    route: "/mix/qux",
+    frontMatter: {
+      "sidebarTitle": "Qux"
+    }
+  }]
+}, {
   name: "one",
   route: "/one",
   children: [{
@@ -15,12 +25,6 @@ export const pageMap = [{
     route: "/one/foo",
     frontMatter: {
       "sidebarTitle": "Foo"
-    }
-  }, {
-    name: "qux",
-    route: "/one/qux",
-    frontMatter: {
-      "sidebarTitle": "Qux"
     }
   }]
 }];
