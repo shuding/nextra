@@ -158,6 +158,7 @@ describe('normalize-page', () => {
     `)
   })
 
+  // https://github.com/shuding/nextra/issues/3331
   it('should keep `activeThemeContext`, `activeType` for hidden route', async () => {
     const dir = path.join(
       __dirname,
@@ -242,5 +243,85 @@ describe('normalize-page', () => {
       route: '/1-level/2-level/foo'
     })
     expect(result2).toMatchSnapshot()
+  })
+
+  it('should initialize `activeType` from `*`', async () => {
+    const dir = path.join(
+      __dirname,
+      'fixture',
+      'page-maps',
+      'active-type-should-be-initialized-from-star'
+    )
+    vi.doMock('../src/server/file-system.ts', () => ({ PAGES_DIR: dir }))
+    vi.doMock('../src/server/constants.ts', async () => ({
+      ...(await vi.importActual('../src/server/constants.ts')),
+      CHUNKS_DIR: dir
+    }))
+    const { collectPageMap } = await import('../src/server/page-map.js')
+
+    const result = await collectPageMap({ dir })
+    await fs.writeFile(path.join(dir, 'generated-page-map.ts'), result)
+
+    const { pageMap } = await import(
+      './fixture/page-maps/active-type-should-be-initialized-from-star/generated-page-map.js'
+    )
+
+    expect(pageMap).toEqual([
+      {
+        data: {
+          '1-level': {
+            display: 'hidden',
+            theme: {
+              layout: 'full'
+            }
+          }
+        }
+      },
+      {
+        name: '1-level',
+        route: '/1-level',
+        children: [
+          {
+            data: {
+              '*': {
+                type: 'page',
+                theme: {
+                  layout: 'default',
+                  toc: false
+                }
+              }
+            }
+          },
+          {
+            name: 'foo',
+            route: '/1-level/foo',
+            frontMatter: {
+              sidebarTitle: 'Foo'
+            }
+          }
+        ]
+      }
+    ])
+
+    const { activeType, activeIndex, activeThemeContext } = normalizePages({
+      list: pageMap,
+      route: '/1-level/not-exist'
+    })
+    expect({ activeType, activeIndex, activeThemeContext }).toEqual({
+      activeType: 'page',
+      activeIndex: 0,
+      activeThemeContext: {
+        breadcrumb: true,
+        collapsed: false,
+        footer: true,
+        layout: 'default',
+        navbar: true,
+        pagination: true,
+        sidebar: true,
+        timestamp: true,
+        toc: false,
+        typesetting: 'default'
+      }
+    })
   })
 })
