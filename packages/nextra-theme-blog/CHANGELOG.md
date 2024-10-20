@@ -1,5 +1,12 @@
 # nextra-theme-blog
 
+## 3.1.0-canary.0
+
+### Patch Changes
+
+- Updated dependencies [fec399a]
+  - nextra@3.1.0-canary.0
+
 ## 3.0.15
 
 ### Patch Changes
