@@ -171,7 +171,7 @@ exports[`normalize-page > /500 page 1`] = `
 
 exports[`normalize-page > en-US getting-started 1`] = `
 {
-  "activeIndex": 0,
+  "activeIndex": 1,
   "activePath": [
     {
       "children": [
@@ -301,7 +301,7 @@ exports[`normalize-page > en-US getting-started 1`] = `
       "name": "docs",
       "route": "/docs",
       "title": "Docs",
-      "type": "nav",
+      "type": "doc",
     },
     {
       "name": "getting-started",
@@ -331,7 +331,7 @@ exports[`normalize-page > en-US getting-started 1`] = `
       "name": "index",
       "route": "/",
       "title": "Introduction",
-      "type": "nav",
+      "type": "doc",
     },
     {
       "children": [
@@ -461,13 +461,12 @@ exports[`normalize-page > en-US getting-started 1`] = `
       "name": "docs",
       "route": "/docs",
       "title": "Docs",
-      "type": "nav",
+      "type": "doc",
     },
     {
       "children": [
         {
           "frontMatter": {
-            "full": true,
             "title": "Basic Usage",
           },
           "name": "basic",
@@ -477,7 +476,6 @@ exports[`normalize-page > en-US getting-started 1`] = `
         },
         {
           "frontMatter": {
-            "full": true,
             "title": "Authentication",
           },
           "name": "auth",
@@ -487,7 +485,6 @@ exports[`normalize-page > en-US getting-started 1`] = `
         },
         {
           "frontMatter": {
-            "full": true,
             "title": "Infinite Loading",
           },
           "name": "infinite-loading",
@@ -497,7 +494,6 @@ exports[`normalize-page > en-US getting-started 1`] = `
         },
         {
           "frontMatter": {
-            "full": true,
             "title": "Error Handling",
           },
           "name": "error-handling",
@@ -507,7 +503,6 @@ exports[`normalize-page > en-US getting-started 1`] = `
         },
         {
           "frontMatter": {
-            "full": true,
             "title": "Next.js SSR",
           },
           "name": "ssr",
@@ -519,7 +514,7 @@ exports[`normalize-page > en-US getting-started 1`] = `
       "name": "examples",
       "route": "/examples",
       "title": "Examples",
-      "type": "nav",
+      "type": "doc",
     },
     {
       "children": [
@@ -537,10 +532,251 @@ exports[`normalize-page > en-US getting-started 1`] = `
       "name": "blog",
       "route": "/blog",
       "title": "Blog",
-      "type": "nav",
+      "type": "doc",
     },
   ],
-  "docsDirectories": [],
+  "docsDirectories": [
+    {
+      "frontMatter": {
+        "title": "React Hooks for Data Fetching",
+      },
+      "isUnderCurrentDocsTree": true,
+      "name": "index",
+      "route": "/",
+      "title": "Introduction",
+      "type": "doc",
+    },
+    {
+      "children": [
+        {
+          "isUnderCurrentDocsTree": true,
+          "name": "getting-started",
+          "route": "/docs/getting-started",
+          "title": "Getting Started",
+          "type": "doc",
+        },
+        {
+          "isUnderCurrentDocsTree": true,
+          "name": "options",
+          "route": "/docs/options",
+          "title": "Options",
+          "type": "doc",
+        },
+        {
+          "isUnderCurrentDocsTree": true,
+          "name": "global-configuration",
+          "route": "/docs/global-configuration",
+          "title": "Global Configuration",
+          "type": "doc",
+        },
+        {
+          "isUnderCurrentDocsTree": true,
+          "name": "data-fetching",
+          "route": "/docs/data-fetching",
+          "title": "Data Fetching",
+          "type": "doc",
+        },
+        {
+          "isUnderCurrentDocsTree": true,
+          "name": "error-handling",
+          "route": "/docs/error-handling",
+          "title": "Error Handling",
+          "type": "doc",
+        },
+        {
+          "isUnderCurrentDocsTree": true,
+          "name": "revalidation",
+          "route": "/docs/revalidation",
+          "title": "Auto Revalidation",
+          "type": "doc",
+        },
+        {
+          "isUnderCurrentDocsTree": true,
+          "name": "conditional-fetching",
+          "route": "/docs/conditional-fetching",
+          "title": "Conditional Data Fetching",
+          "type": "doc",
+        },
+        {
+          "isUnderCurrentDocsTree": true,
+          "name": "arguments",
+          "route": "/docs/arguments",
+          "title": "Arguments",
+          "type": "doc",
+        },
+        {
+          "isUnderCurrentDocsTree": true,
+          "name": "mutation",
+          "route": "/docs/mutation",
+          "title": "Mutation",
+          "type": "doc",
+        },
+        {
+          "isUnderCurrentDocsTree": true,
+          "name": "pagination",
+          "route": "/docs/pagination",
+          "title": "Pagination",
+          "type": "doc",
+        },
+        {
+          "isUnderCurrentDocsTree": true,
+          "name": "prefetching",
+          "route": "/docs/prefetching",
+          "title": "Prefetching",
+          "type": "doc",
+        },
+        {
+          "isUnderCurrentDocsTree": true,
+          "name": "with-nextjs",
+          "route": "/docs/with-nextjs",
+          "title": "Next.js SSG and SSR",
+          "type": "doc",
+        },
+        {
+          "isUnderCurrentDocsTree": true,
+          "name": "typescript",
+          "route": "/docs/typescript",
+          "title": "Typescript",
+          "type": "doc",
+        },
+        {
+          "isUnderCurrentDocsTree": true,
+          "name": "suspense",
+          "route": "/docs/suspense",
+          "title": "Suspense",
+          "type": "doc",
+        },
+        {
+          "isUnderCurrentDocsTree": true,
+          "name": "middleware",
+          "route": "/docs/middleware",
+          "title": "Middleware",
+          "type": "doc",
+        },
+        {
+          "children": [
+            {
+              "isUnderCurrentDocsTree": true,
+              "name": "cache",
+              "route": "/docs/advanced/cache",
+              "title": "Cache",
+              "type": "doc",
+            },
+            {
+              "isUnderCurrentDocsTree": true,
+              "name": "performance",
+              "route": "/docs/advanced/performance",
+              "title": "Performance",
+              "type": "doc",
+            },
+            {
+              "isUnderCurrentDocsTree": true,
+              "name": "react-native",
+              "route": "/docs/advanced/react-native",
+              "title": "React Native",
+              "type": "doc",
+            },
+          ],
+          "isUnderCurrentDocsTree": true,
+          "name": "advanced",
+          "route": "/docs/advanced",
+          "title": "Advanced",
+          "type": "doc",
+        },
+        {
+          "isUnderCurrentDocsTree": true,
+          "name": "change-log",
+          "route": "/docs/change-log",
+          "title": "Change Log",
+          "type": "doc",
+        },
+      ],
+      "isUnderCurrentDocsTree": true,
+      "name": "docs",
+      "route": "/docs",
+      "title": "Docs",
+      "type": "doc",
+    },
+    {
+      "children": [
+        {
+          "frontMatter": {
+            "title": "Basic Usage",
+          },
+          "isUnderCurrentDocsTree": true,
+          "name": "basic",
+          "route": "/examples/basic",
+          "title": "Basic Usage",
+          "type": "doc",
+        },
+        {
+          "frontMatter": {
+            "title": "Authentication",
+          },
+          "isUnderCurrentDocsTree": true,
+          "name": "auth",
+          "route": "/examples/auth",
+          "title": "Authentication",
+          "type": "doc",
+        },
+        {
+          "frontMatter": {
+            "title": "Infinite Loading",
+          },
+          "isUnderCurrentDocsTree": true,
+          "name": "infinite-loading",
+          "route": "/examples/infinite-loading",
+          "title": "Infinite Loading",
+          "type": "doc",
+        },
+        {
+          "frontMatter": {
+            "title": "Error Handling",
+          },
+          "isUnderCurrentDocsTree": true,
+          "name": "error-handling",
+          "route": "/examples/error-handling",
+          "title": "Error Handling",
+          "type": "doc",
+        },
+        {
+          "frontMatter": {
+            "title": "Next.js SSR",
+          },
+          "isUnderCurrentDocsTree": true,
+          "name": "ssr",
+          "route": "/examples/ssr",
+          "title": "Next.js SSR",
+          "type": "doc",
+        },
+      ],
+      "isUnderCurrentDocsTree": true,
+      "name": "examples",
+      "route": "/examples",
+      "title": "Examples",
+      "type": "doc",
+    },
+    {
+      "children": [
+        {
+          "frontMatter": {
+            "description": "Almost 2 years ago we open sourced SWR, the tiny data-fetching React library that people love. Today we are reaching another milestone: the 1.0 version of SWR.",
+            "image": "https://assets.vercel.com/image/upload/v1630059453/swr/v1.png",
+          },
+          "isUnderCurrentDocsTree": true,
+          "name": "swr-v1",
+          "route": "/blog/swr-v1",
+          "title": "Announcing SWR 1.0",
+          "type": "doc",
+        },
+      ],
+      "isUnderCurrentDocsTree": true,
+      "name": "blog",
+      "route": "/blog",
+      "title": "Blog",
+      "type": "doc",
+    },
+  ],
   "flatDirectories": [
     {
       "frontMatter": {
@@ -549,7 +785,7 @@ exports[`normalize-page > en-US getting-started 1`] = `
       "name": "index",
       "route": "/",
       "title": "Introduction",
-      "type": "nav",
+      "type": "doc",
     },
     {
       "name": "getting-started",
@@ -667,7 +903,6 @@ exports[`normalize-page > en-US getting-started 1`] = `
     },
     {
       "frontMatter": {
-        "full": true,
         "title": "Basic Usage",
       },
       "name": "basic",
@@ -677,7 +912,6 @@ exports[`normalize-page > en-US getting-started 1`] = `
     },
     {
       "frontMatter": {
-        "full": true,
         "title": "Authentication",
       },
       "name": "auth",
@@ -687,7 +921,6 @@ exports[`normalize-page > en-US getting-started 1`] = `
     },
     {
       "frontMatter": {
-        "full": true,
         "title": "Infinite Loading",
       },
       "name": "infinite-loading",
@@ -697,7 +930,6 @@ exports[`normalize-page > en-US getting-started 1`] = `
     },
     {
       "frontMatter": {
-        "full": true,
         "title": "Error Handling",
       },
       "name": "error-handling",
@@ -707,7 +939,6 @@ exports[`normalize-page > en-US getting-started 1`] = `
     },
     {
       "frontMatter": {
-        "full": true,
         "title": "Next.js SSR",
       },
       "name": "ssr",
@@ -728,6 +959,16 @@ exports[`normalize-page > en-US getting-started 1`] = `
   ],
   "flatDocsDirectories": [
     {
+      "frontMatter": {
+        "title": "React Hooks for Data Fetching",
+      },
+      "isUnderCurrentDocsTree": true,
+      "name": "index",
+      "route": "/",
+      "title": "Introduction",
+      "type": "doc",
+    },
+    {
       "isUnderCurrentDocsTree": true,
       "name": "getting-started",
       "route": "/docs/getting-started",
@@ -862,7 +1103,6 @@ exports[`normalize-page > en-US getting-started 1`] = `
     },
     {
       "frontMatter": {
-        "full": true,
         "title": "Basic Usage",
       },
       "isUnderCurrentDocsTree": true,
@@ -873,7 +1113,6 @@ exports[`normalize-page > en-US getting-started 1`] = `
     },
     {
       "frontMatter": {
-        "full": true,
         "title": "Authentication",
       },
       "isUnderCurrentDocsTree": true,
@@ -884,7 +1123,6 @@ exports[`normalize-page > en-US getting-started 1`] = `
     },
     {
       "frontMatter": {
-        "full": true,
         "title": "Infinite Loading",
       },
       "isUnderCurrentDocsTree": true,
@@ -895,7 +1133,6 @@ exports[`normalize-page > en-US getting-started 1`] = `
     },
     {
       "frontMatter": {
-        "full": true,
         "title": "Error Handling",
       },
       "isUnderCurrentDocsTree": true,
@@ -906,7 +1143,6 @@ exports[`normalize-page > en-US getting-started 1`] = `
     },
     {
       "frontMatter": {
-        "full": true,
         "title": "Next.js SSR",
       },
       "isUnderCurrentDocsTree": true,
@@ -942,7 +1178,7 @@ exports[`normalize-page > en-US home 1`] = `
       "name": "index",
       "route": "/",
       "title": "Introduction",
-      "type": "nav",
+      "type": "doc",
     },
   ],
   "activeThemeContext": {
@@ -957,7 +1193,7 @@ exports[`normalize-page > en-US home 1`] = `
     "toc": true,
     "typesetting": "default",
   },
-  "activeType": "nav",
+  "activeType": "doc",
   "directories": [
     {
       "frontMatter": {
@@ -966,7 +1202,7 @@ exports[`normalize-page > en-US home 1`] = `
       "name": "index",
       "route": "/",
       "title": "Introduction",
-      "type": "nav",
+      "type": "doc",
     },
     {
       "children": [
@@ -1096,13 +1332,12 @@ exports[`normalize-page > en-US home 1`] = `
       "name": "docs",
       "route": "/docs",
       "title": "Docs",
-      "type": "nav",
+      "type": "doc",
     },
     {
       "children": [
         {
           "frontMatter": {
-            "full": true,
             "title": "Basic Usage",
           },
           "name": "basic",
@@ -1112,7 +1347,6 @@ exports[`normalize-page > en-US home 1`] = `
         },
         {
           "frontMatter": {
-            "full": true,
             "title": "Authentication",
           },
           "name": "auth",
@@ -1122,7 +1356,6 @@ exports[`normalize-page > en-US home 1`] = `
         },
         {
           "frontMatter": {
-            "full": true,
             "title": "Infinite Loading",
           },
           "name": "infinite-loading",
@@ -1132,7 +1365,6 @@ exports[`normalize-page > en-US home 1`] = `
         },
         {
           "frontMatter": {
-            "full": true,
             "title": "Error Handling",
           },
           "name": "error-handling",
@@ -1142,7 +1374,6 @@ exports[`normalize-page > en-US home 1`] = `
         },
         {
           "frontMatter": {
-            "full": true,
             "title": "Next.js SSR",
           },
           "name": "ssr",
@@ -1154,7 +1385,7 @@ exports[`normalize-page > en-US home 1`] = `
       "name": "examples",
       "route": "/examples",
       "title": "Examples",
-      "type": "nav",
+      "type": "doc",
     },
     {
       "children": [
@@ -1172,10 +1403,251 @@ exports[`normalize-page > en-US home 1`] = `
       "name": "blog",
       "route": "/blog",
       "title": "Blog",
-      "type": "nav",
+      "type": "doc",
     },
   ],
-  "docsDirectories": [],
+  "docsDirectories": [
+    {
+      "frontMatter": {
+        "title": "React Hooks for Data Fetching",
+      },
+      "isUnderCurrentDocsTree": true,
+      "name": "index",
+      "route": "/",
+      "title": "Introduction",
+      "type": "doc",
+    },
+    {
+      "children": [
+        {
+          "isUnderCurrentDocsTree": true,
+          "name": "getting-started",
+          "route": "/docs/getting-started",
+          "title": "Getting Started",
+          "type": "doc",
+        },
+        {
+          "isUnderCurrentDocsTree": true,
+          "name": "options",
+          "route": "/docs/options",
+          "title": "Options",
+          "type": "doc",
+        },
+        {
+          "isUnderCurrentDocsTree": true,
+          "name": "global-configuration",
+          "route": "/docs/global-configuration",
+          "title": "Global Configuration",
+          "type": "doc",
+        },
+        {
+          "isUnderCurrentDocsTree": true,
+          "name": "data-fetching",
+          "route": "/docs/data-fetching",
+          "title": "Data Fetching",
+          "type": "doc",
+        },
+        {
+          "isUnderCurrentDocsTree": true,
+          "name": "error-handling",
+          "route": "/docs/error-handling",
+          "title": "Error Handling",
+          "type": "doc",
+        },
+        {
+          "isUnderCurrentDocsTree": true,
+          "name": "revalidation",
+          "route": "/docs/revalidation",
+          "title": "Auto Revalidation",
+          "type": "doc",
+        },
+        {
+          "isUnderCurrentDocsTree": true,
+          "name": "conditional-fetching",
+          "route": "/docs/conditional-fetching",
+          "title": "Conditional Data Fetching",
+          "type": "doc",
+        },
+        {
+          "isUnderCurrentDocsTree": true,
+          "name": "arguments",
+          "route": "/docs/arguments",
+          "title": "Arguments",
+          "type": "doc",
+        },
+        {
+          "isUnderCurrentDocsTree": true,
+          "name": "mutation",
+          "route": "/docs/mutation",
+          "title": "Mutation",
+          "type": "doc",
+        },
+        {
+          "isUnderCurrentDocsTree": true,
+          "name": "pagination",
+          "route": "/docs/pagination",
+          "title": "Pagination",
+          "type": "doc",
+        },
+        {
+          "isUnderCurrentDocsTree": true,
+          "name": "prefetching",
+          "route": "/docs/prefetching",
+          "title": "Prefetching",
+          "type": "doc",
+        },
+        {
+          "isUnderCurrentDocsTree": true,
+          "name": "with-nextjs",
+          "route": "/docs/with-nextjs",
+          "title": "Next.js SSG and SSR",
+          "type": "doc",
+        },
+        {
+          "isUnderCurrentDocsTree": true,
+          "name": "typescript",
+          "route": "/docs/typescript",
+          "title": "Typescript",
+          "type": "doc",
+        },
+        {
+          "isUnderCurrentDocsTree": true,
+          "name": "suspense",
+          "route": "/docs/suspense",
+          "title": "Suspense",
+          "type": "doc",
+        },
+        {
+          "isUnderCurrentDocsTree": true,
+          "name": "middleware",
+          "route": "/docs/middleware",
+          "title": "Middleware",
+          "type": "doc",
+        },
+        {
+          "children": [
+            {
+              "isUnderCurrentDocsTree": true,
+              "name": "cache",
+              "route": "/docs/advanced/cache",
+              "title": "Cache",
+              "type": "doc",
+            },
+            {
+              "isUnderCurrentDocsTree": true,
+              "name": "performance",
+              "route": "/docs/advanced/performance",
+              "title": "Performance",
+              "type": "doc",
+            },
+            {
+              "isUnderCurrentDocsTree": true,
+              "name": "react-native",
+              "route": "/docs/advanced/react-native",
+              "title": "React Native",
+              "type": "doc",
+            },
+          ],
+          "isUnderCurrentDocsTree": true,
+          "name": "advanced",
+          "route": "/docs/advanced",
+          "title": "Advanced",
+          "type": "doc",
+        },
+        {
+          "isUnderCurrentDocsTree": true,
+          "name": "change-log",
+          "route": "/docs/change-log",
+          "title": "Change Log",
+          "type": "doc",
+        },
+      ],
+      "isUnderCurrentDocsTree": true,
+      "name": "docs",
+      "route": "/docs",
+      "title": "Docs",
+      "type": "doc",
+    },
+    {
+      "children": [
+        {
+          "frontMatter": {
+            "title": "Basic Usage",
+          },
+          "isUnderCurrentDocsTree": true,
+          "name": "basic",
+          "route": "/examples/basic",
+          "title": "Basic Usage",
+          "type": "doc",
+        },
+        {
+          "frontMatter": {
+            "title": "Authentication",
+          },
+          "isUnderCurrentDocsTree": true,
+          "name": "auth",
+          "route": "/examples/auth",
+          "title": "Authentication",
+          "type": "doc",
+        },
+        {
+          "frontMatter": {
+            "title": "Infinite Loading",
+          },
+          "isUnderCurrentDocsTree": true,
+          "name": "infinite-loading",
+          "route": "/examples/infinite-loading",
+          "title": "Infinite Loading",
+          "type": "doc",
+        },
+        {
+          "frontMatter": {
+            "title": "Error Handling",
+          },
+          "isUnderCurrentDocsTree": true,
+          "name": "error-handling",
+          "route": "/examples/error-handling",
+          "title": "Error Handling",
+          "type": "doc",
+        },
+        {
+          "frontMatter": {
+            "title": "Next.js SSR",
+          },
+          "isUnderCurrentDocsTree": true,
+          "name": "ssr",
+          "route": "/examples/ssr",
+          "title": "Next.js SSR",
+          "type": "doc",
+        },
+      ],
+      "isUnderCurrentDocsTree": true,
+      "name": "examples",
+      "route": "/examples",
+      "title": "Examples",
+      "type": "doc",
+    },
+    {
+      "children": [
+        {
+          "frontMatter": {
+            "description": "Almost 2 years ago we open sourced SWR, the tiny data-fetching React library that people love. Today we are reaching another milestone: the 1.0 version of SWR.",
+            "image": "https://assets.vercel.com/image/upload/v1630059453/swr/v1.png",
+          },
+          "isUnderCurrentDocsTree": true,
+          "name": "swr-v1",
+          "route": "/blog/swr-v1",
+          "title": "Announcing SWR 1.0",
+          "type": "doc",
+        },
+      ],
+      "isUnderCurrentDocsTree": true,
+      "name": "blog",
+      "route": "/blog",
+      "title": "Blog",
+      "type": "doc",
+    },
+  ],
   "flatDirectories": [
     {
       "frontMatter": {
@@ -1184,7 +1656,7 @@ exports[`normalize-page > en-US home 1`] = `
       "name": "index",
       "route": "/",
       "title": "Introduction",
-      "type": "nav",
+      "type": "doc",
     },
     {
       "name": "getting-started",
@@ -1302,7 +1774,6 @@ exports[`normalize-page > en-US home 1`] = `
     },
     {
       "frontMatter": {
-        "full": true,
         "title": "Basic Usage",
       },
       "name": "basic",
@@ -1312,7 +1783,6 @@ exports[`normalize-page > en-US home 1`] = `
     },
     {
       "frontMatter": {
-        "full": true,
         "title": "Authentication",
       },
       "name": "auth",
@@ -1322,7 +1792,6 @@ exports[`normalize-page > en-US home 1`] = `
     },
     {
       "frontMatter": {
-        "full": true,
         "title": "Infinite Loading",
       },
       "name": "infinite-loading",
@@ -1332,7 +1801,6 @@ exports[`normalize-page > en-US home 1`] = `
     },
     {
       "frontMatter": {
-        "full": true,
         "title": "Error Handling",
       },
       "name": "error-handling",
@@ -1342,7 +1810,6 @@ exports[`normalize-page > en-US home 1`] = `
     },
     {
       "frontMatter": {
-        "full": true,
         "title": "Next.js SSR",
       },
       "name": "ssr",
@@ -1363,6 +1830,16 @@ exports[`normalize-page > en-US home 1`] = `
   ],
   "flatDocsDirectories": [
     {
+      "frontMatter": {
+        "title": "React Hooks for Data Fetching",
+      },
+      "isUnderCurrentDocsTree": true,
+      "name": "index",
+      "route": "/",
+      "title": "Introduction",
+      "type": "doc",
+    },
+    {
       "isUnderCurrentDocsTree": true,
       "name": "getting-started",
       "route": "/docs/getting-started",
@@ -1497,7 +1974,6 @@ exports[`normalize-page > en-US home 1`] = `
     },
     {
       "frontMatter": {
-        "full": true,
         "title": "Basic Usage",
       },
       "isUnderCurrentDocsTree": true,
@@ -1508,7 +1984,6 @@ exports[`normalize-page > en-US home 1`] = `
     },
     {
       "frontMatter": {
-        "full": true,
         "title": "Authentication",
       },
       "isUnderCurrentDocsTree": true,
@@ -1519,7 +1994,6 @@ exports[`normalize-page > en-US home 1`] = `
     },
     {
       "frontMatter": {
-        "full": true,
         "title": "Infinite Loading",
       },
       "isUnderCurrentDocsTree": true,
@@ -1530,7 +2004,6 @@ exports[`normalize-page > en-US home 1`] = `
     },
     {
       "frontMatter": {
-        "full": true,
         "title": "Error Handling",
       },
       "isUnderCurrentDocsTree": true,
@@ -1541,7 +2014,6 @@ exports[`normalize-page > en-US home 1`] = `
     },
     {
       "frontMatter": {
-        "full": true,
         "title": "Next.js SSR",
       },
       "isUnderCurrentDocsTree": true,
@@ -1593,7 +2065,7 @@ exports[`normalize-page > should keep \`activeThemeContext\`, \`activeType\` for
 
 exports[`normalize-page > zh-CN getting-started 1`] = `
 {
-  "activeIndex": 0,
+  "activeIndex": 1,
   "activePath": [
     {
       "children": [
@@ -1722,7 +2194,7 @@ exports[`normalize-page > zh-CN getting-started 1`] = `
       "name": "docs",
       "route": "/docs",
       "title": "文档",
-      "type": "nav",
+      "type": "doc",
     },
     {
       "name": "getting-started",
@@ -1752,7 +2224,7 @@ exports[`normalize-page > zh-CN getting-started 1`] = `
       "name": "index",
       "route": "/",
       "title": "简介",
-      "type": "nav",
+      "type": "doc",
     },
     {
       "children": [
@@ -1881,13 +2353,12 @@ exports[`normalize-page > zh-CN getting-started 1`] = `
       "name": "docs",
       "route": "/docs",
       "title": "文档",
-      "type": "nav",
+      "type": "doc",
     },
     {
       "children": [
         {
           "frontMatter": {
-            "full": true,
             "title": "基本用法",
           },
           "name": "basic",
@@ -1897,7 +2368,6 @@ exports[`normalize-page > zh-CN getting-started 1`] = `
         },
         {
           "frontMatter": {
-            "full": true,
             "title": "身份验证",
           },
           "name": "auth",
@@ -1907,7 +2377,6 @@ exports[`normalize-page > zh-CN getting-started 1`] = `
         },
         {
           "frontMatter": {
-            "full": true,
             "title": "无限加载",
           },
           "name": "infinite-loading",
@@ -1917,7 +2386,6 @@ exports[`normalize-page > zh-CN getting-started 1`] = `
         },
         {
           "frontMatter": {
-            "full": true,
             "title": "错误处理",
           },
           "name": "error-handling",
@@ -1934,7 +2402,7 @@ exports[`normalize-page > zh-CN getting-started 1`] = `
       "name": "examples",
       "route": "/examples",
       "title": "示例",
-      "type": "nav",
+      "type": "doc",
     },
     {
       "children": [
@@ -1952,10 +2420,246 @@ exports[`normalize-page > zh-CN getting-started 1`] = `
       "name": "blog",
       "route": "/blog",
       "title": "博客",
-      "type": "nav",
+      "type": "doc",
     },
   ],
-  "docsDirectories": [],
+  "docsDirectories": [
+    {
+      "frontMatter": {
+        "title": "用于数据请求的 React Hooks 库",
+      },
+      "isUnderCurrentDocsTree": true,
+      "name": "index",
+      "route": "/",
+      "title": "简介",
+      "type": "doc",
+    },
+    {
+      "children": [
+        {
+          "isUnderCurrentDocsTree": true,
+          "name": "getting-started",
+          "route": "/docs/getting-started",
+          "title": "入门",
+          "type": "doc",
+        },
+        {
+          "isUnderCurrentDocsTree": true,
+          "name": "options",
+          "route": "/docs/options",
+          "title": "选项",
+          "type": "doc",
+        },
+        {
+          "isUnderCurrentDocsTree": true,
+          "name": "global-configuration",
+          "route": "/docs/global-configuration",
+          "title": "全局配置",
+          "type": "doc",
+        },
+        {
+          "isUnderCurrentDocsTree": true,
+          "name": "data-fetching",
+          "route": "/docs/data-fetching",
+          "title": "数据请求",
+          "type": "doc",
+        },
+        {
+          "isUnderCurrentDocsTree": true,
+          "name": "error-handling",
+          "route": "/docs/error-handling",
+          "title": "错误处理",
+          "type": "doc",
+        },
+        {
+          "isUnderCurrentDocsTree": true,
+          "name": "revalidation",
+          "route": "/docs/revalidation",
+          "title": "自动重新请求",
+          "type": "doc",
+        },
+        {
+          "isUnderCurrentDocsTree": true,
+          "name": "conditional-fetching",
+          "route": "/docs/conditional-fetching",
+          "title": "条件数据请求",
+          "type": "doc",
+        },
+        {
+          "isUnderCurrentDocsTree": true,
+          "name": "arguments",
+          "route": "/docs/arguments",
+          "title": "传入参数",
+          "type": "doc",
+        },
+        {
+          "isUnderCurrentDocsTree": true,
+          "name": "mutation",
+          "route": "/docs/mutation",
+          "title": "数据更改",
+          "type": "doc",
+        },
+        {
+          "isUnderCurrentDocsTree": true,
+          "name": "pagination",
+          "route": "/docs/pagination",
+          "title": "分页",
+          "type": "doc",
+        },
+        {
+          "isUnderCurrentDocsTree": true,
+          "name": "prefetching",
+          "route": "/docs/prefetching",
+          "title": "预请求",
+          "type": "doc",
+        },
+        {
+          "isUnderCurrentDocsTree": true,
+          "name": "with-nextjs",
+          "route": "/docs/with-nextjs",
+          "title": "Next.js SSG 和 SSR",
+          "type": "doc",
+        },
+        {
+          "isUnderCurrentDocsTree": true,
+          "name": "typescript",
+          "title": "Typescript",
+          "type": "doc",
+        },
+        {
+          "isUnderCurrentDocsTree": true,
+          "name": "suspense",
+          "route": "/docs/suspense",
+          "title": "Suspense",
+          "type": "doc",
+        },
+        {
+          "isUnderCurrentDocsTree": true,
+          "name": "middleware",
+          "route": "/docs/middleware",
+          "title": "中间件",
+          "type": "doc",
+        },
+        {
+          "children": [
+            {
+              "isUnderCurrentDocsTree": true,
+              "name": "cache",
+              "route": "/docs/advanced/cache",
+              "title": "缓存",
+              "type": "doc",
+            },
+            {
+              "isUnderCurrentDocsTree": true,
+              "name": "performance",
+              "route": "/docs/advanced/performance",
+              "title": "性能",
+              "type": "doc",
+            },
+            {
+              "isUnderCurrentDocsTree": true,
+              "name": "react-native",
+              "route": "/docs/advanced/react-native",
+              "title": "React Native",
+              "type": "doc",
+            },
+          ],
+          "isUnderCurrentDocsTree": true,
+          "name": "advanced",
+          "route": "/docs/advanced",
+          "title": "高级",
+          "type": "doc",
+        },
+        {
+          "isUnderCurrentDocsTree": true,
+          "name": "change-log",
+          "route": "/docs/change-log",
+          "title": "更新日志",
+          "type": "doc",
+        },
+      ],
+      "isUnderCurrentDocsTree": true,
+      "name": "docs",
+      "route": "/docs",
+      "title": "文档",
+      "type": "doc",
+    },
+    {
+      "children": [
+        {
+          "frontMatter": {
+            "title": "基本用法",
+          },
+          "isUnderCurrentDocsTree": true,
+          "name": "basic",
+          "route": "/examples/basic",
+          "title": "基本用法",
+          "type": "doc",
+        },
+        {
+          "frontMatter": {
+            "title": "身份验证",
+          },
+          "isUnderCurrentDocsTree": true,
+          "name": "auth",
+          "route": "/examples/auth",
+          "title": "身份验证",
+          "type": "doc",
+        },
+        {
+          "frontMatter": {
+            "title": "无限加载",
+          },
+          "isUnderCurrentDocsTree": true,
+          "name": "infinite-loading",
+          "route": "/examples/infinite-loading",
+          "title": "无限加载",
+          "type": "doc",
+        },
+        {
+          "frontMatter": {
+            "title": "错误处理",
+          },
+          "isUnderCurrentDocsTree": true,
+          "name": "error-handling",
+          "route": "/examples/error-handling",
+          "title": "错误处理",
+          "type": "doc",
+        },
+        {
+          "isUnderCurrentDocsTree": true,
+          "name": "ssr",
+          "title": "Next.js SSR",
+          "type": "doc",
+        },
+      ],
+      "isUnderCurrentDocsTree": true,
+      "name": "examples",
+      "route": "/examples",
+      "title": "示例",
+      "type": "doc",
+    },
+    {
+      "children": [
+        {
+          "frontMatter": {
+            "description": "大约两年前，我们开源了 SWR，大家喜爱的小型数据请求 React 库。今天，我们迎来了另一个里程碑：SWR 1.0 版本发布。",
+            "image": "https://assets.vercel.com/image/upload/v1630059453/swr/v1.png",
+          },
+          "isUnderCurrentDocsTree": true,
+          "name": "swr-v1",
+          "route": "/blog/swr-v1",
+          "title": "SWR 1.0 发布",
+          "type": "doc",
+        },
+      ],
+      "isUnderCurrentDocsTree": true,
+      "name": "blog",
+      "route": "/blog",
+      "title": "博客",
+      "type": "doc",
+    },
+  ],
   "flatDirectories": [
     {
       "frontMatter": {
@@ -1964,7 +2668,7 @@ exports[`normalize-page > zh-CN getting-started 1`] = `
       "name": "index",
       "route": "/",
       "title": "简介",
-      "type": "nav",
+      "type": "doc",
     },
     {
       "name": "getting-started",
@@ -2081,7 +2785,6 @@ exports[`normalize-page > zh-CN getting-started 1`] = `
     },
     {
       "frontMatter": {
-        "full": true,
         "title": "基本用法",
       },
       "name": "basic",
@@ -2091,7 +2794,6 @@ exports[`normalize-page > zh-CN getting-started 1`] = `
     },
     {
       "frontMatter": {
-        "full": true,
         "title": "身份验证",
       },
       "name": "auth",
@@ -2101,7 +2803,6 @@ exports[`normalize-page > zh-CN getting-started 1`] = `
     },
     {
       "frontMatter": {
-        "full": true,
         "title": "无限加载",
       },
       "name": "infinite-loading",
@@ -2111,7 +2812,6 @@ exports[`normalize-page > zh-CN getting-started 1`] = `
     },
     {
       "frontMatter": {
-        "full": true,
         "title": "错误处理",
       },
       "name": "error-handling",
@@ -2137,6 +2837,16 @@ exports[`normalize-page > zh-CN getting-started 1`] = `
   ],
   "flatDocsDirectories": [
     {
+      "frontMatter": {
+        "title": "用于数据请求的 React Hooks 库",
+      },
+      "isUnderCurrentDocsTree": true,
+      "name": "index",
+      "route": "/",
+      "title": "简介",
+      "type": "doc",
+    },
+    {
       "isUnderCurrentDocsTree": true,
       "name": "getting-started",
       "route": "/docs/getting-started",
@@ -2270,7 +2980,6 @@ exports[`normalize-page > zh-CN getting-started 1`] = `
     },
     {
       "frontMatter": {
-        "full": true,
         "title": "基本用法",
       },
       "isUnderCurrentDocsTree": true,
@@ -2281,7 +2990,6 @@ exports[`normalize-page > zh-CN getting-started 1`] = `
     },
     {
       "frontMatter": {
-        "full": true,
         "title": "身份验证",
       },
       "isUnderCurrentDocsTree": true,
@@ -2292,7 +3000,6 @@ exports[`normalize-page > zh-CN getting-started 1`] = `
     },
     {
       "frontMatter": {
-        "full": true,
         "title": "无限加载",
       },
       "isUnderCurrentDocsTree": true,
@@ -2303,7 +3010,6 @@ exports[`normalize-page > zh-CN getting-started 1`] = `
     },
     {
       "frontMatter": {
-        "full": true,
         "title": "错误处理",
       },
       "isUnderCurrentDocsTree": true,
@@ -2345,7 +3051,7 @@ exports[`normalize-page > zh-CN home 1`] = `
       "name": "index",
       "route": "/",
       "title": "简介",
-      "type": "nav",
+      "type": "doc",
     },
   ],
   "activeThemeContext": {
@@ -2360,7 +3066,7 @@ exports[`normalize-page > zh-CN home 1`] = `
     "toc": true,
     "typesetting": "default",
   },
-  "activeType": "nav",
+  "activeType": "doc",
   "directories": [
     {
       "frontMatter": {
@@ -2369,7 +3075,7 @@ exports[`normalize-page > zh-CN home 1`] = `
       "name": "index",
       "route": "/",
       "title": "简介",
-      "type": "nav",
+      "type": "doc",
     },
     {
       "children": [
@@ -2498,13 +3204,12 @@ exports[`normalize-page > zh-CN home 1`] = `
       "name": "docs",
       "route": "/docs",
       "title": "文档",
-      "type": "nav",
+      "type": "doc",
     },
     {
       "children": [
         {
           "frontMatter": {
-            "full": true,
             "title": "基本用法",
           },
           "name": "basic",
@@ -2514,7 +3219,6 @@ exports[`normalize-page > zh-CN home 1`] = `
         },
         {
           "frontMatter": {
-            "full": true,
             "title": "身份验证",
           },
           "name": "auth",
@@ -2524,7 +3228,6 @@ exports[`normalize-page > zh-CN home 1`] = `
         },
         {
           "frontMatter": {
-            "full": true,
             "title": "无限加载",
           },
           "name": "infinite-loading",
@@ -2534,7 +3237,6 @@ exports[`normalize-page > zh-CN home 1`] = `
         },
         {
           "frontMatter": {
-            "full": true,
             "title": "错误处理",
           },
           "name": "error-handling",
@@ -2551,7 +3253,7 @@ exports[`normalize-page > zh-CN home 1`] = `
       "name": "examples",
       "route": "/examples",
       "title": "示例",
-      "type": "nav",
+      "type": "doc",
     },
     {
       "children": [
@@ -2569,10 +3271,246 @@ exports[`normalize-page > zh-CN home 1`] = `
       "name": "blog",
       "route": "/blog",
       "title": "博客",
-      "type": "nav",
+      "type": "doc",
     },
   ],
-  "docsDirectories": [],
+  "docsDirectories": [
+    {
+      "frontMatter": {
+        "title": "用于数据请求的 React Hooks 库",
+      },
+      "isUnderCurrentDocsTree": true,
+      "name": "index",
+      "route": "/",
+      "title": "简介",
+      "type": "doc",
+    },
+    {
+      "children": [
+        {
+          "isUnderCurrentDocsTree": true,
+          "name": "getting-started",
+          "route": "/docs/getting-started",
+          "title": "入门",
+          "type": "doc",
+        },
+        {
+          "isUnderCurrentDocsTree": true,
+          "name": "options",
+          "route": "/docs/options",
+          "title": "选项",
+          "type": "doc",
+        },
+        {
+          "isUnderCurrentDocsTree": true,
+          "name": "global-configuration",
+          "route": "/docs/global-configuration",
+          "title": "全局配置",
+          "type": "doc",
+        },
+        {
+          "isUnderCurrentDocsTree": true,
+          "name": "data-fetching",
+          "route": "/docs/data-fetching",
+          "title": "数据请求",
+          "type": "doc",
+        },
+        {
+          "isUnderCurrentDocsTree": true,
+          "name": "error-handling",
+          "route": "/docs/error-handling",
+          "title": "错误处理",
+          "type": "doc",
+        },
+        {
+          "isUnderCurrentDocsTree": true,
+          "name": "revalidation",
+          "route": "/docs/revalidation",
+          "title": "自动重新请求",
+          "type": "doc",
+        },
+        {
+          "isUnderCurrentDocsTree": true,
+          "name": "conditional-fetching",
+          "route": "/docs/conditional-fetching",
+          "title": "条件数据请求",
+          "type": "doc",
+        },
+        {
+          "isUnderCurrentDocsTree": true,
+          "name": "arguments",
+          "route": "/docs/arguments",
+          "title": "传入参数",
+          "type": "doc",
+        },
+        {
+          "isUnderCurrentDocsTree": true,
+          "name": "mutation",
+          "route": "/docs/mutation",
+          "title": "数据更改",
+          "type": "doc",
+        },
+        {
+          "isUnderCurrentDocsTree": true,
+          "name": "pagination",
+          "route": "/docs/pagination",
+          "title": "分页",
+          "type": "doc",
+        },
+        {
+          "isUnderCurrentDocsTree": true,
+          "name": "prefetching",
+          "route": "/docs/prefetching",
+          "title": "预请求",
+          "type": "doc",
+        },
+        {
+          "isUnderCurrentDocsTree": true,
+          "name": "with-nextjs",
+          "route": "/docs/with-nextjs",
+          "title": "Next.js SSG 和 SSR",
+          "type": "doc",
+        },
+        {
+          "isUnderCurrentDocsTree": true,
+          "name": "typescript",
+          "title": "Typescript",
+          "type": "doc",
+        },
+        {
+          "isUnderCurrentDocsTree": true,
+          "name": "suspense",
+          "route": "/docs/suspense",
+          "title": "Suspense",
+          "type": "doc",
+        },
+        {
+          "isUnderCurrentDocsTree": true,
+          "name": "middleware",
+          "route": "/docs/middleware",
+          "title": "中间件",
+          "type": "doc",
+        },
+        {
+          "children": [
+            {
+              "isUnderCurrentDocsTree": true,
+              "name": "cache",
+              "route": "/docs/advanced/cache",
+              "title": "缓存",
+              "type": "doc",
+            },
+            {
+              "isUnderCurrentDocsTree": true,
+              "name": "performance",
+              "route": "/docs/advanced/performance",
+              "title": "性能",
+              "type": "doc",
+            },
+            {
+              "isUnderCurrentDocsTree": true,
+              "name": "react-native",
+              "route": "/docs/advanced/react-native",
+              "title": "React Native",
+              "type": "doc",
+            },
+          ],
+          "isUnderCurrentDocsTree": true,
+          "name": "advanced",
+          "route": "/docs/advanced",
+          "title": "高级",
+          "type": "doc",
+        },
+        {
+          "isUnderCurrentDocsTree": true,
+          "name": "change-log",
+          "route": "/docs/change-log",
+          "title": "更新日志",
+          "type": "doc",
+        },
+      ],
+      "isUnderCurrentDocsTree": true,
+      "name": "docs",
+      "route": "/docs",
+      "title": "文档",
+      "type": "doc",
+    },
+    {
+      "children": [
+        {
+          "frontMatter": {
+            "title": "基本用法",
+          },
+          "isUnderCurrentDocsTree": true,
+          "name": "basic",
+          "route": "/examples/basic",
+          "title": "基本用法",
+          "type": "doc",
+        },
+        {
+          "frontMatter": {
+            "title": "身份验证",
+          },
+          "isUnderCurrentDocsTree": true,
+          "name": "auth",
+          "route": "/examples/auth",
+          "title": "身份验证",
+          "type": "doc",
+        },
+        {
+          "frontMatter": {
+            "title": "无限加载",
+          },
+          "isUnderCurrentDocsTree": true,
+          "name": "infinite-loading",
+          "route": "/examples/infinite-loading",
+          "title": "无限加载",
+          "type": "doc",
+        },
+        {
+          "frontMatter": {
+            "title": "错误处理",
+          },
+          "isUnderCurrentDocsTree": true,
+          "name": "error-handling",
+          "route": "/examples/error-handling",
+          "title": "错误处理",
+          "type": "doc",
+        },
+        {
+          "isUnderCurrentDocsTree": true,
+          "name": "ssr",
+          "title": "Next.js SSR",
+          "type": "doc",
+        },
+      ],
+      "isUnderCurrentDocsTree": true,
+      "name": "examples",
+      "route": "/examples",
+      "title": "示例",
+      "type": "doc",
+    },
+    {
+      "children": [
+        {
+          "frontMatter": {
+            "description": "大约两年前，我们开源了 SWR，大家喜爱的小型数据请求 React 库。今天，我们迎来了另一个里程碑：SWR 1.0 版本发布。",
+            "image": "https://assets.vercel.com/image/upload/v1630059453/swr/v1.png",
+          },
+          "isUnderCurrentDocsTree": true,
+          "name": "swr-v1",
+          "route": "/blog/swr-v1",
+          "title": "SWR 1.0 发布",
+          "type": "doc",
+        },
+      ],
+      "isUnderCurrentDocsTree": true,
+      "name": "blog",
+      "route": "/blog",
+      "title": "博客",
+      "type": "doc",
+    },
+  ],
   "flatDirectories": [
     {
       "frontMatter": {
@@ -2581,7 +3519,7 @@ exports[`normalize-page > zh-CN home 1`] = `
       "name": "index",
       "route": "/",
       "title": "简介",
-      "type": "nav",
+      "type": "doc",
     },
     {
       "name": "getting-started",
@@ -2698,7 +3636,6 @@ exports[`normalize-page > zh-CN home 1`] = `
     },
     {
       "frontMatter": {
-        "full": true,
         "title": "基本用法",
       },
       "name": "basic",
@@ -2708,7 +3645,6 @@ exports[`normalize-page > zh-CN home 1`] = `
     },
     {
       "frontMatter": {
-        "full": true,
         "title": "身份验证",
       },
       "name": "auth",
@@ -2718,7 +3654,6 @@ exports[`normalize-page > zh-CN home 1`] = `
     },
     {
       "frontMatter": {
-        "full": true,
         "title": "无限加载",
       },
       "name": "infinite-loading",
@@ -2728,7 +3663,6 @@ exports[`normalize-page > zh-CN home 1`] = `
     },
     {
       "frontMatter": {
-        "full": true,
         "title": "错误处理",
       },
       "name": "error-handling",
@@ -2754,6 +3688,16 @@ exports[`normalize-page > zh-CN home 1`] = `
   ],
   "flatDocsDirectories": [
     {
+      "frontMatter": {
+        "title": "用于数据请求的 React Hooks 库",
+      },
+      "isUnderCurrentDocsTree": true,
+      "name": "index",
+      "route": "/",
+      "title": "简介",
+      "type": "doc",
+    },
+    {
       "isUnderCurrentDocsTree": true,
       "name": "getting-started",
       "route": "/docs/getting-started",
@@ -2887,7 +3831,6 @@ exports[`normalize-page > zh-CN home 1`] = `
     },
     {
       "frontMatter": {
-        "full": true,
         "title": "基本用法",
       },
       "isUnderCurrentDocsTree": true,
@@ -2898,7 +3841,6 @@ exports[`normalize-page > zh-CN home 1`] = `
     },
     {
       "frontMatter": {
-        "full": true,
         "title": "身份验证",
       },
       "isUnderCurrentDocsTree": true,
@@ -2909,7 +3851,6 @@ exports[`normalize-page > zh-CN home 1`] = `
     },
     {
       "frontMatter": {
-        "full": true,
         "title": "无限加载",
       },
       "isUnderCurrentDocsTree": true,
@@ -2920,7 +3861,6 @@ exports[`normalize-page > zh-CN home 1`] = `
     },
     {
       "frontMatter": {
-        "full": true,
         "title": "错误处理",
       },
       "isUnderCurrentDocsTree": true,
