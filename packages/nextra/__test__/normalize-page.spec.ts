@@ -336,4 +336,32 @@ describe('normalize-page', () => {
       ]
     `)
   })
+
+  it('should respect order for `type: "separator"`, `type: "menu"` and item with `href`', async () => {
+    const dir = path.join(
+      __dirname,
+      'fixture',
+      'page-maps',
+      'respect-order-for-type-separator-menu-and-item-with-href'
+    )
+    vi.doMock('../src/server/file-system.ts', () => ({ PAGES_DIR: dir }))
+    vi.doMock('../src/server/constants.ts', async () => ({
+      ...(await vi.importActual('../src/server/constants.ts')),
+      CHUNKS_DIR: dir
+    }))
+    const { collectPageMap } = await import('../src/server/page-map.js')
+
+    const result = await collectPageMap({ dir })
+    await fs.writeFile(path.join(dir, 'generated-page-map.ts'), result)
+
+    const { pageMap } = await import(
+      './fixture/page-maps/respect-order-for-type-separator-menu-and-item-with-href/generated-page-map.js'
+      )
+
+    const normalizedResult = normalizePages({
+      list: pageMap,
+      route: '/one/two/qux'
+    })
+    expect(normalizedResult.docsDirectories).toMatchInlineSnapshot()
+  })
 })
