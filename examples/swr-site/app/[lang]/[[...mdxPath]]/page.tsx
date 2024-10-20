@@ -12,10 +12,10 @@ export async function generateMetadata(props: PageProps) {
 }
 
 type PageProps = {
-  params: {
+  params: Promise<{
     mdxPath: string[]
     lang: string
-  }
+  }>
 }
 
 export default async function Page(props: PageProps) {
