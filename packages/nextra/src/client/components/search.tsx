@@ -93,7 +93,7 @@ export const Search: FC<SearchProps> = ({
       try {
         window.pagefind = await import(
           // @ts-expect-error pagefind.js generated after build
-          /* webpackIgnore: true */ './pagefind/pagefind.js'
+          /* webpackIgnore: true */ '/_pagefind/pagefind.js'
         )
         await window.pagefind.options({
           baseUrl: '/'
