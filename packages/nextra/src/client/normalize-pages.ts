@@ -27,13 +27,10 @@ type Display = z.infer<typeof displaySchema>
 type IMenuItem = z.infer<typeof menuItemSchema>
 
 function extendMeta(
-  _meta: string | Record<string, any> = {},
+  _meta: Record<string, any> = {},
   fallback: Record<string, any>,
-  metadata: Record<string, any>
+  metadata: Record<string, any> = {}
 ): Record<string, any> {
-  if (typeof _meta === 'string') {
-    _meta = { title: _meta }
-  }
   const theme: PageTheme = {
     ...fallback.theme,
     ..._meta.theme,
@@ -52,7 +49,7 @@ type FolderWithoutChildren = Omit<Folder, 'children'>
 export type Item = (MdxFile | FolderWithoutChildren) & {
   title: string
   type: string
-  children?: Item[]
+  children: Item[]
   display?: Display
   withIndexPage?: boolean
   theme?: PageTheme
@@ -79,7 +76,7 @@ export type MenuItem = (MdxFile | FolderWithoutChildren) &
 type DocsItem = (MdxFile | FolderWithoutChildren) & {
   title: string
   type: string
-  children?: DocsItem[]
+  children: DocsItem[]
   firstChildRoute?: string
   withIndexPage?: boolean
   isUnderCurrentDocsTree?: boolean
@@ -163,7 +160,7 @@ export function normalizePages({
 
   // Normalize items based on files and _meta.json.
   const items: any[] = list
-    .filter((a): a is MdxFile | Folder => !isMeta(a))
+    .filter((a): a is MdxFile | Folder => !('data' in a))
     .sort((a, b) => {
       const indexA = metaKeys.indexOf(a.name)
       const indexB = metaKeys.indexOf(b.name)
@@ -176,13 +173,13 @@ export function normalizePages({
       const nextItem = list[index + 1]
       // If there are two items with the same name, they must be a directory and a
       // page. In that case we merge them, and use the page's link.
-      if (nextItem && nextItem.name == currentItem.name) {
+      if (nextItem && nextItem.name === currentItem.name) {
         list[index + 1] = {
-          ...nextItem,
+          ...currentItem,
           // @ts-expect-error fixme
           withIndexPage: true,
           // @ts-expect-error fixme
-          children: nextItem.children || currentItem.children
+          frontMatter: nextItem.frontMatter
         }
         return []
       }
@@ -192,7 +189,7 @@ export function normalizePages({
   for (const [index, metaKey] of metaKeys.entries()) {
     if (items.some(item => item.name === metaKey)) continue
 
-    // Validate only on server, will be tree shaked in client build
+    // Validate only on server, will be tree-shaked in client build
     if (typeof window === 'undefined') {
       const metaItem = meta[metaKey]
       const isValid =
@@ -222,10 +219,7 @@ The field key "${metaKey}" in \`_meta\` file refers to a page that cannot be fou
     const extendedMeta = extendMeta(
       meta[currentItem.name],
       fallbackMeta,
-      list.find(
-        (item): item is MdxFile =>
-          'frontMatter' in item && item.name === currentItem.name
-      )?.frontMatter || {}
+      currentItem.frontMatter
     )
     const { display, type = 'doc' } = extendedMeta
     const extendedPageThemeContext = {
@@ -351,9 +345,7 @@ The field key "${metaKey}" in \`_meta\` file refers to a page that cannot be fou
 
           break
         case 'doc':
-          if (Array.isArray(docsItem.children)) {
-            docsItem.children.push(...normalizedChildren.docsDirectories)
-          }
+          docsItem.children.push(...normalizedChildren.docsDirectories)
           // Itself is a doc page.
           if (item.withIndexPage && display !== 'children') {
             flatDocsDirectories.push(docsItem)
@@ -362,9 +354,7 @@ The field key "${metaKey}" in \`_meta\` file refers to a page that cannot be fou
 
       flatDirectories.push(...normalizedChildren.flatDirectories)
       flatDocsDirectories.push(...normalizedChildren.flatDocsDirectories)
-      if (Array.isArray(item.children)) {
-        item.children.push(...normalizedChildren.directories)
-      }
+      item.children.push(...normalizedChildren.directories)
     } else {
       if (isHidden) {
         continue
@@ -402,6 +392,7 @@ The field key "${metaKey}" in \`_meta\` file refers to a page that cannot be fou
     switch (type) {
       case 'page':
       case 'menu':
+        // @ts-expect-error -- fixme
         docsDirectories.push(pageItem)
         break
       case 'doc':
