@@ -30,7 +30,7 @@ function extendMeta(
   _meta: MetaType = {},
   fallback: MetaType,
   metadata: MetaType = {}
-): Record<string, any> {
+): MetaType {
   const theme: PageTheme = {
     ...fallback.theme,
     ..._meta.theme,
@@ -157,11 +157,17 @@ export function normalizePages({
   })
 
   for (const [index, metaKey] of metaKeys.entries()) {
-    if (items.some(item => item.name === metaKey)) continue
+    const metaItem = meta[metaKey]
+    const item = items.find(item => item.name === metaKey)
+    if (metaItem.type === 'menu') {
+      if (item) {
+        item.items = metaItem.items
+      }
+    }
+    if (item) continue
 
     // Validate only on server, will be tree-shaked in client build
     if (typeof window === 'undefined') {
-      const metaItem = meta[metaKey]
       const isValid =
         metaItem.type === 'separator' ||
         metaItem.type === 'menu' ||
