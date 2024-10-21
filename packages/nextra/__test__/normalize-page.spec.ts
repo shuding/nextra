@@ -362,8 +362,12 @@ describe('normalize-page', () => {
       list: pageMap,
       route: '/pagesOnly/one'
     })
-    expect(normalizedResult.topLevelNavbarItems.find(i => i.name === 'mix')).toHaveProperty('items')
-    expect(normalizedResult.topLevelNavbarItems.find(i => i.name === 'pagesOnly')).toHaveProperty('items')
+    expect(
+      normalizedResult.topLevelNavbarItems.find(i => i.name === 'mix')
+    ).toHaveProperty('items')
+    expect(
+      normalizedResult.topLevelNavbarItems.find(i => i.name === 'pagesOnly')
+    ).toHaveProperty('items')
     expect(normalizedResult.topLevelNavbarItems).toMatchInlineSnapshot(`
       [
         {
@@ -471,7 +475,7 @@ describe('normalize-page', () => {
 
     const { pageMap } = await import(
       './fixture/page-maps/pages-order-without-type-page/generated-page-map.js'
-      )
+    )
 
     const normalizedResult = normalizePages({
       list: pageMap,
