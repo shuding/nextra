@@ -162,12 +162,29 @@ export function normalizePages({
     if (metaItem.type === 'menu') {
       if (item) {
         item.items = metaItem.items
+        if (typeof window === 'undefined') {
+          // Validate only on server, will be tree-shaked in client build
+          // Validate menu items, local page should exist
+          const { children } = items.find(
+            (i): i is Folder<MdxFile> => i.name === metaKey
+          )!
+          for (const [key, value] of Object.entries(
+            item.items as Record<string, { title: string; href?: string }>
+          )) {
+            if (!value.href && children.every(i => i.name !== key)) {
+              throw new Error(
+                `Validation of "_meta" file has failed.
+The field key "${metaKey}.items.${key}" in \`_meta\` file refers to a page that cannot be found, remove this key from "_meta" file.`
+              )
+            }
+          }
+        }
       }
     }
     if (item) continue
 
-    // Validate only on server, will be tree-shaked in client build
     if (typeof window === 'undefined') {
+      // Validate only on server, will be tree-shaked in client build
       const isValid =
         metaItem.type === 'separator' ||
         metaItem.type === 'menu' ||
