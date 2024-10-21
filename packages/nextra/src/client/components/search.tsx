@@ -47,8 +47,9 @@ const INPUTS = new Set(['input', 'select', 'button', 'textarea'])
 const DEV_SEARCH_NOTICE = (
   <>
     <p>
-      Search isn't available in development because Nextra&nbsp;4 uses Pagefind
-      package, which indexes built `.html` files instead of `.md`/`.mdx`.
+      Search isn&apos;t available in development because Nextra&nbsp;4 uses
+      Pagefind package, which indexes built `.html` files instead of
+      `.md`/`.mdx`.
     </p>
     <p className="_mt-2">
       To test search during development, run `next build` and then restart your
