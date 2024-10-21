@@ -18,19 +18,19 @@ export const pageMap = [{
     }
   }]
 }, {
-  name: "one",
-  route: "/one",
+  name: "pagesOnly",
+  route: "/pagesOnly",
   children: [{
-    name: "bar",
-    route: "/one/bar",
+    name: "one",
+    route: "/pagesOnly/one",
     frontMatter: {
-      "sidebarTitle": "Bar"
+      "sidebarTitle": "One"
     }
   }, {
-    name: "foo",
-    route: "/one/foo",
+    name: "two",
+    route: "/pagesOnly/two",
     frontMatter: {
-      "sidebarTitle": "Foo"
+      "sidebarTitle": "Two"
     }
   }]
 }];

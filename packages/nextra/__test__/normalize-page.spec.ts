@@ -356,12 +356,97 @@ describe('normalize-page', () => {
 
     const { pageMap } = await import(
       './fixture/page-maps/type-menu-should-contain-items/generated-page-map.js'
-      )
+    )
 
     const normalizedResult = normalizePages({
       list: pageMap,
       route: '/pagesOnly/one'
     })
-    expect(normalizedResult.topLevelNavbarItems).toMatchInlineSnapshot()
+    expect(normalizedResult.topLevelNavbarItems).toMatchInlineSnapshot(`
+      [
+        {
+          "children": [
+            {
+              "frontMatter": {
+                "sidebarTitle": "Not Specified",
+              },
+              "name": "not-specified",
+              "route": "/mix/not-specified",
+              "title": "Not Specified",
+              "type": "doc",
+            },
+            {
+              "frontMatter": {
+                "sidebarTitle": "Qux",
+              },
+              "name": "qux",
+              "route": "/mix/qux",
+              "title": "Qux",
+              "type": "doc",
+            },
+          ],
+          "firstChildRoute": "/mix/not-specified",
+          "items": {
+            "nextra": {
+              "href": "https://nextra.site",
+              "title": "Nextra",
+            },
+            "qux": {
+              "title": "Qux",
+            },
+          },
+          "name": "mix",
+          "route": "/mix",
+          "title": "Mix",
+          "type": "menu",
+        },
+        {
+          "items": {
+            "nextra": {
+              "href": "https://nextra.site",
+              "title": "Nextra",
+            },
+          },
+          "name": "hrefOnly",
+          "title": "Href Only",
+          "type": "menu",
+        },
+        {
+          "children": [
+            {
+              "frontMatter": {
+                "sidebarTitle": "One",
+              },
+              "name": "one",
+              "route": "/pagesOnly/one",
+              "title": "One",
+              "type": "doc",
+            },
+            {
+              "frontMatter": {
+                "sidebarTitle": "Two",
+              },
+              "name": "two",
+              "route": "/pagesOnly/two",
+              "title": "Two",
+              "type": "doc",
+            },
+          ],
+          "firstChildRoute": "/pagesOnly/one",
+          "items": {
+            "one": {
+              "title": "One",
+            },
+            "two": {
+              "title": "Two",
+            },
+          },
+          "name": "pagesOnly",
+          "route": "/pagesOnly",
+          "title": "Pages Only",
+          "type": "menu",
+        },
+      ]
+    `)
   })
 })
