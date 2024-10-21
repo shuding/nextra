@@ -282,7 +282,7 @@ describe('normalize-page', () => {
     `)
   })
 
-  it.only('`type: "menu"` should contain `items`', async () => {
+  it('`type: "menu"` should contain `items`', async () => {
     const pageMap = await getPageMapForFixture('type-menu-should-contain-items')
 
     const normalizedResult = normalizePages({
@@ -376,25 +376,7 @@ describe('normalize-page', () => {
   })
 
   it('pages order without `type: "page"`', async () => {
-    const dir = path.join(
-      __dirname,
-      'fixture',
-      'page-maps',
-      'pages-order-without-type-page'
-    )
-    vi.doMock('../src/server/file-system.ts', () => ({ PAGES_DIR: dir }))
-    vi.doMock('../src/server/constants.ts', async () => ({
-      ...(await vi.importActual('../src/server/constants.ts')),
-      CHUNKS_DIR: dir
-    }))
-    const { collectPageMap } = await import('../src/server/page-map.js')
-
-    const result = await collectPageMap({ dir })
-    await fs.writeFile(path.join(dir, 'generated-page-map.ts'), result)
-
-    const { pageMap } = await import(
-      './fixture/page-maps/pages-order-without-type-page/generated-page-map.js'
-    )
+    const pageMap = await getPageMapForFixture('pages-order-without-type-page')
 
     const normalizedResult = normalizePages({
       list: pageMap,
