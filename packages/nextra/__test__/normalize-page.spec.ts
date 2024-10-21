@@ -337,7 +337,7 @@ describe('normalize-page', () => {
     `)
   })
 
-  it.only('`type: "menu"` should contain `items`', async () => {
+  it('`type: "menu"` should contain `items`', async () => {
     const dir = path.join(
       __dirname,
       'fixture',
