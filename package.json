@@ -3,7 +3,6 @@
   "private": true,
   "packageManager": "pnpm@8.15.9",
   "scripts": {
-    "postinstall": "pnpm build",
     "build": "turbo run build --filter=./packages/\\*",
     "build:all": "turbo run build",
     "clean": "turbo run clean",
@@ -13,6 +12,7 @@
     "dev:website": "turbo run dev --filter=docs...",
     "lint": "ESLINT_USE_FLAT_CONFIG=false eslint --cache --ignore-path .gitignore --max-warnings 0 .",
     "lint:prettier": "prettier --cache --check --ignore-path .gitignore --ignore-path .prettierignore .",
+    "postinstall": "pnpm build",
     "prettier": "pnpm lint:prettier --write",
     "release": "changeset publish",
     "test": "turbo run test",
