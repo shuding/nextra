@@ -73,7 +73,7 @@ function sortFolder(pageMap: PageMapItem[] | Folder) {
     }
   }
 
-  const metaKeys = Object.keys(meta).filter(key => key !== '*')
+  const metaKeys = Object.keys(meta)
 
   // Normalize items based on files and _meta.json.
   const items = newChildren.toSorted((a, b) => {
@@ -85,7 +85,9 @@ function sortFolder(pageMap: PageMapItem[] | Folder) {
     return indexA - indexB
   })
 
-  for (const [index, metaKey] of metaKeys.entries()) {
+  for (const [index, metaKey] of metaKeys
+    .filter(key => key !== '*')
+    .entries()) {
     const metaItem = meta[metaKey]
     const item = items.find(item => item.name === metaKey)
     if (metaItem.type === 'menu') {
@@ -137,5 +139,7 @@ The field key "${metaKey}" in \`_meta\` file refers to a page that cannot be fou
     items.unshift({ data: meta })
   }
 
-  return isFolder ? { ...folder, children: items } : items
+  const result = isFolder ? { ...folder, children: items } : items
+
+  return result
 }

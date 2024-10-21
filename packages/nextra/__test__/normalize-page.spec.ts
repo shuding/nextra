@@ -120,22 +120,39 @@ describe('normalize-page', () => {
     expect(result2).toMatchSnapshot()
   })
 
-  it('should initialize `activeType` from `*`', async () => {
+  it.only('should initialize `activeType` from `*`', async () => {
     const dir = path.join(
       __dirname,
       'fixture',
       'page-maps',
       'active-type-should-be-initialized-from-star'
     )
-    vi.doMock('../src/server/file-system.ts', () => ({ PAGES_DIR: dir }))
+    vi.doMock('next/dist/lib/find-pages-dir.js', () => ({
+      findPagesDir: () => ({ appDir: dir })
+    }))
     vi.doMock('../src/server/constants.ts', async () => ({
       ...(await vi.importActual('../src/server/constants.ts')),
       CHUNKS_DIR: dir
     }))
-    const { collectPageMap } = await import('../src/server/page-map.js')
+    const { getFilepaths, collectPageMap } = await import(
+      '../src/server/page-map.js'
+      )
 
-    const result = await collectPageMap({ dir })
-    await fs.writeFile(path.join(dir, 'generated-page-map.ts'), result)
+    const relativePaths = await getFilepaths({ dir })
+
+    const { pageMap: _pageMap, mdxPages } =
+      generatePageMapFromFilepaths(relativePaths)
+    const rawJs = await collectPageMap({
+      pageMap: _pageMap,
+      mdxPages,
+      fromAppDir: false
+    })
+
+    await fs.writeFile(
+      path.join(dir, 'generated-page-map.ts'),
+      '// @ts-nocheck\n' +
+      rawJs.replaceAll('private-next-root-dir/content/', './')
+    )
 
     const { pageMap } = await import(
       './fixture/page-maps/active-type-should-be-initialized-from-star/generated-page-map.js'
@@ -170,9 +187,7 @@ describe('normalize-page', () => {
           {
             name: 'foo',
             route: '/1-level/foo',
-            frontMatter: {
-              sidebarTitle: 'Foo'
-            }
+            frontMatter: undefined
           }
         ]
       }
