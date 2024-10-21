@@ -1,5 +1,5 @@
 export default {
-  _: {
-    type: 'separator'
+  docs: {
+    type: 'page'
   }
 }
