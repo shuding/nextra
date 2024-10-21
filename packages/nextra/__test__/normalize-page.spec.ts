@@ -337,12 +337,12 @@ describe('normalize-page', () => {
     `)
   })
 
-  it.only('type: "menu" should contains items with local pages', async () => {
+  it.only('`type: "menu"` should contain `items`', async () => {
     const dir = path.join(
       __dirname,
       'fixture',
       'page-maps',
-      'type-menu-should-contain-local-pages'
+      'type-menu-should-contain-items'
     )
     vi.doMock('../src/server/file-system.ts', () => ({ PAGES_DIR: dir }))
     vi.doMock('../src/server/constants.ts', async () => ({
@@ -355,84 +355,13 @@ describe('normalize-page', () => {
     await fs.writeFile(path.join(dir, 'generated-page-map.ts'), result)
 
     const { pageMap } = await import(
-      './fixture/page-maps/type-menu-should-contain-local-pages/generated-page-map.js'
+      './fixture/page-maps/type-menu-should-contain-items/generated-page-map.js'
       )
 
     const normalizedResult = normalizePages({
       list: pageMap,
-      route: '/one/bar'
+      route: '/pagesOnly/one'
     })
-    expect(normalizedResult.topLevelNavbarItems).toMatchInlineSnapshot(`
-      [
-        {
-          "children": [
-            {
-              "frontMatter": {
-                "sidebarTitle": "Not Specified",
-              },
-              "name": "not-specified",
-              "route": "/mix/not-specified",
-              "title": "Not Specified",
-              "type": "doc",
-            },
-            {
-              "frontMatter": {
-                "sidebarTitle": "Qux",
-              },
-              "name": "qux",
-              "route": "/mix/qux",
-              "title": "Qux",
-              "type": "doc",
-            },
-          ],
-          "firstChildRoute": "/mix/not-specified",
-          "name": "mix",
-          "route": "/mix",
-          "title": "mix",
-          "type": "menu",
-        },
-        {
-          "items": {
-            "---": {
-              "type": "separator",
-            },
-            "nextra": {
-              "href": "https://nextra.site",
-              "title": "Nextra",
-            },
-          },
-          "name": "hrefOnly",
-          "title": "Two",
-          "type": "menu",
-        },
-        {
-          "children": [
-            {
-              "frontMatter": {
-                "sidebarTitle": "Bar",
-              },
-              "name": "bar",
-              "route": "/one/bar",
-              "title": "Bar",
-              "type": "doc",
-            },
-            {
-              "frontMatter": {
-                "sidebarTitle": "Foo",
-              },
-              "name": "foo",
-              "route": "/one/foo",
-              "title": "Foo",
-              "type": "doc",
-            },
-          ],
-          "firstChildRoute": "/one/bar",
-          "name": "one",
-          "route": "/one",
-          "title": "One",
-          "type": "menu",
-        },
-      ]
-    `)
+    expect(normalizedResult.topLevelNavbarItems).toMatchInlineSnapshot()
   })
 })

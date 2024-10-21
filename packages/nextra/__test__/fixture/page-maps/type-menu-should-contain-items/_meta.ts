@@ -1,14 +1,11 @@
 export default {
   mix: {
     type: 'menu',
-    title: 'mix',
+    title: 'Mix',
     items: {
       nextra: {
         title: 'Nextra',
         href: 'https://nextra.site'
-      },
-      '---': {
-        type: 'separator'
       },
       qux: {
         title: 'Qux'
@@ -17,29 +14,23 @@ export default {
   },
   hrefOnly: {
     type: 'menu',
-    title: 'Two',
+    title: 'Href Only',
     items: {
       nextra: {
         title: 'Nextra',
         href: 'https://nextra.site'
-      },
-      '---': {
-        type: 'separator'
-      },
+      }
     }
   },
-  one: {
+  pagesOnly: {
     type: 'menu',
-    title: 'One',
+    title: 'Pages Only',
     items: {
-      '---': {
-        type: 'separator'
-      },
-      bar: {
+      one: {
         title: 'One'
       },
-      foo: {
-        title: 'Foo'
+      two: {
+        title: 'Two'
       }
     }
   }
