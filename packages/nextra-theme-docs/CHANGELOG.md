@@ -1,5 +1,14 @@
 # nextra-theme-docs
 
+## 4.0.0-app-router.11
+
+### Patch Changes
+
+- be15165: move `pagefind` output to `public/_pagefind` directory
+  https://github.com/shuding/nextra/pull/3517
+- Updated dependencies [be15165]
+  - nextra@4.0.0-app-router.11
+
 ## 4.0.0-app-router.10
 
 ### Patch Changes
