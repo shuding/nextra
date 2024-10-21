@@ -76,7 +76,7 @@ function sortFolder(pageMap: PageMapItem[] | Folder) {
   const metaKeys = Object.keys(meta)
 
   // Normalize items based on files and _meta.json.
-  const items = newChildren.toSorted((a, b) => {
+  const items = newChildren.sort((a, b) => {
     const indexA = metaKeys.indexOf(a.name)
     const indexB = metaKeys.indexOf(b.name)
     if (indexA === -1 && indexB === -1) return a.name < b.name ? -1 : 1
