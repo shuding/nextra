@@ -16,7 +16,7 @@ async function getPageMapForFixture(dirName: string) {
   }))
   const { getFilepaths, collectPageMap } = await import(
     '../src/server/page-map.js'
-    )
+  )
 
   const relativePaths = await getFilepaths({ dir })
 
@@ -31,7 +31,7 @@ async function getPageMapForFixture(dirName: string) {
   await fs.writeFile(
     path.join(dir, 'generated-page-map.ts'),
     '// @ts-nocheck\n' +
-    rawJs.replaceAll('private-next-root-dir/content/', './')
+      rawJs.replaceAll('private-next-root-dir/content/', './')
   )
 
   const { pageMap } = await import(`${dir}/generated-page-map.js`)
@@ -57,7 +57,9 @@ describe('normalize-page', () => {
 
   // https://github.com/shuding/nextra/issues/3331
   it('should keep `activeThemeContext`, `activeType` for hidden route', async () => {
-    const pageMap = await getPageMapForFixture('hidden-route-should-have-theme-context')
+    const pageMap = await getPageMapForFixture(
+      'hidden-route-should-have-theme-context'
+    )
     expect(pageMap).toEqual([
       {
         data: {
@@ -179,7 +181,9 @@ describe('normalize-page', () => {
   })
 
   it('should respect order for `type: "separator"`, `type: "menu"` and item with `href`', async () => {
-    const pageMap = await getPageMapForFixture('respect-order-for-type-separator-menu-and-item-with-href')
+    const pageMap = await getPageMapForFixture(
+      'respect-order-for-type-separator-menu-and-item-with-href'
+    )
 
     const normalizedResult = normalizePages({
       list: pageMap,

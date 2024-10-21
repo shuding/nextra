@@ -83,7 +83,7 @@ export function generatePageMapFromFilepaths(filepaths: string[]): any {
         keys.length > 1 || (keys.length === 1 && keys[0] !== 'index')
       if (isFolder) {
         ;(item as Folder).children = getPageMap(value, [], route)
-          // .sort((a, b) => a.name.localeCompare(b.name))
+        // .sort((a, b) => a.name.localeCompare(b.name))
       } else if (!name.startsWith('[')) {
         // @ts-expect-error
         item.__pagePath = mdxPages[item.route.slice(1)]
