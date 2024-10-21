@@ -16,7 +16,13 @@ import { Card } from '../showcase/page.mdx'
   </Button>
 </div>
 
-<Cards num={2} className="hover:[&_a]:!no-underline">
+<Cards num={3}>
+  <Card
+    title="GraphQL Hive"
+    href="https://the-guild.dev/graphql/hive?utm_source=nextra.site&utm_campaign=nextra&utm_content=logolink"
+  >
+    <>![GraphQL Hive preview](./showcase/graphql-hive.png)</>
+  </Card>
   <Card
     title="Speakeasy"
     href="https://speakeasyapi.dev/docs?utm_source=nextra.site&utm_campaign=nextra&utm_content=logolink"
@@ -30,3 +36,10 @@ import { Card } from '../showcase/page.mdx'
     <>![xyflow preview](../showcase/_logos/xyflow.jpg)</>
   </Card>
 </Cards>
+
+<style global jsx>{`
+  img {
+    aspect-ratio: 12/6.3;
+    object-fit: cover;
+  }
+`}</style>

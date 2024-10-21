@@ -190,7 +190,6 @@ const Folder: FC<FolderProps> = ({ item, anchors, onFocus, level }) => {
           <Menu
             className={classes.border}
             directories={item.children}
-            base={item.route}
             anchors={anchors}
             level={level}
           />
@@ -271,7 +270,6 @@ const File: FC<{
 interface MenuProps {
   directories: PageItem[] | Item[]
   anchors: Heading[]
-  base?: string
   className?: string
   onlyCurrentDocs?: boolean
   level: number

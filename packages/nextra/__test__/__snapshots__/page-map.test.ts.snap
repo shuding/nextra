@@ -6,28 +6,23 @@ exports[`Page Process > should match i18n site page maps 1`] = `
     {
       "data": {
         "about": {
-          "items": Map {
-            "contributors" => {
+          "items": {
+            "a-page": {
+              "title": "A Page",
+            },
+            "acknowledgement": {
+              "title": "Acknowledgement",
+            },
+            "changelog": {
+              "title": "Changelog",
+            },
+            "contributors": {
               "href": "https://github.com/vercel/swr/graphs/contributors",
               "newWindow": true,
               "title": "Contributors",
             },
-            "team" => {
+            "team": {
               "title": "Team",
-            },
-            "acknowledgement" => {
-              "title": "Acknowledgement",
-            },
-            "a-page" => {
-              "title": "A Page",
-            },
-            "changelog" => {
-              "title": "Changelog",
-            },
-            "123" => {
-              "href": "https://google.com",
-              "newWindow": true,
-              "title": "Last, key is number",
             },
           },
           "title": "About",
@@ -642,28 +637,23 @@ exports[`Page Process > should match i18n site page maps 1`] = `
     {
       "data": {
         "about": {
-          "items": Map {
-            "contributors" => {
+          "items": {
+            "a-page": {
+              "title": "A Page",
+            },
+            "acknowledgement": {
+              "title": "Acknowledgement",
+            },
+            "changelog": {
+              "title": "Changelog",
+            },
+            "contributors": {
               "href": "https://github.com/vercel/swr/graphs/contributors",
               "newWindow": true,
               "title": "Contributors",
             },
-            "team" => {
+            "team": {
               "title": "Team",
-            },
-            "acknowledgement" => {
-              "title": "Acknowledgement",
-            },
-            "a-page" => {
-              "title": "A Page",
-            },
-            "changelog" => {
-              "title": "Changelog",
-            },
-            "123" => {
-              "href": "https://google.com",
-              "newWindow": true,
-              "title": "Last, key is number",
             },
           },
           "title": "About",
@@ -696,14 +686,12 @@ exports[`Page Process > should match i18n site page maps 1`] = `
             "error-handling": "Gestión De Errores",
             "getting-started": "Comienza",
             "global-configuration": "Configuración Global",
-            "middleware": "Middleware",
             "mutation": "Mutación",
             "options": "Opciones",
             "pagination": "Paginación",
             "prefetching": "Prefetching",
             "revalidation": "Revalidación Automática",
             "suspense": "Suspense",
-            "typescript": "Typescript",
             "with-nextjs": "Next.js SSG and SSR",
             "wrap-toc-items": "Ajustar elementos de la tabla de contenido",
           },
@@ -712,10 +700,8 @@ exports[`Page Process > should match i18n site page maps 1`] = `
           "children": [
             {
               "data": {
-                "cache": "Cache",
                 "file-name.with.DOTS": "Nombres de archivos con puntos",
                 "performance": "Rendimiento",
-                "react-native": "React Native",
               },
             },
             {
@@ -997,7 +983,6 @@ exports[`Page Process > should match i18n site page maps 1`] = `
             "prefetching": "Пред-выборка",
             "revalidation": "Авто-ревалидация",
             "suspense": "Задержка (Suspense)",
-            "typescript": "Typescript",
             "with-nextjs": "Next.js SSG и SSR",
             "wrap-toc-items": "Обернуть таблицу содержимого элементов",
           },

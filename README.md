@@ -46,6 +46,9 @@ the watch mode for both nextra and the theme in separated terminals.
 ### Sponsors
 
 <div>
+ <a href="https://the-guild.dev/graphql/hive?utm_source=github&utm_campaign=nextra&utm_content=logolink">
+   <img src="/docs/pages/showcase/graphql-hive.png" alt="GraphQL Hive preview" width="256">
+ </a>
  <a href="https://speakeasyapi.dev/docs?utm_source=github&utm_campaign=nextra&utm_content=logolink">
    <img src="/docs/app/showcase/_logos/speakeasy.png" alt="Speakeasy preview" width="256">
  </a>

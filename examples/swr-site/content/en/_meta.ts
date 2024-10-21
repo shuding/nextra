@@ -19,18 +19,10 @@ export default {
         href: 'https://github.com/vercel/swr/graphs/contributors',
         newWindow: true
       },
-      team: {
-        title: 'Team'
-      },
-      acknowledgement: {
-        title: 'Acknowledgement'
-      },
-      'a-page': {
-        title: 'A Page'
-      },
-      changelog: {
-        title: 'Changelog'
-      }
+      team: { title: 'Team' },
+      acknowledgement: { title: 'Acknowledgement' },
+      'a-page': { title: 'A Page' },
+      changelog: { title: 'Changelog' }
     }
   },
   examples: {

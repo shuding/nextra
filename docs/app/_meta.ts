@@ -26,6 +26,7 @@ export default {
     title: 'Sponsors',
     theme: {
       typesetting: 'article',
+      layout: 'full',
       timestamp: false
     }
   },

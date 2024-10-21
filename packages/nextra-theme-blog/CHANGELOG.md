@@ -153,6 +153,22 @@
 - Updated dependencies [99f34d3]
   - nextra@4.0.0-app-router.0
 
+## 3.1.0-canary.1
+
+### Patch Changes
+
+- Updated dependencies [035fe48]
+- Updated dependencies [8e9767e]
+- Updated dependencies [c002118]
+  - nextra@3.1.0-canary.1
+
+## 3.1.0-canary.0
+
+### Patch Changes
+
+- Updated dependencies [fec399a]
+  - nextra@3.1.0-canary.0
+
 ## 3.0.15
 
 ### Patch Changes

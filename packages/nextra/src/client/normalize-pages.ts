@@ -4,7 +4,7 @@ import type {
   menuItemSchema,
   pageThemeSchema
 } from '../server/schemas'
-import type { Folder, FrontMatter, MdxFile, PageMapItem } from '../types'
+import type { Folder, MdxFile, MetaJsonFile, PageMapItem } from '../types'
 
 const DEFAULT_PAGE_THEME: PageTheme = {
   breadcrumb: true,
@@ -23,12 +23,13 @@ export type PageTheme = z.infer<typeof pageThemeSchema>
 
 type Display = z.infer<typeof displaySchema>
 type IMenuItem = z.infer<typeof menuItemSchema>
+type MetaType = Record<string, any>
 
 function extendMeta(
-  fallback: Record<string, any> = {},
-  _meta: Record<string, any> = {},
-  metadata: Record<string, any> = {}
-): Record<string, any> {
+  _meta: MetaType = {},
+  fallback: MetaType,
+  metadata: MetaType = {}
+): MetaType {
   const theme: PageTheme = {
     ...fallback.theme,
     ..._meta.theme,
@@ -47,7 +48,7 @@ type FolderWithoutChildren = Omit<Folder, 'children'>
 export type Item = (MdxFile | FolderWithoutChildren) & {
   title: string
   type: string
-  children?: Item[]
+  children: Item[]
   display?: Display
   withIndexPage?: boolean
   theme?: PageTheme
@@ -74,7 +75,7 @@ export type MenuItem = (MdxFile | FolderWithoutChildren) &
 type DocsItem = (MdxFile | FolderWithoutChildren) & {
   title: string
   type: string
-  children?: DocsItem[]
+  children: DocsItem[]
   firstChildRoute?: string
   withIndexPage?: boolean
   isUnderCurrentDocsTree?: boolean
@@ -115,6 +116,96 @@ export function normalizePages({
   underCurrentDocsRoot?: boolean
   pageThemeContext?: PageTheme
 }): NormalizedResult {
+  let meta: MetaType = {}
+  let metaKeys: (keyof MetaType)[] = []
+  const items: any[] = []
+
+  for (const [index, item] of list.entries()) {
+    if ('data' in item) {
+      meta = item.data
+      metaKeys = Object.keys(meta).filter(key => key !== '*')
+      for (const key of metaKeys) {
+        if (typeof meta[key] !== 'string') continue
+        meta[key] = { title: meta[key] }
+      }
+      continue
+    }
+    const prevItem = list[index - 1] as Exclude<PageMapItem, MetaJsonFile>
+
+    // If there are two items with the same name, they must be a directory and a
+    // page. In that case we merge them, and use the page's link.
+    if (prevItem && prevItem.name === item.name) {
+      items[items.length - 1] = {
+        ...prevItem,
+        withIndexPage: true,
+        // @ts-expect-error fixme
+        frontMatter: item.frontMatter
+      }
+      continue
+    }
+    items.push(item)
+  }
+  // Normalize items based on files and _meta.json.
+  items.sort((a, b) => {
+    const indexA = metaKeys.indexOf(a.name)
+    const indexB = metaKeys.indexOf(b.name)
+    if (indexA === -1 && indexB === -1) return a.name < b.name ? -1 : 1
+    if (indexA === -1) return 1
+    if (indexB === -1) return -1
+    return indexA - indexB
+  })
+
+  for (const [index, metaKey] of metaKeys.entries()) {
+    const metaItem = meta[metaKey]
+    const item = items.find(item => item.name === metaKey)
+    if (metaItem.type === 'menu') {
+      if (item) {
+        item.items = metaItem.items
+        if (typeof window === 'undefined') {
+          // Validate only on server, will be tree-shaked in client build
+          // Validate menu items, local page should exist
+          const { children } = items.find(
+            (i): i is Folder<MdxFile> => i.name === metaKey
+          )!
+          for (const [key, value] of Object.entries(
+            item.items as Record<string, { title: string; href?: string }>
+          )) {
+            if (!value.href && children.every(i => i.name !== key)) {
+              throw new Error(
+                `Validation of "_meta" file has failed.
+The field key "${metaKey}.items.${key}" in \`_meta\` file refers to a page that cannot be found, remove this key from "_meta" file.`
+              )
+            }
+          }
+        }
+      }
+    }
+    if (item) continue
+
+    if (typeof window === 'undefined') {
+      // Validate only on server, will be tree-shaked in client build
+      const isValid =
+        metaItem.type === 'separator' ||
+        metaItem.type === 'menu' ||
+        metaItem.href
+
+      if (!isValid) {
+        throw new Error(
+          `Validation of "_meta" file has failed.
+The field key "${metaKey}" in \`_meta\` file refers to a page that cannot be found, remove this key from "_meta" file.`
+        )
+      }
+    }
+
+    const currentItem = items[index]
+    if (currentItem && currentItem.name === metaKey) continue
+    items.splice(
+      index, // index at which to start changing the array
+      0, // remove zero items
+      { name: metaKey, ...meta[metaKey] }
+    )
+  }
+
   // All directories
   // - directories: all directories in the tree structure
   // - flatDirectories: all directories in the flat structure, used by search and footer navigation
@@ -128,45 +219,21 @@ export function normalizePages({
   // Page directories
   const topLevelNavbarItems: (PageItem | MenuItem)[] = []
 
-  let activeType: string | undefined
+  const { title: _title, href: _href, ...fallbackMeta } = meta['*'] || {}
+
+  let activeType: string = fallbackMeta.type
   let activeIndex = 0
-  let activeThemeContext = pageThemeContext
+  let activeThemeContext = {
+    ...pageThemeContext,
+    ...fallbackMeta.theme
+  }
   let activePath: Item[] = []
 
-  const meta =
-    'data' in list[0]
-      ? (list[0].data as Record<string, Record<string, any> | undefined>)
-      : {}
-
-  // Normalize items based on files and _meta.json.
-  const items = ('data' in list[0] ? list.slice(1) : list) as (
-    | (Folder & {
-        withIndexPage?: true
-        frontMatter: FrontMatter
-      })
-    | MdxFile
-  )[]
-
-  for (let i = 0; i < items.length; i++) {
-    const currentItem = items[i]
-    const nextItem = items[i + 1]
-
-    // If there are two items with the same name, they must be a directory and a
-    // page. In that case we merge them, and use the page's link.
-    if (nextItem && nextItem.name == currentItem.name) {
-      items[i + 1] = {
-        ...nextItem,
-        withIndexPage: true,
-        children:
-          (nextItem as Folder).children || (currentItem as Folder).children
-      }
-      continue
-    }
-
+  for (const currentItem of items) {
     // Get the item's meta information.
     const extendedMeta = extendMeta(
-      meta['*'],
       meta[currentItem.name],
+      fallbackMeta,
       currentItem.frontMatter
     )
     const { display, type = 'doc' } = extendedMeta
@@ -265,7 +332,7 @@ export function normalizePages({
               flatDocsDirectories.length + normalizedChildren.activeIndex
             break
         }
-        if ((currentItem as Item).withIndexPage && type === 'doc') {
+        if (currentItem.withIndexPage && type === 'doc') {
           activeIndex++
         }
       }
@@ -279,9 +346,8 @@ export function normalizePages({
 
           // If it's a page with children inside, we inject itself as a page too.
           if (normalizedChildren.flatDirectories.length) {
-            pageItem.firstChildRoute = findFirstRoute(
-              normalizedChildren.flatDirectories
-            )
+            const route = findFirstRoute(normalizedChildren.flatDirectories)
+            if (route) pageItem.firstChildRoute = route
             topLevelNavbarItems.push(pageItem)
           } else if (pageItem.withIndexPage) {
             topLevelNavbarItems.push(pageItem)
@@ -289,9 +355,7 @@ export function normalizePages({
 
           break
         case 'doc':
-          if (Array.isArray(docsItem.children)) {
-            docsItem.children.push(...normalizedChildren.docsDirectories)
-          }
+          docsItem.children.push(...normalizedChildren.docsDirectories)
           // Itself is a doc page.
           if (item.withIndexPage && display !== 'children') {
             flatDocsDirectories.push(docsItem)
@@ -300,9 +364,7 @@ export function normalizePages({
 
       flatDirectories.push(...normalizedChildren.flatDirectories)
       flatDocsDirectories.push(...normalizedChildren.flatDocsDirectories)
-      if (Array.isArray(item.children)) {
-        item.children.push(...normalizedChildren.directories)
-      }
+      item.children.push(...normalizedChildren.directories)
     } else {
       if (isHidden) {
         continue
@@ -340,6 +402,7 @@ export function normalizePages({
     switch (type) {
       case 'page':
       case 'menu':
+        // @ts-expect-error -- fixme
         docsDirectories.push(pageItem)
         break
       case 'doc':

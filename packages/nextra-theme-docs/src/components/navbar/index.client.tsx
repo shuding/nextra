@@ -69,7 +69,7 @@ const NavbarMenu: FC<{
           <_MenuItem
             key={key}
             as={Anchor}
-            href={item.href || routes[key]?.route || menu.route + '/' + key}
+            href={item.href || routes[key]?.route}
             className={({ focus }) =>
               cn(
                 '_block _py-1.5 _transition-colors _ps-3 _pe-9',
@@ -80,7 +80,7 @@ const NavbarMenu: FC<{
             }
             newWindow={item.newWindow}
           >
-            {item.title || key}
+            {item.title}
           </_MenuItem>
         ))}
       </MenuItems>
