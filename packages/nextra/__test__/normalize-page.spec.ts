@@ -178,7 +178,7 @@ describe('normalize-page', () => {
     })
   })
 
-  it.skip('should respect order for `type: "separator"`, `type: "menu"` and item with `href`', async () => {
+  it('should respect order for `type: "separator"`, `type: "menu"` and item with `href`', async () => {
     const pageMap = await getPageMapForFixture('respect-order-for-type-separator-menu-and-item-with-href')
 
     const normalizedResult = normalizePages({
@@ -208,13 +208,11 @@ describe('normalize-page', () => {
                   "type": "separator",
                 },
                 {
-                  "frontMatter": {
-                    "sidebarTitle": "Qux",
-                  },
+                  "frontMatter": undefined,
                   "isUnderCurrentDocsTree": true,
                   "name": "qux",
                   "route": "/one/two/qux",
-                  "title": "Qux",
+                  "title": "qux",
                   "type": "doc",
                 },
                 {
@@ -225,19 +223,15 @@ describe('normalize-page', () => {
                   "type": "doc",
                 },
                 {
-                  "frontMatter": {
-                    "sidebarTitle": "1 One",
-                  },
+                  "frontMatter": undefined,
                   "isUnderCurrentDocsTree": true,
                   "name": "1-one",
                   "route": "/one/two/1-one",
-                  "title": "1 One",
+                  "title": "1-one",
                   "type": "doc",
                 },
                 {
-                  "frontMatter": {
-                    "sidebarTitle": "2024",
-                  },
+                  "frontMatter": undefined,
                   "isUnderCurrentDocsTree": true,
                   "name": "2024",
                   "route": "/one/two/2024",
@@ -245,23 +239,19 @@ describe('normalize-page', () => {
                   "type": "doc",
                 },
                 {
-                  "frontMatter": {
-                    "sidebarTitle": "Foo",
-                  },
+                  "frontMatter": undefined,
                   "isUnderCurrentDocsTree": true,
                   "name": "foo",
                   "route": "/one/two/foo",
-                  "title": "Foo",
+                  "title": "foo",
                   "type": "doc",
                 },
                 {
-                  "frontMatter": {
-                    "sidebarTitle": "One",
-                  },
+                  "frontMatter": undefined,
                   "isUnderCurrentDocsTree": true,
                   "name": "one",
                   "route": "/one/two/one",
-                  "title": "One",
+                  "title": "one",
                   "type": "doc",
                 },
               ],

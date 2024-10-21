@@ -10,11 +10,11 @@ const _pageMap = [{
   name: "docs",
   route: "/docs",
   children: [{
+    data: docs_meta
+  }, {
     name: "bar",
     route: "/docs/bar",
     frontMatter: docs_bar
-  }, {
-    data: docs_meta
   }]
 }, {
   name: "foo",

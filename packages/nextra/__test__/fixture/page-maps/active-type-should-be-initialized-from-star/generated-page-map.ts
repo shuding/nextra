@@ -9,11 +9,11 @@ const _pageMap = [{
   name: "1-level",
   route: "/1-level",
   children: [{
+    data: _1_level_meta
+  }, {
     name: "foo",
     route: "/1-level/foo",
     frontMatter: _1_level_foo
-  }, {
-    data: _1_level_meta
   }]
 }];
 

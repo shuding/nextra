@@ -1,42 +1,49 @@
+// @ts-nocheck
+import { normalizePageMap } from 'nextra/page-map'
 import one_two_meta from "./one/two/_meta.ts";
-export const pageMap = [{
+import {metadata as one_two_1_one} from "./one/two/1-one.md";
+import {metadata as one_two_2024} from "./one/two/2024.md";
+import {metadata as one_two_foo} from "./one/two/foo.md";
+import {metadata as one_two_one} from "./one/two/one.md";
+import {metadata as one_two_qux} from "./one/two/qux.md";
+const _pageMap = [{
   name: "one",
   route: "/one",
   children: [{
     name: "two",
     route: "/one/two",
     children: [{
+      name: "2024",
+      route: "/one/two/2024",
+      frontMatter: one_two_2024
+    }, {
       data: one_two_meta
     }, {
       name: "1-one",
       route: "/one/two/1-one",
-      frontMatter: {
-        "sidebarTitle": "1 One"
-      }
-    }, {
-      name: "2024",
-      route: "/one/two/2024",
-      frontMatter: {
-        "sidebarTitle": "2024"
-      }
+      frontMatter: one_two_1_one
     }, {
       name: "foo",
       route: "/one/two/foo",
-      frontMatter: {
-        "sidebarTitle": "Foo"
-      }
+      frontMatter: one_two_foo
     }, {
       name: "one",
       route: "/one/two/one",
-      frontMatter: {
-        "sidebarTitle": "One"
-      }
+      frontMatter: one_two_one
     }, {
       name: "qux",
       route: "/one/two/qux",
-      frontMatter: {
-        "sidebarTitle": "Qux"
-      }
+      frontMatter: one_two_qux
     }]
   }]
 }];
+
+export const pageMap = normalizePageMap(_pageMap)
+
+export const RouteToFilepath = {
+  "one/two/1-one": "one/two/1-one.md",
+  "one/two/2024": "one/two/2024.md",
+  "one/two/foo": "one/two/foo.md",
+  "one/two/one": "one/two/one.md",
+  "one/two/qux": "one/two/qux.md"
+}
