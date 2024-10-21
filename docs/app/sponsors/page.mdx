@@ -16,12 +16,12 @@ import { Card } from '../showcase/page.mdx'
   </Button>
 </div>
 
-<Cards num={3}>
+<Cards num={3} className="[&_img]:object-cover [&_img]:[aspect-ratio:12/6.3]">
   <Card
     title="GraphQL Hive"
     href="https://the-guild.dev/graphql/hive?utm_source=nextra.site&utm_campaign=nextra&utm_content=logolink"
   >
-    <>![GraphQL Hive preview](./showcase/graphql-hive.png)</>
+    <>![GraphQL Hive preview](../showcase/_logos/graphql-hive.png)</>
   </Card>
   <Card
     title="Speakeasy"
@@ -36,10 +36,3 @@ import { Card } from '../showcase/page.mdx'
     <>![xyflow preview](../showcase/_logos/xyflow.jpg)</>
   </Card>
 </Cards>
-
-<style global jsx>{`
-  img {
-    aspect-ratio: 12/6.3;
-    object-fit: cover;
-  }
-`}</style>
