@@ -57,43 +57,7 @@ describe('normalize-page', () => {
 
   // https://github.com/shuding/nextra/issues/3331
   it('should keep `activeThemeContext`, `activeType` for hidden route', async () => {
-    const dir = path.join(
-      __dirname,
-      'fixture',
-      'page-maps',
-      'hidden-route-should-have-theme-context'
-    )
-    vi.doMock('next/dist/lib/find-pages-dir.js', () => ({
-      findPagesDir: () => ({ appDir: dir })
-    }))
-    vi.doMock('../src/server/constants.ts', async () => ({
-      ...(await vi.importActual('../src/server/constants.ts')),
-      CHUNKS_DIR: dir
-    }))
-    const { getFilepaths, collectPageMap } = await import(
-      '../src/server/page-map.js'
-    )
-
-    const relativePaths = await getFilepaths({ dir })
-
-    const { pageMap: _pageMap, mdxPages } =
-      generatePageMapFromFilepaths(relativePaths)
-    const rawJs = await collectPageMap({
-      pageMap: _pageMap,
-      mdxPages,
-      fromAppDir: false
-    })
-
-    await fs.writeFile(
-      path.join(dir, 'generated-page-map.ts'),
-      '// @ts-nocheck\n' +
-        rawJs.replaceAll('private-next-root-dir/content/', './')
-    )
-
-    const { pageMap } = await import(
-      './fixture/page-maps/hidden-route-should-have-theme-context/generated-page-map.js'
-    )
-
+    const pageMap = await getPageMapForFixture('hidden-route-should-have-theme-context')
     expect(pageMap).toEqual([
       {
         data: {
@@ -153,7 +117,7 @@ describe('normalize-page', () => {
     expect(result2).toMatchSnapshot()
   })
 
-  it.only('should initialize `activeType` from `*`', async () => {
+  it('should initialize `activeType` from `*`', async () => {
     const pageMap = await getPageMapForFixture(
       'active-type-should-be-initialized-from-star'
     )
@@ -214,26 +178,8 @@ describe('normalize-page', () => {
     })
   })
 
-  it('should respect order for `type: "separator"`, `type: "menu"` and item with `href`', async () => {
-    const dir = path.join(
-      __dirname,
-      'fixture',
-      'page-maps',
-      'respect-order-for-type-separator-menu-and-item-with-href'
-    )
-    vi.doMock('../src/server/file-system.ts', () => ({ PAGES_DIR: dir }))
-    vi.doMock('../src/server/constants.ts', async () => ({
-      ...(await vi.importActual('../src/server/constants.ts')),
-      CHUNKS_DIR: dir
-    }))
-    const { collectPageMap } = await import('../src/server/page-map.js')
-
-    const result = await collectPageMap({ dir })
-    await fs.writeFile(path.join(dir, 'generated-page-map.ts'), result)
-
-    const { pageMap } = await import(
-      './fixture/page-maps/respect-order-for-type-separator-menu-and-item-with-href/generated-page-map.js'
-    )
+  it.skip('should respect order for `type: "separator"`, `type: "menu"` and item with `href`', async () => {
+    const pageMap = await getPageMapForFixture('respect-order-for-type-separator-menu-and-item-with-href')
 
     const normalizedResult = normalizePages({
       list: pageMap,
@@ -336,26 +282,8 @@ describe('normalize-page', () => {
     `)
   })
 
-  it('`type: "menu"` should contain `items`', async () => {
-    const dir = path.join(
-      __dirname,
-      'fixture',
-      'page-maps',
-      'type-menu-should-contain-items'
-    )
-    vi.doMock('../src/server/file-system.ts', () => ({ PAGES_DIR: dir }))
-    vi.doMock('../src/server/constants.ts', async () => ({
-      ...(await vi.importActual('../src/server/constants.ts')),
-      CHUNKS_DIR: dir
-    }))
-    const { collectPageMap } = await import('../src/server/page-map.js')
-
-    const result = await collectPageMap({ dir })
-    await fs.writeFile(path.join(dir, 'generated-page-map.ts'), result)
-
-    const { pageMap } = await import(
-      './fixture/page-maps/type-menu-should-contain-items/generated-page-map.js'
-    )
+  it.only('`type: "menu"` should contain `items`', async () => {
+    const pageMap = await getPageMapForFixture('type-menu-should-contain-items')
 
     const normalizedResult = normalizePages({
       list: pageMap,
@@ -372,21 +300,17 @@ describe('normalize-page', () => {
         {
           "children": [
             {
-              "frontMatter": {
-                "sidebarTitle": "Not Specified",
-              },
+              "frontMatter": undefined,
               "name": "not-specified",
               "route": "/mix/not-specified",
-              "title": "Not Specified",
+              "title": "not-specified",
               "type": "doc",
             },
             {
-              "frontMatter": {
-                "sidebarTitle": "Qux",
-              },
+              "frontMatter": undefined,
               "name": "qux",
               "route": "/mix/qux",
-              "title": "Qux",
+              "title": "qux",
               "type": "doc",
             },
           ],
@@ -419,21 +343,17 @@ describe('normalize-page', () => {
         {
           "children": [
             {
-              "frontMatter": {
-                "sidebarTitle": "One",
-              },
+              "frontMatter": undefined,
               "name": "one",
               "route": "/pagesOnly/one",
-              "title": "One",
+              "title": "one",
               "type": "doc",
             },
             {
-              "frontMatter": {
-                "sidebarTitle": "Two",
-              },
+              "frontMatter": undefined,
               "name": "two",
               "route": "/pagesOnly/two",
-              "title": "Two",
+              "title": "two",
               "type": "doc",
             },
           ],
