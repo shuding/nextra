@@ -1,5 +1,18 @@
 # nextra
 
+## 3.1.0-canary.1
+
+### Minor Changes
+
+- 8e9767e: `activeType` should be initialized from `meta['*']`
+
+### Patch Changes
+
+- 035fe48: - fix empty dropdown menu when \_meta item with `type: "menu"`
+  contains items with local pages
+- c002118: - add tests for should respect order for `type: "separator"`,
+  `type: "menu"` and item with `href`
+
 ## 3.1.0-canary.0
 
 ### Minor Changes

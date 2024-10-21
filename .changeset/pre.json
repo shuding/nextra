@@ -6,5 +6,10 @@
     "nextra-theme-blog": "3.0.15",
     "nextra-theme-docs": "3.0.15"
   },
-  "changesets": ["chilly-otters-glow"]
+  "changesets": [
+    "beige-experts-tie",
+    "chilly-chairs-protect",
+    "chilly-otters-glow",
+    "few-cups-smoke"
+  ]
 }
