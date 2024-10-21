@@ -59,6 +59,7 @@ function NavbarMenu({
         }
       >
         {children}
+        <ArrowRightIcon className="_h-3.5 *:_origin-center *:_transition-transform *:_rotate-90" />
       </MenuButton>
       <MenuItems
         transition
@@ -136,7 +137,6 @@ export function Navbar({ items }: NavBarProps): ReactElement {
               return (
                 <NavbarMenu key={menu.title} menu={menu}>
                   {menu.title}
-                  <ArrowRightIcon className="_h-3.5 *:_origin-center *:_transition-transform *:_rotate-90" />
                 </NavbarMenu>
               )
             }

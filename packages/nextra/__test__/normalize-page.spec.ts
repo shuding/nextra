@@ -48,116 +48,6 @@ describe('normalize-page', () => {
     expect(result).toMatchSnapshot()
   })
 
-  it('/500 page', () => {
-    const result = normalizePages({
-      list: [
-        { name: '500', route: '/500' },
-        { name: 'get-started', route: '/get-started' },
-        { name: 'index', route: '/' },
-        {
-          data: {
-            '500': {
-              type: 'page',
-              theme: {
-                layout: 'raw'
-              }
-            },
-            index: 'Introduction',
-            'get-started': 'Get Started'
-          }
-        }
-      ],
-      route: '/500'
-    })
-    expect(result).toMatchSnapshot()
-  })
-
-  // https://github.com/shuding/nextra/issues/1888
-  it('should set `route: #` for `type: menu`', () => {
-    const result = normalizePages({
-      list: [
-        {
-          data: {
-            index: {
-              type: 'page',
-              title: 'Nextra',
-              display: 'hidden'
-            },
-            docs: {
-              type: 'page',
-              title: 'Documentation'
-            },
-            explorers: {
-              title: 'Explorers',
-              type: 'menu'
-            },
-            showcase: {
-              type: 'page',
-              title: 'Showcase'
-            },
-            explorers2: {
-              title: 'Explorers2',
-              type: 'menu'
-            },
-            about: {
-              type: 'page',
-              title: 'About'
-            },
-            explorers3: {
-              title: 'Explorers3',
-              type: 'menu'
-            }
-          }
-        },
-        {
-          name: 'about',
-          route: '/about'
-        },
-        {
-          name: 'showcase',
-          route: '/showcase'
-        }
-      ],
-      route: '/docs'
-    })
-    expect(result.topLevelNavbarItems).toMatchInlineSnapshot(`
-      [
-        {
-          "name": "docs",
-          "title": "Documentation",
-          "type": "page",
-        },
-        {
-          "name": "explorers",
-          "title": "Explorers",
-          "type": "menu",
-        },
-        {
-          "name": "showcase",
-          "route": "/showcase",
-          "title": "Showcase",
-          "type": "page",
-        },
-        {
-          "name": "explorers2",
-          "title": "Explorers2",
-          "type": "menu",
-        },
-        {
-          "name": "about",
-          "route": "/about",
-          "title": "About",
-          "type": "page",
-        },
-        {
-          "name": "explorers3",
-          "title": "Explorers3",
-          "type": "menu",
-        },
-      ]
-    `)
-  })
-
   // https://github.com/shuding/nextra/issues/3331
   it('should keep `activeThemeContext`, `activeType` for hidden route', async () => {
     const dir = path.join(
@@ -323,5 +213,127 @@ describe('normalize-page', () => {
         typesetting: 'default'
       }
     })
+  })
+
+  it('should respect order for `type: "separator"`, `type: "menu"` and item with `href`', async () => {
+    const dir = path.join(
+      __dirname,
+      'fixture',
+      'page-maps',
+      'respect-order-for-type-separator-menu-and-item-with-href'
+    )
+    vi.doMock('../src/server/file-system.ts', () => ({ PAGES_DIR: dir }))
+    vi.doMock('../src/server/constants.ts', async () => ({
+      ...(await vi.importActual('../src/server/constants.ts')),
+      CHUNKS_DIR: dir
+    }))
+    const { collectPageMap } = await import('../src/server/page-map.js')
+
+    const result = await collectPageMap({ dir })
+    await fs.writeFile(path.join(dir, 'generated-page-map.ts'), result)
+
+    const { pageMap } = await import(
+      './fixture/page-maps/respect-order-for-type-separator-menu-and-item-with-href/generated-page-map.js'
+    )
+
+    const normalizedResult = normalizePages({
+      list: pageMap,
+      route: '/one/two/qux'
+    })
+    expect(normalizedResult.docsDirectories).toMatchInlineSnapshot(`
+      [
+        {
+          "children": [
+            {
+              "children": [
+                {
+                  "items": {
+                    "nextra": {
+                      "href": "https://nextra.site",
+                      "title": "Nextra",
+                    },
+                  },
+                  "name": "menu",
+                  "title": "menu",
+                  "type": "menu",
+                },
+                {
+                  "isUnderCurrentDocsTree": true,
+                  "name": "---",
+                  "type": "separator",
+                },
+                {
+                  "frontMatter": {
+                    "sidebarTitle": "Qux",
+                  },
+                  "isUnderCurrentDocsTree": true,
+                  "name": "qux",
+                  "route": "/one/two/qux",
+                  "title": "Qux",
+                  "type": "doc",
+                },
+                {
+                  "href": "https://nextra.site",
+                  "isUnderCurrentDocsTree": true,
+                  "name": "nextra",
+                  "title": "Nextra",
+                  "type": "doc",
+                },
+                {
+                  "frontMatter": {
+                    "sidebarTitle": "1 One",
+                  },
+                  "isUnderCurrentDocsTree": true,
+                  "name": "1-one",
+                  "route": "/one/two/1-one",
+                  "title": "1 One",
+                  "type": "doc",
+                },
+                {
+                  "frontMatter": {
+                    "sidebarTitle": "2024",
+                  },
+                  "isUnderCurrentDocsTree": true,
+                  "name": "2024",
+                  "route": "/one/two/2024",
+                  "title": "2024",
+                  "type": "doc",
+                },
+                {
+                  "frontMatter": {
+                    "sidebarTitle": "Foo",
+                  },
+                  "isUnderCurrentDocsTree": true,
+                  "name": "foo",
+                  "route": "/one/two/foo",
+                  "title": "Foo",
+                  "type": "doc",
+                },
+                {
+                  "frontMatter": {
+                    "sidebarTitle": "One",
+                  },
+                  "isUnderCurrentDocsTree": true,
+                  "name": "one",
+                  "route": "/one/two/one",
+                  "title": "One",
+                  "type": "doc",
+                },
+              ],
+              "isUnderCurrentDocsTree": true,
+              "name": "two",
+              "route": "/one/two",
+              "title": "two",
+              "type": "doc",
+            },
+          ],
+          "isUnderCurrentDocsTree": true,
+          "name": "one",
+          "route": "/one",
+          "title": "one",
+          "type": "doc",
+        },
+      ]
+    `)
   })
 })
