@@ -362,6 +362,8 @@ describe('normalize-page', () => {
       list: pageMap,
       route: '/pagesOnly/one'
     })
+    expect(normalizedResult.topLevelNavbarItems.find(i => i.name === 'mix')).toHaveProperty('items')
+    expect(normalizedResult.topLevelNavbarItems.find(i => i.name === 'pagesOnly')).toHaveProperty('items')
     expect(normalizedResult.topLevelNavbarItems).toMatchInlineSnapshot(`
       [
         {
