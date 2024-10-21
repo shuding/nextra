@@ -196,7 +196,6 @@ function FolderImpl({ item, anchors, onFocus }: FolderProps): ReactElement {
           <Menu
             className={cn(classes.border, '_pt-1 ltr:_ml-3 rtl:_mr-3')}
             directories={item.children}
-            base={item.route}
             anchors={anchors}
           />
         </Collapse>
@@ -285,7 +284,6 @@ function File({
 interface MenuProps {
   directories: PageItem[] | Item[]
   anchors: Heading[]
-  base?: string
   className?: string
   onlyCurrentDocs?: boolean
 }

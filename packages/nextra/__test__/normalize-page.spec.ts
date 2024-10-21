@@ -336,4 +336,154 @@ describe('normalize-page', () => {
       ]
     `)
   })
+
+  it('`type: "menu"` should contain `items`', async () => {
+    const dir = path.join(
+      __dirname,
+      'fixture',
+      'page-maps',
+      'type-menu-should-contain-items'
+    )
+    vi.doMock('../src/server/file-system.ts', () => ({ PAGES_DIR: dir }))
+    vi.doMock('../src/server/constants.ts', async () => ({
+      ...(await vi.importActual('../src/server/constants.ts')),
+      CHUNKS_DIR: dir
+    }))
+    const { collectPageMap } = await import('../src/server/page-map.js')
+
+    const result = await collectPageMap({ dir })
+    await fs.writeFile(path.join(dir, 'generated-page-map.ts'), result)
+
+    const { pageMap } = await import(
+      './fixture/page-maps/type-menu-should-contain-items/generated-page-map.js'
+    )
+
+    const normalizedResult = normalizePages({
+      list: pageMap,
+      route: '/pagesOnly/one'
+    })
+    expect(
+      normalizedResult.topLevelNavbarItems.find(i => i.name === 'mix')
+    ).toHaveProperty('items')
+    expect(
+      normalizedResult.topLevelNavbarItems.find(i => i.name === 'pagesOnly')
+    ).toHaveProperty('items')
+    expect(normalizedResult.topLevelNavbarItems).toMatchInlineSnapshot(`
+      [
+        {
+          "children": [
+            {
+              "frontMatter": {
+                "sidebarTitle": "Not Specified",
+              },
+              "name": "not-specified",
+              "route": "/mix/not-specified",
+              "title": "Not Specified",
+              "type": "doc",
+            },
+            {
+              "frontMatter": {
+                "sidebarTitle": "Qux",
+              },
+              "name": "qux",
+              "route": "/mix/qux",
+              "title": "Qux",
+              "type": "doc",
+            },
+          ],
+          "firstChildRoute": "/mix/not-specified",
+          "items": {
+            "nextra": {
+              "href": "https://nextra.site",
+              "title": "Nextra",
+            },
+            "qux": {
+              "title": "Qux",
+            },
+          },
+          "name": "mix",
+          "route": "/mix",
+          "title": "Mix",
+          "type": "menu",
+        },
+        {
+          "items": {
+            "nextra": {
+              "href": "https://nextra.site",
+              "title": "Nextra",
+            },
+          },
+          "name": "hrefOnly",
+          "title": "Href Only",
+          "type": "menu",
+        },
+        {
+          "children": [
+            {
+              "frontMatter": {
+                "sidebarTitle": "One",
+              },
+              "name": "one",
+              "route": "/pagesOnly/one",
+              "title": "One",
+              "type": "doc",
+            },
+            {
+              "frontMatter": {
+                "sidebarTitle": "Two",
+              },
+              "name": "two",
+              "route": "/pagesOnly/two",
+              "title": "Two",
+              "type": "doc",
+            },
+          ],
+          "firstChildRoute": "/pagesOnly/one",
+          "items": {
+            "one": {
+              "title": "One",
+            },
+            "two": {
+              "title": "Two",
+            },
+          },
+          "name": "pagesOnly",
+          "route": "/pagesOnly",
+          "title": "Pages Only",
+          "type": "menu",
+        },
+      ]
+    `)
+  })
+
+  it('pages order without `type: "page"`', async () => {
+    const dir = path.join(
+      __dirname,
+      'fixture',
+      'page-maps',
+      'pages-order-without-type-page'
+    )
+    vi.doMock('../src/server/file-system.ts', () => ({ PAGES_DIR: dir }))
+    vi.doMock('../src/server/constants.ts', async () => ({
+      ...(await vi.importActual('../src/server/constants.ts')),
+      CHUNKS_DIR: dir
+    }))
+    const { collectPageMap } = await import('../src/server/page-map.js')
+
+    const result = await collectPageMap({ dir })
+    await fs.writeFile(path.join(dir, 'generated-page-map.ts'), result)
+
+    const { pageMap } = await import(
+      './fixture/page-maps/pages-order-without-type-page/generated-page-map.js'
+    )
+
+    const normalizedResult = normalizePages({
+      list: pageMap,
+      route: '/docs/bar'
+    })
+    const { flatDirectories } = normalizedResult
+    expect(flatDirectories[0].name).toBe('_')
+    expect(flatDirectories[1].route).toBe('/docs/bar')
+    expect(flatDirectories[2].route).toBe('/foo')
+  })
 })

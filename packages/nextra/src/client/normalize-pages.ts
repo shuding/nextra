@@ -30,7 +30,7 @@ function extendMeta(
   _meta: MetaType = {},
   fallback: MetaType,
   metadata: MetaType = {}
-): Record<string, any> {
+): MetaType {
   const theme: PageTheme = {
     ...fallback.theme,
     ..._meta.theme,
@@ -148,20 +148,43 @@ export function normalizePages({
   }
   // Normalize items based on files and _meta.json.
   items.sort((a, b) => {
-    const indexB = metaKeys.indexOf(b.name)
     const indexA = metaKeys.indexOf(a.name)
-    if (indexB === -1) {
-      return indexA === -1 ? a.name - b.name : -1
-    }
+    const indexB = metaKeys.indexOf(b.name)
+    if (indexA === -1 && indexB === -1) return a.name < b.name ? -1 : 1
+    if (indexA === -1) return 1
+    if (indexB === -1) return -1
     return indexA - indexB
   })
 
   for (const [index, metaKey] of metaKeys.entries()) {
-    if (items.some(item => item.name === metaKey)) continue
+    const metaItem = meta[metaKey]
+    const item = items.find(item => item.name === metaKey)
+    if (metaItem.type === 'menu') {
+      if (item) {
+        item.items = metaItem.items
+        if (typeof window === 'undefined') {
+          // Validate only on server, will be tree-shaked in client build
+          // Validate menu items, local page should exist
+          const { children } = items.find(
+            (i): i is Folder<MdxFile> => i.name === metaKey
+          )!
+          for (const [key, value] of Object.entries(
+            item.items as Record<string, { title: string; href?: string }>
+          )) {
+            if (!value.href && children.every(i => i.name !== key)) {
+              throw new Error(
+                `Validation of "_meta" file has failed.
+The field key "${metaKey}.items.${key}" in \`_meta\` file refers to a page that cannot be found, remove this key from "_meta" file.`
+              )
+            }
+          }
+        }
+      }
+    }
+    if (item) continue
 
-    // Validate only on server, will be tree-shaked in client build
     if (typeof window === 'undefined') {
-      const metaItem = meta[metaKey]
+      // Validate only on server, will be tree-shaked in client build
       const isValid =
         metaItem.type === 'separator' ||
         metaItem.type === 'menu' ||
@@ -328,9 +351,8 @@ The field key "${metaKey}" in \`_meta\` file refers to a page that cannot be fou
 
           // If it's a page with children inside, we inject itself as a page too.
           if (normalizedChildren.flatDirectories.length) {
-            pageItem.firstChildRoute = findFirstRoute(
-              normalizedChildren.flatDirectories
-            )
+            const route = findFirstRoute(normalizedChildren.flatDirectories)
+            if (route) pageItem.firstChildRoute = route
             topLevelNavbarItems.push(pageItem)
           } else if (pageItem.withIndexPage) {
             topLevelNavbarItems.push(pageItem)

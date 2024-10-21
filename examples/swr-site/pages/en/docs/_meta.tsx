@@ -1,7 +1,7 @@
-import type { ReactNode } from 'react'
+import type { FC, ReactNode } from 'react'
 import { SWRLogo } from '../../../theme.config'
 
-export function Separator({ children }: { children: ReactNode }) {
+export const Separator: FC<{ children: ReactNode }> = ({ children }) => {
   return (
     <div className="flex items-center gap-2">
       <SWRLogo className="h-1.5 shrink-0" />
