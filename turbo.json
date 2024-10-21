@@ -26,6 +26,10 @@
       "cache": false
     },
     "dev": {
+      "dependsOn": [
+        // Run `build` in workspaces I depend on first
+        "^build"
+      ],
       "cache": false
     }
   }
