@@ -1,4 +1,10 @@
-import type { Folder, FrontMatter, MdxFile, MetaJsonFile, PageMapItem } from '../types'
+import type {
+  Folder,
+  FrontMatter,
+  MdxFile,
+  MetaJsonFile,
+  PageMapItem
+} from '../types'
 
 export function normalizePageMap(pageMap: PageMapItem[] | Folder): any {
   if (Array.isArray(pageMap)) {
@@ -25,7 +31,7 @@ function sortFolder(pageMap: PageMapItem[] | Folder) {
 
   const meta: Record<string, Record<string, any>> = {}
 
-  for (const [index, item]  of folder.children.entries()) {
+  for (const [index, item] of folder.children.entries()) {
     if (
       isFolder &&
       'frontMatter' in item &&
@@ -48,7 +54,10 @@ function sortFolder(pageMap: PageMapItem[] | Folder) {
         }
       }
     } else {
-      const prevItem = folder.children[index - 1] as Exclude<PageMapItem, MetaJsonFile>
+      const prevItem = folder.children[index - 1] as Exclude<
+        PageMapItem,
+        MetaJsonFile
+      >
       // If there are two items with the same name, they must be a directory and a
       // page. In that case we merge them, and use the page's link.
       if (prevItem && prevItem.name === item.name) {
@@ -83,41 +92,34 @@ function sortFolder(pageMap: PageMapItem[] | Folder) {
       if (item) {
         // @ts-expect-error fixme
         item.items = metaItem.items
-        if (typeof window === 'undefined') {
-          // Validate only on server, will be tree-shaked in client build
-          // Validate menu items, local page should exist
-          const { children } = items.find(
-            (i): i is Folder<MdxFile> => i.name === metaKey
-          )!
-          for (const [key, value] of Object.entries(
-            // @ts-expect-error fixme
-            item.items as Record<string, { title: string; href?: string }>
-          )) {
-            if (!value.href && children.every(i => i.name !== key)) {
-              throw new Error(
-                `Validation of "_meta" file has failed.
+
+        // Validate menu items, local page should exist
+        const { children } = items.find(
+          (i): i is Folder<MdxFile> => i.name === metaKey
+        )!
+        for (const [key, value] of Object.entries(
+          // @ts-expect-error fixme
+          item.items as Record<string, { title: string; href?: string }>
+        )) {
+          if (!value.href && children.every(i => i.name !== key)) {
+            throw new Error(
+              `Validation of "_meta" file has failed.
 The field key "${metaKey}.items.${key}" in \`_meta\` file refers to a page that cannot be found, remove this key from "_meta" file.`
-              )
-            }
+            )
           }
         }
       }
     }
     if (item) continue
 
-    if (typeof window === 'undefined') {
-      // Validate only on server, will be tree-shaked in client build
-      const isValid =
-        metaItem.type === 'separator' ||
-        metaItem.type === 'menu' ||
-        metaItem.href
+    const isValid =
+      metaItem.type === 'separator' || metaItem.type === 'menu' || metaItem.href
 
-      if (!isValid) {
-        throw new Error(
-          `Validation of "_meta" file has failed.
+    if (!isValid) {
+      throw new Error(
+        `Validation of "_meta" file has failed.
 The field key "${metaKey}" in \`_meta\` file refers to a page that cannot be found, remove this key from "_meta" file.`
-        )
-      }
+      )
     }
 
     const currentItem = items[index]
