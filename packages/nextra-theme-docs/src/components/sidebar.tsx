@@ -102,7 +102,7 @@ const Folder: FC<FolderProps> = ({ item, anchors, onFocus, level }) => {
     const isClickOnIcon =
       el /* will be always <a> or <button> */ !==
       event.target /* can be <svg> or <path> */
-    if (!isClickOnIcon) {
+    if (isClickOnIcon) {
       event.preventDefault()
     }
     const isOpen = el.hasAttribute('data-open')

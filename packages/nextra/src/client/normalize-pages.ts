@@ -4,7 +4,7 @@ import type {
   menuItemSchema,
   pageThemeSchema
 } from '../server/schemas'
-import type { Folder, MdxFile, MetaJsonFile, PageMapItem } from '../types'
+import type { Folder, FrontMatter, MdxFile, PageMapItem } from '../types'
 
 const DEFAULT_PAGE_THEME: PageTheme = {
   breadcrumb: true,
@@ -116,96 +116,6 @@ export function normalizePages({
   underCurrentDocsRoot?: boolean
   pageThemeContext?: PageTheme
 }): NormalizedResult {
-  let meta: MetaType = {}
-  let metaKeys: (keyof MetaType)[] = []
-  const items: any[] = []
-
-  for (const [index, item] of list.entries()) {
-    if ('data' in item) {
-      meta = item.data
-      metaKeys = Object.keys(meta).filter(key => key !== '*')
-      for (const key of metaKeys) {
-        if (typeof meta[key] !== 'string') continue
-        meta[key] = { title: meta[key] }
-      }
-      continue
-    }
-    const prevItem = list[index - 1] as Exclude<PageMapItem, MetaJsonFile>
-
-    // If there are two items with the same name, they must be a directory and a
-    // page. In that case we merge them, and use the page's link.
-    if (prevItem && prevItem.name === item.name) {
-      items[items.length - 1] = {
-        ...prevItem,
-        withIndexPage: true,
-        // @ts-expect-error fixme
-        frontMatter: item.frontMatter
-      }
-      continue
-    }
-    items.push(item)
-  }
-  // Normalize items based on files and _meta.json.
-  items.sort((a, b) => {
-    const indexA = metaKeys.indexOf(a.name)
-    const indexB = metaKeys.indexOf(b.name)
-    if (indexA === -1 && indexB === -1) return a.name < b.name ? -1 : 1
-    if (indexA === -1) return 1
-    if (indexB === -1) return -1
-    return indexA - indexB
-  })
-
-  for (const [index, metaKey] of metaKeys.entries()) {
-    const metaItem = meta[metaKey]
-    const item = items.find(item => item.name === metaKey)
-    if (metaItem.type === 'menu') {
-      if (item) {
-        item.items = metaItem.items
-        if (typeof window === 'undefined') {
-          // Validate only on server, will be tree-shaked in client build
-          // Validate menu items, local page should exist
-          const { children } = items.find(
-            (i): i is Folder<MdxFile> => i.name === metaKey
-          )!
-          for (const [key, value] of Object.entries(
-            item.items as Record<string, { title: string; href?: string }>
-          )) {
-            if (!value.href && children.every(i => i.name !== key)) {
-              throw new Error(
-                `Validation of "_meta" file has failed.
-The field key "${metaKey}.items.${key}" in \`_meta\` file refers to a page that cannot be found, remove this key from "_meta" file.`
-              )
-            }
-          }
-        }
-      }
-    }
-    if (item) continue
-
-    if (typeof window === 'undefined') {
-      // Validate only on server, will be tree-shaked in client build
-      const isValid =
-        metaItem.type === 'separator' ||
-        metaItem.type === 'menu' ||
-        metaItem.href
-
-      if (!isValid) {
-        throw new Error(
-          `Validation of "_meta" file has failed.
-The field key "${metaKey}" in \`_meta\` file refers to a page that cannot be found, remove this key from "_meta" file.`
-        )
-      }
-    }
-
-    const currentItem = items[index]
-    if (currentItem && currentItem.name === metaKey) continue
-    items.splice(
-      index, // index at which to start changing the array
-      0, // remove zero items
-      { name: metaKey, ...meta[metaKey] }
-    )
-  }
-
   // All directories
   // - directories: all directories in the tree structure
   // - flatDirectories: all directories in the flat structure, used by search and footer navigation
@@ -219,7 +129,20 @@ The field key "${metaKey}" in \`_meta\` file refers to a page that cannot be fou
   // Page directories
   const topLevelNavbarItems: (PageItem | MenuItem)[] = []
 
-  const { title: _title, href: _href, ...fallbackMeta } = meta['*'] || {}
+  const meta =
+    'data' in list[0]
+      ? (list[0].data as Record<string, Record<string, any> | undefined>)
+      : {}
+  // Normalize items based on files and _meta.json.
+  const items = ('data' in list[0] ? list.slice(1) : list) as (
+    | (Folder & {
+        withIndexPage?: true
+        frontMatter: FrontMatter
+      })
+    | MdxFile
+  )[]
+
+  const fallbackMeta = meta['*'] || {}
 
   let activeType: string = fallbackMeta.type
   let activeIndex = 0
@@ -332,7 +255,7 @@ The field key "${metaKey}" in \`_meta\` file refers to a page that cannot be fou
               flatDocsDirectories.length + normalizedChildren.activeIndex
             break
         }
-        if (currentItem.withIndexPage && type === 'doc') {
+        if ((currentItem as Item).withIndexPage && type === 'doc') {
           activeIndex++
         }
       }

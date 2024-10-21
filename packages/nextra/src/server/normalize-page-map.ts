@@ -1,4 +1,4 @@
-import type { Folder, FrontMatter, MdxFile, PageMapItem } from '../types'
+import type { Folder, FrontMatter, MdxFile, MetaJsonFile, PageMapItem } from '../types'
 
 export function normalizePageMap(pageMap: PageMapItem[] | Folder): any {
   if (Array.isArray(pageMap)) {
@@ -25,7 +25,7 @@ function sortFolder(pageMap: PageMapItem[] | Folder) {
 
   const meta: Record<string, Record<string, any>> = {}
 
-  for (const item of folder.children) {
+  for (const [index, item]  of folder.children.entries()) {
     if (
       isFolder &&
       'frontMatter' in item &&
@@ -48,76 +48,92 @@ function sortFolder(pageMap: PageMapItem[] | Folder) {
         }
       }
     } else {
+      const prevItem = folder.children[index - 1] as Exclude<PageMapItem, MetaJsonFile>
+      // If there are two items with the same name, they must be a directory and a
+      // page. In that case we merge them, and use the page's link.
+      if (prevItem && prevItem.name === item.name) {
+        newChildren[newChildren.length - 1] = {
+          ...prevItem,
+          // @ts-expect-error fixme
+          withIndexPage: true,
+          frontMatter: item.frontMatter
+        }
+        continue
+      }
       newChildren.push(item)
     }
   }
 
-  const metaKeys = Object.keys(meta || {})
-  let metaKeyIndex = -1
+  const metaKeys = Object.keys(meta).filter(key => key !== '*')
 
-  const children = newChildren
-    .sort((a, b) => {
-      const indexA = metaKeys.indexOf(a.name)
-      const indexB = metaKeys.indexOf(b.name)
-      if (indexA === -1 && indexB === -1) return a.name.localeCompare(b.name)
-      if (indexA === -1) return 1
-      if (indexB === -1) return -1
-      return indexA - indexB
-    })
-    .flatMap(item => {
-      const items = []
-      const index = metaKeys.indexOf(item.name)
-      let extendedItem
-      if (index !== -1) {
-        // Fill all skipped items in meta.
-        for (let i = metaKeyIndex + 1; i < index; i++) {
-          const key = metaKeys[i]
-          if (key === '*') continue
-          const value = meta[key]
-          const isValid = value.type === 'separator' || value.href
+  // Normalize items based on files and _meta.json.
+  const items = newChildren.toSorted((a, b) => {
+    const indexA = metaKeys.indexOf(a.name)
+    const indexB = metaKeys.indexOf(b.name)
+    if (indexA === -1 && indexB === -1) return a.name < b.name ? -1 : 1
+    if (indexA === -1) return 1
+    if (indexB === -1) return -1
+    return indexA - indexB
+  })
 
-          if (!isValid) {
-            throw new Error(
-              `Field key "${key}" in \`_meta\` file points to nothing, remove him`
-            )
+  for (const [index, metaKey] of metaKeys.entries()) {
+    const metaItem = meta[metaKey]
+    const item = items.find(item => item.name === metaKey)
+    if (metaItem.type === 'menu') {
+      if (item) {
+        // @ts-expect-error fixme
+        item.items = metaItem.items
+        if (typeof window === 'undefined') {
+          // Validate only on server, will be tree-shaked in client build
+          // Validate menu items, local page should exist
+          const { children } = items.find(
+            (i): i is Folder<MdxFile> => i.name === metaKey
+          )!
+          for (const [key, value] of Object.entries(
+            // @ts-expect-error fixme
+            item.items as Record<string, { title: string; href?: string }>
+          )) {
+            if (!value.href && children.every(i => i.name !== key)) {
+              throw new Error(
+                `Validation of "_meta" file has failed.
+The field key "${metaKey}.items.${key}" in \`_meta\` file refers to a page that cannot be found, remove this key from "_meta" file.`
+              )
+            }
           }
-          items.push({ name: key, ...value })
         }
-        metaKeyIndex = index
-        extendedItem = { ...meta[item.name], ...item }
-
-        // TODO: improve this to avoid using `delete` and pick only needed properties
-        // @ts-expect-error
-        delete extendedItem.type
-        // @ts-expect-error
-        delete extendedItem.theme
-        // @ts-expect-error
-        delete extendedItem.display
       }
-      items.push(extendedItem || item)
-      return items
-    })
-
-  // Fill all skipped items in meta.
-  for (let i = metaKeyIndex + 1; i < metaKeys.length; i++) {
-    const key = metaKeys[i]
-    const value = meta[key]
-    if (key === '*') continue
-    const isValid =
-      value.type === 'separator' || value.href || value.type === 'menu'
-
-    if (!isValid) {
-      throw new Error(
-        `Field key "${key}" in \`_meta\` file points to nothing, remove him`
-      )
     }
-    children.push({ name: key, ...value } as MdxFile)
+    if (item) continue
+
+    if (typeof window === 'undefined') {
+      // Validate only on server, will be tree-shaked in client build
+      const isValid =
+        metaItem.type === 'separator' ||
+        metaItem.type === 'menu' ||
+        metaItem.href
+
+      if (!isValid) {
+        throw new Error(
+          `Validation of "_meta" file has failed.
+The field key "${metaKey}" in \`_meta\` file refers to a page that cannot be found, remove this key from "_meta" file.`
+        )
+      }
+    }
+
+    const currentItem = items[index]
+    if (currentItem && currentItem.name === metaKey) continue
+    items.splice(
+      index, // index at which to start changing the array
+      0, // remove zero items
+      // @ts-expect-error fixme
+      { name: metaKey, ...meta[metaKey] }
+    )
   }
 
   if (metaKeys.length) {
     // @ts-expect-error
-    children.unshift({ data: meta })
+    items.unshift({ data: meta })
   }
 
-  return isFolder ? { ...folder, children } : children
+  return isFolder ? { ...folder, children: items } : items
 }
