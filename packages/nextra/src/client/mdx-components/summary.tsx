@@ -15,7 +15,7 @@ export function Summary({
         '[&::-webkit-details-marker]:_hidden', // Safari
         // display: flex removes whitespace when `<summary>` contains text with other elements, like `foo <strong>bar</strong>`
         '_whitespace-pre-wrap',
-        '_select-none',
+        '_select-none _rounded',
         className
       )}
       {...props}

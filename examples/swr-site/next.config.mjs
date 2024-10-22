@@ -1,5 +1,4 @@
 import bundleAnalyzer from '@next/bundle-analyzer'
-import type { NextConfig } from 'next'
 import nextra from 'nextra'
 
 const withNextra = nextra({
@@ -12,7 +11,7 @@ const withBundleAnalyzer = bundleAnalyzer({
   enabled: process.env.ANALYZE === 'true'
 })
 
-const nextConfig: NextConfig = withBundleAnalyzer(
+const nextConfig = withBundleAnalyzer(
   withNextra({
     reactStrictMode: true,
     eslint: {
@@ -51,7 +50,9 @@ const nextConfig: NextConfig = withBundleAnalyzer(
     experimental: {
       optimizePackageImports: [
         // '@app/_icons'
-        'nextra/components'
+        // Provoke error
+        // Could not find the module in the React Client Manifest. This is probably a bug in the React Server Components bundler
+        // 'nextra/components'
       ]
     }
   })

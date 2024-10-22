@@ -97,7 +97,6 @@ type NormalizedResult = {
   activeThemeContext: PageTheme
   activePath: Item[]
   directories: Item[]
-  flatDirectories: Item[]
   docsDirectories: DocsItem[]
   flatDocsDirectories: DocsItem[]
   topLevelNavbarItems: (PageItem | MenuItem)[]
@@ -118,9 +117,7 @@ export function normalizePages({
 }): NormalizedResult {
   // All directories
   // - directories: all directories in the tree structure
-  // - flatDirectories: all directories in the flat structure, used by search and footer navigation
   const directories: Item[] = []
-  const flatDirectories: Item[] = []
 
   // Docs directories
   const docsDirectories: DocsItem[] = []
@@ -129,10 +126,7 @@ export function normalizePages({
   // Page directories
   const topLevelNavbarItems: (PageItem | MenuItem)[] = []
 
-  const meta =
-    'data' in list[0]
-      ? (list[0].data as Record<string, Record<string, any> | undefined>)
-      : {}
+  const meta = 'data' in list[0] ? (list[0].data as MetaType) : {}
   // Normalize items based on files and _meta.json.
   const items = ('data' in list[0] ? list.slice(1) : list) as (
     | (Folder & {
@@ -268,8 +262,8 @@ export function normalizePages({
           docsDirectories.push(...normalizedChildren.docsDirectories)
 
           // If it's a page with children inside, we inject itself as a page too.
-          if (normalizedChildren.flatDirectories.length) {
-            const route = findFirstRoute(normalizedChildren.flatDirectories)
+          if (normalizedChildren.flatDocsDirectories.length) {
+            const route = findFirstRoute(normalizedChildren.flatDocsDirectories)
             if (route) pageItem.firstChildRoute = route
             topLevelNavbarItems.push(pageItem)
           } else if (pageItem.withIndexPage) {
@@ -285,14 +279,12 @@ export function normalizePages({
           }
       }
 
-      flatDirectories.push(...normalizedChildren.flatDirectories)
       flatDocsDirectories.push(...normalizedChildren.flatDocsDirectories)
       item.children.push(...normalizedChildren.directories)
     } else {
       if (isHidden) {
         continue
       }
-      flatDirectories.push(item)
       switch (type) {
         case 'page':
         case 'menu':
@@ -343,7 +335,6 @@ export function normalizePages({
     activeThemeContext,
     activePath,
     directories,
-    flatDirectories,
     docsDirectories,
     flatDocsDirectories,
     topLevelNavbarItems

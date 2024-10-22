@@ -69,7 +69,9 @@ function sortFolder(pageMap: PageMapItem[] | Folder) {
         }
         continue
       }
-      newChildren.push(item)
+      // @ts-expect-error
+      const { __pagePath, ...rest } = item
+      newChildren.push(rest)
     }
   }
 

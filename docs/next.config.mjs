@@ -1,4 +1,3 @@
-import type { NextConfig } from 'next'
 import nextra from 'nextra'
 
 const withNextra = nextra({
@@ -6,7 +5,7 @@ const withNextra = nextra({
   defaultShowCopyCode: true
 })
 
-const nextConfig: NextConfig = withNextra({
+const nextConfig = withNextra({
   reactStrictMode: true,
   eslint: {
     // ESLint behaves weirdly in this monorepo.
