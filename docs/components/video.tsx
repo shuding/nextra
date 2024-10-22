@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import type { FC } from 'react'
 
 export const Video: FC<{ src: string }> = ({ src }) => {
   return (
