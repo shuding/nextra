@@ -14,7 +14,7 @@ export const Breadcrumb: FC<{
       {activePath.map((item, index, arr) => {
         const nextItem = arr[index + 1]
         const href = nextItem
-          ? item.withIndexPage
+          ? 'frontMatter' in item
             ? item.route
             : item.children[0].route === nextItem.route
               ? ''

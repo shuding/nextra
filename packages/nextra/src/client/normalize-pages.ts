@@ -50,7 +50,6 @@ export type Item = (MdxFile | FolderWithoutChildren) & {
   type: string
   children: Item[]
   display?: Display
-  withIndexPage?: boolean
   theme?: PageTheme
   isUnderCurrentDocsTree?: boolean
 }
@@ -63,7 +62,6 @@ export type PageItem = (MdxFile | FolderWithoutChildren) & {
   children?: PageItem[]
   firstChildRoute?: string
   display?: Display
-  withIndexPage?: boolean
   isUnderCurrentDocsTree?: boolean
 }
 
@@ -77,7 +75,6 @@ type DocsItem = (MdxFile | FolderWithoutChildren) & {
   type: string
   children: DocsItem[]
   firstChildRoute?: string
-  withIndexPage?: boolean
   isUnderCurrentDocsTree?: boolean
 }
 
@@ -129,10 +126,7 @@ export function normalizePages({
   const meta = 'data' in list[0] ? (list[0].data as MetaType) : {}
   // Normalize items based on files and _meta.json.
   const items = ('data' in list[0] ? list.slice(1) : list) as (
-    | (Folder & {
-        withIndexPage?: true
-        frontMatter: FrontMatter
-      })
+    | (Folder & { frontMatter?: FrontMatter })
     | MdxFile
   )[]
 
