@@ -243,7 +243,7 @@ export function normalizePages({
               flatDocsDirectories.length + normalizedChildren.activeIndex
             break
         }
-        if ((currentItem as Item).withIndexPage && type === 'doc') {
+        if ('frontMatter' in currentItem && type === 'doc') {
           activeIndex++
         }
       }
@@ -260,7 +260,7 @@ export function normalizePages({
             const route = findFirstRoute(normalizedChildren.flatDocsDirectories)
             if (route) pageItem.firstChildRoute = route
             topLevelNavbarItems.push(pageItem)
-          } else if (pageItem.withIndexPage) {
+          } else if ('frontMatter' in pageItem) {
             topLevelNavbarItems.push(pageItem)
           }
 
@@ -268,7 +268,7 @@ export function normalizePages({
         case 'doc':
           docsItem.children.push(...normalizedChildren.docsDirectories)
           // Itself is a doc page.
-          if (item.withIndexPage && display !== 'children') {
+          if ('frontMatter' in item && display !== 'children') {
             flatDocsDirectories.push(docsItem)
           }
       }
