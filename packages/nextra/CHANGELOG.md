@@ -1,5 +1,14 @@
 # nextra
 
+## 4.0.0-app-router.12
+
+### Patch Changes
+
+- b8defc9: sync with nextra 3.1.0
+- b8defc9: remove `NormalizedResult.flatDirectories`
+
+  remove `Item.withIndexPage`, use `'frontMatter' in Item`
+
 ## 4.0.0-app-router.11
 
 ### Patch Changes
