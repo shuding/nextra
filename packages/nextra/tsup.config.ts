@@ -2,7 +2,7 @@ import fs from 'fs/promises'
 import path from 'node:path'
 import svgr from 'esbuild-plugin-svgr'
 import { defineConfig } from 'tsup'
-import { CWD } from './src/server/constants.js'
+import { CWD, IS_PRODUCTION } from './src/server/constants.js'
 
 export default defineConfig([
   {
@@ -18,7 +18,7 @@ export default defineConfig([
     target: 'es2020',
     format: 'esm',
     dts: true,
-    splitting: false,
+    splitting: IS_PRODUCTION,
     bundle: false,
     external: ['shiki', 'webpack'],
     async onSuccess() {
