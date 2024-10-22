@@ -1,5 +1,25 @@
 # nextra-theme-docs
 
+## 3.1.0
+
+### Minor Changes
+
+- 8e9767e: `activeType` should be initialized from `meta['*']`
+- fec399a: fix `type: 'separator'`, `type: 'menu'` and `item` with `href` not
+  respecting order when not all pages specified in `_meta` file
+
+### Patch Changes
+
+- 035fe48: - fix empty dropdown menu when \_meta item with `type: "menu"`
+  contains items with local pages
+- c002118: - add tests for should respect order for `type: "separator"`,
+  `type: "menu"` and item with `href`
+- Updated dependencies [035fe48]
+- Updated dependencies [8e9767e]
+- Updated dependencies [fec399a]
+- Updated dependencies [c002118]
+  - nextra@3.1.0
+
 ## 3.1.0-canary.1
 
 ### Minor Changes
