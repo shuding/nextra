@@ -3,7 +3,7 @@ import path from 'node:path'
 import svgr from 'esbuild-plugin-svgr'
 import { defineConfig } from 'tsup'
 import { defaultEntry } from '../nextra-theme-docs/tsup.config.js'
-import { CWD } from './src/server/constants.js'
+import { CWD, IS_PRODUCTION } from './src/server/constants.js'
 
 export default defineConfig([
   {
@@ -12,7 +12,7 @@ export default defineConfig([
     target: 'es2020',
     format: 'esm',
     dts: true,
-    splitting: false,
+    splitting: IS_PRODUCTION,
     bundle: false,
     external: ['shiki', 'webpack'],
     async onSuccess() {
