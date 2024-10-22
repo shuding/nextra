@@ -2,18 +2,15 @@
 
 import { usePathname } from 'next/navigation'
 import { useMounted } from 'nextra/hooks'
-import type { ReactNode } from 'react'
+import type { FC, ReactNode } from 'react'
 import { Link } from '../../mdx-components/link'
 import { useThemeConfig } from '../../stores'
 import { getGitIssueUrl } from '../../utils'
 
-export function NotFoundLink({
-  children,
-  labels
-}: {
+export const NotFoundLink: FC<{
   children: ReactNode
   labels: string
-}) {
+}> = ({ children, labels }) => {
   const config = useThemeConfig()
   const pathname = usePathname()
   const mounted = useMounted()

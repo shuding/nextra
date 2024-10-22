@@ -1,30 +1,27 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import type { ReactElement } from 'react'
+import type { FC, ReactElement } from 'react'
 import { CrossCircledIcon } from '../icons/index.js'
 import { Code } from '../mdx-components/code.js'
 import { Pre } from '../mdx-components/pre/index.js'
 import { RemoteContent } from './remote-content.js'
 import type { RemoteContentProps } from './remote-content.js'
 
-export function Playground({
-  source,
-  fallback = null,
-  components,
-  scope
-}: {
-  /**
-   * String with source MDX
-   *
-   * @example '# hello world <br /> nice to see you'
-   */
-  source: string
-  /**
-   * Fallback component for loading
-   */
-  fallback?: ReactElement | null
-} & Pick<RemoteContentProps, 'components' | 'scope'>) {
+export const Playground: FC<
+  {
+    /**
+     * String with source MDX
+     *
+     * @example '# hello world <br /> nice to see you'
+     */
+    source: string
+    /**
+     * Fallback component for loading
+     */
+    fallback?: ReactElement | null
+  } & Pick<RemoteContentProps, 'components' | 'scope'>
+> = ({ source, fallback = null, components, scope }) => {
   const [compiledSource, setCompiledSource] = useState('')
   const [error, setError] = useState<unknown>()
 

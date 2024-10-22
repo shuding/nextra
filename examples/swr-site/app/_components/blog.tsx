@@ -1,6 +1,7 @@
 import Link from 'next/link'
+import type { FC } from 'react'
 
-export async function Blog({ lang }: { lang: string }) {
+export const Blog: FC<{ lang: string }> = async ({ lang }) => {
   const { pageMap } = await import(
     `.next/static/chunks/nextra-page-map-${lang}.mjs`
   )
