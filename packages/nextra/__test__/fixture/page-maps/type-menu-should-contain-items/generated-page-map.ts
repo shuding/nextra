@@ -8,18 +8,6 @@ import {metadata as pagesOnly_two} from "./pagesOnly/two.md";
 const _pageMap = [{
   data: meta
 }, {
-  name: "pagesOnly",
-  route: "/pagesOnly",
-  children: [{
-    name: "one",
-    route: "/pagesOnly/one",
-    frontMatter: pagesOnly_one
-  }, {
-    name: "two",
-    route: "/pagesOnly/two",
-    frontMatter: pagesOnly_two
-  }]
-}, {
   name: "mix",
   route: "/mix",
   children: [{
@@ -30,6 +18,18 @@ const _pageMap = [{
     name: "qux",
     route: "/mix/qux",
     frontMatter: mix_qux
+  }]
+}, {
+  name: "pagesOnly",
+  route: "/pagesOnly",
+  children: [{
+    name: "one",
+    route: "/pagesOnly/one",
+    frontMatter: pagesOnly_one
+  }, {
+    name: "two",
+    route: "/pagesOnly/two",
+    frontMatter: pagesOnly_two
   }]
 }];
 
