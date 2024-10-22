@@ -102,7 +102,7 @@ const Folder: FC<FolderProps> = ({ item, anchors, onFocus, level }) => {
     const isClickOnIcon =
       el /* will be always <a> or <button> */ !==
       event.target /* can be <svg> or <path> */
-    if (!isClickOnIcon) {
+    if (isClickOnIcon) {
       event.preventDefault()
     }
     const isOpen = el.hasAttribute('data-open')
@@ -190,7 +190,6 @@ const Folder: FC<FolderProps> = ({ item, anchors, onFocus, level }) => {
           <Menu
             className={classes.border}
             directories={item.children}
-            base={item.route}
             anchors={anchors}
             level={level}
           />
@@ -271,7 +270,6 @@ const File: FC<{
 interface MenuProps {
   directories: PageItem[] | Item[]
   anchors: Heading[]
-  base?: string
   className?: string
   onlyCurrentDocs?: boolean
   level: number

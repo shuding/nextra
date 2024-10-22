@@ -18,7 +18,7 @@
   ],
   "scripts": {
     "build": "tsup",
-    "clean": "rimraf ./dist",
+    "clean": "rimraf dist .turbo",
     "dev": "tsup --watch . --watch ../nextra/src --watch ../nextra/styles",
     "prepublishOnly": "pnpm build",
     "test": "vitest run",

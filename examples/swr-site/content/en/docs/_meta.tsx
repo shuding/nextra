@@ -1,7 +1,7 @@
 import { SwrIcon } from '@app/_icons'
-import type { ReactNode } from 'react'
+import type { FC, ReactNode } from 'react'
 
-export function Separator({ children }: { children: ReactNode }) {
+export const Separator: FC<{ children: ReactNode }> = ({ children }) => {
   return (
     <div className="flex items-center gap-2">
       <SwrIcon height="6" className="shrink-0" />
