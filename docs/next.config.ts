@@ -1,23 +1,18 @@
+import type { NextConfig } from 'next'
 import nextra from 'nextra'
 
-/**
- * @type {import('nextra').NextraConfig}
- */
 const withNextra = nextra({
   latex: true,
   defaultShowCopyCode: true
 })
 
-/**
- * @type {import('next').NextConfig}
- */
-export default withNextra({
+const nextConfig: NextConfig = withNextra({
   reactStrictMode: true,
   eslint: {
     // ESLint behaves weirdly in this monorepo.
     ignoreDuringBuilds: true
   },
-  redirects: () => [
+  redirects: async () => [
     {
       source: '/docs/guide/:slug(typescript|latex|tailwind-css|mermaid)',
       destination: '/docs/guide/advanced/:slug',
@@ -63,3 +58,5 @@ export default withNextra({
     ]
   }
 })
+
+export default nextConfig

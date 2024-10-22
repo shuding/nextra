@@ -1,4 +1,5 @@
 import bundleAnalyzer from '@next/bundle-analyzer'
+import type { NextConfig } from 'next'
 import nextra from 'nextra'
 
 const withNextra = nextra({
@@ -11,10 +12,7 @@ const withBundleAnalyzer = bundleAnalyzer({
   enabled: process.env.ANALYZE === 'true'
 })
 
-/**
- * @type {import('next').NextConfig}
- */
-export default withBundleAnalyzer(
+const nextConfig: NextConfig = withBundleAnalyzer(
   withNextra({
     reactStrictMode: true,
     eslint: {
@@ -26,7 +24,7 @@ export default withBundleAnalyzer(
       locales: ['en', 'es', 'ru'],
       defaultLocale: 'en'
     },
-    redirects: () => [
+    redirects: async () => [
       {
         source: '/docs',
         destination: '/docs/getting-started',
@@ -58,3 +56,5 @@ export default withBundleAnalyzer(
     }
   })
 )
+
+export default nextConfig
