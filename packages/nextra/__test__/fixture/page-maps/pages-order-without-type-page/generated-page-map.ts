@@ -1,6 +1,10 @@
+// @ts-nocheck
+import { normalizePageMap } from 'nextra/page-map'
 import meta from "./_meta.ts";
 import docs_meta from "./docs/_meta.ts";
-export const pageMap = [{
+import {metadata as docs_bar} from "./docs/bar.md";
+import {metadata as foo} from "./foo.md";
+const _pageMap = [{
   data: meta
 }, {
   name: "docs",
@@ -10,14 +14,17 @@ export const pageMap = [{
   }, {
     name: "bar",
     route: "/docs/bar",
-    frontMatter: {
-      "sidebarTitle": "Bar"
-    }
+    frontMatter: docs_bar
   }]
 }, {
   name: "foo",
   route: "/foo",
-  frontMatter: {
-    "sidebarTitle": "Foo"
-  }
+  frontMatter: foo
 }];
+
+export const pageMap = normalizePageMap(_pageMap)
+
+export const RouteToFilepath = {
+  "docs/bar": "docs/bar.md",
+  "foo": "foo.md"
+}

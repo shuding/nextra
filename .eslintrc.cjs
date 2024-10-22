@@ -1,3 +1,4 @@
+/* eslint-env node */
 const TAILWIND_CONFIG = {
   extends: ['plugin:tailwindcss/recommended'],
   rules: {
@@ -134,10 +135,16 @@ module.exports = {
         projectService: true
       },
       rules: {
+        '@typescript-eslint/await-thenable': 'error',
         '@typescript-eslint/no-unnecessary-type-assertion': 'error',
         '@typescript-eslint/consistent-type-imports': 'error',
         '@typescript-eslint/non-nullable-type-assertion-style': 'error',
-        '@typescript-eslint/prefer-optional-chain': 'error'
+        '@typescript-eslint/prefer-optional-chain': 'error',
+        'prefer-destructuring': 'off',
+        '@typescript-eslint/prefer-destructuring': [
+          'error',
+          { VariableDeclarator: { object: true } }
+        ]
       }
     },
     // ⚙️ nextra-theme-docs
@@ -150,11 +157,13 @@ module.exports = {
           config: 'packages/nextra-theme-docs/tailwind.config.ts',
           callees: ['cn'],
           whitelist: [
+            'nextra-navbar',
+            'nextra-navbar-blur',
+            'nextra-sidebar',
             'nextra-breadcrumb',
-            'nextra-bleed',
             'nextra-menu-desktop',
             'nextra-menu-mobile',
-            'nextra-search-results'
+            'nextra-toc'
           ]
         }
       },
@@ -162,10 +171,7 @@ module.exports = {
         ...TAILWIND_CONFIG.rules,
         'no-restricted-imports': [
           'error',
-          {
-            name: 'next/link',
-            message: 'Use local <Anchor /> instead'
-          }
+          { name: 'next/link', message: 'Use `<Anchor>` instead' }
         ]
       }
     },
@@ -175,9 +181,24 @@ module.exports = {
       files: 'packages/nextra-theme-blog/**',
       settings: {
         tailwindcss: {
-          config: 'packages/nextra-theme-blog/tailwind.config.ts',
-          whitelist: ['subheading-']
+          config: 'packages/nextra-theme-blog/tailwind.config.ts'
         }
+      },
+      rules: {
+        ...TAILWIND_CONFIG.rules,
+        'no-restricted-imports': [
+          'error',
+          {
+            name: 'next/link',
+            message: 'Use `<Link>` from `next-view-transitions` instead'
+          },
+          {
+            name: 'next/navigation',
+            importNames: ['useRouter'],
+            message:
+              'Use `useTransitionRouter` from `next-view-transitions` instead'
+          }
+        ]
       }
     },
     // ⚙️ nextra
@@ -188,7 +209,13 @@ module.exports = {
         tailwindcss: {
           config: 'packages/nextra-theme-docs/tailwind.config.ts',
           callees: ['cn'],
-          whitelist: ['nextra-code', 'nextra-filetree']
+          whitelist: [
+            'nextra-code',
+            'nextra-filetree',
+            'nextra-bleed',
+            'nextra-skip-nav',
+            'nextra-search-results'
+          ]
         }
       },
       rules: {
@@ -215,6 +242,11 @@ module.exports = {
             'content-container',
             'feat-darkmode',
             'features-container'
+          ],
+          cssFiles: [
+            'docs/app/globals.css',
+            'docs/app/_components/features/style.module.css',
+            'packages/nextra-theme-docs/dist/style.css'
           ]
         },
         next: { rootDir: 'docs' }
@@ -228,7 +260,8 @@ module.exports = {
         tailwindcss: {
           config: 'examples/swr-site/tailwind.config.ts',
           cssFiles: [
-            'examples/swr-site/styles.css',
+            'examples/swr-site/app/[lang]/styles.css',
+            'examples/swr-site/app/_components/features.css',
             'packages/nextra-theme-docs/dist/style.css'
           ]
         },
@@ -250,12 +283,7 @@ module.exports = {
       }
     },
     {
-      files: [
-        'prettier.config.js',
-        'postcss.config.{js,cjs}',
-        'next.config.js',
-        '.eslintrc.cjs'
-      ],
+      files: ['next.config.js'],
       env: {
         node: true
       }
@@ -265,22 +293,6 @@ module.exports = {
       rules: {
         // disable rule because we don't have pagesDir in above folders
         '@next/next/no-html-link-for-pages': 'off'
-      }
-    },
-    {
-      files: 'packages/nextra/src/**',
-      rules: {
-        'no-restricted-imports': [
-          'error',
-          {
-            patterns: [
-              {
-                group: ['fs', 'node:fs'],
-                message: 'Use `graceful-fs` instead'
-              }
-            ]
-          }
-        ]
       }
     },
     {

@@ -1,12 +1,47 @@
 import fs from 'node:fs/promises'
 import path from 'node:path'
 import { normalizePages } from '../src/client/normalize-pages.js'
+import { generatePageMapFromFilepaths } from '../src/server/generate-page-map.js'
+import { normalizePageMap } from '../src/server/normalize-page-map.js'
 import { usPageMap } from './fixture/page-maps/page-map.js'
+
+async function getPageMapForFixture(dirName: string) {
+  const dir = path.join(__dirname, 'fixture', 'page-maps', dirName)
+  vi.doMock('next/dist/lib/find-pages-dir.js', () => ({
+    findPagesDir: () => ({ appDir: dir })
+  }))
+  vi.doMock('../src/server/constants.ts', async () => ({
+    ...(await vi.importActual('../src/server/constants.ts')),
+    CHUNKS_DIR: dir
+  }))
+  const { getFilepaths, collectPageMap } = await import(
+    '../src/server/page-map.js'
+  )
+
+  const relativePaths = await getFilepaths({ dir })
+
+  const { pageMap: _pageMap, mdxPages } =
+    generatePageMapFromFilepaths(relativePaths)
+  const rawJs = await collectPageMap({
+    pageMap: _pageMap,
+    mdxPages,
+    fromAppDir: false
+  })
+
+  await fs.writeFile(
+    path.join(dir, 'generated-page-map.ts'),
+    '// @ts-nocheck\n' +
+      rawJs.replaceAll('private-next-root-dir/content/', './')
+  )
+
+  const { pageMap } = await import(`${dir}/generated-page-map.js`)
+  return pageMap
+}
 
 describe('normalize-page', () => {
   it('en-US home', () => {
     const result = normalizePages({
-      list: usPageMap,
+      list: normalizePageMap(usPageMap),
       route: '/'
     })
     expect(result).toMatchSnapshot()
@@ -14,62 +49,17 @@ describe('normalize-page', () => {
 
   it('en-US getting-started', () => {
     const result = normalizePages({
-      list: usPageMap,
+      list: normalizePageMap(usPageMap),
       route: '/docs/getting-started'
-    })
-    expect(result).toMatchSnapshot()
-  })
-
-  it('/404 page', () => {
-    const result = normalizePages({
-      list: [
-        { name: '404', route: '/404' },
-        { name: 'get-started', route: '/get-started' },
-        { name: 'index', route: '/' },
-        {
-          data: {
-            '404': {
-              type: 'page',
-              theme: {
-                layout: 'full'
-              }
-            },
-            index: {
-              title: 'Introduction'
-            },
-            'get-started': {
-              title: 'Get Started'
-            }
-          }
-        }
-      ],
-      route: '/500ddd'
     })
     expect(result).toMatchSnapshot()
   })
 
   // https://github.com/shuding/nextra/issues/3331
   it('should keep `activeThemeContext`, `activeType` for hidden route', async () => {
-    const dir = path.join(
-      __dirname,
-      'fixture',
-      'page-maps',
+    const pageMap = await getPageMapForFixture(
       'hidden-route-should-have-theme-context'
     )
-    vi.doMock('../src/server/file-system.ts', () => ({ PAGES_DIR: dir }))
-    vi.doMock('../src/server/constants.ts', async () => ({
-      ...(await vi.importActual('../src/server/constants.ts')),
-      CHUNKS_DIR: dir
-    }))
-    const { collectPageMap } = await import('../src/server/page-map.js')
-
-    const result = await collectPageMap({ dir })
-    await fs.writeFile(path.join(dir, 'generated-page-map.ts'), result)
-
-    const { pageMap } = await import(
-      './fixture/page-maps/hidden-route-should-have-theme-context/generated-page-map.js'
-    )
-
     expect(pageMap).toEqual([
       {
         data: {
@@ -104,58 +94,35 @@ describe('normalize-page', () => {
               {
                 name: 'foo',
                 route: '/1-level/2-level/foo',
-                frontMatter: {
-                  sidebarTitle: 'Foo'
-                }
+                frontMatter: undefined
               }
             ]
           },
           {
             name: 'qux',
             route: '/1-level/qux',
-            frontMatter: {
-              sidebarTitle: 'Qux'
-            }
+            frontMatter: undefined
           }
         ]
       },
       {
         name: 'bar',
         route: '/bar',
-        frontMatter: {
-          sidebarTitle: 'Bar'
-        }
+        frontMatter: undefined
       }
     ])
 
     const result2 = normalizePages({
-      list: pageMap,
+      list: normalizePageMap(pageMap),
       route: '/1-level/2-level/foo'
     })
     expect(result2).toMatchSnapshot()
   })
 
   it('should initialize `activeType` from `*`', async () => {
-    const dir = path.join(
-      __dirname,
-      'fixture',
-      'page-maps',
+    const pageMap = await getPageMapForFixture(
       'active-type-should-be-initialized-from-star'
     )
-    vi.doMock('../src/server/file-system.ts', () => ({ PAGES_DIR: dir }))
-    vi.doMock('../src/server/constants.ts', async () => ({
-      ...(await vi.importActual('../src/server/constants.ts')),
-      CHUNKS_DIR: dir
-    }))
-    const { collectPageMap } = await import('../src/server/page-map.js')
-
-    const result = await collectPageMap({ dir })
-    await fs.writeFile(path.join(dir, 'generated-page-map.ts'), result)
-
-    const { pageMap } = await import(
-      './fixture/page-maps/active-type-should-be-initialized-from-star/generated-page-map.js'
-    )
-
     expect(pageMap).toEqual([
       {
         data: {
@@ -185,16 +152,14 @@ describe('normalize-page', () => {
           {
             name: 'foo',
             route: '/1-level/foo',
-            frontMatter: {
-              sidebarTitle: 'Foo'
-            }
+            frontMatter: undefined
           }
         ]
       }
     ])
 
     const { activeType, activeIndex, activeThemeContext } = normalizePages({
-      list: pageMap,
+      list: normalizePageMap(pageMap),
       route: '/1-level/not-exist'
     })
     expect({ activeType, activeIndex, activeThemeContext }).toEqual({
@@ -216,28 +181,12 @@ describe('normalize-page', () => {
   })
 
   it('should respect order for `type: "separator"`, `type: "menu"` and item with `href`', async () => {
-    const dir = path.join(
-      __dirname,
-      'fixture',
-      'page-maps',
+    const pageMap = await getPageMapForFixture(
       'respect-order-for-type-separator-menu-and-item-with-href'
-    )
-    vi.doMock('../src/server/file-system.ts', () => ({ PAGES_DIR: dir }))
-    vi.doMock('../src/server/constants.ts', async () => ({
-      ...(await vi.importActual('../src/server/constants.ts')),
-      CHUNKS_DIR: dir
-    }))
-    const { collectPageMap } = await import('../src/server/page-map.js')
-
-    const result = await collectPageMap({ dir })
-    await fs.writeFile(path.join(dir, 'generated-page-map.ts'), result)
-
-    const { pageMap } = await import(
-      './fixture/page-maps/respect-order-for-type-separator-menu-and-item-with-href/generated-page-map.js'
     )
 
     const normalizedResult = normalizePages({
-      list: pageMap,
+      list: normalizePageMap(pageMap),
       route: '/one/two/qux'
     })
     expect(normalizedResult.docsDirectories).toMatchInlineSnapshot(`
@@ -263,13 +212,11 @@ describe('normalize-page', () => {
                   "type": "separator",
                 },
                 {
-                  "frontMatter": {
-                    "sidebarTitle": "Qux",
-                  },
+                  "frontMatter": undefined,
                   "isUnderCurrentDocsTree": true,
                   "name": "qux",
                   "route": "/one/two/qux",
-                  "title": "Qux",
+                  "title": "qux",
                   "type": "doc",
                 },
                 {
@@ -280,19 +227,15 @@ describe('normalize-page', () => {
                   "type": "doc",
                 },
                 {
-                  "frontMatter": {
-                    "sidebarTitle": "1 One",
-                  },
+                  "frontMatter": undefined,
                   "isUnderCurrentDocsTree": true,
                   "name": "1-one",
                   "route": "/one/two/1-one",
-                  "title": "1 One",
+                  "title": "1-one",
                   "type": "doc",
                 },
                 {
-                  "frontMatter": {
-                    "sidebarTitle": "2024",
-                  },
+                  "frontMatter": undefined,
                   "isUnderCurrentDocsTree": true,
                   "name": "2024",
                   "route": "/one/two/2024",
@@ -300,23 +243,19 @@ describe('normalize-page', () => {
                   "type": "doc",
                 },
                 {
-                  "frontMatter": {
-                    "sidebarTitle": "Foo",
-                  },
+                  "frontMatter": undefined,
                   "isUnderCurrentDocsTree": true,
                   "name": "foo",
                   "route": "/one/two/foo",
-                  "title": "Foo",
+                  "title": "foo",
                   "type": "doc",
                 },
                 {
-                  "frontMatter": {
-                    "sidebarTitle": "One",
-                  },
+                  "frontMatter": undefined,
                   "isUnderCurrentDocsTree": true,
                   "name": "one",
                   "route": "/one/two/one",
-                  "title": "One",
+                  "title": "one",
                   "type": "doc",
                 },
               ],
@@ -338,28 +277,10 @@ describe('normalize-page', () => {
   })
 
   it('`type: "menu"` should contain `items`', async () => {
-    const dir = path.join(
-      __dirname,
-      'fixture',
-      'page-maps',
-      'type-menu-should-contain-items'
-    )
-    vi.doMock('../src/server/file-system.ts', () => ({ PAGES_DIR: dir }))
-    vi.doMock('../src/server/constants.ts', async () => ({
-      ...(await vi.importActual('../src/server/constants.ts')),
-      CHUNKS_DIR: dir
-    }))
-    const { collectPageMap } = await import('../src/server/page-map.js')
-
-    const result = await collectPageMap({ dir })
-    await fs.writeFile(path.join(dir, 'generated-page-map.ts'), result)
-
-    const { pageMap } = await import(
-      './fixture/page-maps/type-menu-should-contain-items/generated-page-map.js'
-    )
+    const pageMap = await getPageMapForFixture('type-menu-should-contain-items')
 
     const normalizedResult = normalizePages({
-      list: pageMap,
+      list: normalizePageMap(pageMap),
       route: '/pagesOnly/one'
     })
     expect(
@@ -373,21 +294,17 @@ describe('normalize-page', () => {
         {
           "children": [
             {
-              "frontMatter": {
-                "sidebarTitle": "Not Specified",
-              },
+              "frontMatter": undefined,
               "name": "not-specified",
               "route": "/mix/not-specified",
-              "title": "Not Specified",
+              "title": "not-specified",
               "type": "doc",
             },
             {
-              "frontMatter": {
-                "sidebarTitle": "Qux",
-              },
+              "frontMatter": undefined,
               "name": "qux",
               "route": "/mix/qux",
-              "title": "Qux",
+              "title": "qux",
               "type": "doc",
             },
           ],
@@ -420,21 +337,17 @@ describe('normalize-page', () => {
         {
           "children": [
             {
-              "frontMatter": {
-                "sidebarTitle": "One",
-              },
+              "frontMatter": undefined,
               "name": "one",
               "route": "/pagesOnly/one",
-              "title": "One",
+              "title": "one",
               "type": "doc",
             },
             {
-              "frontMatter": {
-                "sidebarTitle": "Two",
-              },
+              "frontMatter": undefined,
               "name": "two",
               "route": "/pagesOnly/two",
-              "title": "Two",
+              "title": "two",
               "type": "doc",
             },
           ],
@@ -457,33 +370,15 @@ describe('normalize-page', () => {
   })
 
   it('pages order without `type: "page"`', async () => {
-    const dir = path.join(
-      __dirname,
-      'fixture',
-      'page-maps',
-      'pages-order-without-type-page'
-    )
-    vi.doMock('../src/server/file-system.ts', () => ({ PAGES_DIR: dir }))
-    vi.doMock('../src/server/constants.ts', async () => ({
-      ...(await vi.importActual('../src/server/constants.ts')),
-      CHUNKS_DIR: dir
-    }))
-    const { collectPageMap } = await import('../src/server/page-map.js')
-
-    const result = await collectPageMap({ dir })
-    await fs.writeFile(path.join(dir, 'generated-page-map.ts'), result)
-
-    const { pageMap } = await import(
-      './fixture/page-maps/pages-order-without-type-page/generated-page-map.js'
-    )
+    const pageMap = await getPageMapForFixture('pages-order-without-type-page')
 
     const normalizedResult = normalizePages({
-      list: pageMap,
+      list: normalizePageMap(pageMap),
       route: '/docs/bar'
     })
-    const { flatDirectories } = normalizedResult
-    expect(flatDirectories[0].name).toBe('_')
-    expect(flatDirectories[1].route).toBe('/docs/bar')
-    expect(flatDirectories[2].route).toBe('/foo')
+    const { docsDirectories } = normalizedResult
+    expect(docsDirectories[0].name).toBe('_')
+    expect(docsDirectories[1].route).toBe('/docs/bar')
+    expect(docsDirectories[3].route).toBe('/foo')
   })
 })

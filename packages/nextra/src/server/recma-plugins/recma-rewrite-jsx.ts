@@ -2,7 +2,7 @@ import type { CallExpression, FunctionDeclaration, Program } from 'estree'
 import type { JsxAttribute } from 'estree-util-to-js/lib/jsx'
 import type { Plugin } from 'unified'
 import { visit } from 'unist-util-visit'
-import { DEFAULT_PROPERTY_PROPS, TOC_HEADING_REGEX } from '../constants.js'
+import { DEFAULT_PROPERTY_PROPS, TOC_HEADING_RE } from '../constants.js'
 
 export const recmaRewriteJsx: Plugin<[], Program> =
   () => (ast: Program, file) => {
@@ -50,7 +50,7 @@ export const recmaRewriteJsx: Plugin<[], Program> =
     visit({ children: returnBody }, 'JSXElement', (heading: any) => {
       const { openingElement } = heading
       const name = openingElement?.name.property?.name
-      const isHeading = name && TOC_HEADING_REGEX.test(name)
+      const isHeading = name && TOC_HEADING_RE.test(name)
       if (!isHeading) return
 
       const idNode = openingElement.attributes.find(

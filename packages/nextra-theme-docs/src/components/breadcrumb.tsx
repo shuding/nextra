@@ -3,20 +3,18 @@ import cn from 'clsx'
 import NextLink from 'next/link'
 import { ArrowRightIcon } from 'nextra/icons'
 import type { Item } from 'nextra/normalize-pages'
-import type { ReactElement } from 'react'
+import type { FC } from 'react'
 import { Fragment } from 'react'
 
-export function Breadcrumb({
-  activePath
-}: {
+export const Breadcrumb: FC<{
   activePath: Item[]
-}): ReactElement {
+}> = ({ activePath }) => {
   return (
     <div className="nextra-breadcrumb _mt-1.5 _flex _items-center _gap-1 _overflow-hidden _text-sm _text-gray-500 dark:_text-gray-400 contrast-more:_text-current">
       {activePath.map((item, index, arr) => {
         const nextItem = arr[index + 1]
         const href = nextItem
-          ? item.withIndexPage
+          ? 'frontMatter' in item
             ? item.route
             : item.children[0].route === nextItem.route
               ? ''
@@ -40,7 +38,7 @@ export function Breadcrumb({
                   ? '_min-w-6 _overflow-hidden _text-ellipsis'
                   : '_font-medium _text-gray-700 contrast-more:_font-bold contrast-more:_text-current dark:_text-gray-100 contrast-more:dark:_text-current',
                 href &&
-                  'nextra-focus _ring-inset hover:_text-gray-900 dark:hover:_text-gray-100'
+                  'focus-visible:nextra-focus _ring-inset hover:_text-gray-900 dark:hover:_text-gray-100'
               )}
               title={item.title}
               {...(href && ({ href } as any))}
