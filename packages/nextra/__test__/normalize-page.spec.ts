@@ -376,9 +376,9 @@ describe('normalize-page', () => {
       list: pageMap,
       route: '/docs/bar'
     })
-    const { flatDirectories } = normalizedResult
-    expect(flatDirectories[0].name).toBe('_')
-    expect(flatDirectories[1].route).toBe('/docs/bar')
-    expect(flatDirectories[2].route).toBe('/foo')
+    const { docsDirectories } = normalizedResult
+    expect(docsDirectories[0].name).toBe('_')
+    expect(docsDirectories[1].route).toBe('/docs/bar')
+    expect(docsDirectories[3].route).toBe('/foo')
   })
 })

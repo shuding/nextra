@@ -34,7 +34,7 @@ function sortFolder(pageMap: PageMapItem[] | Folder) {
     if (
       isFolder &&
       'frontMatter' in item &&
-      item.frontMatter!.asIndexPage &&
+      item.frontMatter?.asIndexPage &&
       item.route === folder.route
     ) {
       folder.frontMatter = item.frontMatter
