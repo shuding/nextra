@@ -31,10 +31,9 @@ export const nextraConfigSchema = z.strictObject({
         codeblocks: z.boolean()
       })
     ])
-    .default({
-      codeblocks: false
-    }),
-  staticImage: z.boolean().default(true),
+    .default({ codeblocks: false })
+    .optional(),
+  staticImage: z.boolean().default(true).optional(),
   readingTime: z.boolean().optional(),
   latex: z
     .union([
@@ -49,13 +48,14 @@ export const nextraConfigSchema = z.strictObject({
       })
     ])
     .optional(),
-  codeHighlight: z.boolean().default(true),
+  codeHighlight: z.boolean().default(true).optional(),
   /**
    * A function to modify the `pageMap` passed to theme layouts.
    * @experimental
    */
-  transformPageMap:
-    z.custom<(pageMap: PageMapItem[], locale: string) => PageMapItem[]>(),
+  transformPageMap: z
+    .custom<(pageMap: PageMapItem[], locale: string) => PageMapItem[]>()
+    .optional(),
   mdxOptions: z
     .strictObject({
       rehypePlugins: z.custom<ProcessorOptions['rehypePlugins']>(),

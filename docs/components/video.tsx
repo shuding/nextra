@@ -1,4 +1,6 @@
-export function Video({ src }: { src: string }) {
+import type { FC } from 'react'
+
+export const Video: FC<{ src: string }> = ({ src }) => {
   return (
     <video
       muted

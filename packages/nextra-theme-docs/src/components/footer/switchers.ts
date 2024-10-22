@@ -1,9 +1,9 @@
 'use client'
 
-import type { ReactNode } from 'react'
+import type { FC, ReactNode } from 'react'
 import { useConfig, useThemeConfig } from '../../stores'
 
-export function Switchers({ children }: { children: ReactNode }) {
+export const Switchers: FC<{ children: ReactNode }> = ({ children }) => {
   const { hideSidebar } = useConfig()
   const { i18n, darkMode } = useThemeConfig()
 

@@ -294,7 +294,7 @@ export const Search: FC<SearchProps> = ({
   )
 }
 
-function Result({ data }: { data: PagefindResult }) {
+const Result: FC<{ data: PagefindResult }> = ({ data }) => {
   return (
     <>
       <div

@@ -1,12 +1,8 @@
 import { getDictionary } from '@app/_dictionaries/get-dictionary'
 import type { Locale } from '@app/_dictionaries/i18n-config'
+import type { FC } from 'react'
 
-export async function TopContent({
-  title,
-  date,
-  authors,
-  lang
-}: {
+export const TopContent: FC<{
   title: string
   date: string
   authors: {
@@ -14,7 +10,7 @@ export async function TopContent({
     link: string
   }[]
   lang: Locale
-}) {
+}> = async ({ title, date, authors, lang }) => {
   const dictionary = await getDictionary(lang)
   const dateObj = new Date(date)
   return (

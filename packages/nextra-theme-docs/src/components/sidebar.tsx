@@ -155,7 +155,7 @@ const Folder: FC<FolderProps> = ({ item, anchors, onFocus, level }) => {
     })
   }
 
-  const isLink = 'withIndexPage' in item && item.withIndexPage
+  const isLink = 'frontMatter' in item
   // use button when link don't have href because it impacts on SEO
   const ComponentToUse = isLink ? Anchor : Button
 
@@ -295,7 +295,7 @@ const Menu: FC<MenuProps> = ({
 
         const ComponentToUse =
           item.type === 'menu' ||
-          (item.children && (item.children.length || !item.withIndexPage))
+          (item.children && (item.children.length || !('frontMatter' in item)))
             ? Folder
             : File
 

@@ -3,7 +3,7 @@ import type { Metadata, Viewport } from 'next'
 import { Footer, Layout, Link, Navbar } from 'nextra-theme-docs'
 import { Banner, Head } from 'nextra/components'
 import { getPageMap } from 'nextra/page-map'
-import type { ReactNode } from 'react'
+import type { FC, ReactNode } from 'react'
 import './globals.css'
 import cn from 'clsx'
 import 'nextra-theme-docs/style.css'
@@ -53,11 +53,9 @@ export const metadata: Metadata = {
   }
 }
 
-export default async function RootLayout({
-  children
-}: {
+const RootLayout: FC<{
   children: ReactNode
-}) {
+}> = async ({ children }) => {
   const logo = (
     <NextraLogo
       height="20"
@@ -112,3 +110,5 @@ export default async function RootLayout({
     </html>
   )
 }
+
+export default RootLayout

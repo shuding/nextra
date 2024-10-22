@@ -16,8 +16,7 @@ export function normalizePageMap(pageMap: PageMapItem[] | Folder): any {
 }
 
 type ParsedFolder = Folder & {
-  frontMatter: FrontMatter
-  withIndexPage?: true
+  frontMatter?: FrontMatter
 }
 
 function sortFolder(pageMap: PageMapItem[] | Folder) {
@@ -39,7 +38,6 @@ function sortFolder(pageMap: PageMapItem[] | Folder) {
       item.route === folder.route
     ) {
       folder.frontMatter = item.frontMatter
-      folder.withIndexPage = true
     } else if ('children' in item) {
       newChildren.push(normalizePageMap(item))
     } else if ('data' in item) {
@@ -63,13 +61,13 @@ function sortFolder(pageMap: PageMapItem[] | Folder) {
       if (prevItem && prevItem.name === item.name) {
         newChildren[newChildren.length - 1] = {
           ...prevItem,
-          // @ts-expect-error fixme
-          withIndexPage: true,
           frontMatter: item.frontMatter
         }
         continue
       }
-      newChildren.push(item)
+      // @ts-expect-error
+      const { __pagePath, ...rest } = item
+      newChildren.push(rest)
     }
   }
 

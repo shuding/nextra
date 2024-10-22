@@ -1,3 +1,4 @@
+import type { FC } from 'react'
 import { getDictionary } from '../_dictionaries/get-dictionary'
 import type { Locale } from '../_dictionaries/i18n-config'
 import {
@@ -11,13 +12,10 @@ import {
   RainIcon
 } from '../_icons'
 
-export async function Features({
-  lang,
-  title
-}: {
+export const Features: FC<{
   lang: Locale
   title: string
-}) {
+}> = async ({ lang, title }) => {
   const dictionary = await getDictionary(lang)
 
   return (

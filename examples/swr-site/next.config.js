@@ -11,10 +11,7 @@ const withBundleAnalyzer = bundleAnalyzer({
   enabled: process.env.ANALYZE === 'true'
 })
 
-/**
- * @type {import('next').NextConfig}
- */
-export default withBundleAnalyzer(
+const nextConfig = withBundleAnalyzer(
   withNextra({
     reactStrictMode: true,
     eslint: {
@@ -26,7 +23,7 @@ export default withBundleAnalyzer(
       locales: ['en', 'es', 'ru'],
       defaultLocale: 'en'
     },
-    redirects: () => [
+    redirects: async () => [
       {
         source: '/docs',
         destination: '/docs/getting-started',
@@ -53,8 +50,12 @@ export default withBundleAnalyzer(
     experimental: {
       optimizePackageImports: [
         // '@app/_icons'
-        'nextra/components'
+        // Provoke error
+        // Could not find the module in the React Client Manifest. This is probably a bug in the React Server Components bundler
+        // 'nextra/components'
       ]
     }
   })
 )
+
+export default nextConfig

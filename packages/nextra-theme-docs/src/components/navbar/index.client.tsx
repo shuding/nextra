@@ -116,7 +116,8 @@ export const ClientNavbar: FC<{
           // If it's a directory
           if (page.children) {
             href =
-              (page.withIndexPage ? page.route : page.firstChildRoute) || href
+              ('frontMatter' in page ? page.route : page.firstChildRoute) ||
+              href
           }
 
           const isActive =
