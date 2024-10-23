@@ -145,8 +145,8 @@ const Folder: FC<FolderProps> = ({ item, anchors, onFocus, level }) => {
     )
     item.children = Object.entries(menu.items || {}).map(([key, item]) => {
       return {
-        ...route,
-        ...item
+        ...(routes[key] || { name: key /* for React key prop */ }),
+        ...(item as object)
       }
     })
   }
