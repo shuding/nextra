@@ -1,5 +1,7 @@
 import type { ProcessorOptions } from '@mdx-js/mdx'
 import type { MathJax3Config } from 'better-react-mathjax'
+import type { ReactElement } from 'react'
+import { isValidElement } from 'react'
 import type { Options as RehypeKatexOptions } from 'rehype-katex'
 import type { Options as RehypePrettyCodeOptions } from 'rehype-pretty-code'
 import { z } from 'zod'
@@ -64,6 +66,12 @@ export const nextraConfigSchema = z.strictObject({
   useContentDir: z.boolean().optional()
 })
 
+const element = z.custom<ReactElement>(isValidElement, {
+  message: 'Must be React.ReactElement'
+})
+
+const stringOrElement = z.union([z.string(), element])
+
 export const pageThemeSchema = z.strictObject({
   breadcrumb: z.boolean().optional(),
   collapsed: z.boolean().optional(),
@@ -84,15 +92,19 @@ export const pageThemeSchema = z.strictObject({
  * - `children`: if the item is a folder, itself will be hidden but all its children will still be processed
  */
 export const displaySchema = z.enum(['normal', 'hidden', 'children'])
-const titleSchema = z.string()
+
+const title = stringOrElement.optional()
 
 const linkItemSchema = z.strictObject({
+  type: z.literal('page').optional(),
+  title,
   href: z.string(),
-  newWindow: z.boolean().optional(),
-  title: titleSchema
+  newWindow: z.boolean().optional()
 })
 
 export const menuItemSchema = z.strictObject({
+  type: z.literal('menu'),
+  title,
   items: z.record(
     z
       .union([
@@ -104,20 +116,18 @@ export const menuItemSchema = z.strictObject({
         })
       ])
       .transform(transformTitle)
-  ),
-  title: titleSchema,
-  type: z.literal('menu')
+  )
 })
 
 const separatorItemSchema = z.strictObject({
-  title: titleSchema.optional(),
-  type: z.literal('separator')
+  type: z.literal('separator'),
+  title
 })
 
 const itemSchema = z.strictObject({
   display: displaySchema.optional(),
   theme: pageThemeSchema.optional(),
-  title: titleSchema.optional(),
+  title: z.string().optional(),
   type: z.enum(['page', 'doc']).optional()
 })
 
