@@ -147,6 +147,7 @@ export async function loader(
     )
     return rawJs
   }
+
   const { result, readingTime } = await compileMdx(source, {
     mdxOptions: {
       ...mdxOptions,
