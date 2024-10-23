@@ -1,4 +1,5 @@
 /* eslint-env node */
+import { createRequire } from 'node:module'
 import path from 'node:path'
 import type { RuleSetRule } from 'webpack'
 import { fromZodError } from 'zod-validation-error'
@@ -15,6 +16,8 @@ const PAGE_MAP_RE = new RegExp(
   `nextra${SEP_RE}dist${SEP_RE}server${SEP_RE}page-map-placeholder`
 )
 
+const require = createRequire(import.meta.url)
+
 const nextra: Nextra = nextraConfig => {
   const { error, data: loaderOptions } =
     nextraConfigSchema.safeParse(nextraConfig)
@@ -23,16 +26,22 @@ const nextra: Nextra = nextraConfig => {
     throw fromZodError(error)
   }
 
+  const loaderPath = path.join(
+    require.resolve('nextra/package.json'),
+    '..',
+    'loader.cjs'
+  )
+
   const loader = {
-    loader: 'nextra/loader',
+    loader: loaderPath,
     options: loaderOptions
   }
   const pageImportLoader = {
-    loader: 'nextra/loader',
+    loader: loaderPath,
     options: { ...loaderOptions, isPageImport: true }
   }
-  const pageMapLoader = {
-    loader: 'nextra/loader',
+  const pageMapPlaceholderLoader = {
+    loader: loaderPath,
     options: {
       useContentDir: loaderOptions.useContentDir ?? false,
       isPageMapImport: true
@@ -40,6 +49,12 @@ const nextra: Nextra = nextraConfig => {
   }
 
   return function withNextra(nextConfig = {}) {
+    const pageMapLoader = {
+      loader: loaderPath,
+      options: {
+        locales: nextConfig.i18n?.locales || ['']
+      }
+    }
     const hasI18n = !!nextConfig.i18n?.locales
 
     if (hasI18n) {
@@ -55,8 +70,8 @@ const nextra: Nextra = nextraConfig => {
     return {
       ...nextConfig,
       transpilePackages: [
-        // To import ESM-only packages with `next dev --turbo`. Source: https://github.com/vercel/next.js/issues/63318#issuecomment-2079677098
-        ...(process.env.npm_lifecycle_script!.includes('--turbo')
+        // To import ESM-only packages with `next dev --turbopack`. Source: https://github.com/vercel/next.js/issues/63318#issuecomment-2079677098
+        ...(process.env.npm_lifecycle_script!.includes('--turbopack')
           ? ['shiki']
           : []),
         ...(nextConfig.transpilePackages || [])
@@ -73,7 +88,7 @@ const nextra: Nextra = nextraConfig => {
         i18n: undefined,
         env: {
           ...nextConfig.env,
-          NEXTRA_DEFAULT_LOCALE: nextConfig.i18n?.defaultLocale || 'en',
+          NEXTRA_DEFAULT_LOCALE: nextConfig.i18n?.defaultLocale,
           NEXTRA_LOCALES: JSON.stringify(nextConfig.i18n?.locales)
         }
       }),
@@ -94,6 +109,12 @@ const nextra: Nextra = nextraConfig => {
               loaders: [loader as any]
             },
             '**/nextra/dist/server/page-map-placeholder.js': {
+              loaders: [pageMapPlaceholderLoader]
+            },
+            '**/nextra/dist/server/page-map.js': {
+              loaders: [pageMapLoader]
+            },
+            '**/nextra/dist/client/pages.js': {
               loaders: [pageMapLoader]
             }
           },
@@ -128,7 +149,7 @@ const nextra: Nextra = nextraConfig => {
         rules.push(
           {
             test: PAGE_MAP_RE,
-            use: [options.defaultLoaders.babel, pageMapLoader]
+            use: [options.defaultLoaders.babel, pageMapPlaceholderLoader]
           },
           {
             test: MARKDOWN_EXTENSION_RE,

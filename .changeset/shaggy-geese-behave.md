@@ -4,4 +4,4 @@
 'nextra': patch
 ---
 
-add support for turbopack `next dev --turbo`
+add support for turbopack `next dev --turbopack`

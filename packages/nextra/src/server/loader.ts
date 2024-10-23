@@ -45,6 +45,14 @@ const initGitRepo = (async () => {
   return {}
 })()
 
+function getStaticPageMap(importPath: string, locales: string[]) {
+  return `await {
+${locales
+  .map(lang => `"${lang}": () => import("${importPath}?locale=${lang}")`)
+  .join(',\n')}
+}[locale]()`
+}
+
 export async function loader(
   this: LoaderContext<LoaderOptions>,
   source: string
@@ -52,7 +60,6 @@ export async function loader(
   // this.cacheable(true)
   const {
     isPageImport = false,
-    isPageMapImport,
     defaultShowCopyCode,
     search,
     staticImage,
@@ -60,7 +67,8 @@ export async function loader(
     latex,
     codeHighlight,
     mdxOptions,
-    useContentDir
+    useContentDir,
+    locales
   } = this.getOptions()
 
   const resolveData = this._module?.resourceResolveData
@@ -74,7 +82,7 @@ export async function loader(
        */
       path.join(resolveData.descriptionFileRoot, resolveData.relativePath)
     : this.resourcePath
-  if (isPageMapImport) {
+  if (mdxPath.includes('page-map-placeholder.js')) {
     const locale = this.resourceQuery.replace('?locale=', '')
     const relativePaths = await getFilepaths({
       dir: useContentDir ? path.join('content', locale) : APP_DIR,
@@ -88,6 +96,34 @@ export async function loader(
       mdxPages,
       fromAppDir: !useContentDir
     })
+    return rawJs
+  }
+  // https://github.com/vercel/next.js/issues/71453#issuecomment-2431810574
+  if (mdxPath.includes('/nextra/dist/server/page-map.js')) {
+    const CODE_TO_REPLACE =
+      'await import(`./page-map-placeholder.js?locale=${locale}`);'
+    if (!source.includes(CODE_TO_REPLACE)) {
+      throw new Error("Can't find pageMap, this is Nextra bug")
+    }
+    const rawJs = source.replace(
+      CODE_TO_REPLACE,
+      getStaticPageMap('./page-map-placeholder.js', locales)
+    )
+    // console.log(111, rawJs)
+    return rawJs
+  }
+  // https://github.com/vercel/next.js/issues/71453#issuecomment-2431810574
+  if (mdxPath.includes('/nextra/dist/client/pages.js')) {
+    const CODE_TO_REPLACE =
+      'await import(`../server/page-map-placeholder.js?locale=${locale}`);'
+    if (!source.includes(CODE_TO_REPLACE)) {
+      throw new Error("Can't find RouteToFilepath, this is Nextra bug")
+    }
+    const rawJs = source.replace(
+      CODE_TO_REPLACE,
+      getStaticPageMap('../server/page-map-placeholder.js', locales)
+    )
+    // console.log(222, rawJs)
     return rawJs
   }
   const { result, readingTime } = await compileMdx(source, {

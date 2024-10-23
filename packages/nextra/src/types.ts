@@ -5,8 +5,8 @@ import type { z } from 'zod'
 import type { mathJaxOptionsSchema, nextraConfigSchema } from './server/schemas'
 
 export interface LoaderOptions extends NextraConfig {
-  isPageImport?: boolean
-  isPageMapImport?: boolean
+  isPageImport?: boolean,
+  locales: string[]
 }
 
 export interface Folder<FileType = PageMapItem> {

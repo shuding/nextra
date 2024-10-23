@@ -48,12 +48,6 @@ const nextConfig = withBundleAnalyzer(
       return config
     },
     experimental: {
-      optimizePackageImports: [
-        // '@app/_icons'
-        // Provoke error
-        // Could not find the module in the React Client Manifest. This is probably a bug in the React Server Components bundler
-        // 'nextra/components'
-      ],
       turbo: {
         rules: {
           './app/_icons/*.svg': {
@@ -61,7 +55,13 @@ const nextConfig = withBundleAnalyzer(
             as: '*.js'
           }
         }
-      }
+      },
+      optimizePackageImports: [
+        // '@app/_icons'
+        // Provoke error
+        // Could not find the module in the React Client Manifest. This is probably a bug in the React Server Components bundler
+        // 'nextra/components'
+      ]
     }
   })
 )

@@ -51,10 +51,6 @@ const nextConfig = withNextra({
     return config
   },
   experimental: {
-    optimizePackageImports: [
-      // '@components/icons',
-      'nextra/components'
-    ],
     turbo: {
       rules: {
         './components/icons/*.svg': {
@@ -62,7 +58,11 @@ const nextConfig = withNextra({
           as: '*.js'
         }
       }
-    }
+    },
+    optimizePackageImports: [
+      // '@components/icons',
+      'nextra/components'
+    ]
   }
 })
 
