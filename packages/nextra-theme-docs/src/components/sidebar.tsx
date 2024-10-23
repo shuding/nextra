@@ -144,10 +144,6 @@ const Folder: FC<FolderProps> = ({ item, anchors, onFocus, level }) => {
       (menu.children || []).map(route => [route.name, route])
     )
     item.children = Object.entries(menu.items || {}).map(([key, item]) => {
-      const route = routes[key] || {
-        name: key,
-        route: menu.route + '/' + key
-      }
       return {
         ...route,
         ...item

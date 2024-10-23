@@ -5,7 +5,8 @@ import { isValidElement } from 'react'
 import type { Options as RehypeKatexOptions } from 'rehype-katex'
 import type { Options as RehypePrettyCodeOptions } from 'rehype-pretty-code'
 import { z } from 'zod'
-import type { PageMapItem } from '../types'
+import type { PageMapItem } from '../types.js'
+import { pageTitleFromFilename } from './utils.js'
 
 export const mathJaxOptionsSchema = z.strictObject({
   /**
@@ -102,29 +103,27 @@ const linkItemSchema = z.strictObject({
   newWindow: z.boolean().optional()
 })
 
+const menuItemSchema = z
+  .union([
+    stringOrElement,
+    z.strictObject({
+      title,
+      href: z.string().optional(),
+      newWindow: z.boolean().optional()
+    })
+  ])
+  .transform(transformTitle)
+
 export const menuSchema = z.strictObject({
   type: z.literal('menu'),
   title,
-  items: z
-    .record(
-      z
-        .union([
-          stringOrElement,
-          z.strictObject({
-            title,
-            href: z.string().optional(),
-            newWindow: z.boolean().optional()
-          })
-        ])
-        .transform(transformTitle)
-    )
-    .transform(obj => {
-      for (const key in obj) {
-        // @ts-expect-error
-        obj[key].title ??= key
-      }
-      return obj
-    })
+  items: z.record(menuItemSchema).transform(obj => {
+    for (const key in obj) {
+      // @ts-expect-error
+      obj[key].title ||= pageTitleFromFilename(key)
+    }
+    return obj
+  })
 })
 
 const separatorItemSchema = z.strictObject({
