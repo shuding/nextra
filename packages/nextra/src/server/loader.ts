@@ -129,6 +129,7 @@ export async function loader(
     })
     return rawJs
   }
+
   if (mdxPath.includes('/nextra/dist/server/page-map.js')) {
     const rawJs = replaceDynamicResourceQuery(
       source,
@@ -137,6 +138,7 @@ export async function loader(
     )
     return rawJs
   }
+
   if (mdxPath.includes('/nextra/dist/client/pages.js')) {
     const rawJs = replaceDynamicResourceQuery(
       source,
