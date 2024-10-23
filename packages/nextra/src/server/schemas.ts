@@ -96,22 +96,13 @@ export const displaySchema = z.enum(['normal', 'hidden', 'children'])
 
 const title = stringOrElement.optional()
 
-const linkItemSchema = z.strictObject({
-  type: z.literal('page').optional(),
+const linkSchema = z.strictObject({
   title,
-  href: z.string(),
-  newWindow: z.boolean().optional()
+  href: z.string().startsWith('https://')
 })
 
 const menuItemSchema = z
-  .union([
-    stringOrElement,
-    z.strictObject({
-      title,
-      href: z.string().optional(),
-      newWindow: z.boolean().optional()
-    })
-  ])
+  .union([stringOrElement, linkSchema])
   .transform(transformTitle)
 
 export const menuSchema = z.strictObject({
@@ -142,7 +133,7 @@ export const metaSchema = z
   .union([
     stringOrElement,
     itemSchema,
-    linkItemSchema,
+    linkSchema.extend({ type: z.enum(['page', 'doc']).optional() }),
     separatorItemSchema,
     menuSchema
   ])
