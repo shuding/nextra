@@ -15,7 +15,7 @@ const DEFAULT_PAGE_THEME: PageTheme = {
   typesetting: 'default'
 }
 
-type PageTheme = z.infer<typeof itemSchema>['theme']
+type PageTheme = NonNullable<z.infer<typeof itemSchema>['theme']>
 type Display = z.infer<typeof itemSchema>['display']
 type IMenuItem = z.infer<typeof menuSchema>
 type MetaType = Record<string, any>
