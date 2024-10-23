@@ -20,6 +20,6 @@ export default {
   renderingStrategies: 'SSR / SSG Ready',
   typescript: 'TypeScript Ready',
   remoteLocal: 'Remote + Local',
-  editPage: 'Edit this page on GitHub →',
+  editPage: 'Edit this page on GitHub',
   by: 'by'
 }

@@ -1,42 +1,7 @@
-import fs from 'node:fs/promises'
-import path from 'node:path'
 import { normalizePages } from '../src/client/normalize-pages.js'
-import { generatePageMapFromFilepaths } from '../src/server/generate-page-map.js'
 import { normalizePageMap } from '../src/server/normalize-page-map.js'
 import { usPageMap } from './fixture/page-maps/page-map.js'
-
-async function getPageMapForFixture(dirName: string) {
-  const dir = path.join(__dirname, 'fixture', 'page-maps', dirName)
-  vi.doMock('next/dist/lib/find-pages-dir.js', () => ({
-    findPagesDir: () => ({ appDir: dir })
-  }))
-  vi.doMock('../src/server/constants.ts', async () => ({
-    ...(await vi.importActual('../src/server/constants.ts')),
-    CHUNKS_DIR: dir
-  }))
-  const { getFilepaths, collectPageMap } = await import(
-    '../src/server/page-map.js'
-  )
-
-  const relativePaths = await getFilepaths({ dir })
-
-  const { pageMap: _pageMap, mdxPages } =
-    generatePageMapFromFilepaths(relativePaths)
-  const rawJs = await collectPageMap({
-    pageMap: _pageMap,
-    mdxPages,
-    fromAppDir: false
-  })
-
-  await fs.writeFile(
-    path.join(dir, 'generated-page-map.ts'),
-    '// @ts-nocheck\n' +
-      rawJs.replaceAll('private-next-root-dir/content/', './')
-  )
-
-  const { pageMap } = await import(`${dir}/generated-page-map.js`)
-  return pageMap
-}
+import { getPageMapForFixture } from './test-utils.js'
 
 describe('normalize-page', () => {
   it('en-US home', () => {
@@ -195,17 +160,6 @@ describe('normalize-page', () => {
           "children": [
             {
               "children": [
-                {
-                  "items": {
-                    "nextra": {
-                      "href": "https://nextra.site",
-                      "title": "Nextra",
-                    },
-                  },
-                  "name": "menu",
-                  "title": "menu",
-                  "type": "menu",
-                },
                 {
                   "isUnderCurrentDocsTree": true,
                   "name": "---",
@@ -379,6 +333,6 @@ describe('normalize-page', () => {
     const { docsDirectories } = normalizedResult
     expect(docsDirectories[0].name).toBe('_')
     expect(docsDirectories[1].route).toBe('/docs/bar')
-    expect(docsDirectories[3].route).toBe('/foo')
+    expect(docsDirectories[2].route).toBe('/foo')
   })
 })
