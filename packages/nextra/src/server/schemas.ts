@@ -102,7 +102,7 @@ const linkItemSchema = z.strictObject({
   newWindow: z.boolean().optional()
 })
 
-export const menuItemSchema = z.strictObject({
+export const menuSchema = z.strictObject({
   type: z.literal('menu'),
   title,
   items: z
@@ -121,7 +121,7 @@ export const menuItemSchema = z.strictObject({
     .transform(obj => {
       for (const key in obj) {
         // @ts-expect-error
-        obj[key].title ||= key
+        obj[key].title ??= key
       }
       return obj
     })
@@ -145,7 +145,7 @@ export const metaSchema = z
     itemSchema,
     linkItemSchema,
     separatorItemSchema,
-    menuItemSchema
+    menuSchema
   ])
   .transform(transformTitle)
 

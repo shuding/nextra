@@ -1,7 +1,7 @@
 import type { z } from 'zod'
 import type {
   displaySchema,
-  menuItemSchema,
+  menuSchema,
   pageThemeSchema
 } from '../server/schemas'
 import type { Folder, FrontMatter, MdxFile, PageMapItem } from '../types'
@@ -22,7 +22,7 @@ const DEFAULT_PAGE_THEME: PageTheme = {
 export type PageTheme = z.infer<typeof pageThemeSchema>
 
 type Display = z.infer<typeof displaySchema>
-type IMenuItem = z.infer<typeof menuItemSchema>
+type IMenuItem = z.infer<typeof menuSchema>
 type MetaType = Record<string, any>
 
 function extendMeta(
