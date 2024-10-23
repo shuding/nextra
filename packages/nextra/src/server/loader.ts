@@ -48,14 +48,14 @@ const initGitRepo = (async () => {
 /*
  * https://github.com/vercel/next.js/issues/71453#issuecomment-2431810574
  *
- * Replace `await import(`./page-map-placeholder.js?locale=${locale}`)`
+ * Replace `await import(`./page-map-placeholder.js?lang=${lang}`)`
  *
  * with:
  *
  * await {
- * "en": () => import("./page-map-placeholder.js?locale=en"),
- * "es": () => import("./page-map-placeholder.js?locale=es"),
- * "ru": () => import("./page-map-placeholder.js?locale=ru")
+ * "en": () => import("./page-map-placeholder.js?lang=en"),
+ * "es": () => import("./page-map-placeholder.js?lang=es"),
+ * "ru": () => import("./page-map-placeholder.js?lang=ru")
  * }[locale]()
  *
  * So static analyzer will know which `resourceQuery` to pass to the loader
@@ -66,8 +66,7 @@ function replaceDynamicResourceQuery(
   locales: string[]
 ): string {
   const { importPath } =
-    rawJs.match(/import\(`(?<importPath>.+?)\?locale=\${locale}`\)/)?.groups ||
-    {}
+    rawJs.match(/import\(`(?<importPath>.+?)\?lang=\${lang}`\)/)?.groups || {}
   if (!importPath) {
     throw new Error(
       `Can't find \`${rawImport}\` statement. This is a Nextra bug`
@@ -76,9 +75,9 @@ function replaceDynamicResourceQuery(
 
   const replaced = `{
 ${locales
-  .map(lang => `"${lang}": () => import("${importPath}?locale=${lang}")`)
+  .map(lang => `"${lang}": () => import("${importPath}?lang=${lang}")`)
   .join(',\n')}
-}[locale]()`
+}[lang]()`
 
   return rawJs.replace(rawImport, replaced)
 }
@@ -101,20 +100,10 @@ export async function loader(
     locales
   } = this.getOptions()
 
-  const resolveData = this._module?.resourceResolveData
+  const filePath = this.resourcePath
 
-  const mdxPath = resolveData
-    ? // to make it work with symlinks, resolve the mdx path based on the relative path
-      /*
-       * `context.rootContext` could include path chunk of
-       * `context._module.resourceResolveData.relativePath` use
-       * `context._module.resourceResolveData.descriptionFileRoot` instead
-       */
-      path.join(resolveData.descriptionFileRoot, resolveData.relativePath)
-    : this.resourcePath
-
-  if (mdxPath.includes('page-map-placeholder.js')) {
-    const locale = this.resourceQuery.replace('?locale=', '')
+  if (filePath.includes('page-map-placeholder.js')) {
+    const locale = this.resourceQuery.replace('?lang=', '')
     const relativePaths = await getFilepaths({
       dir: useContentDir ? path.join('content', locale) : APP_DIR,
       isAppDir: !useContentDir
@@ -130,19 +119,19 @@ export async function loader(
     return rawJs
   }
 
-  if (mdxPath.includes('/nextra/dist/server/page-map.js')) {
+  if (filePath.includes('/nextra/dist/server/page-map.js')) {
     const rawJs = replaceDynamicResourceQuery(
       source,
-      'import(`./page-map-placeholder.js?locale=${locale}`)',
+      'import(`./page-map-placeholder.js?lang=${lang}`)',
       locales
     )
     return rawJs
   }
 
-  if (mdxPath.includes('/nextra/dist/client/pages.js')) {
+  if (filePath.includes('/nextra/dist/client/pages.js')) {
     const rawJs = replaceDynamicResourceQuery(
       source,
-      'import(`../server/page-map-placeholder.js?locale=${locale}`)',
+      'import(`../server/page-map-placeholder.js?lang=${lang}`)',
       locales
     )
     return rawJs
@@ -170,7 +159,7 @@ export async function loader(
     search,
     latex,
     codeHighlight,
-    filePath: mdxPath,
+    filePath,
     useCachedCompiler: true,
     isPageImport
   })
@@ -180,7 +169,7 @@ export async function loader(
   if (repository && gitRoot) {
     try {
       timestamp = await repository.getFileLatestModifiedDateAsync(
-        path.relative(gitRoot, mdxPath)
+        path.relative(gitRoot, filePath)
       )
     } catch {
       // Failed to get timestamp for this file. Silently ignore it
@@ -188,7 +177,7 @@ export async function loader(
   }
 
   const restProps: PageOpts['metadata'] = {
-    filePath: slash(path.relative(CWD, mdxPath)),
+    filePath: slash(path.relative(CWD, filePath)),
     timestamp,
     readingTime
   }
