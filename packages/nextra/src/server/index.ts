@@ -37,7 +37,7 @@ const nextra: Nextra = nextraConfig => {
   const pageMapPlaceholderLoader = {
     loader: loaderPath,
     options: {
-      useContentDir: loaderOptions.useContentDir ?? false,
+      useContentDir: loaderOptions.useContentDir ?? false
     }
   }
 

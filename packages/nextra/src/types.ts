@@ -5,7 +5,7 @@ import type { z } from 'zod'
 import type { mathJaxOptionsSchema, nextraConfigSchema } from './server/schemas'
 
 export interface LoaderOptions extends NextraConfig {
-  isPageImport?: boolean,
+  isPageImport?: boolean
   locales: string[]
 }
 

@@ -500,11 +500,11 @@ Empty component for search result.
 
 **Example:**
 
-```jsx filename="theme.config.jsx"
+```js filename="theme.config.js"
 export default {
   searchResultEmpty({ locale }) {
-    if (locale === 'zh-CN') return <span>未查找到结果</span>
-    return <span>No results found</span>
+    if (locale === 'zh-CN') return '未查找到结果'
+    return 'No results found'
   }
 }
 ```
