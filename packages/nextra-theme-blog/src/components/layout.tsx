@@ -1,7 +1,7 @@
 import { ThemeProvider } from 'next-themes'
 import type { ThemeProviderProps } from 'next-themes/dist/types'
 import { ViewTransitions } from 'next-view-transitions'
-import type { FC, ReactNode } from 'react'
+import type { FC, ReactElement, ReactNode } from 'react'
 
 export const Footer: FC<{
   children?: ReactNode
@@ -18,9 +18,11 @@ export const Footer: FC<{
 export const Layout: FC<{
   children: ReactNode
   nextThemes: Omit<ThemeProviderProps, 'children'>
-}> = ({ children, nextThemes }) => {
+  banner?: ReactElement
+}> = ({ children, nextThemes, banner }) => {
   return (
     <ThemeProvider attribute="class" {...nextThemes}>
+      {banner}
       <article
         className="_container _px-4 _prose max-md:_prose-sm dark:_prose-invert"
         dir="ltr"

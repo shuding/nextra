@@ -87,5 +87,3 @@ export type MDXWrapper = FC<
     children: ReactNode
   } & PageOpts
 >
-
-export type UseTOC = (props?: Record<string, any>) => Heading[]
