@@ -103,10 +103,10 @@ export const ClientNavbar: FC<{
     <>
       <div className="_flex _gap-4 _overflow-x-auto nextra-scrollbar _py-1.5">
         {items.map(page => {
-          if (page.display === 'hidden') return
+          if ('display' in page && page.display === 'hidden') return
           if (isMenu(page)) {
             return (
-              <NavbarMenu key={page.title} menu={page}>
+              <NavbarMenu key={page.name} menu={page}>
                 {page.title}
               </NavbarMenu>
             )

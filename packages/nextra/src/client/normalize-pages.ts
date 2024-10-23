@@ -58,7 +58,6 @@ export type PageItem = (MdxFile | FolderWithoutChildren) & {
   title: string
   type: string
   href?: string
-  newWindow?: boolean
   children?: PageItem[]
   firstChildRoute?: string
   display?: Display
