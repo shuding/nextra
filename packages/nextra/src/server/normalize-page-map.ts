@@ -6,7 +6,7 @@ import type {
   MetaJsonFile,
   PageMapItem
 } from '../types'
-import { metaSchema } from './schemas'
+import { metaSchema } from './schemas.js'
 
 export function normalizePageMap(pageMap: PageMapItem[] | Folder): any {
   if (Array.isArray(pageMap)) {
@@ -48,12 +48,14 @@ function sortFolder(pageMap: PageMapItem[] | Folder) {
         if (error) {
           throw fromZodError(error)
         }
-        console.log(data)
-        meta[key] = data
         if (key === '*') {
-          delete meta['*'].title
-          delete meta['*'].href
+          // @ts-expect-error
+          delete data.title
+          // @ts-expect-error
+          delete data.href
         }
+        // @ts-expect-error
+        meta[key] = data
       }
     } else {
       const prevItem = folder.children[index - 1] as Exclude<

@@ -65,16 +65,16 @@ export const nextraConfigSchema = z.strictObject({
 })
 
 export const pageThemeSchema = z.strictObject({
-  breadcrumb: z.boolean(),
-  collapsed: z.boolean(),
-  footer: z.boolean(),
-  layout: z.enum(['default', 'full']),
-  navbar: z.boolean(),
-  pagination: z.boolean(),
-  sidebar: z.boolean(),
-  timestamp: z.boolean(),
-  toc: z.boolean(),
-  typesetting: z.enum(['default', 'article'])
+  breadcrumb: z.boolean().optional(),
+  collapsed: z.boolean().optional(),
+  footer: z.boolean().optional(),
+  layout: z.enum(['default', 'full']).optional(),
+  navbar: z.boolean().optional(),
+  pagination: z.boolean().optional(),
+  sidebar: z.boolean().optional(),
+  timestamp: z.boolean().optional(),
+  toc: z.boolean().optional(),
+  typesetting: z.enum(['default', 'article']).optional()
 })
 
 /**
@@ -88,32 +88,49 @@ const titleSchema = z.string()
 
 const linkItemSchema = z.strictObject({
   href: z.string(),
-  newWindow: z.boolean(),
+  newWindow: z.boolean().optional(),
   title: titleSchema
 })
 
 export const menuItemSchema = z.strictObject({
-  display: displaySchema,
-  items: z.record(linkItemSchema.partial({ href: true, newWindow: true })),
+  items: z.record(
+    z
+      .union([
+        z.string(),
+        z.strictObject({
+          title: z.string(),
+          href: z.string().optional(),
+          newWindow: z.boolean().optional()
+        })
+      ])
+      .transform(transformTitle)
+  ),
   title: titleSchema,
   type: z.literal('menu')
 })
 
 const separatorItemSchema = z.strictObject({
-  title: titleSchema,
+  title: titleSchema.optional(),
   type: z.literal('separator')
 })
 
-const itemSchema = linkItemSchema.extend({
-  display: displaySchema,
-  theme: pageThemeSchema,
+const itemSchema = z.strictObject({
+  display: displaySchema.optional(),
+  theme: pageThemeSchema.optional(),
   title: titleSchema,
-  type: z.enum(['page', 'doc'])
+  type: z.enum(['page', 'doc']).optional()
 })
 
 export const metaSchema = z
-  .string()
-  .or(menuItemSchema)
-  .or(separatorItemSchema)
-  .or(itemSchema)
-  .transform(title => (typeof title === 'string' ? { title } : title))
+  .union([
+    z.string(),
+    itemSchema,
+    linkItemSchema,
+    separatorItemSchema,
+    menuItemSchema
+  ])
+  .transform(transformTitle)
+
+function transformTitle(title: unknown) {
+  return typeof title === 'string' ? { title } : title
+}
