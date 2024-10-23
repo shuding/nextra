@@ -3,7 +3,7 @@
   @apply dark:_bg-[--shiki-dark-bg] dark:_text-[--shiki-dark];
 }
 
-code:not([class*='twoslash-']) {
+code.nextra-code:not([class*='twoslash-']) {
   box-decoration-break: slice;
   font-feature-settings:
     'rlig' 1,
@@ -16,7 +16,7 @@ code:not([class*='twoslash-']) {
   }
 }
 
-pre code:not([class*='twoslash-']) {
+pre code.nextra-code:not([class*='twoslash-']) {
   @apply _grid _text-sm;
 
   &[data-line-numbers] > span {

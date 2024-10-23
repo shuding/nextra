@@ -1,5 +1,42 @@
 # nextra
 
+## 4.0.0-app-router.12
+
+### Patch Changes
+
+- b8defc9: sync with nextra 3.1.0
+- b8defc9: remove `NormalizedResult.flatDirectories`
+
+  remove `Item.withIndexPage`, use `'frontMatter' in Item`
+
+## 4.0.0-app-router.11
+
+### Patch Changes
+
+- be15165: move `pagefind` output to `public/_pagefind` directory
+  https://github.com/shuding/nextra/pull/3517
+
+## 4.0.0-app-router.10
+
+### Patch Changes
+
+- 8b1a7c9: defer pagefind results update for prioritizing the user input state
+
+## 4.0.0-app-router.9
+
+### Patch Changes
+
+- 2c8a8ab: - sync with nextra 3.0.15
+
+  - bump to Next 15
+  - remove importing of `style.css` in themes, you need to import now manually
+    by
+
+  ```js
+  import 'nextra-theme-docs/style.css' // for docs theme
+  import 'nextra-theme-blog/style.css' // for blog theme
+  ```
+
 ## 4.0.0-app-router.8
 
 ### Patch Changes
@@ -71,6 +108,65 @@
 - 99f34d3: The initial version which supports App Router instead of Pages
   Router, something may be broken, check
   https://github.com/shuding/nextra/tree/v4-v2/examples for the migration guide
+
+## 3.1.0
+
+### Minor Changes
+
+- 8e9767e: `activeType` should be initialized from `meta['*']`
+- fec399a: fix `type: 'separator'`, `type: 'menu'` and `item` with `href` not
+  respecting order when not all pages specified in `_meta` file
+
+### Patch Changes
+
+- 035fe48: - fix empty dropdown menu when \_meta item with `type: "menu"`
+  contains items with local pages
+- c002118: - add tests for should respect order for `type: "separator"`,
+  `type: "menu"` and item with `href`
+
+## 3.1.0-canary.1
+
+### Minor Changes
+
+- 8e9767e: `activeType` should be initialized from `meta['*']`
+
+### Patch Changes
+
+- 035fe48: - fix empty dropdown menu when \_meta item with `type: "menu"`
+  contains items with local pages
+- c002118: - add tests for should respect order for `type: "separator"`,
+  `type: "menu"` and item with `href`
+
+## 3.1.0-canary.0
+
+### Minor Changes
+
+- fec399a: fix `type: 'separator'`, `type: 'menu'` and `item` with `href` not
+  respecting order when not all pages specified in `_meta` file
+
+## 3.0.15
+
+### Patch Changes
+
+- bd498c6: fix compatibility with Next.js `15.0.0-rc.1`
+
+## 3.0.14
+
+### Patch Changes
+
+- 6454938: update css selectors for `code`, use `code.nextra-code`
+- 9794e9e: update package version range for `@theguild/remark-mermaid` to be at
+  least `^0.1.3`
+  https://github.com/nextauthjs/next-auth/pull/12029#discussion_r1801785960
+- 9794e9e: Fix `frontMatter.sidebarTitle` didn't affect without
+  `frontMatter.title` set
+
+  now priority for sidebar title is:
+
+  1. `title` property from `_meta` file
+  1. `frontMatter.sidebarTitle`
+  1. `frontMatter.title`
+  1. formatted with [Title](https://title.sh) based on filename
 
 ## 3.0.13
 

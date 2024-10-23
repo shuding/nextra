@@ -1,10 +1,9 @@
 import { compile } from '@mdx-js/mdx'
-import type { VFile } from '@mdx-js/mdx/lib/compile'
 import remarkFrontmatter from 'remark-frontmatter'
 import { clean } from '../../../../__test__/test-utils.js'
 import { remarkMdxFrontMatter } from '../remark-mdx-frontmatter.js'
 
-function process(content: string): Promise<VFile> {
+function process(content: string) {
   return compile(content, {
     jsx: true,
     remarkPlugins: [remarkFrontmatter, [remarkMdxFrontMatter]]
@@ -26,7 +25,7 @@ describe('remarkMdxFrontMatter', () => {
     const file = await process(YAML_FRONTMATTER)
 
     it('should export yaml frontmatter', () => {
-      expect(clean(file)).resolves.toMatchInlineSnapshot(`
+      expect(clean(String(file))).resolves.toMatchInlineSnapshot(`
         "/*@jsxRuntime automatic*/
         /*@jsxImportSource react*/
         export const metadata = {
@@ -57,7 +56,7 @@ describe('remarkMdxFrontMatter', () => {
   describe('esm frontmatter', async () => {
     const file = await process(ESM_FRONTMATTER)
     it('should export esm frontmatter', () => {
-      expect(clean(file)).resolves.toMatchInlineSnapshot(`
+      expect(clean(String(file))).resolves.toMatchInlineSnapshot(`
         "/*@jsxRuntime automatic*/
         /*@jsxImportSource react*/
         export const metadata = {

@@ -16,8 +16,9 @@ const res = generatePageMapFromFilepaths(
 
 export const pageMap = res.pageMap[0].children
 
-export default async function Page({ params: { slug = [] } }) {
-  const route = slug.join('/')
+export default async function Page(props) {
+  const params = await props.params
+  const route = (params.slug || []).join('/')
   const filePath = mdxPages[route]
 
   if (!filePath) {
@@ -31,7 +32,7 @@ export default async function Page({ params: { slug = [] } }) {
     filePath
   })
 
-  const { default: MDXContent, useTOC, ...props } = evaluate(result)
+  const { default: MDXContent, useTOC, metadata, title } = evaluate(result)
 
   const { wrapper: Wrapper, ...components } = useMDXComponents({
     Callout,
@@ -40,7 +41,7 @@ export default async function Page({ params: { slug = [] } }) {
     PackageCmd: () => null
   })
   return (
-    <Wrapper toc={useTOC()} {...props}>
+    <Wrapper toc={useTOC()} metadata={metadata} title={title}>
       <MDXContent components={components} />
     </Wrapper>
   )

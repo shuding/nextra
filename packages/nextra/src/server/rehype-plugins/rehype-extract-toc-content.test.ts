@@ -194,13 +194,7 @@ export const metadata = {
       import { useMDXComponents as _provideComponents } from 'next-mdx-import-source-file'
       export const title = 'Heading 1'
       export const myVar = 'interpolated'
-      export const Test = () => {
-        const _components = {
-          span: 'span',
-          ..._provideComponents()
-        }
-        return <_components.span>Hello</_components.span>
-      }
+      export const Test = () => <span>Hello</span>
       export const metadata = {
         test: 'extract toc content',
         title: 'Heading 1'

@@ -6,19 +6,27 @@
         // Run `build` in workspaces I depend on first
         "^build"
       ],
-      "outputs": ["dist/**", ".next/**", "loader.js"]
+      // Cache all files emitted to the packages's directories
+      "outputs": ["dist/**", ".next/**", "public/_pagefind/**"]
     },
-    "test": {},
+    "test": {
+      "outputs": ["dist/**"]
+    },
     "types:check": {
       "dependsOn": [
         // Run `build` in workspaces I depend on first
         "^build"
-      ]
+      ],
+      "outputs": ["dist/**", ".next/**"]
     },
     "clean": {
       "cache": false
     },
     "dev": {
+      "dependsOn": [
+        // Run `build` in workspaces I depend on first
+        "^build"
+      ],
       "cache": false
     }
   }

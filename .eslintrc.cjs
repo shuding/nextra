@@ -74,6 +74,7 @@ module.exports = {
         'unicorn/catch-error-name': 'error',
         'unicorn/prefer-optional-catch-binding': 'error',
         'unicorn/filename-case': 'error',
+        eqeqeq: ['error', 'always', { null: 'ignore' }],
         // todo: enable
         '@typescript-eslint/no-explicit-any': 'off',
         '@typescript-eslint/no-non-null-assertion': 'off',
@@ -134,6 +135,7 @@ module.exports = {
         projectService: true
       },
       rules: {
+        '@typescript-eslint/await-thenable': 'error',
         '@typescript-eslint/no-unnecessary-type-assertion': 'error',
         '@typescript-eslint/consistent-type-imports': 'error',
         '@typescript-eslint/non-nullable-type-assertion-style': 'error',

@@ -23,12 +23,13 @@ export type PageTheme = z.infer<typeof pageThemeSchema>
 
 type Display = z.infer<typeof displaySchema>
 type IMenuItem = z.infer<typeof menuItemSchema>
+type MetaType = Record<string, any>
 
 function extendMeta(
-  fallback: Record<string, any> = {},
-  _meta: Record<string, any> = {},
-  metadata: Record<string, any> = {}
-): Record<string, any> {
+  _meta: MetaType = {},
+  fallback: MetaType,
+  metadata: MetaType = {}
+): MetaType {
   const theme: PageTheme = {
     ...fallback.theme,
     ..._meta.theme,
@@ -47,9 +48,8 @@ type FolderWithoutChildren = Omit<Folder, 'children'>
 export type Item = (MdxFile | FolderWithoutChildren) & {
   title: string
   type: string
-  children?: Item[]
+  children: Item[]
   display?: Display
-  withIndexPage?: boolean
   theme?: PageTheme
   isUnderCurrentDocsTree?: boolean
 }
@@ -62,7 +62,6 @@ export type PageItem = (MdxFile | FolderWithoutChildren) & {
   children?: PageItem[]
   firstChildRoute?: string
   display?: Display
-  withIndexPage?: boolean
   isUnderCurrentDocsTree?: boolean
 }
 
@@ -74,9 +73,8 @@ export type MenuItem = (MdxFile | FolderWithoutChildren) &
 type DocsItem = (MdxFile | FolderWithoutChildren) & {
   title: string
   type: string
-  children?: DocsItem[]
+  children: DocsItem[]
   firstChildRoute?: string
-  withIndexPage?: boolean
   isUnderCurrentDocsTree?: boolean
 }
 
@@ -96,7 +94,6 @@ type NormalizedResult = {
   activeThemeContext: PageTheme
   activePath: Item[]
   directories: Item[]
-  flatDirectories: Item[]
   docsDirectories: DocsItem[]
   flatDocsDirectories: DocsItem[]
   topLevelNavbarItems: (PageItem | MenuItem)[]
@@ -106,7 +103,6 @@ export function normalizePages({
   list,
   route,
   docsRoot = '',
-  underCurrentDocsRoot = false,
   pageThemeContext = DEFAULT_PAGE_THEME
 }: {
   list: PageMapItem[]
@@ -115,58 +111,38 @@ export function normalizePages({
   underCurrentDocsRoot?: boolean
   pageThemeContext?: PageTheme
 }): NormalizedResult {
-  // All directories
+  // If the doc is under the active page root.
+  const underCurrentDocsRoot = route.startsWith(docsRoot)
   // - directories: all directories in the tree structure
-  // - flatDirectories: all directories in the flat structure, used by search and footer navigation
   const directories: Item[] = []
-  const flatDirectories: Item[] = []
-
   // Docs directories
   const docsDirectories: DocsItem[] = []
   const flatDocsDirectories: DocsItem[] = []
-
   // Page directories
   const topLevelNavbarItems: (PageItem | MenuItem)[] = []
 
-  let activeType: string | undefined
-  let activeIndex = 0
-  let activeThemeContext = pageThemeContext
-  let activePath: Item[] = []
-
-  const meta =
-    'data' in list[0]
-      ? (list[0].data as Record<string, Record<string, any> | undefined>)
-      : {}
-
+  const meta = 'data' in list[0] ? (list[0].data as MetaType) : {}
   // Normalize items based on files and _meta.json.
   const items = ('data' in list[0] ? list.slice(1) : list) as (
-    | (Folder & {
-        withIndexPage?: true
-        frontMatter: FrontMatter
-      })
+    | (Folder & { frontMatter?: FrontMatter })
     | MdxFile
   )[]
 
-  for (let i = 0; i < items.length; i++) {
-    const currentItem = items[i]
-    const nextItem = items[i + 1]
+  const fallbackMeta = meta['*'] || {}
 
-    // If there are two items with the same name, they must be a directory and a
-    // page. In that case we merge them, and use the page's link.
-    if (nextItem && nextItem.name == currentItem.name) {
-      items[i + 1] = {
-        ...nextItem,
-        withIndexPage: true,
-        children:
-          (nextItem as Folder).children || (currentItem as Folder).children
-      }
-      continue
-    }
+  let activeType: string = fallbackMeta.type
+  let activeIndex = 0
+  let activeThemeContext = {
+    ...pageThemeContext,
+    ...fallbackMeta.theme
+  }
+  let activePath: Item[] = []
 
+  for (const currentItem of items) {
     // Get the item's meta information.
     const extendedMeta = extendMeta(
-      meta['*'],
       meta[currentItem.name],
+      fallbackMeta,
       currentItem.frontMatter
     )
     const { display, type = 'doc' } = extendedMeta
@@ -175,9 +151,6 @@ export function normalizePages({
       ...extendedMeta.theme
     }
 
-    // If the doc is under the active page root.
-    const isCurrentDocsTree = route.startsWith(docsRoot)
-
     const normalizedChildren: false | NormalizedResult =
       'children' in currentItem &&
       normalizePages({
@@ -185,7 +158,7 @@ export function normalizePages({
         route,
         docsRoot:
           type === 'page' || type === 'menu' ? currentItem.route : docsRoot,
-        underCurrentDocsRoot: underCurrentDocsRoot || isCurrentDocsTree,
+        underCurrentDocsRoot,
         pageThemeContext: extendedPageThemeContext
       })
 
@@ -207,9 +180,9 @@ export function normalizePages({
     const docsItem: DocsItem = getItem()
     const pageItem: PageItem = getItem()
 
-    docsItem.isUnderCurrentDocsTree = isCurrentDocsTree
+    docsItem.isUnderCurrentDocsTree = underCurrentDocsRoot
     if (type === 'separator') {
-      item.isUnderCurrentDocsTree = isCurrentDocsTree
+      item.isUnderCurrentDocsTree = underCurrentDocsRoot
     }
 
     // This item is currently active, we collect the active path etc.
@@ -265,7 +238,7 @@ export function normalizePages({
               flatDocsDirectories.length + normalizedChildren.activeIndex
             break
         }
-        if ((currentItem as Item).withIndexPage && type === 'doc') {
+        if ('frontMatter' in currentItem && type === 'doc') {
           activeIndex++
         }
       }
@@ -278,36 +251,29 @@ export function normalizePages({
           docsDirectories.push(...normalizedChildren.docsDirectories)
 
           // If it's a page with children inside, we inject itself as a page too.
-          if (normalizedChildren.flatDirectories.length) {
-            pageItem.firstChildRoute = findFirstRoute(
-              normalizedChildren.flatDirectories
-            )
+          if (normalizedChildren.flatDocsDirectories.length) {
+            const route = findFirstRoute(normalizedChildren.flatDocsDirectories)
+            if (route) pageItem.firstChildRoute = route
             topLevelNavbarItems.push(pageItem)
-          } else if (pageItem.withIndexPage) {
+          } else if ('frontMatter' in pageItem) {
             topLevelNavbarItems.push(pageItem)
           }
 
           break
         case 'doc':
-          if (Array.isArray(docsItem.children)) {
-            docsItem.children.push(...normalizedChildren.docsDirectories)
-          }
+          docsItem.children.push(...normalizedChildren.docsDirectories)
           // Itself is a doc page.
-          if (item.withIndexPage && display !== 'children') {
+          if ('frontMatter' in item && display !== 'children') {
             flatDocsDirectories.push(docsItem)
           }
       }
 
-      flatDirectories.push(...normalizedChildren.flatDirectories)
       flatDocsDirectories.push(...normalizedChildren.flatDocsDirectories)
-      if (Array.isArray(item.children)) {
-        item.children.push(...normalizedChildren.directories)
-      }
+      item.children.push(...normalizedChildren.directories)
     } else {
       if (isHidden) {
         continue
       }
-      flatDirectories.push(item)
       switch (type) {
         case 'page':
         case 'menu':
@@ -340,6 +306,7 @@ export function normalizePages({
     switch (type) {
       case 'page':
       case 'menu':
+        // @ts-expect-error -- fixme
         docsDirectories.push(pageItem)
         break
       case 'doc':
@@ -357,8 +324,9 @@ export function normalizePages({
     activeThemeContext,
     activePath,
     directories,
-    flatDirectories,
-    docsDirectories,
+    docsDirectories: docsDirectories.filter(
+      item => item.isUnderCurrentDocsTree
+    ),
     flatDocsDirectories,
     topLevelNavbarItems
   }

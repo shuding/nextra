@@ -1,5 +1,49 @@
 # nextra-theme-blog
 
+## 4.0.0-app-router.12
+
+### Patch Changes
+
+- b8defc9: sync with nextra 3.1.0
+- Updated dependencies [b8defc9]
+- Updated dependencies [b8defc9]
+  - nextra@4.0.0-app-router.12
+
+## 4.0.0-app-router.11
+
+### Patch Changes
+
+- be15165: move `pagefind` output to `public/_pagefind` directory
+  https://github.com/shuding/nextra/pull/3517
+- Updated dependencies [be15165]
+  - nextra@4.0.0-app-router.11
+
+## 4.0.0-app-router.10
+
+### Patch Changes
+
+- 8b1a7c9: defer pagefind results update for prioritizing the user input state
+- Updated dependencies [8b1a7c9]
+  - nextra@4.0.0-app-router.10
+
+## 4.0.0-app-router.9
+
+### Patch Changes
+
+- 2c8a8ab: - sync with nextra 3.0.15
+
+  - bump to Next 15
+  - remove importing of `style.css` in themes, you need to import now manually
+    by
+
+  ```js
+  import 'nextra-theme-docs/style.css' // for docs theme
+  import 'nextra-theme-blog/style.css' // for blog theme
+  ```
+
+- Updated dependencies [2c8a8ab]
+  - nextra@4.0.0-app-router.9
+
 ## 4.0.0-app-router.8
 
 ### Patch Changes
@@ -117,6 +161,48 @@
 
 - Updated dependencies [99f34d3]
   - nextra@4.0.0-app-router.0
+
+## 3.1.0
+
+### Patch Changes
+
+- Updated dependencies [035fe48]
+- Updated dependencies [8e9767e]
+- Updated dependencies [fec399a]
+- Updated dependencies [c002118]
+  - nextra@3.1.0
+
+## 3.1.0-canary.1
+
+### Patch Changes
+
+- Updated dependencies [035fe48]
+- Updated dependencies [8e9767e]
+- Updated dependencies [c002118]
+  - nextra@3.1.0-canary.1
+
+## 3.1.0-canary.0
+
+### Patch Changes
+
+- Updated dependencies [fec399a]
+  - nextra@3.1.0-canary.0
+
+## 3.0.15
+
+### Patch Changes
+
+- Updated dependencies [bd498c6]
+  - nextra@3.0.15
+
+## 3.0.14
+
+### Patch Changes
+
+- Updated dependencies [6454938]
+- Updated dependencies [9794e9e]
+- Updated dependencies [9794e9e]
+  - nextra@3.0.14
 
 ## 3.0.13
 

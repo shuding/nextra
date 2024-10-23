@@ -9,7 +9,7 @@ type NotFoundPageProps = {
 }
 
 export const NotFoundPage: FC<NotFoundPageProps> = ({
-  content = 'Submit an issue about broken link →',
+  content = 'Submit an issue about broken link',
   labels = 'bug',
   children = <H1>404: Page Not Found</H1>
 }) => {

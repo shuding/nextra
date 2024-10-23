@@ -1,3 +1,5 @@
+import { Cards } from 'nextra/components'
+
 # Introduction
 
 **Nextra** is a framework on top of Next.js, that lets you build content focused
@@ -5,8 +7,6 @@ websites. It has all the great features from Next.js, plus extra power to create
 Markdown-based content with ease.
 
 ## Quick Start
-
-import { Cards } from 'nextra/components'
 
 To start using Nextra, you need to select a theme first:
 
@@ -28,21 +28,15 @@ The Nextra FAQ is a collection of useful questions and answers about the
 project. If you have a question that isn't answered here, please
 [open a discussion](https://github.com/shuding/nextra/discussions).
 
-export function FAQBox({ title, children }) {
-  return (
-    <details open className="!rounded-lg !bg-neutral-50 dark:!bg-neutral-800">
-      <summary className="text-lg font-bold">{title}</summary>
-      <div className="p-2">{children}</div>
-    </details>
-  )
-}
-
-<FAQBox title="Can I use Nextra with Next.js `pages` router?">
+<details open>
+  {/* prettier-ignore */}
+  <summary className="mb-2">Can I use Nextra with Next.js `pages` router?</summary>
   Nextra 4 only works with the `app` router. Only Nextra 1/2/3 supports the
   `pages` router.
-</FAQBox>
+</details>
 
-<FAQBox title="Can I use X with Nextra?">
+<details open>
+  <summary className="mb-2">Can I use X with Nextra?</summary>
   The answer is "yes" for most things. Since Nextra is just a Next.js plugin, almost all the things
   that can be done with React can be done with Nextra. Here are some examples and guides:
 
@@ -50,10 +44,12 @@ export function FAQBox({ title, children }) {
 - [Use custom CSS and Sass](/docs/guide/custom-css)
 - [Use custom fonts](https://nextjs.org/docs/basic-features/font-optimization)
 
-</FAQBox>
+</details>
 
-<FAQBox title="How can I add a live coding component in Nextra?">
+<details open>
+  {/* prettier-ignore */}
+  <summary className="mb-2">How can I add a live coding component in Nextra?</summary>
   There are libraries like [Sandpack](https://sandpack.codesandbox.io) and
   [react-live](https://github.com/FormidableLabs/react-live) that can help you
   add live coding components to your MDX.
-</FAQBox>
+</details>

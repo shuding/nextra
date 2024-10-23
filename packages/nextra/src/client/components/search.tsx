@@ -10,7 +10,13 @@ import cn from 'clsx'
 import NextLink from 'next/link'
 import { useRouter } from 'next/navigation'
 import type { FC, FocusEventHandler, ReactElement, SyntheticEvent } from 'react'
-import { useCallback, useEffect, useRef, useState } from 'react'
+import {
+  useCallback,
+  useDeferredValue,
+  useEffect,
+  useRef,
+  useState
+} from 'react'
 import { useMounted } from '../hooks/index.js'
 import { InformationCircleIcon, SpinnerIcon } from '../icons/index.js'
 
@@ -40,22 +46,15 @@ const INPUTS = new Set(['input', 'select', 'button', 'textarea'])
 
 const DEV_SEARCH_NOTICE = (
   <>
-    Search is not available in development because Nextra&nbsp;4 uses Pagefind
-    package which indexes built `.html` files rather than `.md`/`.mdx` content.
-    <p className="_mt-2">
-      If you want to test search during development, follow these steps:
+    <p>
+      Search isn&apos;t available in development because Nextra&nbsp;4 uses
+      Pagefind package, which indexes built `.html` files instead of
+      `.md`/`.mdx`.
     </p>
-    <ol className="_mt-2 _list-decimal">
-      <li>Build your app with `next build`</li>
-      <li>
-        Copy `.next/static/chunks/pagefind` folder to a different location
-      </li>
-      <li>Start your app in dev mode using `next dev`</li>
-      <li>
-        Copy `pagefind` folder into `.next/static/chunks/<b>app</b>` or
-        `.next/static/chunks/<b>app/[lang]</b>` for i18n website
-      </li>
-    </ol>
+    <p className="_mt-2">
+      To test search during development, run `next build` and then restart your
+      app with `next dev`.
+    </p>
   </>
 )
 
@@ -70,10 +69,11 @@ export const Search: FC<SearchProps> = ({
   const [error, setError] = useState<ReactElement | string>('')
   const [results, setResults] = useState<PagefindResult[]>([])
   const [search, setSearch] = useState('')
+  // https://github.com/shuding/nextra/pull/3514
+  // defer pagefind results update for prioritizing user input state
+  const deferredSearch = useDeferredValue(search)
 
-  const onChange = useCallback(async (value: string) => {
-    setSearch(value)
-
+  const handleSearch = useCallback(async (value: string) => {
     if (!value) {
       setResults([])
       setError('')
@@ -86,7 +86,7 @@ export const Search: FC<SearchProps> = ({
       try {
         window.pagefind = await import(
           // @ts-expect-error pagefind.js generated after build
-          /* webpackIgnore: true */ './pagefind/pagefind.js'
+          /* webpackIgnore: true */ '/_pagefind/pagefind.js'
         )
         await window.pagefind.options({
           baseUrl: '/'
@@ -120,6 +120,10 @@ export const Search: FC<SearchProps> = ({
     )
     setIsLoading(false)
   }, [])
+
+  useEffect(() => {
+    handleSearch(deferredSearch)
+  }, [handleSearch, deferredSearch])
 
   const router = useRouter()
   const [focused, setFocused] = useState(false)
@@ -184,22 +188,21 @@ export const Search: FC<SearchProps> = ({
   const handleChange = useCallback(
     (event: SyntheticEvent<HTMLInputElement>) => {
       const { value } = event.currentTarget
-      onChange(value)
+      setSearch(value)
     },
-    [onChange]
+    []
   )
 
   const handleSelect = useCallback(
-    async (searchResult: PagefindResult | null) => {
+    (searchResult: PagefindResult | null) => {
       if (!searchResult) return
       // Calling before navigation so selector `html:not(:has(*:focus))` in styles.css will work,
       // and we'll have padding top since input is not focused
       inputRef.current?.blur()
-      await router.push(searchResult.url)
-      // Clear input after navigation completes
-      onChange('')
+      router.push(searchResult.url)
+      setSearch('')
     },
-    [router, onChange]
+    [router]
   )
 
   return (
@@ -284,14 +287,14 @@ export const Search: FC<SearchProps> = ({
             <Result key={searchResult.url} data={searchResult} />
           ))
         ) : (
-          search && emptyResult
+          deferredSearch && emptyResult
         )}
       </ComboboxOptions>
     </Combobox>
   )
 }
 
-function Result({ data }: { data: PagefindResult }) {
+const Result: FC<{ data: PagefindResult }> = ({ data }) => {
   return (
     <>
       <div

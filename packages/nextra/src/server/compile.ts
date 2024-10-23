@@ -1,7 +1,6 @@
 import path from 'node:path'
 import type { ProcessorOptions } from '@mdx-js/mdx'
 import { createProcessor } from '@mdx-js/mdx'
-import type { Processor } from '@mdx-js/mdx/lib/core'
 import { remarkMermaid } from '@theguild/remark-mermaid'
 import { remarkNpm2Yarn } from '@theguild/remark-npm2yarn'
 import type { Program } from 'estree'
@@ -39,8 +38,10 @@ import {
 } from './remark-plugins/index.js'
 import { logger } from './utils.js'
 
+type Processor = ReturnType<typeof createProcessor>
+
 const cachedCompilerForFormat: Record<
-  Exclude<ProcessorOptions['format'], undefined | null>,
+  NonNullable<ProcessorOptions['format']>,
   Processor
 > = Object.create(null)
 
@@ -76,7 +77,12 @@ export async function compileMdx(
     useCachedCompiler,
     isPageImport = true
   }: Partial<CompileMdxOptions> = {}
-) {
+): Promise<{
+  result: string
+  title?: string
+  readingTime?: ReadingTime
+  frontMatter: FrontMatter
+}> {
   const {
     jsx = false,
     format: _format = 'mdx',

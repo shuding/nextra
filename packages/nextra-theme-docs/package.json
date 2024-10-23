@@ -1,6 +1,6 @@
 {
   "name": "nextra-theme-docs",
-  "version": "4.0.0-app-router.8",
+  "version": "4.0.0-app-router.12",
   "description": "A Nextra theme for documentation sites.",
   "repository": "https://github.com/shuding/nextra",
   "author": "Shu Ding <g@shud.in>",
@@ -18,7 +18,7 @@
   ],
   "scripts": {
     "build": "tsup",
-    "clean": "rimraf ./dist",
+    "clean": "rimraf dist .turbo",
     "dev": "tsup --watch . --watch ../nextra/src --watch ../nextra/styles",
     "prepublishOnly": "pnpm build",
     "test": "vitest run",
@@ -43,7 +43,6 @@
     "@tailwindcss/nesting": "^0.0.0-insiders.565cd3e",
     "@testing-library/react": "^16.0.0",
     "@types/react": "^18.2.23",
-    "@types/react-dom": "^18.2.8",
     "@vitejs/plugin-react": "^4.1.0",
     "jsdom": "^25.0.0",
     "next": "^14.2.5",
@@ -51,8 +50,7 @@
     "postcss": "^8.4.33",
     "postcss-import": "^16.0.0",
     "postcss-lightningcss": "^1.0.0",
-    "react": "^19.0.0-rc.0",
-    "react-dom": "^19.0.0-rc.0",
+    "react": "18.3.1",
     "tailwindcss": "^3.4.1",
     "vitest": "^2.0.3"
   },

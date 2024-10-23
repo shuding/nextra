@@ -1,11 +1,20 @@
 import { ArrowRightIcon } from '@components/icons'
 import cn from 'clsx'
 import Link from 'next/link'
-import type { ComponentProps, ReactNode } from 'react'
+import type { ComponentProps, FC, ReactNode } from 'react'
 import { MotionDiv } from '../framer-motion'
 import styles from './style.module.css'
 
-export function Feature({
+export const Feature: FC<
+  {
+    large?: boolean
+    centered?: boolean
+    children: ReactNode
+    lightOnly?: boolean
+    href?: string
+    index: number
+  } & ComponentProps<typeof MotionDiv>
+> = ({
   large,
   centered,
   children,
@@ -14,14 +23,7 @@ export function Feature({
   href,
   index,
   ...props
-}: {
-  large?: boolean
-  centered?: boolean
-  children: ReactNode
-  lightOnly?: boolean
-  href?: string
-  index: number
-} & ComponentProps<typeof MotionDiv>) {
+}) => {
   return (
     <MotionDiv
       initial={{ opacity: 0 }}
@@ -52,6 +54,6 @@ export function Feature({
   )
 }
 
-export function Features({ children }: { children: ReactNode }) {
+export const Features: FC<{ children: ReactNode }> = ({ children }) => {
   return <div className={styles.features}>{children}</div>
 }

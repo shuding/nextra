@@ -1,7 +1,8 @@
 import Link from 'next/link'
+import type { FC } from 'react'
 import { getPageMap } from 'nextra/page-map'
 
-export async function Blog({ lang }: { lang: string }) {
+export const Blog: FC<{ lang: string }> = async ({ lang }) => {
   const { pageMap } = await getPageMap(lang)
   const blogItems = pageMap.find(item => item.name === 'blog').children
 

@@ -112,7 +112,7 @@ the docs repository, with the current website title prefilled:
 
 |                  |                                       |                                                                                     |
 | ---------------- | ------------------------------------- | ----------------------------------------------------------------------------------- |
-| feedback.content | `string \| ReactElement \| null{:ts}` | Content of the feedback link.<br/>Default: `"Question? Give us feedback →"{:json}`  |
+| feedback.content | `string \| ReactElement \| null{:ts}` | Content of the feedback link.<br/>Default: `"Question? Give us feedback"{:json}`    |
 | feedback.labels  | `string{:ts}`                         | Labels that can be added to the new created issue.<br/>Default: `"feedback"{:json}` |
 
 </Table>
@@ -238,6 +238,24 @@ export default {
 </Screenshot>
 
 <ToggleVisibilitySection element="`<Sidebar>`" property="sidebar" />
+
+### Customize Sidebar with Front Matter
+
+In addition, you can customize the sidebar title using the `sidebarTitle`
+property in your front matter:
+
+```mdx filename="pages/getting-started.mdx"
+---
+sidebarTitle: Getting Started 🚀
+---
+```
+
+The priority of the sidebar title is as follows:
+
+1. `title` property from `_meta.js` file
+1. Front matter `sidebarTitle`
+1. Front matter `title`
+1. Filename of the page formatted with [Title](https://title.sh)
 
 ## Theme Switch
 

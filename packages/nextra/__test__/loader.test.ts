@@ -49,7 +49,7 @@ describe('tree shaking', async () => {
       expect(appFile.includes('basename:')).toBe(false)
     })
     // I think he is false positive
-    it.skip('ensure `process` polyfill is removed', () => {
+    it('ensure `process` polyfill is removed', () => {
       expect(appFile.includes('process)')).toBe(false)
     })
   })
