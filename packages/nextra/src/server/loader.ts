@@ -45,15 +45,42 @@ const initGitRepo = (async () => {
   return {}
 })()
 
-function getPageMapWithStaticResourceQuery(
-  importPath: string,
+/*
+ * https://github.com/vercel/next.js/issues/71453#issuecomment-2431810574
+ *
+ * Replace `await import(`./page-map-placeholder.js?locale=${locale}`)`
+ *
+ * with:
+ *
+ * await {
+ * "en": () => import("./page-map-placeholder.js?locale=en"),
+ * "es": () => import("./page-map-placeholder.js?locale=es"),
+ * "ru": () => import("./page-map-placeholder.js?locale=ru")
+ * }[locale]()
+ *
+ * So static analyzer will know which `resourceQuery` to pass to the loader
+ **/
+function replaceDynamicResourceQuery(
+  rawJs: string,
+  rawImport: string,
   locales: string[]
-) {
-  return `await {
+): string {
+  const { importPath } =
+    rawJs.match(/import\(`(?<importPath>.+?)\?locale=\${locale}`\)/)?.groups ||
+    {}
+  if (!importPath) {
+    throw new Error(
+      `Can't find \`${rawImport}\` statement. This is a Nextra bug`
+    )
+  }
+
+  const replaced = `{
 ${locales
   .map(lang => `"${lang}": () => import("${importPath}?locale=${lang}")`)
   .join(',\n')}
 }[locale]()`
+
+  return rawJs.replace(rawImport, replaced)
 }
 
 export async function loader(
@@ -85,6 +112,7 @@ export async function loader(
        */
       path.join(resolveData.descriptionFileRoot, resolveData.relativePath)
     : this.resourcePath
+
   if (mdxPath.includes('page-map-placeholder.js')) {
     const locale = this.resourceQuery.replace('?locale=', '')
     const relativePaths = await getFilepaths({
@@ -101,32 +129,19 @@ export async function loader(
     })
     return rawJs
   }
-  // https://github.com/vercel/next.js/issues/71453#issuecomment-2431810574
   if (mdxPath.includes('/nextra/dist/server/page-map.js')) {
-    const CODE_TO_REPLACE =
-      'await import(`./page-map-placeholder.js?locale=${locale}`);'
-    if (!source.includes(CODE_TO_REPLACE)) {
-      throw new Error("Can't find pageMap, this is Nextra bug")
-    }
-    const rawJs = source.replace(
-      CODE_TO_REPLACE,
-      getPageMapWithStaticResourceQuery('./page-map-placeholder.js', locales)
+    const rawJs = replaceDynamicResourceQuery(
+      source,
+      'import(`./page-map-placeholder.js?locale=${locale}`)',
+      locales
     )
     return rawJs
   }
-  // https://github.com/vercel/next.js/issues/71453#issuecomment-2431810574
   if (mdxPath.includes('/nextra/dist/client/pages.js')) {
-    const CODE_TO_REPLACE =
-      'await import(`../server/page-map-placeholder.js?locale=${locale}`);'
-    if (!source.includes(CODE_TO_REPLACE)) {
-      throw new Error("Can't find RouteToFilepath, this is Nextra bug")
-    }
-    const rawJs = source.replace(
-      CODE_TO_REPLACE,
-      getPageMapWithStaticResourceQuery(
-        '../server/page-map-placeholder.js',
-        locales
-      )
+    const rawJs = replaceDynamicResourceQuery(
+      source,
+      'import(`../server/page-map-placeholder.js?locale=${locale}`)',
+      locales
     )
     return rawJs
   }
