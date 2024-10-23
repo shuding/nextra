@@ -1,6 +1,6 @@
 import Link from 'next/link'
-import type { FC } from 'react'
 import { getPageMap } from 'nextra/page-map'
+import type { FC } from 'react'
 
 export const Blog: FC<{ lang: string }> = async ({ lang }) => {
   const { pageMap } = await getPageMap(lang)
