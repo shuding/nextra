@@ -65,7 +65,9 @@ const NavbarMenu: FC<{
         }
         anchor={{ to: 'top end', gap: 10, padding: 16 }}
       >
-        {Object.entries(menu.items || {}).map(([key, item]) => (
+        {Object.entries(
+          (menu.items as Record<string, { title: string; href?: string }>) || {}
+        ).map(([key, item]) => (
           <_MenuItem
             key={key}
             as={Anchor}
