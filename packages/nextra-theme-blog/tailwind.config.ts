@@ -12,6 +12,6 @@ export default {
       primary: colors.blue
     }
   },
-  plugins: [typography],
-  darkMode: docsConfig.darkMode
+  darkMode: docsConfig.darkMode,
+  plugins: [typography]
 } satisfies Config

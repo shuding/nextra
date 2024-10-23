@@ -15,7 +15,6 @@
       "import": "./dist/server/index.js",
       "types": "./dist/server/index.d.ts"
     },
-    "./loader": "./loader.cjs",
     "./components": {
       "import": "./dist/client/components/index.js",
       "types": "./dist/client/components/index.d.ts"
@@ -91,9 +90,9 @@
     }
   },
   "files": [
-    "dist/*",
+    "dist",
     "loader.cjs",
-    "styles/*"
+    "styles"
   ],
   "scripts": {
     "build": "tsup",

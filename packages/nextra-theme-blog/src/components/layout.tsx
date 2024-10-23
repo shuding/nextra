@@ -20,12 +20,7 @@ export const Layout: FC<{
   nextThemes: Omit<ThemeProviderProps, 'children'>
 }> = ({ children, nextThemes }) => {
   return (
-    <ThemeProvider
-      attribute="class"
-      defaultTheme="system"
-      enableSystem
-      {...nextThemes}
-    >
+    <ThemeProvider attribute="class" {...nextThemes}>
       <article
         className="_container _px-4 _prose max-md:_prose-sm dark:_prose-invert"
         dir="ltr"
