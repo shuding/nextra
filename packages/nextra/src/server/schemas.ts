@@ -117,7 +117,7 @@ const separatorItemSchema = z.strictObject({
 const itemSchema = z.strictObject({
   display: displaySchema.optional(),
   theme: pageThemeSchema.optional(),
-  title: titleSchema,
+  title: titleSchema.optional(),
   type: z.enum(['page', 'doc']).optional()
 })
 
