@@ -86,14 +86,6 @@ export const pageThemeSchema = z.strictObject({
   typesetting: z.enum(['default', 'article']).optional()
 })
 
-/**
- * An option to control how an item should be displayed in the sidebar:
- * - `normal`: the default behavior, item will be displayed
- * - `hidden`: the item will not be displayed in the sidebar entirely
- * - `children`: if the item is a folder, itself will be hidden but all its children will still be processed
- */
-export const displaySchema = z.enum(['normal', 'hidden', 'children'])
-
 const title = stringOrElement.optional()
 
 const linkSchema = z.strictObject({
@@ -126,10 +118,16 @@ const separatorItemSchema = z.strictObject({
   title
 })
 
-const itemSchema = z.strictObject({
+export const itemSchema = z.strictObject({
   type: z.enum(['page', 'doc']).optional(),
   title,
-  display: displaySchema.optional(),
+  /**
+   * An option to control how an item should be displayed in the sidebar:
+   * - `normal`: the default behavior, item will be displayed
+   * - `hidden`: the item will not be displayed in the sidebar entirely
+   * - `children`: if the item is a folder, itself will be hidden but all its children will still be processed
+   */
+  display: z.enum(['normal', 'hidden', 'children']).optional(),
   theme: pageThemeSchema.optional()
 })
 
