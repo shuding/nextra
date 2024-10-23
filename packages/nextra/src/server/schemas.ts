@@ -105,18 +105,26 @@ const linkItemSchema = z.strictObject({
 export const menuItemSchema = z.strictObject({
   type: z.literal('menu'),
   title,
-  items: z.record(
-    z
-      .union([
-        z.string(),
-        z.strictObject({
-          title: z.string(),
-          href: z.string().optional(),
-          newWindow: z.boolean().optional()
-        })
-      ])
-      .transform(transformTitle)
-  )
+  items: z
+    .record(
+      z
+        .union([
+          stringOrElement,
+          z.strictObject({
+            title,
+            href: z.string().optional(),
+            newWindow: z.boolean().optional()
+          })
+        ])
+        .transform(transformTitle)
+    )
+    .transform(obj => {
+      for (const key in obj) {
+        // @ts-expect-error
+        obj[key].title ||= key
+      }
+      return obj
+    })
 })
 
 const separatorItemSchema = z.strictObject({
@@ -125,15 +133,15 @@ const separatorItemSchema = z.strictObject({
 })
 
 const itemSchema = z.strictObject({
+  type: z.enum(['page', 'doc']).optional(),
+  title,
   display: displaySchema.optional(),
-  theme: pageThemeSchema.optional(),
-  title: z.string().optional(),
-  type: z.enum(['page', 'doc']).optional()
+  theme: pageThemeSchema.optional()
 })
 
 export const metaSchema = z
   .union([
-    z.string(),
+    stringOrElement,
     itemSchema,
     linkItemSchema,
     separatorItemSchema,
@@ -142,5 +150,5 @@ export const metaSchema = z
   .transform(transformTitle)
 
 function transformTitle(title: unknown) {
-  return typeof title === 'string' ? { title } : title
+  return typeof title === 'string' || isValidElement(title) ? { title } : title
 }
