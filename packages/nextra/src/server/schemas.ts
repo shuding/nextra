@@ -98,7 +98,7 @@ const title = stringOrElement.optional()
 
 const linkSchema = z.strictObject({
   title,
-  href: z.string().startsWith('https://')
+  href: z.string()
 })
 
 const menuItemSchema = z
