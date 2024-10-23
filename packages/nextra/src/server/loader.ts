@@ -45,7 +45,10 @@ const initGitRepo = (async () => {
   return {}
 })()
 
-function getStaticPageMap(importPath: string, locales: string[]) {
+function getPageMapWithStaticResourceQuery(
+  importPath: string,
+  locales: string[]
+) {
   return `await {
 ${locales
   .map(lang => `"${lang}": () => import("${importPath}?locale=${lang}")`)
@@ -107,9 +110,8 @@ export async function loader(
     }
     const rawJs = source.replace(
       CODE_TO_REPLACE,
-      getStaticPageMap('./page-map-placeholder.js', locales)
+      getPageMapWithStaticResourceQuery('./page-map-placeholder.js', locales)
     )
-    // console.log(111, rawJs)
     return rawJs
   }
   // https://github.com/vercel/next.js/issues/71453#issuecomment-2431810574
@@ -121,9 +123,11 @@ export async function loader(
     }
     const rawJs = source.replace(
       CODE_TO_REPLACE,
-      getStaticPageMap('../server/page-map-placeholder.js', locales)
+      getPageMapWithStaticResourceQuery(
+        '../server/page-map-placeholder.js',
+        locales
+      )
     )
-    // console.log(222, rawJs)
     return rawJs
   }
   const { result, readingTime } = await compileMdx(source, {
