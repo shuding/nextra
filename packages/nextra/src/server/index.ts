@@ -111,10 +111,7 @@ const nextra: Nextra = nextraConfig => {
             '**/nextra/dist/server/page-map-placeholder.js': {
               loaders: [pageMapPlaceholderLoader]
             },
-            '**/nextra/dist/server/page-map.js': {
-              loaders: [pageMapLoader]
-            },
-            '**/nextra/dist/client/pages.js': {
+            '**/nextra/dist/{server/page-map,client/pages}.js': {
               loaders: [pageMapLoader]
             }
           },

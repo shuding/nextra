@@ -24,12 +24,9 @@ export const Anchor: FC<ComponentProps<'a'>> = ({ href = '', ...props }) => {
     const { children } = props
     return (
       <a href={href} target="_blank" rel="noreferrer" {...props}>
-        {children}
+        {children}&thinsp;
         {typeof (children as any).type !== 'function' && (
-          <LinkArrowIcon
-            height="16"
-            className="_inline _ps-0.5 _align-baseline"
-          />
+          <LinkArrowIcon height="16" className="_inline _align-baseline" />
         )}
       </a>
     )
