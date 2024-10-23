@@ -1,5 +1,5 @@
 import type { z } from 'zod'
-import type { itemSchema, menuSchema, pageThemeSchema } from '../server/schemas'
+import type { itemSchema, menuSchema } from '../server/schemas'
 import type { Folder, FrontMatter, MdxFile, PageMapItem } from '../types'
 
 const DEFAULT_PAGE_THEME: PageTheme = {
@@ -15,8 +15,7 @@ const DEFAULT_PAGE_THEME: PageTheme = {
   typesetting: 'default'
 }
 
-export type PageTheme = z.infer<typeof pageThemeSchema>
-
+type PageTheme = z.infer<typeof itemSchema>['theme']
 type Display = z.infer<typeof itemSchema>['display']
 type IMenuItem = z.infer<typeof menuSchema>
 type MetaType = Record<string, any>
@@ -45,7 +44,7 @@ export type Item = (MdxFile | FolderWithoutChildren) & {
   title: string
   type: string
   children: Item[]
-  display: Display
+  display?: Display
   theme?: PageTheme
   isUnderCurrentDocsTree?: boolean
 }
@@ -56,7 +55,7 @@ export type PageItem = (MdxFile | FolderWithoutChildren) & {
   href?: string
   children?: PageItem[]
   firstChildRoute?: string
-  display: Display
+  display?: Display
   isUnderCurrentDocsTree?: boolean
 }
 

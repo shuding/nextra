@@ -73,7 +73,7 @@ const element = z.custom<ReactElement>(isValidElement, {
 
 const stringOrElement = z.union([z.string(), element])
 
-export const pageThemeSchema = z.strictObject({
+const pageThemeSchema = z.strictObject({
   breadcrumb: z.boolean().optional(),
   collapsed: z.boolean().optional(),
   footer: z.boolean().optional(),
