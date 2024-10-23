@@ -234,7 +234,6 @@ const File: FC<{
     <li className={cn({ active })}>
       <Anchor
         href={(item as PageItem).href || item.route}
-        newWindow={(item as PageItem).newWindow}
         className={cn(classes.link, active ? classes.active : classes.inactive)}
         onFocus={onFocus}
       >

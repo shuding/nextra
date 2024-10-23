@@ -78,7 +78,6 @@ const NavbarMenu: FC<{
                   : '_text-gray-600 dark:_text-gray-400'
               )
             }
-            newWindow={item.newWindow}
           >
             {item.title}
           </_MenuItem>
@@ -130,12 +129,11 @@ export const ClientNavbar: FC<{
               key={href}
               className={cn(
                 classes.link,
-                !isActive || page.newWindow
+                !isActive
                   ? classes.inactive
                   : '_font-medium _subpixel-antialiased'
               )}
-              newWindow={page.newWindow}
-              aria-current={!page.newWindow && isActive}
+              aria-current={isActive}
             >
               {page.title}
             </Anchor>
