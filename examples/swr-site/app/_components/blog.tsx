@@ -3,7 +3,7 @@ import { getPageMap } from 'nextra/page-map'
 import type { FC } from 'react'
 
 export const Blog: FC<{ lang: string }> = async ({ lang }) => {
-  const { pageMap } = await getPageMap(lang)
+  const pageMap = await getPageMap(lang)
   const blogItems = pageMap.find(item => item.name === 'blog').children
 
   return blogItems.map(

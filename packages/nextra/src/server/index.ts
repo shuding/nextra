@@ -1,5 +1,4 @@
 /* eslint-env node */
-import { createRequire } from 'node:module'
 import path from 'node:path'
 import type { RuleSetRule } from 'webpack'
 import { fromZodError } from 'zod-validation-error'
@@ -12,11 +11,11 @@ const DEFAULT_EXTENSIONS = ['js', 'jsx', 'ts', 'tsx']
 
 const SEP_RE = path.sep === '/' ? '/' : '\\\\'
 
-const PAGE_MAP_RE = new RegExp(
+const PAGE_MAP_PLACEHOLDER_RE = new RegExp(
   `nextra${SEP_RE}dist${SEP_RE}server${SEP_RE}page-map-placeholder`
 )
 
-const require = createRequire(import.meta.url)
+const PAGE_MAP_RE = new RegExp('nextra/dist/(server/page-map|client/pages)')
 
 const nextra: Nextra = nextraConfig => {
   const { error, data: loaderOptions } =
@@ -25,12 +24,7 @@ const nextra: Nextra = nextraConfig => {
     logger.error('Error validating nextraConfig')
     throw fromZodError(error)
   }
-
-  const loaderPath = path.join(
-    require.resolve('nextra/package.json'),
-    '..',
-    'loader.cjs'
-  )
+  const loaderPath = path.join(import.meta.dirname, '..', '..', 'loader.cjs')
 
   const loader = {
     loader: loaderPath,
@@ -44,7 +38,6 @@ const nextra: Nextra = nextraConfig => {
     loader: loaderPath,
     options: {
       useContentDir: loaderOptions.useContentDir ?? false,
-      isPageMapImport: true
     }
   }
 
@@ -71,7 +64,7 @@ const nextra: Nextra = nextraConfig => {
       ...nextConfig,
       transpilePackages: [
         // To import ESM-only packages with `next dev --turbopack`. Source: https://github.com/vercel/next.js/issues/63318#issuecomment-2079677098
-        ...(process.env.npm_lifecycle_script!.includes('--turbopack')
+        ...(process.env.npm_lifecycle_script!.includes('--turbo')
           ? ['shiki']
           : []),
         ...(nextConfig.transpilePackages || [])
@@ -145,8 +138,12 @@ const nextra: Nextra = nextraConfig => {
 
         rules.push(
           {
-            test: PAGE_MAP_RE,
+            test: PAGE_MAP_PLACEHOLDER_RE,
             use: [options.defaultLoaders.babel, pageMapPlaceholderLoader]
+          },
+          {
+            test: PAGE_MAP_RE,
+            use: [options.defaultLoaders.babel, pageMapLoader]
           },
           {
             test: MARKDOWN_EXTENSION_RE,
