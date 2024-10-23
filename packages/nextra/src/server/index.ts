@@ -110,7 +110,6 @@ const nextra: Nextra = nextraConfig => {
           },
           resolveAlias: {
             ...nextConfig.experimental?.turbo?.resolveAlias,
-            // TODO: resolving .jsx/.tsx doesn't work for some reason
             'next-mdx-import-source-file': './mdx-components', // '@vercel/turbopack-next/mdx-import-source'
             'private-next-app-dir/*': './app/*',
             'private-next-root-dir/*': './*'

@@ -73,7 +73,7 @@ export type ReadingTime = {
   words: number
 }
 
-export type NextraConfig = z.infer<typeof nextraConfigSchema>
+export type NextraConfig = z.input<typeof nextraConfigSchema>
 
 export type MathJaxOptions = z.infer<typeof mathJaxOptionsSchema>
 
