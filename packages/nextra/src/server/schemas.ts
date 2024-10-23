@@ -102,7 +102,11 @@ const linkSchema = z.strictObject({
 })
 
 const menuItemSchema = z
-  .union([stringOrElement, linkSchema])
+  .union([
+    stringOrElement,
+    linkSchema,
+    z.strictObject({ title: stringOrElement })
+  ])
   .transform(transformTitle)
 
 export const menuSchema = z.strictObject({
