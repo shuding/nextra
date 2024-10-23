@@ -5,19 +5,16 @@ import type { Options as RehypePrettyCodeOptions } from 'rehype-pretty-code'
 import { z } from 'zod'
 import type { PageMapItem } from '../types'
 
-export const mathJaxOptionsSchema = z
-  .strictObject({
-    /**
-     * URL for MathJax. Defaults to `https://cdnjs.cloudflare.com`
-     */
-    src: z.string(),
-    /**
-     * MathJax config. See https://docs.mathjax.org/en/latest/options/index.html
-     */
-    config: z.custom<MathJax3Config>()
-  })
-  // eslint-disable-next-line deprecation/deprecation -- fixme
-  .deepPartial()
+export const mathJaxOptionsSchema = z.strictObject({
+  /**
+   * URL for MathJax. Defaults to `https://cdnjs.cloudflare.com`
+   */
+  src: z.string().optional(),
+  /**
+   * MathJax config. See https://docs.mathjax.org/en/latest/options/index.html
+   */
+  config: z.custom<MathJax3Config>().optional()
+})
 
 export const nextraConfigSchema = z.strictObject({
   defaultShowCopyCode: z.boolean().optional(),
@@ -96,29 +93,27 @@ const linkItemSchema = z.strictObject({
 })
 
 export const menuItemSchema = z.strictObject({
-  display: displaySchema.optional(),
+  display: displaySchema,
   items: z.record(linkItemSchema.partial({ href: true, newWindow: true })),
   title: titleSchema,
   type: z.literal('menu')
 })
 
 const separatorItemSchema = z.strictObject({
-  title: titleSchema.optional(),
+  title: titleSchema,
   type: z.literal('separator')
 })
 
-const itemSchema = linkItemSchema
-  .extend({
-    display: displaySchema,
-    theme: pageThemeSchema,
-    title: titleSchema,
-    type: z.enum(['page', 'doc'])
-  })
-  // eslint-disable-next-line deprecation/deprecation -- fixme
-  .deepPartial()
+const itemSchema = linkItemSchema.extend({
+  display: displaySchema,
+  theme: pageThemeSchema,
+  title: titleSchema,
+  type: z.enum(['page', 'doc'])
+})
 
 export const metaSchema = z
   .string()
   .or(menuItemSchema)
   .or(separatorItemSchema)
   .or(itemSchema)
+  .transform(title => (typeof title === 'string' ? { title } : title))

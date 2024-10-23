@@ -1,3 +1,4 @@
+import { fromZodError } from 'zod-validation-error'
 import type {
   Folder,
   FrontMatter,
@@ -5,6 +6,7 @@ import type {
   MetaJsonFile,
   PageMapItem
 } from '../types'
+import { metaSchema } from './schemas'
 
 export function normalizePageMap(pageMap: PageMapItem[] | Folder): any {
   if (Array.isArray(pageMap)) {
@@ -42,10 +44,12 @@ function sortFolder(pageMap: PageMapItem[] | Folder) {
       newChildren.push(normalizePageMap(item))
     } else if ('data' in item) {
       for (const [key, titleOrObject] of Object.entries(item.data)) {
-        meta[key] =
-          typeof titleOrObject === 'string'
-            ? { title: titleOrObject }
-            : titleOrObject
+        const { data, error } = metaSchema.safeParse(titleOrObject)
+        if (error) {
+          throw fromZodError(error)
+        }
+        console.log(data)
+        meta[key] = data
         if (key === '*') {
           delete meta['*'].title
           delete meta['*'].href
