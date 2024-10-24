@@ -340,8 +340,8 @@ export const IndexPage = () => (
               creating new files
             </h3>
             <p className="mb-4">
-              Name your page files with locales suffixed, Nextra and Next.js
-              will do the rest for you.
+              Place your page files folders specific to each locale, Nextra and
+              Next.js will handle the rest for you.
             </p>
             <I18n />
           </Feature>
