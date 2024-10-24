@@ -1,5 +1,5 @@
 import path from 'node:path'
-import { rendererRich, transformerTwoslash } from '@shikijs/twoslash'
+import { transformerTwoslash } from '@shikijs/twoslash'
 import slash from 'slash'
 import type { LoaderContext } from 'webpack'
 import type { LoaderOptions, PageOpts } from '../types'
@@ -11,6 +11,7 @@ import {
   OFFICIAL_THEMES
 } from './constants.js'
 import { PAGES_DIR } from './file-system.js'
+import { twoslashRenderer } from './rehype-plugins/index.js'
 import { logger } from './utils.js'
 
 const initGitRepo = (async () => {
@@ -161,7 +162,7 @@ ${themeConfigImport && '__nextra_internal__.themeConfig = __themeConfig'}`
       rehypePrettyCodeOptions: {
         transformers: [
           transformerTwoslash({
-            renderer: rendererRich(),
+            renderer: twoslashRenderer(),
             explicitTrigger: true
           })
         ],
