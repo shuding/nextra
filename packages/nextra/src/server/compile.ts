@@ -36,7 +36,8 @@ import {
   rehypeBetterReactMathjax,
   rehypeExtractTocContent,
   rehypeIcon,
-  rehypeParseCodeMeta
+  rehypeParseCodeMeta,
+  rehypeTwoslashPopup
 } from './rehype-plugins/index.js'
 import {
   remarkCustomHeadingId,
@@ -289,6 +290,7 @@ export async function compileMdx(
                   ...rehypePrettyCodeOptions
                 }
               ] as any,
+              rehypeTwoslashPopup,
               !isRemoteContent && rehypeIcon,
               rehypeAttachCodeMeta
             ]),

@@ -71,7 +71,7 @@ pre code.nextra-code:not([class*='twoslash-']) {
   --twoslash-popup-shadow: rgba(0, 0, 0.08) 0px 1px 4px;
   --twoslash-docs-color: #888;
   --twoslash-docs-font: sans-serif;
-  --twoslash-code-font: inherit;
+  --twoslash-code-font: ui-monospace;
   --twoslash-code-font-size: 1em;
   --twoslash-matched-color: inherit;
   --twoslash-unmatched-color: #888;
@@ -111,13 +111,11 @@ pre code.nextra-code:not([class*='twoslash-']) {
 }
 
 .twoslash-popup-container {
-  @apply _inline-flex _flex-col _opacity-0 _absolute _transition-opacity _duration-300 _z-10 _mt-1.5 _rounded;
+  @apply _inline-flex _flex-col _absolute _transition-opacity _duration-300 _z-10 _mt-1.5 _rounded;
   transform: translateY(1.1em);
   background: var(--twoslash-popup-bg) !important;
   color: var(--twoslash-popup-color);
   border: 1px solid var(--twoslash-border-color);
-  pointer-events: none;
-  user-select: none;
   text-align: left;
   /*box-shadow: var(--twoslash-popup-shadow);*/
 }
@@ -125,16 +123,6 @@ pre code.nextra-code:not([class*='twoslash-']) {
 .twoslash-query-presisted .twoslash-popup-container {
   z-index: 9;
   transform: translateY(1.5em);
-}
-
-.twoslash-hover:hover .twoslash-popup-container,
-.twoslash-query-presisted .twoslash-popup-container {
-  opacity: 1;
-  pointer-events: auto;
-}
-
-.twoslash-popup-container:hover {
-  user-select: auto;
 }
 
 .twoslash-popup-arrow {

@@ -6,3 +6,7 @@ export {
 export { rehypeBetterReactMathjax } from './rehype-better-react-mathjax.js'
 export { rehypeExtractTocContent } from './rehype-extract-toc-content.js'
 export { rehypeIcon } from './rehype-icon.js'
+export {
+  twoslashRenderer,
+  rehypeTwoslashPopup
+} from './twoslash/rehype-twoslash-popup.js'
