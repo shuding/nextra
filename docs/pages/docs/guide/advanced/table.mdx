@@ -79,32 +79,19 @@ elements with
   </tbody>
 </table>
 
-## Ways to Fix It
-
-### One-Time Fix
-
-Wrap your table with curly braces `{` and `}`, e.g.
-
-{/* prettier-ignore */}
-```mdx filename="MDX"
-{<table>
-  ...
-</table>}
-```
-
-### Changing Default Behaviour
+## Changing Default Behaviour
 
 If this thing is still confusing for you, and you want to use regular literal
 HTML elements for your tables, do the following:
 
 <Steps>
-#### Install `remark-mdx-disable-explicit-jsx` package
+### Install `remark-mdx-disable-explicit-jsx` package
 
 ```sh npm2yarn
 npm i remark-mdx-disable-explicit-jsx
 ```
 
-#### Setup
+### Setup
 
 Configure plugin in `nextra` function inside `next.config.mjs` file
 
