@@ -1,27 +1,31 @@
-export const metadata = {
-  sidebarTitle: 'Installation'
-}
+---
+sidebarTitle: Installation
+---
 
 # Get Started
 
-import { Callout } from 'nextra/components'
+import { Steps } from 'nextra/components'
 
-<Callout>
-  An example of the blog theme can be found
-  [here](https://github.com/vercel-solutions/nextjs-portfolio-starter).
-</Callout>
+## Configurations
 
 Similar to the docs theme, you can install the blog theme with the following
 commands:
 
-### Configurations
+<Steps>
 
-1. Install Next.js, Nextra and React: `yarn add next nextra react react-dom`
+### Install Next.js, Nextra and React
 
-2. Install the blog theme: `yarn add nextra-theme-blog`
+```sh npm2yarn
+npm i next nextra react react-dom
+```
 
-3. Create the following Next.js config and theme config under the root
-   directory:
+### Install the blog theme
+
+```sh npm2yarn
+npm i nextra-theme-blog
+```
+
+### Create the following Next.js config and theme config under the root directory:
 
 ```js filename="next.config.mjs"
 import nextra from 'nextra'
@@ -29,7 +33,6 @@ import nextra from 'nextra'
 const withNextra = nextra({
   theme: 'nextra-theme-blog',
   themeConfig: './theme.config.js'
-  // optional: add `staticImage: true` to enable Nextra's auto image import
 })
 export default withNextra()
 ```
@@ -64,7 +67,7 @@ export default {
 }
 ```
 
-4. Create `pages/_app.js` and include the theme stylesheet:
+### Create `pages/_app.js` and include the theme stylesheet:
 
 ```jsx filename="_app.js"
 import 'nextra-theme-blog/style.css'
@@ -75,10 +78,19 @@ export default function Nextra({ Component, pageProps }) {
 }
 ```
 
-5. You are good to go!
+### You are good to go!
+
+</Steps>
 
 ---
 
-<Callout>
-You can also use [`<style jsx>`](https://nextjs.org/docs/basic-features/built-in-css-support#css-in-js) to style elements inside `theme.config.js`.
-</Callout>
+> [!TIP]
+>
+> You can also use
+> [`<style jsx>`](https://nextjs.org/docs/basic-features/built-in-css-support#css-in-js)
+> to style elements inside `theme.config.js`.
+
+> [!NOTE]
+>
+> An example of the blog theme can be found
+> [here](https://github.com/vercel-solutions/nextjs-portfolio-starter).

@@ -1,0 +1,5 @@
+/**
+ * Need to import katex styles from this file, otherwise
+ * `import 'katex/dist/katex.min.css'` doesn't work with `next dev --turbopack` flag enabled
+ **/
+@import 'katex/dist/katex.css';

@@ -26,10 +26,10 @@ export const Anchor: FC<ComponentProps<'a'>> = ({ href = '', ...props }) => {
       <a href={href} target="_blank" rel="noreferrer" {...props}>
         {children}
         {typeof (children as any).type !== 'function' && (
-          <LinkArrowIcon
-            height="16"
-            className="_inline _ps-0.5 _align-baseline"
-          />
+          <>
+            &thinsp;
+            <LinkArrowIcon height="16" className="_inline _align-baseline" />
+          </>
         )}
       </a>
     )
@@ -40,11 +40,23 @@ export const Anchor: FC<ComponentProps<'a'>> = ({ href = '', ...props }) => {
 
 export function useMDXComponents(components?: Readonly<MDXComponents>) {
   return {
-    img: props =>
-      createElement(
+    img(props) {
+      if (
+        process.env.NODE_ENV !== 'production' &&
+        typeof props.src === 'object' &&
+        !('blurDataURL' in props.src)
+      ) {
+        console.error(
+          `[nextra] Failed to load blur image "${(props.src as any).src}" due missing "src.blurDataURL" value.
+This is Turbopack bug, which will not occurs on production (since Webpack is used for "next build" command).`
+        )
+        return <img {...props} src={(props.src as any).src} />
+      }
+      return createElement(
         typeof props.src === 'object' ? Image : 'img',
         props as ImageProps
-      ),
+      )
+    },
     a: Anchor,
     ...components
   } satisfies MDXComponents

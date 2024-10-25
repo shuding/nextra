@@ -3,6 +3,7 @@ import cn from 'clsx'
 import NextLink from 'next/link'
 import { DiscordIcon, GitHubIcon } from 'nextra/icons'
 import type { FC, ReactNode } from 'react'
+import { Anchor } from '../anchor'
 import { ClientNavbar } from './index.client'
 
 type NavbarProps = {
@@ -65,24 +66,14 @@ export const Navbar: FC<NavbarProps> = ({
         )}
         <ClientNavbar>
           {projectLink && (
-            <a
-              href={projectLink}
-              target="_blank"
-              rel="noreferrer"
-              className="focus-visible:nextra-focus"
-            >
+            <Anchor href={projectLink} newWindow>
               {projectIcon}
-            </a>
+            </Anchor>
           )}
           {chatLink && (
-            <a
-              href={chatLink}
-              target="_blank"
-              rel="noreferrer"
-              className="focus-visible:nextra-focus"
-            >
+            <Anchor href={chatLink} newWindow>
               {chatIcon}
-            </a>
+            </Anchor>
           )}
           {children}
         </ClientNavbar>

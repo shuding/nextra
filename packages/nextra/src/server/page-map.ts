@@ -155,8 +155,6 @@ export const RouteToFilepath = ${JSON.stringify(mdxPages, null, 2)}
 }
 
 export async function getPageMap(locale = '') {
-  const { pageMap } = await import(
-    `private-dot-next/static/chunks/nextra-page-map-${locale}.mjs`
-  )
+  const { pageMap } = await import(`./page-map-placeholder.js?locale=${locale}`)
   return pageMap
 }

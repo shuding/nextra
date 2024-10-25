@@ -49,9 +49,9 @@ const theme = z.strictObject({
   nextThemes: z
     .strictObject({
       attribute: z.string().default('class'),
-      defaultTheme: z.string().default('system'),
+      defaultTheme: z.string().optional(),
       disableTransitionOnChange: z.boolean().default(true),
-      storageKey: z.string().default('theme')
+      storageKey: z.string().optional()
     })
     .default({}),
   pageMap: z.array(z.any({})),

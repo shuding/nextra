@@ -3,28 +3,19 @@
  * This file should be never used directly, only in loader.ts
  */
 
+import { useMDXComponents } from 'next-mdx-import-source-file'
 import type { ComponentProps, FC } from 'react'
 import { createElement } from 'react'
-import type { MDXWrapper, PageOpts, UseTOC } from '../types'
-import type { useMDXComponents as _useMDXComponents } from './mdx.js'
+import type { Heading, MDXWrapper, PageOpts } from '../types'
 
 export function HOC_MDXWrapper(
   MDXContent: MDXWrapper,
-  useMDXComponents: typeof _useMDXComponents,
-  useTOC: UseTOC,
-  pageOpts: PageOpts
+  hocProps: PageOpts & { toc: Heading[] }
 ): FC<ComponentProps<MDXWrapper>> {
   return function MDXWrapper(props) {
-    const { wrapper: Wrapper } = useMDXComponents()
+    const Wrapper = useMDXComponents().wrapper
     const children = createElement(MDXContent, props)
 
-    return Wrapper ? (
-      // eslint-disable-next-line react-hooks/rules-of-hooks
-      <Wrapper toc={useTOC()} {...pageOpts}>
-        {children}
-      </Wrapper>
-    ) : (
-      children
-    )
+    return Wrapper ? <Wrapper {...hocProps}>{children}</Wrapper> : children
   }
 }

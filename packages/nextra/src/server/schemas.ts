@@ -31,9 +31,8 @@ export const nextraConfigSchema = z.strictObject({
         codeblocks: z.boolean()
       })
     ])
-    .default({ codeblocks: false })
-    .optional(),
-  staticImage: z.boolean().default(true).optional(),
+    .default({ codeblocks: false }),
+  staticImage: z.boolean().default(true),
   readingTime: z.boolean().optional(),
   latex: z
     .union([
@@ -48,7 +47,7 @@ export const nextraConfigSchema = z.strictObject({
       })
     ])
     .optional(),
-  codeHighlight: z.boolean().default(true).optional(),
+  codeHighlight: z.boolean().default(true),
   /**
    * A function to modify the `pageMap` passed to theme layouts.
    * @experimental
