@@ -15,8 +15,9 @@ const PAGE_MAP_PLACEHOLDER_RE = new RegExp(
   `nextra${SEP_RE}dist${SEP_RE}server${SEP_RE}page-map-placeholder`
 )
 
-// eslint-disable-next-line prefer-regex-literals
-const PAGE_MAP_RE = new RegExp('nextra/dist/(server/page-map|client/pages)')
+const PAGE_MAP_RE = new RegExp(
+  `nextra${SEP_RE}dist${SEP_RE}(server${SEP_RE}page-map|client${SEP_RE}pages)`
+)
 
 const nextra: Nextra = nextraConfig => {
   const { error, data: loaderOptions } =
