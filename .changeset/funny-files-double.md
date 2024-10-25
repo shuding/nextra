@@ -3,6 +3,5 @@
 'nextra': patch
 ---
 
-remove `nextra/context`
-
-remove `type NextraThemeLayoutProps`
+- remove `nextra/context`
+- remove `type NextraThemeLayoutProps`
