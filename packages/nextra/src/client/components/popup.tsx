@@ -1,27 +1,32 @@
 import { Popover, PopoverButton, PopoverPanel } from '@headlessui/react'
 import type { PopoverPanelProps, PopoverProps } from '@headlessui/react'
 import cn from 'clsx'
-import type { FC } from 'react'
-import { createContext, useContext, useState } from 'react'
+import { createContext, useCallback, useContext, useState } from 'react'
+import type { FC, MouseEventHandler } from 'react'
 
 const PopupContext = createContext<boolean | null>(null)
 
 function usePopup() {
   const ctx = useContext(PopupContext)
   if (typeof ctx !== 'boolean') {
-    throw new Error('usePopupContext must be used within a Popup')
+    throw new Error('`usePopup` must be used within a `<Popup>` component')
   }
   return ctx
 }
 
 export const Popup: FC<PopoverProps> = props => {
   const [isOpen, setIsOpen] = useState(false)
+
+  const handleMouse: MouseEventHandler = useCallback(event => {
+    setIsOpen(event.type === 'mouseenter')
+  }, [])
+
   return (
     <PopupContext.Provider value={isOpen}>
       <Popover
         as="span"
-        onMouseEnter={() => setIsOpen(true)}
-        onMouseLeave={() => setIsOpen(false)}
+        onMouseEnter={handleMouse}
+        onMouseLeave={handleMouse}
         {...props}
       />
     </PopupContext.Provider>
