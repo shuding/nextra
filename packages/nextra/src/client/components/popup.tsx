@@ -14,7 +14,7 @@ function usePopup(): boolean {
   return ctx
 }
 
-export const Popup: FC<PopoverProps> = props => {
+const Popup_: FC<PopoverProps> = props => {
   const [isOpen, setIsOpen] = useState(false)
 
   const handleMouse: MouseEventHandler = useCallback(event => {
@@ -33,9 +33,7 @@ export const Popup: FC<PopoverProps> = props => {
   )
 }
 
-export const PopupTrigger = PopoverButton
-
-export const PopupPanel: FC<PopoverPanelProps> = props => {
+const PopupPanel: FC<PopoverPanelProps> = props => {
   const isOpen = usePopup()
   return (
     <PopoverPanel
@@ -49,3 +47,8 @@ export const PopupPanel: FC<PopoverPanelProps> = props => {
     />
   )
 }
+
+export const Popup = Object.assign(Popup_, {
+  Button: PopoverButton,
+  Panel: PopupPanel
+})

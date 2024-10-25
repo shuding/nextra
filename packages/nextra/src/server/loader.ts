@@ -11,7 +11,7 @@ import {
   OFFICIAL_THEMES
 } from './constants.js'
 import { PAGES_DIR } from './file-system.js'
-import { twoslashRenderer } from './rehype-plugins/rehype-twoslash-popup.js'
+import { twoslashRenderer } from './rehype-plugins/twoslash.js'
 import { logger } from './utils.js'
 
 const initGitRepo = (async () => {
