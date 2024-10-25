@@ -130,8 +130,7 @@ const nextra: Nextra = nextraConfig => {
         }
         config.resolve.alias['next-mdx-import-source-file'] = [
           'private-next-root-dir/src/mdx-components',
-          'private-next-root-dir/mdx-components',
-          'nextra/mdx'
+          'private-next-root-dir/mdx-components'
         ]
         const rules = config.module.rules as RuleSetRule[]
 
