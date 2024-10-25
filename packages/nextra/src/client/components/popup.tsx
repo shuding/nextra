@@ -6,7 +6,7 @@ import type { FC, MouseEventHandler } from 'react'
 
 const PopupContext = createContext<boolean | null>(null)
 
-function usePopup() {
+function usePopup(): boolean {
   const ctx = useContext(PopupContext)
   if (typeof ctx !== 'boolean') {
     throw new Error('`usePopup` must be used within a `<Popup>` component')
