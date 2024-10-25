@@ -100,7 +100,7 @@ export async function loader(
     locales
   } = this.getOptions()
 
-  const filePath = this.resourcePath
+  const filePath = slash(this.resourcePath)
 
   if (filePath.includes('page-map-placeholder.js')) {
     const locale = this.resourceQuery.replace('?lang=', '')

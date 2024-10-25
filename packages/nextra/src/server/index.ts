@@ -1,5 +1,6 @@
 /* eslint-env node */
 import path from 'node:path'
+import { fileURLToPath } from 'node:url'
 import type { RuleSetRule } from 'webpack'
 import { fromZodError } from 'zod-validation-error'
 import type { Nextra } from '../types'
@@ -8,14 +9,16 @@ import { nextraConfigSchema } from './schemas.js'
 import { logger } from './utils.js'
 
 const DEFAULT_EXTENSIONS = ['js', 'jsx', 'ts', 'tsx']
-
-const SEP_RE = path.sep === '/' ? '/' : '\\\\'
-
+const FILENAME = fileURLToPath(import.meta.url)
+const DIRNAME = path.dirname(FILENAME)
+const LOADER_PATH = path.join(DIRNAME, '..', '..', 'loader.cjs')
+const SEP = path.sep === '/' ? '/' : '\\\\'
 const PAGE_MAP_PLACEHOLDER_RE = new RegExp(
-  `nextra${SEP_RE}dist${SEP_RE}server${SEP_RE}page-map-placeholder`
+  'nextra/dist/server/page-map-placeholder'.replaceAll('/', SEP)
 )
-
-const PAGE_MAP_RE = new RegExp('nextra/dist/(server/page-map|client/pages)')
+const PAGE_MAP_RE = new RegExp(
+  'nextra/dist/(server/page-map|client/pages)'.replaceAll('/', SEP)
+)
 
 const nextra: Nextra = nextraConfig => {
   const { error, data: loaderOptions } =
@@ -24,18 +27,17 @@ const nextra: Nextra = nextraConfig => {
     logger.error('Error validating nextraConfig')
     throw fromZodError(error)
   }
-  const loaderPath = path.join(import.meta.dirname, '..', '..', 'loader.cjs')
 
   const loader = {
-    loader: loaderPath,
+    loader: LOADER_PATH,
     options: loaderOptions
   }
   const pageImportLoader = {
-    loader: loaderPath,
+    loader: LOADER_PATH,
     options: { ...loaderOptions, isPageImport: true }
   }
   const pageMapPlaceholderLoader = {
-    loader: loaderPath,
+    loader: LOADER_PATH,
     options: {
       useContentDir: loaderOptions.useContentDir ?? false
     }
@@ -43,7 +45,7 @@ const nextra: Nextra = nextraConfig => {
 
   return function withNextra(nextConfig = {}) {
     const pageMapLoader = {
-      loader: loaderPath,
+      loader: LOADER_PATH,
       options: {
         locales: nextConfig.i18n?.locales || ['']
       }
@@ -64,9 +66,7 @@ const nextra: Nextra = nextraConfig => {
       ...nextConfig,
       transpilePackages: [
         // To import ESM-only packages with `next dev --turbopack`. Source: https://github.com/vercel/next.js/issues/63318#issuecomment-2079677098
-        ...(process.env.npm_lifecycle_script!.includes('--turbo')
-          ? ['shiki']
-          : []),
+        ...(process.env.TURBOPACK === '1' ? ['shiki'] : []),
         ...(nextConfig.transpilePackages || [])
       ],
       // experimental: {
