@@ -1,6 +1,12 @@
 .subheading-anchor {
-  @apply _opacity-0 _transition-opacity _ms-1;
+  @apply _ms-1;
 
+  /* to avoid conflicts with docs heading which has class `target:_animate-[fade-in_1.5s]` */
+  :not(:target) > & {
+    @apply _opacity-0 _transition;
+  }
+
+  &,
   :target > &,
   &:hover,
   &:focus {
