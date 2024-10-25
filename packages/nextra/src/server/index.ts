@@ -28,8 +28,11 @@ const nextra: Nextra = nextraConfig => {
   }
   const __dirname = new URL('.', import.meta.url).pathname
   console.log('__dirname', __dirname)
-  const loaderPath = path.resolve(__dirname, '..', '..', 'loader.cjs')
-  console.log({ loaderPath })
+  const loaderPath = path.posix.join(__dirname, '..', '..', 'loader.cjs')
+  const loaderPath2 = path.normalize(
+    path.join(__dirname, '..', '..', 'loader.cjs')
+  )
+  console.log({ loaderPath, loaderPath2 })
   const loader = {
     loader: loaderPath,
     options: loaderOptions
