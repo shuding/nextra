@@ -131,6 +131,12 @@
   Router, something may be broken, check
   https://github.com/shuding/nextra/tree/v4-v2/examples for the migration guide
 
+## 3.1.1
+
+### Patch Changes
+
+- 68633e5: fix: Improve Twoslash Popover Display
+
 ## 3.1.0
 
 ### Minor Changes

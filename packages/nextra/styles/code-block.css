@@ -3,21 +3,22 @@
   @apply dark:_bg-[--shiki-dark-bg] dark:_text-[--shiki-dark];
 }
 
-code.nextra-code:not([class*='twoslash-']) {
+code.nextra-code {
   box-decoration-break: slice;
   font-feature-settings:
     'rlig' 1,
     'calt' 1,
     'ss01' 1;
+  @apply _text-sm;
 
-  :not(pre) > & {
+  :not(pre) > &:not([class*='twoslash-']) {
     @apply _border-black _border-opacity-[0.04] _bg-opacity-[0.03] _bg-black _break-words _rounded-md _border _py-0.5 _px-[.25em] _text-[.9em];
     @apply dark:_border-white/10 dark:_bg-white/10;
   }
 }
 
 pre code.nextra-code:not([class*='twoslash-']) {
-  @apply _grid _text-sm;
+  @apply _grid;
 
   &[data-line-numbers] > span {
     @apply _pl-2;
@@ -64,26 +65,20 @@ pre code.nextra-code:not([class*='twoslash-']) {
 :root {
   --twoslash-border-color: #8888;
   --twoslash-underline-color: currentColor;
-  --twoslash-highlighted-border: #c37d0d50;
-  --twoslash-highlighted-bg: #c37d0d20;
+  --twoslash-highlighted-border: 195, 125, 13;
   --twoslash-popup-bg: #f8f8f8;
   --twoslash-popup-color: inherit;
   --twoslash-popup-shadow: rgba(0, 0, 0.08) 0px 1px 4px;
   --twoslash-docs-color: #888;
   --twoslash-docs-font: sans-serif;
-  --twoslash-code-font: inherit;
-  --twoslash-code-font-size: 1em;
   --twoslash-matched-color: inherit;
   --twoslash-unmatched-color: #888;
   --twoslash-cursor-color: #8888;
-  --twoslash-error-color: #d45656;
-  --twoslash-error-bg: #d4565620;
-  --twoslash-tag-color: #3772cf;
-  --twoslash-tag-bg: #3772cf20;
-  --twoslash-tag-warn-color: #c37d0d;
-  --twoslash-tag-warn-bg: #c37d0d20;
-  --twoslash-tag-annotate-color: #1ba673;
-  --twoslash-tag-annotate-bg: #1ba67320;
+  --twoslash-error-color: 212, 86, 86;
+  --twoslash-error-bg: rgba(var(--twoslash-error-color), 0.13);
+  --twoslash-tag-color: 55, 114, 207;
+  --twoslash-tag-warn-color: 195, 125, 13;
+  --twoslash-tag-annotate-color: 27, 166, 115;
 }
 
 .dark {
@@ -111,13 +106,11 @@ pre code.nextra-code:not([class*='twoslash-']) {
 }
 
 .twoslash-popup-container {
-  @apply _inline-flex _flex-col _opacity-0 _absolute _transition-opacity _duration-300 _z-10 _mt-1.5 _rounded;
+  @apply _inline-flex _flex-col _absolute _transition-opacity _duration-300 _z-10 _mt-1.5 _rounded;
   transform: translateY(1.1em);
   background: var(--twoslash-popup-bg) !important;
   color: var(--twoslash-popup-color);
   border: 1px solid var(--twoslash-border-color);
-  pointer-events: none;
-  user-select: none;
   text-align: left;
   /*box-shadow: var(--twoslash-popup-shadow);*/
 }
@@ -125,16 +118,6 @@ pre code.nextra-code:not([class*='twoslash-']) {
 .twoslash-query-presisted .twoslash-popup-container {
   z-index: 9;
   transform: translateY(1.5em);
-}
-
-.twoslash-hover:hover .twoslash-popup-container,
-.twoslash-query-presisted .twoslash-popup-container {
-  opacity: 1;
-  pointer-events: auto;
-}
-
-.twoslash-popup-container:hover {
-  user-select: auto;
 }
 
 .twoslash-popup-arrow {
@@ -149,15 +132,10 @@ pre code.nextra-code:not([class*='twoslash-']) {
   padding: 6px 8px;
 }
 
-.twoslash-popup-code {
-  font-family: var(--twoslash-code-font);
-  font-size: var(--twoslash-code-font-size);
-}
-
 .twoslash-popup-docs {
+  @apply _text-sm;
   color: var(--twoslash-docs-color);
   font-family: var(--twoslash-docs-font);
-  font-size: 0.8em;
   border-top: 1px solid var(--twoslash-border-color);
 }
 
@@ -172,16 +150,12 @@ pre code.nextra-code:not([class*='twoslash-']) {
   margin-right: 0.5em;
 }
 
-.twoslash-popup-docs-tag-name {
-  font-family: var(--twoslash-code-font);
-}
-
 /* ===== Error Line ===== */
 .twoslash-error-line {
   position: relative;
   background-color: var(--twoslash-error-bg);
-  border-left: 3px solid var(--twoslash-error-color);
-  color: var(--twoslash-error-color);
+  border-left: 3px solid currentColor;
+  color: rgb(var(--twoslash-error-color));
   padding: 6px 12px;
   margin: 0.2em 0;
 }
@@ -206,11 +180,6 @@ pre code.nextra-code:not([class*='twoslash-']) {
 
 .twoslash-completion-list {
   @apply _py-1 _px-2 _w-60;
-  font-size: 0.8rem;
-}
-
-.twoslash-completion-list:hover {
-  user-select: auto;
 }
 
 .twoslash-completion-list::before {
@@ -246,8 +215,8 @@ pre code.nextra-code:not([class*='twoslash-']) {
 
 /* Highlights */
 .twoslash-highlighted {
-  background-color: var(--twoslash-highlighted-bg);
-  border: 1px solid var(--twoslash-highlighted-border);
+  background-color: rgba(var(--twoslash-highlighted-border), 0.13);
+  border: 1px solid rgba(var(--twoslash-highlighted-border), 0.31);
   padding: 1px 2px;
   margin: -1px -3px;
   border-radius: 4px;
@@ -263,9 +232,9 @@ pre code.nextra-code:not([class*='twoslash-']) {
 /* Custom Tags */
 .twoslash-tag-line {
   position: relative;
-  background-color: var(--twoslash-tag-bg);
-  border-left: 3px solid var(--twoslash-tag-color);
-  color: var(--twoslash-tag-color);
+  background-color: rgba(var(--twoslash-tag-color), 0.13);
+  border-left: 3px solid currentColor;
+  color: rgb(var(--twoslash-tag-color));
   padding: 6px 10px;
   margin: 0.2em 0;
   display: flex;
@@ -280,18 +249,15 @@ pre code.nextra-code:not([class*='twoslash-']) {
 
 .twoslash-tag-line.twoslash-tag-error-line {
   background-color: var(--twoslash-error-bg);
-  border-left: 3px solid var(--twoslash-error-color);
-  color: var(--twoslash-error-color);
+  color: rgb(var(--twoslash-error-color));
 }
 
 .twoslash-tag-line.twoslash-tag-warn-line {
-  background-color: var(--twoslash-tag-warn-bg);
-  border-left: 3px solid var(--twoslash-tag-warn-color);
-  color: var(--twoslash-tag-warn-color);
+  background-color: rgba(var(--twoslash-tag-warn-color), 0.13);
+  color: rgb(var(--twoslash-tag-warn-color));
 }
 
 .twoslash-tag-line.twoslash-tag-annotate-line {
-  background-color: var(--twoslash-tag-annotate-bg);
-  border-left: 3px solid var(--twoslash-tag-annotate-color);
-  color: var(--twoslash-tag-annotate-color);
+  background-color: rgba(var(--twoslash-tag-annotate-color), 0.13);
+  color: rgb(var(--twoslash-tag-annotate-color));
 }

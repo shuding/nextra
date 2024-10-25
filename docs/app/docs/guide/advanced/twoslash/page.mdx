@@ -6,6 +6,7 @@ Twoslash provides an inline type hove inside the code block.
 
 You can enable twoslash to your code blocks by adding a `twoslash` metadata:
 
+{/* prettier-ignore */}
 ````md copy=false filename="Markdown"
 ```ts twoslash
 // @errors: 2540
@@ -22,11 +23,16 @@ todo.title = 'Hello'
 
 Number.parseInt('123', 10)
 //      ^|
+               // Just comments, so Popup will be
+               // not behind the viewport of `<code>`
+               // element due his `position: absolute` style
+               //
 ```
 ````
 
 Renders:
 
+{/* prettier-ignore */}
 ```ts twoslash
 // @errors: 2540
 interface Todo {
@@ -42,6 +48,10 @@ todo.title = 'Hello'
 
 Number.parseInt('123', 10)
 //      ^|
+
+
+
+
 ```
 
 ## Custom log message

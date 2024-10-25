@@ -1,5 +1,5 @@
 import type { ComponentProps } from 'react'
-import { Tabs as _Tabs, Tab } from './tabs.js'
+import { Tabs as _Tabs, Tab } from './index.client.js'
 
 // Workaround to fix
 // Error: Cannot access Tab.propTypes on the server. You cannot dot into a client module from a

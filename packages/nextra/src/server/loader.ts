@@ -1,5 +1,5 @@
 import path from 'node:path'
-import { rendererRich, transformerTwoslash } from '@shikijs/twoslash'
+import { transformerTwoslash } from '@shikijs/twoslash'
 import slash from 'slash'
 import type { LoaderContext } from 'webpack'
 import type { LoaderOptions, PageOpts } from '../types'
@@ -11,6 +11,7 @@ import {
   getFilepaths
 } from './generate-page-map.js'
 import { collectPageMap } from './page-map.js'
+import { twoslashRenderer } from './rehype-plugins/twoslash.js'
 import { logger } from './utils.js'
 
 const initGitRepo = (async () => {
@@ -146,7 +147,7 @@ export async function loader(
       rehypePrettyCodeOptions: {
         transformers: [
           transformerTwoslash({
-            renderer: rendererRich(),
+            renderer: twoslashRenderer(),
             explicitTrigger: true
           })
         ],
