@@ -1,5 +1,11 @@
 # nextra-theme-blog
 
+## 4.0.0-app-router.15
+
+### Patch Changes
+
+- nextra@4.0.0-app-router.15
+
 ## 4.0.0-app-router.14
 
 ### Major Changes
