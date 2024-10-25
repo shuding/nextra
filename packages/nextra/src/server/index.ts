@@ -31,11 +31,10 @@ const nextra: Nextra = nextraConfig => {
     throw fromZodError(error)
   }
 
-  const loaderPath = path.posix.join(__dirname, '..', '..', 'loader.cjs')
+  const loaderPath = path.join(__dirname, '..', '..', 'loader.cjs')
   console.log({
     loaderPath,
-    loaderPath2: path.normalize(path.join(__dirname, '..', '..', 'loader.cjs')),
-    loaderPath3: path.join(__dirname, '..', '..', 'loader.cjs')
+    loaderPath2: path.normalize(path.join(__dirname, '..', '..', 'loader.cjs'))
   })
   const loader = {
     loader: loaderPath,
