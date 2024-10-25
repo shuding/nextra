@@ -92,13 +92,6 @@ export const Layout: FC<LayoutProps> = ({ children, ...themeConfig }) => {
   if (error) {
     throw fromZodError(error)
   }
-
-  // if (!newChildren.some(child => hasTypeOf(child, Footer))) {
-  //   newChildren.push(
-  //     <Footer key={1}>MIT {new Date().getFullYear()} © Nextra.</Footer>
-  //   )
-  // }
-
   const { footer, navbar, pageMap, nextThemes, banner, ...rest } = data
 
   return (
