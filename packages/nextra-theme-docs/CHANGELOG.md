@@ -1,5 +1,14 @@
 # nextra-theme-docs
 
+## 4.0.0-app-router.13
+
+### Patch Changes
+
+- 3ade013: - remove `nextra/context`
+  - remove `type NextraThemeLayoutProps`
+- Updated dependencies [3ade013]
+  - nextra@4.0.0-app-router.13
+
 ## 4.0.0-app-router.12
 
 ### Patch Changes
