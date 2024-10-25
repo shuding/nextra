@@ -2,36 +2,39 @@ import cn from 'clsx'
 // eslint-disable-next-line no-restricted-imports -- since we don't need newWindow prop
 import NextLink from 'next/link'
 import { DiscordIcon, GitHubIcon } from 'nextra/icons'
-import type { FC, ReactNode } from 'react'
+import { element } from 'nextra/schemas'
+import type { FC } from 'react'
+import { z } from 'zod'
+import { fromZodError } from 'zod-validation-error'
 import { Anchor } from '../anchor'
 import { ClientNavbar } from './index.client'
 
-type NavbarProps = {
-  children?: ReactNode
-  logoLink?: string | boolean
-  logo?: ReactNode
-  projectLink?: string
-  projectIcon?: ReactNode
-  chatLink?: string
-  chatIcon?: ReactNode
-}
+const propsSchema = z.strictObject({
+  children: element.optional(),
+  logoLink: z.union([z.string(), z.boolean()]).default(true),
+  logo: element,
+  projectLink: z.string().optional(),
+  projectIcon: element.default(<GitHubIcon height="24" />),
+  chatLink: z.string().optional(),
+  chatIcon: element.default(<DiscordIcon width="24" />)
+})
 
-export const Navbar: FC<NavbarProps> = ({
-  children,
-  logoLink = true,
-  logo = (
-    <>
-      <span className="_font-extrabold">Nextra</span>
-      <span className="_ms-2 max-md:_hidden _font-normal _text-gray-600">
-        The Next Docs Builder
-      </span>
-    </>
-  ),
-  projectLink,
-  projectIcon = <GitHubIcon height="24" />,
-  chatLink,
-  chatIcon = <DiscordIcon width="24" />
-}) => {
+type NavbarProps = z.input<typeof propsSchema>
+
+export const Navbar: FC<NavbarProps> = props => {
+  const { data, error } = propsSchema.safeParse(props)
+  if (error) {
+    throw fromZodError(error)
+  }
+  const {
+    children,
+    logoLink,
+    logo,
+    projectLink,
+    projectIcon,
+    chatLink,
+    chatIcon
+  } = data
   return (
     <header
       className={cn(
