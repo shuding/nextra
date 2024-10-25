@@ -343,11 +343,11 @@ export const MobileNav: FC = () => {
       <aside
         className={cn(
           classes.aside,
-          '_fixed _top-[--nextra-navbar-height] _w-full _bottom-0 _z-10 _overscroll-contain',
+          '_fixed _inset-0 _pt-[--nextra-navbar-height] _z-10 _overscroll-contain',
           '_transition-transform _duration-700 _ease-[cubic-bezier(.52,.16,.04,1)] _will-change-[transform,opacity]',
           '[contain:layout_style]',
           'md:_hidden',
-          String.raw`[&:has(~*~.nextra-banner:not(.\_hidden))]:_pt-[--nextra-banner-height]`,
+          String.raw`[.nextra-banner:not(.\_hidden)~&]:_pt-[calc(var(--nextra-banner-height)+var(--nextra-navbar-height))]`,
           '_bg-[rgb(var(--nextra-bg))]',
           menu
             ? '[transform:translate3d(0,0,0)]'
