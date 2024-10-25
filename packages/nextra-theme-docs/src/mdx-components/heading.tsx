@@ -11,7 +11,9 @@ const createHeading = (
         ? '_sr-only'
         : cn(
             '_tracking-tight _text-slate-900 dark:_text-slate-100',
-            Tag === 'h1' ? '_font-bold' : '_font-semibold',
+            Tag === 'h1'
+              ? '_font-bold'
+              : '_font-semibold target:_animate-[fade-in_1.5s]',
             {
               h1: '_mt-2 _text-4xl',
               h2: '_mt-10 _border-b _pb-1 _text-3xl _border-neutral-200/70 contrast-more:_border-neutral-400 dark:_border-primary-100/10 contrast-more:dark:_border-neutral-400',

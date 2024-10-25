@@ -469,8 +469,8 @@ export const Sidebar: FC<{ toc: Heading[] }> = ({ toc }) => {
               showToggleAnimation && [
                 '*:_opacity-0',
                 isExpanded
-                  ? '*:_animate-[nextra-fadein_1s_ease_.2s_forwards]'
-                  : '*:_animate-[nextra-fadein2_1s_ease_.2s_forwards]'
+                  ? '*:_animate-[fade-in_1s_ease_.2s_forwards]'
+                  : '*:_animate-[fade-in2_1s_ease_.2s_forwards]'
               ]
             )}
           >
