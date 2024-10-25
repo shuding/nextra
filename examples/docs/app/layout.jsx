@@ -27,18 +27,27 @@ export const metadata = {
 }
 
 export default async function RootLayout({ children }) {
+  const navbar = (
+    <Navbar
+      logo={
+        <>
+          <span className="_font-extrabold">Nextra</span>
+          <span className="_ms-2 max-md:_hidden _font-normal _text-gray-600">
+            The Next Docs Builder
+          </span>
+        </>
+      }
+      // Next.js discord server
+      chatLink="https://discord.gg/hEM84NMkRv"
+    />
+  )
   return (
     <html lang="en" dir="ltr" suppressHydrationWarning>
       <Head faviconGlyph="✦" />
       <body>
         <Layout
           banner={<Banner storageKey="Nextra 2">Nextra 2 Alpha</Banner>}
-          navbar={
-            <Navbar
-              // Next.js discord server
-              chatLink="https://discord.gg/hEM84NMkRv"
-            />
-          }
+          navbar={navbar}
           footer={<Footer />}
           editLink="Edit this page on GitHub"
           docsRepositoryBase="https://github.com/shuding/nextra/blob/core/examples/docs"
