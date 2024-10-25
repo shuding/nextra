@@ -36,7 +36,7 @@ export const Navbar: FC<NavbarProps> = ({
     <header
       className={cn(
         'nextra-navbar _sticky _top-0 _z-20 _w-full _bg-transparent print:_hidden',
-        String.raw`max-md:[.nextra-banner:not(.\_hidden)~&]:_top-10`
+        String.raw`max-md:[.nextra-banner:not(.\_hidden)~&]:_top-[var(--nextra-banner-height)]`
       )}
     >
       <div

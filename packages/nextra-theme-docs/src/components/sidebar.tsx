@@ -347,7 +347,7 @@ export const MobileNav: FC = () => {
           '_transition-transform _duration-700 _ease-[cubic-bezier(.52,.16,.04,1)] _will-change-[transform,opacity]',
           '[contain:layout_style]',
           'md:_hidden',
-          String.raw`[&:has(~*~.nextra-banner:not(.\_hidden))]:_pt-[calc(var(--nextra-banner-height)+var(--nextra-navbar-height))]`,
+          String.raw`[.nextra-banner:not(.\_hidden)~&]:_pt-[calc(var(--nextra-banner-height)+var(--nextra-navbar-height))]`,
           '_bg-[rgb(var(--nextra-bg))]',
           menu
             ? '[transform:translate3d(0,0,0)]'
