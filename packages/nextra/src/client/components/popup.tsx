@@ -1,98 +1,46 @@
-import {
-  Popover,
-  PopoverButton,
-  PopoverPanel,
-  Transition
-} from '@headlessui/react'
+import { Popover, PopoverButton, PopoverPanel } from '@headlessui/react'
+import type { PopoverPanelProps, PopoverProps } from '@headlessui/react'
 import cn from 'clsx'
-import {
-  createContext,
-  Fragment,
-  useCallback,
-  useContext,
-  useRef,
-  useState,
-  type ComponentProps,
-  type PointerEvent
-} from 'react'
+import type { FC } from 'react'
+import { createContext, useContext, useState } from 'react'
 
-interface ContextValue {
-  open: boolean
-  handleOpen: (e: PointerEvent) => void
-  handleClose: (e: PointerEvent) => void
-}
+const PopupContext = createContext<boolean | null>(null)
 
-const PopupContext = createContext<ContextValue | null>(null)
-
-function usePopupContext() {
+function usePopup() {
   const ctx = useContext(PopupContext)
-  if (!ctx) throw new Error('usePopupContext must be used within a Popup')
-
+  if (typeof ctx !== 'boolean') {
+    throw new Error('usePopupContext must be used within a Popup')
+  }
   return ctx
 }
 
-function useDebounce(fn: () => void, delay = 200) {
-  const timeoutRef = useRef<number>()
-
-  return useCallback(() => {
-    if (timeoutRef.current) clearTimeout(timeoutRef.current)
-    timeoutRef.current = window.setTimeout(fn, delay)
-  }, [fn, delay])
-}
-
-export function Popup(props: Omit<ComponentProps<typeof Popover>, 'as'>) {
-  const [open, setOpen] = useState(false)
-
-  const handleOpen = useDebounce(() => setOpen(true))
-  const handleClose = useDebounce(() => setOpen(false))
-
+export const Popup: FC<PopoverProps> = props => {
+  const [isOpen, setIsOpen] = useState(false)
   return (
-    <PopupContext.Provider
-      value={{
-        open,
-        handleOpen,
-        handleClose
-      }}
-    >
-      <Popover as="span" {...props} />
+    <PopupContext.Provider value={isOpen}>
+      <Popover
+        as="span"
+        onMouseEnter={() => setIsOpen(true)}
+        onMouseLeave={() => setIsOpen(false)}
+        {...props}
+      />
     </PopupContext.Provider>
   )
 }
 
-export function PopupTrigger(
-  props: Omit<ComponentProps<typeof PopoverButton>, 'as'>
-) {
-  const { handleOpen, handleClose } = usePopupContext()
+export const PopupTrigger = PopoverButton
 
+export const PopupPanel: FC<PopoverPanelProps> = props => {
+  const isOpen = usePopup()
   return (
-    <PopoverButton
-      as="span"
-      onPointerEnter={handleOpen}
-      onPointerLeave={handleClose}
+    <PopoverPanel
+      static={isOpen}
+      anchor={{ to: 'bottom', gap: -24 }}
       {...props}
+      className={cn(
+        '!_max-w-2xl', // override headlessui's computed max-width
+        props.className
+      )}
     />
-  )
-}
-
-export function PopupPanel({
-  className,
-  ...props
-}: Omit<ComponentProps<typeof PopoverPanel>, 'anchor'>) {
-  const { open, handleOpen, handleClose } = usePopupContext()
-
-  return (
-    <Transition show={open} as={Fragment}>
-      <PopoverPanel
-        static={true}
-        anchor={{ to: 'bottom', gap: -24 }}
-        className={cn(
-          '!_max-w-[700px]', // override headlessui's computed max-width
-          className
-        )}
-        onPointerEnter={handleOpen}
-        onPointerLeave={handleClose}
-        {...props}
-      />
-    </Transition>
   )
 }

@@ -6,7 +6,7 @@ import { gfmFromMarkdown } from 'mdast-util-gfm'
 import { defaultHandlers, toHast } from 'mdast-util-to-hast'
 import type { ShikiTransformerContextCommon } from 'shiki'
 import type { Plugin } from 'unified'
-import { visit } from 'unist-util-visit'
+import { EXIT, visit } from 'unist-util-visit'
 
 const TWOSLASH_POPUP_IMPORT_AST = {
   type: 'mdxjsEsm',
@@ -40,19 +40,12 @@ export const rehypeTwoslashPopup: Plugin<[], Root> = () => ast => {
     node.tagName = 'PopupPanel'
   })
 
-  let hasTwoslash = false
   visit(ast, { tagName: 'code' }, node => {
-    if (hasTwoslash) {
-      return
-    }
-
     if (node.data?.meta === 'twoslash') {
-      hasTwoslash = true
+      ast.children.unshift(TWOSLASH_POPUP_IMPORT_AST)
+      return EXIT
     }
   })
-  if (hasTwoslash) {
-    ast.children.unshift(TWOSLASH_POPUP_IMPORT_AST)
-  }
 }
 
 export function twoslashRenderer(options?: RendererRichOptions) {
