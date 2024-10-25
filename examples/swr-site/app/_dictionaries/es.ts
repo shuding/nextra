@@ -22,6 +22,6 @@ export default {
   renderingStrategies: 'SSR / SSG',
   typescript: 'TypeScript',
   remoteLocal: 'Remoto + Local',
-  editPage: 'Edite esta página en GitHub →',
+  editPage: 'Edite esta página en GitHub',
   by: 'por'
 } satisfies Dictionary

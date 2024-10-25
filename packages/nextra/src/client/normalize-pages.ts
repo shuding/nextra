@@ -103,7 +103,6 @@ export function normalizePages({
   list,
   route,
   docsRoot = '',
-  underCurrentDocsRoot = false,
   pageThemeContext = DEFAULT_PAGE_THEME
 }: {
   list: PageMapItem[]
@@ -112,14 +111,13 @@ export function normalizePages({
   underCurrentDocsRoot?: boolean
   pageThemeContext?: PageTheme
 }): NormalizedResult {
-  // All directories
+  // If the doc is under the active page root.
+  const underCurrentDocsRoot = route.startsWith(docsRoot)
   // - directories: all directories in the tree structure
   const directories: Item[] = []
-
   // Docs directories
   const docsDirectories: DocsItem[] = []
   const flatDocsDirectories: DocsItem[] = []
-
   // Page directories
   const topLevelNavbarItems: (PageItem | MenuItem)[] = []
 
@@ -153,9 +151,6 @@ export function normalizePages({
       ...extendedMeta.theme
     }
 
-    // If the doc is under the active page root.
-    const isCurrentDocsTree = route.startsWith(docsRoot)
-
     const normalizedChildren: false | NormalizedResult =
       'children' in currentItem &&
       normalizePages({
@@ -163,7 +158,7 @@ export function normalizePages({
         route,
         docsRoot:
           type === 'page' || type === 'menu' ? currentItem.route : docsRoot,
-        underCurrentDocsRoot: underCurrentDocsRoot || isCurrentDocsTree,
+        underCurrentDocsRoot,
         pageThemeContext: extendedPageThemeContext
       })
 
@@ -185,9 +180,9 @@ export function normalizePages({
     const docsItem: DocsItem = getItem()
     const pageItem: PageItem = getItem()
 
-    docsItem.isUnderCurrentDocsTree = isCurrentDocsTree
+    docsItem.isUnderCurrentDocsTree = underCurrentDocsRoot
     if (type === 'separator') {
-      item.isUnderCurrentDocsTree = isCurrentDocsTree
+      item.isUnderCurrentDocsTree = underCurrentDocsRoot
     }
 
     // This item is currently active, we collect the active path etc.
@@ -329,7 +324,9 @@ export function normalizePages({
     activeThemeContext,
     activePath,
     directories,
-    docsDirectories,
+    docsDirectories: docsDirectories.filter(
+      item => item.isUnderCurrentDocsTree
+    ),
     flatDocsDirectories,
     topLevelNavbarItems
   }

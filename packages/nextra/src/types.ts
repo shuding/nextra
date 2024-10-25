@@ -2,7 +2,6 @@ import type { Heading as MDASTHeading } from 'mdast'
 import type { Metadata, NextConfig } from 'next'
 import type { FC, ReactElement, ReactNode } from 'react'
 import type { z } from 'zod'
-import type { NEXTRA_INTERNAL } from './constants.js'
 import type { mathJaxOptionsSchema, nextraConfigSchema } from './server/schemas'
 
 export interface LoaderOptions extends NextraConfig {
@@ -82,14 +81,6 @@ export type Nextra = (
   nextraConfig: NextraConfig
 ) => (nextConfig: NextConfig) => NextConfig
 
-export type ThemeConfig = any | null
-
-export type NextraThemeLayoutProps<TThemeConfig = ThemeConfig> = {
-  pageMap: PageMapItem[]
-  themeConfig: TThemeConfig
-  children: ReactNode
-}
-
 export type MDXWrapper = FC<
   {
     toc: Heading[]
@@ -98,19 +89,3 @@ export type MDXWrapper = FC<
 >
 
 export type UseTOC = (props?: Record<string, any>) => Heading[]
-
-export type NextraInternalGlobal = typeof globalThis & {
-  [NEXTRA_INTERNAL]: {
-    pageMap: PageMapItem[]
-    route: string
-    context: Record<
-      string,
-      {
-        Content: MDXWrapper
-        useTOC: UseTOC
-      }
-    >
-    Layout: FC<NextraThemeLayoutProps>
-    themeConfig?: ThemeConfig
-  }
-}

@@ -77,7 +77,7 @@ const RootLayout: FC<{
         <Layout
           pageMap={await getPageMap()}
           docsRepositoryBase="https://github.com/shuding/nextra/tree/main/docs"
-          editLink="Edit this page on GitHub →"
+          editLink="Edit this page on GitHub"
           sidebar={{ defaultMenuCollapseLevel: 1 }}
         >
           <Banner storageKey="4.0-release">

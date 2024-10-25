@@ -69,9 +69,6 @@
       "catch-all": [
         "./dist/client/catch-all.d.ts"
       ],
-      "context": [
-        "./dist/client/context.d.ts"
-      ],
       "icons": [
         "./dist/client/icons/index.d.ts"
       ],

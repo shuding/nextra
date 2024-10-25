@@ -271,7 +271,6 @@ interface MenuProps {
   directories: PageItem[] | Item[]
   anchors: Heading[]
   className?: string
-  onlyCurrentDocs?: boolean
   level: number
 }
 
@@ -281,18 +280,10 @@ const handleFocus: FocusEventHandler = event => {
   setFocusedRoute(route)
 }
 
-const Menu: FC<MenuProps> = ({
-  directories,
-  anchors,
-  className,
-  onlyCurrentDocs,
-  level
-}) => {
+const Menu: FC<MenuProps> = ({ directories, anchors, className, level }) => {
   return (
     <ul className={cn(classes.list, className)}>
       {directories.map(item => {
-        if (onlyCurrentDocs && !item.isUnderCurrentDocsTree) return
-
         const ComponentToUse =
           item.type === 'menu' ||
           (item.children && (item.children.length || !('frontMatter' in item)))
@@ -467,7 +458,6 @@ export const Sidebar: FC<{ toc: Heading[] }> = ({ toc }) => {
                 // The sidebar menu, shows only the docs directories.
                 directories={docsDirectories}
                 anchors={anchors}
-                onlyCurrentDocs
                 level={0}
               />
             </Collapse>
