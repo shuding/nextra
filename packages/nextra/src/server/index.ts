@@ -26,8 +26,9 @@ const nextra: Nextra = nextraConfig => {
     logger.error('Error validating nextraConfig')
     throw fromZodError(error)
   }
-  console.log('import.meta.dirname', import.meta.dirname)
-  const loaderPath = path.join(import.meta.dirname, '..', '..', 'loader.cjs')
+  const __dirname = new URL('.', import.meta.url).pathname
+  console.log('__dirname', __dirname)
+  const loaderPath = path.join(__dirname, '..', '..', 'loader.cjs')
 
   const loader = {
     loader: loaderPath,
