@@ -1,5 +1,11 @@
 # nextra
 
+## 3.1.1
+
+### Patch Changes
+
+- 68633e5: fix: Improve Twoslash Popover Display
+
 ## 3.1.0
 
 ### Minor Changes
