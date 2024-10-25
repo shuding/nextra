@@ -343,7 +343,7 @@ export const MobileNav: FC = () => {
       <aside
         className={cn(
           classes.aside,
-          '_fixed _inset-y-0 _w-full _pt-[--nextra-navbar-height] _z-10 _overscroll-contain',
+          '_fixed _inset-0 _pt-[--nextra-navbar-height] _z-10 _overscroll-contain',
           '_transition-transform _duration-700 _ease-[cubic-bezier(.52,.16,.04,1)] _will-change-[transform,opacity]',
           '[contain:layout_style]',
           'md:_hidden',
