@@ -134,22 +134,6 @@ export default {
 }
 ```
 
-To always open the link in a new tab, enable the `"newWindow": true` option:
-
-```js filename="pages/_meta.js" {9}
-export default {
-  index: 'My Homepage',
-  contact: 'Contact Us',
-  fruits: 'Delicious Fruits',
-  about: 'About Us',
-  github_link: {
-    title: 'Nextra',
-    href: 'https://github.com/shuding/nextra',
-    newWindow: true
-  }
-}
-```
-
 > [!TIP]
 >
 > You can use this option to link to relative internal links too.
@@ -287,8 +271,7 @@ export default {
   contact: {
     title: 'Contact Us',
     type: 'page',
-    href: 'https://example.com/contact',
-    newWindow: true
+    href: 'https://example.com/contact'
   }
 }
 ```

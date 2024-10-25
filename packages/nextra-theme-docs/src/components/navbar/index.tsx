@@ -65,16 +65,8 @@ export const Navbar: FC<NavbarProps> = ({
           <div className="_flex _items-center _me-auto">{logo}</div>
         )}
         <ClientNavbar>
-          {projectLink && (
-            <Anchor href={projectLink} newWindow>
-              {projectIcon}
-            </Anchor>
-          )}
-          {chatLink && (
-            <Anchor href={chatLink} newWindow>
-              {chatIcon}
-            </Anchor>
-          )}
+          {projectLink && <Anchor href={projectLink}>{projectIcon}</Anchor>}
+          {chatLink && <Anchor href={chatLink}>{chatIcon}</Anchor>}
           {children}
         </ClientNavbar>
       </nav>

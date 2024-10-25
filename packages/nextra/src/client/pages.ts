@@ -2,10 +2,10 @@ import { notFound } from 'next/navigation'
 import { logger } from '../server/utils.js'
 
 async function getRouteToFilepath(
-  locale: string
+  lang: string
 ): Promise<Record<string, string>> {
   const { RouteToFilepath } = await import(
-    `../server/page-map-placeholder.js?locale=${locale}`
+    `../server/page-map-placeholder.js?lang=${lang}`
   )
   return RouteToFilepath
 }

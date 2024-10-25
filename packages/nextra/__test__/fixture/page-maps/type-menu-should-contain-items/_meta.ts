@@ -7,9 +7,7 @@ export default {
         title: 'Nextra',
         href: 'https://nextra.site'
       },
-      qux: {
-        title: 'Qux'
-      }
+      qux: ''
     }
   },
   hrefOnly: {
@@ -26,12 +24,8 @@ export default {
     type: 'menu',
     title: 'Pages Only',
     items: {
-      one: {
-        title: 'One'
-      },
-      two: {
-        title: 'Two'
-      }
+      one: '',
+      two: ''
     }
   }
 }

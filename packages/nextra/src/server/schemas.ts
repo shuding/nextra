@@ -1,23 +1,23 @@
 import type { ProcessorOptions } from '@mdx-js/mdx'
 import type { MathJax3Config } from 'better-react-mathjax'
+import type { ReactElement } from 'react'
+import { isValidElement } from 'react'
 import type { Options as RehypeKatexOptions } from 'rehype-katex'
 import type { Options as RehypePrettyCodeOptions } from 'rehype-pretty-code'
 import { z } from 'zod'
-import type { PageMapItem } from '../types'
+import type { PageMapItem } from '../types.js'
+import { pageTitleFromFilename } from './utils.js'
 
-export const mathJaxOptionsSchema = z
-  .strictObject({
-    /**
-     * URL for MathJax. Defaults to `https://cdnjs.cloudflare.com`
-     */
-    src: z.string(),
-    /**
-     * MathJax config. See https://docs.mathjax.org/en/latest/options/index.html
-     */
-    config: z.custom<MathJax3Config>()
-  })
-  // eslint-disable-next-line deprecation/deprecation -- fixme
-  .deepPartial()
+export const mathJaxOptionsSchema = z.strictObject({
+  /**
+   * URL for MathJax. Defaults to `https://cdnjs.cloudflare.com`
+   */
+  src: z.string().optional(),
+  /**
+   * MathJax config. See https://docs.mathjax.org/en/latest/options/index.html
+   */
+  config: z.custom<MathJax3Config>().optional()
+})
 
 export const nextraConfigSchema = z.strictObject({
   defaultShowCopyCode: z.boolean().optional(),
@@ -67,58 +67,80 @@ export const nextraConfigSchema = z.strictObject({
   useContentDir: z.boolean().optional()
 })
 
-export const pageThemeSchema = z.strictObject({
-  breadcrumb: z.boolean(),
-  collapsed: z.boolean(),
-  footer: z.boolean(),
-  layout: z.enum(['default', 'full']),
-  navbar: z.boolean(),
-  pagination: z.boolean(),
-  sidebar: z.boolean(),
-  timestamp: z.boolean(),
-  toc: z.boolean(),
-  typesetting: z.enum(['default', 'article'])
+const element = z.custom<ReactElement>(isValidElement, {
+  message: 'Must be React.ReactElement'
 })
 
-/**
- * An option to control how an item should be displayed in the sidebar:
- * - `normal`: the default behavior, item will be displayed
- * - `hidden`: the item will not be displayed in the sidebar entirely
- * - `children`: if the item is a folder, itself will be hidden but all its children will still be processed
- */
-export const displaySchema = z.enum(['normal', 'hidden', 'children'])
-const titleSchema = z.string()
+const stringOrElement = z.union([z.string(), element])
 
-const linkItemSchema = z.strictObject({
-  href: z.string(),
-  newWindow: z.boolean(),
-  title: titleSchema
+const pageThemeSchema = z.strictObject({
+  breadcrumb: z.boolean().optional(),
+  collapsed: z.boolean().optional(),
+  footer: z.boolean().optional(),
+  layout: z.enum(['default', 'full']).optional(),
+  navbar: z.boolean().optional(),
+  pagination: z.boolean().optional(),
+  sidebar: z.boolean().optional(),
+  timestamp: z.boolean().optional(),
+  toc: z.boolean().optional(),
+  typesetting: z.enum(['default', 'article']).optional()
 })
 
-export const menuItemSchema = z.strictObject({
-  display: displaySchema.optional(),
-  items: z.record(linkItemSchema.partial({ href: true, newWindow: true })),
-  title: titleSchema,
-  type: z.literal('menu')
+const title = stringOrElement.optional()
+
+const linkSchema = z.strictObject({
+  title,
+  href: z.string()
+})
+
+const menuItemSchema = z
+  .union([
+    stringOrElement,
+    linkSchema,
+    z.strictObject({ title: stringOrElement })
+  ])
+  .transform(transformTitle)
+
+export const menuSchema = z.strictObject({
+  type: z.literal('menu'),
+  title,
+  items: z.record(menuItemSchema).transform(obj => {
+    for (const key in obj) {
+      // @ts-expect-error
+      obj[key].title ||= pageTitleFromFilename(key)
+    }
+    return obj
+  })
 })
 
 const separatorItemSchema = z.strictObject({
-  title: titleSchema.optional(),
-  type: z.literal('separator')
+  type: z.literal('separator'),
+  title
 })
 
-const itemSchema = linkItemSchema
-  .extend({
-    display: displaySchema,
-    theme: pageThemeSchema,
-    title: titleSchema,
-    type: z.enum(['page', 'doc'])
-  })
-  // eslint-disable-next-line deprecation/deprecation -- fixme
-  .deepPartial()
+export const itemSchema = z.strictObject({
+  type: z.enum(['page', 'doc']).optional(),
+  title,
+  /**
+   * An option to control how an item should be displayed in the sidebar:
+   * - `normal`: the default behavior, item will be displayed
+   * - `hidden`: the item will not be displayed in the sidebar entirely
+   * - `children`: if the item is a folder, itself will be hidden but all its children will still be processed
+   */
+  display: z.enum(['normal', 'hidden', 'children']).optional(),
+  theme: pageThemeSchema.optional()
+})
 
 export const metaSchema = z
-  .string()
-  .or(menuItemSchema)
-  .or(separatorItemSchema)
-  .or(itemSchema)
+  .union([
+    stringOrElement,
+    itemSchema,
+    linkSchema.extend({ type: z.enum(['page', 'doc']).optional() }),
+    separatorItemSchema,
+    menuSchema
+  ])
+  .transform(transformTitle)
+
+function transformTitle(title: unknown) {
+  return typeof title === 'string' || isValidElement(title) ? { title } : title
+}
