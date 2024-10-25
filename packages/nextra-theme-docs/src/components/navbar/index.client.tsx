@@ -131,9 +131,9 @@ export const ClientNavbar: FC<{
               key={href}
               className={cn(
                 classes.link,
-                !isActive
-                  ? classes.inactive
-                  : '_font-medium _subpixel-antialiased'
+                isActive
+                  ? '_font-medium _subpixel-antialiased'
+                  : classes.inactive
               )}
               aria-current={isActive}
             >
