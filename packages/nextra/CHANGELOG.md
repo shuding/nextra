@@ -1,5 +1,13 @@
 # nextra
 
+## 4.0.0-app-router.14
+
+### Major Changes
+
+- be19dd4: remove `"typesVersions"` field from `package.json`. You need to set
+  `"moduleResolution": "bundler"` in your `tsconfig.json` if you are using
+  TypeScript
+
 ## 4.0.0-app-router.13
 
 ### Major Changes
