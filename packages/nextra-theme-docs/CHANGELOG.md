@@ -1,5 +1,15 @@
 # nextra-theme-docs
 
+## 4.0.0-app-router.15
+
+### Minor Changes
+
+- 367293e: add opacity animation for `:target` state for headings h2-h6
+
+### Patch Changes
+
+- nextra@4.0.0-app-router.15
+
 ## 4.0.0-app-router.14
 
 ### Major Changes
