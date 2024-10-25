@@ -1,5 +1,19 @@
 # nextra
 
+## 4.0.0-app-router.13
+
+### Major Changes
+
+- 54657e2: require Next.js minimum v15
+
+### Patch Changes
+
+- 3ade013: - remove `nextra/context`
+  - remove `type NextraThemeLayoutProps`
+- ddc39cc: - parse and transform `_meta` files with zod
+  - remove `_meta` `newWindow` field
+- 07213e2: add support for turbopack `next dev --turbopack`
+
 ## 4.0.0-app-router.12
 
 ### Patch Changes

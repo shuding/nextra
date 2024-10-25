@@ -1,5 +1,28 @@
 # nextra-theme-docs
 
+## 4.0.0-app-router.13
+
+### Major Changes
+
+- 54657e2: require Next.js minimum v15
+
+### Patch Changes
+
+- 3ade013: - remove `nextra/context`
+  - remove `type NextraThemeLayoutProps`
+- ddc39cc: - parse and transform `_meta` files with zod
+  - remove `_meta` `newWindow` field
+- 54657e2: allow `editLink`/`feedback.content`/`search`/`toc.backToTop` be
+  `null` as value
+- 07213e2: add support for turbopack `next dev --turbopack`
+- 54657e2: add required `Layout.navbar`, `Layout.footer` props and optional
+  `Layout.banner` prop, you don't need to pass them as `children` now
+- Updated dependencies [3ade013]
+- Updated dependencies [ddc39cc]
+- Updated dependencies [07213e2]
+- Updated dependencies [54657e2]
+  - nextra@4.0.0-app-router.13
+
 ## 4.0.0-app-router.12
 
 ### Patch Changes
