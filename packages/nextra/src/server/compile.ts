@@ -36,9 +36,9 @@ import {
   rehypeBetterReactMathjax,
   rehypeExtractTocContent,
   rehypeIcon,
-  rehypeParseCodeMeta
+  rehypeParseCodeMeta,
+  rehypeTwoslashPopup
 } from './rehype-plugins/index.js'
-import { rehypeTwoslashPopup } from './rehype-plugins/rehype-twoslash-popup.js'
 import {
   remarkCustomHeadingId,
   remarkHeadings,
