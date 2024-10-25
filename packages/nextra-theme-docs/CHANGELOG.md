@@ -1,5 +1,20 @@
 # nextra-theme-docs
 
+## 4.0.0-app-router.14
+
+### Major Changes
+
+- be19dd4: remove `"typesVersions"` field from `package.json`. You need to set
+  `"moduleResolution": "bundler"` in your `tsconfig.json` if you are using
+  TypeScript
+
+### Patch Changes
+
+- 9ca1765: fix mobile nav position
+- 2b41ec7: remove default value of `Navbar.logo`, now this prop is required
+- Updated dependencies [be19dd4]
+  - nextra@4.0.0-app-router.14
+
 ## 4.0.0-app-router.13
 
 ### Major Changes

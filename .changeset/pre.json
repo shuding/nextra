@@ -7,6 +7,8 @@
     "nextra-theme-docs": "3.0.0"
   },
   "changesets": [
+    "afraid-pens-teach",
+    "afraid-yaks-kick",
     "calm-dolphins-swim",
     "calm-knives-shave",
     "calm-lemons-poke",
@@ -32,6 +34,7 @@
     "lucky-mails-reflect",
     "ninety-houses-warn",
     "proud-ears-think",
+    "purple-doors-float",
     "serious-pets-design",
     "shaggy-geese-behave",
     "shiny-laws-sparkle",
