@@ -1,10 +1,9 @@
 import Link from 'next/link'
+import { getPageMap } from 'nextra/page-map'
 import type { FC } from 'react'
 
 export const Blog: FC<{ lang: string }> = async ({ lang }) => {
-  const { pageMap } = await import(
-    `.next/static/chunks/nextra-page-map-${lang}.mjs`
-  )
+  const pageMap = await getPageMap(lang)
   const blogItems = pageMap.find(item => item.name === 'blog').children
 
   return blogItems.map(

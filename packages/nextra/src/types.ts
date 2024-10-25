@@ -6,7 +6,7 @@ import type { mathJaxOptionsSchema, nextraConfigSchema } from './server/schemas'
 
 export interface LoaderOptions extends NextraConfig {
   isPageImport?: boolean
-  isPageMapImport?: boolean
+  locales: string[]
 }
 
 export interface Folder<FileType = PageMapItem> {
@@ -73,7 +73,7 @@ export type ReadingTime = {
   words: number
 }
 
-export type NextraConfig = z.infer<typeof nextraConfigSchema>
+export type NextraConfig = z.input<typeof nextraConfigSchema>
 
 export type MathJaxOptions = z.infer<typeof mathJaxOptionsSchema>
 
@@ -87,5 +87,3 @@ export type MDXWrapper = FC<
     children: ReactNode
   } & PageOpts
 >
-
-export type UseTOC = (props?: Record<string, any>) => Heading[]

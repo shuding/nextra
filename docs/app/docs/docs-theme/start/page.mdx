@@ -4,7 +4,7 @@ export const metadata = {
 
 import InstallNextraTheme from '@components/install-nextra-theme.mdx'
 import ReadeToGo from '@components/ready-to-go.mdx'
-import { Callout, Steps } from 'nextra/components'
+import { Steps } from 'nextra/components'
 
 # Docs Theme
 
@@ -21,13 +21,7 @@ This website itself is built with the Nextra Docs Theme.
 You can start by creating your own Nextra site and deploying to Vercel by
 clicking the link:
 
-<a
-  className="mt-3 inline-flex"
-  target="_blank"
-  href="https://vercel.com/new/clone?s=https%3A%2F%2Fgithub.com%2Fshuding%2Fnextra-docs-template&showOptionalTeamCreation=false"
->
-  ![](https://vercel.com/button)
-</a>
+[![](https://vercel.com/button)](https://vercel.com/new/clone?s=https%3A%2F%2Fgithub.com%2Fshuding%2Fnextra-docs-template&showOptionalTeamCreation=false)
 
 Vercel will fork the
 [Nextra Docs template](https://github.com/shuding/nextra-docs-template) and
@@ -52,10 +46,10 @@ the following command to install the dependencies:
 npm i next react react-dom nextra nextra-theme-docs
 ```
 
-<Callout>
-  If you already have Next.js installed in your project, you only need to
-  install `nextra` and `nextra-theme-docs` as the add-ons.
-</Callout>
+> [!NOTE]
+>
+> If you already have Next.js installed in your project, you only need to
+> install `nextra` and `nextra-theme-docs` as the add-ons.
 
 <InstallNextraTheme />
 

@@ -3,9 +3,14 @@ import { rendererRich, transformerTwoslash } from '@shikijs/twoslash'
 import slash from 'slash'
 import type { LoaderContext } from 'webpack'
 import type { LoaderOptions, PageOpts } from '../types'
-import { compileMetadata } from './compile-metadata.js'
 import { compileMdx } from './compile.js'
 import { CWD } from './constants.js'
+import { APP_DIR } from './file-system.js'
+import {
+  generatePageMapFromFilepaths,
+  getFilepaths
+} from './generate-page-map.js'
+import { collectPageMap } from './page-map.js'
 import { logger } from './utils.js'
 
 const initGitRepo = (async () => {
@@ -40,38 +45,78 @@ const initGitRepo = (async () => {
   return {}
 })()
 
+function getStaticPageMap(importPath: string, locales: string[]) {
+  return `await {
+${locales
+  .map(lang => `"${lang}": () => import("${importPath}?locale=${lang}")`)
+  .join(',\n')}
+}[locale]()`
+}
+
 export async function loader(
   this: LoaderContext<LoaderOptions>,
   source: string
 ): Promise<string> {
+  // this.cacheable(true)
   const {
     isPageImport = false,
-    isPageMapImport,
     defaultShowCopyCode,
     search,
     staticImage,
     readingTime: _readingTime,
     latex,
     codeHighlight,
-    mdxOptions
+    mdxOptions,
+    useContentDir,
+    locales
   } = this.getOptions()
 
-  const resolveData = this._module?.resourceResolveData
+  const mdxPath = slash(this.resourcePath)
+  console.log(11, mdxPath)
+  if (mdxPath.includes('page-map-placeholder.js')) {
+    const locale = this.resourceQuery.replace('?locale=', '')
+    const relativePaths = await getFilepaths({
+      dir: useContentDir ? path.join('content', locale) : APP_DIR,
+      isAppDir: !useContentDir
+    })
 
-  const mdxPath = resolveData
-    ? // to make it work with symlinks, resolve the mdx path based on the relative path
-      /*
-       * `context.rootContext` could include path chunk of
-       * `context._module.resourceResolveData.relativePath` use
-       * `context._module.resourceResolveData.descriptionFileRoot` instead
-       */
-      path.join(resolveData.descriptionFileRoot, resolveData.relativePath)
-    : this.resourcePath
-
-  if (isPageMapImport) {
-    return compileMetadata(source, { filePath: mdxPath })
+    const { pageMap, mdxPages } = generatePageMapFromFilepaths(relativePaths)
+    const rawJs = await collectPageMap({
+      locale,
+      pageMap,
+      mdxPages,
+      fromAppDir: !useContentDir
+    })
+    return rawJs
   }
-
+  // https://github.com/vercel/next.js/issues/71453#issuecomment-2431810574
+  if (mdxPath.includes('/nextra/dist/server/page-map.js')) {
+    const CODE_TO_REPLACE =
+      'await import(`./page-map-placeholder.js?locale=${locale}`);'
+    if (!source.includes(CODE_TO_REPLACE)) {
+      throw new Error("Can't find pageMap, this is Nextra bug")
+    }
+    const rawJs = source.replace(
+      CODE_TO_REPLACE,
+      getStaticPageMap('./page-map-placeholder.js', locales)
+    )
+    // console.log(111, rawJs)
+    return rawJs
+  }
+  // https://github.com/vercel/next.js/issues/71453#issuecomment-2431810574
+  if (mdxPath.includes('/nextra/dist/client/pages.js')) {
+    const CODE_TO_REPLACE =
+      'await import(`../server/page-map-placeholder.js?locale=${locale}`);'
+    if (!source.includes(CODE_TO_REPLACE)) {
+      throw new Error("Can't find RouteToFilepath, this is Nextra bug")
+    }
+    const rawJs = source.replace(
+      CODE_TO_REPLACE,
+      getStaticPageMap('../server/page-map-placeholder.js', locales)
+    )
+    // console.log(222, rawJs)
+    return rawJs
+  }
   const { result, readingTime } = await compileMdx(source, {
     mdxOptions: {
       ...mdxOptions,
@@ -124,16 +169,13 @@ export async function loader(
 ${enhancedMetadata}
 export default MDXLayout`
   }
-  const rawJs = `
-import { HOC_MDXWrapper } from 'nextra/setup-page'
+  const rawJs = `import { HOC_MDXWrapper } from 'nextra/setup-page'
 ${result}
 
 ${enhancedMetadata}
 export default HOC_MDXWrapper(
   MDXLayout,
-  _provideComponents,
-  useTOC,
-  {metadata, title}
+  {metadata, title, toc:useTOC()}
 )`
   return rawJs
 }

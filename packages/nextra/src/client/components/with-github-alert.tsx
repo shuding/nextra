@@ -25,7 +25,12 @@ export function withGitHubAlert(
       if (typeof str === 'string') {
         const alertName = str.match(GITHUB_ALERT_RE)?.groups?.name.toLowerCase()
 
-        if (alertName && GITHUB_ALERT_TYPES.has(alertName)) {
+        if (alertName) {
+          if (!GITHUB_ALERT_TYPES.has(alertName)) {
+            throw new Error(
+              `Invalid GitHub alert type: "${alertName}". Should be one of: ${GITHUB_ALERTS.join(', ')}.`
+            )
+          }
           return fn({
             ...props,
             type: alertName as T,

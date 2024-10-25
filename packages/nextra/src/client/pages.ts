@@ -1,10 +1,17 @@
 import { notFound } from 'next/navigation'
 import { logger } from '../server/utils.js'
 
-export async function importPage(pathSegments: string[] = [], locale = '') {
+async function getRouteToFilepath(
+  locale: string
+): Promise<Record<string, string>> {
   const { RouteToFilepath } = await import(
-    `private-dot-next/static/chunks/nextra-page-map-${locale}.mjs`
+    `../server/page-map-placeholder.js?locale=${locale}`
   )
+  return RouteToFilepath
+}
+
+export async function importPage(pathSegments: string[] = [], locale = '') {
+  const RouteToFilepath = await getRouteToFilepath(locale)
 
   const pagePath = RouteToFilepath[pathSegments.join('/')]
   try {
@@ -26,9 +33,7 @@ export const generateStaticParamsFor =
     const result = []
 
     for (const locale of locales) {
-      const { RouteToFilepath } = await import(
-        `private-dot-next/static/chunks/nextra-page-map-${locale}.mjs`
-      )
+      const RouteToFilepath = await getRouteToFilepath(locale)
       const routes = Object.keys(RouteToFilepath)
 
       result.push(
