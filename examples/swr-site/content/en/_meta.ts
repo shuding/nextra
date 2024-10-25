@@ -15,14 +15,12 @@ export default {
     title: 'About',
     items: {
       contributors: {
-        title: 'Contributors',
-        href: 'https://github.com/vercel/swr/graphs/contributors',
-        newWindow: true
+        href: 'https://github.com/vercel/swr/graphs/contributors'
       },
-      team: { title: 'Team' },
-      acknowledgement: { title: 'Acknowledgement' },
-      'a-page': { title: 'A Page' },
-      changelog: { title: 'Changelog' }
+      team: '',
+      acknowledgement: '',
+      'a-page': '',
+      changelog: ''
     }
   },
   examples: {
@@ -43,7 +41,6 @@ export default {
   nextra_link: {
     type: 'page',
     title: 'Nextra',
-    href: 'https://github.com/shuding/nextra',
-    newWindow: true
+    href: 'https://github.com/shuding/nextra'
   }
 }

@@ -65,7 +65,9 @@ const NavbarMenu: FC<{
         }
         anchor={{ to: 'top end', gap: 10, padding: 16 }}
       >
-        {Object.entries(menu.items || {}).map(([key, item]) => (
+        {Object.entries(
+          (menu.items as Record<string, { title: string; href?: string }>) || {}
+        ).map(([key, item]) => (
           <_MenuItem
             key={key}
             as={Anchor}
@@ -78,7 +80,6 @@ const NavbarMenu: FC<{
                   : '_text-gray-600 dark:_text-gray-400'
               )
             }
-            newWindow={item.newWindow}
           >
             {item.title}
           </_MenuItem>
@@ -103,10 +104,10 @@ export const ClientNavbar: FC<{
     <>
       <div className="_flex _gap-4 _overflow-x-auto nextra-scrollbar _py-1.5">
         {items.map(page => {
-          if (page.display === 'hidden') return
+          if ('display' in page && page.display === 'hidden') return
           if (isMenu(page)) {
             return (
-              <NavbarMenu key={page.title} menu={page}>
+              <NavbarMenu key={page.name} menu={page}>
                 {page.title}
               </NavbarMenu>
             )
@@ -130,12 +131,11 @@ export const ClientNavbar: FC<{
               key={href}
               className={cn(
                 classes.link,
-                !isActive || page.newWindow
-                  ? classes.inactive
-                  : '_font-medium _subpixel-antialiased'
+                isActive
+                  ? '_font-medium _subpixel-antialiased'
+                  : classes.inactive
               )}
-              newWindow={page.newWindow}
-              aria-current={!page.newWindow && isActive}
+              aria-current={isActive}
             >
               {page.title}
             </Anchor>

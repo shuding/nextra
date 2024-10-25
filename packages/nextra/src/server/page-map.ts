@@ -154,7 +154,7 @@ export const RouteToFilepath = ${JSON.stringify(mdxPages, null, 2)}
   return rawJs
 }
 
-export async function getPageMap(locale = '') {
-  const { pageMap } = await import(`./page-map-placeholder.js?locale=${locale}`)
+export async function getPageMap(lang = '') {
+  const { pageMap } = await import(`./page-map-placeholder.js?lang=${lang}`)
   return pageMap
 }

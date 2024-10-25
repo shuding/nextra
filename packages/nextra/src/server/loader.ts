@@ -45,12 +45,41 @@ const initGitRepo = (async () => {
   return {}
 })()
 
-function getStaticPageMap(importPath: string, locales: string[]) {
-  return `await {
+/*
+ * https://github.com/vercel/next.js/issues/71453#issuecomment-2431810574
+ *
+ * Replace `await import(`./page-map-placeholder.js?lang=${lang}`)`
+ *
+ * with:
+ *
+ * await {
+ * "en": () => import("./page-map-placeholder.js?lang=en"),
+ * "es": () => import("./page-map-placeholder.js?lang=es"),
+ * "ru": () => import("./page-map-placeholder.js?lang=ru")
+ * }[locale]()
+ *
+ * So static analyzer will know which `resourceQuery` to pass to the loader
+ **/
+function replaceDynamicResourceQuery(
+  rawJs: string,
+  rawImport: string,
+  locales: string[]
+): string {
+  const { importPath } =
+    rawJs.match(/import\(`(?<importPath>.+?)\?lang=\${lang}`\)/)?.groups || {}
+  if (!importPath) {
+    throw new Error(
+      `Can't find \`${rawImport}\` statement. This is a Nextra bug`
+    )
+  }
+
+  const replaced = `{
 ${locales
-  .map(lang => `"${lang}": () => import("${importPath}?locale=${lang}")`)
+  .map(lang => `"${lang}": () => import("${importPath}?lang=${lang}")`)
   .join(',\n')}
-}[locale]()`
+}[lang]()`
+
+  return rawJs.replace(rawImport, replaced)
 }
 
 export async function loader(
@@ -71,10 +100,10 @@ export async function loader(
     locales
   } = this.getOptions()
 
-  const mdxPath = slash(this.resourcePath)
-  console.log(11, mdxPath)
-  if (mdxPath.includes('page-map-placeholder.js')) {
-    const locale = this.resourceQuery.replace('?locale=', '')
+  const filePath = slash(this.resourcePath)
+
+  if (filePath.includes('page-map-placeholder.js')) {
+    const locale = this.resourceQuery.replace('?lang=', '')
     const relativePaths = await getFilepaths({
       dir: useContentDir ? path.join('content', locale) : APP_DIR,
       isAppDir: !useContentDir
@@ -89,34 +118,25 @@ export async function loader(
     })
     return rawJs
   }
-  // https://github.com/vercel/next.js/issues/71453#issuecomment-2431810574
-  if (mdxPath.includes('/nextra/dist/server/page-map.js')) {
-    const CODE_TO_REPLACE =
-      'await import(`./page-map-placeholder.js?locale=${locale}`);'
-    if (!source.includes(CODE_TO_REPLACE)) {
-      throw new Error("Can't find pageMap, this is Nextra bug")
-    }
-    const rawJs = source.replace(
-      CODE_TO_REPLACE,
-      getStaticPageMap('./page-map-placeholder.js', locales)
+
+  if (filePath.includes('/nextra/dist/server/page-map.js')) {
+    const rawJs = replaceDynamicResourceQuery(
+      source,
+      'import(`./page-map-placeholder.js?lang=${lang}`)',
+      locales
     )
-    // console.log(111, rawJs)
     return rawJs
   }
-  // https://github.com/vercel/next.js/issues/71453#issuecomment-2431810574
-  if (mdxPath.includes('/nextra/dist/client/pages.js')) {
-    const CODE_TO_REPLACE =
-      'await import(`../server/page-map-placeholder.js?locale=${locale}`);'
-    if (!source.includes(CODE_TO_REPLACE)) {
-      throw new Error("Can't find RouteToFilepath, this is Nextra bug")
-    }
-    const rawJs = source.replace(
-      CODE_TO_REPLACE,
-      getStaticPageMap('../server/page-map-placeholder.js', locales)
+
+  if (filePath.includes('/nextra/dist/client/pages.js')) {
+    const rawJs = replaceDynamicResourceQuery(
+      source,
+      'import(`../server/page-map-placeholder.js?lang=${lang}`)',
+      locales
     )
-    // console.log(222, rawJs)
     return rawJs
   }
+
   const { result, readingTime } = await compileMdx(source, {
     mdxOptions: {
       ...mdxOptions,
@@ -139,7 +159,7 @@ export async function loader(
     search,
     latex,
     codeHighlight,
-    filePath: mdxPath,
+    filePath,
     useCachedCompiler: true,
     isPageImport
   })
@@ -149,7 +169,7 @@ export async function loader(
   if (repository && gitRoot) {
     try {
       timestamp = await repository.getFileLatestModifiedDateAsync(
-        path.relative(gitRoot, mdxPath)
+        path.relative(gitRoot, filePath)
       )
     } catch {
       // Failed to get timestamp for this file. Silently ignore it
@@ -157,7 +177,7 @@ export async function loader(
   }
 
   const restProps: PageOpts['metadata'] = {
-    filePath: slash(path.relative(CWD, mdxPath)),
+    filePath: slash(path.relative(CWD, filePath)),
     timestamp,
     readingTime
   }

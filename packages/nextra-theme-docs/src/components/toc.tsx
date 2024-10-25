@@ -123,7 +123,6 @@ export const TOC: FC<TOCProps> = ({ toc, filePath, pageTitle }) => {
                 repository: themeConfig.docsRepositoryBase,
                 title: `Feedback for “${pageTitle}”`
               })}
-              newWindow
             >
               {themeConfig.feedback.content}
             </Anchor>
