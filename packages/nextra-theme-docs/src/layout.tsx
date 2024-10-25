@@ -97,14 +97,14 @@ export const Layout: FC<LayoutProps> = ({ children, ...themeConfig }) => {
   return (
     <ThemeConfigProvider value={rest}>
       <ThemeProvider {...nextThemes}>
+        <SkipNavLink />
+        {banner}
         <ConfigProvider pageMap={pageMap} navbar={navbar} footer={footer}>
-          {banner}
           {/*
            * MobileNav should be in layout and not in mdx wrapper, otherwise for non mdx pages will
            * be not rendered
            */}
           <MobileNav />
-          <SkipNavLink />
           {children}
         </ConfigProvider>
       </ThemeProvider>
