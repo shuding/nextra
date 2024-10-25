@@ -1,5 +1,13 @@
 # nextra-theme-blog
 
+## 3.1.1
+
+### Patch Changes
+
+- 68633e5: fix: Improve Twoslash Popover Display
+- Updated dependencies [68633e5]
+  - nextra@3.1.1
+
 ## 3.1.0
 
 ### Patch Changes
