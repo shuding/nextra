@@ -9,7 +9,7 @@
     "skipLibCheck": true,
     "jsx": "react-jsx",
     "lib": ["esnext", "dom"],
-    "moduleResolution": "bundler",
+    "moduleResolution": "node",
     "types": ["vitest/globals"],
     "paths": {
       "unified": ["./node_modules/unified"]
