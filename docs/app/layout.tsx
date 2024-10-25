@@ -114,10 +114,6 @@ const RootLayout: FC<{
           editLink="Edit this page on GitHub"
           sidebar={{ defaultMenuCollapseLevel: 1 }}
           footer={footer}
-          nextThemes={{
-            defaultTheme: 'dark',
-            disableTransitionOnChange: true
-          }}
         >
           {children}
         </Layout>
