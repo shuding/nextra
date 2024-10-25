@@ -67,11 +67,11 @@ export const nextraConfigSchema = z.strictObject({
   useContentDir: z.boolean().optional()
 })
 
-const element = z.custom<ReactElement>(isValidElement, {
+export const element = z.custom<ReactElement>(isValidElement, {
   message: 'Must be React.ReactElement'
 })
 
-const stringOrElement = z.union([z.string(), element])
+export const stringOrElement = z.union([z.string(), element])
 
 const pageThemeSchema = z.strictObject({
   breadcrumb: z.boolean().optional(),

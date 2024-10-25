@@ -17,13 +17,6 @@
     }
   },
   "types": "./dist/index.d.mts",
-  "typesVersions": {
-    "*": {
-      "cusdis": [
-        "./dist/cusdis.d.mts"
-      ]
-    }
-  },
   "files": [
     "dist"
   ],
@@ -36,7 +29,7 @@
     "types:check": "tsc --noEmit"
   },
   "peerDependencies": {
-    "next": ">=15",
+    "next": ">=14",
     "nextra": "workspace:*",
     "react": ">=18",
     "react-dom": ">=18"

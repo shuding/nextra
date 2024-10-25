@@ -43,52 +43,16 @@
       "import": "./dist/server/page-map.js",
       "types": "./dist/server/page-map.d.ts"
     },
+    "./schemas": {
+      "import": "./dist/server/schemas.js",
+      "types": "./dist/server/schemas.d.ts"
+    },
     "./*": {
       "import": "./dist/client/*.js",
       "types": "./dist/client/*.d.ts"
     }
   },
   "types": "./dist/server/index.d.ts",
-  "typesVersions": {
-    "*": {
-      "page-map": [
-        "./dist/server/page-map.d.ts"
-      ],
-      "pages": [
-        "./dist/client/pages.d.ts"
-      ],
-      "compile": [
-        "./dist/server/compile.d.ts"
-      ],
-      "fetch-filepaths-from-github": [
-        "./dist/server/fetch-filepaths-from-github.d.ts"
-      ],
-      "locales": [
-        "./dist/server/locales.d.ts"
-      ],
-      "catch-all": [
-        "./dist/client/catch-all.d.ts"
-      ],
-      "icons": [
-        "./dist/client/icons/index.d.ts"
-      ],
-      "components": [
-        "./dist/client/components/index.d.ts"
-      ],
-      "hooks": [
-        "./dist/client/hooks/index.d.ts"
-      ],
-      "mdx": [
-        "./dist/client/mdx.d.ts"
-      ],
-      "remove-links": [
-        "./dist/client/remove-links.d.ts"
-      ],
-      "normalize-pages": [
-        "./dist/client/normalize-pages.d.ts"
-      ]
-    }
-  },
   "files": [
     "dist",
     "loader.cjs",
@@ -104,7 +68,7 @@
     "types:check": "tsc --noEmit"
   },
   "peerDependencies": {
-    "next": ">=15",
+    "next": ">=14",
     "react": ">=18",
     "react-dom": ">=18"
   },

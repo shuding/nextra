@@ -1,18 +1,12 @@
 /* eslint sort-keys: error */
 import { ThemeProvider } from 'next-themes'
 import { Search, SkipNavLink } from 'nextra/components'
-import type { FC, ReactElement, ReactNode } from 'react'
-import { isValidElement } from 'react'
+import { element, stringOrElement } from 'nextra/schemas'
+import type { FC, ReactNode } from 'react'
 import { z } from 'zod'
 import { fromZodError } from 'zod-validation-error'
 import { LastUpdated, MobileNav } from './components'
 import { ConfigProvider, ThemeConfigProvider } from './stores'
-
-const element = z.custom<ReactElement>(isValidElement, {
-  message: 'Must be React.ReactElement'
-})
-
-const stringOrElement = z.union([z.string(), element])
 
 const theme = z.strictObject({
   banner: element.optional(),

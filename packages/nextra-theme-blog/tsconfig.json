@@ -8,7 +8,7 @@
     "strict": true,
     "skipLibCheck": true,
     "jsx": "react-jsx",
-    "moduleResolution": "Node",
+    "moduleResolution": "bundler",
     "types": ["vitest/globals"]
   },
   "exclude": ["dist"]

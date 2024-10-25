@@ -4,4 +4,4 @@
 'nextra': major
 ---
 
-require Next.js minimum v15
+require Next.js minimum v14
