@@ -82,6 +82,7 @@ export async function loader(
        */
       path.join(resolveData.descriptionFileRoot, resolveData.relativePath)
     : this.resourcePath
+  console.log(11, mdxPath)
   if (mdxPath.includes('page-map-placeholder.js')) {
     const locale = this.resourceQuery.replace('?locale=', '')
     const relativePaths = await getFilepaths({

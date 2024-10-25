@@ -15,6 +15,7 @@ const PAGE_MAP_PLACEHOLDER_RE = new RegExp(
   `nextra${SEP_RE}dist${SEP_RE}server${SEP_RE}page-map-placeholder`
 )
 
+// eslint-disable-next-line prefer-regex-literals
 const PAGE_MAP_RE = new RegExp('nextra/dist/(server/page-map|client/pages)')
 
 const nextra: Nextra = nextraConfig => {
@@ -24,6 +25,7 @@ const nextra: Nextra = nextraConfig => {
     logger.error('Error validating nextraConfig')
     throw fromZodError(error)
   }
+  console.log('import.meta.dirname', import.meta.dirname)
   const loaderPath = path.join(import.meta.dirname, '..', '..', 'loader.cjs')
 
   const loader = {
