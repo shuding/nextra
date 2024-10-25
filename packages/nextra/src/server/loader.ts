@@ -71,17 +71,7 @@ export async function loader(
     locales
   } = this.getOptions()
 
-  const resolveData = this._module?.resourceResolveData
-
-  const mdxPath = resolveData
-    ? // to make it work with symlinks, resolve the mdx path based on the relative path
-      /*
-       * `context.rootContext` could include path chunk of
-       * `context._module.resourceResolveData.relativePath` use
-       * `context._module.resourceResolveData.descriptionFileRoot` instead
-       */
-      path.join(resolveData.descriptionFileRoot, resolveData.relativePath)
-    : this.resourcePath
+  const mdxPath = slash(this.resourcePath)
   console.log(11, mdxPath)
   if (mdxPath.includes('page-map-placeholder.js')) {
     const locale = this.resourceQuery.replace('?locale=', '')

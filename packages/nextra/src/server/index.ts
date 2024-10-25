@@ -9,19 +9,15 @@ import { nextraConfigSchema } from './schemas.js'
 import { logger } from './utils.js'
 
 const DEFAULT_EXTENSIONS = ['js', 'jsx', 'ts', 'tsx']
-
-const SEP_RE = path.sep === '/' ? '/' : '\\\\'
-
+const FILENAME = fileURLToPath(import.meta.url)
+const DIRNAME = path.dirname(FILENAME)
+const LOADER_PATH = path.join(DIRNAME, '..', '..', 'loader.cjs')
 const PAGE_MAP_PLACEHOLDER_RE = new RegExp(
-  `nextra${SEP_RE}dist${SEP_RE}server${SEP_RE}page-map-placeholder`
+  'nextra/dist/server/page-map-placeholder'.replaceAll('/', path.sep)
 )
-
 const PAGE_MAP_RE = new RegExp(
-  `nextra${SEP_RE}dist${SEP_RE}(server${SEP_RE}page-map|client${SEP_RE}pages)`
+  'nextra/dist/(server/page-map|client/pages)'.replaceAll('/', path.sep)
 )
-
-const __filename = fileURLToPath(import.meta.url)
-const __dirname = path.dirname(__filename)
 
 const nextra: Nextra = nextraConfig => {
   const { error, data: loaderOptions } =
@@ -31,21 +27,16 @@ const nextra: Nextra = nextraConfig => {
     throw fromZodError(error)
   }
 
-  const loaderPath = path.join(__dirname, '..', '..', 'loader.cjs')
-  console.log({
-    loaderPath,
-    loaderPath2: path.normalize(path.join(__dirname, '..', '..', 'loader.cjs'))
-  })
   const loader = {
-    loader: loaderPath,
+    loader: LOADER_PATH,
     options: loaderOptions
   }
   const pageImportLoader = {
-    loader: loaderPath,
+    loader: LOADER_PATH,
     options: { ...loaderOptions, isPageImport: true }
   }
   const pageMapPlaceholderLoader = {
-    loader: loaderPath,
+    loader: LOADER_PATH,
     options: {
       useContentDir: loaderOptions.useContentDir ?? false
     }
@@ -53,7 +44,7 @@ const nextra: Nextra = nextraConfig => {
 
   return function withNextra(nextConfig = {}) {
     const pageMapLoader = {
-      loader: loaderPath,
+      loader: LOADER_PATH,
       options: {
         locales: nextConfig.i18n?.locales || ['']
       }
