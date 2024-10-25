@@ -1,5 +1,6 @@
 /* eslint-env node */
 import path from 'node:path'
+import { fileURLToPath } from 'node:url'
 import type { RuleSetRule } from 'webpack'
 import { fromZodError } from 'zod-validation-error'
 import type { Nextra } from '../types'
@@ -19,6 +20,9 @@ const PAGE_MAP_RE = new RegExp(
   `nextra${SEP_RE}dist${SEP_RE}(server${SEP_RE}page-map|client${SEP_RE}pages)`
 )
 
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
+
 const nextra: Nextra = nextraConfig => {
   const { error, data: loaderOptions } =
     nextraConfigSchema.safeParse(nextraConfig)
@@ -26,13 +30,13 @@ const nextra: Nextra = nextraConfig => {
     logger.error('Error validating nextraConfig')
     throw fromZodError(error)
   }
-  const __dirname = new URL('.', import.meta.url).pathname
-  console.log('__dirname', __dirname)
+
   const loaderPath = path.posix.join(__dirname, '..', '..', 'loader.cjs')
-  const loaderPath2 = path.normalize(
-    path.join(__dirname, '..', '..', 'loader.cjs')
-  )
-  console.log({ loaderPath, loaderPath2 })
+  console.log({
+    loaderPath,
+    loaderPath2: path.normalize(path.join(__dirname, '..', '..', 'loader.cjs')),
+    loaderPath3: path.join(__dirname, '..', '..', 'loader.cjs')
+  })
   const loader = {
     loader: loaderPath,
     options: loaderOptions
