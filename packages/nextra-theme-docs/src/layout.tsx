@@ -21,10 +21,12 @@ const theme = z.strictObject({
     .string()
     .startsWith('https://')
     .default('https://github.com/shuding/nextra'),
-  editLink: stringOrElement.default('Edit this page'),
+  editLink: stringOrElement.or(z.null()).default('Edit this page'),
   feedback: z
     .strictObject({
-      content: stringOrElement.default('Question? Give us feedback'),
+      content: stringOrElement
+        .or(z.null())
+        .default('Question? Give us feedback'),
       labels: z.string().default('feedback')
     })
     .default({}),
@@ -58,7 +60,7 @@ const theme = z.strictObject({
     })
     .default({}),
   pageMap: z.array(z.any({})),
-  search: element.default(<Search />),
+  search: z.union([element, z.null()]).default(<Search />),
   sidebar: z
     .strictObject({
       autoCollapse: z.boolean().optional(),
@@ -75,7 +77,7 @@ const theme = z.strictObject({
     .default({}),
   toc: z
     .strictObject({
-      backToTop: stringOrElement.default('Scroll to top'),
+      backToTop: stringOrElement.or(z.null()).default('Scroll to top'),
       extraContent: stringOrElement.optional(),
       float: z.boolean().default(true),
       title: stringOrElement.default('On This Page')
