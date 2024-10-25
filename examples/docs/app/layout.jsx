@@ -1,5 +1,5 @@
 /* eslint-env node */
-import { Layout, Navbar } from 'nextra-theme-docs'
+import { Footer, Layout, Navbar } from 'nextra-theme-docs'
 import { Banner, Head } from 'nextra/components'
 import { getPageMap } from 'nextra/page-map'
 import 'nextra-theme-docs/style.css'
@@ -32,16 +32,19 @@ export default async function RootLayout({ children }) {
       <Head faviconGlyph="✦" />
       <body>
         <Layout
+          banner={<Banner storageKey="Nextra 2">Nextra 2 Alpha</Banner>}
+          navbar={
+            <Navbar
+              // Next.js discord server
+              chatLink="https://discord.gg/hEM84NMkRv"
+            />
+          }
+          footer={<Footer />}
           editLink="Edit this page on GitHub"
           docsRepositoryBase="https://github.com/shuding/nextra/blob/core/examples/docs"
           sidebar={{ defaultMenuCollapseLevel: 1 }}
           pageMap={await getPageMap()}
         >
-          <Banner storageKey="Nextra 2">Nextra 2 Alpha</Banner>
-          <Navbar
-            // Next.js discord server
-            chatLink="https://discord.gg/hEM84NMkRv"
-          />
           {children}
         </Layout>
       </body>

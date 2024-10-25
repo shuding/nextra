@@ -3,8 +3,8 @@
 import type { PageMapItem } from 'nextra'
 import { useFSRoute } from 'nextra/hooks'
 import { normalizePages } from 'nextra/normalize-pages'
-import type { FC, ReactNode } from 'react'
-import { Children, createContext, useContext, useEffect, useState } from 'react'
+import type { FC, ReactElement, ReactNode } from 'react'
+import { createContext, useContext, useEffect, useState } from 'react'
 import { createStore } from 'zustand'
 import type { StoreApi } from 'zustand'
 import { shallow } from 'zustand/shallow'
@@ -46,7 +46,9 @@ function getStore(list: PageMapItem[], route: string) {
 export const ConfigProvider: FC<{
   children: ReactNode
   pageMap: PageMapItem[]
-}> = ({ children, pageMap }) => {
+  navbar: ReactElement
+  footer: ReactElement
+}> = ({ children, pageMap, navbar, footer }) => {
   const pathname = useFSRoute()
 
   const [store] = useState(() =>
@@ -76,26 +78,11 @@ export const ConfigProvider: FC<{
 
   const { activeThemeContext } = store.getState().normalizePagesResult
 
-  const newChildren = Children.map(children, child => {
-    if (
-      child &&
-      typeof child === 'object' &&
-      'type' in child &&
-      '_owner' in child &&
-      child._owner
-    ) {
-      const ownerType = (child._owner as any).name
-      if (ownerType === 'Footer') {
-        return activeThemeContext.footer && child
-      }
-      if (ownerType === 'Navbar') {
-        return activeThemeContext.navbar && child
-      }
-    }
-    return child
-  })
-
   return (
-    <ConfigContext.Provider value={store}>{newChildren}</ConfigContext.Provider>
+    <ConfigContext.Provider value={store}>
+      {activeThemeContext.navbar && navbar}
+      {children}
+      {activeThemeContext.footer && footer}
+    </ConfigContext.Provider>
   )
 }

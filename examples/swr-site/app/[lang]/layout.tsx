@@ -54,7 +54,42 @@ export default async function RootLayout({ children, params }) {
       ...normalizePageMap(graphqlYogaPageMap)
     ]
   }
-
+  const banner = (
+    <Banner storageKey="swr-2">
+      SWR 2.0 is out! <Link href="#">Read more →</Link>
+    </Banner>
+  )
+  const navbar = (
+    <Navbar
+      logo={
+        <>
+          <SwrIcon height="12" />
+          <span
+            className="max-md:hidden select-none font-extrabold ms-2"
+            title={`SWR: ${dictionary.logo.title}`}
+          >
+            SWR
+          </span>
+        </>
+      }
+      projectLink="https://github.com/vercel/swr"
+      chatLink="https://discord.com"
+    >
+      <LocaleSwitch />
+    </Navbar>
+  )
+  const footer = (
+    <Footer>
+      <a
+        rel="noreferrer"
+        target="_blank"
+        className="focus-visible:nextra-focus flex items-center gap-2 font-semibold"
+        href={dictionary.link.vercel}
+      >
+        {dictionary.poweredBy} <VercelIcon height="20" />
+      </a>
+    </Footer>
+  )
   return (
     <html lang={lang} dir={getDirection(lang)} suppressHydrationWarning>
       <Head
@@ -69,6 +104,9 @@ export default async function RootLayout({ children, params }) {
       />
       <body>
         <Layout
+          banner={banner}
+          navbar={navbar}
+          footer={footer}
           docsRepositoryBase="https://github.com/shuding/nextra/blob/core/examples/swr-site"
           i18n={[
             { locale: 'en', name: 'English' },
@@ -95,37 +133,7 @@ export default async function RootLayout({ children, params }) {
             system: dictionary.system
           }}
         >
-          <Banner storageKey="swr-2">
-            SWR 2.0 is out! <Link href="#">Read more →</Link>
-          </Banner>
-          <Navbar
-            logo={
-              <>
-                <SwrIcon height="12" />
-                <span
-                  className="max-md:hidden select-none font-extrabold ms-2"
-                  title={`SWR: ${dictionary.logo.title}`}
-                >
-                  SWR
-                </span>
-              </>
-            }
-            projectLink="https://github.com/vercel/swr"
-            chatLink="https://discord.com"
-          >
-            <LocaleSwitch />
-          </Navbar>
           {children}
-          <Footer>
-            <a
-              rel="noreferrer"
-              target="_blank"
-              className="focus-visible:nextra-focus flex items-center gap-2 font-semibold"
-              href={dictionary.link.vercel}
-            >
-              {dictionary.poweredBy} <VercelIcon height="20" />
-            </a>
-          </Footer>
         </Layout>
       </body>
     </html>
