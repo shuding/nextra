@@ -103,7 +103,7 @@ importers:
         version: 2.1.1
       framer-motion:
         specifier: ^11.0.0
-        version: 11.11.9(react-dom@18.3.1)(react@18.3.1)
+        version: 11.11.10(react-dom@18.3.1)(react@18.3.1)
       next:
         specifier: 15.0.1
         version: 15.0.1(@babel/core@7.25.8)(react-dom@18.3.1)(react@18.3.1)
@@ -4117,6 +4117,17 @@ packages:
       react: 18.3.1
     dev: false
 
+  /@mdx-js/react@3.1.0(@types/react@18.3.12)(react@18.3.1):
+    resolution: {integrity: sha512-QjHtSaoameoalGnKDT3FoIl4+9RwyTmo9ZJGBdLOks/YOiWHoRDI3PUwEzOE7kEmGcV3AFcp9K6dYu9rEuKLAQ==}
+    peerDependencies:
+      '@types/react': '>=16'
+      react: '>=16'
+    dependencies:
+      '@types/mdx': 2.0.13
+      '@types/react': 18.3.12
+      react: 18.3.1
+    dev: false
+
   /@mermaid-js/parser@0.3.0:
     resolution: {integrity: sha512-HsvL6zgE5sUPGgkIDlmAWR1HTNHz2Iy11BAWPTa4Jjabkpguy4Ze2gzfLrg6pdRuBvFwgUYyxiaNqZwrEEXepA==}
     dependencies:
@@ -8037,8 +8048,8 @@ packages:
     resolution: {integrity: sha512-ZsDfxO51wGAXREY55a7la9LScWpwv9RxIrYABrlvOFBlH/ShPnrtsXeuUIfXKKOVicNxQ+o8JTbJvjS4M89yew==}
     dev: true
 
-  /framer-motion@11.11.9(react-dom@18.3.1)(react@18.3.1):
-    resolution: {integrity: sha512-XpdZseuCrZehdHGuW22zZt3SF5g6AHJHJi7JwQIigOznW4Jg1n0oGPMJQheMaKLC+0rp5gxUKMRYI6ytd3q4RQ==}
+  /framer-motion@11.11.10(react-dom@18.3.1)(react@18.3.1):
+    resolution: {integrity: sha512-061Bt1jL/vIm+diYIiA4dP/Yld7vD47ROextS7ESBW5hr4wQFhxB5D5T5zAc3c/5me3cOa+iO5LqhA38WDln/A==}
     peerDependencies:
       '@emotion/is-prop-valid': '*'
       react: ^18.0.0
