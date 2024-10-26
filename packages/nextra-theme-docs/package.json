@@ -52,7 +52,7 @@
     "@vitejs/plugin-react": "^4.1.0",
     "concurrently": "^9.0.0",
     "jsdom": "^25.0.0",
-    "next": "^14.2.5",
+    "next": "^15.0.0-rc.1",
     "nextra": "workspace:*",
     "postcss": "^8.4.33",
     "postcss-cli": "^11.0.0",
