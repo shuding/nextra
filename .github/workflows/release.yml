@@ -23,7 +23,7 @@ jobs:
           cache: pnpm
 
       - name: Install Dependencies
-        run: pnpm i
+        run: pnpm dedupe
 
       - name: Clean
         run: pnpm clean

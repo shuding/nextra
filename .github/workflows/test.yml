@@ -30,7 +30,7 @@ jobs:
           cache: pnpm
 
       - name: Install Dependencies
-        run: pnpm i
+        run: pnpm dedupe
 
       - name: Build All
         run: pnpm build:all
