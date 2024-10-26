@@ -42,7 +42,7 @@
     "prettier-plugin-pkg": "0.18.1",
     "prettier-plugin-tailwindcss": "0.6.8",
     "rimraf": "6.0.1",
-    "tsup": "8.3.0",
+    "tsup": "8.3.5",
     "tsx": "^4.19.1",
     "turbo": "2.2.3",
     "typescript": "5.6.3"
@@ -54,8 +54,8 @@
     },
     "patchedDependencies": {
       "@changesets/assemble-release-plan@6.0.4": "patches/@changesets__assemble-release-plan.patch",
-      "tsup@8.3.0": "patches/tsup.patch",
-      "eslint-plugin-deprecation@3.0.0": "patches/eslint-plugin-deprecation.patch"
+      "eslint-plugin-deprecation@3.0.0": "patches/eslint-plugin-deprecation.patch",
+      "tsup@8.3.5": "patches/tsup@8.3.5.patch"
     }
   }
 }
