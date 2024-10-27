@@ -258,7 +258,7 @@ importers:
         version: 0.1.3(react@18.3.1)
       '@theguild/remark-npm2yarn':
         specifier: ^0.3.2
-        version: 0.3.2
+        version: 0.3.3
       better-react-mathjax:
         specifier: ^2.0.3
         version: 2.0.3(react@18.3.1)
@@ -4722,6 +4722,13 @@ packages:
 
   /@theguild/remark-npm2yarn@0.3.2:
     resolution: {integrity: sha512-H9T/GOuS/+4H7AY1cfD5DJIIIcGIIw1zMCB8OeTgXk7azJULsnuOurZ/CR54rvuTD+Krx0MVQccaUCvCWfP+vw==}
+    dependencies:
+      npm-to-yarn: 3.0.0
+      unist-util-visit: 5.0.0
+    dev: false
+
+  /@theguild/remark-npm2yarn@0.3.3:
+    resolution: {integrity: sha512-ma6DvR03gdbvwqfKx1omqhg9May/VYGdMHvTzB4VuxkyS7KzfZ/lzrj43hmcsggpMje0x7SADA/pcMph0ejRnA==}
     dependencies:
       npm-to-yarn: 3.0.0
       unist-util-visit: 5.0.0
