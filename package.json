@@ -36,7 +36,6 @@
     "eslint-plugin-tailwindcss": "3.17.3",
     "eslint-plugin-typescript-sort-keys": "3.3.0",
     "eslint-plugin-unicorn": "56.0.0",
-    "pagefind": "^1.1.1",
     "prettier": "3.3.3",
     "prettier-plugin-pkg": "0.18.1",
     "prettier-plugin-tailwindcss": "0.6.8",
