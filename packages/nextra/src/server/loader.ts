@@ -4,7 +4,7 @@ import slash from 'slash'
 import type { LoaderContext } from 'webpack'
 import type { LoaderOptions, PageOpts } from '../types'
 import { compileMdx } from './compile.js'
-import { CWD } from './constants.js'
+import { CWD, IS_PRODUCTION } from './constants.js'
 import { APP_DIR } from './file-system.js'
 import {
   generatePageMapFromFilepaths,
@@ -87,7 +87,6 @@ export async function loader(
   this: LoaderContext<LoaderOptions>,
   source: string
 ): Promise<string> {
-  // this.cacheable(true)
   const {
     isPageImport = false,
     defaultShowCopyCode,
@@ -105,6 +104,12 @@ export async function loader(
 
   if (filePath.includes('page-map-placeholder.js')) {
     const locale = this.resourceQuery.replace('?lang=', '')
+    if (!IS_PRODUCTION) {
+      // Add `app` and `content` folders as the dependencies, so Webpack will
+      // rebuild the module if anything in that context changes
+      this.addContextDependency(APP_DIR)
+      this.addContextDependency(path.join(CWD, 'content', locale))
+    }
     const relativePaths = await getFilepaths({
       dir: useContentDir ? path.join('content', locale) : APP_DIR,
       isAppDir: !useContentDir

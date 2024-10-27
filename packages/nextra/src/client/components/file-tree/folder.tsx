@@ -29,6 +29,7 @@ export const Folder = memo<FolderProps>(
       <li className="_flex _flex-col _gap-1">
         <Button
           onClick={toggle}
+          disabled={open}
           className={({ hover }) =>
             cn(
               '_flex _items-center _gap-1 _break-all',

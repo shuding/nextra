@@ -1,7 +1,9 @@
 .nextra-steps {
   h2,
   h3,
-  h4 {
+  h4,
+  h5,
+  h6 {
     counter-increment: var(--counter-id);
     /* resets from nextra-theme-docs */
     @apply _border-0 _pb-0 _font-semibold _tracking-tight _mt-8 _text-2xl;
