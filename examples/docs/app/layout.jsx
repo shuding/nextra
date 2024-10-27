@@ -50,7 +50,7 @@ export default async function RootLayout({ children }) {
           navbar={navbar}
           footer={<Footer />}
           editLink="Edit this page on GitHub"
-          docsRepositoryBase="https://github.com/shuding/nextra/blob/core/examples/docs"
+          docsRepositoryBase="https://github.com/shuding/nextra/blob/main/examples/docs"
           sidebar={{ defaultMenuCollapseLevel: 1 }}
           pageMap={await getPageMap()}
         >

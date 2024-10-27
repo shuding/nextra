@@ -107,7 +107,7 @@ export default async function RootLayout({ children, params }) {
           banner={banner}
           navbar={navbar}
           footer={footer}
-          docsRepositoryBase="https://github.com/shuding/nextra/blob/core/examples/swr-site"
+          docsRepositoryBase="https://github.com/shuding/nextra/blob/main/examples/swr-site"
           i18n={[
             { locale: 'en', name: 'English' },
             { locale: 'es', name: 'Español RTL' },
