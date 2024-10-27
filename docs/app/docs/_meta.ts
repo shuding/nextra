@@ -24,6 +24,6 @@ export default {
   },
   'migration-from-v3': {
     title: 'Migration from Nextra v3',
-    href: 'https://the-guild.dev/blog/nextra-4?utm_source=nextra.site&utm_campaign=sidebar&utm_content=logo_link'
+    href: 'https://the-guild.dev/blog/nextra-4?utm_source=nextra.site&utm_campaign=sidebar&utm_content=sidebar_link'
   }
 }
