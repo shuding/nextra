@@ -60,10 +60,7 @@ export const Pagination: FC<NavLinkProps> = ({
         <NextLink
           href={next.route}
           title={next.title}
-          className={cn(
-            classes.link,
-            '_ps-4 _ms-auto ltr:_text-right rtl:_text-left'
-          )}
+          className={cn(classes.link, '_ps-4 _ms-auto _text-end')}
         >
           {next.title}
           <ArrowRightIcon
