@@ -75,20 +75,17 @@ The `type` prop can be one of the following:
 ```jsx
 import { withGitHubAlert } from 'nextra/components'
 
-const Blockquote = withGitHubAlert(
-  MyBlockquoteComponent,
-  ({ type, ...props }) => {
-    return <MyCalloutComponent type={type} {...props} />
-  }
-)
+const Blockquote = withGitHubAlert(({ type, ...props }) => {
+  return <MyCalloutComponent type={type} {...props} />
+}, MyBlockquoteComponent)
 ```
 
 ### Provide `<Blockquote>` to `useMDXComponents`
 
-To make the `<Blockquote>` component available, you can integrate it into the
+To make the `<Blockquote>` component available, you should integrate it into the
 `useMDXComponents` function:
 
-```jsx filename="my-mdx-components.js"
+```jsx filename="mdx-components.jsx"
 export function useMDXComponents(components) {
   return {
     blockquote: Blockquote,

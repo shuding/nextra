@@ -21,6 +21,13 @@ export default {
       }
     }
   },
+  blog: {
+    type: 'page',
+    theme: {
+      typesetting: 'article',
+      sidebar: false
+    }
+  },
   about: {
     type: 'page',
     theme: {
@@ -37,7 +44,6 @@ export default {
   },
   sponsors: {
     type: 'page',
-    title: 'Sponsors',
     theme: {
       typesetting: 'article',
       layout: 'full',

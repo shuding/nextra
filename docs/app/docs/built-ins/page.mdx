@@ -1,3 +1,8 @@
+---
+asIndexPage: true
+sidebarTitle: Built-ins Components
+---
+
 import {
   CardsIcon,
   FolderTreeIcon,
@@ -6,10 +11,6 @@ import {
   WarningIcon
 } from '@components/icons'
 import { Cards } from 'nextra/components'
-
-export const metadata = {
-  asIndexPage: true
-}
 
 # Built-ins
 
@@ -20,27 +21,19 @@ your content:
   <Cards.Card
     icon={<WarningIcon />}
     title="Callout"
-    href="/docs/guide/built-ins/callout"
+    href="/docs/built-ins/callout"
   />
-  <Cards.Card
-    icon={<CardsIcon />}
-    title="Tabs"
-    href="/docs/guide/built-ins/tabs"
-  />
+  <Cards.Card icon={<CardsIcon />} title="Tabs" href="/docs/built-ins/tabs" />
   <Cards.Card
     icon={<IdCardIcon />}
     title="Cards"
-    href="/docs/guide/built-ins/cards"
+    href="/docs/built-ins/cards"
   />
-  <Cards.Card
-    icon={<OneIcon />}
-    title="Steps"
-    href="/docs/guide/built-ins/steps"
-  />
+  <Cards.Card icon={<OneIcon />} title="Steps" href="/docs/built-ins/steps" />
   <Cards.Card
     icon={<FolderTreeIcon />}
     title="FileTree"
-    href="/docs/guide/built-ins/filetree"
+    href="/docs/built-ins/filetree"
   />
-  <Cards.Card title="Bleed" href="/docs/guide/built-ins/bleed" />
+  <Cards.Card title="Bleed" href="/docs/built-ins/bleed" />
 </Cards>
