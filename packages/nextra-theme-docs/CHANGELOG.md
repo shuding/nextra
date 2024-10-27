@@ -1,5 +1,12 @@
 # nextra-theme-docs
 
+## 3.1.2
+
+### Patch Changes
+
+- Updated dependencies [9c78588]
+  - nextra@3.1.2
+
 ## 3.1.1
 
 ### Patch Changes
