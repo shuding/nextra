@@ -14,12 +14,12 @@ const nextConfig = withNextra({
   redirects: async () => [
     {
       source: '/docs/guide/:slug(typescript|latex|tailwind-css|mermaid)',
-      destination: '/docs/guide/advanced/:slug',
+      destination: '/docs/advanced/:slug',
       permanent: true
     },
     {
       source: '/docs/docs-theme/built-ins/:slug(callout|steps|tabs|bleed)',
-      destination: '/docs/guide/built-ins/:slug',
+      destination: '/docs/built-ins/:slug',
       permanent: true
     },
     {
@@ -29,7 +29,12 @@ const nextConfig = withNextra({
     },
     {
       source: '/docs/docs-theme/built-ins',
-      destination: '/docs/guide/built-ins',
+      destination: '/docs/built-ins',
+      permanent: true
+    },
+    {
+      source: '/docs/guide/advanced/:slug',
+      destination: '/docs/advanced/:slug',
       permanent: true
     }
   ],

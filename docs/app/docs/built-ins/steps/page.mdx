@@ -1,6 +1,6 @@
-export const metadata = {
-  sidebarTitle: 'Steps'
-}
+---
+sidebarTitle: Steps
+---
 
 import { Steps } from 'nextra/components'
 
@@ -29,9 +29,9 @@ This is the third step description.
 
 ## Usage
 
-Wrap a set of Markdown headings with the `<Steps>` component to turn them into
-visual steps. It supports `<h2>`, `<h3>`, and `<h4>` headings. You can choose
-the appropriate heading level based on the content hierarchy on the page.
+Wrap a set of Markdown headings (from `<h2>` to `<h6>`) with the `<Steps>`
+component to display them as visual steps. You can choose the appropriate
+heading level based on the content hierarchy on the page.
 
 {/* prettier-ignore */}
 ```mdx filename="MDX" {7-15}

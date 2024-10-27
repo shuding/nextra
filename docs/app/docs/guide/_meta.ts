@@ -10,6 +10,5 @@ export default {
   'static-exports': '',
   search: '',
   'github-alert-syntax': '',
-  'built-ins': 'Built-ins Components',
-  advanced: ''
+  turbopack: ''
 }
