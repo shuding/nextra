@@ -237,7 +237,7 @@ importers:
     dependencies:
       '@formatjs/intl-localematcher':
         specifier: ^0.5.4
-        version: 0.5.5
+        version: 0.5.6
       '@headlessui/react':
         specifier: ^2.1.2
         version: 2.1.10(react-dom@18.3.1)(react@18.3.1)
@@ -3590,6 +3590,12 @@ packages:
 
   /@formatjs/intl-localematcher@0.5.5:
     resolution: {integrity: sha512-t5tOGMgZ/i5+ALl2/offNqAQq/lfUnKLEw0mXQI4N4bqpedhrSE+fyKLpwnd22sK0dif6AV+ufQcTsKShB9J1g==}
+    dependencies:
+      tslib: 2.8.0
+    dev: false
+
+  /@formatjs/intl-localematcher@0.5.6:
+    resolution: {integrity: sha512-roz1+Ba5e23AHX6KUAWmLEyTRZegM5YDuxuvkHCyK3RJddf/UXB2f+s7pOMm9ktfPGla0g+mQXOn5vsuYirnaA==}
     dependencies:
       tslib: 2.8.0
     dev: false
