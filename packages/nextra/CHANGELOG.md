@@ -1,5 +1,12 @@
 # nextra
 
+## 3.1.2
+
+### Patch Changes
+
+- 9c78588: fix(loader): Prevent overwriting of
+  `rehypePrettyCodeOptions.transformer`
+
 ## 3.1.1
 
 ### Patch Changes
