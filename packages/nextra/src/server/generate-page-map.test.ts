@@ -96,43 +96,44 @@ describe('generatePageMapFromFilepaths()', () => {
       [
         "_meta.ts",
         "about/page.mdx",
+        "blog/page.mdx",
         "docs/_meta.ts",
+        "docs/advanced/_meta.ts",
+        "docs/advanced/customize-the-cascade-layers/page.mdx",
+        "docs/advanced/latex/page.mdx",
+        "docs/advanced/mermaid/page.mdx",
+        "docs/advanced/npm2yarn/page.mdx",
+        "docs/advanced/page.mdx",
+        "docs/advanced/playground/page.mdx",
+        "docs/advanced/remote/page.mdx",
+        "docs/advanced/table/page.mdx",
+        "docs/advanced/tailwind-css/page.mdx",
+        "docs/advanced/twoslash/page.mdx",
+        "docs/advanced/typescript/page.mdx",
         "docs/blog-theme/page.mdx",
         "docs/blog-theme/start/page.mdx",
+        "docs/built-ins/_meta.ts",
+        "docs/built-ins/banner/page.mdx",
+        "docs/built-ins/bleed/page.mdx",
+        "docs/built-ins/callout/page.mdx",
+        "docs/built-ins/cards/page.mdx",
+        "docs/built-ins/filetree/page.mdx",
+        "docs/built-ins/head/page.mdx",
+        "docs/built-ins/page.mdx",
+        "docs/built-ins/search/page.mdx",
+        "docs/built-ins/steps/page.mdx",
+        "docs/built-ins/tabs/page.mdx",
         "docs/custom-theme/page.mdx",
         "docs/docs-theme/_meta.ts",
         "docs/docs-theme/api/page.mdx",
+        "docs/docs-theme/built-ins/footer/page.mdx",
+        "docs/docs-theme/built-ins/layout/page.mdx",
+        "docs/docs-theme/built-ins/navbar/page.mdx",
+        "docs/docs-theme/built-ins/not-found/page.mdx",
         "docs/docs-theme/page-configuration/page.mdx",
         "docs/docs-theme/page.mdx",
         "docs/docs-theme/start/page.mdx",
-        "docs/docs-theme/theme-configuration/nextra-theme-docs/footer/page.mdx",
-        "docs/docs-theme/theme-configuration/nextra-theme-docs/layout/page.mdx",
-        "docs/docs-theme/theme-configuration/nextra-theme-docs/navbar/page.mdx",
-        "docs/docs-theme/theme-configuration/nextra-theme-docs/not-found/page.mdx",
-        "docs/docs-theme/theme-configuration/nextra/banner/page.mdx",
-        "docs/docs-theme/theme-configuration/nextra/head/page.mdx",
-        "docs/docs-theme/theme-configuration/nextra/search/page.mdx",
         "docs/guide/_meta.ts",
-        "docs/guide/advanced/_meta.ts",
-        "docs/guide/advanced/customize-the-cascade-layers/page.mdx",
-        "docs/guide/advanced/latex/page.mdx",
-        "docs/guide/advanced/mermaid/page.mdx",
-        "docs/guide/advanced/npm2yarn/page.mdx",
-        "docs/guide/advanced/page.mdx",
-        "docs/guide/advanced/playground/page.mdx",
-        "docs/guide/advanced/remote/page.mdx",
-        "docs/guide/advanced/table/page.mdx",
-        "docs/guide/advanced/tailwind-css/page.mdx",
-        "docs/guide/advanced/twoslash/page.mdx",
-        "docs/guide/advanced/typescript/page.mdx",
-        "docs/guide/built-ins/_meta.ts",
-        "docs/guide/built-ins/bleed/page.mdx",
-        "docs/guide/built-ins/callout/page.mdx",
-        "docs/guide/built-ins/cards/page.mdx",
-        "docs/guide/built-ins/filetree/page.mdx",
-        "docs/guide/built-ins/page.mdx",
-        "docs/guide/built-ins/steps/page.mdx",
-        "docs/guide/built-ins/tabs/page.mdx",
         "docs/guide/custom-css/page.mdx",
         "docs/guide/github-alert-syntax/page.mdx",
         "docs/guide/i18n/page.mdx",
@@ -167,12 +168,161 @@ describe('generatePageMapFromFilepaths()', () => {
               {
                 "children": [
                   {
+                    "__metaPath": "docs/advanced/_meta.ts",
+                  },
+                  {
+                    "__pagePath": "docs/advanced/customize-the-cascade-layers/page.mdx",
+                    "name": "customize-the-cascade-layers",
+                    "route": "/docs/advanced/customize-the-cascade-layers",
+                  },
+                  {
+                    "__pagePath": "docs/advanced/latex/page.mdx",
+                    "name": "latex",
+                    "route": "/docs/advanced/latex",
+                  },
+                  {
+                    "__pagePath": "docs/advanced/mermaid/page.mdx",
+                    "name": "mermaid",
+                    "route": "/docs/advanced/mermaid",
+                  },
+                  {
+                    "__pagePath": "docs/advanced/npm2yarn/page.mdx",
+                    "name": "npm2yarn",
+                    "route": "/docs/advanced/npm2yarn",
+                  },
+                  {
+                    "__pagePath": "docs/advanced/page.mdx",
+                    "name": "index",
+                    "route": "/docs/advanced",
+                  },
+                  {
+                    "__pagePath": "docs/advanced/playground/page.mdx",
+                    "name": "playground",
+                    "route": "/docs/advanced/playground",
+                  },
+                  {
+                    "__pagePath": "docs/advanced/remote/page.mdx",
+                    "name": "remote",
+                    "route": "/docs/advanced/remote",
+                  },
+                  {
+                    "__pagePath": "docs/advanced/table/page.mdx",
+                    "name": "table",
+                    "route": "/docs/advanced/table",
+                  },
+                  {
+                    "__pagePath": "docs/advanced/tailwind-css/page.mdx",
+                    "name": "tailwind-css",
+                    "route": "/docs/advanced/tailwind-css",
+                  },
+                  {
+                    "__pagePath": "docs/advanced/twoslash/page.mdx",
+                    "name": "twoslash",
+                    "route": "/docs/advanced/twoslash",
+                  },
+                  {
+                    "__pagePath": "docs/advanced/typescript/page.mdx",
+                    "name": "typescript",
+                    "route": "/docs/advanced/typescript",
+                  },
+                ],
+                "name": "advanced",
+                "route": "/docs/advanced",
+              },
+              {
+                "children": [
+                  {
+                    "__metaPath": "docs/built-ins/_meta.ts",
+                  },
+                  {
+                    "__pagePath": "docs/built-ins/banner/page.mdx",
+                    "name": "banner",
+                    "route": "/docs/built-ins/banner",
+                  },
+                  {
+                    "__pagePath": "docs/built-ins/bleed/page.mdx",
+                    "name": "bleed",
+                    "route": "/docs/built-ins/bleed",
+                  },
+                  {
+                    "__pagePath": "docs/built-ins/callout/page.mdx",
+                    "name": "callout",
+                    "route": "/docs/built-ins/callout",
+                  },
+                  {
+                    "__pagePath": "docs/built-ins/cards/page.mdx",
+                    "name": "cards",
+                    "route": "/docs/built-ins/cards",
+                  },
+                  {
+                    "__pagePath": "docs/built-ins/filetree/page.mdx",
+                    "name": "filetree",
+                    "route": "/docs/built-ins/filetree",
+                  },
+                  {
+                    "__pagePath": "docs/built-ins/head/page.mdx",
+                    "name": "head",
+                    "route": "/docs/built-ins/head",
+                  },
+                  {
+                    "__pagePath": "docs/built-ins/page.mdx",
+                    "name": "index",
+                    "route": "/docs/built-ins",
+                  },
+                  {
+                    "__pagePath": "docs/built-ins/search/page.mdx",
+                    "name": "search",
+                    "route": "/docs/built-ins/search",
+                  },
+                  {
+                    "__pagePath": "docs/built-ins/steps/page.mdx",
+                    "name": "steps",
+                    "route": "/docs/built-ins/steps",
+                  },
+                  {
+                    "__pagePath": "docs/built-ins/tabs/page.mdx",
+                    "name": "tabs",
+                    "route": "/docs/built-ins/tabs",
+                  },
+                ],
+                "name": "built-ins",
+                "route": "/docs/built-ins",
+              },
+              {
+                "children": [
+                  {
                     "__metaPath": "docs/docs-theme/_meta.ts",
                   },
                   {
                     "__pagePath": "docs/docs-theme/api/page.mdx",
                     "name": "api",
                     "route": "/docs/docs-theme/api",
+                  },
+                  {
+                    "children": [
+                      {
+                        "__pagePath": "docs/docs-theme/built-ins/footer/page.mdx",
+                        "name": "footer",
+                        "route": "/docs/docs-theme/built-ins/footer",
+                      },
+                      {
+                        "__pagePath": "docs/docs-theme/built-ins/layout/page.mdx",
+                        "name": "layout",
+                        "route": "/docs/docs-theme/built-ins/layout",
+                      },
+                      {
+                        "__pagePath": "docs/docs-theme/built-ins/navbar/page.mdx",
+                        "name": "navbar",
+                        "route": "/docs/docs-theme/built-ins/navbar",
+                      },
+                      {
+                        "__pagePath": "docs/docs-theme/built-ins/not-found/page.mdx",
+                        "name": "not-found",
+                        "route": "/docs/docs-theme/built-ins/not-found",
+                      },
+                    ],
+                    "name": "built-ins",
+                    "route": "/docs/docs-theme/built-ins",
                   },
                   {
                     "__pagePath": "docs/docs-theme/page-configuration/page.mdx",
@@ -189,59 +339,6 @@ describe('generatePageMapFromFilepaths()', () => {
                     "name": "start",
                     "route": "/docs/docs-theme/start",
                   },
-                  {
-                    "children": [
-                      {
-                        "children": [
-                          {
-                            "__pagePath": "docs/docs-theme/theme-configuration/nextra-theme-docs/footer/page.mdx",
-                            "name": "footer",
-                            "route": "/docs/docs-theme/theme-configuration/nextra-theme-docs/footer",
-                          },
-                          {
-                            "__pagePath": "docs/docs-theme/theme-configuration/nextra-theme-docs/layout/page.mdx",
-                            "name": "layout",
-                            "route": "/docs/docs-theme/theme-configuration/nextra-theme-docs/layout",
-                          },
-                          {
-                            "__pagePath": "docs/docs-theme/theme-configuration/nextra-theme-docs/navbar/page.mdx",
-                            "name": "navbar",
-                            "route": "/docs/docs-theme/theme-configuration/nextra-theme-docs/navbar",
-                          },
-                          {
-                            "__pagePath": "docs/docs-theme/theme-configuration/nextra-theme-docs/not-found/page.mdx",
-                            "name": "not-found",
-                            "route": "/docs/docs-theme/theme-configuration/nextra-theme-docs/not-found",
-                          },
-                        ],
-                        "name": "nextra-theme-docs",
-                        "route": "/docs/docs-theme/theme-configuration/nextra-theme-docs",
-                      },
-                      {
-                        "children": [
-                          {
-                            "__pagePath": "docs/docs-theme/theme-configuration/nextra/banner/page.mdx",
-                            "name": "banner",
-                            "route": "/docs/docs-theme/theme-configuration/nextra/banner",
-                          },
-                          {
-                            "__pagePath": "docs/docs-theme/theme-configuration/nextra/head/page.mdx",
-                            "name": "head",
-                            "route": "/docs/docs-theme/theme-configuration/nextra/head",
-                          },
-                          {
-                            "__pagePath": "docs/docs-theme/theme-configuration/nextra/search/page.mdx",
-                            "name": "search",
-                            "route": "/docs/docs-theme/theme-configuration/nextra/search",
-                          },
-                        ],
-                        "name": "nextra",
-                        "route": "/docs/docs-theme/theme-configuration/nextra",
-                      },
-                    ],
-                    "name": "theme-configuration",
-                    "route": "/docs/docs-theme/theme-configuration",
-                  },
                 ],
                 "name": "docs-theme",
                 "route": "/docs/docs-theme",
@@ -250,114 +347,6 @@ describe('generatePageMapFromFilepaths()', () => {
                 "children": [
                   {
                     "__metaPath": "docs/guide/_meta.ts",
-                  },
-                  {
-                    "children": [
-                      {
-                        "__metaPath": "docs/guide/advanced/_meta.ts",
-                      },
-                      {
-                        "__pagePath": "docs/guide/advanced/customize-the-cascade-layers/page.mdx",
-                        "name": "customize-the-cascade-layers",
-                        "route": "/docs/guide/advanced/customize-the-cascade-layers",
-                      },
-                      {
-                        "__pagePath": "docs/guide/advanced/latex/page.mdx",
-                        "name": "latex",
-                        "route": "/docs/guide/advanced/latex",
-                      },
-                      {
-                        "__pagePath": "docs/guide/advanced/mermaid/page.mdx",
-                        "name": "mermaid",
-                        "route": "/docs/guide/advanced/mermaid",
-                      },
-                      {
-                        "__pagePath": "docs/guide/advanced/npm2yarn/page.mdx",
-                        "name": "npm2yarn",
-                        "route": "/docs/guide/advanced/npm2yarn",
-                      },
-                      {
-                        "__pagePath": "docs/guide/advanced/page.mdx",
-                        "name": "index",
-                        "route": "/docs/guide/advanced",
-                      },
-                      {
-                        "__pagePath": "docs/guide/advanced/playground/page.mdx",
-                        "name": "playground",
-                        "route": "/docs/guide/advanced/playground",
-                      },
-                      {
-                        "__pagePath": "docs/guide/advanced/remote/page.mdx",
-                        "name": "remote",
-                        "route": "/docs/guide/advanced/remote",
-                      },
-                      {
-                        "__pagePath": "docs/guide/advanced/table/page.mdx",
-                        "name": "table",
-                        "route": "/docs/guide/advanced/table",
-                      },
-                      {
-                        "__pagePath": "docs/guide/advanced/tailwind-css/page.mdx",
-                        "name": "tailwind-css",
-                        "route": "/docs/guide/advanced/tailwind-css",
-                      },
-                      {
-                        "__pagePath": "docs/guide/advanced/twoslash/page.mdx",
-                        "name": "twoslash",
-                        "route": "/docs/guide/advanced/twoslash",
-                      },
-                      {
-                        "__pagePath": "docs/guide/advanced/typescript/page.mdx",
-                        "name": "typescript",
-                        "route": "/docs/guide/advanced/typescript",
-                      },
-                    ],
-                    "name": "advanced",
-                    "route": "/docs/guide/advanced",
-                  },
-                  {
-                    "children": [
-                      {
-                        "__metaPath": "docs/guide/built-ins/_meta.ts",
-                      },
-                      {
-                        "__pagePath": "docs/guide/built-ins/bleed/page.mdx",
-                        "name": "bleed",
-                        "route": "/docs/guide/built-ins/bleed",
-                      },
-                      {
-                        "__pagePath": "docs/guide/built-ins/callout/page.mdx",
-                        "name": "callout",
-                        "route": "/docs/guide/built-ins/callout",
-                      },
-                      {
-                        "__pagePath": "docs/guide/built-ins/cards/page.mdx",
-                        "name": "cards",
-                        "route": "/docs/guide/built-ins/cards",
-                      },
-                      {
-                        "__pagePath": "docs/guide/built-ins/filetree/page.mdx",
-                        "name": "filetree",
-                        "route": "/docs/guide/built-ins/filetree",
-                      },
-                      {
-                        "__pagePath": "docs/guide/built-ins/page.mdx",
-                        "name": "index",
-                        "route": "/docs/guide/built-ins",
-                      },
-                      {
-                        "__pagePath": "docs/guide/built-ins/steps/page.mdx",
-                        "name": "steps",
-                        "route": "/docs/guide/built-ins/steps",
-                      },
-                      {
-                        "__pagePath": "docs/guide/built-ins/tabs/page.mdx",
-                        "name": "tabs",
-                        "route": "/docs/guide/built-ins/tabs",
-                      },
-                    ],
-                    "name": "built-ins",
-                    "route": "/docs/guide/built-ins",
                   },
                   {
                     "__pagePath": "docs/guide/custom-css/page.mdx",
@@ -462,6 +451,11 @@ describe('generatePageMapFromFilepaths()', () => {
             "__pagePath": "about/page.mdx",
             "name": "about",
             "route": "/about",
+          },
+          {
+            "__pagePath": "blog/page.mdx",
+            "name": "blog",
+            "route": "/blog",
           },
           {
             "__pagePath": "page.tsx",
