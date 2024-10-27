@@ -30,7 +30,7 @@
 import { Button } from '@headlessui/react'
 import type { ButtonProps } from '@headlessui/react'
 import cn from 'clsx'
-import type { ComponentProps, FC } from 'react'
+import type { FC } from 'react'
 
 const DEFAULT_ID = 'nextra-skip-nav'
 const DEFAULT_LABEL = 'Skip to Content'
@@ -57,7 +57,3 @@ export const SkipNavLink: FC = ({
     {children}
   </Button>
 )
-
-export const SkipNavContent: FC<Pick<ComponentProps<'div'>, 'id'>> = ({
-  id = DEFAULT_ID
-}) => <div id={id} />
