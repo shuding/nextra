@@ -77,9 +77,6 @@ importers:
       eslint-plugin-unicorn:
         specifier: 56.0.0
         version: 56.0.0(eslint@9.13.0)
-      pagefind:
-        specifier: ^1.1.1
-        version: 1.1.1
       prettier:
         specifier: 3.3.3
         version: 3.3.3
@@ -147,6 +144,9 @@ importers:
       autoprefixer:
         specifier: ^10.4.16
         version: 10.4.20(postcss@8.4.47)
+      pagefind:
+        specifier: ^1.1.1
+        version: 1.1.1
       postcss:
         specifier: ^8.4.33
         version: 8.4.47
@@ -171,6 +171,10 @@ importers:
       react-dom:
         specifier: 18.3.1
         version: 18.3.1(react@18.3.1)
+    devDependencies:
+      pagefind:
+        specifier: ^1.1.1
+        version: 1.1.1
 
   examples/docs:
     dependencies:
@@ -189,6 +193,10 @@ importers:
       react-dom:
         specifier: 18.3.1
         version: 18.3.1(react@18.3.1)
+    devDependencies:
+      pagefind:
+        specifier: ^1.1.1
+        version: 1.1.1
 
   examples/swr-site:
     dependencies:
@@ -220,6 +228,9 @@ importers:
       autoprefixer:
         specifier: ^10.4.16
         version: 10.4.20(postcss@8.4.47)
+      pagefind:
+        specifier: ^1.1.1
+        version: 1.1.1
       postcss:
         specifier: ^8.4.33
         version: 8.4.47
