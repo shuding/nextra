@@ -46,11 +46,15 @@ export function useMDXComponents(components?: Readonly<MDXComponents>) {
         typeof props.src === 'object' &&
         !('blurDataURL' in props.src)
       ) {
-        console.error(
+        console.warn(
           `[nextra] Failed to load blur image "${(props.src as any).src}" due missing "src.blurDataURL" value.
 This is Turbopack bug, which will not occurs on production (since Webpack is used for "next build" command).`
         )
-        return <img {...props} src={(props.src as any).src} />
+        props = {
+          ...props,
+          // @ts-expect-error
+          placeholder: 'empty'
+        }
       }
       return createElement(
         typeof props.src === 'object' ? Image : 'img',
