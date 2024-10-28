@@ -487,7 +487,7 @@ describe('normalize-page', () => {
     expect(flatDirectories[2].route).toBe('/foo')
   })
 
-  it.only('folder index page and folder should be merged', async () => {
+  it('folder index page and folder should be merged', async () => {
     const dir = path.join(
       __dirname,
       'fixture',
