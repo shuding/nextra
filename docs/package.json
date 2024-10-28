@@ -13,7 +13,7 @@
     "clsx": "^2.1.0",
     "fast-glob": "^3.3.2",
     "framer-motion": "^11.5.4",
-    "next": "^14.2.5",
+    "next": "^15.0.0-rc.1",
     "nextra": "workspace:*",
     "nextra-theme-docs": "workspace:*",
     "react": "18.3.1",

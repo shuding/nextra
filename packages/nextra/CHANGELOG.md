@@ -133,6 +133,13 @@
   Router, something may be broken, check
   https://github.com/shuding/nextra/tree/v4-v2/examples for the migration guide
 
+## 3.1.2
+
+### Patch Changes
+
+- 9c78588: fix(loader): Prevent overwriting of
+  `rehypePrettyCodeOptions.transformer`
+
 ## 3.1.1
 
 ### Patch Changes

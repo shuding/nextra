@@ -6,7 +6,6 @@
     {
       groupName: 'lint',
       matchPackageNames: [
-        '@next/eslint-plugin-next',
         '@typescript-eslint/eslint-plugin',
         '@typescript-eslint/parser',
         'eslint',
@@ -28,6 +27,10 @@
     {
       groupName: 'latex',
       matchPackageNames: ['remark-math', 'rehype-katex']
+    },
+    {
+      groupName: 'next',
+      matchPackageNames: ['next', '@next/eslint-plugin-next']
     }
   ],
   baseBranches: ['main']

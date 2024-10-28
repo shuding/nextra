@@ -38,7 +38,7 @@
     "@tailwindcss/nesting": "^0.0.0-insiders.565cd3e",
     "@tailwindcss/typography": "^0.5.9",
     "@types/react": "^18.2.23",
-    "next": "^14.2.5",
+    "next": "^15.0.0-rc.1",
     "nextra": "workspace:*",
     "postcss": "^8.4.33",
     "postcss-import": "^16.0.0",

@@ -150,13 +150,14 @@ export async function loader(
       outputFormat: 'program',
       format: 'detect',
       rehypePrettyCodeOptions: {
+        ...mdxOptions?.rehypePrettyCodeOptions,
         transformers: [
           transformerTwoslash({
             renderer: twoslashRenderer(),
             explicitTrigger: true
-          })
-        ],
-        ...mdxOptions?.rehypePrettyCodeOptions
+          }),
+          ...(mdxOptions?.rehypePrettyCodeOptions?.transformers || [])
+        ]
       }
     },
     readingTime: _readingTime,
