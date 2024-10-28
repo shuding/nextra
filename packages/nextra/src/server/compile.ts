@@ -57,6 +57,7 @@ type CompileMdxOptions = Pick<
   | 'readingTime'
   | 'latex'
   | 'codeHighlight'
+  | 'whiteListTagsStyling'
 > & {
   mdxOptions?: MdxOptions
   filePath?: string
@@ -76,7 +77,8 @@ export async function compileMdx(
     mdxOptions = {},
     filePath = '',
     useCachedCompiler,
-    isPageImport = true
+    isPageImport = true,
+    whiteListTagsStyling = []
   }: Partial<CompileMdxOptions> = {}
 ): Promise<{
   result: string
@@ -179,7 +181,7 @@ export async function compileMdx(
           ([
             remarkMdxDisableExplicitJsx,
             // Replace the <summary> and <details> with customized components
-            { whiteList: ['details', 'summary'] }
+            { whiteList: ['details', 'summary', ...whiteListTagsStyling] }
           ] satisfies Pluggable),
         remarkCustomHeadingId,
         remarkMdxTitle,
