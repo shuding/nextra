@@ -87,7 +87,7 @@ type NormalizedResult = {
   activeType?: string
   activeIndex: number
   activeThemeContext: PageTheme
-  activeMetadata: FrontMatter
+  activeMetadata?: FrontMatter
   activePath: Item[]
   directories: Item[]
   docsDirectories: DocsItem[]
@@ -314,7 +314,7 @@ export function normalizePages({
         docsDirectories.push(item)
     }
   }
-  const activeMetadata = activePath.at(-1)?.frontMatter!
+  const activeMetadata = activePath.at(-1)?.frontMatter
 
   const result = {
     activeType,
