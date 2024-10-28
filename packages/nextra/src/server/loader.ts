@@ -111,7 +111,9 @@ ${OFFICIAL_THEMES.includes(theme) && autoImportThemeStyle ? `import '${theme}/st
 
   if (currentPath.includes('/pages/_app.')) {
     if (currentPath.includes('/node_modules/')) {
-      throw new Error('Nextra v3 requires to have a custom App component (`pages/_app.jsx`). For additional information, check out https://nextjs.org/docs/pages/building-your-application/routing/custom-app#usage.')
+      throw new Error(
+        'Nextra v3 requires to have a custom App component (`pages/_app.jsx`). For additional information, check out https://nextjs.org/docs/pages/building-your-application/routing/custom-app#usage.'
+      )
     }
     // Relative path instead of a package name
     const themeConfigImport = themeConfig
