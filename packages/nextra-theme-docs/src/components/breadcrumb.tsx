@@ -16,9 +16,11 @@ export const Breadcrumb: FC<{
         const href = nextItem
           ? 'frontMatter' in item
             ? item.route
-            : item.children[0].route === nextItem.route
+            : // @ts-expect-error -- fixme
+              item.children[0].route === nextItem.route
               ? ''
-              : item.children[0].route
+              : // @ts-expect-error -- fixme
+                item.children[0].route
           : ''
 
         const ComponentToUse = href ? NextLink : 'span'

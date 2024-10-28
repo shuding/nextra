@@ -11,7 +11,7 @@ export const Separator: FC<{ children: ReactNode }> = ({ children }) => {
 }
 
 export default {
-  '--- hey': {
+  _: {
     title: <Separator>Getting Started</Separator>,
     type: 'separator'
   },
@@ -27,7 +27,7 @@ export default {
   arguments: '',
   mutation: '',
   pagination: '',
-  '--- my_new_separator': {
+  _2: {
     title: <Separator>Advanced</Separator>,
     type: 'separator'
   },
@@ -47,6 +47,5 @@ export default {
     href: 'https://github.com/shuding/nextra'
   },
   'wrap-toc-items': 'Wrap Table of Content Items',
-  'custom-header-ids': 'Custom Header IDs',
-  '404-500': '404/500 Custom Error Pages'
+  'custom-header-ids': 'Custom Header IDs'
 }

@@ -3,6 +3,7 @@
 exports[`normalize-page > en-US getting-started 1`] = `
 {
   "activeIndex": 1,
+  "activeMetadata": undefined,
   "activePath": [
     {
       "children": [
@@ -821,6 +822,9 @@ exports[`normalize-page > en-US getting-started 1`] = `
 exports[`normalize-page > en-US home 1`] = `
 {
   "activeIndex": 0,
+  "activeMetadata": {
+    "title": "React Hooks for Data Fetching",
+  },
   "activePath": [
     {
       "frontMatter": {
@@ -1512,6 +1516,7 @@ exports[`normalize-page > en-US home 1`] = `
 exports[`normalize-page > should keep \`activeThemeContext\`, \`activeType\` for hidden route 1`] = `
 {
   "activeIndex": 0,
+  "activeMetadata": undefined,
   "activePath": [],
   "activeThemeContext": {
     "breadcrumb": true,

@@ -46,6 +46,7 @@ export type Item = (MdxFile | FolderWithoutChildren) & {
   children: Item[]
   display?: Display
   theme?: PageTheme
+  frontMatter: FrontMatter
   isUnderCurrentDocsTree?: boolean
 }
 
@@ -86,6 +87,7 @@ type NormalizedResult = {
   activeType?: string
   activeIndex: number
   activeThemeContext: PageTheme
+  activeMetadata?: FrontMatter
   activePath: Item[]
   directories: Item[]
   docsDirectories: DocsItem[]
@@ -158,15 +160,14 @@ export function normalizePages({
 
     const title =
       extendedMeta.title ||
-      (type !== 'separator' &&
-        (currentItem.frontMatter?.sidebarTitle ||
-          currentItem.frontMatter?.title ||
-          currentItem.name))
+      currentItem.frontMatter?.sidebarTitle ||
+      currentItem.frontMatter?.title ||
+      (type === 'separator' ? '' : currentItem.name)
 
     const getItem = (): Item => ({
       ...currentItem,
       type,
-      ...(title && { title }),
+      title,
       ...(display && { display }),
       ...(normalizedChildren && { children: [] })
     })
@@ -290,6 +291,7 @@ export function normalizePages({
     if (type === 'doc' && display === 'children') {
       // Hide the directory itself and treat all its children as pages
       if (docsItem.children) {
+        // @ts-expect-error -- fixme
         directories.push(...docsItem.children)
         docsDirectories.push(...docsItem.children)
       }
@@ -312,10 +314,13 @@ export function normalizePages({
         docsDirectories.push(item)
     }
   }
+  const activeMetadata = activePath.at(-1)?.frontMatter
+
   const result = {
     activeType,
     activeIndex,
     activeThemeContext,
+    activeMetadata,
     activePath,
     directories,
     docsDirectories: docsDirectories.filter(

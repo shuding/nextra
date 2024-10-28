@@ -2,14 +2,8 @@ import cn from 'clsx'
 // eslint-disable-next-line no-restricted-imports -- since we don't need newWindow prop
 import NextLink from 'next/link'
 import { ArrowRightIcon } from 'nextra/icons'
-import type { Item } from 'nextra/normalize-pages'
 import type { FC } from 'react'
-import { useThemeConfig } from '../stores'
-
-interface NavLinkProps {
-  currentIndex: number
-  flatDocsDirectories: Item[]
-}
+import { useConfig, useThemeConfig } from '../stores'
 
 const classes = {
   link: cn(
@@ -21,14 +15,12 @@ const classes = {
   icon: cn('_inline _shrink-0')
 }
 
-export const Pagination: FC<NavLinkProps> = ({
-  flatDocsDirectories,
-  currentIndex
-}) => {
+export const Pagination: FC = () => {
+  const { flatDocsDirectories, activeIndex } = useConfig().normalizePagesResult
   const { navigation } = useThemeConfig()
 
-  let prev = navigation.prev && flatDocsDirectories[currentIndex - 1]
-  let next = navigation.next && flatDocsDirectories[currentIndex + 1]
+  let prev = navigation.prev && flatDocsDirectories[activeIndex - 1]
+  let next = navigation.next && flatDocsDirectories[activeIndex + 1]
 
   if (prev && !prev.isUnderCurrentDocsTree) prev = false
   if (next && !next.isUnderCurrentDocsTree) next = false
