@@ -1,5 +1,15 @@
 # nextra-theme-docs
 
+## 4.0.0-app-router.17
+
+### Patch Changes
+
+- 7a48610: export `setMenu`
+- 33568c1: add `normalizePagesResult.activeMetadata` to get value of front
+  matter or exported metadata from page
+- Updated dependencies [33568c1]
+  - nextra@4.0.0-app-router.17
+
 ## 4.0.0-app-router.16
 
 ### Minor Changes

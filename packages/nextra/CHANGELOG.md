@@ -1,5 +1,12 @@
 # nextra
 
+## 4.0.0-app-router.17
+
+### Patch Changes
+
+- 33568c1: add `normalizePagesResult.activeMetadata` to get value of front
+  matter or exported metadata from page
+
 ## 4.0.0-app-router.16
 
 ### Minor Changes
