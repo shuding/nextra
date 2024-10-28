@@ -1,5 +1,27 @@
 # nextra-theme-docs
 
+## 4.0.0-app-router.16
+
+### Minor Changes
+
+- ab21db7: - use ReactIcon for code blocks with `jsx`, `tsx` language
+  - add JsonIcon for `json` language
+  - parse language from filename if exist when `diff` language is specified
+  - use JavaScript icon for `cjs` and `mjs`
+  - use TypeScript icon for `cts` and `mts`
+
+### Patch Changes
+
+- 0540e6c: - add `disabled` prop for `<Folder>` component when `open` prop was
+  set (to disable click event and remove `cursor: pointer`)
+  - allow `<h5>` and `<h6>` tags be used with `<Steps>`
+  - fix Webpack module rebuild for pageMap when new files where added or removed
+    in `app` dir or `content` dir
+- Updated dependencies [ab21db7]
+- Updated dependencies [0540e6c]
+- Updated dependencies [5b47509]
+  - nextra@4.0.0-app-router.16
+
 ## 4.0.0-app-router.15
 
 ### Minor Changes
