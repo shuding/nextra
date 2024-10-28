@@ -25,7 +25,7 @@ export default {
   blog: {
     type: 'page',
     theme: {
-      typesetting: 'article',
+      typesetting: 'article'
     }
   },
   about: {
