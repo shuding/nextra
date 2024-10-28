@@ -46,8 +46,6 @@ const initGitRepo = (async () => {
   return {}
 })()
 
-let isAppFileFromNodeModules = false
-
 export async function loader(
   this: LoaderContext<LoaderOptions>,
   source: string
@@ -112,19 +110,17 @@ ${latex ? "import 'katex/dist/katex.min.css'" : ''}
 ${OFFICIAL_THEMES.includes(theme) && autoImportThemeStyle ? `import '${theme}/style.css'` : ''}`
 
   if (currentPath.includes('/pages/_app.')) {
-    isAppFileFromNodeModules = currentPath.includes('/node_modules/')
+    if (currentPath.includes('/node_modules/')) {
+      throw new Error('Nextra v3 requires to have a custom App component (`pages/_app.jsx`). For additional information, check out https://nextjs.org/docs/pages/building-your-application/routing/custom-app#usage.')
+    }
     // Relative path instead of a package name
     const themeConfigImport = themeConfig
       ? `import __themeConfig from '${slash(path.resolve(themeConfig))}'`
       : ''
-
-    const content = isAppFileFromNodeModules
-      ? 'export default function App({ Component, pageProps }) { return <Component {...pageProps} />}'
-      : [cssImports, source].join('\n')
-
     const appRawJs = `import __layout from '${layoutPath}'
 ${themeConfigImport}
-${content}
+${cssImports}
+${source}
 
 const __nextra_internal__ = globalThis[Symbol.for('__nextra_internal__')] ||= Object.create(null)
 __nextra_internal__.context ||= Object.create(null)
@@ -230,7 +226,6 @@ export default MDXLayout`
 
   const rawJs = `import { HOC_MDXWrapper } from 'nextra/setup-page'
 ${pageMap}
-${isAppFileFromNodeModules ? cssImports : ''}
 ${finalResult}
 
 export default HOC_MDXWrapper(
