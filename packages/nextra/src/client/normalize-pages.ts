@@ -291,6 +291,7 @@ export function normalizePages({
     if (type === 'doc' && display === 'children') {
       // Hide the directory itself and treat all its children as pages
       if (docsItem.children) {
+        // @ts-expect-error -- fixme
         directories.push(...docsItem.children)
         docsDirectories.push(...docsItem.children)
       }

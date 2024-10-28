@@ -12,15 +12,12 @@ export const ClientWrapper: MDXWrapper = ({
   metadata,
   title
 }) => {
-  const { normalizePagesResult } = useConfig()
-  const themeConfig = useThemeConfig()
   const {
     activeType,
     activeThemeContext: themeContext,
-    activePath,
-    flatDocsDirectories,
-    activeIndex
-  } = normalizePagesResult
+    activePath
+  } = useConfig().normalizePagesResult
+  const themeConfig = useThemeConfig()
 
   const date =
     themeContext.timestamp && themeConfig.lastUpdated && metadata.timestamp
@@ -65,12 +62,7 @@ export const ClientWrapper: MDXWrapper = ({
         ) : (
           <div className="_mt-16" />
         )}
-        {themeContext.pagination && activeType !== 'page' && (
-          <Pagination
-            flatDocsDirectories={flatDocsDirectories}
-            currentIndex={activeIndex}
-          />
-        )}
+        {themeContext.pagination && activeType !== 'page' && <Pagination />}
       </article>
     </>
   )
