@@ -1,5 +1,5 @@
 /* eslint-env node */
-import { join, sep } from 'node:path'
+import { sep } from 'node:path'
 import type { NextConfig } from 'next'
 import type { RuleSetRule } from 'webpack'
 import { fromZodError } from 'zod-validation-error'
