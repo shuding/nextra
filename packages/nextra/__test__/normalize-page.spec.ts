@@ -516,6 +516,23 @@ describe('normalize-page', () => {
       {
         name: 'themes',
         route: '/themes',
+        children: [
+          {
+            name: 'bar',
+            route: '/themes/bar',
+            frontMatter: { sidebarTitle: 'Bar' },
+            type: 'doc',
+            title: 'Bar',
+            isUnderCurrentDocsTree: true
+          }
+        ],
+        type: 'doc',
+        title: 'themes',
+        isUnderCurrentDocsTree: true
+      },
+      {
+        name: 'themes',
+        route: '/themes',
         frontMatter: { sidebarTitle: 'Themes' },
         type: 'doc',
         title: 'Themes',

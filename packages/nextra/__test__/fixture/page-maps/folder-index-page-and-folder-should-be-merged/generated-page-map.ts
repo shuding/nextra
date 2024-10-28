@@ -1,4 +1,14 @@
 export const pageMap = [{
+  name: "themes",
+  route: "/themes",
+  children: [{
+    name: "bar",
+    route: "/themes/bar",
+    frontMatter: {
+      "sidebarTitle": "Bar"
+    }
+  }]
+}, {
   name: "themes-test",
   route: "/themes-test",
   children: [{
