@@ -30,8 +30,7 @@ If you try to render table with literal HTML elements `<table>{:js}`,
 `<thead>{:js}`, `<tbody>{:js}`, `<tr>{:js}`, `<th>{:js}` and `<td>{:js}` – your
 table will be unstyled because
 [MDX](https://mdxjs.com/docs/using-mdx/#components) doesn't replace literal HTML
-elements with
-components provided by `useMDXComponents(){:js}`[^1].
+elements with components provided by `useMDXComponents(){:js}`[^1].
 
 ### Usage
 
@@ -82,9 +81,8 @@ components provided by `useMDXComponents(){:js}`[^1].
 ## Changing Default Behaviour
 
 If you want to use standard HTML elements for your tables but have them styled
-with components provided by
-`useMDXComponents(){:js}`[^1],
-you can do this by configuring Nextra.
+with components provided by `useMDXComponents(){:js}`[^1], you can do this by
+configuring Nextra.
 
 To achieve this, pass the `whiteListTagsStyling` option to the Nextra function,
 including an array of tags you want to replace.
