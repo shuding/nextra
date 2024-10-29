@@ -27,14 +27,9 @@ export async function getFilepaths({
     ],
     { cwd }
   )
-  const relativePaths = result
-    // sort filepaths alphabetically
-    .sort((a, b) => {
-      if (a.startsWith('index.')) {
-        return -1
-      }
-      return a.localeCompare(b)
-    })
+  // Sort filepaths alphabetically because there is different order on each
+  // fast-glob invocation
+  const relativePaths = result.sort((a, b) => a.localeCompare(b))
   return relativePaths
 }
 
