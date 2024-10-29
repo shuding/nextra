@@ -485,7 +485,6 @@ describe('generatePageMapFromFilepaths()', () => {
       expect(pagePaths).toMatchInlineSnapshot(`
         [
           "app/_meta.js",
-          "app/docs/[[...mdxPath]]/page.jsx",
           "content/_meta.js",
           "content/advanced/code-highlighting.mdx",
           "content/features/_meta.js",

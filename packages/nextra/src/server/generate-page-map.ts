@@ -6,22 +6,24 @@ import type { Folder, MdxFile } from '../types'
 type Params = {
   dir: string
   cwd: string
+  locale?: string
 }
 
 export async function getFilepaths({
-  dir: _dir,
-  cwd
+  dir,
+  cwd,
+  locale
 }: Params): Promise<string[]> {
-  if (!_dir) {
-    throw new Error('`dir` is required')
-  }
-  const dir = slash(path.relative(cwd, _dir))
+  const appDir = slash(path.relative(cwd, dir))
+  const contentDir = locale ? `content/${locale}` : 'content'
   const result = await fg(
     [
-      `${dir}/**/page.{js,jsx,jsx,tsx,md,mdx}`,
-      `${dir}/**/_meta.{js,jsx,ts,tsx}`,
-      'content/**/_meta.{js,jsx,ts,tsx}',
-      'content/**/*.{md,mdx}'
+      `${appDir}/**/page.{js,jsx,jsx,tsx,md,mdx}`,
+      `${appDir}/**/_meta.{js,jsx,ts,tsx}`,
+      `${contentDir}/**/_meta.{js,jsx,ts,tsx}`,
+      `${contentDir}/**/*.{md,mdx}`,
+      // Ignore dynamic routes
+      '!**/\\[*/*'
     ],
     { cwd }
   )
