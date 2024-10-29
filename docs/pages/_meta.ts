@@ -22,6 +22,12 @@ export default {
       }
     }
   },
+  blog: {
+    type: 'page',
+    theme: {
+      typesetting: 'article'
+    }
+  },
   about: {
     type: 'page',
     title: 'About',
