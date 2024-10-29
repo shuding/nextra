@@ -642,13 +642,7 @@ describe('generatePageMapFromFilepaths()', () => {
         .toMatchInlineSnapshot(`
           [
             {
-              "children": [
-                {
-                  "__metaPath": "app/_meta.js",
-                },
-              ],
-              "name": "app",
-              "route": "/app",
+              "__metaPath": "app/_meta.js",
             },
             {
               "children": [
