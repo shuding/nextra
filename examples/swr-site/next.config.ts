@@ -4,7 +4,7 @@ import nextra from 'nextra'
 const withNextra = nextra({
   defaultShowCopyCode: true,
   latex: true,
-  useContentDir: true
+  contentDirBasePath: '/'
 })
 
 const withBundleAnalyzer = bundleAnalyzer({

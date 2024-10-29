@@ -64,8 +64,15 @@ export const nextraConfigSchema = z.strictObject({
       rehypePrettyCodeOptions: z.custom<RehypePrettyCodeOptions>().optional()
     })
     .optional(),
-  useContentDir: z.boolean().optional(),
-  whiteListTagsStyling: z.array(z.string()).optional()
+  whiteListTagsStyling: z.array(z.string()).optional(),
+  contentDirBasePath: z
+    .string()
+    .startsWith('/')
+    .refine(
+      value => value.length === 1 || !value.endsWith('/'),
+      value => ({ message: `"${value}" must not end with "/"` })
+    )
+    .optional()
 })
 
 export const element = z.custom<ReactElement>(isValidElement, {

@@ -30,12 +30,10 @@ export default async function RootLayout({ children }) {
   const navbar = (
     <Navbar
       logo={
-        <>
-          <span className="_font-extrabold">Nextra</span>
-          <span className="_ms-2 max-md:_hidden _font-normal _text-gray-600">
-            The Next Docs Builder
-          </span>
-        </>
+        <div>
+          <b>Nextra</b>{' '}
+          <span style={{ opacity: '60%' }}>The Next Docs Builder</span>
+        </div>
       }
       // Next.js discord server
       chatLink="https://discord.gg/hEM84NMkRv"

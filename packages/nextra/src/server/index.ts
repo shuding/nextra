@@ -14,10 +14,10 @@ const DIRNAME = path.dirname(FILENAME)
 const LOADER_PATH = path.join(DIRNAME, '..', '..', 'loader.cjs')
 const SEP = path.sep === '/' ? '/' : '\\\\'
 const PAGE_MAP_PLACEHOLDER_RE = new RegExp(
-  'nextra/dist/server/page-map-placeholder'.replaceAll('/', SEP)
+  'nextra/dist/server/page-map-placeholder\\.js'.replaceAll('/', SEP)
 )
 const PAGE_MAP_RE = new RegExp(
-  'nextra/dist/(server/page-map|client/pages)'.replaceAll('/', SEP)
+  'nextra/dist/(server/page-map|client/pages)\\.js'.replaceAll('/', SEP)
 )
 
 const nextra: Nextra = nextraConfig => {
@@ -39,7 +39,7 @@ const nextra: Nextra = nextraConfig => {
   const pageMapPlaceholderLoader = {
     loader: LOADER_PATH,
     options: {
-      useContentDir: loaderOptions.useContentDir ?? false
+      contentDirBasePath: loaderOptions.contentDirBasePath ?? ''
     }
   }
 

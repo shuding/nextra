@@ -1,3 +1,1 @@
-export const metadata = {
-  asIndexPage: true
-}
+export const metadata = { asIndexPage: true }

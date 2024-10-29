@@ -33,8 +33,8 @@ const _pageMap = [{
 export const pageMap = normalizePageMap(_pageMap)
 
 export const RouteToFilepath = {
-  "themes": "themes.md",
   "themes-test": "themes-test.md",
   "themes-test/foo": "themes-test/foo.md",
+  "themes": "themes.md",
   "themes/bar": "themes/bar.md"
 }
