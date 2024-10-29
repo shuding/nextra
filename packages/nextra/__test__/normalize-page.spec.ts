@@ -513,45 +513,44 @@ describe('normalize-page', () => {
       route: '/themes'
     })
     expect(normalizedResult.docsDirectories).toEqual([
-        {
-          name: 'themes',
-          route: '/themes',
-          children: [
-            {
-              name: 'bar',
-              route: '/themes/bar',
-              frontMatter: { sidebarTitle: 'Bar' },
-              type: 'doc',
-              title: 'Bar',
-              isUnderCurrentDocsTree: true
-            }
-          ],
-          withIndexPage: true,
-          frontMatter: { sidebarTitle: 'Themes' },
-          type: 'doc',
-          title: 'Themes',
-          isUnderCurrentDocsTree: true
-        },
-        {
-          name: 'themes-test',
-          route: '/themes-test',
-          children: [
-            {
-              name: 'foo',
-              route: '/themes-test/foo',
-              frontMatter: { sidebarTitle: 'Foo' },
-              type: 'doc',
-              title: 'Foo',
-              isUnderCurrentDocsTree: true
-            }
-          ],
-          withIndexPage: true,
-          frontMatter: { sidebarTitle: 'Themes Test' },
-          type: 'doc',
-          title: 'Themes Test',
-          isUnderCurrentDocsTree: true
-        }
-      ]
-    )
+      {
+        name: 'themes',
+        route: '/themes',
+        children: [
+          {
+            name: 'bar',
+            route: '/themes/bar',
+            frontMatter: { sidebarTitle: 'Bar' },
+            type: 'doc',
+            title: 'Bar',
+            isUnderCurrentDocsTree: true
+          }
+        ],
+        withIndexPage: true,
+        frontMatter: { sidebarTitle: 'Themes' },
+        type: 'doc',
+        title: 'Themes',
+        isUnderCurrentDocsTree: true
+      },
+      {
+        name: 'themes-test',
+        route: '/themes-test',
+        children: [
+          {
+            name: 'foo',
+            route: '/themes-test/foo',
+            frontMatter: { sidebarTitle: 'Foo' },
+            type: 'doc',
+            title: 'Foo',
+            isUnderCurrentDocsTree: true
+          }
+        ],
+        withIndexPage: true,
+        frontMatter: { sidebarTitle: 'Themes Test' },
+        type: 'doc',
+        title: 'Themes Test',
+        isUnderCurrentDocsTree: true
+      }
+    ])
   })
 })

@@ -1,4 +1,7 @@
+import meta from "./_meta.ts";
 export const pageMap = [{
+  data: meta
+}, {
   name: "themes",
   route: "/themes",
   children: [{
