@@ -509,7 +509,7 @@ describe('generatePageMapFromFilepaths()', () => {
       `)
     })
 
-    it.only('should match page map', () => {
+    it('should match page map', () => {
       expect(generatePageMapFromFilepaths(pagePaths).pageMap)
         .toMatchInlineSnapshot(`
           [
@@ -641,6 +641,15 @@ describe('generatePageMapFromFilepaths()', () => {
       expect(generatePageMapFromFilepaths(pagePaths, 'docs').pageMap)
         .toMatchInlineSnapshot(`
           [
+            {
+              "children": [
+                {
+                  "__metaPath": "app/_meta.js",
+                },
+              ],
+              "name": "app",
+              "route": "/app",
+            },
             {
               "children": [
                 {
