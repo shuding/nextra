@@ -487,7 +487,8 @@ describe('normalize-page', () => {
     expect(flatDirectories[2].route).toBe('/foo')
   })
 
-  it('folder index page and folder should be merged', async () => {
+  // https://github.com/shuding/nextra/issues/3581
+  it("folder's index page and folder itself should be merged", async () => {
     const dir = path.join(
       __dirname,
       'fixture',
