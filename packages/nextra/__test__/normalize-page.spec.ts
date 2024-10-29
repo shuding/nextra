@@ -486,4 +486,72 @@ describe('normalize-page', () => {
     expect(flatDirectories[1].route).toBe('/docs/bar')
     expect(flatDirectories[2].route).toBe('/foo')
   })
+
+  // https://github.com/shuding/nextra/issues/3581
+  it("folder's index page and folder itself should be merged", async () => {
+    const dir = path.join(
+      __dirname,
+      'fixture',
+      'page-maps',
+      'folder-index-page-and-folder-should-be-merged'
+    )
+    vi.doMock('../src/server/file-system.ts', () => ({ PAGES_DIR: dir }))
+    vi.doMock('../src/server/constants.ts', async () => ({
+      ...(await vi.importActual('../src/server/constants.ts')),
+      CHUNKS_DIR: dir
+    }))
+    const { collectPageMap } = await import('../src/server/page-map.js')
+
+    const result = await collectPageMap({ dir })
+    await fs.writeFile(path.join(dir, 'generated-page-map.ts'), result)
+
+    const { pageMap } = await import(
+      './fixture/page-maps/folder-index-page-and-folder-should-be-merged/generated-page-map.js'
+    )
+
+    const normalizedResult = normalizePages({
+      list: pageMap,
+      route: '/themes'
+    })
+    expect(normalizedResult.docsDirectories).toEqual([
+      {
+        name: 'themes',
+        route: '/themes',
+        children: [
+          {
+            name: 'bar',
+            route: '/themes/bar',
+            frontMatter: { sidebarTitle: 'Bar' },
+            type: 'doc',
+            title: 'Bar',
+            isUnderCurrentDocsTree: true
+          }
+        ],
+        withIndexPage: true,
+        frontMatter: { sidebarTitle: 'Themes' },
+        type: 'doc',
+        title: 'Themes',
+        isUnderCurrentDocsTree: true
+      },
+      {
+        name: 'themes-test',
+        route: '/themes-test',
+        children: [
+          {
+            name: 'foo',
+            route: '/themes-test/foo',
+            frontMatter: { sidebarTitle: 'Foo' },
+            type: 'doc',
+            title: 'Foo',
+            isUnderCurrentDocsTree: true
+          }
+        ],
+        withIndexPage: true,
+        frontMatter: { sidebarTitle: 'Themes Test' },
+        type: 'doc',
+        title: 'Themes Test',
+        isUnderCurrentDocsTree: true
+      }
+    ])
+  })
 })
