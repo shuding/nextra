@@ -232,6 +232,19 @@
 - Updated dependencies [99f34d3]
   - nextra@4.0.0-app-router.0
 
+## 3.1.3
+
+### Patch Changes
+
+- 6e64b16: fix
+  `Error [ERR_PACKAGE_PATH_NOT_EXPORTED]: No "exports" main defined in /path/to/project/node_modules/nextra/package.json`
+  when using `next.config.ts`
+- d44c4bc: requires to have a custom App component (`pages/_app.jsx`)
+- Updated dependencies [6e64b16]
+- Updated dependencies [d44c4bc]
+- Updated dependencies [24f9806]
+  - nextra@3.1.3
+
 ## 3.1.2
 
 ### Patch Changes

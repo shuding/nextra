@@ -251,7 +251,7 @@ importers:
         version: 2.2.0(react-dom@18.3.1)(react@18.3.1)
       '@mdx-js/mdx':
         specifier: ^3.0.0
-        version: 3.1.0(acorn@8.13.0)
+        version: 3.1.0(acorn@8.14.0)
       '@mdx-js/react':
         specifier: ^3.0.0
         version: 3.1.0(@types/react@18.3.12)(react@18.3.1)
@@ -260,7 +260,7 @@ importers:
         version: 0.1.19
       '@shikijs/twoslash':
         specifier: ^1.0.0
-        version: 1.20.0(typescript@5.6.3)
+        version: 1.22.1(typescript@5.6.3)
       '@theguild/remark-mermaid':
         specifier: ^0.1.3
         version: 0.1.3(react@18.3.1)
@@ -311,7 +311,7 @@ importers:
         version: 7.0.1
       rehype-pretty-code:
         specifier: 0.14.0
-        version: 0.14.0(shiki@1.20.0)
+        version: 0.14.0(shiki@1.22.1)
       rehype-raw:
         specifier: ^7.0.0
         version: 7.0.0
@@ -332,7 +332,7 @@ importers:
         version: 3.0.2
       shiki:
         specifier: ^1.0.0
-        version: 1.20.0
+        version: 1.22.1
       slash:
         specifier: ^5.1.0
         version: 5.1.0
@@ -3881,7 +3881,7 @@ packages:
       read-yaml-file: 1.1.0
     dev: true
 
-  /@mdx-js/mdx@3.1.0(acorn@8.13.0):
+  /@mdx-js/mdx@3.1.0(acorn@8.14.0):
     resolution: {integrity: sha512-/QxEhPAvGwbQmy1Px8F899L5Uc2KZ6JtXwlCgJmjSTBedwOZkByYcBG4GceIGPXRDsmfxhHazuS+hlOShRLeDw==}
     dependencies:
       '@types/estree': 1.0.6
@@ -3896,7 +3896,7 @@ packages:
       hast-util-to-jsx-runtime: 2.3.2
       markdown-extensions: 2.0.0
       recma-build-jsx: 1.0.0
-      recma-jsx: 1.0.0(acorn@8.13.0)
+      recma-jsx: 1.0.0(acorn@8.14.0)
       recma-stringify: 1.0.0
       rehype-recma: 1.0.0
       remark-mdx: 3.1.0
@@ -4440,45 +4440,45 @@ packages:
     resolution: {integrity: sha512-zt6OdqaDoOnJ1ZYsCYGt9YmWzDXl4vQdKTyJev62gFhRGKdx7mcT54V9KIjg+d2wi9EXsPvAPKe7i7WjfVWB8g==}
     dev: true
 
-  /@shikijs/core@1.20.0:
-    resolution: {integrity: sha512-KlO3iE0THzSdYkzDFugt8SHe6FR3qNYTkmpbdW1d6xo8juQkMjybxAw/cBi2npL2eb2F4PbbnSs5Z9tDusfvyg==}
+  /@shikijs/core@1.22.1:
+    resolution: {integrity: sha512-bqAhT/Ri5ixV4oYsvJNH8UJjpjbINWlWyXY6tBTsP4OmD6XnFv43nRJ+lTdxd2rmG5pgam/x+zGR6kLRXrpEKA==}
     dependencies:
-      '@shikijs/engine-javascript': 1.20.0
-      '@shikijs/engine-oniguruma': 1.20.0
-      '@shikijs/types': 1.20.0
+      '@shikijs/engine-javascript': 1.22.1
+      '@shikijs/engine-oniguruma': 1.22.1
+      '@shikijs/types': 1.22.1
       '@shikijs/vscode-textmate': 9.3.0
       '@types/hast': 3.0.4
       hast-util-to-html: 9.0.3
     dev: false
 
-  /@shikijs/engine-javascript@1.20.0:
-    resolution: {integrity: sha512-ZUMo758uduM0Tfgzi/kd+0IKMbNdumCxxWjY36uf1DIs2Qyg9HIq3vA1Wfa/vc6HE7tHWFpANRi3mv7UzJ68MQ==}
+  /@shikijs/engine-javascript@1.22.1:
+    resolution: {integrity: sha512-540pyoy0LWe4jj2BVbgELwOFu1uFvRI7lg4hdsExrSXA9x7gqfzZ/Nnh4RfX86aDAgJ647gx4TCmRwACbnQSvw==}
     dependencies:
-      '@shikijs/types': 1.20.0
+      '@shikijs/types': 1.22.1
       '@shikijs/vscode-textmate': 9.3.0
       oniguruma-to-js: 0.4.3
     dev: false
 
-  /@shikijs/engine-oniguruma@1.20.0:
-    resolution: {integrity: sha512-MQ40WkVTZk7by33ces4PGK6XNFSo6PYvKTSAr2kTWdRNhFmOcnaX+1XzvFwB26eySXR7U74t91czZ1qJkEgxTA==}
+  /@shikijs/engine-oniguruma@1.22.1:
+    resolution: {integrity: sha512-L+1Vmd+a2kk8HtogUFymQS6BjUfJnzcWoUp1BUgxoDiklbKSMvrsMuLZGevTOP1m0rEjgnC5MsDmsr8lX1lC+Q==}
     dependencies:
-      '@shikijs/types': 1.20.0
+      '@shikijs/types': 1.22.1
       '@shikijs/vscode-textmate': 9.3.0
     dev: false
 
-  /@shikijs/twoslash@1.20.0(typescript@5.6.3):
-    resolution: {integrity: sha512-NGaZgluqyo/P8r35/y82lhGtHjQaDlFTpmRzl/T+aNMshatcOsTvMN9uVWSNy83di1VGTxhH4ruX0xUsOAgdtg==}
+  /@shikijs/twoslash@1.22.1(typescript@5.6.3):
+    resolution: {integrity: sha512-Gs3eRsq0P3wOWJkLRQEsf6fjBcCOVcBSt+xPPhgIWqrBkpUf/L65VaGHR8LRWX3L9yhoyvX9PE/vtMVRwe8sNg==}
     dependencies:
-      '@shikijs/core': 1.20.0
-      '@shikijs/types': 1.20.0
+      '@shikijs/core': 1.22.1
+      '@shikijs/types': 1.22.1
       twoslash: 0.2.12(typescript@5.6.3)
     transitivePeerDependencies:
       - supports-color
       - typescript
     dev: false
 
-  /@shikijs/types@1.20.0:
-    resolution: {integrity: sha512-y+EaDvU2K6/GaXOKXxJaGnr1XtmZMF7MfS0pSEDdxEq66gCtKsLwQvVwoQFdp7R7dLlNAro3ijEE19sMZ0pzqg==}
+  /@shikijs/types@1.22.1:
+    resolution: {integrity: sha512-+45f8mu/Hxqs6Kyhfm98Nld5n7Q7lwhjU8UtdQwrOPs7BnM4VAb929O3IQ2ce+4D7SlNFlZGd8CnKRSnwbQreQ==}
     dependencies:
       '@shikijs/vscode-textmate': 9.3.0
       '@types/hast': 3.0.4
@@ -5481,28 +5481,28 @@ packages:
     resolution: {integrity: sha512-NuHqBY1PB/D8xU6s/thBgOAiAP7HOYDQ32+BFZILJ8ivkUkAHQnWfn6WhL79Owj1qmUnoN/YPhktdIoucipkAQ==}
     dev: true
 
-  /acorn-import-assertions@1.8.0(acorn@8.13.0):
+  /acorn-import-assertions@1.8.0(acorn@8.14.0):
     resolution: {integrity: sha512-m7VZ3jwz4eK6A4Vtt8Ew1/mNbP24u0FhdyfA7fSvnJR6LMdfOYnmuIrrJAgrYfYJ10F/otaHTtrtrtmHdMNzEw==}
     peerDependencies:
       acorn: ^8
     dependencies:
-      acorn: 8.13.0
+      acorn: 8.14.0
     dev: true
 
-  /acorn-jsx@5.3.2(acorn@8.13.0):
+  /acorn-jsx@5.3.2(acorn@8.14.0):
     resolution: {integrity: sha512-rq9s+JNhf0IChjtDXxllJ7g41oZk5SlXtp0LHwyA5cejwn7vKmKp4pPri6YEePv2PU65sAsegbXtIinmDFDXgQ==}
     peerDependencies:
       acorn: ^6.0.0 || ^7.0.0 || ^8.0.0
     dependencies:
-      acorn: 8.13.0
+      acorn: 8.14.0
 
   /acorn-walk@8.2.0:
     resolution: {integrity: sha512-k+iyHEuPgSw6SbuDpGQM+06HQUa04DZ3o+F6CSzXMvvI5KMvnaEqXe+YVe555R9nn6GPt404fos4wcgpw12SDA==}
     engines: {node: '>=0.4.0'}
     dev: true
 
-  /acorn@8.13.0:
-    resolution: {integrity: sha512-8zSiw54Oxrdym50NlZ9sUusyO1Z1ZchgRLWRaK6c86XJFClyCgFKetdowBg5bKxyp/u+CDBJG4Mpp0m3HLZl9w==}
+  /acorn@8.14.0:
+    resolution: {integrity: sha512-cl669nCJTZBsL97OF4kUQm5g5hC2uihk0NxY3WENAC0TYdILVkAyHymAntgxGkl7K+t0cXIrH5siy5S4XkFycA==}
     engines: {node: '>=0.4.0'}
     hasBin: true
 
@@ -7020,7 +7020,7 @@ packages:
     resolution: {integrity: sha512-8Ja+rNJ0Lt56Pcf3TAmpBZjmx8ZcK5Ts4cAzIOjsjevg9oSXJnl6SUQ2EevU8tv3h6ZLWmoKL5H4fgWvdvfETw==}
     dependencies:
       '@types/estree-jsx': 1.0.5
-      acorn: 8.13.0
+      acorn: 8.14.0
       esast-util-from-estree: 2.0.0
       vfile-message: 4.0.2
     dev: false
@@ -7510,8 +7510,8 @@ packages:
     resolution: {integrity: sha512-upbkBJbckcCNBDBDXEbuhjbP68n+scUd3k/U2EkyM9nw+I/jPiL4cLF/Al06CF96wRltFda16sxDFrxsI1v0/g==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
     dependencies:
-      acorn: 8.13.0
-      acorn-jsx: 5.3.2(acorn@8.13.0)
+      acorn: 8.14.0
+      acorn-jsx: 5.3.2(acorn@8.14.0)
       eslint-visitor-keys: 4.1.0
     dev: true
 
@@ -7519,8 +7519,8 @@ packages:
     resolution: {integrity: sha512-oruZaFkjorTpF32kDSI5/75ViwGeZginGGy2NoOSg3Q9bnwlnmDm4HLnkl0RE3n+njDXR037aY1+x58Z/zFdwQ==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     dependencies:
-      acorn: 8.13.0
-      acorn-jsx: 5.3.2(acorn@8.13.0)
+      acorn: 8.14.0
+      acorn-jsx: 5.3.2(acorn@8.14.0)
       eslint-visitor-keys: 3.4.3
     dev: true
 
@@ -9487,8 +9487,8 @@ packages:
   /micromark-extension-mdxjs@3.0.0:
     resolution: {integrity: sha512-A873fJfhnJ2siZyUrJ31l34Uqwy4xIFmvPY1oj+Ean5PHcPBYzEsvqvWGaWcfEIr11O5Dlw3p2y0tZWpKHDejQ==}
     dependencies:
-      acorn: 8.13.0
-      acorn-jsx: 5.3.2(acorn@8.13.0)
+      acorn: 8.14.0
+      acorn-jsx: 5.3.2(acorn@8.14.0)
       micromark-extension-mdx-expression: 3.0.0
       micromark-extension-mdx-jsx: 3.0.1
       micromark-extension-mdx-md: 2.0.0
@@ -9738,7 +9738,7 @@ packages:
   /mlly@1.7.1:
     resolution: {integrity: sha512-rrVRZRELyQzrIUAVMHxP97kv+G786pHmOKzuFII8zDYahFBS7qnHh2AlYSl1GAHhaMPCz6/oHjVMcfFYgFYHgA==}
     dependencies:
-      acorn: 8.13.0
+      acorn: 8.14.0
       pathe: 1.1.2
       pkg-types: 1.2.0
       ufo: 1.5.4
@@ -10034,7 +10034,7 @@ packages:
   /oniguruma-to-js@0.4.3:
     resolution: {integrity: sha512-X0jWUcAlxORhOqqBREgPMgnshB7ZGYszBNspP+tS9hPD3l13CdaXcHbgImoHUHlrvGx/7AvFEkTRhAGYh+jzjQ==}
     dependencies:
-      regex: 4.3.2
+      regex: 4.3.3
     dev: false
 
   /opener@1.5.2:
@@ -10648,10 +10648,10 @@ packages:
       vfile: 6.0.3
     dev: false
 
-  /recma-jsx@1.0.0(acorn@8.13.0):
+  /recma-jsx@1.0.0(acorn@8.14.0):
     resolution: {integrity: sha512-5vwkv65qWwYxg+Atz95acp8DMu1JDSqdGkA2Of1j6rCreyFUE/gp15fC8MnGEuG1W68UKjM6x6+YTWIh7hZM/Q==}
     dependencies:
-      acorn-jsx: 5.3.2(acorn@8.13.0)
+      acorn-jsx: 5.3.2(acorn@8.14.0)
       estree-util-to-js: 2.0.0
       recma-parse: 1.0.0
       recma-stringify: 1.0.0
@@ -10719,8 +10719,8 @@ packages:
       '@babel/runtime': 7.26.0
     dev: true
 
-  /regex@4.3.2:
-    resolution: {integrity: sha512-kK/AA3A9K6q2js89+VMymcboLOlF5lZRCYJv3gzszXFHBr6kO6qLGzbm+UIugBEV8SMMKCTR59txoY6ctRHYVw==}
+  /regex@4.3.3:
+    resolution: {integrity: sha512-r/AadFO7owAq1QJVeZ/nq9jNS1vyZt+6t1p/E59B56Rn2GCya+gr1KSyOzNL/er+r+B7phv5jG2xU2Nz1YkmJg==}
     dev: false
 
   /regexp-ast-analysis@0.7.1:
@@ -10796,7 +10796,7 @@ packages:
       unified: 11.0.5
     dev: false
 
-  /rehype-pretty-code@0.14.0(shiki@1.20.0):
+  /rehype-pretty-code@0.14.0(shiki@1.22.1):
     resolution: {integrity: sha512-hBeKF/Wkkf3zyUS8lal9RCUuhypDWLQc+h9UrP9Pav25FUm/AQAVh4m5gdvJxh4Oz+U+xKvdsV01p1LdvsZTiQ==}
     engines: {node: '>=18'}
     peerDependencies:
@@ -10806,7 +10806,7 @@ packages:
       hast-util-to-string: 3.0.0
       parse-numeric-range: 1.3.0
       rehype-parse: 9.0.0
-      shiki: 1.20.0
+      shiki: 1.22.1
       unified: 11.0.5
       unist-util-visit: 5.0.0
     dev: false
@@ -11206,13 +11206,13 @@ packages:
     engines: {node: '>=8'}
     dev: true
 
-  /shiki@1.20.0:
-    resolution: {integrity: sha512-MZJJ1PCFsQB1Piq+25wiz0a75yUv8Q3/fzy7SzRx5ONdjdtGdyiKwYn8vb/FnK5kjS0voWGnPpjG16POauUR+g==}
+  /shiki@1.22.1:
+    resolution: {integrity: sha512-PbJ6XxrWLMwB2rm3qdjIHNm3zq4SfFnOx0B3rEoi4AN8AUngsdyZ1tRe5slMPtn6jQkbUURLNZPpLR7Do3k78g==}
     dependencies:
-      '@shikijs/core': 1.20.0
-      '@shikijs/engine-javascript': 1.20.0
-      '@shikijs/engine-oniguruma': 1.20.0
-      '@shikijs/types': 1.20.0
+      '@shikijs/core': 1.22.1
+      '@shikijs/engine-javascript': 1.22.1
+      '@shikijs/engine-oniguruma': 1.22.1
+      '@shikijs/types': 1.22.1
       '@shikijs/vscode-textmate': 9.3.0
       '@types/hast': 3.0.4
     dev: false
@@ -11673,7 +11673,7 @@ packages:
     hasBin: true
     dependencies:
       '@jridgewell/source-map': 0.3.2
-      acorn: 8.13.0
+      acorn: 8.14.0
       commander: 2.20.3
       source-map-support: 0.5.21
     dev: true
@@ -12464,7 +12464,7 @@ packages:
     hasBin: true
     dependencies:
       '@discoveryjs/json-ext': 0.5.7
-      acorn: 8.13.0
+      acorn: 8.14.0
       acorn-walk: 8.2.0
       commander: 7.2.0
       debounce: 1.2.1
@@ -12501,8 +12501,8 @@ packages:
       '@webassemblyjs/ast': 1.11.1
       '@webassemblyjs/wasm-edit': 1.11.1
       '@webassemblyjs/wasm-parser': 1.11.1
-      acorn: 8.13.0
-      acorn-import-assertions: 1.8.0(acorn@8.13.0)
+      acorn: 8.14.0
+      acorn-import-assertions: 1.8.0(acorn@8.14.0)
       browserslist: 4.24.2
       chrome-trace-event: 1.0.3
       enhanced-resolve: 5.10.0
