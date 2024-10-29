@@ -18,8 +18,6 @@ export const MARKDOWN_EXTENSIONS = ['md', 'mdx'] as const
 
 export const EXTERNAL_URL_RE = /^https?:\/\//
 
-export const DEFAULT_LOCALES = ['']
-
 export const DEFAULT_PROPERTY_PROPS = {
   type: 'Property',
   kind: 'init',
