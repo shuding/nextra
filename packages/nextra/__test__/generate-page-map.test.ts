@@ -782,7 +782,7 @@ describe('generatePageMapFromFilepaths()', () => {
     })
   })
 
-  describe.only('should work for i18n example', async () => {
+  describe('should work for i18n example', async () => {
     const cwd = path.join(CWD, '..', '..', 'examples', 'swr-site')
     const { appDir } = findPagesDir(cwd)
     const filePaths = await getFilepaths({ dir: appDir!, cwd, locale: 'en' })
