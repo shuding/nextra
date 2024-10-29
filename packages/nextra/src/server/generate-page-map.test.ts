@@ -652,128 +652,134 @@ describe('generatePageMapFromFilepaths()', () => {
     })
 
     it('should match page map with base path', () => {
-      expect(generatePageMapFromFilepaths(pagePaths, '/docs').pageMap)
+      expect(generatePageMapFromFilepaths(pagePaths, 'docs/').pageMap)
         .toMatchInlineSnapshot(`
           [
             {
-              "__metaPath": "_meta.js",
-            },
-            {
               "children": [
                 {
-                  "__metaPath": "features/_meta.js",
+                  "__metaPath": undefined,
                 },
                 {
-                  "__pagePath": "features/i18n.mdx",
-                  "name": "i18n",
-                  "route": "/features/i18n",
+                  "children": [
+                    {
+                      "__metaPath": undefined,
+                    },
+                    {
+                      "__pagePath": undefined,
+                      "name": "i18n",
+                      "route": "/docs/features/i18n",
+                    },
+                    {
+                      "__pagePath": undefined,
+                      "name": "image",
+                      "route": "/docs/features/image",
+                    },
+                    {
+                      "__pagePath": undefined,
+                      "name": "latex",
+                      "route": "/docs/features/latex",
+                    },
+                    {
+                      "__pagePath": undefined,
+                      "name": "mdx",
+                      "route": "/docs/features/mdx",
+                    },
+                    {
+                      "__pagePath": undefined,
+                      "name": "ssg",
+                      "route": "/docs/features/ssg",
+                    },
+                    {
+                      "__pagePath": undefined,
+                      "name": "themes",
+                      "route": "/docs/features/themes",
+                    },
+                  ],
+                  "name": "features",
+                  "route": "/docs/features",
                 },
                 {
-                  "__pagePath": "features/image.mdx",
-                  "name": "image",
-                  "route": "/features/image",
-                },
-                {
-                  "__pagePath": "features/latex.mdx",
-                  "name": "latex",
-                  "route": "/features/latex",
-                },
-                {
-                  "__pagePath": "features/mdx.mdx",
-                  "name": "mdx",
-                  "route": "/features/mdx",
-                },
-                {
-                  "__pagePath": "features/ssg.mdx",
-                  "name": "ssg",
-                  "route": "/features/ssg",
-                },
-                {
-                  "__pagePath": "features/themes.mdx",
+                  "children": [
+                    {
+                      "__metaPath": undefined,
+                    },
+                    {
+                      "children": [
+                        {
+                          "__metaPath": undefined,
+                        },
+                        {
+                          "__pagePath": undefined,
+                          "name": "index",
+                          "route": "/docs/themes/blog",
+                        },
+                      ],
+                      "name": "blog",
+                      "route": "/docs/themes/blog",
+                    },
+                    {
+                      "children": [
+                        {
+                          "__metaPath": undefined,
+                        },
+                        {
+                          "__pagePath": undefined,
+                          "name": "bleed",
+                          "route": "/docs/themes/docs/bleed",
+                        },
+                        {
+                          "__pagePath": undefined,
+                          "name": "callout",
+                          "route": "/docs/themes/docs/callout",
+                        },
+                        {
+                          "__pagePath": undefined,
+                          "name": "configuration",
+                          "route": "/docs/themes/docs/configuration",
+                        },
+                        {
+                          "__pagePath": undefined,
+                          "name": "index",
+                          "route": "/docs/themes/docs",
+                        },
+                        {
+                          "__pagePath": undefined,
+                          "name": "tabs",
+                          "route": "/docs/themes/docs/tabs",
+                        },
+                      ],
+                      "name": "docs",
+                      "route": "/docs/themes/docs",
+                    },
+                  ],
                   "name": "themes",
-                  "route": "/features/themes",
-                },
-              ],
-              "name": "features",
-              "route": "/features",
-            },
-            {
-              "children": [
-                {
-                  "__metaPath": "themes/_meta.js",
+                  "route": "/docs/themes",
                 },
                 {
                   "children": [
                     {
-                      "__metaPath": "themes/blog/_meta.js",
-                    },
-                    {
-                      "__pagePath": "themes/blog/index.mdx",
-                      "name": "index",
-                      "route": "/themes/blog",
+                      "__pagePath": undefined,
+                      "name": "code-highlighting",
+                      "route": "/docs/advanced/code-highlighting",
                     },
                   ],
-                  "name": "blog",
-                  "route": "/themes/blog",
+                  "name": "advanced",
+                  "route": "/docs/advanced",
                 },
                 {
-                  "children": [
-                    {
-                      "__metaPath": "themes/docs/_meta.js",
-                    },
-                    {
-                      "__pagePath": "themes/docs/bleed.mdx",
-                      "name": "bleed",
-                      "route": "/themes/docs/bleed",
-                    },
-                    {
-                      "__pagePath": "themes/docs/callout.mdx",
-                      "name": "callout",
-                      "route": "/themes/docs/callout",
-                    },
-                    {
-                      "__pagePath": "themes/docs/configuration.mdx",
-                      "name": "configuration",
-                      "route": "/themes/docs/configuration",
-                    },
-                    {
-                      "__pagePath": "themes/docs/index.mdx",
-                      "name": "index",
-                      "route": "/themes/docs",
-                    },
-                    {
-                      "__pagePath": "themes/docs/tabs.mdx",
-                      "name": "tabs",
-                      "route": "/themes/docs/tabs",
-                    },
-                  ],
-                  "name": "docs",
-                  "route": "/themes/docs",
+                  "__pagePath": undefined,
+                  "name": "get-started",
+                  "route": "/docs/get-started",
                 },
-              ],
-              "name": "themes",
-              "route": "/themes",
-            },
-            {
-              "children": [
                 {
-                  "__pagePath": "advanced/code-highlighting.mdx",
-                  "name": "code-highlighting",
-                  "route": "/advanced/code-highlighting",
+                  "__pagePath": undefined,
+                  "name": "",
+                  "route": "/docs/",
                 },
               ],
-              "name": "advanced",
-              "route": "/advanced",
-            },
-            {
-              "__pagePath": "get-started.mdx",
-              "name": "get-started",
-              "route": "/get-started",
-            },
-            {
-              "__pagePath": "index.mdx",
-              "name": "index",
-              "route": "/",
+              "name": "docs",
+              "route": "/docs",
             },
           ]
         `)
