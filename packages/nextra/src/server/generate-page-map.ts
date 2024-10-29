@@ -25,7 +25,10 @@ export async function getFilepaths({
     ],
     { cwd }
   )
-  const relativePaths = result.map(r => slash(path.relative(dir, r)))
+  const relativePaths = result
+    .map(r => slash(path.relative(dir, r)))
+    // sort filepaths alphabetically
+    .sort((a, b) => a.localeCompare(b))
   return relativePaths
 }
 

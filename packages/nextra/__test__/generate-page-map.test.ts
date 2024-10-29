@@ -3,20 +3,14 @@ import { findPagesDir } from 'next/dist/lib/find-pages-dir.js'
 import {
   generatePageMapFromFilepaths,
   getFilepaths
-} from './generate-page-map.js'
+} from '../src/server/generate-page-map.js'
 
 describe('generatePageMapFromFilepaths()', () => {
   it('should work for blog example', async () => {
     const cwd = path.join(process.cwd(), '..', '..', 'examples', 'blog')
     const { appDir } = findPagesDir(cwd)
 
-    const pagePaths = (
-      await getFilepaths({
-        dir: appDir!,
-        cwd,
-        isAppDir: true
-      })
-    ).toSorted((a, b) => a.localeCompare(b))
+    const pagePaths = await getFilepaths({ dir: appDir!, cwd, isAppDir: true })
     expect(pagePaths).toMatchInlineSnapshot(`
       [
         "page.mdx",
@@ -97,13 +91,7 @@ describe('generatePageMapFromFilepaths()', () => {
     const cwd = path.join(process.cwd(), '..', '..', 'docs')
     const { appDir } = findPagesDir(cwd)
 
-    const pagePaths = (
-      await getFilepaths({
-        dir: appDir!,
-        cwd,
-        isAppDir: true
-      })
-    ).toSorted((a, b) => a.localeCompare(b))
+    const pagePaths = await getFilepaths({ dir: appDir!, cwd, isAppDir: true })
     expect(pagePaths).toMatchInlineSnapshot(`
       [
         "_meta.ts",
@@ -490,12 +478,10 @@ describe('generatePageMapFromFilepaths()', () => {
 
   describe('should work for docs example', async () => {
     const cwd = path.join(process.cwd(), '..', '..', 'examples', 'docs')
-    const pagePaths = (
-      await getFilepaths({
-        dir: path.join(cwd, 'content'),
-        cwd
-      })
-    ).toSorted((a, b) => a.localeCompare(b))
+    const pagePaths = await getFilepaths({
+      dir: path.join(cwd, 'content'),
+      cwd
+    })
     it('should match filepaths', () => {
       expect(pagePaths).toMatchInlineSnapshot(`
       [

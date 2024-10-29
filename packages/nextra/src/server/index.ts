@@ -1,14 +1,12 @@
-;
 /* eslint-env node */
-import path from 'node:path';
-import { fileURLToPath } from 'node:url';
-import type { RuleSetRule } from 'webpack';
-import { fromZodError } from 'zod-validation-error';
-import type { Nextra } from '../types';
-import { MARKDOWN_EXTENSION_RE, MARKDOWN_EXTENSIONS } from './constants.js';
-import { nextraConfigSchema } from './schemas.js';
-import { logger } from './utils.js';
-
+import path from 'node:path'
+import { fileURLToPath } from 'node:url'
+import type { RuleSetRule } from 'webpack'
+import { fromZodError } from 'zod-validation-error'
+import type { Nextra } from '../types'
+import { MARKDOWN_EXTENSION_RE, MARKDOWN_EXTENSIONS } from './constants.js'
+import { nextraConfigSchema } from './schemas.js'
+import { logger } from './utils.js'
 
 const DEFAULT_EXTENSIONS = ['js', 'jsx', 'ts', 'tsx']
 const FILENAME = fileURLToPath(import.meta.url)
