@@ -18,10 +18,15 @@ export async function getFilepaths({
   const contentDir = locale ? `content/${locale}` : 'content'
   const result = await fg(
     [
-      `${appDir}/**/page.{js,jsx,jsx,tsx,md,mdx}`,
-      `${appDir}/**/_meta.{js,jsx,ts,tsx}`,
-      `${contentDir}/**/_meta.{js,jsx,ts,tsx}`,
-      `${contentDir}/**/*.{md,mdx}`,
+      // appDir is empty string on tests
+      ...(appDir
+        ? [
+            `${appDir}/**/page.{js,jsx,jsx,tsx,md,mdx}`,
+            `${appDir}/**/_meta.{js,jsx,ts,tsx}`,
+            `${contentDir}/**/_meta.{js,jsx,ts,tsx}`,
+            `${contentDir}/**/*.{md,mdx}`
+          ]
+        : ['**/_meta.{js,jsx,ts,tsx}', '**/*.{md,mdx}']),
       // Ignore dynamic routes
       '!**/\\[*/*'
     ],
