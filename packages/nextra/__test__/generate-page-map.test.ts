@@ -484,29 +484,29 @@ describe('generatePageMapFromFilepaths()', () => {
     })
     it('should match filepaths', () => {
       expect(pagePaths).toMatchInlineSnapshot(`
-      [
-        "_meta.js",
-        "advanced/code-highlighting.mdx",
-        "features/_meta.js",
-        "features/i18n.mdx",
-        "features/image.mdx",
-        "features/latex.mdx",
-        "features/mdx.mdx",
-        "features/ssg.mdx",
-        "features/themes.mdx",
-        "get-started.mdx",
-        "index.mdx",
-        "themes/_meta.js",
-        "themes/blog/_meta.js",
-        "themes/blog/index.mdx",
-        "themes/docs/_meta.js",
-        "themes/docs/bleed.mdx",
-        "themes/docs/callout.mdx",
-        "themes/docs/configuration.mdx",
-        "themes/docs/index.mdx",
-        "themes/docs/tabs.mdx",
-      ]
-    `)
+        [
+          "index.mdx",
+          "_meta.js",
+          "advanced/code-highlighting.mdx",
+          "features/_meta.js",
+          "features/i18n.mdx",
+          "features/image.mdx",
+          "features/latex.mdx",
+          "features/mdx.mdx",
+          "features/ssg.mdx",
+          "features/themes.mdx",
+          "get-started.mdx",
+          "themes/_meta.js",
+          "themes/blog/_meta.js",
+          "themes/blog/index.mdx",
+          "themes/docs/_meta.js",
+          "themes/docs/bleed.mdx",
+          "themes/docs/callout.mdx",
+          "themes/docs/configuration.mdx",
+          "themes/docs/index.mdx",
+          "themes/docs/tabs.mdx",
+        ]
+      `)
     })
 
     it('should match page map', () => {

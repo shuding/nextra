@@ -28,7 +28,12 @@ export async function getFilepaths({
   const relativePaths = result
     .map(r => slash(path.relative(dir, r)))
     // sort filepaths alphabetically
-    .sort((a, b) => a.localeCompare(b))
+    .sort((a, b) => {
+      if (a.startsWith('index.')) {
+        return -1
+      }
+      return a.localeCompare(b)
+    })
   return relativePaths
 }
 
@@ -38,13 +43,7 @@ export function generatePageMapFromFilepaths(
 ): any {
   const mdxPages: Record<string, string> = Object.create(null)
   const metaFiles: Record<string, string> = Object.create(null)
-  const sortedPaths = filepaths.toSorted((a, b) => {
-    if (a.startsWith('index.')) {
-      return -1
-    }
-    return a.localeCompare(b)
-  })
-  for (const r of sortedPaths) {
+  for (const r of filepaths) {
     const pathInfo = path.parse(r)
 
     if (pathInfo.name === 'page') {
