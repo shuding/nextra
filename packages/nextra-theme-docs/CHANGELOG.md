@@ -1,5 +1,16 @@
 # nextra-theme-docs
 
+## 3.2.0
+
+### Minor Changes
+
+- d755012: feat(nextra-theme-docs): add new theme config option
+  `color.lightness`
+
+### Patch Changes
+
+- nextra@3.2.0
+
 ## 3.1.3
 
 ### Patch Changes
