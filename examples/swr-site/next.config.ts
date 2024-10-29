@@ -54,7 +54,7 @@ export default withBundleAnalyzer(
       defaultLocale: 'en'
     }, // basePath: "/some-base-path",
     distDir: './.next', // Nextra supports custom `nextConfig.distDir`
-    redirects: () => [
+    redirects: async () => [
       // {
       //   source: "/docs.([a-zA-Z-]+)",
       //   destination: "/docs/getting-started",
