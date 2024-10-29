@@ -1,4 +1,4 @@
-import { Hue, Saturation } from '@components/_slider'
+import { Hue, Lightness, Saturation } from '@components/_slider'
 import { Screenshot } from 'components/screenshot'
 import { Callout } from 'nextra/components'
 import logoImage from 'public/assets/docs/logo.png'
@@ -146,25 +146,48 @@ Customize the theme behavior of the website.
 
 ### Theme Color
 
-You can adjust the theme color of the website by setting primary hue and
-saturation values for light and dark themes.
+You can adjust the theme color of the website by setting primary hue, saturation
+and lightness (HSL) values for light and dark themes.
 
 <Table>
 
-|                       |                                             |                                           |
-| --------------------- | ------------------------------------------- | ----------------------------------------- |
-| color.hue             | `number \| { dark: number; light: number }` | The hue of the primary theme color        |
-| color.saturation      | `number \| { dark: number; light: number }` | The saturation of the primary theme color |
-| backgroundColor.dark  | `string` in format `RRR,GGG,BBB`            | Background color for light theme          |
-| backgroundColor.light | `string` in format `RRR,GGG,BBB`            | Background color for dark theme           |
+|                       |                                             |                                                     |
+| --------------------- | ------------------------------------------- | --------------------------------------------------- |
+| color.hue             | `number \| { dark: number; light: number }` | The hue of the primary theme color (0 - 360)        |
+| color.saturation      | `number \| { dark: number; light: number }` | The saturation of the primary theme color (0 - 100) |
+| color.lightness       | `number \| { dark: number; light: number }` | The lightness of the primary theme color (0 - 100)  |
+| backgroundColor.dark  | `string` in format `RRR,GGG,BBB`            | Background color for light theme                    |
+| backgroundColor.light | `string` in format `RRR,GGG,BBB`            | Background color for dark theme                     |
 
 </Table>
 
 Try it out for this website:
 
-| Hue     | Saturation     |
-| ------- | -------------- |
-| <Hue /> | <Saturation /> |
+| Hue (H) | Saturation (S) | Lightness (L) |
+| ------- | -------------- | ------------- |
+| <Hue /> | <Saturation /> | <Lightness/>  |
+
+<Callout>
+
+You can adjust the lightness independently for dark or light mode to increase
+legibility. For example, to have a neutral primary color you can set the primary
+colour to be white `HSL(0, 0%, 100%)` on dark theme and gray `HSL(0, 0%, 50%)`
+for light theme.
+
+```jsx filename="theme.config.jsx"
+export default {
+  color: {
+    hue: 0,
+    saturation: 0,
+    lightness: {
+      dark: 100,
+      light: 50
+    }
+  }
+}
+```
+
+</Callout>
 
 ## Navbar
 

@@ -42,6 +42,10 @@ export const DEFAULT_THEME: DocsThemeConfig = {
       dark: 204,
       light: 212
     },
+    lightness: {
+      dark: 55,
+      light: 45
+    },
     saturation: 100
   },
   darkMode: true,

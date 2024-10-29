@@ -15,13 +15,17 @@ export function Head(): ReactElement {
     typeof themeConfig.head === 'function'
       ? themeConfig.head({})
       : themeConfig.head
-  const { hue, saturation } = themeConfig.color
+  const { hue, saturation, lightness } = themeConfig.color
   const { dark: darkHue, light: lightHue } =
     typeof hue === 'number' ? { dark: hue, light: hue } : hue
   const { dark: darkSaturation, light: lightSaturation } =
     typeof saturation === 'number'
       ? { dark: saturation, light: saturation }
       : saturation
+  const { dark: darkLightness, light: lightLightness } =
+    typeof lightness === 'number'
+      ? { dark: lightness, light: lightness }
+      : lightness
 
   const bgColor = themeConfig.backgroundColor
 
@@ -56,7 +60,7 @@ export function Head(): ReactElement {
         name="viewport"
         content="width=device-width, initial-scale=1.0, viewport-fit=cover"
       />
-      <style>{`:root{--nextra-primary-hue:${lightHue}deg;--nextra-primary-saturation:${lightSaturation}%;--nextra-navbar-height:64px;--nextra-menu-height:3.75rem;--nextra-banner-height:2.5rem;--nextra-bg:${bgColor.light};}.dark{--nextra-primary-hue:${darkHue}deg;--nextra-primary-saturation:${darkSaturation}%;--nextra-bg:${bgColor.dark};}`}</style>
+      <style>{`:root{--nextra-primary-hue:${lightHue}deg;--nextra-primary-saturation:${lightSaturation}%;--nextra-primary-lightness:${lightLightness}%;--nextra-navbar-height:64px;--nextra-menu-height:3.75rem;--nextra-banner-height:2.5rem;--nextra-bg:${bgColor.light};}.dark{--nextra-primary-hue:${darkHue}deg;--nextra-primary-saturation:${darkSaturation}%;--nextra-primary-lightness:${darkLightness}%;--nextra-bg:${bgColor.dark};}`}</style>
       {head}
     </NextHead>
   )

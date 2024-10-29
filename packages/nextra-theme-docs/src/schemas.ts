@@ -98,6 +98,12 @@ export const themeSchema = /* @__PURE__ */ (() =>
           dark: z.number(),
           light: z.number()
         })
+      ),
+      lightness: z.number().or(
+        z.strictObject({
+          dark: z.number(),
+          light: z.number()
+        })
       )
     }),
     project: z.strictObject({
