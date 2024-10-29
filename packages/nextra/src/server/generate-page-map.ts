@@ -42,11 +42,16 @@ export function generatePageMapFromFilepaths(
   filepaths: string[],
   basePath = ''
 ): any {
-  const mdxPages: Record<string, string> = Object.create(null)
+  let mdxPages: Record<string, string> = Object.create(null)
   const metaFiles: Record<string, string> = Object.create(null)
   for (const r of filepaths) {
     let { name, dir } = path.parse(r)
-    dir = dir.replace(/^(content|app)(\/|$)/, '')
+    if (dir.startsWith('content')) {
+      const filePath = dir.replace(/^content(\/|$)/, '')
+      dir = [basePath, filePath].filter(Boolean).join('/')
+    } else {
+      dir = dir.replace(/^app(\/|$)/, '')
+    }
     if (name === 'page') {
       mdxPages[dir.replace(/\(.*\)\//, '')] = r
     } else if (name === '_meta') {
@@ -60,11 +65,10 @@ export function generatePageMapFromFilepaths(
   const obj = Object.create(null)
 
   for (const path of Object.keys(metaFiles)) {
-    const resultKey = [basePath, path].filter(Boolean).join('/')
-    resultKey.split('/').reduce((r, e) => (r[e] ||= {}), obj)
+    path.split('/').reduce((r, e) => (r[e] ||= {}), obj)
   }
   for (const path of Object.keys(mdxPages)) {
-    const resultKey = [basePath, path, 'index'].filter(Boolean).join('/')
+    const resultKey = [path, 'index'].filter(Boolean).join('/')
     resultKey.split('/').reduce((r, e) => (r[e] ||= {}), obj)
   }
 
@@ -75,10 +79,7 @@ export function generatePageMapFromFilepaths(
   ) {
     for (const [name, value] of Object.entries(obj)) {
       const path = `${prefix}/${name}`
-      const routeKey = path
-        .replace(`/${basePath}/`, '')
-        .replace(/(\/|^)index$/, '')
-        .replace(/^\//, '')
+      const routeKey = path.replace(/(\/|^)index$/, '').replace(/^\//, '')
       if (name === '_meta') {
         const __metaPath = metaFiles[routeKey]
         if (!__metaPath) {
@@ -114,6 +115,15 @@ export function generatePageMapFromFilepaths(
   }
 
   const pageMap = getPageMap(obj, [])
+
+  if (basePath) {
+    mdxPages = Object.fromEntries(
+      Object.entries(mdxPages).map(([key, value]) => [
+        key.replace(basePath, '').replace(/^\//, ''),
+        value.replace('content/', '')
+      ])
+    )
+  }
 
   return { pageMap, mdxPages }
 }
