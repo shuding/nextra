@@ -485,6 +485,8 @@ describe('generatePageMapFromFilepaths()', () => {
     it('should match filepaths', () => {
       expect(pagePaths).toMatchInlineSnapshot(`
         [
+          "_meta.js",
+          "docs/[[...mdxPath]]/page.jsx",
           "index.mdx",
           "_meta.js",
           "advanced/code-highlighting.mdx",
@@ -611,6 +613,16 @@ describe('generatePageMapFromFilepaths()', () => {
               ],
               "name": "themes",
               "route": "/themes",
+            },
+            {
+              "children": [
+                {
+                  "name": "[[...mdxPath]]",
+                  "route": "/docs/[[...mdxPath]]",
+                },
+              ],
+              "name": "docs",
+              "route": "/docs",
             },
             {
               "__pagePath": "index.mdx",
@@ -741,6 +753,16 @@ describe('generatePageMapFromFilepaths()', () => {
                   ],
                   "name": "themes",
                   "route": "/docs/themes",
+                },
+                {
+                  "children": [
+                    {
+                      "name": "[[...mdxPath]]",
+                      "route": "/docs/docs/[[...mdxPath]]",
+                    },
+                  ],
+                  "name": "docs",
+                  "route": "/docs/docs",
                 },
                 {
                   "__pagePath": "index.mdx",
