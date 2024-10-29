@@ -1,7 +1,6 @@
 import path from 'node:path'
 import type { ArrayExpression, ImportDeclaration } from 'estree'
 import { toJs } from 'estree-util-to-js'
-import slash from 'slash'
 import type { PageMapItem } from '../types'
 import { META_RE } from './constants.js'
 import { APP_DIR } from './file-system.js'
@@ -69,21 +68,10 @@ function convertPageMapToAst(
   return { type: 'ArrayExpression', elements }
 }
 
-/*
- * Use relative path instead of absolute, because it's fails on Windows
- * https://github.com/nodejs/node/issues/31710
- */
-function getImportPath(filePaths: string[]): string {
-  const importPath = path.join('private-next-root-dir', ...filePaths)
-  return slash(importPath)
-}
-
 export async function collectPageMap({
-  locale = '',
   pageMap,
   mdxPages
 }: {
-  locale?: string
   pageMap: PageMapItem[]
   mdxPages: Record<string, string>
 }): Promise<string> {
@@ -101,7 +89,7 @@ export async function collectPageMap({
       type: 'ImportDeclaration',
       source: {
         type: 'Literal',
-        value: getImportPath(locale ? [locale, filePath] : [filePath])
+        value: path.join('private-next-root-dir', filePath)
       },
       specifiers: [
         {

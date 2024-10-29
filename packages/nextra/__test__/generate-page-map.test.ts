@@ -780,4 +780,76 @@ describe('generatePageMapFromFilepaths()', () => {
         `)
     })
   })
+
+  describe('should work for i18n example', async () => {
+    const cwd = path.join(CWD, '..', '..', 'examples', 'swr-site')
+    const { appDir } = findPagesDir(cwd)
+    const pagePaths = await getFilepaths({ dir: appDir!, cwd, locale: 'en' })
+    it.only('should match filepaths', () => {
+      expect(pagePaths).toMatchInlineSnapshot(`
+        [
+          "content/en/_meta.ts",
+          "content/en/about/_meta.ts",
+          "content/en/about/a-page.mdx",
+          "content/en/about/acknowledgement.mdx",
+          "content/en/about/changelog.md",
+          "content/en/about/team.mdx",
+          "content/en/blog.mdx",
+          "content/en/blog/swr-v1.mdx",
+          "content/en/docs/_meta.tsx",
+          "content/en/docs/advanced.mdx",
+          "content/en/docs/advanced/_meta.tsx",
+          "content/en/docs/advanced/cache.mdx",
+          "content/en/docs/advanced/code-highlighting.mdx",
+          "content/en/docs/advanced/dynamic-markdown-import.mdx",
+          "content/en/docs/advanced/file-name.with.DOTS.mdx",
+          "content/en/docs/advanced/images.mdx",
+          "content/en/docs/advanced/markdown-import.mdx",
+          "content/en/docs/advanced/more/loooooooooooooooooooong-title.mdx",
+          "content/en/docs/advanced/more/tree/one.mdx",
+          "content/en/docs/advanced/more/tree/three.mdx",
+          "content/en/docs/advanced/more/tree/two.mdx",
+          "content/en/docs/advanced/performance.mdx",
+          "content/en/docs/advanced/react-native.mdx",
+          "content/en/docs/advanced/scrollbar-x.mdx",
+          "content/en/docs/arguments.mdx",
+          "content/en/docs/callout.mdx",
+          "content/en/docs/change-log.mdx",
+          "content/en/docs/code-block-without-language.mdx",
+          "content/en/docs/conditional-fetching.md",
+          "content/en/docs/custom-header-ids.mdx",
+          "content/en/docs/data-fetching.mdx",
+          "content/en/docs/error-handling.mdx",
+          "content/en/docs/getting-started.mdx",
+          "content/en/docs/global-configuration.md",
+          "content/en/docs/middleware.mdx",
+          "content/en/docs/mutation.md",
+          "content/en/docs/options.mdx",
+          "content/en/docs/pagination.mdx",
+          "content/en/docs/prefetching.md",
+          "content/en/docs/revalidation.mdx",
+          "content/en/docs/suspense.mdx",
+          "content/en/docs/typescript.mdx",
+          "content/en/docs/understanding.mdx",
+          "content/en/docs/with-nextjs.mdx",
+          "content/en/docs/wrap-toc-items.mdx",
+          "content/en/examples/_meta.ts",
+          "content/en/examples/auth.mdx",
+          "content/en/examples/basic.mdx",
+          "content/en/examples/error-handling.mdx",
+          "content/en/examples/full.mdx",
+          "content/en/examples/infinite-loading.mdx",
+          "content/en/examples/ssr.mdx",
+          "content/en/foo.md",
+          "content/en/index.mdx",
+          "content/en/test.md",
+        ]
+      `)
+    })
+
+    // it('should match page map', () => {
+    //   expect(generatePageMapFromFilepaths(pagePaths).pageMap)
+    //     .toMatchInlineSnapshot()
+    // })
+  })
 })

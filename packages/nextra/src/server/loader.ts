@@ -114,10 +114,10 @@ export async function loader(
     const relativePaths = await getFilepaths({ dir: APP_DIR, cwd: CWD, locale })
     const { pageMap, mdxPages } = generatePageMapFromFilepaths(
       relativePaths,
-      // remove forward slash
+      // Remove forward slash
       contentDirBasePath!.slice(1)
     )
-    const rawJs = await collectPageMap({ locale, pageMap, mdxPages })
+    const rawJs = await collectPageMap({ pageMap, mdxPages })
     return rawJs
   }
 
