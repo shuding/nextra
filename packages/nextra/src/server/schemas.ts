@@ -64,7 +64,8 @@ export const nextraConfigSchema = z.strictObject({
       rehypePrettyCodeOptions: z.custom<RehypePrettyCodeOptions>().optional()
     })
     .optional(),
-  useContentDir: z.boolean().optional()
+  useContentDir: z.boolean().optional(),
+  whiteListTagsStyling: z.array(z.string()).optional()
 })
 
 export const element = z.custom<ReactElement>(isValidElement, {

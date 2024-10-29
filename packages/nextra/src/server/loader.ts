@@ -97,7 +97,8 @@ export async function loader(
     codeHighlight,
     mdxOptions,
     useContentDir,
-    locales
+    locales,
+    whiteListTagsStyling
   } = this.getOptions()
 
   const filePath = slash(this.resourcePath)
@@ -168,7 +169,8 @@ export async function loader(
     codeHighlight,
     filePath,
     useCachedCompiler: true,
-    isPageImport
+    isPageImport,
+    whiteListTagsStyling
   })
 
   let timestamp: PageOpts['metadata']['timestamp']
