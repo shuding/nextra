@@ -1,10 +1,10 @@
 import path from 'node:path'
 import { findPagesDir } from 'next/dist/lib/find-pages-dir.js'
+import { CWD } from '../src/server/constants.js'
 import {
   generatePageMapFromFilepaths,
   getFilepaths
 } from '../src/server/generate-page-map.js'
-import { CWD } from '../src/server/constants.js'
 
 describe('generatePageMapFromFilepaths()', () => {
   it('should work for blog example', async () => {
