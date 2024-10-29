@@ -89,7 +89,7 @@ export async function collectPageMap({
       type: 'ImportDeclaration',
       source: {
         type: 'Literal',
-        value: path.join('private-next-root-dir', filePath)
+        value: path.posix.join('private-next-root-dir', filePath)
       },
       specifiers: [
         {

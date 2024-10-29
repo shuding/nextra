@@ -122,19 +122,17 @@ export function generatePageMapFromFilepaths({
 
   const pageMap = getPageMap(obj, [])
 
-  if (basePath || locale) {
-    mdxPages = Object.fromEntries(
-      Object.entries(mdxPages).map(([key, value]) => {
-        if (basePath) key = key.replace(basePath, '')
-        value = value.replace('content/', '')
-        if (locale) {
-          key = key.replace(locale, '')
-          value = value.replace(`${locale}/`, '')
-        }
-        return [key.replace(/^\//, ''), value]
-      })
-    )
-  }
+  mdxPages = Object.fromEntries(
+    Object.entries(mdxPages).map(([key, value]) => {
+      if (basePath) key = key.replace(basePath, '')
+      value = value.replace('content/', '')
+      if (locale) {
+        key = key.replace(locale, '')
+        value = value.replace(`${locale}/`, '')
+      }
+      return [key.replace(/^\//, ''), value]
+    })
+  )
 
   return { pageMap, mdxPages }
 }
