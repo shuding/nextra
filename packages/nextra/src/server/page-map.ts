@@ -73,26 +73,19 @@ function convertPageMapToAst(
  * Use relative path instead of absolute, because it's fails on Windows
  * https://github.com/nodejs/node/issues/31710
  */
-function getImportPath(filePaths: string[], fromAppDir = false): string {
-  const importPath = path.join(
-    ...(fromAppDir
-      ? ['private-next-app-dir']
-      : ['private-next-root-dir', 'content']),
-    ...filePaths
-  )
+function getImportPath(filePaths: string[]): string {
+  const importPath = path.join('private-next-root-dir', ...filePaths)
   return slash(importPath)
 }
 
 export async function collectPageMap({
   locale = '',
   pageMap,
-  mdxPages,
-  fromAppDir
+  mdxPages
 }: {
   locale?: string
   pageMap: PageMapItem[]
   mdxPages: Record<string, string>
-  fromAppDir: boolean
 }): Promise<string> {
   const someImports: Import[] = []
   const pageMapAst = convertPageMapToAst(
@@ -108,10 +101,7 @@ export async function collectPageMap({
       type: 'ImportDeclaration',
       source: {
         type: 'Literal',
-        value: getImportPath(
-          locale ? [locale, filePath] : [filePath],
-          fromAppDir
-        )
+        value: getImportPath(locale ? [locale, filePath] : [filePath])
       },
       specifiers: [
         {
