@@ -14,78 +14,67 @@ describe('generatePageMapFromFilepaths()', () => {
     const pagePaths = await getFilepaths({ dir: appDir!, cwd })
     expect(pagePaths).toMatchInlineSnapshot(`
       [
-        "page.mdx",
-        "posts/(with-comments)/aaron-swartz-a-programmable-web/page.mdx",
-        "posts/(with-comments)/code-blocks/page.mdx",
-        "posts/(with-comments)/draft/page.mdx",
-        "posts/(with-comments)/lists/page.mdx",
-        "posts/(with-comments)/nextra-components/page.mdx",
-        "posts/(with-comments)/table/page.mdx",
-        "posts/page.jsx",
-        "tags/[tag]/page.jsx",
+        "app/page.mdx",
+        "app/posts/(with-comments)/aaron-swartz-a-programmable-web/page.mdx",
+        "app/posts/(with-comments)/code-blocks/page.mdx",
+        "app/posts/(with-comments)/draft/page.mdx",
+        "app/posts/(with-comments)/lists/page.mdx",
+        "app/posts/(with-comments)/nextra-components/page.mdx",
+        "app/posts/(with-comments)/table/page.mdx",
+        "app/posts/page.jsx",
       ]
     `)
     expect(generatePageMapFromFilepaths(pagePaths).pageMap)
       .toMatchInlineSnapshot(`
-      [
-        {
-          "__pagePath": "page.mdx",
-          "name": "index",
-          "route": "/",
-        },
-        {
-          "children": [
-            {
-              "__pagePath": "posts/(with-comments)/aaron-swartz-a-programmable-web/page.mdx",
-              "name": "aaron-swartz-a-programmable-web",
-              "route": "/posts/aaron-swartz-a-programmable-web",
-            },
-            {
-              "__pagePath": "posts/(with-comments)/code-blocks/page.mdx",
-              "name": "code-blocks",
-              "route": "/posts/code-blocks",
-            },
-            {
-              "__pagePath": "posts/(with-comments)/draft/page.mdx",
-              "name": "draft",
-              "route": "/posts/draft",
-            },
-            {
-              "__pagePath": "posts/(with-comments)/lists/page.mdx",
-              "name": "lists",
-              "route": "/posts/lists",
-            },
-            {
-              "__pagePath": "posts/(with-comments)/nextra-components/page.mdx",
-              "name": "nextra-components",
-              "route": "/posts/nextra-components",
-            },
-            {
-              "__pagePath": "posts/(with-comments)/table/page.mdx",
-              "name": "table",
-              "route": "/posts/table",
-            },
-            {
-              "__pagePath": "posts/page.jsx",
-              "name": "index",
-              "route": "/posts",
-            },
-          ],
-          "name": "posts",
-          "route": "/posts",
-        },
-        {
-          "children": [
-            {
-              "name": "[tag]",
-              "route": "/tags/[tag]",
-            },
-          ],
-          "name": "tags",
-          "route": "/tags",
-        },
-      ]
-    `)
+        [
+          {
+            "__pagePath": "app/page.mdx",
+            "name": "index",
+            "route": "/",
+          },
+          {
+            "children": [
+              {
+                "__pagePath": "app/posts/(with-comments)/aaron-swartz-a-programmable-web/page.mdx",
+                "name": "aaron-swartz-a-programmable-web",
+                "route": "/posts/aaron-swartz-a-programmable-web",
+              },
+              {
+                "__pagePath": "app/posts/(with-comments)/code-blocks/page.mdx",
+                "name": "code-blocks",
+                "route": "/posts/code-blocks",
+              },
+              {
+                "__pagePath": "app/posts/(with-comments)/draft/page.mdx",
+                "name": "draft",
+                "route": "/posts/draft",
+              },
+              {
+                "__pagePath": "app/posts/(with-comments)/lists/page.mdx",
+                "name": "lists",
+                "route": "/posts/lists",
+              },
+              {
+                "__pagePath": "app/posts/(with-comments)/nextra-components/page.mdx",
+                "name": "nextra-components",
+                "route": "/posts/nextra-components",
+              },
+              {
+                "__pagePath": "app/posts/(with-comments)/table/page.mdx",
+                "name": "table",
+                "route": "/posts/table",
+              },
+              {
+                "__pagePath": "app/posts/page.jsx",
+                "name": "index",
+                "route": "/posts",
+              },
+            ],
+            "name": "posts",
+            "route": "/posts",
+          },
+        ]
+      `)
   })
 
   it('should work for nextra.site', async () => {
@@ -95,63 +84,63 @@ describe('generatePageMapFromFilepaths()', () => {
     const pagePaths = await getFilepaths({ dir: appDir!, cwd })
     expect(pagePaths).toMatchInlineSnapshot(`
       [
-        "_meta.ts",
-        "about/page.mdx",
-        "blog/page.mdx",
-        "docs/_meta.ts",
-        "docs/advanced/_meta.ts",
-        "docs/advanced/customize-the-cascade-layers/page.mdx",
-        "docs/advanced/latex/page.mdx",
-        "docs/advanced/mermaid/page.mdx",
-        "docs/advanced/npm2yarn/page.mdx",
-        "docs/advanced/page.mdx",
-        "docs/advanced/playground/page.mdx",
-        "docs/advanced/remote/page.mdx",
-        "docs/advanced/table/page.mdx",
-        "docs/advanced/tailwind-css/page.mdx",
-        "docs/advanced/twoslash/page.mdx",
-        "docs/advanced/typescript/page.mdx",
-        "docs/blog-theme/page.mdx",
-        "docs/blog-theme/start/page.mdx",
-        "docs/built-ins/_meta.ts",
-        "docs/built-ins/banner/page.mdx",
-        "docs/built-ins/bleed/page.mdx",
-        "docs/built-ins/callout/page.mdx",
-        "docs/built-ins/cards/page.mdx",
-        "docs/built-ins/filetree/page.mdx",
-        "docs/built-ins/head/page.mdx",
-        "docs/built-ins/page.mdx",
-        "docs/built-ins/search/page.mdx",
-        "docs/built-ins/steps/page.mdx",
-        "docs/built-ins/tabs/page.mdx",
-        "docs/custom-theme/page.mdx",
-        "docs/docs-theme/_meta.ts",
-        "docs/docs-theme/api/page.mdx",
-        "docs/docs-theme/built-ins/footer/page.mdx",
-        "docs/docs-theme/built-ins/layout/page.mdx",
-        "docs/docs-theme/built-ins/navbar/page.mdx",
-        "docs/docs-theme/built-ins/not-found/page.mdx",
-        "docs/docs-theme/page-configuration/page.mdx",
-        "docs/docs-theme/page.mdx",
-        "docs/docs-theme/start/page.mdx",
-        "docs/guide/_meta.ts",
-        "docs/guide/custom-css/page.mdx",
-        "docs/guide/github-alert-syntax/page.mdx",
-        "docs/guide/i18n/page.mdx",
-        "docs/guide/image/page.mdx",
-        "docs/guide/link/page.mdx",
-        "docs/guide/markdown/page.mdx",
-        "docs/guide/organize-files/page.mdx",
-        "docs/guide/page.mdx",
-        "docs/guide/search/page.mdx",
-        "docs/guide/ssg/page.mdx",
-        "docs/guide/static-exports/page.mdx",
-        "docs/guide/syntax-highlighting/page.mdx",
-        "docs/guide/turbopack/page.mdx",
-        "docs/page.mdx",
-        "page.tsx",
-        "showcase/page.mdx",
-        "sponsors/page.mdx",
+        "app/_meta.ts",
+        "app/about/page.mdx",
+        "app/blog/page.mdx",
+        "app/docs/_meta.ts",
+        "app/docs/advanced/_meta.ts",
+        "app/docs/advanced/customize-the-cascade-layers/page.mdx",
+        "app/docs/advanced/latex/page.mdx",
+        "app/docs/advanced/mermaid/page.mdx",
+        "app/docs/advanced/npm2yarn/page.mdx",
+        "app/docs/advanced/page.mdx",
+        "app/docs/advanced/playground/page.mdx",
+        "app/docs/advanced/remote/page.mdx",
+        "app/docs/advanced/table/page.mdx",
+        "app/docs/advanced/tailwind-css/page.mdx",
+        "app/docs/advanced/twoslash/page.mdx",
+        "app/docs/advanced/typescript/page.mdx",
+        "app/docs/blog-theme/page.mdx",
+        "app/docs/blog-theme/start/page.mdx",
+        "app/docs/built-ins/_meta.ts",
+        "app/docs/built-ins/banner/page.mdx",
+        "app/docs/built-ins/bleed/page.mdx",
+        "app/docs/built-ins/callout/page.mdx",
+        "app/docs/built-ins/cards/page.mdx",
+        "app/docs/built-ins/filetree/page.mdx",
+        "app/docs/built-ins/head/page.mdx",
+        "app/docs/built-ins/page.mdx",
+        "app/docs/built-ins/search/page.mdx",
+        "app/docs/built-ins/steps/page.mdx",
+        "app/docs/built-ins/tabs/page.mdx",
+        "app/docs/custom-theme/page.mdx",
+        "app/docs/docs-theme/_meta.ts",
+        "app/docs/docs-theme/api/page.mdx",
+        "app/docs/docs-theme/built-ins/footer/page.mdx",
+        "app/docs/docs-theme/built-ins/layout/page.mdx",
+        "app/docs/docs-theme/built-ins/navbar/page.mdx",
+        "app/docs/docs-theme/built-ins/not-found/page.mdx",
+        "app/docs/docs-theme/page-configuration/page.mdx",
+        "app/docs/docs-theme/page.mdx",
+        "app/docs/docs-theme/start/page.mdx",
+        "app/docs/guide/_meta.ts",
+        "app/docs/guide/custom-css/page.mdx",
+        "app/docs/guide/github-alert-syntax/page.mdx",
+        "app/docs/guide/i18n/page.mdx",
+        "app/docs/guide/image/page.mdx",
+        "app/docs/guide/link/page.mdx",
+        "app/docs/guide/markdown/page.mdx",
+        "app/docs/guide/organize-files/page.mdx",
+        "app/docs/guide/page.mdx",
+        "app/docs/guide/search/page.mdx",
+        "app/docs/guide/ssg/page.mdx",
+        "app/docs/guide/static-exports/page.mdx",
+        "app/docs/guide/syntax-highlighting/page.mdx",
+        "app/docs/guide/turbopack/page.mdx",
+        "app/docs/page.mdx",
+        "app/page.tsx",
+        "app/showcase/page.mdx",
+        "app/sponsors/page.mdx",
       ]
     `)
 
@@ -159,70 +148,70 @@ describe('generatePageMapFromFilepaths()', () => {
       .toMatchInlineSnapshot(`
         [
           {
-            "__metaPath": "_meta.ts",
+            "__metaPath": "app/_meta.ts",
           },
           {
             "children": [
               {
-                "__metaPath": "docs/_meta.ts",
+                "__metaPath": "app/docs/_meta.ts",
               },
               {
                 "children": [
                   {
-                    "__metaPath": "docs/advanced/_meta.ts",
+                    "__metaPath": "app/docs/advanced/_meta.ts",
                   },
                   {
-                    "__pagePath": "docs/advanced/customize-the-cascade-layers/page.mdx",
+                    "__pagePath": "app/docs/advanced/customize-the-cascade-layers/page.mdx",
                     "name": "customize-the-cascade-layers",
                     "route": "/docs/advanced/customize-the-cascade-layers",
                   },
                   {
-                    "__pagePath": "docs/advanced/latex/page.mdx",
+                    "__pagePath": "app/docs/advanced/latex/page.mdx",
                     "name": "latex",
                     "route": "/docs/advanced/latex",
                   },
                   {
-                    "__pagePath": "docs/advanced/mermaid/page.mdx",
+                    "__pagePath": "app/docs/advanced/mermaid/page.mdx",
                     "name": "mermaid",
                     "route": "/docs/advanced/mermaid",
                   },
                   {
-                    "__pagePath": "docs/advanced/npm2yarn/page.mdx",
+                    "__pagePath": "app/docs/advanced/npm2yarn/page.mdx",
                     "name": "npm2yarn",
                     "route": "/docs/advanced/npm2yarn",
                   },
                   {
-                    "__pagePath": "docs/advanced/page.mdx",
+                    "__pagePath": "app/docs/advanced/page.mdx",
                     "name": "index",
                     "route": "/docs/advanced",
                   },
                   {
-                    "__pagePath": "docs/advanced/playground/page.mdx",
+                    "__pagePath": "app/docs/advanced/playground/page.mdx",
                     "name": "playground",
                     "route": "/docs/advanced/playground",
                   },
                   {
-                    "__pagePath": "docs/advanced/remote/page.mdx",
+                    "__pagePath": "app/docs/advanced/remote/page.mdx",
                     "name": "remote",
                     "route": "/docs/advanced/remote",
                   },
                   {
-                    "__pagePath": "docs/advanced/table/page.mdx",
+                    "__pagePath": "app/docs/advanced/table/page.mdx",
                     "name": "table",
                     "route": "/docs/advanced/table",
                   },
                   {
-                    "__pagePath": "docs/advanced/tailwind-css/page.mdx",
+                    "__pagePath": "app/docs/advanced/tailwind-css/page.mdx",
                     "name": "tailwind-css",
                     "route": "/docs/advanced/tailwind-css",
                   },
                   {
-                    "__pagePath": "docs/advanced/twoslash/page.mdx",
+                    "__pagePath": "app/docs/advanced/twoslash/page.mdx",
                     "name": "twoslash",
                     "route": "/docs/advanced/twoslash",
                   },
                   {
-                    "__pagePath": "docs/advanced/typescript/page.mdx",
+                    "__pagePath": "app/docs/advanced/typescript/page.mdx",
                     "name": "typescript",
                     "route": "/docs/advanced/typescript",
                   },
@@ -233,55 +222,55 @@ describe('generatePageMapFromFilepaths()', () => {
               {
                 "children": [
                   {
-                    "__metaPath": "docs/built-ins/_meta.ts",
+                    "__metaPath": "app/docs/built-ins/_meta.ts",
                   },
                   {
-                    "__pagePath": "docs/built-ins/banner/page.mdx",
+                    "__pagePath": "app/docs/built-ins/banner/page.mdx",
                     "name": "banner",
                     "route": "/docs/built-ins/banner",
                   },
                   {
-                    "__pagePath": "docs/built-ins/bleed/page.mdx",
+                    "__pagePath": "app/docs/built-ins/bleed/page.mdx",
                     "name": "bleed",
                     "route": "/docs/built-ins/bleed",
                   },
                   {
-                    "__pagePath": "docs/built-ins/callout/page.mdx",
+                    "__pagePath": "app/docs/built-ins/callout/page.mdx",
                     "name": "callout",
                     "route": "/docs/built-ins/callout",
                   },
                   {
-                    "__pagePath": "docs/built-ins/cards/page.mdx",
+                    "__pagePath": "app/docs/built-ins/cards/page.mdx",
                     "name": "cards",
                     "route": "/docs/built-ins/cards",
                   },
                   {
-                    "__pagePath": "docs/built-ins/filetree/page.mdx",
+                    "__pagePath": "app/docs/built-ins/filetree/page.mdx",
                     "name": "filetree",
                     "route": "/docs/built-ins/filetree",
                   },
                   {
-                    "__pagePath": "docs/built-ins/head/page.mdx",
+                    "__pagePath": "app/docs/built-ins/head/page.mdx",
                     "name": "head",
                     "route": "/docs/built-ins/head",
                   },
                   {
-                    "__pagePath": "docs/built-ins/page.mdx",
+                    "__pagePath": "app/docs/built-ins/page.mdx",
                     "name": "index",
                     "route": "/docs/built-ins",
                   },
                   {
-                    "__pagePath": "docs/built-ins/search/page.mdx",
+                    "__pagePath": "app/docs/built-ins/search/page.mdx",
                     "name": "search",
                     "route": "/docs/built-ins/search",
                   },
                   {
-                    "__pagePath": "docs/built-ins/steps/page.mdx",
+                    "__pagePath": "app/docs/built-ins/steps/page.mdx",
                     "name": "steps",
                     "route": "/docs/built-ins/steps",
                   },
                   {
-                    "__pagePath": "docs/built-ins/tabs/page.mdx",
+                    "__pagePath": "app/docs/built-ins/tabs/page.mdx",
                     "name": "tabs",
                     "route": "/docs/built-ins/tabs",
                   },
@@ -292,32 +281,32 @@ describe('generatePageMapFromFilepaths()', () => {
               {
                 "children": [
                   {
-                    "__metaPath": "docs/docs-theme/_meta.ts",
+                    "__metaPath": "app/docs/docs-theme/_meta.ts",
                   },
                   {
-                    "__pagePath": "docs/docs-theme/api/page.mdx",
+                    "__pagePath": "app/docs/docs-theme/api/page.mdx",
                     "name": "api",
                     "route": "/docs/docs-theme/api",
                   },
                   {
                     "children": [
                       {
-                        "__pagePath": "docs/docs-theme/built-ins/footer/page.mdx",
+                        "__pagePath": "app/docs/docs-theme/built-ins/footer/page.mdx",
                         "name": "footer",
                         "route": "/docs/docs-theme/built-ins/footer",
                       },
                       {
-                        "__pagePath": "docs/docs-theme/built-ins/layout/page.mdx",
+                        "__pagePath": "app/docs/docs-theme/built-ins/layout/page.mdx",
                         "name": "layout",
                         "route": "/docs/docs-theme/built-ins/layout",
                       },
                       {
-                        "__pagePath": "docs/docs-theme/built-ins/navbar/page.mdx",
+                        "__pagePath": "app/docs/docs-theme/built-ins/navbar/page.mdx",
                         "name": "navbar",
                         "route": "/docs/docs-theme/built-ins/navbar",
                       },
                       {
-                        "__pagePath": "docs/docs-theme/built-ins/not-found/page.mdx",
+                        "__pagePath": "app/docs/docs-theme/built-ins/not-found/page.mdx",
                         "name": "not-found",
                         "route": "/docs/docs-theme/built-ins/not-found",
                       },
@@ -326,17 +315,17 @@ describe('generatePageMapFromFilepaths()', () => {
                     "route": "/docs/docs-theme/built-ins",
                   },
                   {
-                    "__pagePath": "docs/docs-theme/page-configuration/page.mdx",
+                    "__pagePath": "app/docs/docs-theme/page-configuration/page.mdx",
                     "name": "page-configuration",
                     "route": "/docs/docs-theme/page-configuration",
                   },
                   {
-                    "__pagePath": "docs/docs-theme/page.mdx",
+                    "__pagePath": "app/docs/docs-theme/page.mdx",
                     "name": "index",
                     "route": "/docs/docs-theme",
                   },
                   {
-                    "__pagePath": "docs/docs-theme/start/page.mdx",
+                    "__pagePath": "app/docs/docs-theme/start/page.mdx",
                     "name": "start",
                     "route": "/docs/docs-theme/start",
                   },
@@ -347,70 +336,70 @@ describe('generatePageMapFromFilepaths()', () => {
               {
                 "children": [
                   {
-                    "__metaPath": "docs/guide/_meta.ts",
+                    "__metaPath": "app/docs/guide/_meta.ts",
                   },
                   {
-                    "__pagePath": "docs/guide/custom-css/page.mdx",
+                    "__pagePath": "app/docs/guide/custom-css/page.mdx",
                     "name": "custom-css",
                     "route": "/docs/guide/custom-css",
                   },
                   {
-                    "__pagePath": "docs/guide/github-alert-syntax/page.mdx",
+                    "__pagePath": "app/docs/guide/github-alert-syntax/page.mdx",
                     "name": "github-alert-syntax",
                     "route": "/docs/guide/github-alert-syntax",
                   },
                   {
-                    "__pagePath": "docs/guide/i18n/page.mdx",
+                    "__pagePath": "app/docs/guide/i18n/page.mdx",
                     "name": "i18n",
                     "route": "/docs/guide/i18n",
                   },
                   {
-                    "__pagePath": "docs/guide/image/page.mdx",
+                    "__pagePath": "app/docs/guide/image/page.mdx",
                     "name": "image",
                     "route": "/docs/guide/image",
                   },
                   {
-                    "__pagePath": "docs/guide/link/page.mdx",
+                    "__pagePath": "app/docs/guide/link/page.mdx",
                     "name": "link",
                     "route": "/docs/guide/link",
                   },
                   {
-                    "__pagePath": "docs/guide/markdown/page.mdx",
+                    "__pagePath": "app/docs/guide/markdown/page.mdx",
                     "name": "markdown",
                     "route": "/docs/guide/markdown",
                   },
                   {
-                    "__pagePath": "docs/guide/organize-files/page.mdx",
+                    "__pagePath": "app/docs/guide/organize-files/page.mdx",
                     "name": "organize-files",
                     "route": "/docs/guide/organize-files",
                   },
                   {
-                    "__pagePath": "docs/guide/page.mdx",
+                    "__pagePath": "app/docs/guide/page.mdx",
                     "name": "index",
                     "route": "/docs/guide",
                   },
                   {
-                    "__pagePath": "docs/guide/search/page.mdx",
+                    "__pagePath": "app/docs/guide/search/page.mdx",
                     "name": "search",
                     "route": "/docs/guide/search",
                   },
                   {
-                    "__pagePath": "docs/guide/ssg/page.mdx",
+                    "__pagePath": "app/docs/guide/ssg/page.mdx",
                     "name": "ssg",
                     "route": "/docs/guide/ssg",
                   },
                   {
-                    "__pagePath": "docs/guide/static-exports/page.mdx",
+                    "__pagePath": "app/docs/guide/static-exports/page.mdx",
                     "name": "static-exports",
                     "route": "/docs/guide/static-exports",
                   },
                   {
-                    "__pagePath": "docs/guide/syntax-highlighting/page.mdx",
+                    "__pagePath": "app/docs/guide/syntax-highlighting/page.mdx",
                     "name": "syntax-highlighting",
                     "route": "/docs/guide/syntax-highlighting",
                   },
                   {
-                    "__pagePath": "docs/guide/turbopack/page.mdx",
+                    "__pagePath": "app/docs/guide/turbopack/page.mdx",
                     "name": "turbopack",
                     "route": "/docs/guide/turbopack",
                   },
@@ -421,12 +410,12 @@ describe('generatePageMapFromFilepaths()', () => {
               {
                 "children": [
                   {
-                    "__pagePath": "docs/blog-theme/page.mdx",
+                    "__pagePath": "app/docs/blog-theme/page.mdx",
                     "name": "index",
                     "route": "/docs/blog-theme",
                   },
                   {
-                    "__pagePath": "docs/blog-theme/start/page.mdx",
+                    "__pagePath": "app/docs/blog-theme/start/page.mdx",
                     "name": "start",
                     "route": "/docs/blog-theme/start",
                   },
@@ -435,12 +424,12 @@ describe('generatePageMapFromFilepaths()', () => {
                 "route": "/docs/blog-theme",
               },
               {
-                "__pagePath": "docs/custom-theme/page.mdx",
+                "__pagePath": "app/docs/custom-theme/page.mdx",
                 "name": "custom-theme",
                 "route": "/docs/custom-theme",
               },
               {
-                "__pagePath": "docs/page.mdx",
+                "__pagePath": "app/docs/page.mdx",
                 "name": "index",
                 "route": "/docs",
               },
@@ -449,27 +438,27 @@ describe('generatePageMapFromFilepaths()', () => {
             "route": "/docs",
           },
           {
-            "__pagePath": "about/page.mdx",
+            "__pagePath": "app/about/page.mdx",
             "name": "about",
             "route": "/about",
           },
           {
-            "__pagePath": "blog/page.mdx",
+            "__pagePath": "app/blog/page.mdx",
             "name": "blog",
             "route": "/blog",
           },
           {
-            "__pagePath": "page.tsx",
+            "__pagePath": "app/page.tsx",
             "name": "index",
             "route": "/",
           },
           {
-            "__pagePath": "showcase/page.mdx",
+            "__pagePath": "app/showcase/page.mdx",
             "name": "showcase",
             "route": "/showcase",
           },
           {
-            "__pagePath": "sponsors/page.mdx",
+            "__pagePath": "app/sponsors/page.mdx",
             "name": "sponsors",
             "route": "/sponsors",
           },
@@ -481,7 +470,7 @@ describe('generatePageMapFromFilepaths()', () => {
     const cwd = path.join(CWD, '..', '..', 'examples', 'docs')
     const { appDir } = findPagesDir(cwd)
     const pagePaths = await getFilepaths({ dir: appDir!, cwd })
-    it.only('should match filepaths', () => {
+    it('should match filepaths', () => {
       expect(pagePaths).toMatchInlineSnapshot(`
         [
           "app/_meta.js",
@@ -615,6 +604,16 @@ describe('generatePageMapFromFilepaths()', () => {
               "route": "/themes",
             },
             {
+              "__pagePath": "app/blog/page.jsx",
+              "name": "blog",
+              "route": "/blog",
+            },
+            {
+              "__pagePath": "content/index.mdx",
+              "name": "index",
+              "route": "/",
+            },
+            {
               "children": [
                 {
                   "__pagePath": "content/advanced/code-highlighting.mdx",
@@ -630,16 +629,11 @@ describe('generatePageMapFromFilepaths()', () => {
               "name": "get-started",
               "route": "/get-started",
             },
-            {
-              "__pagePath": "content/index.mdx",
-              "name": "index",
-              "route": "/",
-            },
           ]
         `)
     })
 
-    it.only('should match page map with base path', () => {
+    it('should match page map with base path', () => {
       expect(generatePageMapFromFilepaths(pagePaths, 'docs').pageMap)
         .toMatchInlineSnapshot(`
           [
