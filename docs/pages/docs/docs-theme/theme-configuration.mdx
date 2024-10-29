@@ -1,4 +1,4 @@
-import { Hue, Saturation } from '@components/_slider'
+import { Hue, Saturation, Lightness } from '@components/_slider'
 import { Screenshot } from 'components/screenshot'
 import { Callout } from 'nextra/components'
 import logoImage from 'public/assets/docs/logo.png'
@@ -155,6 +155,7 @@ saturation values for light and dark themes.
 | --------------------- | ------------------------------------------- | ----------------------------------------- |
 | color.hue             | `number \| { dark: number; light: number }` | The hue of the primary theme color        |
 | color.saturation      | `number \| { dark: number; light: number }` | The saturation of the primary theme color |
+| color.lightness       | `number \| { dark: number; light: number }` | The lightness of the primary theme color  |
 | backgroundColor.dark  | `string` in format `RRR,GGG,BBB`            | Background color for light theme          |
 | backgroundColor.light | `string` in format `RRR,GGG,BBB`            | Background color for dark theme           |
 
@@ -162,9 +163,9 @@ saturation values for light and dark themes.
 
 Try it out for this website:
 
-| Hue     | Saturation     |
-| ------- | -------------- |
-| <Hue /> | <Saturation /> |
+| Hue     | Saturation     | Lightness    |
+| ------- | -------------- | ------------ |
+| <Hue /> | <Saturation /> | <Lightness/> |
 
 ## Navbar
 
