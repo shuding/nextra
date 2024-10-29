@@ -6,7 +6,7 @@ const withNextra = nextra({
     codeblocks: false
   },
   useContentDir: true,
-  catchAllBasePath: 'my/docs'
+  catchAllBasePath: 'docs'
 })
 
 export default withNextra({
