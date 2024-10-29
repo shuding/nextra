@@ -121,6 +121,12 @@ export function normalizePages({
   let metaKeys: (keyof MetaType)[] = []
   const items: any[] = []
 
+  list.sort((a, b) => {
+    if ('data' in a) return -1
+    if ('data' in b) return 1
+    return a.name.localeCompare(b.name)
+  })
+
   for (const [index, item] of list.entries()) {
     if ('data' in item) {
       meta = item.data
