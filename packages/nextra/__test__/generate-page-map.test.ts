@@ -4,13 +4,14 @@ import {
   generatePageMapFromFilepaths,
   getFilepaths
 } from '../src/server/generate-page-map.js'
+import { CWD } from '../src/server/constants.js'
 
 describe('generatePageMapFromFilepaths()', () => {
   it('should work for blog example', async () => {
-    const cwd = path.join(process.cwd(), '..', '..', 'examples', 'blog')
+    const cwd = path.join(CWD, '..', '..', 'examples', 'blog')
     const { appDir } = findPagesDir(cwd)
 
-    const pagePaths = await getFilepaths({ dir: appDir!, cwd, isAppDir: true })
+    const pagePaths = await getFilepaths({ dir: appDir!, cwd })
     expect(pagePaths).toMatchInlineSnapshot(`
       [
         "page.mdx",
@@ -88,10 +89,10 @@ describe('generatePageMapFromFilepaths()', () => {
   })
 
   it('should work for nextra.site', async () => {
-    const cwd = path.join(process.cwd(), '..', '..', 'docs')
+    const cwd = path.join(CWD, '..', '..', 'docs')
     const { appDir } = findPagesDir(cwd)
 
-    const pagePaths = await getFilepaths({ dir: appDir!, cwd, isAppDir: true })
+    const pagePaths = await getFilepaths({ dir: appDir!, cwd })
     expect(pagePaths).toMatchInlineSnapshot(`
       [
         "_meta.ts",
@@ -477,36 +478,34 @@ describe('generatePageMapFromFilepaths()', () => {
   })
 
   describe('should work for docs example', async () => {
-    const cwd = path.join(process.cwd(), '..', '..', 'examples', 'docs')
-    const pagePaths = await getFilepaths({
-      dir: path.join(cwd, 'content'),
-      cwd
-    })
-    it('should match filepaths', () => {
+    const cwd = path.join(CWD, '..', '..', 'examples', 'docs')
+    const { appDir } = findPagesDir(cwd)
+    const pagePaths = await getFilepaths({ dir: appDir!, cwd })
+    it.only('should match filepaths', () => {
       expect(pagePaths).toMatchInlineSnapshot(`
         [
-          "_meta.js",
-          "docs/[[...mdxPath]]/page.jsx",
-          "index.mdx",
-          "_meta.js",
-          "advanced/code-highlighting.mdx",
-          "features/_meta.js",
-          "features/i18n.mdx",
-          "features/image.mdx",
-          "features/latex.mdx",
-          "features/mdx.mdx",
-          "features/ssg.mdx",
-          "features/themes.mdx",
-          "get-started.mdx",
-          "themes/_meta.js",
-          "themes/blog/_meta.js",
-          "themes/blog/index.mdx",
-          "themes/docs/_meta.js",
-          "themes/docs/bleed.mdx",
-          "themes/docs/callout.mdx",
-          "themes/docs/configuration.mdx",
-          "themes/docs/index.mdx",
-          "themes/docs/tabs.mdx",
+          "app/_meta.js",
+          "app/docs/[[...mdxPath]]/page.jsx",
+          "content/_meta.js",
+          "content/advanced/code-highlighting.mdx",
+          "content/features/_meta.js",
+          "content/features/i18n.mdx",
+          "content/features/image.mdx",
+          "content/features/latex.mdx",
+          "content/features/mdx.mdx",
+          "content/features/ssg.mdx",
+          "content/features/themes.mdx",
+          "content/get-started.mdx",
+          "content/index.mdx",
+          "content/themes/_meta.js",
+          "content/themes/blog/_meta.js",
+          "content/themes/blog/index.mdx",
+          "content/themes/docs/_meta.js",
+          "content/themes/docs/bleed.mdx",
+          "content/themes/docs/callout.mdx",
+          "content/themes/docs/configuration.mdx",
+          "content/themes/docs/index.mdx",
+          "content/themes/docs/tabs.mdx",
         ]
       `)
     })

@@ -5,28 +5,27 @@ import type { Folder, MdxFile } from '../types'
 
 type Params = {
   dir: string
-  cwd?: string
-  isAppDir?: boolean
+  cwd: string
 }
 
 export async function getFilepaths({
   dir: _dir,
-  cwd,
-  isAppDir
+  cwd
 }: Params): Promise<string[]> {
   if (!_dir) {
     throw new Error('`dir` is required')
   }
-  const dir = slash(_dir)
+  const dir = slash(path.relative(cwd, _dir))
   const result = await fg(
     [
-      `${dir}/**/${isAppDir ? 'page.{js,jsx,jsx,tsx,md,mdx}' : '*.{md,mdx}'}`,
-      `${dir}/**/_meta.{js,jsx,ts,tsx}`
+      `${dir}/**/page.{js,jsx,jsx,tsx,md,mdx}`,
+      `${dir}/**/_meta.{js,jsx,ts,tsx}`,
+      'content/**/_meta.{js,jsx,ts,tsx}',
+      'content/**/*.{md,mdx}'
     ],
     { cwd }
   )
   const relativePaths = result
-    .map(r => slash(path.relative(dir, r)))
     // sort filepaths alphabetically
     .sort((a, b) => {
       if (a.startsWith('index.')) {
