@@ -46,7 +46,7 @@ export const DEFAULT_THEME: DocsThemeConfig = {
     lightness: {
       dark: 55,
       light: 45
-    },
+    }
   },
   darkMode: true,
   direction: 'ltr',
