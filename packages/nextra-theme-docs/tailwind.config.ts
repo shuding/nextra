@@ -5,7 +5,7 @@ const makePrimaryColor: any =
   (l: number) =>
   ({ opacityValue }: { opacityValue?: string }) => {
     return (
-      `hsl(var(--nextra-primary-hue) var(--nextra-primary-saturation) ${l}%` +
+      `hsl(var(--nextra-primary-hue) var(--nextra-primary-saturation) calc(var(--nextra-primary-lightness) + ${l}%)` +
       (opacityValue ? ` / ${opacityValue})` : ')')
     )
   }
@@ -52,17 +52,17 @@ export default {
       blue: colors.blue,
       yellow: colors.yellow,
       primary: {
-        50: makePrimaryColor(97),
-        100: makePrimaryColor(94),
-        200: makePrimaryColor(86),
-        300: makePrimaryColor(77),
-        400: makePrimaryColor(66),
-        500: makePrimaryColor(50),
-        600: makePrimaryColor(45),
-        700: makePrimaryColor(39),
-        750: makePrimaryColor(35),
-        800: makePrimaryColor(32),
-        900: makePrimaryColor(24)
+        50: makePrimaryColor(52),
+        100: makePrimaryColor(49),
+        200: makePrimaryColor(41),
+        300: makePrimaryColor(32),
+        400: makePrimaryColor(21),
+        500: makePrimaryColor(5),
+        600: makePrimaryColor(0),
+        700: makePrimaryColor(-6),
+        750: makePrimaryColor(-10),
+        800: makePrimaryColor(-13),
+        900: makePrimaryColor(-11)
       }
     }
   },
