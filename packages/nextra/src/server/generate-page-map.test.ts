@@ -483,7 +483,8 @@ describe('generatePageMapFromFilepaths()', () => {
       cwd
     })
     it('should match filepaths', () => {
-    expect(pagePaths.sort((a, b) => a.localeCompare(b))).toMatchInlineSnapshot(`
+      expect(pagePaths.sort((a, b) => a.localeCompare(b)))
+        .toMatchInlineSnapshot(`
       [
         "_meta.js",
         "advanced/code-highlighting.mdx",
@@ -507,7 +508,6 @@ describe('generatePageMapFromFilepaths()', () => {
         "themes/docs/tabs.mdx",
       ]
     `)
-
     })
 
     it('should match page map', () => {
