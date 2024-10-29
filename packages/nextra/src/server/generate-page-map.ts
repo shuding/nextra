@@ -53,7 +53,7 @@ export function generatePageMapFromFilepaths({
     let { name, dir } = path.parse(r)
     if (dir.startsWith('content')) {
       let filePath = dir.replace(/^content(\/|$)/, '')
-      if (locale) filePath = filePath.replace(`${locale}/`, '')
+      if (locale) filePath = filePath.replace(new RegExp(`${locale}\\/?`), '')
       dir = [basePath, filePath].filter(Boolean).join('/')
     } else {
       dir = dir.replace(/^app(\/|$)/, '')
@@ -126,8 +126,12 @@ export function generatePageMapFromFilepaths({
     mdxPages = Object.fromEntries(
       Object.entries(mdxPages).map(([key, value]) => {
         if (basePath) key = key.replace(basePath, '')
-        if (locale) key = key.replace(locale, '')
-        return [key.replace(/^\//, ''), value.replace('content/', '')]
+        value = value.replace('content/', '')
+        if (locale) {
+          key = key.replace(locale, '')
+          value = value.replace(`${locale}/`, '')
+        }
+        return [key.replace(/^\//, ''), value]
       })
     )
   }
