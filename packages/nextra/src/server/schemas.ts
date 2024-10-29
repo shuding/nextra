@@ -64,14 +64,15 @@ export const nextraConfigSchema = z.strictObject({
       rehypePrettyCodeOptions: z.custom<RehypePrettyCodeOptions>().optional()
     })
     .optional(),
-  useContentDir: z.boolean().default(false),
   whiteListTagsStyling: z.array(z.string()).optional(),
-  catchAllBasePath: z
+  contentDirBasePath: z
     .string()
-    .default('')
-    .refine(value => !value.startsWith('/') && !value.endsWith('/'), {
-      message: '`catchAllBasePath` must not start or end with `/`'
-    })
+    .startsWith('/')
+    .refine(
+      value => value.length === 1 || !value.endsWith('/'),
+      value => ({ message: `"${value}" must not end with "/"` })
+    )
+    .optional()
 })
 
 export const element = z.custom<ReactElement>(isValidElement, {

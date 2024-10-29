@@ -96,10 +96,9 @@ export async function loader(
     latex,
     codeHighlight,
     mdxOptions,
-    useContentDir,
+    contentDirBasePath,
     locales,
-    whiteListTagsStyling,
-    catchAllBasePath
+    whiteListTagsStyling
   } = this.getOptions()
 
   const filePath = slash(this.resourcePath)
@@ -113,18 +112,19 @@ export async function loader(
       this.addContextDependency(path.join(CWD, 'content', locale))
     }
     const relativePaths = await getFilepaths({
-      dir: useContentDir ? path.join('content', locale) : APP_DIR,
-      isAppDir: !useContentDir
+      dir: contentDirBasePath ? path.join('content', locale) : APP_DIR,
+      isAppDir: !contentDirBasePath
     })
     const { pageMap, mdxPages } = generatePageMapFromFilepaths(
       relativePaths,
-      catchAllBasePath
+      // replace forward slash
+      contentDirBasePath!.slice(1)
     )
     const rawJs = await collectPageMap({
       locale,
       pageMap,
       mdxPages,
-      fromAppDir: !useContentDir
+      fromAppDir: !contentDirBasePath
     })
     return rawJs
   }

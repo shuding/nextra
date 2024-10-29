@@ -4,4 +4,4 @@
 'nextra': patch
 ---
 
-add `catchAllBasePath` option to configure `content` directory under a catch-all subdirectory
+replace `useContentDir` with `contentDirBasePath` option which configure `content` directory under a catch-all subdirectory
