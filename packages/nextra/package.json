@@ -12,8 +12,9 @@
     "./katex.css": "./styles/katex.css",
     "./package.json": "./package.json",
     ".": {
+      "types": "./dist/server/index.d.ts",
       "import": "./dist/server/index.js",
-      "types": "./dist/server/index.d.ts"
+      "require": "./dist/server/index.js"
     },
     "./components": {
       "import": "./dist/client/components/index.js",

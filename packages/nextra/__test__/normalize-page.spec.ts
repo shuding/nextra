@@ -336,4 +336,57 @@ describe('normalize-page', () => {
     expect(docsDirectories[1].route).toBe('/docs/bar')
     expect(docsDirectories[2].route).toBe('/foo')
   })
+
+  // https://github.com/shuding/nextra/issues/3581
+  it("folder's index page and folder itself should be merged", async () => {
+    const pageMap = await getPageMapForFixture(
+      'folder-index-page-and-folder-should-be-merged'
+    )
+    const normalizedResult = normalizePages({
+      list: pageMap,
+      route: '/themes'
+    })
+    expect(normalizedResult.docsDirectories).toEqual([
+      {
+        name: 'themes',
+        route: '/themes',
+        children: [
+          {
+            name: 'bar',
+            route: '/themes/bar',
+            frontMatter: undefined,
+            type: 'doc',
+            title: 'bar',
+            isUnderCurrentDocsTree: true
+          }
+        ],
+        frontMatter: {
+          asIndexPage: true
+        },
+        type: 'doc',
+        title: 'themes',
+        isUnderCurrentDocsTree: true
+      },
+      {
+        name: 'themes-test',
+        route: '/themes-test',
+        children: [
+          {
+            name: 'foo',
+            route: '/themes-test/foo',
+            frontMatter: undefined,
+            type: 'doc',
+            title: 'foo',
+            isUnderCurrentDocsTree: true
+          }
+        ],
+        frontMatter: {
+          asIndexPage: true
+        },
+        type: 'doc',
+        title: 'themes-test',
+        isUnderCurrentDocsTree: true
+      }
+    ])
+  })
 })

@@ -25,7 +25,6 @@ export default {
     type: 'page',
     theme: {
       typesetting: 'article',
-      sidebar: false
     }
   },
   about: {
