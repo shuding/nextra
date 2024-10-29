@@ -523,7 +523,7 @@ describe('generatePageMapFromFilepaths()', () => {
     `)
     })
 
-    it.only('should match page map', () => {
+    it('should match page map', () => {
       expect(generatePageMapFromFilepaths(pagePaths).pageMap)
         .toMatchInlineSnapshot(`
           [
@@ -651,8 +651,8 @@ describe('generatePageMapFromFilepaths()', () => {
         `)
     })
 
-    it.only('should match page map with base path', () => {
-      expect(generatePageMapFromFilepaths(pagePaths, 'docs/').pageMap)
+    it('should match page map with base path', () => {
+      expect(generatePageMapFromFilepaths(pagePaths, 'docs').pageMap)
         .toMatchInlineSnapshot(`
           [
             {
