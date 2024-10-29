@@ -485,6 +485,8 @@ describe('generatePageMapFromFilepaths()', () => {
       expect(pagePaths).toMatchInlineSnapshot(`
         [
           "app/_meta.js",
+          "app/blog/page.jsx",
+          "app/page.jsx",
           "content/_meta.js",
           "content/advanced/code-highlighting.mdx",
           "content/features/_meta.js",
@@ -769,6 +771,16 @@ describe('generatePageMapFromFilepaths()', () => {
               ],
               "name": "docs",
               "route": "/docs",
+            },
+            {
+              "__pagePath": "app/blog/page.jsx",
+              "name": "blog",
+              "route": "/blog",
+            },
+            {
+              "__pagePath": "app/page.jsx",
+              "name": "index",
+              "route": "/",
             },
           ]
         `)
