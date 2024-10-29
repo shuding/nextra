@@ -45,16 +45,14 @@ export function generatePageMapFromFilepaths(
   const mdxPages: Record<string, string> = Object.create(null)
   const metaFiles: Record<string, string> = Object.create(null)
   for (const r of filepaths) {
-    const pathInfo = path.parse(r)
-
-    if (pathInfo.name === 'page') {
-      mdxPages[pathInfo.dir.replace(/\(.*\)\//, '')] = r
-    } else if (pathInfo.name === '_meta') {
-      metaFiles[`${pathInfo.dir}/_meta`.replace(/^\//, '')] = r
+    let { name, dir } = path.parse(r)
+    dir = dir.replace(/^(content|app)(\/|$)/, '')
+    if (name === 'page') {
+      mdxPages[dir.replace(/\(.*\)\//, '')] = r
+    } else if (name === '_meta') {
+      metaFiles[`${dir}/_meta`.replace(/^\//, '')] = r
     } else {
-      const key = `${pathInfo.dir}/${pathInfo.name}`
-        .replace(/\/index$/, '')
-        .replace(/^\//, '')
+      const key = `${dir}/${name}`.replace(/\/index$/, '').replace(/^\//, '')
       mdxPages[key] = r
     }
   }

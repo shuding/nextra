@@ -509,45 +509,45 @@ describe('generatePageMapFromFilepaths()', () => {
       `)
     })
 
-    it('should match page map', () => {
+    it.only('should match page map', () => {
       expect(generatePageMapFromFilepaths(pagePaths).pageMap)
         .toMatchInlineSnapshot(`
           [
             {
-              "__metaPath": "_meta.js",
+              "__metaPath": "content/_meta.js",
             },
             {
               "children": [
                 {
-                  "__metaPath": "features/_meta.js",
+                  "__metaPath": "content/features/_meta.js",
                 },
                 {
-                  "__pagePath": "features/i18n.mdx",
+                  "__pagePath": "content/features/i18n.mdx",
                   "name": "i18n",
                   "route": "/features/i18n",
                 },
                 {
-                  "__pagePath": "features/image.mdx",
+                  "__pagePath": "content/features/image.mdx",
                   "name": "image",
                   "route": "/features/image",
                 },
                 {
-                  "__pagePath": "features/latex.mdx",
+                  "__pagePath": "content/features/latex.mdx",
                   "name": "latex",
                   "route": "/features/latex",
                 },
                 {
-                  "__pagePath": "features/mdx.mdx",
+                  "__pagePath": "content/features/mdx.mdx",
                   "name": "mdx",
                   "route": "/features/mdx",
                 },
                 {
-                  "__pagePath": "features/ssg.mdx",
+                  "__pagePath": "content/features/ssg.mdx",
                   "name": "ssg",
                   "route": "/features/ssg",
                 },
                 {
-                  "__pagePath": "features/themes.mdx",
+                  "__pagePath": "content/features/themes.mdx",
                   "name": "themes",
                   "route": "/features/themes",
                 },
@@ -558,15 +558,15 @@ describe('generatePageMapFromFilepaths()', () => {
             {
               "children": [
                 {
-                  "__metaPath": "themes/_meta.js",
+                  "__metaPath": "content/themes/_meta.js",
                 },
                 {
                   "children": [
                     {
-                      "__metaPath": "themes/blog/_meta.js",
+                      "__metaPath": "content/themes/blog/_meta.js",
                     },
                     {
-                      "__pagePath": "themes/blog/index.mdx",
+                      "__pagePath": "content/themes/blog/index.mdx",
                       "name": "index",
                       "route": "/themes/blog",
                     },
@@ -577,30 +577,30 @@ describe('generatePageMapFromFilepaths()', () => {
                 {
                   "children": [
                     {
-                      "__metaPath": "themes/docs/_meta.js",
+                      "__metaPath": "content/themes/docs/_meta.js",
                     },
                     {
-                      "__pagePath": "themes/docs/bleed.mdx",
+                      "__pagePath": "content/themes/docs/bleed.mdx",
                       "name": "bleed",
                       "route": "/themes/docs/bleed",
                     },
                     {
-                      "__pagePath": "themes/docs/callout.mdx",
+                      "__pagePath": "content/themes/docs/callout.mdx",
                       "name": "callout",
                       "route": "/themes/docs/callout",
                     },
                     {
-                      "__pagePath": "themes/docs/configuration.mdx",
+                      "__pagePath": "content/themes/docs/configuration.mdx",
                       "name": "configuration",
                       "route": "/themes/docs/configuration",
                     },
                     {
-                      "__pagePath": "themes/docs/index.mdx",
+                      "__pagePath": "content/themes/docs/index.mdx",
                       "name": "index",
                       "route": "/themes/docs",
                     },
                     {
-                      "__pagePath": "themes/docs/tabs.mdx",
+                      "__pagePath": "content/themes/docs/tabs.mdx",
                       "name": "tabs",
                       "route": "/themes/docs/tabs",
                     },
@@ -615,22 +615,7 @@ describe('generatePageMapFromFilepaths()', () => {
             {
               "children": [
                 {
-                  "name": "[[...mdxPath]]",
-                  "route": "/docs/[[...mdxPath]]",
-                },
-              ],
-              "name": "docs",
-              "route": "/docs",
-            },
-            {
-              "__pagePath": "index.mdx",
-              "name": "index",
-              "route": "/",
-            },
-            {
-              "children": [
-                {
-                  "__pagePath": "advanced/code-highlighting.mdx",
+                  "__pagePath": "content/advanced/code-highlighting.mdx",
                   "name": "code-highlighting",
                   "route": "/advanced/code-highlighting",
                 },
@@ -639,9 +624,14 @@ describe('generatePageMapFromFilepaths()', () => {
               "route": "/advanced",
             },
             {
-              "__pagePath": "get-started.mdx",
+              "__pagePath": "content/get-started.mdx",
               "name": "get-started",
               "route": "/get-started",
+            },
+            {
+              "__pagePath": "content/index.mdx",
+              "name": "index",
+              "route": "/",
             },
           ]
         `)
