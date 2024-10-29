@@ -11,8 +11,9 @@ describe('generatePageMapFromFilepaths()', () => {
     const cwd = path.join(CWD, '..', '..', 'examples', 'blog')
     const { appDir } = findPagesDir(cwd)
 
-    const pagePaths = await getFilepaths({ dir: appDir!, cwd })
-    expect(pagePaths).toMatchInlineSnapshot(`
+    const filePaths = await getFilepaths({ dir: appDir!, cwd })
+    const { pageMap } = generatePageMapFromFilepaths({ filePaths })
+    expect(filePaths).toMatchInlineSnapshot(`
       [
         "app/page.mdx",
         "app/posts/(with-comments)/aaron-swartz-a-programmable-web/page.mdx",
@@ -24,8 +25,7 @@ describe('generatePageMapFromFilepaths()', () => {
         "app/posts/page.jsx",
       ]
     `)
-    expect(generatePageMapFromFilepaths(pagePaths).pageMap)
-      .toMatchInlineSnapshot(`
+    expect(pageMap).toMatchInlineSnapshot(`
         [
           {
             "__pagePath": "app/page.mdx",
@@ -81,8 +81,9 @@ describe('generatePageMapFromFilepaths()', () => {
     const cwd = path.join(CWD, '..', '..', 'docs')
     const { appDir } = findPagesDir(cwd)
 
-    const pagePaths = await getFilepaths({ dir: appDir!, cwd })
-    expect(pagePaths).toMatchInlineSnapshot(`
+    const filePaths = await getFilepaths({ dir: appDir!, cwd })
+    const { pageMap } = generatePageMapFromFilepaths({ filePaths })
+    expect(filePaths).toMatchInlineSnapshot(`
       [
         "app/_meta.ts",
         "app/about/page.mdx",
@@ -143,9 +144,7 @@ describe('generatePageMapFromFilepaths()', () => {
         "app/sponsors/page.mdx",
       ]
     `)
-
-    expect(generatePageMapFromFilepaths(pagePaths).pageMap)
-      .toMatchInlineSnapshot(`
+    expect(pageMap).toMatchInlineSnapshot(`
         [
           {
             "__metaPath": "app/_meta.ts",
@@ -469,9 +468,9 @@ describe('generatePageMapFromFilepaths()', () => {
   describe('should work for docs example', async () => {
     const cwd = path.join(CWD, '..', '..', 'examples', 'docs')
     const { appDir } = findPagesDir(cwd)
-    const pagePaths = await getFilepaths({ dir: appDir!, cwd })
+    const filePaths = await getFilepaths({ dir: appDir!, cwd })
     it('should match filepaths', () => {
-      expect(pagePaths).toMatchInlineSnapshot(`
+      expect(filePaths).toMatchInlineSnapshot(`
         [
           "app/_meta.js",
           "app/blog/page.jsx",
@@ -499,10 +498,9 @@ describe('generatePageMapFromFilepaths()', () => {
         ]
       `)
     })
-
     it('should match page map', () => {
-      expect(generatePageMapFromFilepaths(pagePaths).pageMap)
-        .toMatchInlineSnapshot(`
+      const { pageMap } = generatePageMapFromFilepaths({ filePaths })
+      expect(pageMap).toMatchInlineSnapshot(`
           [
             {
               "__metaPath": "content/_meta.js",
@@ -634,8 +632,11 @@ describe('generatePageMapFromFilepaths()', () => {
     })
 
     it('should match page map with base path', () => {
-      expect(generatePageMapFromFilepaths(pagePaths, 'docs').pageMap)
-        .toMatchInlineSnapshot(`
+      const { pageMap } = generatePageMapFromFilepaths({
+        filePaths,
+        basePath: 'docs'
+      })
+      expect(pageMap).toMatchInlineSnapshot(`
           [
             {
               "__metaPath": "app/_meta.js",
@@ -784,9 +785,9 @@ describe('generatePageMapFromFilepaths()', () => {
   describe('should work for i18n example', async () => {
     const cwd = path.join(CWD, '..', '..', 'examples', 'swr-site')
     const { appDir } = findPagesDir(cwd)
-    const pagePaths = await getFilepaths({ dir: appDir!, cwd, locale: 'en' })
-    it.only('should match filepaths', () => {
-      expect(pagePaths).toMatchInlineSnapshot(`
+    const filePaths = await getFilepaths({ dir: appDir!, cwd, locale: 'en' })
+    it('should match filepaths', () => {
+      expect(filePaths).toMatchInlineSnapshot(`
         [
           "content/en/_meta.ts",
           "content/en/about/_meta.ts",
@@ -848,11 +849,11 @@ describe('generatePageMapFromFilepaths()', () => {
     })
 
     it('should match page map', () => {
-      expect(generatePageMapFromFilepaths({
-        filePaths: pagePaths,
+      const { pageMap } = generatePageMapFromFilepaths({
+        filePaths,
         locale: 'en'
-      }).pageMap)
-        .toMatchInlineSnapshot(`
+      })
+      expect(pageMap).toMatchInlineSnapshot(`
           [
             {
               "children": [

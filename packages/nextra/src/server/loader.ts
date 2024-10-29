@@ -111,12 +111,13 @@ export async function loader(
       this.addContextDependency(APP_DIR)
       this.addContextDependency(path.join(CWD, 'content', locale))
     }
-    const relativePaths = await getFilepaths({ dir: APP_DIR, cwd: CWD, locale })
-    const { pageMap, mdxPages } = generatePageMapFromFilepaths(
-      relativePaths,
+    const filePaths = await getFilepaths({ dir: APP_DIR, cwd: CWD, locale })
+    const { pageMap, mdxPages } = generatePageMapFromFilepaths({
+      filePaths,
       // Remove forward slash
-      contentDirBasePath!.slice(1)
-    )
+      basePath: contentDirBasePath!.slice(1),
+      locale
+    })
     const rawJs = await collectPageMap({ pageMap, mdxPages })
     return rawJs
   }
