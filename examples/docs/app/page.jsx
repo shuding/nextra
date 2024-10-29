@@ -1,6 +1,6 @@
 export const metadata = {}
 
-export default function Page() {
+export default function IndexPage() {
   return (
     <h1
       style={{

@@ -4,8 +4,7 @@ export default {
   },
   docs: {
     type: 'page',
-    title: 'Documentation',
-    display: 'children'
+    title: 'Documentation'
   },
   blog: {
     type: 'page',

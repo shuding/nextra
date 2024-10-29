@@ -1,6 +1,6 @@
 export const metadata = {}
 
-export default function Hello() {
+export default function BlogPage() {
   return (
     <h1
       style={{
