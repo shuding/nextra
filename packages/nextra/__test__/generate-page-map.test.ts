@@ -847,9 +847,328 @@ describe('generatePageMapFromFilepaths()', () => {
       `)
     })
 
-    // it('should match page map', () => {
-    //   expect(generatePageMapFromFilepaths(pagePaths).pageMap)
-    //     .toMatchInlineSnapshot()
-    // })
+    it('should match page map', () => {
+      expect(generatePageMapFromFilepaths({
+        filePaths: pagePaths,
+        locale: 'en'
+      }).pageMap)
+        .toMatchInlineSnapshot(`
+          [
+            {
+              "children": [
+                {
+                  "__metaPath": "content/en/_meta.ts",
+                },
+                {
+                  "__pagePath": "content/en/blog.mdx",
+                  "name": "blog",
+                  "route": "/en/blog",
+                },
+                {
+                  "__pagePath": "content/en/foo.md",
+                  "name": "foo",
+                  "route": "/en/foo",
+                },
+                {
+                  "__pagePath": "content/en/index.mdx",
+                  "name": "index",
+                  "route": "/en",
+                },
+                {
+                  "__pagePath": "content/en/test.md",
+                  "name": "test",
+                  "route": "/en/test",
+                },
+              ],
+              "name": "en",
+              "route": "/en",
+            },
+            {
+              "children": [
+                {
+                  "__metaPath": "content/en/about/_meta.ts",
+                },
+                {
+                  "__pagePath": "content/en/about/a-page.mdx",
+                  "name": "a-page",
+                  "route": "/about/a-page",
+                },
+                {
+                  "__pagePath": "content/en/about/acknowledgement.mdx",
+                  "name": "acknowledgement",
+                  "route": "/about/acknowledgement",
+                },
+                {
+                  "__pagePath": "content/en/about/changelog.md",
+                  "name": "changelog",
+                  "route": "/about/changelog",
+                },
+                {
+                  "__pagePath": "content/en/about/team.mdx",
+                  "name": "team",
+                  "route": "/about/team",
+                },
+              ],
+              "name": "about",
+              "route": "/about",
+            },
+            {
+              "children": [
+                {
+                  "__metaPath": "content/en/docs/_meta.tsx",
+                },
+                {
+                  "children": [
+                    {
+                      "__metaPath": "content/en/docs/advanced/_meta.tsx",
+                    },
+                    {
+                      "__pagePath": "content/en/docs/advanced.mdx",
+                      "name": "index",
+                      "route": "/docs/advanced",
+                    },
+                    {
+                      "__pagePath": "content/en/docs/advanced/cache.mdx",
+                      "name": "cache",
+                      "route": "/docs/advanced/cache",
+                    },
+                    {
+                      "__pagePath": "content/en/docs/advanced/code-highlighting.mdx",
+                      "name": "code-highlighting",
+                      "route": "/docs/advanced/code-highlighting",
+                    },
+                    {
+                      "__pagePath": "content/en/docs/advanced/dynamic-markdown-import.mdx",
+                      "name": "dynamic-markdown-import",
+                      "route": "/docs/advanced/dynamic-markdown-import",
+                    },
+                    {
+                      "__pagePath": "content/en/docs/advanced/file-name.with.DOTS.mdx",
+                      "name": "file-name.with.DOTS",
+                      "route": "/docs/advanced/file-name.with.DOTS",
+                    },
+                    {
+                      "__pagePath": "content/en/docs/advanced/images.mdx",
+                      "name": "images",
+                      "route": "/docs/advanced/images",
+                    },
+                    {
+                      "__pagePath": "content/en/docs/advanced/markdown-import.mdx",
+                      "name": "markdown-import",
+                      "route": "/docs/advanced/markdown-import",
+                    },
+                    {
+                      "children": [
+                        {
+                          "__pagePath": "content/en/docs/advanced/more/loooooooooooooooooooong-title.mdx",
+                          "name": "loooooooooooooooooooong-title",
+                          "route": "/docs/advanced/more/loooooooooooooooooooong-title",
+                        },
+                        {
+                          "children": [
+                            {
+                              "__pagePath": "content/en/docs/advanced/more/tree/one.mdx",
+                              "name": "one",
+                              "route": "/docs/advanced/more/tree/one",
+                            },
+                            {
+                              "__pagePath": "content/en/docs/advanced/more/tree/three.mdx",
+                              "name": "three",
+                              "route": "/docs/advanced/more/tree/three",
+                            },
+                            {
+                              "__pagePath": "content/en/docs/advanced/more/tree/two.mdx",
+                              "name": "two",
+                              "route": "/docs/advanced/more/tree/two",
+                            },
+                          ],
+                          "name": "tree",
+                          "route": "/docs/advanced/more/tree",
+                        },
+                      ],
+                      "name": "more",
+                      "route": "/docs/advanced/more",
+                    },
+                    {
+                      "__pagePath": "content/en/docs/advanced/performance.mdx",
+                      "name": "performance",
+                      "route": "/docs/advanced/performance",
+                    },
+                    {
+                      "__pagePath": "content/en/docs/advanced/react-native.mdx",
+                      "name": "react-native",
+                      "route": "/docs/advanced/react-native",
+                    },
+                    {
+                      "__pagePath": "content/en/docs/advanced/scrollbar-x.mdx",
+                      "name": "scrollbar-x",
+                      "route": "/docs/advanced/scrollbar-x",
+                    },
+                  ],
+                  "name": "advanced",
+                  "route": "/docs/advanced",
+                },
+                {
+                  "__pagePath": "content/en/docs/arguments.mdx",
+                  "name": "arguments",
+                  "route": "/docs/arguments",
+                },
+                {
+                  "__pagePath": "content/en/docs/callout.mdx",
+                  "name": "callout",
+                  "route": "/docs/callout",
+                },
+                {
+                  "__pagePath": "content/en/docs/change-log.mdx",
+                  "name": "change-log",
+                  "route": "/docs/change-log",
+                },
+                {
+                  "__pagePath": "content/en/docs/code-block-without-language.mdx",
+                  "name": "code-block-without-language",
+                  "route": "/docs/code-block-without-language",
+                },
+                {
+                  "__pagePath": "content/en/docs/conditional-fetching.md",
+                  "name": "conditional-fetching",
+                  "route": "/docs/conditional-fetching",
+                },
+                {
+                  "__pagePath": "content/en/docs/custom-header-ids.mdx",
+                  "name": "custom-header-ids",
+                  "route": "/docs/custom-header-ids",
+                },
+                {
+                  "__pagePath": "content/en/docs/data-fetching.mdx",
+                  "name": "data-fetching",
+                  "route": "/docs/data-fetching",
+                },
+                {
+                  "__pagePath": "content/en/docs/error-handling.mdx",
+                  "name": "error-handling",
+                  "route": "/docs/error-handling",
+                },
+                {
+                  "__pagePath": "content/en/docs/getting-started.mdx",
+                  "name": "getting-started",
+                  "route": "/docs/getting-started",
+                },
+                {
+                  "__pagePath": "content/en/docs/global-configuration.md",
+                  "name": "global-configuration",
+                  "route": "/docs/global-configuration",
+                },
+                {
+                  "__pagePath": "content/en/docs/middleware.mdx",
+                  "name": "middleware",
+                  "route": "/docs/middleware",
+                },
+                {
+                  "__pagePath": "content/en/docs/mutation.md",
+                  "name": "mutation",
+                  "route": "/docs/mutation",
+                },
+                {
+                  "__pagePath": "content/en/docs/options.mdx",
+                  "name": "options",
+                  "route": "/docs/options",
+                },
+                {
+                  "__pagePath": "content/en/docs/pagination.mdx",
+                  "name": "pagination",
+                  "route": "/docs/pagination",
+                },
+                {
+                  "__pagePath": "content/en/docs/prefetching.md",
+                  "name": "prefetching",
+                  "route": "/docs/prefetching",
+                },
+                {
+                  "__pagePath": "content/en/docs/revalidation.mdx",
+                  "name": "revalidation",
+                  "route": "/docs/revalidation",
+                },
+                {
+                  "__pagePath": "content/en/docs/suspense.mdx",
+                  "name": "suspense",
+                  "route": "/docs/suspense",
+                },
+                {
+                  "__pagePath": "content/en/docs/typescript.mdx",
+                  "name": "typescript",
+                  "route": "/docs/typescript",
+                },
+                {
+                  "__pagePath": "content/en/docs/understanding.mdx",
+                  "name": "understanding",
+                  "route": "/docs/understanding",
+                },
+                {
+                  "__pagePath": "content/en/docs/with-nextjs.mdx",
+                  "name": "with-nextjs",
+                  "route": "/docs/with-nextjs",
+                },
+                {
+                  "__pagePath": "content/en/docs/wrap-toc-items.mdx",
+                  "name": "wrap-toc-items",
+                  "route": "/docs/wrap-toc-items",
+                },
+              ],
+              "name": "docs",
+              "route": "/docs",
+            },
+            {
+              "children": [
+                {
+                  "__metaPath": "content/en/examples/_meta.ts",
+                },
+                {
+                  "__pagePath": "content/en/examples/auth.mdx",
+                  "name": "auth",
+                  "route": "/examples/auth",
+                },
+                {
+                  "__pagePath": "content/en/examples/basic.mdx",
+                  "name": "basic",
+                  "route": "/examples/basic",
+                },
+                {
+                  "__pagePath": "content/en/examples/error-handling.mdx",
+                  "name": "error-handling",
+                  "route": "/examples/error-handling",
+                },
+                {
+                  "__pagePath": "content/en/examples/full.mdx",
+                  "name": "full",
+                  "route": "/examples/full",
+                },
+                {
+                  "__pagePath": "content/en/examples/infinite-loading.mdx",
+                  "name": "infinite-loading",
+                  "route": "/examples/infinite-loading",
+                },
+                {
+                  "__pagePath": "content/en/examples/ssr.mdx",
+                  "name": "ssr",
+                  "route": "/examples/ssr",
+                },
+              ],
+              "name": "examples",
+              "route": "/examples",
+            },
+            {
+              "children": [
+                {
+                  "__pagePath": "content/en/blog/swr-v1.mdx",
+                  "name": "swr-v1",
+                  "route": "/blog/swr-v1",
+                },
+              ],
+              "name": "blog",
+              "route": "/blog",
+            },
+          ]
+        `)
+    })
   })
 })
