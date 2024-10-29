@@ -89,6 +89,7 @@ export async function collectPageMap({
       type: 'ImportDeclaration',
       source: {
         type: 'Literal',
+        // Use `path.posix` instead of `slash` package because `filePath` already have posix slashes
         value: path.posix.join('private-next-root-dir', filePath)
       },
       specifiers: [
