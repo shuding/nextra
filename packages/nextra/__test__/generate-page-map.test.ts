@@ -6,7 +6,7 @@ import {
   getFilepaths
 } from '../src/server/generate-page-map.js'
 
-describe('generatePageMapFromFilepaths()', () => {
+describe('generatePageMap()', () => {
   it('should work for blog example', async () => {
     const cwd = path.join(CWD, '..', '..', 'examples', 'blog')
     const { appDir } = findPagesDir(cwd)
