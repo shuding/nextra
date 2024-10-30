@@ -48,7 +48,7 @@ export function generatePageMapFromFilepaths({
   filePaths: string[]
   basePath?: string
   locale?: string
-}): any {
+}) {
   let mdxPages: Record<string, string> = Object.create(null)
   const metaFiles: Record<string, string> = Object.create(null)
   for (const filePath of filePaths) {

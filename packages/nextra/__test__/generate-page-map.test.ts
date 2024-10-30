@@ -499,7 +499,27 @@ describe('generatePageMapFromFilepaths()', () => {
       `)
     })
     it('should match page map', () => {
-      const { pageMap } = generatePageMapFromFilepaths({ filePaths })
+      const { pageMap, mdxPages } = generatePageMapFromFilepaths({ filePaths })
+      expect(mdxPages).toMatchInlineSnapshot(`
+        {
+          "": "index.mdx",
+          "advanced/code-highlighting": "advanced/code-highlighting.mdx",
+          "blog": "app/blog/page.jsx",
+          "features/i18n": "features/i18n.mdx",
+          "features/image": "features/image.mdx",
+          "features/latex": "features/latex.mdx",
+          "features/mdx": "features/mdx.mdx",
+          "features/ssg": "features/ssg.mdx",
+          "features/themes": "features/themes.mdx",
+          "get-started": "get-started.mdx",
+          "themes/blog": "themes/blog/index.mdx",
+          "themes/docs": "themes/docs/index.mdx",
+          "themes/docs/bleed": "themes/docs/bleed.mdx",
+          "themes/docs/callout": "themes/docs/callout.mdx",
+          "themes/docs/configuration": "themes/docs/configuration.mdx",
+          "themes/docs/tabs": "themes/docs/tabs.mdx",
+        }
+      `)
       expect(pageMap).toMatchInlineSnapshot(`
           [
             {
@@ -632,10 +652,30 @@ describe('generatePageMapFromFilepaths()', () => {
     })
 
     it('should match page map with base path', () => {
-      const { pageMap } = generatePageMapFromFilepaths({
+      const { pageMap, mdxPages } = generatePageMapFromFilepaths({
         filePaths,
         basePath: 'docs'
       })
+      expect(mdxPages).toMatchInlineSnapshot(`
+        {
+          "": "index.mdx",
+          "advanced/code-highlighting": "advanced/code-highlighting.mdx",
+          "blog": "app/blog/page.jsx",
+          "features/i18n": "features/i18n.mdx",
+          "features/image": "features/image.mdx",
+          "features/latex": "features/latex.mdx",
+          "features/mdx": "features/mdx.mdx",
+          "features/ssg": "features/ssg.mdx",
+          "features/themes": "features/themes.mdx",
+          "get-started": "get-started.mdx",
+          "themes/blog": "themes/blog/index.mdx",
+          "themes/docs": "themes/docs/index.mdx",
+          "themes/docs/bleed": "themes/docs/bleed.mdx",
+          "themes/docs/callout": "themes/docs/callout.mdx",
+          "themes/docs/configuration": "themes/docs/configuration.mdx",
+          "themes/docs/tabs": "themes/docs/tabs.mdx",
+        }
+      `)
       expect(pageMap).toMatchInlineSnapshot(`
           [
             {
