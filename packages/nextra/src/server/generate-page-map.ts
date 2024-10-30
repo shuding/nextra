@@ -38,8 +38,6 @@ export async function getFilepaths({
   return relativePaths
 }
 
-const LEADING_SLASH_RE = /^\//
-
 export function generatePageMapFromFilepaths({
   filePaths,
   basePath = '',
@@ -55,7 +53,7 @@ export function generatePageMapFromFilepaths({
     let { name, dir } = path.parse(filePath)
     if (dir.startsWith('content')) {
       let filePath = dir.replace(/^content(\/|$)/, '')
-      if (locale) filePath = filePath.replace(new RegExp(`^${locale}\\/?`), '')
+      if (locale) filePath = filePath.replace(new RegExp(`^${locale}/?`), '')
       dir = [basePath, filePath].filter(Boolean).join('/')
     } else {
       dir = dir.replace(/^app(\/|$)/, '')
@@ -96,7 +94,7 @@ export function generatePageMapFromFilepaths({
     for (const [name, value] of Object.entries(obj)) {
       const n = name.replace(/^index$/, '')
       const path = prefix + (n ? `/${n}` : '')
-      const routeKey = path.replace(LEADING_SLASH_RE, '')
+      const routeKey = path.replace(/^\//, '')
       if (name === '_meta') {
         const __metaPath = metaFiles[routeKey]
         if (!__metaPath) {
@@ -134,11 +132,7 @@ export function generatePageMapFromFilepaths({
 
   mdxPages = Object.fromEntries(
     Object.entries(mdxPages).flatMap(([key, value]) => {
-      if (basePath) {
-        key = key
-          .replace(new RegExp(`^${basePath}`), '')
-          .replace(LEADING_SLASH_RE, '')
-      }
+      if (basePath) key = key.replace(new RegExp(`^${basePath}/?`), '')
       value = value.replace(/^content\//, '')
       if (locale) value = value.replace(new RegExp(`^${locale}/`), '')
 
