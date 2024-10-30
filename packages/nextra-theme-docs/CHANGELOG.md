@@ -319,6 +319,17 @@
 - Updated dependencies [99f34d3]
   - nextra@4.0.0-app-router.0
 
+## 3.2.0
+
+### Minor Changes
+
+- d755012: feat(nextra-theme-docs): add new theme config option
+  `color.lightness`
+
+### Patch Changes
+
+- nextra@3.2.0
+
 ## 3.1.3
 
 ### Patch Changes
