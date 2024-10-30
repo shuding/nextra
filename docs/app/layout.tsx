@@ -58,9 +58,9 @@ const RootLayout: FC<{
 }> = async ({ children }) => {
   const banner = (
     <Banner storageKey="4.0-release">
-      <div className='before:content-["🎉_"]'>
+      <div className="before:content-['🎉_']">
         Nextra 4.0 is released.{' '}
-        <Link href="#" className='after:content-["_→"]'>
+        <Link href="#" className="after:content-['_→']">
           Read more
         </Link>
       </div>
