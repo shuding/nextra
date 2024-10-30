@@ -8,11 +8,11 @@ import json from '../../../../../nextra-remote-filepaths/graphql-eslint.json'
 
 const { branch, docsPath, filePaths, repo, user } = json
 
-const { mdxPages } = generatePageMapFromFilepaths(filePaths)
+const { mdxPages } = generatePageMapFromFilepaths({ filePaths })
 
-const res = generatePageMapFromFilepaths(
-  filePaths.map(filePath => `remote/graphql-eslint/${filePath}`)
-)
+const res = generatePageMapFromFilepaths({
+  filePaths: filePaths.map(filePath => `remote/graphql-eslint/${filePath}`)
+})
 
 export const pageMap = res.pageMap[0].children
 

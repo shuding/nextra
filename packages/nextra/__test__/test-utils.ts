@@ -26,23 +26,15 @@ export async function getPageMapForFixture(dirName: string) {
   const { getFilepaths, collectPageMap } = await import(
     '../src/server/page-map.js'
   )
+  const filePaths = await getFilepaths({ dir, cwd: dir })
 
-  const relativePaths = await getFilepaths({ dir })
-
-  const { pageMap: _pageMap, mdxPages } =
-    generatePageMapFromFilepaths(relativePaths)
-  const rawJs = await collectPageMap({
-    pageMap: _pageMap,
-    mdxPages,
-    fromAppDir: false
-  })
-
+  const { pageMap, mdxPages } = generatePageMapFromFilepaths({ filePaths })
+  const rawJs = await collectPageMap({ pageMap, mdxPages })
   await fs.writeFile(
     path.join(dir, 'generated-page-map.ts'),
-    '// @ts-nocheck\n' +
-      rawJs.replaceAll('private-next-root-dir/content/', './')
+    '// @ts-nocheck\n' + rawJs.replaceAll('private-next-root-dir/', './')
   )
 
-  const { pageMap } = await import(`${dir}/generated-page-map.js`)
-  return pageMap
+  const result = await import(`${dir}/generated-page-map.js`)
+  return result.pageMap
 }

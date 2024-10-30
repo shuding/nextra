@@ -5,67 +5,88 @@ import type { Folder, MdxFile } from '../types'
 
 type Params = {
   dir: string
-  cwd?: string
-  isAppDir?: boolean
+  cwd: string
+  locale?: string
 }
 
 export async function getFilepaths({
-  dir: _dir,
+  dir,
   cwd,
-  isAppDir
+  locale
 }: Params): Promise<string[]> {
-  if (!_dir) {
-    throw new Error('`dir` is required')
-  }
-  const dir = slash(_dir)
+  const appDir = slash(path.relative(cwd, dir))
+  const contentDir = locale ? `content/${locale}` : 'content'
   const result = await fg(
     [
-      `${dir}/**/${isAppDir ? 'page.{js,jsx,jsx,tsx,md,mdx}' : '*.{md,mdx}'}`,
-      `${dir}/**/_meta.{js,jsx,ts,tsx}`
+      // appDir is empty string on tests
+      ...(appDir
+        ? [
+            `${appDir}/**/page.{js,jsx,jsx,tsx,md,mdx}`,
+            `${appDir}/**/_meta.{js,jsx,ts,tsx}`,
+            `${contentDir}/**/_meta.{js,jsx,ts,tsx}`,
+            `${contentDir}/**/*.{md,mdx}`
+          ]
+        : ['**/_meta.{js,jsx,ts,tsx}', '**/*.{md,mdx}']),
+      // Ignore dynamic routes
+      '!**/\\[*/*'
     ],
     { cwd }
   )
-  const relativePaths = result
-    .map(r => slash(path.relative(dir, r)))
-    // sort filepaths alphabetically
-    .sort((a, b) => {
-      if (a.startsWith('index.')) {
-        return -1
-      }
-      return a.localeCompare(b)
-    })
+  // Sort filepaths alphabetically because there is different order on each
+  // fast-glob invocation
+  const relativePaths = result.sort((a, b) => a.localeCompare(b))
   return relativePaths
 }
 
-export function generatePageMapFromFilepaths(
-  filepaths: string[],
-  basePath = ''
-): any {
-  const mdxPages: Record<string, string> = Object.create(null)
-  const metaFiles: Record<string, string> = Object.create(null)
-  for (const r of filepaths) {
-    const pathInfo = path.parse(r)
+const LEADING_SLASH_RE = /^\//
 
-    if (pathInfo.name === 'page') {
-      mdxPages[pathInfo.dir.replace(/\(.*\)\//, '')] = r
-    } else if (pathInfo.name === '_meta') {
-      metaFiles[`${pathInfo.dir}/_meta`.replace(/^\//, '')] = r
+export function generatePageMapFromFilepaths({
+  filePaths,
+  basePath = '',
+  locale
+}: {
+  filePaths: string[]
+  basePath?: string
+  locale?: string
+}): any {
+  let mdxPages: Record<string, string> = Object.create(null)
+  const metaFiles: Record<string, string> = Object.create(null)
+  for (const filePath of filePaths) {
+    let { name, dir } = path.parse(filePath)
+    if (dir.startsWith('content')) {
+      let filePath = dir.replace(/^content(\/|$)/, '')
+      if (locale) filePath = filePath.replace(new RegExp(`${locale}\\/?`), '')
+      dir = [basePath, filePath].filter(Boolean).join('/')
     } else {
-      const key = `${pathInfo.dir}/${pathInfo.name}`
+      dir = dir.replace(/^app(\/|$)/, '')
+    }
+    if (name === 'page') {
+      // In Next.js we can organize routes without affecting the URL
+      // https://nextjs.org/docs/app/building-your-application/routing/route-groups#organize-routes-without-affecting-the-url-path
+      //
+      // E.g. we have the following filepath:
+      // app/posts/(with-comments)/aaron-swartz-a-programmable-web/()/page.mdx
+      //
+      // will be normalized to:
+      // app/posts/aaron-swartz-a-programmable-web/page.mdx
+      mdxPages[dir.replaceAll(/\(.*?\)\//g, '')] = filePath
+    } else if (name === '_meta') {
+      metaFiles[`${dir}/_meta`.replace(LEADING_SLASH_RE, '')] = filePath
+    } else {
+      const key = `${dir}/${name}`
         .replace(/\/index$/, '')
-        .replace(/^\//, '')
-      mdxPages[key] = r
+        .replace(LEADING_SLASH_RE, '')
+      mdxPages[key] = filePath
     }
   }
 
   const obj = Object.create(null)
 
   for (const path of Object.keys(metaFiles)) {
-    const resultKey = [basePath, path].filter(Boolean).join('/')
-    resultKey.split('/').reduce((r, e) => (r[e] ||= {}), obj)
+    path.split('/').reduce((r, e) => (r[e] ||= {}), obj)
   }
   for (const path of Object.keys(mdxPages)) {
-    const resultKey = [basePath, path, 'index'].filter(Boolean).join('/')
+    const resultKey = [path, 'index'].filter(Boolean).join('/')
     resultKey.split('/').reduce((r, e) => (r[e] ||= {}), obj)
   }
 
@@ -77,9 +98,8 @@ export function generatePageMapFromFilepaths(
     for (const [name, value] of Object.entries(obj)) {
       const path = `${prefix}/${name}`
       const routeKey = path
-        .replace(`/${basePath}/`, '')
         .replace(/(\/|^)index$/, '')
-        .replace(/^\//, '')
+        .replace(LEADING_SLASH_RE, '')
       if (name === '_meta') {
         const __metaPath = metaFiles[routeKey]
         if (!__metaPath) {
@@ -115,6 +135,15 @@ export function generatePageMapFromFilepaths(
   }
 
   const pageMap = getPageMap(obj, [])
+
+  mdxPages = Object.fromEntries(
+    Object.entries(mdxPages).map(([key, value]) => {
+      if (basePath) key = key.replace(basePath, '')
+      value = value.replace('content/', '')
+      if (locale) value = value.replace(`${locale}/`, '')
+      return [key.replace(LEADING_SLASH_RE, ''), value]
+    })
+  )
 
   return { pageMap, mdxPages }
 }
