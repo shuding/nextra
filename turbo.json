@@ -19,9 +19,6 @@
       ],
       "outputs": ["dist/**", ".next/**"]
     },
-    "clean": {
-      "cache": false
-    },
     "dev": {
       "dependsOn": [
         // Run `build` in workspaces I depend on first
