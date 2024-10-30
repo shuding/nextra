@@ -84,7 +84,7 @@ export function generatePageMapFromFilepaths({
     path.split('/').reduce((r, e) => (r[e] ||= {}), obj)
   }
   for (const path of Object.keys(mdxPages)) {
-    const resultKey = path ? `${path}/index` : 'index'
+    const resultKey = path ? `${path}/` : ''
     resultKey.split('/').reduce((r, e) => (r[e] ||= {}), obj)
   }
 
@@ -92,13 +92,11 @@ export function generatePageMapFromFilepaths({
     const children: (Folder | MdxFile | { __metaPath: string })[] = []
 
     for (const [name, value] of Object.entries(obj)) {
-      const n = name.replace(/^index$/, '')
-      const path = prefix + (n ? `/${n}` : '')
-      const routeKey = path.replace(/^\//, '')
+      const path = prefix && name ? `${prefix}/${name}` : prefix || name
       if (name === '_meta') {
-        const __metaPath = metaFiles[routeKey]
+        const __metaPath = metaFiles[path]
         if (!__metaPath) {
-          const o = JSON.stringify({ path, routeKey, metaFiles }, null, 2)
+          const o = JSON.stringify({ path, metaFiles }, null, 2)
           throw new Error(`Can't find "_meta" file for ${path}\n${o}`)
         }
         children.push({ __metaPath })
@@ -106,18 +104,17 @@ export function generatePageMapFromFilepaths({
       }
       const item: Folder | MdxFile = {
         name: name || 'index',
-        route: path || '/'
+        route: '/' + path.replace(/\/$/, '')
       }
       const keys = Object.keys(value)
 
-      const isFolder =
-        keys.length > 1 || (keys.length === 1 && keys[0] !== 'index')
+      const isFolder = keys.length > 1 || (keys.length === 1 && keys[0] !== '')
       if (isFolder) {
         ;(item as any).children = getPageMap(value, path)
       } else {
-        const pagePath = mdxPages[routeKey]
+        const pagePath = mdxPages[path]
         if (!pagePath) {
-          const o = JSON.stringify({ path, routeKey, mdxPages }, null, 2)
+          const o = JSON.stringify({ path, mdxPages }, null, 2)
           throw new Error(`Can't find "page" file for ${path}\n${o}`)
         }
         // @ts-expect-error
