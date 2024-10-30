@@ -1,5 +1,23 @@
 # nextra-theme-blog
 
+## 4.0.0-app-router.18
+
+### Minor Changes
+
+- 439466a: replace `useContentDir` with `contentDirBasePath` option which
+  configure `content` directory under a catch-all subdirectory
+- b00a560: make `page.{jsx,tsx,mdx}` pages and `_meta` files from `app` dir, and
+  also `content` folder files - all add to `pageMap`, but ignore dynamic pages
+  `[[`
+
+### Patch Changes
+
+- a074a99: add `whiteListTagsStyling` nextra config option
+- Updated dependencies [a074a99]
+- Updated dependencies [439466a]
+- Updated dependencies [b00a560]
+  - nextra@4.0.0-app-router.18
+
 ## 4.0.0-app-router.17
 
 ### Patch Changes
