@@ -632,10 +632,31 @@ describe('generatePageMapFromFilepaths()', () => {
     })
 
     it('should match page map with base path', () => {
-      const { pageMap } = generatePageMapFromFilepaths({
+      const { pageMap, mdxPages } = generatePageMapFromFilepaths({
         filePaths,
         basePath: 'docs'
       })
+      // Assert leading slash is removed when `basePath` is set
+      // Assert we don't add pages from `app/` dir to `mdxPages`
+      expect(mdxPages).toMatchInlineSnapshot(`
+        {
+          "": "index.mdx",
+          "advanced/code-highlighting": "advanced/code-highlighting.mdx",
+          "features/i18n": "features/i18n.mdx",
+          "features/image": "features/image.mdx",
+          "features/latex": "features/latex.mdx",
+          "features/mdx": "features/mdx.mdx",
+          "features/ssg": "features/ssg.mdx",
+          "features/themes": "features/themes.mdx",
+          "get-started": "get-started.mdx",
+          "themes/blog": "themes/blog/index.mdx",
+          "themes/docs": "themes/docs/index.mdx",
+          "themes/docs/bleed": "themes/docs/bleed.mdx",
+          "themes/docs/callout": "themes/docs/callout.mdx",
+          "themes/docs/configuration": "themes/docs/configuration.mdx",
+          "themes/docs/tabs": "themes/docs/tabs.mdx",
+        }
+      `)
       expect(pageMap).toMatchInlineSnapshot(`
           [
             {

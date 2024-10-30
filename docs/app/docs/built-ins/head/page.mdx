@@ -1,5 +1,5 @@
 import { Table } from 'components/table'
-import { BackgroundColor, Hue, Lightness, Saturation } from './_slider'
+import { BackgroundColor, Slider } from './_slider'
 
 # `Head`
 
@@ -70,7 +70,8 @@ export const metadata = {
 ### in [dynamic routes with Catch-all segment](https://nextjs.org/docs/app/building-your-application/routing/dynamic-routes#catch-all-segments)
 
 ```jsx filename="app/[[...mdxPath]]/page.jsx"
-export async function generateMetadata({ params: { mdxPath } }) {
+export async function generateMetadata(props) {
+  const { mdxPath } = await props.params
   const { metadata } = await loadPage(mdxPath)
   return {
     title: metadata.title || 'Nextra',
@@ -88,9 +89,9 @@ You can adjust the theme color of the website by setting primary Hue, Saturation
 and Lightness (HSL) values for light and dark themes. Try it out for this
 website:
 
-| Hue (H) | Saturation (S) | Lightness (L) | Background Color   |
-| ------- | -------------- | ------------- | ------------------ |
-| <Hue /> | <Saturation /> | <Lightness/>  | <BackgroundColor/> |
+| Hue (H)                                            | Saturation (S)                                            | Lightness (L)                                             | Background Color   |
+| -------------------------------------------------- | --------------------------------------------------------- | --------------------------------------------------------- | ------------------ |
+| <Slider max={360} cssVar="--nextra-primary-hue" /> | <Slider max={100} cssVar='--nextra-primary-saturation' /> | <Slider max={100} cssVar='--nextra-primary-lightness'  /> | <BackgroundColor/> |
 
 > [!TIP]
 >
