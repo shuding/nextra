@@ -1,45 +1,27 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { ComponentProps, useCallback, useEffect, useState } from 'react'
 
-export function Hue() {
+export function Slider({ cssVar, max }: { cssVar: string; max: number }) {
+  const handleChange: NonNullable<ComponentProps<'input'>['onChange']> =
+    useCallback(
+      e => {
+        const value = `${e.target.value}${max === 360 ? 'deg' : '%'}`
+        e.target.nextSibling!.textContent = value
+        document.documentElement.style.setProperty(cssVar, value)
+      },
+      [cssVar]
+    )
+
   return (
     <div className="flex h-6 items-center gap-2">
       <input
         type="range"
-        min="0"
-        max="360"
+        className="w-28"
+        onChange={handleChange}
         step="1"
-        onChange={e => {
-          const value = `${e.target.value}deg`
-          e.target.nextSibling!.textContent = value
-          document.documentElement.style.setProperty(
-            '--nextra-primary-hue',
-            value
-          )
-        }}
-      />
-      <label className="text-sm text-gray-500 w-14" />
-    </div>
-  )
-}
-
-export function Saturation() {
-  return (
-    <div className="flex h-6 items-center gap-2">
-      <input
-        type="range"
         min="0"
-        max="100"
-        step="1"
-        onChange={e => {
-          const value = `${e.target.value}%`
-          e.target.nextSibling!.textContent = value
-          document.documentElement.style.setProperty(
-            '--nextra-primary-saturation',
-            value
-          )
-        }}
+        max={max}
       />
       <label className="text-sm text-gray-500 w-14" />
     </div>
@@ -78,28 +60,6 @@ export function BackgroundColor() {
         }}
       />
       <label className="text-sm text-gray-500 w-20" />
-    </div>
-  )
-}
-
-export function Lightness() {
-  return (
-    <div className="flex h-6 items-center gap-2">
-      <input
-        type="range"
-        min="0"
-        max="100"
-        step="1"
-        onChange={e => {
-          const value = `${e.target.value}%`
-          e.target.nextSibling!.textContent = value
-          document.documentElement.style.setProperty(
-            '--nextra-primary-lightness',
-            value
-          )
-        }}
-      />
-      <label className="text-sm text-gray-500 w-14" />
     </div>
   )
 }

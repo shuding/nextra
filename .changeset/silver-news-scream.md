@@ -2,4 +2,5 @@
 'nextra': patch
 ---
 
-simplify `generatePageMapFromFilepaths`
+- simplify `generatePageMapFromFilepaths`
+- sync with nextra 3.2.0

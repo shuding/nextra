@@ -1,5 +1,5 @@
 import { Table } from 'components/table'
-import { BackgroundColor, Hue, Lightness, Saturation } from './_slider'
+import { BackgroundColor, Slider } from './_slider'
 
 # `Head`
 
@@ -88,9 +88,9 @@ You can adjust the theme color of the website by setting primary Hue, Saturation
 and Lightness (HSL) values for light and dark themes. Try it out for this
 website:
 
-| Hue (H) | Saturation (S) | Lightness (L) | Background Color   |
-| ------- | -------------- | ------------- | ------------------ |
-| <Hue /> | <Saturation /> | <Lightness/>  | <BackgroundColor/> |
+| Hue (H)                                            | Saturation (S)                                            | Lightness (L)                                             | Background Color   |
+| -------------------------------------------------- | --------------------------------------------------------- | --------------------------------------------------------- | ------------------ |
+| <Slider max={360} cssVar="--nextra-primary-hue" /> | <Slider max={100} cssVar='--nextra-primary-saturation' /> | <Slider max={100} cssVar='--nextra-primary-lightness'  /> | <BackgroundColor/> |
 
 > [!TIP]
 >
