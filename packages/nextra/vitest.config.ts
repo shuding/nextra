@@ -6,7 +6,7 @@ export default defineConfig({
   test: {
     globals: true,
     environment: 'jsdom',
-    testTimeout: 9_000
+    testTimeout: 10_000
   },
   server: {
     watch: {

@@ -69,7 +69,7 @@ export function generatePageMapFromFilepaths({
       //
       // will be normalized to:
       // app/posts/aaron-swartz-a-programmable-web/page.mdx
-      mdxPages[dir.replace(/\(.*?\)\//g, '')] = filePath
+      mdxPages[dir.replaceAll(/\(.*?\)\//g, '')] = filePath
     } else if (name === '_meta') {
       metaFiles[`${dir}/_meta`.replace(LEADING_SLASH_RE, '')] = filePath
     } else {
@@ -140,10 +140,7 @@ export function generatePageMapFromFilepaths({
     Object.entries(mdxPages).map(([key, value]) => {
       if (basePath) key = key.replace(basePath, '')
       value = value.replace('content/', '')
-      if (locale) {
-        key = key.replace(locale, '')
-        value = value.replace(`${locale}/`, '')
-      }
+      if (locale) value = value.replace(`${locale}/`, '')
       return [key.replace(LEADING_SLASH_RE, ''), value]
     })
   )
