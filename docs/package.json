@@ -20,7 +20,7 @@
   },
   "devDependencies": {
     "@svgr/webpack": "^8.0.1",
-    "@types/node": "^20.0.0",
+    "@types/node": "^22.0.0",
     "@types/react": "^18.2.23",
     "autoprefixer": "^10.4.16",
     "postcss": "^8.4.33",
