@@ -134,10 +134,14 @@ export function generatePageMapFromFilepaths({
 
   mdxPages = Object.fromEntries(
     Object.entries(mdxPages).map(([key, value]) => {
-      if (basePath) key = key.replace(new RegExp(`^${basePath}`), '')
+      if (basePath) {
+        key = key
+          .replace(new RegExp(`^${basePath}`), '')
+          .replace(LEADING_SLASH_RE, '')
+      }
       value = value.replace(/^content\//, '')
       if (locale) value = value.replace(new RegExp(`^${locale}/`), '')
-      return [key.replace(LEADING_SLASH_RE, ''), value]
+      return [key, value]
     })
   )
   return { pageMap, mdxPages }
