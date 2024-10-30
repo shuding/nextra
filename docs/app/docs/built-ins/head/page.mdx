@@ -70,7 +70,8 @@ export const metadata = {
 ### in [dynamic routes with Catch-all segment](https://nextjs.org/docs/app/building-your-application/routing/dynamic-routes#catch-all-segments)
 
 ```jsx filename="app/[[...mdxPath]]/page.jsx"
-export async function generateMetadata({ params: { mdxPath } }) {
+export async function generateMetadata(props) {
+  const { mdxPath } = await props.params
   const { metadata } = await loadPage(mdxPath)
   return {
     title: metadata.title || 'Nextra',
