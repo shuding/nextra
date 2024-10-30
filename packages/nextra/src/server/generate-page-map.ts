@@ -3,17 +3,15 @@ import fg from 'fast-glob'
 import slash from 'slash'
 import type { Folder, MdxFile } from '../types'
 
-type Params = {
-  dir: string
-  cwd: string
-  locale?: string
-}
-
 export async function getFilepaths({
   dir,
   cwd,
   locale
-}: Params): Promise<string[]> {
+}: {
+  dir: string
+  cwd: string
+  locale?: string
+}): Promise<string[]> {
   const appDir = slash(path.relative(cwd, dir))
   const contentDir = locale ? `content/${locale}` : 'content'
   const result = await fg(
@@ -42,10 +40,12 @@ interface NestedMap {
   [key: string]: NestedMap
 }
 
+type StringMap = Record<string, string>
+
 const createNested = (prevValue: NestedMap, currVal: string) =>
   (prevValue[currVal] ||= {})
 
-export function generatePageMapFromFilepaths({
+export function generatePageMap({
   filePaths,
   basePath,
   locale
@@ -53,9 +53,12 @@ export function generatePageMapFromFilepaths({
   filePaths: string[]
   basePath?: string
   locale?: string
-}): { mdxPages: Record<string, string>; pageMap: any[] } {
-  let mdxPages: Record<string, string> = Object.create(null)
-  const metaFiles: Record<string, string> = Object.create(null)
+}): {
+  mdxPages: StringMap
+  pageMap: any[]
+} {
+  let mdxPages: StringMap = {}
+  const metaFiles: StringMap = {}
   for (const filePath of filePaths) {
     let { name, dir } = path.parse(filePath)
     if (dir.startsWith('content')) {

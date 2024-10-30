@@ -2,7 +2,7 @@ import path from 'node:path'
 import { findPagesDir } from 'next/dist/lib/find-pages-dir.js'
 import { CWD } from '../src/server/constants.js'
 import {
-  generatePageMapFromFilepaths,
+  generatePageMap,
   getFilepaths
 } from '../src/server/generate-page-map.js'
 
@@ -12,7 +12,7 @@ describe('generatePageMapFromFilepaths()', () => {
     const { appDir } = findPagesDir(cwd)
 
     const filePaths = await getFilepaths({ dir: appDir!, cwd })
-    const { pageMap } = generatePageMapFromFilepaths({ filePaths })
+    const { pageMap } = generatePageMap({ filePaths })
     expect(filePaths).toMatchInlineSnapshot(`
       [
         "app/page.mdx",
@@ -82,7 +82,7 @@ describe('generatePageMapFromFilepaths()', () => {
     const { appDir } = findPagesDir(cwd)
 
     const filePaths = await getFilepaths({ dir: appDir!, cwd })
-    const { pageMap } = generatePageMapFromFilepaths({ filePaths })
+    const { pageMap } = generatePageMap({ filePaths })
     expect(filePaths).toMatchInlineSnapshot(`
       [
         "app/_meta.ts",
@@ -499,7 +499,7 @@ describe('generatePageMapFromFilepaths()', () => {
       `)
     })
     it('should match page map', () => {
-      const { pageMap } = generatePageMapFromFilepaths({ filePaths })
+      const { pageMap } = generatePageMap({ filePaths })
       expect(pageMap).toMatchInlineSnapshot(`
           [
             {
@@ -632,7 +632,7 @@ describe('generatePageMapFromFilepaths()', () => {
     })
 
     it('should match page map with base path', () => {
-      const { pageMap, mdxPages } = generatePageMapFromFilepaths({
+      const { pageMap, mdxPages } = generatePageMap({
         filePaths,
         basePath: 'docs'
       })
@@ -870,7 +870,7 @@ describe('generatePageMapFromFilepaths()', () => {
     })
 
     it('should match page map', () => {
-      const { pageMap, mdxPages } = generatePageMapFromFilepaths({
+      const { pageMap, mdxPages } = generatePageMap({
         filePaths,
         locale: 'en'
       })

@@ -6,10 +6,7 @@ import type { LoaderOptions, PageOpts } from '../types'
 import { compileMdx } from './compile.js'
 import { CWD, IS_PRODUCTION } from './constants.js'
 import { APP_DIR } from './file-system.js'
-import {
-  generatePageMapFromFilepaths,
-  getFilepaths
-} from './generate-page-map.js'
+import { generatePageMap, getFilepaths } from './generate-page-map.js'
 import { collectPageMap } from './page-map.js'
 import { twoslashRenderer } from './rehype-plugins/twoslash.js'
 import { logger } from './utils.js'
@@ -112,7 +109,7 @@ export async function loader(
       this.addContextDependency(path.join(CWD, 'content', locale))
     }
     const filePaths = await getFilepaths({ dir: APP_DIR, cwd: CWD, locale })
-    const { pageMap, mdxPages } = generatePageMapFromFilepaths({
+    const { pageMap, mdxPages } = generatePageMap({
       filePaths,
       // Remove forward slash
       basePath: contentDirBasePath!.slice(1),
