@@ -41,7 +41,8 @@ const headSchema = z.strictObject({
   color: z
     .strictObject({
       hue: darkLightSchema.default({ dark: 204, light: 212 }),
-      saturation: darkLightSchema.default(100)
+      saturation: darkLightSchema.default(100),
+      lightness: darkLightSchema.default({ dark: 55, light: 45 })
     })
     .default({}),
   faviconGlyph: z.string().optional(),
@@ -53,7 +54,7 @@ const headSchema = z.strictObject({
     .default({})
 })
 
-type HeadProps = Partial<z.infer<typeof headSchema>> & {
+type HeadProps = Partial<z.input<typeof headSchema>> & {
   children?: ReactNode
 }
 
@@ -72,19 +73,21 @@ const _Head: FC<HeadProps> = ({ children, ...props }) => {
         :root {
           --nextra-primary-hue: ${color.hue.light}deg;
           --nextra-primary-saturation: ${color.saturation.light}%;
+          --nextra-primary-lightness: ${color.lightness.light}%;
           --nextra-bg: ${backgroundColor.light};
         }
         .dark {
           --nextra-primary-hue: ${color.hue.dark}deg;
           --nextra-primary-saturation: ${color.saturation.dark}%;
+          --nextra-primary-lightness: ${color.lightness.dark}%;
           --nextra-bg: ${backgroundColor.dark};
         }
         ::selection {
-          background: ${makePrimaryColor(86)};
+          background: ${makePrimaryColor(41)};
         }
 
         .dark ::selection {
-          background: ${makePrimaryColor(24)};
+          background: ${makePrimaryColor(-11)};
         }
       `}</style>
       {faviconGlyph && (
@@ -98,7 +101,7 @@ const _Head: FC<HeadProps> = ({ children, ...props }) => {
 }
 
 function makePrimaryColor(l: number) {
-  return `hsl(var(--nextra-primary-hue) var(--nextra-primary-saturation) ${l}%)`
+  return `hsl(var(--nextra-primary-hue) var(--nextra-primary-saturation) calc(var(--nextra-primary-lightness) + ${l}%)`
 }
 
 export const Head = Object.assign(_Head, {

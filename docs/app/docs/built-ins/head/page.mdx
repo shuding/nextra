@@ -1,5 +1,5 @@
 import { Table } from 'components/table'
-import { BackgroundColor, Hue, Saturation } from './_slider'
+import { BackgroundColor, Hue, Lightness, Saturation } from './_slider'
 
 # `Head`
 
@@ -8,14 +8,15 @@ of the website.
 
 <Table>
 
-|                       |                                                  |                                                                                     |
-| --------------------- | ------------------------------------------------ | ----------------------------------------------------------------------------------- |
-| children              | `ReactNode{:ts}`                                 | Content of `<head>`                                                                 |
-| color.hue             | `number \| { dark: number; light: number }{:ts}` | The hue of the primary theme color.<br/>Default: `{ dark: 204, light: 212 }{:json}` |
-| color.saturation      | `number \| { dark: number; light: number }{:ts}` | The saturation of the primary theme color.<br/>Default: `100{:json}`                |
-| backgroundColor.dark  | `"rgb(RRR,GGG,BBB)" \| "#RRGGBB"{:ts}`           | Background color for light theme.<br/>Default: `"rgb(17,17,17)"{:json}`             |
-| backgroundColor.light | `"rgb(RRR,GGG,BBB)" \| "#RRGGBB"{:ts}`           | Background color for dark theme.<br/>Default: `"rgb(250,250,250)"{:json}`           |
-| faviconGlyph          | `string{:ts}`                                    | The glyph to use as the favicon                                                     |
+|                       |                                                  |                                                                                               |
+| --------------------- | ------------------------------------------------ | --------------------------------------------------------------------------------------------- |
+| children              | `ReactNode{:ts}`                                 | Content of `<head>`                                                                           |
+| color.hue             | `number \| { dark: number; light: number }{:ts}` | The hue of the primary theme color.<br/>Default: `{ dark: 204, light: 212 }{:json}` (0 - 360) |
+| color.saturation      | `number \| { dark: number; light: number }{:ts}` | The saturation of the primary theme color.<br/>Default: `100{:json}` (0 - 100)                |
+| color.lightness       | `number \| { dark: number; light: number }`      | The lightness of the primary theme color (0 - 100)                                            |
+| backgroundColor.dark  | `"rgb(RRR,GGG,BBB)" \| "#RRGGBB"{:ts}`           | Background color for light theme.<br/>Default: `"rgb(17,17,17)"{:json}`                       |
+| backgroundColor.light | `"rgb(RRR,GGG,BBB)" \| "#RRGGBB"{:ts}`           | Background color for dark theme.<br/>Default: `"rgb(250,250,250)"{:json}`                     |
+| faviconGlyph          | `string{:ts}`                                    | The glyph to use as the favicon                                                               |
 
 </Table>
 
@@ -83,14 +84,39 @@ information about the `useConfig` hook and the `frontMatter` object.
 
 ## Theme Color
 
-You can adjust the theme color of the website by setting primary hue and
-saturation values for light and dark themes. Try it out for this website:
+You can adjust the theme color of the website by setting primary Hue, Saturation
+and Lightness (HSL) values for light and dark themes. Try it out for this
+website:
 
-| Hue     | Saturation     | Background Color   |
-| ------- | -------------- | ------------------ |
-| <Hue /> | <Saturation /> | <BackgroundColor/> |
+| Hue (H) | Saturation (S) | Lightness (L) | Background Color   |
+| ------- | -------------- | ------------- | ------------------ |
+| <Hue /> | <Saturation /> | <Lightness/>  | <BackgroundColor/> |
+
+> [!TIP]
+>
+> You can adjust the lightness independently for dark or light mode to increase
+> legibility. E.g. to have a neutral primary color you can set the primary color
+> to be white `HSL(0, 0%, 100%)` on dark theme and gray `HSL(0, 0%, 50%)` for
+> light theme.
+>
+> ```jsx filename="app/layout.jsx"
+> <Head
+>   color={{
+>     hue: 0,
+>     saturation: 0,
+>     lightness: {
+>       light: 50,
+>       dark: 100
+>     }
+>   }}
+> />
+> ```
 
 ## Favicon Glyph
 
 This isn't supported by all browsers, but it's a nice way to customize the
 favicon of the website simply by using an emoji or character.
+
+```jsx filename="app/layout.jsx"
+<Head faviconGlyph="✦" />
+```

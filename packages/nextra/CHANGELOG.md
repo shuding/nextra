@@ -173,6 +173,8 @@
   Router, something may be broken, check
   https://github.com/shuding/nextra/tree/v4-v2/examples for the migration guide
 
+## 3.2.0
+
 ## 3.1.3
 
 ### Patch Changes
