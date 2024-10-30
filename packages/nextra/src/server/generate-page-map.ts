@@ -1,6 +1,5 @@
 import path from 'path'
 import fg from 'fast-glob'
-import slash from 'slash'
 import type { Folder, MdxFile } from '../types'
 
 type Params = {
@@ -14,7 +13,7 @@ export async function getFilepaths({
   cwd,
   locale
 }: Params): Promise<string[]> {
-  const appDir = slash(path.relative(cwd, dir))
+  const appDir = path.posix.relative(cwd, dir)
   const contentDir = locale ? `content/${locale}` : 'content'
   const result = await fg(
     [
