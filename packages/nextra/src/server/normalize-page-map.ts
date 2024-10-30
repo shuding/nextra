@@ -83,6 +83,9 @@ function sortFolder(pageMap: PageMapItem[] | Folder) {
   const items = newChildren.sort((a, b) => {
     const indexA = metaKeys.indexOf(a.name)
     const indexB = metaKeys.indexOf(b.name)
+    if (b.name === 'index') return 1
+    if (a.name === 'index') return -1
+
     if (indexA === -1 && indexB === -1) return a.name < b.name ? -1 : 1
     if (indexA === -1) return 1
     if (indexB === -1) return -1

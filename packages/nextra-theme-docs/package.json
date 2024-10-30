@@ -8,8 +8,8 @@
   "exports": {
     "./style.css": "./dist/style.css",
     ".": {
-      "import": "./dist/index.js",
-      "types": "./dist/index.d.mts"
+      "types": "./dist/index.d.mts",
+      "import": "./dist/index.js"
     }
   },
   "types": "./dist/index.d.mts",
@@ -18,7 +18,6 @@
   ],
   "scripts": {
     "build": "tsup",
-    "clean": "rimraf dist .turbo",
     "dev": "tsup --watch . --watch ../nextra/src --watch ../nextra/styles",
     "prepublishOnly": "pnpm build",
     "test": "vitest run",
