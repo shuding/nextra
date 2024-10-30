@@ -1,7 +1,7 @@
 import fs from 'node:fs/promises'
 import path from 'node:path'
 import prettier from 'prettier'
-import { generatePageMapFromFilepaths } from '../src/server/generate-page-map.js'
+import { generatePageMap } from '../src/server/generate-page-map.js'
 
 export function clean(content: string): Promise<string> {
   return prettier.format(content, {
@@ -28,7 +28,7 @@ export async function getPageMapForFixture(dirName: string) {
   )
   const filePaths = await getFilepaths({ dir, cwd: dir })
 
-  const { pageMap, mdxPages } = generatePageMapFromFilepaths({ filePaths })
+  const { pageMap, mdxPages } = generatePageMap({ filePaths })
   const rawJs = await collectPageMap({ pageMap, mdxPages })
   await fs.writeFile(
     path.join(dir, 'generated-page-map.ts'),

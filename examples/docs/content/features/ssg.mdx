@@ -8,9 +8,14 @@ can also be cached by a CDN to maximize the performance.
 This is supported by Nextra too. Here's an example:
 
 export async function Stars() {
-  const response = await fetch(`https://api.github.com/repos/shuding/nextra`)
-  const repo = await response.json()
-  const stars = repo.stargazers_count || 0
+  let stars = 0
+  try {
+    const response = await fetch('https://api.github.com/repos/shuding/nextra')
+    const repo = await response.json()
+    stars = repo.stargazers_count
+  } catch {
+    /* Ignore if there is an error, due rate limiting on CI */
+  }
   return <b>{stars}</b>
 }
 

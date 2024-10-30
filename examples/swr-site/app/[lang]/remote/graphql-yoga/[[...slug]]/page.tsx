@@ -3,14 +3,14 @@ import { notFound } from 'next/navigation'
 import { useMDXComponents } from 'nextra-theme-docs'
 import { compileMdx } from 'nextra/compile'
 import { Callout, evaluate, Tabs } from 'nextra/components'
-import { generatePageMapFromFilepaths } from 'nextra/page-map'
+import { generatePageMap } from 'nextra/page-map'
 import json from '../../../../../nextra-remote-filepaths/graphql-yoga.json'
 
 const { branch, docsPath, filePaths, repo, user } = json
 
-const { mdxPages } = generatePageMapFromFilepaths({ filePaths })
+const { mdxPages } = generatePageMap({ filePaths })
 
-const res = generatePageMapFromFilepaths({
+const res = generatePageMap({
   filePaths: filePaths.map(filePath => `remote/graphql-yoga/${filePath}`)
 })
 

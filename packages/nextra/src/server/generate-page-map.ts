@@ -3,17 +3,15 @@ import fg from 'fast-glob'
 import slash from 'slash'
 import type { Folder, MdxFile } from '../types'
 
-type Params = {
-  dir: string
-  cwd: string
-  locale?: string
-}
-
 export async function getFilepaths({
   dir,
   cwd,
   locale
-}: Params): Promise<string[]> {
+}: {
+  dir: string
+  cwd: string
+  locale?: string
+}): Promise<string[]> {
   const appDir = slash(path.relative(cwd, dir))
   const contentDir = locale ? `content/${locale}` : 'content'
   const result = await fg(
@@ -38,17 +36,29 @@ export async function getFilepaths({
   return relativePaths
 }
 
-export function generatePageMapFromFilepaths({
+interface NestedMap {
+  [key: string]: NestedMap
+}
+
+type StringMap = Record<string, string>
+
+const createNested = (prevValue: NestedMap, currVal: string) =>
+  (prevValue[currVal] ||= {})
+
+export function generatePageMap({
   filePaths,
-  basePath = '',
+  basePath,
   locale
 }: {
   filePaths: string[]
   basePath?: string
   locale?: string
-}): { mdxPages: Record<string, string>; pageMap: any[] } {
-  let mdxPages: Record<string, string> = Object.create(null)
-  const metaFiles: Record<string, string> = Object.create(null)
+}): {
+  mdxPages: StringMap
+  pageMap: any[]
+} {
+  let mdxPages: StringMap = {}
+  const metaFiles: StringMap = {}
   for (const filePath of filePaths) {
     let { name, dir } = path.parse(filePath)
     if (dir.startsWith('content')) {
@@ -78,27 +88,25 @@ export function generatePageMapFromFilepaths({
     }
   }
 
-  const obj = Object.create(null)
+  const obj: NestedMap = {}
 
   for (const path of Object.keys(metaFiles)) {
-    path.split('/').reduce((r, e) => (r[e] ||= {}), obj)
+    path.split('/').reduce(createNested, obj)
   }
   for (const path of Object.keys(mdxPages)) {
-    const resultKey = path ? `${path}/index` : 'index'
-    resultKey.split('/').reduce((r, e) => (r[e] ||= {}), obj)
+    const key = path ? `${path}/` : ''
+    key.split('/').reduce(createNested, obj)
   }
 
   function getPageMap<T extends Record<string, T>>(obj: T, prefix = '') {
     const children: (Folder | MdxFile | { __metaPath: string })[] = []
 
     for (const [name, value] of Object.entries(obj)) {
-      const n = name.replace(/^index$/, '')
-      const path = prefix + (n ? `/${n}` : '')
-      const routeKey = path.replace(/^\//, '')
+      const path = prefix && name ? `${prefix}/${name}` : prefix || name
       if (name === '_meta') {
-        const __metaPath = metaFiles[routeKey]
+        const __metaPath = metaFiles[path]
         if (!__metaPath) {
-          const o = JSON.stringify({ path, routeKey, metaFiles }, null, 2)
+          const o = JSON.stringify({ path, metaFiles }, null, 2)
           throw new Error(`Can't find "_meta" file for ${path}\n${o}`)
         }
         children.push({ __metaPath })
@@ -106,18 +114,17 @@ export function generatePageMapFromFilepaths({
       }
       const item: Folder | MdxFile = {
         name: name || 'index',
-        route: path || '/'
+        route: `/${path}`
       }
       const keys = Object.keys(value)
 
-      const isFolder =
-        keys.length > 1 || (keys.length === 1 && keys[0] !== 'index')
+      const isFolder = keys.length > 1 || (keys.length === 1 && keys[0] !== '')
       if (isFolder) {
         ;(item as any).children = getPageMap(value, path)
       } else {
-        const pagePath = mdxPages[routeKey]
+        const pagePath = mdxPages[path]
         if (!pagePath) {
-          const o = JSON.stringify({ path, routeKey, mdxPages }, null, 2)
+          const o = JSON.stringify({ path, mdxPages }, null, 2)
           throw new Error(`Can't find "page" file for ${path}\n${o}`)
         }
         // @ts-expect-error

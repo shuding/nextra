@@ -15,7 +15,7 @@ export const myVar = 123
 
 export const Test = ({value}) => value
 
-## <Test value='Hello' /> {myVar}
+## <Test value="Hello" /> {myVar}
 `,
       opts
     )
