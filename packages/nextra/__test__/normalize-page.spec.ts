@@ -390,9 +390,9 @@ describe('normalize-page', () => {
     ])
   })
 
-  it.only('findFirstRoute should return index as first', async () => {
+  it('firstChildRoute should return "index" route as first', async () => {
     const pageMap = await getPageMapForFixture(
-      'find-first-route-should-return-index-as-first'
+      'first-child-route-should-return-index-as-first'
     )
     const normalizedResult = normalizePages({
       list: pageMap,
