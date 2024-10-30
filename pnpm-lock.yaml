@@ -127,8 +127,8 @@ importers:
         specifier: ^8.0.1
         version: 8.1.0(typescript@5.6.3)
       '@types/node':
-        specifier: ^20.0.0
-        version: 20.17.3
+        specifier: ^22.0.0
+        version: 22.8.4
       '@types/react':
         specifier: ^18.2.23
         version: 18.3.12
@@ -5106,12 +5106,6 @@ packages:
 
   /@types/node@12.20.55:
     resolution: {integrity: sha512-J8xLz7q2OFulZ2cyGTLE1TbbZcjpno7FaN6zdJNrgAdrJ+DZzh/uFR6YrTb4C+nXakvud8Q4+rbhoIWlYQbUFQ==}
-    dev: true
-
-  /@types/node@20.17.3:
-    resolution: {integrity: sha512-tSQrmKKatLDGnG92h40GD7FzUt0MjahaHwOME4VAFeeA/Xopayq5qLyQRy7Jg/pjgKIFBXuKcGhJo+UdYG55jQ==}
-    dependencies:
-      undici-types: 6.19.8
     dev: true
 
   /@types/node@22.8.4:
