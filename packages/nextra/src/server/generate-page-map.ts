@@ -38,6 +38,13 @@ export async function getFilepaths({
   return relativePaths
 }
 
+interface NestedMap {
+  [key: string]: NestedMap
+}
+
+const createNested = (prevValue: NestedMap, currVal: string) =>
+  (prevValue[currVal] ||= {})
+
 export function generatePageMapFromFilepaths({
   filePaths,
   basePath = '',
@@ -78,14 +85,14 @@ export function generatePageMapFromFilepaths({
     }
   }
 
-  const obj = Object.create(null)
+  const obj: NestedMap = {}
 
   for (const path of Object.keys(metaFiles)) {
-    path.split('/').reduce((r, e) => (r[e] ||= {}), obj)
+    path.split('/').reduce(createNested, obj)
   }
   for (const path of Object.keys(mdxPages)) {
-    const resultKey = path ? `${path}/` : ''
-    resultKey.split('/').reduce((r, e) => (r[e] ||= {}), obj)
+    const key = path ? `${path}/` : ''
+    key.split('/').reduce(createNested, obj)
   }
 
   function getPageMap<T extends Record<string, T>>(obj: T, prefix = '') {
@@ -104,7 +111,7 @@ export function generatePageMapFromFilepaths({
       }
       const item: Folder | MdxFile = {
         name: name || 'index',
-        route: '/' + path.replace(/\/$/, '')
+        route: `/${path}`
       }
       const keys = Object.keys(value)
 
