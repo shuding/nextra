@@ -1,5 +1,12 @@
 # nextra
 
+## 4.0.0-app-router.19
+
+### Patch Changes
+
+- a3627e5: - simplify `generatePageMapFromFilepaths`
+  - sync with nextra 3.2.0
+
 ## 4.0.0-app-router.18
 
 ### Minor Changes
