@@ -1,6 +1,7 @@
 'use client'
 
-import { ComponentProps, useCallback, useEffect, useState } from 'react'
+import type { ComponentProps } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 
 export function Slider({ cssVar, max }: { cssVar: string; max: number }) {
   const handleChange: NonNullable<ComponentProps<'input'>['onChange']> =
@@ -10,7 +11,7 @@ export function Slider({ cssVar, max }: { cssVar: string; max: number }) {
         e.target.nextSibling!.textContent = value
         document.documentElement.style.setProperty(cssVar, value)
       },
-      [cssVar]
+      [cssVar, max]
     )
 
   return (
