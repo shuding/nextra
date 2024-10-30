@@ -133,7 +133,7 @@ export function generatePageMapFromFilepaths({
   const pageMap = getPageMap(obj)
 
   mdxPages = Object.fromEntries(
-    Object.entries(mdxPages).map(([key, value]) => {
+    Object.entries(mdxPages).flatMap(([key, value]) => {
       if (basePath) {
         key = key
           .replace(new RegExp(`^${basePath}`), '')
@@ -141,7 +141,13 @@ export function generatePageMapFromFilepaths({
       }
       value = value.replace(/^content\//, '')
       if (locale) value = value.replace(new RegExp(`^${locale}/`), '')
-      return [key, value]
+
+      // Do not add pages from `app/` dir to `mdxPages`
+      if (value.startsWith('app/')) {
+        return []
+      }
+
+      return [[key, value]]
     })
   )
   return { pageMap, mdxPages }
