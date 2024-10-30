@@ -849,10 +849,64 @@ describe('generatePageMapFromFilepaths()', () => {
     })
 
     it('should match page map', () => {
-      const { pageMap } = generatePageMapFromFilepaths({
+      const { pageMap, mdxPages } = generatePageMapFromFilepaths({
         filePaths,
         locale: 'en'
       })
+      expect(mdxPages).toMatchInlineSnapshot(`
+        {
+          "": "index.mdx",
+          "about/a-page": "about/a-page.mdx",
+          "about/acknowledgemt": "about/acknowledgement.mdx",
+          "about/changelog": "about/changelog.md",
+          "about/team": "about/team.mdx",
+          "blog": "blog.mdx",
+          "blog/swr-v1": "blog/swr-v1.mdx",
+          "docs/advanced": "docs/advanced.mdx",
+          "docs/advanced/cache": "docs/advanced/cache.mdx",
+          "docs/advanced/code-highlighting": "docs/advanced/code-highlighting.mdx",
+          "docs/advanced/dynamic-markdown-import": "docs/advanced/dynamic-markdown-import.mdx",
+          "docs/advanced/file-name.with.DOTS": "docs/advanced/file-name.with.DOTS.mdx",
+          "docs/advanced/images": "docs/advanced/images.mdx",
+          "docs/advanced/markdown-import": "docs/advanced/markdown-import.mdx",
+          "docs/advanced/more/loooooooooooooooooooong-title": "docs/advanced/more/loooooooooooooooooooong-title.mdx",
+          "docs/advanced/more/tree/one": "docs/advanced/more/tree/one.mdx",
+          "docs/advanced/more/tree/three": "docs/advanced/more/tree/three.mdx",
+          "docs/advanced/more/tree/two": "docs/advanced/more/tree/two.mdx",
+          "docs/advanced/performance": "docs/advanced/performance.mdx",
+          "docs/advanced/react-native": "docs/advanced/react-native.mdx",
+          "docs/advanced/scrollbar-x": "docs/advanced/scrollbar-x.mdx",
+          "docs/argumts": "docs/arguments.mdx",
+          "docs/callout": "docs/callout.mdx",
+          "docs/change-log": "docs/change-log.mdx",
+          "docs/code-block-without-language": "docs/code-block-without-language.mdx",
+          "docs/conditional-fetching": "docs/conditional-fetching.md",
+          "docs/custom-header-ids": "docs/custom-header-ids.mdx",
+          "docs/data-fetching": "docs/data-fetching.mdx",
+          "docs/error-handling": "docs/error-handling.mdx",
+          "docs/getting-started": "docs/getting-started.mdx",
+          "docs/global-configuration": "docs/global-configuration.md",
+          "docs/middleware": "docs/middleware.mdx",
+          "docs/mutation": "docs/mutation.md",
+          "docs/options": "docs/options.mdx",
+          "docs/pagination": "docs/pagination.mdx",
+          "docs/prefetching": "docs/prefetching.md",
+          "docs/revalidation": "docs/revalidation.mdx",
+          "docs/suspse": "docs/suspense.mdx",
+          "docs/typescript": "docs/typescript.mdx",
+          "docs/understanding": "docs/understanding.mdx",
+          "docs/with-nextjs": "docs/with-nextjs.mdx",
+          "docs/wrap-toc-items": "docs/wrap-toc-items.mdx",
+          "examples/auth": "examples/auth.mdx",
+          "examples/basic": "examples/basic.mdx",
+          "examples/error-handling": "examples/error-handling.mdx",
+          "examples/full": "examples/full.mdx",
+          "examples/infinite-loading": "examples/infinite-loading.mdx",
+          "examples/ssr": "examples/ssr.mdx",
+          "foo": "foo.md",
+          "test": "test.md",
+        }
+      `)
       expect(pageMap).toMatchInlineSnapshot(`
         [
           {
