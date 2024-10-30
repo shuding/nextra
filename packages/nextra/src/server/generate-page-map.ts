@@ -55,7 +55,7 @@ export function generatePageMapFromFilepaths({
     let { name, dir } = path.parse(filePath)
     if (dir.startsWith('content')) {
       let filePath = dir.replace(/^content(\/|$)/, '')
-      if (locale) filePath = filePath.replace(new RegExp(`${locale}\\/?`), '')
+      if (locale) filePath = filePath.replace(new RegExp(`^${locale}\\/?`), '')
       dir = [basePath, filePath].filter(Boolean).join('/')
     } else {
       dir = dir.replace(/^app(\/|$)/, '')
@@ -69,13 +69,13 @@ export function generatePageMapFromFilepaths({
       //
       // will be normalized to:
       // app/posts/aaron-swartz-a-programmable-web/page.mdx
-      mdxPages[dir.replaceAll(/\(.*?\)\//g, '')] = filePath
+      const key = dir.replaceAll(/\(.*?\)\//g, '')
+      mdxPages[key] = filePath
     } else if (name === '_meta') {
-      metaFiles[`${dir}/_meta`.replace(LEADING_SLASH_RE, '')] = filePath
+      const key = dir ? `${dir}/${name}` : name
+      metaFiles[key] = filePath
     } else {
-      const key = `${dir}/${name}`
-        .replace(/\/index$/, '')
-        .replace(LEADING_SLASH_RE, '')
+      const key = [dir, name.replace(/^index$/, '')].filter(Boolean).join('/')
       mdxPages[key] = filePath
     }
   }
@@ -86,41 +86,37 @@ export function generatePageMapFromFilepaths({
     path.split('/').reduce((r, e) => (r[e] ||= {}), obj)
   }
   for (const path of Object.keys(mdxPages)) {
-    const resultKey = [path, 'index'].filter(Boolean).join('/')
+    const resultKey = path ? `${path}/index` : 'index'
     resultKey.split('/').reduce((r, e) => (r[e] ||= {}), obj)
   }
 
-  function getPageMap<T extends Record<string, T>>(
-    obj: T,
-    list: (Folder | MdxFile)[],
-    prefix = ''
-  ) {
+  function getPageMap<T extends Record<string, T>>(obj: T, prefix = '') {
+    const children: (Folder | MdxFile | { __metaPath: string })[] = []
+
     for (const [name, value] of Object.entries(obj)) {
-      const path = `${prefix}/${name}`
-      const routeKey = path
-        .replace(/(\/|^)index$/, '')
-        .replace(LEADING_SLASH_RE, '')
+      const n = name.replace(/^index$/, '')
+      const path = prefix + (n ? `/${n}` : '')
+      const routeKey = path.replace(LEADING_SLASH_RE, '')
       if (name === '_meta') {
         const __metaPath = metaFiles[routeKey]
         if (!__metaPath) {
           const o = JSON.stringify({ path, routeKey, metaFiles }, null, 2)
           throw new Error(`Can't find "_meta" file for ${path}\n${o}`)
         }
-        // @ts-expect-error
-        list.push({ __metaPath })
+        children.push({ __metaPath })
         continue
       }
-      const item: Folder | MdxFile = {
+      const item = {
         name: name || 'index',
-        route: path.replace(/\/index$/, '') || '/'
+        route: path || '/'
       }
       const keys = Object.keys(value)
 
       const isFolder =
         keys.length > 1 || (keys.length === 1 && keys[0] !== 'index')
       if (isFolder) {
-        ;(item as Folder).children = getPageMap(value, [], path)
-      } else if (!name.startsWith('[')) {
+        ;(item as any).children = getPageMap(value, path)
+      } else {
         const pagePath = mdxPages[routeKey]
         if (!pagePath) {
           const o = JSON.stringify({ path, routeKey, mdxPages }, null, 2)
@@ -129,18 +125,18 @@ export function generatePageMapFromFilepaths({
         // @ts-expect-error
         item.__pagePath = pagePath
       }
-      list.push(item)
+      children.push(item)
     }
-    return list
+    return children
   }
 
-  const pageMap = getPageMap(obj, [])
+  const pageMap = getPageMap(obj)
 
   mdxPages = Object.fromEntries(
     Object.entries(mdxPages).map(([key, value]) => {
-      if (basePath) key = key.replace(basePath, '')
-      value = value.replace('content/', '')
-      if (locale) value = value.replace(`${locale}/`, '')
+      if (basePath) key = key.replace(new RegExp(`^${basePath}`), '')
+      value = value.replace(/^content\//, '')
+      if (locale) value = value.replace(new RegExp(`^${locale}/`), '')
       return [key.replace(LEADING_SLASH_RE, ''), value]
     })
   )

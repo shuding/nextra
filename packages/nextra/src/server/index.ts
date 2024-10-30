@@ -39,7 +39,7 @@ const nextra: Nextra = nextraConfig => {
   const pageMapPlaceholderLoader = {
     loader: LOADER_PATH,
     options: {
-      contentDirBasePath: loaderOptions.contentDirBasePath ?? ''
+      contentDirBasePath: loaderOptions.contentDirBasePath
     }
   }
 

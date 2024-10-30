@@ -72,7 +72,7 @@ export const nextraConfigSchema = z.strictObject({
       value => value.length === 1 || !value.endsWith('/'),
       value => ({ message: `"${value}" must not end with "/"` })
     )
-    .optional()
+    .default('/')
 })
 
 export const element = z.custom<ReactElement>(isValidElement, {
