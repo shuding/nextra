@@ -48,7 +48,7 @@ export function generatePageMapFromFilepaths({
   filePaths: string[]
   basePath?: string
   locale?: string
-}) {
+}): { mdxPages: Record<string, string>; pageMap: any[] } {
   let mdxPages: Record<string, string> = Object.create(null)
   const metaFiles: Record<string, string> = Object.create(null)
   for (const filePath of filePaths) {
@@ -60,22 +60,22 @@ export function generatePageMapFromFilepaths({
     } else {
       dir = dir.replace(/^app(\/|$)/, '')
     }
-    if (name === 'page') {
-      // In Next.js we can organize routes without affecting the URL
-      // https://nextjs.org/docs/app/building-your-application/routing/route-groups#organize-routes-without-affecting-the-url-path
-      //
-      // E.g. we have the following filepath:
-      // app/posts/(with-comments)/aaron-swartz-a-programmable-web/()/page.mdx
-      //
-      // will be normalized to:
-      // app/posts/aaron-swartz-a-programmable-web/page.mdx
-      const key = dir.replaceAll(/\(.*?\)\//g, '')
-      mdxPages[key] = filePath
-    } else if (name === '_meta') {
+    if (name === '_meta') {
       const key = dir ? `${dir}/${name}` : name
       metaFiles[key] = filePath
     } else {
-      const key = [dir, name.replace(/^index$/, '')].filter(Boolean).join('/')
+      const key =
+        name === 'page'
+          ? // In Next.js we can organize routes without affecting the URL
+            // https://nextjs.org/docs/app/building-your-application/routing/route-groups#organize-routes-without-affecting-the-url-path
+            //
+            // E.g. we have the following filepath:
+            // app/posts/(with-comments)/aaron-swartz-a-programmable-web/()/page.mdx
+            //
+            // will be normalized to:
+            // app/posts/aaron-swartz-a-programmable-web/page.mdx
+            dir.replaceAll(/\(.*?\)\//g, '')
+          : [dir, name.replace(/^index$/, '')].filter(Boolean).join('/')
       mdxPages[key] = filePath
     }
   }
@@ -106,7 +106,7 @@ export function generatePageMapFromFilepaths({
         children.push({ __metaPath })
         continue
       }
-      const item = {
+      const item: Folder | MdxFile = {
         name: name || 'index',
         route: path || '/'
       }
@@ -140,6 +140,5 @@ export function generatePageMapFromFilepaths({
       return [key.replace(LEADING_SLASH_RE, ''), value]
     })
   )
-
   return { pageMap, mdxPages }
 }
