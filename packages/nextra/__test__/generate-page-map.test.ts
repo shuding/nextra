@@ -26,55 +26,55 @@ describe('generatePageMapFromFilepaths()', () => {
       ]
     `)
     expect(pageMap).toMatchInlineSnapshot(`
-        [
-          {
-            "__pagePath": "app/page.mdx",
-            "name": "index",
-            "route": "/",
-          },
-          {
-            "children": [
-              {
-                "__pagePath": "app/posts/(with-comments)/aaron-swartz-a-programmable-web/page.mdx",
-                "name": "aaron-swartz-a-programmable-web",
-                "route": "/posts/aaron-swartz-a-programmable-web",
-              },
-              {
-                "__pagePath": "app/posts/(with-comments)/code-blocks/page.mdx",
-                "name": "code-blocks",
-                "route": "/posts/code-blocks",
-              },
-              {
-                "__pagePath": "app/posts/(with-comments)/draft/page.mdx",
-                "name": "draft",
-                "route": "/posts/draft",
-              },
-              {
-                "__pagePath": "app/posts/(with-comments)/lists/page.mdx",
-                "name": "lists",
-                "route": "/posts/lists",
-              },
-              {
-                "__pagePath": "app/posts/(with-comments)/nextra-components/page.mdx",
-                "name": "nextra-components",
-                "route": "/posts/nextra-components",
-              },
-              {
-                "__pagePath": "app/posts/(with-comments)/table/page.mdx",
-                "name": "table",
-                "route": "/posts/table",
-              },
-              {
-                "__pagePath": "app/posts/page.jsx",
-                "name": "index",
-                "route": "/posts",
-              },
-            ],
-            "name": "posts",
-            "route": "/posts",
-          },
-        ]
-      `)
+      [
+        {
+          "__pagePath": "app/page.mdx",
+          "name": "index",
+          "route": "/",
+        },
+        {
+          "children": [
+            {
+              "__pagePath": "app/posts/(with-comments)/aaron-swartz-a-programmable-web/page.mdx",
+              "name": "aaron-swartz-a-programmable-web",
+              "route": "/posts/aaron-swartz-a-programmable-web",
+            },
+            {
+              "__pagePath": "app/posts/(with-comments)/code-blocks/page.mdx",
+              "name": "code-blocks",
+              "route": "/posts/code-blocks",
+            },
+            {
+              "__pagePath": "app/posts/(with-comments)/draft/page.mdx",
+              "name": "draft",
+              "route": "/posts/draft",
+            },
+            {
+              "__pagePath": "app/posts/(with-comments)/lists/page.mdx",
+              "name": "lists",
+              "route": "/posts/lists",
+            },
+            {
+              "__pagePath": "app/posts/(with-comments)/nextra-components/page.mdx",
+              "name": "nextra-components",
+              "route": "/posts/nextra-components",
+            },
+            {
+              "__pagePath": "app/posts/(with-comments)/table/page.mdx",
+              "name": "table",
+              "route": "/posts/table",
+            },
+            {
+              "__pagePath": "app/posts/page.jsx",
+              "name": "index",
+              "route": "/posts",
+            },
+          ],
+          "name": "posts",
+          "route": "/posts",
+        },
+      ]
+    `)
   })
 
   it('should work for nextra.site', async () => {
