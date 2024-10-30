@@ -389,4 +389,18 @@ describe('normalize-page', () => {
       }
     ])
   })
+
+  it.only('findFirstRoute should return index as first', async () => {
+    const pageMap = await getPageMapForFixture(
+      'find-first-route-should-return-index-as-first'
+    )
+    const normalizedResult = normalizePages({
+      list: pageMap,
+      route: '/'
+    })
+    // @ts-expect-error
+    expect(normalizedResult.topLevelNavbarItems[0].firstChildRoute).toBe(
+      '/blog'
+    )
+  })
 })
