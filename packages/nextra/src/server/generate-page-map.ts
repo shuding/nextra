@@ -47,7 +47,7 @@ const createNested = (prevValue: NestedMap, currVal: string) =>
 
 export function generatePageMapFromFilepaths({
   filePaths,
-  basePath = '',
+  basePath,
   locale
 }: {
   filePaths: string[]
