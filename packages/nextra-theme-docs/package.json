@@ -44,7 +44,7 @@
     "@types/react": "^18.2.23",
     "@vitejs/plugin-react": "^4.1.0",
     "jsdom": "^25.0.0",
-    "next": "^15.0.0-rc.1",
+    "next": "^15.0.2",
     "nextra": "workspace:*",
     "postcss": "^8.4.33",
     "postcss-import": "^16.0.0",
