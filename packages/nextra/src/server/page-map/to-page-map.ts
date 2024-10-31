@@ -1,4 +1,4 @@
-import path from 'path'
+import path from 'node:path'
 import type { TItem } from '../../types.js'
 
 interface NestedMap {
