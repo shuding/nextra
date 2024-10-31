@@ -6,8 +6,8 @@ import type { LoaderOptions, PageOpts } from '../types.js'
 import { compileMdx } from './compile.js'
 import { CWD, IS_PRODUCTION } from './constants.js'
 import { APP_DIR } from './file-system.js'
-import { collectPageMap } from './page-map.js'
 import { generatePageMap, getFilepaths } from './page-map/generate.js'
+import { transformPageMapToJs } from './page-map/to-js.js'
 import { twoslashRenderer } from './rehype-plugins/twoslash.js'
 import { logger } from './utils.js'
 
@@ -94,7 +94,7 @@ export async function loader(
       basePath: contentDirBasePath!.slice(1),
       locale
     })
-    const rawJs = await collectPageMap({ pageMap, mdxPages })
+    const rawJs = await transformPageMapToJs({ pageMap, mdxPages })
     return rawJs
   }
   if (filePath.includes('/nextra/dist/server/page-map/get.js')) {

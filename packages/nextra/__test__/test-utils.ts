@@ -1,7 +1,10 @@
 import fs from 'node:fs/promises'
 import path from 'node:path'
 import prettier from 'prettier'
-import { generatePageMap, getFilepaths } from '../src/server/page-map/generate.js'
+import {
+  generatePageMap,
+  getFilepaths
+} from '../src/server/page-map/generate.js'
 
 export function clean(content: string): Promise<string> {
   return prettier.format(content, {
@@ -23,11 +26,13 @@ export async function getPageMapForFixture(dirName: string) {
     ...(await vi.importActual('../src/server/constants.ts')),
     CHUNKS_DIR: dir
   }))
-  const { collectPageMap } = await import('../src/server/page-map.js')
+  const { transformPageMapToJs } = await import(
+    '../src/server/page-map/to-js.js'
+  )
   const filePaths = await getFilepaths({ dir, cwd: dir })
 
   const { pageMap, mdxPages } = generatePageMap({ filePaths })
-  const rawJs = await collectPageMap({ pageMap, mdxPages })
+  const rawJs = await transformPageMapToJs({ pageMap, mdxPages })
   await fs.writeFile(
     path.join(dir, 'generated-page-map.ts'),
     '// @ts-nocheck\n' + rawJs.replaceAll('private-next-root-dir/', './')

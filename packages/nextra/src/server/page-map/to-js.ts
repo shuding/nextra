@@ -1,10 +1,10 @@
 import path from 'node:path'
 import type { ArrayExpression, ImportDeclaration } from 'estree'
 import { toJs } from 'estree-util-to-js'
-import type { TItem } from '../types.js'
-import { META_RE } from './constants.js'
-import { APP_DIR } from './file-system.js'
-import { createAstObject } from './utils.js'
+import type { TItem } from '../../types.js'
+import { META_RE } from '../constants.js'
+import { APP_DIR } from '../file-system.js'
+import { createAstObject } from '../utils.js'
 
 type Import = {
   importName: string
@@ -59,7 +59,7 @@ function convertPageMapToAst(
   return { type: 'ArrayExpression', elements }
 }
 
-export async function collectPageMap({
+export async function transformPageMapToJs({
   pageMap,
   mdxPages
 }: {
