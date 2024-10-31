@@ -8,12 +8,12 @@ import json from '../../../../../nextra-remote-filepaths/graphql-yoga.json'
 
 const { branch, docsPath, filePaths, repo, user } = json
 
-const result = convertToPageMap({
+const { mdxPages, pageMap: _pageMap } = convertToPageMap({
   filePaths,
   basePath: 'remote/graphql-yoga'
 })
 
-export const pageMap = normalizePageMap((result.pageMap[0] as any).children)
+export const pageMap = normalizePageMap(_pageMap as any)
 
 const { wrapper: Wrapper, ...components } = useMDXComponents({
   Callout,
@@ -45,7 +45,7 @@ export default async function Page(props) {
 }
 
 export function generateStaticParams() {
-  const params = Object.keys(result.mdxPages).map(route => ({
+  const params = Object.keys(mdxPages).map(route => ({
     lang: 'en',
     ...(route && { slug: route.split('/') })
   }))

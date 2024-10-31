@@ -47,8 +47,16 @@ export default async function RootLayout({ children, params }) {
   const dictionary = await getDictionary(lang)
   let pageMap = await getPageMap(lang)
 
+  const [remoteItem] = graphqlEslintPageMap
+
   if (lang === 'en') {
-    pageMap = [...pageMap, ...graphqlEslintPageMap, ...graphqlYogaPageMap]
+    pageMap = [
+      ...pageMap,
+      {
+        ...remoteItem,
+        children: [...remoteItem.children, ...graphqlYogaPageMap[0].children]
+      }
+    ]
   }
   const banner = (
     <Banner storageKey="swr-2">
