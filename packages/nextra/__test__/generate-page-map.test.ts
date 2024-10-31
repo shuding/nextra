@@ -1268,7 +1268,7 @@ describe('generatePageMap()', () => {
         'getting-started/parser.mdx',
         'index.mdx'
       ],
-      basePath: 'remote'
+      basePath: 'remote/graphql-eslint'
     })
     expect(mdxPages).toMatchInlineSnapshot(`
       {
@@ -1283,40 +1283,52 @@ describe('generatePageMap()', () => {
     expect(pageMap).toMatchInlineSnapshot(`
       [
         {
-          "__pagePath": "configs.mdx",
-          "name": "configs",
-          "route": "/configs",
-        },
-        {
-          "__pagePath": "custom-rules.mdx",
-          "name": "custom-rules",
-          "route": "/custom-rules",
-        },
-        {
           "children": [
             {
-              "__pagePath": "getting-started.mdx",
-              "name": "index",
-              "route": "/getting-started",
-            },
-            {
-              "__pagePath": "getting-started/parser-options.mdx",
-              "name": "parser-options",
-              "route": "/getting-started/parser-options",
-            },
-            {
-              "__pagePath": "getting-started/parser.mdx",
-              "name": "parser",
-              "route": "/getting-started/parser",
+              "children": [
+                {
+                  "__pagePath": "configs.mdx",
+                  "name": "configs",
+                  "route": "/remote/graphql-eslint/configs",
+                },
+                {
+                  "__pagePath": "custom-rules.mdx",
+                  "name": "custom-rules",
+                  "route": "/remote/graphql-eslint/custom-rules",
+                },
+                {
+                  "children": [
+                    {
+                      "__pagePath": "getting-started.mdx",
+                      "name": "index",
+                      "route": "/remote/graphql-eslint/getting-started",
+                    },
+                    {
+                      "__pagePath": "getting-started/parser-options.mdx",
+                      "name": "parser-options",
+                      "route": "/remote/graphql-eslint/getting-started/parser-options",
+                    },
+                    {
+                      "__pagePath": "getting-started/parser.mdx",
+                      "name": "parser",
+                      "route": "/remote/graphql-eslint/getting-started/parser",
+                    },
+                  ],
+                  "name": "getting-started",
+                  "route": "/remote/graphql-eslint/getting-started",
+                },
+                {
+                  "__pagePath": "index.mdx",
+                  "name": "index",
+                  "route": "/remote/graphql-eslint",
+                },
+              ],
+              "name": "graphql-eslint",
+              "route": "/remote/graphql-eslint",
             },
           ],
-          "name": "getting-started",
-          "route": "/getting-started",
-        },
-        {
-          "__pagePath": "index.mdx",
-          "name": "index",
-          "route": "/",
+          "name": "remote",
+          "route": "/remote",
         },
       ]
     `)
