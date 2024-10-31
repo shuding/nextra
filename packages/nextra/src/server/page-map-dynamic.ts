@@ -4,7 +4,7 @@ import type {
   DynamicMetaItem,
   DynamicMetaJsonFile,
   Folder
-} from '../types'
+} from '../types.js'
 import { normalizePageRoute, pageTitleFromFilename } from './utils.js'
 
 function isFolder(value: DynamicMetaItem): value is DynamicFolder {

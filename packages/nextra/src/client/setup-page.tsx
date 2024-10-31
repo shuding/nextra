@@ -6,7 +6,7 @@
 import { useMDXComponents as getMDXComponents } from 'next-mdx-import-source-file'
 import type { ComponentProps, FC } from 'react'
 import { createElement } from 'react'
-import type { Heading, MDXWrapper, PageOpts } from '../types'
+import type { Heading, MDXWrapper, PageOpts } from '../types.js'
 
 const Wrapper = getMDXComponents().wrapper
 

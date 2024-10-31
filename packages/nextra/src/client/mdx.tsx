@@ -2,7 +2,7 @@ import Image, { type ImageProps } from 'next/image'
 import Link from 'next/link'
 import { createElement } from 'react'
 import type { ComponentProps, FC, JSX } from 'react'
-import type { MDXWrapper } from '../types'
+import type { MDXWrapper } from '../types.js'
 import { LinkArrowIcon } from './icons/index.js'
 
 interface NestedMDXComponents {

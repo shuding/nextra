@@ -1,5 +1,5 @@
 import { MARKDOWN_EXTENSION_RE } from '../constants.js'
-import type { DynamicFolder, DynamicMeta } from '../types'
+import type { DynamicFolder, DynamicMeta } from '../types.js'
 
 function appendSlashForFolders(obj: DynamicMeta): DynamicMeta {
   return Object.fromEntries(

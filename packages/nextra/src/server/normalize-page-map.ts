@@ -5,7 +5,7 @@ import type {
   MdxFile,
   MetaJsonFile,
   PageMapItem
-} from '../types'
+} from '../types.js'
 import { metaSchema } from './schemas.js'
 
 export function normalizePageMap(pageMap: PageMapItem[] | Folder): any {

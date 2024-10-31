@@ -1,7 +1,7 @@
 import path from 'node:path'
 import type { ArrayExpression, ImportDeclaration } from 'estree'
 import { toJs } from 'estree-util-to-js'
-import type { PageMapItem } from '../types'
+import type { TItem } from '../types.js'
 import { META_RE } from './constants.js'
 import { APP_DIR } from './file-system.js'
 import { createAstObject } from './utils.js'
@@ -27,7 +27,7 @@ function cleanFileName(name: string): string {
 }
 
 function convertPageMapToAst(
-  pageMap: PageMapItem[],
+  pageMap: TItem[],
   imports: Import[]
 ): ArrayExpression {
   const elements = pageMap.map(item => {
@@ -39,7 +39,6 @@ function convertPageMapToAst(
       })
     }
     if ('route' in item) {
-      // @ts-expect-error
       const pagePath = item.__pagePath
       let name = ''
 
@@ -53,9 +52,7 @@ function convertPageMapToAst(
         ...(name && { frontMatter: { type: 'Identifier', name } })
       })
     }
-    // @ts-expect-error
     const name = cleanFileName(item.__metaPath)
-    // @ts-expect-error
     imports.push({ importName: name, filePath: item.__metaPath })
     return createAstObject({
       data: { type: 'Identifier', name }
@@ -69,7 +66,7 @@ export async function collectPageMap({
   pageMap,
   mdxPages
 }: {
-  pageMap: PageMapItem[]
+  pageMap: TItem[]
   mdxPages: Record<string, string>
 }): Promise<string> {
   const someImports: Import[] = []

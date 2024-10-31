@@ -3,7 +3,7 @@ import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import type { RuleSetRule } from 'webpack'
 import { fromZodError } from 'zod-validation-error'
-import type { Nextra } from '../types'
+import type { Nextra } from '../types.js'
 import { MARKDOWN_EXTENSION_RE, MARKDOWN_EXTENSIONS } from './constants.js'
 import { nextraConfigSchema } from './schemas.js'
 import { logger } from './utils.js'
@@ -170,4 +170,4 @@ const nextra: Nextra = nextraConfig => {
 
 export default nextra
 
-export type * from '../types'
+export type * from '../types.js'

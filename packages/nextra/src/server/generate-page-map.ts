@@ -1,7 +1,7 @@
 import path from 'path'
 import fg from 'fast-glob'
 import slash from 'slash'
-import type { Folder, MdxFile } from '../types'
+import type { TItem } from '../types.js'
 
 export async function getFilepaths({
   dir,
@@ -53,10 +53,7 @@ export function generatePageMap({
   filePaths: string[]
   basePath?: string
   locale?: string
-}): {
-  mdxPages: StringMap
-  pageMap: any[]
-} {
+}) {
   let mdxPages: StringMap = {}
   const metaFiles: StringMap = {}
   for (const filePath of filePaths) {
@@ -99,11 +96,11 @@ export function generatePageMap({
   }
 
   function getPageMap<T extends Record<string, T>>(obj: T, prefix = '') {
-    const children: (Folder | MdxFile | { __metaPath: string })[] = []
+    const children: TItem[] = []
 
-    for (const [name, value] of Object.entries(obj)) {
-      const path = prefix && name ? `${prefix}/${name}` : prefix || name
-      if (name === '_meta') {
+    for (const [key, value] of Object.entries(obj)) {
+      const path = prefix && key ? `${prefix}/${key}` : prefix || key
+      if (key === '_meta') {
         const __metaPath = metaFiles[path]
         if (!__metaPath) {
           const o = JSON.stringify({ path, metaFiles }, null, 2)
@@ -129,6 +126,15 @@ export function generatePageMap({
         }
         // @ts-expect-error
         item.__pagePath = pagePath
+        }
+        children.push(item)
+        continue
+      }
+      const __pagePath = mdxPages[path]
+      if (!__pagePath) {
+        const o = JSON.stringify({ path, mdxPages }, null, 2)
+        throw new Error(`Can't find "page" file for ${path}\n${o}`)
+      }
       }
       children.push(item)
     }
