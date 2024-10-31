@@ -5,7 +5,7 @@ import type { TItem, Import } from '../../types.js'
 import { META_RE } from '../constants.js'
 import { convertPageMapToAst } from './to-ast.js'
 
-export async function transformPageMapToJs({
+export async function convertPageMapToJs({
   pageMap,
   mdxPages
 }: {

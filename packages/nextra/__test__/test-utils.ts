@@ -1,7 +1,7 @@
 import fs from 'node:fs/promises'
 import path from 'node:path'
 import prettier from 'prettier'
-import { transformPageMapToJs } from '../src/server/page-map/to-js.js'
+import { convertPageMapToJs } from '../src/server/page-map/to-js.js'
 import {
   convertToPageMap,
   getFilepaths
@@ -23,7 +23,7 @@ export async function getPageMapForFixture(dirName: string) {
 
   const filePaths = await getFilepaths({ dir, cwd: dir })
   const { pageMap, mdxPages } = convertToPageMap({ filePaths })
-  const rawJs = await transformPageMapToJs({ pageMap, mdxPages })
+  const rawJs = await convertPageMapToJs({ pageMap, mdxPages })
 
   await fs.writeFile(
     path.join(dir, 'generated-page-map.ts'),

@@ -48,13 +48,6 @@ export const nextraConfigSchema = z.strictObject({
     ])
     .optional(),
   codeHighlight: z.boolean().default(true),
-  /**
-   * A function to modify the `pageMap` passed to theme layouts.
-   * @experimental
-   */
-  transformPageMap: z
-    .custom<(pageMap: PageMapItem[], locale: string) => PageMapItem[]>()
-    .optional(),
   mdxOptions: z
     .strictObject({
       rehypePlugins: z.custom<ProcessorOptions['rehypePlugins']>(),
