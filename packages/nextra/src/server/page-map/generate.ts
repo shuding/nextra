@@ -19,10 +19,11 @@ export async function getFilepaths({
       // appDir is empty string on tests
       ...(appDir
         ? [
+            `${contentDir}/**/_meta.{js,jsx,ts,tsx}`, // Include `_meta` files from `content` directory
+            `${contentDir}/**/*.{md,mdx}`, // Include all Markdown/MDX files from `content` directory
             `${appDir}/**/page.{js,jsx,jsx,tsx,md,mdx}`,
-            `${appDir}/**/_meta.{js,jsx,ts,tsx}`,
-            `${contentDir}/**/_meta.{js,jsx,ts,tsx}`,
-            `${contentDir}/**/*.{md,mdx}`
+            `${appDir}/**/_meta.{js,jsx,ts,tsx}`, // Include `_meta` files from `app` directory
+            `!${appDir}/**/_*/*` // Ignore all subdirectories starting with `_`
           ]
         : ['**/_meta.{js,jsx,ts,tsx}', '**/*.{md,mdx}']),
       // Ignore dynamic routes
@@ -58,6 +59,8 @@ export function generatePageMap({
   const metaFiles: StringMap = {}
   for (const filePath of filePaths) {
     let { name, dir } = path.parse(filePath)
+    const inAppDir = filePath.startsWith('app/')
+
     if (dir.startsWith('content')) {
       let filePath = dir.replace(/^content(\/|$)/, '')
       if (locale) filePath = filePath.replace(new RegExp(`^${locale}/?`), '')
@@ -69,18 +72,17 @@ export function generatePageMap({
       const key = dir ? `${dir}/${name}` : name
       metaFiles[key] = filePath
     } else {
-      const key =
-        name === 'page'
-          ? // In Next.js we can organize routes without affecting the URL
-            // https://nextjs.org/docs/app/building-your-application/routing/route-groups#organize-routes-without-affecting-the-url-path
-            //
-            // E.g. we have the following filepath:
-            // app/posts/(with-comments)/aaron-swartz-a-programmable-web/()/page.mdx
-            //
-            // will be normalized to:
-            // app/posts/aaron-swartz-a-programmable-web/page.mdx
-            dir.replaceAll(/\(.*?\)\//g, '')
-          : [dir, name.replace(/^index$/, '')].filter(Boolean).join('/')
+      const key = inAppDir
+        ? // In Next.js we can organize routes without affecting the URL
+          // https://nextjs.org/docs/app/building-your-application/routing/route-groups#organize-routes-without-affecting-the-url-path
+          //
+          // E.g. we have the following filepath:
+          // app/posts/(with-comments)/aaron-swartz-a-programmable-web/()/page.mdx
+          //
+          // will be normalized to:
+          // app/posts/aaron-swartz-a-programmable-web/page.mdx
+          dir.replaceAll(/\(.*?\)\//g, '')
+        : [dir, name !== 'index' && name].filter(Boolean).join('/')
       mdxPages[key] = filePath
     }
   }
