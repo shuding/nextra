@@ -1,7 +1,7 @@
 import path from 'node:path'
 import type { ImportDeclaration } from 'estree'
 import { toJs } from 'estree-util-to-js'
-import type { TItem, Import } from '../../types.js'
+import type { Import, TItem } from '../../types.js'
 import { META_RE } from '../constants.js'
 import { convertPageMapToAst } from './to-ast.js'
 
@@ -14,10 +14,8 @@ export async function convertPageMapToJs({
 }): Promise<string> {
   const imports: Import[] = []
   const pageMapAst = convertPageMapToAst(pageMap, imports)
-  const importsAst: ImportDeclaration[] = imports
-    // localeCompare to avoid race condition
-    .sort((a, b) => a.filePath.localeCompare(b.filePath))
-    .map(({ filePath, importName }) => ({
+  const importsAst: ImportDeclaration[] = imports.map(
+    ({ filePath, importName }) => ({
       type: 'ImportDeclaration',
       source: {
         type: 'Literal',
@@ -35,7 +33,8 @@ export async function convertPageMapToJs({
               })
         }
       ]
-    }))
+    })
+  )
 
   const importsResult = toJs({
     type: 'Program',

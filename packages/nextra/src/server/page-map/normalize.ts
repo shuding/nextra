@@ -52,7 +52,9 @@ function sortFolder(pageMap: PageMapItem[] | Folder) {
         meta[key] = data
       }
     } else {
-      newChildren.push(item)
+      // @ts-expect-error -- __pagePath can exist from dynamic MDX
+      const { __pagePath, ...rest } = item
+      newChildren.push(rest)
     }
   }
 
