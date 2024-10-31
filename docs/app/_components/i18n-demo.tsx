@@ -2,7 +2,7 @@
 
 import { ArrowRightIcon } from '@components/icons'
 import cn from 'clsx'
-import {FC} from 'react'
+import type { FC } from 'react'
 import { useState } from 'react'
 import styles from '../page.module.css'
 

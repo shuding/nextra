@@ -2,7 +2,7 @@
 
 import { Code, Mermaid, Playground, Pre, Tabs } from 'nextra/components'
 import { MdxIcon } from 'nextra/icons'
-import { FC } from 'react'
+import type { FC } from 'react'
 import { useCallback, useEffect, useRef, useState } from 'react'
 
 export const Demo: FC = () => {

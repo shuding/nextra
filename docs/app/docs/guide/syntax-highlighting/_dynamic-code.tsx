@@ -1,9 +1,10 @@
 'use client'
 
 import { Button } from 'nextra/components'
-import { ReactNode,FC, useEffect, useRef } from 'react'
+import type { FC, ReactNode } from 'react'
+import { useEffect, useRef } from 'react'
 
-export const DynamicCode: FC<{children: ReactNode}> = ({ children }) => {
+export const DynamicCode: FC<{ children: ReactNode }> = ({ children }) => {
   const ref = useRef<HTMLDivElement>(null!)
   const tokenRef = useRef<HTMLSpanElement>()
   // Find the corresponding token from the DOM
