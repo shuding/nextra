@@ -9,6 +9,16 @@ export interface LoaderOptions extends NextraConfig {
   locales: string[]
 }
 
+type TPageItem = { name: string; route: string; __pagePath: string }
+type TMetaItem = { __metaPath: string }
+interface TFolder<T = TItem> {
+  name: string
+  route: string
+  children: T[]
+}
+
+export type TItem = TPageItem | TMetaItem | TFolder
+
 export interface Folder<FileType = PageMapItem> {
   name: string
   route: string

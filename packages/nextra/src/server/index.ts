@@ -3,7 +3,7 @@ import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import type { RuleSetRule } from 'webpack'
 import { fromZodError } from 'zod-validation-error'
-import type { Nextra } from '../types'
+import type { Nextra } from '../types.js'
 import { MARKDOWN_EXTENSION_RE, MARKDOWN_EXTENSIONS } from './constants.js'
 import { nextraConfigSchema } from './schemas.js'
 import { logger } from './utils.js'
@@ -14,10 +14,10 @@ const DIRNAME = path.dirname(FILENAME)
 const LOADER_PATH = path.join(DIRNAME, '..', '..', 'loader.cjs')
 const SEP = path.sep === '/' ? '/' : '\\\\'
 const PAGE_MAP_PLACEHOLDER_RE = new RegExp(
-  'nextra/dist/server/page-map-placeholder\\.js'.replaceAll('/', SEP)
+  'nextra/dist/server/page-map/placeholder\\.js'.replaceAll('/', SEP)
 )
 const PAGE_MAP_RE = new RegExp(
-  'nextra/dist/server/get-page-map\\.js'.replaceAll('/', SEP)
+  'nextra/dist/server/page-map/get\\.js'.replaceAll('/', SEP)
 )
 
 const nextra: Nextra = nextraConfig => {
@@ -101,10 +101,10 @@ const nextra: Nextra = nextraConfig => {
               as: '*.tsx',
               loaders: [loader as any]
             },
-            '**/nextra/dist/server/page-map-placeholder.js': {
+            '**/nextra/dist/server/page-map/placeholder.js': {
               loaders: [pageMapPlaceholderLoader]
             },
-            '**/nextra/dist/server/get-page-map.js': {
+            '**/nextra/dist/server/page-map/get.js': {
               loaders: [pageMapLoader]
             }
           },
@@ -170,4 +170,4 @@ const nextra: Nextra = nextraConfig => {
 
 export default nextra
 
-export type * from '../types'
+export type * from '../types.js'

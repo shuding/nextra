@@ -3,7 +3,7 @@ import type { Element, Root } from 'hast'
 import { toEstree } from 'hast-util-to-estree'
 import type { Plugin } from 'unified'
 import { visit } from 'unist-util-visit'
-import type { Heading } from '../../types'
+import type { Heading } from '../../types.js'
 import { TOC_HEADING_RE } from '../constants.js'
 import { createAstObject } from '../utils.js'
 

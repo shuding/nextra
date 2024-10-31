@@ -4,7 +4,7 @@ import { CWD } from '../src/server/constants.js'
 import {
   generatePageMap,
   getFilepaths
-} from '../src/server/generate-page-map.js'
+} from '../src/server/page-map/generate.js'
 
 describe('generatePageMap()', () => {
   it('should work for blog example', async () => {

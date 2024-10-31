@@ -14,7 +14,7 @@ const res = generatePageMap({
   filePaths: filePaths.map(filePath => `remote/graphql-eslint/${filePath}`)
 })
 
-export const pageMap = res.pageMap[0].children
+export const pageMap = (res.pageMap[0] as any).children
 
 export default async function Page(props) {
   const params = await props.params

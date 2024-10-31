@@ -13,7 +13,7 @@ import remarkMath from 'remark-math'
 import remarkReadingTime from 'remark-reading-time'
 import remarkSmartypants from 'remark-smartypants'
 import type { Pluggable, Plugin } from 'unified'
-import type { FrontMatter, LoaderOptions, ReadingTime } from '../types'
+import type { FrontMatter, LoaderOptions, ReadingTime } from '../types.js'
 import { CWD, MARKDOWN_URL_EXTENSION_RE } from './constants.js'
 import {
   recmaRewriteFunctionBody,

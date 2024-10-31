@@ -1,5 +1,5 @@
 function importPageMap(lang = '') {
-  return import(`./page-map-placeholder.js?lang=${lang}`)
+  return import(`./placeholder.js?lang=${lang}`)
 }
 
 export async function getPageMap(lang?: string) {
