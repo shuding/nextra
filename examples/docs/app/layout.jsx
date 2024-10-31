@@ -1,7 +1,7 @@
 /* eslint-env node */
 import { Footer, Layout, Navbar } from 'nextra-theme-docs'
 import { Banner, Head } from 'nextra/components'
-import { getPageMap } from 'nextra/page-map'
+import { getPageMap } from 'nextra/pages'
 import 'nextra-theme-docs/style.css'
 
 export const { viewport } = Head

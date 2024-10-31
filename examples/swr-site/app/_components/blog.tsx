@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { getPageMap } from 'nextra/page-map'
+import { getPageMap } from 'nextra/pages'
 import type { FC } from 'react'
 
 export const Blog: FC<{ lang: string }> = async ({ lang }) => {

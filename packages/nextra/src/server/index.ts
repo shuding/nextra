@@ -17,7 +17,7 @@ const PAGE_MAP_PLACEHOLDER_RE = new RegExp(
   'nextra/dist/server/page-map-placeholder\\.js'.replaceAll('/', SEP)
 )
 const PAGE_MAP_RE = new RegExp(
-  'nextra/dist/(server/page-map|client/pages)\\.js'.replaceAll('/', SEP)
+  'nextra/dist/server/get-page-map\\.js'.replaceAll('/', SEP)
 )
 
 const nextra: Nextra = nextraConfig => {
@@ -104,14 +104,13 @@ const nextra: Nextra = nextraConfig => {
             '**/nextra/dist/server/page-map-placeholder.js': {
               loaders: [pageMapPlaceholderLoader]
             },
-            '**/nextra/dist/{server/page-map,client/pages}.js': {
+            '**/nextra/dist/server/get-page-map.js': {
               loaders: [pageMapLoader]
             }
           },
           resolveAlias: {
             ...nextConfig.experimental?.turbo?.resolveAlias,
             'next-mdx-import-source-file': './mdx-components', // '@vercel/turbopack-next/mdx-import-source'
-            'private-next-app-dir/*': './app/*',
             'private-next-root-dir/*': './*'
           }
         }
@@ -129,8 +128,8 @@ const nextra: Nextra = nextraConfig => {
           }
         }
         config.resolve.alias['next-mdx-import-source-file'] = [
-          'private-next-root-dir/src/mdx-components',
-          'private-next-root-dir/mdx-components'
+          'private-next-root-dir/mdx-components',
+          'private-next-root-dir/src/mdx-components'
         ]
         const rules = config.module.rules as RuleSetRule[]
 

@@ -1,16 +1,10 @@
 import { notFound } from 'next/navigation'
+import { getRouteToFilepath } from '../server/get-page-map.js'
 import { logger } from '../server/utils.js'
 
-async function getRouteToFilepath(
-  lang: string
-): Promise<Record<string, string>> {
-  const { RouteToFilepath } = await import(
-    `../server/page-map-placeholder.js?lang=${lang}`
-  )
-  return RouteToFilepath
-}
+export { getPageMap } from '../server/get-page-map.js'
 
-export async function importPage(pathSegments: string[] = [], locale = '') {
+export async function importPage(pathSegments: string[] = [], locale?: string) {
   const RouteToFilepath = await getRouteToFilepath(locale)
 
   const pagePath = RouteToFilepath[pathSegments.join('/')]
