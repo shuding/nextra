@@ -25,6 +25,11 @@ export interface Folder<FileType = PageMapItem> {
   children: FileType[]
 }
 
+export type Import = {
+  importName: string
+  filePath: string
+}
+
 export type MetaJsonFile = {
   data: {
     [fileName: string]: Meta
