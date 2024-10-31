@@ -1,10 +1,11 @@
 // @ts-nocheck
 import { normalizePageMap } from 'nextra/page-map'
-import meta from "./_meta.ts";
+import _meta from "./_meta.ts";
 import _1_level_meta from "./1-level/_meta.ts";
 import {metadata as _1_level_foo} from "./1-level/foo.md";
-const _pageMap = [{
-  data: meta
+
+export const pageMap = normalizePageMap([{
+  data: _meta
 }, {
   name: "1-level",
   route: "/1-level",
@@ -15,9 +16,7 @@ const _pageMap = [{
     route: "/1-level/foo",
     frontMatter: _1_level_foo
   }]
-}];
-
-export const pageMap = normalizePageMap(_pageMap)
+}])
 
 export const RouteToFilepath = {
   "1-level/foo": "1-level/foo.md"

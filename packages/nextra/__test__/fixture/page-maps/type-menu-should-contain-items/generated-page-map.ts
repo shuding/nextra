@@ -1,12 +1,13 @@
 // @ts-nocheck
 import { normalizePageMap } from 'nextra/page-map'
-import meta from "./_meta.ts";
+import _meta from "./_meta.ts";
 import {metadata as mix_not_specified} from "./mix/not-specified.md";
 import {metadata as mix_qux} from "./mix/qux.md";
 import {metadata as pagesOnly_one} from "./pagesOnly/one.md";
 import {metadata as pagesOnly_two} from "./pagesOnly/two.md";
-const _pageMap = [{
-  data: meta
+
+export const pageMap = normalizePageMap([{
+  data: _meta
 }, {
   name: "mix",
   route: "/mix",
@@ -31,9 +32,7 @@ const _pageMap = [{
     route: "/pagesOnly/two",
     frontMatter: pagesOnly_two
   }]
-}];
-
-export const pageMap = normalizePageMap(_pageMap)
+}])
 
 export const RouteToFilepath = {
   "mix/not-specified": "mix/not-specified.md",

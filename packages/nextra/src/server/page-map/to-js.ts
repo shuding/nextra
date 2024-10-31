@@ -13,8 +13,13 @@ type Import = {
 function cleanFilePath(filePath: string): string {
   // Remove extension
   const { dir, name } = path.parse(filePath)
-  // Remove `content` prefix
-  return `${dir.replace(/^content\/?/, '')}_${name}`.replaceAll(/[\W_]+/g, '_')
+  return (
+    // Remove `content` prefix
+    `${dir.replace(/^content\/?/, '')}_${name}`
+      .replaceAll(/[\W_]+/g, '_')
+      // Variable can't start with number
+      .replace(/^\d/, match => `_${match}`)
+  )
 }
 
 function convertPageMapToAst(
@@ -99,7 +104,6 @@ export async function transformPageMapToJs({
 
   const rawJs = `import { normalizePageMap } from 'nextra/page-map'
 ${importsResult.value}
-
 export const pageMap = normalizePageMap(${pageMapResult.value.slice(0, -2 /* replace semicolon */)})
 
 export const RouteToFilepath = ${JSON.stringify(mdxPages, null, 2)}`

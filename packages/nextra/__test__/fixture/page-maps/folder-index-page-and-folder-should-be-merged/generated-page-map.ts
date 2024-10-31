@@ -1,16 +1,17 @@
 // @ts-nocheck
 import { normalizePageMap } from 'nextra/page-map'
-import {metadata as themes_test} from "./themes-test.md";
+import {metadata as _themes_test} from "./themes-test.md";
 import {metadata as themes_test_foo} from "./themes-test/foo.md";
-import {metadata as themes} from "./themes.md";
+import {metadata as _themes} from "./themes.md";
 import {metadata as themes_bar} from "./themes/bar.md";
-const _pageMap = [{
+
+export const pageMap = normalizePageMap([{
   name: "themes-test",
   route: "/themes-test",
   children: [{
     name: "index",
     route: "/themes-test",
-    frontMatter: themes_test
+    frontMatter: _themes_test
   }, {
     name: "foo",
     route: "/themes-test/foo",
@@ -22,15 +23,13 @@ const _pageMap = [{
   children: [{
     name: "index",
     route: "/themes",
-    frontMatter: themes
+    frontMatter: _themes
   }, {
     name: "bar",
     route: "/themes/bar",
     frontMatter: themes_bar
   }]
-}];
-
-export const pageMap = normalizePageMap(_pageMap)
+}])
 
 export const RouteToFilepath = {
   "themes-test": "themes-test.md",
