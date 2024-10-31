@@ -19,22 +19,21 @@ export const CopyToClipboard: FC<ComponentProps<'button'>> = props => {
     }
   }, [isCopied])
 
-  const handleClick = useCallback<
-    NonNullable<ComponentProps<'button'>['onClick']>
-  >(async event => {
-    setCopied(true)
-    if (!navigator.clipboard) {
-      console.error('Access to clipboard rejected!')
-      return
-    }
-    try {
-      const container = event.currentTarget.parentNode!.parentNode!
-      const content = container.querySelector('pre code')?.textContent || ''
-      await navigator.clipboard.writeText(content)
-    } catch {
-      console.error('Failed to copy!')
-    }
-  }, [])
+  const handleClick: NonNullable<ComponentProps<'button'>['onClick']> =
+    useCallback(async event => {
+      setCopied(true)
+      if (!navigator.clipboard) {
+        console.error('Access to clipboard rejected!')
+        return
+      }
+      try {
+        const container = event.currentTarget.parentNode!.parentNode!
+        const content = container.querySelector('pre code')?.textContent || ''
+        await navigator.clipboard.writeText(content)
+      } catch {
+        console.error('Failed to copy!')
+      }
+    }, [])
 
   const IconToUse = isCopied ? CheckIcon : CopyIcon
 

@@ -181,7 +181,7 @@ const Folder: FC<FolderProps> = ({ item, anchors, onFocus, level }) => {
           )}
         />
       </ComponentToUse>
-      {Array.isArray(item.children) && (
+      {item.children && (
         <Collapse isOpen={open}>
           <Menu
             className={classes.border}

@@ -4,7 +4,7 @@
  */
 import type { Property } from 'estree'
 
-export { MARKDOWN_EXTENSION_RE, DEFAULT_LOCALE } from '../constants.js'
+export { MARKDOWN_EXTENSION_RE } from '../constants.js'
 
 export const CWD = process.cwd()
 
