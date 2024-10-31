@@ -24,7 +24,6 @@ export function convertToPageMap({
   for (const filePath of filePaths) {
     let { name, dir } = path.parse(filePath)
     const inAppDir = filePath.startsWith('app/')
-
     if (inAppDir) {
       dir = dir.replace(/^app(\/|$)/, '')
     } else {

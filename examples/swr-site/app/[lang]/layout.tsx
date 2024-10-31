@@ -10,7 +10,6 @@ import {
   Navbar
 } from 'nextra-theme-docs'
 import { Banner, Head } from 'nextra/components'
-import { normalizePageMap } from 'nextra/page-map'
 import { getPageMap } from 'nextra/pages'
 import { getDictionary, getDirection } from '../_dictionaries/get-dictionary'
 import { pageMap as graphqlEslintPageMap } from './remote/graphql-eslint/[[...slug]]/page'
@@ -49,11 +48,7 @@ export default async function RootLayout({ children, params }) {
   let pageMap = await getPageMap(lang)
 
   if (lang === 'en') {
-    pageMap = [
-      ...pageMap,
-      ...normalizePageMap(graphqlEslintPageMap),
-      ...normalizePageMap(graphqlYogaPageMap)
-    ]
+    pageMap = [...pageMap, ...graphqlEslintPageMap, ...graphqlYogaPageMap]
   }
   const banner = (
     <Banner storageKey="swr-2">
