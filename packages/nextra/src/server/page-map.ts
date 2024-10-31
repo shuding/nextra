@@ -11,9 +11,6 @@ type Import = {
   filePath: string
 }
 
-export { generatePageMap, getFilepaths } from './generate-page-map.js'
-export { normalizePageMap } from './normalize-page-map.js'
-
 function cleanFileName(name: string): string {
   return (
     path

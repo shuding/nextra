@@ -1,5 +1,5 @@
 import { normalizePages } from '../src/client/normalize-pages.js'
-import { normalizePageMap } from '../src/server/normalize-page-map.js'
+import { normalizePageMap } from '../src/server/page-map/normalize.js'
 import { usPageMap } from './fixture/page-maps/page-map.js'
 import { getPageMapForFixture } from './test-utils.js'
 

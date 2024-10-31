@@ -1,7 +1,7 @@
 import fs from 'node:fs/promises'
 import path from 'node:path'
 import prettier from 'prettier'
-import { generatePageMap } from '../src/server/generate-page-map.js'
+import { generatePageMap, getFilepaths } from '../src/server/page-map/generate'
 
 export function clean(content: string): Promise<string> {
   return prettier.format(content, {
@@ -23,9 +23,7 @@ export async function getPageMapForFixture(dirName: string) {
     ...(await vi.importActual('../src/server/constants.ts')),
     CHUNKS_DIR: dir
   }))
-  const { getFilepaths, collectPageMap } = await import(
-    '../src/server/page-map.js'
-  )
+  const { collectPageMap } = await import('../src/server/page-map.js')
   const filePaths = await getFilepaths({ dir, cwd: dir })
 
   const { pageMap, mdxPages } = generatePageMap({ filePaths })

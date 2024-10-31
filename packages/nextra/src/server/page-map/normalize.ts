@@ -5,8 +5,8 @@ import type {
   MdxFile,
   MetaJsonFile,
   PageMapItem
-} from '../types.js'
-import { metaSchema } from './schemas.js'
+} from '../../types.js'
+import { metaSchema } from '../schemas.js'
 
 export function normalizePageMap(pageMap: PageMapItem[] | Folder): any {
   if (Array.isArray(pageMap)) {

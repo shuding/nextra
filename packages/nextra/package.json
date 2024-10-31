@@ -41,8 +41,8 @@
       "import": "./dist/server/fetch-filepaths-from-github.js"
     },
     "./page-map": {
-      "types": "./dist/server/page-map.d.ts",
-      "import": "./dist/server/page-map.js"
+      "types": "./dist/server/page-map/index.d.ts",
+      "import": "./dist/server/page-map/index.js"
     },
     "./schemas": {
       "types": "./dist/server/schemas.d.ts",

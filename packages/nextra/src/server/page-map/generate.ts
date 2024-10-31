@@ -1,7 +1,7 @@
 import path from 'path'
 import fg from 'fast-glob'
 import slash from 'slash'
-import type { TItem } from '../types.js'
+import type { TItem } from '../../types.js'
 
 export async function getFilepaths({
   dir,
