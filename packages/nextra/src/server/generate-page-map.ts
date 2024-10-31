@@ -95,7 +95,7 @@ export function generatePageMap({
     key.split('/').reduce(createNested, obj)
   }
 
-  function getPageMap<T extends Record<string, T>>(obj: T, prefix = '') {
+  function fillPageMap(obj: NestedMap, prefix?: string): TItem[] {
     const children: TItem[] = []
 
     for (const [key, value] of Object.entries(obj)) {
@@ -109,25 +109,15 @@ export function generatePageMap({
         children.push({ __metaPath })
         continue
       }
-      const item: Folder | MdxFile = {
-        name: name || 'index',
+      const item = {
+        name: key || 'index',
         route: `/${path}`
       }
       const keys = Object.keys(value)
-
       const isFolder = keys.length > 1 || (keys.length === 1 && keys[0] !== '')
+
       if (isFolder) {
-        ;(item as any).children = getPageMap(value, path)
-      } else {
-        const pagePath = mdxPages[path]
-        if (!pagePath) {
-          const o = JSON.stringify({ path, mdxPages }, null, 2)
-          throw new Error(`Can't find "page" file for ${path}\n${o}`)
-        }
-        // @ts-expect-error
-        item.__pagePath = pagePath
-        }
-        children.push(item)
+        children.push({ ...item, children: fillPageMap(value, path) })
         continue
       }
       const __pagePath = mdxPages[path]
@@ -135,13 +125,12 @@ export function generatePageMap({
         const o = JSON.stringify({ path, mdxPages }, null, 2)
         throw new Error(`Can't find "page" file for ${path}\n${o}`)
       }
-      }
-      children.push(item)
+      children.push({ ...item, __pagePath })
     }
     return children
   }
 
-  const pageMap = getPageMap(obj)
+  const pageMap = fillPageMap(obj)
 
   mdxPages = Object.fromEntries(
     Object.entries(mdxPages).flatMap(([key, value]) => {
