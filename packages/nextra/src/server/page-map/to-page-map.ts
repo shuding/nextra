@@ -25,12 +25,12 @@ export function convertToPageMap({
     let { name, dir } = path.parse(filePath)
     const inAppDir = filePath.startsWith('app/')
 
-    if (dir.startsWith('content')) {
+    if (inAppDir) {
+      dir = dir.replace(/^app(\/|$)/, '')
+    } else {
       let filePath = dir.replace(/^content(\/|$)/, '')
       if (locale) filePath = filePath.replace(new RegExp(`^${locale}/?`), '')
       dir = [basePath, filePath].filter(Boolean).join('/')
-    } else {
-      dir = dir.replace(/^app(\/|$)/, '')
     }
     if (name === '_meta') {
       const key = dir ? `${dir}/${name}` : name

@@ -1257,4 +1257,68 @@ describe('generatePageMap()', () => {
       `)
     })
   })
+
+  it('should add `basePath` for graphql-eslint where there is no `content` dir', () => {
+    const { mdxPages, pageMap } = convertToPageMap({
+      filePaths: [
+        'configs.mdx',
+        'custom-rules.mdx',
+        'getting-started.mdx',
+        'getting-started/parser-options.mdx',
+        'getting-started/parser.mdx',
+        'index.mdx'
+      ],
+      basePath: 'remote'
+    })
+    expect(mdxPages).toMatchInlineSnapshot(`
+      {
+        "": "index.mdx",
+        "configs": "configs.mdx",
+        "custom-rules": "custom-rules.mdx",
+        "getting-started": "getting-started.mdx",
+        "getting-started/parser": "getting-started/parser.mdx",
+        "getting-started/parser-options": "getting-started/parser-options.mdx",
+      }
+    `)
+    expect(pageMap).toMatchInlineSnapshot(`
+      [
+        {
+          "__pagePath": "configs.mdx",
+          "name": "configs",
+          "route": "/configs",
+        },
+        {
+          "__pagePath": "custom-rules.mdx",
+          "name": "custom-rules",
+          "route": "/custom-rules",
+        },
+        {
+          "children": [
+            {
+              "__pagePath": "getting-started.mdx",
+              "name": "index",
+              "route": "/getting-started",
+            },
+            {
+              "__pagePath": "getting-started/parser-options.mdx",
+              "name": "parser-options",
+              "route": "/getting-started/parser-options",
+            },
+            {
+              "__pagePath": "getting-started/parser.mdx",
+              "name": "parser",
+              "route": "/getting-started/parser",
+            },
+          ],
+          "name": "getting-started",
+          "route": "/getting-started",
+        },
+        {
+          "__pagePath": "index.mdx",
+          "name": "index",
+          "route": "/",
+        },
+      ]
+    `)
+  })
 })
