@@ -1,8 +1,8 @@
 import { notFound } from 'next/navigation'
-import { getRouteToFilepath } from '../server/get-page-map.js'
+import { getRouteToFilepath } from '../server/page-map/get'
 import { logger } from '../server/utils.js'
 
-export { getPageMap } from '../server/get-page-map.js'
+export { getPageMap } from '../server/page-map/get'
 
 export async function importPage(pathSegments: string[] = [], locale?: string) {
   const RouteToFilepath = await getRouteToFilepath(locale)

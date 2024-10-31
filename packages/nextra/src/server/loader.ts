@@ -46,14 +46,14 @@ const initGitRepo = (async () => {
 /*
  * https://github.com/vercel/next.js/issues/71453#issuecomment-2431810574
  *
- * Replace `await import(`./page-map-placeholder.js?lang=${lang}`)`
+ * Replace `await import(`./placeholder.js?lang=${lang}`)`
  *
  * with:
  *
  * await {
- * "en": () => import("./page-map-placeholder.js?lang=en"),
- * "es": () => import("./page-map-placeholder.js?lang=es"),
- * "ru": () => import("./page-map-placeholder.js?lang=ru")
+ * "en": () => import("./placeholder.js?lang=en"),
+ * "es": () => import("./placeholder.js?lang=es"),
+ * "ru": () => import("./placeholder.js?lang=ru")
  * }[locale]()
  *
  * So static analyzer will know which `resourceQuery` to pass to the loader
@@ -79,7 +79,7 @@ export async function loader(
 
   const filePath = slash(this.resourcePath)
 
-  if (filePath.includes('page-map-placeholder.js')) {
+  if (filePath.includes('/nextra/dist/server/page-map/placeholder.js')) {
     const locale = this.resourceQuery.replace('?lang=', '')
     if (!IS_PRODUCTION) {
       // Add `app` and `content` folders as the dependencies, so Webpack will
@@ -97,10 +97,10 @@ export async function loader(
     const rawJs = await collectPageMap({ pageMap, mdxPages })
     return rawJs
   }
-  if (filePath.includes('/nextra/dist/server/get-page-map.js')) {
+  if (filePath.includes('/nextra/dist/server/page-map/get.js')) {
     const rawJs = replaceDynamicResourceQuery(
       source,
-      'import(`./page-map-placeholder.js?lang=${lang}`)',
+      'import(`./placeholder.js?lang=${lang}`)',
       locales
     )
     return rawJs

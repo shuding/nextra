@@ -1,4 +1,4 @@
-import type { PageMapItem } from '../types.js'
+import type { PageMapItem } from '../../types.js'
 
 export const pageMap: PageMapItem[] = []
 
