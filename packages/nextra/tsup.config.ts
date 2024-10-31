@@ -1,4 +1,4 @@
-import fs from 'fs/promises'
+import fs from 'node:fs/promises'
 import path from 'node:path'
 import svgr from 'esbuild-plugin-svgr'
 import { defineConfig } from 'tsup'

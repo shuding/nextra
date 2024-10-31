@@ -1,16 +1,22 @@
 import path from 'node:path'
 import { transformerTwoslash } from '@shikijs/twoslash'
+import { findPagesDir } from 'next/dist/lib/find-pages-dir.js'
 import slash from 'slash'
 import type { LoaderContext } from 'webpack'
 import type { LoaderOptions, PageOpts } from '../types.js'
 import { compileMdx } from './compile.js'
 import { CWD, IS_PRODUCTION } from './constants.js'
-import { APP_DIR } from './file-system.js'
 import { findMetaAndPageFilePaths } from './page-map/find-meta-and-page-file-paths.js'
 import { convertPageMapToJs } from './page-map/to-js.js'
 import { convertToPageMap } from './page-map/to-page-map.js'
 import { twoslashRenderer } from './rehype-plugins/twoslash.js'
 import { logger } from './utils.js'
+
+const APP_DIR = findPagesDir(CWD).appDir!
+
+if (!APP_DIR) {
+  throw new Error('Unable to find `app` directory')
+}
 
 const initGitRepo = (async () => {
   const IS_WEB_CONTAINER = !!process.versions.webcontainer
