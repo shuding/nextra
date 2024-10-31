@@ -2,9 +2,10 @@
 
 import { Code, Mermaid, Playground, Pre, Tabs } from 'nextra/components'
 import { MdxIcon } from 'nextra/icons'
+import { FC } from 'react'
 import { useCallback, useEffect, useRef, useState } from 'react'
 
-export function Demo() {
+export const Demo: FC = () => {
   const [rawMdx, setRawMdx] =
     useState(`Playground components allow you to write Nextra compatible MDX that renders only on the client. It's modeled after the functionality found in [MDX Playground](https://mdxjs.com/playground).
 

@@ -1,8 +1,8 @@
 'use client'
 
-import { useState } from 'react'
+import { FC, ReactNode, useState } from 'react'
 
-export function Counter({ children }) {
+export const Counter: FC<{ children: ReactNode }> = ({ children }) => {
   const [count, setCount] = useState(0)
   return (
     <button onClick={() => setCount(prev => prev + 1)}>

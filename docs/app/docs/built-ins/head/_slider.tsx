@@ -1,9 +1,9 @@
 'use client'
 
-import type { ComponentProps } from 'react'
+import type { ComponentProps, FC } from 'react'
 import { useCallback, useEffect, useState } from 'react'
 
-export function Slider({ cssVar, max }: { cssVar: string; max: number }) {
+export const Slider: FC = ({ cssVar, max }: { cssVar: string; max: number }) => {
   const handleChange: NonNullable<ComponentProps<'input'>['onChange']> =
     useCallback(
       e => {
@@ -37,7 +37,7 @@ function hexToRgb(hex: `#${string}`): string {
   return `${r},${g},${b}`
 }
 
-export function BackgroundColor() {
+export const BackgroundColor: FC = () => {
   const [value, setValue] = useState('')
   useEffect(() => {
     const color = getComputedStyle(document.body).getPropertyValue(

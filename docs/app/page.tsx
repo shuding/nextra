@@ -10,12 +10,13 @@ import { MotionDiv, MotionH3 } from './_components/framer-motion'
 import { I18n } from './_components/i18n-demo'
 import styles from './page.module.css'
 import './page.css'
+import { FC } from 'react'
 
 export const metadata: Metadata = {
   title: 'Nextra – Next.js Static Site Generator'
 }
 
-export default function IndexPage() {
+const IndexPage: FC = () => {
   return (
     <div className="home-content">
       <div className="content-container">
@@ -324,3 +325,5 @@ export default function IndexPage() {
     </div>
   )
 }
+
+export default IndexPage
