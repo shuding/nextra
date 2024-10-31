@@ -58,27 +58,6 @@ const initGitRepo = (async () => {
  *
  * So static analyzer will know which `resourceQuery` to pass to the loader
  **/
-function replaceDynamicResourceQuery(
-  rawJs: string,
-  rawImport: string,
-  locales: string[]
-): string {
-  const { importPath } =
-    rawJs.match(/import\(`(?<importPath>.+?)\?lang=\${lang}`\)/)?.groups || {}
-  if (!importPath) {
-    throw new Error(
-      `Can't find \`${rawImport}\` statement. This is a Nextra bug`
-    )
-  }
-
-  const replaced = `{
-${locales
-  .map(lang => `"${lang}": () => import("${importPath}?lang=${lang}")`)
-  .join(',\n')}
-}[lang]()`
-
-  return rawJs.replace(rawImport, replaced)
-}
 
 export async function loader(
   this: LoaderContext<LoaderOptions>,
@@ -118,20 +97,10 @@ export async function loader(
     const rawJs = await collectPageMap({ pageMap, mdxPages })
     return rawJs
   }
-
-  if (filePath.includes('/nextra/dist/server/page-map.js')) {
+  if (filePath.includes('/nextra/dist/server/get-page-map.js')) {
     const rawJs = replaceDynamicResourceQuery(
       source,
       'import(`./page-map-placeholder.js?lang=${lang}`)',
-      locales
-    )
-    return rawJs
-  }
-
-  if (filePath.includes('/nextra/dist/client/pages.js')) {
-    const rawJs = replaceDynamicResourceQuery(
-      source,
-      'import(`../server/page-map-placeholder.js?lang=${lang}`)',
       locales
     )
     return rawJs
@@ -200,4 +169,26 @@ export default HOC_MDXWrapper(
   {metadata, title, toc:useTOC()}
 )`
   return rawJs
+}
+
+function replaceDynamicResourceQuery(
+  rawJs: string,
+  rawImport: string,
+  locales: string[]
+): string {
+  const { importPath } =
+    rawJs.match(/import\(`(?<importPath>.+?)\?lang=\${lang}`\)/)?.groups || {}
+  if (!importPath) {
+    throw new Error(
+      `Can't find \`${rawImport}\` statement. This is a Nextra bug`
+    )
+  }
+
+  const replaced = `{
+${locales
+  .map(lang => `"${lang}": () => import("${importPath}?lang=${lang}")`)
+  .join(',\n')}
+}[lang]()`
+
+  return rawJs.replace(rawImport, replaced)
 }
