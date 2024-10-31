@@ -40,7 +40,7 @@ type StringMap = Record<string, string>
 const createNested = (prevValue: NestedMap, currVal: string) =>
   (prevValue[currVal] ||= {})
 
-export function generatePageMap({
+export function convertToPageMap({
   filePaths,
   basePath,
   locale

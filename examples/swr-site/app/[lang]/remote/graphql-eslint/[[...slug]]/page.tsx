@@ -2,15 +2,15 @@
 import { notFound } from 'next/navigation'
 import { compileMdx } from 'nextra/compile'
 import { Callout, evaluate, Tabs } from 'nextra/components'
-import { generatePageMap } from 'nextra/page-map'
+import { convertToPageMap } from 'nextra/page-map'
 import { useMDXComponents } from '../../../../../mdx-components'
 import json from '../../../../../nextra-remote-filepaths/graphql-eslint.json'
 
 const { branch, docsPath, filePaths, repo, user } = json
 
-const { mdxPages } = generatePageMap({ filePaths })
+const { mdxPages } = convertToPageMap({ filePaths })
 
-const res = generatePageMap({
+const res = convertToPageMap({
   filePaths: filePaths.map(filePath => `remote/graphql-eslint/${filePath}`)
 })
 
