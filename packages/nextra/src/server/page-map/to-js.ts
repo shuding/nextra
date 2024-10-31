@@ -17,6 +17,8 @@ function cleanFilePath(filePath: string): string {
     // Remove `content` prefix
     `${dir.replace(/^content\/?/, '')}_${name}`
       .replaceAll(/[\W_]+/g, '_')
+      // Remove leading `_`
+      .replace(/^_/, '')
       // Variable can't start with number
       .replace(/^\d/, match => `_${match}`)
   )

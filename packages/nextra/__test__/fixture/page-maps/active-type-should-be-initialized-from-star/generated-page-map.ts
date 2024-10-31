@@ -1,11 +1,11 @@
 // @ts-nocheck
 import { normalizePageMap } from 'nextra/page-map'
-import _meta from "./_meta.ts";
+import meta from "./_meta.ts";
 import _1_level_meta from "./1-level/_meta.ts";
 import {metadata as _1_level_foo} from "./1-level/foo.md";
 
 export const pageMap = normalizePageMap([{
-  data: _meta
+  data: meta
 }, {
   name: "1-level",
   route: "/1-level",

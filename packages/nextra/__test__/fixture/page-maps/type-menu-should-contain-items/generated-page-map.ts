@@ -1,13 +1,13 @@
 // @ts-nocheck
 import { normalizePageMap } from 'nextra/page-map'
-import _meta from "./_meta.ts";
+import meta from "./_meta.ts";
 import {metadata as mix_not_specified} from "./mix/not-specified.md";
 import {metadata as mix_qux} from "./mix/qux.md";
 import {metadata as pagesOnly_one} from "./pagesOnly/one.md";
 import {metadata as pagesOnly_two} from "./pagesOnly/two.md";
 
 export const pageMap = normalizePageMap([{
-  data: _meta
+  data: meta
 }, {
   name: "mix",
   route: "/mix",
