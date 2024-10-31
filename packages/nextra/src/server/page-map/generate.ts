@@ -14,23 +14,17 @@ export async function getFilepaths({
 }): Promise<string[]> {
   const appDir = slash(path.relative(cwd, dir))
   const contentDir = locale ? `content/${locale}` : 'content'
-  const result = await fg(
-    [
-      // appDir is empty string on tests
-      ...(appDir
-        ? [
-            `${contentDir}/**/_meta.{js,jsx,ts,tsx}`, // Include `_meta` files from `content` directory
-            `${contentDir}/**/*.{md,mdx}`, // Include all Markdown/MDX files from `content` directory
-            `${appDir}/**/page.{js,jsx,jsx,tsx,md,mdx}`,
-            `${appDir}/**/_meta.{js,jsx,ts,tsx}`, // Include `_meta` files from `app` directory
-            `!${appDir}/**/_*/*` // Ignore all subdirectories starting with `_`
-          ]
-        : ['**/_meta.{js,jsx,ts,tsx}', '**/*.{md,mdx}']),
-      // Ignore dynamic routes
-      '!**/\\[*/*'
-    ],
-    { cwd }
-  )
+  // appDir is empty string on tests
+  const pattern = appDir
+    ? [
+        `${contentDir}/**/_meta.{js,jsx,ts,tsx}`, // Include `_meta` files from `content` directory
+        `${contentDir}/**/*.{md,mdx}`, // Include all Markdown/MDX files from `content` directory
+        `${appDir}/**/page.{js,jsx,jsx,tsx,md,mdx}`,
+        `${appDir}/**/_meta.{js,jsx,ts,tsx}`, // Include `_meta` files from `app` directory
+        `!${appDir}/**/{_,[}*/*` // Ignore subdirectories starting with `_` and dynamic routes
+      ]
+    : ['**/_meta.{js,jsx,ts,tsx}', '**/*.{md,mdx}']
+  const result = await fg(pattern, { cwd })
   // Sort filepaths alphabetically because there is different order on each
   // fast-glob invocation
   const relativePaths = result.sort((a, b) => a.localeCompare(b))
