@@ -4,7 +4,7 @@ import { logger } from '../server/utils.js'
 
 export { getPageMap }
 
-export async function importPage(pathSegments: string[] = [], locale?: string) {
+export async function importPage(pathSegments: string[] = [], locale = '') {
   const RouteToFilepath = await getRouteToFilepath(locale)
 
   const pagePath = RouteToFilepath[pathSegments.join('/')]

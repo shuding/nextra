@@ -93,7 +93,7 @@ export function generatePageMap({
     path.split('/').reduce(createNested, obj)
   }
   for (const path of Object.keys(mdxPages)) {
-    const key = path ? `${path}/` : ''
+    const key = path && `${path}/`
     key.split('/').reduce(createNested, obj)
   }
 
@@ -106,7 +106,7 @@ export function generatePageMap({
         const __metaPath = metaFiles[path]
         if (!__metaPath) {
           const o = JSON.stringify({ path, metaFiles }, null, 2)
-          throw new Error(`Can't find "_meta" file for ${path}\n${o}`)
+          throw new Error(`Can't find "_meta" file for:\n${o}`)
         }
         children.push({ __metaPath })
         continue
@@ -125,7 +125,7 @@ export function generatePageMap({
       const __pagePath = mdxPages[path]
       if (!__pagePath) {
         const o = JSON.stringify({ path, mdxPages }, null, 2)
-        throw new Error(`Can't find "page" file for ${path}\n${o}`)
+        throw new Error(`Can't find "page" file for:\n${o}`)
       }
       children.push({ ...item, __pagePath })
     }

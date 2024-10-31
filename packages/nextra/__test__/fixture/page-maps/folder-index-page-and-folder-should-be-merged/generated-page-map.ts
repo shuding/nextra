@@ -4,7 +4,8 @@ import {metadata as themes_test} from "./themes-test.md";
 import {metadata as themes_test_foo} from "./themes-test/foo.md";
 import {metadata as themes} from "./themes.md";
 import {metadata as themes_bar} from "./themes/bar.md";
-const _pageMap = [{
+
+export const pageMap = normalizePageMap([{
   name: "themes-test",
   route: "/themes-test",
   children: [{
@@ -28,9 +29,7 @@ const _pageMap = [{
     route: "/themes/bar",
     frontMatter: themes_bar
   }]
-}];
-
-export const pageMap = normalizePageMap(_pageMap)
+}])
 
 export const RouteToFilepath = {
   "themes-test": "themes-test.md",

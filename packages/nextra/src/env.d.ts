@@ -25,5 +25,5 @@ declare module '*.svg' {
 }
 
 declare module 'next-mdx-import-source-file' {
-  export { useMDXComponents } from 'nextra/mdx'
+  export { useMDXComponents } from 'nextra/mdx-components'
 }

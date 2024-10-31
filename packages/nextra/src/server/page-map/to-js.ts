@@ -3,7 +3,6 @@ import type { ArrayExpression, ImportDeclaration } from 'estree'
 import { toJs } from 'estree-util-to-js'
 import type { TItem } from '../../types.js'
 import { META_RE } from '../constants.js'
-import { APP_DIR } from '../file-system.js'
 import { createAstObject } from '../utils.js'
 
 type Import = {
@@ -11,15 +10,17 @@ type Import = {
   filePath: string
 }
 
-function cleanFileName(name: string): string {
+function cleanFilePath(filePath: string): string {
+  // Remove extension
+  const { dir, name } = path.parse(filePath)
   return (
-    path
-      .relative(APP_DIR, name)
-      .replace(/\.([jt]sx?|mdx?)$/, '')
+    // Remove `content` prefix
+    `${dir.replace(/^content\/?/, '')}_${name}`
       .replaceAll(/[\W_]+/g, '_')
+      // Remove leading `_`
       .replace(/^_/, '')
       // Variable can't start with number
-      .replace(/^\d/, (match: string) => `_${match}`)
+      .replace(/^\d/, match => `_${match}`)
   )
 }
 
@@ -40,7 +41,7 @@ function convertPageMapToAst(
       let name = ''
 
       if (pagePath) {
-        name = cleanFileName(pagePath)
+        name = cleanFilePath(pagePath)
         imports.push({ importName: name, filePath: pagePath })
       }
       return createAstObject({
@@ -49,7 +50,7 @@ function convertPageMapToAst(
         ...(name && { frontMatter: { type: 'Identifier', name } })
       })
     }
-    const name = cleanFileName(item.__metaPath)
+    const name = cleanFilePath(item.__metaPath)
     imports.push({ importName: name, filePath: item.__metaPath })
     return createAstObject({
       data: { type: 'Identifier', name }
@@ -66,14 +67,9 @@ export async function transformPageMapToJs({
   pageMap: TItem[]
   mdxPages: Record<string, string>
 }): Promise<string> {
-  const someImports: Import[] = []
-  const pageMapAst = convertPageMapToAst(
-    pageMap,
-    someImports
-    // transformPageMap ? transformPageMap(pageMap, locale) : pageMap
-  )
-
-  const metaImportsAST: ImportDeclaration[] = someImports
+  const imports: Import[] = []
+  const pageMapAst = convertPageMapToAst(pageMap, imports)
+  const importsAst: ImportDeclaration[] = imports
     // localeCompare to avoid race condition
     .sort((a, b) => a.filePath.localeCompare(b.filePath))
     .map(({ filePath, importName }) => ({
@@ -96,30 +92,22 @@ export async function transformPageMapToJs({
       ]
     }))
 
+  const importsResult = toJs({
+    type: 'Program',
+    sourceType: 'module',
+    body: importsAst
+  })
+
   const pageMapResult = toJs({
     type: 'Program',
     sourceType: 'module',
-    body: [
-      ...metaImportsAST,
-      {
-        type: 'VariableDeclaration',
-        kind: 'const',
-        declarations: [
-          {
-            type: 'VariableDeclarator',
-            id: { type: 'Identifier', name: '_pageMap' },
-            init: pageMapAst
-          }
-        ]
-      }
-    ]
+    body: [{ type: 'ExpressionStatement', expression: pageMapAst }]
   })
 
   const rawJs = `import { normalizePageMap } from 'nextra/page-map'
-${pageMapResult.value}
-export const pageMap = normalizePageMap(_pageMap)
+${importsResult.value}
+export const pageMap = normalizePageMap(${pageMapResult.value.slice(0, -2 /* replace semicolon */)})
 
-export const RouteToFilepath = ${JSON.stringify(mdxPages, null, 2)}
-`
+export const RouteToFilepath = ${JSON.stringify(mdxPages, null, 2)}`
   return rawJs
 }

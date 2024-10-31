@@ -1,5 +1,5 @@
 import cn from 'clsx'
-import { Anchor } from 'nextra/mdx'
+import { Anchor } from 'nextra/mdx-components'
 
 export const Link: typeof Anchor = ({ className, ...props }) => (
   <Anchor

@@ -13,8 +13,8 @@ import {
   withGitHubAlert,
   withIcons
 } from 'nextra/components'
-import { useMDXComponents as getNextraMDXComponents } from 'nextra/mdx'
-import type { MDXComponents } from 'nextra/mdx'
+import { useMDXComponents as getNextraMDXComponents } from 'nextra/mdx-components'
+import type { MDXComponents } from 'nextra/mdx-components'
 import { removeLinks } from 'nextra/remove-links'
 import type { ComponentProps, FC } from 'react'
 import { Sidebar } from '../components'

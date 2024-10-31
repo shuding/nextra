@@ -2,6 +2,7 @@
 
 import { ArrowRightIcon } from '@components/icons'
 import cn from 'clsx'
+import type { FC } from 'react'
 import { useState } from 'react'
 import styles from '../page.module.css'
 
@@ -11,7 +12,7 @@ const LANGUAGES = [
   { lang: 'ja', name: '日本語' }
 ]
 
-export function I18n() {
+export const I18n: FC = () => {
   const [active, setActive] = useState('')
 
   return (

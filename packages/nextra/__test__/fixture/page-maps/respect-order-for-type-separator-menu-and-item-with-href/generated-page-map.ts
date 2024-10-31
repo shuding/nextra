@@ -6,7 +6,8 @@ import {metadata as one_two_2024} from "./one/two/2024.md";
 import {metadata as one_two_foo} from "./one/two/foo.md";
 import {metadata as one_two_one} from "./one/two/one.md";
 import {metadata as one_two_qux} from "./one/two/qux.md";
-const _pageMap = [{
+
+export const pageMap = normalizePageMap([{
   name: "one",
   route: "/one",
   children: [{
@@ -36,9 +37,7 @@ const _pageMap = [{
       frontMatter: one_two_qux
     }]
   }]
-}];
-
-export const pageMap = normalizePageMap(_pageMap)
+}])
 
 export const RouteToFilepath = {
   "one/two/1-one": "one/two/1-one.md",
