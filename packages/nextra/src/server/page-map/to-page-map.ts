@@ -1,35 +1,5 @@
 import path from 'path'
-import fg from 'fast-glob'
-import slash from 'slash'
 import type { TItem } from '../../types.js'
-
-export async function getFilepaths({
-  dir,
-  cwd,
-  locale
-}: {
-  dir: string
-  cwd: string
-  locale?: string
-}): Promise<string[]> {
-  const appDir = slash(path.relative(cwd, dir))
-  const contentDir = locale ? `content/${locale}` : 'content'
-  // appDir is empty string on tests
-  const pattern = appDir
-    ? [
-        `${contentDir}/**/_meta.{js,jsx,ts,tsx}`, // Include `_meta` files from `content` directory
-        `${contentDir}/**/*.{md,mdx}`, // Include all Markdown/MDX files from `content` directory
-        `${appDir}/**/page.{js,jsx,jsx,tsx,md,mdx}`,
-        `${appDir}/**/_meta.{js,jsx,ts,tsx}`, // Include `_meta` files from `app` directory
-        `!${appDir}/**/{_,[}*/*` // Ignore subdirectories starting with `_` and dynamic routes
-      ]
-    : ['**/_meta.{js,jsx,ts,tsx}', '**/*.{md,mdx}']
-  const result = await fg(pattern, { cwd })
-  // Sort filepaths alphabetically because there is different order on each
-  // fast-glob invocation
-  const relativePaths = result.sort((a, b) => a.localeCompare(b))
-  return relativePaths
-}
 
 interface NestedMap {
   [key: string]: NestedMap

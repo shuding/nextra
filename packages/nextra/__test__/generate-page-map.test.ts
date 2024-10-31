@@ -1,17 +1,15 @@
 import path from 'node:path'
-import { findPagesDir } from 'next/dist/lib/find-pages-dir.js'
 import { CWD } from '../src/server/constants.js'
-import {
-  convertToPageMap,
-  getFilepaths
-} from '../src/server/page-map/to-page-map.js'
+import { findMetaAndPageFilePaths } from '../src/server/page-map/find-meta-and-page-file-paths.js'
+import { convertToPageMap } from '../src/server/page-map/to-page-map.js'
 
 describe('generatePageMap()', () => {
   it('should work for blog example', async () => {
     const cwd = path.join(CWD, '..', '..', 'examples', 'blog')
-    const { appDir } = findPagesDir(cwd)
-
-    const filePaths = await getFilepaths({ dir: appDir!, cwd })
+    const filePaths = await findMetaAndPageFilePaths({
+      dir: path.join(cwd, 'app'),
+      cwd
+    })
     const { pageMap } = convertToPageMap({ filePaths })
     expect(filePaths).toMatchInlineSnapshot(`
       [
@@ -79,9 +77,10 @@ describe('generatePageMap()', () => {
 
   it('should work for nextra.site', async () => {
     const cwd = path.join(CWD, '..', '..', 'docs')
-    const { appDir } = findPagesDir(cwd)
-
-    const filePaths = await getFilepaths({ dir: appDir!, cwd })
+    const filePaths = await findMetaAndPageFilePaths({
+      dir: path.join(cwd, 'app'),
+      cwd
+    })
     const { pageMap } = convertToPageMap({ filePaths })
     expect(filePaths).toMatchInlineSnapshot(`
       [
@@ -467,8 +466,10 @@ describe('generatePageMap()', () => {
 
   describe('should work for docs example', async () => {
     const cwd = path.join(CWD, '..', '..', 'examples', 'docs')
-    const { appDir } = findPagesDir(cwd)
-    const filePaths = await getFilepaths({ dir: appDir!, cwd })
+    const filePaths = await findMetaAndPageFilePaths({
+      dir: path.join(cwd, 'app'),
+      cwd
+    })
     it('should match filepaths', () => {
       expect(filePaths).toMatchInlineSnapshot(`
         [
@@ -817,8 +818,11 @@ describe('generatePageMap()', () => {
 
   describe('should work for i18n example', async () => {
     const cwd = path.join(CWD, '..', '..', 'examples', 'swr-site')
-    const { appDir } = findPagesDir(cwd)
-    const filePaths = await getFilepaths({ dir: appDir!, cwd, locale: 'en' })
+    const filePaths = await findMetaAndPageFilePaths({
+      dir: path.join(cwd, 'app'),
+      cwd,
+      locale: 'en'
+    })
     it('should match filepaths', () => {
       expect(filePaths).toMatchInlineSnapshot(`
         [

@@ -1,11 +1,9 @@
 import fs from 'node:fs/promises'
 import path from 'node:path'
 import prettier from 'prettier'
+import { findMetaAndPageFilePaths } from '../src/server/page-map/find-meta-and-page-file-paths.js'
 import { convertPageMapToJs } from '../src/server/page-map/to-js.js'
-import {
-  convertToPageMap,
-  getFilepaths
-} from '../src/server/page-map/to-page-map.js'
+import { convertToPageMap } from '../src/server/page-map/to-page-map.js'
 
 export function clean(content: string): Promise<string> {
   return prettier.format(content, {
@@ -20,8 +18,7 @@ export function clean(content: string): Promise<string> {
 
 export async function getPageMapForFixture(dirName: string) {
   const dir = path.join(__dirname, 'fixture', 'page-maps', dirName)
-
-  const filePaths = await getFilepaths({ dir, cwd: dir })
+  const filePaths = await findMetaAndPageFilePaths({ dir, cwd: dir })
   const { pageMap, mdxPages } = convertToPageMap({ filePaths })
   const rawJs = await convertPageMapToJs({ pageMap, mdxPages })
 
