@@ -1,7 +1,7 @@
 import fs from 'node:fs/promises'
 import path from 'node:path'
 import prettier from 'prettier'
-import { generatePageMap, getFilepaths } from '../src/server/page-map/generate'
+import { generatePageMap, getFilepaths } from '../src/server/page-map/generate.js'
 
 export function clean(content: string): Promise<string> {
   return prettier.format(content, {

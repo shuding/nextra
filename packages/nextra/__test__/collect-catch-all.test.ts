@@ -1,5 +1,5 @@
 import { createCatchAllMeta } from '../src/client/catch-all.js'
-import { collectCatchAllRoutes } from '../src/server/page-map-dynamic.js'
+import { collectCatchAllRoutes } from '../src/server/page-map/dynamic.js'
 
 describe('collectCatchAllRoutes', () => {
   it('should collect', () => {
