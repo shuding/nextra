@@ -30,23 +30,20 @@ export function convertPageMapToAst(
       })
     }
     if ('route' in item) {
-      const pagePath = item.__pagePath
-      let name = ''
-
-      if (pagePath) {
-        name = cleanFilePath(pagePath)
-        imports.push({ importName: name, filePath: pagePath })
-      }
+      const filePath = item.__pagePath
+      const importName = cleanFilePath(filePath)
+      imports.push({ importName, filePath })
       return createAstObject({
         name: item.name,
         route: item.route,
-        ...(name && { frontMatter: { type: 'Identifier', name } })
+        frontMatter: { type: 'Identifier', name: importName }
       })
     }
-    const name = cleanFilePath(item.__metaPath)
-    imports.push({ importName: name, filePath: item.__metaPath })
+    const filePath = item.__metaPath
+    const importName = cleanFilePath(filePath)
+    imports.push({ importName, filePath })
     return createAstObject({
-      data: { type: 'Identifier', name }
+      data: { type: 'Identifier', name: importName }
     })
   })
 
