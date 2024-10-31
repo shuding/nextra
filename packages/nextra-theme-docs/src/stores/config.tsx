@@ -10,9 +10,14 @@ import type { StoreApi } from 'zustand'
 import { shallow } from 'zustand/shallow'
 import { useStoreWithEqualityFn } from 'zustand/traditional'
 
+type TopLevelNavbarItems = ReturnType<
+  typeof normalizePages
+>['topLevelNavbarItems']
+
 type Config = {
   hideSidebar: boolean
   normalizePagesResult: ReturnType<typeof normalizePages>
+  setTopLevelNavbarItems: (items: TopLevelNavbarItems) => void
 }
 
 const ConfigContext = createContext<StoreApi<Config> | null>(null)
@@ -28,19 +33,28 @@ function useConfigStore<T>(selector: (state: Config) => T) {
 export const useConfig = () =>
   useConfigStore(state => ({
     hideSidebar: state.hideSidebar,
-    normalizePagesResult: state.normalizePagesResult
+    normalizePagesResult: state.normalizePagesResult,
+    setTopLevelNavbarItems: state.setTopLevelNavbarItems
   }))
 
 function getStore(list: PageMapItem[], route: string) {
   const normalizePagesResult = normalizePages({ list, route })
   const { activeThemeContext, activeType } = normalizePagesResult
-  return {
+  return createStore<Config>(set => ({
     normalizePagesResult,
     hideSidebar:
       !activeThemeContext.sidebar ||
       activeType === 'page' ||
-      activeType === undefined /* non mdx pages */
-  }
+      activeType === undefined /* non mdx pages */,
+    setTopLevelNavbarItems: (items: TopLevelNavbarItems) =>
+      set(state => ({
+        ...state,
+        normalizePagesResult: {
+          ...state.normalizePagesResult,
+          topLevelNavbarItems: items
+        }
+      }))
+  }))
 }
 
 export const ConfigProvider: FC<{
@@ -51,12 +65,10 @@ export const ConfigProvider: FC<{
 }> = ({ children, pageMap, navbar, footer }) => {
   const pathname = useFSRoute()
 
-  const [store] = useState(() =>
-    createStore<Config>(() => getStore(pageMap, pathname))
-  )
+  const [store] = useState(() => getStore(pageMap, pathname))
 
   useEffect(() => {
-    store.setState(getStore(pageMap, pathname))
+    store.setState(getStore(pageMap, pathname).getState())
   }, [store, pageMap, pathname])
 
   useEffect(() => {
