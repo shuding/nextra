@@ -1,15 +1,22 @@
 import path from 'node:path'
 import { transformerTwoslash } from '@shikijs/twoslash'
+import { findPagesDir } from 'next/dist/lib/find-pages-dir.js'
 import slash from 'slash'
 import type { LoaderContext } from 'webpack'
 import type { LoaderOptions, PageOpts } from '../types.js'
 import { compileMdx } from './compile.js'
 import { CWD, IS_PRODUCTION } from './constants.js'
-import { APP_DIR } from './file-system.js'
-import { generatePageMap, getFilepaths } from './page-map/generate.js'
-import { transformPageMapToJs } from './page-map/to-js.js'
+import { findMetaAndPageFilePaths } from './page-map/find-meta-and-page-file-paths.js'
+import { convertPageMapToJs } from './page-map/to-js.js'
+import { convertToPageMap } from './page-map/to-page-map.js'
 import { twoslashRenderer } from './rehype-plugins/twoslash.js'
 import { logger } from './utils.js'
+
+const APP_DIR = findPagesDir(CWD).appDir!
+
+if (!APP_DIR) {
+  throw new Error('Unable to find `app` directory')
+}
 
 const initGitRepo = (async () => {
   const IS_WEB_CONTAINER = !!process.versions.webcontainer
@@ -87,14 +94,18 @@ export async function loader(
       this.addContextDependency(APP_DIR)
       this.addContextDependency(path.join(CWD, 'content', locale))
     }
-    const filePaths = await getFilepaths({ dir: APP_DIR, cwd: CWD, locale })
-    const { pageMap, mdxPages } = generatePageMap({
+    const filePaths = await findMetaAndPageFilePaths({
+      dir: APP_DIR,
+      cwd: CWD,
+      locale
+    })
+    const { pageMap, mdxPages } = convertToPageMap({
       filePaths,
       // Remove forward slash
       basePath: contentDirBasePath!.slice(1),
       locale
     })
-    const rawJs = await transformPageMapToJs({ pageMap, mdxPages })
+    const rawJs = await convertPageMapToJs({ pageMap, mdxPages })
     return rawJs
   }
   if (filePath.includes('/nextra/dist/server/page-map/get.js')) {

@@ -1,11 +1,5 @@
 import { fromZodError } from 'zod-validation-error'
-import type {
-  Folder,
-  FrontMatter,
-  MdxFile,
-  MetaJsonFile,
-  PageMapItem
-} from '../../types.js'
+import type { Folder, FrontMatter, MdxFile, PageMapItem } from '../../types.js'
 import { metaSchema } from '../schemas.js'
 
 export function normalizePageMap(pageMap: PageMapItem[] | Folder): any {
@@ -32,7 +26,7 @@ function sortFolder(pageMap: PageMapItem[] | Folder) {
 
   const meta: Record<string, Record<string, any>> = {}
 
-  for (const [index, item] of folder.children.entries()) {
+  for (const item of folder.children) {
     if (
       isFolder &&
       'frontMatter' in item &&
@@ -58,20 +52,7 @@ function sortFolder(pageMap: PageMapItem[] | Folder) {
         meta[key] = data
       }
     } else {
-      const prevItem = folder.children[index - 1] as Exclude<
-        PageMapItem,
-        MetaJsonFile
-      >
-      // If there are two items with the same name, they must be a directory and a
-      // page. In that case we merge them, and use the page's link.
-      if (prevItem && prevItem.name === item.name) {
-        newChildren[newChildren.length - 1] = {
-          ...prevItem,
-          frontMatter: item.frontMatter
-        }
-        continue
-      }
-      // @ts-expect-error
+      // @ts-expect-error -- __pagePath can exist from dynamic MDX
       const { __pagePath, ...rest } = item
       newChildren.push(rest)
     }

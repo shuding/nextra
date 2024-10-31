@@ -1,5 +1,5 @@
-import fs from 'fs/promises'
-import path from 'path'
+import fs from 'node:fs/promises'
+import path from 'node:path'
 import fg from 'fast-glob'
 import type { MetadataRoute } from 'next'
 import { findPagesDir } from 'next/dist/lib/find-pages-dir.js'

@@ -75,6 +75,7 @@ module.exports = {
         'unicorn/prefer-optional-catch-binding': 'error',
         'unicorn/filename-case': 'error',
         eqeqeq: ['error', 'always', { null: 'ignore' }],
+        'unicorn/prefer-node-protocol': 'error',
         // todo: enable
         '@typescript-eslint/no-explicit-any': 'off',
         '@typescript-eslint/no-non-null-assertion': 'off',

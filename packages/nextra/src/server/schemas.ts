@@ -5,7 +5,6 @@ import { isValidElement } from 'react'
 import type { Options as RehypeKatexOptions } from 'rehype-katex'
 import type { Options as RehypePrettyCodeOptions } from 'rehype-pretty-code'
 import { z } from 'zod'
-import type { PageMapItem } from '../types.js'
 import { pageTitleFromFilename } from './utils.js'
 
 export const mathJaxOptionsSchema = z.strictObject({
@@ -48,13 +47,6 @@ export const nextraConfigSchema = z.strictObject({
     ])
     .optional(),
   codeHighlight: z.boolean().default(true),
-  /**
-   * A function to modify the `pageMap` passed to theme layouts.
-   * @experimental
-   */
-  transformPageMap: z
-    .custom<(pageMap: PageMapItem[], locale: string) => PageMapItem[]>()
-    .optional(),
   mdxOptions: z
     .strictObject({
       rehypePlugins: z.custom<ProcessorOptions['rehypePlugins']>(),

@@ -1,18 +1,16 @@
 import path from 'node:path'
-import { findPagesDir } from 'next/dist/lib/find-pages-dir.js'
 import { CWD } from '../src/server/constants.js'
-import {
-  generatePageMap,
-  getFilepaths
-} from '../src/server/page-map/generate.js'
+import { findMetaAndPageFilePaths } from '../src/server/page-map/find-meta-and-page-file-paths.js'
+import { convertToPageMap } from '../src/server/page-map/to-page-map.js'
 
 describe('generatePageMap()', () => {
   it('should work for blog example', async () => {
     const cwd = path.join(CWD, '..', '..', 'examples', 'blog')
-    const { appDir } = findPagesDir(cwd)
-
-    const filePaths = await getFilepaths({ dir: appDir!, cwd })
-    const { pageMap } = generatePageMap({ filePaths })
+    const filePaths = await findMetaAndPageFilePaths({
+      dir: path.join(cwd, 'app'),
+      cwd
+    })
+    const { pageMap } = convertToPageMap({ filePaths })
     expect(filePaths).toMatchInlineSnapshot(`
       [
         "app/page.mdx",
@@ -79,10 +77,11 @@ describe('generatePageMap()', () => {
 
   it('should work for nextra.site', async () => {
     const cwd = path.join(CWD, '..', '..', 'docs')
-    const { appDir } = findPagesDir(cwd)
-
-    const filePaths = await getFilepaths({ dir: appDir!, cwd })
-    const { pageMap } = generatePageMap({ filePaths })
+    const filePaths = await findMetaAndPageFilePaths({
+      dir: path.join(cwd, 'app'),
+      cwd
+    })
+    const { pageMap } = convertToPageMap({ filePaths })
     expect(filePaths).toMatchInlineSnapshot(`
       [
         "app/_meta.ts",
@@ -467,8 +466,10 @@ describe('generatePageMap()', () => {
 
   describe('should work for docs example', async () => {
     const cwd = path.join(CWD, '..', '..', 'examples', 'docs')
-    const { appDir } = findPagesDir(cwd)
-    const filePaths = await getFilepaths({ dir: appDir!, cwd })
+    const filePaths = await findMetaAndPageFilePaths({
+      dir: path.join(cwd, 'app'),
+      cwd
+    })
     it('should match filepaths', () => {
       expect(filePaths).toMatchInlineSnapshot(`
         [
@@ -500,7 +501,7 @@ describe('generatePageMap()', () => {
       `)
     })
     it('should match page map', () => {
-      const { pageMap } = generatePageMap({ filePaths })
+      const { pageMap } = convertToPageMap({ filePaths })
       expect(pageMap).toMatchInlineSnapshot(`
         [
           {
@@ -638,7 +639,7 @@ describe('generatePageMap()', () => {
     })
 
     it('should match page map with base path', () => {
-      const { pageMap, mdxPages } = generatePageMap({
+      const { pageMap, mdxPages } = convertToPageMap({
         filePaths,
         basePath: 'docs'
       })
@@ -817,8 +818,11 @@ describe('generatePageMap()', () => {
 
   describe('should work for i18n example', async () => {
     const cwd = path.join(CWD, '..', '..', 'examples', 'swr-site')
-    const { appDir } = findPagesDir(cwd)
-    const filePaths = await getFilepaths({ dir: appDir!, cwd, locale: 'en' })
+    const filePaths = await findMetaAndPageFilePaths({
+      dir: path.join(cwd, 'app'),
+      cwd,
+      locale: 'en'
+    })
     it('should match filepaths', () => {
       expect(filePaths).toMatchInlineSnapshot(`
         [
@@ -882,7 +886,7 @@ describe('generatePageMap()', () => {
     })
 
     it('should match page map', () => {
-      const { pageMap, mdxPages } = generatePageMap({
+      const { pageMap, mdxPages } = convertToPageMap({
         filePaths,
         locale: 'en'
       })
@@ -1252,5 +1256,81 @@ describe('generatePageMap()', () => {
         ]
       `)
     })
+  })
+
+  it('should add `basePath` for graphql-eslint where there is no `content` dir', () => {
+    const { mdxPages, pageMap } = convertToPageMap({
+      filePaths: [
+        'configs.mdx',
+        'custom-rules.mdx',
+        'getting-started.mdx',
+        'getting-started/parser-options.mdx',
+        'getting-started/parser.mdx',
+        'index.mdx'
+      ],
+      basePath: 'remote/graphql-eslint'
+    })
+    expect(mdxPages).toMatchInlineSnapshot(`
+      {
+        "": "index.mdx",
+        "configs": "configs.mdx",
+        "custom-rules": "custom-rules.mdx",
+        "getting-started": "getting-started.mdx",
+        "getting-started/parser": "getting-started/parser.mdx",
+        "getting-started/parser-options": "getting-started/parser-options.mdx",
+      }
+    `)
+    expect(pageMap).toMatchInlineSnapshot(`
+      [
+        {
+          "children": [
+            {
+              "children": [
+                {
+                  "__pagePath": "configs.mdx",
+                  "name": "configs",
+                  "route": "/remote/graphql-eslint/configs",
+                },
+                {
+                  "__pagePath": "custom-rules.mdx",
+                  "name": "custom-rules",
+                  "route": "/remote/graphql-eslint/custom-rules",
+                },
+                {
+                  "children": [
+                    {
+                      "__pagePath": "getting-started.mdx",
+                      "name": "index",
+                      "route": "/remote/graphql-eslint/getting-started",
+                    },
+                    {
+                      "__pagePath": "getting-started/parser-options.mdx",
+                      "name": "parser-options",
+                      "route": "/remote/graphql-eslint/getting-started/parser-options",
+                    },
+                    {
+                      "__pagePath": "getting-started/parser.mdx",
+                      "name": "parser",
+                      "route": "/remote/graphql-eslint/getting-started/parser",
+                    },
+                  ],
+                  "name": "getting-started",
+                  "route": "/remote/graphql-eslint/getting-started",
+                },
+                {
+                  "__pagePath": "index.mdx",
+                  "name": "index",
+                  "route": "/remote/graphql-eslint",
+                },
+              ],
+              "name": "graphql-eslint",
+              "route": "/remote/graphql-eslint",
+            },
+          ],
+          "name": "remote",
+          "route": "/remote",
+        },
+      ]
+    `)
   })
 })

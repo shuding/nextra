@@ -1,2 +1,2 @@
 export { normalizePageMap } from './normalize.js'
-export { generatePageMap } from './generate.js'
+export { convertToPageMap } from './to-page-map.js'

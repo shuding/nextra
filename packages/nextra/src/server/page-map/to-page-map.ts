@@ -1,41 +1,5 @@
-import path from 'path'
-import fg from 'fast-glob'
-import slash from 'slash'
+import path from 'node:path'
 import type { TItem } from '../../types.js'
-
-export async function getFilepaths({
-  dir,
-  cwd,
-  locale
-}: {
-  dir: string
-  cwd: string
-  locale?: string
-}): Promise<string[]> {
-  const appDir = slash(path.relative(cwd, dir))
-  const contentDir = locale ? `content/${locale}` : 'content'
-  const result = await fg(
-    [
-      // appDir is empty string on tests
-      ...(appDir
-        ? [
-            `${contentDir}/**/_meta.{js,jsx,ts,tsx}`, // Include `_meta` files from `content` directory
-            `${contentDir}/**/*.{md,mdx}`, // Include all Markdown/MDX files from `content` directory
-            `${appDir}/**/page.{js,jsx,jsx,tsx,md,mdx}`,
-            `${appDir}/**/_meta.{js,jsx,ts,tsx}`, // Include `_meta` files from `app` directory
-            `!${appDir}/**/_*/*` // Ignore all subdirectories starting with `_`
-          ]
-        : ['**/_meta.{js,jsx,ts,tsx}', '**/*.{md,mdx}']),
-      // Ignore dynamic routes
-      '!**/\\[*/*'
-    ],
-    { cwd }
-  )
-  // Sort filepaths alphabetically because there is different order on each
-  // fast-glob invocation
-  const relativePaths = result.sort((a, b) => a.localeCompare(b))
-  return relativePaths
-}
 
 interface NestedMap {
   [key: string]: NestedMap
@@ -46,7 +10,7 @@ type StringMap = Record<string, string>
 const createNested = (prevValue: NestedMap, currVal: string) =>
   (prevValue[currVal] ||= {})
 
-export function generatePageMap({
+export function convertToPageMap({
   filePaths,
   basePath,
   locale
@@ -60,13 +24,12 @@ export function generatePageMap({
   for (const filePath of filePaths) {
     let { name, dir } = path.parse(filePath)
     const inAppDir = filePath.startsWith('app/')
-
-    if (dir.startsWith('content')) {
+    if (inAppDir) {
+      dir = dir.replace(/^app(\/|$)/, '')
+    } else {
       let filePath = dir.replace(/^content(\/|$)/, '')
       if (locale) filePath = filePath.replace(new RegExp(`^${locale}/?`), '')
       dir = [basePath, filePath].filter(Boolean).join('/')
-    } else {
-      dir = dir.replace(/^app(\/|$)/, '')
     }
     if (name === '_meta') {
       const key = dir ? `${dir}/${name}` : name
