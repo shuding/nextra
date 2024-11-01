@@ -477,6 +477,7 @@ describe('generatePageMap()', () => {
           "app/blog/page.jsx",
           "app/page.jsx",
           "content/_meta.js",
+          "content/_meta.md",
           "content/advanced/code-highlighting.mdx",
           "content/features/_meta.js",
           "content/features/i18n.mdx",
@@ -505,7 +506,7 @@ describe('generatePageMap()', () => {
       expect(pageMap).toMatchInlineSnapshot(`
         [
           {
-            "__metaPath": "content/_meta.js",
+            "__metaPath": "content/_meta.md",
           },
           {
             "children": [
@@ -673,7 +674,7 @@ describe('generatePageMap()', () => {
           {
             "children": [
               {
-                "__metaPath": "content/_meta.js",
+                "__metaPath": "content/_meta.md",
               },
               {
                 "children": [

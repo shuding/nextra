@@ -1,5 +1,6 @@
 import path from 'node:path'
 import type { TItem } from '../../types.js'
+import { META_RE } from '../constants'
 
 interface NestedMap {
   [key: string]: NestedMap
@@ -21,8 +22,10 @@ export function convertToPageMap({
 }) {
   let mdxPages: StringMap = {}
   const metaFiles: StringMap = {}
+  const nestedMap: NestedMap = {}
+
   for (const filePath of filePaths) {
-    let { name, dir } = path.parse(filePath)
+    let { name, dir, base } = path.parse(filePath)
     const inAppDir = filePath.startsWith('app/')
     if (inAppDir) {
       dir = dir.replace(/^app(\/|$)/, '')
@@ -31,7 +34,7 @@ export function convertToPageMap({
       if (locale) filePath = filePath.replace(new RegExp(`^${locale}/?`), '')
       dir = [basePath, filePath].filter(Boolean).join('/')
     }
-    if (name === '_meta') {
+    if (META_RE.test(base)) {
       const key = dir ? `${dir}/${name}` : name
       metaFiles[key] = filePath
     } else {
@@ -50,20 +53,16 @@ export function convertToPageMap({
     }
   }
 
-  const obj: NestedMap = {}
-
   for (const path of Object.keys(metaFiles)) {
-    path.split('/').reduce(createNested, obj)
+    path.split('/').reduce(createNested, nestedMap)
   }
   for (const path of Object.keys(mdxPages)) {
     const key = path && `${path}/`
-    key.split('/').reduce(createNested, obj)
+    key.split('/').reduce(createNested, nestedMap)
   }
 
   function fillPageMap(obj: NestedMap, prefix?: string): TItem[] {
-    const children: TItem[] = []
-
-    for (const [key, value] of Object.entries(obj)) {
+    return Object.entries(obj).map(([key, value]) => {
       const path = prefix && key ? `${prefix}/${key}` : prefix || key
       if (key === '_meta') {
         const __metaPath = metaFiles[path]
@@ -71,8 +70,7 @@ export function convertToPageMap({
           const o = JSON.stringify({ path, metaFiles }, null, 2)
           throw new Error(`Can't find "_meta" file for:\n${o}`)
         }
-        children.push({ __metaPath })
-        continue
+        return { __metaPath }
       }
       const item = {
         name: key || 'index',
@@ -80,22 +78,19 @@ export function convertToPageMap({
       }
       const keys = Object.keys(value)
       const isFolder = keys.length > 1 || (keys.length === 1 && keys[0] !== '')
-
       if (isFolder) {
-        children.push({ ...item, children: fillPageMap(value, path) })
-        continue
+        return { ...item, children: fillPageMap(value, path) }
       }
       const __pagePath = mdxPages[path]
       if (!__pagePath) {
         const o = JSON.stringify({ path, mdxPages }, null, 2)
         throw new Error(`Can't find "page" file for:\n${o}`)
       }
-      children.push({ ...item, __pagePath })
-    }
-    return children
+      return { ...item, __pagePath }
+    })
   }
 
-  const pageMap = fillPageMap(obj)
+  const pageMap = fillPageMap(nestedMap)
 
   mdxPages = Object.fromEntries(
     Object.entries(mdxPages).flatMap(([key, value]) => {
