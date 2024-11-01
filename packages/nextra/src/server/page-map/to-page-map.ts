@@ -1,6 +1,6 @@
 import path from 'node:path'
 import type { TItem } from '../../types.js'
-import { META_RE } from '../constants'
+import { META_RE } from '../constants.js'
 
 interface NestedMap {
   [key: string]: NestedMap
