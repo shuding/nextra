@@ -14,12 +14,15 @@ export const NotFoundLink: FC<{
   const config = useThemeConfig()
   const pathname = usePathname()
   const mounted = useMounted()
+  const ref = mounted && document.referrer
+  const referrer = ref ? ` from "${ref}"` : ''
 
   return (
     <Link
+      className="_mt-6"
       href={getGitIssueUrl({
         repository: config.docsRepositoryBase,
-        title: `Found broken \`${mounted ? pathname : ''}\` link. Please fix!`,
+        title: `Found broken "${mounted ? pathname : ''}" link${referrer}. Please fix!`,
         labels
       })}
     >
