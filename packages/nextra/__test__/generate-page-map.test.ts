@@ -477,6 +477,7 @@ describe('generatePageMap()', () => {
           "app/blog/page.jsx",
           "app/page.jsx",
           "content/_meta.js",
+          "content/_meta.md",
           "content/advanced/code-highlighting.mdx",
           "content/features/_meta.js",
           "content/features/i18n.mdx",
@@ -505,7 +506,9 @@ describe('generatePageMap()', () => {
       expect(pageMap).toMatchInlineSnapshot(`
         [
           {
-            "__metaPath": "content/_meta.js",
+            "__pagePath": "content/_meta.md",
+            "name": "_meta",
+            "route": "/_meta",
           },
           {
             "children": [
@@ -648,6 +651,7 @@ describe('generatePageMap()', () => {
       expect(mdxPages).toMatchInlineSnapshot(`
         {
           "": "index.mdx",
+          "_meta": "_meta.md",
           "advanced/code-highlighting": "advanced/code-highlighting.mdx",
           "features/i18n": "features/i18n.mdx",
           "features/image": "features/image.mdx",
@@ -673,7 +677,9 @@ describe('generatePageMap()', () => {
           {
             "children": [
               {
-                "__metaPath": "content/_meta.js",
+                "__pagePath": "content/_meta.md",
+                "name": "_meta",
+                "route": "/docs/_meta",
               },
               {
                 "children": [
