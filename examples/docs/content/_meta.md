@@ -1,1 +1,1 @@
-<!-- this file should be treated as page -->
+this file will be treated as page since extension is `.md` or `.mdx`

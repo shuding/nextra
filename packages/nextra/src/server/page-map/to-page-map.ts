@@ -64,7 +64,7 @@ export function convertToPageMap({
   function fillPageMap(obj: NestedMap, prefix?: string): TItem[] {
     return Object.entries(obj).map(([key, value]) => {
       const path = prefix && key ? `${prefix}/${key}` : prefix || key
-      if (key === '_meta') {
+      if (key === '_meta' && !Object.keys(value).length) {
         const __metaPath = metaFiles[path]
         if (!__metaPath) {
           const o = JSON.stringify({ path, metaFiles }, null, 2)
