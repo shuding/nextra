@@ -5,9 +5,6 @@ import {
   Pre,
   Summary,
   Table,
-  Td,
-  Th,
-  Tr,
   withGitHubAlert,
   withIcons
 } from 'nextra/components'
@@ -77,9 +74,9 @@ export const useMDXComponents = (components: BlogMDXComponents = {}) =>
     pre: withIcons(Pre),
     summary: Summary,
     table: Table,
-    td: Td,
-    th: Th,
-    tr: Tr,
+    td: Table.Td,
+    th: Table.Th,
+    tr: Table.Tr,
     wrapper({ children, metadata, title }) {
       const date = (metadata as any).date as string
       if (date && !isValidDate(date)) {

@@ -7,9 +7,6 @@ import {
   SkipNavContent,
   Summary,
   Table,
-  Td,
-  Th,
-  Tr,
   withGitHubAlert,
   withIcons
 } from 'nextra/components'
@@ -87,9 +84,9 @@ export const useMDXComponents = (components?: Readonly<MDXComponents>) =>
         {...props}
       />
     ),
-    td: Td,
-    th: Th,
-    tr: Tr,
+    td: Table.Td,
+    th: Table.Th,
+    tr: Table.Tr,
     ul: props => (
       <ul
         className="[:is(ol,ul)_&]:_my-3 [&:not(:first-child)]:_mt-6 _list-disc _ms-6"
