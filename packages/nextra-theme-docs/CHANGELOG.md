@@ -1,5 +1,58 @@
 # nextra-theme-docs
 
+## 4.0.0-app-router.20
+
+### Major Changes
+
+- 16816f2: remove `<Th>`, `<Tr>` and `<Td>` exports (since they should be always
+  used with `<Table>` component)
+
+  ```diff
+  - import { Table, Th, Tr, Td } from 'nextra/components'
+  + import { Table } from 'nextra/components'
+
+  // ...
+
+  - <Th>
+  + <Table.Th>
+  - <Tr>
+  + <Table.Tr>
+  - <Td>
+  + <Table.Td>
+  ```
+
+- 0a63ba3: improve performance on projects without Turbopack enabled
+
+### Minor Changes
+
+- 2bd6f41: include `document.referrer` in link in `<NotFoundPage>` component
+
+### Patch Changes
+
+- 7cc8ca1: simplify `generatePageMap`
+- 16816f2: remove false positive warnings on projects without `content/`
+  directory
+
+  ```
+  ⚠ Compiled with warnings
+
+  ../packages/nextra/dist/client/pages.js
+  Module not found: Can't resolve 'private-next-root-dir/content' in '/Users/dmytro/Desktop/nextra/packages/nextra/dist/client'
+  ```
+
+- b873702: `firstChildRoute` should return "index" route as first
+- Updated dependencies [3d8705c]
+- Updated dependencies [16816f2]
+- Updated dependencies [27454c4]
+- Updated dependencies [7cc8ca1]
+- Updated dependencies [aa94d91]
+- Updated dependencies [0a63ba3]
+- Updated dependencies [71a051b]
+- Updated dependencies [0a63ba3]
+- Updated dependencies [16816f2]
+- Updated dependencies [b873702]
+  - nextra@4.0.0-app-router.20
+
 ## 4.0.0-app-router.19
 
 ### Patch Changes

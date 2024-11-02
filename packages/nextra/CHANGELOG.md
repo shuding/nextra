@@ -1,5 +1,50 @@
 # nextra
 
+## 4.0.0-app-router.20
+
+### Major Changes
+
+- 16816f2: remove `<Th>`, `<Tr>` and `<Td>` exports (since they should be always
+  used with `<Table>` component)
+
+  ```diff
+  - import { Table, Th, Tr, Td } from 'nextra/components'
+  + import { Table } from 'nextra/components'
+
+  // ...
+
+  - <Th>
+  + <Table.Th>
+  - <Tr>
+  + <Table.Tr>
+  - <Td>
+  + <Table.Td>
+  ```
+
+- aa94d91: rename `nextra/mdx` to `nextra/mdx-components`
+- 0a63ba3: improve performance on projects without Turbopack enabled
+
+### Patch Changes
+
+- 3d8705c: improve `generatePageMap` types
+- 27454c4: remove `NextraConfig.transformPageMap`
+- 7cc8ca1: simplify `generatePageMap`
+- 71a051b: - do not treat `content/page.{mdx,md}` as index page
+  - skip visiting directories which starts with underscore for `app` directory
+- 0a63ba3: move `createCatchAllMeta` from `nextra/catch-all` to
+  `nextra/page-map`
+- 16816f2: remove false positive warnings on projects without `content/`
+  directory
+
+  ```
+  ⚠ Compiled with warnings
+
+  ../packages/nextra/dist/client/pages.js
+  Module not found: Can't resolve 'private-next-root-dir/content' in '/Users/dmytro/Desktop/nextra/packages/nextra/dist/client'
+  ```
+
+- b873702: `firstChildRoute` should return "index" route as first
+
 ## 4.0.0-app-router.19
 
 ### Patch Changes
