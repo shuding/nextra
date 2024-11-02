@@ -4,5 +4,5 @@ export default {
   filetree: 'FileTree',
   steps: '',
   table: '',
-  tabs: '',
+  tabs: ''
 }
