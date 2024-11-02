@@ -75,8 +75,9 @@ export async function loader(
     whiteListTagsStyling
   } = this.getOptions()
   const { resourcePath, resourceQuery } = this
+  const filePath = slash(resourcePath)
 
-  if (resourcePath.includes(PAGE_MAP_PLACEHOLDER_PATH)) {
+  if (filePath.includes(PAGE_MAP_PLACEHOLDER_PATH)) {
     const locale = resourceQuery.replace('?lang=', '')
     if (!IS_PRODUCTION) {
       // Add `app` and `content` folders as the dependencies, so Webpack will
@@ -98,7 +99,7 @@ export async function loader(
     const rawJs = await convertPageMapToJs({ pageMap, mdxPages })
     return rawJs
   }
-  if (resourcePath.includes(GET_PAGE_MAP_PATH)) {
+  if (filePath.includes(GET_PAGE_MAP_PATH)) {
     const rawJs = replaceDynamicResourceQuery(
       source,
       'import(`./placeholder.js?lang=${lang}`)',
@@ -108,7 +109,7 @@ export async function loader(
   }
 
   if (!IS_PRODUCTION && resourceQuery === METADATA_ONLY_RQ) {
-    const rawJs = await compileMetadata(source, { filePath: resourcePath })
+    const rawJs = await compileMetadata(source, { filePath })
     return rawJs
   }
 
@@ -135,7 +136,7 @@ export async function loader(
     search,
     latex,
     codeHighlight,
-    filePath: resourcePath,
+    filePath,
     useCachedCompiler: true,
     isPageImport,
     whiteListTagsStyling
@@ -146,7 +147,7 @@ export async function loader(
   if (repository && gitRoot) {
     try {
       timestamp = await repository.getFileLatestModifiedDateAsync(
-        path.relative(gitRoot, resourcePath)
+        path.relative(gitRoot, filePath)
       )
     } catch {
       // Failed to get timestamp for this file. Silently ignore it
@@ -154,7 +155,7 @@ export async function loader(
   }
 
   const restProps: PageOpts['metadata'] = {
-    filePath: slash(path.relative(CWD, resourcePath)),
+    filePath: slash(path.relative(CWD, filePath)),
     timestamp,
     readingTime
   }
