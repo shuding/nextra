@@ -1,4 +1,4 @@
-import { Steps } from 'nextra/components'
+import { Steps, Table, Td, Th, Tr } from 'nextra/components'
 
 # Rendering Tables
 
@@ -33,51 +33,53 @@ table will be unstyled because
 elements with
 [components provided by `useMDXComponents(){:js}`](https://mdxjs.com/packages/vue/#usemdxcomponentscomponents).
 
+Instead, use the built-in `<Table>`, `<Tr>`, `<Th>`, and `<Td>` components instead:
+
 ### Usage
 
 ```mdx filename="MDX"
-<table>
+import { Table, Td, Th, Tr } from 'nextra/components'
+
+<Table>
   <thead>
-    <tr>
-      <th>Country</th>
-      <th>Flag</th>
-    </tr>
+    <Tr>
+      <Th>Country</Th>
+      <Th>Flag</Th>
+    </Tr>
   </thead>
   <tbody>
-    <tr>
-      <td>France</td>
-      <td>🇫🇷</td>
-    </tr>
-    <tr>
-      <td>Ukraine</td>
-      <td>🇺🇦</td>
-    </tr>
+    <Tr>
+      <Td>France</Td>
+      <Td>🇫🇷</Td>
+    </Tr>
+    <Tr>
+      <Td>Ukraine</Td>
+      <Td>🇺🇦</Td>
+    </Tr>
   </tbody>
-</table>
+</Table>
 ```
 
 ### Example
 
-<br />
-
-<table>
+<Table>
   <thead>
-    <tr>
-      <th>Country</th>
-      <th>Flag</th>
-    </tr>
+    <Tr>
+      <Th>Country</Th>
+      <Th>Flag</Th>
+    </Tr>
   </thead>
   <tbody>
-    <tr>
-      <td>France</td>
-      <td>🇫🇷</td>
-    </tr>
-    <tr>
-      <td>Ukraine</td>
-      <td>🇺🇦</td>
-    </tr>
+    <Tr>
+      <Td>France</Td>
+      <Td>🇫🇷</Td>
+    </Tr>
+    <Tr>
+      <Td>Ukraine</Td>
+      <Td>🇺🇦</Td>
+    </Tr>
   </tbody>
-</table>
+</Table>
 
 ## Changing Default Behaviour
 
