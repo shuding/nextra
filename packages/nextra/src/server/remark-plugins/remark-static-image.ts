@@ -1,6 +1,6 @@
 import path from 'node:path'
 import type { ImportDeclaration } from 'estree'
-import { MdxjsEsm } from 'hast-util-to-estree/lib/handlers/mdxjs-esm'
+import type { MdxjsEsm } from 'hast-util-to-estree/lib/handlers/mdxjs-esm'
 import type { Definition, Image, ImageReference, Root } from 'mdast'
 import type { Plugin } from 'unified'
 import { visit } from 'unist-util-visit'
