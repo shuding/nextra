@@ -5,7 +5,7 @@
   "scripts": {
     "build": "turbo run build --filter=./packages/\\*",
     "build:all": "turbo run build",
-    "clean": "pnpm -r exec sh -c 'rm -rf dist .next .turbo'",
+    "clean": "rm -rf .turbo && pnpm -r exec sh -c 'rm -rf dist .next .turbo'",
     "dev": "turbo run dev --filter=./packages/\\*",
     "dev:theme-blog": "turbo run dev --filter=example-blog... --filter=!docs",
     "dev:theme-docs": "turbo run dev --filter=example-docs... --filter=!docs",
