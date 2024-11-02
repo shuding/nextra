@@ -10,7 +10,7 @@ import {
   Navbar
 } from 'nextra-theme-docs'
 import { Banner, Head } from 'nextra/components'
-import { getPageMap } from 'nextra/pages'
+import { getPageMap } from 'nextra/page-map'
 import { getDictionary, getDirection } from '../_dictionaries/get-dictionary'
 import { pageMap as graphqlEslintPageMap } from './remote/graphql-eslint/[[...slug]]/page'
 import { pageMap as graphqlYogaPageMap } from './remote/graphql-yoga/[[...slug]]/page'

@@ -1,4 +1,4 @@
-import { getPageMap } from 'nextra/pages'
+import { getPageMap } from 'nextra/page-map'
 
 export async function getPosts() {
   const pageMap = await getPageMap()
