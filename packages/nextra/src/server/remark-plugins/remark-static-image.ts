@@ -1,10 +1,10 @@
 import path from 'node:path'
 import type { ImportDeclaration } from 'estree'
+import { MdxjsEsm } from 'hast-util-to-estree/lib/handlers/mdxjs-esm'
 import type { Definition, Image, ImageReference, Root } from 'mdast'
 import type { Plugin } from 'unified'
 import { visit } from 'unist-util-visit'
 import { EXTERNAL_URL_RE } from '../constants.js'
-import { MdxjsEsm } from 'hast-util-to-estree/lib/handlers/mdxjs-esm'
 
 /**
  * @link https://github.com/vercel/next.js/blob/6cfebfb02c2a52a1f99fca59a2eac2d704d053db/packages/next/build/webpack/loaders/next-image-loader.js#L6

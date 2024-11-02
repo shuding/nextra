@@ -25,7 +25,7 @@ export async function convertPageMapToJs({
         type: 'ImportDeclaration',
         source: {
           type: 'Literal',
-          // Add resource query only for `md`.`mdx` files
+          // Add resource query only for `.md`, `.mdx` files
           value: `private-next-root-dir/${filePath}${isMdx ? METADATA_ONLY_RQ : ''}`
         },
         specifiers: [
