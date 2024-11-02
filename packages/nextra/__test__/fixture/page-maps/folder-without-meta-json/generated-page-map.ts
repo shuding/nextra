@@ -1,7 +1,7 @@
 // @ts-nocheck
 import { normalizePageMap } from 'nextra/page-map'
-import {metadata as callout} from "./callout.md";
-import {metadata as tabs} from "./tabs.md";
+import {metadata as callout} from "./callout.md?metadata";
+import {metadata as tabs} from "./tabs.md?metadata";
 
 export const pageMap = normalizePageMap([{
   name: "callout",

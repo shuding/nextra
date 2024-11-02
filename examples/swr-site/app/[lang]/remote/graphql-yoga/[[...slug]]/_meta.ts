@@ -1,4 +1,4 @@
-import { createCatchAllMeta } from 'nextra/catch-all'
+import { createCatchAllMeta } from 'nextra/page-map'
 import json from '../../../../../nextra-remote-filepaths/graphql-yoga.json'
 
 export default () => {

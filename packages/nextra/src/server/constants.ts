@@ -4,7 +4,7 @@
  */
 import type { Property } from 'estree'
 
-export { MARKDOWN_EXTENSION_RE } from '../constants.js'
+export const MARKDOWN_EXTENSION_RE = /\.mdx?$/
 
 export const CWD = process.cwd()
 
@@ -27,3 +27,10 @@ export const DEFAULT_PROPERTY_PROPS = {
 } satisfies Omit<Property, 'key' | 'value'>
 
 export const TOC_HEADING_RE = /^h[2-6]$/
+
+export const GET_PAGE_MAP_PATH = '/nextra/dist/server/page-map/get-page-map.js'
+
+export const PAGE_MAP_PLACEHOLDER_PATH =
+  '/nextra/dist/server/page-map/placeholder.js'
+
+export const METADATA_ONLY_RQ = '?metadata'
