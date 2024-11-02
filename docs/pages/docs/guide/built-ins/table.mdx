@@ -1,0 +1,52 @@
+import { Table, Td, Th, Tr } from 'nextra/components'
+
+# Table Component
+
+A collection of built-in components designed to create styled, non-markdown
+(i.e., literal) HTML tables.
+
+## Example
+
+<Table className="mt-6">
+  <thead>
+    <Tr>
+      <Th>Country</Th>
+      <Th>Flag</Th>
+    </Tr>
+  </thead>
+  <tbody>
+    <Tr>
+      <Td>France</Td>
+      <Td>🇫🇷</Td>
+    </Tr>
+    <Tr>
+      <Td>Ukraine</Td>
+      <Td>🇺🇦</Td>
+    </Tr>
+  </tbody>
+</Table>
+
+## Usage
+
+```mdx
+import { Table, Td, Th, Tr } from 'nextra/components'
+
+<Table>
+  <thead>
+    <Tr>
+      <Th>Country</Th>
+      <Th>Flag</Th>
+    </Tr>
+  </thead>
+  <tbody>
+    <Tr>
+      <Td>France</Td>
+      <Td>🇫🇷</Td>
+    </Tr>
+    <Tr>
+      <Td>Ukraine</Td>
+      <Td>🇺🇦</Td>
+    </Tr>
+  </tbody>
+</Table>
+```
