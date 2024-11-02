@@ -33,53 +33,7 @@ table will be unstyled because
 elements with
 [components provided by `useMDXComponents(){:js}`](https://mdxjs.com/packages/vue/#usemdxcomponentscomponents).
 
-Instead, use the built-in `<Table>`, `<Tr>`, `<Th>`, and `<Td>` components instead:
-
-### Usage
-
-```mdx filename="MDX"
-import { Table, Td, Th, Tr } from 'nextra/components'
-
-<Table>
-  <thead>
-    <Tr>
-      <Th>Country</Th>
-      <Th>Flag</Th>
-    </Tr>
-  </thead>
-  <tbody>
-    <Tr>
-      <Td>France</Td>
-      <Td>🇫🇷</Td>
-    </Tr>
-    <Tr>
-      <Td>Ukraine</Td>
-      <Td>🇺🇦</Td>
-    </Tr>
-  </tbody>
-</Table>
-```
-
-### Example
-
-<Table>
-  <thead>
-    <Tr>
-      <Th>Country</Th>
-      <Th>Flag</Th>
-    </Tr>
-  </thead>
-  <tbody>
-    <Tr>
-      <Td>France</Td>
-      <Td>🇫🇷</Td>
-    </Tr>
-    <Tr>
-      <Td>Ukraine</Td>
-      <Td>🇺🇦</Td>
-    </Tr>
-  </tbody>
-</Table>
+Instead, use the [built-in `<Table>`, `<Tr>`, `<Th>`, and `<Td>` components](/docs/guide/built-ins/table) available via `nextra/components`.
 
 ## Changing Default Behaviour
 

@@ -3,7 +3,8 @@ import {
   FolderTreeIcon,
   IdCardIcon,
   OneIcon,
-  WarningIcon
+  WarningIcon,
+  RowsIcon
 } from '@components/icons'
 import { Cards } from 'nextra/components'
 
@@ -19,14 +20,14 @@ your content:
     href="/docs/guide/built-ins/callout"
   />
   <Cards.Card
-    icon={<CardsIcon />}
-    title="Tabs"
-    href="/docs/guide/built-ins/tabs"
-  />
-  <Cards.Card
     icon={<IdCardIcon />}
     title="Cards"
     href="/docs/guide/built-ins/cards"
+  />
+  <Cards.Card
+    icon={<FolderTreeIcon className="size-5" />}
+    title="FileTree"
+    href="/docs/guide/built-ins/filetree"
   />
   <Cards.Card
     icon={<OneIcon />}
@@ -34,8 +35,13 @@ your content:
     href="/docs/guide/built-ins/steps"
   />
   <Cards.Card
-    icon={<FolderTreeIcon className="size-5" />}
-    title="FileTree"
-    href="/docs/guide/built-ins/filetree"
+    icon={<CardsIcon />}
+    title="Tabs"
+    href="/docs/guide/built-ins/tabs"
+  />
+  <Cards.Card
+    icon={<RowsIcon />}
+    title="Table"
+    href="/docs/guide/built-ins/table"
   />
 </Cards>

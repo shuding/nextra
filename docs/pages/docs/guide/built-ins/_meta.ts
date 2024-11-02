@@ -1,7 +1,8 @@
 export default {
   callout: '',
-  tabs: '',
   cards: '',
+  filetree: 'FileTree',
   steps: '',
-  filetree: 'FileTree'
+  table: '',
+  tabs: '',
 }
