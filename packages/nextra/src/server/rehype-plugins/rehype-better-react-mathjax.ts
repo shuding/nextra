@@ -1,6 +1,8 @@
 import type { ImportDeclaration } from 'estree'
 import { valueToEstree } from 'estree-util-value-to-estree'
-import type { Element, Root, RootContent } from 'hast'
+import type { Element, ElementContent, Root } from 'hast'
+import { MdxJsxFlowElement } from 'hast-util-to-estree/lib/handlers/mdx-jsx-element'
+import { MdxjsEsm } from 'hast-util-to-estree/lib/handlers/mdxjs-esm'
 import type { MdxJsxAttribute } from 'hast-util-to-estree/lib/state'
 import type { Plugin } from 'unified'
 import { visit } from 'unist-util-visit'
@@ -23,12 +25,12 @@ const MATHJAX_IMPORTS = {
       ]
     }
   }
-}
+} as MdxjsEsm
 
 function wrapInMathJaxContext(
-  children: RootContent[],
+  children: ElementContent[],
   { config, src }: NonNullable<MathJaxOptions>
-) {
+): MdxJsxFlowElement {
   const attributes: MdxJsxAttribute[] = []
   if (src) {
     attributes.push({ type: 'mdxJsxAttribute', name: 'src', value: src })
@@ -117,12 +119,12 @@ export const rehypeBetterReactMathjax: Plugin<
     if (!hasMathJax) return
 
     const mdxjsEsmNodes = []
-    const rest = []
+    const rest: ElementContent[] = []
     for (const child of ast.children) {
-      if (child.type === ('mdxjsEsm' as any)) {
+      if ((child as MdxjsEsm).type === 'mdxjsEsm') {
         mdxjsEsmNodes.push(child)
       } else {
-        rest.push(child)
+        rest.push(child as any)
       }
     }
     ast.children = [
@@ -130,5 +132,5 @@ export const rehypeBetterReactMathjax: Plugin<
       ...(isRemoteContent ? [] : [MATHJAX_IMPORTS]),
       // Wrap everything in a `<MathJaxContext>` component.
       wrapInMathJaxContext(rest, options)
-    ] as any
+    ]
   }

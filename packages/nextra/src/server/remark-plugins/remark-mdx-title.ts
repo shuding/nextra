@@ -75,6 +75,6 @@ export const remarkMdxTitle: Plugin<[], Root> = () => (ast, file) => {
         body: [createAstExportConst('title', { type: 'Literal', value: title })]
       }
     }
-  } as any)
+  } as MdxjsEsm)
   file.data.title = title
 }

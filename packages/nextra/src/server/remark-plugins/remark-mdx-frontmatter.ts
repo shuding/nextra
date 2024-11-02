@@ -1,12 +1,13 @@
 import type { ArrayExpression, ObjectExpression } from 'estree'
 import { valueToEstree } from 'estree-util-value-to-estree'
+import { MdxjsEsm } from 'hast-util-to-estree/lib/handlers/mdxjs-esm'
 import type { Parent, Root } from 'mdast'
 import type { Plugin } from 'unified'
 import { parse as parseYaml } from 'yaml'
 import { createAstExportConst } from '../utils.js'
 import { isExportNode } from './remark-mdx-title.js'
 
-function createNode(data: Record<string, unknown>): any {
+function createNode(data: Record<string, unknown>) {
   return {
     type: 'mdxjsEsm',
     data: {
@@ -14,7 +15,7 @@ function createNode(data: Record<string, unknown>): any {
         body: [createAstExportConst('metadata', valueToEstree(data))]
       }
     }
-  }
+  } as MdxjsEsm
 }
 
 export const remarkMdxFrontMatter: Plugin<[], Root> =
