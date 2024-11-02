@@ -4,4 +4,4 @@
 'nextra': patch
 ---
 
-add `getPageMap` helper function from `nextra/page-map`
+add `getPageMap` helper function to `nextra/page-map`

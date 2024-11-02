@@ -2,4 +2,4 @@
 'nextra': patch
 ---
 
-remove NextraConfig.transformPageMap
+remove `NextraConfig.transformPageMap`
