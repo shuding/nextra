@@ -4,12 +4,19 @@ import { findPagesDir } from 'next/dist/lib/find-pages-dir.js'
 import slash from 'slash'
 import type { LoaderContext } from 'webpack'
 import type { LoaderOptions, PageOpts } from '../types.js'
+import { compileMetadata } from './compile-metadata.js'
 import { compileMdx } from './compile.js'
-import { CWD, IS_PRODUCTION } from './constants.js'
+import {
+  CWD,
+  GET_PAGE_MAP_PATH,
+  IS_PRODUCTION,
+  METADATA_ONLY_RQ,
+  PAGE_MAP_PLACEHOLDER_PATH
+} from './constants.js'
 import { findMetaAndPageFilePaths } from './page-map/find-meta-and-page-file-paths.js'
 import { convertPageMapToJs } from './page-map/to-js.js'
 import { convertToPageMap } from './page-map/to-page-map.js'
-import { twoslashRenderer } from './rehype-plugins/twoslash.js'
+import { twoslashRenderer } from './twoslash.js'
 import { logger } from './utils.js'
 
 const APP_DIR = findPagesDir(CWD).appDir!
@@ -50,22 +57,6 @@ const initGitRepo = (async () => {
   return {}
 })()
 
-/*
- * https://github.com/vercel/next.js/issues/71453#issuecomment-2431810574
- *
- * Replace `await import(`./placeholder.js?lang=${lang}`)`
- *
- * with:
- *
- * await {
- * "en": () => import("./placeholder.js?lang=en"),
- * "es": () => import("./placeholder.js?lang=es"),
- * "ru": () => import("./placeholder.js?lang=ru")
- * }[locale]()
- *
- * So static analyzer will know which `resourceQuery` to pass to the loader
- **/
-
 export async function loader(
   this: LoaderContext<LoaderOptions>,
   source: string
@@ -83,11 +74,11 @@ export async function loader(
     locales,
     whiteListTagsStyling
   } = this.getOptions()
+  const { resourcePath, resourceQuery } = this
+  const filePath = slash(resourcePath)
 
-  const filePath = slash(this.resourcePath)
-
-  if (filePath.includes('/nextra/dist/server/page-map/placeholder.js')) {
-    const locale = this.resourceQuery.replace('?lang=', '')
+  if (filePath.includes(PAGE_MAP_PLACEHOLDER_PATH)) {
+    const locale = resourceQuery.replace('?lang=', '')
     if (!IS_PRODUCTION) {
       // Add `app` and `content` folders as the dependencies, so Webpack will
       // rebuild the module if anything in that context changes
@@ -108,12 +99,17 @@ export async function loader(
     const rawJs = await convertPageMapToJs({ pageMap, mdxPages })
     return rawJs
   }
-  if (filePath.includes('/nextra/dist/server/page-map/get.js')) {
+  if (filePath.includes(GET_PAGE_MAP_PATH)) {
     const rawJs = replaceDynamicResourceQuery(
       source,
       'import(`./placeholder.js?lang=${lang}`)',
       locales
     )
+    return rawJs
+  }
+
+  if (!IS_PRODUCTION && resourceQuery === METADATA_ONLY_RQ) {
+    const rawJs = await compileMetadata(source, { filePath })
     return rawJs
   }
 
@@ -182,6 +178,21 @@ export default HOC_MDXWrapper(
   return rawJs
 }
 
+/*
+ * https://github.com/vercel/next.js/issues/71453#issuecomment-2431810574
+ *
+ * Replace `await import(`./placeholder.js?lang=${lang}`)`
+ *
+ * with:
+ *
+ * await {
+ * "en": () => import("./placeholder.js?lang=en"),
+ * "es": () => import("./placeholder.js?lang=es"),
+ * "ru": () => import("./placeholder.js?lang=ru")
+ * }[locale]()
+ *
+ * So static analyzer will know which `resourceQuery` to pass to the loader
+ **/
 function replaceDynamicResourceQuery(
   rawJs: string,
   rawImport: string,

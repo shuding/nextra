@@ -2,6 +2,7 @@ import Image, { type ImageProps } from 'next/image'
 import Link from 'next/link'
 import { createElement } from 'react'
 import type { ComponentProps, FC, JSX } from 'react'
+import { EXTERNAL_URL_RE } from '../server/constants.js'
 import type { MDXWrapper } from '../types.js'
 import { LinkArrowIcon } from './icons/index.js'
 
@@ -17,10 +18,8 @@ export type MDXComponents = NestedMDXComponents & {
   wrapper?: MDXWrapper
 }
 
-const EXTERNAL_HREF_RE = /^https?:\/\//
-
 export const Anchor: FC<ComponentProps<'a'>> = ({ href = '', ...props }) => {
-  if (EXTERNAL_HREF_RE.test(href)) {
+  if (EXTERNAL_URL_RE.test(href)) {
     const { children } = props
     return (
       <a href={href} target="_blank" rel="noreferrer" {...props}>

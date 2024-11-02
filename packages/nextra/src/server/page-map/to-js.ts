@@ -1,8 +1,11 @@
-import path from 'node:path'
 import type { ImportDeclaration } from 'estree'
 import { toJs } from 'estree-util-to-js'
 import type { Import, TItem } from '../../types.js'
-import { META_RE } from '../constants.js'
+import {
+  MARKDOWN_EXTENSION_RE,
+  META_RE,
+  METADATA_ONLY_RQ
+} from '../constants.js'
 import { convertPageMapToAst } from './to-ast.js'
 
 export async function convertPageMapToJs({
@@ -15,25 +18,29 @@ export async function convertPageMapToJs({
   const imports: Import[] = []
   const pageMapAst = convertPageMapToAst(pageMap, imports)
   const importsAst: ImportDeclaration[] = imports.map(
-    ({ filePath, importName }) => ({
-      type: 'ImportDeclaration',
-      source: {
-        type: 'Literal',
-        // Use `path.posix` instead of `slash` package because `filePath` already have posix slashes
-        value: path.posix.join('private-next-root-dir', filePath)
-      },
-      specifiers: [
-        {
-          local: { type: 'Identifier', name: importName },
-          ...(META_RE.test(filePath)
-            ? { type: 'ImportDefaultSpecifier' }
-            : {
-                type: 'ImportSpecifier',
-                imported: { type: 'Identifier', name: 'metadata' }
-              })
-        }
-      ]
-    })
+    ({ filePath, importName }) => {
+      const isMdx = MARKDOWN_EXTENSION_RE.test(filePath)
+      const isMeta = META_RE.test(filePath)
+      return {
+        type: 'ImportDeclaration',
+        source: {
+          type: 'Literal',
+          // Add resource query only for `.md`, `.mdx` files
+          value: `private-next-root-dir/${filePath}${isMdx ? METADATA_ONLY_RQ : ''}`
+        },
+        specifiers: [
+          {
+            local: { type: 'Identifier', name: importName },
+            ...(isMeta
+              ? { type: 'ImportDefaultSpecifier' }
+              : {
+                  type: 'ImportSpecifier',
+                  imported: { type: 'Identifier', name: 'metadata' }
+                })
+          }
+        ]
+      }
+    }
   )
 
   const importsResult = toJs({

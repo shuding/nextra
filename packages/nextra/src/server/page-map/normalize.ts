@@ -25,7 +25,6 @@ function sortFolder(pageMap: PageMapItem[] | Folder) {
   ) as ParsedFolder
 
   const meta: Record<string, Record<string, any>> = {}
-
   for (const item of folder.children) {
     if (
       isFolder &&
@@ -128,6 +127,5 @@ The field key "${metaKey}" in \`_meta\` file refers to a page that cannot be fou
   }
 
   const result = isFolder ? { ...folder, children: items } : items
-
   return result
 }

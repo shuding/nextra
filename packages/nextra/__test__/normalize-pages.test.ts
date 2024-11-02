@@ -403,4 +403,15 @@ describe('normalize-page', () => {
       '/blog'
     )
   })
+
+  it('should rename folder', async () => {
+    const pageMap = await getPageMapForFixture('should-rename-folder')
+    const normalizedResult = normalizePages({
+      list: pageMap,
+      route: '/test/foo'
+    })
+    expect(
+      normalizedResult.docsDirectories.find(o => o.name === 'test')!.title
+    ).toBe('HELLO')
+  })
 })

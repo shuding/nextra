@@ -1,7 +1,7 @@
 import path from 'node:path'
 import type { ImportDeclaration } from 'estree'
+import type { MdxjsEsm } from 'hast-util-to-estree/lib/handlers/mdxjs-esm'
 import type { Definition, Image, ImageReference, Root } from 'mdast'
-import slash from 'slash'
 import type { Plugin } from 'unified'
 import { visit } from 'unist-util-visit'
 import { EXTERNAL_URL_RE } from '../constants.js'
@@ -47,8 +47,7 @@ export const remarkStaticImage: Plugin<[], Root> = () => ast => {
     }
 
     if (url.startsWith('/')) {
-      const urlPath = path.join('private-next-root-dir', 'public', url)
-      url = slash(urlPath)
+      url = path.posix.join('private-next-root-dir', 'public', url)
     }
     imageImports.add(url)
     // @ts-expect-error -- we assign explicitly
@@ -127,7 +126,7 @@ export const remarkStaticImage: Plugin<[], Root> = () => ast => {
                 ]
               }
             }
-          }) as any
+          }) as MdxjsEsm
       )
     )
   }

@@ -1,10 +1,10 @@
 // @ts-nocheck
 import { normalizePageMap } from 'nextra/page-map'
 import meta from "./_meta.ts";
-import {metadata as mix_not_specified} from "./mix/not-specified.md";
-import {metadata as mix_qux} from "./mix/qux.md";
-import {metadata as pagesOnly_one} from "./pagesOnly/one.md";
-import {metadata as pagesOnly_two} from "./pagesOnly/two.md";
+import {metadata as mix_not_specified} from "./mix/not-specified.md?metadata";
+import {metadata as mix_qux} from "./mix/qux.md?metadata";
+import {metadata as pagesOnly_one} from "./pagesOnly/one.md?metadata";
+import {metadata as pagesOnly_two} from "./pagesOnly/two.md?metadata";
 
 export const pageMap = normalizePageMap([{
   data: meta

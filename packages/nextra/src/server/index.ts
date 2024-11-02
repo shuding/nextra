@@ -4,20 +4,31 @@ import { fileURLToPath } from 'node:url'
 import type { RuleSetRule } from 'webpack'
 import { fromZodError } from 'zod-validation-error'
 import type { Nextra } from '../types.js'
-import { MARKDOWN_EXTENSION_RE, MARKDOWN_EXTENSIONS } from './constants.js'
+import {
+  GET_PAGE_MAP_PATH,
+  MARKDOWN_EXTENSION_RE,
+  PAGE_MAP_PLACEHOLDER_PATH
+} from './constants.js'
 import { nextraConfigSchema } from './schemas.js'
 import { logger } from './utils.js'
 
-const DEFAULT_EXTENSIONS = ['js', 'jsx', 'ts', 'tsx']
+const MARKDOWN_EXTENSIONS = ['md', 'mdx'] as const
+
+const DEFAULT_EXTENSIONS = ['js', 'jsx', 'ts', 'tsx'] as const
+
 const FILENAME = fileURLToPath(import.meta.url)
+
 const DIRNAME = path.dirname(FILENAME)
+
 const LOADER_PATH = path.join(DIRNAME, '..', '..', 'loader.cjs')
+
 const SEP = path.sep === '/' ? '/' : '\\\\'
+
 const PAGE_MAP_PLACEHOLDER_RE = new RegExp(
-  'nextra/dist/server/page-map/placeholder\\.js'.replaceAll('/', SEP)
+  PAGE_MAP_PLACEHOLDER_PATH.replaceAll('/', SEP).replaceAll('.', '\\.')
 )
-const PAGE_MAP_RE = new RegExp(
-  'nextra/dist/server/page-map/get\\.js'.replaceAll('/', SEP)
+const GET_PAGE_MAP_RE = new RegExp(
+  GET_PAGE_MAP_PATH.replaceAll('/', SEP).replaceAll('.', '\\.')
 )
 
 const nextra: Nextra = nextraConfig => {
@@ -101,10 +112,10 @@ const nextra: Nextra = nextraConfig => {
               as: '*.tsx',
               loaders: [loader as any]
             },
-            '**/nextra/dist/server/page-map/placeholder.js': {
+            [`**${PAGE_MAP_PLACEHOLDER_PATH}`]: {
               loaders: [pageMapPlaceholderLoader]
             },
-            '**/nextra/dist/server/page-map/get.js': {
+            [`**${GET_PAGE_MAP_PATH}`]: {
               loaders: [pageMapLoader]
             }
           },
@@ -139,7 +150,7 @@ const nextra: Nextra = nextraConfig => {
             use: [options.defaultLoaders.babel, pageMapPlaceholderLoader]
           },
           {
-            test: PAGE_MAP_RE,
+            test: GET_PAGE_MAP_RE,
             use: [options.defaultLoaders.babel, pageMapLoader]
           },
           {

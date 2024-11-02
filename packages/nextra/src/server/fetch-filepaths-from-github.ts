@@ -1,4 +1,5 @@
 import fs from 'node:fs/promises'
+import { MARKDOWN_EXTENSION_RE } from './constants.js'
 
 type Params = {
   user: string
@@ -62,7 +63,9 @@ export async function fetchFilePathsFromGitHub({
     repo,
     branch,
     docsPath,
-    filePaths: filePaths.filter(filePath => /\.mdx?$/.test(filePath)),
+    filePaths: filePaths.filter(filePath =>
+      MARKDOWN_EXTENSION_RE.test(filePath)
+    ),
     nestedMeta: await fillNestedMeta(
       filePaths.filter(filePath => filePath.endsWith('_meta.json'))
     )
