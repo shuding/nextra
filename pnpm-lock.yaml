@@ -270,7 +270,7 @@ importers:
         version: 2.0.0
       estree-util-value-to-estree:
         specifier: ^3.0.1
-        version: 3.1.2
+        version: 3.2.1
       github-slugger:
         specifier: ^2.0.0
         version: 2.0.0
@@ -7907,6 +7907,12 @@ packages:
 
   /estree-util-value-to-estree@3.1.2:
     resolution: {integrity: sha512-S0gW2+XZkmsx00tU2uJ4L9hUT7IFabbml9pHh2WQqFmAbxit++YGZne0sKJbNwkj9Wvg9E4uqWl4nCIFQMmfag==}
+    dependencies:
+      '@types/estree': 1.0.6
+    dev: false
+
+  /estree-util-value-to-estree@3.2.1:
+    resolution: {integrity: sha512-Vt2UOjyPbNQQgT5eJh+K5aATti0OjCIAGc9SgMdOFYbohuifsWclR74l0iZTJwePMgWYdX1hlVS+dedH9XV8kw==}
     dependencies:
       '@types/estree': 1.0.6
     dev: false
