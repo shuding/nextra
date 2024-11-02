@@ -14,7 +14,7 @@ export default {
   content: [
     './src/**/*.{ts,tsx}',
     '../nextra/src/client/icons/*.svg',
-    '../nextra/src/client/mdx.tsx',
+    '../nextra/src/client/mdx-components.tsx',
     '../nextra/src/client/{components,mdx-components}/**/*.tsx'
   ],
   theme: {
