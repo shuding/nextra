@@ -51,6 +51,6 @@ export default withNextra({
     return config
   },
   experimental: {
-    optimizePackageImports: ['@components/icons']
+    optimizePackageImports: ['@components/icons', 'framer-motion']
   }
 })
