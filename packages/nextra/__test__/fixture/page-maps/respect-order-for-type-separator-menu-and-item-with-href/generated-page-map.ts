@@ -1,11 +1,11 @@
 // @ts-nocheck
 import { normalizePageMap } from 'nextra/page-map'
-import {metadata as one_two_2024} from "./one/two/2024.md";
+import {metadata as one_two_2024} from "./one/two/2024.md?metadata";
 import one_two_meta from "./one/two/_meta.ts";
-import {metadata as one_two_1_one} from "./one/two/1-one.md";
-import {metadata as one_two_foo} from "./one/two/foo.md";
-import {metadata as one_two_one} from "./one/two/one.md";
-import {metadata as one_two_qux} from "./one/two/qux.md";
+import {metadata as one_two_1_one} from "./one/two/1-one.md?metadata";
+import {metadata as one_two_foo} from "./one/two/foo.md?metadata";
+import {metadata as one_two_one} from "./one/two/one.md?metadata";
+import {metadata as one_two_qux} from "./one/two/qux.md?metadata";
 
 export const pageMap = normalizePageMap([{
   name: "one",
