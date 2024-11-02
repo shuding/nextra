@@ -14,8 +14,6 @@ export const IS_PRODUCTION = process.env.NODE_ENV === 'production'
 
 export const META_RE = /_meta\.[jt]sx?$/
 
-export const MARKDOWN_EXTENSIONS = ['md', 'mdx'] as const
-
 export const EXTERNAL_URL_RE = /^https?:\/\//
 
 export const DEFAULT_PROPERTY_PROPS = {
@@ -28,7 +26,7 @@ export const DEFAULT_PROPERTY_PROPS = {
 
 export const TOC_HEADING_RE = /^h[2-6]$/
 
-export const GET_PAGE_MAP_PATH = '/nextra/dist/server/page-map/get-page-map.js'
+export const GET_PAGE_MAP_PATH = '/nextra/dist/server/page-map/get.js'
 
 export const PAGE_MAP_PLACEHOLDER_PATH =
   '/nextra/dist/server/page-map/placeholder.js'

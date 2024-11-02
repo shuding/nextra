@@ -1,9 +1,9 @@
 // @ts-nocheck
 import { normalizePageMap } from 'nextra/page-map'
-import {metadata as themes_test} from "./themes-test.md?metadata";
-import {metadata as themes_test_foo} from "./themes-test/foo.md?metadata";
-import {metadata as themes} from "./themes.md?metadata";
-import {metadata as themes_bar} from "./themes/bar.md?metadata";
+import {metadata as themes_test} from "./themes-test.md";
+import {metadata as themes_test_foo} from "./themes-test/foo.md";
+import {metadata as themes} from "./themes.md";
+import {metadata as themes_bar} from "./themes/bar.md";
 
 export const pageMap = normalizePageMap([{
   name: "themes-test",

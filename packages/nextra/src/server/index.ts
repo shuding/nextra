@@ -7,17 +7,23 @@ import type { Nextra } from '../types.js'
 import {
   GET_PAGE_MAP_PATH,
   MARKDOWN_EXTENSION_RE,
-  MARKDOWN_EXTENSIONS,
   PAGE_MAP_PLACEHOLDER_PATH
 } from './constants.js'
 import { nextraConfigSchema } from './schemas.js'
 import { logger } from './utils.js'
 
-const DEFAULT_EXTENSIONS = ['js', 'jsx', 'ts', 'tsx']
+const MARKDOWN_EXTENSIONS = ['md', 'mdx'] as const
+
+const DEFAULT_EXTENSIONS = ['js', 'jsx', 'ts', 'tsx'] as const
+
 const FILENAME = fileURLToPath(import.meta.url)
+
 const DIRNAME = path.dirname(FILENAME)
+
 const LOADER_PATH = path.join(DIRNAME, '..', '..', 'loader.cjs')
+
 const SEP = path.sep === '/' ? '/' : '\\\\'
+
 const PAGE_MAP_PLACEHOLDER_RE = new RegExp(
   PAGE_MAP_PLACEHOLDER_PATH.replaceAll('/', SEP).replaceAll('.', '\\.')
 )

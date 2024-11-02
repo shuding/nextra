@@ -1,7 +1,7 @@
 // @ts-nocheck
 import { normalizePageMap } from 'nextra/page-map'
 import meta from "./_meta.js";
-import {metadata as test_foo} from "./test/foo.md?metadata";
+import {metadata as test_foo} from "./test/foo.md";
 
 export const pageMap = normalizePageMap([{
   data: meta
