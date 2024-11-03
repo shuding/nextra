@@ -2,10 +2,10 @@
 
 import { useEffect, useState } from 'react'
 import type { FC, ReactElement } from 'react'
+import { evaluate } from '../evaluate.js'
 import { CrossCircledIcon } from '../icons/index.js'
 import { Code } from '../mdx-components/code.js'
 import { Pre } from '../mdx-components/pre/index.js'
-import { RemoteContent } from './remote-content.js'
 import type { RemoteContentProps } from './remote-content.js'
 
 export const Playground: FC<
@@ -62,13 +62,10 @@ export const Playground: FC<
   }
 
   if (compiledSource) {
-    return (
-      <RemoteContent
-        scope={scope}
-        components={components}
-        compiledSource={compiledSource}
-      />
-    )
+    // `<RemoteContent>` cannot be used here because `useMDXComponents` may include components that
+    // are only available on the server.
+    const MDXContent = evaluate(compiledSource, scope).default
+    return <MDXContent components={components} />
   }
 
   return fallback

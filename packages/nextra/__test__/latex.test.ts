@@ -14,7 +14,6 @@ describe('LaTeX', () => {
         "/*@jsxRuntime automatic*/
         /*@jsxImportSource react*/
         'use strict'
-        const { useMDXComponents: _provideComponents } = arguments[0]
         const title = ''
         const metadata = {}
         function useTOC(props) {
@@ -30,7 +29,6 @@ describe('LaTeX', () => {
             msup: 'msup',
             semantics: 'semantics',
             span: 'span',
-            ..._provideComponents(),
             ...props.components
           }
           return (
@@ -120,7 +118,6 @@ describe('LaTeX', () => {
       expect(clean(result)).resolves.toMatchInlineSnapshot(`
         "/*@jsxRuntime automatic*/
         /*@jsxImportSource react*/
-        import { useMDXComponents as _provideComponents } from 'next-mdx-import-source-file'
         export const title = ''
         export const metadata = {}
         import { MathJax, MathJaxContext } from 'nextra/components'
@@ -130,7 +127,6 @@ describe('LaTeX', () => {
         function MDXLayout(props) {
           const _components = {
             p: 'p',
-            ..._provideComponents(),
             ...props.components
           }
           return (
@@ -152,7 +148,6 @@ describe('LaTeX', () => {
       expect(clean(result)).resolves.toMatchInlineSnapshot(`
         "/*@jsxRuntime automatic*/
         /*@jsxImportSource react*/
-        import { useMDXComponents as _provideComponents } from 'next-mdx-import-source-file'
         export const title = ''
         export const metadata = {}
         import { MathJax, MathJaxContext } from 'nextra/components'
@@ -184,7 +179,6 @@ ${MATH_LANG}`
       expect(clean(result)).resolves.toMatchInlineSnapshot(`
         "/*@jsxRuntime automatic*/
         /*@jsxImportSource react*/
-        import { useMDXComponents as _provideComponents } from 'next-mdx-import-source-file'
         export const title = ''
         export const metadata = {}
         import foo from 'foo'
@@ -196,7 +190,6 @@ ${MATH_LANG}`
         function MDXLayout(props) {
           const _components = {
             p: 'p',
-            ..._provideComponents(),
             ...props.components
           }
           return (

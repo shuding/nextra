@@ -23,7 +23,6 @@ export const Test = ({value}) => value
       "/*@jsxRuntime automatic*/
       /*@jsxImportSource react*/
       'use strict'
-      const { useMDXComponents: _provideComponents } = arguments[0]
       const title = ''
       const metadata = {}
       const myVar = 123
@@ -44,7 +43,6 @@ export const Test = ({value}) => value
       function _createMdxContent(props) {
         const _components = {
           h2: 'h2',
-          ..._provideComponents(),
           ...props.components
         }
         return (

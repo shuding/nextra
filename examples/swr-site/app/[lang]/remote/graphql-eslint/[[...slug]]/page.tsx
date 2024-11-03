@@ -1,7 +1,8 @@
 /* eslint-disable react-hooks/rules-of-hooks -- false positive, useMDXComponents/useTOC are not react hooks */
 import { notFound } from 'next/navigation'
 import { compileMdx } from 'nextra/compile'
-import { Callout, evaluate, Tabs } from 'nextra/components'
+import { Callout, Tabs } from 'nextra/components'
+import { evaluate } from 'nextra/evaluate'
 import { convertToPageMap, normalizePageMap } from 'nextra/page-map'
 import { useMDXComponents } from '../../../../../mdx-components'
 import json from '../../../../../nextra-remote-filepaths/graphql-eslint.json'

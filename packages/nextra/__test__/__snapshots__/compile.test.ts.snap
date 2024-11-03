@@ -3,7 +3,6 @@
 exports[`Process heading > code-h1 1`] = `
 "/*@jsxRuntime automatic*/
 /*@jsxImportSource react*/
-import { useMDXComponents as _provideComponents } from 'next-mdx-import-source-file'
 export const title = 'codegen.yml'
 export const metadata = {
   title: 'codegen.yml'
@@ -15,7 +14,6 @@ function MDXLayout(props) {
   const _components = {
     code: 'code',
     h1: 'h1',
-    ..._provideComponents(),
     ...props.components
   }
   return (
@@ -30,7 +28,6 @@ function MDXLayout(props) {
 exports[`Process heading > code-with-text-h1 1`] = `
 "/*@jsxRuntime automatic*/
 /*@jsxImportSource react*/
-import { useMDXComponents as _provideComponents } from 'next-mdx-import-source-file'
 export const title = 'codegen.yml file'
 export const metadata = {
   title: 'codegen.yml file'
@@ -42,7 +39,6 @@ function MDXLayout(props) {
   const _components = {
     code: 'code',
     h1: 'h1',
-    ..._provideComponents(),
     ...props.components
   }
   return (
@@ -60,7 +56,6 @@ exports[`Process heading > dynamic-h1 1`] = `
   "frontMatter": {},
   "result": "/*@jsxRuntime automatic*/
 /*@jsxImportSource react*/
-import { useMDXComponents as _provideComponents } from 'next-mdx-import-source-file'
 export const title = 'Posts Tagged with ""'
 export const metadata = {
   title: 'Posts Tagged with ""'
@@ -76,7 +71,6 @@ export function useTOC(props) {
 function MDXLayout(props) {
   const _components = {
     h1: 'h1',
-    ..._provideComponents(),
     ...props.components
   }
   return (
@@ -95,7 +89,6 @@ function MDXLayout(props) {
 exports[`Process heading > no-h1 1`] = `
 "/*@jsxRuntime automatic*/
 /*@jsxImportSource react*/
-import { useMDXComponents as _provideComponents } from 'next-mdx-import-source-file'
 export const title = ''
 export const metadata = {}
 export function useTOC(props) {
@@ -111,7 +104,6 @@ function MDXLayout(props) {
   const { toc = useTOC(props) } = props
   const _components = {
     h2: 'h2',
-    ..._provideComponents(),
     ...props.components
   }
   return <_components.h2 id={toc[0].id}>{toc[0].value}</_components.h2>
@@ -122,7 +114,6 @@ function MDXLayout(props) {
 exports[`Process heading > static-h1 1`] = `
 "/*@jsxRuntime automatic*/
 /*@jsxImportSource react*/
-import { useMDXComponents as _provideComponents } from 'next-mdx-import-source-file'
 export const title = 'Hello World'
 export const metadata = {
   title: 'Hello World'
@@ -133,7 +124,6 @@ export function useTOC(props) {
 function MDXLayout(props) {
   const _components = {
     h1: 'h1',
-    ..._provideComponents(),
     ...props.components
   }
   return <_components.h1>{'Hello World'}</_components.h1>
