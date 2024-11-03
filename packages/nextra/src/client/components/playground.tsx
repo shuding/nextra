@@ -27,8 +27,9 @@ export const Playground: FC<
 
   useEffect(() => {
     async function doCompile() {
+      // Importing in useEffect to not increase global bundle size
+      const { compileMdx } = await import('../../server/compile.js')
       try {
-        const { compileMdx } = await import('../../server/compile.js')
         const mdx = await compileMdx(source)
         setCompiledSource(mdx.result)
         setError(null)
