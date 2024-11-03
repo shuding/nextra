@@ -24,7 +24,7 @@ export const Anchor: FC<ComponentProps<'a'>> = ({ href = '', ...props }) => {
     return (
       <a href={href} target="_blank" rel="noreferrer" {...props}>
         {children}
-        {typeof (children as any).type !== 'function' && (
+        {typeof children === 'string' && (
           <>
             &thinsp;
             <LinkArrowIcon height="16" className="_inline _align-baseline" />
