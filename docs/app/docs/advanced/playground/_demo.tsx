@@ -4,6 +4,7 @@ import { Code, Mermaid, Playground, Pre, Tabs } from 'nextra/components'
 import { MdxIcon } from 'nextra/icons'
 import type { FC } from 'react'
 import { useCallback, useEffect, useRef, useState } from 'react'
+import { useMDXComponents } from '../../../../mdx-components'
 
 export const Demo: FC = () => {
   const [rawMdx, setRawMdx] =
@@ -58,7 +59,7 @@ Z --> G
   }, []) // eslint-disable-line react-hooks/exhaustive-deps -- only on mount
 
   return (
-    <div className="grid grid-cols-2 gap-2 mt-6">
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-2 mt-6">
       <Pre
         data-filename="MDX"
         icon={<MdxIcon height="16" className="_shrink-0" />}
@@ -81,7 +82,7 @@ Z --> G
             </div>
           }
           source={rawMdx}
-          components={{ Mermaid, $Tabs: Tabs }}
+          components={useMDXComponents({ Mermaid, $Tabs: Tabs })}
         />
       </div>
     </div>

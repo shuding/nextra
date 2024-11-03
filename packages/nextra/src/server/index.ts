@@ -71,7 +71,6 @@ const nextra: Nextra = nextraConfig => {
     // const optimizedImports = new Set(
     //   nextConfig.experimental?.optimizePackageImports || []
     // )
-    //
     // optimizedImports.add('nextra/components')
     return {
       ...nextConfig,

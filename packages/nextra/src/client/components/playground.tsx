@@ -2,10 +2,11 @@
 
 import { useEffect, useState } from 'react'
 import type { FC, ReactElement } from 'react'
+import { compileMdx } from '../../server/compile.js'
+import { evaluate } from '../evaluate.js'
 import { CrossCircledIcon } from '../icons/index.js'
 import { Code } from '../mdx-components/code.js'
 import { Pre } from '../mdx-components/pre/index.js'
-import { RemoteContent } from './remote-content.js'
 import type { RemoteContentProps } from './remote-content.js'
 
 export const Playground: FC<
@@ -27,8 +28,6 @@ export const Playground: FC<
 
   useEffect(() => {
     async function doCompile() {
-      // Importing in useEffect to not increase global bundle size
-      const { compileMdx } = await import('../../server/compile.js')
       try {
         const mdx = await compileMdx(source)
         setCompiledSource(mdx.result)
@@ -62,13 +61,9 @@ export const Playground: FC<
   }
 
   if (compiledSource) {
-    return (
-      <RemoteContent
-        scope={scope}
-        components={components}
-        compiledSource={compiledSource}
-      />
-    )
+    // Cannot use `<RemoteContent>` here because `useMDXComponents` can contain server-only components
+    const MDXContent = evaluate(compiledSource, scope).default
+    return <MDXContent components={components} />
   }
 
   return fallback

@@ -47,7 +47,7 @@ const cachedCompilerForFormat: Record<
 > = Object.create(null)
 
 type MdxOptions = LoaderOptions['mdxOptions'] &
-  Pick<ProcessorOptions, 'jsx' | 'outputFormat'>
+  Pick<ProcessorOptions, 'jsx' | 'outputFormat' | 'providerImportSource'>
 
 type CompileMdxOptions = Pick<
   LoaderOptions,
@@ -93,7 +93,8 @@ export async function compileMdx(
     remarkPlugins,
     rehypePlugins,
     recmaPlugins,
-    rehypePrettyCodeOptions
+    rehypePrettyCodeOptions,
+    providerImportSource
   } = mdxOptions
 
   const format =
@@ -159,7 +160,7 @@ export async function compileMdx(
       jsx,
       format,
       outputFormat,
-      providerImportSource: 'next-mdx-import-source-file',
+      providerImportSource,
       // Fix TypeError: _jsx is not a function for remote content
       development: process.env.NODE_ENV === 'development',
       remarkPlugins: [

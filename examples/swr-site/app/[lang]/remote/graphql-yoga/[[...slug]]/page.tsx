@@ -2,7 +2,8 @@
 import { notFound } from 'next/navigation'
 import { useMDXComponents } from 'nextra-theme-docs'
 import { compileMdx } from 'nextra/compile'
-import { Callout, evaluate, Tabs } from 'nextra/components'
+import { Callout, Tabs } from 'nextra/components'
+import { evaluate } from 'nextra/evaluate'
 import { convertToPageMap, normalizePageMap } from 'nextra/page-map'
 import json from '../../../../../nextra-remote-filepaths/graphql-yoga.json'
 
