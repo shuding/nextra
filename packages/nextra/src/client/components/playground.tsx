@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from 'react'
 import type { FC, ReactElement } from 'react'
-import { compileMdx } from '../../server/compile.js'
 import { evaluate } from '../evaluate.js'
 import { CrossCircledIcon } from '../icons/index.js'
 import { Code } from '../mdx-components/code.js'
@@ -29,6 +28,7 @@ export const Playground: FC<
   useEffect(() => {
     async function doCompile() {
       try {
+        const { compileMdx } = await import('../../server/compile.js')
         const mdx = await compileMdx(source)
         setCompiledSource(mdx.result)
         setError(null)
