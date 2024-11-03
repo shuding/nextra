@@ -1,5 +1,22 @@
 # nextra-theme-blog
 
+## 4.0.0-app-router.21
+
+### Major Changes
+
+- 730899e: - add `nextra/components` to `experimental.optimizePackageImports` to
+  optimize `nextra/components` by default
+  - remove `<RemoteContent>` from `nextra/components`
+  - rename `<RemoteContent>` to `MDXRemote` and move to `nextra/mdx-remote`
+
+### Patch Changes
+
+- 0d74f68: fix external svg icon was added for span in `<Anchor>`
+- Updated dependencies [4e02ef3]
+- Updated dependencies [0d74f68]
+- Updated dependencies [730899e]
+  - nextra@4.0.0-app-router.21
+
 ## 4.0.0-app-router.20
 
 ### Major Changes
