@@ -1,9 +1,9 @@
 import { useMDXComponents } from 'next-mdx-import-source-file'
-import { evaluate } from '../evaluate.js'
-import type { Scope } from '../evaluate.js'
-import type { MDXComponents } from '../mdx-components.js'
+import { evaluate } from './evaluate.js'
+import type { Scope } from './evaluate.js'
+import type { MDXComponents } from './mdx-components'
 
-export type RemoteContentProps = {
+export type MDXRemoteProps = {
   /**
    * An object mapping names to React components.
    * The key used will be the name accessible to MDX.
@@ -18,11 +18,11 @@ export type RemoteContentProps = {
   compiledSource: string
 }
 
-export function RemoteContent({
+export function MDXRemote({
   scope,
   components,
   compiledSource
-}: RemoteContentProps) {
+}: MDXRemoteProps) {
   const MDXContent = evaluate(compiledSource, scope).default
 
   return <MDXContent components={useMDXComponents(components)} />

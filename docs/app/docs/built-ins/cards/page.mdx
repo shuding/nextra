@@ -4,7 +4,8 @@ export const metadata = {
 
 import { CardsIcon, OneIcon, WarningIcon, BoxIcon } from '@components/icons'
 import { compileMdx } from 'nextra/compile'
-import { Cards, RemoteContent } from 'nextra/components'
+import { Cards } from 'nextra/components'
+import { MDXRemote } from 'nextra/mdx-remote'
 
 # Cards Component
 
@@ -74,7 +75,7 @@ ${mdx2}
 ~~~mdx filename="MDX"
 ${mdx2}
 ~~~`)
-  return <RemoteContent compiledSource={result} components={{ Cards, CardsIcon, OneIcon, WarningIcon, BoxIcon }}  />
+  return <MDXRemote compiledSource={result} components={{ Cards, CardsIcon, OneIcon, WarningIcon, BoxIcon }}  />
 }
 
 <CardsPage />

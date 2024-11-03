@@ -58,9 +58,6 @@ const nextConfig = withBundleAnalyzer(
       },
       optimizePackageImports: [
         // '@app/_icons'
-        // Provoke error
-        // Could not find the module in the React Client Manifest. This is probably a bug in the React Server Components bundler
-        // 'nextra/components'
       ]
     }
   })

@@ -1,5 +1,6 @@
 import { compileMdx } from 'nextra/compile'
-import { Callout, RemoteContent } from 'nextra/components'
+import { Callout } from 'nextra/components'
+import { MDXRemote } from 'nextra/mdx-remote'
 
 # Next.js SSG
 
@@ -49,5 +50,5 @@ ${starsComponent}
 ~~~
 `
   const { result } = await compileMdx(mdx)
-  return <RemoteContent compiledSource={result} components={{ Callout }} />
+  return <MDXRemote compiledSource={result} components={{ Callout }} />
 }

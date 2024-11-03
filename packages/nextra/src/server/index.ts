@@ -68,10 +68,6 @@ const nextra: Nextra = nextraConfig => {
         'You have Next.js i18n enabled, read here https://nextjs.org/docs/app/building-your-application/routing/internationalization for the docs.'
       )
     }
-    // const optimizedImports = new Set(
-    //   nextConfig.experimental?.optimizePackageImports || []
-    // )
-    // optimizedImports.add('nextra/components')
     return {
       ...nextConfig,
       transpilePackages: [
@@ -79,10 +75,6 @@ const nextra: Nextra = nextraConfig => {
         ...(process.env.TURBOPACK === '1' ? ['shiki'] : []),
         ...(nextConfig.transpilePackages || [])
       ],
-      // experimental: {
-      //   ...nextConfig.experimental,
-      //   optimizePackageImports: [...optimizedImports]
-      // },
       pageExtensions: [
         ...(nextConfig.pageExtensions || DEFAULT_EXTENSIONS),
         ...MARKDOWN_EXTENSIONS
@@ -97,7 +89,10 @@ const nextra: Nextra = nextraConfig => {
       }),
       experimental: {
         ...nextConfig.experimental,
-        // optimizePackageImports: [...optimizedImports]
+        optimizePackageImports: [
+          'nextra/components',
+          ...(nextConfig.experimental?.optimizePackageImports || [])
+        ],
         turbo: {
           ...nextConfig.experimental?.turbo,
           rules: {

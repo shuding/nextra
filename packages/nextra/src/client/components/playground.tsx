@@ -6,7 +6,7 @@ import { evaluate } from '../evaluate.js'
 import { CrossCircledIcon } from '../icons/index.js'
 import { Code } from '../mdx-components/code.js'
 import { Pre } from '../mdx-components/pre/index.js'
-import type { RemoteContentProps } from './remote-content.js'
+import type { MDXRemoteProps } from '../mdx-remote.js'
 
 export const Playground: FC<
   {
@@ -20,7 +20,7 @@ export const Playground: FC<
      * Fallback component for loading
      */
     fallback?: ReactElement | null
-  } & Pick<RemoteContentProps, 'components' | 'scope'>
+  } & Pick<MDXRemoteProps, 'components' | 'scope'>
 > = ({ source, fallback = null, components, scope }) => {
   const [compiledSource, setCompiledSource] = useState('')
   const [error, setError] = useState<unknown>()
@@ -62,7 +62,7 @@ export const Playground: FC<
   }
 
   if (compiledSource) {
-    // `<RemoteContent>` cannot be used here because `useMDXComponents` may include components that
+    // `<MDXRemote>` cannot be used here because `useMDXComponents` may include components that
     // are only available on the server.
     const MDXContent = evaluate(compiledSource, scope).default
     return <MDXContent components={components} />

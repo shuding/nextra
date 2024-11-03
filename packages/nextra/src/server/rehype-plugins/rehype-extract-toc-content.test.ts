@@ -330,11 +330,11 @@ export const metadata = {
   describe('Remote MDX', () => {
     it("with outputFormat: 'program'", async () => {
       const rawMdx = `
-import { RemoteContent } from 'nextra/components'
+import { MDXRemote } from 'nextra/mdx-remote'
 
 ## hello
 
-<RemoteContent components={{ Callout, $Tabs: Tabs }} />`
+<MDXRemote components={{ Callout, $Tabs: Tabs }} />`
 
       const { result } = await compileMdx(rawMdx, {
         ...opts,
@@ -347,7 +347,7 @@ import { RemoteContent } from 'nextra/components'
         /*@jsxImportSource react*/
         export const title = '[[...slug]]'
         export const metadata = {}
-        import { RemoteContent } from 'nextra/components'
+        import { MDXRemote } from 'nextra/mdx-remote'
         export function useTOC(props) {
           return [
             {
@@ -367,7 +367,7 @@ import { RemoteContent } from 'nextra/components'
             <>
               <_components.h2 id={toc[0].id}>{toc[0].value}</_components.h2>
               {'\\n'}
-              <RemoteContent
+              <MDXRemote
                 components={{
                   Callout,
                   $Tabs: Tabs

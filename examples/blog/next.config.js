@@ -9,6 +9,6 @@ export default withNextra({
   reactStrictMode: true,
   cleanDistDir: true,
   experimental: {
-    optimizePackageImports: ['nextra/components', 'nextra-theme-blog']
+    optimizePackageImports: ['nextra-theme-blog']
   }
 })

@@ -17,8 +17,7 @@
     "nextra": "workspace:*",
     "nextra-theme-docs": "workspace:*",
     "react": "18.3.1",
-    "react-dom": "18.3.1",
-    "sharp": "^0.33.0"
+    "react-dom": "18.3.1"
   },
   "devDependencies": {
     "@svgr/webpack": "^8.0.1",
