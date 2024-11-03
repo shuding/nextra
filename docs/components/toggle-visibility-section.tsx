@@ -1,5 +1,5 @@
 import { compileMdx } from 'nextra/compile'
-import { RemoteContent } from 'nextra/components'
+import { MDXRemote } from 'nextra/mdx-remote'
 import type { FC } from 'react'
 
 export const ToggleVisibilitySection: FC<{
@@ -20,5 +20,5 @@ export default {
   }
 }
 \`\`\``)
-  return <RemoteContent compiledSource={result} />
+  return <MDXRemote compiledSource={result} />
 }

@@ -7,8 +7,5 @@ const withNextra = nextra({
 
 export default withNextra({
   reactStrictMode: true,
-  cleanDistDir: true,
-  experimental: {
-    optimizePackageImports: ['nextra/components', 'nextra-theme-blog']
-  }
+  cleanDistDir: true
 })

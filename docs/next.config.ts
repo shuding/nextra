@@ -64,10 +64,7 @@ const nextConfig = withNextra({
         }
       }
     },
-    optimizePackageImports: [
-      // '@components/icons',
-      'nextra/components'
-    ]
+    optimizePackageImports: ['@components/icons']
   }
 })
 

@@ -1,5 +1,6 @@
 import { compileMdx } from 'nextra/compile'
-import { Mermaid, RemoteContent } from 'nextra/components'
+import { Mermaid } from 'nextra/components'
+import { MDXRemote } from 'nextra/mdx-remote'
 
 # Mermaid
 
@@ -42,5 +43,5 @@ Z --> G;
 ${mermaidCodeblock}
 ~~~
 `)
-  return <RemoteContent compiledSource={result} components={{ Mermaid }} />
+  return <MDXRemote compiledSource={result} components={{ Mermaid }} />
 }

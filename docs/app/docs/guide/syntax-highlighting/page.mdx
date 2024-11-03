@@ -1,6 +1,6 @@
 import { OptionTable } from 'components/_table'
 import { compileMdx } from 'nextra/compile'
-import { Callout, RemoteContent } from 'nextra/components'
+import { MDXRemote } from 'nextra/mdx-remote'
 
 # Syntax Highlighting
 
@@ -177,7 +177,7 @@ Renders:
 
 ${rawAnsi}
 `)
-  return <RemoteContent compiledSource={result} />
+  return <MDXRemote compiledSource={result} />
 }
 
 ## Supported Languages

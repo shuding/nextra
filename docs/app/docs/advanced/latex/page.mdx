@@ -1,8 +1,8 @@
 import { compileMdx } from 'nextra/compile'
+import { MDXRemote } from 'nextra/mdx-remote'
 import {
   MathJax,
   MathJaxContext,
-  RemoteContent
 } from 'nextra/components'
 
 import 'nextra/katex.css'
@@ -203,5 +203,5 @@ export async function MathJaxExample() {
     }
   )
 
-  return <RemoteContent compiledSource={result} components={{ MathJax, MathJaxContext }} />
+  return <MDXRemote compiledSource={result} components={{ MathJax, MathJaxContext }} />
 }
