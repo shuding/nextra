@@ -1,4 +1,3 @@
-<<<<<<<< HEAD:packages/nextra/src/client/evaluate.ts
 import jsxDevRuntime from 'react/jsx-dev-runtime'
 import jsxRuntime from 'react/jsx-runtime'
 
@@ -21,34 +20,4 @@ export function evaluate(compiledSource: string, scope: Scope = {}) {
   const hydrateFn = Reflect.construct(Function, ['$', ...keys, compiledSource])
 
   return hydrateFn(runtime, ...values)
-========
-import { useMDXComponents } from 'next-mdx-import-source-file'
-import { evaluate } from '../evaluate.js'
-import type { Scope } from '../evaluate.js'
-import type { MDXComponents } from '../mdx-components.js'
-
-export type RemoteContentProps = {
-  /**
-   * An object mapping names to React components.
-   * The key used will be the name accessible to MDX.
-   *
-   * @example `{ ComponentName: Component }` will be accessible in the MDX as `<ComponentName>`.
-   */
-  components?: MDXComponents
-  /**
-   * Pass-through variables for use in the MDX content
-   */
-  scope?: Scope
-  compiledSource: string
-}
-
-export function RemoteContent({
-  scope,
-  components,
-  compiledSource
-}: RemoteContentProps) {
-  const MDXContent = evaluate(compiledSource, scope).default
-
-  return <MDXContent components={useMDXComponents(components)} />
->>>>>>>> v4-v2:packages/nextra/src/client/components/remote-content.tsx
 }
