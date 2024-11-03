@@ -23,6 +23,10 @@ const APP_DIR = findPagesDir(CWD).appDir!
 
 if (!APP_DIR) {
   throw new Error('Unable to find `app` directory')
+} else if (APP_DIR.includes('src/app')) {
+  throw new Error(
+    "Nextra 4 doesn't support `src/app` directory for now. use `app` directory instead"
+  )
 }
 
 const initGitRepo = (async () => {

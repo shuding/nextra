@@ -91,13 +91,15 @@ const nextra: Nextra = nextraConfig => {
         ...nextConfig.experimental,
         optimizePackageImports: [
           'nextra/components',
+          'nextra-theme-docs',
+          'nextra-theme-blog',
           ...(nextConfig.experimental?.optimizePackageImports || [])
         ],
         turbo: {
           ...nextConfig.experimental?.turbo,
           rules: {
             ...nextConfig.experimental?.turbo?.rules,
-            './{src/app,app}/**/page.{md,mdx}': {
+            './app/**/page.{md,mdx}': {
               as: '*.tsx',
               loaders: [pageImportLoader as any]
             },
