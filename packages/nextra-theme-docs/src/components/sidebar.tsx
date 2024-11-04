@@ -406,8 +406,8 @@ export function Sidebar({
           showSidebar ? 'md:_w-64' : 'md:_w-20',
           asPopover ? 'md:_hidden' : 'md:_sticky md:_self-start',
           menu
-            ? 'max-md:[transform:translate3d(0,0,0)] max-md:_duration-200'
-            : 'max-md:[transform:translate3d(0,-100%,0)] max-md:_duration-200'
+            ? 'max-md:[transform:translate3d(0,0,0)] max-md:_duration-300'
+            : 'max-md:[transform:translate3d(0,-100%,0)] max-md:_duration-300'
         )}
         ref={containerRef}
       >
