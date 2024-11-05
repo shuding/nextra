@@ -64,7 +64,7 @@ export default {
         700: makePrimaryColor(-6),
         750: makePrimaryColor(-10),
         800: makePrimaryColor(-13),
-        900: makePrimaryColor(-11)
+        900: makePrimaryColor(-21)
       }
     }
   },
