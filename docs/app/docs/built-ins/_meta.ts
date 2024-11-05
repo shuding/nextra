@@ -3,13 +3,11 @@ export default {
     type: 'separator',
     title: 'Layout Components'
   },
+  banner: '',
   head: '',
   search: '',
-  banner: '',
   __: {
     type: 'separator',
     title: 'Content Components'
-  },
-  callout: '',
-  tabs: ''
+  }
 }
