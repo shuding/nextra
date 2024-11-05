@@ -151,10 +151,7 @@ export const ClientNavbar: FC<{
       <Button
         aria-label="Menu"
         className={({ active }) =>
-          cn(
-            'nextra-hamburger _rounded md:_hidden',
-            active && '_bg-gray-400/20'
-          )
+          cn('nextra-hamburger md:_hidden', active && '_bg-gray-400/20')
         }
         onClick={() => setMenu(prev => !prev)}
       >

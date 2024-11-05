@@ -66,30 +66,31 @@ const _Head: FC<HeadProps> = ({ children, ...props }) => {
 
   const { color, backgroundColor, faviconGlyph } = data
 
+  const style = `
+:root {
+  --nextra-primary-hue: ${color.hue.light}deg;
+  --nextra-primary-saturation: ${color.saturation.light}%;
+  --nextra-primary-lightness: ${color.lightness.light}%;
+  --nextra-bg: ${backgroundColor.light};
+}
+.dark {
+  --nextra-primary-hue: ${color.hue.dark}deg;
+  --nextra-primary-saturation: ${color.saturation.dark}%;
+  --nextra-primary-lightness: ${color.lightness.dark}%;
+  --nextra-bg: ${backgroundColor.dark};
+}
+::selection {
+  background: ${makePrimaryColor('+ 41%')};
+}
+.dark ::selection {
+  background: ${makePrimaryColor('- 11%')};
+}
+`.trim()
+
   return (
     <head>
       {children}
-      <style>{`
-        :root {
-          --nextra-primary-hue: ${color.hue.light}deg;
-          --nextra-primary-saturation: ${color.saturation.light}%;
-          --nextra-primary-lightness: ${color.lightness.light}%;
-          --nextra-bg: ${backgroundColor.light};
-        }
-        .dark {
-          --nextra-primary-hue: ${color.hue.dark}deg;
-          --nextra-primary-saturation: ${color.saturation.dark}%;
-          --nextra-primary-lightness: ${color.lightness.dark}%;
-          --nextra-bg: ${backgroundColor.dark};
-        }
-        ::selection {
-          background: ${makePrimaryColor(41)};
-        }
-
-        .dark ::selection {
-          background: ${makePrimaryColor(-11)};
-        }
-      `}</style>
+      <style>{style}</style>
       {faviconGlyph && (
         <link
           rel="icon"
@@ -100,8 +101,11 @@ const _Head: FC<HeadProps> = ({ children, ...props }) => {
   )
 }
 
-function makePrimaryColor(l: number) {
-  return `hsl(var(--nextra-primary-hue) var(--nextra-primary-saturation) calc(var(--nextra-primary-lightness) + ${l}%)`
+function makePrimaryColor(val: string): string {
+  const h = 'var(--nextra-primary-hue)'
+  const s = 'var(--nextra-primary-saturation)'
+  const l = `calc(var(--nextra-primary-lightness) ${val})`
+  return `hsl(${h + s + l})`
 }
 
 export const Head = Object.assign(_Head, {
