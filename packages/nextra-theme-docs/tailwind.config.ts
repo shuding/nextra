@@ -2,12 +2,13 @@ import type { Config } from 'tailwindcss'
 import colors from 'tailwindcss/colors'
 
 const makePrimaryColor: any =
-  (l: number) =>
-  ({ opacityValue }: { opacityValue?: string }) => {
-    return (
-      `hsl(var(--nextra-primary-hue) var(--nextra-primary-saturation) calc(var(--nextra-primary-lightness) + ${l}%)` +
-      (opacityValue ? ` / ${opacityValue})` : ')')
-    )
+  (val: number) =>
+  ({ opacityValue }: { opacityValue?: string }): string => {
+    const h = 'var(--nextra-primary-hue)'
+    const s = 'var(--nextra-primary-saturation)'
+    const _l = 'var(--nextra-primary-lightness)'
+    const l = val ? `calc(${_l} + ${val}%)` : _l
+    return 'hsl(' + h + s + l + (opacityValue ? ` / ${opacityValue}` : '') + ')'
   }
 export default {
   prefix: '_',
@@ -63,7 +64,7 @@ export default {
         700: makePrimaryColor(-6),
         750: makePrimaryColor(-10),
         800: makePrimaryColor(-13),
-        900: makePrimaryColor(-11)
+        900: makePrimaryColor(-21)
       }
     }
   },
