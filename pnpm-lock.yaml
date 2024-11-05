@@ -12,6 +12,9 @@ patchedDependencies:
   '@changesets/assemble-release-plan@6.0.4':
     hash: tekp75rilwrgkypl2xdezarfeu
     path: patches/@changesets__assemble-release-plan.patch
+  esbuild-plugin-svgr@3.0.0:
+    hash: kmh2qsgxlktkyk6nn2h2tj76dm
+    path: patches/esbuild-plugin-svgr.patch
   eslint-plugin-deprecation@3.0.0:
     hash: lc7tasx5o5q2nd7db4ciaguh2a
     path: patches/eslint-plugin-deprecation.patch
@@ -375,7 +378,7 @@ importers:
         version: 4.3.3(vite@5.4.10)
       esbuild-plugin-svgr:
         specifier: ^3.0.0
-        version: 3.0.0(esbuild@0.24.0)(typescript@5.6.3)
+        version: 3.0.0(patch_hash=kmh2qsgxlktkyk6nn2h2tj76dm)(esbuild@0.24.0)(typescript@5.6.3)
       next:
         specifier: 15.0.2
         version: 15.0.2(patch_hash=ih2n7uyu6sqdsauhnxm6ovrrua)(@babel/core@7.26.0)(react-dom@18.3.1)(react@18.3.1)
@@ -7037,7 +7040,7 @@ packages:
       vfile-message: 4.0.2
     dev: false
 
-  /esbuild-plugin-svgr@3.0.0(esbuild@0.24.0)(typescript@5.6.3):
+  /esbuild-plugin-svgr@3.0.0(patch_hash=kmh2qsgxlktkyk6nn2h2tj76dm)(esbuild@0.24.0)(typescript@5.6.3):
     resolution: {integrity: sha512-8/YuGHKoNVKdcV8HUGFQtAJ16agxzemcX9IvcQvaVKuXqIBDvc5IV9nlPyyHcrgr+IvyKBcljO4wjxrh24DSAQ==}
     peerDependencies:
       esbuild: ^0.24.0
@@ -7049,6 +7052,7 @@ packages:
       - supports-color
       - typescript
     dev: true
+    patched: true
 
   /esbuild@0.24.0:
     resolution: {integrity: sha512-FuLPevChGDshgSicjisSooU0cemp/sGXR841D5LHMB7mTVOmsEHcAxaH3irL53+8YDIeVNQEySh4DaYU/iuPqQ==}
