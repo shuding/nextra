@@ -1,5 +1,16 @@
 # nextra-theme-blog
 
+## 4.0.0-app-router.22
+
+### Patch Changes
+
+- 5f79b77: fix unable to select text and `::selection` style
+- 57fde3f: reduce bundle size of bundled website by compiling svg icons in
+  separated files
+- Updated dependencies [5f79b77]
+- Updated dependencies [57fde3f]
+  - nextra@4.0.0-app-router.22
+
 ## 4.0.0-app-router.21
 
 ### Major Changes
