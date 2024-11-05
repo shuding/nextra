@@ -44,7 +44,7 @@ body {
 @media (max-width: 767px) {
   .nextra-sidebar-container {
     @apply _fixed _pt-[calc(var(--nextra-navbar-height))] _top-0 _w-full _bottom-0 _z-[15] _overscroll-contain;
-    transition: transform 0.8s cubic-bezier(0.52, 0.16, 0.04, 1);
+    transition: transform 0.6s cubic-bezier(0.52, 0.16, 0.04, 1);
     will-change: transform, opacity;
     contain: layout style;
     backface-visibility: hidden;
