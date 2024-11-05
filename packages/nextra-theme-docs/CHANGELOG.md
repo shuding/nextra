@@ -1,5 +1,20 @@
 # nextra-theme-docs
 
+## 3.2.1
+
+### Patch Changes
+
+- 9154c2f: fix(nextra-theme-docs): incorrect makePrimaryColor relative value for
+  tailwind primary.900
+- 8a21a77: - Change hamburger menu animation speed
+
+  Google Core Web Vitals rolled out a new
+  [INP](https://developers.google.com/search/blog/2023/05/introducing-inp) score
+  The mobile hamburger menu would occasionally get flagged for "need
+  improvement"
+
+  - nextra@3.2.1
+
 ## 3.2.0
 
 ### Minor Changes
