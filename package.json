@@ -52,6 +52,7 @@
       "next": "15.0.2"
     },
     "patchedDependencies": {
+      "esbuild-plugin-svgr@3.0.0": "patches/esbuild-plugin-svgr.patch",
       "@changesets/assemble-release-plan@6.0.4": "patches/@changesets__assemble-release-plan.patch",
       "tsup@8.3.5": "patches/tsup@8.3.5.patch",
       "eslint-plugin-deprecation@3.0.0": "patches/eslint-plugin-deprecation.patch",

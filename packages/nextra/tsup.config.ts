@@ -5,61 +5,61 @@ import { defineConfig } from 'tsup'
 import { defaultEntry } from '../nextra-theme-docs/tsup.config.js'
 import { CWD, IS_PRODUCTION } from './src/server/constants.js'
 
-export default defineConfig([
-  {
-    name: 'nextra',
-    entry: [...defaultEntry, '!src/types.ts', '!src/client/icons'],
-    target: 'es2020',
-    format: 'esm',
-    dts: true,
-    splitting: IS_PRODUCTION,
-    bundle: false,
-    external: ['shiki', 'webpack'],
-    async onSuccess() {
-      // Fixes hydration errors in client apps due "type": "module" in root package.json
-      const clientPackageJSON = path.join(CWD, 'dist', 'client', 'package.json')
-      await fs.writeFile(clientPackageJSON, '{"sideEffects":false}')
-    },
-    plugins: [
-      {
-        // Strip `node:` prefix from imports because
-        // Next.js only polyfills `path` and not `node:path` for browser
-        name: 'strip-node-colon',
-        renderChunk(code) {
-          const replaced = code.replaceAll(
-            / from "node:(?<moduleName>.*?)";/g,
-            matched => matched.replace('node:', '')
-          )
-          return { code: replaced }
+export default defineConfig({
+  name: 'nextra',
+  entry: [...defaultEntry, '!src/types.ts', 'src/**/*.svg'],
+  target: 'es2020',
+  format: 'esm',
+  dts: true,
+  splitting: IS_PRODUCTION,
+  bundle: false,
+  external: ['shiki', 'webpack'],
+  async onSuccess() {
+    // Fixes hydration errors in client apps due "type": "module" in root package.json
+    const clientPackageJSON = path.join(CWD, 'dist', 'client', 'package.json')
+    await fs.writeFile(clientPackageJSON, '{"sideEffects":false}')
+  },
+  esbuildPlugins: [
+    svgr({
+      exportType: 'named',
+      typescript: true,
+      jsx: {
+        // svgo's removeXMLNS plugin doesn't work for some reason...
+        babelConfig: {
+          plugins: [
+            [
+              '@svgr/babel-plugin-remove-jsx-attribute',
+              { elements: ['svg'], attributes: ['xmlns'] }
+            ]
+          ]
         }
       }
-    ]
-  },
-  {
-    name: 'nextra/icons',
-    entry: {
-      'client/icons/index': 'src/client/icons/index.ts'
+    })
+  ],
+  plugins: [
+    {
+      // Strip `node:` prefix from imports
+      // Next.js only polyfills `path` and not `node:path` for browser
+      name: 'strip-node-colon',
+      renderChunk(code) {
+        // (?<= from ")
+        // Positive lookbehind asserts that the pattern we're trying to match is preceded by
+        // ` from "`, but does not include ` from "` in the actual match.
+        //
+        // (?=";)
+        // Positive lookahead asserts that the pattern is followed by `";`, but does not include
+        // `";` in the match.
+        const replaced = code.replaceAll(/(?<= from ")node:(.+)(?=";)/g, '$1')
+        return { code: replaced }
+      }
     },
-    esbuildPlugins: [
-      svgr({
-        exportType: 'named',
-        typescript: true,
-        jsx: {
-          // svgo's removeXMLNS plugin doesn't work for some reason...
-          babelConfig: {
-            plugins: [
-              [
-                '@svgr/babel-plugin-remove-jsx-attribute',
-                { elements: ['svg'], attributes: ['xmlns'] }
-              ]
-            ]
-          }
-        }
-      })
-    ],
-    format: 'esm',
-    target: 'es2020',
-    treeshake: true,
-    dts: true
-  }
-])
+    {
+      // Strip `.svg` suffix from imports
+      name: 'strip-dot-svg',
+      renderChunk(code) {
+        const replaced = code.replaceAll(/(?<= from ")(.+)\.svg(?=";)/g, '$1')
+        return { code: replaced }
+      }
+    }
+  ]
+})
