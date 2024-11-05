@@ -9,6 +9,6 @@ export default {
   'custom-css': '',
   'static-exports': '',
   search: '',
-  'built-ins': 'Built-ins Components',
+  'built-ins': 'Built-in Components',
   advanced: ''
 }
