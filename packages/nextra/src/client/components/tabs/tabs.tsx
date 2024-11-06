@@ -8,6 +8,7 @@ import {
   TabPanels
 } from '@headlessui/react'
 import type {
+  TabProps as HeadlessTabProps,
   TabGroupProps,
   TabListProps,
   TabPanelProps
@@ -32,8 +33,9 @@ export const Tabs: FC<
     items: (TabItem | TabObjectItem)[]
     children: ReactNode
     storageKey?: string
-  } & Pick<TabGroupProps, 'defaultIndex' | 'selectedIndex' | 'onChange'> &
-    Pick<TabListProps, 'className'>
+    className?: TabListProps['className']
+    tabClassName?: HeadlessTabProps['className']
+  } & Pick<TabGroupProps, 'defaultIndex' | 'selectedIndex' | 'onChange'>
 > = ({
   items,
   children,
@@ -41,7 +43,8 @@ export const Tabs: FC<
   defaultIndex = 0,
   selectedIndex: _selectedIndex,
   onChange,
-  className
+  className,
+  tabClassName
 }) => {
   const [selectedIndex, setSelectedIndex] = useState(defaultIndex)
 
@@ -109,8 +112,9 @@ export const Tabs: FC<
           <HeadlessTab
             key={index}
             disabled={isTabObjectItem(item) && item.disabled}
-            className={({ selected, disabled, hover, focus }) =>
-              cn(
+            className={args => {
+              const { selected, disabled, hover, focus } = args
+              return cn(
                 focus && 'nextra-focusable _ring-inset',
                 selected && '_outline-none',
                 '_whitespace-nowrap',
@@ -127,9 +131,12 @@ export const Tabs: FC<
                     ? '_text-gray-400 dark:_text-neutral-600 _pointer-events-none'
                     : hover
                       ? '_text-black dark:_text-white'
-                      : '_text-gray-600 dark:_text-gray-200'
+                      : '_text-gray-600 dark:_text-gray-200',
+                typeof tabClassName === 'function'
+                  ? tabClassName(args)
+                  : tabClassName
               )
-            }
+            }}
           >
             {isTabObjectItem(item) ? item.label : item}
           </HeadlessTab>
