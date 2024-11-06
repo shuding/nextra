@@ -47,12 +47,6 @@ const classes = {
     'before:_w-px before:_bg-gray-200 before:_content-[""] dark:before:_bg-neutral-800',
     '_ps-3 before:_start-0 _pt-1 _ms-3'
   ),
-  aside: cn(
-    'nextra-sidebar _flex _flex-col',
-    'motion-reduce:_transform-none [.resizing_&]:_transition-none',
-    '_transform-gpu _transition-all _ease-in-out',
-    'print:_hidden'
-  ),
   wrapper: cn(
     '_overflow-y-auto',
     '_p-4 _grow md:_h-[calc(100vh-var(--nextra-navbar-height)-var(--nextra-menu-height))]'
@@ -331,60 +325,46 @@ export const MobileNav: FC = () => {
   const hasMenu = themeConfig.darkMode || hasI18n
 
   return (
-    <>
-      <div
-        className={cn(
-          '[transition:background-color_1.5s_ease]',
-          menu
-            ? '_bg-black/80 dark:_bg-black/60 _fixed _inset-0 _z-10 md:_hidden'
-            : '_bg-transparent'
-        )}
-      />
-      <aside
-        className={cn(
-          classes.aside,
-          '_fixed _inset-0 _pt-[--nextra-navbar-height] _z-10 _overscroll-contain',
-          '_transition-transform _duration-700 _ease-[cubic-bezier(.52,.16,.04,1)] _will-change-[transform,opacity]',
-          '[contain:layout_style]',
-          'md:_hidden',
-          String.raw`[.nextra-banner:not(.\_hidden)~&]:_pt-[calc(var(--nextra-banner-height)+var(--nextra-navbar-height))]`,
-          '_bg-[rgb(var(--nextra-bg))]',
-          menu
-            ? '[transform:translate3d(0,0,0)]'
-            : '[transform:translate3d(0,-100%,0)]'
-        )}
-      >
-        {themeConfig.search && (
-          <div className="_px-4 _pt-4">{themeConfig.search}</div>
-        )}
-        <div
-          className={cn(classes.wrapper, 'nextra-scrollbar')}
-          ref={sidebarRef}
-        >
-          <Menu
-            className="nextra-menu-mobile"
-            // The mobile dropdown menu, shows all the directories.
-            directories={directories}
-            // Always show the anchor links on mobile (`md`).
-            anchors={anchors}
-            level={0}
-          />
-        </div>
+    <aside
+      className={cn(
+        '_flex _flex-col',
+        '_fixed _inset-0 _pt-[--nextra-navbar-height] _z-10 _overscroll-contain',
+        '[contain:layout_style]',
+        'md:_hidden',
+        String.raw`[.nextra-banner:not(.\_hidden)~&]:_pt-[calc(var(--nextra-banner-height)+var(--nextra-navbar-height))]`,
+        '_bg-[rgb(var(--nextra-bg))]',
+        menu
+          ? '[transform:translate3d(0,0,0)]'
+          : '[transform:translate3d(0,-100%,0)]'
+      )}
+    >
+      {themeConfig.search && (
+        <div className="_px-4 _pt-4">{themeConfig.search}</div>
+      )}
+      <div className={cn(classes.wrapper, 'nextra-scrollbar')} ref={sidebarRef}>
+        <Menu
+          className="nextra-menu-mobile"
+          // The mobile dropdown menu, shows all the directories.
+          directories={directories}
+          // Always show the anchor links on mobile (`md`).
+          anchors={anchors}
+          level={0}
+        />
+      </div>
 
-        {hasMenu && (
-          <div
-            className={cn(
-              classes.bottomMenu,
-              hasI18n && '_justify-end',
-              '_border-t'
-            )}
-          >
-            <LocaleSwitch className="_grow" />
-            <ThemeSwitch lite={hasI18n} className={hasI18n ? '' : '_grow'} />
-          </div>
-        )}
-      </aside>
-    </>
+      {hasMenu && (
+        <div
+          className={cn(
+            classes.bottomMenu,
+            hasI18n && '_justify-end',
+            '_border-t'
+          )}
+        >
+          <LocaleSwitch className="_grow" />
+          <ThemeSwitch lite={hasI18n} className={hasI18n ? '' : '_grow'} />
+        </div>
+      )}
+    </aside>
   )
 }
 
@@ -431,7 +411,8 @@ export const Sidebar: FC<{ toc: Heading[] }> = ({ toc }) => {
       <aside
         id={sidebarControlsId}
         className={cn(
-          classes.aside,
+          'nextra-sidebar print:_hidden',
+          '_transition-all _ease-in-out',
           'max-md:_hidden',
           '_top-[--nextra-navbar-height] _shrink-0',
           isExpanded ? '_w-64' : '_w-20',
