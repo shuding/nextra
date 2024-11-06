@@ -5,10 +5,10 @@ import {
   TabGroup,
   TabList,
   TabPanel,
-  TabPanels,
-  type TabProps as HeadlessTabProps
+  TabPanels
 } from '@headlessui/react'
 import type {
+  TabProps as HeadlessTabProps,
   TabGroupProps,
   TabListProps,
   TabPanelProps
