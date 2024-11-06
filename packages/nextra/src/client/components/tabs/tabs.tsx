@@ -2,11 +2,11 @@
 
 import {
   Tab as HeadlessTab,
-  TabProps as HeadlessTabProps,
   TabGroup,
   TabList,
   TabPanel,
-  TabPanels
+  TabPanels,
+  type TabProps as HeadlessTabProps
 } from '@headlessui/react'
 import type {
   TabGroupProps,
