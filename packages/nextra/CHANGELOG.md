@@ -1,5 +1,11 @@
 # nextra
 
+## 3.2.3
+
+### Patch Changes
+
+- 50f33f3: Add tabClassName to Tabs props
+
 ## 3.2.2
 
 ### Patch Changes
