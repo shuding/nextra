@@ -1,5 +1,11 @@
 # nextra
 
+## 3.2.2
+
+### Patch Changes
+
+- 45cccd4: allow passing `className` for `<Tabs>` and `<Tabs.Tab>`
+
 ## 3.2.1
 
 ## 3.2.0

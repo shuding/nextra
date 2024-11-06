@@ -1,5 +1,13 @@
 # nextra-theme-docs
 
+## 3.2.2
+
+### Patch Changes
+
+- 45cccd4: allow passing `className` for `<Tabs>` and `<Tabs.Tab>`
+- Updated dependencies [45cccd4]
+  - nextra@3.2.2
+
 ## 3.2.1
 
 ### Patch Changes
