@@ -8,7 +8,15 @@ import { useFSRoute } from 'nextra/hooks'
 import { ArrowRightIcon, ExpandIcon } from 'nextra/icons'
 import type { Item, MenuItem, PageItem } from 'nextra/normalize-pages'
 import type { FC, FocusEventHandler, MouseEventHandler } from 'react'
-import { useCallback, useEffect, useId, useMemo, useRef, useState } from 'react'
+import {
+  forwardRef,
+  useCallback,
+  useEffect,
+  useId,
+  useMemo,
+  useRef,
+  useState
+} from 'react'
 import scrollIntoView from 'scroll-into-view-if-needed'
 import {
   setFocusedRoute,
@@ -46,15 +54,6 @@ const classes = {
     '_relative before:_absolute before:_inset-y-1',
     'before:_w-px before:_bg-gray-200 before:_content-[""] dark:before:_bg-neutral-800',
     '_ps-3 before:_start-0 _pt-1 _ms-3'
-  ),
-  wrapper: cn(
-    '_overflow-y-auto',
-    '_p-4 _grow md:_h-[calc(100vh-var(--nextra-navbar-height)-var(--nextra-menu-height))]'
-  ),
-  bottomMenu: cn(
-    'nextra-sidebar-footer _sticky _bottom-0',
-    '_flex _items-center _gap-2 _py-4',
-    '_mx-3 _px-1' // to hide focused sidebar links
   )
 }
 
@@ -413,15 +412,16 @@ export const Sidebar: FC<{ toc: Heading[] }> = ({ toc }) => {
         className={cn(
           'nextra-sidebar print:_hidden',
           '_transition-all _ease-in-out',
-          'max-md:_hidden',
+          'max-md:_hidden _flex _flex-col',
+          '_h-[calc(100dvh-var(--nextra-menu-height))]',
           '_top-[--nextra-navbar-height] _shrink-0',
           isExpanded ? '_w-64' : '_w-20',
-          hideSidebar ? '_hidden' : '_sticky _self-start'
+          hideSidebar ? '_hidden' : '_sticky'
         )}
       >
         <div
           className={cn(
-            classes.wrapper,
+            '_overflow-y-auto _p-4 _grow mask',
             isExpanded ? 'nextra-scrollbar' : 'no-scrollbar'
           )}
           ref={sidebarRef}
@@ -443,10 +443,11 @@ export const Sidebar: FC<{ toc: Heading[] }> = ({ toc }) => {
         {hasMenu && (
           <div
             className={cn(
-              classes.bottomMenu,
+              'bordered',
+              '_flex _items-center _gap-2 _py-4 _mx-4',
               isExpanded
-                ? [hasI18n && '_justify-end', '_border-t']
-                : '_py-4 _flex-wrap _justify-center',
+                ? hasI18n && '_justify-end'
+                : '_flex-wrap _justify-center',
               showToggleAnimation && [
                 '*:_opacity-0',
                 isExpanded
