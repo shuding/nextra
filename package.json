@@ -24,7 +24,7 @@
   "devDependencies": {
     "@changesets/cli": "2.27.9",
     "@ianvs/prettier-plugin-sort-imports": "4.4.0",
-    "@next/eslint-plugin-next": "15.0.2",
+    "@next/eslint-plugin-next": "15.0.3",
     "@rollup/plugin-alias": "^5.1.1",
     "@typescript-eslint/eslint-plugin": "8.13.0",
     "@typescript-eslint/parser": "8.13.0",
@@ -50,7 +50,7 @@
   "pnpm": {
     "overrides": {
       "esbuild": "^0.24.0",
-      "next": "15.0.2"
+      "next": "15.0.3"
     },
     "patchedDependencies": {
       "@changesets/assemble-release-plan@6.0.4": "patches/@changesets__assemble-release-plan.patch",
