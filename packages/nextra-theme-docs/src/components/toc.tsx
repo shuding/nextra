@@ -57,25 +57,20 @@ export const TOC: FC<TOCProps> = ({ toc, filePath, pageTitle }) => {
     <div
       className={cn(
         hasHeadings && '_grid _grid-rows-[min-content_1fr_min-content]', // 1fr: toc headings, min-content: title/footer
-        '_sticky _top-[--nextra-navbar-height] _pt-6 _text-sm',
+        '_sticky _top-[--nextra-navbar-height] _text-sm',
         '_max-h-[calc(100vh-var(--nextra-navbar-height))]'
       )}
     >
       {hasHeadings && (
         <>
-          <p
-            className={cn(
-              '_mx-4', // use margin instead padding to not have shadow on scrollbar
-              '_font-semibold _tracking-tight _pb-2'
-            )}
-          >
+          <p className="_pt-6 _px-4 _font-semibold _tracking-tight">
             {themeConfig.toc.title}
           </p>
           <ul
             ref={tocRef}
             className={cn(
-              '_px-4 nextra-scrollbar _overscroll-y-contain _overflow-y-auto _hyphens-auto',
-              '_py-1.5 mask' // for title/footer shadow
+              '_p-4 nextra-scrollbar _overscroll-y-contain _overflow-y-auto _hyphens-auto',
+              'mask' // for title/footer shadow
             )}
           >
             {toc.map(({ id, value, depth }) => (
@@ -108,11 +103,7 @@ export const TOC: FC<TOCProps> = ({ toc, filePath, pageTitle }) => {
 
       {hasMetaInfo && (
         <div
-          className={cn(
-            hasHeadings && 'bordered',
-            '_flex _items-start _gap-2 _py-4 _mx-4',
-            '_flex-col'
-          )}
+          className={cn(hasHeadings && 'bordered', '_grid _gap-2 _py-4 _mx-4')}
         >
           {themeConfig.feedback.content && (
             <Anchor
