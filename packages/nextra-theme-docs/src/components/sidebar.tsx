@@ -268,9 +268,9 @@ const handleFocus: FocusEventHandler = event => {
   setFocusedRoute(route)
 }
 
-const Menu: FC<MenuProps> = ({ directories, anchors, className, level }) => {
-  return (
-    <ul className={cn(classes.list, className)}>
+const Menu = forwardRef<HTMLUListElement, MenuProps>(
+  ({ directories, anchors, className, level }, forwardedRef) => (
+    <ul className={cn(classes.list, className)} ref={forwardedRef}>
       {directories.map(item => {
         const ComponentToUse =
           item.type === 'menu' ||
@@ -290,7 +290,7 @@ const Menu: FC<MenuProps> = ({ directories, anchors, className, level }) => {
       })}
     </ul>
   )
-}
+)
 
 export const MobileNav: FC = () => {
   const { directories } = useConfig().normalizePagesResult
