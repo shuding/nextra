@@ -54,10 +54,17 @@ html {
   }
 }
 
-.nextra-toc-footer,
-.nextra-sidebar-footer {
-  @apply _bg-[rgb(var(--nextra-bg))];
-  @apply _border-t dark:_border-neutral-800;
-  @apply contrast-more:_shadow-none contrast-more:_border-neutral-400 contrast-more:dark:_border-neutral-400;
-  @apply _shadow-[0_-12px_16px_rgb(var(--nextra-bg))];
+.bordered {
+  @apply _border-t dark:_border-neutral-800 contrast-more:!_border-neutral-400;
+}
+
+.mask {
+  mask-image: linear-gradient(
+      to bottom,
+      transparent,
+      #000 20px,
+      transparent 100%
+    ),
+    linear-gradient(to top, transparent, #000 20px, transparent 100%);
+  @apply contrast-more:[mask-image:none];
 }
