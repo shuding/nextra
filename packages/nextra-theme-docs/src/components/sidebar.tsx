@@ -354,9 +354,9 @@ export const MobileNav: FC = () => {
       {hasMenu && (
         <div
           className={cn(
-            classes.bottomMenu,
-            hasI18n && '_justify-end',
-            '_border-t'
+            'bordered',
+            '_flex _items-center _gap-2 _py-4 _mx-4',
+            hasI18n && '_justify-end'
           )}
         >
           <LocaleSwitch className="_grow" />
