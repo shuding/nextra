@@ -162,8 +162,6 @@ module.exports = {
             'nextra-navbar-blur',
             'nextra-sidebar',
             'nextra-breadcrumb',
-            'nextra-menu-desktop',
-            'nextra-menu-mobile',
             'nextra-toc'
           ]
         }

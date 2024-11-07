@@ -304,7 +304,7 @@ export const MobileNav: FC = () => {
   }, [pathname])
 
   const anchors = useMemo(() => toc.filter(v => v.depth === 2), [toc])
-  const sidebarRef = useRef<HTMLDivElement>(null!)
+  const sidebarRef = useRef<HTMLUListElement>(null!)
 
   useEffect(() => {
     const activeElement = sidebarRef.current.querySelector('li.active')
@@ -340,16 +340,15 @@ export const MobileNav: FC = () => {
       {themeConfig.search && (
         <div className="_px-4 _pt-4">{themeConfig.search}</div>
       )}
-      <div className={cn(classes.wrapper, 'nextra-scrollbar')} ref={sidebarRef}>
-        <Menu
-          className="nextra-menu-mobile"
-          // The mobile dropdown menu, shows all the directories.
-          directories={directories}
-          // Always show the anchor links on mobile (`md`).
-          anchors={anchors}
-          level={0}
-        />
-      </div>
+      <Menu
+        ref={sidebarRef}
+        className={cn('_p-4 _overflow-y-auto nextra-scrollbar _grow mask')}
+        // The mobile dropdown menu, shows all the directories.
+        directories={directories}
+        // Always show the anchor links on mobile (`md`).
+        anchors={anchors}
+        level={0}
+      />
 
       {hasMenu && (
         <div
@@ -430,7 +429,6 @@ export const Sidebar: FC<{ toc: Heading[] }> = ({ toc }) => {
           {(!hideSidebar || !isExpanded) && (
             <Collapse isOpen={isExpanded} horizontal>
               <Menu
-                className="nextra-menu-desktop"
                 // The sidebar menu, shows only the docs directories.
                 directories={docsDirectories}
                 anchors={anchors}
