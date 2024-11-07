@@ -264,7 +264,9 @@ interface MenuProps {
 
 const handleFocus: FocusEventHandler = event => {
   const route =
-    event.target.getAttribute('href') || event.target.getAttribute('data-href')!
+    event.target.getAttribute('href') ||
+    event.target.getAttribute('data-href') ||
+    ''
   setFocusedRoute(route)
 }
 
@@ -342,7 +344,7 @@ export const MobileNav: FC = () => {
       )}
       <Menu
         ref={sidebarRef}
-        className={cn('_p-4 _overflow-y-auto nextra-scrollbar _grow mask')}
+        className={cn('_p-4 _overflow-y-auto nextra-scrollbar mask')}
         // The mobile dropdown menu, shows all the directories.
         directories={directories}
         // Always show the anchor links on mobile (`md`).
@@ -354,7 +356,7 @@ export const MobileNav: FC = () => {
         <div
           className={cn(
             'bordered',
-            '_flex _items-center _gap-2 _py-4 _mx-4',
+            '_flex _items-center _gap-2 _py-4 _mx-4 _mt-auto',
             hasI18n && '_justify-end'
           )}
         >
