@@ -66,8 +66,7 @@ export const TOC: FC<TOCProps> = ({ toc, filePath, pageTitle }) => {
           <p
             className={cn(
               '_mx-4', // use margin instead padding to not have shadow on scrollbar
-              '_font-semibold _tracking-tight',
-              '_pb-2 _shadow-[0_12px_16px_rgb(var(--nextra-bg))] contrast-more:_shadow-none _z-[1]'
+              '_font-semibold _tracking-tight _pb-2'
             )}
           >
             {themeConfig.toc.title}
@@ -76,7 +75,7 @@ export const TOC: FC<TOCProps> = ({ toc, filePath, pageTitle }) => {
             ref={tocRef}
             className={cn(
               '_px-4 nextra-scrollbar _overscroll-y-contain _overflow-y-auto _hyphens-auto',
-              '_py-1.5' // for title/footer shadow
+              '_py-1.5 mask' // for title/footer shadow
             )}
           >
             {toc.map(({ id, value, depth }) => (
@@ -110,9 +109,9 @@ export const TOC: FC<TOCProps> = ({ toc, filePath, pageTitle }) => {
       {hasMetaInfo && (
         <div
           className={cn(
-            hasHeadings && 'nextra-toc-footer _pt-4',
-            '_flex _flex-col _items-start _gap-2 _pb-4',
-            '_mx-4' // for border top width
+            hasHeadings && 'bordered',
+            '_flex _items-start _gap-2 _py-4 _mx-4',
+            '_flex-col'
           )}
         >
           {themeConfig.feedback.content && (
