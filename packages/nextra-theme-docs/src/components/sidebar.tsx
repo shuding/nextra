@@ -76,7 +76,7 @@ const Folder: FC<FolderProps> = ({ item, anchors, onFocus, level }) => {
   const focusedRouteInside = focusedRoute.startsWith(item.route + '/')
 
   const { theme } = item as Item
-  const themeConfig = useThemeConfig()
+  const { defaultMenuCollapseLevel, autoCollapse } = useThemeConfig().sidebar
 
   const open =
     TreeState[item.route] === undefined
@@ -85,12 +85,12 @@ const Folder: FC<FolderProps> = ({ item, anchors, onFocus, level }) => {
         focusedRouteInside ||
         (theme && 'collapsed' in theme
           ? !theme.collapsed
-          : level < themeConfig.sidebar.defaultMenuCollapseLevel)
+          : level < defaultMenuCollapseLevel)
       : TreeState[item.route] || focusedRouteInside
 
   const [, rerender] = useState<object>()
 
-  const onClick: MouseEventHandler = useCallback(event => {
+  const handleClick: MouseEventHandler = useCallback(event => {
     const el = event.currentTarget
     const isClickOnIcon =
       el /* will be always <a> or <button> */ !==
@@ -98,8 +98,8 @@ const Folder: FC<FolderProps> = ({ item, anchors, onFocus, level }) => {
     if (isClickOnIcon) {
       event.preventDefault()
     }
-    const isOpen = el.hasAttribute('data-open')
-    const route = el.getAttribute('href') || el.getAttribute('data-href')!
+    const isOpen = el.parentElement!.classList.contains('open')
+    const route = el.getAttribute('href') || el.getAttribute('data-href') || ''
     TreeState[route] = !isOpen
     rerender({})
   }, [])
@@ -119,17 +119,12 @@ const Folder: FC<FolderProps> = ({ item, anchors, onFocus, level }) => {
       }
     }
 
-    if (themeConfig.sidebar.autoCollapse) {
+    if (autoCollapse) {
       updateAndPruneTreeState()
     } else {
       updateTreeState()
     }
-  }, [
-    activeRouteInside,
-    focusedRouteInside,
-    item.route,
-    themeConfig.sidebar.autoCollapse
-  ])
+  }, [activeRouteInside, focusedRouteInside, item.route, autoCollapse])
 
   if (item.type === 'menu') {
     const menu = item as MenuItem
@@ -159,8 +154,7 @@ const Folder: FC<FolderProps> = ({ item, anchors, onFocus, level }) => {
           classes.link,
           active ? classes.active : classes.inactive
         )}
-        data-open={open ? '' : undefined}
-        onClick={onClick}
+        onClick={handleClick}
         onFocus={onFocus}
       >
         {item.title}
@@ -293,6 +287,7 @@ const Menu = forwardRef<HTMLUListElement, MenuProps>(
     </ul>
   )
 )
+Menu.displayName = 'Menu'
 
 export const MobileNav: FC = () => {
   const { directories } = useConfig().normalizePagesResult
