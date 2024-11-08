@@ -98,12 +98,7 @@ const RootLayout: FC<{
     </Footer>
   )
   return (
-    <html
-      lang="en"
-      dir="ltr"
-      suppressHydrationWarning
-      className="nextra-scrollbar"
-    >
+    <html lang="en" dir="ltr" suppressHydrationWarning>
       <Head />
       <body>
         <Layout

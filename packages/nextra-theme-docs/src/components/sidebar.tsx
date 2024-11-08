@@ -240,7 +240,7 @@ const File: FC<{
                 href={`#${id}`}
                 className={cn(
                   classes.link,
-                  '_flex _gap-2 before:_opacity-25 before:_content-["#"]',
+                  'focus-visible:nextra-focus _flex _gap-2 before:_opacity-25 before:_content-["#"]',
                   id === activeSlug ? classes.active : classes.inactive
                 )}
                 onClick={handleClick}
