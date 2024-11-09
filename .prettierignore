@@ -4,7 +4,7 @@ generated-page-map.ts
 
 examples/swr-site/nextra-remote-filepaths/*.json
 
-examples/docs/content/features/mdx.mdx
+examples/docs/src/content/features/mdx.mdx
 docs/app/docs/advanced/latex/page.mdx
 docs/app/docs/advanced/mermaid/page.mdx
 docs/app/docs/advanced/npm2yarn/page.mdx
