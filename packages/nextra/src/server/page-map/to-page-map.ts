@@ -10,6 +10,8 @@ type StringMap = Record<string, string>
 const createNested = (prevValue: NestedMap, currVal: string) =>
   (prevValue[currVal] ||= {})
 
+const APP_DIR_SUFFIX_RE = /^(src\/)?app\//
+
 export function convertToPageMap({
   filePaths,
   basePath,
@@ -25,11 +27,11 @@ export function convertToPageMap({
 
   for (const filePath of filePaths) {
     let { name, dir } = path.parse(filePath)
-    const inAppDir = filePath.startsWith('app/')
+    const inAppDir = APP_DIR_SUFFIX_RE.test(filePath)
     if (inAppDir) {
-      dir = dir.replace(/^app(\/|$)/, '')
+      dir = dir.replace(/^(src\/)?app(\/|$)/, '')
     } else {
-      let filePath = dir.replace(/^content(\/|$)/, '')
+      let filePath = dir.replace(/^(src\/)?content(\/|$)/, '')
       if (locale) filePath = filePath.replace(new RegExp(`^${locale}/?`), '')
       dir = [basePath, filePath].filter(Boolean).join('/')
     }
@@ -94,11 +96,11 @@ export function convertToPageMap({
   const mdxPages = Object.fromEntries(
     Object.entries(pages).flatMap(([key, value]) => {
       if (basePath) key = key.replace(new RegExp(`^${basePath}/?`), '')
-      value = value.replace(/^content\//, '')
+      value = value.replace(/^(src\/)?content\//, '')
       if (locale) value = value.replace(new RegExp(`^${locale}/`), '')
 
       // Do not add pages from `app/` dir to `mdxPages`
-      if (value.startsWith('app/')) {
+      if (APP_DIR_SUFFIX_RE.test(value)) {
         return []
       }
 

@@ -1,6 +1,7 @@
 /* eslint-env node */
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
+import fg from 'fast-glob'
 import type { RuleSetRule } from 'webpack'
 import { fromZodError } from 'zod-validation-error'
 import type { Nextra } from '../types.js'
@@ -31,6 +32,12 @@ const GET_PAGE_MAP_RE = new RegExp(
   GET_PAGE_MAP_PATH.replaceAll('/', SEP).replaceAll('.', '\\.')
 )
 
+export function getContentDirectory() {
+  // Next.js gives priority to `app` over `src/app`, we do the same for `content` directory
+  const [contentDir] = fg.sync(['{src/,}content'], { onlyDirectories: true })
+  return contentDir
+}
+
 const nextra: Nextra = nextraConfig => {
   const { error, data: loaderOptions } =
     nextraConfigSchema.safeParse(nextraConfig)
@@ -53,6 +60,7 @@ const nextra: Nextra = nextraConfig => {
       contentDirBasePath: loaderOptions.contentDirBasePath
     }
   }
+  const contentDir = getContentDirectory()
 
   return function withNextra(nextConfig = {}) {
     const pageMapLoader = {
@@ -99,12 +107,12 @@ const nextra: Nextra = nextraConfig => {
           ...nextConfig.experimental?.turbo,
           rules: {
             ...nextConfig.experimental?.turbo?.rules,
-            './app/**/page.{md,mdx}': {
+            [`./{src/,}app/**/page.{${MARKDOWN_EXTENSIONS}}`]: {
               as: '*.tsx',
               loaders: [pageImportLoader as any]
             },
             // Order matter here, pages match first -> after partial files
-            '*.{md,mdx}': {
+            [`*.{${MARKDOWN_EXTENSIONS}}`]: {
               as: '*.tsx',
               loaders: [loader as any]
             },
@@ -118,7 +126,8 @@ const nextra: Nextra = nextraConfig => {
           resolveAlias: {
             ...nextConfig.experimental?.turbo?.resolveAlias,
             'next-mdx-import-source-file': './mdx-components', // '@vercel/turbopack-next/mdx-import-source'
-            'private-next-root-dir/*': './*'
+            'private-next-root-dir/*': './*',
+            'private-next-content-dir/*': `./${contentDir}/*`
           }
         }
       },
@@ -134,6 +143,8 @@ const nextra: Nextra = nextraConfig => {
             )
           }
         }
+        config.resolve.alias['private-next-content-dir'] =
+          `private-next-root-dir/${contentDir}`
         config.resolve.alias['next-mdx-import-source-file'] = [
           'private-next-root-dir/mdx-components',
           'private-next-root-dir/src/mdx-components'

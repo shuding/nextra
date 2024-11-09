@@ -414,7 +414,11 @@ export const Sidebar: FC<{ toc: Heading[] }> = ({ toc }) => {
         )}
       >
         <div
-          className={cn(classes.wrapper, !isExpanded && 'no-scrollbar')}
+          className={cn(
+            classes.wrapper,
+            '_grow',
+            !isExpanded && 'no-scrollbar'
+          )}
           ref={sidebarRef}
         >
           {/* without !hideSidebar check <Collapse />'s inner.clientWidth on `layout: "raw"` will be 0 and element will not have width on initial loading */}
@@ -444,7 +448,7 @@ export const Sidebar: FC<{ toc: Heading[] }> = ({ toc }) => {
           >
             <LocaleSwitch
               lite={!isExpanded}
-              className={isExpanded ? '_grow' : 'max-md:_grow'}
+              className={isExpanded ? '_grow' : ''}
             />
             <ThemeSwitch
               lite={!isExpanded || hasI18n}

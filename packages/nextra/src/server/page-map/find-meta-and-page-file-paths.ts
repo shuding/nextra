@@ -5,14 +5,17 @@ import slash from 'slash'
 export async function findMetaAndPageFilePaths({
   dir,
   cwd,
-  locale = ''
+  locale = '',
+  // Can be `src/content` also
+  contentDir = 'content'
 }: {
   dir: string
   cwd: string
   locale?: string
+  contentDir?: string
 }): Promise<string[]> {
   const appDir = slash(path.relative(cwd, dir))
-  const contentDir = `content${locale && `/${locale}`}`
+  if (locale) contentDir += `/${locale}`
   // appDir is empty string on tests
   const pattern = appDir
     ? [

@@ -13,21 +13,19 @@ import {
   METADATA_ONLY_RQ,
   PAGE_MAP_PLACEHOLDER_PATH
 } from './constants.js'
+import { getContentDirectory } from './index.js'
 import { findMetaAndPageFilePaths } from './page-map/find-meta-and-page-file-paths.js'
 import { convertPageMapToJs } from './page-map/to-js.js'
 import { convertToPageMap } from './page-map/to-page-map.js'
 import { twoslashRenderer } from './twoslash.js'
 import { logger } from './utils.js'
 
-const APP_DIR = slash(findPagesDir(CWD).appDir!)
-
+const APP_DIR = findPagesDir(CWD).appDir!
 if (!APP_DIR) {
   throw new Error('Unable to find `app` directory')
-} else if (APP_DIR.includes('src/app')) {
-  throw new Error(
-    "Nextra 4 doesn't support `src/app` directory for now. use `app` directory instead"
-  )
 }
+
+const contentDir = getContentDirectory()
 
 const initGitRepo = (async () => {
   const IS_WEB_CONTAINER = !!process.versions.webcontainer
@@ -87,12 +85,15 @@ export async function loader(
       // Add `app` and `content` folders as the dependencies, so Webpack will
       // rebuild the module if anything in that context changes
       this.addContextDependency(APP_DIR)
-      this.addContextDependency(path.join(CWD, 'content', locale))
+      if (contentDir) {
+        this.addContextDependency(path.join(CWD, contentDir, locale))
+      }
     }
     const filePaths = await findMetaAndPageFilePaths({
       dir: APP_DIR,
       cwd: CWD,
-      locale
+      locale,
+      contentDir
     })
     const { pageMap, mdxPages } = convertToPageMap({
       filePaths,
