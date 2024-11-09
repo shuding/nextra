@@ -27,7 +27,7 @@ if (!APP_DIR) {
 
 const contentDir = getContentDirectory()
 
-const initGitRepo = (async () => {
+const git = await (async () => {
   if (process.versions.webcontainer) return
   const { Repository } = await import('@napi-rs/simple-git')
   try {
@@ -149,21 +149,21 @@ export async function loader(
   })
 
   let timestamp: number | undefined = LastCommitTimeMap.get(filePath)
-  if (timestamp === undefined) {
-    const { repository, gitRoot } = (await initGitRepo) || {}
-    if (repository && gitRoot) {
-      try {
-        const relativePath = path.relative(gitRoot, filePath)
-        timestamp =
-          await repository.getFileLatestModifiedDateAsync(relativePath)
-        LastCommitTimeMap.set(filePath, timestamp)
-      } catch {
-        logger.warn(
-          'Failed to get the last modified timestamp from Git for the file',
-          filePath
-        )
-        LastCommitTimeMap.set(filePath, 0)
+  if (IS_PRODUCTION && timestamp === undefined) {
+    try {
+      if (!git) {
+        throw new Error('Init git repository failed')
       }
+      const relativePath = path.relative(git.gitRoot, filePath)
+      timestamp =
+        await git.repository.getFileLatestModifiedDateAsync(relativePath)
+      LastCommitTimeMap.set(filePath, timestamp)
+    } catch {
+      logger.warn(
+        'Failed to get the last modified timestamp from Git for the file',
+        filePath
+      )
+      LastCommitTimeMap.set(filePath, 0)
     }
   }
 
