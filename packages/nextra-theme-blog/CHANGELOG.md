@@ -1,5 +1,13 @@
 # nextra-theme-blog
 
+## 4.0.0-app-router.23
+
+### Patch Changes
+
+- b2e44d3: make Nextra works with `src/app` and `src/content` directories
+- Updated dependencies [b2e44d3]
+  - nextra@4.0.0-app-router.23
+
 ## 4.0.0-app-router.22
 
 ### Patch Changes
