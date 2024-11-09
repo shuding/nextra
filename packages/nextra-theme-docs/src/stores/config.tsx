@@ -18,10 +18,7 @@ export function useConfig() {
   const { activeThemeContext, activeType } = normalizePagesResult
   return {
     normalizePagesResult,
-    hideSidebar:
-      !activeThemeContext.sidebar ||
-      activeType === 'page' ||
-      activeType === undefined /* non mdx pages */
+    hideSidebar: !activeThemeContext.sidebar || activeType === 'page'
   }
 }
 
