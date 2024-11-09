@@ -15,7 +15,7 @@ export async function findMetaAndPageFilePaths({
   contentDir?: string
 }): Promise<string[]> {
   const appDir = slash(path.relative(cwd, dir))
-  contentDir = `${contentDir}${locale && `/${locale}`}`
+  if (locale) contentDir += `/${locale}`
   // appDir is empty string on tests
   const pattern = appDir
     ? [
