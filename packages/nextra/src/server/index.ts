@@ -33,8 +33,7 @@ const GET_PAGE_MAP_RE = new RegExp(
 )
 
 export function getContentDirectory() {
-  // Next.js take priority to `app` rather than `src/app`, we do the same for
-  // `content` directory
+  // Next.js gives priority to `app` over `src/app`, we do the same for `content` directory
   const [contentDir] = fg.sync(['{src/,}content'], { onlyDirectories: true })
   return contentDir
 }
