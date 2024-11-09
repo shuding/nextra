@@ -467,36 +467,37 @@ describe('generatePageMap()', () => {
   describe('should work for docs example', async () => {
     const cwd = path.join(CWD, '..', '..', 'examples', 'docs')
     const filePaths = await findMetaAndPageFilePaths({
-      dir: path.join(cwd, 'app'),
-      cwd
+      dir: path.join(cwd, 'src/app'),
+      cwd,
+      contentDir: 'src/content'
     })
     it('should match filepaths', () => {
       expect(filePaths).toMatchInlineSnapshot(`
         [
-          "app/_meta.js",
-          "app/blog/page.jsx",
-          "app/page.jsx",
-          "content/_meta.js",
-          "content/advanced/code-highlighting.mdx",
-          "content/features/_meta.js",
-          "content/features/i18n.mdx",
-          "content/features/image.mdx",
-          "content/features/latex.mdx",
-          "content/features/mdx.mdx",
-          "content/features/ssg.mdx",
-          "content/features/themes.mdx",
-          "content/get-started.mdx",
-          "content/index.mdx",
-          "content/page.mdx",
-          "content/themes/_meta.js",
-          "content/themes/blog/_meta.js",
-          "content/themes/blog/index.mdx",
-          "content/themes/docs/_meta.js",
-          "content/themes/docs/bleed.mdx",
-          "content/themes/docs/callout.mdx",
-          "content/themes/docs/configuration.mdx",
-          "content/themes/docs/index.mdx",
-          "content/themes/docs/tabs.mdx",
+          "src/app/_meta.js",
+          "src/app/blog/page.jsx",
+          "src/app/page.jsx",
+          "src/content/_meta.js",
+          "src/content/advanced/code-highlighting.mdx",
+          "src/content/features/_meta.js",
+          "src/content/features/i18n.mdx",
+          "src/content/features/image.mdx",
+          "src/content/features/latex.mdx",
+          "src/content/features/mdx.mdx",
+          "src/content/features/ssg.mdx",
+          "src/content/features/themes.mdx",
+          "src/content/get-started.mdx",
+          "src/content/index.mdx",
+          "src/content/page.mdx",
+          "src/content/themes/_meta.js",
+          "src/content/themes/blog/_meta.js",
+          "src/content/themes/blog/index.mdx",
+          "src/content/themes/docs/_meta.js",
+          "src/content/themes/docs/bleed.mdx",
+          "src/content/themes/docs/callout.mdx",
+          "src/content/themes/docs/configuration.mdx",
+          "src/content/themes/docs/index.mdx",
+          "src/content/themes/docs/tabs.mdx",
         ]
       `)
     })
@@ -505,40 +506,40 @@ describe('generatePageMap()', () => {
       expect(pageMap).toMatchInlineSnapshot(`
         [
           {
-            "__metaPath": "content/_meta.js",
+            "__metaPath": "src/content/_meta.js",
           },
           {
             "children": [
               {
-                "__metaPath": "content/features/_meta.js",
+                "__metaPath": "src/content/features/_meta.js",
               },
               {
-                "__pagePath": "content/features/i18n.mdx",
+                "__pagePath": "src/content/features/i18n.mdx",
                 "name": "i18n",
                 "route": "/features/i18n",
               },
               {
-                "__pagePath": "content/features/image.mdx",
+                "__pagePath": "src/content/features/image.mdx",
                 "name": "image",
                 "route": "/features/image",
               },
               {
-                "__pagePath": "content/features/latex.mdx",
+                "__pagePath": "src/content/features/latex.mdx",
                 "name": "latex",
                 "route": "/features/latex",
               },
               {
-                "__pagePath": "content/features/mdx.mdx",
+                "__pagePath": "src/content/features/mdx.mdx",
                 "name": "mdx",
                 "route": "/features/mdx",
               },
               {
-                "__pagePath": "content/features/ssg.mdx",
+                "__pagePath": "src/content/features/ssg.mdx",
                 "name": "ssg",
                 "route": "/features/ssg",
               },
               {
-                "__pagePath": "content/features/themes.mdx",
+                "__pagePath": "src/content/features/themes.mdx",
                 "name": "themes",
                 "route": "/features/themes",
               },
@@ -549,15 +550,15 @@ describe('generatePageMap()', () => {
           {
             "children": [
               {
-                "__metaPath": "content/themes/_meta.js",
+                "__metaPath": "src/content/themes/_meta.js",
               },
               {
                 "children": [
                   {
-                    "__metaPath": "content/themes/blog/_meta.js",
+                    "__metaPath": "src/content/themes/blog/_meta.js",
                   },
                   {
-                    "__pagePath": "content/themes/blog/index.mdx",
+                    "__pagePath": "src/content/themes/blog/index.mdx",
                     "name": "index",
                     "route": "/themes/blog",
                   },
@@ -568,30 +569,30 @@ describe('generatePageMap()', () => {
               {
                 "children": [
                   {
-                    "__metaPath": "content/themes/docs/_meta.js",
+                    "__metaPath": "src/content/themes/docs/_meta.js",
                   },
                   {
-                    "__pagePath": "content/themes/docs/bleed.mdx",
+                    "__pagePath": "src/content/themes/docs/bleed.mdx",
                     "name": "bleed",
                     "route": "/themes/docs/bleed",
                   },
                   {
-                    "__pagePath": "content/themes/docs/callout.mdx",
+                    "__pagePath": "src/content/themes/docs/callout.mdx",
                     "name": "callout",
                     "route": "/themes/docs/callout",
                   },
                   {
-                    "__pagePath": "content/themes/docs/configuration.mdx",
+                    "__pagePath": "src/content/themes/docs/configuration.mdx",
                     "name": "configuration",
                     "route": "/themes/docs/configuration",
                   },
                   {
-                    "__pagePath": "content/themes/docs/index.mdx",
+                    "__pagePath": "src/content/themes/docs/index.mdx",
                     "name": "index",
                     "route": "/themes/docs",
                   },
                   {
-                    "__pagePath": "content/themes/docs/tabs.mdx",
+                    "__pagePath": "src/content/themes/docs/tabs.mdx",
                     "name": "tabs",
                     "route": "/themes/docs/tabs",
                   },
@@ -604,19 +605,19 @@ describe('generatePageMap()', () => {
             "route": "/themes",
           },
           {
-            "__pagePath": "app/blog/page.jsx",
+            "__pagePath": "src/app/blog/page.jsx",
             "name": "blog",
             "route": "/blog",
           },
           {
-            "__pagePath": "content/index.mdx",
+            "__pagePath": "src/content/index.mdx",
             "name": "index",
             "route": "/",
           },
           {
             "children": [
               {
-                "__pagePath": "content/advanced/code-highlighting.mdx",
+                "__pagePath": "src/content/advanced/code-highlighting.mdx",
                 "name": "code-highlighting",
                 "route": "/advanced/code-highlighting",
               },
@@ -625,12 +626,12 @@ describe('generatePageMap()', () => {
             "route": "/advanced",
           },
           {
-            "__pagePath": "content/get-started.mdx",
+            "__pagePath": "src/content/get-started.mdx",
             "name": "get-started",
             "route": "/get-started",
           },
           {
-            "__pagePath": "content/page.mdx",
+            "__pagePath": "src/content/page.mdx",
             "name": "page",
             "route": "/page",
           },
@@ -649,6 +650,7 @@ describe('generatePageMap()', () => {
         {
           "": "index.mdx",
           "advanced/code-highlighting": "advanced/code-highlighting.mdx",
+          "blog": "src/app/blog/page.jsx",
           "features/i18n": "features/i18n.mdx",
           "features/image": "features/image.mdx",
           "features/latex": "features/latex.mdx",
@@ -668,45 +670,45 @@ describe('generatePageMap()', () => {
       expect(pageMap).toMatchInlineSnapshot(`
         [
           {
-            "__metaPath": "app/_meta.js",
+            "__metaPath": "src/app/_meta.js",
           },
           {
             "children": [
               {
-                "__metaPath": "content/_meta.js",
+                "__metaPath": "src/content/_meta.js",
               },
               {
                 "children": [
                   {
-                    "__metaPath": "content/features/_meta.js",
+                    "__metaPath": "src/content/features/_meta.js",
                   },
                   {
-                    "__pagePath": "content/features/i18n.mdx",
+                    "__pagePath": "src/content/features/i18n.mdx",
                     "name": "i18n",
                     "route": "/docs/features/i18n",
                   },
                   {
-                    "__pagePath": "content/features/image.mdx",
+                    "__pagePath": "src/content/features/image.mdx",
                     "name": "image",
                     "route": "/docs/features/image",
                   },
                   {
-                    "__pagePath": "content/features/latex.mdx",
+                    "__pagePath": "src/content/features/latex.mdx",
                     "name": "latex",
                     "route": "/docs/features/latex",
                   },
                   {
-                    "__pagePath": "content/features/mdx.mdx",
+                    "__pagePath": "src/content/features/mdx.mdx",
                     "name": "mdx",
                     "route": "/docs/features/mdx",
                   },
                   {
-                    "__pagePath": "content/features/ssg.mdx",
+                    "__pagePath": "src/content/features/ssg.mdx",
                     "name": "ssg",
                     "route": "/docs/features/ssg",
                   },
                   {
-                    "__pagePath": "content/features/themes.mdx",
+                    "__pagePath": "src/content/features/themes.mdx",
                     "name": "themes",
                     "route": "/docs/features/themes",
                   },
@@ -717,15 +719,15 @@ describe('generatePageMap()', () => {
               {
                 "children": [
                   {
-                    "__metaPath": "content/themes/_meta.js",
+                    "__metaPath": "src/content/themes/_meta.js",
                   },
                   {
                     "children": [
                       {
-                        "__metaPath": "content/themes/blog/_meta.js",
+                        "__metaPath": "src/content/themes/blog/_meta.js",
                       },
                       {
-                        "__pagePath": "content/themes/blog/index.mdx",
+                        "__pagePath": "src/content/themes/blog/index.mdx",
                         "name": "index",
                         "route": "/docs/themes/blog",
                       },
@@ -736,30 +738,30 @@ describe('generatePageMap()', () => {
                   {
                     "children": [
                       {
-                        "__metaPath": "content/themes/docs/_meta.js",
+                        "__metaPath": "src/content/themes/docs/_meta.js",
                       },
                       {
-                        "__pagePath": "content/themes/docs/bleed.mdx",
+                        "__pagePath": "src/content/themes/docs/bleed.mdx",
                         "name": "bleed",
                         "route": "/docs/themes/docs/bleed",
                       },
                       {
-                        "__pagePath": "content/themes/docs/callout.mdx",
+                        "__pagePath": "src/content/themes/docs/callout.mdx",
                         "name": "callout",
                         "route": "/docs/themes/docs/callout",
                       },
                       {
-                        "__pagePath": "content/themes/docs/configuration.mdx",
+                        "__pagePath": "src/content/themes/docs/configuration.mdx",
                         "name": "configuration",
                         "route": "/docs/themes/docs/configuration",
                       },
                       {
-                        "__pagePath": "content/themes/docs/index.mdx",
+                        "__pagePath": "src/content/themes/docs/index.mdx",
                         "name": "index",
                         "route": "/docs/themes/docs",
                       },
                       {
-                        "__pagePath": "content/themes/docs/tabs.mdx",
+                        "__pagePath": "src/content/themes/docs/tabs.mdx",
                         "name": "tabs",
                         "route": "/docs/themes/docs/tabs",
                       },
@@ -774,7 +776,7 @@ describe('generatePageMap()', () => {
               {
                 "children": [
                   {
-                    "__pagePath": "content/advanced/code-highlighting.mdx",
+                    "__pagePath": "src/content/advanced/code-highlighting.mdx",
                     "name": "code-highlighting",
                     "route": "/docs/advanced/code-highlighting",
                   },
@@ -783,17 +785,17 @@ describe('generatePageMap()', () => {
                 "route": "/docs/advanced",
               },
               {
-                "__pagePath": "content/get-started.mdx",
+                "__pagePath": "src/content/get-started.mdx",
                 "name": "get-started",
                 "route": "/docs/get-started",
               },
               {
-                "__pagePath": "content/index.mdx",
+                "__pagePath": "src/content/index.mdx",
                 "name": "index",
                 "route": "/docs",
               },
               {
-                "__pagePath": "content/page.mdx",
+                "__pagePath": "src/content/page.mdx",
                 "name": "page",
                 "route": "/docs/page",
               },
@@ -802,12 +804,12 @@ describe('generatePageMap()', () => {
             "route": "/docs",
           },
           {
-            "__pagePath": "app/blog/page.jsx",
+            "__pagePath": "src/app/blog/page.jsx",
             "name": "blog",
             "route": "/blog",
           },
           {
-            "__pagePath": "app/page.jsx",
+            "__pagePath": "src/app/page.jsx",
             "name": "index",
             "route": "/",
           },
