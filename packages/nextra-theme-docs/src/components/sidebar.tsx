@@ -448,7 +448,7 @@ export const Sidebar: FC<{ toc: Heading[] }> = ({ toc }) => {
           >
             <LocaleSwitch
               lite={!isExpanded}
-              className={isExpanded ? '_grow' : 'max-md:_grow'}
+              className={isExpanded ? '_grow' : ''}
             />
             <ThemeSwitch
               lite={!isExpanded || hasI18n}
