@@ -1,6 +1,5 @@
 import path from 'node:path'
 import { transformerTwoslash } from '@shikijs/twoslash'
-import fg from 'fast-glob'
 import { findPagesDir } from 'next/dist/lib/find-pages-dir.js'
 import slash from 'slash'
 import type { LoaderContext } from 'webpack'
@@ -14,18 +13,12 @@ import {
   METADATA_ONLY_RQ,
   PAGE_MAP_PLACEHOLDER_PATH
 } from './constants.js'
+import { getContentDirectory } from './index.js'
 import { findMetaAndPageFilePaths } from './page-map/find-meta-and-page-file-paths.js'
 import { convertPageMapToJs } from './page-map/to-js.js'
 import { convertToPageMap } from './page-map/to-page-map.js'
 import { twoslashRenderer } from './twoslash.js'
 import { logger } from './utils.js'
-
-export function getContentDirectory() {
-  // Next.js take priority to `app` rather than `src/app`, we do the same for
-  // `content` directory
-  const [contentDir] = fg.sync(['{src/,}content'], { onlyDirectories: true })
-  return contentDir
-}
 
 const APP_DIR = findPagesDir(CWD).appDir!
 if (!APP_DIR) {

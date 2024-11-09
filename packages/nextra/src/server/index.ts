@@ -1,6 +1,7 @@
 /* eslint-env node */
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
+import fg from 'fast-glob'
 import type { RuleSetRule } from 'webpack'
 import { fromZodError } from 'zod-validation-error'
 import type { Nextra } from '../types.js'
@@ -9,7 +10,6 @@ import {
   MARKDOWN_EXTENSION_RE,
   PAGE_MAP_PLACEHOLDER_PATH
 } from './constants.js'
-import { getContentDirectory } from './loader.js'
 import { nextraConfigSchema } from './schemas.js'
 import { logger } from './utils.js'
 
@@ -31,6 +31,13 @@ const PAGE_MAP_PLACEHOLDER_RE = new RegExp(
 const GET_PAGE_MAP_RE = new RegExp(
   GET_PAGE_MAP_PATH.replaceAll('/', SEP).replaceAll('.', '\\.')
 )
+
+export function getContentDirectory() {
+  // Next.js take priority to `app` rather than `src/app`, we do the same for
+  // `content` directory
+  const [contentDir] = fg.sync(['{src/,}content'], { onlyDirectories: true })
+  return contentDir
+}
 
 const nextra: Nextra = nextraConfig => {
   const { error, data: loaderOptions } =
