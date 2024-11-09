@@ -81,10 +81,10 @@ export const TOC: FC<TOCProps> = ({ toc, filePath, pageTitle }) => {
                     'focus-visible:nextra-focus',
                     {
                       2: '_font-semibold',
-                      3: '_ms-4',
-                      4: '_ms-8',
-                      5: '_ms-12',
-                      6: '_ms-16'
+                      3: '_ms-3',
+                      4: '_ms-6',
+                      5: '_ms-9',
+                      6: '_ms-12'
                     }[depth],
                     '_block _transition-colors _subpixel-antialiased',
                     id === activeSlug

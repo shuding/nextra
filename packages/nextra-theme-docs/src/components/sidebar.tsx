@@ -54,6 +54,10 @@ const classes = {
     '_relative before:_absolute before:_inset-y-1',
     'before:_w-px before:_bg-gray-200 before:_content-[""] dark:before:_bg-neutral-800',
     '_ps-3 before:_start-0 _pt-1 _ms-3'
+  ),
+  wrapper: cn('_p-4 _overflow-y-auto nextra-scrollbar mask'),
+  footer: cn(
+    'nextra-sidebar-footer bordered _flex _items-center _gap-2 _py-4 _mx-4'
   )
 }
 
@@ -339,7 +343,7 @@ export const MobileNav: FC = () => {
       )}
       <Menu
         ref={sidebarRef}
-        className={cn('_p-4 _overflow-y-auto nextra-scrollbar mask')}
+        className={classes.wrapper}
         // The mobile dropdown menu, shows all the directories.
         directories={directories}
         // Always show the anchor links on mobile (`md`).
@@ -348,7 +352,7 @@ export const MobileNav: FC = () => {
       />
 
       {hasMenu && (
-        <div className="nextra-sidebar-footer bordered _flex _items-center _gap-2 _py-4 _mx-4 _mt-auto">
+        <div className={cn(classes.footer, '_mt-auto')}>
           <ThemeSwitch lite={hasI18n} className="_grow" />
           <LocaleSwitch />
         </div>
@@ -410,10 +414,7 @@ export const Sidebar: FC<{ toc: Heading[] }> = ({ toc }) => {
         )}
       >
         <div
-          className={cn(
-            '_overflow-y-auto _p-4 _grow mask',
-            isExpanded ? 'nextra-scrollbar' : 'no-scrollbar'
-          )}
+          className={cn(classes.wrapper, !isExpanded && 'no-scrollbar')}
           ref={sidebarRef}
         >
           {/* without !hideSidebar check <Collapse />'s inner.clientWidth on `layout: "raw"` will be 0 and element will not have width on initial loading */}
@@ -428,15 +429,11 @@ export const Sidebar: FC<{ toc: Heading[] }> = ({ toc }) => {
             </Collapse>
           )}
         </div>
-
         {hasMenu && (
           <div
             className={cn(
-              'bordered',
-              '_flex _items-center _gap-2 _py-4 _mx-4',
-              isExpanded
-                ? hasI18n && '_justify-end'
-                : '_flex-wrap _justify-center',
+              classes.footer,
+              !isExpanded && '_flex-wrap _justify-center',
               showToggleAnimation && [
                 '*:_opacity-0',
                 isExpanded
