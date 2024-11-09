@@ -1,5 +1,11 @@
 # nextra
 
+## 4.0.0-app-router.23
+
+### Patch Changes
+
+- b2e44d3: make Nextra works with `src/app` and `src/content` directories
+
 ## 4.0.0-app-router.22
 
 ### Patch Changes

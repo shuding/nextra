@@ -1,5 +1,15 @@
 # nextra-theme-docs
 
+## 4.0.0-app-router.23
+
+### Patch Changes
+
+- 803e5be: migrate to zustand v5
+- 7212f88: remove `transition` for `transform` property when opening mobile nav
+- b2e44d3: make Nextra works with `src/app` and `src/content` directories
+- Updated dependencies [b2e44d3]
+  - nextra@4.0.0-app-router.23
+
 ## 4.0.0-app-router.22
 
 ### Patch Changes
