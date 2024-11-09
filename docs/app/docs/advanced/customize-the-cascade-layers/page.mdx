@@ -23,20 +23,6 @@ module.exports = {
 }
 ```
 
-## Disable Automatic Import of the Nextra Official Theme CSS
-
-Nextra by default automatically imports the official theme CSS. You can disable
-this behavior by setting `autoImportThemeStyle: false` in the Nextra
-configuration.
-
-```js filename="next.config.js"
-const withNextra = nextra({
-  autoImportThemeStyle: false,
-  theme: 'nextra-theme-docs'
-  // ...
-})
-```
-
 ## Set Up the Cascade Layers
 
 In your CSS file (e.g. `styles.css`), import the `nextra-docs-theme` CSS and
@@ -54,13 +40,18 @@ specify the layers:
 
 ## Import Your CSS File
 
-Create a `pages/_app.jsx` file and import your CSS files there:
+Import your CSS file at the top-level layout of your application (e.g.
+`app/layout.jsx`) to apply the styles.
 
-```jsx filename="pages/_app.jsx"
+```jsx filename="app/layout.jsx"
 import '../path/to/your/styles.css'
 
-export default function MyApp({ Component, pageProps }) {
-  return <Component {...pageProps} />
+export default function RootLayout({ children }) {
+  return (
+    <html lang="en">
+      <body>{children}</body>
+    </html>
+  )
 }
 ```
 
