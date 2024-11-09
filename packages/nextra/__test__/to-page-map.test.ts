@@ -650,7 +650,6 @@ describe('generatePageMap()', () => {
         {
           "": "index.mdx",
           "advanced/code-highlighting": "advanced/code-highlighting.mdx",
-          "blog": "src/app/blog/page.jsx",
           "features/i18n": "features/i18n.mdx",
           "features/image": "features/image.mdx",
           "features/latex": "features/latex.mdx",
