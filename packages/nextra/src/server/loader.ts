@@ -25,39 +25,38 @@ if (!APP_DIR) {
   throw new Error('Unable to find `app` directory')
 }
 
-const contentDir = getContentDirectory()
-
-const initGitRepo = (async () => {
-  const IS_WEB_CONTAINER = !!process.versions.webcontainer
-
-  if (!IS_WEB_CONTAINER) {
-    const { Repository } = await import('@napi-rs/simple-git')
-    try {
-      const repository = Repository.discover(CWD)
-      if (repository.isShallow()) {
-        if (process.env.VERCEL) {
-          logger.warn(
-            'The repository is shallow cloned, so the latest modified time will not be presented. Set the VERCEL_DEEP_CLONE=true environment variable to enable deep cloning.'
-          )
-        } else if (process.env.GITHUB_ACTION) {
-          logger.warn(
-            'The repository is shallow cloned, so the latest modified time will not be presented. See https://github.com/actions/checkout#fetch-all-history-for-all-tags-and-branches to fetch all the history.'
-          )
-        } else {
-          logger.warn(
-            'The repository is shallow cloned, so the latest modified time will not be presented.'
-          )
-        }
+const repository = await (async () => {
+  if (process.versions.webcontainer) return
+  const { Repository } = await import('@napi-rs/simple-git')
+  try {
+    const repository = Repository.discover(CWD)
+    if (repository.isShallow()) {
+      if (process.env.VERCEL) {
+        logger.warn(
+          'The repository is shallow cloned, so the latest modified time will not be presented. Set the VERCEL_DEEP_CLONE=true environment variable to enable deep cloning.'
+        )
+      } else if (process.env.GITHUB_ACTION) {
+        logger.warn(
+          'The repository is shallow cloned, so the latest modified time will not be presented. See https://github.com/actions/checkout#fetch-all-history-for-all-tags-and-branches to fetch all the history.'
+        )
+      } else {
+        logger.warn(
+          'The repository is shallow cloned, so the latest modified time will not be presented.'
+        )
       }
-      // repository.path() returns the `/path/to/repo/.git`, we need the parent directory of it
-      const gitRoot = path.join(repository.path(), '..')
-      return { repository, gitRoot }
-    } catch (error) {
-      logger.warn(`Init git repository failed ${(error as Error).message}`)
     }
+    return repository
+  } catch (error) {
+    logger.warn(`Init git repository failed ${(error as Error).message}`)
   }
-  return {}
 })()
+
+const CONTENT_DIR = getContentDirectory()
+// repository.path() returns the `/path/to/repo/.git`, we need the parent directory of it
+const GIT_ROOT = repository ? path.join(repository.path(), '..') : ''
+// Cache the result of `repository.getFileLatestModifiedDateAsync` because it can slow down
+// Fast Refresh for uncommitted files
+const LastCommitTimeMap = new Map<string, number>()
 
 export async function loader(
   this: LoaderContext<LoaderOptions>,
@@ -85,15 +84,15 @@ export async function loader(
       // Add `app` and `content` folders as the dependencies, so Webpack will
       // rebuild the module if anything in that context changes
       this.addContextDependency(APP_DIR)
-      if (contentDir) {
-        this.addContextDependency(path.join(CWD, contentDir, locale))
+      if (CONTENT_DIR) {
+        this.addContextDependency(path.join(CWD, CONTENT_DIR, locale))
       }
     }
     const filePaths = await findMetaAndPageFilePaths({
       dir: APP_DIR,
       cwd: CWD,
       locale,
-      contentDir
+      contentDir: CONTENT_DIR
     })
     const { pageMap, mdxPages } = convertToPageMap({
       filePaths,
@@ -148,15 +147,21 @@ export async function loader(
     whiteListTagsStyling
   })
 
-  let timestamp: PageOpts['metadata']['timestamp']
-  const { repository, gitRoot } = await initGitRepo
-  if (repository && gitRoot) {
+  let timestamp: number | undefined = LastCommitTimeMap.get(filePath)
+  if (IS_PRODUCTION && timestamp === undefined) {
     try {
-      timestamp = await repository.getFileLatestModifiedDateAsync(
-        path.relative(gitRoot, filePath)
-      )
+      if (!repository) {
+        throw new Error('Init git repository failed')
+      }
+      const relativePath = path.relative(GIT_ROOT, filePath)
+      timestamp = await repository.getFileLatestModifiedDateAsync(relativePath)
+      LastCommitTimeMap.set(filePath, timestamp)
     } catch {
-      // Failed to get timestamp for this file. Silently ignore it
+      logger.warn(
+        'Failed to get the last modified timestamp from Git for the file',
+        filePath
+      )
+      LastCommitTimeMap.set(filePath, 0)
     }
   }
 

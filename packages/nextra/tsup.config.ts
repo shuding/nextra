@@ -8,7 +8,6 @@ import { CWD, IS_PRODUCTION } from './src/server/constants.js'
 export default defineConfig({
   name: 'nextra',
   entry: [...defaultEntry, '!src/types.ts', 'src/**/*.svg'],
-  target: 'es2020',
   format: 'esm',
   dts: true,
   splitting: IS_PRODUCTION,
