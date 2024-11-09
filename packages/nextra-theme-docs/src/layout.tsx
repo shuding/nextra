@@ -8,6 +8,10 @@ import { fromZodError } from 'zod-validation-error'
 import { LastUpdated, MobileNav } from './components'
 import { ConfigProvider, ThemeConfigProvider } from './stores'
 
+const attributeSchema = z.custom<'class' | `data-${string}`>(
+  value => value === 'class' || value.startsWith('data-')
+)
+
 const theme = z.strictObject({
   banner: element.optional(),
   darkMode: z.boolean().default(true),
@@ -47,7 +51,9 @@ const theme = z.strictObject({
     .transform(v => (typeof v === 'boolean' ? { next: v, prev: v } : v)),
   nextThemes: z
     .strictObject({
-      attribute: z.string().default('class'),
+      attribute: z
+        .union([attributeSchema, z.array(attributeSchema)])
+        .default('class'),
       defaultTheme: z.string().optional(),
       disableTransitionOnChange: z.boolean().default(true),
       storageKey: z.string().optional()

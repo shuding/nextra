@@ -260,6 +260,20 @@
   Router, something may be broken, check
   https://github.com/shuding/nextra/tree/v4-v2/examples for the migration guide
 
+## 3.2.3
+
+### Patch Changes
+
+- 50f33f3: Add tabClassName to Tabs props
+
+## 3.2.2
+
+### Patch Changes
+
+- 45cccd4: allow passing `className` for `<Tabs>` and `<Tabs.Tab>`
+
+## 3.2.1
+
 ## 3.2.0
 
 ## 3.1.3

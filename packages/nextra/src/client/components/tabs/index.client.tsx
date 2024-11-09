@@ -7,7 +7,12 @@ import {
   TabPanel,
   TabPanels
 } from '@headlessui/react'
-import type { TabPanelProps } from '@headlessui/react'
+import type {
+  TabProps as HeadlessTabProps,
+  TabGroupProps,
+  TabListProps,
+  TabPanelProps
+} from '@headlessui/react'
 import cn from 'clsx'
 import type { FC, ReactElement, ReactNode } from 'react'
 import { useCallback, useEffect, useState } from 'react'
@@ -23,20 +28,23 @@ function isTabObjectItem(item: unknown): item is TabObjectItem {
   return !!item && typeof item === 'object' && 'label' in item
 }
 
-export const Tabs: FC<{
-  items: (TabItem | TabObjectItem)[]
-  selectedIndex?: number
-  defaultIndex?: number
-  onChange?: (index: number) => void
-  children: ReactNode
-  storageKey?: string
-}> = ({
+export const Tabs: FC<
+  {
+    items: (TabItem | TabObjectItem)[]
+    children: ReactNode
+    storageKey?: string
+    className?: TabListProps['className']
+    tabClassName?: HeadlessTabProps['className']
+  } & Pick<TabGroupProps, 'defaultIndex' | 'selectedIndex' | 'onChange'>
+> = ({
   items,
-  selectedIndex: _selectedIndex,
-  defaultIndex = 0,
-  onChange,
   children,
-  storageKey
+  storageKey,
+  defaultIndex = 0,
+  selectedIndex: _selectedIndex,
+  onChange,
+  className,
+  tabClassName
 }) => {
   const [selectedIndex, setSelectedIndex] = useState(defaultIndex)
 
@@ -91,18 +99,22 @@ export const Tabs: FC<{
       tabIndex={-1} // disables focus in Firefox
     >
       <TabList
-        className={cn(
-          'nextra-scrollbar _overflow-x-auto _overscroll-x-contain _overflow-y-hidden',
-          '_mt-4 _flex _w-full _gap-2 _border-b _border-gray-200 _pb-px dark:_border-neutral-800',
-          'focus-visible:nextra-focus'
-        )}
+        className={args =>
+          cn(
+            'nextra-scrollbar _overflow-x-auto _overscroll-x-contain _overflow-y-hidden',
+            '_mt-4 _flex _w-full _gap-2 _border-b _border-gray-200 _pb-px dark:_border-neutral-800',
+            'focus-visible:nextra-focus',
+            typeof className === 'function' ? className(args) : className
+          )
+        }
       >
         {items.map((item, index) => (
           <HeadlessTab
             key={index}
             disabled={isTabObjectItem(item) && item.disabled}
-            className={({ selected, disabled, hover, focus }) =>
-              cn(
+            className={args => {
+              const { selected, disabled, hover, focus } = args
+              return cn(
                 focus && 'nextra-focus _ring-inset',
                 '_whitespace-nowrap',
                 '_rounded-t _p-2 _font-medium _leading-5 _transition-colors',
@@ -118,9 +130,12 @@ export const Tabs: FC<{
                     ? '_text-gray-400 dark:_text-neutral-600 _pointer-events-none'
                     : hover
                       ? '_text-black dark:_text-white'
-                      : '_text-gray-600 dark:_text-gray-200'
+                      : '_text-gray-600 dark:_text-gray-200',
+                typeof tabClassName === 'function'
+                  ? tabClassName(args)
+                  : tabClassName
               )
-            }
+            }}
           >
             {isTabObjectItem(item) ? item.label : item}
           </HeadlessTab>
@@ -135,13 +150,20 @@ export const Tab: FC<TabPanelProps> = ({
   children,
   // For SEO display all the Panel in the DOM and set `display: none;` for those that are not selected
   unmount = false,
+  className,
   ...props
 }) => {
   return (
     <TabPanel
       {...props}
       unmount={unmount}
-      className={({ focus }) => cn('_rounded _mt-6', focus && 'nextra-focus')}
+      className={args =>
+        cn(
+          '_rounded _mt-6',
+          args.focus && 'nextra-focus',
+          typeof className === 'function' ? className(args) : className
+        )
+      }
     >
       {children}
     </TabPanel>

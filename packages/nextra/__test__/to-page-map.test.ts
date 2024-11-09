@@ -112,6 +112,7 @@ describe('generatePageMap()', () => {
         "app/docs/built-ins/page.mdx",
         "app/docs/built-ins/search/page.mdx",
         "app/docs/built-ins/steps/page.mdx",
+        "app/docs/built-ins/table/page.mdx",
         "app/docs/built-ins/tabs/page.mdx",
         "app/docs/custom-theme/page.mdx",
         "app/docs/docs-theme/_meta.ts",
@@ -266,6 +267,11 @@ describe('generatePageMap()', () => {
                   "__pagePath": "app/docs/built-ins/steps/page.mdx",
                   "name": "steps",
                   "route": "/docs/built-ins/steps",
+                },
+                {
+                  "__pagePath": "app/docs/built-ins/table/page.mdx",
+                  "name": "table",
+                  "route": "/docs/built-ins/table",
                 },
                 {
                   "__pagePath": "app/docs/built-ins/tabs/page.mdx",

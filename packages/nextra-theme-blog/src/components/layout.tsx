@@ -1,7 +1,6 @@
 import { ThemeProvider } from 'next-themes'
-import type { ThemeProviderProps } from 'next-themes/dist/types'
 import { ViewTransitions } from 'next-view-transitions'
-import type { FC, ReactElement, ReactNode } from 'react'
+import type { ComponentProps, FC, ReactElement, ReactNode } from 'react'
 
 export const Footer: FC<{
   children?: ReactNode
@@ -17,7 +16,7 @@ export const Footer: FC<{
 
 export const Layout: FC<{
   children: ReactNode
-  nextThemes: Omit<ThemeProviderProps, 'children'>
+  nextThemes: Omit<ComponentProps<typeof ThemeProvider>, 'children'>
   banner?: ReactElement
 }> = ({ children, nextThemes, banner }) => {
   return (

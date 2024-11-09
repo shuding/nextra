@@ -1,4 +1,4 @@
-import { Steps } from 'nextra/components'
+import { Callout, Steps, Table, Td, Th, Tr } from 'nextra/components'
 
 # Rendering Tables
 
@@ -32,51 +32,10 @@ table will be unstyled because
 [MDX](https://mdxjs.com/docs/using-mdx/#components) doesn't replace literal HTML
 elements with components provided by `useMDXComponents(){:js}`[^1].
 
-### Usage
-
-```mdx filename="MDX"
-<table>
-  <thead>
-    <tr>
-      <th>Country</th>
-      <th>Flag</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>France</td>
-      <td>🇫🇷</td>
-    </tr>
-    <tr>
-      <td>Ukraine</td>
-      <td>🇺🇦</td>
-    </tr>
-  </tbody>
-</table>
-```
-
-### Example
-
-<br />
-
-<table>
-  <thead>
-    <tr>
-      <th>Country</th>
-      <th>Flag</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>France</td>
-      <td>🇫🇷</td>
-    </tr>
-    <tr>
-      <td>Ukraine</td>
-      <td>🇺🇦</td>
-    </tr>
-  </tbody>
-</table>
+<Callout>
+  Instead, use the [built-in `<Table>`, `<Th>`, `<Tr>`, and `<Td>` components](/docs/guide/built-ins/table)
+  available via `nextra/components`.
+</Callout>
 
 ## Changing Default Behaviour
 
