@@ -5,9 +5,11 @@ import type {
   Expression,
   ObjectExpression
 } from 'estree'
+import fg from 'fast-glob'
+import { findPagesDir } from 'next/dist/lib/find-pages-dir.js'
 import slash from 'slash'
 import title from 'title'
-import { DEFAULT_PROPERTY_PROPS } from './constants.js'
+import { CWD, DEFAULT_PROPERTY_PROPS } from './constants.js'
 
 export const logger = {
   info: console.log.bind(null, '-', '\x1b[36minfo\x1b[0m', '[nextra]'),
@@ -55,5 +57,19 @@ export function createAstObject(
       value:
         value && typeof value === 'object' ? value : { type: 'Literal', value }
     }))
+  }
+}
+
+export function getDirectories() {
+  const { appDir } = findPagesDir(CWD)
+  if (!appDir) {
+    throw new Error('Unable to find `app` directory')
+  }
+  // Next.js take priority to `app` rather than `src/app`, we do the same for
+  // `content` directory
+  const [contentDir] = fg.sync(['{src/,}content'], { onlyDirectories: true })
+  return {
+    appDir,
+    contentDir
   }
 }

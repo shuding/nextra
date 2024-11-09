@@ -6,6 +6,7 @@ import { fromZodError } from 'zod-validation-error'
 import type { Nextra } from '../types.js'
 import {
   GET_PAGE_MAP_PATH,
+  IMPORT_PAGE_PATH,
   MARKDOWN_EXTENSION_RE,
   PAGE_MAP_PLACEHOLDER_PATH
 } from './constants.js'
@@ -99,7 +100,7 @@ const nextra: Nextra = nextraConfig => {
           ...nextConfig.experimental?.turbo,
           rules: {
             ...nextConfig.experimental?.turbo?.rules,
-            './app/**/page.{md,mdx}': {
+            '{src/,}app/**/page.{md,mdx}': {
               as: '*.tsx',
               loaders: [pageImportLoader as any]
             },
@@ -113,6 +114,9 @@ const nextra: Nextra = nextraConfig => {
             },
             [`**${GET_PAGE_MAP_PATH}`]: {
               loaders: [pageMapLoader]
+            },
+            [`**${IMPORT_PAGE_PATH}`]: {
+              loaders: [{ loader: LOADER_PATH }]
             }
           },
           resolveAlias: {

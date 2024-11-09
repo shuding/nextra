@@ -9,6 +9,7 @@ import { compileMdx } from './compile.js'
 import {
   CWD,
   GET_PAGE_MAP_PATH,
+  IMPORT_PAGE_PATH,
   IS_PRODUCTION,
   METADATA_ONLY_RQ,
   PAGE_MAP_PLACEHOLDER_PATH
@@ -17,17 +18,9 @@ import { findMetaAndPageFilePaths } from './page-map/find-meta-and-page-file-pat
 import { convertPageMapToJs } from './page-map/to-js.js'
 import { convertToPageMap } from './page-map/to-page-map.js'
 import { twoslashRenderer } from './twoslash.js'
-import { logger } from './utils.js'
+import { getDirectories, logger } from './utils.js'
 
-const APP_DIR = slash(findPagesDir(CWD).appDir!)
-
-if (!APP_DIR) {
-  throw new Error('Unable to find `app` directory')
-} else if (APP_DIR.includes('src/app')) {
-  throw new Error(
-    "Nextra 4 doesn't support `src/app` directory for now. use `app` directory instead"
-  )
-}
+const { appDir, contentDir } = getDirectories()
 
 const initGitRepo = (async () => {
   const IS_WEB_CONTAINER = !!process.versions.webcontainer
@@ -86,13 +79,14 @@ export async function loader(
     if (!IS_PRODUCTION) {
       // Add `app` and `content` folders as the dependencies, so Webpack will
       // rebuild the module if anything in that context changes
-      this.addContextDependency(APP_DIR)
-      this.addContextDependency(path.join(CWD, 'content', locale))
+      this.addContextDependency(appDir)
+      this.addContextDependency(path.posix.join(CWD, contentDir, locale))
     }
     const filePaths = await findMetaAndPageFilePaths({
-      dir: APP_DIR,
+      dir: appDir,
       cwd: CWD,
-      locale
+      locale,
+      contentDir
     })
     const { pageMap, mdxPages } = convertToPageMap({
       filePaths,
@@ -110,6 +104,16 @@ export async function loader(
       locales
     )
     return rawJs
+  }
+  if (filePath.includes(IMPORT_PAGE_PATH)) {
+    return contentDir
+      ? source.replace(
+          'private-next-root-dir/content',
+          // User can have `src/content`, so dynamic require will fail, we need
+          // to replace it with right `content` directory path
+          `private-next-root-dir/${contentDir}`
+        )
+      : source
   }
 
   if (!IS_PRODUCTION && resourceQuery === METADATA_ONLY_RQ) {

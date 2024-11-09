@@ -1,18 +1,20 @@
 import path from 'node:path'
 import fg from 'fast-glob'
-import slash from 'slash'
 
 export async function findMetaAndPageFilePaths({
   dir,
   cwd,
-  locale = ''
+  locale = '',
+  // Can be `src/content` also
+  contentDir = 'content'
 }: {
   dir: string
   cwd: string
   locale?: string
+  contentDir?: string
 }): Promise<string[]> {
-  const appDir = slash(path.relative(cwd, dir))
-  const contentDir = `content${locale && `/${locale}`}`
+  const appDir = path.posix.relative(cwd, dir)
+  contentDir = `${contentDir}${locale && `/${locale}`}`
   // appDir is empty string on tests
   const pattern = appDir
     ? [
