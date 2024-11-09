@@ -8,7 +8,7 @@ function cleanFilePath(filePath: string): string {
   const { dir, name } = path.parse(filePath)
   return (
     // Remove `content` prefix
-    `${dir.replace(/^content\/?/, '')}_${name}`
+    `${dir.replace(/^(src\/)?content\/?/, '')}_${name}`
       .replaceAll(/[\W_]+/g, '_')
       // Remove leading `_`
       .replace(/^_/, '')

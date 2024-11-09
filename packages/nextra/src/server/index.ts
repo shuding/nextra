@@ -116,7 +116,7 @@ const nextra: Nextra = nextraConfig => {
               loaders: [pageMapLoader]
             },
             [`**${IMPORT_PAGE_PATH}`]: {
-              loaders: [{ loader: LOADER_PATH }]
+              loaders: [{ loader: LOADER_PATH, options: {} }]
             }
           },
           resolveAlias: {
