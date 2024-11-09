@@ -57,26 +57,20 @@ export const TOC: FC<TOCProps> = ({ toc, filePath, pageTitle }) => {
     <div
       className={cn(
         hasHeadings && '_grid _grid-rows-[min-content_1fr_min-content]', // 1fr: toc headings, min-content: title/footer
-        '_sticky _top-[--nextra-navbar-height] _pt-6 _text-sm',
+        '_sticky _top-[--nextra-navbar-height] _text-sm',
         '_max-h-[calc(100vh-var(--nextra-navbar-height))]'
       )}
     >
       {hasHeadings && (
         <>
-          <p
-            className={cn(
-              '_mx-4', // use margin instead padding to not have shadow on scrollbar
-              '_font-semibold _tracking-tight',
-              '_pb-2 _shadow-[0_12px_16px_rgb(var(--nextra-bg))] contrast-more:_shadow-none _z-[1]'
-            )}
-          >
+          <p className="_pt-6 _px-4 _font-semibold _tracking-tight">
             {themeConfig.toc.title}
           </p>
           <ul
             ref={tocRef}
             className={cn(
-              '_px-4 nextra-scrollbar _overscroll-y-contain _overflow-y-auto _hyphens-auto',
-              '_py-1.5' // for title/footer shadow
+              '_p-4 nextra-scrollbar _overscroll-y-contain _overflow-y-auto _hyphens-auto',
+              'mask' // for title/footer shadow
             )}
           >
             {toc.map(({ id, value, depth }) => (
@@ -87,10 +81,10 @@ export const TOC: FC<TOCProps> = ({ toc, filePath, pageTitle }) => {
                     'focus-visible:nextra-focus',
                     {
                       2: '_font-semibold',
-                      3: '_ms-4',
-                      4: '_ms-8',
-                      5: '_ms-12',
-                      6: '_ms-16'
+                      3: '_ms-3',
+                      4: '_ms-6',
+                      5: '_ms-9',
+                      6: '_ms-12'
                     }[depth],
                     '_block _transition-colors _subpixel-antialiased',
                     id === activeSlug
@@ -109,11 +103,7 @@ export const TOC: FC<TOCProps> = ({ toc, filePath, pageTitle }) => {
 
       {hasMetaInfo && (
         <div
-          className={cn(
-            hasHeadings && 'nextra-toc-footer _pt-4',
-            '_flex _flex-col _items-start _gap-2 _pb-4',
-            '_mx-4' // for border top width
-          )}
+          className={cn(hasHeadings && 'bordered', '_grid _gap-2 _py-4 _mx-4')}
         >
           {themeConfig.feedback.content && (
             <Anchor

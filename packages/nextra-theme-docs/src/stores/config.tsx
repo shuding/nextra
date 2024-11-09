@@ -59,23 +59,6 @@ export const ConfigProvider: FC<{
     store.setState(getStore(pageMap, pathname))
   }, [store, pageMap, pathname])
 
-  useEffect(() => {
-    let resizeTimer: number
-
-    function addResizingClass() {
-      document.body.classList.add('resizing')
-      clearTimeout(resizeTimer)
-      resizeTimer = window.setTimeout(() => {
-        document.body.classList.remove('resizing')
-      }, 200)
-    }
-
-    window.addEventListener('resize', addResizingClass)
-    return () => {
-      window.removeEventListener('resize', addResizingClass)
-    }
-  }, [])
-
   const { activeThemeContext } = store.getState().normalizePagesResult
 
   return (

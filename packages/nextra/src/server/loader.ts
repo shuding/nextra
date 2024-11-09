@@ -19,7 +19,7 @@ import { convertToPageMap } from './page-map/to-page-map.js'
 import { twoslashRenderer } from './twoslash.js'
 import { logger } from './utils.js'
 
-const APP_DIR = findPagesDir(CWD).appDir!
+const APP_DIR = slash(findPagesDir(CWD).appDir!)
 
 if (!APP_DIR) {
   throw new Error('Unable to find `app` directory')

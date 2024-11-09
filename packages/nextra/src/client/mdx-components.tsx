@@ -27,7 +27,10 @@ export const Anchor: FC<ComponentProps<'a'>> = ({ href = '', ...props }) => {
         {typeof children === 'string' && (
           <>
             &thinsp;
-            <LinkArrowIcon height="16" className="_inline _align-baseline" />
+            <LinkArrowIcon
+              height="16"
+              className="_inline _align-baseline _shrink-0"
+            />
           </>
         )}
       </a>

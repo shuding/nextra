@@ -8,7 +8,15 @@ import { useFSRoute } from 'nextra/hooks'
 import { ArrowRightIcon, ExpandIcon } from 'nextra/icons'
 import type { Item, MenuItem, PageItem } from 'nextra/normalize-pages'
 import type { FC, FocusEventHandler, MouseEventHandler } from 'react'
-import { useCallback, useEffect, useId, useMemo, useRef, useState } from 'react'
+import {
+  forwardRef,
+  useCallback,
+  useEffect,
+  useId,
+  useMemo,
+  useRef,
+  useState
+} from 'react'
 import scrollIntoView from 'scroll-into-view-if-needed'
 import {
   setFocusedRoute,
@@ -47,20 +55,9 @@ const classes = {
     'before:_w-px before:_bg-gray-200 before:_content-[""] dark:before:_bg-neutral-800',
     '_ps-3 before:_start-0 _pt-1 _ms-3'
   ),
-  aside: cn(
-    'nextra-sidebar _flex _flex-col',
-    'motion-reduce:_transform-none [.resizing_&]:_transition-none',
-    '_transform-gpu _transition-all _ease-in-out',
-    'print:_hidden'
-  ),
-  wrapper: cn(
-    '_overflow-y-auto',
-    '_p-4 _grow md:_h-[calc(100vh-var(--nextra-navbar-height)-var(--nextra-menu-height))]'
-  ),
-  bottomMenu: cn(
-    'nextra-sidebar-footer _sticky _bottom-0',
-    '_flex _items-center _gap-2 _py-4',
-    '_mx-3 _px-1' // to hide focused sidebar links
+  wrapper: cn('_p-4 _overflow-y-auto nextra-scrollbar mask'),
+  footer: cn(
+    'nextra-sidebar-footer bordered _flex _items-center _gap-2 _py-4 _mx-4'
   )
 }
 
@@ -83,7 +80,7 @@ const Folder: FC<FolderProps> = ({ item, anchors, onFocus, level }) => {
   const focusedRouteInside = focusedRoute.startsWith(item.route + '/')
 
   const { theme } = item as Item
-  const themeConfig = useThemeConfig()
+  const { defaultMenuCollapseLevel, autoCollapse } = useThemeConfig().sidebar
 
   const open =
     TreeState[item.route] === undefined
@@ -92,12 +89,12 @@ const Folder: FC<FolderProps> = ({ item, anchors, onFocus, level }) => {
         focusedRouteInside ||
         (theme && 'collapsed' in theme
           ? !theme.collapsed
-          : level < themeConfig.sidebar.defaultMenuCollapseLevel)
+          : level < defaultMenuCollapseLevel)
       : TreeState[item.route] || focusedRouteInside
 
   const [, rerender] = useState<object>()
 
-  const onClick: MouseEventHandler = useCallback(event => {
+  const handleClick: MouseEventHandler = useCallback(event => {
     const el = event.currentTarget
     const isClickOnIcon =
       el /* will be always <a> or <button> */ !==
@@ -105,8 +102,8 @@ const Folder: FC<FolderProps> = ({ item, anchors, onFocus, level }) => {
     if (isClickOnIcon) {
       event.preventDefault()
     }
-    const isOpen = el.hasAttribute('data-open')
-    const route = el.getAttribute('href') || el.getAttribute('data-href')!
+    const isOpen = el.parentElement!.classList.contains('open')
+    const route = el.getAttribute('href') || el.getAttribute('data-href') || ''
     TreeState[route] = !isOpen
     rerender({})
   }, [])
@@ -126,17 +123,12 @@ const Folder: FC<FolderProps> = ({ item, anchors, onFocus, level }) => {
       }
     }
 
-    if (themeConfig.sidebar.autoCollapse) {
+    if (autoCollapse) {
       updateAndPruneTreeState()
     } else {
       updateTreeState()
     }
-  }, [
-    activeRouteInside,
-    focusedRouteInside,
-    item.route,
-    themeConfig.sidebar.autoCollapse
-  ])
+  }, [activeRouteInside, focusedRouteInside, item.route, autoCollapse])
 
   if (item.type === 'menu') {
     const menu = item as MenuItem
@@ -166,8 +158,7 @@ const Folder: FC<FolderProps> = ({ item, anchors, onFocus, level }) => {
           classes.link,
           active ? classes.active : classes.inactive
         )}
-        data-open={open ? '' : undefined}
-        onClick={onClick}
+        onClick={handleClick}
         onFocus={onFocus}
       >
         {item.title}
@@ -247,7 +238,7 @@ const File: FC<{
                 href={`#${id}`}
                 className={cn(
                   classes.link,
-                  '_flex _gap-2 before:_opacity-25 before:_content-["#"]',
+                  'focus-visible:nextra-focus _flex _gap-2 before:_opacity-25 before:_content-["#"]',
                   id === activeSlug ? classes.active : classes.inactive
                 )}
                 onClick={handleClick}
@@ -271,13 +262,15 @@ interface MenuProps {
 
 const handleFocus: FocusEventHandler = event => {
   const route =
-    event.target.getAttribute('href') || event.target.getAttribute('data-href')!
+    event.target.getAttribute('href') ||
+    event.target.getAttribute('data-href') ||
+    ''
   setFocusedRoute(route)
 }
 
-const Menu: FC<MenuProps> = ({ directories, anchors, className, level }) => {
-  return (
-    <ul className={cn(classes.list, className)}>
+const Menu = forwardRef<HTMLUListElement, MenuProps>(
+  ({ directories, anchors, className, level }, forwardedRef) => (
+    <ul className={cn(classes.list, className)} ref={forwardedRef}>
       {directories.map(item => {
         const ComponentToUse =
           item.type === 'menu' ||
@@ -297,7 +290,8 @@ const Menu: FC<MenuProps> = ({ directories, anchors, className, level }) => {
       })}
     </ul>
   )
-}
+)
+Menu.displayName = 'Menu'
 
 export const MobileNav: FC = () => {
   const { directories } = useConfig().normalizePagesResult
@@ -311,7 +305,7 @@ export const MobileNav: FC = () => {
   }, [pathname])
 
   const anchors = useMemo(() => toc.filter(v => v.depth === 2), [toc])
-  const sidebarRef = useRef<HTMLDivElement>(null!)
+  const sidebarRef = useRef<HTMLUListElement>(null!)
 
   useEffect(() => {
     const activeElement = sidebarRef.current.querySelector('li.active')
@@ -331,60 +325,39 @@ export const MobileNav: FC = () => {
   const hasMenu = themeConfig.darkMode || hasI18n
 
   return (
-    <>
-      <div
-        className={cn(
-          '[transition:background-color_1.5s_ease]',
-          menu
-            ? '_bg-black/80 dark:_bg-black/60 _fixed _inset-0 _z-10 md:_hidden'
-            : '_bg-transparent'
-        )}
+    <aside
+      className={cn(
+        '_flex _flex-col',
+        '_fixed _inset-0 _pt-[--nextra-navbar-height] _z-10 _overscroll-contain',
+        '[contain:layout_style]',
+        'md:_hidden',
+        String.raw`[.nextra-banner:not(.\_hidden)~&]:_pt-[calc(var(--nextra-banner-height)+var(--nextra-navbar-height))]`,
+        '_bg-[rgb(var(--nextra-bg))]',
+        menu
+          ? '[transform:translate3d(0,0,0)]'
+          : '[transform:translate3d(0,-100%,0)]'
+      )}
+    >
+      {themeConfig.search && (
+        <div className="_px-4 _pt-4">{themeConfig.search}</div>
+      )}
+      <Menu
+        ref={sidebarRef}
+        className={classes.wrapper}
+        // The mobile dropdown menu, shows all the directories.
+        directories={directories}
+        // Always show the anchor links on mobile (`md`).
+        anchors={anchors}
+        level={0}
       />
-      <aside
-        className={cn(
-          classes.aside,
-          '_fixed _inset-0 _pt-[--nextra-navbar-height] _z-10 _overscroll-contain',
-          '_transition-transform _duration-700 _ease-[cubic-bezier(.52,.16,.04,1)] _will-change-[transform,opacity]',
-          '[contain:layout_style]',
-          'md:_hidden',
-          String.raw`[.nextra-banner:not(.\_hidden)~&]:_pt-[calc(var(--nextra-banner-height)+var(--nextra-navbar-height))]`,
-          '_bg-[rgb(var(--nextra-bg))]',
-          menu
-            ? '[transform:translate3d(0,0,0)]'
-            : '[transform:translate3d(0,-100%,0)]'
-        )}
-      >
-        {themeConfig.search && (
-          <div className="_px-4 _pt-4">{themeConfig.search}</div>
-        )}
-        <div
-          className={cn(classes.wrapper, 'nextra-scrollbar')}
-          ref={sidebarRef}
-        >
-          <Menu
-            className="nextra-menu-mobile"
-            // The mobile dropdown menu, shows all the directories.
-            directories={directories}
-            // Always show the anchor links on mobile (`md`).
-            anchors={anchors}
-            level={0}
-          />
-        </div>
 
-        {hasMenu && (
-          <div
-            className={cn(
-              classes.bottomMenu,
-              hasI18n && '_justify-end',
-              '_border-t'
-            )}
-          >
-            <LocaleSwitch className="_grow" />
-            <ThemeSwitch lite={hasI18n} className={hasI18n ? '' : '_grow'} />
-          </div>
-        )}
-      </aside>
-    </>
+      {hasMenu && (
+        <div className={cn(classes.footer, '_mt-auto')}>
+          <ThemeSwitch lite={hasI18n} className="_grow" />
+          <LocaleSwitch />
+        </div>
+      )}
+    </aside>
   )
 }
 
@@ -431,25 +404,23 @@ export const Sidebar: FC<{ toc: Heading[] }> = ({ toc }) => {
       <aside
         id={sidebarControlsId}
         className={cn(
-          classes.aside,
-          'max-md:_hidden',
+          'nextra-sidebar print:_hidden',
+          '_transition-all _ease-in-out',
+          'max-md:_hidden _flex _flex-col',
+          '_h-[calc(100dvh-var(--nextra-menu-height))]',
           '_top-[--nextra-navbar-height] _shrink-0',
           isExpanded ? '_w-64' : '_w-20',
-          hideSidebar ? '_hidden' : '_sticky _self-start'
+          hideSidebar ? '_hidden' : '_sticky'
         )}
       >
         <div
-          className={cn(
-            classes.wrapper,
-            isExpanded ? 'nextra-scrollbar' : 'no-scrollbar'
-          )}
+          className={cn(classes.wrapper, !isExpanded && 'no-scrollbar')}
           ref={sidebarRef}
         >
           {/* without !hideSidebar check <Collapse />'s inner.clientWidth on `layout: "raw"` will be 0 and element will not have width on initial loading */}
           {(!hideSidebar || !isExpanded) && (
             <Collapse isOpen={isExpanded} horizontal>
               <Menu
-                className="nextra-menu-desktop"
                 // The sidebar menu, shows only the docs directories.
                 directories={docsDirectories}
                 anchors={anchors}
@@ -458,14 +429,11 @@ export const Sidebar: FC<{ toc: Heading[] }> = ({ toc }) => {
             </Collapse>
           )}
         </div>
-
         {hasMenu && (
           <div
             className={cn(
-              classes.bottomMenu,
-              isExpanded
-                ? [hasI18n && '_justify-end', '_border-t']
-                : '_py-4 _flex-wrap _justify-center',
+              classes.footer,
+              !isExpanded && '_flex-wrap _justify-center',
               showToggleAnimation && [
                 '*:_opacity-0',
                 isExpanded
