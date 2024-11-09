@@ -4,28 +4,17 @@ import type { PageMapItem } from 'nextra'
 import { useFSRoute } from 'nextra/hooks'
 import { normalizePages } from 'nextra/normalize-pages'
 import type { FC, ReactElement, ReactNode } from 'react'
-import { createContext, useContext, useEffect, useState } from 'react'
-import type { StoreApi } from 'zustand'
-import { useStore } from 'zustand/react'
-import { createStore } from 'zustand/vanilla'
+import { createContext, useContext, useMemo } from 'react'
 
-type Config = {
-  hideSidebar: boolean
-  normalizePagesResult: ReturnType<typeof normalizePages>
-}
-
-const ConfigContext = createContext<StoreApi<Config> | null>(null)
+const ConfigContext = createContext<ReturnType<typeof normalizePages> | null>(
+  null
+)
 
 export function useConfig() {
-  const store = useContext(ConfigContext)
-  if (!store) {
+  const normalizePagesResult = useContext(ConfigContext)
+  if (!normalizePagesResult) {
     throw new Error('Missing ConfigContext.Provider')
   }
-  return useStore(store)
-}
-
-function getStore(list: PageMapItem[], route: string) {
-  const normalizePagesResult = normalizePages({ list, route })
   const { activeThemeContext, activeType } = normalizePagesResult
   return {
     normalizePagesResult,
@@ -44,18 +33,18 @@ export const ConfigProvider: FC<{
 }> = ({ children, pageMap, navbar, footer }) => {
   const pathname = useFSRoute()
 
-  const [store] = useState(() =>
-    createStore<Config>(() => getStore(pageMap, pathname))
+  const normalizedPages = useMemo(
+    () =>
+      normalizePages({
+        list: pageMap,
+        route: pathname
+      }),
+    [pageMap, pathname]
   )
-
-  useEffect(() => {
-    store.setState(getStore(pageMap, pathname))
-  }, [store, pageMap, pathname])
-
-  const { activeThemeContext } = store.getState().normalizePagesResult
+  const { activeThemeContext } = normalizedPages
 
   return (
-    <ConfigContext.Provider value={store}>
+    <ConfigContext.Provider value={normalizedPages}>
       {activeThemeContext.navbar && navbar}
       {children}
       {activeThemeContext.footer && footer}
