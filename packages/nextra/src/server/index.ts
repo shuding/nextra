@@ -100,12 +100,12 @@ const nextra: Nextra = nextraConfig => {
           ...nextConfig.experimental?.turbo,
           rules: {
             ...nextConfig.experimental?.turbo?.rules,
-            '{src/,}app/**/page.{md,mdx}': {
+            [`./{src/,}app/**/page.{${MARKDOWN_EXTENSIONS}}`]: {
               as: '*.tsx',
               loaders: [pageImportLoader as any]
             },
             // Order matter here, pages match first -> after partial files
-            '*.{md,mdx}': {
+            [`*.{${MARKDOWN_EXTENSIONS}}`]: {
               as: '*.tsx',
               loaders: [loader as any]
             },

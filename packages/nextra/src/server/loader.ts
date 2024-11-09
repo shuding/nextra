@@ -95,7 +95,9 @@ export async function loader(
       // Add `app` and `content` folders as the dependencies, so Webpack will
       // rebuild the module if anything in that context changes
       this.addContextDependency(appDir)
-      this.addContextDependency(path.posix.join(CWD, contentDir, locale))
+      if (contentDir) {
+        this.addContextDependency(path.posix.join(CWD, contentDir, locale))
+      }
     }
     const filePaths = await findMetaAndPageFilePaths({
       dir: appDir,
