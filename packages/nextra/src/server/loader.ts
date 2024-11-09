@@ -28,36 +28,36 @@ if (!APP_DIR) {
 const contentDir = getContentDirectory()
 
 const initGitRepo = (async () => {
-  const IS_WEB_CONTAINER = !!process.versions.webcontainer
-
-  if (!IS_WEB_CONTAINER) {
-    const { Repository } = await import('@napi-rs/simple-git')
-    try {
-      const repository = Repository.discover(CWD)
-      if (repository.isShallow()) {
-        if (process.env.VERCEL) {
-          logger.warn(
-            'The repository is shallow cloned, so the latest modified time will not be presented. Set the VERCEL_DEEP_CLONE=true environment variable to enable deep cloning.'
-          )
-        } else if (process.env.GITHUB_ACTION) {
-          logger.warn(
-            'The repository is shallow cloned, so the latest modified time will not be presented. See https://github.com/actions/checkout#fetch-all-history-for-all-tags-and-branches to fetch all the history.'
-          )
-        } else {
-          logger.warn(
-            'The repository is shallow cloned, so the latest modified time will not be presented.'
-          )
-        }
+  if (process.versions.webcontainer) return
+  const { Repository } = await import('@napi-rs/simple-git')
+  try {
+    const repository = Repository.discover(CWD)
+    if (repository.isShallow()) {
+      if (process.env.VERCEL) {
+        logger.warn(
+          'The repository is shallow cloned, so the latest modified time will not be presented. Set the VERCEL_DEEP_CLONE=true environment variable to enable deep cloning.'
+        )
+      } else if (process.env.GITHUB_ACTION) {
+        logger.warn(
+          'The repository is shallow cloned, so the latest modified time will not be presented. See https://github.com/actions/checkout#fetch-all-history-for-all-tags-and-branches to fetch all the history.'
+        )
+      } else {
+        logger.warn(
+          'The repository is shallow cloned, so the latest modified time will not be presented.'
+        )
       }
-      // repository.path() returns the `/path/to/repo/.git`, we need the parent directory of it
-      const gitRoot = path.join(repository.path(), '..')
-      return { repository, gitRoot }
-    } catch (error) {
-      logger.warn(`Init git repository failed ${(error as Error).message}`)
     }
+    // repository.path() returns the `/path/to/repo/.git`, we need the parent directory of it
+    const gitRoot = path.join(repository.path(), '..')
+    return { repository, gitRoot }
+  } catch (error) {
+    logger.warn(`Init git repository failed ${(error as Error).message}`)
   }
-  return {}
 })()
+
+// Cache the result of `repository.getFileLatestModifiedDateAsync` because it can slow down
+// Fast Refresh for uncommitted files
+const LastCommitTimeMap = new Map<string, number>()
 
 export async function loader(
   this: LoaderContext<LoaderOptions>,
@@ -148,15 +148,22 @@ export async function loader(
     whiteListTagsStyling
   })
 
-  let timestamp: PageOpts['metadata']['timestamp']
-  const { repository, gitRoot } = await initGitRepo
-  if (repository && gitRoot) {
-    try {
-      timestamp = await repository.getFileLatestModifiedDateAsync(
-        path.relative(gitRoot, filePath)
-      )
-    } catch {
-      // Failed to get timestamp for this file. Silently ignore it
+  let timestamp: number | undefined = LastCommitTimeMap.get(filePath)
+  if (timestamp === undefined) {
+    const { repository, gitRoot } = (await initGitRepo) || {}
+    if (repository && gitRoot) {
+      try {
+        const relativePath = path.relative(gitRoot, filePath)
+        timestamp =
+          await repository.getFileLatestModifiedDateAsync(relativePath)
+        LastCommitTimeMap.set(filePath, timestamp)
+      } catch {
+        logger.warn(
+          'Failed to get the last modified timestamp from Git for the file',
+          filePath
+        )
+        LastCommitTimeMap.set(filePath, 0)
+      }
     }
   }
 
