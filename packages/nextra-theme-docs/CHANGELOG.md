@@ -1,5 +1,15 @@
 # nextra-theme-docs
 
+## 4.0.0-app-router.24
+
+### Patch Changes
+
+- e46dbdf: Cache the result of `repository.getFileLatestModifiedDateAsync`
+  because it can slow down Fast Refresh for uncommitted files.
+- cc33237: avoid unnecessary updates to the config store on initial render
+- Updated dependencies [e46dbdf]
+  - nextra@4.0.0-app-router.24
+
 ## 4.0.0-app-router.23
 
 ### Patch Changes
