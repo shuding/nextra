@@ -2,15 +2,13 @@ import { notFound } from 'next/navigation'
 import { getRouteToFilepath } from '../server/page-map/get.js'
 import { logger } from '../server/utils.js'
 
-export async function importPage(pathSegments: string[] = [], locale = '') {
-  const RouteToFilepath = await getRouteToFilepath(locale)
+export async function importPage(pathSegments: string[] = [], lang = '') {
+  const RouteToFilepath = await getRouteToFilepath(lang)
 
   const pagePath = RouteToFilepath[pathSegments.join('/')]
   try {
     // eslint-disable-next-line @typescript-eslint/no-require-imports -- Require statement enables Fast Refresh
-    return require(
-      `private-next-root-dir/content/${locale && `${locale}/`}${pagePath}`
-    )
+    return require(`private-next-content-dir/${lang && `${lang}/`}${pagePath}`)
   } catch (error) {
     logger.error('Error while loading', { pathSegments }, error)
     notFound()

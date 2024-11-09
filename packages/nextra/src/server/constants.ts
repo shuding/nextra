@@ -31,6 +31,4 @@ export const GET_PAGE_MAP_PATH = '/nextra/dist/server/page-map/get.js'
 export const PAGE_MAP_PLACEHOLDER_PATH =
   '/nextra/dist/server/page-map/placeholder.js'
 
-export const IMPORT_PAGE_PATH = '/nextra/dist/client/pages.js'
-
 export const METADATA_ONLY_RQ = '?metadata'

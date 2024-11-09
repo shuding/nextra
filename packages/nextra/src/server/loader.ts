@@ -10,7 +10,6 @@ import { compileMdx } from './compile.js'
 import {
   CWD,
   GET_PAGE_MAP_PATH,
-  IMPORT_PAGE_PATH,
   IS_PRODUCTION,
   METADATA_ONLY_RQ,
   PAGE_MAP_PLACEHOLDER_PATH
@@ -21,21 +20,19 @@ import { convertToPageMap } from './page-map/to-page-map.js'
 import { twoslashRenderer } from './twoslash.js'
 import { logger } from './utils.js'
 
-function getDirectories() {
-  const { appDir } = findPagesDir(CWD)
-  if (!appDir) {
-    throw new Error('Unable to find `app` directory')
-  }
+export function getContentDirectory() {
   // Next.js take priority to `app` rather than `src/app`, we do the same for
   // `content` directory
   const [contentDir] = fg.sync(['{src/,}content'], { onlyDirectories: true })
-  return {
-    appDir,
-    contentDir
-  }
+  return contentDir
 }
 
-const { appDir, contentDir } = getDirectories()
+const APP_DIR = findPagesDir(CWD).appDir!
+if (!APP_DIR) {
+  throw new Error('Unable to find `app` directory')
+}
+
+const contentDir = getContentDirectory()
 
 const initGitRepo = (async () => {
   const IS_WEB_CONTAINER = !!process.versions.webcontainer
@@ -94,13 +91,13 @@ export async function loader(
     if (!IS_PRODUCTION) {
       // Add `app` and `content` folders as the dependencies, so Webpack will
       // rebuild the module if anything in that context changes
-      this.addContextDependency(appDir)
+      this.addContextDependency(APP_DIR)
       if (contentDir) {
-        this.addContextDependency(path.posix.join(CWD, contentDir, locale))
+        this.addContextDependency(path.join(CWD, contentDir, locale))
       }
     }
     const filePaths = await findMetaAndPageFilePaths({
-      dir: appDir,
+      dir: APP_DIR,
       cwd: CWD,
       locale,
       contentDir
@@ -121,16 +118,6 @@ export async function loader(
       locales
     )
     return rawJs
-  }
-  if (filePath.includes(IMPORT_PAGE_PATH)) {
-    return contentDir
-      ? source.replace(
-          'private-next-root-dir/content',
-          // User can have `src/content`, so dynamic require will fail, we need
-          // to replace it with right `content` directory path
-          `private-next-root-dir/${contentDir}`
-        )
-      : source
   }
 
   if (!IS_PRODUCTION && resourceQuery === METADATA_ONLY_RQ) {

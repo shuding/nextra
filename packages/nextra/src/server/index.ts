@@ -6,10 +6,10 @@ import { fromZodError } from 'zod-validation-error'
 import type { Nextra } from '../types.js'
 import {
   GET_PAGE_MAP_PATH,
-  IMPORT_PAGE_PATH,
   MARKDOWN_EXTENSION_RE,
   PAGE_MAP_PLACEHOLDER_PATH
 } from './constants.js'
+import { getContentDirectory } from './loader.js'
 import { nextraConfigSchema } from './schemas.js'
 import { logger } from './utils.js'
 
@@ -54,6 +54,7 @@ const nextra: Nextra = nextraConfig => {
       contentDirBasePath: loaderOptions.contentDirBasePath
     }
   }
+  const contentDir = getContentDirectory()
 
   return function withNextra(nextConfig = {}) {
     const pageMapLoader = {
@@ -114,15 +115,13 @@ const nextra: Nextra = nextraConfig => {
             },
             [`**${GET_PAGE_MAP_PATH}`]: {
               loaders: [pageMapLoader]
-            },
-            [`**${IMPORT_PAGE_PATH}`]: {
-              loaders: [{ loader: LOADER_PATH, options: {} }]
             }
           },
           resolveAlias: {
             ...nextConfig.experimental?.turbo?.resolveAlias,
             'next-mdx-import-source-file': './mdx-components', // '@vercel/turbopack-next/mdx-import-source'
-            'private-next-root-dir/*': './*'
+            'private-next-root-dir/*': './*',
+            'private-next-content-dir/*': `./${contentDir}/*`
           }
         }
       },
@@ -138,6 +137,9 @@ const nextra: Nextra = nextraConfig => {
             )
           }
         }
+        config.resolve.alias['private-next-content-dir'] = [
+          `private-next-root-dir/${contentDir}`
+        ]
         config.resolve.alias['next-mdx-import-source-file'] = [
           'private-next-root-dir/mdx-components',
           'private-next-root-dir/src/mdx-components'
