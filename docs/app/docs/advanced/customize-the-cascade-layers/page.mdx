@@ -12,10 +12,10 @@ CSS into a specified cascade layer:
 
 ## Install `postcss-import`
 
-Install `postcss-import` and add it to `postcss.config.js`:
+Install `postcss-import` and add it to `postcss.config.mjs`:
 
-```js filename="postcss.config.js"
-module.exports = {
+```js filename="postcss.config.mjs"
+export default {
   plugins: {
     'postcss-import': {}
     // ... your other PostCSS plugins (e.g., `autoprefixer`, `cssnano`)
