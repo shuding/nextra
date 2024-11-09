@@ -162,6 +162,7 @@ module.exports = {
             'nextra-navbar-blur',
             'nextra-sidebar',
             'nextra-breadcrumb',
+            'nextra-sidebar-footer',
             'nextra-toc'
           ]
         }

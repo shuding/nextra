@@ -348,15 +348,9 @@ export const MobileNav: FC = () => {
       />
 
       {hasMenu && (
-        <div
-          className={cn(
-            'bordered',
-            '_flex _items-center _gap-2 _py-4 _mx-4 _mt-auto',
-            hasI18n && '_justify-end'
-          )}
-        >
-          <LocaleSwitch className="_grow" />
-          <ThemeSwitch lite={hasI18n} className={hasI18n ? '' : '_grow'} />
+        <div className="nextra-sidebar-footer bordered _flex _items-center _gap-2 _py-4 _mx-4 _mt-auto">
+          <ThemeSwitch lite={hasI18n} className="_grow" />
+          <LocaleSwitch />
         </div>
       )}
     </aside>
