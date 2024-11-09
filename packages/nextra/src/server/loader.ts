@@ -25,9 +25,7 @@ if (!APP_DIR) {
   throw new Error('Unable to find `app` directory')
 }
 
-const contentDir = getContentDirectory()
-
-const git = await (async () => {
+const repository = await (async () => {
   if (process.versions.webcontainer) return
   const { Repository } = await import('@napi-rs/simple-git')
   try {
@@ -47,14 +45,15 @@ const git = await (async () => {
         )
       }
     }
-    // repository.path() returns the `/path/to/repo/.git`, we need the parent directory of it
-    const gitRoot = path.join(repository.path(), '..')
-    return { repository, gitRoot }
+    return repository
   } catch (error) {
     logger.warn(`Init git repository failed ${(error as Error).message}`)
   }
 })()
 
+const CONTENT_DIR = getContentDirectory()
+// repository.path() returns the `/path/to/repo/.git`, we need the parent directory of it
+const GIT_ROOT = repository ? path.join(repository.path(), '..') : ''
 // Cache the result of `repository.getFileLatestModifiedDateAsync` because it can slow down
 // Fast Refresh for uncommitted files
 const LastCommitTimeMap = new Map<string, number>()
@@ -85,15 +84,15 @@ export async function loader(
       // Add `app` and `content` folders as the dependencies, so Webpack will
       // rebuild the module if anything in that context changes
       this.addContextDependency(APP_DIR)
-      if (contentDir) {
-        this.addContextDependency(path.join(CWD, contentDir, locale))
+      if (CONTENT_DIR) {
+        this.addContextDependency(path.join(CWD, CONTENT_DIR, locale))
       }
     }
     const filePaths = await findMetaAndPageFilePaths({
       dir: APP_DIR,
       cwd: CWD,
       locale,
-      contentDir
+      contentDir: CONTENT_DIR
     })
     const { pageMap, mdxPages } = convertToPageMap({
       filePaths,
@@ -151,12 +150,11 @@ export async function loader(
   let timestamp: number | undefined = LastCommitTimeMap.get(filePath)
   if (IS_PRODUCTION && timestamp === undefined) {
     try {
-      if (!git) {
+      if (!repository) {
         throw new Error('Init git repository failed')
       }
-      const relativePath = path.relative(git.gitRoot, filePath)
-      timestamp =
-        await git.repository.getFileLatestModifiedDateAsync(relativePath)
+      const relativePath = path.relative(GIT_ROOT, filePath)
+      timestamp = await repository.getFileLatestModifiedDateAsync(relativePath)
       LastCommitTimeMap.set(filePath, timestamp)
     } catch {
       logger.warn(
