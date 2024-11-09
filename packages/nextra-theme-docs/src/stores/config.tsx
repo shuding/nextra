@@ -6,9 +6,8 @@ import { normalizePages } from 'nextra/normalize-pages'
 import type { FC, ReactElement, ReactNode } from 'react'
 import { createContext, useContext, useEffect, useState } from 'react'
 import type { StoreApi } from 'zustand'
-import { createStore } from 'zustand/vanilla'
 import { useStore } from 'zustand/react'
-import { useShallow } from 'zustand/react/shallow'
+import { createStore } from 'zustand/vanilla'
 
 type Config = {
   hideSidebar: boolean
@@ -17,19 +16,13 @@ type Config = {
 
 const ConfigContext = createContext<StoreApi<Config> | null>(null)
 
-function useConfigStore<T>(selector: (state: Config) => T) {
+export function useConfig() {
   const store = useContext(ConfigContext)
   if (!store) {
     throw new Error('Missing ConfigContext.Provider')
   }
-  return useStore(store, selector)
+  return useStore(store)
 }
-
-export const useConfig = () =>
-  useConfigStore(useShallow(state => ({
-    hideSidebar: state.hideSidebar,
-    normalizePagesResult: state.normalizePagesResult
-  })))
 
 function getStore(list: PageMapItem[], route: string) {
   const normalizePagesResult = normalizePages({ list, route })
