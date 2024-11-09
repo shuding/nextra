@@ -144,9 +144,8 @@ const nextra: Nextra = nextraConfig => {
             )
           }
         }
-        config.resolve.alias['private-next-content-dir'] = [
+        config.resolve.alias['private-next-content-dir'] =
           `private-next-root-dir/${contentDir}`
-        ]
         config.resolve.alias['next-mdx-import-source-file'] = [
           'private-next-root-dir/mdx-components',
           'private-next-root-dir/src/mdx-components'
