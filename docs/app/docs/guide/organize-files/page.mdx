@@ -4,7 +4,7 @@ import { Cards, FileTree } from 'nextra/components'
 # Organize Files
 
 Nextra first collects all your Markdown files and configurations from the
-`pages` directory, and then generates the "page map information" of your entire
+`content` directory, and then generates the "page map information" of your entire
 site, to render things such as the _navigation bar_ and _sidebar_ below:
 
 <br />
@@ -27,7 +27,7 @@ from filenames.
 For example if you have the following structure:
 
 <FileTree>
-  <FileTree.Folder name="pages" defaultOpen>
+  <FileTree.Folder name="content" defaultOpen>
     <FileTree.File name="contact.md" />
     <FileTree.File name="index.mdx" />
     <FileTree.Folder name="about" defaultOpen>
@@ -104,7 +104,7 @@ for JavaScript objects.
 
 Following:
 
-```js filename="pages/_meta.js"
+```js filename="content/_meta.js"
 export default {
   foo: '',
   1992_10_21: '',
@@ -115,7 +115,7 @@ export default {
 Will be converted to:
 
 {/* prettier-ignore */}
-```js filename="pages/_meta.js"
+```js filename="content/_meta.js"
 export default {
   '1': '',
   '19921021': '',
@@ -125,9 +125,9 @@ export default {
 
 ## Example
 
-Put this in your `pages/_meta.js` file:
+Put this in your `content/_meta.js` file:
 
-```js filename="pages/_meta.js"
+```js filename="content/_meta.js"
 export default {
   index: 'My Homepage',
   contact: 'Contact Us',
