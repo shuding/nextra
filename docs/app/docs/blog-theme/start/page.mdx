@@ -40,14 +40,13 @@ Create the following `next.config.mjs` file in your project's root directory:
 import nextra from 'nextra'
 
 const withNextra = nextra({
-  theme: 'nextra-theme-blog',
-  themeConfig: './theme.config.jsx'
+  // ... Other Nextra config options
 })
 
-export default withNextra()
-
 // If you have other Next.js configurations, you can pass them as the parameter:
-// export default withNextra({ /* other next.js config */ })
+export default withNextra({
+  // ... Other Next.js config options
+})
 ```
 
 With the above configuration, Nextra can handle Markdown files in your Next.js
