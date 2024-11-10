@@ -65,7 +65,7 @@ directory, and it will be used to override the default configuration of each
 page:
 
 <FileTree>
-  <FileTree.Folder name="pages" defaultOpen>
+  <FileTree.Folder name="content" defaultOpen>
     <FileTree.File name="_meta.js" />
     <FileTree.File name="contact.md" />
     <FileTree.File name="index.mdx" />
@@ -140,7 +140,7 @@ It tells Nextra the order of each page, and the correct title.
 Alternatively, you can do it with `title` property and have other configurations
 in there as well:
 
-```js filename="pages/_meta.js"
+```js filename="content/_meta.js"
 export default {
   index: 'My Homepage',
   contact: 'Contact Us',
