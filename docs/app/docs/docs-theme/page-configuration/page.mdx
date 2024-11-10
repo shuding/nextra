@@ -23,7 +23,7 @@ The title and order of a page shown in the sidebar should be configured in the
 structure:
 
 <FileTree>
-  <FileTree.Folder name="pages" defaultOpen>
+  <FileTree.Folder name="content" defaultOpen>
     <FileTree.File name="_meta.js" />
     <FileTree.File name="about.mdx" />
     <FileTree.File name="contact.mdx" />
@@ -52,7 +52,7 @@ export default {
 Folders can be configured in the same way as pages. For example:
 
 <FileTree>
-  <FileTree.Folder name="pages" defaultOpen>
+  <FileTree.Folder name="content" defaultOpen>
     <FileTree.Folder name="fruits" defaultOpen>
       <FileTree.File name="_meta.js" />
       <FileTree.File name="apple.mdx" />
@@ -68,7 +68,7 @@ Folders can be configured in the same way as pages. For example:
 The top-level `_meta.js` file contains the meta information for the top-level
 pages and folders:
 
-```js filename="pages/_meta.js"
+```js filename="content/_meta.js"
 export default {
   index: 'My Homepage',
   contact: 'Contact Us',
@@ -80,7 +80,7 @@ export default {
 And the nested `_meta.js` file contains the meta information for pages in the
 same folder:
 
-```js filename="pages/fruits/_meta.js"
+```js filename="content/fruits/_meta.js"
 export default {
   apple: 'Apple',
   banana: 'Banana'
@@ -95,10 +95,10 @@ move directories around without having to change the `_meta.js` file.
 What if I want to have a folder with an index page? We can add a MDX page with
 the same name and in the same directory as the folder. Let's say we want to add
 `/fruits` route in the example above, we can create a `fruits.mdx` file in
-pages:
+`content`:
 
 <FileTree>
-  <FileTree.Folder name="pages" defaultOpen>
+  <FileTree.Folder name="content" defaultOpen>
     <FileTree.Folder name="fruits" defaultOpen>
       <FileTree.File name="_meta.js" />
       <FileTree.File name="apple.mdx" />
@@ -121,7 +121,7 @@ show you the `fruits.mdx` page at the same time.
 You can add external links to the sidebar by adding an item with `href` in
 `_meta.js`:
 
-```js filename="pages/_meta.js" {6-9}
+```js filename="content/_meta.js" {6-9}
 export default {
   index: 'My Homepage',
   contact: 'Contact Us',
@@ -144,7 +144,7 @@ By default, all MDX routes in the filesystem will be shown on the sidebar. But
 you can hide a specific pages or folders by using the `"display": "hidden"`
 configuration:
 
-```js filename="pages/_meta.js" {4}
+```js filename="content/_meta.js" {4}
 export default {
   index: 'My Homepage',
   contact: {
@@ -170,7 +170,7 @@ For example, you can have 2 docs folders `frameworks` and `fruits` in your
 project:
 
 <FileTree>
-  <FileTree.Folder name="pages" defaultOpen>
+  <FileTree.Folder name="content" defaultOpen>
     <FileTree.Folder name="frameworks" defaultOpen>
       <FileTree.File name="react.mdx" />
       <FileTree.File name="svelte.mdx" />
@@ -189,7 +189,7 @@ project:
 In your top-level `_meta.js` file, you can set everything as a page, instead of
 a normal sidebar item:
 
-```js filename="pages/_meta.js"
+```js filename="content/_meta.js"
 export default {
   index: {
     title: 'Home',
@@ -234,7 +234,7 @@ option:
   StackBlitz](https://stackblitz.com/edit/nextra-2-docs-2qopvp?file=pages%2F_meta.js)
 </div>
 
-```js filename="pages/_meta.js"
+```js filename="content/_meta.js"
 export default {
   company: {
     title: 'Company',
@@ -258,7 +258,7 @@ export default {
 Same as the [External Links](#external-links) option, you can have external
 links in the navbar too:
 
-```js filename="pages/_meta.js"
+```js filename="content/_meta.js"
 export default {
   index: {
     title: 'Home',
@@ -282,7 +282,7 @@ In the [Sub Docs](#sub-docs) example above, we have to define the
 `"type": "page"` option for every page. To make it easier, you can use the `"*"`
 key to define the fallback configuration for all items in this folder:
 
-```js filename="pages/_meta.js" {2-4}
+```js filename="content/_meta.js" {2-4}
 export default {
   '*': {
     type: 'page'
@@ -323,7 +323,7 @@ export default {
 You can configure the theme for each page using the `"theme"` option. For
 example, you can disable or enable specific components for specific pages:
 
-```js filename="pages/_meta.js"
+```js filename="content/_meta.js"
 export default {
   index: {
     title: 'Home',
@@ -350,7 +350,7 @@ the default behavior.
 You might want to render some page with the full container width and height, but
 keep all the other styles. You can use the `"full"` layout to do that:
 
-```js filename="pages/_meta.js" {5}
+```js filename="content/_meta.js" {5}
 export default {
   index: {
     title: 'Home',
@@ -370,7 +370,7 @@ heading styles and components like `li` and `code`. There are `"default"` and
 The default one is suitable for most cases like documentation, but you can use
 the `"article"` typesetting to make it look like an elegant article page:
 
-```js filename="pages/_meta.js" {5}
+```js filename="content/_meta.js" {5}
 export default {
   about: {
     title: 'About Us',
