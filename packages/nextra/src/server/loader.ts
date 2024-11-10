@@ -20,7 +20,10 @@ import { convertToPageMap } from './page-map/to-page-map.js'
 import { twoslashRenderer } from './twoslash.js'
 import { logger } from './utils.js'
 
+const NOW = Date.now()
+const CONTENT_DIR = getContentDirectory()
 const APP_DIR = findPagesDir(CWD).appDir!
+
 if (!APP_DIR) {
   throw new Error('Unable to find `app` directory')
 }
@@ -51,12 +54,8 @@ const repository = await (async () => {
   }
 })()
 
-const CONTENT_DIR = getContentDirectory()
 // repository.path() returns the `/path/to/repo/.git`, we need the parent directory of it
 const GIT_ROOT = repository ? path.join(repository.path(), '..') : ''
-// Cache the result of `repository.getFileLatestModifiedDateAsync` because it can slow down
-// Fast Refresh for uncommitted files
-const LastCommitTimeMap = new Map<string, number>()
 
 export async function loader(
   this: LoaderContext<LoaderOptions>,
@@ -147,27 +146,11 @@ export async function loader(
     whiteListTagsStyling
   })
 
-  let timestamp: number | undefined = LastCommitTimeMap.get(filePath)
-  if (IS_PRODUCTION && timestamp === undefined) {
-    try {
-      if (!repository) {
-        throw new Error('Init git repository failed')
-      }
-      const relativePath = path.relative(GIT_ROOT, filePath)
-      timestamp = await repository.getFileLatestModifiedDateAsync(relativePath)
-      LastCommitTimeMap.set(filePath, timestamp)
-    } catch {
-      logger.warn(
-        'Failed to get the last modified timestamp from Git for the file',
-        filePath
-      )
-      LastCommitTimeMap.set(filePath, 0)
-    }
-  }
-
   const restProps: PageOpts['metadata'] = {
     filePath: slash(path.relative(CWD, filePath)),
-    timestamp,
+    // Run only on production because it can slow down Fast Refresh for uncommitted files
+    // https://github.com/shuding/nextra/issues/3675#issuecomment-2466416366
+    timestamp: IS_PRODUCTION ? await getLastCommitTime(filePath) : NOW,
     readingTime
   }
   const enhancedMetadata = `Object.assign(metadata, ${JSON.stringify(restProps)})`
@@ -224,4 +207,21 @@ ${locales
 }[lang]()`
 
   return rawJs.replace(rawImport, replaced)
+}
+
+async function getLastCommitTime(
+  filePath: string
+): Promise<number | undefined> {
+  try {
+    if (!repository) {
+      throw new Error('Init git repository failed')
+    }
+    const relativePath = path.relative(GIT_ROOT, filePath)
+    return await repository.getFileLatestModifiedDateAsync(relativePath)
+  } catch {
+    logger.warn(
+      'Failed to get the last modified timestamp from Git for the file',
+      filePath
+    )
+  }
 }
