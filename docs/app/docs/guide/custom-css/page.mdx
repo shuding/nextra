@@ -21,14 +21,13 @@ body {
 }
 ```
 
-You can create a `pages/_app.js` file and import your CSS files there:
+Import your CSS files in root layout:
 
-```jsx filename="pages/_app.js"
-import '../styles.css'
+```jsx filename="app/layout.jsx"
+import '../path/to/your/styles.css'
 
-// This default export is required in a new `pages/_app.js` file.
-export default function MyApp({ Component, pageProps }) {
-  return <Component {...pageProps} />
+export default async function RootLayout({ children }) {
+  // ...
 }
 ```
 
