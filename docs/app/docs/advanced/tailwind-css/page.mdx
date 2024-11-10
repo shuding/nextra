@@ -1,9 +1,15 @@
+import { Steps } from 'nextra/components'
+
 # Tailwind CSS
 
 Tailwind CSS is a CSS framework that provides a set of pre-defined CSS classes
 to quickly style elements. You can follow the official
 [Tailwind CSS documentation for Next.js](https://tailwindcss.com/docs/guides/nextjs)
 to set up Tailwind CSS for your Nextra project.
+
+<Steps>
+
+## Create `tailwind.config.js` file
 
 To use Tailwind classes in your Markdown files, you will also need to add `.md`
 and `.mdx` files to the `content` list in `tailwind.config.js`:
@@ -29,21 +35,23 @@ export default {
 >
 > You can use `tailwind.config.ts` as well.
 
-Next step, create a CSS file for Tailwind directives, `globals.css` for example:
+## Create `globals.css` file
+
+Create a CSS file for Tailwind directives, `globals.css` for example:
 
 ```css filename="globals.css"
-@tailwind base;
+@tailwind base; /* preflight styles */
 @tailwind components;
 @tailwind utilities;
 ```
 
-> [!TIP]
+> [!NOTE]
 >
 > You don't need to have `@tailwind base` directive while using `nextra-theme-docs` or
 > `nextra-theme-blog` because they already imports Tailwind CSS preflight styles in
-> their `style.css` files
+> their `style.css` files.
 
-Then import in root layout file
+## Import styles in root layout
 
 ```jsx filename="app/layout.jsx"
 import '../path/to/your/globals.css'
@@ -52,3 +60,5 @@ export default async function RootLayout({ children }) {
   // ...
 }
 ```
+
+</Steps>
