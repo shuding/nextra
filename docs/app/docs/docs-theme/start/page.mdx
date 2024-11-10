@@ -61,37 +61,99 @@ Create the following `next.config.mjs` file in your project's root directory:
 import nextra from 'nextra'
 
 const withNextra = nextra({
-  theme: 'nextra-theme-docs',
-  themeConfig: './theme.config.jsx'
+  // Other Nextra config options
 })
 
-export default withNextra()
-
 // If you have other Next.js configurations, you can pass them as the parameter:
-// export default withNextra({ /* other next.js config */ })
+export default withNextra({
+  // Other Next.js config options
+})
 ```
 
 With the above configuration, Nextra can handle Markdown files in your Next.js
 project, with the specified theme. Other Nextra configurations can be found in
 [Guide](/docs/guide).
 
-### Create Docs Theme Config
+### Add `mdx-components.js` in root directory
 
-Lastly, create the corresponding `theme.config.jsx` file in your project's root
-directory. This will be used to configure the Nextra Docs theme:
+```ts filename="mdx-components.js"
+import { useMDXComponents as getDocsMDXComponents } from 'nextra-theme-docs'
 
-```jsx filename="theme.config.jsx"
-export default {
-  logo: <span>My Nextra Documentation</span>,
-  project: {
-    link: 'https://github.com/shuding/nextra'
+const docsComponents = getDocsMDXComponents()
+
+export function useMDXComponents(components) {
+  return {
+    ...docsComponents,
+    ...components
   }
-  // ... other theme options
 }
 ```
 
-Full theme configurations can be found
-[here](/docs/docs-theme/theme-configuration).
+> [!TIP]
+>
+> You can use `.jsx`, `.ts` and `.tsx` extensions for your `mdx-components` file
+> as well.
+
+### Create Root Layout
+
+Lastly, create the root layout of your application in `app` folder. This will be
+used to configure the Nextra docs theme:
+
+```jsx filename="app/layout.jsx"
+import { Footer, Layout, Navbar } from 'nextra-theme-docs'
+import { Banner, Head } from 'nextra/components'
+import { getPageMap } from 'nextra/page-map'
+import 'nextra-theme-docs/style.css'
+
+export const metadata = {
+  // ... Your metadata API
+  // https://nextjs.org/docs/app/building-your-application/optimizing/metadata
+}
+
+const banner = <Banner storageKey="some-key">Nextra 4.0 is released 🎉</Banner>
+const navbar = (
+  <Navbar
+    logo={<b>Nextra</b>}
+    // ... Your additional navbar options
+  />
+)
+const footer = (
+  <Footer>
+    MIT {new Date().getFullYear()} © Nextra.
+  </Footer>
+)
+
+export default async function RootLayout({ children }) {
+  return (
+    <html
+      // Not required, but good for SEO
+      lang="en"
+      // Required to be set
+      dir="ltr"
+      // Suggested by `next-themes` package https://github.com/pacocoursey/next-themes#with-app
+      suppressHydrationWarning
+    >
+      <Head
+      // ... Your additional head options
+      >
+        {/* Your additional tags should be passed as `children` of `<Head>` element */}
+      </Head>
+      <body>
+        <Layout
+          banner={banner}
+          navbar={navbar}
+          pageMap={await getPageMap()}
+          docsRepositoryBase="https://github.com/shuding/nextra/tree/main/docs"
+          footer={footer}
+          // ... Your additional layout options
+        >
+          {children}
+        </Layout>
+      </body>
+    </html>
+  )
+}
+```
 
 <ReadeToGo />
 
