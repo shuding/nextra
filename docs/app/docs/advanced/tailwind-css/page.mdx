@@ -10,10 +10,10 @@ and `.mdx` files to the `content` list in `tailwind.config.js`:
 
 ```js filename="tailwind.config.js" /md,mdx/
 /** @type {import('tailwindcss').Config} */
-module.exports = {
+export default {
   content: [
-    './pages/**/*.{js,jsx,ts,tsx,md,mdx}',
-    './components/**/*.{js,jsx,ts,tsx,md,mdx}',
+    './app/**/*.{js,jsx,ts,tsx,md,mdx}',
+    './content/**/*.{md,mdx}',
 
     // Or if using `src` directory:
     './src/**/*.{js,jsx,ts,tsx,md,mdx}'
@@ -25,6 +25,10 @@ module.exports = {
 }
 ```
 
+> [!TIP]
+>
+> You can use `tailwind.config.ts` as well.
+
 Next step, create a CSS file for Tailwind directives, `globals.css` for example:
 
 ```css filename="globals.css"
@@ -33,12 +37,18 @@ Next step, create a CSS file for Tailwind directives, `globals.css` for example:
 @tailwind utilities;
 ```
 
-Then import into `pages/_app.jsx`
+> [!TIP]
+>
+> You don't need to have `@tailwind base` directive while using `nextra-theme-docs` or
+> `nextra-theme-blog` because they already imports Tailwind CSS preflight styles in
+> their `style.css` files
 
-```jsx filename="_app.jsx"
+Then import in root layout file
+
+```jsx filename="app/layout.jsx"
 import '../path/to/your/globals.css'
 
-export default function App({ Component, pageProps }) {
-  return <Component {...pageProps} />
+export default async function RootLayout({ children }) {
+  // ...
 }
 ```
