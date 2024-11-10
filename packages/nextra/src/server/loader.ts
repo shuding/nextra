@@ -57,23 +57,6 @@ const repository = await (async () => {
 // repository.path() returns the `/path/to/repo/.git`, we need the parent directory of it
 const GIT_ROOT = repository ? path.join(repository.path(), '..') : ''
 
-async function getLastCommitTime(
-  filePath: string
-): Promise<number | undefined> {
-  try {
-    if (!repository) {
-      throw new Error('Init git repository failed')
-    }
-    const relativePath = path.relative(GIT_ROOT, filePath)
-    return await repository.getFileLatestModifiedDateAsync(relativePath)
-  } catch {
-    logger.warn(
-      'Failed to get the last modified timestamp from Git for the file',
-      filePath
-    )
-  }
-}
-
 export async function loader(
   this: LoaderContext<LoaderOptions>,
   source: string
@@ -224,4 +207,21 @@ ${locales
 }[lang]()`
 
   return rawJs.replace(rawImport, replaced)
+}
+
+async function getLastCommitTime(
+  filePath: string
+): Promise<number | undefined> {
+  try {
+    if (!repository) {
+      throw new Error('Init git repository failed')
+    }
+    const relativePath = path.relative(GIT_ROOT, filePath)
+    return await repository.getFileLatestModifiedDateAsync(relativePath)
+  } catch {
+    logger.warn(
+      'Failed to get the last modified timestamp from Git for the file',
+      filePath
+    )
+  }
 }
