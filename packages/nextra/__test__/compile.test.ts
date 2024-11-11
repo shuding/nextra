@@ -436,13 +436,10 @@ describe('Link', () => {
   })
 
   it('supports external .mdx links', async () => {
-    const rawJs = await compileMdx(
-      '[link](https://example.com/file.mdx)',
-      { mdxOptions }
-    )
-    expect(rawJs).toMatch(
-      '<_components.a href="https://example.com/file.mdx">'
-    )
+    const rawJs = await compileMdx('[link](https://example.com/file.mdx)', {
+      mdxOptions
+    })
+    expect(rawJs).toMatch('<_components.a href="https://example.com/file.mdx">')
   })
 })
 
@@ -482,10 +479,9 @@ describe('Code block', () => {
 
   describe('Highlight', () => {
     it('should support line highlights', async () => {
-      const rawJs = await compileMdx(
-        '```js filename="test.js" {1}\n123\n```',
-        { mdxOptions }
-      )
+      const rawJs = await compileMdx('```js filename="test.js" {1}\n123\n```', {
+        mdxOptions
+      })
       expect(rawJs).toMatch('<_components.span data-highlighted-line="">')
     })
   })

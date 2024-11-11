@@ -5,7 +5,7 @@ import type { Parent, Root } from 'mdast'
 import type { Plugin } from 'unified'
 import { parse as parseYaml } from 'yaml'
 import { createAstExportConst } from '../utils.js'
-import { isExportNode, getFrontMatterASTObject } from './remark-mdx-title.js'
+import { getFrontMatterASTObject, isExportNode } from './remark-mdx-title.js'
 
 function createNode(data: Record<string, unknown>) {
   return {
