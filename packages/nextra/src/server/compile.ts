@@ -119,7 +119,7 @@ export async function compileMdx(
 
   try {
     const vFile = await processor.process(fileCompatible)
-    const rawJs = String(vFile)
+    const rawJs = (vFile.value as string)
       // https://github.com/shuding/nextra/issues/1032
       .replaceAll('__esModule', '_\\_esModule')
     return rawJs

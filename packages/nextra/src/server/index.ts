@@ -7,8 +7,10 @@ import { fromZodError } from 'zod-validation-error'
 import type { Nextra } from '../types.js'
 import {
   GET_PAGE_MAP_PATH,
+  GET_PAGE_MAP_RE,
   MARKDOWN_EXTENSION_RE,
-  PAGE_MAP_PLACEHOLDER_PATH
+  PAGE_MAP_PLACEHOLDER_PATH,
+  PAGE_MAP_PLACEHOLDER_RE
 } from './constants.js'
 import { nextraConfigSchema } from './schemas.js'
 import { logger } from './utils.js'
@@ -22,15 +24,6 @@ const FILENAME = fileURLToPath(import.meta.url)
 const DIRNAME = path.dirname(FILENAME)
 
 const LOADER_PATH = path.join(DIRNAME, '..', '..', 'loader.cjs')
-
-const SEP = path.sep === '/' ? '/' : '\\\\'
-
-const PAGE_MAP_PLACEHOLDER_RE = new RegExp(
-  PAGE_MAP_PLACEHOLDER_PATH.replaceAll('/', SEP).replaceAll('.', '\\.')
-)
-const GET_PAGE_MAP_RE = new RegExp(
-  GET_PAGE_MAP_PATH.replaceAll('/', SEP).replaceAll('.', '\\.')
-)
 
 export function getContentDirectory() {
   // Next.js gives priority to `app` over `src/app`, we do the same for `content` directory
