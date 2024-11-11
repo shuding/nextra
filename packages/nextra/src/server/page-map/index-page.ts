@@ -2,9 +2,9 @@ import { MdxFile, PageMapItem } from '../../types'
 import { compileMdx } from '../compile.js'
 
 function renderCard(item: MdxFile): string {
-  const { icon, sidebarTitle } = item.frontMatter!
+  const { icon, sidebarTitle, title } = item.frontMatter!
   const Icon = icon ? `<${icon}/>` : 'null'
-  return `<Cards.Card title="${sidebarTitle}" href="${item.route}" icon={${Icon}} />`
+  return `<Cards.Card title="${sidebarTitle || title}" href="${item.route}" icon={${Icon}} />`
 }
 
 export async function createIndexPage(pageMap: PageMapItem[]): Promise<string> {
