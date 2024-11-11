@@ -3,7 +3,7 @@ import { transformerTwoslash } from '@shikijs/twoslash'
 import { findPagesDir } from 'next/dist/lib/find-pages-dir.js'
 import slash from 'slash'
 import type { LoaderContext } from 'webpack'
-import type { LoaderOptions, PageOpts } from '../types.js'
+import type { LoaderOptions } from '../types.js'
 import { compileMetadata } from './compile-metadata.js'
 import { compileMdx } from './compile.js'
 import {

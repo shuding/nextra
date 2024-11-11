@@ -1,4 +1,4 @@
-import { Folder, PageMapItem } from '../../types'
+import type { Folder, PageMapItem } from '../../types.js'
 
 function importPageMap(lang = ''): Promise<{
   pageMap: PageMapItem[]

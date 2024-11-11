@@ -1,10 +1,10 @@
 import path from 'node:path'
-import { Property } from 'estree'
+import type { Property } from 'estree'
 import { valueToEstree } from 'estree-util-value-to-estree'
 import type { Root } from 'mdast'
 import slash from 'slash'
 import type { Plugin } from 'unified'
-import { ReadingTime } from '../../types.js'
+import type { ReadingTime } from '../../types.js'
 import { CWD } from '../constants.js'
 import { getFrontMatterASTObject, isExportNode } from './remark-mdx-title.js'
 

@@ -13,7 +13,7 @@ import remarkMath from 'remark-math'
 import remarkReadingTime from 'remark-reading-time'
 import remarkSmartypants from 'remark-smartypants'
 import type { Pluggable, Plugin } from 'unified'
-import type { FrontMatter, LoaderOptions, ReadingTime } from '../types.js'
+import type { LoaderOptions } from '../types.js'
 import { CWD, MARKDOWN_URL_EXTENSION_RE } from './constants.js'
 import {
   recmaRewriteFunctionBody,
@@ -38,7 +38,6 @@ import {
   remarkRemoveImports,
   remarkStaticImage
 } from './remark-plugins/index.js'
-import { logger } from './utils.js'
 
 type Processor = ReturnType<typeof createProcessor>
 

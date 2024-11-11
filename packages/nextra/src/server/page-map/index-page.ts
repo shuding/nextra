@@ -1,4 +1,4 @@
-import { MdxFile, PageMapItem } from '../../types'
+import type { MdxFile, PageMapItem } from '../../types.js'
 import { compileMdx } from '../compile.js'
 
 function renderCard(item: MdxFile): string {
@@ -8,7 +8,7 @@ function renderCard(item: MdxFile): string {
 }
 
 export async function createIndexPage(pageMap: PageMapItem[]): Promise<string> {
-  let result = []
+  const result = []
   let hasCards = false
   for (const item of pageMap) {
     if ('data' in item) {
