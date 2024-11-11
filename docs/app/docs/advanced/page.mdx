@@ -17,9 +17,7 @@ import { createIndexPage, getPageMap } from 'nextra/page-map'
 # Advanced
 
 <MDXRemote
-  compiledSource={await createIndexPage(
-    await getPageMap('', '/docs/advanced')
-  )}
+  compiledSource={await createIndexPage(await getPageMap('', '/docs/advanced'))}
   components={{
     Cards,
     TerminalIcon,
