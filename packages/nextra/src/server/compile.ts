@@ -28,6 +28,7 @@ import {
   rehypeTwoslashPopup
 } from './rehype-plugins/index.js'
 import {
+  remarkAssignFrontMatter,
   remarkCustomHeadingId,
   remarkHeadings,
   remarkLinkRewrite,
@@ -59,10 +60,11 @@ type CompileMdxOptions = Pick<
   | 'codeHighlight'
   | 'whiteListTagsStyling'
 > & {
-  mdxOptions?: MdxOptions
-  filePath?: string
-  useCachedCompiler?: boolean
-  isPageImport?: boolean
+  mdxOptions: MdxOptions
+  filePath: string
+  useCachedCompiler: boolean
+  isPageImport: boolean
+  lastCommitTime: number
 }
 
 export async function compileMdx(
@@ -78,12 +80,12 @@ export async function compileMdx(
     filePath = '',
     useCachedCompiler,
     isPageImport = true,
-    whiteListTagsStyling = []
+    whiteListTagsStyling = [],
+    lastCommitTime
   }: Partial<CompileMdxOptions> = {}
 ): Promise<{
   result: string
   title?: string
-  readingTime?: ReadingTime
   frontMatter: FrontMatter
 }> {
   const {
@@ -124,12 +126,11 @@ export async function compileMdx(
     const vFile = await processor.process(fileCompatible)
 
     const data = vFile.data as {
-      readingTime?: ReadingTime
       title?: string
       frontMatter: FrontMatter
     }
 
-    const { readingTime, title, frontMatter } = data
+    const { title, frontMatter } = data
     // https://github.com/shuding/nextra/issues/1032
     const result = String(vFile).replaceAll('__esModule', '_\\_esModule')
 
@@ -147,7 +148,6 @@ export async function compileMdx(
     return {
       result,
       title,
-      ...(readingTime && { readingTime }),
       frontMatter
     }
   } catch (error) {
@@ -177,6 +177,8 @@ export async function compileMdx(
         isRemoteContent && remarkRemoveImports,
         remarkFrontmatter, // parse and attach yaml node
         remarkMdxFrontMatter,
+        readingTime && remarkReadingTime,
+        [remarkAssignFrontMatter, { lastCommitTime }] satisfies Pluggable,
         remarkGfm,
         format !== 'md' &&
           ([
@@ -188,7 +190,6 @@ export async function compileMdx(
         remarkMdxTitle,
         [remarkHeadings, { isRemoteContent }] satisfies Pluggable,
         staticImage && remarkStaticImage,
-        readingTime && remarkReadingTime,
         latex && remarkMath,
         // Remove the markdown file extension from links
         [

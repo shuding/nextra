@@ -115,8 +115,7 @@ export async function loader(
     const rawJs = await compileMetadata(source, { filePath })
     return rawJs
   }
-
-  const { result, readingTime } = await compileMdx(source, {
+  const { result } = await compileMdx(source, {
     mdxOptions: {
       ...mdxOptions,
       jsx: true,
@@ -143,28 +142,19 @@ export async function loader(
     filePath,
     useCachedCompiler: true,
     isPageImport,
-    whiteListTagsStyling
-  })
-
-  const restProps: PageOpts['metadata'] = {
-    filePath: slash(path.relative(CWD, filePath)),
+    whiteListTagsStyling,
     // Run only on production because it can slow down Fast Refresh for uncommitted files
     // https://github.com/shuding/nextra/issues/3675#issuecomment-2466416366
-    timestamp: IS_PRODUCTION ? await getLastCommitTime(filePath) : NOW,
-    readingTime
-  }
-  const enhancedMetadata = `Object.assign(metadata, ${JSON.stringify(restProps)})`
+    lastCommitTime: IS_PRODUCTION ? await getLastCommitTime(filePath) : NOW
+  })
 
   // Imported as a normal component, no need to add the layout.
   if (!isPageImport) {
     return `${result}   
-${enhancedMetadata}
 export default MDXLayout`
   }
   const rawJs = `import { HOC_MDXWrapper } from 'nextra/setup-page'
 ${result}
-
-${enhancedMetadata}
 export default HOC_MDXWrapper(
   MDXLayout,
   {metadata, title, toc:useTOC()}

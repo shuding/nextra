@@ -5,7 +5,7 @@ import type { Parent, Root } from 'mdast'
 import type { Plugin } from 'unified'
 import { parse as parseYaml } from 'yaml'
 import { createAstExportConst } from '../utils.js'
-import { isExportNode } from './remark-mdx-title.js'
+import { isExportNode, getFrontMatterASTObject } from './remark-mdx-title.js'
 
 function createNode(data: Record<string, unknown>) {
   return {
@@ -43,13 +43,10 @@ export const remarkMdxFrontMatter: Plugin<[], Root> =
       ast.children.unshift(createNode({}))
     }
 
-    // @ts-expect-error -- fixme
-    const frontMatter = ast.children.find(
-      node =>
-        // @ts-expect-error -- fixme
-        isExportNode(node, 'metadata')
-      // @ts-expect-error -- fixme
-    ).data.estree.body[0].declaration.declarations[0].init.properties
+    const frontMatterNode = ast.children.find((node: any) =>
+      isExportNode(node, 'metadata')
+    )!
+    const frontMatter = getFrontMatterASTObject(frontMatterNode)
 
     file.data.frontMatter = estreeToValue(frontMatter)
   }
