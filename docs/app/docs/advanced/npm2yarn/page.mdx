@@ -25,11 +25,11 @@ export async function Page() {
   const codeBlock = `\`\`\`sh npm2yarn
 npm i -D @graphql-eslint/eslint-plugin
 \`\`\``
-  const { result } = await compileMdx(`${codeBlock}
+  const rawJs = await compileMdx(`${codeBlock}
 ## Usage
 
 ~~~md filename="Markdown" /npm2yarn/
 ${codeBlock}
 ~~~`)
-  return <MDXRemote compiledSource={result} components={{ $Tabs: Tabs }} />
+  return <MDXRemote compiledSource={rawJs} components={{ $Tabs: Tabs }} />
 }

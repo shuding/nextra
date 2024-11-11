@@ -7,7 +7,7 @@ const opts = {
 
 describe('remarkRemoveImports', () => {
   it('should fill heading deeply', async () => {
-    const { result } = await compileMdx(
+    const rawJs = await compileMdx(
       `
 import { Steps } from 'nextra/components'
 
@@ -19,7 +19,7 @@ export const Test = ({value}) => value
 `,
       opts
     )
-    expect(clean(result)).resolves.toMatchInlineSnapshot(`
+    expect(clean(rawJs)).resolves.toMatchInlineSnapshot(`
       "/*@jsxRuntime automatic*/
       /*@jsxImportSource react*/
       'use strict'

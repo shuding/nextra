@@ -33,9 +33,9 @@ export async function createIndexPage(pageMap: PageMapItem[]): Promise<string> {
   if (hasCards) {
     result.push('</Cards>')
   }
-  const rawJsx = result.join('\n')
+  const rawMdx = result.join('\n')
 
-  const mdx = await compileMdx(rawJsx)
+  const rawJs = await compileMdx(rawMdx)
 
-  return mdx.result
+  return rawJs
 }

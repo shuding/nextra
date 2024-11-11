@@ -14,7 +14,7 @@ describe('remarkMdxTitle', () => {
   describe('should prioritize frontmatter', () => {
     it('yaml', async () => {
       const title = 'From yaml frontMatter'
-      const { result } = await compileMdx(
+      const rawJs = await compileMdx(
         `---
 title: ${title}
 ---
@@ -22,40 +22,40 @@ title: ${title}
 # Hello`,
         opts
       )
-      expect(clean(result)).resolves.toMatch(`const title = '${title}'`)
+      expect(clean(rawJs)).resolves.toMatch(`const title = '${title}'`)
     })
 
     it('esm', async () => {
       const title = 'From esm frontMatter'
-      const { result } = await compileMdx(
+      const rawJs = await compileMdx(
         `export const metadata = { title: '${title}' }
 
 # Hello`,
         opts
       )
-      expect(clean(result)).resolves.toMatch(`const title = '${title}'`)
+      expect(clean(rawJs)).resolves.toMatch(`const title = '${title}'`)
     })
   })
 
   it('should fallback to first h1', async () => {
-    const { result } = await compileMdx(
+    const rawJs = await compileMdx(
       `## h2
 # h1 1
 # h1 2
 `,
       opts
     )
-    expect(clean(result)).resolves.toMatch("const title = 'h1 1'")
+    expect(clean(rawJs)).resolves.toMatch("const title = 'h1 1'")
   })
 
   it('should fallback to capitalized filename', async () => {
-    const { result } = await compileMdx('', opts)
-    expect(clean(result)).resolves.toMatch("const title = 'My Test File'")
+    const rawJs = await compileMdx('', opts)
+    expect(clean(rawJs)).resolves.toMatch("const title = 'My Test File'")
   })
 
   it('should set metadata.title if missing', async () => {
-    const { result } = await compileMdx('# should attach', opts)
-    expect(clean(result)).resolves.toMatch(`export const metadata = {
+    const rawJs = await compileMdx('# should attach', opts)
+    expect(clean(rawJs)).resolves.toMatch(`export const metadata = {
   title: 'should attach'
 }`)
   })

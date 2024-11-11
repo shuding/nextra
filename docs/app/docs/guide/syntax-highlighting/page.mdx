@@ -173,7 +173,7 @@ export async function ANSI() {
   [42;1;39;0m PASS [0;32m Waiting for file changes...[0m
          [0;2mpress [0;1mh[0;2m to show help, press [0;1mq[0;2m to quit
 \`\`\``
-  const { result } = await compileMdx(`~~~md filename="Markdown"
+  const rawJs = await compileMdx(`~~~md filename="Markdown"
 ${rawAnsi}
 ~~~
 
@@ -181,7 +181,7 @@ Renders:
 
 ${rawAnsi}
 `)
-  return <MDXRemote compiledSource={result} />
+  return <MDXRemote compiledSource={rawJs} />
 }
 
 ## Supported Languages

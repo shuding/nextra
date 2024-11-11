@@ -48,7 +48,9 @@ export const remarkMdxFrontMatter: Plugin<[], Root> =
     )!
     const frontMatter = getFrontMatterASTObject(frontMatterNode)
 
-    file.data.frontMatter = estreeToValue(frontMatter)
+    if (estreeToValue(frontMatter).mdxOptions) {
+      throw new Error('`frontMatter.mdxOptions` is no longer supported')
+    }
   }
 
 function traverseArray(

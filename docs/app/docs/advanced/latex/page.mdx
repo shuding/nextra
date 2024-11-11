@@ -189,7 +189,7 @@ export async function MathJaxExample() {
 \\int_2^3x^3\\,\\mathrm{d}x
 ~~~
 `
-  const { result } = await compileMdx(
+  const rawJs = await compileMdx(
     rawMdx,
     {
       latex: {
@@ -207,5 +207,5 @@ export async function MathJaxExample() {
     }
   )
 
-  return <MDXRemote compiledSource={result} components={{ MathJax, MathJaxContext }} />
+  return <MDXRemote compiledSource={rawJs} components={{ MathJax, MathJaxContext }} />
 }
