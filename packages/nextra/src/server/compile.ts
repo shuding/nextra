@@ -83,11 +83,7 @@ export async function compileMdx(
     whiteListTagsStyling = [],
     lastCommitTime
   }: Partial<CompileMdxOptions> = {}
-): Promise<{
-  result: string
-  title?: string
-  frontMatter: FrontMatter
-}> {
+): Promise<string> {
   const {
     jsx = false,
     format: _format = 'mdx',
@@ -124,32 +120,10 @@ export async function compileMdx(
 
   try {
     const vFile = await processor.process(fileCompatible)
-
-    const data = vFile.data as {
-      title?: string
-      frontMatter: FrontMatter
-    }
-
-    const { title, frontMatter } = data
-    // https://github.com/shuding/nextra/issues/1032
-    const result = String(vFile).replaceAll('__esModule', '_\\_esModule')
-
-    if (typeof title !== 'string') {
-      logger.error('`title` is not defined')
-    }
-    if (!frontMatter) {
-      logger.error('`frontMatter` is not defined')
-    }
-
-    if (frontMatter.mdxOptions) {
-      throw new Error('`frontMatter.mdxOptions` is no longer supported')
-    }
-
-    return {
-      result,
-      title,
-      frontMatter
-    }
+    const rawJs = String(vFile)
+      // https://github.com/shuding/nextra/issues/1032
+      .replaceAll('__esModule', '_\\_esModule')
+    return rawJs
   } catch (error) {
     console.error(`[nextra] Error compiling ${filePath}.`)
     throw error
