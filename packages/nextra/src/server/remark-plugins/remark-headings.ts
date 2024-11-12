@@ -22,7 +22,7 @@ const SKIP_FOR_PARENT_NAMES = new Set(['Tab', 'Tabs.Tab'])
 export const remarkHeadings: Plugin<
   [{ exportName?: string; isRemoteContent?: boolean }],
   Root
-> = ({ exportName = 'useTOC', isRemoteContent }) => {
+> = ({ exportName = 'toc', isRemoteContent }) => {
   const headings: (Heading | string)[] = []
 
   const slugger = new Slugger()
@@ -34,9 +34,9 @@ export const remarkHeadings: Plugin<
       ast,
       [
         'heading',
-        // push partial component's `useTOC` export name to headings list
+        // push partial component's `toc` export name to headings list
         'mdxJsxFlowElement',
-        // verify .md/.mdx exports and attach named `useTOC` export
+        // verify .md/.mdx exports and attach named `toc` export
         'mdxjsEsm'
       ],
       (node, _index, parent) => {

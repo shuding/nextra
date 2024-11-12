@@ -24,17 +24,14 @@ bar[^1]
       "/*@jsxRuntime automatic*/
       /*@jsxImportSource react*/
       export const metadata = {}
-      export function useTOC(props) {
-        return [
-          {
-            value: 'foo',
-            id: 'foo',
-            depth: 2
-          }
-        ]
-      }
+      export const toc = [
+        {
+          value: 'foo',
+          id: 'foo',
+          depth: 2
+        }
+      ]
       function MDXLayout(props) {
-        const { toc = useTOC(props) } = props
         const _components = {
           a: 'a',
           h2: 'h2',
@@ -116,22 +113,19 @@ import { Steps } from 'nextra/components'
       /*@jsxImportSource react*/
       export const metadata = {}
       import { Steps } from 'nextra/components'
-      export function useTOC(props) {
-        return [
-          {
-            value: 'baz qux',
-            id: 'baz-qux',
-            depth: 2
-          },
-          {
-            value: 'foo bar',
-            id: 'foo-bar',
-            depth: 3
-          }
-        ]
-      }
+      export const toc = [
+        {
+          value: 'baz qux',
+          id: 'baz-qux',
+          depth: 2
+        },
+        {
+          value: 'foo bar',
+          id: 'foo-bar',
+          depth: 3
+        }
+      ]
       function MDXLayout(props) {
-        const { toc = useTOC(props) } = props
         const _components = {
           h2: 'h2',
           h3: 'h3',
@@ -191,104 +185,101 @@ export const metadata = {
         title: 'Heading 1',
         test: 'extract toc content'
       }
-      export function useTOC(props) {
-        return [
-          {
-            value: (
-              <>
-                {'Heading '}
-                {myVar}
-              </>
-            ),
-            id: 'heading-myvar',
-            depth: 2
-          },
-          {
-            value: (
-              <>
-                {'Heading '}
-                <span className="katex">
-                  <span className="katex-mathml">
-                    <math xmlns="http://www.w3.org/1998/Math/MathML">
-                      <semantics>
-                        <mrow>
-                          <mi>{'l'}</mi>
-                          <mi>{'a'}</mi>
-                          <mi>{'t'}</mi>
-                          <mi>{'e'}</mi>
-                          <mi>{'x'}</mi>
-                        </mrow>
-                        <annotation encoding="application/x-tex">{'latex'}</annotation>
-                      </semantics>
-                    </math>
-                  </span>
-                  <span className="katex-html" aria-hidden="true">
-                    <span className="base">
-                      <span
-                        className="strut"
-                        style={{
-                          height: '0.6944em'
-                        }}
-                      />
-                      <span
-                        className="mord mathnormal"
-                        style={{
-                          marginRight: '0.01968em'
-                        }}
-                      >
-                        {'l'}
-                      </span>
-                      <span className="mord mathnormal">{'a'}</span>
-                      <span className="mord mathnormal">{'t'}</span>
-                      <span className="mord mathnormal">{'e'}</span>
-                      <span className="mord mathnormal">{'x'}</span>
+      export const toc = [
+        {
+          value: (
+            <>
+              {'Heading '}
+              {myVar}
+            </>
+          ),
+          id: 'heading-myvar',
+          depth: 2
+        },
+        {
+          value: (
+            <>
+              {'Heading '}
+              <span className="katex">
+                <span className="katex-mathml">
+                  <math xmlns="http://www.w3.org/1998/Math/MathML">
+                    <semantics>
+                      <mrow>
+                        <mi>{'l'}</mi>
+                        <mi>{'a'}</mi>
+                        <mi>{'t'}</mi>
+                        <mi>{'e'}</mi>
+                        <mi>{'x'}</mi>
+                      </mrow>
+                      <annotation encoding="application/x-tex">{'latex'}</annotation>
+                    </semantics>
+                  </math>
+                </span>
+                <span className="katex-html" aria-hidden="true">
+                  <span className="base">
+                    <span
+                      className="strut"
+                      style={{
+                        height: '0.6944em'
+                      }}
+                    />
+                    <span
+                      className="mord mathnormal"
+                      style={{
+                        marginRight: '0.01968em'
+                      }}
+                    >
+                      {'l'}
                     </span>
+                    <span className="mord mathnormal">{'a'}</span>
+                    <span className="mord mathnormal">{'t'}</span>
+                    <span className="mord mathnormal">{'e'}</span>
+                    <span className="mord mathnormal">{'x'}</span>
                   </span>
                 </span>
-              </>
-            ),
-            id: 'heading-latex',
-            depth: 3
-          },
-          {
-            value: (
-              <>
-                {'Heading '}
-                <code>{'<Code />:{jsx}'}</code>
-              </>
-            ),
-            id: 'heading-code-jsx',
-            depth: 3
-          },
-          {
-            value: (
-              <>
-                <Test />
-                {' World'}
-              </>
-            ),
-            id: '-world',
-            depth: 4
-          },
-          {
-            value: 'String',
-            id: 'string',
-            depth: 5
-          },
-          {
-            value: '123',
-            id: '123',
-            depth: 6
-          },
-          {
-            value: 'Dada 123 true',
-            id: 'dada-123-true',
-            depth: 6
-          }
-        ]
-      }
+              </span>
+            </>
+          ),
+          id: 'heading-latex',
+          depth: 3
+        },
+        {
+          value: (
+            <>
+              {'Heading '}
+              <code>{'<Code />:{jsx}'}</code>
+            </>
+          ),
+          id: 'heading-code-jsx',
+          depth: 3
+        },
+        {
+          value: (
+            <>
+              <Test />
+              {' World'}
+            </>
+          ),
+          id: '-world',
+          depth: 4
+        },
+        {
+          value: 'String',
+          id: 'string',
+          depth: 5
+        },
+        {
+          value: '123',
+          id: '123',
+          depth: 6
+        },
+        {
+          value: 'Dada 123 true',
+          id: 'dada-123-true',
+          depth: 6
+        }
+      ]
       function MDXLayout(props) {
-        const { toc = useTOC(props) } = props
         const _components = {
           h1: 'h1',
           h2: 'h2',
@@ -345,17 +336,14 @@ import { MDXRemote } from 'nextra/mdx-remote'
           filePath: '[[...slug]].mdx'
         }
         import { MDXRemote } from 'nextra/mdx-remote'
-        export function useTOC(props) {
-          return [
-            {
-              value: 'hello',
-              id: 'hello',
-              depth: 2
-            }
-          ]
-        }
+        export const toc = [
+          {
+            value: 'hello',
+            id: 'hello',
+            depth: 2
+          }
+        ]
         function MDXLayout(props) {
-          const { toc = useTOC(props) } = props
           const _components = {
             h2: 'h2',
             ...props.components
@@ -375,9 +363,6 @@ import { MDXRemote } from 'nextra/mdx-remote'
         }
         "
       `)
-      // expect(res).not.toMatch('const frontMatter')
-      // expect(res).not.toMatch('function useTOC')
-      // expect(res).toMatch('MDXContent')
     })
 
     it("with outputFormat: 'function-body'", async () => {
@@ -398,22 +383,20 @@ export const myVar = 123
         const { Fragment: _Fragment, jsx: _jsx, jsxs: _jsxs } = arguments[0]
         const metadata = {}
         const myVar = 123
-        function useTOC(props) {
-          return [
-            {
-              value: 'bar',
-              id: 'bar',
-              depth: 2
-            },
-            {
-              value: _jsxs(_Fragment, {
-                children: ['123 ', myVar]
-              }),
-              id: '123-myvar',
-              depth: 3
-            }
-          ]
-        }
+        const toc = [
+          {
+            value: 'bar',
+            id: 'bar',
+            depth: 2
+          },
+          {
+            value: _jsxs(_Fragment, {
+              children: ['123 ', myVar]
+            }),
+            id: '123-myvar',
+            depth: 3
+          }
+        ]
         function _createMdxContent(props) {
           const _components = {
               h2: 'h2',
@@ -442,7 +425,7 @@ export const myVar = 123
         return {
           metadata,
           myVar,
-          useTOC,
+          toc,
           default: _createMdxContent
         }
         function _missingMdxReference(id, component) {
@@ -458,7 +441,7 @@ export const myVar = 123
       `)
       expect(rawJs).toMatch('default: _createMdxContent')
       expect(rawJs).toMatch('const metadata = {')
-      expect(rawJs).toMatch('function useTOC')
+      expect(rawJs).toMatch('const toc = [')
       expect(rawJs).not.toMatch('MDXContent')
     })
   })

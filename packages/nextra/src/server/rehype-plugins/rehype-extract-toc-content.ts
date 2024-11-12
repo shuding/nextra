@@ -5,7 +5,7 @@ import type { Plugin } from 'unified'
 import { visit } from 'unist-util-visit'
 import type { Heading } from '../../types.js'
 import { TOC_HEADING_RE } from '../constants.js'
-import { createAstObject } from '../utils.js'
+import { createAstExportConst, createAstObject } from '../utils.js'
 
 export const rehypeExtractTocContent: Plugin<
   [{ isRemoteContent?: boolean }],
@@ -43,10 +43,7 @@ export const rehypeExtractTocContent: Plugin<
       if (typeof n === 'string') {
         return {
           type: 'SpreadElement',
-          argument: {
-            type: 'CallExpression',
-            callee: { type: 'Identifier', name: n }
-          }
+          argument: { type: 'Identifier', name: n }
         }
       }
 
@@ -83,24 +80,7 @@ export const rehypeExtractTocContent: Plugin<
       data: {
         estree: {
           body: [
-            {
-              type: 'ExportNamedDeclaration',
-              specifiers: [],
-              declaration: {
-                type: 'FunctionDeclaration',
-                id: { type: 'Identifier', name: 'useTOC' },
-                params: [{ type: 'Identifier', name: 'props' }],
-                body: {
-                  type: 'BlockStatement',
-                  body: [
-                    {
-                      type: 'ReturnStatement',
-                      argument: { type: 'ArrayExpression', elements }
-                    }
-                  ]
-                }
-              }
-            }
+            createAstExportConst('toc', { type: 'ArrayExpression', elements })
           ]
         }
       }

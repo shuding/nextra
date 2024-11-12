@@ -6,9 +6,7 @@ exports[`Process heading > code-h1 1`] = `
 export const metadata = {
   title: 'codegen.yml'
 }
-export function useTOC(props) {
-  return []
-}
+export const toc = []
 function MDXLayout(props) {
   const _components = {
     code: 'code',
@@ -30,9 +28,7 @@ exports[`Process heading > code-with-text-h1 1`] = `
 export const metadata = {
   title: 'codegen.yml file'
 }
-export function useTOC(props) {
-  return []
-}
+export const toc = []
 function MDXLayout(props) {
   const _components = {
     code: 'code',
@@ -60,9 +56,7 @@ export const TagName = () => {
   const { tag } = useRouter().query
   return tag || null
 }
-export function useTOC(props) {
-  return []
-}
+export const toc = []
 function MDXLayout(props) {
   const _components = {
     h1: 'h1',
@@ -83,17 +77,14 @@ exports[`Process heading > no-h1 1`] = `
 "/*@jsxRuntime automatic*/
 /*@jsxImportSource react*/
 export const metadata = {}
-export function useTOC(props) {
-  return [
-    {
-      value: 'H2',
-      id: 'h2',
-      depth: 2
-    }
-  ]
-}
+export const toc = [
+  {
+    value: 'H2',
+    id: 'h2',
+    depth: 2
+  }
+]
 function MDXLayout(props) {
-  const { toc = useTOC(props) } = props
   const _components = {
     h2: 'h2',
     ...props.components
@@ -109,9 +100,7 @@ exports[`Process heading > static-h1 1`] = `
 export const metadata = {
   title: 'Hello World'
 }
-export function useTOC(props) {
-  return []
-}
+export const toc = []
 function MDXLayout(props) {
   const _components = {
     h1: 'h1',

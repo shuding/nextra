@@ -1,4 +1,4 @@
-/* eslint-disable react-hooks/rules-of-hooks -- false positive, useMDXComponents/useTOC are not react hooks */
+/* eslint-disable react-hooks/rules-of-hooks -- false positive, useMDXComponents are not react hooks */
 import { notFound } from 'next/navigation'
 import { useMDXComponents } from 'nextra-theme-docs'
 import { compileMdx } from 'nextra/compile'
@@ -37,9 +37,9 @@ export default async function Page(props) {
   const data = await response.text()
   const rawJs = await compileMdx(data, { filePath })
 
-  const { default: MDXContent, useTOC, metadata } = evaluate(rawJs)
+  const { default: MDXContent, toc, metadata } = evaluate(rawJs)
   return (
-    <Wrapper toc={useTOC()} metadata={metadata}>
+    <Wrapper toc={toc} metadata={metadata}>
       <MDXContent components={components} />
     </Wrapper>
   )
