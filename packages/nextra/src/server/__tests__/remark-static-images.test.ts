@@ -47,8 +47,7 @@ describe('remarkStaticImages', () => {
             </_components.p>
           </>
         )
-      }
-      "
+      }"
     `)
   })
 
@@ -112,8 +111,7 @@ describe('remarkStaticImages', () => {
             </_components.p>
           </>
         )
-      }
-      "
+      }"
     `)
   })
 })

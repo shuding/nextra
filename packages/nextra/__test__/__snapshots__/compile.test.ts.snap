@@ -18,8 +18,7 @@ function MDXLayout(props) {
       <_components.code>{'codegen.yml'}</_components.code>
     </_components.h1>
   )
-}
-"
+}"
 `;
 
 exports[`Process heading > code-with-text-h1 1`] = `
@@ -41,8 +40,7 @@ function MDXLayout(props) {
       {' file'}
     </_components.h1>
   )
-}
-"
+}"
 `;
 
 exports[`Process heading > dynamic-h1 1`] = `
@@ -69,8 +67,7 @@ function MDXLayout(props) {
       {'"'}
     </_components.h1>
   )
-}
-"
+}"
 `;
 
 exports[`Process heading > no-h1 1`] = `
@@ -90,8 +87,7 @@ function MDXLayout(props) {
     ...props.components
   }
   return <_components.h2 id={toc[0].id}>{toc[0].value}</_components.h2>
-}
-"
+}"
 `;
 
 exports[`Process heading > static-h1 1`] = `
@@ -107,6 +103,5 @@ function MDXLayout(props) {
     ...props.components
   }
   return <_components.h1>{'Hello World'}</_components.h1>
-}
-"
+}"
 `;

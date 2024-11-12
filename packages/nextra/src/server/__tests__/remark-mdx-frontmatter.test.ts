@@ -31,8 +31,7 @@ describe('remarkMdxFrontMatter', () => {
           metadata,
           toc,
           default: _createMdxContent
-        }
-        "
+        }"
       `)
     })
 
@@ -59,8 +58,7 @@ describe('remarkMdxFrontMatter', () => {
           metadata,
           toc,
           default: _createMdxContent
-        }
-        "
+        }"
       `)
     })
     it('should add file.data', () => {

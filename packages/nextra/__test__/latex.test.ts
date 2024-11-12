@@ -94,8 +94,7 @@ describe('LaTeX', () => {
           metadata,
           toc,
           default: _createMdxContent
-        }
-        "
+        }"
       `)
     })
   })
@@ -130,8 +129,7 @@ describe('LaTeX', () => {
               </_components.p>
             </MathJaxContext>
           )
-        }
-        "
+        }"
       `)
     })
 
@@ -150,8 +148,7 @@ describe('LaTeX', () => {
               <MathJax>{'\\\\[x^2\\n\\\\]'}</MathJax>
             </MathJaxContext>
           )
-        }
-        "
+        }"
       `)
     })
 
@@ -189,8 +186,7 @@ ${MATH_LANG}`
               <MathJax>{'\\\\[x^2\\n\\\\]'}</MathJax>
             </MathJaxContext>
           )
-        }
-        "
+        }"
       `)
     })
   })

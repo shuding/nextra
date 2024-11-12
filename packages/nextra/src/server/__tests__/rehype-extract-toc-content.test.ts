@@ -88,8 +88,7 @@ bar[^1]
             </_components.section>
           </>
         )
-      }
-      "
+      }"
     `)
   })
 
@@ -142,8 +141,7 @@ import { Steps } from 'nextra/components'
             </Steps>
           </>
         )
-      }
-      "
+      }"
     `)
   })
 
@@ -310,8 +308,7 @@ export const metadata = {
             <_components.h6 id={toc[6].id}>{toc[6].value}</_components.h6>
           </>
         )
-      }
-      "
+      }"
     `)
   })
 
@@ -360,8 +357,7 @@ import { MDXRemote } from 'nextra/mdx-remote'
               />
             </>
           )
-        }
-        "
+        }"
       `)
     })
 
@@ -436,8 +432,7 @@ export const myVar = 123
               id +
               '\` to be defined: you likely forgot to import, pass, or provide it.'
           )
-        }
-        "
+        }"
       `)
       expect(rawJs).toMatch('default: _createMdxContent')
       expect(rawJs).toMatch('const metadata = {')
