@@ -21,7 +21,7 @@ export const rehypeExtractTocContent: Plugin<[], Root> = () => (ast, file) => {
       TocMap[id] = node
     }
   })
-  
+
   const elements = toc.map((name, index) => {
     if (typeof name === 'string') {
       return {
