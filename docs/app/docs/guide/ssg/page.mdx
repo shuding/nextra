@@ -1,3 +1,7 @@
+---
+icon: LightningIcon
+---
+
 import { compileMdx } from 'nextra/compile'
 import { Callout } from 'nextra/components'
 import { MDXRemote } from 'nextra/mdx-remote'
@@ -49,6 +53,6 @@ Here's the MDX code for the example above:
 ${starsComponent}
 ~~~
 `
-  const { result } = await compileMdx(mdx)
-  return <MDXRemote compiledSource={result} components={{ Callout }} />
+  const rawJs = await compileMdx(mdx)
+  return <MDXRemote compiledSource={rawJs} components={{ Callout }} />
 }

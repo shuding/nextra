@@ -11,49 +11,21 @@ import {
 } from '@components/icons'
 import { Cards } from 'nextra/components'
 import { TerminalIcon, TypeScriptIcon } from 'nextra/icons'
+import { MDXRemote } from 'nextra/mdx-remote'
+import { createIndexPage, getPageMap } from 'nextra/page-map'
 
 # Advanced
 
-<Cards>
-  <Cards.Card
-    icon={<TerminalIcon />}
-    title="Npm2Yarn"
-    href="/docs/advanced/npm2yarn"
-  />
-  <Cards.Card
-    icon={<DiagramIcon />}
-    title="Mermaid"
-    href="/docs/advanced/mermaid"
-  />
-  <Cards.Card
-    icon={<TailwindIcon />}
-    title="Tailwind CSS"
-    href="/docs/advanced/tailwind-css"
-  />
-  <Cards.Card
-    icon={<FormulaIcon />}
-    title="LaTeX"
-    href="/docs/advanced/latex"
-  />
-  <Cards.Card
-    icon={<TableIcon />}
-    title="Rendering Tables"
-    href="/docs/advanced/table"
-  />
-  <Cards.Card
-    icon={<TypeScriptIcon />}
-    title="TypeScript"
-    href="/docs/advanced/typescript"
-  />
-  <Cards.Card
-    icon={<CloudIcon />}
-    title="Remote Content"
-    href="/docs/advanced/remote"
-  />
-  <Cards.Card title="Playground" href="/docs/advanced/playground" />
-  <Cards.Card
-    title="Customize Cascade Layers"
-    href="/docs/advanced/customize-the-cascade-layers"
-  />
-  <Cards.Card title="Twoslash Support" href="/docs/advanced/twoslash-support" />
-</Cards>
+<MDXRemote
+  compiledSource={await createIndexPage(await getPageMap('', '/docs/advanced'))}
+  components={{
+    Cards,
+    TerminalIcon,
+    DiagramIcon,
+    TailwindIcon,
+    FormulaIcon,
+    TableIcon,
+    TypeScriptIcon,
+    CloudIcon
+  }}
+/>

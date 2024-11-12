@@ -1,19 +1,16 @@
 import path from 'node:path'
 import { transformerTwoslash } from '@shikijs/twoslash'
 import { findPagesDir } from 'next/dist/lib/find-pages-dir.js'
-import slash from 'slash'
 import type { LoaderContext } from 'webpack'
-import type { LoaderOptions, PageOpts } from '../types.js'
+import type { LoaderOptions } from '../types.js'
 import { compileMetadata } from './compile-metadata.js'
 import { compileMdx } from './compile.js'
+import { CWD, IS_PRODUCTION, METADATA_ONLY_RQ } from './constants.js'
 import {
-  CWD,
-  GET_PAGE_MAP_PATH,
-  IS_PRODUCTION,
-  METADATA_ONLY_RQ,
-  PAGE_MAP_PLACEHOLDER_PATH
-} from './constants.js'
-import { getContentDirectory } from './index.js'
+  GET_PAGE_MAP_RE,
+  getContentDirectory,
+  PAGE_MAP_PLACEHOLDER_RE
+} from './index.js'
 import { findMetaAndPageFilePaths } from './page-map/find-meta-and-page-file-paths.js'
 import { convertPageMapToJs } from './page-map/to-js.js'
 import { convertToPageMap } from './page-map/to-page-map.js'
@@ -75,9 +72,8 @@ export async function loader(
     whiteListTagsStyling
   } = this.getOptions()
   const { resourcePath, resourceQuery } = this
-  const filePath = slash(resourcePath)
 
-  if (filePath.includes(PAGE_MAP_PLACEHOLDER_PATH)) {
+  if (PAGE_MAP_PLACEHOLDER_RE.test(resourcePath)) {
     const locale = resourceQuery.replace('?lang=', '')
     if (!IS_PRODUCTION) {
       // Add `app` and `content` folders as the dependencies, so Webpack will
@@ -102,7 +98,7 @@ export async function loader(
     const rawJs = await convertPageMapToJs({ pageMap, mdxPages })
     return rawJs
   }
-  if (filePath.includes(GET_PAGE_MAP_PATH)) {
+  if (GET_PAGE_MAP_RE.test(resourcePath)) {
     const rawJs = replaceDynamicResourceQuery(
       source,
       'import(`./placeholder.js?lang=${lang}`)',
@@ -112,11 +108,10 @@ export async function loader(
   }
 
   if (!IS_PRODUCTION && resourceQuery === METADATA_ONLY_RQ) {
-    const rawJs = await compileMetadata(source, { filePath })
+    const rawJs = await compileMetadata(source, { filePath: resourcePath })
     return rawJs
   }
-
-  const { result, readingTime } = await compileMdx(source, {
+  const compiledSource = await compileMdx(source, {
     mdxOptions: {
       ...mdxOptions,
       jsx: true,
@@ -140,31 +135,22 @@ export async function loader(
     search,
     latex,
     codeHighlight,
-    filePath,
+    filePath: resourcePath,
     useCachedCompiler: true,
     isPageImport,
-    whiteListTagsStyling
-  })
-
-  const restProps: PageOpts['metadata'] = {
-    filePath: slash(path.relative(CWD, filePath)),
+    whiteListTagsStyling,
     // Run only on production because it can slow down Fast Refresh for uncommitted files
     // https://github.com/shuding/nextra/issues/3675#issuecomment-2466416366
-    timestamp: IS_PRODUCTION ? await getLastCommitTime(filePath) : NOW,
-    readingTime
-  }
-  const enhancedMetadata = `Object.assign(metadata, ${JSON.stringify(restProps)})`
+    lastCommitTime: IS_PRODUCTION ? await getLastCommitTime(resourcePath) : NOW
+  })
 
   // Imported as a normal component, no need to add the layout.
   if (!isPageImport) {
-    return `${result}   
-${enhancedMetadata}
+    return `${compiledSource}   
 export default MDXLayout`
   }
   const rawJs = `import { HOC_MDXWrapper } from 'nextra/setup-page'
-${result}
-
-${enhancedMetadata}
+${compiledSource}
 export default HOC_MDXWrapper(
   MDXLayout,
   {metadata, title, toc:useTOC()}

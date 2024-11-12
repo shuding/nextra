@@ -33,8 +33,8 @@ export default async function Page(props) {
     `https://raw.githubusercontent.com/${user}/${repo}/${branch}/${docsPath}${filePath}`
   )
   const data = await response.text()
-  const { result } = await compileMdx(data, { filePath })
-  const { default: MDXContent, useTOC, metadata, title } = evaluate(result)
+  const rawJs = await compileMdx(data, { filePath })
+  const { default: MDXContent, useTOC, metadata, title } = evaluate(rawJs)
 
   return (
     <Wrapper toc={useTOC()} metadata={metadata} title={title}>

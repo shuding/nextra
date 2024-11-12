@@ -9,8 +9,8 @@ const options = {
 describe('LaTeX', () => {
   describe('KaTeX', () => {
     it('should convert ```math code block language', async () => {
-      const { result } = await compileMdx('```math\nx^2\n```', options)
-      expect(clean(result)).resolves.toMatchInlineSnapshot(`
+      const rawJs = await compileMdx('```math\nx^2\n```', options)
+      expect(clean(rawJs)).resolves.toMatchInlineSnapshot(`
         "/*@jsxRuntime automatic*/
         /*@jsxImportSource react*/
         'use strict'
@@ -114,8 +114,8 @@ describe('LaTeX', () => {
     const MATH_LANG = '```math\nx^2\n```'
 
     it('should convert math inline', async () => {
-      const { result } = await compileMdx(INLINE_MATH, options)
-      expect(clean(result)).resolves.toMatchInlineSnapshot(`
+      const rawJs = await compileMdx(INLINE_MATH, options)
+      expect(clean(rawJs)).resolves.toMatchInlineSnapshot(`
         "/*@jsxRuntime automatic*/
         /*@jsxImportSource react*/
         export const title = ''
@@ -144,8 +144,8 @@ describe('LaTeX', () => {
     })
 
     it('should convert ```math code block language', async () => {
-      const { result } = await compileMdx(MATH_LANG, options)
-      expect(clean(result)).resolves.toMatchInlineSnapshot(`
+      const rawJs = await compileMdx(MATH_LANG, options)
+      expect(clean(rawJs)).resolves.toMatchInlineSnapshot(`
         "/*@jsxRuntime automatic*/
         /*@jsxImportSource react*/
         export const title = ''
@@ -175,8 +175,8 @@ import foo from 'foo'
 export let bar
 
 ${MATH_LANG}`
-      const { result } = await compileMdx(rawMdx, options)
-      expect(clean(result)).resolves.toMatchInlineSnapshot(`
+      const rawJs = await compileMdx(rawMdx, options)
+      expect(clean(rawJs)).resolves.toMatchInlineSnapshot(`
         "/*@jsxRuntime automatic*/
         /*@jsxImportSource react*/
         export const title = ''

@@ -11,60 +11,26 @@ import {
   TableIcon,
   WarningIcon
 } from '@components/icons'
-import { compileMdx } from 'nextra/compile'
 import { Cards } from 'nextra/components'
 import { MDXRemote } from 'nextra/mdx-remote'
-import { getPageMap } from 'nextra/page-map'
+import { createIndexPage, getPageMap } from 'nextra/page-map'
 
 # Built-ins
 
 Nextra includes a couple of built-in components that you can use to better style
 your content:
 
-export async function List() {
-  const pageMap = await getPageMap()
-  const [_meta, ...pages] = pageMap
-    .find(item => item.name === 'docs')
-    .children.find(item => item.name === 'built-ins').children
-  const layoutIndex = pages.findIndex(item => item.type === 'separator')
-  const contentIndex = pages.findLastIndex(item => item.type === 'separator')
-  function renderCard(item) {
-    const { icon, sidebarTitle } = item.frontMatter
-    const Icon = icon ? `<${icon}/>` : 'null'
-    return `<Cards.Card
-title="${sidebarTitle}"
-href="${item.route}"
-icon={${Icon}}
-/>`
-  }
-  const { result } = await compileMdx(`## ${pages[layoutIndex].title}
-<Cards>
-${pages
-  .slice(layoutIndex + 1, contentIndex)
-  .map(renderCard)
-  .join('')}
-</Cards>
-## ${pages[contentIndex].title}
-<Cards>
-${pages
-  .slice(contentIndex + 1)
-  .map(renderCard)
-  .join('')}
-</Cards>`)
-  return (
-    <MDXRemote
-      compiledSource={result}
-      components={{
-        Cards,
-        WarningIcon,
-        CardsIcon,
-        IdCardIcon,
-        OneIcon,
-        FolderTreeIcon,
-        TableIcon
-      }}
-    />
-  )
-}
-
-<List />
+<MDXRemote
+  compiledSource={await createIndexPage(
+    await getPageMap('', '/docs/built-ins')
+  )}
+  components={{
+    Cards,
+    WarningIcon,
+    CardsIcon,
+    IdCardIcon,
+    OneIcon,
+    FolderTreeIcon,
+    TableIcon
+  }}
+/>

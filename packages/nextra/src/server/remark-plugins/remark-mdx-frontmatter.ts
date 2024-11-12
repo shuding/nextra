@@ -1,11 +1,11 @@
 import type { ArrayExpression, ObjectExpression } from 'estree'
 import { valueToEstree } from 'estree-util-value-to-estree'
 import type { MdxjsEsm } from 'hast-util-to-estree/lib/handlers/mdxjs-esm'
-import type { Parent, Root } from 'mdast'
+import type { Root } from 'mdast'
 import type { Plugin } from 'unified'
 import { parse as parseYaml } from 'yaml'
 import { createAstExportConst } from '../utils.js'
-import { isExportNode } from './remark-mdx-title.js'
+import { getFrontMatterASTObject, isExportNode } from './remark-mdx-title.js'
 
 function createNode(data: Record<string, unknown>) {
   return {
@@ -19,7 +19,7 @@ function createNode(data: Record<string, unknown>) {
 }
 
 export const remarkMdxFrontMatter: Plugin<[], Root> =
-  () => (ast: Parent, file) => {
+  () => (ast: Root, file) => {
     const yamlNodeIndex = ast.children.findIndex(node => node.type === 'yaml')
     const esmNodeIndex = ast.children.findIndex((node: any) =>
       isExportNode(node, 'metadata')
@@ -43,15 +43,17 @@ export const remarkMdxFrontMatter: Plugin<[], Root> =
       ast.children.unshift(createNode({}))
     }
 
-    // @ts-expect-error -- fixme
-    const frontMatter = ast.children.find(
-      node =>
-        // @ts-expect-error -- fixme
-        isExportNode(node, 'metadata')
-      // @ts-expect-error -- fixme
-    ).data.estree.body[0].declaration.declarations[0].init.properties
-
-    file.data.frontMatter = estreeToValue(frontMatter)
+    const frontMatterNode = ast.children.find((node: any) =>
+      isExportNode(node, 'metadata')
+    )!
+    const frontMatter = getFrontMatterASTObject(frontMatterNode)
+    const frontMatterValue = estreeToValue(frontMatter)
+    if (frontMatterValue.mdxOptions) {
+      throw new Error('`frontMatter.mdxOptions` is no longer supported')
+    }
+    if (process.env.NODE_ENV === 'test') {
+      file.data.frontMatter = frontMatterValue
+    }
   }
 
 function traverseArray(

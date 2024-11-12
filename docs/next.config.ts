@@ -28,11 +28,6 @@ const nextConfig = withNextra({
       permanent: true
     },
     {
-      source: '/docs/docs-theme/built-ins',
-      destination: '/docs/built-ins',
-      permanent: true
-    },
-    {
       source: '/docs/guide/advanced/:slug',
       destination: '/docs/advanced/:slug',
       permanent: true

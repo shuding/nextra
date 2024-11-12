@@ -28,8 +28,10 @@ const withNextra = nextra({
   theme: './theme.tsx'
 })
 
-// If you have other Next.js configurations, you can pass them as the parameter:
-// export default withNextra({ /* other next.js config */ })
+// You can include other Next.js configuration options here, in addition to Nextra settings:
+export default withNextra({
+  // ... Other Next.js config options
+})
 ```
 
 ### Create a Basic Theme
@@ -37,10 +39,8 @@ const withNextra = nextra({
 You can now start working on your theme! In your root directory, create the
 corresponding `theme.tsx` file with basic content:
 
-```tsx filename="theme.tsx" /children/
-import type { NextraThemeLayoutProps } from 'nextra'
-
-export default function Layout({ children }: NextraThemeLayoutProps) {
+```tsx filename="theme.jsx" /children/
+export default function Layout({ children }) {
   return (
     <div>
       <h1>My Theme</h1>
@@ -52,7 +52,7 @@ export default function Layout({ children }: NextraThemeLayoutProps) {
 
 It accepts a `children` prop, which is the MDX content of the current page, and
 wraps some other elements around the content. After creating the theme, you can
-simply add a MDX file as `pages/index.mdx` and see the result:
+simply add a MDX file as `content/index.mdx` and see the result:
 
 <Screenshot>![Custom theme](/assets/docs/custom-theme.png)</Screenshot>
 

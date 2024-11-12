@@ -11,7 +11,7 @@ const opts = {
 
 describe('rehypeExtractTocContent', () => {
   it('should work with footnotes or user ids', async () => {
-    const { result } = await compileMdx(
+    const rawJs = await compileMdx(
       `
 ## foo
 bar[^1]
@@ -20,7 +20,7 @@ bar[^1]
 `,
       opts
     )
-    expect(clean(result)).resolves.toMatchInlineSnapshot(`
+    expect(clean(rawJs)).resolves.toMatchInlineSnapshot(`
       "/*@jsxRuntime automatic*/
       /*@jsxImportSource react*/
       export const title = ''
@@ -98,7 +98,7 @@ bar[^1]
   })
 
   it('should fill heading deeply', async () => {
-    const { result } = await compileMdx(
+    const rawJs = await compileMdx(
       `
 import { Steps } from 'nextra/components'
 
@@ -112,7 +112,7 @@ import { Steps } from 'nextra/components'
 `,
       opts
     )
-    expect(clean(result)).resolves.toMatchInlineSnapshot(`
+    expect(clean(rawJs)).resolves.toMatchInlineSnapshot(`
       "/*@jsxRuntime automatic*/
       /*@jsxImportSource react*/
       export const title = ''
@@ -156,7 +156,7 @@ import { Steps } from 'nextra/components'
   })
 
   it('should extract', async () => {
-    const { result } = await compileMdx(
+    const rawJs = await compileMdx(
       `
 # Heading 1
 
@@ -184,7 +184,7 @@ export const metadata = {
     `,
       opts
     )
-    expect(clean(result)).resolves.toMatchInlineSnapshot(`
+    expect(clean(rawJs)).resolves.toMatchInlineSnapshot(`
       "/*@jsxRuntime automatic*/
       /*@jsxImportSource react*/
       export const title = 'Heading 1'
@@ -336,17 +336,17 @@ import { MDXRemote } from 'nextra/mdx-remote'
 
 <MDXRemote components={{ Callout, $Tabs: Tabs }} />`
 
-      const { result } = await compileMdx(rawMdx, {
+      const rawJs = await compileMdx(rawMdx, {
         ...opts,
         filePath: '[[...slug]].mdx'
       })
-      const res = await clean(result)
-
-      expect(res).toMatchInlineSnapshot(`
+      expect(clean(rawJs)).resolves.toMatchInlineSnapshot(`
         "/*@jsxRuntime automatic*/
         /*@jsxImportSource react*/
         export const title = '[[...slug]]'
-        export const metadata = {}
+        export const metadata = {
+          filePath: '[[...slug]].mdx'
+        }
         import { MDXRemote } from 'nextra/mdx-remote'
         export function useTOC(props) {
           return [
@@ -395,10 +395,8 @@ export const myVar = 123
 
 ### 123 {myVar}`
 
-      const { result } = await compileMdx(rawMdx)
-      const res = await clean(result)
-
-      expect(res).toMatchInlineSnapshot(`
+      const rawJs = await compileMdx(rawMdx)
+      expect(clean(rawJs)).resolves.toMatchInlineSnapshot(`
         "'use strict'
         const { Fragment: _Fragment, jsx: _jsx, jsxs: _jsxs } = arguments[0]
         const title = ''
@@ -463,10 +461,10 @@ export const myVar = 123
         }
         "
       `)
-      expect(res).toMatch('default: _createMdxContent')
-      expect(res).toMatch('const metadata = {')
-      expect(res).toMatch('function useTOC')
-      expect(res).not.toMatch('MDXContent')
+      expect(rawJs).toMatch('default: _createMdxContent')
+      expect(rawJs).toMatch('const metadata = {')
+      expect(rawJs).toMatch('function useTOC')
+      expect(rawJs).not.toMatch('MDXContent')
     })
   })
 })

@@ -1,6 +1,7 @@
-export const metadata = {
-  sidebarTitle: 'Custom CSS'
-}
+---
+sidebarTitle: Custom CSS
+icon: BrushIcon
+---
 
 # Custom CSS Support
 
@@ -21,16 +22,15 @@ body {
 }
 ```
 
-You can create a `pages/_app.js` file and import your CSS files there:
+To apply your global styles, import your CSS file in the root layout file:
 
-```jsx filename="pages/_app.js"
-import '../styles.css'
+```jsx filename="app/layout.jsx"
+import '../path/to/your/styles.css'
 
-// This default export is required in a new `pages/_app.js` file.
-export default function MyApp({ Component, pageProps }) {
-  return <Component {...pageProps} />
+export default async function RootLayout({ children }) {
+  // ... Your layout logic here
 }
 ```
 
-To learn more about CSS support in Next.js, check out the
-[Next.js documentation](https://nextjs.org/docs/basic-features/built-in-css-support).
+For more information on how to use CSS in Next.js, check out the
+[Next.js CSS Support documentation](https://nextjs.org/docs/basic-features/built-in-css-support).

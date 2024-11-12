@@ -1,6 +1,7 @@
-export const metadata = {
-  sidebarTitle: 'Get Started'
-}
+---
+sidebarTitle: Get Started
+icon: ChevronRightIcon
+---
 
 import InstallNextraTheme from '@components/install-nextra-theme.mdx'
 import ReadeToGo from '@components/ready-to-go.mdx'
@@ -53,45 +54,84 @@ npm i next react react-dom nextra nextra-theme-docs
 
 <InstallNextraTheme />
 
-### Add Next.js Config
+### Add `mdx-components.js` in the root directory
 
-Create the following `next.config.mjs` file in your project's root directory:
+```ts filename="mdx-components.js"
+import { useMDXComponents as getDocsMDXComponents } from 'nextra-theme-docs'
 
-```js filename="next.config.mjs"
-import nextra from 'nextra'
+// Get the default MDX components from Nextra Docs theme
+const docsComponents = getDocsMDXComponents()
 
-const withNextra = nextra({
-  theme: 'nextra-theme-docs',
-  themeConfig: './theme.config.jsx'
-})
-
-export default withNextra()
-
-// If you have other Next.js configurations, you can pass them as the parameter:
-// export default withNextra({ /* other next.js config */ })
-```
-
-With the above configuration, Nextra can handle Markdown files in your Next.js
-project, with the specified theme. Other Nextra configurations can be found in
-[Guide](/docs/guide).
-
-### Create Docs Theme Config
-
-Lastly, create the corresponding `theme.config.jsx` file in your project's root
-directory. This will be used to configure the Nextra Docs theme:
-
-```jsx filename="theme.config.jsx"
-export default {
-  logo: <span>My Nextra Documentation</span>,
-  project: {
-    link: 'https://github.com/shuding/nextra'
+// Merge custom components with default Nextra components
+export function useMDXComponents(components) {
+  return {
+    ...docsComponents,
+    ...components
   }
-  // ... other theme options
 }
 ```
 
-Full theme configurations can be found
-[here](/docs/docs-theme/theme-configuration).
+> [!TIP]
+>
+> You can use `.jsx`, `.ts`, or `.tsx` extensions for your `mdx-components`
+> file.
+
+### Create the Root Layout
+
+Next, create the root layout of your application inside the `app` folder. This
+layout will be used to configure the Nextra Docs Theme:
+
+```jsx filename="app/layout.jsx"
+import { Footer, Layout, Navbar } from 'nextra-theme-docs'
+import { Banner, Head } from 'nextra/components'
+import { getPageMap } from 'nextra/page-map'
+import 'nextra-theme-docs/style.css'
+
+export const metadata = {
+  // Define your metadata here
+  // For more information on metadata API, see: https://nextjs.org/docs/app/building-your-application/optimizing/metadata
+}
+
+const banner = <Banner storageKey="some-key">Nextra 4.0 is released 🎉</Banner>
+const navbar = (
+  <Navbar
+    logo={<b>Nextra</b>}
+    // ... Your additional navbar options
+  />
+)
+const footer = <Footer>MIT {new Date().getFullYear()} © Nextra.</Footer>
+
+export default async function RootLayout({ children }) {
+  return (
+    <html
+      // Not required, but good for SEO
+      lang="en"
+      // Required to be set
+      dir="ltr"
+      // Suggested by `next-themes` package https://github.com/pacocoursey/next-themes#with-app
+      suppressHydrationWarning
+    >
+      <Head
+      // ... Your additional head options
+      >
+        {/* Your additional tags should be passed as `children` of `<Head>` element */}
+      </Head>
+      <body>
+        <Layout
+          banner={banner}
+          navbar={navbar}
+          pageMap={await getPageMap()}
+          docsRepositoryBase="https://github.com/shuding/nextra/tree/main/docs"
+          footer={footer}
+          // ... Your additional layout options
+        >
+          {children}
+        </Layout>
+      </body>
+    </html>
+  )
+}
+```
 
 <ReadeToGo />
 

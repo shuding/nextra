@@ -1,11 +1,14 @@
-import { FileIcon, NewsletterIcon } from '@components/icons'
-import { Cards, FileTree } from 'nextra/components'
+---
+icon: FilesIcon
+---
+
+import { FileTree } from 'nextra/components'
 
 # Organize Files
 
 Nextra first collects all your Markdown files and configurations from the
-`pages` directory, and then generates the "page map information" of your entire
-site, to render things such as the _navigation bar_ and _sidebar_ below:
+`content` directory, and then generates the "page map information" of your
+entire site, to render things such as the _navigation bar_ and _sidebar_ below:
 
 <br />
 
@@ -27,7 +30,7 @@ from filenames.
 For example if you have the following structure:
 
 <FileTree>
-  <FileTree.Folder name="pages" defaultOpen>
+  <FileTree.Folder name="content" defaultOpen>
     <FileTree.File name="contact.md" />
     <FileTree.File name="index.mdx" />
     <FileTree.Folder name="about" defaultOpen>
@@ -65,7 +68,7 @@ directory, and it will be used to override the default configuration of each
 page:
 
 <FileTree>
-  <FileTree.Folder name="pages" defaultOpen>
+  <FileTree.Folder name="content" defaultOpen>
     <FileTree.File name="_meta.js" />
     <FileTree.File name="contact.md" />
     <FileTree.File name="index.mdx" />
@@ -104,7 +107,7 @@ for JavaScript objects.
 
 Following:
 
-```js filename="pages/_meta.js"
+```js filename="content/_meta.js"
 export default {
   foo: '',
   1992_10_21: '',
@@ -115,7 +118,7 @@ export default {
 Will be converted to:
 
 {/* prettier-ignore */}
-```js filename="pages/_meta.js"
+```js filename="content/_meta.js"
 export default {
   '1': '',
   '19921021': '',
@@ -125,9 +128,9 @@ export default {
 
 ## Example
 
-Put this in your `pages/_meta.js` file:
+Put this in your `content/_meta.js` file:
 
-```js filename="pages/_meta.js"
+```js filename="content/_meta.js"
 export default {
   index: 'My Homepage',
   contact: 'Contact Us',
@@ -140,7 +143,7 @@ It tells Nextra the order of each page, and the correct title.
 Alternatively, you can do it with `title` property and have other configurations
 in there as well:
 
-```js filename="pages/_meta.js"
+```js filename="content/_meta.js"
 export default {
   index: 'My Homepage',
   contact: 'Contact Us',
@@ -152,20 +155,3 @@ export default {
 ```
 
 The extra configurations are passed to the **theme** as additional information.
-Check the corresponding pages for more information:
-
-<Cards>
-  <Cards.Card
-    icon={<NewsletterIcon />}
-    title="Docs Theme"
-    href="/docs/docs-theme/page-configuration"
-    arrow
-  />
-  <Cards.Card
-    icon={<FileIcon />}
-    title="Blog Theme"
-    href="/docs/blog-theme/start"
-    arrow
-  />
-  <Cards.Card title="Custom Theme" href="/docs/custom-theme" arrow />
-</Cards>

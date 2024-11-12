@@ -22,14 +22,14 @@ export async function Demo() {
   MDX document to a syntax tree and then generates a JSX document from that
   tree.
 </Callout>`
-  const { result } = await compileMdx(`~~~mdx filename="example.mdx"
+  const rawJs = await compileMdx(`~~~mdx filename="example.mdx"
 ${mdx}
 ~~~
 
 Generates:
 
 ${mdx}`)
-  return <MDXRemote compiledSource={result} components={{ Callout }} />
+  return <MDXRemote compiledSource={rawJs} components={{ Callout }} />
 }
 
 <Demo />

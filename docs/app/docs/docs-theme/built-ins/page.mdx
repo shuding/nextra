@@ -1,21 +1,18 @@
 ---
 asIndexPage: true
-sidebarTitle: Blog Theme
+sidebarTitle: Built-In Components
+icon: BoxIcon
 ---
 
-import { ChevronRightIcon } from '@components/icons'
 import { Cards } from 'nextra/components'
 import { MDXRemote } from 'nextra/mdx-remote'
 import { createIndexPage, getPageMap } from 'nextra/page-map'
 
-# Nextra Blog Theme
+# Built-ins
 
 <MDXRemote
   compiledSource={await createIndexPage(
-    await getPageMap('', '/docs/blog-theme')
+    await getPageMap('', '/docs/docs-theme/built-ins')
   )}
-  components={{
-    Cards,
-    ChevronRightIcon
-  }}
+  components={{ Cards }}
 />

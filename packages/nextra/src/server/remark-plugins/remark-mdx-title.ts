@@ -8,7 +8,7 @@ import { DEFAULT_PROPERTY_PROPS } from '../constants.js'
 import { createAstExportConst, pageTitleFromFilename } from '../utils.js'
 import { getFlattenedValue } from './remark-headings.js'
 
-function getFrontMatterASTObject(node: MdxjsEsm): Property[] {
+export function getFrontMatterASTObject(node: MdxjsEsm): Property[] {
   const [n] = node.data!.estree!.body
   return (n as any).declaration.declarations[0].init.properties
 }
@@ -33,8 +33,8 @@ export const remarkMdxTitle: Plugin<[], Root> = () => (ast, file) => {
 
   const frontMatterNode = ast.children.find((node: any) =>
     isExportNode(node, 'metadata')
-  )
-  const frontMatter = getFrontMatterASTObject(frontMatterNode as any)
+  )!
+  const frontMatter = getFrontMatterASTObject(frontMatterNode)
 
   for (const { key, value } of frontMatter) {
     if (key.type === 'Literal' && key.value === 'title') {

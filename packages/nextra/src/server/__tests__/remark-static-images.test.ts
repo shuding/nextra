@@ -1,9 +1,9 @@
-import { clean } from '../../../../__test__/test-utils.js'
-import { compileMdx } from '../../compile.js'
+import { clean } from '../../../__test__/test-utils.js'
+import { compileMdx } from '../compile.js'
 
 describe('remarkStaticImages', () => {
   it('should insert same import only once', async () => {
-    const { result } = await compileMdx(
+    const rawJs = await compileMdx(
       `
 ![](../foo.png)
 
@@ -19,7 +19,7 @@ describe('remarkStaticImages', () => {
       }
     )
 
-    expect(clean(result)).resolves.toMatchInlineSnapshot(`
+    expect(clean(rawJs)).resolves.toMatchInlineSnapshot(`
       "/*@jsxRuntime automatic*/
       /*@jsxImportSource react*/
       import __img0 from '../foo.png'
@@ -56,7 +56,7 @@ describe('remarkStaticImages', () => {
   })
 
   it('should work with link definitions', async () => {
-    const { result } = await compileMdx(
+    const rawJs = await compileMdx(
       `
 ![One][link-def]
 
@@ -79,7 +79,7 @@ describe('remarkStaticImages', () => {
       }
     )
 
-    expect(clean(result)).resolves.toMatchInlineSnapshot(`
+    expect(clean(rawJs)).resolves.toMatchInlineSnapshot(`
       "/*@jsxRuntime automatic*/
       /*@jsxImportSource react*/
       import __img0 from '../foo.png'

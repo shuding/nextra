@@ -1,3 +1,7 @@
+---
+icon: ChevronRightIcon
+---
+
 import InstallNextraTheme from '@components/install-nextra-theme.mdx'
 import ReadeToGo from '@components/ready-to-go.mdx'
 import { Steps } from 'nextra/components'
@@ -31,28 +35,6 @@ npm i next react react-dom nextra nextra-theme-blog
 > install `nextra` and `nextra-theme-blog` as the add-ons.
 
 <InstallNextraTheme />
-
-### Add Next.js Config
-
-Create the following `next.config.mjs` file in your project's root directory:
-
-```js filename="next.config.mjs"
-import nextra from 'nextra'
-
-const withNextra = nextra({
-  theme: 'nextra-theme-blog',
-  themeConfig: './theme.config.jsx'
-})
-
-export default withNextra()
-
-// If you have other Next.js configurations, you can pass them as the parameter:
-// export default withNextra({ /* other next.js config */ })
-```
-
-With the above configuration, Nextra can handle Markdown files in your Next.js
-project, with the specified theme. Other Nextra configurations can be found in
-[Guide](/docs/guide).
 
 ### Create Blog Theme Config
 

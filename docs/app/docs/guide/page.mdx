@@ -1,7 +1,9 @@
+---
+asIndexPage: true
+---
+
 import {
-  BoxIcon,
   BrushIcon,
-  DropperIcon,
   FilesIcon,
   GlobeIcon,
   LightningIcon,
@@ -11,63 +13,25 @@ import {
 } from '@components/icons'
 import { Cards } from 'nextra/components'
 import { MarkdownIcon } from 'nextra/icons'
-
-export const metadata = {
-  asIndexPage: true
-}
+import { MDXRemote } from 'nextra/mdx-remote'
+import { createIndexPage, getPageMap } from 'nextra/page-map'
 
 # Guide
 
 The following features are configured via the Next.js configuration and are
 available in all themes.
 
-<Cards>
-  <Cards.Card
-    icon={<FilesIcon />}
-    title="Organize Files"
-    href="/docs/guide/organize-files"
-  />
-  <Cards.Card
-    icon={<MarkdownIcon />}
-    title="Markdown"
-    href="/docs/guide/markdown"
-  />
-  <Cards.Card
-    icon={<StarsIcon />}
-    title="Syntax Highlighting"
-    href="/docs/guide/syntax-highlighting"
-  />
-  <Cards.Card
-    icon={<LinkIcon />}
-    title="Next.js Link"
-    href="/docs/guide/link"
-  />
-  <Cards.Card
-    icon={<PictureIcon />}
-    title="Next.js Image"
-    href="/docs/guide/image"
-  />
-  <Cards.Card
-    icon={<LightningIcon />}
-    title="Next.js SSG"
-    href="/docs/guide/ssg"
-  />
-  <Cards.Card
-    icon={<GlobeIcon />}
-    title="Next.js I18n"
-    href="/docs/guide/i18n"
-  />
-  <Cards.Card
-    icon={<BrushIcon />}
-    title="Custom CSS"
-    href="/docs/guide/custom-css"
-  />
-  <Cards.Card title="Static Exports" href="/docs/guide/static-exports" />
-  <Cards.Card title="Search Engine" href="/docs/guide/search" />
-  <Cards.Card
-    icon={<BoxIcon />}
-    title="Built-in Components"
-    href="/docs/built-ins"
-  />
-  <Cards.Card icon={<DropperIcon />} title="Advanced" href="/docs/advanced" />
-</Cards>
+<MDXRemote
+  compiledSource={await createIndexPage(await getPageMap('', '/docs/guide'))}
+  components={{
+    Cards,
+    FilesIcon,
+    MarkdownIcon,
+    StarsIcon,
+    LinkIcon,
+    GlobeIcon,
+    LightningIcon,
+    PictureIcon,
+    BrushIcon
+  }}
+/>

@@ -38,7 +38,7 @@ export async function CardsPage() {
     href="/docs/guide/built-ins/steps"
   />
 </Cards>`
-  const { result } = await compileMdx(`
+  const rawJs = await compileMdx(`
 ## Grouped Cards
 
 ### Example
@@ -76,7 +76,7 @@ ${mdx2}
 ~~~mdx filename="MDX"
 ${mdx2}
 ~~~`)
-  return <MDXRemote compiledSource={result} components={{ Cards, CardsIcon, OneIcon, WarningIcon, BoxIcon }}  />
+  return <MDXRemote compiledSource={rawJs} components={{ Cards, CardsIcon, OneIcon, WarningIcon, BoxIcon }}  />
 }
 
 <CardsPage />

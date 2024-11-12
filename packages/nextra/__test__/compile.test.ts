@@ -8,7 +8,7 @@ const mdxOptions = {
 
 describe('Compile', () => {
   it('should work with export default', async () => {
-    const { result } = await compileMdx(
+    const rawJs = await compileMdx(
       `import foo from './foo'
       
 ## heading
@@ -16,7 +16,7 @@ describe('Compile', () => {
 export default foo`,
       { mdxOptions }
     )
-    expect(clean(result)).resolves.toMatchInlineSnapshot(`
+    expect(clean(rawJs)).resolves.toMatchInlineSnapshot(`
       "/*@jsxRuntime automatic*/
       /*@jsxImportSource react*/
       export const title = ''
@@ -36,13 +36,13 @@ export default foo`,
     `)
   })
   it('should work with export as default', async () => {
-    const { result } = await compileMdx(
+    const rawJs = await compileMdx(
       `## heading
       
 export { foo as default } from './foo'`,
       { mdxOptions }
     )
-    expect(clean(result)).resolves.toMatchInlineSnapshot(`
+    expect(clean(rawJs)).resolves.toMatchInlineSnapshot(`
       "/*@jsxRuntime automatic*/
       /*@jsxImportSource react*/
       export const title = ''
@@ -64,19 +64,19 @@ export { foo as default } from './foo'`,
 
 describe('Process heading', () => {
   it('code-h1', async () => {
-    const { result } = await compileMdx('# `codegen.yml`', { mdxOptions })
-    expect(clean(result)).resolves.toMatchSnapshot()
+    const rawJs = await compileMdx('# `codegen.yml`', { mdxOptions })
+    expect(clean(rawJs)).resolves.toMatchSnapshot()
   })
   it('code-with-text-h1', async () => {
-    const { result } = await compileMdx('# `codegen.yml` file', { mdxOptions })
-    expect(clean(result)).resolves.toMatchSnapshot()
+    const rawJs = await compileMdx('# `codegen.yml` file', { mdxOptions })
+    expect(clean(rawJs)).resolves.toMatchSnapshot()
   })
   it('static-h1', async () => {
-    const { result } = await compileMdx('# Hello World', { mdxOptions })
-    expect(clean(result)).resolves.toMatchSnapshot()
+    const rawJs = await compileMdx('# Hello World', { mdxOptions })
+    expect(clean(rawJs)).resolves.toMatchSnapshot()
   })
   it('dynamic-h1', async () => {
-    const res = await compileMdx(
+    const rawJs = await compileMdx(
       `
 import { useRouter } from 'next/router'
 
@@ -89,15 +89,14 @@ export const TagName = () => {
     `,
       { mdxOptions }
     )
-    res.result = await clean(res.result)
-    expect(res).toMatchSnapshot()
+    expect(clean(rawJs)).resolves.toMatchSnapshot()
   })
   it('no-h1', async () => {
-    const { result } = await compileMdx('## H2', { mdxOptions })
-    expect(clean(result)).resolves.toMatchSnapshot()
+    const rawJs = await compileMdx('## H2', { mdxOptions })
+    expect(clean(rawJs)).resolves.toMatchSnapshot()
   })
   it('use custom heading id', async () => {
-    const { result } = await compileMdx(
+    const rawJs = await compileMdx(
       `
 # My Header [#test-id]
 ## Some extra space [#extra-space]&nbsp;
@@ -108,7 +107,7 @@ export const TagName = () => {
 ###### bar Qux [#]`,
       { mdxOptions }
     )
-    expect(clean(result)).resolves.toMatchInlineSnapshot(`
+    expect(clean(rawJs)).resolves.toMatchInlineSnapshot(`
       "/*@jsxRuntime automatic*/
       /*@jsxImportSource react*/
       export const title = 'My Header'
@@ -182,8 +181,8 @@ export const TagName = () => {
     `)
   })
   it('use github-slugger', async () => {
-    const { result } = await compileMdx('### My Header', { mdxOptions })
-    expect(clean(result)).resolves.toMatchInlineSnapshot(`
+    const rawJs = await compileMdx('### My Header', { mdxOptions })
+    expect(clean(rawJs)).resolves.toMatchInlineSnapshot(`
       "/*@jsxRuntime automatic*/
       /*@jsxImportSource react*/
       export const title = ''
@@ -210,7 +209,7 @@ export const TagName = () => {
   })
 
   it('should merge headings from partial components', async () => {
-    const { result } = await compileMdx(
+    const rawJs = await compileMdx(
       `
 import FromMdx from './one.mdx'
 import FromMarkdown from './two.md'
@@ -243,7 +242,7 @@ import Last from './three.mdx'
 `,
       { mdxOptions, latex: true }
     )
-    expect(clean(result)).resolves.toMatchInlineSnapshot(`
+    expect(clean(rawJs)).resolves.toMatchInlineSnapshot(`
       "/*@jsxRuntime automatic*/
       /*@jsxImportSource react*/
       export const title = ''
@@ -379,7 +378,7 @@ import Last from './three.mdx'
     `)
   })
   it('should not attach headings with parent Tab or Tabs.Tab', async () => {
-    const { result } = await compileMdx(
+    const rawJs = await compileMdx(
       `
 <Tab>
  ## foo
@@ -392,102 +391,98 @@ import Last from './three.mdx'
 `,
       { mdxOptions }
     )
-    expect(result).toMatch(`export function useTOC(props) {
+    expect(rawJs).toMatch(`export function useTOC(props) {
   return [];
 }`)
-    expect(result).not.toMatch('id=')
+    expect(rawJs).not.toMatch('id=')
   })
 })
 
 describe('Link', () => {
   it('supports .md links', async () => {
-    const { result } = await compileMdx('[link](../file.md)', { mdxOptions })
-    expect(result).toMatch('<_components.a href="../file">')
+    const rawJs = await compileMdx('[link](../file.md)', { mdxOptions })
+    expect(rawJs).toMatch('<_components.a href="../file">')
   })
 
   it('supports .mdx links', async () => {
-    const { result } = await compileMdx('[link](../file.mdx)', { mdxOptions })
-    expect(result).toMatch('<_components.a href="../file">')
+    const rawJs = await compileMdx('[link](../file.mdx)', { mdxOptions })
+    expect(rawJs).toMatch('<_components.a href="../file">')
   })
 
   it('supports URL links', async () => {
-    const { result } = await compileMdx('[link](../file)', { mdxOptions })
-    expect(result).toMatch('<_components.a href="../file">')
+    const rawJs = await compileMdx('[link](../file)', { mdxOptions })
+    expect(rawJs).toMatch('<_components.a href="../file">')
   })
 
   it('supports query', async () => {
-    const { result } = await compileMdx('[link](../file.md?query=a)', {
+    const rawJs = await compileMdx('[link](../file.md?query=a)', {
       mdxOptions
     })
-    expect(result).toMatch('<_components.a href="../file?query=a">')
+    expect(rawJs).toMatch('<_components.a href="../file?query=a">')
   })
 
   it('supports anchor', async () => {
-    const { result } = await compileMdx('[link](../file.md#anchor)', {
+    const rawJs = await compileMdx('[link](../file.md#anchor)', {
       mdxOptions
     })
-    expect(result).toMatch('<_components.a href="../file#anchor">')
+    expect(rawJs).toMatch('<_components.a href="../file#anchor">')
   })
 
   it('supports external .md links', async () => {
-    const { result } = await compileMdx('[link](https://example.com/file.md)', {
+    const rawJs = await compileMdx('[link](https://example.com/file.md)', {
       mdxOptions
     })
-    expect(result).toMatch('<_components.a href="https://example.com/file.md">')
+    expect(rawJs).toMatch('<_components.a href="https://example.com/file.md">')
   })
 
   it('supports external .mdx links', async () => {
-    const { result } = await compileMdx(
-      '[link](https://example.com/file.mdx)',
-      { mdxOptions }
-    )
-    expect(result).toMatch(
-      '<_components.a href="https://example.com/file.mdx">'
-    )
+    const rawJs = await compileMdx('[link](https://example.com/file.mdx)', {
+      mdxOptions
+    })
+    expect(rawJs).toMatch('<_components.a href="https://example.com/file.mdx">')
   })
 })
 
 describe('Code block', () => {
   describe('Filename', () => {
     it('attach with "codeHighlight: true" by default', async () => {
-      const { result } = await compileMdx('```text filename="test.js"\n```', {
+      const rawJs = await compileMdx('```text filename="test.js"\n```', {
         mdxOptions,
         search: true
       })
-      expect(result).toMatch(
+      expect(rawJs).toMatch(
         '<_components.pre tabIndex="0" data-language="text" data-word-wrap="" data-filename="test.js">'
       )
     })
 
     it('attach with "codeHighlight: false"', async () => {
-      const { result } = await compileMdx('```js filename="test.js"\n```', {
+      const rawJs = await compileMdx('```js filename="test.js"\n```', {
         mdxOptions,
         codeHighlight: false
       })
-      expect(result).toMatch(
+      expect(rawJs).toMatch(
         '<_components.pre data-filename="test.js" data-word-wrap="">'
       )
     })
 
     it('not highlight filename as substring', async () => {
-      const { result } = await compileMdx('```js filename="/foo/"\nfoo\n```', {
+      const rawJs = await compileMdx('```js filename="/foo/"\nfoo\n```', {
         mdxOptions,
         codeHighlight: true // processed only by rehype-pretty-code
       })
-      expect(result).not.toMatch(
+      expect(rawJs).not.toMatch(
         'className="highlighted">{"foo"}</_components.span>'
       )
-      expect(result).toMatch('}}>{"foo"}</_components.span>')
+      expect(rawJs).toMatch('}}>{"foo"}</_components.span>')
     })
   })
 
   describe('Highlight', () => {
     it('should support line highlights', async () => {
-      const { result } = await compileMdx(
-        '```js filename="test.js" {1}\n123\n```',
-        { mdxOptions }
-      )
-      expect(result).toMatch('<_components.span data-highlighted-line="">')
+      const rawJs = await compileMdx('```js filename="test.js" {1}\n123\n```', {
+        mdxOptions
+      })
+      expect(rawJs).toMatch('<_components.span data-highlighted-line="">')
     })
   })
 
@@ -495,31 +490,31 @@ describe('Code block', () => {
     for (const codeHighlight of [true, false]) {
       describe(`codeHighlight: ${codeHighlight}`, () => {
         it('attach with "copy"', async () => {
-          const { result } = await compileMdx('```js copy\n```', {
+          const rawJs = await compileMdx('```js copy\n```', {
             mdxOptions,
             codeHighlight,
             search: true
           })
-          expect(result).toMatch('data-word-wrap="" data-copy="">')
+          expect(rawJs).toMatch('data-word-wrap="" data-copy="">')
         })
 
         it('attach with "defaultShowCopyCode: true"', async () => {
-          const { result } = await compileMdx('```js\n```', {
+          const rawJs = await compileMdx('```js\n```', {
             mdxOptions,
             defaultShowCopyCode: true,
             codeHighlight,
             search: true
           })
-          expect(result).toMatch('data-word-wrap="" data-copy="">')
+          expect(rawJs).toMatch('data-word-wrap="" data-copy="">')
         })
 
         it('not attach with "defaultShowCopyCode: true" and "copy=false"', async () => {
-          const { result } = await compileMdx('```js copy=false\n```', {
+          const rawJs = await compileMdx('```js copy=false\n```', {
             mdxOptions,
             defaultShowCopyCode: true,
             codeHighlight
           })
-          expect(result).not.toMatch('data-copy=""')
+          expect(rawJs).not.toMatch('data-copy=""')
         })
       })
     }

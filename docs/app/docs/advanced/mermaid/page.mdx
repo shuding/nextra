@@ -1,3 +1,7 @@
+---
+icon: DiagramIcon
+---
+
 import { compileMdx } from 'nextra/compile'
 import { Mermaid } from 'nextra/components'
 import { MDXRemote } from 'nextra/mdx-remote'
@@ -35,7 +39,7 @@ Z --> E;
 Z --> F;
 Z --> G;
 \`\`\``
-  const { result } = await compileMdx(`${mermaidCodeblock}
+  const rawJs = await compileMdx(`${mermaidCodeblock}
 
 ## Usage
 
@@ -43,5 +47,5 @@ Z --> G;
 ${mermaidCodeblock}
 ~~~
 `)
-  return <MDXRemote compiledSource={result} components={{ Mermaid }} />
+  return <MDXRemote compiledSource={rawJs} components={{ Mermaid }} />
 }

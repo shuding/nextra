@@ -5,11 +5,7 @@ import fg from 'fast-glob'
 import type { RuleSetRule } from 'webpack'
 import { fromZodError } from 'zod-validation-error'
 import type { Nextra } from '../types.js'
-import {
-  GET_PAGE_MAP_PATH,
-  MARKDOWN_EXTENSION_RE,
-  PAGE_MAP_PLACEHOLDER_PATH
-} from './constants.js'
+import { MARKDOWN_EXTENSION_RE } from './constants.js'
 import { nextraConfigSchema } from './schemas.js'
 import { logger } from './utils.js'
 
@@ -25,11 +21,15 @@ const LOADER_PATH = path.join(DIRNAME, '..', '..', 'loader.cjs')
 
 const SEP = path.sep === '/' ? '/' : '\\\\'
 
-const PAGE_MAP_PLACEHOLDER_RE = new RegExp(
-  PAGE_MAP_PLACEHOLDER_PATH.replaceAll('/', SEP).replaceAll('.', '\\.')
-)
-const GET_PAGE_MAP_RE = new RegExp(
+const GET_PAGE_MAP_PATH = '/nextra/dist/server/page-map/get.js'
+
+const PAGE_MAP_PLACEHOLDER_PATH = '/nextra/dist/server/page-map/placeholder.js'
+
+export const GET_PAGE_MAP_RE = new RegExp(
   GET_PAGE_MAP_PATH.replaceAll('/', SEP).replaceAll('.', '\\.')
+)
+export const PAGE_MAP_PLACEHOLDER_RE = new RegExp(
+  PAGE_MAP_PLACEHOLDER_PATH.replaceAll('/', SEP).replaceAll('.', '\\.')
 )
 
 export function getContentDirectory() {

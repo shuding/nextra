@@ -1,3 +1,7 @@
+---
+sidebarTitle: Customize Cascade Layers
+---
+
 import { Steps } from 'nextra/components'
 
 # Customize the Cascade Layers
@@ -46,12 +50,8 @@ Import your CSS file at the top-level layout of your application (e.g.
 ```jsx filename="app/layout.jsx"
 import '../path/to/your/styles.css'
 
-export default function RootLayout({ children }) {
-  return (
-    <html lang="en">
-      <body>{children}</body>
-    </html>
-  )
+export default async function RootLayout({ children }) {
+  // ... Your layout logic here
 }
 ```
 

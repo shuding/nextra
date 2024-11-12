@@ -6,7 +6,7 @@ export const ToggleVisibilitySection: FC<{
   element: string
   property: string
 }> = async ({ element, property }) => {
-  const { result } =
+  const rawJs =
     await compileMdx(`### Toggle Visibility [#toggle-visibility-for-${property}]
 
 You can toggle visibility of the ${element} on the specific pages by setting \`theme.${property}\` property in the \`_meta.js\` file:
@@ -20,5 +20,5 @@ export default {
   }
 }
 \`\`\``)
-  return <MDXRemote compiledSource={result} />
+  return <MDXRemote compiledSource={rawJs} />
 }
