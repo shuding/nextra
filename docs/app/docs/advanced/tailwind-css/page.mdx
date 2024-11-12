@@ -37,9 +37,9 @@ export default {
 
 > [!TIP]
 >
-> You can use `tailwind.config.ts` as well.
+> You can also use a `tailwind.config.ts` file if you prefer TypeScript for your Tailwind CSS configuration.
 
-## Create `globals.css` file
+## Create the `globals.css` File
 
 Create a CSS file for Tailwind directives, `globals.css` for example:
 
@@ -55,13 +55,13 @@ Create a CSS file for Tailwind directives, `globals.css` for example:
 > `nextra-theme-docs` or `nextra-theme-blog` because they already imports
 > Tailwind CSS preflight styles in their `style.css` files.
 
-## Import styles in root layout
+## Import styles in the root layout
 
 ```jsx filename="app/layout.jsx"
 import '../path/to/your/globals.css'
 
 export default async function RootLayout({ children }) {
-  // ...
+  // ... Your layout logic here
 }
 ```
 
