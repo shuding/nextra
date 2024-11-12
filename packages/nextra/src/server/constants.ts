@@ -22,6 +22,4 @@ export const DEFAULT_PROPERTY_PROPS = {
   computed: false
 } satisfies Omit<Property, 'key' | 'value'>
 
-export const TOC_HEADING_RE = /^h[2-6]$/
-
 export const METADATA_ONLY_RQ = '?metadata'
