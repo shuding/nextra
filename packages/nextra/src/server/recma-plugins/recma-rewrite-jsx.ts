@@ -1,4 +1,4 @@
-import type { CallExpression, FunctionDeclaration, Program } from 'estree'
+import type { FunctionDeclaration, Program } from 'estree'
 import type { JsxAttribute } from 'estree-util-to-js/lib/jsx'
 import type { Plugin } from 'unified'
 import { visit } from 'unist-util-visit'
@@ -35,7 +35,7 @@ export const recmaRewriteJsx: Plugin<[], Program> =
       | string
     )[]
 
-    // Do not add `const toc = useTOC(props)`
+    // Do not add `const toc = [`
     if (!tocProperties.length) return
 
     const returnStatement = createMdxContent.body.body.find(
@@ -91,13 +91,6 @@ export const recmaRewriteJsx: Plugin<[], Program> =
       }
     })
 
-    const useTOC = {
-      type: 'CallExpression',
-      callee: { type: 'Identifier', name: 'useTOC' },
-      arguments: [{ type: 'Identifier', name: 'props' }],
-      optional: false
-    } satisfies CallExpression
-
     createMdxContent.params = [{ type: 'Identifier', name: 'props' }]
     // Needs for partial imports since we remove `export default MDXContent` for them
     createMdxContent.body.body.unshift({
@@ -113,11 +106,7 @@ export const recmaRewriteJsx: Plugin<[], Program> =
                 ...DEFAULT_PROPERTY_PROPS,
                 shorthand: true,
                 key: { type: 'Identifier', name: 'toc' },
-                value: {
-                  type: 'AssignmentPattern',
-                  left: { type: 'Identifier', name: 'toc' },
-                  right: useTOC
-                }
+                value: { type: 'Identifier', name: 'toc' },
               }
             ]
           },

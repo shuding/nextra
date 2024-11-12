@@ -32,7 +32,7 @@ bar[^1]
         }
       ]
       function MDXLayout(props) {
-        const { toc = useTOC(props) } = props
+        const { toc } = props
         const _components = {
           a: 'a',
           h2: 'h2',
@@ -127,7 +127,7 @@ import { Steps } from 'nextra/components'
         }
       ]
       function MDXLayout(props) {
-        const { toc = useTOC(props) } = props
+        const { toc } = props
         const _components = {
           h2: 'h2',
           h3: 'h3',
@@ -282,7 +282,7 @@ export const metadata = {
         }
       ]
       function MDXLayout(props) {
-        const { toc = useTOC(props) } = props
+        const { toc } = props
         const _components = {
           h1: 'h1',
           h2: 'h2',
@@ -347,7 +347,7 @@ import { MDXRemote } from 'nextra/mdx-remote'
           }
         ]
         function MDXLayout(props) {
-          const { toc = useTOC(props) } = props
+          const { toc } = props
           const _components = {
             h2: 'h2',
             ...props.components

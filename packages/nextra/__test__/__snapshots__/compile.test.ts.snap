@@ -85,7 +85,7 @@ export const toc = [
   }
 ]
 function MDXLayout(props) {
-  const { toc = useTOC(props) } = props
+  const { toc } = props
   const _components = {
     h2: 'h2',
     ...props.components
