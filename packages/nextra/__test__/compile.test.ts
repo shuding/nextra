@@ -335,7 +335,7 @@ import Last from './three.mdx'
             {'\\n'}
             <FromMdx />
             {'\\n'}
-            <_components.h2 id={toc[1].id}>{toc[1].value}</_components.h2>
+            <_components.h2 id={toc[2].id}>{toc[2].value}</_components.h2>
             {'\\n'}
             <FromMarkdown />
             {'\\n'}
@@ -344,15 +344,15 @@ import Last from './three.mdx'
             {'\\n'}
             <IgnoreMe />
             {'\\n'}
-            <_components.h2 id={toc[2].id}>{toc[2].value}</_components.h2>
-            {'\\n'}
-            <_components.h2 id={toc[3].id}>{toc[3].value}</_components.h2>
-            {'\\n'}
-            <_components.h2 id={toc[4].id}>{toc[4].value}</_components.h2>
-            {'\\n'}
             <_components.h2 id={toc[5].id}>{toc[5].value}</_components.h2>
             {'\\n'}
             <_components.h2 id={toc[6].id}>{toc[6].value}</_components.h2>
+            {'\\n'}
+            <_components.h2 id={toc[7].id}>{toc[7].value}</_components.h2>
+            {'\\n'}
+            <_components.h2 id={toc[8].id}>{toc[8].value}</_components.h2>
+            {'\\n'}
+            <_components.h2 id={toc[9].id}>{toc[9].value}</_components.h2>
           </>
         )
       }
