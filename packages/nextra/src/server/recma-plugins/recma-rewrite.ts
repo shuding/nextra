@@ -1,7 +1,7 @@
 import type { Program } from 'estree'
 import type { Plugin } from 'unified'
 
-export const recmaRewrite: Plugin<[], Program> = () => (ast, file) => {
+export const recmaRewrite: Plugin<[], Program> = () => (ast: Program, file) => {
   const mdxContentIndex = ast.body.findIndex(node => {
     if (node.type === 'ExportDefaultDeclaration') {
       return (node.declaration as any).id.name === 'MDXContent'

@@ -78,8 +78,6 @@ export const rehypeExtractTocContent: Plugin<[], Root> = () => (ast, file) => {
       }
     }
   } as MdxjsEsm)
-
-  file.data.toc = TocMap
 }
 
 function createComputedKey(
