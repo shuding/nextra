@@ -132,7 +132,7 @@ const nextra: Nextra = nextraConfig => {
             // Fixes when Turbopack is enabled: Module not found: Can't resolve '@theguild/remark-mermaid/mermaid'
             '@theguild/remark-mermaid/mermaid': path.relative(
               CWD,
-              path.join(
+              path.posix.join(
                 require.resolve('@theguild/remark-mermaid/package.json'),
                 '..',
                 'dist',
