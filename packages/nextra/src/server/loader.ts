@@ -197,16 +197,16 @@ ${locales
 async function getLastCommitTime(
   filePath: string
 ): Promise<number | undefined> {
+  const relativePath = path.relative(GIT_ROOT, filePath)
   try {
     if (!repository) {
       throw new Error('Init git repository failed')
     }
-    const relativePath = path.relative(GIT_ROOT, filePath)
     return await repository.getFileLatestModifiedDateAsync(relativePath)
   } catch {
     logger.warn(
       'Failed to get the last modified timestamp from Git for the file',
-      filePath
+      relativePath
     )
   }
 }

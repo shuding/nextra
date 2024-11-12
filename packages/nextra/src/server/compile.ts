@@ -11,7 +11,7 @@ import remarkGfm from 'remark-gfm'
 import remarkMath from 'remark-math'
 import remarkReadingTime from 'remark-reading-time'
 import remarkSmartypants from 'remark-smartypants'
-import type { Pluggable, Plugin } from 'unified'
+import type { Pluggable } from 'unified'
 import type { LoaderOptions, NextraConfig } from '../types.js'
 import { CWD, MARKDOWN_URL_EXTENSION_RE } from './constants.js'
 import {
