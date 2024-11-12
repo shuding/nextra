@@ -18,7 +18,7 @@ function createNode(data: Record<string, unknown>) {
   } as MdxjsEsm
 }
 
-export const remarkMdxFrontMatter: Plugin<[], Root> = () => (ast: Parent) => {
+export const remarkMdxFrontMatter: Plugin<[], Root> = () => (ast, file) => {
   const yamlNodeIndex = ast.children.findIndex(node => node.type === 'yaml')
   const esmNodeIndex = ast.children.findIndex((node: any) =>
     isExportNode(node, 'metadata')
@@ -46,9 +46,12 @@ export const remarkMdxFrontMatter: Plugin<[], Root> = () => (ast: Parent) => {
     isExportNode(node, 'metadata')
   )!
   const frontMatter = getFrontMatterASTObject(frontMatterNode)
-
-  if (estreeToValue(frontMatter).mdxOptions) {
+  const frontMatterValue = estreeToValue(frontMatter)
+  if (frontMatterValue.mdxOptions) {
     throw new Error('`frontMatter.mdxOptions` is no longer supported')
+  }
+  if (process.env.NODE_ENV === 'test') {
+    file.data.frontMatter = frontMatterValue
   }
 }
 
