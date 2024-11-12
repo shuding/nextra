@@ -106,7 +106,7 @@ export const recmaRewriteJsx: Plugin<[], Program> =
                 ...DEFAULT_PROPERTY_PROPS,
                 shorthand: true,
                 key: { type: 'Identifier', name: 'toc' },
-                value: { type: 'Identifier', name: 'toc' },
+                value: { type: 'Identifier', name: 'toc' }
               }
             ]
           },
