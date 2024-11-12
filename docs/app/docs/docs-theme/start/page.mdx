@@ -54,13 +54,15 @@ npm i next react react-dom nextra nextra-theme-docs
 
 <InstallNextraTheme />
 
-### Add `mdx-components.js` in root directory
+### Add `mdx-components.js` in the root directory
 
 ```ts filename="mdx-components.js"
 import { useMDXComponents as getDocsMDXComponents } from 'nextra-theme-docs'
 
+// Get the default MDX components from Nextra Docs theme
 const docsComponents = getDocsMDXComponents()
 
+// Merge custom components with default Nextra components
 export function useMDXComponents(components) {
   return {
     ...docsComponents,
@@ -71,13 +73,13 @@ export function useMDXComponents(components) {
 
 > [!TIP]
 >
-> You can use `.jsx`, `.ts` and `.tsx` extensions for your `mdx-components` file
-> as well.
+> You can use `.jsx`, `.ts`, or `.tsx` extensions for your `mdx-components`
+> file.
 
-### Create Root Layout
+### Create the Root Layout
 
-Lastly, create the root layout of your application in `app` folder. This will be
-used to configure the Nextra Docs Theme:
+Next, create the root layout of your application inside the `app` folder. This
+layout will be used to configure the Nextra Docs Theme:
 
 ```jsx filename="app/layout.jsx"
 import { Footer, Layout, Navbar } from 'nextra-theme-docs'
@@ -86,8 +88,8 @@ import { getPageMap } from 'nextra/page-map'
 import 'nextra-theme-docs/style.css'
 
 export const metadata = {
-  // ... Your metadata API
-  // https://nextjs.org/docs/app/building-your-application/optimizing/metadata
+  // Define your metadata here
+  // For more information on metadata API, see: https://nextjs.org/docs/app/building-your-application/optimizing/metadata
 }
 
 const banner = <Banner storageKey="some-key">Nextra 4.0 is released 🎉</Banner>
