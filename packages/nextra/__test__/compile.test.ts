@@ -140,7 +140,6 @@ export const TagName = () => {
         }
       ]
       function MDXLayout(props) {
-        const { toc } = props
         const _components = {
           h1: 'h1',
           h2: 'h2',
@@ -185,7 +184,6 @@ export const TagName = () => {
         }
       ]
       function MDXLayout(props) {
-        const { toc } = props
         const _components = {
           h3: 'h3',
           ...props.components
@@ -327,7 +325,6 @@ import Last from './three.mdx'
         }
       ]
       function MDXLayout(props) {
-        const { toc } = props
         const _components = {
           h2: 'h2',
           ...props.components

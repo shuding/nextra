@@ -92,26 +92,4 @@ export const recmaRewriteJsx: Plugin<[], Program> =
     })
 
     createMdxContent.params = [{ type: 'Identifier', name: 'props' }]
-    // Needs for partial imports since we remove `export default MDXContent` for them
-    createMdxContent.body.body.unshift({
-      type: 'VariableDeclaration',
-      kind: 'const',
-      declarations: [
-        {
-          type: 'VariableDeclarator',
-          id: {
-            type: 'ObjectPattern',
-            properties: [
-              {
-                ...DEFAULT_PROPERTY_PROPS,
-                shorthand: true,
-                key: { type: 'Identifier', name: 'toc' },
-                value: { type: 'Identifier', name: 'toc' }
-              }
-            ]
-          },
-          init: { type: 'Identifier', name: 'props' }
-        }
-      ]
-    })
   }
