@@ -33,9 +33,9 @@ export const rehypeExtractTocContent: Plugin<[], Root> = () => (ast, file) => {
 
     const node = TocMap[name.id]
 
-    const isText = node.children.every(child => child.type === 'text')
+    const isTextOnly = node.children.every(child => child.type === 'text')
 
-    const result = isText
+    const result = isTextOnly
       ? node.children.map(n => (n as Text).value).join('')
       : // @ts-expect-error
         Object.assign(toEstree(node).body[0].expression, {
@@ -51,54 +51,14 @@ export const rehypeExtractTocContent: Plugin<[], Root> = () => (ast, file) => {
         {
           type: 'mdxJsxAttribute',
           name: 'id',
-          value: {
-            type: 'mdxJsxAttributeValueExpression',
-            data: {
-              estree: {
-                body: [
-                  {
-                    type: 'ExpressionStatement',
-                    expression: {
-                      type: 'MemberExpression',
-                      property: { type: 'Identifier', name: 'id' },
-                      object: {
-                        type: 'MemberExpression',
-                        object: { type: 'Identifier', name: 'toc' },
-                        property: { type: 'Literal', value: index },
-                        computed: true
-                      }
-                    }
-                  }
-                ]
-              }
-            }
-          }
+          value: createComputedKey(
+            'mdxJsxAttributeValueExpression',
+            index,
+            'id'
+          )
         }
       ],
-      children: [
-        {
-          type: 'mdxFlowExpression',
-          data: {
-            estree: {
-              body: [
-                {
-                  type: 'ExpressionStatement',
-                  expression: {
-                    type: 'MemberExpression',
-                    property: { type: 'Identifier', name: 'value' },
-                    object: {
-                      type: 'MemberExpression',
-                      object: { type: 'Identifier', name: 'toc' },
-                      property: { type: 'Literal', value: index },
-                      computed: true
-                    }
-                  }
-                }
-              ]
-            }
-          }
-        }
-      ]
+      children: [createComputedKey('mdxFlowExpression', index, 'value')]
     })
 
     return createAstObject({
@@ -120,4 +80,33 @@ export const rehypeExtractTocContent: Plugin<[], Root> = () => (ast, file) => {
   } as MdxjsEsm)
 
   file.data.toc = TocMap
+}
+
+function createComputedKey(
+  type: 'mdxFlowExpression' | 'mdxJsxAttributeValueExpression',
+  index: number,
+  key: string
+) {
+  return {
+    type,
+    data: {
+      estree: {
+        body: [
+          {
+            type: 'ExpressionStatement',
+            expression: {
+              type: 'MemberExpression',
+              property: { type: 'Identifier', name: key },
+              object: {
+                type: 'MemberExpression',
+                object: { type: 'Identifier', name: 'toc' },
+                property: { type: 'Literal', value: index },
+                computed: true
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
 }
