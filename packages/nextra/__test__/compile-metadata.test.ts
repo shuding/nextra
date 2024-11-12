@@ -45,7 +45,9 @@ export const MyComponent = () => null
     })
     expect(result).resolves.toMatchInlineSnapshot(`
       "import {Fragment as _Fragment, jsx as _jsx} from "react/jsx-runtime";
-      export const metadata = {};
+      export const metadata = {
+        "title": "Bar"
+      };
       "
     `)
   })

@@ -153,7 +153,7 @@ export default MDXLayout`
 ${compiledSource}
 export default HOC_MDXWrapper(
   MDXLayout,
-  {metadata, title, toc:useTOC()}
+  {metadata, toc:useTOC()}
 )`
   return rawJs
 }

@@ -14,7 +14,6 @@ describe('LaTeX', () => {
         "/*@jsxRuntime automatic*/
         /*@jsxImportSource react*/
         'use strict'
-        const title = ''
         const metadata = {}
         function useTOC(props) {
           return []
@@ -94,7 +93,6 @@ describe('LaTeX', () => {
           )
         }
         return {
-          title,
           metadata,
           useTOC,
           default: _createMdxContent
@@ -118,7 +116,6 @@ describe('LaTeX', () => {
       expect(clean(rawJs)).resolves.toMatchInlineSnapshot(`
         "/*@jsxRuntime automatic*/
         /*@jsxImportSource react*/
-        export const title = ''
         export const metadata = {}
         import { MathJax, MathJaxContext } from 'nextra/components'
         export function useTOC(props) {
@@ -131,7 +128,6 @@ describe('LaTeX', () => {
           }
           return (
             <MathJaxContext>
-              {'\\n'}
               {'\\n'}
               <_components.p>
                 <MathJax inline>{'\\\\(a=\\\\sqrt{b^2 + c^2}\\\\)'}</MathJax>
@@ -148,7 +144,6 @@ describe('LaTeX', () => {
       expect(clean(rawJs)).resolves.toMatchInlineSnapshot(`
         "/*@jsxRuntime automatic*/
         /*@jsxImportSource react*/
-        export const title = ''
         export const metadata = {}
         import { MathJax, MathJaxContext } from 'nextra/components'
         export function useTOC(props) {
@@ -157,7 +152,6 @@ describe('LaTeX', () => {
         function MDXLayout(props) {
           return (
             <MathJaxContext>
-              {'\\n'}
               {'\\n'}
               <MathJax>{'\\\\[x^2\\n\\\\]'}</MathJax>
             </MathJaxContext>
@@ -179,7 +173,6 @@ ${MATH_LANG}`
       expect(clean(rawJs)).resolves.toMatchInlineSnapshot(`
         "/*@jsxRuntime automatic*/
         /*@jsxImportSource react*/
-        export const title = ''
         export const metadata = {}
         import foo from 'foo'
         export let bar
@@ -194,7 +187,6 @@ ${MATH_LANG}`
           }
           return (
             <MathJaxContext>
-              {'\\n'}
               {'\\n'}
               <_components.p>
                 <MathJax inline>{'\\\\(a=\\\\sqrt{b^2 + c^2}\\\\)'}</MathJax>
