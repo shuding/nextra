@@ -1,5 +1,20 @@
 # nextra-theme-docs
 
+## 4.0.0-app-router.26
+
+### Minor Changes
+
+- 0076bad: move TOC logic from `recma-rewrite-jsx` plugin to
+  `rehype-extract-toc-content` plugin
+
+### Patch Changes
+
+- be82724: Fixes when Turbopack is enabled:
+  `Module not found: Can't resolve '@theguild/remark-mermaid/mermaid'`
+- Updated dependencies [be82724]
+- Updated dependencies [0076bad]
+  - nextra@4.0.0-app-router.26
+
 ## 4.0.0-app-router.25
 
 ### Major Changes
