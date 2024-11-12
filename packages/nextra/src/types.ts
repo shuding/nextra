@@ -4,7 +4,7 @@ import type { FC, ReactElement, ReactNode } from 'react'
 import type { z } from 'zod'
 import type { mathJaxOptionsSchema, nextraConfigSchema } from './server/schemas'
 
-export interface LoaderOptions extends NextraConfig {
+export interface LoaderOptions extends z.infer<typeof nextraConfigSchema> {
   isPageImport?: boolean
   locales: string[]
 }

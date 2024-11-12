@@ -13,7 +13,7 @@ import remarkMath from 'remark-math'
 import remarkReadingTime from 'remark-reading-time'
 import remarkSmartypants from 'remark-smartypants'
 import type { Pluggable, Plugin } from 'unified'
-import type { LoaderOptions } from '../types.js'
+import type { LoaderOptions, NextraConfig } from '../types.js'
 import { CWD, MARKDOWN_URL_EXTENSION_RE } from './constants.js'
 import {
   recmaRewriteFunctionBody,
@@ -46,7 +46,7 @@ const cachedCompilerForFormat: Record<
   Processor
 > = Object.create(null)
 
-type MdxOptions = LoaderOptions['mdxOptions'] &
+type MdxOptions = NextraConfig['mdxOptions'] &
   Pick<ProcessorOptions, 'jsx' | 'outputFormat' | 'providerImportSource'>
 
 type CompileMdxOptions = Pick<
