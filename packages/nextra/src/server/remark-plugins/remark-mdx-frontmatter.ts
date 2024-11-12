@@ -1,11 +1,10 @@
-import type { ArrayExpression, ObjectExpression } from 'estree'
 import { valueToEstree } from 'estree-util-value-to-estree'
 import type { MdxjsEsm } from 'hast-util-to-estree/lib/handlers/mdxjs-esm'
 import type { Root } from 'mdast'
 import type { Plugin } from 'unified'
 import { parse as parseYaml } from 'yaml'
 import { createAstExportConst } from '../utils.js'
-import { getFrontMatterASTObject, isExportNode } from './remark-mdx-title.js'
+import { isExportNode } from './remark-mdx-title.js'
 
 function createNode(data: Record<string, unknown>) {
   return {
@@ -19,7 +18,7 @@ function createNode(data: Record<string, unknown>) {
 }
 
 export const remarkMdxFrontMatter: Plugin<[], Root> =
-  () => (ast: Root, file) => {
+  () => (ast: Root) => {
     const yamlNodeIndex = ast.children.findIndex(node => node.type === 'yaml')
     const esmNodeIndex = ast.children.findIndex((node: any) =>
       isExportNode(node, 'metadata')
@@ -42,71 +41,4 @@ export const remarkMdxFrontMatter: Plugin<[], Root> =
       // Attach dummy node
       ast.children.unshift(createNode({}))
     }
-
-    const frontMatterNode = ast.children.find((node: any) =>
-      isExportNode(node, 'metadata')
-    )!
-    const frontMatter = getFrontMatterASTObject(frontMatterNode)
-    const frontMatterValue = estreeToValue(frontMatter)
-    if (frontMatterValue.mdxOptions) {
-      throw new Error('`frontMatter.mdxOptions` is no longer supported')
-    }
-    if (process.env.NODE_ENV === 'test') {
-      file.data.frontMatter = frontMatterValue
-    }
   }
-
-function traverseArray(
-  nodes: ArrayExpression['elements'],
-  result: (
-    | string
-    | number
-    | boolean
-    | null
-    | unknown[]
-    | Record<string, unknown>
-  )[] = []
-) {
-  for (const node of nodes) {
-    if (!node) continue
-
-    if (node.type === 'Literal') {
-      // @ts-expect-error
-      result.push(node.value)
-      continue
-    }
-    if (node.type === 'ObjectExpression') {
-      result.push(estreeToValue(node.properties))
-      continue
-    }
-    if (node.type === 'ArrayExpression') {
-      result.push(traverseArray(node.elements))
-    }
-  }
-  return result
-}
-
-function estreeToValue(
-  nodes: ObjectExpression['properties'],
-  result: Record<string, unknown> = Object.create(null)
-) {
-  for (const node of nodes) {
-    if (node.type !== 'Property') continue
-    const { key, value } = node
-
-    const keyName =
-      key.type === 'Literal'
-        ? (key.value as string)
-        : key.type === 'Identifier'
-          ? key.name
-          : ''
-    if (value.type === 'Literal') {
-      result[keyName] = value.value
-    } else if (value.type === 'ObjectExpression') {
-      result[keyName] = estreeToValue(value.properties)
-    } else if (value.type === 'ArrayExpression') {
-      result[keyName] = traverseArray(value.elements)
-    }
-  }
-  return result
-}
