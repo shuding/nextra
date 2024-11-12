@@ -77,7 +77,7 @@ export const useMDXComponents = (components: BlogMDXComponents = {}) =>
     td: Table.Td,
     th: Table.Th,
     tr: Table.Tr,
-    wrapper({ children, metadata, title }) {
+    wrapper({ children, metadata }) {
       const date = (metadata as any).date as string
       if (date && !isValidDate(date)) {
         throw new Error(
@@ -89,7 +89,7 @@ export const useMDXComponents = (components: BlogMDXComponents = {}) =>
 
       return (
         <>
-          <h1>{title}</h1>
+          <h1>{metadata.title}</h1>
           <Meta {...(metadata as BlogMetadata)}>
             {dateObj && (
               <time dateTime={dateObj.toISOString()}>

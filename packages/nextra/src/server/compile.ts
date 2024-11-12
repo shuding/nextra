@@ -233,30 +233,6 @@ export async function compileMdx(
           file.data.hasMdxLayout =
             !!mdxContentArgument &&
             mdxContentArgument.openingElement.name.name === 'MDXLayout'
-
-          // const localExports = new Set(['title', 'metadata', 'useTOC'])
-          //
-          // for (const node of ast.body) {
-          //   if (node.type === 'ExportNamedDeclaration') {
-          //     let varName: string
-          //     const { declaration } = node
-          //     if (!declaration) {
-          //       // skip for `export ... from '...'` declaration
-          //       continue
-          //     } else if (declaration.type === 'VariableDeclaration') {
-          //       const [{ id }] = declaration.declarations
-          //       varName = (id as any).name
-          //     } else if (declaration.type === 'FunctionDeclaration') {
-          //       varName = declaration.id.name
-          //     } else {
-          //       throw new Error(`\`${declaration.type}\` unsupported.`)
-          //     }
-          //
-          //     if (localExports.has(varName)) {
-          //       Object.assign(node, node.declaration)
-          //     }
-          //   }
-          // }
         }) satisfies Plugin<[], Program>,
         isRemoteContent ? recmaRewriteFunctionBody : recmaRewriteJsx
       ].filter(v => !!v)

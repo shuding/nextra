@@ -23,7 +23,6 @@ export const Test = ({value}) => value
       "/*@jsxRuntime automatic*/
       /*@jsxImportSource react*/
       'use strict'
-      const title = ''
       const metadata = {}
       const myVar = 123
       const Test = ({ value }) => value
@@ -52,7 +51,6 @@ export const Test = ({value}) => value
         )
       }
       return {
-        title,
         metadata,
         myVar,
         Test,

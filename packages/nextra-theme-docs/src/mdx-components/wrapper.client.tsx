@@ -6,12 +6,7 @@ import { cloneElement, useEffect } from 'react'
 import { Breadcrumb, Pagination, TOC } from '../components'
 import { setToc, useConfig, useThemeConfig } from '../stores'
 
-export const ClientWrapper: MDXWrapper = ({
-  toc,
-  children,
-  metadata,
-  title
-}) => {
+export const ClientWrapper: MDXWrapper = ({ toc, children, metadata }) => {
   const {
     activeType,
     activeThemeContext: themeContext,
@@ -38,7 +33,7 @@ export const ClientWrapper: MDXWrapper = ({
             <TOC
               toc={themeConfig.toc.float ? toc : []}
               filePath={metadata.filePath}
-              pageTitle={title}
+              pageTitle={metadata.title}
             />
           )}
         </nav>

@@ -1,14 +1,9 @@
-import { describe } from 'vitest'
 import { clean } from '../../../__test__/test-utils.js'
 import { compileMdx } from '../compile.js'
 
 const opts = {
-  filePath: 'foo/my-test-file.mdx',
-  mdxOptions: {
-    outputFormat: 'program',
-    jsx: true
-  }
-} as const
+  filePath: 'foo/my-test-file.mdx'
+}
 
 describe('remarkMdxTitle', () => {
   describe('should prioritize frontmatter', () => {
@@ -22,7 +17,7 @@ title: ${title}
 # Hello`,
         opts
       )
-      expect(clean(rawJs)).resolves.toMatch(`const title = '${title}'`)
+      expect(clean(rawJs)).resolves.toMatch(`title: '${title}',`)
     })
 
     it('esm', async () => {
@@ -33,7 +28,7 @@ title: ${title}
 # Hello`,
         opts
       )
-      expect(clean(rawJs)).resolves.toMatch(`const title = '${title}'`)
+      expect(clean(rawJs)).resolves.toMatch(`title: '${title}',`)
     })
   })
 
@@ -45,19 +40,16 @@ title: ${title}
 `,
       opts
     )
-    expect(clean(rawJs)).resolves.toMatch("const title = 'h1 1'")
+    expect(clean(rawJs)).resolves.toMatch("title: 'h1 1',")
   })
 
   it('should fallback to capitalized filename', async () => {
     const rawJs = await compileMdx('', opts)
-    expect(clean(rawJs)).resolves.toMatch("const title = 'My Test File'")
+    expect(clean(rawJs)).resolves.toMatch("title: 'My Test File',")
   })
 
-  it('should set metadata.title if missing', async () => {
-    const rawJs = await compileMdx('# should attach', opts)
-    expect(clean(rawJs)).resolves.toMatch(`export const metadata = {
-  filePath: 'foo/my-test-file.mdx',
-  title: 'should attach'
-}`)
+  it('should not set `metadata.title` if there is no h1 or filename provided', async () => {
+    const rawJs = await compileMdx('')
+    expect(clean(rawJs)).resolves.toMatch('const metadata = {}')
   })
 })

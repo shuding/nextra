@@ -24,7 +24,6 @@ describe('remarkStaticImages', () => {
       /*@jsxImportSource react*/
       import __img0 from '../foo.png'
       import __img1 from '../bar.jpeg'
-      export const title = ''
       export const metadata = {}
       export function useTOC(props) {
         return []
@@ -84,7 +83,6 @@ describe('remarkStaticImages', () => {
       /*@jsxImportSource react*/
       import __img0 from '../foo.png'
       import __img1 from './bar.svg'
-      export const title = ''
       export const metadata = {}
       export function useTOC(props) {
         return []

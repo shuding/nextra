@@ -23,7 +23,6 @@ bar[^1]
     expect(clean(rawJs)).resolves.toMatchInlineSnapshot(`
       "/*@jsxRuntime automatic*/
       /*@jsxImportSource react*/
-      export const title = ''
       export const metadata = {}
       export function useTOC(props) {
         return [
@@ -115,7 +114,6 @@ import { Steps } from 'nextra/components'
     expect(clean(rawJs)).resolves.toMatchInlineSnapshot(`
       "/*@jsxRuntime automatic*/
       /*@jsxImportSource react*/
-      export const title = ''
       export const metadata = {}
       import { Steps } from 'nextra/components'
       export function useTOC(props) {
@@ -187,12 +185,11 @@ export const metadata = {
     expect(clean(rawJs)).resolves.toMatchInlineSnapshot(`
       "/*@jsxRuntime automatic*/
       /*@jsxImportSource react*/
-      export const title = 'Heading 1'
       export const myVar = 'interpolated'
       export const Test = () => <span>Hello</span>
       export const metadata = {
-        test: 'extract toc content',
-        title: 'Heading 1'
+        title: 'Heading 1',
+        test: 'extract toc content'
       }
       export function useTOC(props) {
         return [
@@ -343,8 +340,8 @@ import { MDXRemote } from 'nextra/mdx-remote'
       expect(clean(rawJs)).resolves.toMatchInlineSnapshot(`
         "/*@jsxRuntime automatic*/
         /*@jsxImportSource react*/
-        export const title = '[[...slug]]'
         export const metadata = {
+          title: '[[...slug]]',
           filePath: '[[...slug]].mdx'
         }
         import { MDXRemote } from 'nextra/mdx-remote'
@@ -399,7 +396,6 @@ export const myVar = 123
       expect(clean(rawJs)).resolves.toMatchInlineSnapshot(`
         "'use strict'
         const { Fragment: _Fragment, jsx: _jsx, jsxs: _jsxs } = arguments[0]
-        const title = ''
         const metadata = {}
         const myVar = 123
         function useTOC(props) {
@@ -444,7 +440,6 @@ export const myVar = 123
           })
         }
         return {
-          title,
           metadata,
           myVar,
           useTOC,

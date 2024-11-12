@@ -19,7 +19,6 @@ export default foo`,
     expect(clean(rawJs)).resolves.toMatchInlineSnapshot(`
       "/*@jsxRuntime automatic*/
       /*@jsxImportSource react*/
-      export const title = ''
       export const metadata = {}
       import foo from './foo'
       const MDXLayout = foo
@@ -45,7 +44,6 @@ export { foo as default } from './foo'`,
     expect(clean(rawJs)).resolves.toMatchInlineSnapshot(`
       "/*@jsxRuntime automatic*/
       /*@jsxImportSource react*/
-      export const title = ''
       export const metadata = {}
       import { foo as MDXLayout } from './foo'
       export function useTOC(props) {
@@ -110,7 +108,6 @@ export const TagName = () => {
     expect(clean(rawJs)).resolves.toMatchInlineSnapshot(`
       "/*@jsxRuntime automatic*/
       /*@jsxImportSource react*/
-      export const title = 'My Header'
       export const metadata = {
         title: 'My Header'
       }
@@ -185,7 +182,6 @@ export const TagName = () => {
     expect(clean(rawJs)).resolves.toMatchInlineSnapshot(`
       "/*@jsxRuntime automatic*/
       /*@jsxImportSource react*/
-      export const title = ''
       export const metadata = {}
       export function useTOC(props) {
         return [
@@ -245,7 +241,6 @@ import Last from './three.mdx'
     expect(clean(rawJs)).resolves.toMatchInlineSnapshot(`
       "/*@jsxRuntime automatic*/
       /*@jsxImportSource react*/
-      export const title = ''
       export const metadata = {}
       import FromMdx, { useTOC as useTOC0 } from './one.mdx'
       import FromMarkdown, { useTOC as useTOC1 } from './two.md'
