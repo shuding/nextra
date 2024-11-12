@@ -53,9 +53,9 @@ export const nextraConfigSchema = z.strictObject({
       remarkPlugins: z.custom<ProcessorOptions['remarkPlugins']>(),
       recmaPlugins: z.custom<ProcessorOptions['recmaPlugins']>(),
       format: z.enum(['detect', 'mdx', 'md']).optional(),
-      rehypePrettyCodeOptions: z.custom<RehypePrettyCodeOptions>().optional()
+      rehypePrettyCodeOptions: z.custom<RehypePrettyCodeOptions>().default({})
     })
-    .optional(),
+    .default({}),
   whiteListTagsStyling: z.array(z.string()).optional(),
   contentDirBasePath: z
     .string()

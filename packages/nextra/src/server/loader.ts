@@ -54,6 +54,11 @@ const repository = await (async () => {
 // repository.path() returns the `/path/to/repo/.git`, we need the parent directory of it
 const GIT_ROOT = repository ? path.join(repository.path(), '..') : ''
 
+const DEFAULT_TRANSFORMERS = transformerTwoslash({
+  renderer: twoslashRenderer(),
+  explicitTrigger: true
+})
+
 export async function loader(
   this: LoaderContext<LoaderOptions>,
   source: string
@@ -92,7 +97,7 @@ export async function loader(
     const { pageMap, mdxPages } = convertToPageMap({
       filePaths,
       // Remove forward slash
-      basePath: contentDirBasePath!.slice(1),
+      basePath: contentDirBasePath.slice(1),
       locale
     })
     const rawJs = await convertPageMapToJs({ pageMap, mdxPages })
@@ -119,13 +124,10 @@ export async function loader(
       format: 'detect',
       providerImportSource: 'next-mdx-import-source-file',
       rehypePrettyCodeOptions: {
-        ...mdxOptions?.rehypePrettyCodeOptions,
+        ...mdxOptions.rehypePrettyCodeOptions,
         transformers: [
-          transformerTwoslash({
-            renderer: twoslashRenderer(),
-            explicitTrigger: true
-          }),
-          ...(mdxOptions?.rehypePrettyCodeOptions?.transformers || [])
+          DEFAULT_TRANSFORMERS,
+          ...(mdxOptions.rehypePrettyCodeOptions.transformers || [])
         ]
       }
     },
