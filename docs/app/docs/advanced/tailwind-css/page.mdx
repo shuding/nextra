@@ -37,25 +37,28 @@ export default {
 
 > [!TIP]
 >
-> You can also use a `tailwind.config.ts` file if you prefer TypeScript for your Tailwind CSS configuration.
+> You can also use a `tailwind.config.ts` file if you prefer TypeScript for your
+> Tailwind CSS configuration.
 
-## Create the `globals.css` File
+## Create the `globals.css` file
 
 Create a CSS file for Tailwind directives, `globals.css` for example:
 
 ```css filename="globals.css"
-@tailwind base; /* preflight styles */
-@tailwind components;
-@tailwind utilities;
+@tailwind base; /* Apply Tailwind's base styles (Preflight) */
+@tailwind components; /* Include component styles */
+@tailwind utilities; /* Include utility classes */
 ```
 
 > [!NOTE]
 >
-> You don't need to have `@tailwind base` directive while using
-> `nextra-theme-docs` or `nextra-theme-blog` because they already imports
-> Tailwind CSS preflight styles in their `style.css` files.
+> If you're using `nextra-theme-docs` or `nextra-theme-blog`, you don't need to
+> include the `@tailwind base` directive. These themes already import Tailwind's
+> preflight styles in their `style.css` files.
 
-## Import styles in the root layout
+## Import styles in the Root Layout
+
+To apply the styles globally, import the `globals.css` file in your root layout file:
 
 ```jsx filename="app/layout.jsx"
 import '../path/to/your/globals.css'
