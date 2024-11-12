@@ -1,5 +1,5 @@
 import type { SpreadElement } from 'estree'
-import type { Element, Root } from 'hast'
+import type { Element, Root, Text } from 'hast'
 import { toEstree } from 'hast-util-to-estree'
 import type { MdxjsEsm } from 'hast-util-to-estree/lib/handlers/mdxjs-esm'
 import type { Plugin } from 'unified'
@@ -32,25 +32,17 @@ export const rehypeExtractTocContent: Plugin<[], Root> = () => (ast, file) => {
     }
 
     const node = TocMap[name.id]
-    // @ts-expect-error
-    const { children } = toEstree(node).body[0].expression
 
-    const isText = children.every(
-      // @ts-expect-error
-      child =>
-        child.type === 'JSXExpressionContainer' &&
-        child.expression.type === 'Literal'
-    )
+    const isText = node.children.every(child => child.type === 'text')
 
     const result = isText
-      ? // @ts-expect-error
-        children.map(n => n.expression)[0]
-      : {
+      ? node.children.map(n => (n as Text).value).join('')
+      : // @ts-expect-error
+        Object.assign(toEstree(node).body[0].expression, {
           type: 'JSXFragment',
           openingFragment: { type: 'JSXOpeningFragment' },
-          closingFragment: { type: 'JSXClosingFragment' },
-          children
-        }
+          closingFragment: { type: 'JSXClosingFragment' }
+        })
 
     Object.assign(node, {
       type: 'mdxJsxFlowElement',
