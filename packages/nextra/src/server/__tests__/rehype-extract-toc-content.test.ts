@@ -408,16 +408,16 @@ export const myVar = 123
           return _jsxs(_Fragment, {
             children: [
               _jsx(_components.h2, {
-                id: 'bar',
-                children: 'bar'
+                id: toc[0].id,
+                children: toc[0].value
               }),
               '\\n',
               _jsx(Foo, {}),
               '\\n',
               '\\n',
-              _jsxs(_components.h3, {
-                id: '123-myvar',
-                children: ['123 ', myVar]
+              _jsx(_components.h3, {
+                id: toc[1].id,
+                children: toc[1].value
               })
             ]
           })

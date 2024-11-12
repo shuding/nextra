@@ -15,9 +15,7 @@ const DEFAULT_EXTENSIONS = ['js', 'jsx', 'ts', 'tsx'] as const
 
 const FILENAME = fileURLToPath(import.meta.url)
 
-const DIRNAME = path.dirname(FILENAME)
-
-const LOADER_PATH = path.join(DIRNAME, '..', '..', 'loader.cjs')
+const LOADER_PATH = path.join(FILENAME, '..', '..', '..', 'loader.cjs')
 
 const SEP = path.sep === '/' ? '/' : '\\\\'
 
@@ -143,8 +141,10 @@ const nextra: Nextra = nextraConfig => {
             )
           }
         }
-        config.resolve.alias['private-next-content-dir'] =
-          `private-next-root-dir/${contentDir}`
+        config.resolve.alias['private-next-content-dir'] = [
+          'private-next-root-dir/content',
+          'private-next-root-dir/src/content'
+        ]
         config.resolve.alias['next-mdx-import-source-file'] = [
           'private-next-root-dir/mdx-components',
           'private-next-root-dir/src/mdx-components'
