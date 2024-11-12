@@ -30,3 +30,24 @@ npm run start
 >
 > If you're not familiar with Next.js, note that development mode is
 > significantly slower since Next.js compiles every page you navigate to.
+
+### Add Next.js Config
+
+Create the following `next.config.mjs` file in your project's root directory:
+
+```js filename="next.config.mjs"
+import nextra from 'nextra'
+
+const withNextra = nextra({
+  // ... Other Nextra config options
+})
+
+// You can include other Next.js configuration options here, in addition to Nextra settings:
+export default withNextra({
+  // ... Other Next.js config options
+})
+```
+
+With the above configuration, Nextra can handle Markdown files in your Next.js
+project, with the specified theme. Other Nextra configurations can be found in
+[Guide](/docs/guide).

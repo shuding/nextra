@@ -54,27 +54,6 @@ npm i next react react-dom nextra nextra-theme-docs
 
 <InstallNextraTheme />
 
-### Add Next.js Config
-
-Create the following `next.config.mjs` file in your project's root directory:
-
-```js filename="next.config.mjs"
-import nextra from 'nextra'
-
-const withNextra = nextra({
-  // ... Other Nextra config options
-})
-
-// If you have other Next.js configurations, you can pass them as the parameter:
-export default withNextra({
-  // ... Other Next.js config options
-})
-```
-
-With the above configuration, Nextra can handle Markdown files in your Next.js
-project, with the specified theme. Other Nextra configurations can be found in
-[Guide](/docs/guide).
-
 ### Add `mdx-components.js` in root directory
 
 ```ts filename="mdx-components.js"
