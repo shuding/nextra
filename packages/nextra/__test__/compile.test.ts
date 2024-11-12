@@ -89,7 +89,7 @@ export const TagName = () => {
     `,
       { mdxOptions }
     )
-    expect(await clean(rawJs)).toMatchSnapshot()
+    expect(clean(rawJs)).resolves.toMatchSnapshot()
   })
   it('no-h1', async () => {
     const rawJs = await compileMdx('## H2', { mdxOptions })

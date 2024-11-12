@@ -340,9 +340,7 @@ import { MDXRemote } from 'nextra/mdx-remote'
         ...opts,
         filePath: '[[...slug]].mdx'
       })
-      const res = await clean(rawJs)
-
-      expect(res).toMatchInlineSnapshot(`
+      expect(clean(rawJs)).resolves.toMatchInlineSnapshot(`
         "/*@jsxRuntime automatic*/
         /*@jsxImportSource react*/
         export const title = '[[...slug]]'
@@ -396,7 +394,7 @@ export const myVar = 123
 ### 123 {myVar}`
 
       const rawJs = await compileMdx(rawMdx)
-      expect(await clean(rawJs)).toMatchInlineSnapshot(`
+      expect(clean(rawJs)).resolves.toMatchInlineSnapshot(`
         "'use strict'
         const { Fragment: _Fragment, jsx: _jsx, jsxs: _jsxs } = arguments[0]
         const title = ''
@@ -461,10 +459,10 @@ export const myVar = 123
         }
         "
       `)
-      expect(res).toMatch('default: _createMdxContent')
-      expect(res).toMatch('const metadata = {')
-      expect(res).toMatch('function useTOC')
-      expect(res).not.toMatch('MDXContent')
+      expect(rawJs).toMatch('default: _createMdxContent')
+      expect(rawJs).toMatch('const metadata = {')
+      expect(rawJs).toMatch('function useTOC')
+      expect(rawJs).not.toMatch('MDXContent')
     })
   })
 })
