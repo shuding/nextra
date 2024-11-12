@@ -1,7 +1,7 @@
 import { compile } from '@mdx-js/mdx'
 import remarkFrontmatter from 'remark-frontmatter'
-import { clean } from '../../../../__test__/test-utils.js'
-import { remarkMdxFrontMatter } from '../remark-mdx-frontmatter.js'
+import { clean } from '../../../__test__/test-utils.js'
+import { remarkMdxFrontMatter } from '../remark-plugins/remark-mdx-frontmatter.js'
 
 function process(content: string) {
   return compile(content, {

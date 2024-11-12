@@ -344,7 +344,9 @@ import { MDXRemote } from 'nextra/mdx-remote'
         "/*@jsxRuntime automatic*/
         /*@jsxImportSource react*/
         export const title = '[[...slug]]'
-        export const metadata = {}
+        export const metadata = {
+          filePath: '[[...slug]].mdx'
+        }
         import { MDXRemote } from 'nextra/mdx-remote'
         export function useTOC(props) {
           return [

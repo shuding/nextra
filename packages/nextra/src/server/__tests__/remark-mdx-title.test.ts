@@ -1,9 +1,8 @@
-import { describe } from 'vitest'
-import { clean } from '../../../../__test__/test-utils.js'
-import { compileMdx } from '../../compile.js'
+import { clean } from '../../../__test__/test-utils.js'
+import { compileMdx } from '../compile.js'
 
 const opts = {
-  filePath: '/foo/my-test-file.mdx',
+  filePath: 'foo/my-test-file.mdx',
   mdxOptions: {
     outputFormat: 'program',
     jsx: true
@@ -56,6 +55,7 @@ title: ${title}
   it('should set metadata.title if missing', async () => {
     const rawJs = await compileMdx('# should attach', opts)
     expect(clean(rawJs)).resolves.toMatch(`export const metadata = {
+  filePath: 'foo/my-test-file.mdx',
   title: 'should attach'
 }`)
   })

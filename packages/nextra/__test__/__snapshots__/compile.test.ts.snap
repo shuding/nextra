@@ -52,9 +52,7 @@ function MDXLayout(props) {
 `;
 
 exports[`Process heading > dynamic-h1 1`] = `
-{
-  "frontMatter": {},
-  "result": "/*@jsxRuntime automatic*/
+"/*@jsxRuntime automatic*/
 /*@jsxImportSource react*/
 export const title = 'Posts Tagged with ""'
 export const metadata = {
@@ -81,9 +79,7 @@ function MDXLayout(props) {
     </_components.h1>
   )
 }
-",
-  "title": "Posts Tagged with """,
-}
+"
 `;
 
 exports[`Process heading > no-h1 1`] = `

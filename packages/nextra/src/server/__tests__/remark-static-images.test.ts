@@ -1,5 +1,5 @@
-import { clean } from '../../../../__test__/test-utils.js'
-import { compileMdx } from '../../compile.js'
+import { clean } from '../../../__test__/test-utils.js'
+import { compileMdx } from '../compile.js'
 
 describe('remarkStaticImages', () => {
   it('should insert same import only once', async () => {

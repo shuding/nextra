@@ -1,7 +1,7 @@
 import type { ArrayExpression, ObjectExpression } from 'estree'
 import { valueToEstree } from 'estree-util-value-to-estree'
 import type { MdxjsEsm } from 'hast-util-to-estree/lib/handlers/mdxjs-esm'
-import type { Parent, Root } from 'mdast'
+import type { Root } from 'mdast'
 import type { Plugin } from 'unified'
 import { parse as parseYaml } from 'yaml'
 import { createAstExportConst } from '../utils.js'
