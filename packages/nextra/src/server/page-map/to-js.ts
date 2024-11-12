@@ -1,12 +1,10 @@
 import type { ImportDeclaration } from 'estree'
 import { toJs } from 'estree-util-to-js'
 import type { Import, TItem } from '../../types.js'
-import {
-  MARKDOWN_EXTENSION_RE,
-  META_RE,
-  METADATA_ONLY_RQ
-} from '../constants.js'
+import { MARKDOWN_EXTENSION_RE, METADATA_ONLY_RQ } from '../constants.js'
 import { convertPageMapToAst } from './to-ast.js'
+
+const META_RE = /_meta\.[jt]sx?$/
 
 export async function convertPageMapToJs({
   pageMap,

@@ -5,14 +5,12 @@ import type { LoaderContext } from 'webpack'
 import type { LoaderOptions } from '../types.js'
 import { compileMetadata } from './compile-metadata.js'
 import { compileMdx } from './compile.js'
+import { CWD, IS_PRODUCTION, METADATA_ONLY_RQ } from './constants.js'
 import {
-  CWD,
   GET_PAGE_MAP_RE,
-  IS_PRODUCTION,
-  METADATA_ONLY_RQ,
+  getContentDirectory,
   PAGE_MAP_PLACEHOLDER_RE
-} from './constants.js'
-import { getContentDirectory } from './index.js'
+} from './index.js'
 import { findMetaAndPageFilePaths } from './page-map/find-meta-and-page-file-paths.js'
 import { convertPageMapToJs } from './page-map/to-js.js'
 import { convertToPageMap } from './page-map/to-page-map.js'

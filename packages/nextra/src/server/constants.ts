@@ -2,7 +2,6 @@
  * Benefit of server/constants - do not include unneeded `path` polyfill in client bundle,
  * while importing constants in client file
  */
-import { sep } from 'node:path'
 import type { Property } from 'estree'
 
 export const MARKDOWN_EXTENSION_RE = /\.mdx?$/
@@ -12,8 +11,6 @@ export const CWD = process.cwd()
 export const MARKDOWN_URL_EXTENSION_RE = /\.mdx?(?:(?=[#?])|$)/
 
 export const IS_PRODUCTION = process.env.NODE_ENV === 'production'
-
-export const META_RE = /_meta\.[jt]sx?$/
 
 export const EXTERNAL_URL_RE = /^https?:\/\//
 
@@ -26,18 +23,5 @@ export const DEFAULT_PROPERTY_PROPS = {
 } satisfies Omit<Property, 'key' | 'value'>
 
 export const TOC_HEADING_RE = /^h[2-6]$/
-
-const SEP = sep === '/' ? '/' : '\\\\'
-
-export const GET_PAGE_MAP_PATH = '/nextra/dist/server/page-map/get.js'
-export const GET_PAGE_MAP_RE = new RegExp(
-  GET_PAGE_MAP_PATH.replaceAll('/', SEP).replaceAll('.', '\\.')
-)
-
-export const PAGE_MAP_PLACEHOLDER_PATH =
-  '/nextra/dist/server/page-map/placeholder.js'
-export const PAGE_MAP_PLACEHOLDER_RE = new RegExp(
-  PAGE_MAP_PLACEHOLDER_PATH.replaceAll('/', SEP).replaceAll('.', '\\.')
-)
 
 export const METADATA_ONLY_RQ = '?metadata'
