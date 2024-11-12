@@ -206,7 +206,7 @@ export async function compileMdx(
               rehypeTwoslashPopup,
               [rehypeAttachCodeMeta, { search }]
             ]),
-        [rehypeExtractTocContent, { isRemoteContent }]
+        rehypeExtractTocContent
       ].filter(v => !!v),
       recmaPlugins: [
         ...(recmaPlugins || []),

@@ -1,4 +1,3 @@
-import type { JsxAttribute } from 'estree-util-to-js/lib/jsx'
 import type { Element, Root } from 'hast'
 import { toEstree } from 'hast-util-to-estree'
 import type { MdxjsEsm } from 'hast-util-to-estree/lib/handlers/mdxjs-esm'
@@ -10,36 +9,32 @@ import { createAstExportConst, createAstObject } from '../utils.js'
 const TOC_HEADING_RE = /^h[2-6]$/
 
 export const rehypeExtractTocContent: Plugin<[], Root> = () => (ast, file) => {
-  const toc: any[] = []
-  const idSet = new Set((file.data.toc as Heading[]).map(({ id }) => id))
+  const TocMap: Record<string, Element> = {}
+  const toc = file.data.toc as Heading[]
+  const idSet = new Set(toc.map(({ id }) => id))
 
   visit(ast, 'element', (node: Element) => {
     if (!TOC_HEADING_RE.test(node.tagName)) return
 
-    const { id } = node.properties
-    if (typeof id === 'string' && idSet.has(id)) {
-      toc.push(node)
+    const id = node.properties.id as string
+    if (idSet.has(id)) {
+      TocMap[id] = node
     }
   })
-
-  const TocToExpression = Object.fromEntries(
-    toc.map(node => [node.properties.id, node])
-  )
-
-  // @ts-expect-error
-  const elements = file.data.toc.map((n, index) => {
-    if (typeof n === 'string') {
+  
+  const elements = toc.map((name, index) => {
+    if (typeof name === 'string') {
       return {
         type: 'SpreadElement',
-        argument: { type: 'Identifier', name: n }
+        argument: { type: 'Identifier', name }
       }
     }
 
-    const originalNode = TocToExpression[n.id]
+    const node = TocMap[name.id]
     // @ts-expect-error
-    const node = toEstree(originalNode).body[0].expression
+    const { children } = toEstree(node).body[0].expression
 
-    const isText = node.children.every(
+    const isText = children.every(
       // @ts-expect-error
       child =>
         child.type === 'JSXExpressionContainer' &&
@@ -48,25 +43,17 @@ export const rehypeExtractTocContent: Plugin<[], Root> = () => (ast, file) => {
 
     const result = isText
       ? // @ts-expect-error
-        node.children.map(n => n.expression)[0]
+        children.map(n => n.expression)[0]
       : {
           type: 'JSXFragment',
           openingFragment: { type: 'JSXOpeningFragment' },
           closingFragment: { type: 'JSXClosingFragment' },
-          children: node.children
+          children
         }
 
-    const ast = createAstObject({
-      value: result,
-      id: node.openingElement.attributes.find(
-        (attr: JsxAttribute) => attr.name.name === 'id'
-      ).value.value,
-      depth: Number(node.openingElement.name.name[1])
-    })
-
-    Object.assign(originalNode, {
+    Object.assign(node, {
       type: 'mdxJsxFlowElement',
-      name: originalNode.tagName,
+      name: node.tagName,
       attributes: [
         {
           type: 'mdxJsxAttribute',
@@ -121,7 +108,11 @@ export const rehypeExtractTocContent: Plugin<[], Root> = () => (ast, file) => {
       ]
     })
 
-    return ast
+    return createAstObject({
+      value: result,
+      id: node.properties.id as string,
+      depth: Number(node.tagName[1])
+    })
   })
 
   ast.children.push({
@@ -135,5 +126,5 @@ export const rehypeExtractTocContent: Plugin<[], Root> = () => (ast, file) => {
     }
   } as MdxjsEsm)
 
-  file.data.toc = toc
+  file.data.toc = TocMap
 }
