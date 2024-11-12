@@ -18,42 +18,43 @@ function createNode(data: Record<string, unknown>) {
   } as MdxjsEsm
 }
 
-export const remarkMdxFrontMatter: Plugin<[], Root> = () => (ast, file) => {
-  const yamlNodeIndex = ast.children.findIndex(node => node.type === 'yaml')
-  const esmNodeIndex = ast.children.findIndex((node: any) =>
-    isExportNode(node, 'metadata')
-  )
-  const hasYaml = yamlNodeIndex !== -1
-  const hasEsm = esmNodeIndex !== -1
+export const remarkMdxFrontMatter: Plugin<[], Root> =
+  () => (ast: Root, file) => {
+    const yamlNodeIndex = ast.children.findIndex(node => node.type === 'yaml')
+    const esmNodeIndex = ast.children.findIndex((node: any) =>
+      isExportNode(node, 'metadata')
+    )
+    const hasYaml = yamlNodeIndex !== -1
+    const hasEsm = esmNodeIndex !== -1
 
-  if (hasYaml) {
-    if (hasEsm) {
-      throw new Error(
-        "Both yaml frontMatter and esm export frontMatter aren't supported. Keep only 1."
-      )
+    if (hasYaml) {
+      if (hasEsm) {
+        throw new Error(
+          "Both yaml frontMatter and esm export frontMatter aren't supported. Keep only 1."
+        )
+      }
+
+      const raw = (ast.children[yamlNodeIndex] as { value: string }).value
+      const data = parseYaml(raw)
+
+      ast.children[yamlNodeIndex] = createNode(data)
+    } else if (!hasEsm) {
+      // Attach dummy node
+      ast.children.unshift(createNode({}))
     }
 
-    const raw = (ast.children[yamlNodeIndex] as { value: string }).value
-    const data = parseYaml(raw)
-
-    ast.children[yamlNodeIndex] = createNode(data)
-  } else if (!hasEsm) {
-    // Attach dummy node
-    ast.children.unshift(createNode({}))
+    const frontMatterNode = ast.children.find((node: any) =>
+      isExportNode(node, 'metadata')
+    )!
+    const frontMatter = getFrontMatterASTObject(frontMatterNode)
+    const frontMatterValue = estreeToValue(frontMatter)
+    if (frontMatterValue.mdxOptions) {
+      throw new Error('`frontMatter.mdxOptions` is no longer supported')
+    }
+    if (process.env.NODE_ENV === 'test') {
+      file.data.frontMatter = frontMatterValue
+    }
   }
-
-  const frontMatterNode = ast.children.find((node: any) =>
-    isExportNode(node, 'metadata')
-  )!
-  const frontMatter = getFrontMatterASTObject(frontMatterNode)
-  const frontMatterValue = estreeToValue(frontMatter)
-  if (frontMatterValue.mdxOptions) {
-    throw new Error('`frontMatter.mdxOptions` is no longer supported')
-  }
-  if (process.env.NODE_ENV === 'test') {
-    file.data.frontMatter = frontMatterValue
-  }
-}
 
 function traverseArray(
   nodes: ArrayExpression['elements'],

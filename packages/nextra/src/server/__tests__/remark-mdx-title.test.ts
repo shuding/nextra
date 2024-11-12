@@ -1,3 +1,4 @@
+import { describe } from 'vitest'
 import { clean } from '../../../__test__/test-utils.js'
 import { compileMdx } from '../compile.js'
 
