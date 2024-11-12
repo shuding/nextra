@@ -1,13 +1,16 @@
 /* eslint-env node */
+import { createRequire } from 'node:module'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import fg from 'fast-glob'
 import type { RuleSetRule } from 'webpack'
 import { fromZodError } from 'zod-validation-error'
 import type { Nextra } from '../types.js'
-import { MARKDOWN_EXTENSION_RE } from './constants.js'
+import { CWD, MARKDOWN_EXTENSION_RE } from './constants.js'
 import { nextraConfigSchema } from './schemas.js'
 import { logger } from './utils.js'
+
+const require = createRequire(import.meta.url)
 
 const MARKDOWN_EXTENSIONS = ['md', 'mdx'] as const
 
@@ -125,7 +128,17 @@ const nextra: Nextra = nextraConfig => {
             ...nextConfig.experimental?.turbo?.resolveAlias,
             'next-mdx-import-source-file': './mdx-components', // '@vercel/turbopack-next/mdx-import-source'
             'private-next-root-dir/*': './*',
-            'private-next-content-dir/*': `./${contentDir}/*`
+            'private-next-content-dir/*': `./${contentDir}/*`,
+            // Fixes when Turbopack is enabled: Module not found: Can't resolve '@theguild/remark-mermaid/mermaid'
+            '@theguild/remark-mermaid/mermaid': path.relative(
+              CWD,
+              path.join(
+                require.resolve('@theguild/remark-mermaid/package.json'),
+                '..',
+                'dist',
+                'mermaid.js'
+              )
+            )
           }
         }
       },
