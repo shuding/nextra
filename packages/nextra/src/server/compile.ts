@@ -3,7 +3,6 @@ import type { ProcessorOptions } from '@mdx-js/mdx'
 import { createProcessor } from '@mdx-js/mdx'
 import { remarkMermaid } from '@theguild/remark-mermaid'
 import { remarkNpm2Yarn } from '@theguild/remark-npm2yarn'
-import type { Program } from 'estree'
 import rehypeKatex from 'rehype-katex'
 import rehypePrettyCode from 'rehype-pretty-code'
 import rehypeRaw from 'rehype-raw'
@@ -16,6 +15,7 @@ import type { Pluggable, Plugin } from 'unified'
 import type { LoaderOptions, NextraConfig } from '../types.js'
 import { CWD, MARKDOWN_URL_EXTENSION_RE } from './constants.js'
 import {
+  recmaRewrite,
   recmaRewriteFunctionBody,
   recmaRewriteJsx
 } from './recma-plugins/index.js'
@@ -210,30 +210,7 @@ export async function compileMdx(
       ].filter(v => !!v),
       recmaPlugins: [
         ...(recmaPlugins || []),
-        (() => (ast: Program, file) => {
-          const mdxContentIndex = ast.body.findIndex(node => {
-            if (node.type === 'ExportDefaultDeclaration') {
-              return (node.declaration as any).id.name === 'MDXContent'
-            }
-            if (node.type === 'FunctionDeclaration') {
-              return node.id.name === 'MDXContent'
-            }
-          })
-
-          // Remove `MDXContent` since we use custom HOC_MDXContent
-          let [mdxContent] = ast.body.splice(mdxContentIndex, 1) as any
-
-          // In MDX3 MDXContent is directly exported as export default when `outputFormat: 'program'` is specified
-          if (mdxContent.type === 'ExportDefaultDeclaration') {
-            mdxContent = mdxContent.declaration
-          }
-
-          const mdxContentArgument = mdxContent.body.body[0].argument
-
-          file.data.hasMdxLayout =
-            !!mdxContentArgument &&
-            mdxContentArgument.openingElement.name.name === 'MDXLayout'
-        }) satisfies Plugin<[], Program>,
+        recmaRewrite,
         isRemoteContent ? recmaRewriteFunctionBody : recmaRewriteJsx
       ].filter(v => !!v)
     })
