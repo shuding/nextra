@@ -500,6 +500,7 @@ describe('generatePageMap()', () => {
           "src/content/features/themes.mdx",
           "src/content/get-started.mdx",
           "src/content/index.mdx",
+          "src/content/mermaid.mdx",
           "src/content/page.mdx",
           "src/content/themes/_meta.js",
           "src/content/themes/blog/_meta.js",
@@ -643,6 +644,11 @@ describe('generatePageMap()', () => {
             "route": "/get-started",
           },
           {
+            "__pagePath": "src/content/mermaid.mdx",
+            "name": "mermaid",
+            "route": "/mermaid",
+          },
+          {
             "__pagePath": "src/content/page.mdx",
             "name": "page",
             "route": "/page",
@@ -669,6 +675,7 @@ describe('generatePageMap()', () => {
           "features/ssg": "features/ssg.mdx",
           "features/themes": "features/themes.mdx",
           "get-started": "get-started.mdx",
+          "mermaid": "mermaid.mdx",
           "page": "page.mdx",
           "themes/blog": "themes/blog/index.mdx",
           "themes/docs": "themes/docs/index.mdx",
@@ -804,6 +811,11 @@ describe('generatePageMap()', () => {
                 "__pagePath": "src/content/index.mdx",
                 "name": "index",
                 "route": "/docs",
+              },
+              {
+                "__pagePath": "src/content/mermaid.mdx",
+                "name": "mermaid",
+                "route": "/docs/mermaid",
               },
               {
                 "__pagePath": "src/content/page.mdx",
