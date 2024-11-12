@@ -1,5 +1,21 @@
 # nextra
 
+## 4.0.0-app-router.25
+
+### Major Changes
+
+- c095f98: make `compileMdx` from `nextra/compile` return a `string` instead of
+  an `object`
+- 79bbab7: remove `export const title` from generated mdx pages
+- 33ee518: replace `export const useTOC = () = [/* your headings */]` by
+  `export const toc = [/* your headings */]`
+
+### Patch Changes
+
+- 3edc6d7: use `Date.now()` for last edit time on development and git last
+  commit time on production
+- fdbae45: initialize `transformerTwoslash` only 1 time outside of loader
+
 ## 4.0.0-app-router.24
 
 ### Patch Changes
