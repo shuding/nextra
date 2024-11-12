@@ -1,85 +1,71 @@
-import { compile } from '@mdx-js/mdx'
-import remarkFrontmatter from 'remark-frontmatter'
 import { clean } from '../../../__test__/test-utils.js'
-import { remarkMdxFrontMatter } from '../remark-plugins/remark-mdx-frontmatter.js'
-
-function process(content: string) {
-  return compile(content, {
-    jsx: true,
-    remarkPlugins: [remarkFrontmatter, [remarkMdxFrontMatter]]
-  })
-}
+import { evaluate } from '../../client/evaluate.js'
+import { compileMdx } from '../compile.js'
 
 const YAML_FRONTMATTER = '---\nfoo: bar\n---'
 const ESM_FRONTMATTER = "export const metadata = { foo: 'bar' }"
 
 describe('remarkMdxFrontMatter', () => {
   it('should throw error if both yaml/esm frontmatter are used', () => {
-    const processor = process(`${YAML_FRONTMATTER}\n${ESM_FRONTMATTER}`)
+    const processor = compileMdx(`${YAML_FRONTMATTER}\n${ESM_FRONTMATTER}`)
     expect(processor).rejects.toThrowError(
       "Both yaml frontMatter and esm export frontMatter aren't supported. Keep only 1."
     )
   })
 
   describe('yaml frontmatter', async () => {
-    const file = await process(YAML_FRONTMATTER)
+    const rawJs = await compileMdx(YAML_FRONTMATTER)
 
     it('should export yaml frontmatter', () => {
-      expect(clean(String(file))).resolves.toMatchInlineSnapshot(`
-        "/*@jsxRuntime automatic*/
-        /*@jsxImportSource react*/
-        export const metadata = {
+      expect(clean(rawJs)).resolves.toMatchInlineSnapshot(`
+        "'use strict'
+        const { Fragment: _Fragment, jsx: _jsx } = arguments[0]
+        const metadata = {
           foo: 'bar'
         }
+        const toc = []
         function _createMdxContent(props) {
-          return <></>
+          return _jsx(_Fragment, {})
         }
-        export default function MDXContent(props = {}) {
-          const { wrapper: MDXLayout } = props.components || {}
-          return MDXLayout ? (
-            <MDXLayout {...props}>
-              <_createMdxContent {...props} />
-            </MDXLayout>
-          ) : (
-            _createMdxContent(props)
-          )
+        return {
+          metadata,
+          toc,
+          default: _createMdxContent
         }
         "
       `)
     })
 
     it('should add file.data', () => {
-      expect(file.data.frontMatter).toEqual({ foo: 'bar' })
+      const { metadata } = evaluate(rawJs)
+      expect(metadata).toEqual({ foo: 'bar' })
     })
   })
 
   describe('esm frontmatter', async () => {
-    const file = await process(ESM_FRONTMATTER)
+    const rawJs = await compileMdx(ESM_FRONTMATTER)
     it('should export esm frontmatter', () => {
-      expect(clean(String(file))).resolves.toMatchInlineSnapshot(`
-        "/*@jsxRuntime automatic*/
-        /*@jsxImportSource react*/
-        export const metadata = {
+      expect(clean(rawJs)).resolves.toMatchInlineSnapshot(`
+        "'use strict'
+        const { Fragment: _Fragment, jsx: _jsx } = arguments[0]
+        const metadata = {
           foo: 'bar'
         }
+        const toc = []
         function _createMdxContent(props) {
-          return <></>
+          return _jsx(_Fragment, {})
         }
-        export default function MDXContent(props = {}) {
-          const { wrapper: MDXLayout } = props.components || {}
-          return MDXLayout ? (
-            <MDXLayout {...props}>
-              <_createMdxContent {...props} />
-            </MDXLayout>
-          ) : (
-            _createMdxContent(props)
-          )
+        return {
+          metadata,
+          toc,
+          default: _createMdxContent
         }
         "
       `)
     })
     it('should add file.data', () => {
-      expect(file.data.frontMatter).toEqual({ foo: 'bar' })
+      const { metadata } = evaluate(rawJs)
+      expect(metadata).toEqual({ foo: 'bar' })
     })
   })
 
@@ -100,7 +86,7 @@ describe('remarkMdxFrontMatter', () => {
     }
 
     it('yaml', async () => {
-      const file = await process(`---
+      const rawJs = await compileMdx(`---
 string: Hello
 number: 222
 boolean: true
@@ -118,13 +104,15 @@ array:
   - [undefined, true, Bool]
 ---
 `)
-      expect(file.data.frontMatter).toEqual(result)
+      const { metadata } = evaluate(rawJs)
+      expect(metadata).toEqual(result)
     })
     it('esm', async () => {
-      const file = await process(
+      const rawJs = await compileMdx(
         `export const metadata = ${JSON.stringify(result)}`
       )
-      expect(file.data.frontMatter).toEqual(result)
+      const { metadata } = evaluate(rawJs)
+      expect(metadata).toEqual(result)
     })
   })
 })
