@@ -33,7 +33,7 @@ export const ClientWrapper: MDXWrapper = ({ toc, children, metadata }) => {
             <TOC
               toc={themeConfig.toc.float ? toc : []}
               filePath={metadata.filePath}
-              pageTitle={metadata.title as string}
+              pageTitle={metadata.title}
             />
           )}
         </nav>

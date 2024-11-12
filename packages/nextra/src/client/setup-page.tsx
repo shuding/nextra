@@ -6,14 +6,16 @@
 import { useMDXComponents as getMDXComponents } from 'next-mdx-import-source-file'
 import type { ComponentProps, FC } from 'react'
 import { createElement } from 'react'
-import type { Heading, MDXWrapper, PageOpts } from '../types.js'
+import type { MDXWrapper } from '../types.js'
 
 const Wrapper = getMDXComponents().wrapper
 
+type WrapperProps = ComponentProps<MDXWrapper>
+
 export function HOC_MDXWrapper(
   MDXContent: MDXWrapper,
-  hocProps: PageOpts & { toc: Heading[] }
-): FC<ComponentProps<MDXWrapper>> {
+  hocProps: Omit<WrapperProps, 'children'>
+): FC<WrapperProps> {
   return function MDXWrapper(props) {
     const children = createElement(MDXContent, props)
 

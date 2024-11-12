@@ -11,6 +11,7 @@ export interface LoaderOptions extends NextraConfig {
 
 type TPageItem = { name: string; route: string; __pagePath: string }
 type TMetaItem = { __metaPath: string }
+
 interface TFolder<T = TItem> {
   name: string
   route: string
@@ -72,13 +73,11 @@ export type Heading = {
   id: string
 }
 
-export type PageOpts = {
+type NextraMetadata = Omit<Metadata, 'title'> & {
   title: string
-  metadata: Metadata & {
-    filePath: string
-    timestamp?: number
-    readingTime?: ReadingTime
-  }
+  filePath: string
+  timestamp?: number
+  readingTime?: ReadingTime
 }
 
 export type ReadingTime = {
@@ -96,9 +95,8 @@ export type Nextra = (
   nextraConfig: NextraConfig
 ) => (nextConfig: NextConfig) => NextConfig
 
-export type MDXWrapper = FC<
-  {
-    toc: Heading[]
-    children: ReactNode
-  } & PageOpts
->
+export type MDXWrapper = FC<{
+  toc: Heading[]
+  children: ReactNode
+  metadata: NextraMetadata
+}>
