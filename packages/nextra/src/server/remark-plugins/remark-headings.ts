@@ -22,7 +22,7 @@ const SKIP_FOR_PARENT_NAMES = new Set(['Tab', 'Tabs.Tab'])
 export const remarkHeadings: Plugin<
   [{ exportName?: string; isRemoteContent?: boolean }],
   Root
-> = ({ exportName = 'useTOC', isRemoteContent }) => {
+> = ({ exportName = 'toc', isRemoteContent }) => {
   const headings: (Heading | string)[] = []
 
   const slugger = new Slugger()

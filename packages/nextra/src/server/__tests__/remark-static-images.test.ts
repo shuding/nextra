@@ -25,9 +25,7 @@ describe('remarkStaticImages', () => {
       import __img0 from '../foo.png'
       import __img1 from '../bar.jpeg'
       export const metadata = {}
-      export function useTOC(props) {
-        return []
-      }
+      export const toc = []
       function MDXLayout(props) {
         const _components = {
           img: 'img',
@@ -84,9 +82,7 @@ describe('remarkStaticImages', () => {
       import __img0 from '../foo.png'
       import __img1 from './bar.svg'
       export const metadata = {}
-      export function useTOC(props) {
-        return []
-      }
+      export const toc = []
       function MDXLayout(props) {
         const _components = {
           img: 'img',

@@ -22,15 +22,13 @@ export default foo`,
       export const metadata = {}
       import foo from './foo'
       const MDXLayout = foo
-      export function useTOC(props) {
-        return [
-          {
-            value: 'heading',
-            id: 'heading',
-            depth: 2
-          }
-        ]
-      }
+      export const toc = [
+        {
+          value: 'heading',
+          id: 'heading',
+          depth: 2
+        }
+      ]
       "
     `)
   })
@@ -46,15 +44,13 @@ export { foo as default } from './foo'`,
       /*@jsxImportSource react*/
       export const metadata = {}
       import { foo as MDXLayout } from './foo'
-      export function useTOC(props) {
-        return [
-          {
-            value: 'heading',
-            id: 'heading',
-            depth: 2
-          }
-        ]
-      }
+      export const toc = [
+        {
+          value: 'heading',
+          id: 'heading',
+          depth: 2
+        }
+      ]
       "
     `)
   })
@@ -111,40 +107,38 @@ export const TagName = () => {
       export const metadata = {
         title: 'My Header'
       }
-      export function useTOC(props) {
-        return [
-          {
-            value: 'Some extra space',
-            id: 'extra-space',
-            depth: 2
-          },
-          {
-            value: 'Some extra space in heading',
-            id: 'extra-space-in-heading',
-            depth: 3
-          },
-          {
-            value: 'nospace',
-            id: 'without-space',
-            depth: 3
-          },
-          {
-            value: 'foo',
-            id: 'другой-язык',
-            depth: 4
-          },
-          {
-            value: 'bar Baz []',
-            id: 'bar-baz-',
-            depth: 5
-          },
-          {
-            value: 'bar Qux [#]',
-            id: 'bar-qux-',
-            depth: 6
-          }
-        ]
-      }
+      export const toc = [
+        {
+          value: 'Some extra space',
+          id: 'extra-space',
+          depth: 2
+        },
+        {
+          value: 'Some extra space in heading',
+          id: 'extra-space-in-heading',
+          depth: 3
+        },
+        {
+          value: 'nospace',
+          id: 'without-space',
+          depth: 3
+        },
+        {
+          value: 'foo',
+          id: 'другой-язык',
+          depth: 4
+        },
+        {
+          value: 'bar Baz []',
+          id: 'bar-baz-',
+          depth: 5
+        },
+        {
+          value: 'bar Qux [#]',
+          id: 'bar-qux-',
+          depth: 6
+        }
+      ]
       function MDXLayout(props) {
         const { toc = useTOC(props) } = props
         const _components = {
@@ -183,15 +177,13 @@ export const TagName = () => {
       "/*@jsxRuntime automatic*/
       /*@jsxImportSource react*/
       export const metadata = {}
-      export function useTOC(props) {
-        return [
-          {
-            value: 'My Header',
-            id: 'my-header',
-            depth: 3
-          }
-        ]
-      }
+      export const toc = [
+        {
+          value: 'My Header',
+          id: 'my-header',
+          depth: 3
+        }
+      ]
       function MDXLayout(props) {
         const { toc = useTOC(props) } = props
         const _components = {
@@ -242,100 +234,98 @@ import Last from './three.mdx'
       "/*@jsxRuntime automatic*/
       /*@jsxImportSource react*/
       export const metadata = {}
-      import FromMdx, { useTOC as useTOC0 } from './one.mdx'
-      import FromMarkdown, { useTOC as useTOC1 } from './two.md'
+      import FromMdx, { toc as toc0 } from './one.mdx'
+      import FromMarkdown, { toc as toc1 } from './two.md'
       import IgnoreMe from './foo'
-      import Last, { useTOC as useTOC2 } from './three.mdx'
-      export function useTOC(props) {
-        return [
-          {
-            value: '❤️',
-            id: '️',
-            depth: 2
-          },
-          ...useTOC0(),
-          {
-            value: '✅',
-            id: '',
-            depth: 2
-          },
-          ...useTOC1(),
-          ...useTOC2(),
-          {
-            value: '👋',
-            id: '-1',
-            depth: 2
-          },
-          {
-            value: (
-              <>
-                {'kek '}
-                <Kek />
-              </>
-            ),
-            id: 'kek-',
-            depth: 2
-          },
-          {
-            value: (
-              <>
-                <code>{'try'}</code>
-                {' me'}
-              </>
-            ),
-            id: 'try-me',
-            depth: 2
-          },
-          {
-            value: (
-              <>
-                {'latex '}
-                <span className="katex">
-                  <span className="katex-mathml">
-                    <math xmlns="http://www.w3.org/1998/Math/MathML">
-                      <semantics>
-                        <mrow>
-                          <mi>{'l'}</mi>
-                        </mrow>
-                        <annotation encoding="application/x-tex">{'l'}</annotation>
-                      </semantics>
-                    </math>
-                  </span>
-                  <span className="katex-html" aria-hidden="true">
-                    <span className="base">
-                      <span
-                        className="strut"
-                        style={{
-                          height: '0.6944em'
-                        }}
-                      />
-                      <span
-                        className="mord mathnormal"
-                        style={{
-                          marginRight: '0.01968em'
-                        }}
-                      >
-                        {'l'}
-                      </span>
+      import Last, { toc as toc2 } from './three.mdx'
+      export const toc = [
+        {
+          value: '❤️',
+          id: '️',
+          depth: 2
+        },
+        ...toc0,
+        {
+          value: '✅',
+          id: '',
+          depth: 2
+        },
+        ...toc1,
+        ...toc2,
+        {
+          value: '👋',
+          id: '-1',
+          depth: 2
+        },
+        {
+          value: (
+            <>
+              {'kek '}
+              <Kek />
+            </>
+          ),
+          id: 'kek-',
+          depth: 2
+        },
+        {
+          value: (
+            <>
+              <code>{'try'}</code>
+              {' me'}
+            </>
+          ),
+          id: 'try-me',
+          depth: 2
+        },
+        {
+          value: (
+            <>
+              {'latex '}
+              <span className="katex">
+                <span className="katex-mathml">
+                  <math xmlns="http://www.w3.org/1998/Math/MathML">
+                    <semantics>
+                      <mrow>
+                        <mi>{'l'}</mi>
+                      </mrow>
+                      <annotation encoding="application/x-tex">{'l'}</annotation>
+                    </semantics>
+                  </math>
+                </span>
+                <span className="katex-html" aria-hidden="true">
+                  <span className="base">
+                    <span
+                      className="strut"
+                      style={{
+                        height: '0.6944em'
+                      }}
+                    />
+                    <span
+                      className="mord mathnormal"
+                      style={{
+                        marginRight: '0.01968em'
+                      }}
+                    >
+                      {'l'}
                     </span>
                   </span>
                 </span>
-              </>
-            ),
-            id: 'latex-l',
-            depth: 2
-          },
-          {
-            value: (
-              <>
-                {'interpolate'} {1} {true} {null} {variable}
-              </>
-            ),
-            id: 'interpolate-1-true-null-variable',
-            depth: 2
-          }
-        ]
-      }
+              </span>
+            </>
+          ),
+          id: 'latex-l',
+          depth: 2
+        },
+        {
+          value: (
+            <>
+              {'interpolate'} {1} {true} {null} {variable}
+            </>
+          ),
+          id: 'interpolate-1-true-null-variable',
+          depth: 2
+        }
+      ]
       function MDXLayout(props) {
         const { toc = useTOC(props) } = props
         const _components = {
@@ -386,9 +376,7 @@ import Last from './three.mdx'
 `,
       { mdxOptions }
     )
-    expect(rawJs).toMatch(`export function useTOC(props) {
-  return [];
-}`)
+    expect(rawJs).toMatch('export const toc = []')
     expect(rawJs).not.toMatch('id=')
   })
 })

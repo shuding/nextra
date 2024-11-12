@@ -151,10 +151,7 @@ export default MDXLayout`
   }
   const rawJs = `import { HOC_MDXWrapper } from 'nextra/setup-page'
 ${compiledSource}
-export default HOC_MDXWrapper(
-  MDXLayout,
-  {metadata, toc:useTOC()}
-)`
+export default HOC_MDXWrapper(MDXLayout, { metadata, toc })`
   return rawJs
 }
 
