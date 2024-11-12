@@ -26,4 +26,4 @@ export const recmaRewriteJsx: Plugin<[], Program> =
     }
 
     createMdxContent.id.name = 'MDXLayout'
- }
+  }
