@@ -15,9 +15,7 @@ const DEFAULT_EXTENSIONS = ['js', 'jsx', 'ts', 'tsx'] as const
 
 const FILENAME = fileURLToPath(import.meta.url)
 
-const DIRNAME = path.dirname(FILENAME)
-
-const LOADER_PATH = path.join(DIRNAME, '..', '..', 'loader.cjs')
+const LOADER_PATH = path.join(FILENAME, '..', '..', '..', 'loader.cjs')
 
 const SEP = path.sep === '/' ? '/' : '\\\\'
 
