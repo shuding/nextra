@@ -1,3 +1,4 @@
+import type { SpreadElement } from 'estree'
 import type { Element, Root } from 'hast'
 import { toEstree } from 'hast-util-to-estree'
 import type { MdxjsEsm } from 'hast-util-to-estree/lib/handlers/mdxjs-esm'
@@ -27,7 +28,7 @@ export const rehypeExtractTocContent: Plugin<[], Root> = () => (ast, file) => {
       return {
         type: 'SpreadElement',
         argument: { type: 'Identifier', name }
-      }
+      } satisfies SpreadElement
     }
 
     const node = TocMap[name.id]
