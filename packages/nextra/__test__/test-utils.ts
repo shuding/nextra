@@ -5,8 +5,8 @@ import { findMetaAndPageFilePaths } from '../src/server/page-map/find-meta-and-p
 import { convertPageMapToJs } from '../src/server/page-map/to-js.js'
 import { convertToPageMap } from '../src/server/page-map/to-page-map.js'
 
-export function clean(content: string): Promise<string> {
-  return prettier.format(content, {
+export async function clean(content: string): Promise<string> {
+  const result = await prettier.format(content, {
     parser: 'typescript',
     semi: false,
     trailingComma: 'none',
@@ -14,6 +14,7 @@ export function clean(content: string): Promise<string> {
     printWidth: 120,
     arrowParens: 'avoid'
   })
+  return result.trimEnd()
 }
 
 export async function getPageMapForFixture(dirName: string) {

@@ -1,4 +1,5 @@
 import { createProcessor } from '@mdx-js/mdx'
+import type { Program } from 'estree'
 import remarkFrontmatter from 'remark-frontmatter'
 import {
   remarkExportOnlyMetadata,
@@ -29,7 +30,7 @@ export async function compileMetadata(
       remarkExportOnlyMetadata
     ],
     recmaPlugins: [
-      () => (ast: any) => {
+      () => (ast: Program) => {
         const [importReact] = ast.body.splice(0, 1)
 
         ast.body = ast.body.filter(

@@ -28,8 +28,7 @@ export default foo`,
           id: 'heading',
           depth: 2
         }
-      ]
-      "
+      ]"
     `)
   })
   it('should work with export as default', async () => {
@@ -50,8 +49,7 @@ export { foo as default } from './foo'`,
           id: 'heading',
           depth: 2
         }
-      ]
-      "
+      ]"
     `)
   })
 })
@@ -166,8 +164,7 @@ export const TagName = () => {
             <_components.h6 id={toc[5].id}>{toc[5].value}</_components.h6>
           </>
         )
-      }
-      "
+      }"
     `)
   })
   it('use github-slugger', async () => {
@@ -189,8 +186,7 @@ export const TagName = () => {
           ...props.components
         }
         return <_components.h3 id={toc[0].id}>{toc[0].value}</_components.h3>
-      }
-      "
+      }"
     `)
   })
 
@@ -355,8 +351,7 @@ import Last from './three.mdx'
             <_components.h2 id={toc[9].id}>{toc[9].value}</_components.h2>
           </>
         )
-      }
-      "
+      }"
     `)
   })
   it('should not attach headings with parent Tab or Tabs.Tab', async () => {

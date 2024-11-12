@@ -50,8 +50,7 @@ export const Test = ({value}) => value
         Test,
         toc,
         default: _createMdxContent
-      }
-      "
+      }"
     `)
   })
 })
