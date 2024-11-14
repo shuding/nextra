@@ -1,8 +1,17 @@
-import type { ObjectExpression, Program } from 'estree'
+import type { ObjectExpression, Program, Property } from 'estree'
 import type { Plugin } from 'unified'
 import { DEFAULT_PROPERTY_PROPS } from '../constants.js'
 
 type Body = Program['body'][number]
+
+function isMdxLayout(node: Body) {
+  return (
+    node.type === 'VariableDeclaration' &&
+    node.kind === 'const' &&
+    node.declarations[0].id.type === 'Identifier' &&
+    node.declarations[0].id.name === 'MDXLayout'
+  )
+}
 
 export const recmaRewrite: Plugin<
   [
@@ -15,13 +24,7 @@ export const recmaRewrite: Plugin<
 > =
   ({ isPageImport, isRemoteContent }) =>
   ast => {
-    const hasMdxLayout = ast.body.some(
-      node =>
-        node.type === 'VariableDeclaration' &&
-        node.kind === 'const' &&
-        node.declarations[0].id.type === 'Identifier' &&
-        node.declarations[0].id.name === 'MDXLayout'
-    )
+    const hasMdxLayout = ast.body.some(isMdxLayout)
     if (hasMdxLayout) return
 
     const excludeMdxContent = isRemoteContent
@@ -34,15 +37,15 @@ export const recmaRewrite: Plugin<
       const returnStatement = ast.body.at(-1) as {
         argument: ObjectExpression
       }
-      for (const prop of returnStatement.argument.properties) {
+      for (const node of returnStatement.argument.properties) {
         if (
-          prop.type === 'Property' &&
-          prop.key.type === 'Identifier' &&
-          prop.key.name === 'default' &&
-          prop.value.type === 'Identifier' &&
-          prop.value.name === 'MDXContent'
+          node.type === 'Property' &&
+          node.key.type === 'Identifier' &&
+          node.key.name === 'default' &&
+          node.value.type === 'Identifier' &&
+          node.value.name === 'MDXContent'
         ) {
-          prop.value.name = '_createMdxContent'
+          node.value.name = '_createMdxContent'
           break
         }
       }
