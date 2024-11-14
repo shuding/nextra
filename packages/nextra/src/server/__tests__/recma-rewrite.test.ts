@@ -12,12 +12,10 @@ describe('recma-rewrite', () => {
   `
 
   const testMdxWithDefaultExport = `${testMdx}
-
 export const components = {
   h1: () => null
 }
-
-export default function Hello(props) {
+export default function Foo(props) {
   return <div>Default Export {props.children}</div>
 }
 `
@@ -98,7 +96,7 @@ export default function Hello(props) {
         const components = {
           h1: () => null
         }
-        const MDXLayout = function Hello(props) {
+        const MDXLayout = function Foo(props) {
           return _jsxs('div', {
             children: ['Default Export ', props.children]
           })
@@ -223,7 +221,7 @@ export default function Hello(props) {
         export const components = {
           h1: () => null
         }
-        const MDXLayout = function Hello(props) {
+        const MDXLayout = function Foo(props) {
           return <div>Default Export {props.children}</div>
         }
         export const toc = []

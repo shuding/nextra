@@ -100,8 +100,7 @@ export async function compileMdx(
   const fileCompatible = filePath ? { value: source, path: filePath } : source
 
   // https://github.com/shuding/nextra/issues/1303
-  const isFileOutsideCWD =
-    !isPageImport && path.relative(CWD, filePath).startsWith('..')
+  const isFileOutsideCWD = path.relative(CWD, filePath).startsWith('..')
 
   if (isFileOutsideCWD) {
     throw new Error(
