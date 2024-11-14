@@ -53,7 +53,7 @@ Open source projects powered by Nextra
 <>[![AnythingLLM preview](./_logos/anythingllm.png)](https://anythingllm.com)</>
 </Cards>
 
-export default function Hello(props) {
+export default function MdxLayout(props) {
   return cloneElement(props.children, {
     components: {
       a({ children, href }) {
@@ -65,6 +65,7 @@ export default function Hello(props) {
             target="_blank"
             rel="noreferrer"
             arrow
+            className='!no-underline'
           >
             {children}
           </Cards.Card>

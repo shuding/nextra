@@ -8,7 +8,8 @@ const Card: FC<{
   arrow?: boolean
   href: string
   children?: ReactNode
-}> = ({ children, title, icon, arrow, href, ...props }) => {
+  className?: string
+}> = ({ children, title, icon, arrow, href, className,...props }) => {
   return (
     <NextLink
       href={href}
@@ -20,7 +21,8 @@ const Card: FC<{
         '_transition-all _duration-200 hover:_border-gray-300',
         children
           ? '_bg-gray-100 _shadow dark:_border-neutral-700 dark:_bg-neutral-800 dark:_text-gray-50 hover:_shadow-lg dark:hover:_border-neutral-500 dark:hover:_bg-neutral-700'
-          : '_bg-transparent _shadow-sm dark:_border-neutral-800 hover:_bg-slate-50 hover:_shadow-md dark:hover:_border-neutral-700 dark:hover:_bg-neutral-900'
+          : '_bg-transparent _shadow-sm dark:_border-neutral-800 hover:_bg-slate-50 hover:_shadow-md dark:hover:_border-neutral-700 dark:hover:_bg-neutral-900',
+        className
       )}
       {...props}
     >

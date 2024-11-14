@@ -22,7 +22,7 @@ import { cloneElement } from 'react'
 <>[![Speakeasy preview](../showcase/_logos/speakeasy.png)](https://speakeasyapi.dev/docs?utm_source=nextra.site&utm_campaign=nextra&utm_content=logolink)</>
 </Cards>
 
-export default function Hello(props) {
+export default function MdxLayout(props) {
   return cloneElement(props.children, {
     components: {
       a({ children, href }) {
@@ -34,6 +34,7 @@ export default function Hello(props) {
             target="_blank"
             rel="noreferrer"
             arrow
+            className='!no-underline'
           >
             {children}
           </Cards.Card>
