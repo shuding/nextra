@@ -14,11 +14,7 @@ import remarkSmartypants from 'remark-smartypants'
 import type { Pluggable } from 'unified'
 import type { LoaderOptions, NextraConfig } from '../types.js'
 import { CWD, MARKDOWN_URL_EXTENSION_RE } from './constants.js'
-import {
-  recmaRewrite,
-  recmaRewriteFunctionBody,
-  recmaRewriteJsx
-} from './recma-plugins/index.js'
+import { recmaRewrite } from './recma-plugins/index.js'
 import {
   DEFAULT_REHYPE_PRETTY_CODE_OPTIONS,
   rehypeAttachCodeMeta,
@@ -210,7 +206,6 @@ export async function compileMdx(
       recmaPlugins: [
         ...(recmaPlugins || []),
         [recmaRewrite, { isPageImport, isRemoteContent }] satisfies Pluggable
-        // isRemoteContent ? recmaRewriteFunctionBody : recmaRewriteJsx
       ].filter(v => !!v)
     })
   }

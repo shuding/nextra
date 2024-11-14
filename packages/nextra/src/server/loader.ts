@@ -116,7 +116,7 @@ export async function loader(
     const rawJs = await compileMetadata(source, { filePath: resourcePath })
     return rawJs
   }
-  const compiledSource = await compileMdx(source, {
+  const rawJs = await compileMdx(source, {
     mdxOptions: {
       ...mdxOptions,
       jsx: true,
@@ -145,15 +145,6 @@ export async function loader(
     // https://github.com/shuding/nextra/issues/3675#issuecomment-2466416366
     lastCommitTime: IS_PRODUCTION ? await getLastCommitTime(resourcePath) : NOW
   })
-
-  // Imported as a normal component, no need to add the layout.
-  if (!isPageImport) {
-    return `${compiledSource}   
-export default MDXLayout`
-  }
-  const rawJs = `import { HOC_MDXWrapper } from 'nextra/setup-page'
-${compiledSource}
-export default HOC_MDXWrapper(MDXLayout, { metadata, toc })`
   return rawJs
 }
 

@@ -21,7 +21,7 @@ export default function Foo(props) {
 `
 
   describe("outputFormat: 'function-body'", () => {
-    it.only('should work', async () => {
+    it('should work', async () => {
       const rawMdx = await compileMdx(testMdx)
       expect(clean(rawMdx)).resolves.toMatchInlineSnapshot(`
         "'use strict'
@@ -153,7 +153,7 @@ export default function Foo(props) {
         jsx: true
       }
     }
-    it.only('should work', async () => {
+    it('should work', async () => {
       const rawMdx = await compileMdx(testMdx, options)
       expect(clean(rawMdx)).resolves.toMatchInlineSnapshot(`
         "/*@jsxRuntime automatic*/
@@ -190,7 +190,7 @@ export default function Foo(props) {
         export default _createMdxContent"
       `)
     })
-    it.only('should work with isPageImport', async () => {
+    it('should work with `isPageImport`', async () => {
       const rawMdx = await compileMdx(testMdx, {
         ...options,
         isPageImport: true
@@ -234,7 +234,7 @@ export default function Foo(props) {
         })"
       `)
     })
-    it.only('should work with `export default` and `export const components`', async () => {
+    it('should work with `export default` and `export const components`', async () => {
       const rawMdx = await compileMdx(testMdxWithDefaultExport, options)
       expect(clean(rawMdx)).resolves.toMatchInlineSnapshot(`
         "/*@jsxRuntime automatic*/
