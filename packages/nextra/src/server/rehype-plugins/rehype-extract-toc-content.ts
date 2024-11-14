@@ -3,7 +3,7 @@ import type { Element, Root, Text } from 'hast'
 import { toEstree } from 'hast-util-to-estree'
 import type { MdxjsEsm } from 'hast-util-to-estree/lib/handlers/mdxjs-esm'
 import type { Plugin } from 'unified'
-import { visit } from 'unist-util-visit'
+import { SKIP, visit } from 'unist-util-visit'
 import type { Heading } from '../../types.js'
 import { createAstExportConst, createAstObject } from '../utils.js'
 
@@ -11,19 +11,16 @@ const TOC_HEADING_RE = /^h[2-6]$/
 
 export const rehypeExtractTocContent: Plugin<[], Root> = () => (ast, file) => {
   const TocMap: Record<string, Element> = {}
-  const toc = file.data.toc as Heading[]
-  const idSet = new Set(toc.map(({ id }) => id))
-
-  visit(ast, 'element', (node: Element) => {
+  visit(ast, 'element', (node, _index, parent) => {
     if (!TOC_HEADING_RE.test(node.tagName)) return
-
-    const id = node.properties.id as string
-    if (idSet.has(id)) {
-      TocMap[id] = node
+    if (parent && 'properties' in parent && parent.properties.dataFootnotes) {
+      return SKIP
     }
+    const { id } = node.properties
+    TocMap[id as string] = node
   })
 
-  const elements = toc.map((name, index) => {
+  const elements = (file.data.toc as Heading[]).map((name, index) => {
     if (typeof name === 'string') {
       return {
         type: 'SpreadElement',
