@@ -1,5 +1,6 @@
-import { clean } from '../../../__test__/test-utils.js'
-import { compileMdx } from '../compile.js'
+import { clean } from '../../../__test__/test-utils.js';
+import { compileMdx } from '../compile.js';
+
 
 describe('recma-rewrite', () => {
   const testMdx = `
@@ -164,7 +165,7 @@ export default function Foo(props) {
         jsx: true
       }
     }
-    it('should work', async () => {
+    it.only('should work', async () => {
       const rawMdx = await compileMdx(testMdx, options)
       expect(clean(rawMdx)).resolves.toMatchInlineSnapshot(`
         "/*@jsxRuntime automatic*/
@@ -199,6 +200,42 @@ export default function Foo(props) {
           )
         }
         export default _createMdxContent"
+      `)
+    })
+    it.only('should work with isPageImport', async () => {
+      const rawMdx = await compileMdx(testMdx, { ...options, isPageImport: true })
+      expect(clean(rawMdx)).resolves.toMatchInlineSnapshot(`
+        "/*@jsxRuntime automatic*/
+        /*@jsxImportSource react*/
+        export const metadata = {
+          title: 'h1'
+        }
+        export const toc = []
+        function _createMdxContent(props) {
+          const _components = {
+            h1: 'h1',
+            li: 'li',
+            ul: 'ul',
+            ...props.components
+          }
+          return (
+            <>
+              <_components.h1>{'h1'}</_components.h1>
+              {'\\n'}
+              <_components.h1>{'h2'}</_components.h1>
+              {'\\n'}
+              <_components.h1>{'h3'}</_components.h1>
+              {'\\n'}
+              <_components.ul>
+                {'\\n'}
+                <_components.li>{'list 1'}</_components.li>
+                {'\\n'}
+                <_components.li>{'list 2'}</_components.li>
+                {'\\n'}
+              </_components.ul>
+            </>
+          )
+        }"
       `)
     })
     it('should work with `export default` and `export const components`', async () => {

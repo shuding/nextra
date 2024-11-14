@@ -19,17 +19,21 @@ export const recmaRewrite: Plugin<
         node.declarations[0].id.type === 'Identifier' &&
         node.declarations[0].id.name === 'MDXLayout'
     )
-    if (!hasMdxLayout && !isPageImport) {
+    if (!hasMdxLayout) {
       ast.body = ast.body.filter(
         node => node.type !== 'ExportDefaultDeclaration'
       )
-      ast.body.push({
-        type: 'ExportDefaultDeclaration',
-        declaration: {
-          type: 'Identifier',
-          name: '_createMdxContent'
-        }
-      })
+      if (isPageImport) {
+
+      } else {
+        ast.body.push({
+          type: 'ExportDefaultDeclaration',
+          declaration: {
+            type: 'Identifier',
+            name: '_createMdxContent'
+          }
+        })
+      }
     }
 
     console.dir({ hasMdxLayout, isRemoteContent, isPageImport }, { depth: 4 })
