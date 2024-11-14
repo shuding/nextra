@@ -78,7 +78,7 @@ export async function compileMdx(
     mdxOptions = {},
     filePath = '',
     useCachedCompiler,
-    isPageImport = true,
+    isPageImport,
     whiteListTagsStyling = [],
     lastCommitTime
   }: Partial<CompileMdxOptions> = {}
@@ -209,8 +209,8 @@ export async function compileMdx(
       ].filter(v => !!v),
       recmaPlugins: [
         ...(recmaPlugins || []),
-        recmaRewrite,
-        isRemoteContent ? recmaRewriteFunctionBody : recmaRewriteJsx
+        [recmaRewrite, { isPageImport, isRemoteContent }] satisfies Pluggable
+        // isRemoteContent ? recmaRewriteFunctionBody : recmaRewriteJsx
       ].filter(v => !!v)
     })
   }
