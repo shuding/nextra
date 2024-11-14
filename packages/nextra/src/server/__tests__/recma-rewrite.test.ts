@@ -1,6 +1,5 @@
-import { clean } from '../../../__test__/test-utils.js';
-import { compileMdx } from '../compile.js';
-
+import { clean } from '../../../__test__/test-utils.js'
+import { compileMdx } from '../compile.js'
 
 describe('recma-rewrite', () => {
   const testMdx = `
@@ -203,10 +202,14 @@ export default function Foo(props) {
       `)
     })
     it.only('should work with isPageImport', async () => {
-      const rawMdx = await compileMdx(testMdx, { ...options, isPageImport: true })
+      const rawMdx = await compileMdx(testMdx, {
+        ...options,
+        isPageImport: true
+      })
       expect(clean(rawMdx)).resolves.toMatchInlineSnapshot(`
         "/*@jsxRuntime automatic*/
         /*@jsxImportSource react*/
+        import { HOC_MDXWrapper } from 'nextra/setup-page'
         export const metadata = {
           title: 'h1'
         }
@@ -235,11 +238,15 @@ export default function Foo(props) {
               </_components.ul>
             </>
           )
-        }"
+        }
+        export default HOC_MDXWrapper(_createMdxContent, {
+          metadata,
+          toc
+        })"
       `)
     })
     it('should work with `export default` and `export const components`', async () => {
-      const rawMdx = await compileMdx(testMdxWithDefaultExport,options)
+      const rawMdx = await compileMdx(testMdxWithDefaultExport, options)
       expect(clean(rawMdx)).resolves.toMatchInlineSnapshot(`
         "/*@jsxRuntime automatic*/
         /*@jsxImportSource react*/
