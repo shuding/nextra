@@ -239,6 +239,7 @@ export default function Foo(props) {
       expect(clean(rawMdx)).resolves.toMatchInlineSnapshot(`
         "/*@jsxRuntime automatic*/
         /*@jsxImportSource react*/
+        import { HOC_MDXWrapper } from 'nextra/setup-page'
         export const metadata = {
           title: 'h1'
         }

@@ -1,13 +1,9 @@
 import { Cards } from 'nextra/components'
 import { cloneElement } from 'react'
 
-<div className="mb-16 mt-10 text-center">
-  # Showcase
+# Showcase
 
-  <p className="mt-4 text-lg text-gray-500 dark:text-gray-400">
-    {'Open source projects powered by Nextra'}
-  </p>
-</div>
+Open source projects powered by Nextra
 
 {/* prettier-ignore */}
 <Cards className="[&_img]:object-cover [&_img]:[aspect-ratio:12/6.3]">
@@ -72,6 +68,14 @@ export default function Hello(props) {
           >
             {children}
           </Cards.Card>
+        )
+      },
+      p(props) {
+        return (
+          <p
+            {...props}
+            className="mt-4 text-lg text-gray-500 dark:text-gray-400 mb-16 text-center"
+          />
         )
       }
     }

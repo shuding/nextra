@@ -1,5 +1,6 @@
 import type {
   ExportDefaultDeclaration,
+  ImportDeclaration,
   ObjectExpression,
   Program
 } from 'estree'
@@ -32,10 +33,11 @@ export const recmaRewrite: Plugin<
     if (hasMdxLayout) {
       if (!isRemoteContent) {
         const defaultExport = ast.body.find(
-          node => node.type === 'ExportDefaultDeclaration'
+          (node: Body) => node.type === 'ExportDefaultDeclaration'
         )!
         Object.assign(defaultExport, defaultExport.declaration)
         ast.body.push(createHocCallAst('MDXContent'))
+        ast.body.unshift(createHocImportAst())
       }
       return
     }
@@ -46,6 +48,7 @@ export const recmaRewrite: Plugin<
       : (node: Body) => node.type !== 'ExportDefaultDeclaration'
     ast.body = ast.body.filter(excludeMdxContent)
 
+    // Remote MDX
     if (isRemoteContent) {
       const returnStatement = ast.body.at(-1) as {
         argument: ObjectExpression
@@ -65,21 +68,13 @@ export const recmaRewrite: Plugin<
       return
     }
 
+    // Page MDX
     if (isPageImport) {
-      ast.body.unshift({
-        type: 'ImportDeclaration',
-        specifiers: [
-          {
-            type: 'ImportSpecifier',
-            imported: { type: 'Identifier', name: 'HOC_MDXWrapper' },
-            local: { type: 'Identifier', name: 'HOC_MDXWrapper' }
-          }
-        ],
-        source: { type: 'Literal', value: 'nextra/setup-page' }
-      })
+      ast.body.unshift(createHocImportAst())
       ast.body.push(createHocCallAst('_createMdxContent'))
       return
     }
+    // Partial MDX
     ast.body.push({
       type: 'ExportDefaultDeclaration',
       declaration: {
@@ -89,7 +84,21 @@ export const recmaRewrite: Plugin<
     })
   }
 
-function createHocCallAst(componentName: string) {
+function createHocImportAst(): ImportDeclaration {
+  return {
+    type: 'ImportDeclaration',
+    specifiers: [
+      {
+        type: 'ImportSpecifier',
+        imported: { type: 'Identifier', name: 'HOC_MDXWrapper' },
+        local: { type: 'Identifier', name: 'HOC_MDXWrapper' }
+      }
+    ],
+    source: { type: 'Literal', value: 'nextra/setup-page' }
+  }
+}
+
+function createHocCallAst(componentName: string): ExportDefaultDeclaration {
   return {
     type: 'ExportDefaultDeclaration',
     declaration: {
@@ -117,5 +126,5 @@ function createHocCallAst(componentName: string) {
         }
       ]
     }
-  } satisfies ExportDefaultDeclaration
+  }
 }

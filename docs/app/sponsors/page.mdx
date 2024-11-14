@@ -1,10 +1,11 @@
 import { Button, Cards } from 'nextra/components'
+import { cloneElement } from 'react'
 
-<div className="mb-16 mt-10 text-center">
-  # Sponsors
-  <br />
+# Sponsors
+
+<div className="mb-12 text-center">
   <Button
-    className="!px-6 hover:!no-underline"
+    className="mt-3 inline-block !px-6 hover:!no-underline"
     variant="outline"
     href="https://github.com/sponsors/dimaMachina"
     as="a"
@@ -15,17 +16,29 @@ import { Button, Cards } from 'nextra/components'
   </Button>
 </div>
 
+{/* prettier-ignore */}
 <Cards num={3} className="[&_img]:object-cover [&_img]:[aspect-ratio:12/6.3]">
-  <Cards.Card
-    title="GraphQL Hive"
-    href="https://the-guild.dev/graphql/hive?utm_source=nextra.site&utm_campaign=nextra&utm_content=logolink"
-  >
-    <>![GraphQL Hive preview](../showcase/_logos/graphql-hive.png)</>
-  </Cards.Card>
-  <Cards.Card
-    title="Speakeasy"
-    href="https://speakeasyapi.dev/docs?utm_source=nextra.site&utm_campaign=nextra&utm_content=logolink"
-  >
-    <>![Speakeasy preview](../showcase/_logos/speakeasy.png)</>
-  </Cards.Card>
+<>[![GraphQL Hive preview](../showcase/_logos/graphql-hive.png)](https://the-guild.dev/graphql/hive?utm_source=nextra.site&utm_campaign=nextra&utm_content=logolink)</>
+<>[![Speakeasy preview](../showcase/_logos/speakeasy.png)](https://speakeasyapi.dev/docs?utm_source=nextra.site&utm_campaign=nextra&utm_content=logolink)</>
 </Cards>
+
+export default function Hello(props) {
+  return cloneElement(props.children, {
+    components: {
+      a({ children, href }) {
+        const { alt } = children.props
+        return (
+          <Cards.Card
+            href={href}
+            title={alt.replace(/ preview$/i, '')}
+            target="_blank"
+            rel="noreferrer"
+            arrow
+          >
+            {children}
+          </Cards.Card>
+        )
+      }
+    }
+  })
+}
