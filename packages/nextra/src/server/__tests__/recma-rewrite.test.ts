@@ -22,61 +22,72 @@ export default function Hello(props) {
 }
 `
 
-  describe("outputFormat: 'function-body'",  () => {
-    it('should work', async() => {
+  describe("outputFormat: 'function-body'", () => {
+    it('should work', async () => {
       const rawMdx = await compileMdx(testMdx)
       expect(clean(rawMdx)).resolves.toMatchInlineSnapshot(`
-      "'use strict'
-      const { Fragment: _Fragment, jsx: _jsx, jsxs: _jsxs } = arguments[0]
-      const metadata = {
-        title: 'h1'
-      }
-      const toc = []
-      function _createMdxContent(props) {
-        const _components = {
-          h1: 'h1',
-          li: 'li',
-          ul: 'ul',
-          ...props.components
+        "'use strict'
+        const { Fragment: _Fragment, jsx: _jsx, jsxs: _jsxs } = arguments[0]
+        const metadata = {
+          title: 'h1'
         }
-        return _jsxs(_Fragment, {
-          children: [
-            _jsx(_components.h1, {
-              children: 'h1'
-            }),
-            '\\n',
-            _jsx(_components.h1, {
-              children: 'h2'
-            }),
-            '\\n',
-            _jsx(_components.h1, {
-              children: 'h3'
-            }),
-            '\\n',
-            _jsxs(_components.ul, {
-              children: [
-                '\\n',
-                _jsx(_components.li, {
-                  children: 'list 1'
-                }),
-                '\\n',
-                _jsx(_components.li, {
-                  children: 'list 2'
-                }),
-                '\\n'
-              ]
-            })
-          ]
-        })
-      }
-      return {
-        metadata,
-        toc,
-        default: _createMdxContent
-      }"
-    `)
+        const toc = []
+        function _createMdxContent(props) {
+          const _components = {
+            h1: 'h1',
+            li: 'li',
+            ul: 'ul',
+            ...props.components
+          }
+          return _jsxs(_Fragment, {
+            children: [
+              _jsx(_components.h1, {
+                children: 'h1'
+              }),
+              '\\n',
+              _jsx(_components.h1, {
+                children: 'h2'
+              }),
+              '\\n',
+              _jsx(_components.h1, {
+                children: 'h3'
+              }),
+              '\\n',
+              _jsxs(_components.ul, {
+                children: [
+                  '\\n',
+                  _jsx(_components.li, {
+                    children: 'list 1'
+                  }),
+                  '\\n',
+                  _jsx(_components.li, {
+                    children: 'list 2'
+                  }),
+                  '\\n'
+                ]
+              })
+            ]
+          })
+        }
+        function MDXContent(props = {}) {
+          const { wrapper: MDXLayout } = props.components || {}
+          return MDXLayout
+            ? _jsx(MDXLayout, {
+                ...props,
+                children: _jsx(_createMdxContent, {
+                  ...props
+                })
+              })
+            : _createMdxContent(props)
+        }
+        return {
+          metadata,
+          toc,
+          default: MDXContent
+        }"
+      `)
     })
-    it('should work with `export default` and `export const components`', async() => {
+    it('should work with `export default` and `export const components`', async () => {
       const rawMdx = await compileMdx(testMdxWithDefaultExport)
       expect(clean(rawMdx)).resolves.toMatchInlineSnapshot(`
         "'use strict'
@@ -145,69 +156,25 @@ export default function Hello(props) {
           default: MDXContent
         }"
       `)
-      })
+    })
   })
 
-  describe("outputFormat: 'program'",  () => {
-    it('should work', async() => {
-
-    const rawMdx = await compileMdx(testMdx, {
+  describe("outputFormat: 'program'", () => {
+    const options = {
       mdxOptions: {
-        outputFormat: 'program',
+        outputFormat: 'program' as const,
         jsx: true
       }
-    })
-    expect(clean(rawMdx)).resolves.toMatchInlineSnapshot(`
-      "/*@jsxRuntime automatic*/
-      /*@jsxImportSource react*/
-      export const metadata = {
-        title: 'h1'
-      }
-      export const toc = []
-      function MDXLayout(props) {
-        const _components = {
-          h1: 'h1',
-          li: 'li',
-          ul: 'ul',
-          ...props.components
-        }
-        return (
-          <>
-            <_components.h1>{'h1'}</_components.h1>
-            {'\\n'}
-            <_components.h1>{'h2'}</_components.h1>
-            {'\\n'}
-            <_components.h1>{'h3'}</_components.h1>
-            {'\\n'}
-            <_components.ul>
-              {'\\n'}
-              <_components.li>{'list 1'}</_components.li>
-              {'\\n'}
-              <_components.li>{'list 2'}</_components.li>
-              {'\\n'}
-            </_components.ul>
-          </>
-        )
-      }"
-    `)
-    })
-    it('should work with `export default` and `export const components`', async() => {
-      const rawMdx = await compileMdx(testMdxWithDefaultExport)
+    }
+    it('should work', async () => {
+      const rawMdx = await compileMdx(testMdx, options)
       expect(clean(rawMdx)).resolves.toMatchInlineSnapshot(`
-        "'use strict'
-        const { Fragment: _Fragment, jsx: _jsx, jsxs: _jsxs } = arguments[0]
-        const metadata = {
+        "/*@jsxRuntime automatic*/
+        /*@jsxImportSource react*/
+        export const metadata = {
           title: 'h1'
         }
-        const components = {
-          h1: () => null
-        }
-        const MDXLayout = function Hello(props) {
-          return _jsxs('div', {
-            children: ['Default Export ', props.children]
-          })
-        }
-        const toc = []
+        export const toc = []
         function _createMdxContent(props) {
           const _components = {
             h1: 'h1',
@@ -215,49 +182,82 @@ export default function Hello(props) {
             ul: 'ul',
             ...props.components
           }
-          return _jsxs(_Fragment, {
-            children: [
-              _jsx(_components.h1, {
-                children: 'h1'
-              }),
-              '\\n',
-              _jsx(_components.h1, {
-                children: 'h2'
-              }),
-              '\\n',
-              _jsx(_components.h1, {
-                children: 'h3'
-              }),
-              '\\n',
-              _jsxs(_components.ul, {
-                children: [
-                  '\\n',
-                  _jsx(_components.li, {
-                    children: 'list 1'
-                  }),
-                  '\\n',
-                  _jsx(_components.li, {
-                    children: 'list 2'
-                  }),
-                  '\\n'
-                ]
-              })
-            ]
-          })
+          return (
+            <>
+              <_components.h1>{'h1'}</_components.h1>
+              {'\\n'}
+              <_components.h1>{'h2'}</_components.h1>
+              {'\\n'}
+              <_components.h1>{'h3'}</_components.h1>
+              {'\\n'}
+              <_components.ul>
+                {'\\n'}
+                <_components.li>{'list 1'}</_components.li>
+                {'\\n'}
+                <_components.li>{'list 2'}</_components.li>
+                {'\\n'}
+              </_components.ul>
+            </>
+          )
         }
-        function MDXContent(props = {}) {
-          return _jsx(MDXLayout, {
-            ...props,
-            children: _jsx(_createMdxContent, {
-              ...props
-            })
-          })
+        export default function MDXContent(props = {}) {
+          const { wrapper: MDXLayout } = props.components || {}
+          return MDXLayout ? (
+            <MDXLayout {...props}>
+              <_createMdxContent {...props} />
+            </MDXLayout>
+          ) : (
+            _createMdxContent(props)
+          )
+        }"
+      `)
+    })
+    it('should work with `export default` and `export const components`', async () => {
+      const rawMdx = await compileMdx(testMdxWithDefaultExport,options)
+      expect(clean(rawMdx)).resolves.toMatchInlineSnapshot(`
+        "/*@jsxRuntime automatic*/
+        /*@jsxImportSource react*/
+        export const metadata = {
+          title: 'h1'
         }
-        return {
-          metadata,
-          components,
-          toc,
-          default: MDXContent
+        export const components = {
+          h1: () => null
+        }
+        const MDXLayout = function Hello(props) {
+          return <div>Default Export {props.children}</div>
+        }
+        export const toc = []
+        function _createMdxContent(props) {
+          const _components = {
+            h1: 'h1',
+            li: 'li',
+            ul: 'ul',
+            ...props.components
+          }
+          return (
+            <>
+              <_components.h1>{'h1'}</_components.h1>
+              {'\\n'}
+              <_components.h1>{'h2'}</_components.h1>
+              {'\\n'}
+              <_components.h1>{'h3'}</_components.h1>
+              {'\\n'}
+              <_components.ul>
+                {'\\n'}
+                <_components.li>{'list 1'}</_components.li>
+                {'\\n'}
+                <_components.li>{'list 2'}</_components.li>
+                {'\\n'}
+              </_components.ul>
+            </>
+          )
+        }
+        export default function MDXContent(props = {}) {
+          return (
+            <MDXLayout {...props}>
+              <_createMdxContent {...props} />
+            </MDXLayout>
+          )
         }"
       `)
     })
