@@ -144,6 +144,38 @@ export default function Foo(props) {
         }"
       `)
     })
+
+    it('should replace return statement when there is `_missingMdxReference`', async () => {
+      const rawMdx = await compileMdx(`
+import { MDXRemote } from 'nextra/mdx-remote'
+
+<MDXRemote />`)
+      expect(clean(rawMdx)).resolves.toMatchInlineSnapshot(`
+        "'use strict'
+        const { jsx: _jsx } = arguments[0]
+        const metadata = {}
+        const toc = []
+        function _createMdxContent(props) {
+          const { MDXRemote } = props.components || {}
+          if (!MDXRemote) _missingMdxReference('MDXRemote', true)
+          return _jsx(MDXRemote, {})
+        }
+        return {
+          metadata,
+          toc,
+          default: _createMdxContent
+        }
+        function _missingMdxReference(id, component) {
+          throw new Error(
+            'Expected ' +
+              (component ? 'component' : 'object') +
+              ' \`' +
+              id +
+              '\` to be defined: you likely forgot to import, pass, or provide it.'
+          )
+        }"
+      `)
+    })
   })
 
   describe("outputFormat: 'program'", () => {
@@ -234,6 +266,7 @@ export default function Foo(props) {
         })"
       `)
     })
+
     it('should work with `export default` and `export const components`', async () => {
       const rawMdx = await compileMdx(testMdxWithDefaultExport, options)
       expect(clean(rawMdx)).resolves.toMatchInlineSnapshot(`

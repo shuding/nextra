@@ -7,9 +7,9 @@ import type {
 import type { Plugin } from 'unified'
 import { DEFAULT_PROPERTY_PROPS } from '../constants.js'
 
-type Body = Program['body'][number]
+type Node = Program['body'][number]
 
-function isMdxLayout(node: Body) {
+function isMdxLayout(node: Node) {
   return (
     node.type === 'VariableDeclaration' &&
     node.kind === 'const' &&
@@ -33,27 +33,28 @@ export const recmaRewrite: Plugin<
     if (hasMdxLayout) {
       if (!isRemoteContent) {
         const defaultExport = ast.body.find(
-          (node: Body) => node.type === 'ExportDefaultDeclaration'
+          (node: Node) => node.type === 'ExportDefaultDeclaration'
         )!
         Object.assign(defaultExport, defaultExport.declaration)
-        ast.body.push(createHocCallAst('MDXContent'))
         ast.body.unshift(createHocImportAst())
+        ast.body.push(createHocCallAst('MDXContent'))
       }
       return
     }
 
     const excludeMdxContent = isRemoteContent
-      ? (node: Body) =>
+      ? (node: Node) =>
           node.type !== 'FunctionDeclaration' || node.id.name !== 'MDXContent'
-      : (node: Body) => node.type !== 'ExportDefaultDeclaration'
+      : (node: Node) => node.type !== 'ExportDefaultDeclaration'
     ast.body = ast.body.filter(excludeMdxContent)
 
     // Remote MDX
     if (isRemoteContent) {
-      const returnStatement = ast.body.at(-1) as {
-        argument: ObjectExpression
-      }
-      for (const node of returnStatement.argument.properties) {
+      const returnStatement = ast.body.find(
+        (node: Node) => node.type === 'ReturnStatement'
+      )!
+      const { properties } = returnStatement!.argument as ObjectExpression
+      for (const node of properties) {
         if (
           node.type === 'Property' &&
           node.key.type === 'Identifier' &&
