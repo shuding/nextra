@@ -274,13 +274,17 @@ export default function Foo(props) {
             </>
           )
         }
-        export default function MDXContent(props = {}) {
+        function MDXContent(props = {}) {
           return (
             <MDXLayout {...props}>
               <_createMdxContent {...props} />
             </MDXLayout>
           )
-        }"
+        }
+        export default HOC_MDXWrapper(MDXContent, {
+          metadata,
+          toc
+        })"
       `)
     })
   })

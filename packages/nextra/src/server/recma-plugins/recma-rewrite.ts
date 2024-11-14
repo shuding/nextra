@@ -1,4 +1,8 @@
-import type { ObjectExpression, Program, Property } from 'estree'
+import type {
+  ExportDefaultDeclaration,
+  ObjectExpression,
+  Program
+} from 'estree'
 import type { Plugin } from 'unified'
 import { DEFAULT_PROPERTY_PROPS } from '../constants.js'
 
@@ -25,7 +29,16 @@ export const recmaRewrite: Plugin<
   ({ isPageImport, isRemoteContent }) =>
   ast => {
     const hasMdxLayout = ast.body.some(isMdxLayout)
-    if (hasMdxLayout) return
+    if (hasMdxLayout) {
+      if (!isRemoteContent) {
+        const defaultExport = ast.body.find(
+          node => node.type === 'ExportDefaultDeclaration'
+        )!
+        Object.assign(defaultExport, defaultExport.declaration)
+        ast.body.push(createHocCallAst('MDXContent'))
+      }
+      return
+    }
 
     const excludeMdxContent = isRemoteContent
       ? (node: Body) =>
@@ -64,34 +77,7 @@ export const recmaRewrite: Plugin<
         ],
         source: { type: 'Literal', value: 'nextra/setup-page' }
       })
-      ast.body.push({
-        type: 'ExportDefaultDeclaration',
-        declaration: {
-          type: 'CallExpression',
-          callee: { type: 'Identifier', name: 'HOC_MDXWrapper' },
-          optional: false,
-          arguments: [
-            { type: 'Identifier', name: '_createMdxContent' },
-            {
-              type: 'ObjectExpression',
-              properties: [
-                {
-                  ...DEFAULT_PROPERTY_PROPS,
-                  shorthand: true,
-                  key: { type: 'Identifier', name: 'metadata' },
-                  value: { type: 'Identifier', name: 'metadata' }
-                },
-                {
-                  ...DEFAULT_PROPERTY_PROPS,
-                  shorthand: true,
-                  key: { type: 'Identifier', name: 'toc' },
-                  value: { type: 'Identifier', name: 'toc' }
-                }
-              ]
-            }
-          ]
-        }
-      })
+      ast.body.push(createHocCallAst('_createMdxContent'))
       return
     }
     ast.body.push({
@@ -102,3 +88,34 @@ export const recmaRewrite: Plugin<
       }
     })
   }
+
+function createHocCallAst(componentName: string) {
+  return {
+    type: 'ExportDefaultDeclaration',
+    declaration: {
+      type: 'CallExpression',
+      callee: { type: 'Identifier', name: 'HOC_MDXWrapper' },
+      optional: false,
+      arguments: [
+        { type: 'Identifier', name: componentName },
+        {
+          type: 'ObjectExpression',
+          properties: [
+            {
+              ...DEFAULT_PROPERTY_PROPS,
+              shorthand: true,
+              key: { type: 'Identifier', name: 'metadata' },
+              value: { type: 'Identifier', name: 'metadata' }
+            },
+            {
+              ...DEFAULT_PROPERTY_PROPS,
+              shorthand: true,
+              key: { type: 'Identifier', name: 'toc' },
+              value: { type: 'Identifier', name: 'toc' }
+            }
+          ]
+        }
+      ]
+    }
+  } satisfies ExportDefaultDeclaration
+}
