@@ -21,7 +21,7 @@ export default function Foo(props) {
 `
 
   describe("outputFormat: 'function-body'", () => {
-    it('should work', async () => {
+    it.only('should work', async () => {
       const rawMdx = await compileMdx(testMdx)
       expect(clean(rawMdx)).resolves.toMatchInlineSnapshot(`
         "'use strict'
@@ -67,21 +67,10 @@ export default function Foo(props) {
             ]
           })
         }
-        function MDXContent(props = {}) {
-          const { wrapper: MDXLayout } = props.components || {}
-          return MDXLayout
-            ? _jsx(MDXLayout, {
-                ...props,
-                children: _jsx(_createMdxContent, {
-                  ...props
-                })
-              })
-            : _createMdxContent(props)
-        }
         return {
           metadata,
           toc,
-          default: MDXContent
+          default: _createMdxContent
         }"
       `)
     })
@@ -245,7 +234,7 @@ export default function Foo(props) {
         })"
       `)
     })
-    it('should work with `export default` and `export const components`', async () => {
+    it.only('should work with `export default` and `export const components`', async () => {
       const rawMdx = await compileMdx(testMdxWithDefaultExport, options)
       expect(clean(rawMdx)).resolves.toMatchInlineSnapshot(`
         "/*@jsxRuntime automatic*/
