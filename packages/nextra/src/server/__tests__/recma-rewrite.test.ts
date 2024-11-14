@@ -11,9 +11,10 @@ describe('recma-rewrite', () => {
 - list 2
   `
 
-  it("outputFormat: 'function-body'", async () => {
-    const rawMdx = await compileMdx(testMdx)
-    expect(clean(rawMdx)).resolves.toMatchInlineSnapshot(`
+  describe("outputFormat: 'function-body'",  () => {
+    it('should work', async() => {
+      const rawMdx = await compileMdx(testMdx)
+      expect(clean(rawMdx)).resolves.toMatchInlineSnapshot(`
       "'use strict'
       const { Fragment: _Fragment, jsx: _jsx, jsxs: _jsxs } = arguments[0]
       const metadata = {
@@ -63,9 +64,12 @@ describe('recma-rewrite', () => {
         default: _createMdxContent
       }"
     `)
+    })
   })
 
-  it("outputFormat: 'program'", async () => {
+  describe("outputFormat: 'program'",  () => {
+    it('should work', async() => {
+
     const rawMdx = await compileMdx(testMdx, {
       mdxOptions: {
         outputFormat: 'program',
@@ -105,5 +109,6 @@ describe('recma-rewrite', () => {
         )
       }"
     `)
+    })
   })
 })
