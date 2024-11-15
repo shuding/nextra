@@ -14,7 +14,7 @@ export const remarkAssignFrontMatter: Plugin<
 > =
   ({ lastCommitTime }) =>
   (ast, file) => {
-    const frontMatterNode = ast.children.find((node: any) =>
+    const frontMatterNode = ast.children.find(node =>
       isExportNode(node, 'metadata')
     )!
     const frontMatter = getFrontMatterASTObject(frontMatterNode)

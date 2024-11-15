@@ -9,7 +9,7 @@ describe('remarkMdxFrontMatter', () => {
   it('should throw error if both yaml/esm frontmatter are used', () => {
     const processor = compileMdx(`${YAML_FRONTMATTER}\n${ESM_FRONTMATTER}`)
     expect(processor).rejects.toThrowError(
-      "Both yaml frontMatter and esm export frontMatter aren't supported. Keep only 1."
+      "Both YAML front matter and `metadata` aren't supported. Keep only 1."
     )
   })
 

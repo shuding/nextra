@@ -1,7 +1,7 @@
 import path from 'node:path'
 import type { Property } from 'estree'
 import type { MdxjsEsm } from 'hast-util-to-estree/lib/handlers/mdxjs-esm'
-import type { Root } from 'mdast'
+import type { Root, RootContent } from 'mdast'
 import type { Plugin } from 'unified'
 import { EXIT, visit } from 'unist-util-visit'
 import { DEFAULT_PROPERTY_PROPS } from '../constants.js'
@@ -14,7 +14,7 @@ export function getFrontMatterASTObject(node: MdxjsEsm): Property[] {
 }
 
 export function isExportNode(
-  node: MdxjsEsm,
+  node: MdxjsEsm | RootContent,
   varName: string
 ): node is MdxjsEsm {
   if (node.type !== 'mdxjsEsm') return false
@@ -31,7 +31,7 @@ export function isExportNode(
 export const remarkMdxTitle: Plugin<[], Root> = () => (ast, file) => {
   let title = ''
 
-  const frontMatterNode = ast.children.find((node: any) =>
+  const frontMatterNode = ast.children.find(node =>
     isExportNode(node, 'metadata')
   )!
   const frontMatter = getFrontMatterASTObject(frontMatterNode)
