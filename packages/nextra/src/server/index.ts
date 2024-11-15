@@ -36,7 +36,9 @@ const CONTENT_DIR = getContentDirectory()
 
 function getContentDirectory() {
   // Next.js gives priority to `app` over `src/app`, we do the same for `content` directory
-  const [contentDir = ''] = fg.sync(['{src/,}content'], { onlyDirectories: true })
+  const [contentDir = 'content'] = fg.sync(['{src/,}content'], {
+    onlyDirectories: true
+  })
   return contentDir
 }
 
@@ -65,18 +67,17 @@ const nextra: Nextra = nextraConfig => {
   }
 
   return function withNextra(nextConfig = {}) {
-    const pageMapLoader = {
-      loader: LOADER_PATH,
-      options: {
-        locales: nextConfig.i18n?.locales || ['']
-      }
-    }
-    const hasI18n = !!nextConfig.i18n?.locales
-
-    if (hasI18n) {
+    const { locales, defaultLocale } = nextConfig.i18n || {}
+    if (locales) {
       logger.info(
         'You have Next.js i18n enabled, read here https://nextjs.org/docs/app/building-your-application/routing/internationalization for the docs.'
       )
+    }
+    const pageMapLoader = {
+      loader: LOADER_PATH,
+      options: {
+        locales: locales || ['']
+      }
     }
     return {
       ...nextConfig,
@@ -94,7 +95,7 @@ const nextra: Nextra = nextraConfig => {
       env: {
         ...nextConfig.env,
         NEXTRA_LOCALES: JSON.stringify(pageMapLoader.options.locales),
-        NEXTRA_DEFAULT_LOCALE: nextConfig.i18n?.defaultLocale
+        NEXTRA_DEFAULT_LOCALE: defaultLocale
       },
       experimental: {
         ...nextConfig.experimental,

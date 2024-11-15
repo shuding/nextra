@@ -73,15 +73,13 @@ export async function loader(
   } = this.getOptions()
   const { resourcePath, resourceQuery } = this
 
-  if (contentDir !== undefined) { // We pass `contentDir` only for `page-map/placeholder.ts`
+  if (contentDir) { // We pass `contentDir` only for `page-map/placeholder.ts`
     const locale = resourceQuery.replace('?lang=', '')
     if (!IS_PRODUCTION) {
       // Add `app` and `content` folders as the dependencies, so Webpack will
       // rebuild the module if anything in that context changes
       this.addContextDependency(APP_DIR)
-      if (contentDir) {
-        this.addContextDependency(path.join(CWD, contentDir, locale))
-      }
+      this.addContextDependency(path.join(CWD, contentDir, locale))
     }
     const filePaths = await findMetaAndPageFilePaths({
       dir: APP_DIR,
