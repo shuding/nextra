@@ -1,4 +1,4 @@
-import { compileMetadata } from '../src/server/compile-metadata.js'
+import { compileMetadata } from '../compile-metadata.js'
 
 describe('compileMetadata()', () => {
   it('should remove everything', () => {

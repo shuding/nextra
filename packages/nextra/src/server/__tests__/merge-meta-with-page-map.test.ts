@@ -1,14 +1,14 @@
-import { mergeMetaWithPageMap } from '../src/server/page-map/merge-meta-with-page-map.js'
+import { mergeMetaWithPageMap } from '../page-map/merge-meta-with-page-map.js'
 
 describe('mergeMetaWithPageMap', () => {
   it('should collect', async () => {
     // Fixes Error: Failed to resolve import "/_pagefind/pagefind.js" from "dist/client/components/search.js". Does the file exist?
-    vi.mock('../../nextra/dist/client/components/search.js', () => ({
+    vi.mock('../../../../nextra/dist/client/components/search.js', () => ({
       Search: null
     }))
     globalThis.IntersectionObserver = vi.fn(() => ({}) as IntersectionObserver)
     const { eslintPage } = await import(
-      '../../../examples/swr-site/app/[lang]/remote/graphql-eslint/[[...slug]]/page.js' +
+      '../../../../../examples/swr-site/app/[lang]/remote/graphql-eslint/[[...slug]]/page.js' +
         // Skip TypeScript type checking for this import to prevent errors
         // when running nextra's `types:check` command with `swr-site` package type errors
         ''

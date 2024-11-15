@@ -1,10 +1,10 @@
-import { compileMdx } from '../src/server/compile.js'
-import { clean } from './test-utils.js'
+import { compileMdx } from '../compile.js'
+import { clean } from '../../../__test__/test-utils.js'
 
 const mdxOptions = {
   jsx: true,
-  outputFormat: 'program'
-} as const
+  outputFormat: 'program' as const
+}
 
 describe('Compile', () => {
   it('should work with export default', async () => {
