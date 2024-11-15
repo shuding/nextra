@@ -9,13 +9,9 @@ import { DEFAULT_PROPERTY_PROPS } from '../constants.js'
 
 type Node = Program['body'][number]
 
-function isMdxLayout(node: Node) {
-  return (
-    node.type === 'VariableDeclaration' &&
-    node.kind === 'const' &&
-    node.declarations[0].id.type === 'Identifier' &&
-    node.declarations[0].id.name === 'MDXLayout'
-  )
+enum Mdx {
+  Wrapper = 'MDXContent',
+  Content = '_createMdxContent'
 }
 
 export const recmaRewrite: Plugin<
@@ -29,29 +25,22 @@ export const recmaRewrite: Plugin<
 > =
   ({ isPageImport, isRemoteContent }) =>
   ast => {
-    const hasMdxLayout = ast.body.some(isMdxLayout)
-    const defaultExport = ast.body.find(
-      (node: Node) => node.type === 'ExportDefaultDeclaration'
-    )!
-    if (hasMdxLayout) {
-      if (!isRemoteContent) {
-        // `export default function MDXContent` > `function MDXContent`
-        Object.assign(defaultExport, defaultExport.declaration)
-        ast.body.unshift(HOC_IMPORT_AST)
-        ast.body.push({
-          type: 'ExportDefaultDeclaration',
-          declaration: createHocCallAst('MDXContent')
-        })
-      }
-      return
-    }
-
+    const hasMdxLayout = ast.body.some(
+      (node: Node) =>
+        node.type === 'VariableDeclaration' &&
+        node.kind === 'const' &&
+        node.declarations[0].id.type === 'Identifier' &&
+        node.declarations[0].id.name === 'MDXLayout'
+    )
     // Remote MDX
     if (isRemoteContent) {
+      if (hasMdxLayout) {
+        return
+      }
       // Remove `function MDXContent` with wrapper logic
       ast.body = ast.body.filter(
         (node: Node) =>
-          node.type !== 'FunctionDeclaration' || node.id.name !== 'MDXContent'
+          node.type !== 'FunctionDeclaration' || node.id.name !== Mdx.Wrapper
       )
       const returnStatement = ast.body.find(
         (node: Node) => node.type === 'ReturnStatement'
@@ -63,25 +52,39 @@ export const recmaRewrite: Plugin<
           node.key.type === 'Identifier' &&
           node.key.name === 'default' &&
           node.value.type === 'Identifier' &&
-          node.value.name === 'MDXContent'
+          node.value.name === Mdx.Wrapper
         ) {
-          node.value.name = '_createMdxContent'
+          node.value.name = Mdx.Content
           break
         }
       }
+      return
+    }
+    const defaultExport = ast.body.find(
+      (node: Node) => node.type === 'ExportDefaultDeclaration'
+    )!
+
+    if (hasMdxLayout) {
+      // `export default function MDXContent` > `function MDXContent`
+      Object.assign(defaultExport, defaultExport.declaration)
+      ast.body.unshift(HOC_IMPORT_AST)
+      ast.body.push({
+        type: 'ExportDefaultDeclaration',
+        declaration: createHocCallAst(Mdx.Wrapper)
+      })
       return
     }
 
     // Page MDX
     if (isPageImport) {
       ast.body.unshift(HOC_IMPORT_AST)
-      defaultExport.declaration = createHocCallAst('_createMdxContent')
+      defaultExport.declaration = createHocCallAst(Mdx.Content)
       return
     }
     // Partial MDX
     defaultExport.declaration = {
       type: 'Identifier',
-      name: '_createMdxContent'
+      name: Mdx.Content
     }
   }
 
