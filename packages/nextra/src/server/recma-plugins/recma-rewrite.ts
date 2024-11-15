@@ -1,5 +1,5 @@
 import type {
-  ExportDefaultDeclaration,
+  CallExpression,
   ImportDeclaration,
   ObjectExpression,
   Program
@@ -30,26 +30,29 @@ export const recmaRewrite: Plugin<
   ({ isPageImport, isRemoteContent }) =>
   ast => {
     const hasMdxLayout = ast.body.some(isMdxLayout)
+    const defaultExport = ast.body.find(
+      (node: Node) => node.type === 'ExportDefaultDeclaration'
+    )!
     if (hasMdxLayout) {
       if (!isRemoteContent) {
-        const defaultExport = ast.body.find(
-          (node: Node) => node.type === 'ExportDefaultDeclaration'
-        )!
+        // `export default function MDXContent` > `function MDXContent`
         Object.assign(defaultExport, defaultExport.declaration)
         ast.body.unshift(createHocImportAst())
-        ast.body.push(createHocCallAst('MDXContent'))
+        ast.body.push({
+          type: 'ExportDefaultDeclaration',
+          declaration: createHocCallAst('MDXContent')
+        })
       }
       return
     }
 
-    const excludeMdxContent = isRemoteContent
-      ? (node: Node) =>
-          node.type !== 'FunctionDeclaration' || node.id.name !== 'MDXContent'
-      : (node: Node) => node.type !== 'ExportDefaultDeclaration'
-    ast.body = ast.body.filter(excludeMdxContent)
-
     // Remote MDX
     if (isRemoteContent) {
+      // Remove `function MDXContent` with wrapper logic
+      ast.body = ast.body.filter(
+        (node: Node) =>
+          node.type !== 'FunctionDeclaration' || node.id.name !== 'MDXContent'
+      )
       const returnStatement = ast.body.find(
         (node: Node) => node.type === 'ReturnStatement'
       )!
@@ -72,17 +75,14 @@ export const recmaRewrite: Plugin<
     // Page MDX
     if (isPageImport) {
       ast.body.unshift(createHocImportAst())
-      ast.body.push(createHocCallAst('_createMdxContent'))
+      defaultExport.declaration = createHocCallAst('_createMdxContent')
       return
     }
     // Partial MDX
-    ast.body.push({
-      type: 'ExportDefaultDeclaration',
-      declaration: {
-        type: 'Identifier',
-        name: '_createMdxContent'
-      }
-    })
+    defaultExport.declaration = {
+      type: 'Identifier',
+      name: '_createMdxContent'
+    }
   }
 
 function createHocImportAst(): ImportDeclaration {
@@ -99,33 +99,30 @@ function createHocImportAst(): ImportDeclaration {
   }
 }
 
-function createHocCallAst(componentName: string): ExportDefaultDeclaration {
+function createHocCallAst(componentName: string): CallExpression {
   return {
-    type: 'ExportDefaultDeclaration',
-    declaration: {
-      type: 'CallExpression',
-      callee: { type: 'Identifier', name: 'HOC_MDXWrapper' },
-      optional: false,
-      arguments: [
-        { type: 'Identifier', name: componentName },
-        {
-          type: 'ObjectExpression',
-          properties: [
-            {
-              ...DEFAULT_PROPERTY_PROPS,
-              shorthand: true,
-              key: { type: 'Identifier', name: 'metadata' },
-              value: { type: 'Identifier', name: 'metadata' }
-            },
-            {
-              ...DEFAULT_PROPERTY_PROPS,
-              shorthand: true,
-              key: { type: 'Identifier', name: 'toc' },
-              value: { type: 'Identifier', name: 'toc' }
-            }
-          ]
-        }
-      ]
-    }
+    type: 'CallExpression',
+    callee: { type: 'Identifier', name: 'HOC_MDXWrapper' },
+    optional: false,
+    arguments: [
+      { type: 'Identifier', name: componentName },
+      {
+        type: 'ObjectExpression',
+        properties: [
+          {
+            ...DEFAULT_PROPERTY_PROPS,
+            shorthand: true,
+            key: { type: 'Identifier', name: 'metadata' },
+            value: { type: 'Identifier', name: 'metadata' }
+          },
+          {
+            ...DEFAULT_PROPERTY_PROPS,
+            shorthand: true,
+            key: { type: 'Identifier', name: 'toc' },
+            value: { type: 'Identifier', name: 'toc' }
+          }
+        ]
+      }
+    ]
   }
 }
