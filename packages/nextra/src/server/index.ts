@@ -32,10 +32,11 @@ const GET_PAGE_MAP_RE = new RegExp(
 const PAGE_MAP_PLACEHOLDER_RE = new RegExp(
   PAGE_MAP_PLACEHOLDER_PATH.replaceAll('/', SEP).replaceAll('.', '\\.')
 )
+const CONTENT_DIR = getContentDirectory()
 
-export function getContentDirectory() {
+function getContentDirectory() {
   // Next.js gives priority to `app` over `src/app`, we do the same for `content` directory
-  const [contentDir] = fg.sync(['{src/,}content'], { onlyDirectories: true })
+  const [contentDir = ''] = fg.sync(['{src/,}content'], { onlyDirectories: true })
   return contentDir
 }
 
@@ -58,10 +59,10 @@ const nextra: Nextra = nextraConfig => {
   const pageMapPlaceholderLoader = {
     loader: LOADER_PATH,
     options: {
-      contentDirBasePath: loaderOptions.contentDirBasePath
+      contentDirBasePath: loaderOptions.contentDirBasePath,
+      contentDir: CONTENT_DIR
     }
   }
-  const contentDir = getContentDirectory()
 
   return function withNextra(nextConfig = {}) {
     const pageMapLoader = {
@@ -127,7 +128,7 @@ const nextra: Nextra = nextraConfig => {
             ...nextConfig.experimental?.turbo?.resolveAlias,
             'next-mdx-import-source-file': './mdx-components', // '@vercel/turbopack-next/mdx-import-source'
             'private-next-root-dir/*': './*',
-            'private-next-content-dir/*': `./${contentDir}/*`,
+            'private-next-content-dir/*': `./${CONTENT_DIR}/*`,
             // Fixes when Turbopack is enabled: Module not found: Can't resolve '@theguild/remark-mermaid/mermaid'
             '@theguild/remark-mermaid/mermaid': path.relative(
               CWD,

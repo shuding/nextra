@@ -7,6 +7,7 @@ import type { mathJaxOptionsSchema, nextraConfigSchema } from './server/schemas'
 export interface LoaderOptions extends z.infer<typeof nextraConfigSchema> {
   isPageImport?: boolean
   locales: string[]
+  contentDir?: string
 }
 
 type TPageItem = { name: string; route: string; __pagePath: string }

@@ -6,7 +6,6 @@ import type { LoaderOptions } from '../types.js'
 import { compileMetadata } from './compile-metadata.js'
 import { compileMdx } from './compile.js'
 import { CWD, IS_PRODUCTION, METADATA_ONLY_RQ } from './constants.js'
-import { getContentDirectory } from './index.js'
 import { findMetaAndPageFilePaths } from './page-map/find-meta-and-page-file-paths.js'
 import { convertPageMapToJs } from './page-map/to-js.js'
 import { convertToPageMap } from './page-map/to-page-map.js'
@@ -14,7 +13,6 @@ import { twoslashRenderer } from './twoslash.js'
 import { logger } from './utils.js'
 
 const NOW = Date.now()
-const CONTENT_DIR = getContentDirectory()
 const APP_DIR = findPagesDir(CWD).appDir!
 
 if (!APP_DIR) {
@@ -69,26 +67,27 @@ export async function loader(
     codeHighlight,
     mdxOptions,
     contentDirBasePath,
+    contentDir,
     locales,
     whiteListTagsStyling
   } = this.getOptions()
   const { resourcePath, resourceQuery } = this
 
-  if (contentDirBasePath) { // We pass `contentDirBasePath` only for `page-map/placeholder.ts`
+  if (contentDir !== undefined) { // We pass `contentDir` only for `page-map/placeholder.ts`
     const locale = resourceQuery.replace('?lang=', '')
     if (!IS_PRODUCTION) {
       // Add `app` and `content` folders as the dependencies, so Webpack will
       // rebuild the module if anything in that context changes
       this.addContextDependency(APP_DIR)
-      if (CONTENT_DIR) {
-        this.addContextDependency(path.join(CWD, CONTENT_DIR, locale))
+      if (contentDir) {
+        this.addContextDependency(path.join(CWD, contentDir, locale))
       }
     }
     const filePaths = await findMetaAndPageFilePaths({
       dir: APP_DIR,
       cwd: CWD,
       locale,
-      contentDir: CONTENT_DIR
+      contentDir
     })
     const { pageMap, mdxPages } = convertToPageMap({
       filePaths,
