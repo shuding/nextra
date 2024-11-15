@@ -4,17 +4,25 @@ import { useMDXComponents } from 'nextra-theme-docs'
 import { compileMdx } from 'nextra/compile'
 import { Callout, Tabs } from 'nextra/components'
 import { evaluate } from 'nextra/evaluate'
-import { convertToPageMap, normalizePageMap } from 'nextra/page-map'
+import { convertToPageMap, normalizePageMap, createCatchAllMeta, collectCatchAllRoutes } from 'nextra/page-map'
 import json from '../../../../../nextra-remote-filepaths/graphql-yoga.json'
 
-const { branch, docsPath, filePaths, repo, user } = json
+const { branch, docsPath, filePaths, repo, user, nestedMeta } = json
 
 const { mdxPages, pageMap: _pageMap } = convertToPageMap({
   filePaths,
   basePath: 'remote/graphql-yoga'
 })
 
-export const pageMap = normalizePageMap(_pageMap as any)
+const [yogaPage] = _pageMap[0].children[0].children
+
+const metaItem = {
+  data: createCatchAllMeta(filePaths, nestedMeta)
+}
+
+export const pageMap = [
+  normalizePageMap(collectCatchAllRoutes(yogaPage, metaItem))
+]
 
 const { wrapper: Wrapper, ...components } = useMDXComponents({
   Callout,

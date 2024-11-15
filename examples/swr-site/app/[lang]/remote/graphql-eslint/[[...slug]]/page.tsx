@@ -3,18 +3,31 @@ import { notFound } from 'next/navigation'
 import { compileMdx } from 'nextra/compile'
 import { Callout, Tabs } from 'nextra/components'
 import { evaluate } from 'nextra/evaluate'
-import { convertToPageMap, normalizePageMap } from 'nextra/page-map'
+import {
+  collectCatchAllRoutes,
+  convertToPageMap,
+  createCatchAllMeta,
+  normalizePageMap
+} from 'nextra/page-map'
 import { useMDXComponents } from '../../../../../mdx-components'
 import json from '../../../../../nextra-remote-filepaths/graphql-eslint.json'
 
-const { branch, docsPath, filePaths, repo, user } = json
+const { branch, docsPath, filePaths, repo, user, nestedMeta } = json
 
 const { mdxPages, pageMap: _pageMap } = convertToPageMap({
   filePaths,
   basePath: 'remote/graphql-eslint'
 })
 
-export const pageMap = normalizePageMap(_pageMap as any)
+const [eslintPage] = _pageMap[0].children[0].children
+
+const metaItem = {
+  data: createCatchAllMeta(filePaths, nestedMeta)
+}
+
+export const pageMap = [
+  normalizePageMap(collectCatchAllRoutes(eslintPage, metaItem))
+]
 
 const { wrapper: Wrapper, ...components } = useMDXComponents({
   $Tabs: Tabs,
