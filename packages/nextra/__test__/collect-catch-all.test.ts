@@ -1,6 +1,6 @@
-import { collectCatchAllRoutes } from '../src/server/page-map/dynamic.js'
+import { mergeMetaWithPageMap } from '../src/server/page-map/merge-meta-with-page-map.js'
 
-describe('collectCatchAllRoutes', () => {
+describe('mergeMetaWithPageMap', () => {
   it('should collect', async () => {
     // Fixes Error: Failed to resolve import "/_pagefind/pagefind.js" from "dist/client/components/search.js". Does the file exist?
     vi.mock('../../nextra/dist/client/components/search.js', () => ({
@@ -11,7 +11,7 @@ describe('collectCatchAllRoutes', () => {
       '../../../examples/swr-site/app/[lang]/remote/graphql-eslint/[[...slug]]/page.js'
     )
 
-    const result = collectCatchAllRoutes(eslintPage, {
+    const result = mergeMetaWithPageMap(eslintPage, {
       index: 'Introduction',
       'getting-started': {
         type: 'folder',

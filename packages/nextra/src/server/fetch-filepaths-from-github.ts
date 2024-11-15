@@ -38,7 +38,7 @@ export async function fetchFilePathsFromGitHub({
     docsPath,
     filePaths: filePaths.filter(filePath =>
       MARKDOWN_EXTENSION_RE.test(filePath)
-    ),
+    )
   }
   const json = JSON.stringify(result, null, 2)
 

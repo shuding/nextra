@@ -5,8 +5,8 @@ import { compileMdx } from 'nextra/compile'
 import { Callout, Tabs } from 'nextra/components'
 import { evaluate } from 'nextra/evaluate'
 import {
-  collectCatchAllRoutes,
   convertToPageMap,
+  mergeMetaWithPageMap,
   normalizePageMap
 } from 'nextra/page-map'
 import json from '../../../../../nextra-remote-filepaths/graphql-yoga.json'
@@ -21,7 +21,7 @@ const { mdxPages, pageMap: _pageMap } = convertToPageMap({
 // @ts-expect-error -- fixme
 const [yogaPage] = _pageMap[0].children
 
-const yogaPageMap = collectCatchAllRoutes(yogaPage, {
+const yogaPageMap = mergeMetaWithPageMap(yogaPage, {
   index: 'Quick Start',
   features: {
     type: 'folder',

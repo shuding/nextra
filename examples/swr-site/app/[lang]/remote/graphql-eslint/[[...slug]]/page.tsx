@@ -4,8 +4,8 @@ import { compileMdx } from 'nextra/compile'
 import { Callout, Tabs } from 'nextra/components'
 import { evaluate } from 'nextra/evaluate'
 import {
-  collectCatchAllRoutes,
   convertToPageMap,
+  mergeMetaWithPageMap,
   normalizePageMap
 } from 'nextra/page-map'
 import { useMDXComponents } from '../../../../../mdx-components'
@@ -21,7 +21,7 @@ const { mdxPages, pageMap: _pageMap } = convertToPageMap({
 // @ts-expect-error -- fixme
 export const [eslintPage] = _pageMap[0].children
 
-const eslintPageMap = collectCatchAllRoutes(eslintPage, {
+const eslintPageMap = mergeMetaWithPageMap(eslintPage, {
   index: 'Introduction',
   'getting-started': {
     type: 'folder',

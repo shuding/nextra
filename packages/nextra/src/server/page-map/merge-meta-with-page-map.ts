@@ -20,23 +20,23 @@ function normalizeMetaData(obj: DynamicMeta): DynamicMeta {
   )
 }
 
-export function collectCatchAllRoutes<T extends Folder | PageMapItem[]>(
-  parent: T,
+export function mergeMetaWithPageMap<T extends Folder | PageMapItem[]>(
+  pageMap: T,
   meta: DynamicMeta
 ): T {
-  if ('children' in parent) {
+  if ('children' in pageMap) {
     return {
-      ...parent,
+      ...pageMap,
       children: [
         { data: normalizeMetaData(meta) },
-        ...collectCatchAllRoutes(parent.children, meta)
+        ...mergeMetaWithPageMap(pageMap.children, meta)
       ]
     }
   }
   // @ts-expect-error -- pagePath exist
-  return parent.map(({ __pagePath, ...restParent }) => {
+  return pageMap.map(({ __pagePath, ...restParent }) => {
     if ('children' in restParent) {
-      restParent.children = collectCatchAllRoutes(restParent.children, {})
+      restParent.children = mergeMetaWithPageMap(restParent.children, {})
       const prop = meta[restParent.name]
       if (isFolder(prop)) {
         restParent.children.unshift({ data: normalizeMetaData(prop.items) })
