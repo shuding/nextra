@@ -116,7 +116,7 @@ describe('LaTeX', () => {
         export const metadata = {}
         import { MathJax, MathJaxContext } from 'nextra/components'
         export const toc = []
-        function MDXLayout(props) {
+        function _createMdxContent(props) {
           const _components = {
             p: 'p',
             ...props.components
@@ -129,7 +129,8 @@ describe('LaTeX', () => {
               </_components.p>
             </MathJaxContext>
           )
-        }"
+        }
+        export default _createMdxContent"
       `)
     })
 
@@ -141,14 +142,15 @@ describe('LaTeX', () => {
         export const metadata = {}
         import { MathJax, MathJaxContext } from 'nextra/components'
         export const toc = []
-        function MDXLayout(props) {
+        function _createMdxContent(props) {
           return (
             <MathJaxContext>
               {'\\n'}
               <MathJax>{'\\\\[x^2\\n\\\\]'}</MathJax>
             </MathJaxContext>
           )
-        }"
+        }
+        export default _createMdxContent"
       `)
     })
 
@@ -169,7 +171,7 @@ ${MATH_LANG}`
         export let bar
         import { MathJax, MathJaxContext } from 'nextra/components'
         export const toc = []
-        function MDXLayout(props) {
+        function _createMdxContent(props) {
           const _components = {
             p: 'p',
             ...props.components
@@ -186,7 +188,8 @@ ${MATH_LANG}`
               <MathJax>{'\\\\[x^2\\n\\\\]'}</MathJax>
             </MathJaxContext>
           )
-        }"
+        }
+        export default _createMdxContent"
       `)
     })
   })

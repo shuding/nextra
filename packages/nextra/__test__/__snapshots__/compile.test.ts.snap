@@ -7,7 +7,7 @@ export const metadata = {
   title: 'codegen.yml'
 }
 export const toc = []
-function MDXLayout(props) {
+function _createMdxContent(props) {
   const _components = {
     code: 'code',
     h1: 'h1',
@@ -18,7 +18,8 @@ function MDXLayout(props) {
       <_components.code>{'codegen.yml'}</_components.code>
     </_components.h1>
   )
-}"
+}
+export default _createMdxContent"
 `;
 
 exports[`Process heading > code-with-text-h1 1`] = `
@@ -28,7 +29,7 @@ export const metadata = {
   title: 'codegen.yml file'
 }
 export const toc = []
-function MDXLayout(props) {
+function _createMdxContent(props) {
   const _components = {
     code: 'code',
     h1: 'h1',
@@ -40,7 +41,8 @@ function MDXLayout(props) {
       {' file'}
     </_components.h1>
   )
-}"
+}
+export default _createMdxContent"
 `;
 
 exports[`Process heading > dynamic-h1 1`] = `
@@ -55,7 +57,7 @@ export const TagName = () => {
   return tag || null
 }
 export const toc = []
-function MDXLayout(props) {
+function _createMdxContent(props) {
   const _components = {
     h1: 'h1',
     ...props.components
@@ -67,7 +69,8 @@ function MDXLayout(props) {
       {'"'}
     </_components.h1>
   )
-}"
+}
+export default _createMdxContent"
 `;
 
 exports[`Process heading > no-h1 1`] = `
@@ -81,13 +84,14 @@ export const toc = [
     depth: 2
   }
 ]
-function MDXLayout(props) {
+function _createMdxContent(props) {
   const _components = {
     h2: 'h2',
     ...props.components
   }
   return <_components.h2 id={toc[0].id}>{toc[0].value}</_components.h2>
-}"
+}
+export default _createMdxContent"
 `;
 
 exports[`Process heading > static-h1 1`] = `
@@ -97,11 +101,12 @@ export const metadata = {
   title: 'Hello World'
 }
 export const toc = []
-function MDXLayout(props) {
+function _createMdxContent(props) {
   const _components = {
     h1: 'h1',
     ...props.components
   }
   return <_components.h1>{'Hello World'}</_components.h1>
-}"
+}
+export default _createMdxContent"
 `;
