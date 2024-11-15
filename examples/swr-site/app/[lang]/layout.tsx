@@ -47,18 +47,17 @@ export default async function RootLayout({ children, params }) {
   const dictionary = await getDictionary(lang)
   let pageMap = await getPageMap(lang)
 
-  const [remoteItem] = graphqlEslintPageMap
-
   if (lang === 'en') {
     pageMap = [
       ...pageMap,
       {
-        ...remoteItem,
+        name: 'remote',
+        route: '/remote',
         children: [
           {
             name: 'graphql-eslint',
             route: '/remote/graphql-eslint',
-            children: remoteItem.children
+            children: graphqlEslintPageMap[0].children
           },
           {
             name: 'graphql-yoga',
