@@ -146,6 +146,7 @@ export async function compileMdx(
         remarkFrontmatter, // parse and attach yaml node
         remarkMdxFrontMatter,
         readingTime && remarkReadingTime,
+        remarkMdxTitle,
         [remarkAssignFrontMatter, { lastCommitTime }] satisfies Pluggable,
         remarkGfm,
         format !== 'md' &&
@@ -155,7 +156,6 @@ export async function compileMdx(
             { whiteList: ['details', 'summary', ...whiteListTagsStyling] }
           ] satisfies Pluggable),
         remarkCustomHeadingId,
-        remarkMdxTitle,
         [remarkHeadings, { isRemoteContent }] satisfies Pluggable,
         staticImage && remarkStaticImage,
         latex && remarkMath,

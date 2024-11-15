@@ -34,7 +34,8 @@ export const MyComponent = () => null
       "import {Fragment as _Fragment, jsx as _jsx} from "react/jsx-runtime";
       export const metadata = {
         "title": "Foo",
-        "description": "Bar"
+        "description": "Bar",
+        "filePath": "foo.mdx"
       };
       "
     `)
@@ -46,7 +47,8 @@ export const MyComponent = () => null
     expect(result).resolves.toMatchInlineSnapshot(`
       "import {Fragment as _Fragment, jsx as _jsx} from "react/jsx-runtime";
       export const metadata = {
-        "title": "Bar"
+        "title": "Bar",
+        "filePath": "bar.mdx"
       };
       "
     `)
