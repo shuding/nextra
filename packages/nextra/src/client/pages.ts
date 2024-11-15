@@ -18,8 +18,7 @@ export async function importPage(pathSegments: string[] = [], lang = '') {
 export const generateStaticParamsFor =
   (segmentKey: string, localeSegmentKey = 'lang') =>
   async () => {
-    const envLocales = process.env.NEXTRA_LOCALES
-    const locales = envLocales ? (JSON.parse(envLocales) as string[]) : ['']
+    const locales = JSON.parse(process.env.NEXTRA_LOCALES!) as string[]
     const result = []
 
     for (const locale of locales) {

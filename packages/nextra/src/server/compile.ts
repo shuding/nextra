@@ -13,7 +13,7 @@ import remarkReadingTime from 'remark-reading-time'
 import remarkSmartypants from 'remark-smartypants'
 import type { Pluggable } from 'unified'
 import type { LoaderOptions, NextraConfig } from '../types.js'
-import { CWD, MARKDOWN_URL_EXTENSION_RE } from './constants.js'
+import { CWD, IS_PRODUCTION, MARKDOWN_URL_EXTENSION_RE } from './constants.js'
 import { recmaRewrite } from './recma-plugins/index.js'
 import {
   DEFAULT_REHYPE_PRETTY_CODE_OPTIONS,
@@ -130,7 +130,7 @@ export async function compileMdx(
       outputFormat,
       providerImportSource,
       // Fix TypeError: _jsx is not a function for remote content
-      development: process.env.NODE_ENV === 'development',
+      development: !IS_PRODUCTION,
       remarkPlugins: [
         ...(remarkPlugins || []),
         remarkMermaid, // should be before remarkRemoveImports because contains `import { Mermaid } from ...`

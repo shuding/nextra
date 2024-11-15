@@ -26,10 +26,10 @@ const GET_PAGE_MAP_PATH = '/nextra/dist/server/page-map/get.js'
 
 const PAGE_MAP_PLACEHOLDER_PATH = '/nextra/dist/server/page-map/placeholder.js'
 
-export const GET_PAGE_MAP_RE = new RegExp(
+const GET_PAGE_MAP_RE = new RegExp(
   GET_PAGE_MAP_PATH.replaceAll('/', SEP).replaceAll('.', '\\.')
 )
-export const PAGE_MAP_PLACEHOLDER_RE = new RegExp(
+const PAGE_MAP_PLACEHOLDER_RE = new RegExp(
   PAGE_MAP_PLACEHOLDER_PATH.replaceAll('/', SEP).replaceAll('.', '\\.')
 )
 
@@ -88,14 +88,13 @@ const nextra: Nextra = nextraConfig => {
         ...(nextConfig.pageExtensions || DEFAULT_EXTENSIONS),
         ...MARKDOWN_EXTENSIONS
       ],
-      ...(hasI18n && {
-        i18n: undefined,
-        env: {
-          ...nextConfig.env,
-          NEXTRA_DEFAULT_LOCALE: nextConfig.i18n?.defaultLocale,
-          NEXTRA_LOCALES: JSON.stringify(nextConfig.i18n?.locales)
-        }
-      }),
+      // We always unset `nextConfig.i18n` property
+      i18n: undefined,
+      env: {
+        ...nextConfig.env,
+        NEXTRA_LOCALES: JSON.stringify(pageMapLoader.options.locales),
+        NEXTRA_DEFAULT_LOCALE: nextConfig.i18n?.defaultLocale
+      },
       experimental: {
         ...nextConfig.experimental,
         optimizePackageImports: [

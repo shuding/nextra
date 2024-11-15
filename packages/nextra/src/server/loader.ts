@@ -6,11 +6,7 @@ import type { LoaderOptions } from '../types.js'
 import { compileMetadata } from './compile-metadata.js'
 import { compileMdx } from './compile.js'
 import { CWD, IS_PRODUCTION, METADATA_ONLY_RQ } from './constants.js'
-import {
-  GET_PAGE_MAP_RE,
-  getContentDirectory,
-  PAGE_MAP_PLACEHOLDER_RE
-} from './index.js'
+import { getContentDirectory } from './index.js'
 import { findMetaAndPageFilePaths } from './page-map/find-meta-and-page-file-paths.js'
 import { convertPageMapToJs } from './page-map/to-js.js'
 import { convertToPageMap } from './page-map/to-page-map.js'
@@ -64,7 +60,7 @@ export async function loader(
   source: string
 ): Promise<string> {
   const {
-    isPageImport = false,
+    isPageImport,
     defaultShowCopyCode,
     search,
     staticImage,
@@ -78,7 +74,7 @@ export async function loader(
   } = this.getOptions()
   const { resourcePath, resourceQuery } = this
 
-  if (PAGE_MAP_PLACEHOLDER_RE.test(resourcePath)) {
+  if (contentDirBasePath) { // We pass `contentDirBasePath` only for `page-map/placeholder.ts`
     const locale = resourceQuery.replace('?lang=', '')
     if (!IS_PRODUCTION) {
       // Add `app` and `content` folders as the dependencies, so Webpack will
@@ -103,7 +99,7 @@ export async function loader(
     const rawJs = await convertPageMapToJs({ pageMap, mdxPages })
     return rawJs
   }
-  if (GET_PAGE_MAP_RE.test(resourcePath)) {
+  if (locales) { // We pass `locales` only for `page-map/get.ts`
     const rawJs = replaceDynamicResourceQuery(
       source,
       'import(`./placeholder.js?lang=${lang}`)',
