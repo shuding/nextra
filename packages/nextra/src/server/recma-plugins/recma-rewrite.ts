@@ -37,7 +37,7 @@ export const recmaRewrite: Plugin<
       if (!isRemoteContent) {
         // `export default function MDXContent` > `function MDXContent`
         Object.assign(defaultExport, defaultExport.declaration)
-        ast.body.unshift(createHocImportAst())
+        ast.body.unshift(HOC_IMPORT_AST)
         ast.body.push({
           type: 'ExportDefaultDeclaration',
           declaration: createHocCallAst('MDXContent')
@@ -74,7 +74,7 @@ export const recmaRewrite: Plugin<
 
     // Page MDX
     if (isPageImport) {
-      ast.body.unshift(createHocImportAst())
+      ast.body.unshift(HOC_IMPORT_AST)
       defaultExport.declaration = createHocCallAst('_createMdxContent')
       return
     }
@@ -85,18 +85,16 @@ export const recmaRewrite: Plugin<
     }
   }
 
-function createHocImportAst(): ImportDeclaration {
-  return {
-    type: 'ImportDeclaration',
-    specifiers: [
-      {
-        type: 'ImportSpecifier',
-        imported: { type: 'Identifier', name: 'HOC_MDXWrapper' },
-        local: { type: 'Identifier', name: 'HOC_MDXWrapper' }
-      }
-    ],
-    source: { type: 'Literal', value: 'nextra/setup-page' }
-  }
+const HOC_IMPORT_AST: ImportDeclaration = {
+  type: 'ImportDeclaration',
+  specifiers: [
+    {
+      type: 'ImportSpecifier',
+      imported: { type: 'Identifier', name: 'HOC_MDXWrapper' },
+      local: { type: 'Identifier', name: 'HOC_MDXWrapper' }
+    }
+  ],
+  source: { type: 'Literal', value: 'nextra/setup-page' }
 }
 
 function createHocCallAst(componentName: string): CallExpression {
