@@ -3,7 +3,8 @@ import type {
   DynamicMeta,
   DynamicMetaItem,
   DynamicMetaJsonFile,
-  Folder
+  Folder,
+  PageMapItem
 } from '../../types.js'
 import { normalizePageRoute, pageTitleFromFilename } from '../utils.js'
 
@@ -26,47 +27,32 @@ function normalizeMetaData(obj: DynamicMeta): DynamicMeta {
   )
 }
 
-export function collectCatchAllRoutes(
-  parent: Folder,
-  meta: DynamicMetaJsonFile,
-  isRootFolder = true
-): Folder {
-  if (isRootFolder) {
-    const folder = collectCatchAllRoutes(parent, meta, false)
-
+export function collectCatchAllRoutes<T extends Folder | PageMapItem[]>(
+  parent: T,
+  meta: DynamicMeta
+): T {
+  if ('children' in parent) {
     return {
-      ...folder,
-      children: [{ data: normalizeMetaData(meta.data) }, ...folder.children]
+      ...parent,
+      children: [
+        { data: normalizeMetaData(meta) },
+        ...collectCatchAllRoutes(parent.children, meta)
+      ]
     }
   }
-  const result = []
+  // @ts-expect-error -- pagePath exist
+  return parent.map(({ __pagePath, ...restParent }) => {
+    if ('children' in restParent) {
+      const prop = meta[restParent.name]
 
-  for (const [key, value] of Object.entries(meta.data)) {
-    if (!isFolder(value)) {
-      if (key === '*') {
-        continue
+      return {
+        ...restParent,
+        children: [
+          ...(isFolder(prop) ? [{ data: normalizeMetaData(prop.items) }] : []),
+          ...collectCatchAllRoutes(restParent.children, {})
+        ]
       }
-      result.push({
-        name: key,
-        route: normalizePageRoute(parent.route, key)
-      })
-      continue
     }
-    const routeWithoutSlashes = key.replace('/', '')
-    const newParent: Folder = {
-      name: routeWithoutSlashes,
-      route: `${parent.route}/${routeWithoutSlashes}`,
-      children: [{ data: normalizeMetaData(value.items) }]
-    }
-    newParent.children.push(
-      ...collectCatchAllRoutes(newParent, { data: value.items }, false).children
-    )
-    result.push(newParent)
-  }
-
-  return {
-    route: parent.route,
-    name: parent.name,
-    children: result
-  }
+    return restParent
+  })
 }

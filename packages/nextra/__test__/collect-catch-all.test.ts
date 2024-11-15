@@ -2,24 +2,30 @@ import { createCatchAllMeta } from '../src/server/page-map/catch-all.js'
 import { collectCatchAllRoutes } from '../src/server/page-map/dynamic.js'
 
 describe('collectCatchAllRoutes', () => {
-  it('should collect', () => {
-    const meta = {
-      data: createCatchAllMeta([
-        'configs.md',
-        'custom-rules.md',
-        'getting-started.md',
-        'getting-started/parser-options.md',
-        'getting-started/parser.md',
-        'getting-started/third-level/foo.md',
-        'index.md'
-      ])
-    }
-    const parent = {
-      name: 'nested',
-      route: '/remote/nested',
-      children: []
-    }
-    expect(collectCatchAllRoutes(parent, meta)).toMatchInlineSnapshot(`
+  it.only('should collect', async () => {
+    // Fixes Error: Failed to resolve import "/_pagefind/pagefind.js" from "dist/client/components/search.js". Does the file exist?
+    vi.mock('../../nextra/dist/client/components/search.js', () => ({
+      Search: null
+    }))
+    globalThis.IntersectionObserver = vi.fn(() => ({}) as IntersectionObserver)
+    const { eslintPage } = await import(
+      '../../../examples/swr-site/app/[lang]/remote/graphql-eslint/[[...slug]]/page.js'
+    )
+
+    const result = collectCatchAllRoutes(eslintPage, {
+      index: 'Introduction',
+      'getting-started': {
+        type: 'folder',
+        items: {
+          'parser-options': 'Parser Options',
+          parser: 'Parser'
+        }
+      },
+      configs: 'Configs',
+      'custom-rules': 'Custom Rules'
+    })
+
+    expect(result).toMatchInlineSnapshot(`
       {
         "children": [
           {
@@ -27,20 +33,16 @@ describe('collectCatchAllRoutes', () => {
               "configs": "Configs",
               "custom-rules": "Custom Rules",
               "getting-started": "Getting Started",
-              "index": "Index",
+              "index": "Introduction",
             },
           },
           {
             "name": "configs",
-            "route": "/remote/nested/configs",
+            "route": "/remote/graphql-eslint/configs",
           },
           {
             "name": "custom-rules",
-            "route": "/remote/nested/custom-rules",
-          },
-          {
-            "name": "getting-started",
-            "route": "/remote/nested/getting-started",
+            "route": "/remote/graphql-eslint/custom-rules",
           },
           {
             "children": [
@@ -48,43 +50,31 @@ describe('collectCatchAllRoutes', () => {
                 "data": {
                   "parser": "Parser",
                   "parser-options": "Parser Options",
-                  "third-level": "Third Level",
                 },
               },
               {
+                "name": "index",
+                "route": "/remote/graphql-eslint/getting-started",
+              },
+              {
                 "name": "parser-options",
-                "route": "/remote/nested/getting-started/parser-options",
+                "route": "/remote/graphql-eslint/getting-started/parser-options",
               },
               {
                 "name": "parser",
-                "route": "/remote/nested/getting-started/parser",
-              },
-              {
-                "children": [
-                  {
-                    "data": {
-                      "foo": "Foo",
-                    },
-                  },
-                  {
-                    "name": "foo",
-                    "route": "/remote/nested/getting-started/third-level/foo",
-                  },
-                ],
-                "name": "third-level",
-                "route": "/remote/nested/getting-started/third-level",
+                "route": "/remote/graphql-eslint/getting-started/parser",
               },
             ],
             "name": "getting-started",
-            "route": "/remote/nested/getting-started",
+            "route": "/remote/graphql-eslint/getting-started",
           },
           {
             "name": "index",
-            "route": "/remote/nested",
+            "route": "/remote/graphql-eslint",
           },
         ],
-        "name": "nested",
-        "route": "/remote/nested",
+        "name": "graphql-eslint",
+        "route": "/remote/graphql-eslint",
       }
     `)
   })
