@@ -1,7 +1,7 @@
 import path from 'node:path'
-import { CWD } from '../src/server/constants.js'
-import { findMetaAndPageFilePaths } from '../src/server/page-map/find-meta-and-page-file-paths.js'
-import { convertToPageMap } from '../src/server/page-map/to-page-map.js'
+import { CWD } from '../constants.js'
+import { findMetaAndPageFilePaths } from '../page-map/find-meta-and-page-file-paths.js'
+import { convertToPageMap } from '../page-map/to-page-map.js'
 
 describe('generatePageMap()', () => {
   it('should work for blog example', async () => {
