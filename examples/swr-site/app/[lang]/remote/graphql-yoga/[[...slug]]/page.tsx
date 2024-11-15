@@ -4,7 +4,12 @@ import { useMDXComponents } from 'nextra-theme-docs'
 import { compileMdx } from 'nextra/compile'
 import { Callout, Tabs } from 'nextra/components'
 import { evaluate } from 'nextra/evaluate'
-import { convertToPageMap, normalizePageMap, createCatchAllMeta, collectCatchAllRoutes } from 'nextra/page-map'
+import {
+  collectCatchAllRoutes,
+  convertToPageMap,
+  createCatchAllMeta,
+  normalizePageMap
+} from 'nextra/page-map'
 import json from '../../../../../nextra-remote-filepaths/graphql-yoga.json'
 
 const { branch, docsPath, filePaths, repo, user, nestedMeta } = json
@@ -14,6 +19,7 @@ const { mdxPages, pageMap: _pageMap } = convertToPageMap({
   basePath: 'remote/graphql-yoga'
 })
 
+// @ts-expect-error -- fixme
 const [yogaPage] = _pageMap[0].children[0].children
 
 const metaItem = {

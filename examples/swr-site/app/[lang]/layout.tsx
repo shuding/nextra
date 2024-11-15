@@ -45,7 +45,7 @@ export const metadata: Metadata = {
 export default async function RootLayout({ children, params }) {
   const { lang } = await params
   const dictionary = await getDictionary(lang)
-  let pageMap = await getPageMap(lang)
+  let pageMap = await getPageMap(`/${lang}`)
 
   if (lang === 'en') {
     pageMap = [
@@ -63,7 +63,7 @@ export default async function RootLayout({ children, params }) {
             name: 'graphql-yoga',
             route: '/remote/graphql-yoga',
             children: graphqlYogaPageMap[0].children
-          },
+          }
         ]
       }
     ]

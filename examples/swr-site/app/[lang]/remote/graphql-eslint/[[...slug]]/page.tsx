@@ -19,6 +19,7 @@ const { mdxPages, pageMap: _pageMap } = convertToPageMap({
   basePath: 'remote/graphql-eslint'
 })
 
+// @ts-expect-error -- fixme
 const [eslintPage] = _pageMap[0].children[0].children
 
 const metaItem = {

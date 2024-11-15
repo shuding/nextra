@@ -9,7 +9,7 @@ const Card: FC<{
   href: string
   children?: ReactNode
   className?: string
-}> = ({ children, title, icon, arrow, href, className,...props }) => {
+}> = ({ children, title, icon, arrow, href, className, ...props }) => {
   return (
     <NextLink
       href={href}

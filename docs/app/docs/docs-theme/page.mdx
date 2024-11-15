@@ -11,9 +11,7 @@ import { MDXRemote } from 'nextra/mdx-remote'
 import { createIndexPage, getPageMap } from 'nextra/page-map'
 
 <MDXRemote
-  compiledSource={await createIndexPage(
-    await getPageMap('', '/docs/docs-theme')
-  )}
+  compiledSource={await createIndexPage(await getPageMap('/docs/docs-theme'))}
   components={{
     Cards,
     ChevronRightIcon,
