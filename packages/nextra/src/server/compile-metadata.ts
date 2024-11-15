@@ -31,12 +31,12 @@ export async function compileMetadata(
     ],
     recmaPlugins: [
       () => (ast: Program) => {
-        const [importReact] = ast.body.splice(0, 1)
+        const [importReact] = ast.body
 
         ast.body = ast.body.filter(
-          (node: any) =>
+          node =>
             node.type === 'ExportNamedDeclaration' &&
-            node.declaration?.declarations[0].id.name === 'metadata'
+            (node.declaration as any).declarations[0].id.name === 'metadata'
         )
         ast.body.unshift(importReact)
       }
