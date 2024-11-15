@@ -19,10 +19,6 @@ export function pageTitleFromFilename(fileName: string) {
   return title(fileName.replaceAll(/[-_]/g, ' '), { special: ['SSR'] })
 }
 
-export function normalizePageRoute(parentRoute: string, route: string): string {
-  return slash(path.join(parentRoute, route.replace(/^index$/, '')))
-}
-
 export function createAstExportConst(
   name: string,
   value: ArrayExpression | ObjectExpression | Expression

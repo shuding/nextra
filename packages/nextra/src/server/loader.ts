@@ -73,7 +73,8 @@ export async function loader(
   } = this.getOptions()
   const { resourcePath, resourceQuery } = this
 
-  if (contentDir) { // We pass `contentDir` only for `page-map/placeholder.ts`
+  // We pass `contentDir` only for `page-map/placeholder.ts`
+  if (contentDir) {
     const locale = resourceQuery.replace('?lang=', '')
     if (!IS_PRODUCTION) {
       // Add `app` and `content` folders as the dependencies, so Webpack will
@@ -96,7 +97,8 @@ export async function loader(
     const rawJs = await convertPageMapToJs({ pageMap, mdxPages })
     return rawJs
   }
-  if (locales) { // We pass `locales` only for `page-map/get.ts`
+  // We pass `locales` only for `page-map/get.ts`
+  if (locales) {
     const rawJs = replaceDynamicResourceQuery(
       source,
       'import(`./placeholder.js?lang=${lang}`)',

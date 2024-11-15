@@ -2,11 +2,10 @@ import type {
   DynamicFolder,
   DynamicMeta,
   DynamicMetaItem,
-  DynamicMetaJsonFile,
   Folder,
   PageMapItem
 } from '../../types.js'
-import { normalizePageRoute, pageTitleFromFilename } from '../utils.js'
+import { pageTitleFromFilename } from '../utils.js'
 
 function isFolder(value: DynamicMetaItem): value is DynamicFolder {
   return !!value && typeof value === 'object' && value.type === 'folder'
@@ -43,15 +42,12 @@ export function collectCatchAllRoutes<T extends Folder | PageMapItem[]>(
   // @ts-expect-error -- pagePath exist
   return parent.map(({ __pagePath, ...restParent }) => {
     if ('children' in restParent) {
+      restParent.children = collectCatchAllRoutes(restParent.children, {})
       const prop = meta[restParent.name]
-
-      return {
-        ...restParent,
-        children: [
-          ...(isFolder(prop) ? [{ data: normalizeMetaData(prop.items) }] : []),
-          ...collectCatchAllRoutes(restParent.children, {})
-        ]
+      if (isFolder(prop)) {
+        restParent.children.unshift({ data: normalizeMetaData(prop.items) })
       }
+      return restParent
     }
     return restParent
   })

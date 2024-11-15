@@ -20,7 +20,7 @@ const { mdxPages, pageMap: _pageMap } = convertToPageMap({
 })
 
 // @ts-expect-error -- fixme
-const [eslintPage] = _pageMap[0].children[0].children
+export const [eslintPage] = _pageMap[0].children
 
 const metaItem = {
   data: createCatchAllMeta(filePaths, nestedMeta)

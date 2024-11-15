@@ -48,10 +48,6 @@ export type DynamicMetaItem = Meta | DynamicFolder
 
 export type DynamicMeta = Record<string, DynamicMetaItem>
 
-export type DynamicMetaJsonFile = {
-  data: DynamicMeta
-}
-
 export type FrontMatter = Record<string, any>
 export type Meta = string | Record<string, any>
 
