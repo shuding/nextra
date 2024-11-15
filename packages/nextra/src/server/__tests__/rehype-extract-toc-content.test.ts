@@ -182,8 +182,8 @@ export const metadata = {
       export const myVar = 'interpolated'
       export const Test = () => <span>Hello</span>
       export const metadata = {
-        title: 'Heading 1',
-        test: 'extract toc content'
+        test: 'extract toc content',
+        title: 'Heading 1'
       }
       export const toc = [
         {
