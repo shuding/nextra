@@ -7,10 +7,14 @@ function importPageMap(lang = ''): Promise<{
   return import(`./placeholder.js?lang=${lang}`)
 }
 
-export async function getPageMap(lang?: string, route = '/') {
+const defaultLocale = process.env.NEXTRA_DEFAULT_LOCALE
+
+export async function getPageMap(route = '/') {
+  const segments = route.split('/')
+  // Remove 1 or 2 items from the beginning of the array
+  const lang = segments.splice(0, defaultLocale ? 2 : 1).at(-1)!
   let { pageMap } = await importPageMap(lang)
 
-  const segments = route.split('/').filter(Boolean)
   let segment: string | undefined
   while ((segment = segments.shift())) {
     const folder = pageMap.find(
