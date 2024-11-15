@@ -7,26 +7,19 @@ import type {
 import type { Plugin } from 'unified'
 import { DEFAULT_PROPERTY_PROPS } from '../constants.js'
 
-type Node = Program['body'][number]
-
 enum Mdx {
   Wrapper = 'MDXContent',
   Content = '_createMdxContent'
 }
 
 export const recmaRewrite: Plugin<
-  [
-    {
-      isPageImport?: boolean
-      isRemoteContent?: boolean
-    }
-  ],
+  [{ isPageImport?: boolean; isRemoteContent?: boolean }],
   Program
 > =
   ({ isPageImport, isRemoteContent }) =>
-  ast => {
+  (ast: Program) => {
     const hasMdxLayout = ast.body.some(
-      (node: Node) =>
+      node =>
         node.type === 'VariableDeclaration' &&
         node.kind === 'const' &&
         node.declarations[0].id.type === 'Identifier' &&
@@ -39,11 +32,11 @@ export const recmaRewrite: Plugin<
       }
       // Remove `function MDXContent` with wrapper logic
       ast.body = ast.body.filter(
-        (node: Node) =>
+        node =>
           node.type !== 'FunctionDeclaration' || node.id.name !== Mdx.Wrapper
       )
       const returnStatement = ast.body.find(
-        (node: Node) => node.type === 'ReturnStatement'
+        node => node.type === 'ReturnStatement'
       )!
       const { properties } = returnStatement.argument as ObjectExpression
       for (const node of properties) {
@@ -61,7 +54,7 @@ export const recmaRewrite: Plugin<
       return
     }
     const defaultExport = ast.body.find(
-      (node: Node) => node.type === 'ExportDefaultDeclaration'
+      node => node.type === 'ExportDefaultDeclaration'
     )!
 
     if (hasMdxLayout) {
