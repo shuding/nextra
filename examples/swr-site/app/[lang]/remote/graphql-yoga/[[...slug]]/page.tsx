@@ -7,12 +7,11 @@ import { evaluate } from 'nextra/evaluate'
 import {
   collectCatchAllRoutes,
   convertToPageMap,
-  createCatchAllMeta,
   normalizePageMap
 } from 'nextra/page-map'
 import json from '../../../../../nextra-remote-filepaths/graphql-yoga.json'
 
-const { branch, docsPath, filePaths, repo, user, nestedMeta } = json
+const { branch, docsPath, filePaths, repo, user } = json
 
 const { mdxPages, pageMap: _pageMap } = convertToPageMap({
   filePaths,
@@ -20,15 +19,50 @@ const { mdxPages, pageMap: _pageMap } = convertToPageMap({
 })
 
 // @ts-expect-error -- fixme
-const [yogaPage] = _pageMap[0].children[0].children
+const [yogaPage] = _pageMap[0].children
 
-const metaItem = {
-  data: createCatchAllMeta(filePaths, nestedMeta)
-}
+const yogaPageMap = collectCatchAllRoutes(yogaPage, {
+  index: 'Quick Start',
+  features: {
+    type: 'folder',
+    items: {
+      graphiql: '',
+      context: 'GraphQL Context',
+      'error-masking': '',
+      subscriptions: '',
+      'file-uploads': '',
+      'envelop-plugins': '',
+      testing: '',
+      'apollo-federation': '',
+      cors: ''
+    }
+  },
+  integrations: {
+    type: 'folder',
+    items: {
+      'integration-with-aws-lambda': 'AWS Lambda',
+      'integration-with-cloudflare-workers': 'Cloudflare Workers',
+      'integration-with-deno': 'Deno',
+      'integration-with-express': 'Express',
+      'integration-with-fastify': 'Fastify',
+      'integration-with-koa': 'Koa',
+      'integration-with-nestjs': 'NestJS',
+      'integration-with-nextjs': 'Next.js',
+      'integration-with-sveltekit': 'SvelteKit',
+      'z-other-environments': 'Other Environments'
+    }
+  },
+  migration: {
+    type: 'folder',
+    items: {
+      'migration-from-apollo-server': 'Apollo Server',
+      'migration-from-express-graphql': 'Express GraphQL',
+      'migration-from-yoga-v1': 'Yoga v1'
+    }
+  }
+})
 
-export const pageMap = [
-  normalizePageMap(collectCatchAllRoutes(yogaPage, metaItem))
-]
+export const pageMap = normalizePageMap(yogaPageMap)
 
 const { wrapper: Wrapper, ...components } = useMDXComponents({
   Callout,
