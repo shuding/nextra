@@ -8,7 +8,10 @@ describe('mergeMetaWithPageMap', () => {
     }))
     globalThis.IntersectionObserver = vi.fn(() => ({}) as IntersectionObserver)
     const { eslintPage } = await import(
-      '../../../examples/swr-site/app/[lang]/remote/graphql-eslint/[[...slug]]/page.js'
+      '../../../examples/swr-site/app/[lang]/remote/graphql-eslint/[[...slug]]/page.js' +
+        // Skip TypeScript type checking for this import to prevent errors
+        // when running nextra's `types:check` command with `swr-site` package type errors
+        ''
     )
 
     const result = mergeMetaWithPageMap(eslintPage, {
