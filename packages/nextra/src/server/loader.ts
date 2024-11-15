@@ -94,24 +94,30 @@ export async function loader(
       basePath: contentDirBasePath.slice(1),
       locale
     })
-    const rawJs = await convertPageMapToJs({ pageMap, mdxPages })
-    return rawJs
+    return convertPageMapToJs({ pageMap, mdxPages })
   }
   // We pass `locales` only for `page-map/get.ts`
   if (locales) {
-    const rawJs = replaceDynamicResourceQuery(
+    return replaceDynamicResourceQuery(
       source,
       'import(`./placeholder.js?lang=${lang}`)',
       locales
     )
-    return rawJs
   }
 
+  // Run only on production because it can slow down Fast Refresh for uncommitted files
+  // https://github.com/shuding/nextra/issues/3675#issuecomment-2466416366
+  const lastCommitTime = IS_PRODUCTION
+    ? await getLastCommitTime(resourcePath)
+    : NOW
+
   if (!IS_PRODUCTION && resourceQuery === METADATA_ONLY_RQ) {
-    const rawJs = await compileMetadata(source, { filePath: resourcePath })
-    return rawJs
+    return compileMetadata(source, {
+      filePath: resourcePath,
+      lastCommitTime
+    })
   }
-  const rawJs = await compileMdx(source, {
+  return compileMdx(source, {
     mdxOptions: {
       ...mdxOptions,
       jsx: true,
@@ -136,11 +142,8 @@ export async function loader(
     useCachedCompiler: true,
     isPageImport,
     whiteListTagsStyling,
-    // Run only on production because it can slow down Fast Refresh for uncommitted files
-    // https://github.com/shuding/nextra/issues/3675#issuecomment-2466416366
-    lastCommitTime: IS_PRODUCTION ? await getLastCommitTime(resourcePath) : NOW
+    lastCommitTime
   })
-  return rawJs
 }
 
 /*

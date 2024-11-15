@@ -16,7 +16,10 @@ import {
  */
 export async function compileMetadata(
   source: string,
-  { filePath, lastCommitTime }: { filePath?: string, lastCommitTime?: number } = {}
+  {
+    filePath,
+    lastCommitTime
+  }: { filePath?: string; lastCommitTime?: number } = {}
 ): Promise<string> {
   const format = filePath?.endsWith('.mdx') ? 'mdx' : 'md'
 
