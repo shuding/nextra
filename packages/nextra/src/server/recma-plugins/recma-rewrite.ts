@@ -83,14 +83,14 @@ export const recmaRewrite: Plugin<
 
 const HOC_IMPORT_AST: ImportDeclaration = {
   type: 'ImportDeclaration',
+  source: { type: 'Literal', value: 'nextra/setup-page' },
   specifiers: [
     {
       type: 'ImportSpecifier',
       imported: { type: 'Identifier', name: 'HOC_MDXWrapper' },
       local: { type: 'Identifier', name: 'HOC_MDXWrapper' }
     }
-  ],
-  source: { type: 'Literal', value: 'nextra/setup-page' }
+  ]
 }
 
 function createHocCallAst(componentName: string): CallExpression {
