@@ -13,7 +13,7 @@ export const remarkAssignFrontMatter: Plugin<
   Root
 > =
   ({ lastCommitTime }) =>
-  (ast, file) => {
+  (ast: Root, file) => {
     const frontMatterNode = ast.children.find(node =>
       isExportNode(node, 'metadata')
     )!

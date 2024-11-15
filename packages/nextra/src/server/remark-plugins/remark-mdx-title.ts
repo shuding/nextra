@@ -28,7 +28,7 @@ export function isExportNode(
   return name === varName
 }
 
-export const remarkMdxTitle: Plugin<[], Root> = () => (ast, file) => {
+export const remarkMdxTitle: Plugin<[], Root> = () => (ast: Root, file) => {
   let title = ''
 
   const frontMatterNode = ast.children.find(node =>
