@@ -1,11 +1,9 @@
-import path from 'node:path'
 import type {
   ArrayExpression,
   ExportNamedDeclaration,
   Expression,
   ObjectExpression
 } from 'estree'
-import slash from 'slash'
 import title from 'title'
 import { DEFAULT_PROPERTY_PROPS } from './constants.js'
 

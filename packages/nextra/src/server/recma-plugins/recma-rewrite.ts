@@ -56,7 +56,7 @@ export const recmaRewrite: Plugin<
       const returnStatement = ast.body.find(
         (node: Node) => node.type === 'ReturnStatement'
       )!
-      const { properties } = returnStatement!.argument as ObjectExpression
+      const { properties } = returnStatement.argument as ObjectExpression
       for (const node of properties) {
         if (
           node.type === 'Property' &&

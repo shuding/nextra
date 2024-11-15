@@ -13,7 +13,7 @@ import remarkReadingTime from 'remark-reading-time'
 import remarkSmartypants from 'remark-smartypants'
 import type { Pluggable } from 'unified'
 import type { LoaderOptions, NextraConfig } from '../types.js'
-import { CWD, IS_PRODUCTION, MARKDOWN_URL_EXTENSION_RE } from './constants.js'
+import { CWD, MARKDOWN_URL_EXTENSION_RE } from './constants.js'
 import { recmaRewrite } from './recma-plugins/index.js'
 import {
   DEFAULT_REHYPE_PRETTY_CODE_OPTIONS,
