@@ -1,6 +1,6 @@
-import { clean } from '../../../__test__/test-utils.js'
 import { evaluate } from '../../client/evaluate.js'
 import { compileMdx } from '../compile.js'
+import { clean } from './test-utils.js'
 
 const YAML_FRONTMATTER = '---\nfoo: bar\n---'
 const ESM_FRONTMATTER = "export const metadata = { foo: 'bar' }"

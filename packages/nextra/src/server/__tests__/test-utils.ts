@@ -1,9 +1,9 @@
 import fs from 'node:fs/promises'
 import path from 'node:path'
 import prettier from 'prettier'
-import { findMetaAndPageFilePaths } from '../src/server/page-map/find-meta-and-page-file-paths.js'
-import { convertPageMapToJs } from '../src/server/page-map/to-js.js'
-import { convertToPageMap } from '../src/server/page-map/to-page-map.js'
+import { findMetaAndPageFilePaths } from '../page-map/find-meta-and-page-file-paths.js'
+import { convertPageMapToJs } from '../page-map/to-js.js'
+import { convertToPageMap } from '../page-map/to-page-map.js'
 
 export async function clean(content: string): Promise<string> {
   const result = await prettier.format(content, {

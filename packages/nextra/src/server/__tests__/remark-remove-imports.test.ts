@@ -1,5 +1,5 @@
-import { clean } from '../../../__test__/test-utils.js'
 import { compileMdx } from '../compile.js'
+import { clean } from './test-utils.js'
 
 const opts = {
   mdxOptions: { jsx: true }

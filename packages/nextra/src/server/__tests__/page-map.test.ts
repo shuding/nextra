@@ -1,4 +1,4 @@
-import { getPageMapForFixture } from '../../../__test__/test-utils.js'
+import { getPageMapForFixture } from './test-utils.js'
 
 describe('Page Process', () => {
   it("should not add `_meta.json` file if folder doesn't contain markdown files", async () => {

@@ -1,4 +1,4 @@
-import type { PageMapItem } from '../../../src/types'
+import type { PageMapItem } from '../../../../types'
 
 export const usPageMap: PageMapItem[] = [
   {
