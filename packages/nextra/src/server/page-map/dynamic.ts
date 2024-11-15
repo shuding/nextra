@@ -14,14 +14,8 @@ function isFolder(value: DynamicMetaItem): value is DynamicFolder {
 function normalizeMetaData(obj: DynamicMeta): DynamicMeta {
   return Object.fromEntries(
     Object.entries(obj).map(([key, value]) => {
-      if (isFolder(value)) {
-        const keyWithoutSlash = key.replace('/', '')
-        return [
-          keyWithoutSlash,
-          value.title || pageTitleFromFilename(keyWithoutSlash)
-        ]
-      }
-      return [key, value || pageTitleFromFilename(key)]
+      const title = isFolder(value) ? value.title : value
+      return [key, title || pageTitleFromFilename(key)]
     })
   )
 }

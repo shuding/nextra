@@ -53,18 +53,7 @@ export default async function RootLayout({ children, params }) {
       {
         name: 'remote',
         route: '/remote',
-        children: [
-          {
-            name: 'graphql-eslint',
-            route: '/remote/graphql-eslint',
-            children: graphqlEslintPageMap[0].children
-          },
-          {
-            name: 'graphql-yoga',
-            route: '/remote/graphql-yoga',
-            children: graphqlYogaPageMap[0].children
-          }
-        ]
+        children: [graphqlEslintPageMap, graphqlYogaPageMap]
       }
     ]
   }
