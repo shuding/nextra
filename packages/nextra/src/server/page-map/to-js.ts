@@ -8,10 +8,12 @@ const META_RE = /_meta\.[jt]sx?$/
 
 export function convertPageMapToJs({
   pageMap,
-  mdxPages
+  mdxPages,
+  globalMetaPath
 }: {
   pageMap: TItem[]
   mdxPages: Record<string, string>
+  globalMetaPath?: string
 }): string {
   const imports: Import[] = []
   const pageMapAst = convertPageMapToAst(pageMap, imports)
@@ -53,9 +55,15 @@ export function convertPageMapToJs({
     body: [{ type: 'ExpressionStatement', expression: pageMapAst }]
   })
 
-  const rawJs = `import { normalizePageMap } from 'nextra/page-map'
+  let pageMapRawJs = pageMapResult.value.slice(0, -2 /* replace semicolon */)
+  if (globalMetaPath) {
+    pageMapRawJs = `mergeMetaWithPageMap(${pageMapRawJs}, globalMeta)`
+  }
+
+  const rawJs = `import { ${['normalizePageMap', globalMetaPath && 'mergeMetaWithPageMap'].filter(Boolean).join(', ')} } from 'nextra/page-map'
+${globalMetaPath ? `import { metadata as globalMeta } from 'private-next-root-dir/${globalMetaPath}'` : ''}
 ${importsResult.value}
-export const pageMap = normalizePageMap(${pageMapResult.value.slice(0, -2 /* replace semicolon */)})
+export const pageMap = normalizePageMap(${pageMapRawJs})
 
 export const RouteToFilepath = ${JSON.stringify(mdxPages, null, 2)}`
   return rawJs
