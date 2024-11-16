@@ -1,5 +1,6 @@
 // @ts-nocheck
 import { normalizePageMap } from 'nextra/page-map'
+
 import meta from "./_meta.ts";
 import {metadata as mix_not_specified} from "./mix/not-specified.md?metadata";
 import {metadata as mix_qux} from "./mix/qux.md?metadata";

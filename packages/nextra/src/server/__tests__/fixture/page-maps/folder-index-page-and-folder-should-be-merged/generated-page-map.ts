@@ -1,5 +1,6 @@
 // @ts-nocheck
 import { normalizePageMap } from 'nextra/page-map'
+
 import {metadata as themes_test} from "./themes-test.md?metadata";
 import {metadata as themes_test_foo} from "./themes-test/foo.md?metadata";
 import {metadata as themes} from "./themes.md?metadata";

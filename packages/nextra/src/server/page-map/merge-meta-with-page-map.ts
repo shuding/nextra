@@ -11,6 +11,7 @@ function isFolder(value: DynamicMetaItem): value is DynamicFolder {
     !!value &&
     typeof value === 'object' &&
     'items' in value &&
+    // @ts-expect-error -- fixme
     value.type !== 'menu'
   )
 }
@@ -58,8 +59,10 @@ export function mergeMetaWithPageMap<T extends Folder | PageMapItem[]>(
 
   if (hasMeta) {
     throw new Error(
-      'Merging an `_meta.global` file with a folder-specific `_meta` is unsupported. Move `/_meta` ' +
-        'file into the `_meta.global` file'
+      [
+        'Merging an `_meta.global` file with a folder-specific `_meta` is unsupported.',
+        'Move `/_meta` file into the `_meta.global` file'
+      ].join('\n')
     )
   }
   result.unshift({ data: normalizeMetaData(meta) })

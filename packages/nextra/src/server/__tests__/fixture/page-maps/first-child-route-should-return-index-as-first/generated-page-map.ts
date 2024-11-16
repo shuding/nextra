@@ -1,5 +1,6 @@
 // @ts-nocheck
 import { normalizePageMap } from 'nextra/page-map'
+
 import meta from "./_meta.ts";
 import {metadata as blog_} from "./blog/_.md?metadata";
 import {metadata as blog_a} from "./blog/a.md?metadata";
