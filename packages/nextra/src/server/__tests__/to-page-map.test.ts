@@ -88,8 +88,6 @@ describe('generatePageMap()', () => {
         "app/_meta.global.ts",
         "app/about/page.mdx",
         "app/blog/page.mdx",
-        "app/docs/_meta.ts",
-        "app/docs/advanced/_meta.ts",
         "app/docs/advanced/customize-the-cascade-layers/page.mdx",
         "app/docs/advanced/latex/page.mdx",
         "app/docs/advanced/mermaid/page.mdx",
@@ -103,7 +101,6 @@ describe('generatePageMap()', () => {
         "app/docs/advanced/typescript/page.mdx",
         "app/docs/blog-theme/page.mdx",
         "app/docs/blog-theme/start/page.mdx",
-        "app/docs/built-ins/_meta.ts",
         "app/docs/built-ins/banner/page.mdx",
         "app/docs/built-ins/bleed/page.mdx",
         "app/docs/built-ins/callout/page.mdx",
@@ -116,7 +113,6 @@ describe('generatePageMap()', () => {
         "app/docs/built-ins/table/page.mdx",
         "app/docs/built-ins/tabs/page.mdx",
         "app/docs/custom-theme/page.mdx",
-        "app/docs/docs-theme/_meta.ts",
         "app/docs/docs-theme/api/page.mdx",
         "app/docs/docs-theme/built-ins/footer/page.mdx",
         "app/docs/docs-theme/built-ins/layout/page.mdx",
@@ -126,7 +122,6 @@ describe('generatePageMap()', () => {
         "app/docs/docs-theme/page-configuration/page.mdx",
         "app/docs/docs-theme/page.mdx",
         "app/docs/docs-theme/start/page.mdx",
-        "app/docs/guide/_meta.ts",
         "app/docs/guide/custom-css/page.mdx",
         "app/docs/guide/github-alert-syntax/page.mdx",
         "app/docs/guide/i18n/page.mdx",
@@ -149,15 +144,24 @@ describe('generatePageMap()', () => {
     expect(pageMap).toMatchInlineSnapshot(`
       [
         {
+          "__pagePath": "app/page.tsx",
+          "name": "index",
+          "route": "/",
+        },
+        {
+          "__pagePath": "app/about/page.mdx",
+          "name": "about",
+          "route": "/about",
+        },
+        {
+          "__pagePath": "app/blog/page.mdx",
+          "name": "blog",
+          "route": "/blog",
+        },
+        {
           "children": [
             {
-              "__metaPath": "app/docs/_meta.ts",
-            },
-            {
               "children": [
-                {
-                  "__metaPath": "app/docs/advanced/_meta.ts",
-                },
                 {
                   "__pagePath": "app/docs/advanced/customize-the-cascade-layers/page.mdx",
                   "name": "customize-the-cascade-layers",
@@ -220,8 +224,21 @@ describe('generatePageMap()', () => {
             {
               "children": [
                 {
-                  "__metaPath": "app/docs/built-ins/_meta.ts",
+                  "__pagePath": "app/docs/blog-theme/page.mdx",
+                  "name": "index",
+                  "route": "/docs/blog-theme",
                 },
+                {
+                  "__pagePath": "app/docs/blog-theme/start/page.mdx",
+                  "name": "start",
+                  "route": "/docs/blog-theme/start",
+                },
+              ],
+              "name": "blog-theme",
+              "route": "/docs/blog-theme",
+            },
+            {
+              "children": [
                 {
                   "__pagePath": "app/docs/built-ins/banner/page.mdx",
                   "name": "banner",
@@ -282,10 +299,12 @@ describe('generatePageMap()', () => {
               "route": "/docs/built-ins",
             },
             {
+              "__pagePath": "app/docs/custom-theme/page.mdx",
+              "name": "custom-theme",
+              "route": "/docs/custom-theme",
+            },
+            {
               "children": [
-                {
-                  "__metaPath": "app/docs/docs-theme/_meta.ts",
-                },
                 {
                   "__pagePath": "app/docs/docs-theme/api/page.mdx",
                   "name": "api",
@@ -343,9 +362,6 @@ describe('generatePageMap()', () => {
             },
             {
               "children": [
-                {
-                  "__metaPath": "app/docs/guide/_meta.ts",
-                },
                 {
                   "__pagePath": "app/docs/guide/custom-css/page.mdx",
                   "name": "custom-css",
@@ -416,27 +432,6 @@ describe('generatePageMap()', () => {
               "route": "/docs/guide",
             },
             {
-              "children": [
-                {
-                  "__pagePath": "app/docs/blog-theme/page.mdx",
-                  "name": "index",
-                  "route": "/docs/blog-theme",
-                },
-                {
-                  "__pagePath": "app/docs/blog-theme/start/page.mdx",
-                  "name": "start",
-                  "route": "/docs/blog-theme/start",
-                },
-              ],
-              "name": "blog-theme",
-              "route": "/docs/blog-theme",
-            },
-            {
-              "__pagePath": "app/docs/custom-theme/page.mdx",
-              "name": "custom-theme",
-              "route": "/docs/custom-theme",
-            },
-            {
               "__pagePath": "app/docs/page.mdx",
               "name": "index",
               "route": "/docs",
@@ -444,21 +439,6 @@ describe('generatePageMap()', () => {
           ],
           "name": "docs",
           "route": "/docs",
-        },
-        {
-          "__pagePath": "app/page.tsx",
-          "name": "index",
-          "route": "/",
-        },
-        {
-          "__pagePath": "app/about/page.mdx",
-          "name": "about",
-          "route": "/about",
-        },
-        {
-          "__pagePath": "app/blog/page.mdx",
-          "name": "blog",
-          "route": "/blog",
         },
         {
           "__pagePath": "app/showcase/page.mdx",
@@ -477,9 +457,10 @@ describe('generatePageMap()', () => {
 
     expect(convertPageMapToJs({ pageMap, mdxPages, globalMetaPath })).toMatchInlineSnapshot(`
       "import { normalizePageMap, mergeMetaWithPageMap } from 'nextra/page-map'
-      import { metadata as globalMeta } from 'private-next-root-dir/app/_meta.global.ts'
-      import app_docs_meta from "private-next-root-dir/app/docs/_meta.ts";
-      import app_docs_advanced_meta from "private-next-root-dir/app/docs/advanced/_meta.ts";
+      import globalMeta from 'private-next-root-dir/app/_meta.global.ts'
+      import {metadata as app_page} from "private-next-root-dir/app/page.tsx";
+      import {metadata as app_about_page} from "private-next-root-dir/app/about/page.mdx?metadata";
+      import {metadata as app_blog_page} from "private-next-root-dir/app/blog/page.mdx?metadata";
       import {metadata as app_docs_advanced_customize_the_cascade_layers_page} from "private-next-root-dir/app/docs/advanced/customize-the-cascade-layers/page.mdx?metadata";
       import {metadata as app_docs_advanced_latex_page} from "private-next-root-dir/app/docs/advanced/latex/page.mdx?metadata";
       import {metadata as app_docs_advanced_mermaid_page} from "private-next-root-dir/app/docs/advanced/mermaid/page.mdx?metadata";
@@ -491,7 +472,8 @@ describe('generatePageMap()', () => {
       import {metadata as app_docs_advanced_tailwind_css_page} from "private-next-root-dir/app/docs/advanced/tailwind-css/page.mdx?metadata";
       import {metadata as app_docs_advanced_twoslash_page} from "private-next-root-dir/app/docs/advanced/twoslash/page.mdx?metadata";
       import {metadata as app_docs_advanced_typescript_page} from "private-next-root-dir/app/docs/advanced/typescript/page.mdx?metadata";
-      import app_docs_built_ins_meta from "private-next-root-dir/app/docs/built-ins/_meta.ts";
+      import {metadata as app_docs_blog_theme_page} from "private-next-root-dir/app/docs/blog-theme/page.mdx?metadata";
+      import {metadata as app_docs_blog_theme_start_page} from "private-next-root-dir/app/docs/blog-theme/start/page.mdx?metadata";
       import {metadata as app_docs_built_ins_banner_page} from "private-next-root-dir/app/docs/built-ins/banner/page.mdx?metadata";
       import {metadata as app_docs_built_ins_bleed_page} from "private-next-root-dir/app/docs/built-ins/bleed/page.mdx?metadata";
       import {metadata as app_docs_built_ins_callout_page} from "private-next-root-dir/app/docs/built-ins/callout/page.mdx?metadata";
@@ -503,7 +485,7 @@ describe('generatePageMap()', () => {
       import {metadata as app_docs_built_ins_steps_page} from "private-next-root-dir/app/docs/built-ins/steps/page.mdx?metadata";
       import {metadata as app_docs_built_ins_table_page} from "private-next-root-dir/app/docs/built-ins/table/page.mdx?metadata";
       import {metadata as app_docs_built_ins_tabs_page} from "private-next-root-dir/app/docs/built-ins/tabs/page.mdx?metadata";
-      import app_docs_docs_theme_meta from "private-next-root-dir/app/docs/docs-theme/_meta.ts";
+      import {metadata as app_docs_custom_theme_page} from "private-next-root-dir/app/docs/custom-theme/page.mdx?metadata";
       import {metadata as app_docs_docs_theme_api_page} from "private-next-root-dir/app/docs/docs-theme/api/page.mdx?metadata";
       import {metadata as app_docs_docs_theme_built_ins_footer_page} from "private-next-root-dir/app/docs/docs-theme/built-ins/footer/page.mdx?metadata";
       import {metadata as app_docs_docs_theme_built_ins_layout_page} from "private-next-root-dir/app/docs/docs-theme/built-ins/layout/page.mdx?metadata";
@@ -513,7 +495,6 @@ describe('generatePageMap()', () => {
       import {metadata as app_docs_docs_theme_page_configuration_page} from "private-next-root-dir/app/docs/docs-theme/page-configuration/page.mdx?metadata";
       import {metadata as app_docs_docs_theme_page} from "private-next-root-dir/app/docs/docs-theme/page.mdx?metadata";
       import {metadata as app_docs_docs_theme_start_page} from "private-next-root-dir/app/docs/docs-theme/start/page.mdx?metadata";
-      import app_docs_guide_meta from "private-next-root-dir/app/docs/guide/_meta.ts";
       import {metadata as app_docs_guide_custom_css_page} from "private-next-root-dir/app/docs/guide/custom-css/page.mdx?metadata";
       import {metadata as app_docs_guide_github_alert_syntax_page} from "private-next-root-dir/app/docs/guide/github-alert-syntax/page.mdx?metadata";
       import {metadata as app_docs_guide_i18n_page} from "private-next-root-dir/app/docs/guide/i18n/page.mdx?metadata";
@@ -527,27 +508,29 @@ describe('generatePageMap()', () => {
       import {metadata as app_docs_guide_static_exports_page} from "private-next-root-dir/app/docs/guide/static-exports/page.mdx?metadata";
       import {metadata as app_docs_guide_syntax_highlighting_page} from "private-next-root-dir/app/docs/guide/syntax-highlighting/page.mdx?metadata";
       import {metadata as app_docs_guide_turbopack_page} from "private-next-root-dir/app/docs/guide/turbopack/page.mdx?metadata";
-      import {metadata as app_docs_blog_theme_page} from "private-next-root-dir/app/docs/blog-theme/page.mdx?metadata";
-      import {metadata as app_docs_blog_theme_start_page} from "private-next-root-dir/app/docs/blog-theme/start/page.mdx?metadata";
-      import {metadata as app_docs_custom_theme_page} from "private-next-root-dir/app/docs/custom-theme/page.mdx?metadata";
       import {metadata as app_docs_page} from "private-next-root-dir/app/docs/page.mdx?metadata";
-      import {metadata as app_page} from "private-next-root-dir/app/page.tsx";
-      import {metadata as app_about_page} from "private-next-root-dir/app/about/page.mdx?metadata";
-      import {metadata as app_blog_page} from "private-next-root-dir/app/blog/page.mdx?metadata";
       import {metadata as app_showcase_page} from "private-next-root-dir/app/showcase/page.mdx?metadata";
       import {metadata as app_sponsors_page} from "private-next-root-dir/app/sponsors/page.mdx?metadata";
 
       export const pageMap = normalizePageMap(mergeMetaWithPageMap([{
+        name: "index",
+        route: "/",
+        frontMatter: app_page
+      }, {
+        name: "about",
+        route: "/about",
+        frontMatter: app_about_page
+      }, {
+        name: "blog",
+        route: "/blog",
+        frontMatter: app_blog_page
+      }, {
         name: "docs",
         route: "/docs",
         children: [{
-          data: app_docs_meta
-        }, {
           name: "advanced",
           route: "/docs/advanced",
           children: [{
-            data: app_docs_advanced_meta
-          }, {
             name: "customize-the-cascade-layers",
             route: "/docs/advanced/customize-the-cascade-layers",
             frontMatter: app_docs_advanced_customize_the_cascade_layers_page
@@ -593,11 +576,21 @@ describe('generatePageMap()', () => {
             frontMatter: app_docs_advanced_typescript_page
           }]
         }, {
+          name: "blog-theme",
+          route: "/docs/blog-theme",
+          children: [{
+            name: "index",
+            route: "/docs/blog-theme",
+            frontMatter: app_docs_blog_theme_page
+          }, {
+            name: "start",
+            route: "/docs/blog-theme/start",
+            frontMatter: app_docs_blog_theme_start_page
+          }]
+        }, {
           name: "built-ins",
           route: "/docs/built-ins",
           children: [{
-            data: app_docs_built_ins_meta
-          }, {
             name: "banner",
             route: "/docs/built-ins/banner",
             frontMatter: app_docs_built_ins_banner_page
@@ -643,11 +636,13 @@ describe('generatePageMap()', () => {
             frontMatter: app_docs_built_ins_tabs_page
           }]
         }, {
+          name: "custom-theme",
+          route: "/docs/custom-theme",
+          frontMatter: app_docs_custom_theme_page
+        }, {
           name: "docs-theme",
           route: "/docs/docs-theme",
           children: [{
-            data: app_docs_docs_theme_meta
-          }, {
             name: "api",
             route: "/docs/docs-theme/api",
             frontMatter: app_docs_docs_theme_api_page
@@ -692,8 +687,6 @@ describe('generatePageMap()', () => {
           name: "guide",
           route: "/docs/guide",
           children: [{
-            data: app_docs_guide_meta
-          }, {
             name: "custom-css",
             route: "/docs/guide/custom-css",
             frontMatter: app_docs_guide_custom_css_page
@@ -747,38 +740,10 @@ describe('generatePageMap()', () => {
             frontMatter: app_docs_guide_turbopack_page
           }]
         }, {
-          name: "blog-theme",
-          route: "/docs/blog-theme",
-          children: [{
-            name: "index",
-            route: "/docs/blog-theme",
-            frontMatter: app_docs_blog_theme_page
-          }, {
-            name: "start",
-            route: "/docs/blog-theme/start",
-            frontMatter: app_docs_blog_theme_start_page
-          }]
-        }, {
-          name: "custom-theme",
-          route: "/docs/custom-theme",
-          frontMatter: app_docs_custom_theme_page
-        }, {
           name: "index",
           route: "/docs",
           frontMatter: app_docs_page
         }]
-      }, {
-        name: "index",
-        route: "/",
-        frontMatter: app_page
-      }, {
-        name: "about",
-        route: "/about",
-        frontMatter: app_about_page
-      }, {
-        name: "blog",
-        route: "/blog",
-        frontMatter: app_blog_page
       }, {
         name: "showcase",
         route: "/showcase",

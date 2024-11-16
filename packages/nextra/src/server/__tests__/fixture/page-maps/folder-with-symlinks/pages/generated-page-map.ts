@@ -1,5 +1,6 @@
 // @ts-nocheck
 import { normalizePageMap } from 'nextra/page-map'
+
 import {metadata as docs_test2} from "./docs/test2.md?metadata";
 import {metadata as test1} from "./test1.md?metadata";
 

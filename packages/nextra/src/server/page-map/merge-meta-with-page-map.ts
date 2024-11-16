@@ -34,10 +34,20 @@ export function mergeMetaWithPageMap<T extends Folder | PageMapItem[]>(
     }
   }
   // @ts-expect-error -- pagePath exist
-  return pageMap.map(({ __pagePath, ...restParent }) => {
+  const result = pageMap.map(({ __pagePath, ...restParent }, index, arr) => {
     if ('children' in restParent) {
       restParent.children = mergeMetaWithPageMap(restParent.children, {})
       const prop = meta[restParent.name]
+      const hasMeta = 'data' in arr[0]
+
+      if (hasMeta) {
+        throw new Error(
+          'Merging an `_meta.global` file with a folder-specific `_meta` is unsupported. Move `' +
+            restParent.route +
+            '/_meta' +
+            '` file into the `_meta.global` file'
+        )
+      }
       if (isFolder(prop)) {
         restParent.children.unshift({ data: normalizeMetaData(prop.items) })
       }
@@ -45,4 +55,16 @@ export function mergeMetaWithPageMap<T extends Folder | PageMapItem[]>(
     }
     return restParent
   })
+  const hasMeta = 'data' in result[0]
+
+  if (hasMeta) {
+    throw new Error(
+      'Merging an `_meta.global` file with a folder-specific `_meta` is unsupported. Move `/_meta` ' +
+        'file into the `_meta.global` file'
+    )
+  }
+  result.unshift({ data: normalizeMetaData(meta) })
+
+  // @ts-expect-error -- fixme
+  return result
 }

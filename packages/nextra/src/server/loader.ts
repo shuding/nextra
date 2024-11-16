@@ -94,7 +94,8 @@ export async function loader(
       basePath: contentDirBasePath.slice(1),
       locale
     })
-    return convertPageMapToJs({ pageMap, mdxPages })
+    const globalMetaPath = filePaths.find((filePath) => filePath.includes('/_meta.global.'))
+    return convertPageMapToJs({ pageMap, mdxPages, globalMetaPath })
   }
   // We pass `locales` only for `page-map/get.ts`
   if (locales) {
