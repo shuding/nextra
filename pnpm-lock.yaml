@@ -382,7 +382,7 @@ importers:
         version: 4.3.3(vite@5.4.11)
       esbuild-plugin-svgr:
         specifier: ^3.0.0
-        version: 3.0.0(esbuild@0.24.0)(typescript@5.6.3)
+        version: 3.1.0(esbuild@0.24.0)(typescript@5.6.3)
       next:
         specifier: 15.0.3
         version: 15.0.3(@babel/core@7.26.0)(react-dom@18.3.1)(react@18.3.1)
@@ -7069,8 +7069,8 @@ packages:
       vfile-message: 4.0.2
     dev: false
 
-  /esbuild-plugin-svgr@3.0.0(esbuild@0.24.0)(typescript@5.6.3):
-    resolution: {integrity: sha512-8/YuGHKoNVKdcV8HUGFQtAJ16agxzemcX9IvcQvaVKuXqIBDvc5IV9nlPyyHcrgr+IvyKBcljO4wjxrh24DSAQ==}
+  /esbuild-plugin-svgr@3.1.0(esbuild@0.24.0)(typescript@5.6.3):
+    resolution: {integrity: sha512-SOfjehS9effRn8W/+T05GiXAbT6QHivr2uAUwzbXnqLnezKA4QIjvEt3VCzpzZU9J6oP21GZBB8tbDsJWYXPlw==}
     peerDependencies:
       esbuild: ^0.24.0
     dependencies:
