@@ -311,5 +311,30 @@ import { MDXRemote } from 'nextra/mdx-remote'
         })"
       `)
     })
+
+    it.only('should have styled inline code and anchor', async () => {
+      const rawMdx = await compileMdx('## A `Theme` [google](https://google.com) $e = mc^2$', options)
+      expect (clean(rawMdx)).resolves.toMatchInlineSnapshot(`
+        "/*@jsxRuntime automatic*/
+        /*@jsxImportSource react*/
+        export const metadata = {}
+        function _createMdxContent(props) {
+          const _components = {
+            a: 'a',
+            code: 'code',
+            h2: 'h2',
+            ...props.components
+          }
+          return (
+            <_components.h2 id="a-theme-google-e--mc2">
+              {'A '}
+              <_components.code>{'Theme'}</_components.code> <_components.a href="https://google.com">{'google'}</_components.a>
+              {' $e = mc^2$'}
+            </_components.h2>
+          )
+        }
+        export default _createMdxContent"
+      `)
+    })
   })
 })

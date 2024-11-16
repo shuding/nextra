@@ -91,14 +91,6 @@ You can use ESLint's built-in `sort-keys` rule, append
 `/* eslint sort-keys: error */` comment at the top of your `_meta` file, and you
 will receive ESLint's errors about incorrect order.
 
-### Usage with `next-sitemap`
-
-If you are using
-[next-sitemap](https://github.com/iamvishnusankar/next-sitemap), you will
-probably need to add `exclude: ['*/_meta']{:js}` to your
-`next-sitemap.config.js` file, as it is
-[tricky to exclude `_meta` files from the build](https://github.com/vercel/next.js/issues/8974#issuecomment-542525837).
-
 ### Allowed Keys Values
 
 The type of your `_meta` keys should be always `string` and not `number` since
