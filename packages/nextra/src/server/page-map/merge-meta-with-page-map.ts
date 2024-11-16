@@ -61,7 +61,7 @@ export function mergeMetaWithPageMap<T extends Folder | PageMapItem[]>(
     throw new Error(
       [
         'Merging an `_meta.global` file with a folder-specific `_meta` is unsupported.',
-        'Move `/_meta` file into the `_meta.global` file'
+        'Move content of `/_meta` file into the `_meta.global` file'
       ].join('\n')
     )
   }
