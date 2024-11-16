@@ -473,10 +473,11 @@ describe('generatePageMap()', () => {
       ]
     `)
 
-    const globalMetaPath = filePaths.find((filePath) => filePath.includes('_meta.global'))
+    const globalMetaPath = filePaths.find((filePath) => filePath.includes('/_meta.global.'))
 
     expect(convertPageMapToJs({ pageMap, mdxPages, globalMetaPath })).toMatchInlineSnapshot(`
-      "import { normalizePageMap } from 'nextra/page-map'
+      "import { normalizePageMap, mergeMetaWithPageMap } from 'nextra/page-map'
+      import { metadata as globalMeta } from 'private-next-root-dir/app/_meta.global.ts'
       import app_docs_meta from "private-next-root-dir/app/docs/_meta.ts";
       import app_docs_advanced_meta from "private-next-root-dir/app/docs/advanced/_meta.ts";
       import {metadata as app_docs_advanced_customize_the_cascade_layers_page} from "private-next-root-dir/app/docs/advanced/customize-the-cascade-layers/page.mdx?metadata";
@@ -536,7 +537,7 @@ describe('generatePageMap()', () => {
       import {metadata as app_showcase_page} from "private-next-root-dir/app/showcase/page.mdx?metadata";
       import {metadata as app_sponsors_page} from "private-next-root-dir/app/sponsors/page.mdx?metadata";
 
-      export const pageMap = normalizePageMap([{
+      export const pageMap = normalizePageMap(mergeMetaWithPageMap([{
         name: "docs",
         route: "/docs",
         children: [{
@@ -786,7 +787,7 @@ describe('generatePageMap()', () => {
         name: "sponsors",
         route: "/sponsors",
         frontMatter: app_sponsors_page
-      }])
+      }], globalMeta))
 
       export const RouteToFilepath = {}"
     `)
