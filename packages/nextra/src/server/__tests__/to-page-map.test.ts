@@ -85,7 +85,7 @@ describe('generatePageMap()', () => {
     const { pageMap, mdxPages } = convertToPageMap({ filePaths })
     expect(filePaths).toMatchInlineSnapshot(`
       [
-        "app/_meta.ts",
+        "app/_meta.global.ts",
         "app/about/page.mdx",
         "app/blog/page.mdx",
         "app/docs/_meta.ts",
@@ -148,9 +148,6 @@ describe('generatePageMap()', () => {
     `)
     expect(pageMap).toMatchInlineSnapshot(`
       [
-        {
-          "__metaPath": "app/_meta.ts",
-        },
         {
           "children": [
             {
@@ -449,6 +446,11 @@ describe('generatePageMap()', () => {
           "route": "/docs",
         },
         {
+          "__pagePath": "app/page.tsx",
+          "name": "index",
+          "route": "/",
+        },
+        {
           "__pagePath": "app/about/page.mdx",
           "name": "about",
           "route": "/about",
@@ -457,11 +459,6 @@ describe('generatePageMap()', () => {
           "__pagePath": "app/blog/page.mdx",
           "name": "blog",
           "route": "/blog",
-        },
-        {
-          "__pagePath": "app/page.tsx",
-          "name": "index",
-          "route": "/",
         },
         {
           "__pagePath": "app/showcase/page.mdx",
@@ -478,7 +475,6 @@ describe('generatePageMap()', () => {
 
     expect(convertPageMapToJs({ pageMap, mdxPages })).toMatchInlineSnapshot(`
       "import { normalizePageMap } from 'nextra/page-map'
-      import app_meta from "private-next-root-dir/app/_meta.ts";
       import app_docs_meta from "private-next-root-dir/app/docs/_meta.ts";
       import app_docs_advanced_meta from "private-next-root-dir/app/docs/advanced/_meta.ts";
       import {metadata as app_docs_advanced_customize_the_cascade_layers_page} from "private-next-root-dir/app/docs/advanced/customize-the-cascade-layers/page.mdx?metadata";
@@ -532,15 +528,13 @@ describe('generatePageMap()', () => {
       import {metadata as app_docs_blog_theme_start_page} from "private-next-root-dir/app/docs/blog-theme/start/page.mdx?metadata";
       import {metadata as app_docs_custom_theme_page} from "private-next-root-dir/app/docs/custom-theme/page.mdx?metadata";
       import {metadata as app_docs_page} from "private-next-root-dir/app/docs/page.mdx?metadata";
+      import {metadata as app_page} from "private-next-root-dir/app/page.tsx";
       import {metadata as app_about_page} from "private-next-root-dir/app/about/page.mdx?metadata";
       import {metadata as app_blog_page} from "private-next-root-dir/app/blog/page.mdx?metadata";
-      import {metadata as app_page} from "private-next-root-dir/app/page.tsx";
       import {metadata as app_showcase_page} from "private-next-root-dir/app/showcase/page.mdx?metadata";
       import {metadata as app_sponsors_page} from "private-next-root-dir/app/sponsors/page.mdx?metadata";
 
       export const pageMap = normalizePageMap([{
-        data: app_meta
-      }, {
         name: "docs",
         route: "/docs",
         children: [{
@@ -771,6 +765,10 @@ describe('generatePageMap()', () => {
           frontMatter: app_docs_page
         }]
       }, {
+        name: "index",
+        route: "/",
+        frontMatter: app_page
+      }, {
         name: "about",
         route: "/about",
         frontMatter: app_about_page
@@ -778,10 +776,6 @@ describe('generatePageMap()', () => {
         name: "blog",
         route: "/blog",
         frontMatter: app_blog_page
-      }, {
-        name: "index",
-        route: "/",
-        frontMatter: app_page
       }, {
         name: "showcase",
         route: "/showcase",
