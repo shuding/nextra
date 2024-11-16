@@ -453,9 +453,12 @@ describe('generatePageMap()', () => {
       ]
     `)
 
-    const globalMetaPath = filePaths.find((filePath) => filePath.includes('/_meta.global.'))
+    const globalMetaPath = filePaths.find(filePath =>
+      filePath.includes('/_meta.global.')
+    )
 
-    expect(convertPageMapToJs({ pageMap, mdxPages, globalMetaPath })).toMatchInlineSnapshot(`
+    expect(convertPageMapToJs({ pageMap, mdxPages, globalMetaPath }))
+      .toMatchInlineSnapshot(`
       "import { normalizePageMap, mergeMetaWithPageMap } from 'nextra/page-map'
       import globalMeta from 'private-next-root-dir/app/_meta.global.ts'
       import {metadata as app_page} from "private-next-root-dir/app/page.tsx";
