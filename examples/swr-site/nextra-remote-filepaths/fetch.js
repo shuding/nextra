@@ -12,7 +12,7 @@ fetchFilePathsFromGitHub({
 fetchFilePathsFromGitHub({
   user: 'B2o5T',
   repo: 'graphql-eslint',
-  branch: 'master',
+  branch: '34b722a2a520599ce06a4ddcccc9623b76434089',
   docsPath: 'website/src/pages/docs/',
   outputPath: './nextra-remote-filepaths/graphql-eslint.json'
 })
