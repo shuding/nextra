@@ -1,3 +1,4 @@
+import path from 'node:path'
 import type {
   DynamicFolder,
   DynamicMeta,
@@ -56,12 +57,15 @@ export function mergeMetaWithPageMap<T extends Folder | PageMapItem[]>(
     return restParent
   })
   const hasMeta = 'data' in result[0]
-
   if (hasMeta) {
+    // @ts-expect-error fixme
+    const childRoute = result[1].route
+    const { dir } = path.parse(childRoute)
+    const metaPath = `${dir.replace(/^\/$/, '')}/_meta`
     throw new Error(
       [
         'Merging an `_meta.global` file with a folder-specific `_meta` is unsupported.',
-        'Move content of `/_meta` file into the `_meta.global` file'
+        `Move content of \`${metaPath}\` file into the \`_meta.global\` file`
       ].join('\n')
     )
   }

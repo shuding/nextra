@@ -71,7 +71,7 @@ export default function Foo(props) {
         }"
       `)
     })
-    it('should work with `export default` and `export const components`', async () => {
+    it('should work with `export default`', async () => {
       const rawMdx = await compileMdx(testMdxWithDefaultExport)
       expect(clean(rawMdx)).resolves.toMatchInlineSnapshot(`
         "'use strict'
@@ -260,7 +260,7 @@ import { MDXRemote } from 'nextra/mdx-remote'
       `)
     })
 
-    it('should work with `export default` and `export const components`', async () => {
+    it('should work with `export default`', async () => {
       const rawMdx = await compileMdx(testMdxWithDefaultExport, options)
       expect(clean(rawMdx)).resolves.toMatchInlineSnapshot(`
         "/*@jsxRuntime automatic*/
