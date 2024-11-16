@@ -21,7 +21,7 @@ export async function getPageMapForFixture(dirName: string) {
   const dir = path.join(__dirname, 'fixture', 'page-maps', dirName)
   const filePaths = await findMetaAndPageFilePaths({ dir, cwd: dir })
   const { pageMap, mdxPages } = convertToPageMap({ filePaths })
-  const rawJs = await convertPageMapToJs({ pageMap, mdxPages })
+  const rawJs = convertPageMapToJs({ pageMap, mdxPages })
 
   await fs.writeFile(
     path.join(dir, 'generated-page-map.ts'),

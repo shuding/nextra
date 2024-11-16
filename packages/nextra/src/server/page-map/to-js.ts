@@ -6,13 +6,13 @@ import { convertPageMapToAst } from './to-ast.js'
 
 const META_RE = /_meta\.[jt]sx?$/
 
-export async function convertPageMapToJs({
+export function convertPageMapToJs({
   pageMap,
   mdxPages
 }: {
   pageMap: TItem[]
   mdxPages: Record<string, string>
-}): Promise<string> {
+}): string {
   const imports: Import[] = []
   const pageMapAst = convertPageMapToAst(pageMap, imports)
   const importsAst: ImportDeclaration[] = imports.map(
