@@ -12,9 +12,6 @@ describe('recma-rewrite', () => {
   `
 
   const testMdxWithDefaultExport = `${testMdx}
-export const components = {
-  h1: () => null
-}
 export default function Foo(props) {
   return <div>Default Export {props.children}</div>
 }
@@ -82,9 +79,6 @@ export default function Foo(props) {
         const metadata = {
           title: 'h1'
         }
-        const components = {
-          h1: () => null
-        }
         const MDXLayout = function Foo(props) {
           return _jsxs('div', {
             children: ['Default Export ', props.children]
@@ -138,7 +132,6 @@ export default function Foo(props) {
         }
         return {
           metadata,
-          components,
           toc,
           default: MDXContent
         }"
@@ -275,9 +268,6 @@ import { MDXRemote } from 'nextra/mdx-remote'
         import { HOC_MDXWrapper } from 'nextra/setup-page'
         export const metadata = {
           title: 'h1'
-        }
-        export const components = {
-          h1: () => null
         }
         const MDXLayout = function Foo(props) {
           return <div>Default Export {props.children}</div>
