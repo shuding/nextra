@@ -1,5 +1,5 @@
-import { clean } from '../../../__test__/test-utils.js'
 import { compileMdx } from '../compile.js'
+import { clean } from './test-utils.js'
 
 describe('remarkStaticImages', () => {
   it('should insert same import only once', async () => {
@@ -26,7 +26,7 @@ describe('remarkStaticImages', () => {
       import __img1 from '../bar.jpeg'
       export const metadata = {}
       export const toc = []
-      function MDXLayout(props) {
+      function _createMdxContent(props) {
         const _components = {
           img: 'img',
           p: 'p',
@@ -47,7 +47,8 @@ describe('remarkStaticImages', () => {
             </_components.p>
           </>
         )
-      }"
+      }
+      export default _createMdxContent"
     `)
   })
 
@@ -82,7 +83,7 @@ describe('remarkStaticImages', () => {
       import __img1 from './bar.svg'
       export const metadata = {}
       export const toc = []
-      function MDXLayout(props) {
+      function _createMdxContent(props) {
         const _components = {
           img: 'img',
           p: 'p',
@@ -111,7 +112,8 @@ describe('remarkStaticImages', () => {
             </_components.p>
           </>
         )
-      }"
+      }
+      export default _createMdxContent"
     `)
   })
 })

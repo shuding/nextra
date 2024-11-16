@@ -2,6 +2,7 @@ import { createProcessor } from '@mdx-js/mdx'
 import type { Program } from 'estree'
 import remarkFrontmatter from 'remark-frontmatter'
 import {
+  remarkAssignFrontMatter,
   remarkExportOnlyMetadata,
   remarkMdxFrontMatter,
   remarkMdxTitle
@@ -15,7 +16,10 @@ import {
  */
 export async function compileMetadata(
   source: string,
-  { filePath }: { filePath?: string } = {}
+  {
+    filePath,
+    lastCommitTime
+  }: { filePath?: string; lastCommitTime?: number } = {}
 ): Promise<string> {
   const format = filePath?.endsWith('.mdx') ? 'mdx' : 'md'
 
@@ -27,16 +31,17 @@ export async function compileMetadata(
       remarkFrontmatter, // parse and attach yaml node
       remarkMdxFrontMatter,
       remarkMdxTitle,
+      [remarkAssignFrontMatter, { lastCommitTime }],
       remarkExportOnlyMetadata
     ],
     recmaPlugins: [
       () => (ast: Program) => {
-        const [importReact] = ast.body.splice(0, 1)
+        const [importReact] = ast.body
 
         ast.body = ast.body.filter(
-          (node: any) =>
+          node =>
             node.type === 'ExportNamedDeclaration' &&
-            node.declaration?.declarations[0].id.name === 'metadata'
+            (node.declaration as any).declarations[0].id.name === 'metadata'
         )
         ast.body.unshift(importReact)
       }

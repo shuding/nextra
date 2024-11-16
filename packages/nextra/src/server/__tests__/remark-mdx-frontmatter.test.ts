@@ -1,6 +1,6 @@
-import { clean } from '../../../__test__/test-utils.js'
 import { evaluate } from '../../client/evaluate.js'
 import { compileMdx } from '../compile.js'
+import { clean } from './test-utils.js'
 
 const YAML_FRONTMATTER = '---\nfoo: bar\n---'
 const ESM_FRONTMATTER = "export const metadata = { foo: 'bar' }"
@@ -9,7 +9,7 @@ describe('remarkMdxFrontMatter', () => {
   it('should throw error if both yaml/esm frontmatter are used', () => {
     const processor = compileMdx(`${YAML_FRONTMATTER}\n${ESM_FRONTMATTER}`)
     expect(processor).rejects.toThrowError(
-      "Both yaml frontMatter and esm export frontMatter aren't supported. Keep only 1."
+      "Both YAML front matter and `metadata` aren't supported. Keep only 1."
     )
   })
 

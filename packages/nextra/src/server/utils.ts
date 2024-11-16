@@ -1,11 +1,9 @@
-import path from 'node:path'
 import type {
   ArrayExpression,
   ExportNamedDeclaration,
   Expression,
   ObjectExpression
 } from 'estree'
-import slash from 'slash'
 import title from 'title'
 import { DEFAULT_PROPERTY_PROPS } from './constants.js'
 
@@ -16,11 +14,7 @@ export const logger = {
 }
 
 export function pageTitleFromFilename(fileName: string) {
-  return title(fileName.replaceAll(/[-_]/g, ' '), { special: ['SSR'] })
-}
-
-export function normalizePageRoute(parentRoute: string, route: string): string {
-  return slash(path.join(parentRoute, route.replace(/^index$/, '')))
+  return title(fileName.replaceAll(/[-_]/g, ' '), { special: ['SSR', 'CORS'] })
 }
 
 export function createAstExportConst(

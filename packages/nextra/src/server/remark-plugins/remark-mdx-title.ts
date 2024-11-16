@@ -1,10 +1,9 @@
 import path from 'node:path'
 import type { Property } from 'estree'
 import type { MdxjsEsm } from 'hast-util-to-estree/lib/handlers/mdxjs-esm'
-import type { Root } from 'mdast'
+import type { Root, RootContent } from 'mdast'
 import type { Plugin } from 'unified'
 import { EXIT, visit } from 'unist-util-visit'
-import { DEFAULT_PROPERTY_PROPS } from '../constants.js'
 import { pageTitleFromFilename } from '../utils.js'
 import { getFlattenedValue } from './remark-headings.js'
 
@@ -14,7 +13,7 @@ export function getFrontMatterASTObject(node: MdxjsEsm): Property[] {
 }
 
 export function isExportNode(
-  node: MdxjsEsm,
+  node: MdxjsEsm | RootContent,
   varName: string
 ): node is MdxjsEsm {
   if (node.type !== 'mdxjsEsm') return false
@@ -28,15 +27,14 @@ export function isExportNode(
   return name === varName
 }
 
-export const remarkMdxTitle: Plugin<[], Root> = () => (ast, file) => {
+export const remarkMdxTitle: Plugin<[], Root> = () => (ast: Root, file) => {
   let title = ''
 
-  const frontMatterNode = ast.children.find((node: any) =>
+  const frontMatterNode = ast.children.find(node =>
     isExportNode(node, 'metadata')
   )!
-  const frontMatter = getFrontMatterASTObject(frontMatterNode)
 
-  for (const { key, value } of frontMatter) {
+  for (const { key, value } of getFrontMatterASTObject(frontMatterNode)) {
     if (key.type === 'Literal' && key.value === 'title') {
       // @ts-expect-error
       title = value.value
@@ -64,11 +62,7 @@ export const remarkMdxTitle: Plugin<[], Root> = () => (ast, file) => {
     }
     // Set from h1 or from filename
     if (title) {
-      frontMatter.unshift({
-        ...DEFAULT_PROPERTY_PROPS,
-        key: { type: 'Literal', value: 'title' },
-        value: { type: 'Literal', value: title }
-      })
+      file.data.title = title
     }
   }
 }

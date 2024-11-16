@@ -45,16 +45,15 @@ export const metadata: Metadata = {
 export default async function RootLayout({ children, params }) {
   const { lang } = await params
   const dictionary = await getDictionary(lang)
-  let pageMap = await getPageMap(lang)
-
-  const [remoteItem] = graphqlEslintPageMap
+  let pageMap = await getPageMap(`/${lang}`)
 
   if (lang === 'en') {
     pageMap = [
       ...pageMap,
       {
-        ...remoteItem,
-        children: [...remoteItem.children, ...graphqlYogaPageMap[0].children]
+        name: 'remote',
+        route: '/remote',
+        children: [graphqlEslintPageMap, graphqlYogaPageMap]
       }
     ]
   }

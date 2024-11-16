@@ -23,6 +23,7 @@ export async function findMetaAndPageFilePaths({
         `${contentDir}/**/*.{md,mdx}`, // Include all Markdown/MDX files from `content` directory
         `${appDir}/**/page.{js,jsx,jsx,tsx,md,mdx}`,
         `${appDir}/**/_meta.{js,jsx,ts,tsx}`, // Include `_meta` files from `app` directory
+        `${appDir}/_meta.global.{js,jsx,ts,tsx}`, // Include global `_meta` file from `app` directory
         `!${appDir}/**/{_,[}*/*` // Ignore subdirectories starting with `_` and dynamic routes
       ]
     : ['**/_meta.{js,jsx,ts,tsx}', '**/*.{md,mdx}']

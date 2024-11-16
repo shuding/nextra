@@ -7,6 +7,7 @@ import type { mathJaxOptionsSchema, nextraConfigSchema } from './server/schemas'
 export interface LoaderOptions extends z.infer<typeof nextraConfigSchema> {
   isPageImport?: boolean
   locales: string[]
+  contentDir?: string
 }
 
 type TPageItem = { name: string; route: string; __pagePath: string }
@@ -38,7 +39,6 @@ export type MetaJsonFile = {
 }
 
 export type DynamicFolder = {
-  type: 'folder'
   items: DynamicMeta
   title?: string
 }
@@ -46,10 +46,6 @@ export type DynamicFolder = {
 export type DynamicMetaItem = Meta | DynamicFolder
 
 export type DynamicMeta = Record<string, DynamicMetaItem>
-
-export type DynamicMetaJsonFile = {
-  data: DynamicMeta
-}
 
 export type FrontMatter = Record<string, any>
 export type Meta = string | Record<string, any>

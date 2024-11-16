@@ -21,9 +21,7 @@ Nextra includes a couple of built-in components that you can use to better style
 your content:
 
 <MDXRemote
-  compiledSource={await createIndexPage(
-    await getPageMap('', '/docs/built-ins')
-  )}
+  compiledSource={await createIndexPage(await getPageMap('/docs/built-ins'))}
   components={{
     Cards,
     WarningIcon,

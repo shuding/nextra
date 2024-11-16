@@ -4,7 +4,11 @@ import { useMDXComponents } from 'nextra-theme-docs'
 import { compileMdx } from 'nextra/compile'
 import { Callout, Tabs } from 'nextra/components'
 import { evaluate } from 'nextra/evaluate'
-import { convertToPageMap, normalizePageMap } from 'nextra/page-map'
+import {
+  convertToPageMap,
+  mergeMetaWithPageMap,
+  normalizePageMap
+} from 'nextra/page-map'
 import json from '../../../../../nextra-remote-filepaths/graphql-yoga.json'
 
 const { branch, docsPath, filePaths, repo, user } = json
@@ -14,7 +18,48 @@ const { mdxPages, pageMap: _pageMap } = convertToPageMap({
   basePath: 'remote/graphql-yoga'
 })
 
-export const pageMap = normalizePageMap(_pageMap as any)
+// @ts-expect-error -- fixme
+const [yogaPage] = _pageMap[0].children
+
+const yogaPageMap = mergeMetaWithPageMap(yogaPage, {
+  index: 'Quick Start',
+  features: {
+    items: {
+      graphiql: '',
+      context: 'GraphQL Context',
+      'error-masking': '',
+      subscriptions: '',
+      'file-uploads': '',
+      'envelop-plugins': '',
+      testing: '',
+      'apollo-federation': '',
+      cors: ''
+    }
+  },
+  integrations: {
+    items: {
+      'integration-with-aws-lambda': 'AWS Lambda',
+      'integration-with-cloudflare-workers': 'Cloudflare Workers',
+      'integration-with-deno': 'Deno',
+      'integration-with-express': 'Express',
+      'integration-with-fastify': 'Fastify',
+      'integration-with-koa': 'Koa',
+      'integration-with-nestjs': 'NestJS',
+      'integration-with-nextjs': 'Next.js',
+      'integration-with-sveltekit': 'SvelteKit',
+      'z-other-environments': 'Other Environments'
+    }
+  },
+  migration: {
+    items: {
+      'migration-from-apollo-server': 'Apollo Server',
+      'migration-from-express-graphql': 'Express GraphQL',
+      'migration-from-yoga-v1': 'Yoga v1'
+    }
+  }
+})
+
+export const pageMap = normalizePageMap(yogaPageMap)
 
 const { wrapper: Wrapper, ...components } = useMDXComponents({
   Callout,

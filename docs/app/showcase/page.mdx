@@ -1,175 +1,84 @@
 import { Cards } from 'nextra/components'
+import { cloneElement } from 'react'
 
-<div className="mb-16 mt-10 text-center">
-  # Showcase
+# Showcase
 
-  <p className="mt-4 text-lg text-gray-500 dark:text-gray-400">
-    {'Open source projects powered by Nextra'}
-  </p>
-</div>
+Open source projects powered by Nextra
 
+{/* prettier-ignore */}
 <Cards className="[&_img]:object-cover [&_img]:[aspect-ratio:12/6.3]">
-  <Card title="GraphQL Hive" href="https://the-guild.dev/graphql/hive">
-    <>![GraphQL Hive preview](./_logos/graphql-hive.png)</>
-  </Card>
-  <Card title="Speakeasy" href="https://speakeasyapi.dev/docs">
-    <>![Speakeasy preview](./_logos/speakeasy.png)</>
-  </Card>
-  <Card title="React Flow" href="https://reactflow.dev">
-    <>![React Flow preview](./_logos/react-flow.jpg)</>
-  </Card>
-  <Card title="Svelte Flow" href="https://svelteflow.dev">
-    <>![Svelte Flow preview](./_logos/svelte-flow.jpg)</>
-  </Card>
-  <Card title="The Graph" href="https://thegraph.com/docs/en">
-    <>![The Graph preview](./_logos/thegraph.jpeg)</>
-  </Card>
-  <Card title="GraphQL" href="https://graphql.org">
-    <>![GraphQL preview](./_logos/graphql.png)</>
-  </Card>
-  <Card title="SWR" href="https://swr.vercel.app">
-    <>![SWR preview](./_logos/swr.png)</>
-  </Card>
-  <Card title="COBE" href="https://cobe.vercel.app">
-    <>![COBE preview](./_logos/cobe.png)</>
-  </Card>
-  <Card
-    title="JavaScript Patterns"
-    href="https://javascriptpatterns.vercel.app"
-  >
-    <>![JavaScript Patterns preview](./_logos/javascript-patterns.jpg)</>
-  </Card>
-  <Card
-    title="CodeSandbox"
-    href="https://codesandbox.io/docs/learn/introduction/overview"
-  >
-    <>![CodeSandbox preview](./_logos/codesandbox.jpg)</>
-  </Card>
-  <Card title="DocsGPT" href="https://docs.docsgpt.co.uk">
-    <>![DocsGPT preview](./_logos/docsgpt.png)</>
-  </Card>
-  <Card title="CloudQuery" href="https://cloudquery.io">
-    <>![CloudQuery preview](./_logos/cloudquery.svg)</>
-  </Card>
-  <Card title="Edge Runtime" href="https://edge-runtime.vercel.app">
-    <>![Edge Runtime preview](./_logos/edge-runtime.jpeg)</>
-  </Card>
-  <Card title="Livepeer" href="https://docs.livepeer.org/guides/overview">
-    <>![Livepeer preview](./_logos/livepeer.png)</>
-  </Card>
-  <Card title="Sound.xyz" href="https://docs.sound.xyz">
-    <>![Sound.xyz preview](./_logos/sound.xyz.png)</>
-  </Card>
-  <Card title="Panda" href="https://panda-css.com">
-    <>![Panda preview](./_logos/panda.png)</>
-  </Card>
-  <Card title="Kuma UI" href="https://kuma-ui.com">
-    <>![Kuma UI preview](./_logos/kuma-ui.png)</>
-  </Card>
-  <Card title="Langfuse" href="https://langfuse.com">
-    <>![Langfuse Open Source LLM Engineering Platform](./_logos/langfuse.png)</>
-  </Card>
-  <Card title="The Guild Blog" href="https://the-guild.dev">
-    <>![The Guild Blog preview](./_logos/the-guild.png)</>
-  </Card>
-  <Card title="GraphQL Yoga" href="https://the-guild.dev/graphql/yoga-server">
-    <>![GraphQL Yoga preview](./_logos/graphql-yoga.png)</>
-  </Card>
-  <Card title="GraphQL Envelop" href="https://the-guild.dev/graphql/envelop">
-    <>![GraphQL Envelop preview](./_logos/graphql-envelop.png)</>
-  </Card>
-  <Card
-    title="GraphQL Inspector"
-    href="https://the-guild.dev/graphql/inspector"
-  >
-    <>![GraphQL Inspector preview](./_logos/graphql-inspector.png)</>
-  </Card>
-  <Card
-    title="GraphQL Code Generator"
-    href="https://the-guild.dev/graphql/codegen"
-  >
-    <>![GraphQL Code Generator preview](./_logos/graphql-codegen.png)</>
-  </Card>
-  <Card title="GraphQL Mesh" href="https://the-guild.dev/graphql/mesh">
-    <>![GraphQL Mesh preview](./_logos/graphql-mesh.png)</>
-  </Card>
-  <Card title="GraphQL Tools" href="https://the-guild.dev/graphql/tools">
-    <>![GraphQL Tools preview](./_logos/graphql-tools.png)</>
-  </Card>
-  <Card title="GraphQL Modules" href="https://the-guild.dev/graphql/modules">
-    <>![GraphQL Modules preview](./_logos/graphql-modules.png)</>
-  </Card>
-  <Card title="GraphQL ESLint" href="https://the-guild.dev/graphql/eslint">
-    <>![GraphQL ESLint preview](./_logos/graphql-eslint.png)</>
-  </Card>
-  <Card title="GraphQL Config" href="https://the-guild.dev/graphql/config">
-    <>![GraphQL Config preview](./_logos/graphql-config.png)</>
-  </Card>
-  <Card title="GraphQL Scalars" href="https://the-guild.dev/graphql/scalars">
-    <>![GraphQL Scalars preview](./_logos/graphql-scalars.png)</>
-  </Card>
-  <Card title="GraphQL Shield" href="https://the-guild.dev/graphql/shield">
-    <>![GraphQL Shield preview](./_logos/graphql-shield.png)</>
-  </Card>
-  <Card title="GraphQL SOFA" href="https://the-guild.dev/graphql/sofa-api">
-    <>![GraphQL SOFA preview](./_logos/graphql-sofa.png)</>
-  </Card>
-  <Card
-    title="Apollo Angular"
-    href="https://the-guild.dev/graphql/apollo-angular"
-  >
-    <>![Apollo Angular preview](./_logos/apollo-angular.png)</>
-  </Card>
-  <Card title="KitQL" href="https://kitql.dev">
-    <>![KitQL preview](./_logos/kitql.png)</>
-  </Card>
-  <Card title="GraphQL SSE" href="https://the-guild.dev/graphql/sse">
-    <>![GraphQL SSE preview](./_logos/graphql-sse.png)</>
-  </Card>
-  <Card title="GraphQL WS" href="https://the-guild.dev/graphql/ws">
-    <>![GraphQL WS preview](./_logos/graphql-ws.png)</>
-  </Card>
-  <Card title="feTS" href="https://the-guild.dev/openapi/fets">
-    <>![feTS preview](./_logos/fets.png)</>
-  </Card>
-  <Card
-    title="JavaScript Code Challenges"
-    href="https://jscodechallenges.vercel.app"
-  >
-    <>![JavaScript Code Challenges preview](./_logos/jscodechallenges.png)</>
-  </Card>
-  <Card title="React Cosmos" href="https://reactcosmos.org">
-    <>![React Cosmos preview](./_logos/react-cosmos.png)</>
-  </Card>
-  <Card title="Typia" href="https://typia.io">
-    <>![Typia preview](./_logos/typia.png)</>
-  </Card>
-  <Card title="Nestia" href="https://nestia.io">
-    <>![Nestia preview](./_logos/nestia.png)</>
-  </Card>
-  <Card title="Safe" href="https://docs.safe.global">
-    <>![Safe preview](./_logos/safe-core.png)</>
-  </Card>
-  <Card title="Auth.js" href="https://authjs.dev">
-    <>![Auth.js preview](./_logos/authjs.png)</>
-  </Card>
-  <Card title="imgix" href="https://docs.imgix.com">
-    <>![imgix preview](./_logos/imgix.png)</>
-  </Card>
-  <Card title="AnythingLLM" href="https://anythingllm.com/">
-    <>![AnythingLLM preview](./_logos/anythingllm.png)</>
-  </Card>
+<>[![GraphQL Hive preview](./_logos/graphql-hive.png)](https://the-guild.dev/graphql/hive)</>
+<>[![Speakeasy preview](./_logos/speakeasy.png)](https://speakeasyapi.dev/docs)</>
+<>[![React Flow preview](./_logos/react-flow.jpg)](https://reactflow.dev)</>
+<>[![Svelte Flow preview](./_logos/svelte-flow.jpg)](https://svelteflow.dev)</>
+<>[![The Graph preview](./_logos/thegraph.jpeg)](https://thegraph.com/docs/en)</>
+<>[![GraphQL preview](./_logos/graphql.png)](https://graphql.org)</>
+<>[![SWR preview](./_logos/swr.png)](https://swr.vercel.app)</>
+<>[![COBE preview](./_logos/cobe.png)](https://cobe.vercel.app)</>
+<>[![JavaScript Patterns preview](./_logos/javascript-patterns.jpg)](https://javascriptpatterns.vercel.app)</>
+<>[![CodeSandbox preview](./_logos/codesandbox.jpg)](https://codesandbox.io/docs/learn/introduction/overview)</>
+<>[![DocsGPT preview](./_logos/docsgpt.png)](https://docs.docsgpt.co.uk)</>
+<>[![CloudQuery preview](./_logos/cloudquery.svg)](https://cloudquery.io)</>
+<>[![Edge Runtime preview](./_logos/edge-runtime.jpeg)](https://edge-runtime.vercel.app)</>
+<>[![Livepeer preview](./_logos/livepeer.png)](https://docs.livepeer.org/guides/overview)</>
+<>[![Sound.xyz preview](./_logos/sound.xyz.png)](https://docs.sound.xyz)</>
+<>[![Panda preview](./_logos/panda.png)](https://panda-css.com)</>
+<>[![Kuma UI preview](./_logos/kuma-ui.png)](https://kuma-ui.com)</>
+<>[![Langfuse Open Source LLM Engineering Platform](./_logos/langfuse.png)](https://langfuse.com)</>
+<>[![The Guild Blog preview](./_logos/the-guild.png)](https://the-guild.dev)</>
+<>[![GraphQL Yoga preview](./_logos/graphql-yoga.png)](https://the-guild.dev/graphql/yoga-server)</>
+<>[![GraphQL Envelop preview](./_logos/graphql-envelop.png)](https://the-guild.dev/graphql/envelop)</>
+<>[![GraphQL Inspector preview](./_logos/graphql-inspector.png)](https://the-guild.dev/graphql/inspector)</>
+<>[![GraphQL Code Generator preview](./_logos/graphql-codegen.png)](https://the-guild.dev/graphql/codegen)</>
+<>[![GraphQL Mesh preview](./_logos/graphql-mesh.png)](https://the-guild.dev/graphql/mesh)</>
+<>[![GraphQL Tools preview](./_logos/graphql-tools.png)](https://the-guild.dev/graphql/tools)</>
+<>[![GraphQL Modules preview](./_logos/graphql-modules.png)](https://the-guild.dev/graphql/modules)</>
+<>[![GraphQL ESLint preview](./_logos/graphql-eslint.png)](https://the-guild.dev/graphql/eslint)</>
+<>[![GraphQL Config preview](./_logos/graphql-config.png)](https://the-guild.dev/graphql/config)</>
+<>[![GraphQL Scalars preview](./_logos/graphql-scalars.png)](https://the-guild.dev/graphql/scalars)</>
+<>[![GraphQL Shield preview](./_logos/graphql-shield.png)](https://the-guild.dev/graphql/shield)</>
+<>[![GraphQL SOFA preview](./_logos/graphql-sofa.png)](https://the-guild.dev/graphql/sofa-api)</>
+<>[![Apollo Angular preview](./_logos/apollo-angular.png)](https://the-guild.dev/graphql/apollo-angular)</>
+<>[![KitQL preview](./_logos/kitql.png)](https://kitql.dev)</>
+<>[![GraphQL SSE preview](./_logos/graphql-sse.png)](https://the-guild.dev/graphql/sse)</>
+<>[![GraphQL WS preview](./_logos/graphql-ws.png)](https://the-guild.dev/graphql/ws)</>
+<>[![feTS preview](./_logos/fets.png)](https://the-guild.dev/openapi/fets)</>
+<>[![JavaScript Code Challenges preview](./_logos/jscodechallenges.png)](https://jscodechallenges.vercel.app)</>
+<>[![React Cosmos preview](./_logos/react-cosmos.png)](https://reactcosmos.org)</>
+<>[![Typia preview](./_logos/typia.png)](https://typia.io)</>
+<>[![Nestia preview](./_logos/nestia.png)](https://nestia.io)</>
+<>[![Safe preview](./_logos/safe-core.png)](https://docs.safe.global)</>
+<>[![Auth.js preview](./_logos/authjs.png)](https://authjs.dev)</>
+<>[![imgix preview](./_logos/imgix.png)](https://docs.imgix.com)</>
+<>[![AnythingLLM preview](./_logos/anythingllm.png)](https://anythingllm.com)</>
 </Cards>
 
-export const Card = Object.assign(
-  // Copy card component and add default props
-  Cards.Card.bind(),
-  {
-    displayName: 'Card',
-    defaultProps: {
-      arrow: true,
-      target: '_blank',
-      rel: 'noreferrer'
+export default function MdxLayout(props) {
+  return cloneElement(props.children, {
+    components: {
+      a({ children, href }) {
+        const { alt } = children.props
+        return (
+          <Cards.Card
+            href={href}
+            title={alt.replace(/ preview$/i, '')}
+            target="_blank"
+            rel="noreferrer"
+            arrow
+            className="!no-underline"
+          >
+            {children}
+          </Cards.Card>
+        )
+      },
+      p(props) {
+        return (
+          <p
+            {...props}
+            className="mt-4 text-lg text-gray-500 dark:text-gray-400 mb-16 text-center"
+          />
+        )
+      }
     }
-  }
-)
+  })
+}

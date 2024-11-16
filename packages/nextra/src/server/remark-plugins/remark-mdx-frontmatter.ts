@@ -19,7 +19,7 @@ function createNode(data: Record<string, unknown>) {
 
 export const remarkMdxFrontMatter: Plugin<[], Root> = () => (ast: Root) => {
   const yamlNodeIndex = ast.children.findIndex(node => node.type === 'yaml')
-  const esmNodeIndex = ast.children.findIndex((node: any) =>
+  const esmNodeIndex = ast.children.findIndex(node =>
     isExportNode(node, 'metadata')
   )
   const hasYaml = yamlNodeIndex !== -1
@@ -28,16 +28,13 @@ export const remarkMdxFrontMatter: Plugin<[], Root> = () => (ast: Root) => {
   if (hasYaml) {
     if (hasEsm) {
       throw new Error(
-        "Both yaml frontMatter and esm export frontMatter aren't supported. Keep only 1."
+        "Both YAML front matter and `metadata` aren't supported. Keep only 1."
       )
     }
-
-    const raw = (ast.children[yamlNodeIndex] as { value: string }).value
-    const data = parseYaml(raw)
-
-    ast.children[yamlNodeIndex] = createNode(data)
+    const node = ast.children[yamlNodeIndex] as { value: string }
+    ast.children[yamlNodeIndex] = createNode(parseYaml(node.value))
   } else if (!hasEsm) {
-    // Attach dummy node
+    // Attach empty node
     ast.children.unshift(createNode({}))
   }
 }

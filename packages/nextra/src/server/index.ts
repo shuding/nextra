@@ -26,16 +26,19 @@ const GET_PAGE_MAP_PATH = '/nextra/dist/server/page-map/get.js'
 
 const PAGE_MAP_PLACEHOLDER_PATH = '/nextra/dist/server/page-map/placeholder.js'
 
-export const GET_PAGE_MAP_RE = new RegExp(
+const GET_PAGE_MAP_RE = new RegExp(
   GET_PAGE_MAP_PATH.replaceAll('/', SEP).replaceAll('.', '\\.')
 )
-export const PAGE_MAP_PLACEHOLDER_RE = new RegExp(
+const PAGE_MAP_PLACEHOLDER_RE = new RegExp(
   PAGE_MAP_PLACEHOLDER_PATH.replaceAll('/', SEP).replaceAll('.', '\\.')
 )
+const CONTENT_DIR = getContentDirectory()
 
-export function getContentDirectory() {
+function getContentDirectory() {
   // Next.js gives priority to `app` over `src/app`, we do the same for `content` directory
-  const [contentDir] = fg.sync(['{src/,}content'], { onlyDirectories: true })
+  const [contentDir = 'content'] = fg.sync(['{src/,}content'], {
+    onlyDirectories: true
+  })
   return contentDir
 }
 
@@ -58,24 +61,23 @@ const nextra: Nextra = nextraConfig => {
   const pageMapPlaceholderLoader = {
     loader: LOADER_PATH,
     options: {
-      contentDirBasePath: loaderOptions.contentDirBasePath
+      contentDirBasePath: loaderOptions.contentDirBasePath,
+      contentDir: CONTENT_DIR
     }
   }
-  const contentDir = getContentDirectory()
 
   return function withNextra(nextConfig = {}) {
-    const pageMapLoader = {
-      loader: LOADER_PATH,
-      options: {
-        locales: nextConfig.i18n?.locales || ['']
-      }
-    }
-    const hasI18n = !!nextConfig.i18n?.locales
-
-    if (hasI18n) {
+    const { locales, defaultLocale } = nextConfig.i18n || {}
+    if (locales) {
       logger.info(
         'You have Next.js i18n enabled, read here https://nextjs.org/docs/app/building-your-application/routing/internationalization for the docs.'
       )
+    }
+    const pageMapLoader = {
+      loader: LOADER_PATH,
+      options: {
+        locales: locales || ['']
+      }
     }
     return {
       ...nextConfig,
@@ -88,14 +90,13 @@ const nextra: Nextra = nextraConfig => {
         ...(nextConfig.pageExtensions || DEFAULT_EXTENSIONS),
         ...MARKDOWN_EXTENSIONS
       ],
-      ...(hasI18n && {
-        i18n: undefined,
-        env: {
-          ...nextConfig.env,
-          NEXTRA_DEFAULT_LOCALE: nextConfig.i18n?.defaultLocale,
-          NEXTRA_LOCALES: JSON.stringify(nextConfig.i18n?.locales)
-        }
-      }),
+      // We always unset `nextConfig.i18n` property
+      i18n: undefined,
+      env: {
+        ...nextConfig.env,
+        NEXTRA_LOCALES: JSON.stringify(pageMapLoader.options.locales),
+        NEXTRA_DEFAULT_LOCALE: defaultLocale
+      },
       experimental: {
         ...nextConfig.experimental,
         optimizePackageImports: [
@@ -128,7 +129,7 @@ const nextra: Nextra = nextraConfig => {
             ...nextConfig.experimental?.turbo?.resolveAlias,
             'next-mdx-import-source-file': './mdx-components', // '@vercel/turbopack-next/mdx-import-source'
             'private-next-root-dir/*': './*',
-            'private-next-content-dir/*': `./${contentDir}/*`,
+            'private-next-content-dir/*': `./${CONTENT_DIR}/*`,
             // Fixes when Turbopack is enabled: Module not found: Can't resolve '@theguild/remark-mermaid/mermaid'
             '@theguild/remark-mermaid/mermaid': path.relative(
               CWD,

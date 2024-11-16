@@ -12,7 +12,7 @@ import { createIndexPage, getPageMap } from 'nextra/page-map'
 
 <MDXRemote
   compiledSource={await createIndexPage(
-    await getPageMap('', '/docs/docs-theme/built-ins')
+    await getPageMap('/docs/docs-theme/built-ins')
   )}
   components={{ Cards }}
 />

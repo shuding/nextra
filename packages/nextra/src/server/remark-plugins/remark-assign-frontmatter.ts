@@ -13,16 +13,20 @@ export const remarkAssignFrontMatter: Plugin<
   Root
 > =
   ({ lastCommitTime }) =>
-  (ast, file) => {
-    const frontMatterNode = ast.children.find((node: any) =>
+  (ast: Root, file) => {
+    const frontMatterNode = ast.children.find(node =>
       isExportNode(node, 'metadata')
     )!
     const frontMatter = getFrontMatterASTObject(frontMatterNode)
 
     const [filePath] = file.history
-    const { readingTime } = file.data as { readingTime?: ReadingTime }
+    const { readingTime, title } = file.data as {
+      readingTime?: ReadingTime
+      title?: string
+    }
 
     const { properties } = valueToEstree({
+      ...(title && { title }),
       // File path can be undefined (e.g. dynamic mdx without filePath provided to processor)
       ...(filePath && { filePath: slash(path.relative(CWD, filePath)) }),
       ...(readingTime && { readingTime }),

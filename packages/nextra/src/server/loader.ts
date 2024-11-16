@@ -6,11 +6,6 @@ import type { LoaderOptions } from '../types.js'
 import { compileMetadata } from './compile-metadata.js'
 import { compileMdx } from './compile.js'
 import { CWD, IS_PRODUCTION, METADATA_ONLY_RQ } from './constants.js'
-import {
-  GET_PAGE_MAP_RE,
-  getContentDirectory,
-  PAGE_MAP_PLACEHOLDER_RE
-} from './index.js'
 import { findMetaAndPageFilePaths } from './page-map/find-meta-and-page-file-paths.js'
 import { convertPageMapToJs } from './page-map/to-js.js'
 import { convertToPageMap } from './page-map/to-page-map.js'
@@ -18,7 +13,6 @@ import { twoslashRenderer } from './twoslash.js'
 import { logger } from './utils.js'
 
 const NOW = Date.now()
-const CONTENT_DIR = getContentDirectory()
 const APP_DIR = findPagesDir(CWD).appDir!
 
 if (!APP_DIR) {
@@ -64,7 +58,7 @@ export async function loader(
   source: string
 ): Promise<string> {
   const {
-    isPageImport = false,
+    isPageImport,
     defaultShowCopyCode,
     search,
     staticImage,
@@ -73,26 +67,26 @@ export async function loader(
     codeHighlight,
     mdxOptions,
     contentDirBasePath,
+    contentDir,
     locales,
     whiteListTagsStyling
   } = this.getOptions()
   const { resourcePath, resourceQuery } = this
 
-  if (PAGE_MAP_PLACEHOLDER_RE.test(resourcePath)) {
+  // We pass `contentDir` only for `page-map/placeholder.ts`
+  if (contentDir) {
     const locale = resourceQuery.replace('?lang=', '')
     if (!IS_PRODUCTION) {
       // Add `app` and `content` folders as the dependencies, so Webpack will
       // rebuild the module if anything in that context changes
       this.addContextDependency(APP_DIR)
-      if (CONTENT_DIR) {
-        this.addContextDependency(path.join(CWD, CONTENT_DIR, locale))
-      }
+      this.addContextDependency(path.join(CWD, contentDir, locale))
     }
     const filePaths = await findMetaAndPageFilePaths({
       dir: APP_DIR,
       cwd: CWD,
       locale,
-      contentDir: CONTENT_DIR
+      contentDir
     })
     const { pageMap, mdxPages } = convertToPageMap({
       filePaths,
@@ -100,23 +94,33 @@ export async function loader(
       basePath: contentDirBasePath.slice(1),
       locale
     })
-    const rawJs = await convertPageMapToJs({ pageMap, mdxPages })
-    return rawJs
+    const globalMetaPath = filePaths.find(filePath =>
+      filePath.includes('/_meta.global.')
+    )
+    return convertPageMapToJs({ pageMap, mdxPages, globalMetaPath })
   }
-  if (GET_PAGE_MAP_RE.test(resourcePath)) {
-    const rawJs = replaceDynamicResourceQuery(
+  // We pass `locales` only for `page-map/get.ts`
+  if (locales) {
+    return replaceDynamicResourceQuery(
       source,
       'import(`./placeholder.js?lang=${lang}`)',
       locales
     )
-    return rawJs
   }
 
+  // Run only on production because it can slow down Fast Refresh for uncommitted files
+  // https://github.com/shuding/nextra/issues/3675#issuecomment-2466416366
+  const lastCommitTime = IS_PRODUCTION
+    ? await getLastCommitTime(resourcePath)
+    : NOW
+
   if (!IS_PRODUCTION && resourceQuery === METADATA_ONLY_RQ) {
-    const rawJs = await compileMetadata(source, { filePath: resourcePath })
-    return rawJs
+    return compileMetadata(source, {
+      filePath: resourcePath,
+      lastCommitTime
+    })
   }
-  const compiledSource = await compileMdx(source, {
+  return compileMdx(source, {
     mdxOptions: {
       ...mdxOptions,
       jsx: true,
@@ -141,20 +145,8 @@ export async function loader(
     useCachedCompiler: true,
     isPageImport,
     whiteListTagsStyling,
-    // Run only on production because it can slow down Fast Refresh for uncommitted files
-    // https://github.com/shuding/nextra/issues/3675#issuecomment-2466416366
-    lastCommitTime: IS_PRODUCTION ? await getLastCommitTime(resourcePath) : NOW
+    lastCommitTime
   })
-
-  // Imported as a normal component, no need to add the layout.
-  if (!isPageImport) {
-    return `${compiledSource}   
-export default MDXLayout`
-  }
-  const rawJs = `import { HOC_MDXWrapper } from 'nextra/setup-page'
-${compiledSource}
-export default HOC_MDXWrapper(MDXLayout, { metadata, toc })`
-  return rawJs
 }
 
 /*

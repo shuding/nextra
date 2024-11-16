@@ -1,5 +1,5 @@
-import { clean } from '../../../__test__/test-utils.js'
 import { compileMdx } from '../compile.js'
+import { clean } from './test-utils.js'
 
 const opts = {
   mdxOptions: {
@@ -31,7 +31,7 @@ bar[^1]
           depth: 2
         }
       ]
-      function MDXLayout(props) {
+      function _createMdxContent(props) {
         const _components = {
           a: 'a',
           h2: 'h2',
@@ -88,7 +88,8 @@ bar[^1]
             </_components.section>
           </>
         )
-      }"
+      }
+      export default _createMdxContent"
     `)
   })
 
@@ -124,7 +125,7 @@ import { Steps } from 'nextra/components'
           depth: 3
         }
       ]
-      function MDXLayout(props) {
+      function _createMdxContent(props) {
         const _components = {
           h2: 'h2',
           h3: 'h3',
@@ -141,7 +142,8 @@ import { Steps } from 'nextra/components'
             </Steps>
           </>
         )
-      }"
+      }
+      export default _createMdxContent"
     `)
   })
 
@@ -180,8 +182,8 @@ export const metadata = {
       export const myVar = 'interpolated'
       export const Test = () => <span>Hello</span>
       export const metadata = {
-        title: 'Heading 1',
-        test: 'extract toc content'
+        test: 'extract toc content',
+        title: 'Heading 1'
       }
       export const toc = [
         {
@@ -277,7 +279,7 @@ export const metadata = {
           depth: 6
         }
       ]
-      function MDXLayout(props) {
+      function _createMdxContent(props) {
         const _components = {
           h1: 'h1',
           h2: 'h2',
@@ -308,7 +310,8 @@ export const metadata = {
             <_components.h6 id={toc[6].id}>{toc[6].value}</_components.h6>
           </>
         )
-      }"
+      }
+      export default _createMdxContent"
     `)
   })
 
@@ -340,7 +343,7 @@ import { MDXRemote } from 'nextra/mdx-remote'
             depth: 2
           }
         ]
-        function MDXLayout(props) {
+        function _createMdxContent(props) {
           const _components = {
             h2: 'h2',
             ...props.components
@@ -357,7 +360,8 @@ import { MDXRemote } from 'nextra/mdx-remote'
               />
             </>
           )
-        }"
+        }
+        export default _createMdxContent"
       `)
     })
 

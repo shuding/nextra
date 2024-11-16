@@ -4,7 +4,7 @@ import { getPageMap } from 'nextra/page-map'
 import type { FC } from 'react'
 
 export const Blog: FC<{ lang: string }> = async ({ lang }) => {
-  const pageMap = (await getPageMap(lang, '/blog')) as unknown as MdxFile[]
+  const pageMap = (await getPageMap(`/${lang}/blog`)) as unknown as MdxFile[]
   return pageMap.map(page => {
     if (page.name === 'index') return
     const { title, description, date } = page.frontMatter!

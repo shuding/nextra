@@ -14,11 +14,7 @@ import remarkSmartypants from 'remark-smartypants'
 import type { Pluggable } from 'unified'
 import type { LoaderOptions, NextraConfig } from '../types.js'
 import { CWD, MARKDOWN_URL_EXTENSION_RE } from './constants.js'
-import {
-  recmaRewrite,
-  recmaRewriteFunctionBody,
-  recmaRewriteJsx
-} from './recma-plugins/index.js'
+import { recmaRewrite } from './recma-plugins/index.js'
 import {
   DEFAULT_REHYPE_PRETTY_CODE_OPTIONS,
   rehypeAttachCodeMeta,
@@ -42,7 +38,7 @@ import {
 type Processor = ReturnType<typeof createProcessor>
 
 const cachedCompilerForFormat: Record<
-  NonNullable<ProcessorOptions['format']>,
+  `${NonNullable<ProcessorOptions['format']>}:${boolean}`,
   Processor
 > = Object.create(null)
 
@@ -78,7 +74,7 @@ export async function compileMdx(
     mdxOptions = {},
     filePath = '',
     useCachedCompiler,
-    isPageImport = true,
+    isPageImport = false,
     whiteListTagsStyling = [],
     lastCommitTime
   }: Partial<CompileMdxOptions> = {}
@@ -100,8 +96,7 @@ export async function compileMdx(
   const fileCompatible = filePath ? { value: source, path: filePath } : source
 
   // https://github.com/shuding/nextra/issues/1303
-  const isFileOutsideCWD =
-    !isPageImport && path.relative(CWD, filePath).startsWith('..')
+  const isFileOutsideCWD = path.relative(CWD, filePath).startsWith('..')
 
   if (isFileOutsideCWD) {
     throw new Error(
@@ -114,7 +109,8 @@ export async function compileMdx(
   const compiler =
     !useCachedCompiler || isRemoteContent
       ? createCompiler()
-      : (cachedCompilerForFormat[format] ??= createCompiler())
+      : (cachedCompilerForFormat[`${format}:${isPageImport}`] ??=
+          createCompiler())
   const processor = compiler()
 
   try {
@@ -151,6 +147,9 @@ export async function compileMdx(
         remarkFrontmatter, // parse and attach yaml node
         remarkMdxFrontMatter,
         readingTime && remarkReadingTime,
+        // before mdx title
+        remarkCustomHeadingId,
+        remarkMdxTitle,
         [remarkAssignFrontMatter, { lastCommitTime }] satisfies Pluggable,
         remarkGfm,
         format !== 'md' &&
@@ -159,8 +158,6 @@ export async function compileMdx(
             // Replace the <summary> and <details> with customized components
             { whiteList: ['details', 'summary', ...whiteListTagsStyling] }
           ] satisfies Pluggable),
-        remarkCustomHeadingId,
-        remarkMdxTitle,
         [remarkHeadings, { isRemoteContent }] satisfies Pluggable,
         staticImage && remarkStaticImage,
         latex && remarkMath,
@@ -210,8 +207,7 @@ export async function compileMdx(
       ].filter(v => !!v),
       recmaPlugins: [
         ...(recmaPlugins || []),
-        recmaRewrite,
-        isRemoteContent ? recmaRewriteFunctionBody : recmaRewriteJsx
+        [recmaRewrite, { isPageImport, isRemoteContent }] satisfies Pluggable
       ].filter(v => !!v)
     })
   }
