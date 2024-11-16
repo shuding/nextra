@@ -24,7 +24,7 @@ function normalizeMetaData(obj: DynamicMeta): DynamicMeta {
 
       if (isFolder(value)) {
         // Remove `items` object to make zod happy
-        const { items, ...rest } = value
+        const { items: _items, ...rest } = value
         val = rest
       } else {
         val = value
@@ -45,7 +45,7 @@ export function mergeMetaWithPageMap<T extends Folder | PageMapItem[]>(
     }
   }
   // @ts-expect-error -- pagePath exist
-  const result = pageMap.map(({ __pagePath, ...restParent }, index, arr) => {
+  const result = pageMap.map(({ __pagePath, ...restParent }) => {
     if ('children' in restParent) {
       restParent.children = mergeMetaWithPageMap(
         restParent.children,
