@@ -33,7 +33,7 @@ describe('mergeMetaWithPageMap', () => {
             "data": {
               "configs": "Configs",
               "custom-rules": "Custom Rules",
-              "getting-started": "Getting Started",
+              "getting-started": {},
               "index": "Introduction",
             },
           },
