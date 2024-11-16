@@ -98,6 +98,7 @@ const RootLayout: FC<{
     </Footer>
   )
   const pageMap = await getPageMap()
+
   return (
     <html lang="en" dir="ltr" suppressHydrationWarning>
       <Head />

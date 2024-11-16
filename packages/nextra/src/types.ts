@@ -39,7 +39,6 @@ export type MetaJsonFile = {
 }
 
 export type DynamicFolder = {
-  type: 'folder'
   items: DynamicMeta
   title?: string
 }

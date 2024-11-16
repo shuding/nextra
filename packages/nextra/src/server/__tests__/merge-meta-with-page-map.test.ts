@@ -17,7 +17,6 @@ describe('mergeMetaWithPageMap', () => {
     const result = mergeMetaWithPageMap(eslintPage, {
       index: 'Introduction',
       'getting-started': {
-        type: 'folder',
         items: {
           'parser-options': 'Parser Options',
           parser: 'Parser'

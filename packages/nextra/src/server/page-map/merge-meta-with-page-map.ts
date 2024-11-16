@@ -5,17 +5,29 @@ import type {
   Folder,
   PageMapItem
 } from '../../types.js'
-import { pageTitleFromFilename } from '../utils.js'
 
 function isFolder(value: DynamicMetaItem): value is DynamicFolder {
-  return !!value && typeof value === 'object' && value.type === 'folder'
+  return (
+    !!value &&
+    typeof value === 'object' &&
+    'items' in value &&
+    value.type !== 'menu'
+  )
 }
 
 function normalizeMetaData(obj: DynamicMeta): DynamicMeta {
   return Object.fromEntries(
     Object.entries(obj).map(([key, value]) => {
-      const title = isFolder(value) ? value.title : value
-      return [key, title || pageTitleFromFilename(key)]
+      let val
+
+      if (isFolder(value)) {
+        // Remove `items` object to make zod happy
+        const { items, ...rest } = value
+        val = rest
+      } else {
+        val = value
+      }
+      return [key, val]
     })
   )
 }
@@ -36,7 +48,11 @@ export function mergeMetaWithPageMap<T extends Folder | PageMapItem[]>(
   // @ts-expect-error -- pagePath exist
   const result = pageMap.map(({ __pagePath, ...restParent }, index, arr) => {
     if ('children' in restParent) {
-      restParent.children = mergeMetaWithPageMap(restParent.children, {})
+      restParent.children = mergeMetaWithPageMap(
+        restParent.children,
+        // @ts-expect-error -- fixme
+        meta[restParent.name]?.items || {}
+      )
       const prop = meta[restParent.name]
       const hasMeta = 'data' in arr[0]
 

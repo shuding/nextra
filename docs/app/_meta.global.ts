@@ -4,11 +4,11 @@ export default {
     display: 'hidden'
   },
   docs: {
-    type: 'folder',
+    type: 'page',
+    title: 'Documentation',
     items: {
       index: '',
       guide: {
-        type: 'folder',
         items: {
           'organize-files': '',
           markdown: '',
@@ -25,7 +25,6 @@ export default {
         }
       },
       advanced: {
-        type: 'folder',
         items: {
           npm2yarn: '',
           mermaid: '',
@@ -42,7 +41,6 @@ export default {
         }
       },
       'built-ins': {
-        type: 'folder',
         items: {
           _: {
             type: 'separator',
@@ -62,7 +60,6 @@ export default {
         title: 'Themes'
       },
       'docs-theme': {
-        type: 'folder',
         items: {
           start: '',
           'page-configuration': '',

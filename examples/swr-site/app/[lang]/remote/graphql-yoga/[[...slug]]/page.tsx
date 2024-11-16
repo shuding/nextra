@@ -24,7 +24,6 @@ const [yogaPage] = _pageMap[0].children
 const yogaPageMap = mergeMetaWithPageMap(yogaPage, {
   index: 'Quick Start',
   features: {
-    type: 'folder',
     items: {
       graphiql: '',
       context: 'GraphQL Context',
@@ -38,7 +37,6 @@ const yogaPageMap = mergeMetaWithPageMap(yogaPage, {
     }
   },
   integrations: {
-    type: 'folder',
     items: {
       'integration-with-aws-lambda': 'AWS Lambda',
       'integration-with-cloudflare-workers': 'Cloudflare Workers',
@@ -53,7 +51,6 @@ const yogaPageMap = mergeMetaWithPageMap(yogaPage, {
     }
   },
   migration: {
-    type: 'folder',
     items: {
       'migration-from-apollo-server': 'Apollo Server',
       'migration-from-express-graphql': 'Express GraphQL',

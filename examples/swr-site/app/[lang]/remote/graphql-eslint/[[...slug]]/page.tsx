@@ -24,7 +24,6 @@ export const [eslintPage] = _pageMap[0].children
 const eslintPageMap = mergeMetaWithPageMap(eslintPage, {
   index: 'Introduction',
   'getting-started': {
-    type: 'folder',
     items: {
       index: 'Getting Started',
       'parser-options': '',
