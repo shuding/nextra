@@ -38,7 +38,7 @@ import {
 type Processor = ReturnType<typeof createProcessor>
 
 const cachedCompilerForFormat: Record<
-  NonNullable<ProcessorOptions['format']>,
+  `${NonNullable<ProcessorOptions['format']>}:${boolean}`,
   Processor
 > = Object.create(null)
 
@@ -74,7 +74,7 @@ export async function compileMdx(
     mdxOptions = {},
     filePath = '',
     useCachedCompiler,
-    isPageImport,
+    isPageImport = false,
     whiteListTagsStyling = [],
     lastCommitTime
   }: Partial<CompileMdxOptions> = {}
@@ -109,7 +109,8 @@ export async function compileMdx(
   const compiler =
     !useCachedCompiler || isRemoteContent
       ? createCompiler()
-      : (cachedCompilerForFormat[format] ??= createCompiler())
+      : (cachedCompilerForFormat[`${format}:${isPageImport}`] ??=
+          createCompiler())
   const processor = compiler()
 
   try {
