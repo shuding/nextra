@@ -394,18 +394,33 @@ import { MDXRemote } from 'nextra/mdx-remote'
     })
 
     it('should have styled inline code and anchor', async () => {
-      const rawMdx = await compileMdx('## A `Theme` [google](https://google.com) $e = mc^2$', options)
-      expect (clean(rawMdx)).resolves.toMatchInlineSnapshot(`
+      const rawMdx = await compileMdx(
+        '## A `Theme` [google](https://google.com) $e = mc^2$',
+        {
+          mdxOptions: {
+            ...options.mdxOptions,
+            providerImportSource: '👍'
+          }
+        }
+      )
+      expect(clean(rawMdx)).resolves.toMatchInlineSnapshot(`
         "/*@jsxRuntime automatic*/
         /*@jsxImportSource react*/
+        import { useMDXComponents as _provideComponents } from '👍'
         export const metadata = {}
         export function useTOC(props) {
+          const _components = {
+            a: 'a',
+            code: 'code',
+            ..._provideComponents()
+          }
           return [
             {
               value: (
                 <>
                   {'A '}
-                  <code>{'Theme'}</code> <a href="https://google.com">{'google'}</a>
+                  <_components.code>{'Theme'}</_components.code>{' '}
+                  <_components.a href="https://google.com">{'google'}</_components.a>
                   {' $e = mc^2$'}
                 </>
               ),
@@ -417,6 +432,7 @@ import { MDXRemote } from 'nextra/mdx-remote'
         function _createMdxContent(props) {
           const _components = {
             h2: 'h2',
+            ..._provideComponents(),
             ...props.components
           }
           return <_components.h2 id={toc[0].id}>{toc[0].value}</_components.h2>

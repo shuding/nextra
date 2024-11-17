@@ -18,6 +18,26 @@ export const rehypeExtractTocContent: Plugin<[], Root> = () => (ast, file) => {
     }
     const { id } = node.properties
     TocMap[id as string] = node
+
+    visit(node, (innerNode) => {
+      // console.log({ innerNode })
+      if (
+        (innerNode.type === 'mdxFlowExpression' ||
+          innerNode.type === 'mdxTextExpression' ||
+          innerNode.type === 'mdxjsEsm')
+        // && node.data && node.data.estree
+      ) {
+        console.log(11)
+        // walk(node.data.estree, {
+        //   enter(node) {
+        //     if (node.type === 'JSXElement') {
+        //       const data = node.data || (node.data = {})
+        //       data._mdxExplicitJsx = true
+        //     }
+        //   }
+        // })
+      }
+    })
   })
 
   const elements = (file.data.toc as Heading[]).map((name, index) => {
