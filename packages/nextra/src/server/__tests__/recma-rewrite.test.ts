@@ -4,8 +4,8 @@ import { clean } from './test-utils.js'
 describe('recma-rewrite', () => {
   const testMdx = `
 # h1
-# h2
-# h3
+## h2
+### h3
 
 - list 1
 - list 2
@@ -312,7 +312,7 @@ import { MDXRemote } from 'nextra/mdx-remote'
       `)
     })
 
-    it.only('should have styled inline code and anchor', async () => {
+    it('should have styled inline code and anchor', async () => {
       const rawMdx = await compileMdx('## A `Theme` [google](https://google.com) $e = mc^2$', options)
       expect (clean(rawMdx)).resolves.toMatchInlineSnapshot(`
         "/*@jsxRuntime automatic*/

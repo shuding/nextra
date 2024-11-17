@@ -1,23 +1,31 @@
 import type {
   CallExpression,
+  FunctionDeclaration,
   ImportDeclaration,
   ObjectExpression,
-  Program
+  Program,
+  ReturnStatement
 } from 'estree'
+import { JsxAttribute } from 'estree-util-to-js/lib/jsx'
 import type { Plugin } from 'unified'
+import { visit } from 'unist-util-visit'
+import { Heading } from '../../types'
 import { DEFAULT_PROPERTY_PROPS } from '../constants.js'
+import { createAstObject } from '../utils'
 
 enum Mdx {
   Wrapper = 'MDXContent',
   Content = '_createMdxContent'
 }
 
+const TOC_HEADING_RE = /^h[2-6]$/
+
 export const recmaRewrite: Plugin<
   [{ isPageImport?: boolean; isRemoteContent?: boolean }],
   Program
 > =
   ({ isPageImport, isRemoteContent }) =>
-  (ast: Program) => {
+  (ast: Program, file) => {
     const hasMdxLayout = ast.body.some(
       node =>
         node.type === 'VariableDeclaration' &&
@@ -53,6 +61,91 @@ export const recmaRewrite: Plugin<
       }
       return
     }
+    /*
+    const mdxContent = ast.body.find(
+      (node): node is FunctionDeclaration =>
+        'id' in node &&
+        node.id.type === 'Identifier' &&
+        node.id.name === '_createMdxContent'
+    )!
+
+    const { argument } = mdxContent.body.body.at(-1) as ReturnStatement
+
+    const astObjects: ObjectExpression[] = []
+
+    visit(argument, 'JSXElement', (heading: any) => {
+      const { openingElement } = heading
+      const { name } = openingElement.name.property
+      if (!TOC_HEADING_RE.test(name)) return
+
+      const idNode = openingElement.attributes.find(
+        (attr: JsxAttribute) => attr.name.name === 'id'
+      )
+      if (!idNode) return
+
+      const id = idNode.value.value
+      const foundIndex = (file.data.toc as (Heading | string)[]).findIndex(
+        item => {
+          if (typeof item === 'string') return
+          return item.id === id
+        }
+      )
+      if (foundIndex === -1) return
+
+      console.dir(openingElement,{depth:null})
+
+      astObjects.push(createAstObject({
+        // value: result,
+        id,
+        // depth: Number(node.tagName[1])
+      }))
+
+      idNode.value = {
+        type: 'JSXExpressionContainer',
+        expression: {
+          type: 'Identifier',
+          name: `toc[${foundIndex}].id`
+        }
+      }
+      heading.children = [
+        {
+          type: 'JSXExpressionContainer',
+          expression: {
+            type: 'Identifier',
+            name: `toc[${foundIndex}].value`
+          }
+        }
+      ]
+    })
+    ast.body.unshift({
+      type: 'ExportNamedDeclaration',
+      declaration: {
+        type: 'FunctionDeclaration',
+        id: {
+          type: 'Identifier',
+          name: 'useTOC'
+        },
+        expression: false,
+        generator: false,
+        async: false,
+        params: [{ type: 'Identifier', name: 'props' }],
+        body: {
+          type: 'BlockStatement',
+          body: [
+            {
+              type: 'ReturnStatement',
+              argument: {
+                type: 'ArrayExpression',
+                elements: astObjects
+              }
+            }
+          ]
+        }
+      },
+      specifiers: []
+    })
+    console.log(mdxContent)
+    */
     const defaultExport = ast.body.find(
       node => node.type === 'ExportDefaultDeclaration'
     )!
