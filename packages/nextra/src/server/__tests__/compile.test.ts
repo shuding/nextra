@@ -20,6 +20,7 @@ export default foo`,
       "/*@jsxRuntime automatic*/
       /*@jsxImportSource react*/
       import { HOC_MDXWrapper } from 'nextra/setup-page'
+      import { useMDXComponents as _provideComponents } from 'next-mdx-import-source-file'
       export const metadata = {}
       import foo from './foo'
       const MDXLayout = foo
@@ -36,6 +37,7 @@ export default foo`,
       function _createMdxContent(props) {
         const _components = {
           h2: 'h2',
+          ..._provideComponents(),
           ...props.components
         }
         return <_components.h2 id={toc[0].id}>{toc[0].value}</_components.h2>
@@ -63,6 +65,7 @@ export { foo as default } from './foo'`,
     expect(clean(rawJs)).resolves.toMatchInlineSnapshot(`
       "/*@jsxRuntime automatic*/
       /*@jsxImportSource react*/
+      import { useMDXComponents as _provideComponents } from 'next-mdx-import-source-file'
       export const metadata = {}
       import { foo as MDXLayout } from './foo'
       function useTOC(props) {
@@ -78,6 +81,7 @@ export { foo as default } from './foo'`,
       function _createMdxContent(props) {
         const _components = {
           h2: 'h2',
+          ..._provideComponents(),
           ...props.components
         }
         return <_components.h2 id={toc[0].id}>{toc[0].value}</_components.h2>
@@ -135,6 +139,7 @@ export const TagName = () => {
     expect(clean(rawJs)).resolves.toMatchInlineSnapshot(`
       "/*@jsxRuntime automatic*/
       /*@jsxImportSource react*/
+      import { useMDXComponents as _provideComponents } from 'next-mdx-import-source-file'
       export const metadata = {
         title: 'My Header'
       }
@@ -181,6 +186,7 @@ export const TagName = () => {
           h4: 'h4',
           h5: 'h5',
           h6: 'h6',
+          ..._provideComponents(),
           ...props.components
         }
         return (
@@ -209,6 +215,7 @@ export const TagName = () => {
     expect(clean(rawJs)).resolves.toMatchInlineSnapshot(`
       "/*@jsxRuntime automatic*/
       /*@jsxImportSource react*/
+      import { useMDXComponents as _provideComponents } from 'next-mdx-import-source-file'
       export const metadata = {}
       function useTOC(props) {
         return [
@@ -223,6 +230,7 @@ export const TagName = () => {
       function _createMdxContent(props) {
         const _components = {
           h3: 'h3',
+          ..._provideComponents(),
           ...props.components
         }
         return <_components.h3 id={toc[0].id}>{toc[0].value}</_components.h3>
@@ -268,12 +276,25 @@ import Last from './three.mdx'
     expect(clean(rawJs)).resolves.toMatchInlineSnapshot(`
       "/*@jsxRuntime automatic*/
       /*@jsxImportSource react*/
+      import { useMDXComponents as _provideComponents } from 'next-mdx-import-source-file'
       export const metadata = {}
       import FromMdx, { toc as toc0 } from './one.mdx'
       import FromMarkdown, { toc as toc1 } from './two.md'
       import IgnoreMe from './foo'
       import Last, { toc as toc2 } from './three.mdx'
       function useTOC(props) {
+        const _components = {
+            annotation: 'annotation',
+            code: 'code',
+            math: 'math',
+            mi: 'mi',
+            mrow: 'mrow',
+            semantics: 'semantics',
+            span: 'span',
+            ..._provideComponents()
+          },
+          { Kek } = _components
+        if (!Kek) _missingMdxReference('Kek', true)
         return [
           {
             value: '❤️',
@@ -306,7 +327,7 @@ import Last from './three.mdx'
           {
             value: (
               <>
-                <code>{'try'}</code>
+                <_components.code>{'try'}</_components.code>
                 {' me'}
               </>
             ),
@@ -317,36 +338,36 @@ import Last from './three.mdx'
             value: (
               <>
                 {'latex '}
-                <span className="katex">
-                  <span className="katex-mathml">
-                    <math xmlns="http://www.w3.org/1998/Math/MathML">
-                      <semantics>
-                        <mrow>
-                          <mi>{'l'}</mi>
-                        </mrow>
-                        <annotation encoding="application/x-tex">{'l'}</annotation>
-                      </semantics>
-                    </math>
-                  </span>
-                  <span className="katex-html" aria-hidden="true">
-                    <span className="base">
-                      <span
+                <_components.span className="katex">
+                  <_components.span className="katex-mathml">
+                    <_components.math xmlns="http://www.w3.org/1998/Math/MathML">
+                      <_components.semantics>
+                        <_components.mrow>
+                          <_components.mi>{'l'}</_components.mi>
+                        </_components.mrow>
+                        <_components.annotation encoding="application/x-tex">{'l'}</_components.annotation>
+                      </_components.semantics>
+                    </_components.math>
+                  </_components.span>
+                  <_components.span className="katex-html" aria-hidden="true">
+                    <_components.span className="base">
+                      <_components.span
                         className="strut"
                         style={{
                           height: '0.6944em'
                         }}
                       />
-                      <span
+                      <_components.span
                         className="mord mathnormal"
                         style={{
                           marginRight: '0.01968em'
                         }}
                       >
                         {'l'}
-                      </span>
-                    </span>
-                  </span>
-                </span>
+                      </_components.span>
+                    </_components.span>
+                  </_components.span>
+                </_components.span>
               </>
             ),
             id: 'latex-l',
@@ -367,6 +388,7 @@ import Last from './three.mdx'
       function _createMdxContent(props) {
         const _components = {
           h2: 'h2',
+          ..._provideComponents(),
           ...props.components
         }
         return (
@@ -396,7 +418,16 @@ import Last from './three.mdx'
           </>
         )
       }
-      export default _createMdxContent"
+      export default _createMdxContent
+      function _missingMdxReference(id, component) {
+        throw new Error(
+          'Expected ' +
+            (component ? 'component' : 'object') +
+            ' \`' +
+            id +
+            '\` to be defined: you likely forgot to import, pass, or provide it.'
+        )
+      }"
     `)
   })
   it('should not attach headings with parent Tab or Tabs.Tab', async () => {

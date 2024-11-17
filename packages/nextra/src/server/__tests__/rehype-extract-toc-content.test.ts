@@ -23,6 +23,7 @@ bar[^1]
     expect(clean(rawJs)).resolves.toMatchInlineSnapshot(`
       "/*@jsxRuntime automatic*/
       /*@jsxImportSource react*/
+      import { useMDXComponents as _provideComponents } from 'next-mdx-import-source-file'
       export const metadata = {}
       function useTOC(props) {
         return [
@@ -43,6 +44,7 @@ bar[^1]
           p: 'p',
           section: 'section',
           sup: 'sup',
+          ..._provideComponents(),
           ...props.components
         }
         return (
@@ -114,6 +116,7 @@ import { Steps } from 'nextra/components'
     expect(clean(rawJs)).resolves.toMatchInlineSnapshot(`
       "/*@jsxRuntime automatic*/
       /*@jsxImportSource react*/
+      import { useMDXComponents as _provideComponents } from 'next-mdx-import-source-file'
       export const metadata = {}
       import { Steps } from 'nextra/components'
       function useTOC(props) {
@@ -135,6 +138,7 @@ import { Steps } from 'nextra/components'
         const _components = {
           h2: 'h2',
           h3: 'h3',
+          ..._provideComponents(),
           ...props.components
         }
         return (
@@ -185,6 +189,7 @@ export const metadata = {
     expect(clean(rawJs)).resolves.toMatchInlineSnapshot(`
       "/*@jsxRuntime automatic*/
       /*@jsxImportSource react*/
+      import { useMDXComponents as _provideComponents } from 'next-mdx-import-source-file'
       export const myVar = 'interpolated'
       export const Test = () => <span>Hello</span>
       export const metadata = {
@@ -192,6 +197,16 @@ export const metadata = {
         title: 'Heading 1'
       }
       function useTOC(props) {
+        const _components = {
+          annotation: 'annotation',
+          code: 'code',
+          math: 'math',
+          mi: 'mi',
+          mrow: 'mrow',
+          semantics: 'semantics',
+          span: 'span',
+          ..._provideComponents()
+        }
         return [
           {
             value: (
@@ -207,44 +222,44 @@ export const metadata = {
             value: (
               <>
                 {'Heading '}
-                <span className="katex">
-                  <span className="katex-mathml">
-                    <math xmlns="http://www.w3.org/1998/Math/MathML">
-                      <semantics>
-                        <mrow>
-                          <mi>{'l'}</mi>
-                          <mi>{'a'}</mi>
-                          <mi>{'t'}</mi>
-                          <mi>{'e'}</mi>
-                          <mi>{'x'}</mi>
-                        </mrow>
-                        <annotation encoding="application/x-tex">{'latex'}</annotation>
-                      </semantics>
-                    </math>
-                  </span>
-                  <span className="katex-html" aria-hidden="true">
-                    <span className="base">
-                      <span
+                <_components.span className="katex">
+                  <_components.span className="katex-mathml">
+                    <_components.math xmlns="http://www.w3.org/1998/Math/MathML">
+                      <_components.semantics>
+                        <_components.mrow>
+                          <_components.mi>{'l'}</_components.mi>
+                          <_components.mi>{'a'}</_components.mi>
+                          <_components.mi>{'t'}</_components.mi>
+                          <_components.mi>{'e'}</_components.mi>
+                          <_components.mi>{'x'}</_components.mi>
+                        </_components.mrow>
+                        <_components.annotation encoding="application/x-tex">{'latex'}</_components.annotation>
+                      </_components.semantics>
+                    </_components.math>
+                  </_components.span>
+                  <_components.span className="katex-html" aria-hidden="true">
+                    <_components.span className="base">
+                      <_components.span
                         className="strut"
                         style={{
                           height: '0.6944em'
                         }}
                       />
-                      <span
+                      <_components.span
                         className="mord mathnormal"
                         style={{
                           marginRight: '0.01968em'
                         }}
                       >
                         {'l'}
-                      </span>
-                      <span className="mord mathnormal">{'a'}</span>
-                      <span className="mord mathnormal">{'t'}</span>
-                      <span className="mord mathnormal">{'e'}</span>
-                      <span className="mord mathnormal">{'x'}</span>
-                    </span>
-                  </span>
-                </span>
+                      </_components.span>
+                      <_components.span className="mord mathnormal">{'a'}</_components.span>
+                      <_components.span className="mord mathnormal">{'t'}</_components.span>
+                      <_components.span className="mord mathnormal">{'e'}</_components.span>
+                      <_components.span className="mord mathnormal">{'x'}</_components.span>
+                    </_components.span>
+                  </_components.span>
+                </_components.span>
               </>
             ),
             id: 'heading-latex',
@@ -254,7 +269,7 @@ export const metadata = {
             value: (
               <>
                 {'Heading '}
-                <code>{'<Code />:{jsx}'}</code>
+                <_components.code>{'<Code />:{jsx}'}</_components.code>
               </>
             ),
             id: 'heading-code-jsx',
@@ -296,6 +311,7 @@ export const metadata = {
           h4: 'h4',
           h5: 'h5',
           h6: 'h6',
+          ..._provideComponents(),
           ...props.components
         }
         return (
@@ -340,6 +356,7 @@ import { MDXRemote } from 'nextra/mdx-remote'
       expect(clean(rawJs)).resolves.toMatchInlineSnapshot(`
         "/*@jsxRuntime automatic*/
         /*@jsxImportSource react*/
+        import { useMDXComponents as _provideComponents } from 'next-mdx-import-source-file'
         export const metadata = {
           title: '[[...slug]]',
           filePath: '[[...slug]].mdx'
@@ -358,6 +375,7 @@ import { MDXRemote } from 'nextra/mdx-remote'
         function _createMdxContent(props) {
           const _components = {
             h2: 'h2',
+            ..._provideComponents(),
             ...props.components
           }
           return (
@@ -393,6 +411,7 @@ export const myVar = 123
       expect(clean(rawJs)).resolves.toMatchInlineSnapshot(`
         "'use strict'
         const { Fragment: _Fragment, jsx: _jsx, jsxs: _jsxs } = arguments[0]
+        const { useMDXComponents: _provideComponents } = arguments[0]
         const metadata = {}
         const myVar = 123
         function useTOC(props) {
@@ -416,6 +435,7 @@ export const myVar = 123
           const _components = {
               h2: 'h2',
               h3: 'h3',
+              ..._provideComponents(),
               ...props.components
             },
             { Foo } = _components

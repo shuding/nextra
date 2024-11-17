@@ -14,6 +14,7 @@ describe('LaTeX', () => {
         "/*@jsxRuntime automatic*/
         /*@jsxImportSource react*/
         'use strict'
+        const { useMDXComponents: _provideComponents } = arguments[0]
         const metadata = {}
         function useTOC(props) {
           return []
@@ -29,6 +30,7 @@ describe('LaTeX', () => {
             msup: 'msup',
             semantics: 'semantics',
             span: 'span',
+            ..._provideComponents(),
             ...props.components
           }
           return (
@@ -116,6 +118,7 @@ describe('LaTeX', () => {
       expect(clean(rawJs)).resolves.toMatchInlineSnapshot(`
         "/*@jsxRuntime automatic*/
         /*@jsxImportSource react*/
+        import { useMDXComponents as _provideComponents } from 'next-mdx-import-source-file'
         export const metadata = {}
         import { MathJax, MathJaxContext } from 'nextra/components'
         function useTOC(props) {
@@ -125,6 +128,7 @@ describe('LaTeX', () => {
         function _createMdxContent(props) {
           const _components = {
             p: 'p',
+            ..._provideComponents(),
             ...props.components
           }
           return (
@@ -145,6 +149,7 @@ describe('LaTeX', () => {
       expect(clean(rawJs)).resolves.toMatchInlineSnapshot(`
         "/*@jsxRuntime automatic*/
         /*@jsxImportSource react*/
+        import { useMDXComponents as _provideComponents } from 'next-mdx-import-source-file'
         export const metadata = {}
         import { MathJax, MathJaxContext } from 'nextra/components'
         function useTOC(props) {
@@ -175,6 +180,7 @@ ${MATH_LANG}`
       expect(clean(rawJs)).resolves.toMatchInlineSnapshot(`
         "/*@jsxRuntime automatic*/
         /*@jsxImportSource react*/
+        import { useMDXComponents as _provideComponents } from 'next-mdx-import-source-file'
         export const metadata = {}
         import foo from 'foo'
         export let bar
@@ -186,6 +192,7 @@ ${MATH_LANG}`
         function _createMdxContent(props) {
           const _components = {
             p: 'p',
+            ..._provideComponents(),
             ...props.components
           }
           return (
