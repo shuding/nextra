@@ -1,6 +1,6 @@
 {
   "name": "nextra",
-  "version": "4.0.0-app-router.26",
+  "version": "4.0.0-app-router.27",
   "type": "module",
   "description": "Next.js and MDX based site generator.",
   "repository": "https://github.com/shuding/nextra",
