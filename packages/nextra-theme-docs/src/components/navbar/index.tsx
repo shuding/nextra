@@ -1,8 +1,8 @@
 import cn from 'clsx'
 // eslint-disable-next-line no-restricted-imports -- since we don't need newWindow prop
 import NextLink from 'next/link'
-import { DiscordIcon, GitHubIcon } from 'nextra/icons'
 import { Anchor } from 'nextra/components'
+import { DiscordIcon, GitHubIcon } from 'nextra/icons'
 import { element } from 'nextra/schemas'
 import type { FC } from 'react'
 import { z } from 'zod'

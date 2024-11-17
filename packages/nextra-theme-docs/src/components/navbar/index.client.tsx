@@ -7,7 +7,7 @@ import {
   MenuItems
 } from '@headlessui/react'
 import cn from 'clsx'
-import { Button, Anchor } from 'nextra/components'
+import { Anchor, Button } from 'nextra/components'
 import { useFSRoute } from 'nextra/hooks'
 import { ArrowRightIcon, MenuIcon } from 'nextra/icons'
 import type { MenuItem } from 'nextra/normalize-pages'

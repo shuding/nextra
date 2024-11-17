@@ -71,7 +71,7 @@ const DEFAULT_COMPONENTS = getNextraMDXComponents({
   table: Table,
   td: Table.Td,
   th: Table.Th,
-  tr: Table.Tr,
+  tr: Table.Tr
 })
 
 /* eslint sort-keys: error */
