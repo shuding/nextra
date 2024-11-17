@@ -1,4 +1,4 @@
-import type { SpreadElement } from 'estree'
+import type { ExportNamedDeclaration, SpreadElement } from 'estree'
 import type { Element, Root, Text } from 'hast'
 import { toEstree } from 'hast-util-to-estree'
 import type { MdxjsEsm } from 'hast-util-to-estree/lib/handlers/mdxjs-esm'
@@ -70,7 +70,39 @@ export const rehypeExtractTocContent: Plugin<[], Root> = () => (ast, file) => {
     data: {
       estree: {
         body: [
-          createAstExportConst('toc', { type: 'ArrayExpression', elements })
+          {
+            type: 'ExportNamedDeclaration',
+            declaration: {
+              type: 'FunctionDeclaration',
+              id: {
+                type: 'Identifier',
+                name: 'useTOC'
+              },
+              expression: false,
+              generator: false,
+              async: false,
+              params: [
+                {
+                  type: 'Identifier',
+                  name: 'props'
+                }
+              ],
+              body: {
+                type: 'BlockStatement',
+                body: [
+                  {
+                    type: 'ReturnStatement',
+                    argument: {
+                      type: 'ArrayExpression',
+                      elements: elements
+                    }
+                  }
+                ]
+              }
+            },
+            specifiers: [],
+            source: null
+          } as ExportNamedDeclaration
         ]
       }
     }

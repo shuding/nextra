@@ -26,18 +26,20 @@ export default function Foo(props) {
         const metadata = {
           title: 'h1'
         }
-        const toc = [
-          {
-            value: 'h2 content',
-            id: 'h2-content',
-            depth: 2
-          },
-          {
-            value: 'h3 content',
-            id: 'h3-content',
-            depth: 3
-          }
-        ]
+        function useTOC(props) {
+          return [
+            {
+              value: 'h2 content',
+              id: 'h2-content',
+              depth: 2
+            },
+            {
+              value: 'h3 content',
+              id: 'h3-content',
+              depth: 3
+            }
+          ]
+        }
         function _createMdxContent(props) {
           const _components = {
             h1: 'h1',
@@ -81,7 +83,7 @@ export default function Foo(props) {
         }
         return {
           metadata,
-          toc,
+          useTOC,
           default: _createMdxContent
         }"
       `)
@@ -99,18 +101,20 @@ export default function Foo(props) {
             children: ['Default Export ', props.children]
           })
         }
-        const toc = [
-          {
-            value: 'h2 content',
-            id: 'h2-content',
-            depth: 2
-          },
-          {
-            value: 'h3 content',
-            id: 'h3-content',
-            depth: 3
-          }
-        ]
+        function useTOC(props) {
+          return [
+            {
+              value: 'h2 content',
+              id: 'h2-content',
+              depth: 2
+            },
+            {
+              value: 'h3 content',
+              id: 'h3-content',
+              depth: 3
+            }
+          ]
+        }
         function _createMdxContent(props) {
           const _components = {
             h1: 'h1',
@@ -162,7 +166,7 @@ export default function Foo(props) {
         }
         return {
           metadata,
-          toc,
+          useTOC,
           default: MDXContent
         }"
       `)
@@ -177,7 +181,9 @@ import { MDXRemote } from 'nextra/mdx-remote'
         "'use strict'
         const { jsx: _jsx } = arguments[0]
         const metadata = {}
-        const toc = []
+        function useTOC(props) {
+          return []
+        }
         function _createMdxContent(props) {
           const { MDXRemote } = props.components || {}
           if (!MDXRemote) _missingMdxReference('MDXRemote', true)
@@ -185,7 +191,7 @@ import { MDXRemote } from 'nextra/mdx-remote'
         }
         return {
           metadata,
-          toc,
+          useTOC,
           default: _createMdxContent
         }
         function _missingMdxReference(id, component) {
@@ -216,18 +222,20 @@ import { MDXRemote } from 'nextra/mdx-remote'
         export const metadata = {
           title: 'h1'
         }
-        export const toc = [
-          {
-            value: 'h2 content',
-            id: 'h2-content',
-            depth: 2
-          },
-          {
-            value: 'h3 content',
-            id: 'h3-content',
-            depth: 3
-          }
-        ]
+        export function useTOC(props) {
+          return [
+            {
+              value: 'h2 content',
+              id: 'h2-content',
+              depth: 2
+            },
+            {
+              value: 'h3 content',
+              id: 'h3-content',
+              depth: 3
+            }
+          ]
+        }
         function _createMdxContent(props) {
           const _components = {
             h1: 'h1',
@@ -270,18 +278,20 @@ import { MDXRemote } from 'nextra/mdx-remote'
         export const metadata = {
           title: 'h1'
         }
-        export const toc = [
-          {
-            value: 'h2 content',
-            id: 'h2-content',
-            depth: 2
-          },
-          {
-            value: 'h3 content',
-            id: 'h3-content',
-            depth: 3
-          }
-        ]
+        export function useTOC(props) {
+          return [
+            {
+              value: 'h2 content',
+              id: 'h2-content',
+              depth: 2
+            },
+            {
+              value: 'h3 content',
+              id: 'h3-content',
+              depth: 3
+            }
+          ]
+        }
         function _createMdxContent(props) {
           const _components = {
             h1: 'h1',
@@ -328,18 +338,20 @@ import { MDXRemote } from 'nextra/mdx-remote'
         const MDXLayout = function Foo(props) {
           return <div>Default Export {props.children}</div>
         }
-        export const toc = [
-          {
-            value: 'h2 content',
-            id: 'h2-content',
-            depth: 2
-          },
-          {
-            value: 'h3 content',
-            id: 'h3-content',
-            depth: 3
-          }
-        ]
+        export function useTOC(props) {
+          return [
+            {
+              value: 'h2 content',
+              id: 'h2-content',
+              depth: 2
+            },
+            {
+              value: 'h3 content',
+              id: 'h3-content',
+              depth: 3
+            }
+          ]
+        }
         function _createMdxContent(props) {
           const _components = {
             h1: 'h1',
@@ -387,19 +399,21 @@ import { MDXRemote } from 'nextra/mdx-remote'
         "/*@jsxRuntime automatic*/
         /*@jsxImportSource react*/
         export const metadata = {}
-        export const toc = [
-          {
-            value: (
-              <>
-                {'A '}
-                <code>{'Theme'}</code> <a href="https://google.com">{'google'}</a>
-                {' $e = mc^2$'}
-              </>
-            ),
-            id: 'a-theme-google-e--mc2',
-            depth: 2
-          }
-        ]
+        export function useTOC(props) {
+          return [
+            {
+              value: (
+                <>
+                  {'A '}
+                  <code>{'Theme'}</code> <a href="https://google.com">{'google'}</a>
+                  {' $e = mc^2$'}
+                </>
+              ),
+              id: 'a-theme-google-e--mc2',
+              depth: 2
+            }
+          ]
+        }
         function _createMdxContent(props) {
           const _components = {
             h2: 'h2',
