@@ -4,8 +4,8 @@ import { clean } from './test-utils.js'
 describe('recma-rewrite', () => {
   const testMdx = `
 # h1
-## h2
-### h3
+## h2 content
+### h3 content
 
 - list 1
 - list 2
@@ -26,10 +26,23 @@ export default function Foo(props) {
         const metadata = {
           title: 'h1'
         }
-        const toc = []
+        const toc = [
+          {
+            value: 'h2 content',
+            id: 'h2-content',
+            depth: 2
+          },
+          {
+            value: 'h3 content',
+            id: 'h3-content',
+            depth: 3
+          }
+        ]
         function _createMdxContent(props) {
           const _components = {
             h1: 'h1',
+            h2: 'h2',
+            h3: 'h3',
             li: 'li',
             ul: 'ul',
             ...props.components
@@ -40,12 +53,14 @@ export default function Foo(props) {
                 children: 'h1'
               }),
               '\\n',
-              _jsx(_components.h1, {
-                children: 'h2'
+              _jsx(_components.h2, {
+                id: toc[0].id,
+                children: toc[0].value
               }),
               '\\n',
-              _jsx(_components.h1, {
-                children: 'h3'
+              _jsx(_components.h3, {
+                id: toc[1].id,
+                children: toc[1].value
               }),
               '\\n',
               _jsxs(_components.ul, {
@@ -84,10 +99,23 @@ export default function Foo(props) {
             children: ['Default Export ', props.children]
           })
         }
-        const toc = []
+        const toc = [
+          {
+            value: 'h2 content',
+            id: 'h2-content',
+            depth: 2
+          },
+          {
+            value: 'h3 content',
+            id: 'h3-content',
+            depth: 3
+          }
+        ]
         function _createMdxContent(props) {
           const _components = {
             h1: 'h1',
+            h2: 'h2',
+            h3: 'h3',
             li: 'li',
             ul: 'ul',
             ...props.components
@@ -98,12 +126,14 @@ export default function Foo(props) {
                 children: 'h1'
               }),
               '\\n',
-              _jsx(_components.h1, {
-                children: 'h2'
+              _jsx(_components.h2, {
+                id: toc[0].id,
+                children: toc[0].value
               }),
               '\\n',
-              _jsx(_components.h1, {
-                children: 'h3'
+              _jsx(_components.h3, {
+                id: toc[1].id,
+                children: toc[1].value
               }),
               '\\n',
               _jsxs(_components.ul, {
@@ -186,10 +216,23 @@ import { MDXRemote } from 'nextra/mdx-remote'
         export const metadata = {
           title: 'h1'
         }
-        export const toc = []
+        export const toc = [
+          {
+            value: 'h2 content',
+            id: 'h2-content',
+            depth: 2
+          },
+          {
+            value: 'h3 content',
+            id: 'h3-content',
+            depth: 3
+          }
+        ]
         function _createMdxContent(props) {
           const _components = {
             h1: 'h1',
+            h2: 'h2',
+            h3: 'h3',
             li: 'li',
             ul: 'ul',
             ...props.components
@@ -198,9 +241,9 @@ import { MDXRemote } from 'nextra/mdx-remote'
             <>
               <_components.h1>{'h1'}</_components.h1>
               {'\\n'}
-              <_components.h1>{'h2'}</_components.h1>
+              <_components.h2 id={toc[0].id}>{toc[0].value}</_components.h2>
               {'\\n'}
-              <_components.h1>{'h3'}</_components.h1>
+              <_components.h3 id={toc[1].id}>{toc[1].value}</_components.h3>
               {'\\n'}
               <_components.ul>
                 {'\\n'}
@@ -227,10 +270,23 @@ import { MDXRemote } from 'nextra/mdx-remote'
         export const metadata = {
           title: 'h1'
         }
-        export const toc = []
+        export const toc = [
+          {
+            value: 'h2 content',
+            id: 'h2-content',
+            depth: 2
+          },
+          {
+            value: 'h3 content',
+            id: 'h3-content',
+            depth: 3
+          }
+        ]
         function _createMdxContent(props) {
           const _components = {
             h1: 'h1',
+            h2: 'h2',
+            h3: 'h3',
             li: 'li',
             ul: 'ul',
             ...props.components
@@ -239,9 +295,9 @@ import { MDXRemote } from 'nextra/mdx-remote'
             <>
               <_components.h1>{'h1'}</_components.h1>
               {'\\n'}
-              <_components.h1>{'h2'}</_components.h1>
+              <_components.h2 id={toc[0].id}>{toc[0].value}</_components.h2>
               {'\\n'}
-              <_components.h1>{'h3'}</_components.h1>
+              <_components.h3 id={toc[1].id}>{toc[1].value}</_components.h3>
               {'\\n'}
               <_components.ul>
                 {'\\n'}
@@ -272,10 +328,23 @@ import { MDXRemote } from 'nextra/mdx-remote'
         const MDXLayout = function Foo(props) {
           return <div>Default Export {props.children}</div>
         }
-        export const toc = []
+        export const toc = [
+          {
+            value: 'h2 content',
+            id: 'h2-content',
+            depth: 2
+          },
+          {
+            value: 'h3 content',
+            id: 'h3-content',
+            depth: 3
+          }
+        ]
         function _createMdxContent(props) {
           const _components = {
             h1: 'h1',
+            h2: 'h2',
+            h3: 'h3',
             li: 'li',
             ul: 'ul',
             ...props.components
@@ -284,9 +353,9 @@ import { MDXRemote } from 'nextra/mdx-remote'
             <>
               <_components.h1>{'h1'}</_components.h1>
               {'\\n'}
-              <_components.h1>{'h2'}</_components.h1>
+              <_components.h2 id={toc[0].id}>{toc[0].value}</_components.h2>
               {'\\n'}
-              <_components.h1>{'h3'}</_components.h1>
+              <_components.h3 id={toc[1].id}>{toc[1].value}</_components.h3>
               {'\\n'}
               <_components.ul>
                 {'\\n'}
@@ -318,20 +387,25 @@ import { MDXRemote } from 'nextra/mdx-remote'
         "/*@jsxRuntime automatic*/
         /*@jsxImportSource react*/
         export const metadata = {}
+        export const toc = [
+          {
+            value: (
+              <>
+                {'A '}
+                <code>{'Theme'}</code> <a href="https://google.com">{'google'}</a>
+                {' $e = mc^2$'}
+              </>
+            ),
+            id: 'a-theme-google-e--mc2',
+            depth: 2
+          }
+        ]
         function _createMdxContent(props) {
           const _components = {
-            a: 'a',
-            code: 'code',
             h2: 'h2',
             ...props.components
           }
-          return (
-            <_components.h2 id="a-theme-google-e--mc2">
-              {'A '}
-              <_components.code>{'Theme'}</_components.code> <_components.a href="https://google.com">{'google'}</_components.a>
-              {' $e = mc^2$'}
-            </_components.h2>
-          )
+          return <_components.h2 id={toc[0].id}>{toc[0].value}</_components.h2>
         }
         export default _createMdxContent"
       `)
