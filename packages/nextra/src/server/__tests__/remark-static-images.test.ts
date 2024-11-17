@@ -22,14 +22,19 @@ describe('remarkStaticImages', () => {
     expect(clean(rawJs)).resolves.toMatchInlineSnapshot(`
       "/*@jsxRuntime automatic*/
       /*@jsxImportSource react*/
+      import { useMDXComponents as _provideComponents } from 'next-mdx-import-source-file'
       import __img0 from '../foo.png'
       import __img1 from '../bar.jpeg'
       export const metadata = {}
-      export const toc = []
+      function useTOC(props) {
+        return []
+      }
+      export const toc = useTOC()
       function _createMdxContent(props) {
         const _components = {
           img: 'img',
           p: 'p',
+          ..._provideComponents(),
           ...props.components
         }
         return (
@@ -79,14 +84,19 @@ describe('remarkStaticImages', () => {
     expect(clean(rawJs)).resolves.toMatchInlineSnapshot(`
       "/*@jsxRuntime automatic*/
       /*@jsxImportSource react*/
+      import { useMDXComponents as _provideComponents } from 'next-mdx-import-source-file'
       import __img0 from '../foo.png'
       import __img1 from './bar.svg'
       export const metadata = {}
-      export const toc = []
+      function useTOC(props) {
+        return []
+      }
+      export const toc = useTOC()
       function _createMdxContent(props) {
         const _components = {
           img: 'img',
           p: 'p',
+          ..._provideComponents(),
           ...props.components
         }
         return (

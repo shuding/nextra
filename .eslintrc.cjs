@@ -14,11 +14,7 @@ const TAILWIND_CONFIG = {
 module.exports = {
   root: true,
   reportUnusedDisableDirectives: true,
-  ignorePatterns: [
-    'next-env.d.ts',
-    'generated-page-map.js',
-    'generated-page-map.ts'
-  ],
+  ignorePatterns: ['next-env.d.ts', 'generated-page-map.ts'],
   overrides: [
     // Rules for all files
     {
@@ -89,8 +85,8 @@ module.exports = {
       extends: [
         'plugin:react/recommended',
         'plugin:react/jsx-runtime',
-        'plugin:react-hooks/recommended'
-        // 'plugin:@next/next/recommended'
+        'plugin:react-hooks/recommended',
+        'plugin:@next/next/recommended'
       ],
       rules: {
         'react/prop-types': 'off',
@@ -280,19 +276,6 @@ module.exports = {
       files: 'examples/docs/**',
       settings: {
         next: { rootDir: 'examples/docs' }
-      }
-    },
-    {
-      files: ['next.config.js'],
-      env: {
-        node: true
-      }
-    },
-    {
-      files: 'packages/{nextra,nextra-theme-docs,nextra-theme-blog}/**',
-      rules: {
-        // disable rule because we don't have pagesDir in above folders
-        '@next/next/no-html-link-for-pages': 'off'
       }
     },
     {

@@ -20,19 +20,24 @@ export default foo`,
       "/*@jsxRuntime automatic*/
       /*@jsxImportSource react*/
       import { HOC_MDXWrapper } from 'nextra/setup-page'
+      import { useMDXComponents as _provideComponents } from 'next-mdx-import-source-file'
       export const metadata = {}
       import foo from './foo'
       const MDXLayout = foo
-      export const toc = [
-        {
-          value: 'heading',
-          id: 'heading',
-          depth: 2
-        }
-      ]
+      function useTOC(props) {
+        return [
+          {
+            value: 'heading',
+            id: 'heading',
+            depth: 2
+          }
+        ]
+      }
+      export const toc = useTOC()
       function _createMdxContent(props) {
         const _components = {
           h2: 'h2',
+          ..._provideComponents(),
           ...props.components
         }
         return <_components.h2 id={toc[0].id}>{toc[0].value}</_components.h2>
@@ -60,18 +65,23 @@ export { foo as default } from './foo'`,
     expect(clean(rawJs)).resolves.toMatchInlineSnapshot(`
       "/*@jsxRuntime automatic*/
       /*@jsxImportSource react*/
+      import { useMDXComponents as _provideComponents } from 'next-mdx-import-source-file'
       export const metadata = {}
       import { foo as MDXLayout } from './foo'
-      export const toc = [
-        {
-          value: 'heading',
-          id: 'heading',
-          depth: 2
-        }
-      ]
+      function useTOC(props) {
+        return [
+          {
+            value: 'heading',
+            id: 'heading',
+            depth: 2
+          }
+        ]
+      }
+      export const toc = useTOC()
       function _createMdxContent(props) {
         const _components = {
           h2: 'h2',
+          ..._provideComponents(),
           ...props.components
         }
         return <_components.h2 id={toc[0].id}>{toc[0].value}</_components.h2>
@@ -129,41 +139,45 @@ export const TagName = () => {
     expect(clean(rawJs)).resolves.toMatchInlineSnapshot(`
       "/*@jsxRuntime automatic*/
       /*@jsxImportSource react*/
+      import { useMDXComponents as _provideComponents } from 'next-mdx-import-source-file'
       export const metadata = {
         title: 'My Header'
       }
-      export const toc = [
-        {
-          value: 'Some extra space',
-          id: 'extra-space',
-          depth: 2
-        },
-        {
-          value: 'Some extra space in heading',
-          id: 'extra-space-in-heading',
-          depth: 3
-        },
-        {
-          value: 'nospace',
-          id: 'without-space',
-          depth: 3
-        },
-        {
-          value: 'foo',
-          id: 'другой-язык',
-          depth: 4
-        },
-        {
-          value: 'bar Baz []',
-          id: 'bar-baz-',
-          depth: 5
-        },
-        {
-          value: 'bar Qux [#]',
-          id: 'bar-qux-',
-          depth: 6
-        }
-      ]
+      function useTOC(props) {
+        return [
+          {
+            value: 'Some extra space',
+            id: 'extra-space',
+            depth: 2
+          },
+          {
+            value: 'Some extra space in heading',
+            id: 'extra-space-in-heading',
+            depth: 3
+          },
+          {
+            value: 'nospace',
+            id: 'without-space',
+            depth: 3
+          },
+          {
+            value: 'foo',
+            id: 'другой-язык',
+            depth: 4
+          },
+          {
+            value: 'bar Baz []',
+            id: 'bar-baz-',
+            depth: 5
+          },
+          {
+            value: 'bar Qux [#]',
+            id: 'bar-qux-',
+            depth: 6
+          }
+        ]
+      }
+      export const toc = useTOC()
       function _createMdxContent(props) {
         const _components = {
           h1: 'h1',
@@ -172,6 +186,7 @@ export const TagName = () => {
           h4: 'h4',
           h5: 'h5',
           h6: 'h6',
+          ..._provideComponents(),
           ...props.components
         }
         return (
@@ -200,17 +215,22 @@ export const TagName = () => {
     expect(clean(rawJs)).resolves.toMatchInlineSnapshot(`
       "/*@jsxRuntime automatic*/
       /*@jsxImportSource react*/
+      import { useMDXComponents as _provideComponents } from 'next-mdx-import-source-file'
       export const metadata = {}
-      export const toc = [
-        {
-          value: 'My Header',
-          id: 'my-header',
-          depth: 3
-        }
-      ]
+      function useTOC(props) {
+        return [
+          {
+            value: 'My Header',
+            id: 'my-header',
+            depth: 3
+          }
+        ]
+      }
+      export const toc = useTOC()
       function _createMdxContent(props) {
         const _components = {
           h3: 'h3',
+          ..._provideComponents(),
           ...props.components
         }
         return <_components.h3 id={toc[0].id}>{toc[0].value}</_components.h3>
@@ -256,102 +276,119 @@ import Last from './three.mdx'
     expect(clean(rawJs)).resolves.toMatchInlineSnapshot(`
       "/*@jsxRuntime automatic*/
       /*@jsxImportSource react*/
+      import { useMDXComponents as _provideComponents } from 'next-mdx-import-source-file'
       export const metadata = {}
       import FromMdx, { toc as toc0 } from './one.mdx'
       import FromMarkdown, { toc as toc1 } from './two.md'
       import IgnoreMe from './foo'
       import Last, { toc as toc2 } from './three.mdx'
-      export const toc = [
-        {
-          value: '❤️',
-          id: '️',
-          depth: 2
-        },
-        ...toc0,
-        {
-          value: '✅',
-          id: '',
-          depth: 2
-        },
-        ...toc1,
-        ...toc2,
-        {
-          value: '👋',
-          id: '-1',
-          depth: 2
-        },
-        {
-          value: (
-            <>
-              {'kek '}
-              <Kek />
-            </>
-          ),
-          id: 'kek-',
-          depth: 2
-        },
-        {
-          value: (
-            <>
-              <code>{'try'}</code>
-              {' me'}
-            </>
-          ),
-          id: 'try-me',
-          depth: 2
-        },
-        {
-          value: (
-            <>
-              {'latex '}
-              <span className="katex">
-                <span className="katex-mathml">
-                  <math xmlns="http://www.w3.org/1998/Math/MathML">
-                    <semantics>
-                      <mrow>
-                        <mi>{'l'}</mi>
-                      </mrow>
-                      <annotation encoding="application/x-tex">{'l'}</annotation>
-                    </semantics>
-                  </math>
-                </span>
-                <span className="katex-html" aria-hidden="true">
-                  <span className="base">
-                    <span
-                      className="strut"
-                      style={{
-                        height: '0.6944em'
-                      }}
-                    />
-                    <span
-                      className="mord mathnormal"
-                      style={{
-                        marginRight: '0.01968em'
-                      }}
-                    >
-                      {'l'}
-                    </span>
-                  </span>
-                </span>
-              </span>
-            </>
-          ),
-          id: 'latex-l',
-          depth: 2
-        },
-        {
-          value: (
-            <>
-              {'interpolate'} {1} {true} {null} {variable}
-            </>
-          ),
-          id: 'interpolate-1-true-null-variable',
-          depth: 2
-        }
-      ]
+      function useTOC(props) {
+        const _components = {
+            annotation: 'annotation',
+            code: 'code',
+            math: 'math',
+            mi: 'mi',
+            mrow: 'mrow',
+            semantics: 'semantics',
+            span: 'span',
+            ..._provideComponents()
+          },
+          { Kek } = _components
+        if (!Kek) _missingMdxReference('Kek', true)
+        return [
+          {
+            value: '❤️',
+            id: '️',
+            depth: 2
+          },
+          ...toc0,
+          {
+            value: '✅',
+            id: '',
+            depth: 2
+          },
+          ...toc1,
+          ...toc2,
+          {
+            value: '👋',
+            id: '-1',
+            depth: 2
+          },
+          {
+            value: (
+              <>
+                {'kek '}
+                <Kek />
+              </>
+            ),
+            id: 'kek-',
+            depth: 2
+          },
+          {
+            value: (
+              <>
+                <_components.code>{'try'}</_components.code>
+                {' me'}
+              </>
+            ),
+            id: 'try-me',
+            depth: 2
+          },
+          {
+            value: (
+              <>
+                {'latex '}
+                <_components.span className="katex">
+                  <_components.span className="katex-mathml">
+                    <_components.math xmlns="http://www.w3.org/1998/Math/MathML">
+                      <_components.semantics>
+                        <_components.mrow>
+                          <_components.mi>{'l'}</_components.mi>
+                        </_components.mrow>
+                        <_components.annotation encoding="application/x-tex">{'l'}</_components.annotation>
+                      </_components.semantics>
+                    </_components.math>
+                  </_components.span>
+                  <_components.span className="katex-html" aria-hidden="true">
+                    <_components.span className="base">
+                      <_components.span
+                        className="strut"
+                        style={{
+                          height: '0.6944em'
+                        }}
+                      />
+                      <_components.span
+                        className="mord mathnormal"
+                        style={{
+                          marginRight: '0.01968em'
+                        }}
+                      >
+                        {'l'}
+                      </_components.span>
+                    </_components.span>
+                  </_components.span>
+                </_components.span>
+              </>
+            ),
+            id: 'latex-l',
+            depth: 2
+          },
+          {
+            value: (
+              <>
+                {'interpolate'} {1} {true} {null} {variable}
+              </>
+            ),
+            id: 'interpolate-1-true-null-variable',
+            depth: 2
+          }
+        ]
+      }
+      export const toc = useTOC()
       function _createMdxContent(props) {
         const _components = {
           h2: 'h2',
+          ..._provideComponents(),
           ...props.components
         }
         return (
@@ -381,7 +418,16 @@ import Last from './three.mdx'
           </>
         )
       }
-      export default _createMdxContent"
+      export default _createMdxContent
+      function _missingMdxReference(id, component) {
+        throw new Error(
+          'Expected ' +
+            (component ? 'component' : 'object') +
+            ' \`' +
+            id +
+            '\` to be defined: you likely forgot to import, pass, or provide it.'
+        )
+      }"
     `)
   })
   it('should not attach headings with parent Tab or Tabs.Tab', async () => {
@@ -398,7 +444,7 @@ import Last from './three.mdx'
 `,
       { mdxOptions }
     )
-    expect(rawJs).toMatch('export const toc = []')
+    expect(rawJs).toMatch('export const toc = useTOC()')
     expect(rawJs).not.toMatch('id=')
   })
 })

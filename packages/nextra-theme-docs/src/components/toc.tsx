@@ -2,12 +2,12 @@
 
 import cn from 'clsx'
 import type { Heading } from 'nextra'
+import { Anchor } from 'nextra/components'
 import type { FC } from 'react'
 import { useEffect, useRef } from 'react'
 import scrollIntoView from 'scroll-into-view-if-needed'
 import { useActiveAnchor, useThemeConfig } from '../stores'
 import { getGitIssueUrl, gitUrlParse } from '../utils'
-import { Anchor } from './anchor'
 import { BackToTop } from './back-to-top'
 
 type TOCProps = {

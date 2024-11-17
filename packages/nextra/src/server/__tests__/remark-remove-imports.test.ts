@@ -23,23 +23,28 @@ export const Test = ({value}) => value
       "/*@jsxRuntime automatic*/
       /*@jsxImportSource react*/
       'use strict'
+      const { useMDXComponents: _provideComponents } = arguments[0]
       const metadata = {}
       const myVar = 123
       const Test = ({ value }) => value
-      const toc = [
-        {
-          value: (
-            <>
-              <Test value="Hello" /> {myVar}
-            </>
-          ),
-          id: '-myvar',
-          depth: 2
-        }
-      ]
+      function useTOC(props) {
+        return [
+          {
+            value: (
+              <>
+                <Test value="Hello" /> {myVar}
+              </>
+            ),
+            id: '-myvar',
+            depth: 2
+          }
+        ]
+      }
+      const toc = useTOC()
       function _createMdxContent(props) {
         const _components = {
           h2: 'h2',
+          ..._provideComponents(),
           ...props.components
         }
         return <_components.h2 id={toc[0].id}>{toc[0].value}</_components.h2>

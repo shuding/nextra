@@ -1,4 +1,3 @@
-export { Anchor } from './anchor'
 export { Breadcrumb } from './breadcrumb'
 export { Footer } from './footer'
 export { LastUpdated } from './last-updated'

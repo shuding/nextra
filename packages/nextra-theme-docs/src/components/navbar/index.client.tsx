@@ -7,13 +7,12 @@ import {
   MenuItems
 } from '@headlessui/react'
 import cn from 'clsx'
-import { Button } from 'nextra/components'
+import { Anchor, Button } from 'nextra/components'
 import { useFSRoute } from 'nextra/hooks'
 import { ArrowRightIcon, MenuIcon } from 'nextra/icons'
 import type { MenuItem } from 'nextra/normalize-pages'
 import type { FC, ReactNode } from 'react'
 import { setMenu, useConfig, useMenu, useThemeConfig } from '../../stores'
-import { Anchor } from '../anchor'
 
 const classes = {
   link: cn(

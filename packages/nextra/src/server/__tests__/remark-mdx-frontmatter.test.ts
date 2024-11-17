@@ -20,10 +20,14 @@ describe('remarkMdxFrontMatter', () => {
       expect(clean(rawJs)).resolves.toMatchInlineSnapshot(`
         "'use strict'
         const { Fragment: _Fragment, jsx: _jsx } = arguments[0]
+        const { useMDXComponents: _provideComponents } = arguments[0]
         const metadata = {
           foo: 'bar'
         }
-        const toc = []
+        function useTOC(props) {
+          return []
+        }
+        const toc = useTOC()
         function _createMdxContent(props) {
           return _jsx(_Fragment, {})
         }
@@ -47,10 +51,14 @@ describe('remarkMdxFrontMatter', () => {
       expect(clean(rawJs)).resolves.toMatchInlineSnapshot(`
         "'use strict'
         const { Fragment: _Fragment, jsx: _jsx } = arguments[0]
+        const { useMDXComponents: _provideComponents } = arguments[0]
         const metadata = {
           foo: 'bar'
         }
-        const toc = []
+        function useTOC(props) {
+          return []
+        }
+        const toc = useTOC()
         function _createMdxContent(props) {
           return _jsx(_Fragment, {})
         }

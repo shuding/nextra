@@ -1,3 +1,4 @@
+/* eslint sort-keys: error */
 import cn from 'clsx'
 import {
   Callout,
@@ -29,92 +30,93 @@ const Blockquote: FC<ComponentProps<'blockquote'>> = props => (
   />
 )
 
-const DEFAULT_COMPONENTS = getNextraMDXComponents()
+const DEFAULT_COMPONENTS = getNextraMDXComponents({
+  a: Link,
+  blockquote: withGitHubAlert(({ type, ...props }) => {
+    const calloutType = (
+      {
+        caution: 'error',
+        important: 'error', // TODO
+        note: 'info',
+        tip: 'default',
+        warning: 'warning'
+      } as const
+    )[type]
 
-/* eslint sort-keys: error */
-export const useMDXComponents = (components?: Readonly<MDXComponents>) =>
-  ({
+    return <Callout type={calloutType} {...props} />
+  }, Blockquote),
+  code: Code,
+  details: Details,
+  h1: H1,
+  h2: H2,
+  h3: H3,
+  h4: H4,
+  h5: H5,
+  h6: H6,
+  hr: props => (
+    <hr
+      className="_my-8 _border-neutral-200/70 contrast-more:_border-neutral-400 dark:_border-primary-100/10 contrast-more:dark:_border-neutral-400"
+      {...props}
+    />
+  ),
+  li: props => <li className="_my-2" {...props} />,
+  ol: props => (
+    <ol
+      className="[:is(ol,ul)_&]:_my-3 [&:not(:first-child)]:_mt-6 _list-decimal _ms-6"
+      {...props}
+    />
+  ),
+  p: props => (
+    <p className="[&:not(:first-child)]:_mt-6 _leading-7" {...props} />
+  ),
+  pre: withIcons(Pre),
+  summary: Summary,
+  table: ({ className, ...props }) => (
+    <Table
+      className={cn(
+        'nextra-scrollbar [&:not(:first-child)]:_mt-6 _p-0',
+        className
+      )}
+      {...props}
+    />
+  ),
+  td: Table.Td,
+  th: Table.Th,
+  tr: Table.Tr,
+  ul: props => (
+    <ul
+      className="[:is(ol,ul)_&]:_my-3 [&:not(:first-child)]:_mt-6 _list-disc _ms-6"
+      {...props}
+    />
+  ),
+  wrapper({ toc, children, ...props }) {
+    // @ts-expect-error fixme
+    toc = toc.map(item => ({
+      ...item,
+      value: removeLinks(item.value)
+    }))
+    return (
+      <div className="_mx-auto _flex _max-w-[90rem]">
+        <Sidebar toc={toc} />
+
+        <ClientWrapper toc={toc} {...props}>
+          <SkipNavContent />
+          <main
+            data-pagefind-body={
+              (props.metadata as any).searchable !== false || undefined
+            }
+          >
+            {children}
+          </main>
+        </ClientWrapper>
+      </div>
+    )
+  }
+})
+
+export const useMDXComponents = (components?: Readonly<MDXComponents>) => {
+  return {
     ...DEFAULT_COMPONENTS,
-    a: Link,
-    blockquote: withGitHubAlert(({ type, ...props }) => {
-      const calloutType = (
-        {
-          caution: 'error',
-          important: 'error', // TODO
-          note: 'info',
-          tip: 'default',
-          warning: 'warning'
-        } as const
-      )[type]
-
-      return <Callout type={calloutType} {...props} />
-    }, Blockquote),
-    code: Code,
-    details: Details,
-    h1: H1,
-    h2: H2,
-    h3: H3,
-    h4: H4,
-    h5: H5,
-    h6: H6,
-    hr: props => (
-      <hr
-        className="_my-8 _border-neutral-200/70 contrast-more:_border-neutral-400 dark:_border-primary-100/10 contrast-more:dark:_border-neutral-400"
-        {...props}
-      />
-    ),
-    li: props => <li className="_my-2" {...props} />,
-    ol: props => (
-      <ol
-        className="[:is(ol,ul)_&]:_my-3 [&:not(:first-child)]:_mt-6 _list-decimal _ms-6"
-        {...props}
-      />
-    ),
-    p: props => (
-      <p className="[&:not(:first-child)]:_mt-6 _leading-7" {...props} />
-    ),
-    pre: withIcons(Pre),
-    summary: Summary,
-    table: ({ className, ...props }) => (
-      <Table
-        className={cn(
-          'nextra-scrollbar [&:not(:first-child)]:_mt-6 _p-0',
-          className
-        )}
-        {...props}
-      />
-    ),
-    td: Table.Td,
-    th: Table.Th,
-    tr: Table.Tr,
-    ul: props => (
-      <ul
-        className="[:is(ol,ul)_&]:_my-3 [&:not(:first-child)]:_mt-6 _list-disc _ms-6"
-        {...props}
-      />
-    ),
-    wrapper({ toc, children, ...props }) {
-      // @ts-expect-error fixme
-      toc = toc.map(item => ({
-        ...item,
-        value: removeLinks(item.value)
-      }))
-      return (
-        <div className="_mx-auto _flex _max-w-[90rem]">
-          <Sidebar toc={toc} />
-
-          <ClientWrapper toc={toc} {...props}>
-            <SkipNavContent />
-            <main
-              data-pagefind-body={
-                (props.metadata as any).searchable !== false || undefined
-              }
-            >
-              {children}
-            </main>
-          </ClientWrapper>
-        </div>
-      )
-    },
     ...components
-  }) satisfies MDXComponents
+  } satisfies MDXComponents
+}

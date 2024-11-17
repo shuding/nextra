@@ -70,7 +70,28 @@ export const rehypeExtractTocContent: Plugin<[], Root> = () => (ast, file) => {
     data: {
       estree: {
         body: [
-          createAstExportConst('toc', { type: 'ArrayExpression', elements })
+          {
+            // TOC links must be inside a function, in our case inside useTOC, so
+            // mdx components will be injected for `a` or `code` tags inside headings
+            type: 'FunctionDeclaration',
+            id: { type: 'Identifier', name: 'useTOC' },
+            params: [{ type: 'Identifier', name: 'props' }],
+            body: {
+              type: 'BlockStatement',
+              body: [
+                {
+                  type: 'ReturnStatement',
+                  argument: { type: 'ArrayExpression', elements }
+                }
+              ]
+            }
+          },
+          createAstExportConst('toc', {
+            type: 'CallExpression',
+            callee: { type: 'Identifier', name: 'useTOC' },
+            arguments: [],
+            optional: false
+          })
         ]
       }
     }

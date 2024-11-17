@@ -3,14 +3,19 @@
 exports[`Process heading > code-h1 1`] = `
 "/*@jsxRuntime automatic*/
 /*@jsxImportSource react*/
+import { useMDXComponents as _provideComponents } from 'next-mdx-import-source-file'
 export const metadata = {
   title: 'codegen.yml'
 }
-export const toc = []
+function useTOC(props) {
+  return []
+}
+export const toc = useTOC()
 function _createMdxContent(props) {
   const _components = {
     code: 'code',
     h1: 'h1',
+    ..._provideComponents(),
     ...props.components
   }
   return (
@@ -25,14 +30,19 @@ export default _createMdxContent"
 exports[`Process heading > code-with-text-h1 1`] = `
 "/*@jsxRuntime automatic*/
 /*@jsxImportSource react*/
+import { useMDXComponents as _provideComponents } from 'next-mdx-import-source-file'
 export const metadata = {
   title: 'codegen.yml file'
 }
-export const toc = []
+function useTOC(props) {
+  return []
+}
+export const toc = useTOC()
 function _createMdxContent(props) {
   const _components = {
     code: 'code',
     h1: 'h1',
+    ..._provideComponents(),
     ...props.components
   }
   return (
@@ -48,6 +58,7 @@ export default _createMdxContent"
 exports[`Process heading > dynamic-h1 1`] = `
 "/*@jsxRuntime automatic*/
 /*@jsxImportSource react*/
+import { useMDXComponents as _provideComponents } from 'next-mdx-import-source-file'
 export const metadata = {
   title: 'Posts Tagged with ""'
 }
@@ -56,10 +67,14 @@ export const TagName = () => {
   const { tag } = useRouter().query
   return tag || null
 }
-export const toc = []
+function useTOC(props) {
+  return []
+}
+export const toc = useTOC()
 function _createMdxContent(props) {
   const _components = {
     h1: 'h1',
+    ..._provideComponents(),
     ...props.components
   }
   return (
@@ -76,17 +91,22 @@ export default _createMdxContent"
 exports[`Process heading > no-h1 1`] = `
 "/*@jsxRuntime automatic*/
 /*@jsxImportSource react*/
+import { useMDXComponents as _provideComponents } from 'next-mdx-import-source-file'
 export const metadata = {}
-export const toc = [
-  {
-    value: 'H2',
-    id: 'h2',
-    depth: 2
-  }
-]
+function useTOC(props) {
+  return [
+    {
+      value: 'H2',
+      id: 'h2',
+      depth: 2
+    }
+  ]
+}
+export const toc = useTOC()
 function _createMdxContent(props) {
   const _components = {
     h2: 'h2',
+    ..._provideComponents(),
     ...props.components
   }
   return <_components.h2 id={toc[0].id}>{toc[0].value}</_components.h2>
@@ -97,13 +117,18 @@ export default _createMdxContent"
 exports[`Process heading > static-h1 1`] = `
 "/*@jsxRuntime automatic*/
 /*@jsxImportSource react*/
+import { useMDXComponents as _provideComponents } from 'next-mdx-import-source-file'
 export const metadata = {
   title: 'Hello World'
 }
-export const toc = []
+function useTOC(props) {
+  return []
+}
+export const toc = useTOC()
 function _createMdxContent(props) {
   const _components = {
     h1: 'h1',
+    ..._provideComponents(),
     ...props.components
   }
   return <_components.h1>{'Hello World'}</_components.h1>

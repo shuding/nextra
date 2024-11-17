@@ -123,6 +123,7 @@ export default async function RootLayout({ children, params }) {
           toc={{
             backToTop: dictionary.backToTop,
             extraContent: (
+              // eslint-disable-next-line @next/next/no-img-element -- we can't use with external urls
               <img alt="placeholder cat" src="https://placecats.com/300/200" />
             )
           }}

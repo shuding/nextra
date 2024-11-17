@@ -1,12 +1,12 @@
 import cn from 'clsx'
 // eslint-disable-next-line no-restricted-imports -- since we don't need newWindow prop
 import NextLink from 'next/link'
+import { Anchor } from 'nextra/components'
 import { DiscordIcon, GitHubIcon } from 'nextra/icons'
 import { element } from 'nextra/schemas'
 import type { FC } from 'react'
 import { z } from 'zod'
 import { fromZodError } from 'zod-validation-error'
-import { Anchor } from '../anchor'
 import { ClientNavbar } from './index.client'
 
 const propsSchema = z.strictObject({
