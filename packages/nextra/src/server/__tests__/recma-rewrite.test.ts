@@ -420,7 +420,8 @@ import { MDXRemote } from 'nextra/mdx-remote'
           mdxOptions: {
             ...options.mdxOptions,
             providerImportSource: '👍'
-          }
+          },
+          latex: true
         }
       )
       expect(clean(rawMdx)).resolves.toMatchInlineSnapshot(`
@@ -431,7 +432,16 @@ import { MDXRemote } from 'nextra/mdx-remote'
         function useTOC(props) {
           const _components = {
             a: 'a',
+            annotation: 'annotation',
             code: 'code',
+            math: 'math',
+            mi: 'mi',
+            mn: 'mn',
+            mo: 'mo',
+            mrow: 'mrow',
+            msup: 'msup',
+            semantics: 'semantics',
+            span: 'span',
             ..._provideComponents()
           }
           return [
@@ -440,8 +450,90 @@ import { MDXRemote } from 'nextra/mdx-remote'
                 <>
                   {'A '}
                   <_components.code>{'Theme'}</_components.code>{' '}
-                  <_components.a href="https://google.com">{'google'}</_components.a>
-                  {' $e = mc^2$'}
+                  <_components.a href="https://google.com">{'google'}</_components.a>{' '}
+                  <_components.span className="katex">
+                    <_components.span className="katex-mathml">
+                      <_components.math xmlns="http://www.w3.org/1998/Math/MathML">
+                        <_components.semantics>
+                          <_components.mrow>
+                            <_components.mi>{'e'}</_components.mi>
+                            <_components.mo>{'='}</_components.mo>
+                            <_components.mi>{'m'}</_components.mi>
+                            <_components.msup>
+                              <_components.mi>{'c'}</_components.mi>
+                              <_components.mn>{'2'}</_components.mn>
+                            </_components.msup>
+                          </_components.mrow>
+                          <_components.annotation encoding="application/x-tex">{'e = mc^2'}</_components.annotation>
+                        </_components.semantics>
+                      </_components.math>
+                    </_components.span>
+                    <_components.span className="katex-html" aria-hidden="true">
+                      <_components.span className="base">
+                        <_components.span
+                          className="strut"
+                          style={{
+                            height: '0.4306em'
+                          }}
+                        />
+                        <_components.span className="mord mathnormal">{'e'}</_components.span>
+                        <_components.span
+                          className="mspace"
+                          style={{
+                            marginRight: '0.2778em'
+                          }}
+                        />
+                        <_components.span className="mrel">{'='}</_components.span>
+                        <_components.span
+                          className="mspace"
+                          style={{
+                            marginRight: '0.2778em'
+                          }}
+                        />
+                      </_components.span>
+                      <_components.span className="base">
+                        <_components.span
+                          className="strut"
+                          style={{
+                            height: '0.8141em'
+                          }}
+                        />
+                        <_components.span className="mord mathnormal">{'m'}</_components.span>
+                        <_components.span className="mord">
+                          <_components.span className="mord mathnormal">{'c'}</_components.span>
+                          <_components.span className="msupsub">
+                            <_components.span className="vlist-t">
+                              <_components.span className="vlist-r">
+                                <_components.span
+                                  className="vlist"
+                                  style={{
+                                    height: '0.8141em'
+                                  }}
+                                >
+                                  <_components.span
+                                    style={{
+                                      top: '-3.063em',
+                                      marginRight: '0.05em'
+                                    }}
+                                  >
+                                    <_components.span
+                                      className="pstrut"
+                                      style={{
+                                        height: '2.7em'
+                                      }}
+                                    />
+                                    <_components.span className="sizing reset-size6 size3 mtight">
+                                      <_components.span className="mord mtight">{'2'}</_components.span>
+                                    </_components.span>
+                                  </_components.span>
+                                </_components.span>
+                              </_components.span>
+                            </_components.span>
+                          </_components.span>
+                        </_components.span>
+                      </_components.span>
+                    </_components.span>
+                  </_components.span>
                 </>
               ),
               id: 'a-theme-google-e--mc2',

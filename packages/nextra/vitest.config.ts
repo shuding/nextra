@@ -1,6 +1,6 @@
+import path from 'node:path'
 import react from '@vitejs/plugin-react'
 import { defineConfig } from 'vitest/config'
-import path from 'node:path'
 
 export default defineConfig({
   plugins: [react()],
@@ -10,7 +10,9 @@ export default defineConfig({
     testTimeout: 12_000,
     alias: {
       // to make pass `merge-meta-with-page-map.ts` test
-      'next-mdx-import-source-file': path.resolve('src/client/mdx-components.tsx')
+      'next-mdx-import-source-file': path.resolve(
+        'src/client/mdx-components.tsx'
+      )
     }
   },
   server: {
