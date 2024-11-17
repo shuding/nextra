@@ -413,7 +413,7 @@ import Last from './three.mdx'
 `,
       { mdxOptions }
     )
-    expect(rawJs).toMatch('export const toc = []')
+    expect(rawJs).toMatch('export const toc = useTOC()')
     expect(rawJs).not.toMatch('id=')
   })
 })

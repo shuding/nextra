@@ -79,7 +79,7 @@ export const rehypeExtractTocContent: Plugin<[], Root> = () => (ast, file) => {
               body: [
                 {
                   type: 'ReturnStatement',
-                  argument: { type: 'ArrayExpression', elements: elements }
+                  argument: { type: 'ArrayExpression', elements }
                 }
               ]
             }
