@@ -11,7 +11,7 @@ export default defineConfig({
     alias: {
       // to make pass `merge-meta-with-page-map.ts` test
       'next-mdx-import-source-file': path.resolve(
-        'src/client/mdx-components.tsx'
+        'src/client/mdx-components.ts'
       )
     }
   },

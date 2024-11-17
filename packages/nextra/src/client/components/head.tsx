@@ -88,6 +88,7 @@ const _Head: FC<HeadProps> = ({ children, ...props }) => {
 `.trim()
 
   return (
+    // eslint-disable-next-line @next/next/no-head-element -- false positive, we use it in App router
     <head>
       {children}
       <style>{style}</style>
