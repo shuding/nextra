@@ -69,7 +69,7 @@ export type Heading = {
   id: string
 }
 
-type NextraMetadata = Omit<Metadata, 'title'> & {
+export type NextraMetadata = Omit<Metadata, 'title'> & {
   title: string
   filePath: string
   timestamp?: number

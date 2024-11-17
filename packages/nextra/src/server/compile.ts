@@ -87,7 +87,7 @@ export async function compileMdx(
     rehypePlugins,
     recmaPlugins,
     rehypePrettyCodeOptions,
-    providerImportSource
+    providerImportSource = 'next-mdx-import-source-file',
   } = mdxOptions
 
   const format =

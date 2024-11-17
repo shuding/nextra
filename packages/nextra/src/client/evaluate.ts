@@ -1,3 +1,4 @@
+import { useMDXComponents } from 'next-mdx-import-source-file'
 import jsxDevRuntime from 'react/jsx-dev-runtime'
 import jsxRuntime from 'react/jsx-runtime'
 
@@ -19,5 +20,5 @@ export function evaluate(compiledSource: string, scope: Scope = {}) {
   // function with the actual values.
   const hydrateFn = Reflect.construct(Function, ['$', ...keys, compiledSource])
 
-  return hydrateFn(runtime, ...values)
+  return hydrateFn({ ...runtime, useMDXComponents }, ...values)
 }

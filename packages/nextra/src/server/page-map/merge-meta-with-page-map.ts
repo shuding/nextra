@@ -4,8 +4,10 @@ import type {
   DynamicMeta,
   DynamicMetaItem,
   Folder,
+  NextraMetadata,
   PageMapItem
 } from '../../types.js'
+import { pageTitleFromFilename } from '../utils.js'
 
 function isFolder(value: DynamicMetaItem): value is DynamicFolder {
   return (
@@ -17,7 +19,10 @@ function isFolder(value: DynamicMetaItem): value is DynamicFolder {
   )
 }
 
-function normalizeMetaData(obj: DynamicMeta): DynamicMeta {
+function normalizeMetaData(
+  obj: DynamicMeta,
+  map: Record<string, NextraMetadata>
+): DynamicMeta {
   return Object.fromEntries(
     Object.entries(obj).map(([key, value]) => {
       let val
@@ -29,7 +34,7 @@ function normalizeMetaData(obj: DynamicMeta): DynamicMeta {
       } else {
         val = value
       }
-      return [key, val]
+      return [key, map[key] ? val : val || pageTitleFromFilename(key)]
     })
   )
 }
@@ -69,7 +74,13 @@ export function mergeMetaWithPageMap<T extends Folder | PageMapItem[]>(
       ].join('\n')
     )
   }
-  result.unshift({ data: normalizeMetaData(meta) })
+  result.unshift({
+    data: normalizeMetaData(
+      meta,
+      // @ts-expect-error -- fixme
+      Object.fromEntries(result.map(key => [key.name, key.frontMatter]))
+    )
+  })
 
   // @ts-expect-error -- fixme
   return result

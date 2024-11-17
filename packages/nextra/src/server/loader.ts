@@ -126,7 +126,6 @@ export async function loader(
       jsx: true,
       outputFormat: 'program',
       format: 'detect',
-      providerImportSource: 'next-mdx-import-source-file',
       rehypePrettyCodeOptions: {
         ...mdxOptions.rehypePrettyCodeOptions,
         transformers: [
