@@ -7,7 +7,7 @@ const runtime =
 
 export type Scope = Record<string, unknown>
 
-export function evaluate(compiledSource: string, scope: Scope = {}) {
+export function evaluate(rawJs: string, scope: Scope = {}) {
   // if we're ready to render, we can assemble the component tree and let React do its thing
   // first we set up the scope which has to include the mdx custom
   // create element function as well as any components we're using
@@ -18,7 +18,7 @@ export function evaluate(compiledSource: string, scope: Scope = {}) {
   // and all our components in scope for the function, which is the case here
   // we pass the names (via keys) in as the function's args, and execute the
   // function with the actual values.
-  const hydrateFn = Reflect.construct(Function, ['$', ...keys, compiledSource])
+  const hydrateFn = Reflect.construct(Function, ['$', ...keys, rawJs])
 
   return hydrateFn({ ...runtime, useMDXComponents }, ...values)
 }
