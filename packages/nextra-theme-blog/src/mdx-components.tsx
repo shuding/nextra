@@ -1,3 +1,4 @@
+/* eslint sort-keys: error */
 import {
   Callout,
   Code,
@@ -74,8 +75,10 @@ const DEFAULT_COMPONENTS = getNextraMDXComponents({
   tr: Table.Tr
 })
 
-/* eslint sort-keys: error */
-export const useMDXComponents = (components: BlogMDXComponents = {}) =>
+export const useMDXComponents = ({
+  DateFormatter,
+  ...components
+}: BlogMDXComponents = {}) =>
   ({
     ...DEFAULT_COMPONENTS,
     wrapper({ children, metadata }) {
@@ -86,8 +89,6 @@ export const useMDXComponents = (components: BlogMDXComponents = {}) =>
         )
       }
       const dateObj = date && new Date(date)
-      const { DateFormatter } = components
-
       return (
         <>
           <h1>{metadata.title}</h1>

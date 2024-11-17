@@ -16,12 +16,12 @@ export type MDXComponents = NestedMDXComponents & {
   img?: FC<ComponentPropsWithoutRef<typeof Image>>
 }
 
-export function useMDXComponents<T extends Readonly<MDXComponents>>(
-  components?: T
-) {
+export const useMDXComponents = <T extends Readonly<MDXComponents>>(
+  components: T
+) => {
   return {
     img: Image,
     a: Anchor,
     ...components
-  }
+  } satisfies T
 }
