@@ -1,5 +1,30 @@
 # nextra
 
+## 4.0.0-app-router.27
+
+### Major Changes
+
+- 8a0ae0f: - add root `_meta.global.{js,jsx,ts,tsx}` file
+  > See
+  > [working example](https://github.com/shuding/nextra/blob/v4-v2/docs/app/_meta.global.ts)
+  > based on https://nextra.site website
+  - `getPageMap` now receive only 1 argument `root?: string = '/'` instead of 2
+    `lang?: string, route?: string = '/'`
+  - remove `createCatchAllMeta` from `nextra/catch-all`
+  - remove `collectCatchAllRoutes`
+  - remove `normalizePageRoute`
+  - add `mergeMetaWithPageMap` to `nextra/page-map`
+  - move adding `metadata.filePath`, `metadata.title` and `metadata.readingTime`
+    in remark plugin
+  - refactor recma rewrite plugin and add tests
+    - remove `recmaRewriteJsx`
+    - remove `recmaRewriteFunctionBody`
+  - make `convertPageMapToJs` sync
+
+### Patch Changes
+
+- 5e06f57: fix injecting mdx-components into headings and injecting into toc
+
 ## 4.0.0-app-router.26
 
 ### Minor Changes
