@@ -57,26 +57,27 @@ type BlogMDXComponents = Readonly<
   }
 >
 
-const DEFAULT_COMPONENTS = getNextraMDXComponents()
+const DEFAULT_COMPONENTS = getNextraMDXComponents({
+  blockquote: Blockquote,
+  code: Code,
+  details: Details,
+  h2: createHeading('h2'),
+  h3: createHeading('h3'),
+  h4: createHeading('h4'),
+  h5: createHeading('h5'),
+  h6: createHeading('h6'),
+  pre: withIcons(Pre),
+  summary: Summary,
+  table: Table,
+  td: Table.Td,
+  th: Table.Th,
+  tr: Table.Tr,
+})
 
 /* eslint sort-keys: error */
 export const useMDXComponents = (components: BlogMDXComponents = {}) =>
   ({
     ...DEFAULT_COMPONENTS,
-    blockquote: Blockquote,
-    code: Code,
-    details: Details,
-    h2: createHeading('h2'),
-    h3: createHeading('h3'),
-    h4: createHeading('h4'),
-    h5: createHeading('h5'),
-    h6: createHeading('h6'),
-    pre: withIcons(Pre),
-    summary: Summary,
-    table: Table,
-    td: Table.Td,
-    th: Table.Th,
-    tr: Table.Tr,
     wrapper({ children, metadata }) {
       const date = (metadata as any).date as string
       if (date && !isValidDate(date)) {

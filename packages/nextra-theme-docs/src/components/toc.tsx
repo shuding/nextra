@@ -7,7 +7,7 @@ import { useEffect, useRef } from 'react'
 import scrollIntoView from 'scroll-into-view-if-needed'
 import { useActiveAnchor, useThemeConfig } from '../stores'
 import { getGitIssueUrl, gitUrlParse } from '../utils'
-import { Anchor } from './anchor'
+import { Anchor } from 'nextra/components'
 import { BackToTop } from './back-to-top'
 
 type TOCProps = {
