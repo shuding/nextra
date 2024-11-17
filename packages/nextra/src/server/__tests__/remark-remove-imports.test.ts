@@ -26,17 +26,20 @@ export const Test = ({value}) => value
       const metadata = {}
       const myVar = 123
       const Test = ({ value }) => value
-      const toc = [
-        {
-          value: (
-            <>
-              <Test value="Hello" /> {myVar}
-            </>
-          ),
-          id: '-myvar',
-          depth: 2
-        }
-      ]
+      function useTOC(props) {
+        return [
+          {
+            value: (
+              <>
+                <Test value="Hello" /> {myVar}
+              </>
+            ),
+            id: '-myvar',
+            depth: 2
+          }
+        ]
+      }
+      const toc = useTOC()
       function _createMdxContent(props) {
         const _components = {
           h2: 'h2',

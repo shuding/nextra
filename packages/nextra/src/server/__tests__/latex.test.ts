@@ -15,7 +15,10 @@ describe('LaTeX', () => {
         /*@jsxImportSource react*/
         'use strict'
         const metadata = {}
-        const toc = []
+        function useTOC(props) {
+          return []
+        }
+        const toc = useTOC()
         function _createMdxContent(props) {
           const _components = {
             annotation: 'annotation',
@@ -115,7 +118,10 @@ describe('LaTeX', () => {
         /*@jsxImportSource react*/
         export const metadata = {}
         import { MathJax, MathJaxContext } from 'nextra/components'
-        export const toc = []
+        function useTOC(props) {
+          return []
+        }
+        export const toc = useTOC()
         function _createMdxContent(props) {
           const _components = {
             p: 'p',
@@ -141,7 +147,10 @@ describe('LaTeX', () => {
         /*@jsxImportSource react*/
         export const metadata = {}
         import { MathJax, MathJaxContext } from 'nextra/components'
-        export const toc = []
+        function useTOC(props) {
+          return []
+        }
+        export const toc = useTOC()
         function _createMdxContent(props) {
           return (
             <MathJaxContext>
@@ -170,7 +179,10 @@ ${MATH_LANG}`
         import foo from 'foo'
         export let bar
         import { MathJax, MathJaxContext } from 'nextra/components'
-        export const toc = []
+        function useTOC(props) {
+          return []
+        }
+        export const toc = useTOC()
         function _createMdxContent(props) {
           const _components = {
             p: 'p',

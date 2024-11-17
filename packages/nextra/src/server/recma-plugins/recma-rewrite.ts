@@ -17,7 +17,7 @@ export const recmaRewrite: Plugin<
   Program
 > =
   ({ isPageImport, isRemoteContent }) =>
-  (ast: Program, file) => {
+  (ast: Program) => {
     const hasMdxLayout = ast.body.some(
       node =>
         node.type === 'VariableDeclaration' &&

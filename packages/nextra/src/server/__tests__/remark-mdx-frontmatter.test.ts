@@ -23,7 +23,10 @@ describe('remarkMdxFrontMatter', () => {
         const metadata = {
           foo: 'bar'
         }
-        const toc = []
+        function useTOC(props) {
+          return []
+        }
+        const toc = useTOC()
         function _createMdxContent(props) {
           return _jsx(_Fragment, {})
         }
@@ -50,7 +53,10 @@ describe('remarkMdxFrontMatter', () => {
         const metadata = {
           foo: 'bar'
         }
-        const toc = []
+        function useTOC(props) {
+          return []
+        }
+        const toc = useTOC()
         function _createMdxContent(props) {
           return _jsx(_Fragment, {})
         }
