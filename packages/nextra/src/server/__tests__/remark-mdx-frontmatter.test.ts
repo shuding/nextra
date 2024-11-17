@@ -20,6 +20,7 @@ describe('remarkMdxFrontMatter', () => {
       expect(clean(rawJs)).resolves.toMatchInlineSnapshot(`
         "'use strict'
         const { Fragment: _Fragment, jsx: _jsx } = arguments[0]
+        const { useMDXComponents: _provideComponents } = arguments[0]
         const metadata = {
           foo: 'bar'
         }
@@ -50,6 +51,7 @@ describe('remarkMdxFrontMatter', () => {
       expect(clean(rawJs)).resolves.toMatchInlineSnapshot(`
         "'use strict'
         const { Fragment: _Fragment, jsx: _jsx } = arguments[0]
+        const { useMDXComponents: _provideComponents } = arguments[0]
         const metadata = {
           foo: 'bar'
         }

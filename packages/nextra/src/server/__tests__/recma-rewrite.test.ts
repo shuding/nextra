@@ -23,6 +23,7 @@ export default function Foo(props) {
       expect(clean(rawMdx)).resolves.toMatchInlineSnapshot(`
         "'use strict'
         const { Fragment: _Fragment, jsx: _jsx, jsxs: _jsxs } = arguments[0]
+        const { useMDXComponents: _provideComponents } = arguments[0]
         const metadata = {
           title: 'h1'
         }
@@ -48,6 +49,7 @@ export default function Foo(props) {
             h3: 'h3',
             li: 'li',
             ul: 'ul',
+            ..._provideComponents(),
             ...props.components
           }
           return _jsxs(_Fragment, {
@@ -94,6 +96,7 @@ export default function Foo(props) {
       expect(clean(rawMdx)).resolves.toMatchInlineSnapshot(`
         "'use strict'
         const { Fragment: _Fragment, jsx: _jsx, jsxs: _jsxs } = arguments[0]
+        const { useMDXComponents: _provideComponents } = arguments[0]
         const metadata = {
           title: 'h1'
         }
@@ -124,6 +127,7 @@ export default function Foo(props) {
             h3: 'h3',
             li: 'li',
             ul: 'ul',
+            ..._provideComponents(),
             ...props.components
           }
           return _jsxs(_Fragment, {
@@ -182,13 +186,17 @@ import { MDXRemote } from 'nextra/mdx-remote'
       expect(clean(rawMdx)).resolves.toMatchInlineSnapshot(`
         "'use strict'
         const { jsx: _jsx } = arguments[0]
+        const { useMDXComponents: _provideComponents } = arguments[0]
         const metadata = {}
         function useTOC(props) {
           return []
         }
         const toc = useTOC()
         function _createMdxContent(props) {
-          const { MDXRemote } = props.components || {}
+          const { MDXRemote } = {
+            ..._provideComponents(),
+            ...props.components
+          }
           if (!MDXRemote) _missingMdxReference('MDXRemote', true)
           return _jsx(MDXRemote, {})
         }
@@ -222,6 +230,7 @@ import { MDXRemote } from 'nextra/mdx-remote'
       expect(clean(rawMdx)).resolves.toMatchInlineSnapshot(`
         "/*@jsxRuntime automatic*/
         /*@jsxImportSource react*/
+        import { useMDXComponents as _provideComponents } from 'next-mdx-import-source-file'
         export const metadata = {
           title: 'h1'
         }
@@ -247,6 +256,7 @@ import { MDXRemote } from 'nextra/mdx-remote'
             h3: 'h3',
             li: 'li',
             ul: 'ul',
+            ..._provideComponents(),
             ...props.components
           }
           return (
@@ -279,6 +289,7 @@ import { MDXRemote } from 'nextra/mdx-remote'
         "/*@jsxRuntime automatic*/
         /*@jsxImportSource react*/
         import { HOC_MDXWrapper } from 'nextra/setup-page'
+        import { useMDXComponents as _provideComponents } from 'next-mdx-import-source-file'
         export const metadata = {
           title: 'h1'
         }
@@ -304,6 +315,7 @@ import { MDXRemote } from 'nextra/mdx-remote'
             h3: 'h3',
             li: 'li',
             ul: 'ul',
+            ..._provideComponents(),
             ...props.components
           }
           return (
@@ -337,6 +349,7 @@ import { MDXRemote } from 'nextra/mdx-remote'
         "/*@jsxRuntime automatic*/
         /*@jsxImportSource react*/
         import { HOC_MDXWrapper } from 'nextra/setup-page'
+        import { useMDXComponents as _provideComponents } from 'next-mdx-import-source-file'
         export const metadata = {
           title: 'h1'
         }
@@ -365,6 +378,7 @@ import { MDXRemote } from 'nextra/mdx-remote'
             h3: 'h3',
             li: 'li',
             ul: 'ul',
+            ..._provideComponents(),
             ...props.components
           }
           return (
