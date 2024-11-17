@@ -18,8 +18,5 @@ This is Turbopack bug, which will not occurs on production (since Webpack is use
       placeholder: 'empty'
     }
   }
-  return createElement(
-    typeof props.src === 'object' ? NextImage : 'img',
-    props as ImageProps
-  )
+  return createElement(typeof props.src === 'object' ? NextImage : 'img', props)
 }

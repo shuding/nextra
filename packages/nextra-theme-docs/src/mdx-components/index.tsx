@@ -88,34 +88,34 @@ const DEFAULT_COMPONENTS = getNextraMDXComponents({
       {...props}
     />
   ),
-  wrapper({ toc, children, ...props }) {
-    // @ts-expect-error fixme
-    toc = toc.map(item => ({
-      ...item,
-      value: removeLinks(item.value)
-    }))
-    return (
-      <div className="_mx-auto _flex _max-w-[90rem]">
-        <Sidebar toc={toc} />
-
-        <ClientWrapper toc={toc} {...props}>
-          <SkipNavContent />
-          <main
-            data-pagefind-body={
-              (props.metadata as any).searchable !== false || undefined
-            }
-          >
-            {children}
-          </main>
-        </ClientWrapper>
-      </div>
-    )
-  }
 })
 
 /* eslint sort-keys: error */
 export const useMDXComponents = (components?: Readonly<MDXComponents>) =>
   ({
     ...DEFAULT_COMPONENTS,
+    wrapper({ toc, children, ...props }) {
+      // @ts-expect-error fixme
+      toc = toc.map(item => ({
+        ...item,
+        value: removeLinks(item.value)
+      }))
+      return (
+        <div className="_mx-auto _flex _max-w-[90rem]">
+          <Sidebar toc={toc} />
+
+          <ClientWrapper toc={toc} {...props}>
+            <SkipNavContent />
+            <main
+              data-pagefind-body={
+                (props.metadata as any).searchable !== false || undefined
+              }
+            >
+              {children}
+            </main>
+          </ClientWrapper>
+        </div>
+      )
+    },
     ...components
   }) satisfies MDXComponents
