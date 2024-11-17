@@ -28,7 +28,8 @@ export const Anchor: FC<ComponentProps<'a'>> = ({ href = '', ...props }) => {
           <>
             &thinsp;
             <LinkArrowIcon
-              height="16"
+              // based on font-size
+              height="1em"
               className="_inline _align-baseline _shrink-0"
             />
           </>

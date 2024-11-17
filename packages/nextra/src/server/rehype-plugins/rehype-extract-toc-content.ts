@@ -1,4 +1,4 @@
-import type { ExportNamedDeclaration, SpreadElement } from 'estree'
+import type { SpreadElement } from 'estree'
 import type { Element, Root, Text } from 'hast'
 import { toEstree } from 'hast-util-to-estree'
 import type { MdxjsEsm } from 'hast-util-to-estree/lib/handlers/mdxjs-esm'
@@ -18,26 +18,6 @@ export const rehypeExtractTocContent: Plugin<[], Root> = () => (ast, file) => {
     }
     const { id } = node.properties
     TocMap[id as string] = node
-
-    visit(node, (innerNode) => {
-      // console.log({ innerNode })
-      if (
-        (innerNode.type === 'mdxFlowExpression' ||
-          innerNode.type === 'mdxTextExpression' ||
-          innerNode.type === 'mdxjsEsm')
-        // && node.data && node.data.estree
-      ) {
-        console.log(11)
-        // walk(node.data.estree, {
-        //   enter(node) {
-        //     if (node.type === 'JSXElement') {
-        //       const data = node.data || (node.data = {})
-        //       data._mdxExplicitJsx = true
-        //     }
-        //   }
-        // })
-      }
-    })
   })
 
   const elements = (file.data.toc as Heading[]).map((name, index) => {
@@ -91,38 +71,25 @@ export const rehypeExtractTocContent: Plugin<[], Root> = () => (ast, file) => {
       estree: {
         body: [
           {
-            type: 'ExportNamedDeclaration',
-            declaration: {
-              type: 'FunctionDeclaration',
-              id: {
-                type: 'Identifier',
-                name: 'useTOC'
-              },
-              expression: false,
-              generator: false,
-              async: false,
-              params: [
+            type: 'FunctionDeclaration',
+            id: { type: 'Identifier', name: 'useTOC' },
+            params: [{ type: 'Identifier', name: 'props' }],
+            body: {
+              type: 'BlockStatement',
+              body: [
                 {
-                  type: 'Identifier',
-                  name: 'props'
+                  type: 'ReturnStatement',
+                  argument: { type: 'ArrayExpression', elements: elements }
                 }
-              ],
-              body: {
-                type: 'BlockStatement',
-                body: [
-                  {
-                    type: 'ReturnStatement',
-                    argument: {
-                      type: 'ArrayExpression',
-                      elements: elements
-                    }
-                  }
-                ]
-              }
-            },
-            specifiers: [],
-            source: null
-          } as ExportNamedDeclaration
+              ]
+            }
+          },
+          createAstExportConst('toc', {
+            type: 'CallExpression',
+            callee: { type: 'Identifier', name: 'useTOC' },
+            arguments: [],
+            optional: false
+          })
         ]
       }
     }
