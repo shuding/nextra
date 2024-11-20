@@ -1,5 +1,15 @@
 # nextra-theme-blog
 
+## 4.0.0-app-router.28
+
+### Patch Changes
+
+- 846552e: - fix missing tailwind class for `json` icon in code blocks
+  - capitalize folders in sidebar even without index pages
+  - sync with nextra 3.2.4
+- Updated dependencies [846552e]
+  - nextra@4.0.0-app-router.28
+
 ## 4.0.0-app-router.27
 
 ### Major Changes
