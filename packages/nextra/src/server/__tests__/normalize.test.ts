@@ -39,10 +39,12 @@ describe('normalize-page', () => {
       {
         name: '1-level',
         route: '/1-level',
+        title: '1 Level',
         children: [
           {
             name: '2-level',
             route: '/1-level/2-level',
+            title: '2 Level',
             children: [
               {
                 data: {
@@ -102,6 +104,7 @@ describe('normalize-page', () => {
       {
         name: '1-level',
         route: '/1-level',
+        title: '1 Level',
         children: [
           {
             data: {
@@ -217,14 +220,14 @@ describe('normalize-page', () => {
               "isUnderCurrentDocsTree": true,
               "name": "two",
               "route": "/one/two",
-              "title": "two",
+              "title": "Two",
               "type": "doc",
             },
           ],
           "isUnderCurrentDocsTree": true,
           "name": "one",
           "route": "/one",
-          "title": "one",
+          "title": "One",
           "type": "doc",
         },
       ]
@@ -364,7 +367,7 @@ describe('normalize-page', () => {
           asIndexPage: true
         },
         type: 'doc',
-        title: 'themes',
+        title: 'Themes',
         isUnderCurrentDocsTree: true
       },
       {
@@ -384,7 +387,7 @@ describe('normalize-page', () => {
           asIndexPage: true
         },
         type: 'doc',
-        title: 'themes-test',
+        title: 'Themes Test',
         isUnderCurrentDocsTree: true
       }
     ])
