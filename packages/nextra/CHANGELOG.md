@@ -1,5 +1,14 @@
 # nextra
 
+## 3.2.4
+
+### Patch Changes
+
+- a4b0bbb: fix(deps): update dependency title to v4
+
+  > This fix ReDoS vulnerability exposed via title → clipboardy → execa →
+  > cross-spawn dependency chain
+
 ## 3.2.3
 
 ### Patch Changes
