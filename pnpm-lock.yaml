@@ -342,7 +342,7 @@ importers:
         version: 5.0.0
       yaml:
         specifier: ^2.3.2
-        version: 2.6.0
+        version: 2.6.1
       zod:
         specifier: ^3.22.3
         version: 3.23.8
@@ -10571,7 +10571,7 @@ packages:
     dependencies:
       lilconfig: 3.1.2
       postcss: 8.4.49
-      yaml: 2.6.0
+      yaml: 2.6.1
     dev: true
 
   /postcss-load-config@5.1.0(postcss@8.4.49)(tsx@4.19.2):
@@ -10592,7 +10592,7 @@ packages:
       lilconfig: 3.1.2
       postcss: 8.4.49
       tsx: 4.19.2
-      yaml: 2.6.0
+      yaml: 2.6.1
     dev: true
 
   /postcss-load-config@6.0.1(tsx@4.19.2):
@@ -13044,6 +13044,12 @@ packages:
 
   /yaml@2.6.0:
     resolution: {integrity: sha512-a6ae//JvKDEra2kdi1qzCyrJW/WZCgFi8ydDV+eXExl95t+5R+ijnqHJbz9tmMh8FUjx3iv2fCQ4dclAQlO2UQ==}
+    engines: {node: '>= 14'}
+    hasBin: true
+    dev: false
+
+  /yaml@2.6.1:
+    resolution: {integrity: sha512-7r0XPzioN/Q9kXBro/XPnA6kznR73DHq+GXh5ON7ZozRO6aMjbmiBuKste2wslTFkC5d1dw0GooOCepZXJ2SAg==}
     engines: {node: '>= 14'}
     hasBin: true
 
