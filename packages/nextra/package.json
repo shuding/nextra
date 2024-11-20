@@ -101,7 +101,7 @@
     "remark-smartypants": "^3.0.0",
     "shiki": "^1.0.0",
     "slash": "^5.1.0",
-    "title": "^3.5.3",
+    "title": "^4.0.0",
     "unist-util-remove": "^4.0.0",
     "unist-util-visit": "^5.0.0",
     "yaml": "^2.3.2",
