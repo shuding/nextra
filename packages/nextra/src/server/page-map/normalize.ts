@@ -55,7 +55,7 @@ function sortFolder(pageMap: PageMapItem[] | Folder) {
       newChildren.push(item)
     }
   }
-  if (folder.name) {
+  if (folder.name && !folder.frontMatter?.title) {
     // @ts-expect-error -- we use title for capitalize folders without index page
     folder.title = pageTitleFromFilename(folder.name)
   }

@@ -272,10 +272,7 @@ const Menu = forwardRef<HTMLUListElement, MenuProps>(
     <ul className={cn(classes.list, className)} ref={forwardedRef}>
       {directories.map(item => {
         const ComponentToUse =
-          item.type === 'menu' ||
-          (item.children && (item.children.length || !('frontMatter' in item)))
-            ? Folder
-            : File
+          item.type === 'menu' || item.children?.length ? Folder : File
 
         return (
           <ComponentToUse
