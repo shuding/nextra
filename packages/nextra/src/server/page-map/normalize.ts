@@ -1,6 +1,7 @@
 import { fromZodError } from 'zod-validation-error'
 import type { Folder, FrontMatter, MdxFile, PageMapItem } from '../../types.js'
 import { metaSchema } from '../schemas.js'
+import { pageTitleFromFilename } from '../utils.js'
 
 export function normalizePageMap(pageMap: PageMapItem[] | Folder): any {
   if (Array.isArray(pageMap)) {
@@ -53,6 +54,10 @@ function sortFolder(pageMap: PageMapItem[] | Folder) {
     } else {
       newChildren.push(item)
     }
+  }
+  if (folder.name && !folder.frontMatter?.title) {
+    // @ts-expect-error -- we use title for capitalize folders without index page
+    folder.title = pageTitleFromFilename(folder.name)
   }
 
   const metaKeys = Object.keys(meta)

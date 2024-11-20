@@ -162,7 +162,8 @@ export function normalizePages({
       extendedMeta.title ||
       currentItem.frontMatter?.sidebarTitle ||
       currentItem.frontMatter?.title ||
-      (type === 'separator' ? '' : currentItem.name)
+      // @ts-expect-error -- we use title for capitalize folders without index page
+      (type === 'separator' ? '' : currentItem.title || currentItem.name)
 
     const getItem = (): Item => ({
       ...currentItem,

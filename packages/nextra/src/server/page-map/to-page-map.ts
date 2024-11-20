@@ -38,7 +38,7 @@ export function convertToPageMap({
     if (name === '_meta') {
       const key = dir ? `${dir}/${name}` : name
       metaFiles[key] = filePath
-    } else {
+    } else if (name !== '_meta.global') {
       const key = inAppDir
         ? // In Next.js we can organize routes without affecting the URL
           // https://nextjs.org/docs/app/building-your-application/routing/route-groups#organize-routes-without-affecting-the-url-path

@@ -144,11 +144,6 @@ describe('generatePageMap()', () => {
     expect(pageMap).toMatchInlineSnapshot(`
       [
         {
-          "__pagePath": "app/page.tsx",
-          "name": "index",
-          "route": "/",
-        },
-        {
           "__pagePath": "app/about/page.mdx",
           "name": "about",
           "route": "/about",
@@ -441,6 +436,11 @@ describe('generatePageMap()', () => {
           "route": "/docs",
         },
         {
+          "__pagePath": "app/page.tsx",
+          "name": "index",
+          "route": "/",
+        },
+        {
           "__pagePath": "app/showcase/page.mdx",
           "name": "showcase",
           "route": "/showcase",
@@ -459,306 +459,306 @@ describe('generatePageMap()', () => {
 
     expect(convertPageMapToJs({ pageMap, mdxPages, globalMetaPath }))
       .toMatchInlineSnapshot(`
-      "import { normalizePageMap, mergeMetaWithPageMap } from 'nextra/page-map'
-      import globalMeta from 'private-next-root-dir/app/_meta.global.ts'
-      import {metadata as app_page} from "private-next-root-dir/app/page.tsx";
-      import {metadata as app_about_page} from "private-next-root-dir/app/about/page.mdx?metadata";
-      import {metadata as app_blog_page} from "private-next-root-dir/app/blog/page.mdx?metadata";
-      import {metadata as app_docs_advanced_customize_the_cascade_layers_page} from "private-next-root-dir/app/docs/advanced/customize-the-cascade-layers/page.mdx?metadata";
-      import {metadata as app_docs_advanced_latex_page} from "private-next-root-dir/app/docs/advanced/latex/page.mdx?metadata";
-      import {metadata as app_docs_advanced_mermaid_page} from "private-next-root-dir/app/docs/advanced/mermaid/page.mdx?metadata";
-      import {metadata as app_docs_advanced_npm2yarn_page} from "private-next-root-dir/app/docs/advanced/npm2yarn/page.mdx?metadata";
-      import {metadata as app_docs_advanced_page} from "private-next-root-dir/app/docs/advanced/page.mdx?metadata";
-      import {metadata as app_docs_advanced_playground_page} from "private-next-root-dir/app/docs/advanced/playground/page.mdx?metadata";
-      import {metadata as app_docs_advanced_remote_page} from "private-next-root-dir/app/docs/advanced/remote/page.mdx?metadata";
-      import {metadata as app_docs_advanced_table_page} from "private-next-root-dir/app/docs/advanced/table/page.mdx?metadata";
-      import {metadata as app_docs_advanced_tailwind_css_page} from "private-next-root-dir/app/docs/advanced/tailwind-css/page.mdx?metadata";
-      import {metadata as app_docs_advanced_twoslash_page} from "private-next-root-dir/app/docs/advanced/twoslash/page.mdx?metadata";
-      import {metadata as app_docs_advanced_typescript_page} from "private-next-root-dir/app/docs/advanced/typescript/page.mdx?metadata";
-      import {metadata as app_docs_blog_theme_page} from "private-next-root-dir/app/docs/blog-theme/page.mdx?metadata";
-      import {metadata as app_docs_blog_theme_start_page} from "private-next-root-dir/app/docs/blog-theme/start/page.mdx?metadata";
-      import {metadata as app_docs_built_ins_banner_page} from "private-next-root-dir/app/docs/built-ins/banner/page.mdx?metadata";
-      import {metadata as app_docs_built_ins_bleed_page} from "private-next-root-dir/app/docs/built-ins/bleed/page.mdx?metadata";
-      import {metadata as app_docs_built_ins_callout_page} from "private-next-root-dir/app/docs/built-ins/callout/page.mdx?metadata";
-      import {metadata as app_docs_built_ins_cards_page} from "private-next-root-dir/app/docs/built-ins/cards/page.mdx?metadata";
-      import {metadata as app_docs_built_ins_filetree_page} from "private-next-root-dir/app/docs/built-ins/filetree/page.mdx?metadata";
-      import {metadata as app_docs_built_ins_head_page} from "private-next-root-dir/app/docs/built-ins/head/page.mdx?metadata";
-      import {metadata as app_docs_built_ins_page} from "private-next-root-dir/app/docs/built-ins/page.mdx?metadata";
-      import {metadata as app_docs_built_ins_search_page} from "private-next-root-dir/app/docs/built-ins/search/page.mdx?metadata";
-      import {metadata as app_docs_built_ins_steps_page} from "private-next-root-dir/app/docs/built-ins/steps/page.mdx?metadata";
-      import {metadata as app_docs_built_ins_table_page} from "private-next-root-dir/app/docs/built-ins/table/page.mdx?metadata";
-      import {metadata as app_docs_built_ins_tabs_page} from "private-next-root-dir/app/docs/built-ins/tabs/page.mdx?metadata";
-      import {metadata as app_docs_custom_theme_page} from "private-next-root-dir/app/docs/custom-theme/page.mdx?metadata";
-      import {metadata as app_docs_docs_theme_api_page} from "private-next-root-dir/app/docs/docs-theme/api/page.mdx?metadata";
-      import {metadata as app_docs_docs_theme_built_ins_footer_page} from "private-next-root-dir/app/docs/docs-theme/built-ins/footer/page.mdx?metadata";
-      import {metadata as app_docs_docs_theme_built_ins_layout_page} from "private-next-root-dir/app/docs/docs-theme/built-ins/layout/page.mdx?metadata";
-      import {metadata as app_docs_docs_theme_built_ins_navbar_page} from "private-next-root-dir/app/docs/docs-theme/built-ins/navbar/page.mdx?metadata";
-      import {metadata as app_docs_docs_theme_built_ins_not_found_page} from "private-next-root-dir/app/docs/docs-theme/built-ins/not-found/page.mdx?metadata";
-      import {metadata as app_docs_docs_theme_built_ins_page} from "private-next-root-dir/app/docs/docs-theme/built-ins/page.mdx?metadata";
-      import {metadata as app_docs_docs_theme_page_configuration_page} from "private-next-root-dir/app/docs/docs-theme/page-configuration/page.mdx?metadata";
-      import {metadata as app_docs_docs_theme_page} from "private-next-root-dir/app/docs/docs-theme/page.mdx?metadata";
-      import {metadata as app_docs_docs_theme_start_page} from "private-next-root-dir/app/docs/docs-theme/start/page.mdx?metadata";
-      import {metadata as app_docs_guide_custom_css_page} from "private-next-root-dir/app/docs/guide/custom-css/page.mdx?metadata";
-      import {metadata as app_docs_guide_github_alert_syntax_page} from "private-next-root-dir/app/docs/guide/github-alert-syntax/page.mdx?metadata";
-      import {metadata as app_docs_guide_i18n_page} from "private-next-root-dir/app/docs/guide/i18n/page.mdx?metadata";
-      import {metadata as app_docs_guide_image_page} from "private-next-root-dir/app/docs/guide/image/page.mdx?metadata";
-      import {metadata as app_docs_guide_link_page} from "private-next-root-dir/app/docs/guide/link/page.mdx?metadata";
-      import {metadata as app_docs_guide_markdown_page} from "private-next-root-dir/app/docs/guide/markdown/page.mdx?metadata";
-      import {metadata as app_docs_guide_organize_files_page} from "private-next-root-dir/app/docs/guide/organize-files/page.mdx?metadata";
-      import {metadata as app_docs_guide_page} from "private-next-root-dir/app/docs/guide/page.mdx?metadata";
-      import {metadata as app_docs_guide_search_page} from "private-next-root-dir/app/docs/guide/search/page.mdx?metadata";
-      import {metadata as app_docs_guide_ssg_page} from "private-next-root-dir/app/docs/guide/ssg/page.mdx?metadata";
-      import {metadata as app_docs_guide_static_exports_page} from "private-next-root-dir/app/docs/guide/static-exports/page.mdx?metadata";
-      import {metadata as app_docs_guide_syntax_highlighting_page} from "private-next-root-dir/app/docs/guide/syntax-highlighting/page.mdx?metadata";
-      import {metadata as app_docs_guide_turbopack_page} from "private-next-root-dir/app/docs/guide/turbopack/page.mdx?metadata";
-      import {metadata as app_docs_page} from "private-next-root-dir/app/docs/page.mdx?metadata";
-      import {metadata as app_showcase_page} from "private-next-root-dir/app/showcase/page.mdx?metadata";
-      import {metadata as app_sponsors_page} from "private-next-root-dir/app/sponsors/page.mdx?metadata";
+        "import { normalizePageMap, mergeMetaWithPageMap } from 'nextra/page-map'
+        import globalMeta from 'private-next-root-dir/app/_meta.global.ts'
+        import {metadata as app_about_page} from "private-next-root-dir/app/about/page.mdx?metadata";
+        import {metadata as app_blog_page} from "private-next-root-dir/app/blog/page.mdx?metadata";
+        import {metadata as app_docs_advanced_customize_the_cascade_layers_page} from "private-next-root-dir/app/docs/advanced/customize-the-cascade-layers/page.mdx?metadata";
+        import {metadata as app_docs_advanced_latex_page} from "private-next-root-dir/app/docs/advanced/latex/page.mdx?metadata";
+        import {metadata as app_docs_advanced_mermaid_page} from "private-next-root-dir/app/docs/advanced/mermaid/page.mdx?metadata";
+        import {metadata as app_docs_advanced_npm2yarn_page} from "private-next-root-dir/app/docs/advanced/npm2yarn/page.mdx?metadata";
+        import {metadata as app_docs_advanced_page} from "private-next-root-dir/app/docs/advanced/page.mdx?metadata";
+        import {metadata as app_docs_advanced_playground_page} from "private-next-root-dir/app/docs/advanced/playground/page.mdx?metadata";
+        import {metadata as app_docs_advanced_remote_page} from "private-next-root-dir/app/docs/advanced/remote/page.mdx?metadata";
+        import {metadata as app_docs_advanced_table_page} from "private-next-root-dir/app/docs/advanced/table/page.mdx?metadata";
+        import {metadata as app_docs_advanced_tailwind_css_page} from "private-next-root-dir/app/docs/advanced/tailwind-css/page.mdx?metadata";
+        import {metadata as app_docs_advanced_twoslash_page} from "private-next-root-dir/app/docs/advanced/twoslash/page.mdx?metadata";
+        import {metadata as app_docs_advanced_typescript_page} from "private-next-root-dir/app/docs/advanced/typescript/page.mdx?metadata";
+        import {metadata as app_docs_blog_theme_page} from "private-next-root-dir/app/docs/blog-theme/page.mdx?metadata";
+        import {metadata as app_docs_blog_theme_start_page} from "private-next-root-dir/app/docs/blog-theme/start/page.mdx?metadata";
+        import {metadata as app_docs_built_ins_banner_page} from "private-next-root-dir/app/docs/built-ins/banner/page.mdx?metadata";
+        import {metadata as app_docs_built_ins_bleed_page} from "private-next-root-dir/app/docs/built-ins/bleed/page.mdx?metadata";
+        import {metadata as app_docs_built_ins_callout_page} from "private-next-root-dir/app/docs/built-ins/callout/page.mdx?metadata";
+        import {metadata as app_docs_built_ins_cards_page} from "private-next-root-dir/app/docs/built-ins/cards/page.mdx?metadata";
+        import {metadata as app_docs_built_ins_filetree_page} from "private-next-root-dir/app/docs/built-ins/filetree/page.mdx?metadata";
+        import {metadata as app_docs_built_ins_head_page} from "private-next-root-dir/app/docs/built-ins/head/page.mdx?metadata";
+        import {metadata as app_docs_built_ins_page} from "private-next-root-dir/app/docs/built-ins/page.mdx?metadata";
+        import {metadata as app_docs_built_ins_search_page} from "private-next-root-dir/app/docs/built-ins/search/page.mdx?metadata";
+        import {metadata as app_docs_built_ins_steps_page} from "private-next-root-dir/app/docs/built-ins/steps/page.mdx?metadata";
+        import {metadata as app_docs_built_ins_table_page} from "private-next-root-dir/app/docs/built-ins/table/page.mdx?metadata";
+        import {metadata as app_docs_built_ins_tabs_page} from "private-next-root-dir/app/docs/built-ins/tabs/page.mdx?metadata";
+        import {metadata as app_docs_custom_theme_page} from "private-next-root-dir/app/docs/custom-theme/page.mdx?metadata";
+        import {metadata as app_docs_docs_theme_api_page} from "private-next-root-dir/app/docs/docs-theme/api/page.mdx?metadata";
+        import {metadata as app_docs_docs_theme_built_ins_footer_page} from "private-next-root-dir/app/docs/docs-theme/built-ins/footer/page.mdx?metadata";
+        import {metadata as app_docs_docs_theme_built_ins_layout_page} from "private-next-root-dir/app/docs/docs-theme/built-ins/layout/page.mdx?metadata";
+        import {metadata as app_docs_docs_theme_built_ins_navbar_page} from "private-next-root-dir/app/docs/docs-theme/built-ins/navbar/page.mdx?metadata";
+        import {metadata as app_docs_docs_theme_built_ins_not_found_page} from "private-next-root-dir/app/docs/docs-theme/built-ins/not-found/page.mdx?metadata";
+        import {metadata as app_docs_docs_theme_built_ins_page} from "private-next-root-dir/app/docs/docs-theme/built-ins/page.mdx?metadata";
+        import {metadata as app_docs_docs_theme_page_configuration_page} from "private-next-root-dir/app/docs/docs-theme/page-configuration/page.mdx?metadata";
+        import {metadata as app_docs_docs_theme_page} from "private-next-root-dir/app/docs/docs-theme/page.mdx?metadata";
+        import {metadata as app_docs_docs_theme_start_page} from "private-next-root-dir/app/docs/docs-theme/start/page.mdx?metadata";
+        import {metadata as app_docs_guide_custom_css_page} from "private-next-root-dir/app/docs/guide/custom-css/page.mdx?metadata";
+        import {metadata as app_docs_guide_github_alert_syntax_page} from "private-next-root-dir/app/docs/guide/github-alert-syntax/page.mdx?metadata";
+        import {metadata as app_docs_guide_i18n_page} from "private-next-root-dir/app/docs/guide/i18n/page.mdx?metadata";
+        import {metadata as app_docs_guide_image_page} from "private-next-root-dir/app/docs/guide/image/page.mdx?metadata";
+        import {metadata as app_docs_guide_link_page} from "private-next-root-dir/app/docs/guide/link/page.mdx?metadata";
+        import {metadata as app_docs_guide_markdown_page} from "private-next-root-dir/app/docs/guide/markdown/page.mdx?metadata";
+        import {metadata as app_docs_guide_organize_files_page} from "private-next-root-dir/app/docs/guide/organize-files/page.mdx?metadata";
+        import {metadata as app_docs_guide_page} from "private-next-root-dir/app/docs/guide/page.mdx?metadata";
+        import {metadata as app_docs_guide_search_page} from "private-next-root-dir/app/docs/guide/search/page.mdx?metadata";
+        import {metadata as app_docs_guide_ssg_page} from "private-next-root-dir/app/docs/guide/ssg/page.mdx?metadata";
+        import {metadata as app_docs_guide_static_exports_page} from "private-next-root-dir/app/docs/guide/static-exports/page.mdx?metadata";
+        import {metadata as app_docs_guide_syntax_highlighting_page} from "private-next-root-dir/app/docs/guide/syntax-highlighting/page.mdx?metadata";
+        import {metadata as app_docs_guide_turbopack_page} from "private-next-root-dir/app/docs/guide/turbopack/page.mdx?metadata";
+        import {metadata as app_docs_page} from "private-next-root-dir/app/docs/page.mdx?metadata";
+        import {metadata as app_page} from "private-next-root-dir/app/page.tsx";
+        import {metadata as app_showcase_page} from "private-next-root-dir/app/showcase/page.mdx?metadata";
+        import {metadata as app_sponsors_page} from "private-next-root-dir/app/sponsors/page.mdx?metadata";
 
-      export const pageMap = normalizePageMap(mergeMetaWithPageMap([{
-        name: "index",
-        route: "/",
-        frontMatter: app_page
-      }, {
-        name: "about",
-        route: "/about",
-        frontMatter: app_about_page
-      }, {
-        name: "blog",
-        route: "/blog",
-        frontMatter: app_blog_page
-      }, {
-        name: "docs",
-        route: "/docs",
-        children: [{
-          name: "advanced",
-          route: "/docs/advanced",
+        export const pageMap = normalizePageMap(mergeMetaWithPageMap([{
+          name: "about",
+          route: "/about",
+          frontMatter: app_about_page
+        }, {
+          name: "blog",
+          route: "/blog",
+          frontMatter: app_blog_page
+        }, {
+          name: "docs",
+          route: "/docs",
           children: [{
-            name: "customize-the-cascade-layers",
-            route: "/docs/advanced/customize-the-cascade-layers",
-            frontMatter: app_docs_advanced_customize_the_cascade_layers_page
-          }, {
-            name: "latex",
-            route: "/docs/advanced/latex",
-            frontMatter: app_docs_advanced_latex_page
-          }, {
-            name: "mermaid",
-            route: "/docs/advanced/mermaid",
-            frontMatter: app_docs_advanced_mermaid_page
-          }, {
-            name: "npm2yarn",
-            route: "/docs/advanced/npm2yarn",
-            frontMatter: app_docs_advanced_npm2yarn_page
-          }, {
-            name: "index",
+            name: "advanced",
             route: "/docs/advanced",
-            frontMatter: app_docs_advanced_page
-          }, {
-            name: "playground",
-            route: "/docs/advanced/playground",
-            frontMatter: app_docs_advanced_playground_page
-          }, {
-            name: "remote",
-            route: "/docs/advanced/remote",
-            frontMatter: app_docs_advanced_remote_page
-          }, {
-            name: "table",
-            route: "/docs/advanced/table",
-            frontMatter: app_docs_advanced_table_page
-          }, {
-            name: "tailwind-css",
-            route: "/docs/advanced/tailwind-css",
-            frontMatter: app_docs_advanced_tailwind_css_page
-          }, {
-            name: "twoslash",
-            route: "/docs/advanced/twoslash",
-            frontMatter: app_docs_advanced_twoslash_page
-          }, {
-            name: "typescript",
-            route: "/docs/advanced/typescript",
-            frontMatter: app_docs_advanced_typescript_page
-          }]
-        }, {
-          name: "blog-theme",
-          route: "/docs/blog-theme",
-          children: [{
-            name: "index",
-            route: "/docs/blog-theme",
-            frontMatter: app_docs_blog_theme_page
-          }, {
-            name: "start",
-            route: "/docs/blog-theme/start",
-            frontMatter: app_docs_blog_theme_start_page
-          }]
-        }, {
-          name: "built-ins",
-          route: "/docs/built-ins",
-          children: [{
-            name: "banner",
-            route: "/docs/built-ins/banner",
-            frontMatter: app_docs_built_ins_banner_page
-          }, {
-            name: "bleed",
-            route: "/docs/built-ins/bleed",
-            frontMatter: app_docs_built_ins_bleed_page
-          }, {
-            name: "callout",
-            route: "/docs/built-ins/callout",
-            frontMatter: app_docs_built_ins_callout_page
-          }, {
-            name: "cards",
-            route: "/docs/built-ins/cards",
-            frontMatter: app_docs_built_ins_cards_page
-          }, {
-            name: "filetree",
-            route: "/docs/built-ins/filetree",
-            frontMatter: app_docs_built_ins_filetree_page
-          }, {
-            name: "head",
-            route: "/docs/built-ins/head",
-            frontMatter: app_docs_built_ins_head_page
-          }, {
-            name: "index",
-            route: "/docs/built-ins",
-            frontMatter: app_docs_built_ins_page
-          }, {
-            name: "search",
-            route: "/docs/built-ins/search",
-            frontMatter: app_docs_built_ins_search_page
-          }, {
-            name: "steps",
-            route: "/docs/built-ins/steps",
-            frontMatter: app_docs_built_ins_steps_page
-          }, {
-            name: "table",
-            route: "/docs/built-ins/table",
-            frontMatter: app_docs_built_ins_table_page
-          }, {
-            name: "tabs",
-            route: "/docs/built-ins/tabs",
-            frontMatter: app_docs_built_ins_tabs_page
-          }]
-        }, {
-          name: "custom-theme",
-          route: "/docs/custom-theme",
-          frontMatter: app_docs_custom_theme_page
-        }, {
-          name: "docs-theme",
-          route: "/docs/docs-theme",
-          children: [{
-            name: "api",
-            route: "/docs/docs-theme/api",
-            frontMatter: app_docs_docs_theme_api_page
-          }, {
-            name: "built-ins",
-            route: "/docs/docs-theme/built-ins",
             children: [{
-              name: "footer",
-              route: "/docs/docs-theme/built-ins/footer",
-              frontMatter: app_docs_docs_theme_built_ins_footer_page
+              name: "customize-the-cascade-layers",
+              route: "/docs/advanced/customize-the-cascade-layers",
+              frontMatter: app_docs_advanced_customize_the_cascade_layers_page
             }, {
-              name: "layout",
-              route: "/docs/docs-theme/built-ins/layout",
-              frontMatter: app_docs_docs_theme_built_ins_layout_page
+              name: "latex",
+              route: "/docs/advanced/latex",
+              frontMatter: app_docs_advanced_latex_page
             }, {
-              name: "navbar",
-              route: "/docs/docs-theme/built-ins/navbar",
-              frontMatter: app_docs_docs_theme_built_ins_navbar_page
+              name: "mermaid",
+              route: "/docs/advanced/mermaid",
+              frontMatter: app_docs_advanced_mermaid_page
             }, {
-              name: "not-found",
-              route: "/docs/docs-theme/built-ins/not-found",
-              frontMatter: app_docs_docs_theme_built_ins_not_found_page
+              name: "npm2yarn",
+              route: "/docs/advanced/npm2yarn",
+              frontMatter: app_docs_advanced_npm2yarn_page
             }, {
               name: "index",
-              route: "/docs/docs-theme/built-ins",
-              frontMatter: app_docs_docs_theme_built_ins_page
+              route: "/docs/advanced",
+              frontMatter: app_docs_advanced_page
+            }, {
+              name: "playground",
+              route: "/docs/advanced/playground",
+              frontMatter: app_docs_advanced_playground_page
+            }, {
+              name: "remote",
+              route: "/docs/advanced/remote",
+              frontMatter: app_docs_advanced_remote_page
+            }, {
+              name: "table",
+              route: "/docs/advanced/table",
+              frontMatter: app_docs_advanced_table_page
+            }, {
+              name: "tailwind-css",
+              route: "/docs/advanced/tailwind-css",
+              frontMatter: app_docs_advanced_tailwind_css_page
+            }, {
+              name: "twoslash",
+              route: "/docs/advanced/twoslash",
+              frontMatter: app_docs_advanced_twoslash_page
+            }, {
+              name: "typescript",
+              route: "/docs/advanced/typescript",
+              frontMatter: app_docs_advanced_typescript_page
             }]
           }, {
-            name: "page-configuration",
-            route: "/docs/docs-theme/page-configuration",
-            frontMatter: app_docs_docs_theme_page_configuration_page
+            name: "blog-theme",
+            route: "/docs/blog-theme",
+            children: [{
+              name: "index",
+              route: "/docs/blog-theme",
+              frontMatter: app_docs_blog_theme_page
+            }, {
+              name: "start",
+              route: "/docs/blog-theme/start",
+              frontMatter: app_docs_blog_theme_start_page
+            }]
           }, {
-            name: "index",
+            name: "built-ins",
+            route: "/docs/built-ins",
+            children: [{
+              name: "banner",
+              route: "/docs/built-ins/banner",
+              frontMatter: app_docs_built_ins_banner_page
+            }, {
+              name: "bleed",
+              route: "/docs/built-ins/bleed",
+              frontMatter: app_docs_built_ins_bleed_page
+            }, {
+              name: "callout",
+              route: "/docs/built-ins/callout",
+              frontMatter: app_docs_built_ins_callout_page
+            }, {
+              name: "cards",
+              route: "/docs/built-ins/cards",
+              frontMatter: app_docs_built_ins_cards_page
+            }, {
+              name: "filetree",
+              route: "/docs/built-ins/filetree",
+              frontMatter: app_docs_built_ins_filetree_page
+            }, {
+              name: "head",
+              route: "/docs/built-ins/head",
+              frontMatter: app_docs_built_ins_head_page
+            }, {
+              name: "index",
+              route: "/docs/built-ins",
+              frontMatter: app_docs_built_ins_page
+            }, {
+              name: "search",
+              route: "/docs/built-ins/search",
+              frontMatter: app_docs_built_ins_search_page
+            }, {
+              name: "steps",
+              route: "/docs/built-ins/steps",
+              frontMatter: app_docs_built_ins_steps_page
+            }, {
+              name: "table",
+              route: "/docs/built-ins/table",
+              frontMatter: app_docs_built_ins_table_page
+            }, {
+              name: "tabs",
+              route: "/docs/built-ins/tabs",
+              frontMatter: app_docs_built_ins_tabs_page
+            }]
+          }, {
+            name: "custom-theme",
+            route: "/docs/custom-theme",
+            frontMatter: app_docs_custom_theme_page
+          }, {
+            name: "docs-theme",
             route: "/docs/docs-theme",
-            frontMatter: app_docs_docs_theme_page
+            children: [{
+              name: "api",
+              route: "/docs/docs-theme/api",
+              frontMatter: app_docs_docs_theme_api_page
+            }, {
+              name: "built-ins",
+              route: "/docs/docs-theme/built-ins",
+              children: [{
+                name: "footer",
+                route: "/docs/docs-theme/built-ins/footer",
+                frontMatter: app_docs_docs_theme_built_ins_footer_page
+              }, {
+                name: "layout",
+                route: "/docs/docs-theme/built-ins/layout",
+                frontMatter: app_docs_docs_theme_built_ins_layout_page
+              }, {
+                name: "navbar",
+                route: "/docs/docs-theme/built-ins/navbar",
+                frontMatter: app_docs_docs_theme_built_ins_navbar_page
+              }, {
+                name: "not-found",
+                route: "/docs/docs-theme/built-ins/not-found",
+                frontMatter: app_docs_docs_theme_built_ins_not_found_page
+              }, {
+                name: "index",
+                route: "/docs/docs-theme/built-ins",
+                frontMatter: app_docs_docs_theme_built_ins_page
+              }]
+            }, {
+              name: "page-configuration",
+              route: "/docs/docs-theme/page-configuration",
+              frontMatter: app_docs_docs_theme_page_configuration_page
+            }, {
+              name: "index",
+              route: "/docs/docs-theme",
+              frontMatter: app_docs_docs_theme_page
+            }, {
+              name: "start",
+              route: "/docs/docs-theme/start",
+              frontMatter: app_docs_docs_theme_start_page
+            }]
           }, {
-            name: "start",
-            route: "/docs/docs-theme/start",
-            frontMatter: app_docs_docs_theme_start_page
-          }]
-        }, {
-          name: "guide",
-          route: "/docs/guide",
-          children: [{
-            name: "custom-css",
-            route: "/docs/guide/custom-css",
-            frontMatter: app_docs_guide_custom_css_page
-          }, {
-            name: "github-alert-syntax",
-            route: "/docs/guide/github-alert-syntax",
-            frontMatter: app_docs_guide_github_alert_syntax_page
-          }, {
-            name: "i18n",
-            route: "/docs/guide/i18n",
-            frontMatter: app_docs_guide_i18n_page
-          }, {
-            name: "image",
-            route: "/docs/guide/image",
-            frontMatter: app_docs_guide_image_page
-          }, {
-            name: "link",
-            route: "/docs/guide/link",
-            frontMatter: app_docs_guide_link_page
-          }, {
-            name: "markdown",
-            route: "/docs/guide/markdown",
-            frontMatter: app_docs_guide_markdown_page
-          }, {
-            name: "organize-files",
-            route: "/docs/guide/organize-files",
-            frontMatter: app_docs_guide_organize_files_page
+            name: "guide",
+            route: "/docs/guide",
+            children: [{
+              name: "custom-css",
+              route: "/docs/guide/custom-css",
+              frontMatter: app_docs_guide_custom_css_page
+            }, {
+              name: "github-alert-syntax",
+              route: "/docs/guide/github-alert-syntax",
+              frontMatter: app_docs_guide_github_alert_syntax_page
+            }, {
+              name: "i18n",
+              route: "/docs/guide/i18n",
+              frontMatter: app_docs_guide_i18n_page
+            }, {
+              name: "image",
+              route: "/docs/guide/image",
+              frontMatter: app_docs_guide_image_page
+            }, {
+              name: "link",
+              route: "/docs/guide/link",
+              frontMatter: app_docs_guide_link_page
+            }, {
+              name: "markdown",
+              route: "/docs/guide/markdown",
+              frontMatter: app_docs_guide_markdown_page
+            }, {
+              name: "organize-files",
+              route: "/docs/guide/organize-files",
+              frontMatter: app_docs_guide_organize_files_page
+            }, {
+              name: "index",
+              route: "/docs/guide",
+              frontMatter: app_docs_guide_page
+            }, {
+              name: "search",
+              route: "/docs/guide/search",
+              frontMatter: app_docs_guide_search_page
+            }, {
+              name: "ssg",
+              route: "/docs/guide/ssg",
+              frontMatter: app_docs_guide_ssg_page
+            }, {
+              name: "static-exports",
+              route: "/docs/guide/static-exports",
+              frontMatter: app_docs_guide_static_exports_page
+            }, {
+              name: "syntax-highlighting",
+              route: "/docs/guide/syntax-highlighting",
+              frontMatter: app_docs_guide_syntax_highlighting_page
+            }, {
+              name: "turbopack",
+              route: "/docs/guide/turbopack",
+              frontMatter: app_docs_guide_turbopack_page
+            }]
           }, {
             name: "index",
-            route: "/docs/guide",
-            frontMatter: app_docs_guide_page
-          }, {
-            name: "search",
-            route: "/docs/guide/search",
-            frontMatter: app_docs_guide_search_page
-          }, {
-            name: "ssg",
-            route: "/docs/guide/ssg",
-            frontMatter: app_docs_guide_ssg_page
-          }, {
-            name: "static-exports",
-            route: "/docs/guide/static-exports",
-            frontMatter: app_docs_guide_static_exports_page
-          }, {
-            name: "syntax-highlighting",
-            route: "/docs/guide/syntax-highlighting",
-            frontMatter: app_docs_guide_syntax_highlighting_page
-          }, {
-            name: "turbopack",
-            route: "/docs/guide/turbopack",
-            frontMatter: app_docs_guide_turbopack_page
+            route: "/docs",
+            frontMatter: app_docs_page
           }]
         }, {
           name: "index",
-          route: "/docs",
-          frontMatter: app_docs_page
-        }]
-      }, {
-        name: "showcase",
-        route: "/showcase",
-        frontMatter: app_showcase_page
-      }, {
-        name: "sponsors",
-        route: "/sponsors",
-        frontMatter: app_sponsors_page
-      }], globalMeta))
+          route: "/",
+          frontMatter: app_page
+        }, {
+          name: "showcase",
+          route: "/showcase",
+          frontMatter: app_showcase_page
+        }, {
+          name: "sponsors",
+          route: "/sponsors",
+          frontMatter: app_sponsors_page
+        }], globalMeta))
 
-      export const RouteToFilepath = {}"
-    `)
+        export const RouteToFilepath = {}"
+      `)
   })
 
   describe('should work for docs example', async () => {

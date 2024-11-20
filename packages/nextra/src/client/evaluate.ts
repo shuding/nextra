@@ -1,13 +1,17 @@
-import { useMDXComponents } from 'next-mdx-import-source-file'
 import jsxDevRuntime from 'react/jsx-dev-runtime'
 import jsxRuntime from 'react/jsx-runtime'
+import type { MDXComponents } from './mdx-components.js'
 
 const runtime =
   process.env.NODE_ENV === 'production' ? jsxRuntime : jsxDevRuntime
 
 export type Scope = Record<string, unknown>
 
-export function evaluate(rawJs: string, scope: Scope = {}) {
+export function evaluate(
+  rawJs: string,
+  scope: Scope = {},
+  components?: MDXComponents
+) {
   // if we're ready to render, we can assemble the component tree and let React do its thing
   // first we set up the scope which has to include the mdx custom
   // create element function as well as any components we're using
@@ -20,5 +24,12 @@ export function evaluate(rawJs: string, scope: Scope = {}) {
   // function with the actual values.
   const hydrateFn = Reflect.construct(Function, ['$', ...keys, rawJs])
 
-  return hydrateFn({ ...runtime, useMDXComponents }, ...values)
+  return hydrateFn(
+    {
+      ...runtime,
+      // Inject components in `<MDXContent>` and TOC
+      useMDXComponents: () => components
+    },
+    ...values
+  )
 }

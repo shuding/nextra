@@ -38,6 +38,7 @@ describe('Page Process', () => {
           ],
           "name": "docs",
           "route": "/docs",
+          "title": "Docs",
         },
         {
           "frontMatter": undefined,
