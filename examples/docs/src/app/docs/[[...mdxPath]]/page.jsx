@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/rules-of-hooks -- false positive, useMDXComponents are not react hooks */
 
-import { useMDXComponents } from 'nextra-theme-docs'
+import { useMDXComponents } from '../../../../mdx-components'
 import { generateStaticParamsFor, importPage } from 'nextra/pages'
 
 export const generateStaticParams = generateStaticParamsFor('mdxPath')

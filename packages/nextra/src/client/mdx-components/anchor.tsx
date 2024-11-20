@@ -8,9 +8,9 @@ export const Anchor: FC<ComponentPropsWithoutRef<'a'>> = ({
   href = '',
   ...props
 }) => {
+  props.className = cn('focus-visible:nextra-focus', props.className)
   if (EXTERNAL_URL_RE.test(href)) {
     const { children } = props
-    props.className = cn('focus-visible:nextra-focus', props.className)
     return (
       <a href={href} target="_blank" rel="noreferrer" {...props}>
         {children}
