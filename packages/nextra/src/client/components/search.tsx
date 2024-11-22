@@ -51,7 +51,7 @@ const DEV_SEARCH_NOTICE = (
       Pagefind package, which indexes built `.html` files instead of
       `.md`/`.mdx`.
     </p>
-    <p className="_mt-2">
+    <p className="x:mt-2">
       To test search during development, run `next build` and then restart your
       app with `next dev`.
     </p>
@@ -162,17 +162,17 @@ export const Search: FC<SearchProps> = ({
   const icon = mounted && !focused && (
     <kbd
       className={cn(
-        '_absolute _my-1.5 _select-none _end-1.5',
-        '_h-5 _rounded _bg-white _px-1.5 _font-mono _text-[11px] _font-medium _text-gray-500',
-        '_border dark:_border-gray-100/20 dark:_bg-black/50',
-        'contrast-more:_border-current contrast-more:_text-current contrast-more:dark:_border-current',
-        '_items-center _gap-1 _flex',
-        'max-sm:_hidden'
+        'x:absolute x:my-1.5 x:select-none x:end-1.5',
+        'x:h-5 x:rounded x:bg-white x:px-1.5 x:font-mono x:text-[11px] x:font-medium x:text-gray-500',
+        'x:border x:dark:border-gray-100/20 x:dark:bg-black/50',
+        'x:contrast-more:border-current x:contrast-more:text-current x:contrast-more:dark:border-current',
+        'x:items-center x:gap-1 x:flex',
+        'x:max-sm:hidden'
       )}
     >
       {navigator.userAgent.includes('Mac') ? (
         <>
-          <span className="_text-xs">⌘</span>K
+          <span className="x:text-xs">⌘</span>K
         </>
       ) : (
         'CTRL K'
@@ -209,10 +209,10 @@ export const Search: FC<SearchProps> = ({
     <Combobox onChange={handleSelect}>
       <div
         className={cn(
-          '_not-prose', // for blog
-          '_relative _flex _items-center',
-          '_text-gray-900 dark:_text-gray-300',
-          'contrast-more:_text-gray-800 contrast-more:dark:_text-gray-300',
+          'x:not-prose', // for blog
+          'x:relative x:flex x:items-center',
+          'x:text-gray-900 x:dark:text-gray-300',
+          'x:contrast-more:text-gray-800 x:contrast-more:dark:text-gray-300',
           className
         )}
       >
@@ -221,15 +221,15 @@ export const Search: FC<SearchProps> = ({
           spellCheck={false}
           className={({ focus }) =>
             cn(
-              '_rounded-lg _px-3 _py-2 _transition-colors',
-              '_w-full md:_w-64',
-              '_text-base _leading-tight md:_text-sm',
+              'x:rounded-lg x:px-3 x:py-2 x:transition-colors',
+              'x:w-full x:md:w-64',
+              'x:text-base x:leading-tight x:md:text-sm',
               focus
-                ? '_bg-transparent nextra-focus'
-                : '_bg-black/[.05] dark:_bg-gray-50/10',
-              'placeholder:_text-gray-500 dark:placeholder:_text-gray-400',
-              'contrast-more:_border contrast-more:_border-current',
-              '[&::-webkit-search-cancel-button]:_appearance-none'
+                ? 'x:bg-transparent nextra-focus'
+                : 'x:bg-black/[.05] x:dark:bg-gray-50/10',
+              'x:placeholder:text-gray-500 x:dark:placeholder:text-gray-400',
+              'x:contrast-more:border x:contrast-more:border-current',
+              'x:[&::-webkit-search-cancel-button]:appearance-none'
             )
           }
           autoComplete="off"
@@ -248,38 +248,38 @@ export const Search: FC<SearchProps> = ({
         className={({ open }) =>
           cn(
             'nextra-search-results', // for user styling
-            'nextra-scrollbar max-md:_h-full',
-            '_border _border-gray-200 _text-gray-100 dark:_border-neutral-800',
-            '_z-20 _rounded-xl _py-2.5 _shadow-xl',
-            'contrast-more:_border contrast-more:_border-gray-900 contrast-more:dark:_border-gray-50',
-            '_backdrop-blur-md _bg-[rgba(var(--nextra-bg),.7)]',
-            'motion-reduce:_transition-none _transition-opacity',
-            open ? '_opacity-100' : '_opacity-0',
+            'nextra-scrollbar x:max-md:h-full',
+            'x:border x:border-gray-200 x:text-gray-100 x:dark:border-neutral-800',
+            'x:z-20 x:rounded-xl x:py-2.5 x:shadow-xl',
+            'x:contrast-more:border x:contrast-more:border-gray-900 x:contrast-more:dark:border-gray-50',
+            'x:backdrop-blur-md x:bg-[rgba(var(--nextra-bg),.7)]',
+            'x:motion-reduce:transition-none x:transition-opacity',
+            open ? 'x:opacity-100' : 'x:opacity-0',
             error || isLoading || !results.length
               ? [
-                  'md:_min-h-28 _grow _flex _justify-center _text-sm _gap-2 _px-8',
+                  'x:md:min-h-28 x:grow x:flex x:justify-center x:text-sm x:gap-2 x:px-8',
                   error
-                    ? '_text-red-500 _items-start'
-                    : '_text-gray-400 _items-center'
+                    ? 'x:text-red-500 x:items-start'
+                    : 'x:text-gray-400 x:items-center'
                 ]
               : // headlessui adds max-height as style, use !important to override
-                'md:!_max-h-[min(calc(100vh-5rem),400px)]',
-            '_w-full md:_w-[576px]',
-            'empty:_invisible'
+                'x:md:max-h-[min(calc(100vh-5rem),400px)]!',
+            'x:w-full x:md:w-[576px]',
+            'x:empty:invisible'
           )
         }
       >
         {error ? (
           <>
-            <InformationCircleIcon height="20" className="_shrink-0" />
-            <div className="_grid">
-              <b className="_mb-2">{errorText}</b>
+            <InformationCircleIcon height="20" className="x:shrink-0" />
+            <div className="x:grid">
+              <b className="x:mb-2">{errorText}</b>
               {error}
             </div>
           </>
         ) : isLoading ? (
           <>
-            <SpinnerIcon height="20" className="_shrink-0 _animate-spin" />
+            <SpinnerIcon height="20" className="x:shrink-0 x:animate-spin" />
             {loading}
           </>
         ) : results.length ? (
@@ -299,8 +299,8 @@ const Result: FC<{ data: PagefindResult }> = ({ data }) => {
     <>
       <div
         className={cn(
-          '_mx-2.5 _mb-2 [&:not(:first-child)]:_mt-6 _select-none _border-b _border-black/10 _px-2.5 _pb-1.5 _text-xs _font-semibold _uppercase _text-gray-500 dark:_border-white/20 dark:_text-gray-300',
-          'contrast-more:_border-gray-600 contrast-more:_text-gray-900 contrast-more:dark:_border-gray-50 contrast-more:dark:_text-gray-50'
+          'x:mx-2.5 x:mb-2 x:[&:not(:first-child)]:mt-6 x:select-none x:border-b x:border-black/10 x:px-2.5 x:pb-1.5 x:text-xs x:font-semibold x:uppercase x:text-gray-500 x:dark:border-white/20 x:dark:text-gray-300',
+          'x:contrast-more:border-gray-600 x:contrast-more:text-gray-900 x:contrast-more:dark:border-gray-50 x:contrast-more:dark:text-gray-50'
         )}
       >
         {data.meta.title}
@@ -313,22 +313,22 @@ const Result: FC<{ data: PagefindResult }> = ({ data }) => {
           href={subResult.url}
           className={({ focus }) =>
             cn(
-              '_mx-2.5 _break-words _rounded-md',
-              'contrast-more:_border',
+              'x:mx-2.5 x:break-words x:rounded-md',
+              'x:contrast-more:border',
               focus
-                ? '_text-primary-600 contrast-more:_border-current _bg-primary-500/10'
-                : '_text-gray-800 dark:_text-gray-300 contrast-more:_border-transparent',
-              '_block _scroll-m-12 _px-2.5 _py-2'
+                ? 'x:text-primary-600 x:contrast-more:border-current x:bg-primary-500/10'
+                : 'x:text-gray-800 x:dark:text-gray-300 x:contrast-more:border-transparent',
+              'x:block x:scroll-m-12 x:px-2.5 x:py-2'
             )
           }
         >
-          <div className="_text-base _font-semibold _leading-5">
+          <div className="x:text-base x:font-semibold x:leading-5">
             {subResult.title}
           </div>
           <div
             className={cn(
-              '_mt-1 _text-sm _leading-[1.35rem] _text-gray-600 dark:_text-gray-400 contrast-more:dark:_text-gray-50',
-              '[&_mark]:_bg-primary-600/80 [&_mark]:_text-white'
+              'x:mt-1 x:text-sm x:leading-[1.35rem] x:text-gray-600 x:dark:text-gray-400 x:contrast-more:dark:text-gray-50',
+              'x:[&_mark]:bg-primary-600/80 x:[&_mark]:text-white'
             )}
             dangerouslySetInnerHTML={{ __html: subResult.excerpt }}
           />
