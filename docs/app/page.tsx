@@ -220,7 +220,7 @@ const IndexPage: FC = () => {
                 <br />
                 zero-config needed
               </h3>
-              <p className="z-[2]">
+              <p className="z-2">
                 Nextra indexes your content automatically at build-time and
                 performs incredibly fast full-text search via{' '}
                 <Link href="https://github.com/cloudcannon/pagefind">
@@ -228,7 +228,7 @@ const IndexPage: FC = () => {
                 </Link>
                 .
               </p>
-              <div className="absolute size-full inset-0 max-sm:hidden bg-[linear-gradient(to_right,white_250px,_transparent)] dark:bg-[linear-gradient(to_right,#202020_250px,_transparent)] z-[1]" />
+              <div className="absolute size-full inset-0 max-sm:hidden bg-[linear-gradient(to_right,white_250px,_transparent)] dark:bg-[linear-gradient(to_right,#202020_250px,_transparent)] z-1" />
               <video
                 autoPlay
                 loop

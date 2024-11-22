@@ -45,7 +45,7 @@ export const Navbar: FC<NavbarProps> = props => {
       <div
         className={cn(
           'nextra-navbar-blur',
-          'x:pointer-events-none x:absolute x:z-[-1] x:size-full',
+          'x:pointer-events-none x:absolute x:-z-1 x:size-full',
           'x:shadow-[0_2px_4px_rgba(0,0,0,.02),0_1px_0_rgba(0,0,0,.06)]',
           'x:dark:shadow-[0_-1px_0_rgba(255,255,255,.1)_inset]',
           'x:contrast-more:shadow-[0_0_0_1px_#000]',
