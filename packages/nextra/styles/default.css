@@ -1,5 +1,6 @@
 @source "../../nextra/src/client/icons/*.svg";
 @source "../../nextra/src/client/{components,hocs,mdx-components}/**/*.tsx";
+@variant dark (&:where(.dark *));
 
 @theme {
   --color-primary-50: hsl(var(--nextra-primary-hue)var(--nextra-primary-saturation)calc(var(--nextra-primary-lightness) + 52%));

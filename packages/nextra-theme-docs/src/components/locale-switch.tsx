@@ -31,7 +31,7 @@ export const LocaleSwitch: FC<LocaleSwitchProps> = ({ lite, className }) => {
       }}
       value={locale}
       selectedOption={
-        <span className="_flex _items-center _gap-2">
+        <span className="x:flex x:items-center x:gap-2">
           <GlobeIcon height="12" />
           {!lite && i18n.find(l => locale === l.locale)?.name}
         </span>

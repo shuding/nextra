@@ -26,7 +26,7 @@ export const ClientWrapper: MDXWrapper = ({ toc, children, metadata }) => {
     <>
       {themeContext.layout !== 'full' && (
         <nav
-          className="nextra-toc _order-last max-xl:_hidden _w-64 _shrink-0 print:_hidden"
+          className="nextra-toc x:order-last x:max-xl:hidden x:w-64 x:shrink-0 x:print:hidden"
           aria-label="table of contents"
         >
           {themeContext.toc && activeType !== 'page' && (
@@ -40,8 +40,8 @@ export const ClientWrapper: MDXWrapper = ({ toc, children, metadata }) => {
       )}
       <article
         className={cn(
-          '_w-full _min-w-0 _break-words _min-h-[calc(100vh-var(--nextra-navbar-height))]',
-          '_text-slate-700 dark:_text-slate-200 _pb-8 _px-6 _pt-4 md:_px-12',
+          'x:w-full x:min-w-0 x:break-words x:min-h-[calc(100vh-var(--nextra-navbar-height))]',
+          'x:text-slate-700 x:dark:text-slate-200 x:pb-8 x:px-6 x:pt-4 x:md:px-12',
           themeContext.typesetting === 'article' &&
             'nextra-body-typesetting-article'
         )}
@@ -51,11 +51,11 @@ export const ClientWrapper: MDXWrapper = ({ toc, children, metadata }) => {
         )}
         {children}
         {date ? (
-          <div className="_mt-12 _mb-8 _text-xs _text-gray-500 _text-end dark:_text-gray-400">
+          <div className="x:mt-12 x:mb-8 x:text-xs x:text-gray-500 x:text-end x:dark:text-gray-400">
             {cloneElement(themeConfig.lastUpdated, { date: new Date(date) })}
           </div>
         ) : (
-          <div className="_mt-16" />
+          <div className="x:mt-16" />
         )}
         {themeContext.pagination && activeType !== 'page' && <Pagination />}
       </article>

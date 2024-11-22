@@ -38,34 +38,34 @@ export const Navbar: FC<NavbarProps> = props => {
   return (
     <header
       className={cn(
-        'nextra-navbar _sticky _top-0 _z-20 _w-full _bg-transparent print:_hidden',
-        String.raw`max-md:[.nextra-banner:not(.\_hidden)~&]:_top-[--nextra-banner-height]`
+        'nextra-navbar x:sticky x:top-0 x:z-20 x:w-full x:bg-transparent x:print:hidden',
+        'x:max-md:[.nextra-banner:not([class$=hidden])~&]:top-(--nextra-banner-height)'
       )}
     >
       <div
         className={cn(
           'nextra-navbar-blur',
-          '_pointer-events-none _absolute _z-[-1] _size-full',
-          '_shadow-[0_2px_4px_rgba(0,0,0,.02),0_1px_0_rgba(0,0,0,.06)]',
-          'dark:_shadow-[0_-1px_0_rgba(255,255,255,.1)_inset]',
-          'contrast-more:_shadow-[0_0_0_1px_#000]',
-          'contrast-more:dark:_shadow-[0_0_0_1px_#fff]',
-          '_backdrop-blur-md _bg-[rgba(var(--nextra-bg),.7)]'
+          'x:pointer-events-none x:absolute x:z-[-1] x:size-full',
+          'x:shadow-[0_2px_4px_rgba(0,0,0,.02),0_1px_0_rgba(0,0,0,.06)]',
+          'x:dark:shadow-[0_-1px_0_rgba(255,255,255,.1)_inset]',
+          'x:contrast-more:shadow-[0_0_0_1px_#000]',
+          'x:contrast-more:dark:shadow-[0_0_0_1px_#fff]',
+          'x:backdrop-blur-md x:bg-[rgba(var(--nextra-bg),.7)]'
         )}
       />
       <nav
         style={{ height: 'var(--nextra-navbar-height)' }}
-        className="_mx-auto _flex _max-w-[90rem] _items-center _justify-end _gap-4 _pl-[max(env(safe-area-inset-left),1.5rem)] _pr-[max(env(safe-area-inset-right),1.5rem)]"
+        className="x:mx-auto x:flex x:max-w-[90rem] x:items-center x:justify-end x:gap-4 x:pl-[max(env(safe-area-inset-left),1.5rem)] x:pr-[max(env(safe-area-inset-right),1.5rem)]"
       >
         {logoLink ? (
           <NextLink
             href={typeof logoLink === 'string' ? logoLink : '/'}
-            className="focus-visible:nextra-focus _flex _items-center hover:_opacity-75 _me-auto"
+            className="focus-visible:nextra-focus x:flex x:items-center x:hover:opacity-75 x:me-auto"
           >
             {logo}
           </NextLink>
         ) : (
-          <div className="_flex _items-center _me-auto">{logo}</div>
+          <div className="x:flex x:items-center x:me-auto">{logo}</div>
         )}
         <ClientNavbar>
           {projectLink && <Anchor href={projectLink}>{projectIcon}</Anchor>}
