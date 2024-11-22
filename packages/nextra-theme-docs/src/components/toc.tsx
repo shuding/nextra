@@ -17,10 +17,10 @@ type TOCProps = {
 }
 
 const linkClassName = cn(
-  '_text-xs _font-medium',
-  '_text-gray-600 dark:_text-gray-400',
-  'hover:_text-gray-800 dark:hover:_text-gray-200',
-  'contrast-more:_text-gray-700 contrast-more:dark:_text-gray-100'
+  'x:text-xs x:font-medium',
+  'x:text-gray-600 x:dark:text-gray-400',
+  'x:hover:text-gray-800 x:dark:hover:text-gray-200',
+  'x:contrast-more:text-gray-700 x:contrast-more:dark:text-gray-100'
 )
 
 export const TOC: FC<TOCProps> = ({ toc, filePath, pageTitle }) => {
@@ -56,41 +56,41 @@ export const TOC: FC<TOCProps> = ({ toc, filePath, pageTitle }) => {
   return (
     <div
       className={cn(
-        hasHeadings && '_grid _grid-rows-[min-content_1fr_min-content]', // 1fr: toc headings, min-content: title/footer
-        '_sticky _top-[--nextra-navbar-height] _text-sm',
-        '_max-h-[calc(100vh-var(--nextra-navbar-height))]'
+        hasHeadings && 'x:grid x:grid-rows-[min-content_1fr_min-content]', // 1fr: toc headings, min-content: title/footer
+        'x:sticky x:top-(--nextra-navbar-height) x:text-sm',
+        'x:max-h-[calc(100vh-var(--nextra-navbar-height))]'
       )}
     >
       {hasHeadings && (
         <>
-          <p className="_pt-6 _px-4 _font-semibold _tracking-tight">
+          <p className="x:pt-6 x:px-4 x:font-semibold x:tracking-tight">
             {themeConfig.toc.title}
           </p>
           <ul
             ref={tocRef}
             className={cn(
-              '_p-4 nextra-scrollbar _overscroll-y-contain _overflow-y-auto _hyphens-auto',
+              'x:p-4 nextra-scrollbar x:overscroll-y-contain x:overflow-y-auto x:hyphens-auto',
               'mask' // for title/footer shadow
             )}
           >
             {toc.map(({ id, value, depth }) => (
-              <li className="_my-2 _scroll-my-6 _scroll-py-6" key={id}>
+              <li className="x:my-2 x:scroll-my-6 x:scroll-py-6" key={id}>
                 <a
                   href={`#${id}`}
                   className={cn(
                     'focus-visible:nextra-focus',
                     {
-                      2: '_font-semibold',
-                      3: '_ms-3',
-                      4: '_ms-6',
-                      5: '_ms-9',
-                      6: '_ms-12'
+                      2: 'x:font-semibold',
+                      3: 'x:ms-3',
+                      4: 'x:ms-6',
+                      5: 'x:ms-9',
+                      6: 'x:ms-12'
                     }[depth],
-                    '_block _transition-colors _subpixel-antialiased',
+                    'x:block x:transition-colors x:subpixel-antialiased',
                     id === activeSlug
-                      ? '_text-primary-600 contrast-more:!_text-primary-600'
-                      : '_text-gray-500 hover:_text-gray-900 dark:_text-gray-400 dark:hover:_text-gray-300',
-                    'contrast-more:_text-gray-900 contrast-more:_underline contrast-more:dark:_text-gray-50 _break-words'
+                      ? 'x:text-primary-600 x:contrast-more:text-primary-600!'
+                      : 'x:text-gray-500 x:hover:text-gray-900 x:dark:text-gray-400 x:dark:hover:text-gray-300',
+                    'x:contrast-more:text-gray-900 x:contrast-more:underline x:contrast-more:dark:text-gray-50 x:break-words'
                   )}
                 >
                   {value}
@@ -103,7 +103,7 @@ export const TOC: FC<TOCProps> = ({ toc, filePath, pageTitle }) => {
 
       {hasMetaInfo && (
         <div
-          className={cn(hasHeadings && 'bordered', '_grid _gap-2 _py-4 _mx-4')}
+          className={cn(hasHeadings && 'bordered', 'x:grid x:gap-2 x:py-4 x:mx-4')}
         >
           {themeConfig.feedback.content && (
             <Anchor
