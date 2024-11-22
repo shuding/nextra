@@ -55,7 +55,7 @@ const DEFAULT_COMPONENTS = getNextraMDXComponents({
   h6: H6,
   hr: props => (
     <hr
-      className="x:my-8 x:border-neutral-200/70 x:contrast-more:border-neutral-400 x:dark:border-primary-100/10 x:contrast-more:dark:border-neutral-400"
+      className="x:my-8 bordered"
       {...props}
     />
   ),
