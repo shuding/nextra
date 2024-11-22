@@ -23,7 +23,11 @@ export function MDXRemote({
   components,
   compiledSource
 }: MDXRemoteProps) {
-  const MDXContent = evaluate(compiledSource, useMDXComponents(components), scope).default
+  const MDXContent = evaluate(
+    compiledSource,
+    useMDXComponents(components),
+    scope
+  ).default
 
   return <MDXContent />
 }

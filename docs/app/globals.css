@@ -1,5 +1,7 @@
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
+
+@theme {
+}
 
 body {
   font-feature-settings:

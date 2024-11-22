@@ -1,6 +1,6 @@
 .nextra-code span {
-  @apply _bg-[--shiki-light-bg] _text-[--shiki-light];
-  @apply dark:_bg-[--shiki-dark-bg] dark:_text-[--shiki-dark];
+  @apply x:bg-(--shiki-light-bg) x:text-(--shiki-light);
+  @apply x:dark:bg-(--shiki-dark-bg) x:dark:text-(--shiki-dark);
 }
 
 code.nextra-code {
@@ -9,29 +9,29 @@ code.nextra-code {
     'rlig' 1,
     'calt' 1,
     'ss01' 1;
-  @apply _text-sm;
+  @apply x:text-sm;
 
   :not(pre) > &:not([class*='twoslash-']) {
-    @apply _border-black _border-opacity-[0.04] _bg-opacity-[0.03] _bg-black _break-words _rounded-md _border _py-0.5 _px-[.25em] _text-[.9em];
-    @apply dark:_border-white/10 dark:_bg-white/10;
+    @apply x:border-black/[0.04] x:bg-black/[0.03] x:break-words x:rounded-md x:border x:py-0.5 x:px-[.25em] x:text-[.9em];
+    @apply x:dark:border-white/10 x:dark:bg-white/10;
   }
 }
 
 pre code.nextra-code:not([class*='twoslash-']) {
-  @apply _grid;
+  @apply x:grid;
 
   &[data-line-numbers] > span {
-    @apply _pl-2;
+    @apply x:pl-2;
 
     &::before {
       counter-increment: line;
       content: counter(line);
-      @apply _inline-block _pr-4 _text-right _min-w-[2.6rem] _text-gray-500;
+      @apply x:inline-block x:pr-4 x:text-right x:min-w-[2.6rem] x:text-gray-500;
     }
   }
 
   & > span {
-    @apply _px-4;
+    @apply x:px-4;
 
     &[data-highlighted-line] {
       @apply _bg-primary-600/10 dark:_bg-primary-600/20 !_text-primary-600/80 _shadow-[2px_0_currentColor_inset];

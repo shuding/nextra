@@ -10,7 +10,7 @@ export type Scope = Record<string, unknown>
 export function evaluate(
   rawJs: string,
   components: MDXComponents = {},
-  scope: Scope = {},
+  scope: Scope = {}
 ) {
   // if we're ready to render, we can assemble the component tree and let React do its thing
   // first we set up the scope which has to include the mdx custom
