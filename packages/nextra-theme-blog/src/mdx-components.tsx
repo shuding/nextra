@@ -24,14 +24,14 @@ const createHeading = (
       <Tag
         id={id}
         // can be added by footnotes
-        className={className === 'sr-only' ? '_sr-only' : ''}
+        className={className === 'sr-only' ? 'x:sr-only' : ''}
         {...props}
       >
         {children}
         {id && (
           <a
             href={`#${id}`}
-            className="_not-prose subheading-anchor"
+            className="x:not-prose subheading-anchor"
             aria-label="Permalink for this section"
           />
         )}

@@ -12,7 +12,7 @@ export function GoBack() {
   if (!isNestedPage) return null
 
   return (
-    <Button onClick={router.back} className="print:_hidden _underline">
+    <Button onClick={router.back} className="x:print:hidden x:underline">
       Back
     </Button>
   )

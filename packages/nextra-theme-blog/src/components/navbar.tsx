@@ -14,14 +14,14 @@ export const Navbar: FC<NavbarProps> = ({ navs, children }) => {
 
   return (
     <header
-      className="_mb-8 _flex _items-center _gap-3 _justify-end"
+      className="x:mb-8 x:flex x:items-center x:gap-3 x:justify-end"
       data-pagefind-ignore="all"
     >
       {navs?.map(nav =>
         nav.url === pathname ? (
           <span
             key={nav.url}
-            className="_cursor-default dark:_text-gray-400 _text-gray-600"
+            className="x:cursor-default x:dark:text-gray-400 x:text-gray-600"
           >
             {nav.name}
           </span>
