@@ -5,7 +5,6 @@ const _Table: FC<ComponentProps<'table'>> = props => (
   <table
     {...props}
     className={cn(
-      'x:not-prose', // for nextra-theme-blog
       'x:block x:overflow-x-auto',
       props.className
     )}

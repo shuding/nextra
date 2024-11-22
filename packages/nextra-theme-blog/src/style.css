@@ -1,4 +1,7 @@
 @import 'tailwindcss' prefix(x);
+@plugin "@tailwindcss/typography";
+@source "../../nextra/src/client/icons/*.svg";
+@source "../../nextra/src/client/{components,hocs,mdx-components}/**/*.tsx";
 @import '../../nextra/styles/code-block.css';
 @import '../../nextra/styles/subheading-anchor.css';
 @import '../../nextra/styles/scrollbar.css';
@@ -29,7 +32,7 @@ h1 {
   letter-spacing: -0.03em;
 }
 
-.x:prose code {
+.x\:prose code {
   &:before,
   &:after {
     @apply x:hidden;
@@ -39,7 +42,7 @@ h1 {
   }
 }
 
-.x:prose .nextra-callout p {
+.x\:prose .nextra-callout p {
   @apply x:m-0;
 }
 

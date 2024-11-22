@@ -64,7 +64,7 @@ export const Pre: FC<PreProps> = ({
           'x:contrast-more:ring-gray-900 x:contrast-more:dark:ring-gray-50',
           'x:contrast-more:contrast-150',
           filename ? 'x:rounded-b-md' : 'x:rounded-md',
-          'x:not-prose', // for nextra-theme-blog
+          'not-prose', // for nextra-theme-blog
           className
         )}
         {...props}

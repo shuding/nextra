@@ -25,7 +25,7 @@ export const Meta: FC<BlogMetadata & { children: ReactNode }> = ({
         (readingTimeText ? 'x:items-start' : 'x:items-center')
       }
     >
-      <div className="x:not-prose x:grow x:dark:text-gray-400 x:text-gray-600">
+      <div className="x:grow x:dark:text-gray-400 x:text-gray-600">
         <div className="x:flex x:flex-wrap x:items-center x:gap-1">
           {author}
           {author && date && ','}

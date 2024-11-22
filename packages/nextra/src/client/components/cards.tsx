@@ -55,7 +55,7 @@ const _Cards: FC<{ num?: number } & ComponentProps<'div'>> = ({
     <div
       className={cn(
         'nextra-cards x:mt-4 x:gap-4 x:grid',
-        'x:not-prose', // for nextra-theme-blog
+        'not-prose', // for nextra-theme-blog
         className
       )}
       {...props}

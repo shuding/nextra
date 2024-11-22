@@ -31,7 +31,7 @@ const createHeading = (
         {id && (
           <a
             href={`#${id}`}
-            className="x:not-prose subheading-anchor"
+            className="not-prose subheading-anchor"
             aria-label="Permalink for this section"
           />
         )}
