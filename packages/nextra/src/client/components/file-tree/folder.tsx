@@ -26,25 +26,25 @@ export const Folder = memo<FolderProps>(
     const ComponentToUse = isFolderOpen ? FolderOpenIcon : FolderIcon
 
     return (
-      <li className="_flex _flex-col _gap-1">
+      <li className="x:flex x:flex-col x:gap-1">
         <Button
           onClick={toggle}
           disabled={open}
           className={({ hover }) =>
             cn(
-              '_flex _items-center _gap-1 _break-all',
-              '_text-left', // override browser default
-              hover && '_opacity-60',
-              active && '_text-primary-600'
+              'x:flex x:items-center x:gap-1 x:break-all',
+              'x:text-left', // override browser default
+              hover && 'x:opacity-60',
+              active && 'x:text-primary-600'
             )
           }
         >
           {/* Text can shrink icon */}
-          <ComponentToUse height="14" className="_shrink-0" />
+          <ComponentToUse height="14" className="x:shrink-0" />
           {name}
         </Button>
         {isFolderOpen && (
-          <ul className="_flex _flex-col _gap-2 _ps-4">{children}</ul>
+          <ul className="x:flex x:flex-col x:gap-2 x:ps-4">{children}</ul>
         )}
       </li>
     )

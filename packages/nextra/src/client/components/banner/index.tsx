@@ -13,7 +13,7 @@ export const Banner: FC<{
   if (!children) {
     return null
   }
-  const hideBannerScript = `try{document.querySelector('.${CLASS_NAME}').classList.toggle('_hidden',localStorage.getItem(${JSON.stringify(storageKey)}))}catch(e){}`
+  const hideBannerScript = `try{document.querySelector('.${CLASS_NAME}').classList.toggle('x:hidden',localStorage.getItem(${JSON.stringify(storageKey)}))}catch(e){}`
 
   return (
     <div
@@ -22,12 +22,12 @@ export const Banner: FC<{
       style={{ height: 'var(--nextra-banner-height)' }}
       className={cn(
         CLASS_NAME,
-        'max-md:_sticky _top-0 _z-20 _flex _items-center',
-        '_text-slate-50 dark:_text-white _bg-neutral-900 dark:_bg-[linear-gradient(1deg,#383838,#212121)]',
-        '_px-2 print:_hidden'
+        'x:max-md:sticky x:top-0 x:z-20 x:flex x:items-center',
+        'x:text-slate-50 x:dark:text-white x:bg-neutral-900 x:dark:bg-[linear-gradient(1deg,#383838,#212121)]',
+        'x:px-2 x:print:hidden'
       )}
     >
-      <div className="_w-full _whitespace-nowrap _overflow-x-auto _text-center _font-medium _text-sm">
+      <div className="x:w-full x:whitespace-nowrap x:overflow-x-auto x:text-center x:font-medium x:text-sm">
         {children}
       </div>
       {dismissible && (

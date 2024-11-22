@@ -48,8 +48,8 @@ export const SkipNavLink: FC = ({
       cn(
         'nextra-skip-nav',
         focus
-          ? 'nextra-focus _fixed _z-50 _my-3 _mx-4 _rounded-lg _px-3 _py-2 _text-sm _font-bold _bg-[rgb(var(--nextra-bg))] _border _border-current'
-          : '_sr-only',
+          ? 'nextra-focus x:fixed x:z-50 x:my-3 x:mx-4 x:rounded-lg x:px-3 x:py-2 x:text-sm x:font-bold x:bg-[rgb(var(--nextra-bg))] x:border x:border-current'
+          : 'x:sr-only',
         className
       )
     }
