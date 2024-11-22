@@ -56,7 +56,7 @@ const classes = {
   ),
   wrapper: cn('x:p-4 x:overflow-y-auto nextra-scrollbar mask'),
   footer: cn(
-    'nextra-sidebar-footer bordered x:flex x:items-center x:gap-2 x:py-4 x:mx-4'
+    'nextra-sidebar-footer x:border-t bordered x:flex x:items-center x:gap-2 x:py-4 x:mx-4'
   )
 }
 

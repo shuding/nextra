@@ -16,7 +16,7 @@ const createHeading = (
               : 'x:font-semibold x:target:animate-[fade-in_1.5s]',
             {
               h1: 'x:mt-2 x:text-4xl',
-              h2: 'x:mt-10 x:border-b x:pb-1 x:text-3xl x:border-neutral-200/70 x:contrast-more:border-neutral-400 x:dark:border-primary-100/10 x:contrast-more:dark:border-neutral-400',
+              h2: 'x:mt-10 x:border-b x:pb-1 x:text-3xl bordered',
               h3: 'x:mt-8 x:text-2xl',
               h4: 'x:mt-8 x:text-xl',
               h5: 'x:mt-8 x:text-lg',

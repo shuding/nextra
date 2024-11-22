@@ -17,7 +17,7 @@ export const Footer: FC<ComponentProps<'footer'>> = ({
           <ThemeSwitch />
         </div>
       </Switchers>
-      <hr className="x:dark:border-neutral-800" />
+      <hr className="bordered" />
       <footer
         className={cn(
           'x:mx-auto x:flex x:max-w-[90rem] x:justify-center x:py-12 x:text-gray-600 x:dark:text-gray-400 x:md:justify-start',

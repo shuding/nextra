@@ -30,8 +30,7 @@ export const Pagination: FC = () => {
   return (
     <div
       className={cn(
-        'x:mb-8 x:flex x:items-center x:border-t x:pt-8 x:dark:border-neutral-800',
-        'x:contrast-more:border-neutral-400 x:dark:contrast-more:border-neutral-400',
+        'x:mb-8 x:flex x:items-center x:border-t x:pt-8 bordered',
         'x:print:hidden'
       )}
     >
