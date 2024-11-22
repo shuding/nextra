@@ -55,11 +55,11 @@ export default async function Page(props) {
   )
   const data = await response.text()
   const rawJs = await compileMdx(data, { filePath })
-  const { default: MDXContent, toc, metadata } = evaluate(rawJs)
+  const { default: MDXContent, toc, metadata } = evaluate(rawJs, components)
 
   return (
     <Wrapper toc={toc} metadata={metadata}>
-      <MDXContent components={components} />
+      <MDXContent />
     </Wrapper>
   )
 }

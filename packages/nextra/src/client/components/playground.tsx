@@ -64,7 +64,7 @@ export const Playground: FC<
   if (compiledSource) {
     // `<MDXRemote>` cannot be used here because `useMDXComponents` may include components that
     // are only available on the server.
-    const MDXContent = evaluate(compiledSource, scope, components).default
+    const MDXContent = evaluate(compiledSource, components, scope).default
     return <MDXContent />
   }
 
