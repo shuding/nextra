@@ -165,7 +165,7 @@ export const Search: FC<SearchProps> = ({
         'x:absolute x:my-1.5 x:select-none x:end-1.5',
         'x:h-5 x:rounded x:bg-white x:px-1.5 x:font-mono x:text-[11px] x:font-medium x:text-gray-500',
         'x:border x:dark:border-gray-100/20 x:dark:bg-black/50',
-        'x:contrast-more:border-current x:contrast-more:text-current x:contrast-more:dark:border-current',
+        'x:contrast-more:border-current! x:contrast-more:text-current',
         'x:items-center x:gap-1 x:flex',
         'x:max-sm:hidden'
       )}

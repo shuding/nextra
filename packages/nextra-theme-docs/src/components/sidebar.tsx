@@ -46,7 +46,7 @@ const classes = {
   ),
   active: cn(
     'x:bg-primary-100 x:font-semibold x:text-primary-800 x:dark:bg-primary-400/10 x:dark:text-primary-600',
-    'x:contrast-more:border-primary-500 x:contrast-more:dark:border-primary-500'
+    'x:contrast-more:border-primary-500!'
   ),
   list: cn('x:grid x:gap-1'),
   border: cn(
