@@ -35,28 +35,28 @@ const TreeState: Record<string, boolean> = Object.create(null)
 
 const classes = {
   link: cn(
-    '_flex _rounded _px-2 _py-1.5 _text-sm _transition-colors [word-break:break-word]',
-    '_cursor-pointer contrast-more:_border'
+    'x:flex x:rounded x:px-2 x:py-1.5 x:text-sm x:transition-colors [word-break:break-word]',
+    'x:cursor-pointer x:contrast-more:border'
   ),
   inactive: cn(
-    '_text-gray-500 hover:_bg-gray-100 hover:_text-gray-900',
-    'dark:_text-neutral-400 dark:hover:_bg-primary-100/5 dark:hover:_text-gray-50',
-    'contrast-more:_text-gray-900 contrast-more:dark:_text-gray-50',
-    'contrast-more:_border-transparent contrast-more:hover:_border-gray-900 contrast-more:dark:hover:_border-gray-50'
+    'x:text-gray-500 x:hover:bg-gray-100 x:hover:text-gray-900',
+    'x:dark:text-neutral-400 x:dark:hover:bg-primary-100/5 x:dark:hover:text-gray-50',
+    'x:contrast-more:text-gray-900 x:contrast-more:dark:text-gray-50',
+    'x:contrast-more:border-transparent x:contrast-more:hover:border-gray-900 x:contrast-more:dark:hover:border-gray-50'
   ),
   active: cn(
-    '_bg-primary-100 _font-semibold _text-primary-800 dark:_bg-primary-400/10 dark:_text-primary-600',
-    'contrast-more:_border-primary-500 contrast-more:dark:_border-primary-500'
+    'x:bg-primary-100 x:font-semibold x:text-primary-800 x:dark:bg-primary-400/10 x:dark:text-primary-600',
+    'x:contrast-more:border-primary-500 x:contrast-more:dark:border-primary-500'
   ),
-  list: cn('_grid _gap-1'),
+  list: cn('x:grid x:gap-1'),
   border: cn(
-    '_relative before:_absolute before:_inset-y-1',
-    'before:_w-px before:_bg-gray-200 before:_content-[""] dark:before:_bg-neutral-800',
-    '_ps-3 before:_start-0 _pt-1 _ms-3'
+    'x:relative x:before:absolute x:before:inset-y-1',
+    'x:before:w-px x:before:bg-gray-200 x:before:content-[""] x:dark:before:bg-neutral-800',
+    'x:ps-3 x:before:start-0 x:pt-1 x:ms-3'
   ),
-  wrapper: cn('_p-4 _overflow-y-auto nextra-scrollbar mask'),
+  wrapper: cn('x:p-4 x:overflow-y-auto nextra-scrollbar mask'),
   footer: cn(
-    'nextra-sidebar-footer bordered _flex _items-center _gap-2 _py-4 _mx-4'
+    'nextra-sidebar-footer bordered x:flex x:items-center x:gap-2 x:py-4 x:mx-4'
   )
 }
 
@@ -152,8 +152,8 @@ const Folder: FC<FolderProps> = ({ item, anchors, onFocus, level }) => {
         href={isLink ? item.route : undefined}
         data-href={isLink ? undefined : item.route}
         className={cn(
-          '_items-center _justify-between _gap-2',
-          !isLink && '_text-left _w-full',
+          'x:items-center x:justify-between x:gap-2',
+          !isLink && 'x:text-left x:w-full',
           classes.link,
           active ? classes.active : classes.inactive
         )}
@@ -164,10 +164,10 @@ const Folder: FC<FolderProps> = ({ item, anchors, onFocus, level }) => {
         <ArrowRightIcon
           height="18"
           className={cn(
-            '_shrink-0',
-            '_rounded-sm _p-0.5 hover:_bg-gray-800/5 dark:hover:_bg-gray-100/5',
-            'motion-reduce:*:_transition-none *:_origin-center *:_transition-transform *:rtl:_-rotate-180',
-            open && '*:ltr:_rotate-90 *:rtl:_rotate-[-270deg]'
+            'x:shrink-0',
+            'x:rounded-sm x:p-0.5 x:hover:bg-gray-800/5 x:dark:hover:bg-gray-100/5',
+            'x:motion-reduce:*:transition-none x:*:origin-center x:*:transition-transform x:*:rtl:-rotate-180',
+            open && 'x:*:ltr:rotate-90 x:*:rtl:rotate-[-270deg]'
           )}
         />
       </ComponentToUse>
@@ -191,12 +191,12 @@ const Separator: FC<{ title: string }> = ({ title }) => {
       className={cn(
         '[word-break:break-word]',
         title
-          ? '[&:not(:first-child)]:_mt-5 _mb-2 _px-2 _py-1.5 _text-sm _font-semibold _text-gray-900 dark:_text-gray-100'
-          : '_my-4'
+          ? 'x:[&:not(:first-child)]:mt-5 x:mb-2 x:px-2 x:py-1.5 x:text-sm x:font-semibold x:text-gray-900 x:dark:text-gray-100'
+          : 'x:my-4'
       )}
     >
       {title || (
-        <hr className="_mx-2 _border-t _border-gray-200 dark:_border-primary-100/10" />
+        <hr className="x:mx-2 x:border-t x:border-gray-200 x:dark:border-primary-100/10" />
       )}
     </li>
   )
@@ -237,7 +237,7 @@ const File: FC<{
                 href={`#${id}`}
                 className={cn(
                   classes.link,
-                  'focus-visible:nextra-focus _flex _gap-2 before:_opacity-25 before:_content-["#"]',
+                  'focus-visible:nextra-focus x:flex x:gap-2 x:before:opacity-25 x:before:content-["#"]',
                   id === activeSlug ? classes.active : classes.inactive
                 )}
                 onClick={handleClick}
@@ -323,19 +323,19 @@ export const MobileNav: FC = () => {
   return (
     <aside
       className={cn(
-        '_flex _flex-col',
-        '_fixed _inset-0 _pt-[--nextra-navbar-height] _z-10 _overscroll-contain',
+        'x:flex x:flex-col',
+        'x:fixed x:inset-0 x:pt-(--nextra-navbar-height) x:z-10 x:overscroll-contain',
         '[contain:layout_style]',
-        'md:_hidden',
-        String.raw`[.nextra-banner:not(.\_hidden)~&]:_pt-[calc(var(--nextra-banner-height)+var(--nextra-navbar-height))]`,
-        '_bg-[rgb(var(--nextra-bg))]',
+        'x:md:hidden',
+        'x:[.nextra-banner:not([class$=hidden])~&]:pt-[calc(var(--nextra-banner-height)+var(--nextra-navbar-height))]',
+        'x:bg-[rgb(var(--nextra-bg))]',
         menu
           ? '[transform:translate3d(0,0,0)]'
           : '[transform:translate3d(0,-100%,0)]'
       )}
     >
       {themeConfig.search && (
-        <div className="_px-4 _pt-4">{themeConfig.search}</div>
+        <div className="x:px-4 x:pt-4">{themeConfig.search}</div>
       )}
       <Menu
         ref={sidebarRef}
@@ -348,8 +348,8 @@ export const MobileNav: FC = () => {
       />
 
       {hasMenu && (
-        <div className={cn(classes.footer, '_mt-auto')}>
-          <ThemeSwitch lite={hasI18n} className="_grow" />
+        <div className={cn(classes.footer, 'x:mt-auto')}>
+          <ThemeSwitch lite={hasI18n} className="x:grow" />
           <LocaleSwitch />
         </div>
       )}
@@ -395,24 +395,24 @@ export const Sidebar: FC<{ toc: Heading[] }> = ({ toc }) => {
   return (
     <>
       {includePlaceholder && hideSidebar && (
-        <div className="max-xl:_hidden _h-0 _w-64 _shrink-0" />
+        <div className="x:max-xl:hidden x:h-0 x:w-64 x:shrink-0" />
       )}
       <aside
         id={sidebarControlsId}
         className={cn(
-          'nextra-sidebar print:_hidden',
-          '_transition-all _ease-in-out',
-          'max-md:_hidden _flex _flex-col',
-          '_h-[calc(100dvh-var(--nextra-menu-height))]',
-          '_top-[--nextra-navbar-height] _shrink-0',
-          isExpanded ? '_w-64' : '_w-20',
-          hideSidebar ? '_hidden' : '_sticky'
+          'nextra-sidebar x:print:hidden',
+          'x:transition-all x:ease-in-out',
+          'x:max-md:hidden x:flex x:flex-col',
+          'x:h-[calc(100dvh-var(--nextra-menu-height))]',
+          'x:top-(--nextra-navbar-height) x:shrink-0',
+          isExpanded ? 'x:w-64' : 'x:w-20',
+          hideSidebar ? 'x:hidden' : 'x:sticky'
         )}
       >
         <div
           className={cn(
             classes.wrapper,
-            '_grow',
+            'x:grow',
             !isExpanded && 'no-scrollbar'
           )}
           ref={sidebarRef}
@@ -433,22 +433,22 @@ export const Sidebar: FC<{ toc: Heading[] }> = ({ toc }) => {
           <div
             className={cn(
               classes.footer,
-              !isExpanded && '_flex-wrap _justify-center',
+              !isExpanded && 'x:flex-wrap x:justify-center',
               showToggleAnimation && [
-                '*:_opacity-0',
+                'x:*:opacity-0',
                 isExpanded
-                  ? '*:_animate-[fade-in_1s_ease_.2s_forwards]'
-                  : '*:_animate-[fade-in2_1s_ease_.2s_forwards]'
+                  ? 'x:*:animate-[fade-in_1s_ease_.2s_forwards]'
+                  : 'x:*:animate-[fade-in2_1s_ease_.2s_forwards]'
               ]
             )}
           >
             <LocaleSwitch
               lite={!isExpanded}
-              className={isExpanded ? '_grow' : ''}
+              className={isExpanded ? 'x:grow' : ''}
             />
             <ThemeSwitch
               lite={!isExpanded || hasI18n}
-              className={!isExpanded || hasI18n ? '' : '_grow'}
+              className={!isExpanded || hasI18n ? '' : 'x:grow'}
             />
             {themeConfig.sidebar.toggleButton && (
               <Button
@@ -457,10 +457,10 @@ export const Sidebar: FC<{ toc: Heading[] }> = ({ toc }) => {
                 title={isExpanded ? 'Collapse sidebar' : 'Expand sidebar'}
                 className={({ hover }) =>
                   cn(
-                    '_rounded-md _p-2',
+                    'x:rounded-md x:p-2',
                     hover
-                      ? '_bg-gray-100 _text-gray-900 dark:_bg-primary-100/5 dark:_text-gray-50'
-                      : '_text-gray-600 dark:_text-gray-400'
+                      ? 'x:bg-gray-100 x:text-gray-900 x:dark:bg-primary-100/5 x:dark:text-gray-50'
+                      : 'x:text-gray-600 x:dark:text-gray-400'
                   )
                 }
                 onClick={() => {
@@ -471,7 +471,7 @@ export const Sidebar: FC<{ toc: Heading[] }> = ({ toc }) => {
                 <ExpandIcon
                   height="12"
                   className={cn(
-                    !isExpanded && 'first:*:_origin-[35%] first:*:_rotate-180'
+                    !isExpanded && 'x:*:first:origin-[35%] x:*:first:rotate-180'
                   )}
                 />
               </Button>
