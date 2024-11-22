@@ -168,7 +168,9 @@ module.exports = {
         'no-restricted-imports': [
           'error',
           { name: 'next/link', message: 'Use `<Anchor>` instead' }
-        ]
+        ],
+        // False positive due Tailwind CSS v4
+        'tailwindcss/no-custom-classname': 'off'
       }
     },
     // ⚙️ nextra-theme-blog
@@ -194,7 +196,9 @@ module.exports = {
             message:
               'Use `useTransitionRouter` from `next-view-transitions` instead'
           }
-        ]
+        ],
+        // False positive due Tailwind CSS v4
+        'tailwindcss/no-custom-classname': 'off'
       }
     },
     // ⚙️ nextra
@@ -216,7 +220,9 @@ module.exports = {
       },
       rules: {
         ...TAILWIND_CONFIG.rules,
-        'import/extensions': ['error', 'ignorePackages']
+        'import/extensions': ['error', 'ignorePackages'],
+        // False positive due Tailwind CSS v4
+        'tailwindcss/no-custom-classname': 'off'
       }
     },
     // ⚙️ Docs
@@ -237,7 +243,10 @@ module.exports = {
             'headline',
             'content-container',
             'feat-darkmode',
-            'features-container'
+            'features-container',
+            // New in TailwindCSS v4
+            'z-1',
+            'z-2'
           ],
           cssFiles: [
             'docs/app/globals.css',
