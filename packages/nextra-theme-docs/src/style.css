@@ -57,7 +57,7 @@ html {
 }
 
 .bordered {
-  @apply x:border-t x:dark:border-neutral-800 x:contrast-more:border-neutral-400!;
+  @apply x:border-gray-200 x:dark:border-neutral-800 x:contrast-more:border-neutral-400!;
 }
 
 .mask {
