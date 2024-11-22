@@ -13,7 +13,8 @@
     "types": ["vitest/globals"],
     "paths": {
       "unified": ["./node_modules/unified"]
-    }
+    },
+    "resolveJsonModule": true
   },
   "exclude": ["dist"]
 }

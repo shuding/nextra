@@ -4,10 +4,7 @@ import type { ComponentProps, FC } from 'react'
 const _Table: FC<ComponentProps<'table'>> = props => (
   <table
     {...props}
-    className={cn(
-      'x:block x:overflow-x-auto',
-      props.className
-    )}
+    className={cn('x:block x:overflow-x-auto', props.className)}
   />
 )
 const Th: FC<ComponentProps<'th'>> = props => (

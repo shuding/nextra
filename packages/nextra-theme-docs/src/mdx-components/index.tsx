@@ -66,17 +66,12 @@ const DEFAULT_COMPONENTS = getNextraMDXComponents({
       {...props}
     />
   ),
-  p: props => (
-    <p className="x:not-first:mt-6 x:leading-7" {...props} />
-  ),
+  p: props => <p className="x:not-first:mt-6 x:leading-7" {...props} />,
   pre: withIcons(Pre),
   summary: Summary,
   table: ({ className, ...props }) => (
     <Table
-      className={cn(
-        'nextra-scrollbar x:not-first:mt-6 x:p-0',
-        className
-      )}
+      className={cn('nextra-scrollbar x:not-first:mt-6 x:p-0', className)}
       {...props}
     />
   ),

@@ -1,11 +1,6 @@
 import type { Config } from 'tailwindcss'
 
 export default {
-  content: [
-    './src/**/*.{ts,tsx}',
-    '../nextra/src/client/icons/*.svg',
-    '../nextra/src/client/{components,hocs,mdx-components}/**/*.tsx'
-  ],
   theme: {
     screens: {
       sm: '640px',
@@ -33,8 +28,7 @@ export default {
       transparent: 'transparent',
       current: 'currentColor',
       black: '#000',
-      white: '#fff',
+      white: '#fff'
     }
   },
-  darkMode: ['class', 'html[class~="dark"]']
 } satisfies Config

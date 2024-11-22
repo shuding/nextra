@@ -20,7 +20,7 @@ export const PostCard: FC<PostCardProps> = ({
     <div key={post.route}>
       <h2 className="x:mt-6 x:mb-2 x:text-xl x:font-semibold">
         <Link href={post.route} className="x:no-underline!">
-         {title}
+          {title}
         </Link>
       </h2>
       {description && (

@@ -3,10 +3,11 @@ import path from 'node:path'
 import svgr from 'esbuild-plugin-svgr'
 import { defineConfig } from 'tsup'
 import { defaultEntry } from '../nextra-theme-docs/tsup.config.js'
+import packageJson from './package.json'
 import { CWD, IS_PRODUCTION } from './src/server/constants.js'
 
 export default defineConfig({
-  name: 'nextra',
+  name: packageJson.name,
   entry: [...defaultEntry, '!src/types.ts', 'src/**/*.svg'],
   format: 'esm',
   dts: true,
