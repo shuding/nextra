@@ -11,11 +11,11 @@ export function Summary({
     <summary
       className={cn(
         'focus-visible:nextra-focus',
-        '_flex _items-center _cursor-pointer _p-1 _transition-colors hover:_bg-gray-100 dark:hover:_bg-neutral-800',
-        '[&::-webkit-details-marker]:_hidden', // Safari
+        'x:flex x:items-center x:cursor-pointer x:p-1 x:transition-colors x:hover:bg-gray-100 x:dark:hover:bg-neutral-800',
+        'x:[&::-webkit-details-marker]:hidden', // Safari
         // display: flex removes whitespace when `<summary>` contains text with other elements, like `foo <strong>bar</strong>`
-        '_whitespace-pre-wrap',
-        '_select-none _rounded',
+        'x:whitespace-pre-wrap',
+        'x:select-none x:rounded',
         className
       )}
       {...props}
@@ -24,9 +24,9 @@ export function Summary({
       <ArrowRightIcon
         height="16"
         className={cn(
-          '_order-first', // if prettier formats `summary` it will have unexpected margin-top
-          '_shrink-0 _mx-1.5 motion-reduce:_transition-none',
-          'rtl:_rotate-180 [[data-expanded]>summary:first-child>&]:_rotate-90 _transition'
+          'x:order-first', // if prettier formats `summary` it will have unexpected margin-top
+          'x:shrink-0 x:mx-1.5 x:motion-reduce:transition-none',
+          'x:rtl:rotate-180 x:[[data-expanded]>summary:first-child>&]:rotate-90 x:transition'
         )}
         strokeWidth="3"
       />

@@ -43,7 +43,7 @@ export const PopupPanel: FC<PopoverPanelProps> = props => {
       anchor={{ to: 'bottom start', gap: -24 }}
       {...props}
       className={cn(
-        '!_max-w-2xl', // Override headlessui's computed max-width
+        'x:max-w-2xl!', // Override headlessui's computed max-width
         props.className
       )}
     />

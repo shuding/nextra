@@ -20,7 +20,7 @@ export const Anchor: FC<ComponentPropsWithoutRef<'a'>> = ({
             <LinkArrowIcon
               // based on font-size
               height="1em"
-              className="_inline _align-baseline _shrink-0"
+              className="x:inline x:align-baseline x:shrink-0"
             />
           </>
         )}
