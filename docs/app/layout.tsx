@@ -4,9 +4,8 @@ import { Footer, Layout, Link, Navbar } from 'nextra-theme-docs'
 import { Banner, Head } from 'nextra/components'
 import { getPageMap } from 'nextra/page-map'
 import type { FC, ReactNode } from 'react'
-import './globals.css'
 import cn from 'clsx'
-import 'nextra-theme-docs/style.css'
+import './globals.css'
 
 export const viewport: Viewport = Head.viewport
 

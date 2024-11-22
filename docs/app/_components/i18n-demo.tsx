@@ -38,7 +38,7 @@ export const I18n: FC = () => {
             className={cn(
               'relative cursor-default select-none whitespace-nowrap px-4 py-1.5',
               active === lang
-                ? '_text-primary-600 _bg-primary-50 dark:_bg-primary-500/10'
+                ? 'x:text-primary-600 x:bg-primary-50 x:dark:bg-primary-500/10'
                 : 'text-gray-800 dark:text-gray-100 '
             )}
           >
