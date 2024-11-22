@@ -20,9 +20,9 @@ export const Button: FC<ButtonProps> = ({
     <HeadlessButton
       className={args =>
         cn(
-          '_transition',
+          'x:transition',
           args.focus && 'nextra-focus',
-          variant === 'outline' && [classes.border, '_rounded-md _p-1.5'],
+          variant === 'outline' && [classes.border, 'x:rounded-md x:p-1.5'],
           typeof className === 'function' ? className(args) : className
         )
       }
