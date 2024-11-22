@@ -10,18 +10,18 @@ export const Footer: FC<ComponentProps<'footer'>> = ({
   ...props
 }) => {
   return (
-    <div className="_bg-gray-100 _pb-[env(safe-area-inset-bottom)] dark:_bg-neutral-900 print:_bg-transparent">
+    <div className="x:bg-gray-100 x:pb-[env(safe-area-inset-bottom)] x:dark:bg-neutral-900 x:print:bg-transparent">
       <Switchers>
-        <div className="_mx-auto _flex _max-w-[90rem] _gap-2 _py-2 _px-4">
+        <div className="x:mx-auto x:flex x:max-w-[90rem] x:gap-2 x:py-2 x:px-4">
           <LocaleSwitch />
           <ThemeSwitch />
         </div>
       </Switchers>
-      <hr className="dark:_border-neutral-800" />
+      <hr className="x:dark:border-neutral-800" />
       <footer
         className={cn(
-          '_mx-auto _flex _max-w-[90rem] _justify-center _py-12 _text-gray-600 dark:_text-gray-400 md:_justify-start',
-          '_pl-[max(env(safe-area-inset-left),1.5rem)] _pr-[max(env(safe-area-inset-right),1.5rem)]',
+          'x:mx-auto x:flex x:max-w-[90rem] x:justify-center x:py-12 x:text-gray-600 x:dark:text-gray-400 x:md:justify-start',
+          'x:pl-[max(env(safe-area-inset-left),1.5rem)] x:pr-[max(env(safe-area-inset-right),1.5rem)]',
           className
         )}
         {...props}

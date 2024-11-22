@@ -30,9 +30,9 @@ export const BackToTop: FC<{
       disabled={hidden}
       className={({ disabled }) =>
         cn(
-          '_flex _items-center _gap-1.5',
-          '_whitespace-nowrap', // Safari
-          disabled ? '_opacity-0' : '_opacity-100',
+          'x:flex x:items-center x:gap-1.5',
+          'x:whitespace-nowrap', // Safari
+          disabled ? 'x:opacity-0' : 'x:opacity-100',
           className
         )
       }
@@ -40,7 +40,7 @@ export const BackToTop: FC<{
       {children}
       <ArrowRightIcon
         height="16"
-        className="_-rotate-90 _border _rounded-full _border-current"
+        className="x:-rotate-90 x:border x:rounded-full x:border-current"
       />
     </Button>
   )

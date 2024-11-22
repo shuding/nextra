@@ -7,12 +7,12 @@ import { useConfig, useThemeConfig } from '../stores'
 
 const classes = {
   link: cn(
-    'focus-visible:nextra-focus _text-gray-600 dark:_text-gray-400',
-    'hover:_text-gray-800 dark:hover:_text-gray-200',
-    'contrast-more:_text-gray-700 contrast-more:dark:_text-gray-100',
-    '_flex _max-w-[50%] _items-center _gap-1 _py-4 _text-base _font-medium _transition-colors [word-break:break-word] md:_text-lg'
+    'focus-visible:nextra-focus x:text-gray-600 x:dark:text-gray-400',
+    'x:hover:text-gray-800 x:dark:hover:text-gray-200',
+    'x:contrast-more:text-gray-700 x:contrast-more:dark:text-gray-100',
+    'x:flex x:max-w-[50%] x:items-center x:gap-1 x:py-4 x:text-base x:font-medium x:transition-colors [word-break:break-word] x:md:text-lg'
   ),
-  icon: cn('_inline _shrink-0')
+  icon: cn('x:inline x:shrink-0')
 }
 
 export const Pagination: FC = () => {
@@ -30,20 +30,20 @@ export const Pagination: FC = () => {
   return (
     <div
       className={cn(
-        '_mb-8 _flex _items-center _border-t _pt-8 dark:_border-neutral-800',
-        'contrast-more:_border-neutral-400 dark:contrast-more:_border-neutral-400',
-        'print:_hidden'
+        'x:mb-8 x:flex x:items-center x:border-t x:pt-8 x:dark:border-neutral-800',
+        'x:contrast-more:border-neutral-400 x:dark:contrast-more:border-neutral-400',
+        'x:print:hidden'
       )}
     >
       {prev && (
         <NextLink
           href={prev.route}
           title={prev.title}
-          className={cn(classes.link, '_pe-4')}
+          className={cn(classes.link, 'x:pe-4')}
         >
           <ArrowRightIcon
             height="20"
-            className={cn(classes.icon, 'ltr:_rotate-180')}
+            className={cn(classes.icon, 'x:ltr:rotate-180')}
           />
           {prev.title}
         </NextLink>
@@ -52,12 +52,12 @@ export const Pagination: FC = () => {
         <NextLink
           href={next.route}
           title={next.title}
-          className={cn(classes.link, '_ps-4 _ms-auto _text-end')}
+          className={cn(classes.link, 'x:ps-4 x:ms-auto x:text-end')}
         >
           {next.title}
           <ArrowRightIcon
             height="20"
-            className={cn(classes.icon, 'rtl:_rotate-180')}
+            className={cn(classes.icon, 'x:rtl:rotate-180')}
           />
         </NextLink>
       )}

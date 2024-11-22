@@ -19,7 +19,7 @@ export const NotFoundLink: FC<{
 
   return (
     <Link
-      className="_mt-6"
+      className="x:mt-6"
       href={getGitIssueUrl({
         repository: config.docsRepositoryBase,
         title: `Found broken "${mounted ? pathname : ''}" link${referrer}. Please fix!`,
