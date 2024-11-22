@@ -16,10 +16,10 @@ import { setMenu, useConfig, useMenu, useThemeConfig } from '../../stores'
 
 const classes = {
   link: cn(
-    '_text-sm contrast-more:_text-gray-700 contrast-more:dark:_text-gray-100 max-md:_hidden _whitespace-nowrap _ring-inset'
+    'x:text-sm x:contrast-more:text-gray-700 x:contrast-more:dark:text-gray-100 x:max-md:hidden x:whitespace-nowrap x:ring-inset'
   ),
   inactive: cn(
-    '_text-gray-600 hover:_text-gray-800 dark:_text-gray-400 dark:hover:_text-gray-200'
+    'x:text-gray-600 x:hover:text-gray-800 x:dark:text-gray-400 x:dark:hover:text-gray-200'
   )
 }
 
@@ -37,7 +37,7 @@ const NavbarMenu: FC<{
           cn(
             classes.link,
             classes.inactive,
-            '_items-center _flex _gap-1.5',
+            'x:items-center x:flex x:gap-1.5',
             focus && 'nextra-focus'
           )
         }
@@ -45,7 +45,7 @@ const NavbarMenu: FC<{
         {children}
         <ArrowRightIcon
           height="14"
-          className="*:_origin-center *:_transition-transform *:_rotate-90"
+          className="x:*:origin-center x:*:transition-transform x:*:rotate-90"
         />
       </MenuButton>
       <MenuItems
@@ -53,13 +53,13 @@ const NavbarMenu: FC<{
         className={({ open }) =>
           cn(
             'focus-visible:nextra-focus',
-            open ? '_opacity-100' : '_opacity-0',
-            'nextra-scrollbar _transition-opacity motion-reduce:_transition-none',
-            '_border _border-black/5 dark:_border-white/20',
-            '_backdrop-blur-md _bg-[rgba(var(--nextra-bg),.7)]',
-            '_z-20 _rounded-md _py-1 _text-sm _shadow-lg',
+            open ? 'x:opacity-100' : 'x:opacity-0',
+            'nextra-scrollbar x:transition-opacity x:motion-reduce:transition-none',
+            'x:border x:border-black/5 x:dark:border-white/20',
+            'x:backdrop-blur-md x:bg-[rgba(var(--nextra-bg),.7)]',
+            'x:z-20 x:rounded-md x:py-1 x:text-sm x:shadow-lg',
             // headlessui adds max-height as style, use !important to override
-            '!_max-h-[min(calc(100vh-5rem),256px)]'
+            'x:max-h-[min(calc(100vh-5rem),256px)]!'
           )
         }
         anchor={{ to: 'top end', gap: 10, padding: 16 }}
@@ -73,10 +73,10 @@ const NavbarMenu: FC<{
             href={item.href || routes[key]?.route}
             className={({ focus }) =>
               cn(
-                '_block _py-1.5 _transition-colors _ps-3 _pe-9',
+                'x:block x:py-1.5 x:transition-colors x:ps-3 x:pe-9',
                 focus
-                  ? '_text-gray-900 dark:_text-gray-100'
-                  : '_text-gray-600 dark:_text-gray-400'
+                  ? 'x:text-gray-900 x:dark:text-gray-100'
+                  : 'x:text-gray-600 x:dark:text-gray-400'
               )
             }
           >
@@ -101,7 +101,7 @@ export const ClientNavbar: FC<{
 
   return (
     <>
-      <div className="_flex _gap-4 _overflow-x-auto nextra-scrollbar _py-1.5">
+      <div className="x:flex x:gap-4 x:overflow-x-auto nextra-scrollbar x:py-1.5">
         {items.map(page => {
           if ('display' in page && page.display === 'hidden') return
           if (isMenu(page)) {
@@ -131,7 +131,7 @@ export const ClientNavbar: FC<{
               className={cn(
                 classes.link,
                 isActive
-                  ? '_font-medium _subpixel-antialiased'
+                  ? 'x:font-medium x:subpixel-antialiased'
                   : classes.inactive
               )}
               aria-current={isActive}
@@ -142,7 +142,7 @@ export const ClientNavbar: FC<{
         })}
       </div>
       {themeConfig.search && (
-        <div className="max-md:_hidden">{themeConfig.search}</div>
+        <div className="x:max-md:hidden">{themeConfig.search}</div>
       )}
 
       {children}
@@ -150,7 +150,7 @@ export const ClientNavbar: FC<{
       <Button
         aria-label="Menu"
         className={({ active }) =>
-          cn('nextra-hamburger md:_hidden', active && '_bg-gray-400/20')
+          cn('nextra-hamburger x:md:hidden', active && 'x:bg-gray-400/20')
         }
         onClick={() => setMenu(prev => !prev)}
       >
