@@ -85,6 +85,9 @@ const _Head: FC<HeadProps> = ({ children, ...props }) => {
 .dark ::selection {
   background: ${makePrimaryColor('- 11%')};
 }
+html {
+  background: rgb(var(--nextra-bg));
+}
 `.trim()
 
   return (

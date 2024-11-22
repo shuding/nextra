@@ -1,4 +1,4 @@
-@import 'tailwindcss' prefix(x);
+@import '../../nextra/styles/default.css';
 @import '../../nextra/styles/code-block.css';
 @import '../../nextra/styles/subheading-anchor.css';
 @import '../../nextra/styles/scrollbar.css';
@@ -8,11 +8,6 @@
 @import '../css/typesetting-article.css';
 
 @theme {
-  --color-primary-200: white;
-  --color-primary-300: white;
-  --color-primary-600: white;
-  --color-primary-700: white;
-  --color-primary-800: white;
 }
 
 html {
@@ -20,7 +15,7 @@ html {
   --nextra-menu-height: 3.75rem;
   --nextra-banner-height: 2.5rem;
 
-  @apply x:antialiased x:text-base x:bg-[rgb(var(--nextra-bg))];
+  @apply x:antialiased x:text-base;
   font-feature-settings:
     'rlig' 1,
     'calt' 1,

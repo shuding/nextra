@@ -1,7 +1,5 @@
-@import 'tailwindcss' prefix(x);
 @plugin "@tailwindcss/typography";
-@source "../../nextra/src/client/icons/*.svg";
-@source "../../nextra/src/client/{components,hocs,mdx-components}/**/*.tsx";
+@import '../../nextra/styles/default.css';
 @import '../../nextra/styles/code-block.css';
 @import '../../nextra/styles/subheading-anchor.css';
 @import '../../nextra/styles/scrollbar.css';
@@ -9,16 +7,11 @@
 @import '../../nextra/styles/cards.css';
 
 @theme {
-  --color-primary-600: white;
 }
 
 html {
   --nextra-banner-height: 2.5rem;
   @apply x:scroll-pt-5;
-}
-
-body {
-  @apply x:bg-[rgb(var(--nextra-bg))]!;
 }
 
 article {

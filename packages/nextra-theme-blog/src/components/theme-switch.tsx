@@ -20,7 +20,7 @@ export function ThemeSwitch() {
   return (
     <Button
       aria-label="Toggle Dark Mode"
-      className="x:p-2"
+      className="x:p-2 x:cursor-pointer"
       onClick={toggleTheme}
     >
       <IconToUse height="14" />
