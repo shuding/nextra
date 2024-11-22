@@ -28,7 +28,7 @@ export const TopContent: FC<{
         {authors.map(author => (
           <span
             key={author.name}
-            className="[&:not(:last-child)]:after:content-[',_']"
+            className="not-last:after:content-[',_']"
           >
             <a
               href={author.link}

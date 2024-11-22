@@ -38,7 +38,7 @@ export const Pre: FC<PreProps> = ({
   return (
     <div
       data-pagefind-ignore={pagefindIgnore}
-      className="nextra-code x:relative x:[&:not(:first-child)]:mt-6"
+      className="nextra-code x:relative x:not-first:mt-6"
     >
       {filename && (
         <div

@@ -23,7 +23,7 @@ import { ClientWrapper } from './wrapper.client'
 const Blockquote: FC<ComponentProps<'blockquote'>> = props => (
   <blockquote
     className={cn(
-      'x:[&:not(:first-child)]:mt-6 x:border-gray-300 x:italic x:text-gray-700 x:dark:border-gray-700 x:dark:text-gray-400',
+      'x:not-first:mt-6 x:border-gray-300 x:italic x:text-gray-700 x:dark:border-gray-700 x:dark:text-gray-400',
       'x:border-s-2 x:ps-6'
     )}
     {...props}
@@ -62,19 +62,19 @@ const DEFAULT_COMPONENTS = getNextraMDXComponents({
   li: props => <li className="x:my-2" {...props} />,
   ol: props => (
     <ol
-      className="x:[:is(ol,ul)_&]:my-3 x:[&:not(:first-child)]:mt-6 x:list-decimal x:ms-6"
+      className="x:[:is(ol,ul)_&]:my-3 x:not-first:mt-6 x:list-decimal x:ms-6"
       {...props}
     />
   ),
   p: props => (
-    <p className="x:[&:not(:first-child)]:mt-6 x:leading-7" {...props} />
+    <p className="x:not-first:mt-6 x:leading-7" {...props} />
   ),
   pre: withIcons(Pre),
   summary: Summary,
   table: ({ className, ...props }) => (
     <Table
       className={cn(
-        'nextra-scrollbar x:[&:not(:first-child)]:mt-6 x:p-0',
+        'nextra-scrollbar x:not-first:mt-6 x:p-0',
         className
       )}
       {...props}
@@ -85,7 +85,7 @@ const DEFAULT_COMPONENTS = getNextraMDXComponents({
   tr: Table.Tr,
   ul: props => (
     <ul
-      className="x:[:is(ol,ul)_&]:my-3 x:[&:not(:first-child)]:mt-6 x:list-disc x:ms-6"
+      className="x:[:is(ol,ul)_&]:my-3 x:not-first:mt-6 x:list-disc x:ms-6"
       {...props}
     />
   ),

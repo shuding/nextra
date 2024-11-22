@@ -35,7 +35,7 @@ const TreeState: Record<string, boolean> = Object.create(null)
 
 const classes = {
   link: cn(
-    'x:flex x:rounded x:px-2 x:py-1.5 x:text-sm x:transition-colors [word-break:break-word]',
+    'x:flex x:rounded x:px-2 x:py-1.5 x:text-sm x:transition-colors x:[word-break:break-word]',
     'x:cursor-pointer x:contrast-more:border'
   ),
   inactive: cn(
@@ -191,7 +191,7 @@ const Separator: FC<{ title: string }> = ({ title }) => {
       className={cn(
         '[word-break:break-word]',
         title
-          ? 'x:[&:not(:first-child)]:mt-5 x:mb-2 x:px-2 x:py-1.5 x:text-sm x:font-semibold x:text-gray-900 x:dark:text-gray-100'
+          ? 'x:not-first:mt-5 x:mb-2 x:px-2 x:py-1.5 x:text-sm x:font-semibold x:text-gray-900 x:dark:text-gray-100'
           : 'x:my-4'
       )}
     >

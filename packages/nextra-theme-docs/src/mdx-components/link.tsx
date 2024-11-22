@@ -4,7 +4,7 @@ import { Anchor } from 'nextra/components'
 export const Link: typeof Anchor = ({ className, ...props }) => (
   <Anchor
     className={cn(
-      'x:text-primary-600 x:underline x:hover:no-underline x:decoration-from-font [text-underline-position:from-font]',
+      'x:text-primary-600 x:underline x:hover:no-underline x:decoration-from-font x:[text-underline-position:from-font]',
       className
     )}
     {...props}
