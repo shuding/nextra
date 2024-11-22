@@ -1,3 +1,4 @@
+@import 'tailwindcss' prefix(x);
 @plugin "@tailwindcss/typography";
 @import '../../nextra/styles/default.css';
 @import '../../nextra/styles/code-block.css';

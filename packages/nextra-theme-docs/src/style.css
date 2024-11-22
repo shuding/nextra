@@ -1,3 +1,4 @@
+@import 'tailwindcss' prefix(x);
 @import '../../nextra/styles/default.css';
 @import '../../nextra/styles/code-block.css';
 @import '../../nextra/styles/subheading-anchor.css';
@@ -24,7 +25,7 @@ html {
 
   &:not(:has(*:focus)) {
     /* adding `:not` with `:has` otherwise page jumps while focusing or while tapping in input https://github.com/shuding/nextra/issues/2840 */
-    @apply x:scroll-pt-[--nextra-navbar-height];
+    @apply x:scroll-pt-(--nextra-navbar-height);
   }
 }
 
