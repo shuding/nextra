@@ -56,7 +56,7 @@ const NavbarMenu: FC<{
             open ? 'x:opacity-100' : 'x:opacity-0',
             'nextra-scrollbar x:transition-opacity x:motion-reduce:transition-none',
             'x:border x:border-black/5 x:dark:border-white/20',
-            'x:backdrop-blur-md x:bg-[rgba(var(--nextra-bg),.7)]',
+            'x:backdrop-blur-md x:bg-nextra-bg/70',
             'x:z-20 x:rounded-md x:py-1 x:text-sm x:shadow-lg',
             // headlessui adds max-height as style, use !important to override
             'x:max-h-[min(calc(100vh-5rem),256px)]!'

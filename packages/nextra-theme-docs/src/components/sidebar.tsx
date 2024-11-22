@@ -328,7 +328,7 @@ export const MobileNav: FC = () => {
         '[contain:layout_style]',
         'x:md:hidden',
         'x:[.nextra-banner:not([class$=hidden])~&]:pt-[calc(var(--nextra-banner-height)+var(--nextra-navbar-height))]',
-        'x:bg-[rgb(var(--nextra-bg))]',
+        'x:bg-nextra-bg',
         menu
           ? '[transform:translate3d(0,0,0)]'
           : '[transform:translate3d(0,-100%,0)]'

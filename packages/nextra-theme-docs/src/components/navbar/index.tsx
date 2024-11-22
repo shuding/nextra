@@ -50,7 +50,7 @@ export const Navbar: FC<NavbarProps> = props => {
           'x:dark:shadow-[0_-1px_0_rgba(255,255,255,.1)_inset]',
           'x:contrast-more:shadow-[0_0_0_1px_#000]',
           'x:contrast-more:dark:shadow-[0_0_0_1px_#fff]',
-          'x:backdrop-blur-md x:bg-[rgba(var(--nextra-bg),.7)]'
+          'x:backdrop-blur-md x:bg-nextra-bg/70'
         )}
       />
       <nav

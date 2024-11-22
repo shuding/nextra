@@ -251,7 +251,7 @@ export const Search: FC<SearchProps> = ({
             'x:border x:border-gray-200 x:text-gray-100 x:dark:border-neutral-800',
             'x:z-20 x:rounded-xl x:py-2.5 x:shadow-xl',
             'x:contrast-more:border x:contrast-more:border-gray-900 x:contrast-more:dark:border-gray-50',
-            'x:backdrop-blur-md x:bg-[rgba(var(--nextra-bg),.7)]',
+            'x:backdrop-blur-md x:bg-nextra-bg/70',
             'x:motion-reduce:transition-none x:transition-opacity',
             open ? 'x:opacity-100' : 'x:opacity-0',
             error || isLoading || !results.length

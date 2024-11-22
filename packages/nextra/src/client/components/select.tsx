@@ -60,7 +60,7 @@ export const Select: FC<MenuProps> = ({
           cn(
             'focus-visible:nextra-focus',
             open ? 'x:opacity-100' : 'x:opacity-0',
-            'x:motion-reduce:transition-none x:transition-opacity x:min-w-(--button-width) x:z-20 x:max-h-64 x:rounded-md x:border x:border-black/5 x:backdrop-blur-md x:bg-[rgba(var(--nextra-bg),.7)] x:py-1 x:text-sm x:shadow-lg x:dark:border-white/20'
+            'x:motion-reduce:transition-none x:transition-opacity x:min-w-(--button-width) x:z-20 x:max-h-64 x:rounded-md x:border x:border-black/5 x:backdrop-blur-md x:bg-nextra-bg/70 x:py-1 x:text-sm x:shadow-lg x:dark:border-white/20'
           )
         }
       >
