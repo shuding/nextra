@@ -1,4 +1,7 @@
-@import 'tailwindcss' prefix(x);
+@import 'tailwindcss' source(none) prefix(x);
+
+@source './**/*.{ts,tsx}';
+
 @import '../../nextra/styles/default.css';
 @import '../../nextra/styles/code-block.css';
 @import '../../nextra/styles/subheading-anchor.css';
