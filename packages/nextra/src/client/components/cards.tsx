@@ -31,8 +31,11 @@ const Card: FC<{
       <span
         className={cn(
           'x:flex x:font-semibold x:items-center x:gap-2 x:p-4 x:text-gray-700 x:hover:text-gray-900',
-          arrow &&
-            'x:after:content-["→"] x:after:transition-transform x:after:duration-75 x:group-hover:after:translate-x-0.5',
+          arrow && [
+            'x:after:content-["→"] x:after:transition-transform x:after:duration-75',
+            'x:group-hover:after:translate-x-0.5',
+            'x:group-focus:after:translate-x-0.5'
+          ],
           children
             ? 'x:dark:text-gray-300 x:dark:hover:text-gray-100'
             : 'x:dark:text-neutral-200 x:dark:hover:text-neutral-50'
