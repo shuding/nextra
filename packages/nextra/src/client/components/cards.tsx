@@ -14,6 +14,7 @@ const Card: FC<{
     <NextLink
       href={href}
       className={cn(
+        'group', // https://github.com/tailwindlabs/tailwindcss/issues/15172
         'x:focus-visible:nextra-focus nextra-card x:flex x:flex-col x:justify-start x:overflow-hidden x:rounded-lg x:border x:border-gray-200',
         'x:text-current x:no-underline x:dark:shadow-none',
         'x:hover:shadow-gray-100 x:dark:hover:shadow-none x:shadow-gray-100',
@@ -31,7 +32,7 @@ const Card: FC<{
         className={cn(
           'x:flex x:font-semibold x:items-center x:gap-2 x:p-4 x:text-gray-700 x:hover:text-gray-900',
           arrow &&
-            'x:after:content-["→"] x:after:transition-transform x:after:duration-75 x:after:in-hover:translate-x-0.5',
+            'x:after:content-["→"] x:after:transition-transform x:after:duration-75 x:group-hover:after:translate-x-0.5',
           children
             ? 'x:dark:text-gray-300 x:dark:hover:text-gray-100'
             : 'x:dark:text-neutral-200 x:dark:hover:text-neutral-50'
