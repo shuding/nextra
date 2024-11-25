@@ -151,7 +151,6 @@ module.exports = {
       plugins: ['typescript-sort-keys'],
       settings: {
         tailwindcss: {
-          config: 'packages/nextra-theme-docs/tailwind.config.ts',
           callees: ['cn'],
           whitelist: [
             'nextra-navbar',
@@ -177,11 +176,6 @@ module.exports = {
     {
       ...TAILWIND_CONFIG,
       files: 'packages/nextra-theme-blog/**',
-      settings: {
-        tailwindcss: {
-          config: 'packages/nextra-theme-blog/tailwind.config.ts'
-        }
-      },
       rules: {
         ...TAILWIND_CONFIG.rules,
         'no-restricted-imports': [
@@ -207,7 +201,6 @@ module.exports = {
       files: 'packages/nextra/**',
       settings: {
         tailwindcss: {
-          config: 'packages/nextra-theme-docs/tailwind.config.ts',
           callees: ['cn'],
           whitelist: [
             'nextra-code',
@@ -231,7 +224,6 @@ module.exports = {
       files: 'docs/**',
       settings: {
         tailwindcss: {
-          config: 'docs/tailwind.config.ts',
           callees: ['cn'],
           whitelist: [
             'dash-ring',
@@ -246,7 +238,8 @@ module.exports = {
             'features-container',
             // New in TailwindCSS v4
             'z-1',
-            'z-2'
+            'z-2',
+            '.*nextra-focus' // I can't ignore colon `:`, use `*` instead
           ],
           cssFiles: [
             'docs/app/globals.css',
@@ -263,11 +256,13 @@ module.exports = {
       files: 'examples/swr-site/**',
       settings: {
         tailwindcss: {
-          config: 'examples/swr-site/tailwind.config.ts',
           cssFiles: [
             'examples/swr-site/app/[lang]/styles.css',
             'examples/swr-site/app/_components/features.css',
             'packages/nextra-theme-docs/dist/style.css'
+          ],
+          whitelist: [
+            '.*nextra-focus' // I can't ignore colon `:`, use `*` instead
           ]
         },
         next: { rootDir: 'examples/swr-site' }
