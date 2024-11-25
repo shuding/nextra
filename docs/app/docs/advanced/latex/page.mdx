@@ -1,5 +1,8 @@
 ---
 icon: FormulaIcon
+links:
+  - rel: stylesheet
+    href: "https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.css"
 ---
 
 import { compileMdx } from 'nextra/compile'
@@ -8,8 +11,6 @@ import {
   MathJax,
   MathJaxContext,
 } from 'nextra/components'
-
-{/* TODO: inject in loader */}
 
 # LaTeX
 
@@ -173,7 +174,6 @@ MathJax (second).
 
 ```math
 \int_2^3x^3\,\mathrm{d}x
-
 ```
 
 <MathJaxExample />
@@ -185,8 +185,7 @@ for the visually impaired.
 export async function MathJaxExample() {
   const rawMdx = `~~~math
 \\int_2^3x^3\\,\\mathrm{d}x
-~~~
-`
+~~~`
   const rawJs = await compileMdx(
     rawMdx,
     {
