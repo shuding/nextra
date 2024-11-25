@@ -36,10 +36,6 @@
     var(--nextra-primary-hue) var(--nextra-primary-saturation)
       calc(var(--nextra-primary-lightness) - 6%)
   );
-  --color-primary-750: hsl(
-    var(--nextra-primary-hue) var(--nextra-primary-saturation)
-      calc(var(--nextra-primary-lightness) - 10%)
-  );
   --color-primary-800: hsl(
     var(--nextra-primary-hue) var(--nextra-primary-saturation)
       calc(var(--nextra-primary-lightness) - 13%)
