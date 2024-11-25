@@ -234,7 +234,7 @@ const IndexPage: FC = () => {
                 loop
                 muted
                 playsInline
-                className="focus-visible:nextra-focus dark:hidden block"
+                className="x:focus-visible:nextra-focus dark:hidden block"
               >
                 <source src="/assets/search.mp4" type="video/mp4" />
               </video>
@@ -243,7 +243,7 @@ const IndexPage: FC = () => {
                 loop
                 muted
                 playsInline
-                className="focus-visible:nextra-focus dark:block hidden -translate-x-4"
+                className="x:focus-visible:nextra-focus dark:block hidden -translate-x-4"
               >
                 <source src="/assets/search-dark.mp4" type="video/mp4" />
               </video>

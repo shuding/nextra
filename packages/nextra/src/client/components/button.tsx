@@ -21,7 +21,7 @@ export const Button: FC<ButtonProps> = ({
       className={args =>
         cn(
           'x:transition',
-          args.focus && 'nextra-focus',
+          args.focus && 'x:nextra-focus',
           variant === 'outline' && [classes.border, 'x:rounded-md x:p-1.5'],
           typeof className === 'function' ? className(args) : className
         )

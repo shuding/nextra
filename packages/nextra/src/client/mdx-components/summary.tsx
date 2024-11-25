@@ -10,7 +10,7 @@ export function Summary({
   return (
     <summary
       className={cn(
-        'focus-visible:nextra-focus',
+        'x:focus-visible:nextra-focus',
         'x:flex x:items-center x:cursor-pointer x:p-1 x:transition-colors x:hover:bg-gray-100 x:dark:hover:bg-neutral-800',
         'x:[&::-webkit-details-marker]:hidden', // Safari
         // display: flex removes whitespace when `<summary>` contains text with other elements, like `foo <strong>bar</strong>`

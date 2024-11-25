@@ -103,7 +103,7 @@ export const Tabs: FC<
           cn(
             'nextra-scrollbar x:overflow-x-auto x:overscroll-x-contain x:overflow-y-hidden',
             'x:mt-4 x:flex x:w-full x:gap-2 x:border-b x:border-gray-200 x:pb-px x:dark:border-neutral-800',
-            'focus-visible:nextra-focus',
+            'x:focus-visible:nextra-focus',
             typeof className === 'function' ? className(args) : className
           )
         }
@@ -115,7 +115,7 @@ export const Tabs: FC<
             className={args => {
               const { selected, disabled, hover, focus } = args
               return cn(
-                focus && 'nextra-focus x:ring-inset',
+                focus && 'x:nextra-focus x:ring-inset',
                 'x:whitespace-nowrap',
                 'x:rounded-t x:p-2 x:font-medium x:leading-5 x:transition-colors',
                 'x:-mb-0.5 x:select-none x:border-b-2',
@@ -160,7 +160,7 @@ export const Tab: FC<TabPanelProps> = ({
       className={args =>
         cn(
           'x:rounded x:mt-6',
-          args.focus && 'nextra-focus',
+          args.focus && 'x:nextra-focus',
           typeof className === 'function' ? className(args) : className
         )
       }

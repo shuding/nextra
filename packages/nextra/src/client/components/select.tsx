@@ -45,7 +45,7 @@ export const Select: FC<MenuProps> = ({
               : hover
                 ? 'x:bg-gray-100 x:text-gray-900 x:dark:bg-primary-100/5 x:dark:text-gray-50'
                 : 'x:text-gray-600 x:dark:text-gray-400',
-            focus && 'nextra-focus',
+            focus && 'x:nextra-focus',
             className
           )
         }
@@ -58,7 +58,7 @@ export const Select: FC<MenuProps> = ({
         anchor={{ to: 'top start', gap: 10 }}
         className={({ open }) =>
           cn(
-            'focus-visible:nextra-focus',
+            'x:focus-visible:nextra-focus',
             open ? 'x:opacity-100' : 'x:opacity-0',
             'x:motion-reduce:transition-none x:transition-opacity x:min-w-(--button-width) x:z-20 x:max-h-64 x:rounded-md x:border x:border-black/5 x:backdrop-blur-md x:bg-nextra-bg/70 x:py-1 x:text-sm x:shadow-lg x:dark:border-white/20'
           )

@@ -78,7 +78,7 @@ export const TOC: FC<TOCProps> = ({ toc, filePath, pageTitle }) => {
                 <a
                   href={`#${id}`}
                   className={cn(
-                    'focus-visible:nextra-focus',
+                    'x:focus-visible:nextra-focus',
                     {
                       2: 'x:font-semibold',
                       3: 'x:ms-3',

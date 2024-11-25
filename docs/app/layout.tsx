@@ -82,7 +82,7 @@ const RootLayout: FC<{
   const footer = (
     <Footer className="flex-col items-center md:items-start">
       <a
-        className="focus-visible:nextra-focus flex items-center gap-1"
+        className="x:focus-visible:nextra-focus flex items-center gap-1"
         target="_blank"
         rel="noreferrer"
         title="vercel.com homepage"

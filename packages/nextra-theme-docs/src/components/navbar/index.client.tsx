@@ -16,7 +16,8 @@ import { setMenu, useConfig, useMenu, useThemeConfig } from '../../stores'
 
 const classes = {
   link: cn(
-    'x:text-sm x:contrast-more:text-gray-700 x:contrast-more:dark:text-gray-100 x:max-md:hidden x:whitespace-nowrap x:ring-inset'
+    'x:text-sm x:contrast-more:text-gray-700 x:contrast-more:dark:text-gray-100 x:max-md:hidden x:whitespace-nowrap',
+    'x:ring-inset'
   ),
   inactive: cn(
     'x:text-gray-600 x:hover:text-gray-800 x:dark:text-gray-400 x:dark:hover:text-gray-200'
@@ -38,7 +39,7 @@ const NavbarMenu: FC<{
             classes.link,
             classes.inactive,
             'x:items-center x:flex x:gap-1.5',
-            focus && 'nextra-focus'
+            focus && 'x:nextra-focus'
           )
         }
       >
@@ -52,7 +53,7 @@ const NavbarMenu: FC<{
         transition
         className={({ open }) =>
           cn(
-            'focus-visible:nextra-focus',
+            'x:focus-visible:nextra-focus',
             open ? 'x:opacity-100' : 'x:opacity-0',
             'nextra-scrollbar x:transition-opacity x:motion-reduce:transition-none',
             'x:border x:border-black/5 x:dark:border-white/20',

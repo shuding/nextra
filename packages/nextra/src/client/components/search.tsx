@@ -224,7 +224,7 @@ export const Search: FC<SearchProps> = ({
               'x:w-full x:md:w-64',
               'x:text-base x:leading-tight x:md:text-sm',
               focus
-                ? 'x:bg-transparent nextra-focus'
+                ? 'x:bg-transparent x:nextra-focus'
                 : 'x:bg-black/[.05] x:dark:bg-gray-50/10',
               'x:placeholder:text-gray-500 x:dark:placeholder:text-gray-400',
               'x:contrast-more:border x:contrast-more:border-current',

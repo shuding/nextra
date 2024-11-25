@@ -11,6 +11,10 @@
 @theme {
 }
 
+@utility nextra-focus {
+  @apply x:focus-visible:outline-none x:ring-2 x:ring-primary-200 x:ring-offset-1 x:ring-offset-primary-300 x:dark:ring-primary-800 x:dark:ring-offset-primary-700;
+}
+
 html {
   --nextra-navbar-height: 64px;
   --nextra-menu-height: 3.75rem;
@@ -26,12 +30,6 @@ html {
   &:not(:has(*:focus)) {
     /* adding `:not` with `:has` otherwise page jumps while focusing or while tapping in input https://github.com/shuding/nextra/issues/2840 */
     @apply x:scroll-pt-(--nextra-navbar-height);
-  }
-}
-
-@layer components {
-  .nextra-focus {
-    @apply x:focus-visible:outline-none x:ring-2 x:ring-primary-200 x:ring-offset-1 x:ring-offset-primary-300 x:dark:ring-primary-800 x:dark:ring-offset-primary-700;
   }
 }
 

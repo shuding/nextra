@@ -57,7 +57,7 @@ export const Pre: FC<PreProps> = ({
       )}
       <pre
         className={cn(
-          'focus-visible:nextra-focus',
+          'x:focus-visible:nextra-focus',
           'x:overflow-x-auto x:subpixel-antialiased x:text-[.9em]',
           'x:bg-white x:dark:bg-black x:py-4',
           'x:ring-1 x:ring-inset x:ring-gray-300 x:dark:ring-neutral-700',
