@@ -57,6 +57,7 @@ export const Pre: FC<PreProps> = ({
       )}
       <pre
         className={cn(
+          'group',
           'x:focus-visible:nextra-focus',
           'x:overflow-x-auto x:subpixel-antialiased x:text-[.9em]',
           'x:bg-white x:dark:bg-black x:py-4',
@@ -69,22 +70,24 @@ export const Pre: FC<PreProps> = ({
         )}
         {...props}
       >
+        <div
+          className={cn(
+            'x:group-hover:opacity-100',
+            'x:group-focus:opacity-100',
+            'x:opacity-0 x:transition x:focus-within:opacity-100',
+            'x:flex x:gap-1 x:absolute x:right-4',
+            filename ? 'x:top-14' : 'x:top-2'
+          )}
+        >
+          {hasWordWrap === '' && (
+            <ToggleWordWrapButton>
+              <WordWrapIcon height="16" />
+            </ToggleWordWrapButton>
+          )}
+          {!filename && copyButton}
+        </div>
         {children}
       </pre>
-      <div
-        className={cn(
-          'x:opacity-0 x:transition x:[div:hover>&]:opacity-100 x:focus-within:opacity-100',
-          'x:flex x:gap-1 x:absolute x:right-4',
-          filename ? 'x:top-14' : 'x:top-2'
-        )}
-      >
-        {hasWordWrap === '' && (
-          <ToggleWordWrapButton>
-            <WordWrapIcon height="16" />
-          </ToggleWordWrapButton>
-        )}
-        {!filename && copyButton}
-      </div>
     </div>
   )
 }
