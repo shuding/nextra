@@ -65,7 +65,7 @@ const IndexPage: FC = () => {
                 Links and images are <br className="show-on-mobile" />
                 always <span className="font-light">optimized</span>
               </h3>
-              <p className="text-left mb-8">
+              <p className="text-start mb-8">
                 Nextra automatically converts Markdown links and images to use{' '}
                 <Link href="https://nextjs.org/docs/routing/introduction#linking-between-pages">
                   Next.js Link

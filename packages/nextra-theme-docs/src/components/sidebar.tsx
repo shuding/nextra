@@ -153,7 +153,7 @@ const Folder: FC<FolderProps> = ({ item, anchors, onFocus, level }) => {
         data-href={isLink ? undefined : item.route}
         className={cn(
           'x:items-center x:justify-between x:gap-2',
-          !isLink && 'x:text-left x:w-full',
+          !isLink && 'x:text-start x:w-full',
           classes.link,
           active ? classes.active : classes.inactive
         )}
@@ -167,7 +167,7 @@ const Folder: FC<FolderProps> = ({ item, anchors, onFocus, level }) => {
             'x:shrink-0',
             'x:rounded-sm x:p-0.5 x:hover:bg-gray-800/5 x:dark:hover:bg-gray-100/5',
             'x:motion-reduce:*:transition-none x:*:origin-center x:*:transition-transform x:*:rtl:-rotate-180',
-            open && 'x:*:ltr:rotate-90 x:*:rtl:rotate-[-270deg]'
+            open && 'x:*:ltr:rotate-90 x:*:rtl:-rotate-270'
           )}
         />
       </ComponentToUse>

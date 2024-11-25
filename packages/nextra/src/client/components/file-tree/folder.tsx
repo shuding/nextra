@@ -33,7 +33,7 @@ export const Folder = memo<FolderProps>(
           className={({ hover }) =>
             cn(
               'x:flex x:items-center x:gap-1 x:break-all',
-              'x:text-left', // override browser default
+              'x:text-start', // override browser default
               hover && 'x:opacity-60',
               active && 'x:text-primary-600'
             )
