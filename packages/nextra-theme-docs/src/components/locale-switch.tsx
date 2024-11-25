@@ -19,7 +19,7 @@ export const LocaleSwitch: FC<LocaleSwitchProps> = ({ lite, className }) => {
   const pathname = usePathname()
   if (!i18n.length) return
 
-  const [,locale] = pathname.split('/', 2)
+  const [, locale] = pathname.split('/', 2)
   return (
     <Select
       title="Change language"

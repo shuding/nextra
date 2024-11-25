@@ -325,13 +325,13 @@ export const MobileNav: FC = () => {
       className={cn(
         'x:flex x:flex-col',
         'x:fixed x:inset-0 x:pt-(--nextra-navbar-height) x:z-10 x:overscroll-contain',
-        '[contain:layout_style]',
+        'x:[contain:layout_style]',
         'x:md:hidden',
         'x:[.nextra-banner:not([class$=hidden])~&]:pt-[calc(var(--nextra-banner-height)+var(--nextra-navbar-height))]',
         'x:bg-nextra-bg',
         menu
-          ? '[transform:translate3d(0,0,0)]'
-          : '[transform:translate3d(0,-100%,0)]'
+          ? 'x:[transform:translate3d(0,0,0)]'
+          : 'x:[transform:translate3d(0,-100%,0)]'
       )}
     >
       {themeConfig.search && (
