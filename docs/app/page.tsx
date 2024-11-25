@@ -39,7 +39,7 @@ const IndexPage: FC = () => {
           </Link>
         </p>
       </div>
-      <div className="features-container">
+      <div className="features-container x:border-b bordered">
         <div className="content-container">
           <Features>
             <Feature
@@ -65,7 +65,7 @@ const IndexPage: FC = () => {
                 Links and images are <br className="show-on-mobile" />
                 always <span className="font-light">optimized</span>
               </h3>
-              <p className="text-left mb-8">
+              <p className="text-start mb-8">
                 Nextra automatically converts Markdown links and images to use{' '}
                 <Link href="https://nextjs.org/docs/routing/introduction#linking-between-pages">
                   Next.js Link
@@ -220,7 +220,7 @@ const IndexPage: FC = () => {
                 <br />
                 zero-config needed
               </h3>
-              <p className="z-[2]">
+              <p className="z-2">
                 Nextra indexes your content automatically at build-time and
                 performs incredibly fast full-text search via{' '}
                 <Link href="https://github.com/cloudcannon/pagefind">
@@ -228,13 +228,13 @@ const IndexPage: FC = () => {
                 </Link>
                 .
               </p>
-              <div className="absolute size-full inset-0 max-sm:hidden bg-[linear-gradient(to_right,white_250px,_transparent)] dark:bg-[linear-gradient(to_right,#202020_250px,_transparent)] z-[1]" />
+              <div className="absolute size-full inset-0 max-sm:hidden bg-[linear-gradient(to_right,white_250px,_transparent)] dark:bg-[linear-gradient(to_right,#202020_250px,_transparent)] z-1" />
               <video
                 autoPlay
                 loop
                 muted
                 playsInline
-                className="focus-visible:nextra-focus dark:hidden block"
+                className="x:focus-visible:nextra-focus dark:hidden block"
               >
                 <source src="/assets/search.mp4" type="video/mp4" />
               </video>
@@ -243,7 +243,7 @@ const IndexPage: FC = () => {
                 loop
                 muted
                 playsInline
-                className="focus-visible:nextra-focus dark:block hidden -translate-x-4"
+                className="x:focus-visible:nextra-focus dark:block hidden -translate-x-4"
               >
                 <source src="/assets/search-dark.mp4" type="video/mp4" />
               </video>

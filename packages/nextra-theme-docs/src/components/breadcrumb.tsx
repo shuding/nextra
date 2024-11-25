@@ -10,7 +10,7 @@ export const Breadcrumb: FC<{
   activePath: Item[]
 }> = ({ activePath }) => {
   return (
-    <div className="nextra-breadcrumb _mt-1.5 _flex _items-center _gap-1 _overflow-hidden _text-sm _text-gray-500 dark:_text-gray-400 contrast-more:_text-current">
+    <div className="nextra-breadcrumb x:mt-1.5 x:flex x:items-center x:gap-1 x:overflow-hidden x:text-sm x:text-gray-500 x:dark:text-gray-400 x:contrast-more:text-current">
       {activePath.map((item, index, arr) => {
         const nextItem = arr[index + 1]
         const href = nextItem
@@ -30,17 +30,17 @@ export const Breadcrumb: FC<{
             {index > 0 && (
               <ArrowRightIcon
                 height="14"
-                className="_shrink-0 rtl:_rotate-180"
+                className="x:shrink-0 x:rtl:rotate-180"
               />
             )}
             <ComponentToUse
               className={cn(
-                '_whitespace-nowrap _transition-colors',
+                'x:whitespace-nowrap x:transition-colors',
                 nextItem
-                  ? '_min-w-6 _overflow-hidden _text-ellipsis'
-                  : '_font-medium _text-gray-700 contrast-more:_font-bold contrast-more:_text-current dark:_text-gray-100 contrast-more:dark:_text-current',
+                  ? 'x:min-w-6 x:overflow-hidden x:text-ellipsis'
+                  : 'x:font-medium x:text-gray-700 x:dark:text-gray-100',
                 href &&
-                  'focus-visible:nextra-focus _ring-inset hover:_text-gray-900 dark:hover:_text-gray-100'
+                  'x:focus-visible:nextra-focus x:ring-inset x:hover:text-gray-900 x:dark:hover:text-gray-100'
               )}
               title={item.title}
               {...(href && ({ href } as any))}

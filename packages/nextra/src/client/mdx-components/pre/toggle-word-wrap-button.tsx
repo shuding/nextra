@@ -19,7 +19,7 @@ export const ToggleWordWrapButton: FC<{
   return (
     <Button
       onClick={toggleWordWrap}
-      className="md:_hidden"
+      className="x:md:hidden"
       title="Toggle word wrap"
       variant="outline"
     >

@@ -23,8 +23,8 @@ import { ClientWrapper } from './wrapper.client'
 const Blockquote: FC<ComponentProps<'blockquote'>> = props => (
   <blockquote
     className={cn(
-      '[&:not(:first-child)]:_mt-6 _border-gray-300 _italic _text-gray-700 dark:_border-gray-700 dark:_text-gray-400',
-      '_border-s-2 _ps-6'
+      'x:not-first:mt-6 x:border-gray-300 x:italic x:text-gray-700 x:dark:border-gray-700 x:dark:text-gray-400',
+      'x:border-s-2 x:ps-6'
     )}
     {...props}
   />
@@ -53,30 +53,20 @@ const DEFAULT_COMPONENTS = getNextraMDXComponents({
   h4: H4,
   h5: H5,
   h6: H6,
-  hr: props => (
-    <hr
-      className="_my-8 _border-neutral-200/70 contrast-more:_border-neutral-400 dark:_border-primary-100/10 contrast-more:dark:_border-neutral-400"
-      {...props}
-    />
-  ),
-  li: props => <li className="_my-2" {...props} />,
+  hr: props => <hr className="x:my-8 bordered" {...props} />,
+  li: props => <li className="x:my-2" {...props} />,
   ol: props => (
     <ol
-      className="[:is(ol,ul)_&]:_my-3 [&:not(:first-child)]:_mt-6 _list-decimal _ms-6"
+      className="x:[:is(ol,ul)_&]:my-3 x:not-first:mt-6 x:list-decimal x:ms-6"
       {...props}
     />
   ),
-  p: props => (
-    <p className="[&:not(:first-child)]:_mt-6 _leading-7" {...props} />
-  ),
+  p: props => <p className="x:not-first:mt-6 x:leading-7" {...props} />,
   pre: withIcons(Pre),
   summary: Summary,
   table: ({ className, ...props }) => (
     <Table
-      className={cn(
-        'nextra-scrollbar [&:not(:first-child)]:_mt-6 _p-0',
-        className
-      )}
+      className={cn('nextra-scrollbar x:not-first:mt-6 x:p-0', className)}
       {...props}
     />
   ),
@@ -85,7 +75,7 @@ const DEFAULT_COMPONENTS = getNextraMDXComponents({
   tr: Table.Tr,
   ul: props => (
     <ul
-      className="[:is(ol,ul)_&]:_my-3 [&:not(:first-child)]:_mt-6 _list-disc _ms-6"
+      className="x:[:is(ol,ul)_&]:my-3 x:not-first:mt-6 x:list-disc x:ms-6"
       {...props}
     />
   ),
@@ -96,7 +86,7 @@ const DEFAULT_COMPONENTS = getNextraMDXComponents({
       value: removeLinks(item.value)
     }))
     return (
-      <div className="_mx-auto _flex _max-w-[90rem]">
+      <div className="x:mx-auto x:flex x:max-w-[90rem]">
         <Sidebar toc={toc} />
 
         <ClientWrapper toc={toc} {...props}>

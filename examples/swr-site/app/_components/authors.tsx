@@ -26,10 +26,7 @@ export const TopContent: FC<{
         </time>{' '}
         {dictionary.by}{' '}
         {authors.map(author => (
-          <span
-            key={author.name}
-            className="[&:not(:last-child)]:after:content-[',_']"
-          >
+          <span key={author.name} className="not-last:after:content-[',_']">
             <a
               href={author.link}
               target="_blank"

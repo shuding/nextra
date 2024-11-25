@@ -5,10 +5,10 @@ export const Tree: FC<{ children: ReactNode }> = ({ children }) => {
   return (
     <ul
       className={cn(
-        'nextra-filetree _mt-6 _select-none _text-sm _text-gray-800 dark:_text-gray-300',
-        '_not-prose', // for nextra-theme-blog
-        '_rounded-lg _border _px-4 _py-3 _inline-flex _flex-col _gap-2',
-        '_border-neutral-200/70 contrast-more:_border-neutral-400 dark:_border-primary-100/10 contrast-more:dark:_border-neutral-400'
+        'nextra-filetree x:mt-6 x:select-none x:text-sm x:text-gray-800 x:dark:text-gray-300',
+        'not-prose', // for nextra-theme-blog
+        'x:rounded-lg x:border x:px-4 x:py-3 x:inline-flex x:flex-col x:gap-2',
+        'x:border-neutral-200/70 x:contrast-more:border-neutral-400! x:dark:border-primary-100/10'
       )}
     >
       {children}

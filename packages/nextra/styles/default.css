@@ -1,0 +1,47 @@
+@source "../src/client/icons/*.svg";
+@source "../src/client/{components,hocs,mdx-components}/**/*.tsx";
+@variant dark (&:where(.dark *));
+
+@theme {
+  --color-nextra-bg: rgb(var(--nextra-bg));
+  --color-primary-50: hsl(
+    var(--nextra-primary-hue) var(--nextra-primary-saturation)
+      calc(var(--nextra-primary-lightness) + 52%)
+  );
+  --color-primary-100: hsl(
+    var(--nextra-primary-hue) var(--nextra-primary-saturation)
+      calc(var(--nextra-primary-lightness) + 49%)
+  );
+  --color-primary-200: hsl(
+    var(--nextra-primary-hue) var(--nextra-primary-saturation)
+      calc(var(--nextra-primary-lightness) + 41%)
+  );
+  --color-primary-300: hsl(
+    var(--nextra-primary-hue) var(--nextra-primary-saturation)
+      calc(var(--nextra-primary-lightness) + 32%)
+  );
+  --color-primary-400: hsl(
+    var(--nextra-primary-hue) var(--nextra-primary-saturation)
+      calc(var(--nextra-primary-lightness) + 21%)
+  );
+  --color-primary-500: hsl(
+    var(--nextra-primary-hue) var(--nextra-primary-saturation)
+      calc(var(--nextra-primary-lightness) + 5%)
+  );
+  --color-primary-600: hsl(
+    var(--nextra-primary-hue) var(--nextra-primary-saturation)
+      var(--nextra-primary-lightness)
+  );
+  --color-primary-700: hsl(
+    var(--nextra-primary-hue) var(--nextra-primary-saturation)
+      calc(var(--nextra-primary-lightness) - 6%)
+  );
+  --color-primary-800: hsl(
+    var(--nextra-primary-hue) var(--nextra-primary-saturation)
+      calc(var(--nextra-primary-lightness) - 13%)
+  );
+  --color-primary-900: hsl(
+    var(--nextra-primary-hue) var(--nextra-primary-saturation)
+      calc(var(--nextra-primary-lightness) - 21%)
+  );
+}

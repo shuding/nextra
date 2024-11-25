@@ -1,25 +1,25 @@
 .subheading-anchor {
-  @apply _ms-1;
+  @apply x:ms-1;
 
   /* to avoid conflicts with docs heading which has class `target:_animate-[fade-in_1.5s]` */
   :not(:target) > & {
-    @apply _opacity-0 _transition;
+    @apply x:opacity-0 x:transition;
   }
 
   &,
   :target > &,
   &:hover,
   &:focus {
-    @apply _opacity-100;
+    @apply x:opacity-100;
   }
 
   :target > &:after {
-    @apply _text-gray-400;
-    @apply dark:_text-neutral-500;
+    @apply x:text-gray-400;
+    @apply x:dark:text-neutral-500;
   }
 
   &:after {
-    @apply _content-['#'] _px-1;
-    @apply _text-gray-300 dark:_text-neutral-700;
+    @apply x:content-['#'] x:px-1;
+    @apply x:text-gray-300 x:dark:text-neutral-700;
   }
 }

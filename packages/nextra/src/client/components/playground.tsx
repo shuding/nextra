@@ -43,11 +43,11 @@ export const Playground: FC<
 
   if (error) {
     return (
-      <div className="[&_svg]:_text-red-500">
+      <div className="x:[&_svg]:text-red-500">
         <Pre
           data-filename="Could not compile code"
-          icon={<CrossCircledIcon height="16" className="_shrink-0" />}
-          className="_whitespace-pre-wrap"
+          icon={<CrossCircledIcon height="16" className="x:shrink-0" />}
+          className="x:whitespace-pre-wrap"
         >
           <Code>
             <span>
@@ -64,7 +64,7 @@ export const Playground: FC<
   if (compiledSource) {
     // `<MDXRemote>` cannot be used here because `useMDXComponents` may include components that
     // are only available on the server.
-    const MDXContent = evaluate(compiledSource, scope, components).default
+    const MDXContent = evaluate(compiledSource, components, scope).default
     return <MDXContent />
   }
 

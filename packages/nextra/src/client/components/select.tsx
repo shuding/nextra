@@ -39,13 +39,13 @@ export const Select: FC<MenuProps> = ({
         title={title}
         className={({ hover, open, focus }) =>
           cn(
-            '_h-7 _rounded-md _px-2 _text-xs _font-medium _transition-colors',
+            'x:h-7 x:rounded-md x:px-2 x:text-xs x:font-medium x:transition-colors',
             open
-              ? '_bg-gray-200 _text-gray-900 dark:_bg-primary-100/10 dark:_text-gray-50'
+              ? 'x:bg-gray-200 x:text-gray-900 x:dark:bg-primary-100/10 x:dark:text-gray-50'
               : hover
-                ? '_bg-gray-100 _text-gray-900 dark:_bg-primary-100/5 dark:_text-gray-50'
-                : '_text-gray-600 dark:_text-gray-400',
-            focus && 'nextra-focus',
+                ? 'x:bg-gray-100 x:text-gray-900 x:dark:bg-primary-100/5 x:dark:text-gray-50'
+                : 'x:text-gray-600 x:dark:text-gray-400',
+            focus && 'x:nextra-focus',
             className
           )
         }
@@ -58,9 +58,9 @@ export const Select: FC<MenuProps> = ({
         anchor={{ to: 'top start', gap: 10 }}
         className={({ open }) =>
           cn(
-            'focus-visible:nextra-focus',
-            open ? '_opacity-100' : '_opacity-0',
-            'motion-reduce:_transition-none _transition-opacity _min-w-[--button-width] _z-20 _max-h-64 _rounded-md _border _border-black/5 _backdrop-blur-md _bg-[rgba(var(--nextra-bg),.7)] _py-1 _text-sm _shadow-lg dark:_border-white/20'
+            'x:focus-visible:nextra-focus',
+            open ? 'x:opacity-100' : 'x:opacity-0',
+            'x:motion-reduce:transition-none x:transition-opacity x:min-w-(--button-width) x:z-20 x:max-h-64 x:rounded-md x:border x:border-black/5 x:backdrop-blur-md x:bg-nextra-bg/70 x:py-1 x:text-sm x:shadow-lg x:dark:border-white/20'
           )
         }
       >
@@ -70,11 +70,11 @@ export const Select: FC<MenuProps> = ({
               <li
                 className={cn(
                   focus
-                    ? '_bg-primary-50 _text-primary-600 dark:_bg-primary-500/10'
-                    : '_text-gray-800 dark:_text-gray-100',
-                  '_cursor-pointer _whitespace-nowrap _py-1.5 _px-3',
-                  '_transition-colors',
-                  selected && '_flex _items-center _justify-between _gap-3'
+                    ? 'x:bg-primary-50 x:text-primary-600 x:dark:bg-primary-500/10'
+                    : 'x:text-gray-800 x:dark:text-gray-100',
+                  'x:cursor-pointer x:whitespace-nowrap x:py-1.5 x:px-3',
+                  'x:transition-colors',
+                  selected && 'x:flex x:items-center x:justify-between x:gap-3'
                 )}
               >
                 {option.name}

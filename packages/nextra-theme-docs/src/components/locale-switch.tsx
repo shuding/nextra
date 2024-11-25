@@ -17,9 +17,9 @@ interface LocaleSwitchProps {
 export const LocaleSwitch: FC<LocaleSwitchProps> = ({ lite, className }) => {
   const { i18n } = useThemeConfig()
   const pathname = usePathname()
-  if (!i18n.length) return null
+  if (!i18n.length) return
 
-  const locale = pathname.split('/')[1]
+  const [, locale] = pathname.split('/', 2)
   return (
     <Select
       title="Change language"
@@ -31,7 +31,7 @@ export const LocaleSwitch: FC<LocaleSwitchProps> = ({ lite, className }) => {
       }}
       value={locale}
       selectedOption={
-        <span className="_flex _items-center _gap-2">
+        <span className="x:flex x:items-center x:gap-2">
           <GlobeIcon height="12" />
           {!lite && i18n.find(l => locale === l.locale)?.name}
         </span>

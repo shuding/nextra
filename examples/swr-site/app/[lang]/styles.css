@@ -1,6 +1,9 @@
-@import 'nextra-theme-docs/dist/style.css' layer(nextra-base);
+@import 'tailwindcss';
+@import 'nextra-theme-docs/style.css';
+@import '../_components/features.css';
 
-@tailwind utilities;
+@theme {
+}
 
 body {
   --bg-dot-color: #d1d1d1;

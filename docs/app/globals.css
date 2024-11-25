@@ -1,5 +1,10 @@
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
+@import 'nextra-theme-docs/style.css';
+
+@variant dark (&:where(.dark *));
+
+@theme {
+}
 
 body {
   font-feature-settings:

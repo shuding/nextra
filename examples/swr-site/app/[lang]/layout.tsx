@@ -15,7 +15,6 @@ import { getDictionary, getDirection } from '../_dictionaries/get-dictionary'
 import { pageMap as graphqlEslintPageMap } from './remote/graphql-eslint/[[...slug]]/page'
 import { pageMap as graphqlYogaPageMap } from './remote/graphql-yoga/[[...slug]]/page'
 import './styles.css'
-import '../_components/features.css'
 
 export const { viewport } = Head
 
@@ -86,7 +85,7 @@ export default async function RootLayout({ children, params }) {
       <a
         rel="noreferrer"
         target="_blank"
-        className="focus-visible:nextra-focus flex items-center gap-2 font-semibold"
+        className="x:focus-visible:nextra-focus flex items-center gap-2 font-semibold"
         href={dictionary.link.vercel}
       >
         {dictionary.poweredBy} <VercelIcon height="20" />

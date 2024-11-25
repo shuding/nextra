@@ -6,8 +6,8 @@ import { ToggleWordWrapButton } from './toggle-word-wrap-button.js'
 
 export const classes = {
   border: cn(
-    '_border _border-gray-300 dark:_border-neutral-700',
-    'contrast-more:_border-gray-900 contrast-more:dark:_border-gray-50'
+    'x:border x:border-gray-300 x:dark:border-neutral-700',
+    'x:contrast-more:border-gray-900 x:contrast-more:dark:border-gray-50'
   )
 }
 
@@ -32,59 +32,62 @@ export const Pre: FC<PreProps> = ({
   ...props
 }) => {
   const copyButton = copy === '' && (
-    <CopyToClipboard className={filename ? '_ms-auto' : ''} />
+    <CopyToClipboard className={filename ? 'x:ms-auto' : ''} />
   )
 
   return (
     <div
       data-pagefind-ignore={pagefindIgnore}
-      className="nextra-code _relative [&:not(:first-child)]:_mt-6"
+      className="nextra-code x:relative x:not-first:mt-6"
     >
       {filename && (
         <div
           className={cn(
-            '_px-4 _text-xs _text-gray-700 dark:_text-gray-200',
-            '_bg-gray-100 dark:_bg-neutral-900',
-            '_flex _items-center _h-12 _gap-2 _rounded-t-md',
+            'x:px-4 x:text-xs x:text-gray-700 x:dark:text-gray-200',
+            'x:bg-gray-100 x:dark:bg-neutral-900',
+            'x:flex x:items-center x:h-12 x:gap-2 x:rounded-t-md',
             classes.border,
-            '_border-b-0'
+            'x:border-b-0'
           )}
         >
           {icon}
-          <span className="_truncate">{filename}</span>
+          <span className="x:truncate">{filename}</span>
           {copyButton}
         </div>
       )}
       <pre
         className={cn(
-          'focus-visible:nextra-focus',
-          '_overflow-x-auto _subpixel-antialiased _text-[.9em]',
-          '_bg-white dark:_bg-black _py-4',
-          '_ring-1 _ring-inset _ring-gray-300 dark:_ring-neutral-700',
-          'contrast-more:_ring-gray-900 contrast-more:dark:_ring-gray-50',
-          'contrast-more:_contrast-150',
-          filename ? '_rounded-b-md' : '_rounded-md',
-          '_not-prose', // for nextra-theme-blog
+          'group',
+          'x:focus-visible:nextra-focus',
+          'x:overflow-x-auto x:subpixel-antialiased x:text-[.9em]',
+          'x:bg-white x:dark:bg-black x:py-4',
+          'x:ring-1 x:ring-inset x:ring-gray-300 x:dark:ring-neutral-700',
+          'x:contrast-more:ring-gray-900 x:contrast-more:dark:ring-gray-50',
+          'x:contrast-more:contrast-150',
+          filename ? 'x:rounded-b-md' : 'x:rounded-md',
+          'not-prose', // for nextra-theme-blog
           className
         )}
         {...props}
       >
+        <div
+          className={cn(
+            'x:group-hover:opacity-100',
+            'x:group-focus:opacity-100',
+            'x:opacity-0 x:transition x:focus-within:opacity-100',
+            'x:flex x:gap-1 x:absolute x:right-4',
+            filename ? 'x:top-14' : 'x:top-2'
+          )}
+        >
+          {hasWordWrap === '' && (
+            <ToggleWordWrapButton>
+              <WordWrapIcon height="16" />
+            </ToggleWordWrapButton>
+          )}
+          {!filename && copyButton}
+        </div>
         {children}
       </pre>
-      <div
-        className={cn(
-          '_opacity-0 _transition [div:hover>&]:_opacity-100 focus-within:_opacity-100',
-          '_flex _gap-1 _absolute _right-4',
-          filename ? '_top-14' : '_top-2'
-        )}
-      >
-        {hasWordWrap === '' && (
-          <ToggleWordWrapButton>
-            <WordWrapIcon height="16" />
-          </ToggleWordWrapButton>
-        )}
-        {!filename && copyButton}
-      </div>
     </div>
   )
 }

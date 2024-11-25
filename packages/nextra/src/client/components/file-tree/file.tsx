@@ -10,12 +10,12 @@ export type FileProps = {
 export const File: FC<FileProps> = ({ name, active }) => (
   <li
     className={cn(
-      '_flex _items-center _gap-1 _break-all',
-      active && '_text-primary-600'
+      'x:flex x:items-center x:gap-1 x:break-all',
+      active && 'x:text-primary-600'
     )}
   >
     {/* Text can shrink icon */}
-    <FileIcon height="14 " className="_shrink-0" />
+    <FileIcon height="14 " className="x:shrink-0" />
     {name}
   </li>
 )

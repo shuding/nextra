@@ -1,13 +1,13 @@
 .nextra-hamburger svg {
   g,
   path {
-    @apply motion-reduce:!_transition-none;
+    @apply x:motion-reduce:transition-none!;
   }
 
   --animation: transform 0.15s cubic-bezier(0.25, 1, 0.5, 1);
 
   g {
-    @apply _origin-center;
+    @apply x:origin-center;
     transition: var(--animation);
   }
 

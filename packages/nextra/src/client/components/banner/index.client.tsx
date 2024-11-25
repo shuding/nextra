@@ -12,10 +12,10 @@ export const CloseBannerButton: FC<{
     <Button
       aria-label="Dismiss banner"
       className={({ hover }) =>
-        cn('_p-2', hover ? '_opacity-100' : '_opacity-80')
+        cn('x:p-2', hover ? 'x:opacity-100' : 'x:opacity-80')
       }
       onClick={event => {
-        event.currentTarget.parentElement!.classList.add('_hidden')
+        event.currentTarget.parentElement!.classList.add('x:hidden')
         try {
           localStorage.setItem(storageKey, '1')
         } catch {

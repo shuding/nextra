@@ -8,19 +8,19 @@ const createHeading = (
   function Heading({ children, id, className, ...props }) {
     const _class = // can be added by footnotes
       className === 'sr-only'
-        ? '_sr-only'
+        ? 'x:sr-only'
         : cn(
-            '_tracking-tight _text-slate-900 dark:_text-slate-100',
+            'x:tracking-tight x:text-slate-900 x:dark:text-slate-100',
             Tag === 'h1'
-              ? '_font-bold'
-              : '_font-semibold target:_animate-[fade-in_1.5s]',
+              ? 'x:font-bold'
+              : 'x:font-semibold x:target:animate-[fade-in_1.5s]',
             {
-              h1: '_mt-2 _text-4xl',
-              h2: '_mt-10 _border-b _pb-1 _text-3xl _border-neutral-200/70 contrast-more:_border-neutral-400 dark:_border-primary-100/10 contrast-more:dark:_border-neutral-400',
-              h3: '_mt-8 _text-2xl',
-              h4: '_mt-8 _text-xl',
-              h5: '_mt-8 _text-lg',
-              h6: '_mt-8 _text-base'
+              h1: 'x:mt-2 x:text-4xl',
+              h2: 'x:mt-10 x:border-b x:pb-1 x:text-3xl bordered',
+              h3: 'x:mt-8 x:text-2xl',
+              h4: 'x:mt-8 x:text-xl',
+              h5: 'x:mt-8 x:text-lg',
+              h6: 'x:mt-8 x:text-base'
             }[Tag],
             className
           )

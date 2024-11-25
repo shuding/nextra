@@ -14,14 +14,15 @@ const Card: FC<{
     <NextLink
       href={href}
       className={cn(
-        'focus-visible:nextra-focus nextra-card _group _flex _flex-col _justify-start _overflow-hidden _rounded-lg _border _border-gray-200',
-        '_text-current _no-underline dark:_shadow-none',
-        'hover:_shadow-gray-100 dark:hover:_shadow-none _shadow-gray-100',
-        'active:_shadow-sm active:_shadow-gray-200',
-        '_transition-all _duration-200 hover:_border-gray-300',
+        'group', // https://github.com/tailwindlabs/tailwindcss/issues/15172
+        'x:focus-visible:nextra-focus nextra-card x:flex x:flex-col x:justify-start x:overflow-hidden x:rounded-lg x:border x:border-gray-200',
+        'x:text-current x:no-underline x:dark:shadow-none',
+        'x:hover:shadow-gray-100 x:dark:hover:shadow-none x:shadow-gray-100',
+        'x:active:shadow-sm x:active:shadow-gray-200',
+        'x:transition-all x:duration-200 x:hover:border-gray-300',
         children
-          ? '_bg-gray-100 _shadow dark:_border-neutral-700 dark:_bg-neutral-800 dark:_text-gray-50 hover:_shadow-lg dark:hover:_border-neutral-500 dark:hover:_bg-neutral-700'
-          : '_bg-transparent _shadow-sm dark:_border-neutral-800 hover:_bg-slate-50 hover:_shadow-md dark:hover:_border-neutral-700 dark:hover:_bg-neutral-900',
+          ? 'x:bg-gray-100 x:shadow x:dark:border-neutral-700 x:dark:bg-neutral-800 x:dark:text-gray-50 x:hover:shadow-lg x:dark:hover:border-neutral-500 x:dark:hover:bg-neutral-700'
+          : 'x:bg-transparent x:shadow-sm x:dark:border-neutral-800 x:hover:bg-slate-50 x:hover:shadow-md x:dark:hover:border-neutral-700 x:dark:hover:bg-neutral-900',
         className
       )}
       {...props}
@@ -29,12 +30,15 @@ const Card: FC<{
       {children}
       <span
         className={cn(
-          '_flex _font-semibold _items-center _gap-2 _p-4 _text-gray-700 hover:_text-gray-900',
-          arrow &&
-            'after:_content-["→"] after:_transition-transform after:_duration-75 after:group-hover:_translate-x-0.5',
+          'x:flex x:font-semibold x:items-center x:gap-2 x:p-4 x:text-gray-700 x:hover:text-gray-900',
+          arrow && [
+            'x:after:content-["→"] x:after:transition-transform x:after:duration-75',
+            'x:group-hover:after:translate-x-0.5',
+            'x:group-focus:after:translate-x-0.5'
+          ],
           children
-            ? 'dark:_text-gray-300 dark:hover:_text-gray-100'
-            : 'dark:_text-neutral-200 dark:hover:_text-neutral-50'
+            ? 'x:dark:text-gray-300 x:dark:hover:text-gray-100'
+            : 'x:dark:text-neutral-200 x:dark:hover:text-neutral-50'
         )}
       >
         {icon}
@@ -54,8 +58,8 @@ const _Cards: FC<{ num?: number } & ComponentProps<'div'>> = ({
   return (
     <div
       className={cn(
-        'nextra-cards _mt-4 _gap-4 _grid',
-        '_not-prose', // for nextra-theme-blog
+        'nextra-cards x:mt-4 x:gap-4 x:grid',
+        'not-prose', // for nextra-theme-blog
         className
       )}
       {...props}

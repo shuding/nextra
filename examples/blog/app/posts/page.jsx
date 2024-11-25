@@ -17,7 +17,7 @@ export default async function PostsPage() {
     <div data-pagefind-ignore="all">
       <h1>{metadata.title}</h1>
       <div
-        className="_not-prose"
+        className="not-prose"
         style={{ display: 'flex', flexWrap: 'wrap', gap: '.5rem' }}
       >
         {Object.entries(allTags).map(([tag, count]) => (

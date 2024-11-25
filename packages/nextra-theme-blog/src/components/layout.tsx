@@ -8,7 +8,7 @@ export const Footer: FC<{
   children = `CC BY-NC 4.0 ${new Date().getFullYear()} © Shu Ding.`
 }) => {
   return (
-    <small className="_mt-32 _block" data-pagefind-ignore="all">
+    <small className="x:mt-32 x:block" data-pagefind-ignore="all">
       {children}
     </small>
   )
@@ -23,7 +23,7 @@ export const Layout: FC<{
     <ThemeProvider attribute="class" {...nextThemes}>
       {banner}
       <article
-        className="_container _px-4 _prose max-md:_prose-sm dark:_prose-invert"
+        className="x:container x:px-4 x:prose x:max-md:prose-sm x:dark:prose-invert"
         dir="ltr"
         data-pagefind-body
       >

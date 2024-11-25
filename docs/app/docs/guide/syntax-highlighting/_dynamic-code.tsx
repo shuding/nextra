@@ -16,7 +16,7 @@ export const DynamicCode: FC<{ children: ReactNode }> = ({ children }) => {
   }, [])
   return (
     <>
-      <div ref={ref} className="_mt-6">
+      <div ref={ref} className="mt-6">
         {children}
       </div>
       <div className="flex mt-3 gap-3 justify-center text-sm">

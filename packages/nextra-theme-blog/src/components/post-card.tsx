@@ -18,16 +18,16 @@ export const PostCard: FC<PostCardProps> = ({
   const dateObj = date && new Date(date)
   return (
     <div key={post.route}>
-      <h2 className="_not-prose _mt-6 _mb-2 _text-xl _font-semibold">
-        <Link href={post.route} className="!_no-underline">
+      <h2 className="x:mt-6 x:mb-2 x:text-xl x:font-semibold">
+        <Link href={post.route} className="x:no-underline!">
           {title}
         </Link>
       </h2>
       {description && (
-        <p className="_mb-2 dark:_text-gray-400 _text-gray-600">
+        <p className="x:mb-2 x:dark:text-gray-400 x:text-gray-600">
           {description}
           {readMore && (
-            <Link href={post.route} className="_ml-2">
+            <Link href={post.route} className="x:ml-2">
               {readMore}
             </Link>
           )}
@@ -35,7 +35,7 @@ export const PostCard: FC<PostCardProps> = ({
       )}
       {dateObj && (
         <time
-          className="_text-sm dark:_text-gray-400 _text-gray-600"
+          className="x:text-sm x:dark:text-gray-400 x:text-gray-600"
           dateTime={dateObj.toISOString()}
         >
           {dateObj.toDateString()}

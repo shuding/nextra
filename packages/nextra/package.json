@@ -9,7 +9,6 @@
     "node": ">=18"
   },
   "exports": {
-    "./katex.css": "./styles/katex.css",
     "./package.json": "./package.json",
     ".": {
       "types": "./dist/server/index.d.ts",

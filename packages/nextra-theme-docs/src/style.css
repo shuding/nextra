@@ -1,20 +1,29 @@
-@import 'tailwindcss/base';
-@import 'tailwindcss/components';
-@import 'tailwindcss/utilities';
-@import 'nextra/styles/code-block.css';
-@import 'nextra/styles/subheading-anchor.css';
-@import 'nextra/styles/scrollbar.css';
-@import 'nextra/styles/steps.css';
-@import 'nextra/styles/cards.css';
+@import 'tailwindcss' source(none) prefix(x);
+
+@source './**/*.{ts,tsx}';
+
+@import '../../nextra/styles/default.css';
+@import '../../nextra/styles/code-block.css';
+@import '../../nextra/styles/subheading-anchor.css';
+@import '../../nextra/styles/scrollbar.css';
+@import '../../nextra/styles/steps.css';
+@import '../../nextra/styles/cards.css';
 @import '../css/hamburger.css';
 @import '../css/typesetting-article.css';
+
+@theme {
+}
+
+@utility nextra-focus {
+  @apply x:focus-visible:outline-none x:ring-2 x:ring-primary-200 x:ring-offset-1 x:ring-offset-primary-300 x:dark:ring-primary-800 x:dark:ring-offset-primary-700;
+}
 
 html {
   --nextra-navbar-height: 64px;
   --nextra-menu-height: 3.75rem;
   --nextra-banner-height: 2.5rem;
 
-  @apply _antialiased _text-base _bg-[rgb(var(--nextra-bg))];
+  @apply x:antialiased x:text-base;
   font-feature-settings:
     'rlig' 1,
     'calt' 1,
@@ -23,21 +32,15 @@ html {
 
   &:not(:has(*:focus)) {
     /* adding `:not` with `:has` otherwise page jumps while focusing or while tapping in input https://github.com/shuding/nextra/issues/2840 */
-    @apply _scroll-pt-[--nextra-navbar-height];
-  }
-}
-
-@layer components {
-  .nextra-focus {
-    @apply focus-visible:_outline-none _ring-2 _ring-primary-200 _ring-offset-1 _ring-offset-primary-300 dark:_ring-primary-800 dark:_ring-offset-primary-700;
+    @apply x:scroll-pt-(--nextra-navbar-height);
   }
 }
 
 .contains-task-list {
-  @apply _mt-6;
+  @apply x:mt-6;
 
   input[type='checkbox'] {
-    @apply _me-1;
+    @apply x:me-1;
   }
 }
 
@@ -55,7 +58,7 @@ html {
 }
 
 .bordered {
-  @apply _border-t dark:_border-neutral-800 contrast-more:!_border-neutral-400;
+  @apply x:border-gray-200 x:dark:border-neutral-800 x:contrast-more:border-neutral-400!;
 }
 
 .mask {
@@ -66,5 +69,5 @@ html {
       transparent 100%
     ),
     linear-gradient(to top, transparent, #000 20px, transparent 100%);
-  @apply contrast-more:[mask-image:none];
+  @apply x:contrast-more:[mask-image:none];
 }

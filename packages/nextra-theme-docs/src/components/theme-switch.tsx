@@ -33,9 +33,9 @@ export const ThemeSwitch: FC<ThemeSwitchProps> = ({ lite, className }) => {
       onChange={setTheme}
       value={id}
       selectedOption={
-        <span className="_flex _items-center _gap-2 _capitalize">
+        <span className="x:flex x:items-center x:gap-2 x:capitalize">
           <IconToUse height="12" />
-          <span className={lite ? 'md:_hidden' : ''}>{themeSwitch[id]}</span>
+          <span className={lite ? 'x:md:hidden' : ''}>{themeSwitch[id]}</span>
         </span>
       }
     />

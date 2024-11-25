@@ -1,25 +1,28 @@
-@import 'tailwindcss/base';
-@import 'tailwindcss/components';
-@import 'tailwindcss/utilities';
-@import 'nextra/styles/code-block.css';
-@import 'nextra/styles/subheading-anchor.css';
-@import 'nextra/styles/scrollbar.css';
-@import 'nextra/styles/steps.css';
-@import 'nextra/styles/cards.css';
+@import 'tailwindcss' source(none) prefix(x);
+
+@source './**/*.{ts,tsx}';
+
+@plugin "@tailwindcss/typography";
+
+@import '../../nextra/styles/default.css';
+@import '../../nextra/styles/code-block.css';
+@import '../../nextra/styles/subheading-anchor.css';
+@import '../../nextra/styles/scrollbar.css';
+@import '../../nextra/styles/steps.css';
+@import '../../nextra/styles/cards.css';
+
+@theme {
+}
 
 html {
   --nextra-banner-height: 2.5rem;
-  @apply _scroll-pt-5;
-}
-
-body {
-  @apply !_bg-[rgb(var(--nextra-bg))];
+  @apply x:scroll-pt-5;
 }
 
 article {
-  @apply _mx-auto _block _pt-20 _pb-32;
+  @apply x:mx-auto x:block x:pt-20 x:pb-32;
   img {
-    @apply _mx-auto;
+    @apply x:mx-auto;
   }
 }
 
@@ -27,18 +30,18 @@ h1 {
   letter-spacing: -0.03em;
 }
 
-._prose code {
+.x\:prose code {
   &:before,
   &:after {
-    @apply _hidden;
+    @apply x:hidden;
   }
   .line {
-    @apply _font-normal;
+    @apply x:font-normal;
   }
 }
 
-._prose .nextra-callout p {
-  @apply _m-0;
+.x\:prose .nextra-callout p {
+  @apply x:m-0;
 }
 
 .footnotes a[data-footnote-backref] {
@@ -46,11 +49,11 @@ h1 {
 }
 
 .nextra-tag {
-  @apply _select-none _rounded-md _bg-gray-200 _px-1 _text-sm _text-gray-400 _transition-colors;
-  @apply dark:_bg-gray-600 dark:_text-gray-300;
+  @apply x:select-none x:rounded-md x:bg-gray-200 x:px-1 x:text-sm x:text-gray-400 x:transition-colors;
+  @apply x:dark:bg-gray-600 x:dark:text-gray-300;
 
   &:hover {
-    @apply _bg-gray-300 _text-gray-500;
-    @apply dark:_bg-gray-700 dark:_text-gray-200;
+    @apply x:bg-gray-300 x:text-gray-500;
+    @apply x:dark:bg-gray-700 x:dark:text-gray-200;
   }
 }

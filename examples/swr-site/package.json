@@ -26,10 +26,9 @@
   },
   "devDependencies": {
     "@next/bundle-analyzer": "^14.2.13",
-    "autoprefixer": "^10.4.16",
+    "@tailwindcss/postcss": "^4.0.0-beta.2",
     "pagefind": "^1.1.1",
-    "postcss-import": "^16.0.0",
-    "tailwindcss": "^3.4.1"
+    "tailwindcss": "^4.0.0-beta.2"
   },
   "browserslist": [
     ">= .25%",

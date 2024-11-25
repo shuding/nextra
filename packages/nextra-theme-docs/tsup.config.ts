@@ -1,17 +1,24 @@
 import { defineConfig } from 'tsup'
+import packageJson from './package.json'
 
 export const defaultEntry = [
   'src/**/*.{ts,tsx}',
   '!**/*.d.ts',
   '!**/__tests__',
   '!**/*.{test,spec}.{ts,tsx}'
-] as const
+]
 
-export default defineConfig({
-  name: 'nextra-theme-docs',
-  entry: [...defaultEntry, 'src/style.css'],
-  format: 'esm',
-  dts: true,
-  outExtension: () => ({ js: '.js' }),
-  bundle: false
-})
+export default defineConfig([
+  {
+    name: packageJson.name,
+    entry: defaultEntry,
+    format: 'esm',
+    dts: true,
+    outExtension: () => ({ js: '.js' }),
+    bundle: false
+  },
+  {
+    name: `${packageJson.name}/css`,
+    entry: ['src/style.css']
+  }
+])

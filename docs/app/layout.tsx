@@ -1,12 +1,11 @@
 import { NextraLogo, VercelLogo } from '@components/icons'
+import cn from 'clsx'
 import type { Metadata, Viewport } from 'next'
 import { Footer, Layout, Link, Navbar } from 'nextra-theme-docs'
 import { Banner, Head } from 'nextra/components'
 import { getPageMap } from 'nextra/page-map'
 import type { FC, ReactNode } from 'react'
 import './globals.css'
-import cn from 'clsx'
-import 'nextra-theme-docs/style.css'
 
 export const viewport: Viewport = Head.viewport
 
@@ -83,7 +82,7 @@ const RootLayout: FC<{
   const footer = (
     <Footer className="flex-col items-center md:items-start">
       <a
-        className="focus-visible:nextra-focus flex items-center gap-1"
+        className="x:focus-visible:nextra-focus flex items-center gap-1"
         target="_blank"
         rel="noreferrer"
         title="vercel.com homepage"
