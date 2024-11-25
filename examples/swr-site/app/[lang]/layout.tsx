@@ -15,7 +15,6 @@ import { getDictionary, getDirection } from '../_dictionaries/get-dictionary'
 import { pageMap as graphqlEslintPageMap } from './remote/graphql-eslint/[[...slug]]/page'
 import { pageMap as graphqlYogaPageMap } from './remote/graphql-yoga/[[...slug]]/page'
 import './styles.css'
-import '../_components/features.css'
 
 export const { viewport } = Head
 

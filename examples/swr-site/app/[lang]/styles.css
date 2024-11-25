@@ -1,5 +1,6 @@
 @import 'tailwindcss';
-@import 'nextra-theme-docs/style.css' layer(nextra-base);
+@import 'nextra-theme-docs/style.css';
+@import '../_components/features.css';
 
 @theme {
 }
