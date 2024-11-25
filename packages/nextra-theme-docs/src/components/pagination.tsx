@@ -25,7 +25,7 @@ export const Pagination: FC = () => {
   if (prev && !prev.isUnderCurrentDocsTree) prev = false
   if (next && !next.isUnderCurrentDocsTree) next = false
 
-  if (!prev && !next) return null
+  if (!prev && !next) return
 
   return (
     <div

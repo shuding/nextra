@@ -17,7 +17,7 @@ interface LocaleSwitchProps {
 export const LocaleSwitch: FC<LocaleSwitchProps> = ({ lite, className }) => {
   const { i18n } = useThemeConfig()
   const pathname = usePathname()
-  if (!i18n.length) return null
+  if (!i18n.length) return
 
   const [,locale] = pathname.split('/', 2)
   return (

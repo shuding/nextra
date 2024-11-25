@@ -25,10 +25,10 @@ export const Comments: FC<{
 
   if (!appId) {
     console.warn('[nextra/cusdis] `appId` is required')
-    return null
+    return
   }
   if (!mounted) {
-    return null
+    return
   }
 
   return (
