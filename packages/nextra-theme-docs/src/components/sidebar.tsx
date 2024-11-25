@@ -69,7 +69,7 @@ type FolderProps = {
 
 const Folder: FC<FolderProps> = ({ item, anchors, onFocus, level }) => {
   const routeOriginal = useFSRoute()
-  const [route] = routeOriginal.split('#')
+  const [route] = routeOriginal.split('#', 1)
   const hasRoute = !!item.route // for item.type === 'menu' will be ''
   const active = hasRoute && [route, route + '/'].includes(item.route + '/')
   const activeRouteInside =

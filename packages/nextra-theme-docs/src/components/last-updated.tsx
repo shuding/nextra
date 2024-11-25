@@ -16,8 +16,7 @@ export const LastUpdated: FC<{
     return null
   }
 
-  const dateLocale = i18n.length ? pathname.split('/')[1] : locale
-
+  const dateLocale = i18n.length ? pathname.split('/', 2)[1] : locale
   return (
     <>
       {children}{' '}
