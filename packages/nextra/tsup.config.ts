@@ -16,10 +16,16 @@ const reactCompilerConfig = {
   target: packageJson.devDependencies.react.slice(0, 2)
 }
 
+const SEP = path.sep === '/' ? '/' : '\\\\'
+
+const CLIENT_FILE_RE = new RegExp(
+  '/nextra/src/client/.*\\.tsx?$'.replace('/', SEP)
+)
+
 const reactCompilerPlugin: NonNullable<Options['esbuildPlugins']>[number] = {
   name: 'react-compiler',
   setup(build) {
-    build.onLoad({ filter: /nextra\/src\/client\/.*\.tsx?$/ }, async args => {
+    build.onLoad({ filter: CLIENT_FILE_RE }, async args => {
       // Read the file content
       const code = await fs.readFile(args.path, 'utf8')
       return new Promise<{
