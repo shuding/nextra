@@ -39,7 +39,7 @@ const IndexPage: FC = () => {
           </Link>
         </p>
       </div>
-      <div className="features-container x:border-b bordered">
+      <div className="features-container x:border-b nextra-border">
         <div className="content-container">
           <Features>
             <Feature

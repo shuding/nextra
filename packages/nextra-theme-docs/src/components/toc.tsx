@@ -104,7 +104,7 @@ export const TOC: FC<TOCProps> = ({ toc, filePath, pageTitle }) => {
       {hasMetaInfo && (
         <div
           className={cn(
-            hasHeadings && 'x:border-t bordered',
+            hasHeadings && 'x:border-t nextra-border',
             'x:grid x:gap-2 x:py-4 x:mx-4'
           )}
         >
