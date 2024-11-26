@@ -1,7 +1,7 @@
 import { NextraLogo, VercelLogo } from '@components/icons'
 import cn from 'clsx'
 import type { Metadata, Viewport } from 'next'
-import { Footer, Layout, Link, Navbar } from 'nextra-theme-docs'
+import { Footer, Layout, Navbar } from 'nextra-theme-docs'
 import { Banner, Head } from 'nextra/components'
 import { getPageMap } from 'nextra/page-map'
 import type { FC, ReactNode } from 'react'

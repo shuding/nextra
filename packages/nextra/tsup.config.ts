@@ -1,6 +1,7 @@
 import fs from 'node:fs/promises'
 import path from 'node:path'
 import svgr from 'esbuild-plugin-svgr'
+import reactCompilerLoader from 'react-compiler-webpack/dist/react-compiler-loader.js'
 import { defineConfig } from 'tsup'
 import { defaultEntry } from '../nextra-theme-docs/tsup.config.js'
 import packageJson from './package.json'
@@ -60,6 +61,40 @@ export default defineConfig({
         const replaced = code.replaceAll(/(?<= from ")(.+)\.svg(?=";)/g, '$1')
         return { code: replaced }
       }
+    },
+    {
+      name: 'babel-transform',
+      renderChunk(code, { path: resourcePath }) {
+        const { resolve, promise, reject } = Promise.withResolvers<{
+          code: string
+        }>()
+
+        reactCompilerLoader.call(
+          {
+            async: () =>
+              function callback(error: Error | null, result?: string) {
+                if (error) {
+                  reject(error)
+                } else {
+                  resolve({ code: result! })
+                }
+              },
+            getOptions: () => reactCompilerConfig,
+            resourcePath
+          },
+          code
+        )
+
+        return promise
+      }
     }
   ]
 })
+
+const reactCompilerConfig = {
+  sources(filename: string) {
+    console.log({ filename })
+    return true
+  },
+  target: packageJson.devDependencies.react.split('.', 1)[0]
+}
