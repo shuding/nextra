@@ -12,7 +12,10 @@ export const GoBack: FC = () => {
   const isNestedPage = segments.length > 2
   if (!isNestedPage) return
   return (
-    <Button onClick={router.back} className="x:print:hidden x:underline x:cursor-pointer">
+    <Button
+      onClick={router.back}
+      className="x:print:hidden x:underline x:cursor-pointer"
+    >
       Back
     </Button>
   )
