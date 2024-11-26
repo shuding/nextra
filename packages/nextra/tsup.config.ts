@@ -7,13 +7,14 @@ import { defineConfig } from 'tsup'
 import { defaultEntry } from '../nextra-theme-docs/tsup.config.js'
 import packageJson from './package.json'
 import { CWD, IS_PRODUCTION } from './src/server/constants.js'
+import { logger } from './src/server/utils.js'
 
 const reactCompilerPlugin: NonNullable<Options['esbuildPlugins']>[number] = {
   name: 'react-compiler',
   setup(build) {
-    build.onLoad({ filter: /\.tsx?$/ }, async args => {
+    build.onLoad({ filter: /nextra\/src\/client\/.*\.tsx?$/ }, async args => {
       // Read the file content
-      const code = await fs.readFile(args.path)
+      const code = await fs.readFile(args.path, 'utf8')
       return new Promise<{
         contents: string
         loader: 'ts' | 'tsx'
@@ -28,6 +29,18 @@ const reactCompilerPlugin: NonNullable<Options['esbuildPlugins']>[number] = {
                   const loader = path.extname(args.path).slice(1) as
                     | 'ts'
                     | 'tsx'
+                  if (
+                    result!.includes(
+                      'import { c as _c } from "react-compiler-runtime";'
+                    )
+                  ) {
+                    logger.info(
+                      'File',
+                      path.relative(CWD, args.path),
+                      'was optimized with react-compiler'
+                    )
+                  }
+
                   resolve({
                     contents: result!,
                     loader // Mark the file as a JSX file
@@ -103,17 +116,9 @@ export default defineConfig({
   ]
 })
 
-const ALLOWED_REACT_COMPILER_PATH = path.join(
-  'nextra',
-  'packages',
-  'nextra',
-  'src',
-  'client'
-)
-
 const reactCompilerConfig = {
   sources(filename: string) {
-    return filename.includes(ALLOWED_REACT_COMPILER_PATH)
+    return true
   },
   target: packageJson.devDependencies.react.slice(0, 2)
 }
