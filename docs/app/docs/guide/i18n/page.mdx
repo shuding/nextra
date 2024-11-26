@@ -20,12 +20,11 @@ out of the box. These docs explain how to configure and use it.
 To add multi-language pages to your Nextra application, you need to config
 `i18n` in `next.config.mjs` first:
 
-```js filename="next.config.mjs" {9-12}
+```js filename="next.config.mjs" {8-11}
 import nextra from 'nextra'
 
 const withNextra = nextra({
-  theme: 'nextra-theme-docs',
-  themeConfig: './theme.config.tsx'
+  // ... other Nextra config options
 })
 
 export default withNextra({
@@ -78,7 +77,7 @@ export const config = {
 > [!WARNING]
 >
 > This approach will not work for i18n sites that are statically exported with
-> `output: "export"` in `nextConfig`.
+> `output: 'export'` in `nextConfig`.
 
 ## Custom 404 Page (Optional)
 

@@ -72,7 +72,7 @@ export const rehypeExtractTocContent: Plugin<[], Root> = () => (ast, file) => {
         body: [
           {
             // TOC links must be inside a function, in our case inside useTOC, so
-            // mdx components will be injected for `a` or `code` tags inside headings
+            // mdx components will be injected for `<a>` or `<code>` tags inside headings
             type: 'FunctionDeclaration',
             id: { type: 'Identifier', name: 'useTOC' },
             params: [{ type: 'Identifier', name: 'props' }],

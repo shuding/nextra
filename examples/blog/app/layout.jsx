@@ -1,5 +1,6 @@
 import { Footer, Layout, Navbar, ThemeSwitch } from 'nextra-theme-blog'
 import { Banner, Head, Search } from 'nextra/components'
+import { getPageMap } from 'nextra/page-map'
 import 'nextra-theme-blog/style.css'
 
 export const metadata = {
@@ -21,12 +22,7 @@ export default async function RootLayout({ children }) {
       <Head backgroundColor={{ dark: '#0f172a', light: '#fefce8' }} />
       <body>
         <Layout banner={banner}>
-          <Navbar
-            navs={[
-              { url: '/', name: 'About' },
-              { url: '/posts', name: 'Posts' }
-            ]}
-          >
+          <Navbar pageMap={await getPageMap()}>
             <Search />
             <ThemeSwitch />
           </Navbar>
@@ -40,7 +36,7 @@ export default async function RootLayout({ children }) {
             >
               CC BY-NC 4.0
             </abbr>{' '}
-            {new Date().getFullYear()} © Shu Ding.
+            {new Date().getFullYear()} © Dimitri POSTOLOV.
             <a href="/feed.xml" style={{ float: 'right' }}>
               RSS
             </a>

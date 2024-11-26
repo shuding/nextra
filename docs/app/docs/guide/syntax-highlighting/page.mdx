@@ -248,7 +248,7 @@ You can provide these grammars by overriding the `getHighlighter` function in
 import { BUNDLED_LANGUAGES } from 'shiki'
 
 nextra({
-  // ... other options
+  // ... other Nextra config options
   mdxOptions: {
     rehypePrettyCodeOptions: {
       getHighlighter: options =>
@@ -277,7 +277,7 @@ instead of [relying on CSS Variables](/docs/guide/syntax-highlighting):
 
 ```js copy=false filename="next.config.mjs" {4}
 nextra({
-  // ... other options
+  // ... other Nextra config options
   mdxOptions: {
     rehypePrettyCodeOptions: {
       // VSCode theme or built-in Shiki theme, see Shiki documentation for more information
@@ -295,7 +295,7 @@ Pass your themes to `theme`, where the keys represent the color mode:
 
 ```js copy=false filename="next.config.mjs" {5-8}
 nextra({
-  // ...
+  // ... other Nextra config options
   mdxOptions: {
     rehypePrettyCodeOptions: {
       theme: {

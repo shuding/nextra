@@ -14,6 +14,7 @@ describe('generatePageMap()', () => {
     const { pageMap } = convertToPageMap({ filePaths })
     expect(filePaths).toMatchInlineSnapshot(`
       [
+        "app/_meta.global.js",
         "app/page.mdx",
         "app/posts/(with-comments)/aaron-swartz-a-programmable-web/page.mdx",
         "app/posts/(with-comments)/code-blocks/page.mdx",

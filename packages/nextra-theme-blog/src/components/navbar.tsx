@@ -1,36 +1,47 @@
 'use client'
 
 import { Link } from 'next-view-transitions'
-import { usePathname } from 'next/navigation'
+import type { PageMapItem } from 'nextra'
+import { useFSRoute } from 'nextra/hooks'
+import { normalizePages } from 'nextra/normalize-pages'
 import type { FC, ReactNode } from 'react'
+import { useMemo } from 'react'
 
 type NavbarProps = {
-  navs?: { name: string; url: string }[]
   children?: ReactNode
+  pageMap: PageMapItem[]
 }
 
-export const Navbar: FC<NavbarProps> = ({ navs, children }) => {
-  const pathname = usePathname()
-
+export const Navbar: FC<NavbarProps> = ({ children, pageMap }) => {
+  const pathname = useFSRoute()
+  const { topLevelNavbarItems } = useMemo(
+    () =>
+      normalizePages({
+        list: pageMap,
+        route: pathname
+      }),
+    [pageMap, pathname]
+  )
   return (
     <header
       className="x:mb-8 x:flex x:items-center x:gap-3 x:justify-end"
       data-pagefind-ignore="all"
     >
-      {navs?.map(nav =>
-        nav.url === pathname ? (
+      {topLevelNavbarItems.map(nav => {
+        const url = nav.route
+        return url === pathname ? (
           <span
-            key={nav.url}
+            key={url}
             className="x:cursor-default x:dark:text-gray-400 x:text-gray-600"
           >
-            {nav.name}
+            {nav.title}
           </span>
         ) : (
-          <Link key={nav.url} href={nav.url}>
-            {nav.name}
+          <Link key={url} href={url}>
+            {nav.title}
           </Link>
         )
-      )}
+      })}
       {children}
     </header>
   )
