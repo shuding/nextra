@@ -19,7 +19,7 @@ const reactCompilerConfig = {
 const SEP = path.sep === '/' ? '/' : '\\\\'
 
 const CLIENT_FILE_RE = new RegExp(
-  '/nextra/src/client/.*\\.tsx?$'.replace('/', SEP)
+  '/nextra/src/client/.*\\.tsx?$'.replaceAll('/', SEP)
 )
 
 const reactCompilerPlugin: NonNullable<Options['esbuildPlugins']>[number] = {
