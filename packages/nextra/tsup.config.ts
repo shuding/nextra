@@ -8,7 +8,7 @@ import { CWD, IS_PRODUCTION } from './src/server/constants.js'
 
 export default defineConfig({
   name: packageJson.name,
-  entry: [...defaultEntry, '!src/types.ts', 'src/**/*.svg'],
+  entry: [...defaultEntry, 'src/**/*.svg'],
   format: 'esm',
   dts: true,
   splitting: IS_PRODUCTION,

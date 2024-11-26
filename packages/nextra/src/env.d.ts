@@ -1,12 +1,3 @@
-declare module 'title' {
-  export default function title(
-    title: string,
-    special?: {
-      special: string[]
-    }
-  )
-}
-
 declare namespace globalThis {
   var pagefind: {
     search: <T>(query: string) => Promise<{

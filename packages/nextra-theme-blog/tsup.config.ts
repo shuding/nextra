@@ -5,7 +5,7 @@ import packageJson from './package.json'
 export default defineConfig([
   {
     name: packageJson.name,
-    entry: [...defaultEntry, '!src/types.ts'],
+    entry: defaultEntry,
     format: 'esm',
     dts: true,
     outExtension: () => ({ js: '.js' }),
