@@ -5,9 +5,9 @@ import { element, stringOrElement } from 'nextra/schemas'
 import type { FC, ReactNode } from 'react'
 import { z } from 'zod'
 import { fromZodError } from 'zod-validation-error'
-import { ConfigProvider, ThemeConfigProvider } from '../stores'
-import { LastUpdated } from './last-updated'
-import { MobileNav } from './sidebar'
+import { ConfigProvider, ThemeConfigProvider } from './stores'
+import { LastUpdated } from './components/last-updated'
+import { MobileNav } from './components/sidebar'
 
 const attributeSchema = z.custom<'class' | `data-${string}`>(
   value => value === 'class' || value.startsWith('data-')

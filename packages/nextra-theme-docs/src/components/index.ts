@@ -1,7 +1,6 @@
 export { Breadcrumb } from './breadcrumb'
 export { Footer } from './footer'
 export { LastUpdated } from './last-updated'
-export { Layout } from './layout'
 export { LocaleSwitch } from './locale-switch'
 export { Pagination } from './pagination'
 export { Navbar } from './navbar'
