@@ -1,15 +1,8 @@
 'use client'
 
 import cn from 'clsx'
-import type { ComponentProps, FC, ReactNode } from 'react'
-import {
-  Children,
-  cloneElement,
-  useEffect,
-  useMemo,
-  useRef,
-  useState
-} from 'react'
+import type { ComponentProps, Dispatch, FC, ReactNode, SetStateAction } from 'react'
+import { Children, cloneElement, useEffect, useRef, useState } from 'react'
 import { Collapse } from '../components/collapse.js'
 
 export const Details: FC<ComponentProps<'details'>> = ({
@@ -41,37 +34,7 @@ export const Details: FC<ComponentProps<'details'>> = ({
     setDelayedOpenState(true)
   }, [isOpen])
 
-  const [summaryElement, restChildren] = useMemo(
-    function findSummary(list = children): [summary: ReactNode, ReactNode] {
-      let summary: ReactNode
-
-      const rest = Children.map(list, child => {
-        if (
-          !summary && // Add onClick only for first summary
-          child &&
-          typeof child === 'object' &&
-          'type' in child
-        ) {
-          if (child.type === 'summary') {
-            summary = cloneElement(child, {
-              onClick(event: MouseEvent) {
-                event.preventDefault()
-                setIsOpen(v => !v)
-              }
-            })
-            return
-          }
-          if (child.type !== Details && child.props.children) {
-            ;[summary, child] = findSummary(child.props.children)
-          }
-        }
-        return child
-      })
-
-      return [summary, rest]
-    },
-    [children]
-  )
+  const [summaryElement, restChildren] = findSummary(children, setIsOpen)
 
   return (
     <details
@@ -90,4 +53,37 @@ export const Details: FC<ComponentProps<'details'>> = ({
       <Collapse isOpen={isOpen}>{restChildren}</Collapse>
     </details>
   )
+}
+
+// Fix Unsupported declaration type for hoisting. variable "findSummary" declared with FunctionExpression
+function findSummary(
+  list: ReactNode,
+  setIsOpen: Dispatch<SetStateAction<boolean>>
+): [summary: ReactNode, ReactNode] {
+  let summary: ReactNode
+
+  const rest = Children.map(list, child => {
+    if (
+      !summary && // Add onClick only for first summary
+      child &&
+      typeof child === 'object' &&
+      'type' in child
+    ) {
+      if (child.type === 'summary') {
+        summary = cloneElement(child, {
+          onClick(event: MouseEvent) {
+            event.preventDefault()
+            setIsOpen(v => !v)
+          }
+        })
+        return
+      }
+      if (child.type !== Details && child.props.children) {
+        ;[summary, child] = findSummary(child.props.children, setIsOpen)
+      }
+    }
+    return child
+  })
+
+  return [summary, rest]
 }
