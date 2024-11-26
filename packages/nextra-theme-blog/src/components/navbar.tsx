@@ -1,10 +1,11 @@
 'use client'
 
 import { Link } from 'next-view-transitions'
-import { PageMapItem } from 'nextra'
+import type { PageMapItem } from 'nextra'
 import { useFSRoute } from 'nextra/hooks'
 import { normalizePages } from 'nextra/normalize-pages'
-import { FC, ReactNode, useMemo } from 'react'
+import type { FC, ReactNode } from 'react'
+import { useMemo } from 'react'
 
 type NavbarProps = {
   children?: ReactNode
