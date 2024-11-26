@@ -145,7 +145,7 @@ export default {
 ## Hidden Routes
 
 By default, all MDX routes in the filesystem will be shown on the sidebar. But
-you can hide a specific pages or folders by using the `"display": "hidden"`
+you can hide a specific pages or folders by using the `display: 'hidden'`
 configuration:
 
 ```js filename="content/_meta.js" {4}
@@ -165,7 +165,7 @@ shown in the sidebar.
 
 ### Sub Docs
 
-By defining a top-level page or folder as `"type": "page"`, it will be shown as
+By defining a top-level page or folder as `type: 'page'`, it will be shown as
 a special page on the navigation bar, instead of the sidebar. With this feature,
 you can have multiple "sub docs", and special pages or links such as "Contact
 Us" that are always visible.
@@ -224,11 +224,11 @@ And it will look like this:
 </div>
 
 You can also hide links like `Home` from the navbar with the
-[`"display": "hidden"`](#hidden-routes) option.
+[`display: 'hidden'`](#hidden-routes) option.
 
 ### Menus
 
-You can also add menus to the navbar using `"type": "menu"` and the `"items"`
+You can also add menus to the navbar using `type: 'menu'` and the `'items'`
 option:
 
 <Screenshot>![Navbar menu](/assets/docs/menu.png)</Screenshot>
@@ -283,7 +283,7 @@ export default {
 ## Fallbacks
 
 In the [Sub Docs](#sub-docs) example above, we have to define the
-`"type": "page"` option for every page. To make it easier, you can use the `"*"`
+`type: 'page'` option for every page. To make it easier, you can use the `'*'`
 key to define the fallback configuration for all items in this folder:
 
 ```js filename="content/_meta.js" {2-4}
@@ -298,11 +298,11 @@ export default {
 }
 ```
 
-They are equivalent where all items have `"type": "page"` set.
+They are equivalent where all items have `type: 'page'` set.
 
 ## Separators
 
-You can use a "placeholder" item with `"type": "separator"` to create a
+You can use a "placeholder" item with `type: 'separator'` to create a
 separator line between items in the sidebar:
 
 ```js filename="_meta.js"
@@ -324,7 +324,7 @@ export default {
 
 ### Theme Components
 
-You can configure the theme for each page using the `"theme"` option. For
+You can configure the theme for each page using the `'theme'` option. For
 example, you can disable or enable specific components for specific pages:
 
 ```js filename="content/_meta.js"
@@ -346,13 +346,13 @@ This option will be inherited by all child pages if set to a folder.
 
 ### Layouts
 
-By default, each page has `"layout": "default"` in their theme config, which is
+By default, each page has `layout: 'default'` in their theme config, which is
 the default behavior.
 
 #### Full Layout
 
 You might want to render some page with the full container width and height, but
-keep all the other styles. You can use the `"full"` layout to do that:
+keep all the other styles. You can use the `'full'` layout to do that:
 
 ```js filename="content/_meta.js" {5}
 export default {
@@ -367,12 +367,12 @@ export default {
 
 ### Typesetting
 
-The `"typesetting"` option controls typesetting details like font features,
-heading styles and components like `li` and `code`. There are `"default"` and
-`"article"` typesettings available in the docs theme.
+The `'typesetting'` option controls typesetting details like font features,
+heading styles and components like `li` and `code`. There are `'default'` and
+`'article'` typesettings available in the docs theme.
 
 The default one is suitable for most cases like documentation, but you can use
-the `"article"` typesetting to make it look like an elegant article page:
+the `'article'` typesetting to make it look like an elegant article page:
 
 ```js filename="content/_meta.js" {5}
 export default {
