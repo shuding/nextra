@@ -1,8 +1,8 @@
 'use client'
 
 import cn from 'clsx'
-import { memo, useCallback, useState } from 'react'
-import type { ReactNode } from 'react'
+import { useState } from 'react'
+import type { ReactNode, FC } from 'react'
 import { FolderIcon, FolderOpenIcon } from '../../icons/index.js'
 import { Button } from '../button.js'
 import type { FileProps } from './file.js'
@@ -13,13 +13,12 @@ type FolderProps = FileProps & {
   children: ReactNode
 }
 
-export const Folder = memo<FolderProps>(
-  ({ name, open, children, defaultOpen = false, active }) => {
+export const Folder: FC<FolderProps> = ({ name, open, children, defaultOpen = false, active }) => {
     const [isOpen, setIsOpen] = useState(defaultOpen)
 
-    const toggle = useCallback(() => {
+    const toggle = () => {
       setIsOpen(v => !v)
-    }, [])
+    }
 
     const isFolderOpen = open === undefined ? isOpen : open
 
@@ -49,5 +48,3 @@ export const Folder = memo<FolderProps>(
       </li>
     )
   }
-)
-Folder.displayName = 'Folder'
