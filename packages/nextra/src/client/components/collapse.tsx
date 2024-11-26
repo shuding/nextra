@@ -1,8 +1,9 @@
 'use client'
 
 import cn from 'clsx'
-import type { FC, ReactNode } from 'react'
-import { Children, useEffect, useMemo, useRef } from 'react'
+import { Children, FC, ReactNode, useEffect, useRef, useState } from 'react'
+
+const _useRef = useRef
 
 export const Collapse: FC<{
   children: ReactNode
@@ -17,8 +18,8 @@ export const Collapse: FC<{
   openDuration = 500,
   closeDuration = 300
 }) => {
-  const containerRef = useRef<HTMLDivElement>(null!)
-  const initialOpen = useRef(isOpen)
+  const containerRef = _useRef<HTMLDivElement>(null!)
+  const [initialOpen] = useState(isOpen)
   const animationRef = useRef(0)
   const initialRender = useRef(true)
   useEffect(() => {
@@ -61,18 +62,16 @@ export const Collapse: FC<{
     initialRender.current = false
   }, [])
   // Add inner <div> only if children.length != 1
-  const newChildren = useMemo(
-    () =>
-      Children.count(children) === 1 &&
-      children &&
-      typeof children === 'object' &&
-      'type' in children ? (
-        children
-      ) : (
-        <div>{children}</div>
-      ),
-    [children]
-  )
+  const newChildren =
+    Children.count(children) === 1 &&
+    children &&
+    typeof children === 'object' &&
+    'type' in children ? (
+      children
+    ) : (
+      <div>{children}</div>
+    )
+
   return (
     <div
       ref={containerRef}
@@ -81,7 +80,7 @@ export const Collapse: FC<{
         isOpen ? 'x:opacity-100' : ['x:opacity-0', 'x:overflow-hidden']
       )}
       style={{
-        ...(initialOpen.current || horizontal ? undefined : { height: 0 }),
+        ...(initialOpen || horizontal ? undefined : { height: 0 }),
         transitionDuration: (isOpen ? openDuration : closeDuration) + 'ms'
       }}
     >
