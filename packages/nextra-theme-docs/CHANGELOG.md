@@ -1,5 +1,13 @@
 # nextra-theme-docs
 
+## 4.0.0-app-router.30
+
+### Patch Changes
+
+- f277a7a: fix search, didn't work with Next.js' `basePath` set
+- Updated dependencies [f277a7a]
+  - nextra@4.0.0-app-router.30
+
 ## 4.0.0-app-router.29
 
 ### Major Changes
