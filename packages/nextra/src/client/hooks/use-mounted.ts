@@ -1,5 +1,7 @@
 'use client'
-'use no memo' // don't need to memoize boolean `mounted` value
+
+// don't need to memoize boolean `mounted` value
+'use no memo'
 
 import { useEffect, useState } from 'react'
 
