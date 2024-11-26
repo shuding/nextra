@@ -63,7 +63,7 @@ export default defineConfig({
       }
     },
     {
-      name: 'babel-transform',
+      name: 'react-compiler-transform',
       renderChunk(code, { path: resourcePath }) {
         const { resolve, promise, reject } = Promise.withResolvers<{
           code: string
