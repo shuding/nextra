@@ -30,7 +30,7 @@ export const CopyToClipboard: FC<ComponentProps<'button'>> = props => {
     const container = event.currentTarget.parentNode!.parentNode!
     const content = container.querySelector('pre code')?.textContent || ''
     try {
-      // container should be not inside to support value blocks (conditional, logical, optional chaining, etc.) within a try/catch statement
+      // container should be not inside a try/catch statement, otherwise react-compiler give an error
       await navigator.clipboard.writeText(content)
     } catch {
       console.error('Failed to copy!')
