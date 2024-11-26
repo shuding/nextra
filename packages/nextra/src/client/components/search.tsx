@@ -7,6 +7,7 @@ import {
   ComboboxOptions
 } from '@headlessui/react'
 import cn from 'clsx'
+import { addBasePath } from 'next/dist/client/add-base-path'
 import NextLink from 'next/link'
 import { useRouter } from 'next/navigation'
 import type { FC, FocusEventHandler, ReactElement, SyntheticEvent } from 'react'
@@ -85,8 +86,7 @@ export const Search: FC<SearchProps> = ({
       setError('')
       try {
         window.pagefind = await import(
-          // @ts-expect-error pagefind.js generated after build
-          /* webpackIgnore: true */ '/_pagefind/pagefind.js'
+          /* webpackIgnore: true */ addBasePath('/_pagefind/pagefind.js')
         )
         await window.pagefind.options({
           baseUrl: '/'
