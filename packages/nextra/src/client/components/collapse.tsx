@@ -3,6 +3,7 @@
 import cn from 'clsx'
 import { Children, FC, ReactNode, useEffect, useRef, useState } from 'react'
 
+// https://github.com/facebook/react/issues/31637
 const _useRef = useRef
 
 export const Collapse: FC<{
