@@ -9,6 +9,13 @@ import packageJson from './package.json'
 import { CWD, IS_PRODUCTION } from './src/server/constants.js'
 import { logger } from './src/server/utils.js'
 
+const reactCompilerConfig = {
+  sources(_filename: string) {
+    return true
+  },
+  target: packageJson.devDependencies.react.slice(0, 2)
+}
+
 const reactCompilerPlugin: NonNullable<Options['esbuildPlugins']>[number] = {
   name: 'react-compiler',
   setup(build) {
@@ -35,7 +42,7 @@ const reactCompilerPlugin: NonNullable<Options['esbuildPlugins']>[number] = {
                     )
                   ) {
                     logger.info(
-                      'File',
+                      '🚀 File',
                       path.relative(CWD, args.path),
                       'was optimized with react-compiler'
                     )
@@ -115,10 +122,3 @@ export default defineConfig({
     }
   ]
 })
-
-const reactCompilerConfig = {
-  sources(filename: string) {
-    return true
-  },
-  target: packageJson.devDependencies.react.slice(0, 2)
-}
