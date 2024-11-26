@@ -1,9 +1,22 @@
 import { getPageMap } from 'nextra/page-map'
 
 export async function getPosts() {
-  const pageMap = await getPageMap('/posts')
-  return pageMap
-    .filter(post => !post.frontMatter.draft && post.name !== 'index')
+  const [meta, ...posts] = await getPageMap('/posts')
+  return posts
+    .filter(
+      post => {
+        const isIndexPage = post.name === 'index'
+        if (isIndexPage) {
+          return
+        }
+        const metaItem = meta.data[post.name]
+        if (!metaItem) {
+          return true
+        }
+
+        return metaItem.display !== 'hidden'
+      }
+    )
     .sort((a, b) => new Date(b.frontMatter.date) - new Date(a.frontMatter.date))
 }
 
