@@ -101,7 +101,6 @@ const ALLOWED_REACT_COMPILER_PATH = path.join(
 
 const reactCompilerConfig = {
   sources(filename: string) {
-    console.log({ filename })
     return filename.includes(ALLOWED_REACT_COMPILER_PATH)
   },
   target: packageJson.devDependencies.react.split('.', 1)[0]
