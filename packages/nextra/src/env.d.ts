@@ -11,8 +11,7 @@ declare namespace globalThis {
 }
 
 declare module '*.svg' {
-  import type { FC, SVGProps } from 'react'
-  export const ReactComponent: FC<SVGProps<SVGElement>>
+  export { ReactComponent } from './icon.js'
 }
 
 declare module 'next-mdx-import-source-file' {
