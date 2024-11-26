@@ -65,27 +65,25 @@ export default defineConfig({
     {
       name: 'react-compiler-transform',
       renderChunk(code, { path: resourcePath }) {
-        const { resolve, promise, reject } = Promise.withResolvers<{
+        return new Promise<{
           code: string
-        }>()
-
-        reactCompilerLoader.call(
-          {
-            async: () =>
-              function callback(error: Error | null, result?: string) {
-                if (error) {
-                  reject(error)
-                } else {
-                  resolve({ code: result! })
-                }
-              },
-            getOptions: () => reactCompilerConfig,
-            resourcePath
-          },
-          code
-        )
-
-        return promise
+        }>((resolve, reject) => {
+          reactCompilerLoader.call(
+            {
+              async: () =>
+                function callback(error: Error | null, result?: string) {
+                  if (error) {
+                    reject(error)
+                  } else {
+                    resolve({ code: result! })
+                  }
+                },
+              getOptions: () => reactCompilerConfig,
+              resourcePath
+            },
+            code
+          )
+        })
       }
     }
   ]
