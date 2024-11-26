@@ -7,19 +7,16 @@ import {
   ComboboxOptions
 } from '@headlessui/react'
 import cn from 'clsx'
-import { addBasePath } from 'next/dist/client/add-base-path'
 import NextLink from 'next/link'
 import { useRouter } from 'next/navigation'
 import type { FC, FocusEventHandler, ReactElement, SyntheticEvent } from 'react'
-import {
-  useCallback,
-  useDeferredValue,
-  useEffect,
-  useRef,
-  useState
-} from 'react'
-import { useMounted } from '../hooks/index.js'
-import { InformationCircleIcon, SpinnerIcon } from '../icons/index.js'
+import { useDeferredValue, useEffect, useRef, useState } from 'react'
+import { useMounted } from '../../hooks/index.js'
+import { InformationCircleIcon, SpinnerIcon } from '../../icons/index.js'
+import { importPagefind } from './import-pagefind.js'
+
+// https://github.com/facebook/react/issues/31637
+const _useRef = useRef
 
 type PagefindResult = {
   excerpt: string
@@ -74,7 +71,7 @@ export const Search: FC<SearchProps> = ({
   // defer pagefind results update for prioritizing user input state
   const deferredSearch = useDeferredValue(search)
 
-  const handleSearch = useCallback(async (value: string) => {
+  const handleSearch = async (value: string) => {
     if (!value) {
       setResults([])
       setError('')
@@ -85,13 +82,7 @@ export const Search: FC<SearchProps> = ({
       setIsLoading(true)
       setError('')
       try {
-        window.pagefind = await import(
-          /* webpackIgnore: true */ addBasePath('/_pagefind/pagefind.js')
-        )
-        await window.pagefind.options({
-          baseUrl: '/'
-          // ... more search options
-        })
+        await importPagefind()
       } catch (error) {
         const message =
           error instanceof Error
@@ -119,7 +110,7 @@ export const Search: FC<SearchProps> = ({
       }))
     )
     setIsLoading(false)
-  }, [])
+  }
 
   useEffect(() => {
     handleSearch(deferredSearch)
@@ -128,7 +119,7 @@ export const Search: FC<SearchProps> = ({
   const router = useRouter()
   const [focused, setFocused] = useState(false)
   const mounted = useMounted()
-  const inputRef = useRef<HTMLInputElement>(null)
+  const inputRef = _useRef<HTMLInputElement>(null)
 
   useEffect(() => {
     function handleKeyDown(event: globalThis.KeyboardEvent) {
@@ -180,30 +171,24 @@ export const Search: FC<SearchProps> = ({
     </kbd>
   )
 
-  const handleFocus = useCallback<FocusEventHandler>(event => {
+  const handleFocus: FocusEventHandler = event => {
     const isFocus = event.type === 'focus'
     setFocused(isFocus)
-  }, [])
+  }
 
-  const handleChange = useCallback(
-    (event: SyntheticEvent<HTMLInputElement>) => {
-      const { value } = event.currentTarget
-      setSearch(value)
-    },
-    []
-  )
+  const handleChange = (event: SyntheticEvent<HTMLInputElement>) => {
+    const { value } = event.currentTarget
+    setSearch(value)
+  }
 
-  const handleSelect = useCallback(
-    (searchResult: PagefindResult | null) => {
-      if (!searchResult) return
-      // Calling before navigation so selector `html:not(:has(*:focus))` in styles.css will work,
-      // and we'll have padding top since input is not focused
-      inputRef.current?.blur()
-      router.push(searchResult.url)
-      setSearch('')
-    },
-    [router]
-  )
+  const handleSelect = (searchResult: PagefindResult | null) => {
+    if (!searchResult) return
+    // Calling before navigation so selector `html:not(:has(*:focus))` in styles.css will work,
+    // and we'll have padding top since input is not focused
+    inputRef.current?.blur()
+    router.push(searchResult.url)
+    setSearch('')
+  }
 
   return (
     <Combobox onChange={handleSelect}>
