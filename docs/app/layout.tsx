@@ -56,13 +56,8 @@ const RootLayout: FC<{
   children: ReactNode
 }> = async ({ children }) => {
   const banner = (
-    <Banner storageKey="4.0-release">
-      <div className="before:content-['🎉_']">
-        Nextra 4.0 is released.{' '}
-        <Link href="#" className="after:content-['_→']">
-          Read more
-        </Link>
-      </div>
+    <Banner dismissible={false}>
+        🚧 This is WIP documentation for Nextra 4.0
     </Banner>
   )
   const navbar = (

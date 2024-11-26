@@ -40,7 +40,8 @@ export const TOC: FC<TOCProps> = ({ toc, filePath, pageTitle }) => {
     if (!activeSlug) return
     const anchor = tocRef.current.querySelector(
       `a[href="#${activeSlug}"]`
-    ) as HTMLAnchorElement
+    )
+    if (!anchor) return
 
     scrollIntoView(anchor, {
       behavior: 'smooth',
