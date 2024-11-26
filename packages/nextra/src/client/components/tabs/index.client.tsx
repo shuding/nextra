@@ -15,7 +15,7 @@ import type {
 } from '@headlessui/react'
 import cn from 'clsx'
 import type { FC, ReactElement, ReactNode } from 'react'
-import { useCallback, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 type TabItem = string | ReactElement
 
@@ -75,7 +75,7 @@ export const Tabs: FC<
     }
   }, []) // eslint-disable-line react-hooks/exhaustive-deps -- only on mount
 
-  const handleChange = useCallback((index: number) => {
+  const handleChange = (index: number) => {
     if (storageKey) {
       const newValue = String(index)
       localStorage.setItem(storageKey, newValue)
@@ -89,7 +89,7 @@ export const Tabs: FC<
     }
     setSelectedIndex(index)
     onChange?.(index)
-  }, []) // eslint-disable-line react-hooks/exhaustive-deps -- only on mount
+  }
 
   return (
     <TabGroup
