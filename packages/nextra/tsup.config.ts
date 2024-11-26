@@ -103,5 +103,5 @@ const reactCompilerConfig = {
   sources(filename: string) {
     return filename.includes(ALLOWED_REACT_COMPILER_PATH)
   },
-  target: packageJson.devDependencies.react.split('.', 1)[0]
+  target: packageJson.devDependencies.react.slice(0, 2)
 }
