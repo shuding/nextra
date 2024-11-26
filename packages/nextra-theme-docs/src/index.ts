@@ -9,5 +9,5 @@ export {
   ThemeSwitch,
   LocaleSwitch,
   LastUpdated,
-  Footer,
+  Footer
 } from './components'

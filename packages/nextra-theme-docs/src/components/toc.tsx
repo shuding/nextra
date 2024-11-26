@@ -28,7 +28,6 @@ export const TOC: FC<TOCProps> = ({ toc, filePath, pageTitle }) => {
   const tocRef = useRef<HTMLUListElement>(null!)
   const themeConfig = useThemeConfig()
 
-  const hasHeadings = toc.length > 0
   const hasMetaInfo = Boolean(
     themeConfig.feedback.content ||
       themeConfig.editLink ||
@@ -40,74 +39,65 @@ export const TOC: FC<TOCProps> = ({ toc, filePath, pageTitle }) => {
 
   useEffect(() => {
     if (!activeSlug) return
-    const anchor = tocRef.current?.querySelector(`a[href="#${activeSlug}"]`)
+    const anchor = tocRef.current.querySelector(
+      `a[href="#${activeSlug}"]`
+    ) as HTMLAnchorElement
 
-    if (anchor) {
-      scrollIntoView(anchor, {
-        behavior: 'smooth',
-        block: 'center',
-        inline: 'center',
-        scrollMode: 'if-needed',
-        boundary: tocRef.current
-      })
-    }
+    scrollIntoView(anchor, {
+      behavior: 'smooth',
+      block: 'center',
+      inline: 'center',
+      scrollMode: 'if-needed',
+      boundary: tocRef.current
+    })
   }, [activeSlug])
 
   return (
     <div
       className={cn(
-        hasHeadings && 'x:grid x:grid-rows-[min-content_1fr_min-content]', // 1fr: toc headings, min-content: title/footer
+        'x:grid x:grid-rows-[min-content_1fr_min-content]', // 1fr: toc headings, min-content: title/footer
         'x:sticky x:top-(--nextra-navbar-height) x:text-sm',
         'x:max-h-[calc(100vh-var(--nextra-navbar-height))]'
       )}
     >
-      {hasHeadings && (
-        <>
-          <p className="x:pt-6 x:px-4 x:font-semibold x:tracking-tight">
-            {themeConfig.toc.title}
-          </p>
-          <ul
-            ref={tocRef}
-            className={cn(
-              'x:p-4 nextra-scrollbar x:overscroll-y-contain x:overflow-y-auto x:hyphens-auto',
-              'mask' // for title/footer shadow
-            )}
-          >
-            {toc.map(({ id, value, depth }) => (
-              <li className="x:my-2 x:scroll-my-6 x:scroll-py-6" key={id}>
-                <a
-                  href={`#${id}`}
-                  className={cn(
-                    'x:focus-visible:nextra-focus',
-                    {
-                      2: 'x:font-semibold',
-                      3: 'x:ms-3',
-                      4: 'x:ms-6',
-                      5: 'x:ms-9',
-                      6: 'x:ms-12'
-                    }[depth],
-                    'x:block x:transition-colors x:subpixel-antialiased',
-                    id === activeSlug
-                      ? 'x:text-primary-600 x:contrast-more:text-primary-600!'
-                      : 'x:text-gray-500 x:hover:text-gray-900 x:dark:text-gray-400 x:dark:hover:text-gray-300',
-                    'x:contrast-more:text-gray-900 x:contrast-more:underline x:contrast-more:dark:text-gray-50 x:break-words'
-                  )}
-                >
-                  {value}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </>
-      )}
+      <p className="x:pt-6 x:px-4 x:font-semibold x:tracking-tight">
+        {themeConfig.toc.title}
+      </p>
+      <ul
+        ref={tocRef}
+        className={cn(
+          'x:p-4 nextra-scrollbar x:overscroll-y-contain x:overflow-y-auto x:hyphens-auto',
+          'nextra-mask' // for title/footer shadow
+        )}
+      >
+        {toc.map(({ id, value, depth }) => (
+          <li className="x:my-2 x:scroll-my-6 x:scroll-py-6" key={id}>
+            <a
+              href={`#${id}`}
+              className={cn(
+                'x:focus-visible:nextra-focus',
+                {
+                  2: 'x:font-semibold',
+                  3: 'x:ms-3',
+                  4: 'x:ms-6',
+                  5: 'x:ms-9',
+                  6: 'x:ms-12'
+                }[depth],
+                'x:block x:transition-colors x:subpixel-antialiased',
+                id === activeSlug
+                  ? 'x:text-primary-600 x:contrast-more:text-primary-600!'
+                  : 'x:text-gray-500 x:hover:text-gray-900 x:dark:text-gray-400 x:dark:hover:text-gray-300',
+                'x:contrast-more:text-gray-900 x:contrast-more:underline x:contrast-more:dark:text-gray-50 x:break-words'
+              )}
+            >
+              {value}
+            </a>
+          </li>
+        ))}
+      </ul>
 
       {hasMetaInfo && (
-        <div
-          className={cn(
-            hasHeadings && 'x:border-t nextra-border',
-            'x:grid x:gap-2 x:py-4 x:mx-4'
-          )}
-        >
+        <div className="x:border-t nextra-border x:grid x:gap-2 x:py-4 x:mx-4">
           {themeConfig.feedback.content && (
             <Anchor
               className={linkClassName}

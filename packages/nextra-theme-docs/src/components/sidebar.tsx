@@ -54,7 +54,7 @@ const classes = {
     'x:before:w-px x:before:bg-gray-200 x:before:content-[""] x:dark:before:bg-neutral-800',
     'x:ps-3 x:before:start-0 x:pt-1 x:ms-3'
   ),
-  wrapper: cn('x:p-4 x:overflow-y-auto nextra-scrollbar mask'),
+  wrapper: cn('x:p-4 x:overflow-y-auto nextra-scrollbar nextra-mask'),
   footer: cn(
     'nextra-sidebar-footer x:border-t nextra-border x:flex x:items-center x:gap-2 x:py-4 x:mx-4'
   )

@@ -61,7 +61,7 @@ html {
   @apply x:border-gray-200 x:dark:border-neutral-800 x:contrast-more:border-neutral-400!;
 }
 
-.mask {
+.nextra-mask {
   mask-image: linear-gradient(
       to bottom,
       transparent,
