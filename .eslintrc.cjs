@@ -211,9 +211,7 @@ module.exports = {
           ]
         }
       },
-      plugins: [
-        'eslint-plugin-react-compiler',
-      ],
+      plugins: ['eslint-plugin-react-compiler'],
       rules: {
         ...TAILWIND_CONFIG.rules,
         'import/extensions': ['error', 'ignorePackages'],
@@ -221,9 +219,12 @@ module.exports = {
         'tailwindcss/no-custom-classname': 'off',
         'no-restricted-imports': [
           'error',
-          { name: 'react', importNames: ['memo','useCallback', 'useMemo', 'forwardRef'] }
+          {
+            name: 'react',
+            importNames: ['memo', 'useCallback', 'useMemo', 'forwardRef']
+          }
         ],
-        'react-compiler/react-compiler': 'error',
+        'react-compiler/react-compiler': 'error'
       }
     },
     // ⚙️ Docs
