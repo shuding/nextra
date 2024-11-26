@@ -1,5 +1,18 @@
 # nextra-theme-blog
 
+## 4.0.0-app-router.30
+
+### Major Changes
+
+- 39bacdc: remove `BlogMetadata.draft`, support \_meta files for
+  `nextra-theme-blog`
+
+### Patch Changes
+
+- f277a7a: fix search, didn't work with Next.js' `basePath` set
+- Updated dependencies [f277a7a]
+  - nextra@4.0.0-app-router.30
+
 ## 4.0.0-app-router.29
 
 ### Major Changes
