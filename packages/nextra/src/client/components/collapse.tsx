@@ -1,7 +1,8 @@
 'use client'
 
 import cn from 'clsx'
-import { Children, FC, ReactNode, useEffect, useRef, useState } from 'react'
+import type { FC, ReactNode } from 'react'
+import { Children, useEffect, useRef, useState } from 'react'
 
 // https://github.com/facebook/react/issues/31637
 const _useRef = useRef
@@ -57,7 +58,7 @@ export const Collapse: FC<{
         }
       })
     }
-  }, [horizontal, isOpen, openDuration])
+  }, [horizontal, isOpen, openDuration]) // eslint-disable-line -- false positive due rename of _useRef
 
   useEffect(() => {
     initialRender.current = false

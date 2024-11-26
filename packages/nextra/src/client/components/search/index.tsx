@@ -71,50 +71,49 @@ export const Search: FC<SearchProps> = ({
   // defer pagefind results update for prioritizing user input state
   const deferredSearch = useDeferredValue(search)
 
-  const handleSearch = async (value: string) => {
-    if (!value) {
-      setResults([])
-      setError('')
-      return
-    }
-
-    if (!window.pagefind) {
-      setIsLoading(true)
-      setError('')
-      try {
-        await importPagefind()
-      } catch (error) {
-        const message =
-          error instanceof Error
-            ? process.env.NODE_ENV !== 'production' &&
-              error.message.includes('Failed to fetch')
-              ? DEV_SEARCH_NOTICE // This error will be tree-shaked in production
-              : `${error.constructor.name}: ${error.message}`
-            : String(error)
-        setError(message)
-        setIsLoading(false)
+  useEffect(() => {
+    const handleSearch = async (value: string) => {
+      if (!value) {
+        setResults([])
+        setError('')
         return
       }
+
+      if (!window.pagefind) {
+        setIsLoading(true)
+        setError('')
+        try {
+          await importPagefind()
+        } catch (error) {
+          const message =
+            error instanceof Error
+              ? process.env.NODE_ENV !== 'production' &&
+                error.message.includes('Failed to fetch')
+                ? DEV_SEARCH_NOTICE // This error will be tree-shaked in production
+                : `${error.constructor.name}: ${error.message}`
+              : String(error)
+          setError(message)
+          setIsLoading(false)
+          return
+        }
+      }
+      const { results } = await window.pagefind.search<PagefindResult>(value)
+      const data = await Promise.all(results.map(o => o.data()))
+
+      setResults(
+        data.map(newData => ({
+          ...newData,
+          sub_results: newData.sub_results.map(r => {
+            const url = r.url.replace(/\.html$/, '').replace(/\.html#/, '#')
+
+            return { ...r, url }
+          })
+        }))
+      )
+      setIsLoading(false)
     }
-    const { results } = await window.pagefind.search<PagefindResult>(value)
-    const data = await Promise.all(results.map(o => o.data()))
-
-    setResults(
-      data.map(newData => ({
-        ...newData,
-        sub_results: newData.sub_results.map(r => {
-          const url = r.url.replace(/\.html$/, '').replace(/\.html#/, '#')
-
-          return { ...r, url }
-        })
-      }))
-    )
-    setIsLoading(false)
-  }
-
-  useEffect(() => {
     handleSearch(deferredSearch)
-  }, [handleSearch, deferredSearch])
+  }, [deferredSearch])
 
   const router = useRouter()
   const [focused, setFocused] = useState(false)
@@ -148,7 +147,7 @@ export const Search: FC<SearchProps> = ({
     return () => {
       window.removeEventListener('keydown', handleKeyDown)
     }
-  }, [])
+  }, []) // eslint-disable-line -- false positive due rename of _useRef
 
   const icon = mounted && !focused && (
     <kbd
