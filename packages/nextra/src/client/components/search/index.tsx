@@ -15,9 +15,6 @@ import { useMounted } from '../../hooks/index.js'
 import { InformationCircleIcon, SpinnerIcon } from '../../icons/index.js'
 import { importPagefind } from './import-pagefind.js'
 
-// https://github.com/facebook/react/issues/31637
-const _useRef = useRef
-
 type PagefindResult = {
   excerpt: string
   meta: {
@@ -118,7 +115,7 @@ export const Search: FC<SearchProps> = ({
   const router = useRouter()
   const [focused, setFocused] = useState(false)
   const mounted = useMounted()
-  const inputRef = _useRef<HTMLInputElement>(null)
+  const inputRef = useRef<HTMLInputElement>(null)
 
   useEffect(() => {
     function handleKeyDown(event: globalThis.KeyboardEvent) {
@@ -147,7 +144,7 @@ export const Search: FC<SearchProps> = ({
     return () => {
       window.removeEventListener('keydown', handleKeyDown)
     }
-  }, []) // eslint-disable-line -- false positive due rename of _useRef
+  }, [])
 
   const icon = mounted && !focused && (
     <kbd

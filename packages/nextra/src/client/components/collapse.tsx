@@ -4,9 +4,6 @@ import cn from 'clsx'
 import type { FC, ReactNode } from 'react'
 import { Children, useEffect, useRef, useState } from 'react'
 
-// https://github.com/facebook/react/issues/31637
-const _useRef = useRef
-
 export const Collapse: FC<{
   children: ReactNode
   isOpen: boolean
@@ -20,7 +17,7 @@ export const Collapse: FC<{
   openDuration = 500,
   closeDuration = 300
 }) => {
-  const containerRef = _useRef<HTMLDivElement>(null!)
+  const containerRef = useRef<HTMLDivElement>(null!)
   const [initialOpen] = useState(isOpen)
   const animationRef = useRef(0)
   const initialRender = useRef(true)
@@ -58,7 +55,7 @@ export const Collapse: FC<{
         }
       })
     }
-  }, [horizontal, isOpen, openDuration]) // eslint-disable-line -- false positive due rename of _useRef
+  }, [horizontal, isOpen, openDuration])
 
   useEffect(() => {
     initialRender.current = false

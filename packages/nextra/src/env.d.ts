@@ -19,5 +19,5 @@ declare module 'next-mdx-import-source-file' {
 }
 
 declare module 'react-compiler-webpack/dist/react-compiler-loader.js' {
-  export default function reactCompilerLoader(source: string): Promise<void>
+  export default function reactCompilerLoader(source: string | Buffer): Promise<void>
 }

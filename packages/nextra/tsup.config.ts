@@ -2,10 +2,47 @@ import fs from 'node:fs/promises'
 import path from 'node:path'
 import svgr from 'esbuild-plugin-svgr'
 import reactCompilerLoader from 'react-compiler-webpack/dist/react-compiler-loader.js'
+import type { Options } from 'tsup'
 import { defineConfig } from 'tsup'
 import { defaultEntry } from '../nextra-theme-docs/tsup.config.js'
 import packageJson from './package.json'
 import { CWD, IS_PRODUCTION } from './src/server/constants.js'
+
+const reactCompilerPlugin: NonNullable<Options['esbuildPlugins']>[number] = {
+  name: 'react-compiler',
+  setup(build) {
+    build.onLoad({ filter: /\.tsx?$/ }, async args => {
+      // Read the file content
+      const code = await fs.readFile(args.path)
+      return new Promise<{
+        contents: string
+        loader: 'ts' | 'tsx'
+      }>((resolve, reject) => {
+        reactCompilerLoader.call(
+          {
+            async: () =>
+              function callback(error: Error | null, result?: string) {
+                if (error) {
+                  reject(error)
+                } else {
+                  const loader = path.extname(args.path).slice(1) as
+                    | 'ts'
+                    | 'tsx'
+                  resolve({
+                    contents: result!,
+                    loader // Mark the file as a JSX file
+                  })
+                }
+              },
+            getOptions: () => reactCompilerConfig,
+            resourcePath: args.path
+          },
+          code
+        )
+      })
+    })
+  }
+}
 
 export default defineConfig({
   name: packageJson.name,
@@ -35,7 +72,8 @@ export default defineConfig({
           ]
         }
       }
-    })
+    }),
+    reactCompilerPlugin
   ],
   plugins: [
     {
@@ -61,30 +99,6 @@ export default defineConfig({
         const replaced = code.replaceAll(/(?<= from ")(.+)\.svg(?=";)/g, '$1')
         return { code: replaced }
       }
-    },
-    {
-      name: 'react-compiler-transform',
-      renderChunk(code, { path: resourcePath }) {
-        return new Promise<{
-          code: string
-        }>((resolve, reject) => {
-          reactCompilerLoader.call(
-            {
-              async: () =>
-                function callback(error: Error | null, result?: string) {
-                  if (error) {
-                    reject(error)
-                  } else {
-                    resolve({ code: result! })
-                  }
-                },
-              getOptions: () => reactCompilerConfig,
-              resourcePath
-            },
-            code
-          )
-        })
-      }
     }
   ]
 })
@@ -93,7 +107,7 @@ const ALLOWED_REACT_COMPILER_PATH = path.join(
   'nextra',
   'packages',
   'nextra',
-  'dist',
+  'src',
   'client'
 )
 
