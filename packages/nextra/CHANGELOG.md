@@ -436,7 +436,7 @@
 
 ### Patch Changes
 
-- 6454938: update css selectors for `code`, use `code.nextra-code`
+- 6454938: update css selectors for `<code>`, use `code.nextra-code`
 - 9794e9e: update package version range for `@theguild/remark-mermaid` to be at
   least `^0.1.3`
   https://github.com/nextauthjs/next-auth/pull/12029#discussion_r1801785960
