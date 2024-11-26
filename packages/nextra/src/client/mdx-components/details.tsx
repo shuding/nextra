@@ -1,7 +1,13 @@
 'use client'
 
 import cn from 'clsx'
-import type { ComponentProps, Dispatch, FC, ReactNode, SetStateAction } from 'react'
+import type {
+  ComponentProps,
+  Dispatch,
+  FC,
+  ReactNode,
+  SetStateAction
+} from 'react'
 import { Children, cloneElement, useEffect, useRef, useState } from 'react'
 import { Collapse } from '../components/collapse.js'
 
