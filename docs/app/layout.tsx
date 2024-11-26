@@ -57,7 +57,7 @@ const RootLayout: FC<{
 }> = async ({ children }) => {
   const banner = (
     <Banner dismissible={false}>
-        🚧 This is WIP documentation for Nextra 4.0
+      🚧 This is WIP documentation for Nextra 4.0
     </Banner>
   )
   const navbar = (

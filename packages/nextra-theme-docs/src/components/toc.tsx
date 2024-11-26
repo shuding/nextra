@@ -38,9 +38,7 @@ export const TOC: FC<TOCProps> = ({ toc, filePath, pageTitle }) => {
 
   useEffect(() => {
     if (!activeSlug) return
-    const anchor = tocRef.current.querySelector(
-      `a[href="#${activeSlug}"]`
-    )
+    const anchor = tocRef.current.querySelector(`a[href="#${activeSlug}"]`)
     if (!anchor) return
 
     scrollIntoView(anchor, {
