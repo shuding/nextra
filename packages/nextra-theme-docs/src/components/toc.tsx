@@ -28,12 +28,11 @@ export const TOC: FC<TOCProps> = ({ toc, filePath, pageTitle }) => {
   const tocRef = useRef<HTMLUListElement>(null!)
   const themeConfig = useThemeConfig()
 
-  const hasMetaInfo = Boolean(
+  const hasMetaInfo =
     themeConfig.feedback.content ||
-      themeConfig.editLink ||
-      themeConfig.toc.extraContent ||
-      themeConfig.toc.backToTop
-  )
+    themeConfig.editLink ||
+    themeConfig.toc.extraContent ||
+    themeConfig.toc.backToTop
 
   const activeIndex = toc.findIndex(({ id }) => id === activeSlug)
 
