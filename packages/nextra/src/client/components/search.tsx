@@ -7,13 +7,24 @@ import {
   ComboboxOptions
 } from '@headlessui/react'
 import cn from 'clsx'
+import { addBasePath } from 'next/dist/client/add-base-path'
 import NextLink from 'next/link'
 import { useRouter } from 'next/navigation'
 import type { FC, FocusEventHandler, ReactElement, SyntheticEvent } from 'react'
 import { useDeferredValue, useEffect, useRef, useState } from 'react'
-import { useMounted } from '../../hooks/index.js'
-import { InformationCircleIcon, SpinnerIcon } from '../../icons/index.js'
-import { importPagefind } from './import-pagefind.js'
+import { useMounted } from '../hooks/use-mounted.js'
+import { InformationCircleIcon, SpinnerIcon } from '../icons/index.js'
+
+// Fix React Compiler (BuildHIR::lowerExpression) Handle Import expressions (82:82)
+export async function importPagefind() {
+  window.pagefind = await import(
+    /* webpackIgnore: true */ addBasePath('/_pagefind/pagefind.js')
+  )
+  await window.pagefind.options({
+    baseUrl: '/'
+    // ... more search options
+  })
+}
 
 type PagefindResult = {
   excerpt: string
