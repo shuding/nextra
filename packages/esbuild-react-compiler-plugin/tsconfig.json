@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "es2018",
+    "target": "es2022",
     "module": "ESNext",
     "declaration": true,
     "noEmit": true,
@@ -8,9 +8,9 @@
     "strict": true,
     "skipLibCheck": true,
     "strictNullChecks": true,
-    "jsx": "react-jsx",
-    "moduleResolution": "bundler",
-    "types": ["vitest/globals"]
+    "lib": ["esnext", "dom"],
+    "moduleResolution": "node",
+    "resolveJsonModule": true
   },
   "exclude": ["dist"]
 }

@@ -1,7 +1,7 @@
 import { NextraLogo, VercelLogo } from '@components/icons'
 import cn from 'clsx'
 import type { Metadata, Viewport } from 'next'
-import { Footer, Layout, Link, Navbar } from 'nextra-theme-docs'
+import { Footer, Layout, Navbar } from 'nextra-theme-docs'
 import { Banner, Head } from 'nextra/components'
 import { getPageMap } from 'nextra/page-map'
 import type { FC, ReactNode } from 'react'
@@ -56,13 +56,8 @@ const RootLayout: FC<{
   children: ReactNode
 }> = async ({ children }) => {
   const banner = (
-    <Banner storageKey="4.0-release">
-      <div className="before:content-['🎉_']">
-        Nextra 4.0 is released.{' '}
-        <Link href="#" className="after:content-['_→']">
-          Read more
-        </Link>
-      </div>
+    <Banner dismissible={false}>
+      🚧 This is WIP documentation for Nextra 4.0
     </Banner>
   )
   const navbar = (

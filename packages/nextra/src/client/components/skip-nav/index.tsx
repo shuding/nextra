@@ -6,4 +6,6 @@ export { SkipNavLink } from './index.client.js'
 
 export const SkipNavContent: FC<Pick<ComponentProps<'div'>, 'id'>> = ({
   id = DEFAULT_ID
-}) => <div id={id} />
+}) => {
+  return <div id={id} />
+}

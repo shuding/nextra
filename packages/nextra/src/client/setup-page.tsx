@@ -1,8 +1,10 @@
+/* should be used on server, and hocs aren't optimized by react-compiler */
+'use no memo'
+
 /*
  * ⚠️ Attention!
  * This file should be never used directly, only in loader.ts
  */
-
 import { useMDXComponents as getMDXComponents } from 'next-mdx-import-source-file'
 import type { ComponentProps, FC } from 'react'
 import { createElement } from 'react'

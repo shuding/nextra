@@ -1,3 +1,6 @@
+// should be used on server
+'use no memo'
+
 /* eslint sort-keys: error */
 import cn from 'clsx'
 import {
@@ -53,7 +56,7 @@ const DEFAULT_COMPONENTS = getNextraMDXComponents({
   h4: H4,
   h5: H5,
   h6: H6,
-  hr: props => <hr className="x:my-8 bordered" {...props} />,
+  hr: props => <hr className="x:my-8 nextra-border" {...props} />,
   li: props => <li className="x:my-2" {...props} />,
   ol: props => (
     <ol

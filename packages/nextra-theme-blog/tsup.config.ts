@@ -1,3 +1,4 @@
+import { reactCompilerPlugin } from 'esbuild-react-compiler-plugin'
 import { defineConfig } from 'tsup'
 import { defaultEntry } from '../nextra-theme-docs/tsup.config'
 import packageJson from './package.json'
@@ -5,11 +6,12 @@ import packageJson from './package.json'
 export default defineConfig([
   {
     name: packageJson.name,
-    entry: [...defaultEntry, '!src/types.ts'],
+    entry: defaultEntry,
     format: 'esm',
     dts: true,
     outExtension: () => ({ js: '.js' }),
-    bundle: false
+    bundle: false,
+    esbuildPlugins: [reactCompilerPlugin(/\.tsx?$/)]
   },
   {
     name: `${packageJson.name}/css`,

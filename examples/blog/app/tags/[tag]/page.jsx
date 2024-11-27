@@ -17,7 +17,7 @@ export default async function TagPage(props) {
   const params = await props.params
   return (
     <>
-      <h1>{generateMetadata({ params }).title}</h1>
+      <h1>{(await generateMetadata({ params })).title}</h1>
       {(await getPosts())
         .filter(post =>
           post.frontMatter.tags.includes(decodeURIComponent(params.tag))

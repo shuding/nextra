@@ -5,7 +5,6 @@ import type { PageMapItem } from 'nextra'
 import { useFSRoute } from 'nextra/hooks'
 import { normalizePages } from 'nextra/normalize-pages'
 import type { FC, ReactNode } from 'react'
-import { useMemo } from 'react'
 
 type NavbarProps = {
   children?: ReactNode
@@ -14,14 +13,10 @@ type NavbarProps = {
 
 export const Navbar: FC<NavbarProps> = ({ children, pageMap }) => {
   const pathname = useFSRoute()
-  const { topLevelNavbarItems } = useMemo(
-    () =>
-      normalizePages({
-        list: pageMap,
-        route: pathname
-      }),
-    [pageMap, pathname]
-  )
+  const { topLevelNavbarItems } = normalizePages({
+    list: pageMap,
+    route: pathname
+  })
   return (
     <header
       className="x:mb-8 x:flex x:items-center x:gap-3 x:justify-end"

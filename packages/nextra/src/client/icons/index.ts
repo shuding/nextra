@@ -1,3 +1,5 @@
+'use no memo'
+
 export { ReactComponent as ArrowRightIcon } from './arrow-right.svg'
 export { ReactComponent as CheckIcon } from './check.svg'
 export { ReactComponent as CopyIcon } from './copy.svg'

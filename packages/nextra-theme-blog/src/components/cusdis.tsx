@@ -17,7 +17,10 @@ export const Comments: FC<{
   useEffect(() => {
     try {
       // update the theme for the cusdis iframe when theme changed
-      window.CUSDIS?.setTheme(resolvedTheme as 'dark' | 'light')
+      if (window.CUSDIS) {
+        // window.CUSDIS? doesn't work with react-compiler
+        window.CUSDIS.setTheme(resolvedTheme as 'dark' | 'light')
+      }
     } catch (error) {
       console.error(error)
     }
@@ -25,10 +28,10 @@ export const Comments: FC<{
 
   if (!appId) {
     console.warn('[nextra/cusdis] `appId` is required')
-    return
+    return null
   }
   if (!mounted) {
-    return
+    return null
   }
 
   return (

@@ -1,3 +1,6 @@
+// TODO: Isn't optimized, due HOC?
+'use no memo'
+
 import cn from 'clsx'
 import type { ComponentProps, FC } from 'react'
 import { HeadingAnchor } from './heading-anchor.client'
@@ -16,7 +19,7 @@ const createHeading = (
               : 'x:font-semibold x:target:animate-[fade-in_1.5s]',
             {
               h1: 'x:mt-2 x:text-4xl',
-              h2: 'x:mt-10 x:border-b x:pb-1 x:text-3xl bordered',
+              h2: 'x:mt-10 x:border-b x:pb-1 x:text-3xl nextra-border',
               h3: 'x:mt-8 x:text-2xl',
               h4: 'x:mt-8 x:text-xl',
               h5: 'x:mt-8 x:text-lg',

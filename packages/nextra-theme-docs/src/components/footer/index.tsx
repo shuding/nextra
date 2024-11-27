@@ -6,7 +6,7 @@ import { Switchers } from './switchers'
 
 export const Footer: FC<ComponentProps<'footer'>> = ({
   className,
-  children = `MIT ${new Date().getFullYear()} © Nextra.`,
+  children,
   ...props
 }) => {
   return (
@@ -17,7 +17,7 @@ export const Footer: FC<ComponentProps<'footer'>> = ({
           <ThemeSwitch />
         </div>
       </Switchers>
-      <hr className="bordered" />
+      <hr className="nextra-border" />
       <footer
         className={cn(
           'x:mx-auto x:flex x:max-w-[90rem] x:justify-center x:py-12 x:text-gray-600 x:dark:text-gray-400 x:md:justify-start',
@@ -26,7 +26,7 @@ export const Footer: FC<ComponentProps<'footer'>> = ({
         )}
         {...props}
       >
-        {children}
+        {children || `MIT ${new Date().getFullYear()} © Nextra.`}
       </footer>
     </div>
   )

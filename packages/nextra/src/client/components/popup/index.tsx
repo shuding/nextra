@@ -1,3 +1,5 @@
+'use no memo'
+
 import { PopoverButton } from '@headlessui/react'
 import type { ComponentProps } from 'react'
 import { Popup as _Popup, PopupPanel } from './index.client.js'

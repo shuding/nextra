@@ -1,3 +1,4 @@
+import { reactCompilerPlugin } from 'esbuild-react-compiler-plugin'
 import { defineConfig } from 'tsup'
 import packageJson from './package.json'
 
@@ -15,7 +16,8 @@ export default defineConfig([
     format: 'esm',
     dts: true,
     outExtension: () => ({ js: '.js' }),
-    bundle: false
+    bundle: false,
+    esbuildPlugins: [reactCompilerPlugin(/\.tsx?$/)]
   },
   {
     name: `${packageJson.name}/css`,

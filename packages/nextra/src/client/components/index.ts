@@ -1,3 +1,5 @@
+'use no memo'
+
 export { Banner } from './banner/index.js'
 export { FileTree } from './file-tree/index.js'
 export { SkipNavContent, SkipNavLink } from './skip-nav/index.js'

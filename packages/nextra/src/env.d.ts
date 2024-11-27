@@ -1,12 +1,3 @@
-declare module 'title' {
-  export default function title(
-    title: string,
-    special?: {
-      special: string[]
-    }
-  )
-}
-
 declare namespace globalThis {
   var pagefind: {
     search: <T>(query: string) => Promise<{
@@ -20,8 +11,7 @@ declare namespace globalThis {
 }
 
 declare module '*.svg' {
-  import type { FC, SVGProps } from 'react'
-  export const ReactComponent: FC<SVGProps<SVGElement>>
+  export { ReactComponent } from './icon.js'
 }
 
 declare module 'next-mdx-import-source-file' {

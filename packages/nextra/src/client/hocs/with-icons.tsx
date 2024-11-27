@@ -1,3 +1,6 @@
+/* should be used on server, and hocs aren't optimized by react-compiler */
+'use no memo'
+
 import path from 'node:path'
 import type { FC, SVGProps } from 'react'
 import {

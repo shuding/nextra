@@ -1,3 +1,5 @@
+'use no memo'
+
 import jsxDevRuntime from 'react/jsx-dev-runtime'
 import jsxRuntime from 'react/jsx-runtime'
 import type { MDXComponents } from './mdx-components.js'

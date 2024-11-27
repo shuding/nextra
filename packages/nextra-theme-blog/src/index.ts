@@ -1,3 +1,5 @@
+'use no memo'
+
 export { useMDXComponents } from './mdx-components'
 export {
   Comments,

@@ -1,3 +1,5 @@
+'use no memo'
+
 import type { Dispatch, SetStateAction } from 'react'
 import { create } from 'zustand'
 

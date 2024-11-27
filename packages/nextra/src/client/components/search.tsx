@@ -11,15 +11,20 @@ import { addBasePath } from 'next/dist/client/add-base-path'
 import NextLink from 'next/link'
 import { useRouter } from 'next/navigation'
 import type { FC, FocusEventHandler, ReactElement, SyntheticEvent } from 'react'
-import {
-  useCallback,
-  useDeferredValue,
-  useEffect,
-  useRef,
-  useState
-} from 'react'
-import { useMounted } from '../hooks/index.js'
+import { useDeferredValue, useEffect, useRef, useState } from 'react'
+import { useMounted } from '../hooks/use-mounted.js'
 import { InformationCircleIcon, SpinnerIcon } from '../icons/index.js'
+
+// Fix React Compiler (BuildHIR::lowerExpression) Handle Import expressions
+export async function importPagefind() {
+  window.pagefind = await import(
+    /* webpackIgnore: true */ addBasePath('/_pagefind/pagefind.js')
+  )
+  await window.pagefind.options({
+    baseUrl: '/'
+    // ... more search options
+  })
+}
 
 type PagefindResult = {
   excerpt: string
@@ -74,56 +79,49 @@ export const Search: FC<SearchProps> = ({
   // defer pagefind results update for prioritizing user input state
   const deferredSearch = useDeferredValue(search)
 
-  const handleSearch = useCallback(async (value: string) => {
-    if (!value) {
-      setResults([])
-      setError('')
-      return
-    }
-
-    if (!window.pagefind) {
-      setIsLoading(true)
-      setError('')
-      try {
-        window.pagefind = await import(
-          /* webpackIgnore: true */ addBasePath('/_pagefind/pagefind.js')
-        )
-        await window.pagefind.options({
-          baseUrl: '/'
-          // ... more search options
-        })
-      } catch (error) {
-        const message =
-          error instanceof Error
-            ? process.env.NODE_ENV !== 'production' &&
-              error.message.includes('Failed to fetch')
-              ? DEV_SEARCH_NOTICE // This error will be tree-shaked in production
-              : `${error.constructor.name}: ${error.message}`
-            : String(error)
-        setError(message)
-        setIsLoading(false)
+  useEffect(() => {
+    const handleSearch = async (value: string) => {
+      if (!value) {
+        setResults([])
+        setError('')
         return
       }
+
+      if (!window.pagefind) {
+        setIsLoading(true)
+        setError('')
+        try {
+          await importPagefind()
+        } catch (error) {
+          const message =
+            error instanceof Error
+              ? process.env.NODE_ENV !== 'production' &&
+                error.message.includes('Failed to fetch')
+                ? DEV_SEARCH_NOTICE // This error will be tree-shaked in production
+                : `${error.constructor.name}: ${error.message}`
+              : String(error)
+          setError(message)
+          setIsLoading(false)
+          return
+        }
+      }
+      const { results } = await window.pagefind.search<PagefindResult>(value)
+      const data = await Promise.all(results.map(o => o.data()))
+
+      setResults(
+        data.map(newData => ({
+          ...newData,
+          sub_results: newData.sub_results.map(r => {
+            const url = r.url.replace(/\.html$/, '').replace(/\.html#/, '#')
+
+            return { ...r, url }
+          })
+        }))
+      )
+      setIsLoading(false)
     }
-    const { results } = await window.pagefind.search<PagefindResult>(value)
-    const data = await Promise.all(results.map(o => o.data()))
-
-    setResults(
-      data.map(newData => ({
-        ...newData,
-        sub_results: newData.sub_results.map(r => {
-          const url = r.url.replace(/\.html$/, '').replace(/\.html#/, '#')
-
-          return { ...r, url }
-        })
-      }))
-    )
-    setIsLoading(false)
-  }, [])
-
-  useEffect(() => {
     handleSearch(deferredSearch)
-  }, [handleSearch, deferredSearch])
+  }, [deferredSearch])
 
   const router = useRouter()
   const [focused, setFocused] = useState(false)
@@ -164,7 +162,7 @@ export const Search: FC<SearchProps> = ({
       className={cn(
         'x:absolute x:my-1.5 x:select-none x:end-1.5',
         'x:h-5 x:rounded x:bg-nextra-bg x:px-1.5 x:font-mono x:text-[11px] x:font-medium x:text-gray-500',
-        'x:border bordered',
+        'x:border nextra-border',
         'x:contrast-more:text-current',
         'x:items-center x:gap-1 x:flex',
         'x:max-sm:hidden not-prose'
@@ -180,30 +178,24 @@ export const Search: FC<SearchProps> = ({
     </kbd>
   )
 
-  const handleFocus = useCallback<FocusEventHandler>(event => {
+  const handleFocus: FocusEventHandler = event => {
     const isFocus = event.type === 'focus'
     setFocused(isFocus)
-  }, [])
+  }
 
-  const handleChange = useCallback(
-    (event: SyntheticEvent<HTMLInputElement>) => {
-      const { value } = event.currentTarget
-      setSearch(value)
-    },
-    []
-  )
+  const handleChange = (event: SyntheticEvent<HTMLInputElement>) => {
+    const { value } = event.currentTarget
+    setSearch(value)
+  }
 
-  const handleSelect = useCallback(
-    (searchResult: PagefindResult | null) => {
-      if (!searchResult) return
-      // Calling before navigation so selector `html:not(:has(*:focus))` in styles.css will work,
-      // and we'll have padding top since input is not focused
-      inputRef.current?.blur()
-      router.push(searchResult.url)
-      setSearch('')
-    },
-    [router]
-  )
+  const handleSelect = (searchResult: PagefindResult | null) => {
+    if (!searchResult) return
+    // Calling before navigation so selector `html:not(:has(*:focus))` in styles.css will work,
+    // and we'll have padding top since input is not focused
+    inputRef.current?.blur()
+    router.push(searchResult.url)
+    setSearch('')
+  }
 
   return (
     <Combobox onChange={handleSelect}>

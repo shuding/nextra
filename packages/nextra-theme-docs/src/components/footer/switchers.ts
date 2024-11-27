@@ -10,5 +10,4 @@ export const Switchers: FC<{ children: ReactNode }> = ({ children }) => {
   if (hideSidebar && (darkMode || i18n.length)) {
     return children
   }
-  return null
 }

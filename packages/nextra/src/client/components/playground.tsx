@@ -28,7 +28,7 @@ export const Playground: FC<
   useEffect(() => {
     async function doCompile() {
       // Importing in useEffect to not increase global bundle size
-      const { compileMdx } = await import('../../server/compile.js')
+      const { compileMdx } = await importCompile()
       try {
         const rawJs = await compileMdx(source)
         setCompiledSource(rawJs)
@@ -69,4 +69,9 @@ export const Playground: FC<
   }
 
   return fallback
+}
+
+// Otherwise react-compiler fails
+function importCompile() {
+  return import('../../server/compile.js')
 }

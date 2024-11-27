@@ -1,3 +1,5 @@
+'use no memo'
+
 export { useActiveAnchor, setActiveSlug } from './active-anchor'
 export { useConfig, ConfigProvider } from './config'
 export { useFocusedRoute, setFocusedRoute } from './focused-route'

@@ -58,7 +58,7 @@ type HeadProps = Partial<z.input<typeof headSchema>> & {
   children?: ReactNode
 }
 
-const _Head: FC<HeadProps> = ({ children, ...props }) => {
+const Head_: FC<HeadProps> = ({ children, ...props }) => {
   const { data, error } = headSchema.safeParse(props)
   if (error) {
     throw fromZodError(error)
@@ -112,7 +112,7 @@ function makePrimaryColor(val: string): string {
   return `hsl(${h + s + l})`
 }
 
-export const Head = Object.assign(_Head, {
+export const Head = Object.assign(Head_, {
   viewport: {
     themeColor: [
       { media: '(prefers-color-scheme: light)', color: '#fff' },

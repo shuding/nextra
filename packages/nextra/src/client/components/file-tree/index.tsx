@@ -1,3 +1,5 @@
+'use no memo'
+
 import type { ComponentProps } from 'react'
 import { File } from './file.js'
 import { Folder } from './folder.js'
