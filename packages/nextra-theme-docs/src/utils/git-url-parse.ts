@@ -1,3 +1,5 @@
+'use no memo'
+
 export function gitUrlParse(url: string) {
   const { href, origin, pathname } = new URL(url)
 

@@ -1,3 +1,5 @@
+'use no memo'
+
 export { Breadcrumb } from './breadcrumb'
 export { Footer } from './footer'
 export { LastUpdated } from './last-updated'

@@ -13,7 +13,7 @@ export const LastUpdated: FC<{
   const pathname = usePathname()
 
   if (!date) {
-    return
+    return null
   }
 
   const dateLocale = i18n.length ? pathname.split('/', 2)[1] : locale

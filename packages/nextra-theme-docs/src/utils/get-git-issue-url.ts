@@ -1,3 +1,5 @@
+'use no memo'
+
 import { gitUrlParse } from './git-url-parse'
 
 export function getGitIssueUrl({
