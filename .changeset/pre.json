@@ -4,7 +4,8 @@
   "initialVersions": {
     "nextra": "3.0.0",
     "nextra-theme-blog": "3.0.0",
-    "nextra-theme-docs": "3.0.0"
+    "nextra-theme-docs": "3.0.0",
+    "esbuild-react-compiler-plugin": "0.0.0"
   },
   "changesets": [
     "afraid-pens-teach",
@@ -95,6 +96,7 @@
     "unlucky-rabbits-press",
     "violet-cobras-tell",
     "violet-plums-tan",
+    "violet-walls-cover",
     "warm-maps-smash",
     "wet-dodos-move",
     "wild-crews-film",
