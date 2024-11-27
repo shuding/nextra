@@ -153,10 +153,7 @@ module.exports = {
       files: ['packages/**'],
       plugins: ['eslint-plugin-react-compiler'],
       rules: {
-        'no-restricted-imports': [
-          'error',
-          REACT_COMPILER_RESTRICT
-        ],
+        'no-restricted-imports': ['error', REACT_COMPILER_RESTRICT],
         'react-compiler/react-compiler': 'error'
       }
     },

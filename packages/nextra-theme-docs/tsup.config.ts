@@ -1,6 +1,6 @@
+import { reactCompilerPlugin } from 'esbuild-react-compiler-plugin'
 import { defineConfig } from 'tsup'
 import packageJson from './package.json'
-import { reactCompilerPlugin } from 'esbuild-react-compiler-plugin'
 
 export const defaultEntry = [
   'src/**/*.{ts,tsx}',

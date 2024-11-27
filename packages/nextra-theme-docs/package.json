@@ -39,11 +39,11 @@
     "zustand": "^5.0.1"
   },
   "devDependencies": {
-    "esbuild-react-compiler-plugin": "workspace:*",
     "@tailwindcss/postcss": "^4.0.0-beta.2",
     "@testing-library/react": "^16.0.0",
     "@types/react": "^18.2.23",
     "@vitejs/plugin-react": "^4.1.0",
+    "esbuild-react-compiler-plugin": "workspace:*",
     "jsdom": "^25.0.0",
     "next": "^15.0.2",
     "nextra": "workspace:*",
