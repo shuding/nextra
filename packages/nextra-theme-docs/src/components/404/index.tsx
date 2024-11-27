@@ -13,7 +13,7 @@ type NotFoundPageProps = {
 export const NotFoundPage: FC<NotFoundPageProps> = ({
   content = 'Submit an issue about broken link',
   labels = 'bug',
-  children = <H1>404: Page Not Found</H1>,
+  children,
   className
 }) => {
   return (
@@ -23,7 +23,7 @@ export const NotFoundPage: FC<NotFoundPageProps> = ({
         className
       )}
     >
-      {children}
+      {children || <H1>404: Page Not Found</H1>}
       <NotFoundLink labels={labels}>{content}</NotFoundLink>
     </div>
   )

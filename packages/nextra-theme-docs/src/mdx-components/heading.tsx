@@ -1,3 +1,6 @@
+// TODO: Isn't optimized, due HOC?
+'use no memo'
+
 import cn from 'clsx'
 import type { ComponentProps, FC } from 'react'
 import { HeadingAnchor } from './heading-anchor.client'

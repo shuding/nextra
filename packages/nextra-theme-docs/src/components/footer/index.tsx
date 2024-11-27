@@ -6,7 +6,7 @@ import { Switchers } from './switchers'
 
 export const Footer: FC<ComponentProps<'footer'>> = ({
   className,
-  children = `MIT ${new Date().getFullYear()} © Nextra.`,
+  children,
   ...props
 }) => {
   return (
@@ -26,7 +26,7 @@ export const Footer: FC<ComponentProps<'footer'>> = ({
         )}
         {...props}
       >
-        {children}
+        {children || `MIT ${new Date().getFullYear()} © Nextra.`}
       </footer>
     </div>
   )
