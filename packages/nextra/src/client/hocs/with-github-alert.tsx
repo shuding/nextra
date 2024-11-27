@@ -1,4 +1,4 @@
-// should be used on server
+/* should be used on server, and hocs aren't optimized by react-compiler */
 'use no memo'
 
 import type { ComponentProps, FC, ReactNode } from 'react'

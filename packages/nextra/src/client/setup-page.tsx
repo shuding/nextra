@@ -1,3 +1,6 @@
+/* should be used on server, and hocs aren't optimized by react-compiler */
+'use no memo'
+
 /*
  * ⚠️ Attention!
  * This file should be never used directly, only in loader.ts
