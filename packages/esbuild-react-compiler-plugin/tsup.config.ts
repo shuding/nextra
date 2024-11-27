@@ -1,10 +1,9 @@
 import { defineConfig } from 'tsup'
-import { defaultEntry } from '../nextra-theme-docs/tsup.config.js'
 import packageJson from './package.json'
 
 export default defineConfig({
   name: packageJson.name,
-  entry: defaultEntry,
+  entry: ['src/**/*.ts'],
   format: 'esm',
   dts: true,
   splitting: process.env.NODE_ENV === 'production',
