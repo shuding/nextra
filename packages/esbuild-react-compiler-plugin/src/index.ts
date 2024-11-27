@@ -1,6 +1,5 @@
 import fs from 'node:fs/promises'
 import path from 'node:path'
-// @ts-expect-error
 import reactCompilerLoader from 'react-compiler-webpack/dist/react-compiler-loader.js'
 import type { Options } from 'tsup'
 
@@ -23,44 +22,40 @@ export const reactCompilerPlugin = (
         contents: string
         loader: 'ts' | 'tsx'
       }>((resolve, reject) => {
+        function callback(error: Error | null, result?: string) {
+          if (error) {
+            reject(error)
+          } else {
+            const loader = path.extname(args.path).slice(1) as 'ts' | 'tsx'
+            const relativePath = path.relative(process.cwd(), args.path)
+
+            if (
+              /^import \{ c as _c } from "react-compiler-runtime";/m.test(
+                result!
+              )
+            ) {
+              console.info(
+                '🚀 File',
+                relativePath,
+                'was optimized with react-compiler'
+              )
+            } else if (!/^'use no memo'/m.test(result!)) {
+              console.error(
+                '❌ File',
+                relativePath,
+                'was not optimized with react-compiler'
+              )
+            }
+
+            resolve({
+              contents: result!,
+              loader // Mark the file as a JSX file
+            })
+          }
+        }
         reactCompilerLoader.call(
           {
-            async: () =>
-              function callback(error: Error | null, result?: string) {
-                if (error) {
-                  reject(error)
-                } else {
-                  const loader = path.extname(args.path).slice(1) as
-                    | 'ts'
-                    | 'tsx'
-                  const relativePath = path.relative(process.cwd(), args.path)
-
-                  if (
-                    /^import \{ c as _c } from "react-compiler-runtime";/m.test(
-                      result!
-                    )
-                  ) {
-                    console.info(
-                      '🚀 File',
-                      relativePath,
-                      'was optimized with react-compiler'
-                    )
-                  } else if (!/^'use no memo'/m.test(result!)) {
-                    console.error(
-                      '❌ File',
-                      relativePath,
-                      'was not optimized with react-compiler'
-                    )
-                    // console.log(result)
-                    // process.exit(1)
-                  }
-
-                  resolve({
-                    contents: result!,
-                    loader // Mark the file as a JSX file
-                  })
-                }
-              },
+            async: () => callback,
             getOptions: () => reactCompilerConfig,
             resourcePath: args.path
           },

@@ -17,9 +17,3 @@ declare module '*.svg' {
 declare module 'next-mdx-import-source-file' {
   export { useMDXComponents } from 'nextra/mdx-components'
 }
-
-declare module 'react-compiler-webpack/dist/react-compiler-loader.js' {
-  export default function reactCompilerLoader(
-    source: string | Buffer
-  ): Promise<void>
-}
