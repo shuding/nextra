@@ -1,3 +1,5 @@
+'use no memo'
+
 import { notFound } from 'next/navigation'
 import { getRouteToFilepath } from '../server/page-map/get.js'
 import { logger } from '../server/utils.js'

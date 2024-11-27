@@ -40,20 +40,22 @@ export const SkipNavLink: FC = ({
   className,
   id = DEFAULT_ID,
   children = DEFAULT_LABEL
-}: Pick<ButtonProps, 'className' | 'id' | 'children'>) => (
-  <Button
-    as="a"
-    href={`#${id}`}
-    className={({ focus }) =>
-      cn(
-        'nextra-skip-nav',
-        focus
-          ? 'x:nextra-focus x:fixed x:z-50 x:my-3 x:mx-4 x:rounded-lg x:px-3 x:py-2 x:text-sm x:font-bold x:bg-nextra-bg x:border x:border-current'
-          : 'x:sr-only',
-        className
-      )
-    }
-  >
-    {children}
-  </Button>
-)
+}: Pick<ButtonProps, 'className' | 'id' | 'children'>) => {
+  return (
+    <Button
+      as="a"
+      href={`#${id}`}
+      className={({ focus }) =>
+        cn(
+          'nextra-skip-nav',
+          focus
+            ? 'x:nextra-focus x:fixed x:z-50 x:my-3 x:mx-4 x:rounded-lg x:px-3 x:py-2 x:text-sm x:font-bold x:bg-nextra-bg x:border x:border-current'
+            : 'x:sr-only',
+          className
+        )
+      }
+    >
+      {children}
+    </Button>
+  )
+}

@@ -1,13 +1,14 @@
-import cn from 'clsx'
-import type { ComponentProps, FC } from 'react'
-import { ArrowRightIcon } from '../icons/index.js'
+import cn from 'clsx';
+import type { ComponentProps, FC } from 'react';
+import { ArrowRightIcon } from '../icons/index.js';
+
 
 export const Summary: FC<ComponentProps<'summary'>> = ({
   children,
   className,
   ...props
-}) => (
-  <summary
+}) => {
+  return <summary
     className={cn(
       'x:focus-visible:nextra-focus',
       'x:flex x:items-center x:cursor-pointer x:p-1 x:transition-colors x:hover:bg-gray-100 x:dark:hover:bg-neutral-800',
@@ -30,4 +31,4 @@ export const Summary: FC<ComponentProps<'summary'>> = ({
       strokeWidth="3"
     />
   </summary>
-)
+}

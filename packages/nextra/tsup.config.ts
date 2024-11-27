@@ -27,7 +27,7 @@ const reactCompilerPlugin: NonNullable<Options['esbuildPlugins']>[number] = {
   setup(build) {
     build.onLoad({ filter: CLIENT_FILE_RE }, async args => {
       // Read the file content
-      const code = await fs.readFile(args.path, 'utf8')
+      const code = await fs.readFile(args.path)
       return new Promise<{
         contents: string
         loader: 'ts' | 'tsx'
@@ -42,6 +42,8 @@ const reactCompilerPlugin: NonNullable<Options['esbuildPlugins']>[number] = {
                   const loader = path.extname(args.path).slice(1) as
                     | 'ts'
                     | 'tsx'
+                  const relativePath = path.relative(CWD, args.path)
+
                   if (
                     result!.includes(
                       'import { c as _c } from "react-compiler-runtime";'
@@ -49,9 +51,17 @@ const reactCompilerPlugin: NonNullable<Options['esbuildPlugins']>[number] = {
                   ) {
                     logger.info(
                       '🚀 File',
-                      path.relative(CWD, args.path),
+                      relativePath,
                       'was optimized with react-compiler'
                     )
+                  } else if (!result!.match(/^'use no memo'/m)) {
+                    logger.error(
+                      '❌ File',
+                      relativePath,
+                      'was not optimized with react-compiler'
+                    )
+                    // console.log(result)
+                    // process.exit(1)
                   }
 
                   resolve({

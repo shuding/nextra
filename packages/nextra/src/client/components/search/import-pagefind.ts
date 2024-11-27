@@ -1,3 +1,5 @@
+'use no memo'
+
 import { addBasePath } from 'next/dist/client/add-base-path'
 
 // Fix React Compiler (BuildHIR::lowerExpression) Handle Import expressions (82:82)
