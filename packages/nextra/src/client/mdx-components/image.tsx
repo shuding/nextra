@@ -1,7 +1,6 @@
 import type { ImageProps } from 'next/image'
 import NextImage from 'next/image'
 import type { FC } from 'react'
-import { createElement } from 'react'
 
 export const Image: FC<ImageProps> = props => {
   if (
@@ -18,5 +17,7 @@ This is Turbopack bug, which will not occurs on production (since Webpack is use
       placeholder: 'empty'
     }
   }
-  return createElement(typeof props.src === 'object' ? NextImage : 'img', props)
+  const ComponentToUse = typeof props.src === 'object' ? NextImage : 'img'
+  // @ts-expect-error -- createElement isn't optimized by react compiler
+  return <ComponentToUse {...props} />
 }
