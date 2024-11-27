@@ -23,36 +23,33 @@ export const reactCompilerPlugin = (
         loader: 'ts' | 'tsx'
       }>((resolve, reject) => {
         function callback(error: Error | null, result?: string) {
-          if (error) {
+          if (!result) {
             reject(error)
-          } else {
-            const loader = path.extname(args.path).slice(1) as 'ts' | 'tsx'
-            const relativePath = path.relative(process.cwd(), args.path)
-
-            if (
-              /^import \{ c as _c } from "react-compiler-runtime";/m.test(
-                result!
-              )
-            ) {
-              console.info(
-                '🚀 File',
-                relativePath,
-                'was optimized with react-compiler'
-              )
-            } else if (!/^'use no memo'/m.test(result!)) {
-              console.error(
-                '❌ File',
-                relativePath,
-                'was not optimized with react-compiler'
-              )
-            }
-
-            resolve({
-              contents: result!,
-              loader // Mark the file as a JSX file
-            })
+            return
           }
+          // Mark the file as a ts/tsx file
+          const loader = path.extname(args.path).slice(1) as 'ts' | 'tsx'
+          const relativePath = path.relative(process.cwd(), args.path)
+
+          if (
+            /^import \{ c as _c } from "react-compiler-runtime";/m.test(result)
+          ) {
+            console.info(
+              '🚀 File',
+              relativePath,
+              'was optimized with react-compiler'
+            )
+          } else if (!/^'use no memo'/m.test(result)) {
+            console.error(
+              '❌ File',
+              relativePath,
+              'was not optimized with react-compiler'
+            )
+          }
+
+          resolve({ contents: result, loader })
         }
+
         reactCompilerLoader.call(
           {
             async: () => callback,

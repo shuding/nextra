@@ -15,7 +15,7 @@ import { useDeferredValue, useEffect, useRef, useState } from 'react'
 import { useMounted } from '../hooks/use-mounted.js'
 import { InformationCircleIcon, SpinnerIcon } from '../icons/index.js'
 
-// Fix React Compiler (BuildHIR::lowerExpression) Handle Import expressions (82:82)
+// Fix React Compiler (BuildHIR::lowerExpression) Handle Import expressions
 export async function importPagefind() {
   window.pagefind = await import(
     /* webpackIgnore: true */ addBasePath('/_pagefind/pagefind.js')
