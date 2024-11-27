@@ -1,11 +1,11 @@
 import fs from 'node:fs/promises'
 import path from 'node:path'
 import svgr from 'esbuild-plugin-svgr'
+import { reactCompilerPlugin } from 'esbuild-react-compiler-plugin'
 import { defineConfig } from 'tsup'
 import { defaultEntry } from '../nextra-theme-docs/tsup.config.js'
 import packageJson from './package.json'
 import { CWD, IS_PRODUCTION } from './src/server/constants.js'
-import { reactCompilerPlugin } from 'esbuild-react-compiler-plugin'
 
 const SEP = path.sep === '/' ? '/' : '\\\\'
 

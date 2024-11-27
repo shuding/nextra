@@ -34,10 +34,10 @@
     "next-view-transitions": "^0.3.0"
   },
   "devDependencies": {
-    "esbuild-react-compiler-plugin": "workspace:*",
     "@tailwindcss/postcss": "^4.0.0-beta.2",
     "@tailwindcss/typography": "^0.5.15",
     "@types/react": "^18.2.23",
+    "esbuild-react-compiler-plugin": "workspace:*",
     "next": "^15.0.2",
     "nextra": "workspace:*",
     "postcss": "^8.4.33",

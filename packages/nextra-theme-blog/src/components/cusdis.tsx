@@ -17,7 +17,8 @@ export const Comments: FC<{
   useEffect(() => {
     try {
       // update the theme for the cusdis iframe when theme changed
-      if (window.CUSDIS) { // window.CUSDIS? doesn't work with react-compiler
+      if (window.CUSDIS) {
+        // window.CUSDIS? doesn't work with react-compiler
         window.CUSDIS.setTheme(resolvedTheme as 'dark' | 'light')
       }
     } catch (error) {

@@ -8,5 +8,5 @@ export default defineConfig({
   format: 'esm',
   dts: true,
   splitting: process.env.NODE_ENV === 'production',
-  bundle: false,
+  bundle: false
 })

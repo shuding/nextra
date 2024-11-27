@@ -1,8 +1,8 @@
-import type { Options } from 'tsup'
 import fs from 'node:fs/promises'
 import path from 'node:path'
 // @ts-expect-error
 import reactCompilerLoader from 'react-compiler-webpack/dist/react-compiler-loader.js'
+import type { Options } from 'tsup'
 
 const reactCompilerConfig = {
   sources(_filename: string) {
@@ -11,8 +11,9 @@ const reactCompilerConfig = {
   target: '18'
 }
 
-
-export const reactCompilerPlugin= (filter: RegExp): NonNullable<Options['esbuildPlugins']>[number] => ({
+export const reactCompilerPlugin = (
+  filter: RegExp
+): NonNullable<Options['esbuildPlugins']>[number] => ({
   name: 'react-compiler',
   setup(build) {
     build.onLoad({ filter }, async args => {

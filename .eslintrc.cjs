@@ -229,7 +229,7 @@ module.exports = {
         ...TAILWIND_CONFIG.rules,
         'import/extensions': ['error', 'ignorePackages'],
         // False positive due Tailwind CSS v4
-        'tailwindcss/no-custom-classname': 'off',
+        'tailwindcss/no-custom-classname': 'off'
       }
     },
     // ⚙️ Docs

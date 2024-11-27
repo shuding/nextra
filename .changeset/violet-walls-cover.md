@@ -2,4 +2,4 @@
 'nextra': minor
 ---
 
-compile `nextra/components` and `nextra/hooks` source code with react-compiler
+compile `nextra/components`, `nextra/hooks` and `nextra-theme-blog` source code with react-compiler
