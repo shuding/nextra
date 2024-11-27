@@ -45,16 +45,14 @@ const reactCompilerPlugin: NonNullable<Options['esbuildPlugins']>[number] = {
                   const relativePath = path.relative(CWD, args.path)
 
                   if (
-                    result!.includes(
-                      'import { c as _c } from "react-compiler-runtime";'
-                    )
+                    /^import \{ c as _c } from "react-compiler-runtime";/m.test(result!)
                   ) {
                     logger.info(
                       '🚀 File',
                       relativePath,
                       'was optimized with react-compiler'
                     )
-                  } else if (!result!.match(/^'use no memo'/m)) {
+                  } else if (!/^'use no memo'/m.test(result!)) {
                     logger.error(
                       '❌ File',
                       relativePath,

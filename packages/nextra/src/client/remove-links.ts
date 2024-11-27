@@ -1,3 +1,5 @@
+'use no memo' // should be used on server
+
 import type { ReactElement } from 'react'
 import { Children, cloneElement } from 'react'
 

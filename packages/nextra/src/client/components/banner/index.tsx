@@ -11,7 +11,7 @@ export const Banner: FC<{
   storageKey?: string
 }> = ({ children, dismissible = true, storageKey = 'nextra-banner' }) => {
   if (!children) {
-    return
+    return null
   }
   const hideBannerScript = `try{document.querySelector('.${CLASS_NAME}').classList.toggle('x:hidden',localStorage.getItem(${JSON.stringify(storageKey)}))}catch(e){}`
 

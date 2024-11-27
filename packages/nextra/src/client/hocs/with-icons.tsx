@@ -1,3 +1,5 @@
+'use no memo' // should be used on server
+
 import path from 'node:path'
 import type { FC, SVGProps } from 'react'
 import {
