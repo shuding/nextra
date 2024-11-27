@@ -73,5 +73,5 @@ export const Playground: FC<
 
 // Otherwise react-compiler fails
 function importCompile() {
-  return import('../../server/compile')
+  return import('../../server/compile.js')
 }
