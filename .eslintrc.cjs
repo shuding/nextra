@@ -10,6 +10,11 @@ const TAILWIND_CONFIG = {
   }
 }
 
+const REACT_COMPILER_RESTRICT = {
+  name: 'react',
+  importNames: ['memo', 'useCallback', 'useMemo', 'forwardRef']
+}
+
 /** @type {import('eslint').Linter.Config} */
 module.exports = {
   root: true,
@@ -144,6 +149,17 @@ module.exports = {
         ]
       }
     },
+    {
+      files: ['packages/**'],
+      plugins: ['eslint-plugin-react-compiler'],
+      rules: {
+        'no-restricted-imports': [
+          'error',
+          REACT_COMPILER_RESTRICT
+        ],
+        'react-compiler/react-compiler': 'error'
+      }
+    },
     // ⚙️ nextra-theme-docs
     {
       ...TAILWIND_CONFIG,
@@ -166,7 +182,8 @@ module.exports = {
         ...TAILWIND_CONFIG.rules,
         'no-restricted-imports': [
           'error',
-          { name: 'next/link', message: 'Use `<Anchor>` instead' }
+          { name: 'next/link', message: 'Use `<Anchor>` instead' },
+          REACT_COMPILER_RESTRICT
         ],
         // False positive due Tailwind CSS v4
         'tailwindcss/no-custom-classname': 'off'
@@ -193,20 +210,6 @@ module.exports = {
         ],
         // False positive due Tailwind CSS v4
         'tailwindcss/no-custom-classname': 'off'
-      }
-    },
-    {
-      files: ['packages/nextra/**', 'packages/nextra-theme-blog/**'],
-      plugins: ['eslint-plugin-react-compiler'],
-      rules: {
-        'no-restricted-imports': [
-          'error',
-          {
-            name: 'react',
-            importNames: ['memo', 'useCallback', 'useMemo', 'forwardRef']
-          }
-        ],
-        'react-compiler/react-compiler': 'error'
       }
     },
     // ⚙️ nextra

@@ -1,4 +1,10 @@
+/* eslint-disable react-compiler/react-compiler, no-restricted-imports */
+
 'use client'
+
+// TODO: enable in the future
+// This is a big component and something could be broken after enabling react-compiler
+'use no memo'
 
 import cn from 'clsx'
 import { usePathname } from 'next/navigation'

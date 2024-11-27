@@ -487,6 +487,9 @@ importers:
       '@vitejs/plugin-react':
         specifier: ^4.1.0
         version: 4.3.3(vite@5.4.11)
+      esbuild-react-compiler-plugin:
+        specifier: workspace:*
+        version: link:../esbuild-react-compiler-plugin
       jsdom:
         specifier: ^25.0.0
         version: 25.0.1
