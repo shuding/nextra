@@ -45,7 +45,9 @@ const reactCompilerPlugin: NonNullable<Options['esbuildPlugins']>[number] = {
                   const relativePath = path.relative(CWD, args.path)
 
                   if (
-                    /^import \{ c as _c } from "react-compiler-runtime";/m.test(result!)
+                    /^import \{ c as _c } from "react-compiler-runtime";/m.test(
+                      result!
+                    )
                   ) {
                     logger.info(
                       '🚀 File',
