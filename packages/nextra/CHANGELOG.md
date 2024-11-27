@@ -1,5 +1,12 @@
 # nextra
 
+## 4.0.0-app-router.31
+
+### Minor Changes
+
+- 386b620: compile `nextra/components`, `nextra/hooks`, `nextra-theme-docs` and
+  `nextra-theme-blog` source code with react-compiler
+
 ## 4.0.0-app-router.30
 
 ### Patch Changes
