@@ -237,9 +237,6 @@ importers:
 
   packages/esbuild-react-compiler-plugin:
     dependencies:
-      react-compiler-runtime:
-        specifier: 19.0.0-beta-df7b47d-20241124
-        version: 19.0.0-beta-df7b47d-20241124(react@18.3.1)
       react-compiler-webpack:
         specifier: 0.1.2
         version: 0.1.2(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)
@@ -307,6 +304,9 @@ importers:
       negotiator:
         specifier: ^1.0.0
         version: 1.0.0
+      react-compiler-runtime:
+        specifier: 19.0.0-beta-df7b47d-20241124
+        version: 19.0.0-beta-df7b47d-20241124(react@18.3.1)
       react-dom:
         specifier: '>=18'
         version: 18.3.1(react@18.3.1)
@@ -413,6 +413,9 @@ importers:
       next-view-transitions:
         specifier: ^0.3.0
         version: 0.3.2(next@15.0.3)(react-dom@18.3.1)(react@18.3.1)
+      react-compiler-runtime:
+        specifier: 19.0.0-beta-df7b47d-20241124
+        version: 19.0.0-beta-df7b47d-20241124(react@18.3.1)
       react-dom:
         specifier: '>=18'
         version: 18.3.1(react@18.3.1)
@@ -459,6 +462,9 @@ importers:
       next-themes:
         specifier: ^0.4.0
         version: 0.4.3(react-dom@18.3.1)(react@18.3.1)
+      react-compiler-runtime:
+        specifier: 19.0.0-beta-df7b47d-20241124
+        version: 19.0.0-beta-df7b47d-20241124(react@18.3.1)
       react-dom:
         specifier: '>=18'
         version: 18.3.1(react@18.3.1)

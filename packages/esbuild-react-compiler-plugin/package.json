@@ -19,7 +19,6 @@
     "dev": "tsup --watch"
   },
   "dependencies": {
-    "react-compiler-runtime": "19.0.0-beta-df7b47d-20241124",
     "react-compiler-webpack": "0.1.2"
   },
   "devDependencies": {
