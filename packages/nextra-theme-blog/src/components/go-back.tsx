@@ -10,7 +10,7 @@ export const GoBack: FC = () => {
   const segments = usePathname().split('/')
 
   const isNestedPage = segments.length > 2
-  if (!isNestedPage) return
+  if (!isNestedPage) return null
   return (
     <Button
       onClick={router.back}

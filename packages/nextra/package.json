@@ -108,6 +108,7 @@
     "zod-validation-error": "^3.0.0"
   },
   "devDependencies": {
+    "esbuild-react-compiler-plugin": "workspace:*",
     "@svgr/babel-plugin-remove-jsx-attribute": "^8.0.0",
     "@testing-library/react": "^16.0.0",
     "@types/estree": "^1.0.5",
@@ -120,8 +121,6 @@
     "esbuild-plugin-svgr": "^3.0.0",
     "next": "^15.0.2",
     "react": "18.3.1",
-    "react-compiler-runtime": "19.0.0-beta-df7b47d-20241124",
-    "react-compiler-webpack": "0.1.2",
     "unified": "^11.0.5",
     "vitest": "^2.0.4"
   },
