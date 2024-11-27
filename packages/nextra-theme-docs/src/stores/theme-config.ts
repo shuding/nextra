@@ -1,4 +1,5 @@
 'use client'
+'use no memo'
 
 import type { ComponentProps } from 'react'
 import { createContext, createElement, useContext } from 'react'
