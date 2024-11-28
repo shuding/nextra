@@ -1,5 +1,5 @@
+import prettierPluginSortImport from '@ianvs/prettier-plugin-sort-imports'
 import prettierPluginPkg from 'prettier-plugin-pkg'
-import prettierPluginSortImport from '@ianvs/prettier-plugin-sort-imports/lib/src/index.js'
 import * as prettierPluginTailwindCss from 'prettier-plugin-tailwindcss'
 
 export default {
