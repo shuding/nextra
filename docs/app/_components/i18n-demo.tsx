@@ -29,14 +29,14 @@ export const I18n: FC = () => {
         ))}
       </div>
       <ArrowRightIcon width="1.2em" />
-      <div className="overflow-auto rounded-md bg-white py-1 text-sm shadow-lg ring-1 ring-black/5 dark:bg-neutral-800 dark:ring-white/20">
+      <div className="overflow-auto rounded-md bg-white py-1 text-sm ring-1 shadow-lg ring-black/5 dark:bg-neutral-800 dark:ring-white/20">
         {LANGUAGES.map(({ lang, name }) => (
           <div
             key={lang}
             onPointerOver={() => setActive(lang)}
             // eslint-disable-next-line tailwindcss/no-custom-classname -- TODO: configure eslint-plugin-tailwindcss to import nextra-theme-docs styles so below classes could be removed
             className={cn(
-              'relative cursor-default select-none whitespace-nowrap px-4 py-1.5',
+              'relative cursor-default px-4 py-1.5 whitespace-nowrap select-none',
               active === lang
                 ? 'x:text-primary-600 x:bg-primary-50 x:dark:bg-primary-500/10'
                 : 'text-gray-800 dark:text-gray-100'
