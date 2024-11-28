@@ -14,7 +14,6 @@ import eslintPluginTsSortKeys from 'eslint-plugin-typescript-sort-keys'
 import eslintPluginUnicorn from 'eslint-plugin-unicorn'
 import tseslint from 'typescript-eslint'
 
-/* eslint-env node */
 const TAILWIND_CONFIG = {
   extends: [eslintPluginTailwindCss.configs['flat/recommended']],
   rules: {
@@ -26,19 +25,14 @@ const TAILWIND_CONFIG = {
   }
 }
 
-const gitignorePath = path.resolve('.gitignore')
-
 const REACT_COMPILER_RESTRICT = {
   name: 'react',
   importNames: ['memo', 'useCallback', 'useMemo', 'forwardRef']
 }
 
 export default tseslint.config(
-  includeIgnoreFile(gitignorePath),
-  // root: true,
-  // reportUnusedDisableDirectives: true,
-  // ignorePatterns: ['next-env.d.ts', 'generated-page-map.ts'],
-  // overrides: [
+  includeIgnoreFile(path.resolve('.gitignore')),
+  { ignores: ['**/generated-page-map.ts', '**/next-env.d.ts'] },
   // Rules for all files
   {
     files: ['**/*.{js,jsx,cjs,mjs,ts,tsx,cts,mts}'],
