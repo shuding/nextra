@@ -33,8 +33,7 @@ const REACT_COMPILER_RESTRICT = {
   importNames: ['memo', 'useCallback', 'useMemo', 'forwardRef']
 }
 
-
-export default [
+export default tseslint.config(
   includeIgnoreFile(gitignorePath),
   // root: true,
   // reportUnusedDisableDirectives: true,
@@ -42,14 +41,13 @@ export default [
   // overrides: [
   // Rules for all files
   {
-    files: '**/*.{js,jsx,cjs,mjs,ts,tsx,cts,mts}',
-    extends: [
-      'eslint:recommended',
-      'plugin:@typescript-eslint/recommended',
-      'plugin:import/typescript',
-      'prettier'
-    ],
-    plugins: ['import', 'unicorn', 'sonarjs'],
+    files: ['**/*.{js,jsx,cjs,mjs,ts,tsx,cts,mts}'],
+    extends: [js.configs.recommended, tseslint.configs.recommended, eslintConfigPrettier],
+    plugins: {
+      import: eslintPluginImport,
+      unicorn: eslintPluginUnicorn,
+      sonarjs: eslintPluginSonarJs
+    },
     rules: {
       'no-extra-boolean-cast': ['error', { enforceForInnerExpressions: true }],
       'prefer-object-has-own': 'error',
@@ -102,14 +100,18 @@ export default [
   },
   // Rules for React files
   {
-    files: '{packages,examples,docs}/**',
+    files: ['{packages,examples,docs}/**'],
     extends: [
-      'plugin:react/recommended',
-      'plugin:react/jsx-runtime',
-      'plugin:react-hooks/recommended',
-      'plugin:@next/next/recommended'
+      eslintPluginReact.configs.flat.recommended,
+      eslintPluginReact.configs.flat['jsx-runtime']
     ],
+    plugins: {
+      'react-hooks': eslintPluginReactHooks,
+      '@next/next': eslintPluginNext
+    },
     rules: {
+      ...eslintPluginReactHooks.configs.recommended.rules,
+      ...eslintPluginNext.configs.recommended.rules,
       'react/prop-types': 'off',
       'react/no-unknown-property': ['error', { ignore: ['jsx'] }],
       'react-hooks/exhaustive-deps': 'error',
@@ -144,7 +146,8 @@ export default [
   {
     files: ['**/*.{ts,tsx,cts,mts}'],
     plugins: {
-      deprecation: eslintPluginDeprecation
+      deprecation: eslintPluginDeprecation,
+      'typescript-sort-keys': eslintPluginTsSortKeys
     },
     // TODO: fix errors
     // 'plugin:@typescript-eslint/recommended-requiring-type-checking'
@@ -180,8 +183,7 @@ export default [
   // ⚙️ nextra-theme-docs
   {
     ...TAILWIND_CONFIG,
-    files: 'packages/nextra-theme-docs/**',
-    plugins: ['typescript-sort-keys'],
+    files: ['packages/nextra-theme-docs/**'],
     settings: {
       tailwindcss: {
         callees: ['cn'],
