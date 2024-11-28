@@ -11,7 +11,7 @@
     "dev:theme-docs": "turbo run dev --filter=example-docs... --filter=!docs",
     "dev:theme-i18n": "turbo run dev --filter=swr-site... --filter=!docs",
     "dev:website": "turbo run dev --filter=docs...",
-    "lint": "ESLINT_USE_FLAT_CONFIG=true eslint --cache --max-warnings 0 .",
+    "lint": "ESLINT_USE_FLAT_CONFIG=true eslint --cache --max-warnings 0 --flag unstable_ts_config --config packages/eslint-config/src/index.ts .",
     "lint:prettier": "prettier --cache --check --ignore-path .gitignore --ignore-path .prettierignore .",
     "postinstall": "pnpm build",
     "prettier": "pnpm lint:prettier --write",

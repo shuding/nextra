@@ -1,18 +1,25 @@
 import path from 'node:path'
 import { includeIgnoreFile } from '@eslint/compat'
 import js from '@eslint/js'
+// @ts-expect-error -- no types
 import eslintPluginNext from '@next/eslint-plugin-next'
+// @ts-expect-error -- no types
 import eslintConfigPrettier from 'eslint-config-prettier'
 import eslintPluginDeprecation from 'eslint-plugin-deprecation'
+// @ts-expect-error -- no types
 import eslintPluginImport from 'eslint-plugin-import'
 import eslintPluginReact from 'eslint-plugin-react'
-import eslintPluginReactCompiler from 'eslint-plugin-react-compiler'
+// @ts-expect-error -- no types
+import * as eslintPluginReactCompiler from 'eslint-plugin-react-compiler'
+// @ts-expect-error -- no types
 import eslintPluginReactHooks from 'eslint-plugin-react-hooks'
 import eslintPluginSonarJs from 'eslint-plugin-sonarjs'
+// @ts-expect-error -- no types
 import eslintPluginTailwindCss from 'eslint-plugin-tailwindcss'
+// @ts-expect-error -- no types
 import eslintPluginTsSortKeys from 'eslint-plugin-typescript-sort-keys'
 import eslintPluginUnicorn from 'eslint-plugin-unicorn'
-import tseslint from 'typescript-eslint'
+import tseslint, { Config } from 'typescript-eslint'
 
 const TAILWIND_CONFIG = {
   extends: [eslintPluginTailwindCss.configs['flat/recommended']],
@@ -30,7 +37,7 @@ const REACT_COMPILER_RESTRICT = {
   importNames: ['memo', 'useCallback', 'useMemo', 'forwardRef']
 }
 
-export default tseslint.config(
+const config: Config = tseslint.config(
   includeIgnoreFile(path.resolve('.gitignore')),
   { ignores: ['**/generated-page-map.ts', '**/next-env.d.ts'] },
   // Rules for all files
@@ -323,3 +330,5 @@ export default tseslint.config(
     }
   }
 )
+
+export default config
