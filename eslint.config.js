@@ -36,7 +36,11 @@ export default tseslint.config(
   // Rules for all files
   {
     files: ['**/*.{js,jsx,cjs,mjs,ts,tsx,cts,mts}'],
-    extends: [js.configs.recommended, tseslint.configs.recommended, eslintConfigPrettier],
+    extends: [
+      js.configs.recommended,
+      tseslint.configs.recommended,
+      eslintConfigPrettier
+    ],
     plugins: {
       import: eslintPluginImport,
       unicorn: eslintPluginUnicorn,
