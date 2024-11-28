@@ -11,7 +11,7 @@
     "dev:theme-docs": "turbo run dev --filter=example-docs... --filter=!docs",
     "dev:theme-i18n": "turbo run dev --filter=swr-site... --filter=!docs",
     "dev:website": "turbo run dev --filter=docs...",
-    "lint": "ESLINT_USE_FLAT_CONFIG=false eslint --cache --ignore-path .gitignore --max-warnings 0 .",
+    "lint": "ESLINT_USE_FLAT_CONFIG=true eslint --cache --max-warnings 0 .",
     "lint:prettier": "prettier --cache --check --ignore-path .gitignore --ignore-path .prettierignore .",
     "postinstall": "pnpm build",
     "prettier": "pnpm lint:prettier --write",
@@ -22,6 +22,7 @@
   },
   "devDependencies": {
     "@changesets/cli": "2.27.9",
+    "@eslint/compat": "1.2.3",
     "@ianvs/prettier-plugin-sort-imports": "4.4.0",
     "@next/eslint-plugin-next": "15.0.3",
     "@rollup/plugin-alias": "^5.1.1",
