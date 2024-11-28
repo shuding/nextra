@@ -1,6 +1,9 @@
 {
   "name": "@nextra/eslint-config",
   "version": "0.0.0",
+  "scripts": {
+    "types:check": "tsc --noEmit"
+  },
   "dependencies": {
     "@eslint/compat": "1.2.3",
     "@eslint/js": "9.15.0",
@@ -19,8 +22,5 @@
   },
   "devDependencies": {
     "@types/node": "^22.0.0"
-  },
-  "scripts": {
-    "types:check": "tsc --noEmit"
   }
 }

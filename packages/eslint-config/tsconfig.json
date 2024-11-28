@@ -10,7 +10,7 @@
     "strictNullChecks": true,
     "lib": ["esnext", "dom"],
     "moduleResolution": "node",
-    "resolveJsonModule": true,
+    "resolveJsonModule": true
   },
   "exclude": ["dist"]
 }
