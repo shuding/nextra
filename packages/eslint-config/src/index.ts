@@ -19,7 +19,8 @@ import eslintPluginTailwindCss from 'eslint-plugin-tailwindcss'
 // @ts-expect-error -- no types
 import eslintPluginTsSortKeys from 'eslint-plugin-typescript-sort-keys'
 import eslintPluginUnicorn from 'eslint-plugin-unicorn'
-import tseslint, { Config } from 'typescript-eslint'
+import tseslint from 'typescript-eslint'
+import type { Config } from 'typescript-eslint'
 
 const TAILWIND_CONFIG = {
   extends: [eslintPluginTailwindCss.configs['flat/recommended']],
@@ -107,7 +108,9 @@ const config: Config = tseslint.config(
   {
     files: ['{packages,examples,docs}/**'],
     extends: [
+      // @ts-expect-error
       eslintPluginReact.configs.flat.recommended,
+      // @ts-expect-error
       eslintPluginReact.configs.flat['jsx-runtime']
     ],
     plugins: {
