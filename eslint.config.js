@@ -1,9 +1,22 @@
-import path from "node:path";
-import { includeIgnoreFile } from "@eslint/compat";
+import path from 'node:path'
+import { includeIgnoreFile } from '@eslint/compat'
+import js from '@eslint/js'
+import eslintPluginNext from '@next/eslint-plugin-next'
+import eslintConfigPrettier from 'eslint-config-prettier'
+import eslintPluginDeprecation from 'eslint-plugin-deprecation'
+import eslintPluginImport from 'eslint-plugin-import'
+import eslintPluginReact from 'eslint-plugin-react'
+import eslintPluginReactCompiler from 'eslint-plugin-react-compiler'
+import eslintPluginReactHooks from 'eslint-plugin-react-hooks'
+import eslintPluginSonarJs from 'eslint-plugin-sonarjs'
+import eslintPluginTailwindCss from 'eslint-plugin-tailwindcss'
+import eslintPluginTsSortKeys from 'eslint-plugin-typescript-sort-keys'
+import eslintPluginUnicorn from 'eslint-plugin-unicorn'
+import tseslint from 'typescript-eslint'
 
 /* eslint-env node */
 const TAILWIND_CONFIG = {
-  extends: ['plugin:tailwindcss/recommended'],
+  extends: [eslintPluginTailwindCss.configs['flat/recommended']],
   rules: {
     'tailwindcss/classnames-order': 'off', // conflicts with prettier-plugin-tailwindcss
     'tailwindcss/enforces-negative-arbitrary-values': 'error',
@@ -13,7 +26,7 @@ const TAILWIND_CONFIG = {
   }
 }
 
-const gitignorePath = path.resolve(".gitignore");
+const gitignorePath = path.resolve('.gitignore')
 
 const REACT_COMPILER_RESTRICT = {
   name: 'react',
@@ -129,16 +142,19 @@ export default [
   },
   // Rules for TypeScript files
   {
-    files: '**/*.{ts,tsx,cts,mts}',
-    extends: [
-      'plugin:deprecation/recommended'
-      // TODO: fix errors
-      // 'plugin:@typescript-eslint/recommended-requiring-type-checking'
-    ],
-    parserOptions: {
-      projectService: true
+    files: ['**/*.{ts,tsx,cts,mts}'],
+    plugins: {
+      deprecation: eslintPluginDeprecation
+    },
+    // TODO: fix errors
+    // 'plugin:@typescript-eslint/recommended-requiring-type-checking'
+    languageOptions: {
+      parserOptions: {
+        projectService: true
+      }
     },
     rules: {
+      ...eslintPluginDeprecation.configs.recommended.rules,
       '@typescript-eslint/await-thenable': 'error',
       '@typescript-eslint/no-unnecessary-type-assertion': 'error',
       '@typescript-eslint/consistent-type-imports': 'error',
@@ -153,7 +169,9 @@ export default [
   },
   {
     files: ['packages/**'],
-    plugins: ['eslint-plugin-react-compiler'],
+    plugins: {
+      'react-compiler': eslintPluginReactCompiler
+    },
     rules: {
       'no-restricted-imports': ['error', REACT_COMPILER_RESTRICT],
       'react-compiler/react-compiler': 'error'
@@ -191,7 +209,7 @@ export default [
   // ⚙️ nextra-theme-blog
   {
     ...TAILWIND_CONFIG,
-    files: 'packages/nextra-theme-blog/**',
+    files: ['packages/nextra-theme-blog/**'],
     rules: {
       ...TAILWIND_CONFIG.rules,
       'no-restricted-imports': [
@@ -214,7 +232,7 @@ export default [
   // ⚙️ nextra
   {
     ...TAILWIND_CONFIG,
-    files: 'packages/nextra/**',
+    files: ['packages/nextra/**'],
     settings: {
       tailwindcss: {
         callees: ['cn'],
@@ -237,7 +255,7 @@ export default [
   // ⚙️ Docs
   {
     ...TAILWIND_CONFIG,
-    files: 'docs/**',
+    files: ['docs/**'],
     settings: {
       tailwindcss: {
         callees: ['cn'],
@@ -269,7 +287,7 @@ export default [
   // ⚙️ SWR-site example
   {
     ...TAILWIND_CONFIG,
-    files: 'examples/swr-site/**',
+    files: ['examples/swr-site/**'],
     settings: {
       tailwindcss: {
         cssFiles: [
@@ -286,14 +304,14 @@ export default [
   },
   // ⚙️ blog example
   {
-    files: 'examples/blog/**',
+    files: ['examples/blog/**'],
     settings: {
       next: { rootDir: 'examples/blog' }
     }
   },
   // ⚙️ docs example
   {
-    files: 'examples/docs/**',
+    files: ['examples/docs/**'],
     settings: {
       next: { rootDir: 'examples/docs' }
     }
@@ -304,4 +322,4 @@ export default [
       'no-var': 'off'
     }
   }
-]
+)
