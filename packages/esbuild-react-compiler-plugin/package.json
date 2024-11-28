@@ -16,7 +16,8 @@
   "types": "./dist/index.d.ts",
   "scripts": {
     "build": "tsup",
-    "dev": "tsup --watch"
+    "dev": "tsup --watch",
+    "types:check": "tsc --noEmit"
   },
   "dependencies": {
     "react-compiler-webpack": "0.1.2"

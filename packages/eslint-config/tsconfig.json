@@ -9,8 +9,8 @@
     "skipLibCheck": true,
     "strictNullChecks": true,
     "lib": ["esnext", "dom"],
-    "moduleResolution": "bundler",
-    "resolveJsonModule": true
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
   },
   "exclude": ["dist"]
 }

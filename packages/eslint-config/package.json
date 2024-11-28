@@ -19,5 +19,8 @@
   },
   "devDependencies": {
     "@types/node": "^22.0.0"
+  },
+  "scripts": {
+    "types:check": "tsc --noEmit"
   }
 }
