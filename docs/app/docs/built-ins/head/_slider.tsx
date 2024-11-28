@@ -30,7 +30,7 @@ export const Slider: FC = ({
         min="0"
         max={max}
       />
-      <label className="text-sm text-gray-500 w-14" />
+      <label className="w-14 text-sm text-gray-500" />
     </div>
   )
 }
@@ -66,7 +66,7 @@ export const BackgroundColor: FC = () => {
           )
         }}
       />
-      <label className="text-sm text-gray-500 w-20" />
+      <label className="w-20 text-sm text-gray-500" />
     </div>
   )
 }

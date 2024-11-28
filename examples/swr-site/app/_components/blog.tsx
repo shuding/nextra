@@ -12,7 +12,7 @@ export const Blog: FC<{ lang: string }> = async ({ lang }) => {
     return (
       <div key={page.route} className="mt-12">
         <h3 className="text-2xl font-semibold">{title}</h3>
-        <p className="opacity-80 my-6 leading-7">
+        <p className="my-6 leading-7 opacity-80">
           {description}{' '}
           <Link href={page.route} className="after:content-['_→']">
             Read more

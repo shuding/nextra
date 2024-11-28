@@ -59,7 +59,7 @@ Z --> G
   }, []) // eslint-disable-line react-hooks/exhaustive-deps -- only on mount
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-2 mt-6">
+    <div className="mt-6 grid grid-cols-1 gap-2 lg:grid-cols-2">
       <Pre
         data-filename="MDX"
         icon={<MdxIcon height="16" className="shrink-0" />}

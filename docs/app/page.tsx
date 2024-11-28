@@ -65,7 +65,7 @@ const IndexPage: FC = () => {
                 Links and images are <br className="show-on-mobile" />
                 always <span className="font-light">optimized</span>
               </h3>
-              <p className="text-start mb-8">
+              <p className="mb-8 text-start">
                 Nextra automatically converts Markdown links and images to use{' '}
                 <Link href="https://nextjs.org/docs/routing/introduction#linking-between-pages">
                   Next.js Link
@@ -86,7 +86,7 @@ const IndexPage: FC = () => {
                 </div>
                 <ArrowRightIcon
                   width="1.2em"
-                  className="text-neutral-400 rotate-90 my-6 mx-auto"
+                  className="mx-auto my-6 rotate-90 text-neutral-400"
                 />
                 <div className={styles.optimization}>
                   <div style={{ fontSize: '.9rem' }} className="leading-8">
@@ -125,7 +125,7 @@ const IndexPage: FC = () => {
             <Feature
               index={4}
               centered
-              className="text-white bg-[url(/assets/gradient-bg.jpeg)] bg-center bg-cover flex flex-col items-center justify-center"
+              className="flex flex-col items-center justify-center bg-[url(/assets/gradient-bg.jpeg)] bg-cover bg-center text-white"
               href="/docs/guide/markdown"
             >
               <MdxIcon className="w-4/6 [filter:drop-shadow(0_2px_10px_rgba(0,0,0,.1))]" />
@@ -228,13 +228,13 @@ const IndexPage: FC = () => {
                 </Link>
                 .
               </p>
-              <div className="absolute size-full inset-0 max-sm:hidden bg-[linear-gradient(to_right,white_250px,_transparent)] dark:bg-[linear-gradient(to_right,#202020_250px,_transparent)] z-1" />
+              <div className="absolute inset-0 z-1 size-full bg-[linear-gradient(to_right,white_250px,_transparent)] max-sm:hidden dark:bg-[linear-gradient(to_right,#202020_250px,_transparent)]" />
               <video
                 autoPlay
                 loop
                 muted
                 playsInline
-                className="x:focus-visible:nextra-focus dark:hidden block"
+                className="x:focus-visible:nextra-focus block dark:hidden"
               >
                 <source src="/assets/search.mp4" type="video/mp4" />
               </video>
@@ -243,7 +243,7 @@ const IndexPage: FC = () => {
                 loop
                 muted
                 playsInline
-                className="x:focus-visible:nextra-focus dark:block hidden -translate-x-4"
+                className="x:focus-visible:nextra-focus hidden -translate-x-4 dark:block"
               >
                 <source src="/assets/search-dark.mp4" type="video/mp4" />
               </video>

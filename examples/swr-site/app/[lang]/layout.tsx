@@ -67,7 +67,7 @@ export default async function RootLayout({ children, params }) {
         <>
           <SwrIcon height="12" />
           <span
-            className="max-md:hidden select-none font-extrabold ms-2"
+            className="ms-2 font-extrabold select-none max-md:hidden"
             title={`SWR: ${dictionary.logo.title}`}
           >
             SWR

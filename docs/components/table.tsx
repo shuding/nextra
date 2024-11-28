@@ -5,7 +5,7 @@ export const Table: FC<{ children: ReactNode }> = ({ children }) => {
   const { table: Table, tr: Tr, th: Th } = useMDXComponents()
 
   return (
-    <Table className="w-full !table text-sm">
+    <Table className="!table w-full text-sm">
       <thead>
         <Tr>
           <Th align="left">Option</Th>

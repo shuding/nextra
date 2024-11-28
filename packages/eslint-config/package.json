@@ -1,0 +1,27 @@
+{
+  "name": "@nextra/eslint-config",
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "types:check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@eslint/compat": "1.2.3",
+    "@eslint/js": "9.15.0",
+    "@next/eslint-plugin-next": "15.0.3",
+    "eslint-config-prettier": "9.1.0",
+    "eslint-plugin-deprecation": "3.0.0",
+    "eslint-plugin-import-x": "4.4.3",
+    "eslint-plugin-react": "7.37.2",
+    "eslint-plugin-react-compiler": "19.0.0-beta-df7b47d-20241124",
+    "eslint-plugin-react-hooks": "5.0.0",
+    "eslint-plugin-sonarjs": "^2.0.4",
+    "eslint-plugin-tailwindcss": "3.17.3",
+    "eslint-plugin-typescript-sort-keys": "3.3.0",
+    "eslint-plugin-unicorn": "56.0.1",
+    "typescript-eslint": "8.16.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0"
+  }
+}
