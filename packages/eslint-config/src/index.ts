@@ -6,8 +6,7 @@ import eslintPluginNext from '@next/eslint-plugin-next'
 // @ts-expect-error -- no types
 import eslintConfigPrettier from 'eslint-config-prettier'
 import eslintPluginDeprecation from 'eslint-plugin-deprecation'
-// @ts-expect-error -- no types
-import eslintPluginImport from 'eslint-plugin-import'
+import eslintPluginImport from 'eslint-plugin-import-x'
 import eslintPluginReact from 'eslint-plugin-react'
 // @ts-expect-error -- no types
 import * as eslintPluginReactCompiler from 'eslint-plugin-react-compiler'
