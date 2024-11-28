@@ -19,7 +19,7 @@ export const DynamicCode: FC<{ children: ReactNode }> = ({ children }) => {
       <div ref={ref} className="mt-6">
         {children}
       </div>
-      <div className="flex mt-3 gap-3 justify-center text-sm">
+      <div className="mt-3 flex justify-center gap-3 text-sm">
         <Button
           variant="outline"
           onClick={() => {

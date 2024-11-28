@@ -1,6 +1,7 @@
 {
   "name": "@nextra/eslint-config",
   "version": "0.0.0",
+  "type": "module",
   "scripts": {
     "types:check": "tsc --noEmit"
   },

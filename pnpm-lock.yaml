@@ -35,9 +35,6 @@ importers:
       '@changesets/cli':
         specifier: 2.27.9
         version: 2.27.9
-      '@ianvs/prettier-plugin-sort-imports':
-        specifier: 4.4.0
-        version: 4.4.0(prettier@3.3.3)
       '@rollup/plugin-alias':
         specifier: ^5.1.1
         version: 5.1.1
@@ -47,12 +44,6 @@ importers:
       prettier:
         specifier: 3.3.3
         version: 3.3.3
-      prettier-plugin-pkg:
-        specifier: 0.18.1
-        version: 0.18.1(prettier@3.3.3)
-      prettier-plugin-tailwindcss:
-        specifier: 0.6.9
-        version: 0.6.9(@ianvs/prettier-plugin-sort-imports@4.4.0)(prettier@3.3.3)
       rimraf:
         specifier: 6.0.1
         version: 6.0.1
@@ -527,6 +518,18 @@ importers:
       vitest:
         specifier: ^2.0.3
         version: 2.1.5(jsdom@25.0.1)
+
+  packages/prettier-config:
+    dependencies:
+      '@ianvs/prettier-plugin-sort-imports':
+        specifier: 4.4.0
+        version: 4.4.0(prettier@3.3.3)
+      prettier-plugin-pkg:
+        specifier: 0.18.1
+        version: 0.18.1(prettier@3.3.3)
+      prettier-plugin-tailwindcss:
+        specifier: 0.6.9
+        version: 0.6.9(@ianvs/prettier-plugin-sort-imports@4.4.0)(prettier@3.3.3)
 
 packages:
 
@@ -3707,7 +3710,7 @@ packages:
       semver: 7.6.3
     transitivePeerDependencies:
       - supports-color
-    dev: true
+    dev: false
 
   /@iconify/types@2.0.0:
     resolution: {integrity: sha512-+wluvCrRhXrhyOmRDJ3q8mux9JkKy5SJ/v8ol2tu4FVjyYvtEzkc/3pK15ET6RKg4b4w4BmTk1+gsCUhf21Ykg==}
@@ -10679,7 +10682,7 @@ packages:
       prettier: ^3.0.3
     dependencies:
       prettier: 3.3.3
-    dev: true
+    dev: false
 
   /prettier-plugin-tailwindcss@0.6.9(@ianvs/prettier-plugin-sort-imports@4.4.0)(prettier@3.3.3):
     resolution: {integrity: sha512-r0i3uhaZAXYP0At5xGfJH876W3HHGHDp+LCRUJrs57PBeQ6mYHMwr25KH8NPX44F2yGTvdnH7OqCshlQx183Eg==}
@@ -10738,7 +10741,7 @@ packages:
     dependencies:
       '@ianvs/prettier-plugin-sort-imports': 4.4.0(prettier@3.3.3)
       prettier: 3.3.3
-    dev: true
+    dev: false
 
   /prettier@2.8.8:
     resolution: {integrity: sha512-tdN8qQGvNjw4CHbY+XXk0JgCXn9QiF21a55rBe5LJAU+kDyC4WQn4+awm2Xfk2lQMk5fKup9XgzTZtGkjBdP9Q==}
@@ -10750,7 +10753,6 @@ packages:
     resolution: {integrity: sha512-i2tDNA0O5IrMO757lfrdQZCc2jPNDVntV0m/+4whiDfWaTKfMNgR7Qz0NAeGz/nRqF4m5/6CLzbP4/liHt12Ew==}
     engines: {node: '>=14'}
     hasBin: true
-    dev: true
 
   /pretty-format@27.5.1:
     resolution: {integrity: sha512-Qb1gy5OrP5+zDf2Bvnzdl3jsTf1qXVMazbvCoKhtKqVs4/YK4ozX4gKQJJVyNe+cajNPn0KoC0MC3FUmaHWEmQ==}
