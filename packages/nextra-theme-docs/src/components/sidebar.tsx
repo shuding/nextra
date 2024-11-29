@@ -37,7 +37,7 @@ import {
 import { LocaleSwitch } from './locale-switch'
 import { ThemeSwitch } from './theme-switch'
 
-const TreeState: Record<string, boolean> = Object.create(null)
+const TreeState: Record<string, boolean | void> = Object.create(null)
 
 const classes = {
   link: cn(

@@ -116,6 +116,7 @@ export const rehypeBetterReactMathjax: Plugin<
       hasMathJax = true
     })
 
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- fixme
     if (!hasMathJax) return
 
     const mdxjsEsmNodes = []
