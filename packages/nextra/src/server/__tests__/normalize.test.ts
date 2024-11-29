@@ -335,9 +335,9 @@ describe('normalize-page', () => {
       route: '/docs/bar'
     })
     const { docsDirectories } = normalizedResult
-    expect(docsDirectories[0].name).toBe('_')
-    expect(docsDirectories[1].route).toBe('/docs/bar')
-    expect(docsDirectories[2].route).toBe('/foo')
+    expect(docsDirectories[0]!.name).toBe('_')
+    expect(docsDirectories[1]!.route).toBe('/docs/bar')
+    expect(docsDirectories[2]!.route).toBe('/foo')
   })
 
   // https://github.com/shuding/nextra/issues/3581
