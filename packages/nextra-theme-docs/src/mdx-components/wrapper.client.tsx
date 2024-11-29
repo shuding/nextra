@@ -15,7 +15,7 @@ export const ClientWrapper: MDXWrapper = ({ toc, children, metadata }) => {
   const themeConfig = useThemeConfig()
 
   const date =
-    themeContext.timestamp && themeConfig.lastUpdated && metadata.timestamp
+    themeContext.timestamp && metadata.timestamp
 
   // We can't update store in server component so doing it in client component
   useEffect(() => {

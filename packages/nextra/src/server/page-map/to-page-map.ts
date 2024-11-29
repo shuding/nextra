@@ -8,6 +8,7 @@ interface NestedMap {
 type StringMap = Record<string, string>
 
 const createNested = (prevValue: NestedMap, currVal: string) =>
+  // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- value can be `undefined`
   (prevValue[currVal] ||= {})
 
 const APP_DIR_SUFFIX_RE = /^(src\/)?app\//

@@ -7,7 +7,7 @@ declare namespace globalThis {
       }[]
     }>
     options: (opts: Record<string, unknown>) => Promise<void>
-  }
+  } | undefined
 }
 
 declare module '*.svg' {

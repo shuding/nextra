@@ -105,7 +105,7 @@ export const Search: FC<SearchProps> = ({
           return
         }
       }
-      const { results } = await window.pagefind.search<PagefindResult>(value)
+      const { results } = await window.pagefind!.search<PagefindResult>(value)
       const data = await Promise.all(results.map(o => o.data()))
 
       setResults(
@@ -131,12 +131,13 @@ export const Search: FC<SearchProps> = ({
   useEffect(() => {
     function handleKeyDown(event: globalThis.KeyboardEvent) {
       const input = inputRef.current
-      const activeElement = document.activeElement as HTMLElement
+      const { activeElement } = document;
       const tagName = activeElement?.tagName.toLowerCase()
       if (
         !input ||
         !tagName ||
         INPUTS.has(tagName) ||
+        // @ts-expect-error -- fixme
         activeElement?.isContentEditable
       )
         return
