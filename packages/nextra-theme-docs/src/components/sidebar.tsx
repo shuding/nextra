@@ -99,19 +99,20 @@ const Folder: FC<FolderProps> = ({ item, anchors, onFocus, level }) => {
 
   const [, rerender] = useState<object>()
 
-  const handleClick: MouseEventHandler = useCallback(event => {
-    const el = event.currentTarget
-    const isClickOnIcon =
-      el /* will be always <a> or <button> */ !==
-      event.target /* can be <svg> or <path> */
-    if (isClickOnIcon) {
-      event.preventDefault()
-    }
-    const isOpen = el.parentElement!.classList.contains('open')
-    const route = el.getAttribute('href') || el.getAttribute('data-href') || ''
-    TreeState[route] = !isOpen
-    rerender({})
-  }, [])
+  const handleClick: MouseEventHandler<HTMLAnchorElement | HTMLButtonElement> =
+    useCallback(event => {
+      const el = event.currentTarget
+      const isClickOnIcon =
+        el /* will be always <a> or <button> */ !==
+        event.target /* can be <svg> or <path> */
+      if (isClickOnIcon) {
+        event.preventDefault()
+      }
+      const isOpen = el.parentElement!.classList.contains('open')
+      const route = el.getAttribute('href') || el.dataset.href || ''
+      TreeState[route] = !isOpen
+      rerender({})
+    }, [])
 
   useEffect(() => {
     function updateTreeState() {
@@ -265,11 +266,9 @@ interface MenuProps {
   level: number
 }
 
-const handleFocus: FocusEventHandler = event => {
+const handleFocus: FocusEventHandler<HTMLAnchorElement> = event => {
   const route =
-    event.target.getAttribute('href') ||
-    event.target.getAttribute('data-href') ||
-    ''
+    event.target.getAttribute('href') || event.target.dataset.href || ''
   setFocusedRoute(route)
 }
 
