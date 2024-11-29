@@ -141,8 +141,8 @@ const Folder: FC<FolderProps> = ({ item, anchors, onFocus, level }) => {
     const routes = Object.fromEntries(
       (menu.children || []).map(route => [route.name, route])
     )
-    // @ts-expect-error eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- fixme
-    item.children = Object.entries(menu.items || {}).map(([key, item]) => {
+    // @ts-expect-error
+    item.children = Object.entries(menu.items || {}).map(([key, item]) => { // eslint-disable-line @typescript-eslint/no-unnecessary-condition -- fixme
       return {
         ...(routes[key] || { name: key /* for React key prop */ }),
         ...(item as object)

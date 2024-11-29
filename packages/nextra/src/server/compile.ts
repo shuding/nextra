@@ -39,7 +39,7 @@ type Processor = ReturnType<typeof createProcessor>
 
 const cachedCompilerForFormat: Record<
   `${NonNullable<ProcessorOptions['format']>}:${boolean}`,
-  Processor
+  Processor | void
 > = Object.create(null)
 
 type MdxOptions = NextraConfig['mdxOptions'] &
@@ -111,7 +111,7 @@ export async function compileMdx(
   const compiler =
     !useCachedCompiler || isRemoteContent
       ? createCompiler()
-      : (cachedCompilerForFormat[`${format}:${isPageImport}`] ??=
+      : (cachedCompilerForFormat[`${format}:${isPageImport}`] ||=
           createCompiler())
   const processor = compiler()
 
