@@ -11,7 +11,8 @@
     "jsx": "react-jsx",
     "moduleResolution": "bundler",
     "lib": ["ESNext", "DOM"],
-    "types": ["vitest/globals"]
+    "types": ["vitest/globals"],
+    "noUncheckedIndexedAccess": true
   },
   "exclude": ["dist"]
 }

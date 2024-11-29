@@ -9,7 +9,7 @@ const dictionaries: Dictionaries = {
   ru: () => import('./ru')
 }
 
-export async function getDictionary(locale: Locale): Promise<Dictionary> {
+export async function getDictionary(locale: string): Promise<Dictionary> {
   const { default: dictionary } = await (
     dictionaries[locale] || dictionaries.en
   )()
@@ -18,12 +18,5 @@ export async function getDictionary(locale: Locale): Promise<Dictionary> {
 }
 
 export function getDirection(locale: Locale): 'ltr' | 'rtl' {
-  switch (locale) {
-    case 'es':
-      return 'rtl'
-    case 'en':
-    case 'ru':
-    default:
-      return 'ltr'
-  }
+  return locale === 'es' ? 'rtl' : 'ltr'
 }

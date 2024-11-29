@@ -13,7 +13,7 @@ const darkLightSchema = z
   .transform(v => (typeof v === 'number' ? { dark: v, light: v } : v))
 
 function hexToRgb(hex: `#${string}`): string {
-  const bigint = parseInt(hex.slice(1), 16)
+  const bigint = Number.parseInt(hex.slice(1), 16)
   const r = (bigint >> 16) & 255
   const g = (bigint >> 8) & 255
   const b = bigint & 255
@@ -30,9 +30,9 @@ const colorSchema = z
     if (value.startsWith('#')) {
       return hexToRgb(value as `#${string}`)
     }
-    const groups = value.match(/^rgb\((?<rgb>.*?)\)$/)?.groups
-    if (groups) {
-      return groups.rgb.replaceAll(' ', '')
+    const rgb = value.match(/^rgb\((?<rgb>.*?)\)$/)?.groups!.rgb
+    if (rgb) {
+      return rgb.replaceAll(' ', '')
     }
     return value
   })

@@ -75,7 +75,7 @@ type FolderProps = {
 
 const Folder: FC<FolderProps> = ({ item, anchors, onFocus, level }) => {
   const routeOriginal = useFSRoute()
-  const [route] = routeOriginal.split('#', 1)
+  const route = routeOriginal.split('#', 1)[0]!
   const hasRoute = !!item.route // for item.type === 'menu' will be ''
   const active = hasRoute && [route, route + '/'].includes(item.route + '/')
   const activeRouteInside =
@@ -99,19 +99,20 @@ const Folder: FC<FolderProps> = ({ item, anchors, onFocus, level }) => {
 
   const [, rerender] = useState<object>()
 
-  const handleClick: MouseEventHandler = useCallback(event => {
-    const el = event.currentTarget
-    const isClickOnIcon =
-      el /* will be always <a> or <button> */ !==
-      event.target /* can be <svg> or <path> */
-    if (isClickOnIcon) {
-      event.preventDefault()
-    }
-    const isOpen = el.parentElement!.classList.contains('open')
-    const route = el.getAttribute('href') || el.getAttribute('data-href') || ''
-    TreeState[route] = !isOpen
-    rerender({})
-  }, [])
+  const handleClick: MouseEventHandler<HTMLAnchorElement | HTMLButtonElement> =
+    useCallback(event => {
+      const el = event.currentTarget
+      const isClickOnIcon =
+        el /* will be always <a> or <button> */ !==
+        event.target /* can be <svg> or <path> */
+      if (isClickOnIcon) {
+        event.preventDefault()
+      }
+      const isOpen = el.parentElement!.classList.contains('open')
+      const route = el.getAttribute('href') || el.dataset.href || ''
+      TreeState[route] = !isOpen
+      rerender({})
+    }, [])
 
   useEffect(() => {
     function updateTreeState() {
@@ -140,12 +141,14 @@ const Folder: FC<FolderProps> = ({ item, anchors, onFocus, level }) => {
     const routes = Object.fromEntries(
       (menu.children || []).map(route => [route.name, route])
     )
-    item.children = Object.entries(menu.items || {}).map(([key, item]) => {
-      return {
-        ...(routes[key] || { name: key /* for React key prop */ }),
-        ...(item as object)
-      }
-    })
+    // @ts-expect-error
+    item.children = Object.entries(menu.items || {}) // eslint-disable-line @typescript-eslint/no-unnecessary-condition -- fixme
+      .map(([key, item]) => {
+        return {
+          ...(routes[key] || { name: key /* for React key prop */ }),
+          ...(item as object)
+        }
+      })
   }
 
   const isLink = 'frontMatter' in item
@@ -265,11 +268,9 @@ interface MenuProps {
   level: number
 }
 
-const handleFocus: FocusEventHandler = event => {
+const handleFocus: FocusEventHandler<HTMLAnchorElement> = event => {
   const route =
-    event.target.getAttribute('href') ||
-    event.target.getAttribute('data-href') ||
-    ''
+    event.target.getAttribute('href') || event.target.dataset.href || ''
   setFocusedRoute(route)
 }
 

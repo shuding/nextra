@@ -36,7 +36,7 @@ export async function compileMetadata(
     ],
     recmaPlugins: [
       () => (ast: Program) => {
-        const [importReact] = ast.body
+        const importReact = ast.body[0]! // always exist
 
         ast.body = ast.body.filter(
           node =>

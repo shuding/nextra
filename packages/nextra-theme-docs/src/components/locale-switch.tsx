@@ -7,7 +7,7 @@ import { GlobeIcon } from 'nextra/icons'
 import type { FC } from 'react'
 import { useThemeConfig } from '../stores'
 
-const ONE_YEAR = 365 * 24 * 60 * 60 * 1_000
+const ONE_YEAR = 365 * 24 * 60 * 60 * 1000
 
 interface LocaleSwitchProps {
   lite?: boolean
@@ -29,7 +29,7 @@ export const LocaleSwitch: FC<LocaleSwitchProps> = ({ lite, className }) => {
         document.cookie = `NEXT_LOCALE=${lang}; expires=${date.toUTCString()}; path=/`
         location.href = addBasePath(pathname.replace(`/${locale}`, `/${lang}`))
       }}
-      value={locale}
+      value={locale!}
       selectedOption={
         <span className="x:flex x:items-center x:gap-2">
           <GlobeIcon height="12" />

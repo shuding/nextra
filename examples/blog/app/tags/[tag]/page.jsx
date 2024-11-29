@@ -15,10 +15,12 @@ export async function generateStaticParams() {
 
 export default async function TagPage(props) {
   const params = await props.params
+  const { title } = await generateMetadata({ params })
+  const posts = await getPosts()
   return (
     <>
-      <h1>{(await generateMetadata({ params })).title}</h1>
-      {(await getPosts())
+      <h1>{title}</h1>
+      {posts
         .filter(post =>
           post.frontMatter.tags.includes(decodeURIComponent(params.tag))
         )

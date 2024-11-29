@@ -23,10 +23,6 @@ export const CopyToClipboard: FC<ComponentProps<'button'>> = props => {
     ComponentProps<'button'>['onClick']
   > = async event => {
     setCopied(true)
-    if (!navigator.clipboard) {
-      console.error('Access to clipboard rejected!')
-      return
-    }
     const container = event.currentTarget.parentNode!.parentNode!
     const content = container.querySelector('pre code')?.textContent || ''
     try {

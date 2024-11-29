@@ -7,7 +7,9 @@ export const metadata = {
 }
 
 export default async function PostsPage() {
-  const allTags = (await getTags()).reduce((acc, curr) => {
+  const tags = await getTags()
+  const posts = await getPosts()
+  const allTags = tags.reduce((acc, curr) => {
     acc[curr] ??= 0
     acc[curr] += 1
     return acc
@@ -26,7 +28,7 @@ export default async function PostsPage() {
           </Link>
         ))}
       </div>
-      {(await getPosts()).map(post => (
+      {posts.map(post => (
         <PostCard key={post.route} post={post} />
       ))}
     </div>

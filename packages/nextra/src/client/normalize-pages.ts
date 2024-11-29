@@ -78,6 +78,7 @@ type DocsItem = (MdxFile | FolderWithoutChildren) & {
 function findFirstRoute(items: DocsItem[]): string | undefined {
   for (const item of items) {
     if (item.route) return item.route
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- fixme
     if (item.children) {
       const route = findFirstRoute(item.children)
       if (route) return route
@@ -118,10 +119,10 @@ export function normalizePages({
   const flatDocsDirectories: DocsItem[] = []
   // Page directories
   const topLevelNavbarItems: (PageItem | MenuItem)[] = []
-
-  const meta = 'data' in list[0] ? (list[0].data as MetaType) : {}
+  const firstItem = list[0]! // always exists
+  const meta = 'data' in firstItem ? (firstItem.data as MetaType) : {}
   // Normalize items based on files and _meta.json.
-  const items = ('data' in list[0] ? list.slice(1) : list) as (
+  const items = ('data' in firstItem ? list.slice(1) : list) as (
     | (Folder & { frontMatter?: FrontMatter })
     | MdxFile
   )[]
@@ -209,6 +210,7 @@ export function normalizePages({
     if (normalizedChildren) {
       // If the active item is in its children
       if (
+        // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- fixme
         normalizedChildren.activeIndex !== undefined &&
         normalizedChildren.activeType !== undefined
       ) {
@@ -293,6 +295,7 @@ export function normalizePages({
 
     if (type === 'doc' && display === 'children') {
       // Hide the directory itself and treat all its children as pages
+      // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- fixme
       if (docsItem.children) {
         // @ts-expect-error -- fixme
         directories.push(...docsItem.children)

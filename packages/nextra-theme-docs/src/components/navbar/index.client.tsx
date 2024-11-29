@@ -66,6 +66,7 @@ const NavbarMenu: FC<{
         anchor={{ to: 'top end', gap: 10, padding: 16 }}
       >
         {Object.entries(
+          // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- fixme
           (menu.items as Record<string, { title: string; href?: string }>) || {}
         ).map(([key, item]) => (
           <_MenuItem

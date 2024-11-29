@@ -17,7 +17,7 @@ export function isExportNode(
   varName: string
 ): node is MdxjsEsm {
   if (node.type !== 'mdxjsEsm') return false
-  const [n] = node.data!.estree!.body
+  const n = node.data!.estree!.body[0]!
 
   if (n.type !== 'ExportNamedDeclaration') return false
 

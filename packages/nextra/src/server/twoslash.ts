@@ -52,12 +52,14 @@ function renderMarkdownInline(
     context === 'tag:param' ? md.replace(/^(?<link>[\w$-]+)/, '`$1` ') : md
 
   const children = renderMarkdown.call(this, text)
+  const [firstChild] = children
   if (
     children.length === 1 &&
-    children[0].type === 'element' &&
-    children[0].tagName === 'p'
+    firstChild &&
+    firstChild.type === 'element' &&
+    firstChild.tagName === 'p'
   )
-    return children[0].children
+    return firstChild.children
   return children
 }
 

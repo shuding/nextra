@@ -45,6 +45,7 @@ export const reactCompilerPlugin = (
               relativePath,
               'was not optimized with react-compiler'
             )
+            console.log(result)
           }
 
           resolve({ contents: result, loader })

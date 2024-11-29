@@ -25,6 +25,7 @@ export async function fetchFilePathsFromGitHub({
       '❌ GitHub API rate limit exceeded, skipping…',
       JSON.stringify(data, null, 2)
     )
+    // eslint-disable-next-line unicorn/no-process-exit -- This file is a CLI
     process.exit(0)
   }
   const filePaths = (data.tree as { path: string }[])

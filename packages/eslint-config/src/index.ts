@@ -46,11 +46,11 @@ const config: Config = tseslint.config(
     extends: [
       js.configs.recommended,
       tseslint.configs.recommended,
+      eslintPluginUnicorn.configs['flat/recommended'],
       eslintConfigPrettier
     ],
     plugins: {
       import: eslintPluginImport,
-      unicorn: eslintPluginUnicorn,
       sonarjs: eslintPluginSonarJs
     },
     rules: {
@@ -68,13 +68,8 @@ const config: Config = tseslint.config(
         { VariableDeclarator: { object: true } }
       ],
       'import/no-duplicates': 'error',
-      'no-negated-condition': 'off',
-      'unicorn/no-negated-condition': 'error',
       'prefer-regex-literals': ['error', { disallowRedundantWrapping: true }],
       'object-shorthand': ['error', 'always'],
-      'unicorn/prefer-regexp-test': 'error',
-      'unicorn/no-array-for-each': 'error',
-      'unicorn/prefer-string-replace-all': 'error',
       '@typescript-eslint/prefer-for-of': 'error',
       quotes: ['error', 'single', { avoidEscape: true }], // Matches Prettier, but also replaces backticks
       '@typescript-eslint/no-unused-vars': [
@@ -86,21 +81,29 @@ const config: Config = tseslint.config(
       ],
       'prefer-object-spread': 'error',
       'prefer-arrow-callback': ['error', { allowNamedFunctions: true }],
-      'unicorn/prefer-at': 'error',
       'sonarjs/no-small-switch': 'error',
       'prefer-const': ['error', { destructuring: 'all' }],
-      'unicorn/prefer-array-index-of': 'error',
       'sonarjs/no-unused-collection': 'error',
-      'unicorn/catch-error-name': 'error',
-      'unicorn/prefer-optional-catch-binding': 'error',
-      'unicorn/filename-case': 'error',
       eqeqeq: ['error', 'always', { null: 'ignore' }],
-      'unicorn/prefer-node-protocol': 'error',
+      'unicorn/switch-case-braces': ['error', 'avoid'],
       // todo: enable
       '@typescript-eslint/no-explicit-any': 'off',
       '@typescript-eslint/no-non-null-assertion': 'off',
       '@typescript-eslint/no-var-requires': 'off',
-      '@typescript-eslint/ban-ts-comment': 'off'
+      '@typescript-eslint/ban-ts-comment': 'off',
+
+      'unicorn/no-hex-escape': 'off', // todo
+      'unicorn/escape-case': 'off', // todo
+      'unicorn/consistent-function-scoping': 'off', // todo
+      'unicorn/prefer-module': 'off',
+      'unicorn/no-array-reduce': 'off',
+      'unicorn/prefer-top-level-await': 'off', // Check if possible to refactor without breaking
+
+      'unicorn/prevent-abbreviations': 'off', // Too many cases
+      'unicorn/explicit-length-check': 'off', // I don't like
+      'unicorn/no-null': 'off', // I don't like
+      'unicorn/prefer-global-this': 'off', // Bundlers are smarter with window
+      'unicorn/prefer-optional-catch-binding': 'off' // catch by @typescript-eslint/no-unused-vars
     }
   },
   // Rules for React files
@@ -174,7 +177,8 @@ const config: Config = tseslint.config(
       '@typescript-eslint/prefer-destructuring': [
         'error',
         { VariableDeclarator: { object: true } }
-      ]
+      ],
+      '@typescript-eslint/no-unnecessary-condition': 'error'
     }
   },
   {

@@ -110,7 +110,7 @@ describe('LaTeX', () => {
       latex: { renderer: 'mathjax' }
     } as const
 
-    const INLINE_MATH = '$a=\\sqrt{b^2 + c^2}$'
+    const INLINE_MATH = String.raw`$a=\sqrt{b^2 + c^2}$`
     const MATH_LANG = '```math\nx^2\n```'
 
     it('should convert math inline', async () => {

@@ -4,7 +4,7 @@ import { ImageResponse } from 'next/og'
 
 export const runtime = 'edge'
 
-const font = fetch(new URL('./Inter-SemiBold.otf', import.meta.url)).then(res =>
+const font = fetch(new URL('Inter-SemiBold.otf', import.meta.url)).then(res =>
   res.arrayBuffer()
 )
 

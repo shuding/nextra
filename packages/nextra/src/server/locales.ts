@@ -46,7 +46,7 @@ export function middleware(request: NextRequest) {
 
   if (requestLocale !== cookieLocale) {
     const response = NextResponse.next()
-    response.cookies.set(COOKIE_NAME, requestLocale)
+    response.cookies.set(COOKIE_NAME, requestLocale!)
     return response
   }
 }

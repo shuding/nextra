@@ -10,7 +10,7 @@ import { CWD, IS_PRODUCTION } from './src/server/constants.js'
 const SEP = path.sep === '/' ? '/' : '\\\\'
 
 const CLIENT_FILE_RE = new RegExp(
-  '/nextra/src/client/.*\\.tsx?$'.replaceAll('/', SEP)
+  String.raw`/nextra/src/client/.*\.tsx?$`.replaceAll('/', SEP)
 )
 
 export default defineConfig({

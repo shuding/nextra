@@ -15,7 +15,8 @@
     "paths": {
       "unified": ["./node_modules/unified"]
     },
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "noUncheckedIndexedAccess": true
   },
   "exclude": ["dist"]
 }

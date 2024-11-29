@@ -74,8 +74,8 @@ function wrapInBraces(
 ): string {
   const { inlineMath, displayMath } = options.config?.tex || {}
 
-  const inlineBraces = inlineMath?.[0] || ['\\(', '\\)']
-  const displayBraces = displayMath?.[0] || ['\\[', '\\]']
+  const inlineBraces = inlineMath?.[0] || [String.raw`\(`, String.raw`\)`]
+  const displayBraces = displayMath?.[0] || [String.raw`\[`, String.raw`\]`]
   const [before, after] = mathInline ? inlineBraces : displayBraces
   return `${before}${source}${after}`
 }
@@ -116,12 +116,13 @@ export const rehypeBetterReactMathjax: Plugin<
       hasMathJax = true
     })
 
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- fixme
     if (!hasMathJax) return
 
     const mdxjsEsmNodes = []
     const rest: ElementContent[] = []
     for (const child of ast.children) {
-      if ((child as MdxjsEsm).type === 'mdxjsEsm') {
+      if (child.type === 'mdxjsEsm') {
         mdxjsEsmNodes.push(child)
       } else {
         rest.push(child as any)

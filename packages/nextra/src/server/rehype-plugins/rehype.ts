@@ -50,7 +50,7 @@ export const rehypeParseCodeMeta: Plugin<
   ast => {
     visit(ast, { tagName: 'pre' }, (node: PreElement) => {
       const [codeEl] = node.children as Element[]
-      const { meta = '' } = codeEl.data || {}
+      const { meta = '' } = codeEl!.data || {}
 
       node.__filename = meta!.match(CODE_BLOCK_FILENAME_RE)?.[1]
       node.properties['data-filename'] = node.__filename
@@ -93,7 +93,7 @@ export const rehypeAttachCodeMeta: Plugin<
         delete preEl.properties['data-theme']
 
         if (preEl.tagName === 'pre') {
-          const [codeEl] = preEl.children as Element[]
+          const codeEl = preEl.children[0] as Element
           delete codeEl.properties['data-theme']
           delete codeEl.properties['data-language']
 
