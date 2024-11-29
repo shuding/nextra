@@ -62,7 +62,7 @@ export function mergeMetaWithPageMap<T extends Folder | PageMapItem[]>(
     }
     return restParent
   })
-  const hasMeta = 'data' in result[0]
+  const hasMeta = 'data' in result[0]!
   if (hasMeta) {
     // @ts-expect-error fixme
     const childRoute = result[1].route

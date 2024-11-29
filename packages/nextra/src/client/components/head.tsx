@@ -30,9 +30,9 @@ const colorSchema = z
     if (value.startsWith('#')) {
       return hexToRgb(value as `#${string}`)
     }
-    const groups = value.match(/^rgb\((?<rgb>.*?)\)$/)?.groups
-    if (groups) {
-      return groups.rgb.replaceAll(' ', '')
+    const rgb = value.match(/^rgb\((?<rgb>.*?)\)$/)?.groups!.rgb
+    if (rgb) {
+      return rgb.replaceAll(' ', '')
     }
     return value
   })

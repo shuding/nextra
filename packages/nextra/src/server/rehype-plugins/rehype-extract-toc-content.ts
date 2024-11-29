@@ -28,7 +28,7 @@ export const rehypeExtractTocContent: Plugin<[], Root> = () => (ast, file) => {
       } satisfies SpreadElement
     }
 
-    const node = TocMap[name.id]
+    const node = TocMap[name.id]!
 
     const isTextOnly = node.children.every(child => child.type === 'text')
 

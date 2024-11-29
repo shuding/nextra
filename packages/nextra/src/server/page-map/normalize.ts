@@ -78,7 +78,7 @@ function sortFolder(pageMap: PageMapItem[] | Folder) {
   for (const [index, metaKey] of metaKeys
     .filter(key => key !== '*')
     .entries()) {
-    const metaItem = meta[metaKey]
+    const metaItem = meta[metaKey]!
     const item = items.find(item => item.name === metaKey)
     if (metaItem.type === 'menu' && item) {
       // @ts-expect-error fixme

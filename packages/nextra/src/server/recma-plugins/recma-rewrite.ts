@@ -22,8 +22,8 @@ export const recmaRewrite: Plugin<
       node =>
         node.type === 'VariableDeclaration' &&
         node.kind === 'const' &&
-        node.declarations[0].id.type === 'Identifier' &&
-        node.declarations[0].id.name === 'MDXLayout'
+        node.declarations[0]!.id.type === 'Identifier' &&
+        node.declarations[0]!.id.name === 'MDXLayout'
     )
     // Remote MDX
     if (isRemoteContent) {

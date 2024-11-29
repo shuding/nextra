@@ -119,10 +119,10 @@ export function normalizePages({
   const flatDocsDirectories: DocsItem[] = []
   // Page directories
   const topLevelNavbarItems: (PageItem | MenuItem)[] = []
-
-  const meta = 'data' in list[0] ? (list[0].data as MetaType) : {}
+  const firstItem = list[0]! // always exists
+  const meta = 'data' in firstItem ? (firstItem.data as MetaType) : {}
   // Normalize items based on files and _meta.json.
-  const items = ('data' in list[0] ? list.slice(1) : list) as (
+  const items = ('data' in firstItem ? list.slice(1) : list) as (
     | (Folder & { frontMatter?: FrontMatter })
     | MdxFile
   )[]
