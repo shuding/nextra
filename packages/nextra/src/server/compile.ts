@@ -210,7 +210,7 @@ export async function compileMdx(
       recmaPlugins: [
         ...(recmaPlugins || []),
         [recmaRewrite, { isPageImport, isRemoteContent }] satisfies Pluggable
-      ].filter(v => !!v)
+      ]
     })
   }
 }

@@ -1,13 +1,15 @@
 declare namespace globalThis {
-  var pagefind: {
-    search: <T>(query: string) => Promise<{
-      results: {
-        data: () => Promise<T>
-        id: string
-      }[]
-    }>
-    options: (opts: Record<string, unknown>) => Promise<void>
-  } | undefined
+  var pagefind:
+    | {
+        search: <T>(query: string) => Promise<{
+          results: {
+            data: () => Promise<T>
+            id: string
+          }[]
+        }>
+        options: (opts: Record<string, unknown>) => Promise<void>
+      }
+    | undefined
 }
 
 declare module '*.svg' {

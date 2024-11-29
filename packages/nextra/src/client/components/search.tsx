@@ -131,7 +131,7 @@ export const Search: FC<SearchProps> = ({
   useEffect(() => {
     function handleKeyDown(event: globalThis.KeyboardEvent) {
       const input = inputRef.current
-      const { activeElement } = document;
+      const { activeElement } = document
       const tagName = activeElement?.tagName.toLowerCase()
       if (
         !input ||
