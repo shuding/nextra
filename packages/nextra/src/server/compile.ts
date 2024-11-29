@@ -119,7 +119,7 @@ export async function compileMdx(
     const vFile = await processor.process(fileCompatible)
     const rawJs = (vFile.value as string)
       // https://github.com/shuding/nextra/issues/1032
-      .replaceAll('__esModule', '_\\_esModule')
+      .replaceAll('__esModule', String.raw`_\_esModule`)
     return rawJs
   } catch (error) {
     console.error(`[nextra] Error compiling ${filePath}.`)

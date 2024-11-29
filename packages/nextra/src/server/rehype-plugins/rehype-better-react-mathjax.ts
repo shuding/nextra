@@ -74,8 +74,8 @@ function wrapInBraces(
 ): string {
   const { inlineMath, displayMath } = options.config?.tex || {}
 
-  const inlineBraces = inlineMath?.[0] || ['\\(', '\\)']
-  const displayBraces = displayMath?.[0] || ['\\[', '\\]']
+  const inlineBraces = inlineMath?.[0] || [String.raw`\(`, String.raw`\)`]
+  const displayBraces = displayMath?.[0] || [String.raw`\[`, String.raw`\]`]
   const [before, after] = mathInline ? inlineBraces : displayBraces
   return `${before}${source}${after}`
 }

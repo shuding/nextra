@@ -27,10 +27,10 @@ const GET_PAGE_MAP_PATH = '/nextra/dist/server/page-map/get.js'
 const PAGE_MAP_PLACEHOLDER_PATH = '/nextra/dist/server/page-map/placeholder.js'
 
 const GET_PAGE_MAP_RE = new RegExp(
-  GET_PAGE_MAP_PATH.replaceAll('/', SEP).replaceAll('.', '\\.')
+  GET_PAGE_MAP_PATH.replaceAll('/', SEP).replaceAll('.', String.raw`\.`)
 )
 const PAGE_MAP_PLACEHOLDER_RE = new RegExp(
-  PAGE_MAP_PLACEHOLDER_PATH.replaceAll('/', SEP).replaceAll('.', '\\.')
+  PAGE_MAP_PLACEHOLDER_PATH.replaceAll('/', SEP).replaceAll('.', String.raw`\.`)
 )
 const CONTENT_DIR = getContentDirectory()
 
@@ -152,7 +152,7 @@ const nextra: Nextra = nextraConfig => {
           config.watchOptions = {
             ...config.watchOptions,
             ignored: new RegExp(
-              ignored.replace('(\\.(git|next)|node_modules)', '\\.(git|next)')
+              ignored.replace(String.raw`(\.(git|next)|node_modules)`, String.raw`\.(git|next)`)
             )
           }
         }
