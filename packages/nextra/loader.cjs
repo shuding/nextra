@@ -10,7 +10,7 @@
  * @param {string} code
  * @return {Promise<void>}
  */
-module.exports = async function (code) {
+module.exports = async function loader(code) {
   const callback = this.async()
 
   try {
