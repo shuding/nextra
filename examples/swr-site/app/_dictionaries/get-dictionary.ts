@@ -9,7 +9,7 @@ const dictionaries: Dictionaries = {
   ru: () => import('./ru')
 }
 
-export async function getDictionary(locale: Locale): Promise<Dictionary> {
+export async function getDictionary(locale: string): Promise<Dictionary> {
   const { default: dictionary } = await (
     dictionaries[locale] || dictionaries.en
   )()
