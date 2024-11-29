@@ -113,7 +113,8 @@ The field key "${metaKey}" in \`_meta\` file refers to a page that cannot be fou
     }
 
     const currentItem = items[index]
-    if (currentItem.name === metaKey) continue
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- fixme
+    if (currentItem && currentItem.name === metaKey) continue
     items.splice(
       index, // index at which to start changing the array
       0, // remove zero items
