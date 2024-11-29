@@ -11,6 +11,7 @@ const PopupContext = createContext<boolean | null>(null)
 function usePopup(): boolean {
   const ctx = useContext(PopupContext)
   if (typeof ctx !== 'boolean') {
+    // eslint-disable-next-line unicorn/prefer-type-error -- Doesn't fit in this case
     throw new Error('`usePopup` must be used within a `<Popup>` component')
   }
   return ctx

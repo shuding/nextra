@@ -94,6 +94,12 @@ const config: Config = tseslint.config(
       'unicorn/switch-case-braces': ['error', 'avoid'],
       'unicorn/prefer-optional-catch-binding': 'error', // test
 
+      'unicorn/no-hex-escape': 'off', // todo
+      'unicorn/escape-case': 'off', // todo
+      'unicorn/consistent-function-scoping': 'off', // todo
+      'unicorn/prefer-module': 'off',
+      'unicorn/no-array-reduce': 'off',
+
       'unicorn/prevent-abbreviations': 'off', // too many cases
       'unicorn/explicit-length-check': 'off', // I don't like
       'unicorn/no-null': 'off', // I don't like

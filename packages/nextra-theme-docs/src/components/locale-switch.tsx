@@ -7,7 +7,7 @@ import { GlobeIcon } from 'nextra/icons'
 import type { FC } from 'react'
 import { useThemeConfig } from '../stores'
 
-const ONE_YEAR = 365 * 24 * 60 * 60 * 1_000
+const ONE_YEAR = 365 * 24 * 60 * 60 * 1000
 
 interface LocaleSwitchProps {
   lite?: boolean

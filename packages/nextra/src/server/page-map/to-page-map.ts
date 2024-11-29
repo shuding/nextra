@@ -55,10 +55,12 @@ export function convertToPageMap({
   }
 
   for (const path of Object.keys(metaFiles)) {
+    // eslint-disable-next-line unicorn/no-array-callback-reference
     path.split('/').reduce(createNested, nestedMap)
   }
   for (const path of Object.keys(pages)) {
     const key = path && `${path}/`
+    // eslint-disable-next-line unicorn/no-array-callback-reference
     key.split('/').reduce(createNested, nestedMap)
   }
 
