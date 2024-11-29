@@ -91,13 +91,13 @@ const config: Config = tseslint.config(
       '@typescript-eslint/no-var-requires': 'off',
       '@typescript-eslint/ban-ts-comment': 'off',
 
-      'unicorn/switch-case-braces': ["error", "avoid"],
+      'unicorn/switch-case-braces': ['error', 'avoid'],
       'unicorn/prefer-optional-catch-binding': 'error', // test
 
       'unicorn/prevent-abbreviations': 'off', // too many cases
       'unicorn/explicit-length-check': 'off', // I don't like
       'unicorn/no-null': 'off', // I don't like
-      'unicorn/prefer-global-this': 'off', // bundlers are smarter with window
+      'unicorn/prefer-global-this': 'off' // bundlers are smarter with window
     }
   },
   // Rules for React files
