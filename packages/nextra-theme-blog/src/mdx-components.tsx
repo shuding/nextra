@@ -98,8 +98,7 @@ export const useMDXComponents = ({
           <Meta {...(metadata as BlogMetadata)}>
             {dateObj && (
               <time dateTime={dateObj.toISOString()}>
-                {(DateFormatter && <DateFormatter date={dateObj} />) ||
-                  dateObj.toLocaleDateString()}
+                {DateFormatter ? <DateFormatter date={dateObj} /> : dateObj.toLocaleDateString()}
               </time>
             )}
           </Meta>

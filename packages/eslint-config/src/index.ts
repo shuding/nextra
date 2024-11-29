@@ -177,7 +177,8 @@ const config: Config = tseslint.config(
       '@typescript-eslint/prefer-destructuring': [
         'error',
         { VariableDeclarator: { object: true } }
-      ]
+      ],
+      '@typescript-eslint/no-unnecessary-condition': 'error'
     }
   },
   {

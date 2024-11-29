@@ -99,7 +99,7 @@ export async function loader(
     )
     return convertPageMapToJs({ pageMap, mdxPages, globalMetaPath })
   }
-  // We pass `locales` only for `page-map/get.ts`
+  // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- We pass `locales` only for `page-map/get.ts`
   if (locales) {
     return replaceDynamicResourceQuery(
       source,

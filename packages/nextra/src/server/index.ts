@@ -191,6 +191,7 @@ const nextra: Nextra = nextraConfig => {
                 // issuer, which can be anything as long as it's not empty string.
                 // When the issuer is `null`, it means that it can be imported via a
                 // runtime import call such as `import('...')`.
+                // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- types are wrong, value can be null
                 issuer: request => request === null || !!request,
                 use: [options.defaultLoaders.babel, loader]
               }
