@@ -34,6 +34,7 @@ function normalizeMetaData(
       } else {
         val = value
       }
+      // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- fixme
       return [key, map[key] ? val : val || pageTitleFromFilename(key)]
     })
   )
@@ -55,7 +56,7 @@ export function mergeMetaWithPageMap<T extends Folder | PageMapItem[]>(
       restParent.children = mergeMetaWithPageMap(
         restParent.children,
         // @ts-expect-error -- fixme
-        meta[restParent.name]?.items || {}
+        meta[restParent.name]?.items || {} // eslint-disable-line @typescript-eslint/no-unnecessary-condition -- fixme
       )
       return restParent
     }

@@ -78,6 +78,7 @@ type DocsItem = (MdxFile | FolderWithoutChildren) & {
 function findFirstRoute(items: DocsItem[]): string | undefined {
   for (const item of items) {
     if (item.route) return item.route
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- fixme
     if (item.children) {
       const route = findFirstRoute(item.children)
       if (route) return route
@@ -209,6 +210,7 @@ export function normalizePages({
     if (normalizedChildren) {
       // If the active item is in its children
       if (
+        // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- fixme
         normalizedChildren.activeIndex !== undefined &&
         normalizedChildren.activeType !== undefined
       ) {
@@ -293,6 +295,7 @@ export function normalizePages({
 
     if (type === 'doc' && display === 'children') {
       // Hide the directory itself and treat all its children as pages
+      // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- fixme
       if (docsItem.children) {
         // @ts-expect-error -- fixme
         directories.push(...docsItem.children)
