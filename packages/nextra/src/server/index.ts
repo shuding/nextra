@@ -152,7 +152,10 @@ const nextra: Nextra = nextraConfig => {
           config.watchOptions = {
             ...config.watchOptions,
             ignored: new RegExp(
-              ignored.replace(String.raw`(\.(git|next)|node_modules)`, String.raw`\.(git|next)`)
+              ignored.replace(
+                String.raw`(\.(git|next)|node_modules)`,
+                String.raw`\.(git|next)`
+              )
             )
           }
         }
