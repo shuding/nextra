@@ -37,7 +37,7 @@ import {
 import { LocaleSwitch } from './locale-switch'
 import { ThemeSwitch } from './theme-switch'
 
-const TreeState: Record<string, boolean | void> = Object.create(null)
+const TreeState: Record<string, boolean> = Object.create(null)
 
 const classes = {
   link: cn(
@@ -75,7 +75,7 @@ type FolderProps = {
 
 const Folder: FC<FolderProps> = ({ item, anchors, onFocus, level }) => {
   const routeOriginal = useFSRoute()
-  const [route] = routeOriginal.split('#', 1)
+  const route = routeOriginal.split('#', 1)[0]!
   const hasRoute = !!item.route // for item.type === 'menu' will be ''
   const active = hasRoute && [route, route + '/'].includes(item.route + '/')
   const activeRouteInside =
@@ -141,10 +141,9 @@ const Folder: FC<FolderProps> = ({ item, anchors, onFocus, level }) => {
     const routes = Object.fromEntries(
       (menu.children || []).map(route => [route.name, route])
     )
-    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- fixme
+    // @ts-expect-error eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- fixme
     item.children = Object.entries(menu.items || {}).map(([key, item]) => {
       return {
-        // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- fixme
         ...(routes[key] || { name: key /* for React key prop */ }),
         ...(item as object)
       }

@@ -39,7 +39,7 @@ type Processor = ReturnType<typeof createProcessor>
 
 const cachedCompilerForFormat: Record<
   `${NonNullable<ProcessorOptions['format']>}:${boolean}`,
-  Processor | void
+  Processor
 > = Object.create(null)
 
 type MdxOptions = NextraConfig['mdxOptions'] &

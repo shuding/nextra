@@ -72,7 +72,6 @@ const NavbarMenu: FC<{
           <_MenuItem
             key={key}
             as={Anchor}
-            // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- fixme
             href={item.href || routes[key]?.route}
             className={({ focus }) =>
               cn(

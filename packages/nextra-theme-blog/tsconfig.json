@@ -10,7 +10,8 @@
     "strictNullChecks": true,
     "jsx": "react-jsx",
     "moduleResolution": "bundler",
-    "types": ["vitest/globals"]
+    "types": ["vitest/globals"],
+    "noUncheckedIndexedAccess": true
   },
   "exclude": ["dist"]
 }
