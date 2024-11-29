@@ -16,7 +16,7 @@
       "unified": ["./node_modules/unified"]
     },
     "resolveJsonModule": true,
-    "noUncheckedIndexedAccess": true,
+    "noUncheckedIndexedAccess": true
   },
   "exclude": ["dist"]
 }

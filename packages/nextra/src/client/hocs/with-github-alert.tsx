@@ -26,7 +26,9 @@ export function withGitHubAlert(
     if (Array.isArray(props.children)) {
       const str = props.children[1].props.children
       if (typeof str === 'string') {
-        const alertName = str.match(GITHUB_ALERT_RE)?.groups?.name!.toLowerCase()
+        const alertName = str
+          .match(GITHUB_ALERT_RE)
+          ?.groups?.name!.toLowerCase()
 
         if (alertName) {
           if (!GITHUB_ALERT_TYPES.has(alertName)) {

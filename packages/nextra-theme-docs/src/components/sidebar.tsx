@@ -142,12 +142,13 @@ const Folder: FC<FolderProps> = ({ item, anchors, onFocus, level }) => {
       (menu.children || []).map(route => [route.name, route])
     )
     // @ts-expect-error
-    item.children = Object.entries(menu.items || {}).map(([key, item]) => { // eslint-disable-line @typescript-eslint/no-unnecessary-condition -- fixme
-      return {
-        ...(routes[key] || { name: key /* for React key prop */ }),
-        ...(item as object)
-      }
-    })
+    item.children = Object.entries(menu.items || {}) // eslint-disable-line @typescript-eslint/no-unnecessary-condition -- fixme
+      .map(([key, item]) => {
+        return {
+          ...(routes[key] || { name: key /* for React key prop */ }),
+          ...(item as object)
+        }
+      })
   }
 
   const isLink = 'frontMatter' in item
