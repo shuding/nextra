@@ -99,11 +99,12 @@ const config: Config = tseslint.config(
       'unicorn/consistent-function-scoping': 'off', // todo
       'unicorn/prefer-module': 'off',
       'unicorn/no-array-reduce': 'off',
+      'unicorn/prefer-top-level-await': 'off', // Check if possible to refactor without breaking
 
-      'unicorn/prevent-abbreviations': 'off', // too many cases
+      'unicorn/prevent-abbreviations': 'off', // Too many cases
       'unicorn/explicit-length-check': 'off', // I don't like
       'unicorn/no-null': 'off', // I don't like
-      'unicorn/prefer-global-this': 'off' // bundlers are smarter with window
+      'unicorn/prefer-global-this': 'off' // Bundlers are smarter with window
     }
   },
   // Rules for React files
