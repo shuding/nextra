@@ -85,14 +85,12 @@ const config: Config = tseslint.config(
       'prefer-const': ['error', { destructuring: 'all' }],
       'sonarjs/no-unused-collection': 'error',
       eqeqeq: ['error', 'always', { null: 'ignore' }],
+      'unicorn/switch-case-braces': ['error', 'avoid'],
       // todo: enable
       '@typescript-eslint/no-explicit-any': 'off',
       '@typescript-eslint/no-non-null-assertion': 'off',
       '@typescript-eslint/no-var-requires': 'off',
       '@typescript-eslint/ban-ts-comment': 'off',
-
-      'unicorn/switch-case-braces': ['error', 'avoid'],
-      'unicorn/prefer-optional-catch-binding': 'error', // test
 
       'unicorn/no-hex-escape': 'off', // todo
       'unicorn/escape-case': 'off', // todo
@@ -104,7 +102,8 @@ const config: Config = tseslint.config(
       'unicorn/prevent-abbreviations': 'off', // Too many cases
       'unicorn/explicit-length-check': 'off', // I don't like
       'unicorn/no-null': 'off', // I don't like
-      'unicorn/prefer-global-this': 'off' // Bundlers are smarter with window
+      'unicorn/prefer-global-this': 'off', // Bundlers are smarter with window
+      'unicorn/prefer-optional-catch-binding': 'off', // catch by @typescript-eslint/no-unused-vars
     }
   },
   // Rules for React files
