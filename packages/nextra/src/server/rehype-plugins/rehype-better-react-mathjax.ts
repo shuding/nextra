@@ -121,7 +121,7 @@ export const rehypeBetterReactMathjax: Plugin<
     const mdxjsEsmNodes = []
     const rest: ElementContent[] = []
     for (const child of ast.children) {
-      if ((child as MdxjsEsm).type === 'mdxjsEsm') {
+      if (child.type === 'mdxjsEsm') {
         mdxjsEsmNodes.push(child)
       } else {
         rest.push(child as any)

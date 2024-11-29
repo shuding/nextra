@@ -20,7 +20,7 @@ export async function importPagefind() {
   window.pagefind = await import(
     /* webpackIgnore: true */ addBasePath('/_pagefind/pagefind.js')
   )
-  await window.pagefind.options({
+  await window.pagefind!.options({
     baseUrl: '/'
     // ... more search options
   })
