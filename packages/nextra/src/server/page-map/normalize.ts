@@ -80,25 +80,23 @@ function sortFolder(pageMap: PageMapItem[] | Folder) {
     .entries()) {
     const metaItem = meta[metaKey]
     const item = items.find(item => item.name === metaKey)
-    if (metaItem.type === 'menu') {
-      if (item) {
-        // @ts-expect-error fixme
-        item.items = metaItem.items
+    if (metaItem.type === 'menu' && item) {
+      // @ts-expect-error fixme
+      item.items = metaItem.items
 
-        // Validate menu items, local page should exist
-        const { children } = items.find(
-          (i): i is Folder<MdxFile> => i.name === metaKey
-        )!
-        for (const [key, value] of Object.entries(
-          // @ts-expect-error fixme
-          item.items as Record<string, { title: string; href?: string }>
-        )) {
-          if (!value.href && children.every(i => i.name !== key)) {
-            throw new Error(
-              `Validation of "_meta" file has failed.
+      // Validate menu items, local page should exist
+      const { children } = items.find(
+        (i): i is Folder<MdxFile> => i.name === metaKey
+      )!
+      for (const [key, value] of Object.entries(
+        // @ts-expect-error fixme
+        item.items as Record<string, { title: string; href?: string }>
+      )) {
+        if (!value.href && children.every(i => i.name !== key)) {
+          throw new Error(
+            `Validation of "_meta" file has failed.
 The field key "${metaKey}.items.${key}" in \`_meta\` file refers to a page that cannot be found, remove this key from "_meta" file.`
-            )
-          }
+          )
         }
       }
     }

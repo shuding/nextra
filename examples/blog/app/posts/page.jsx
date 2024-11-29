@@ -7,8 +7,8 @@ export const metadata = {
 }
 
 export default async function PostsPage() {
-  const tags = (await getTags())
-  const posts = (await getPosts())
+  const tags = await getTags()
+  const posts = await getPosts()
   const allTags = tags.reduce((acc, curr) => {
     acc[curr] ??= 0
     acc[curr] += 1
