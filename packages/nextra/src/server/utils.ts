@@ -8,9 +8,9 @@ import title from 'title'
 import { DEFAULT_PROPERTY_PROPS } from './constants.js'
 
 export const logger = {
-  info: console.log.bind(null, '-', '\x1b[36minfo\x1b[0m', '[nextra]'),
-  warn: console.log.bind(null, '-', '\x1b[33mwarn\x1b[0m', '[nextra]'),
-  error: console.log.bind(null, '-', '\x1b[31merror\x1b[0m', '[nextra]')
+  info: console.log.bind(null, '-', '\x1B[36minfo\x1B[0m', '[nextra]'),
+  warn: console.log.bind(null, '-', '\x1B[33mwarn\x1B[0m', '[nextra]'),
+  error: console.log.bind(null, '-', '\x1B[31merror\x1B[0m', '[nextra]')
 }
 
 export function pageTitleFromFilename(fileName: string) {

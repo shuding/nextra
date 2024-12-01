@@ -93,7 +93,6 @@ const config: Config = tseslint.config(
       '@typescript-eslint/ban-ts-comment': 'off',
 
       'unicorn/no-hex-escape': 'off', // todo
-      'unicorn/escape-case': 'off', // todo
       'unicorn/prefer-module': 'off',
       'unicorn/no-array-reduce': 'off',
       'unicorn/prefer-top-level-await': 'off', // Check if possible to refactor without breaking
@@ -108,28 +107,20 @@ const config: Config = tseslint.config(
   // Rules for React files
   {
     files: ['{packages,examples,docs}/**'],
+    plugins: {
+      'react-hooks': eslintPluginReactHooks,
+      '@next/next': eslintPluginNext
+    },
     extends: [
       // @ts-expect-error
       eslintPluginReact.configs.flat.recommended,
       // @ts-expect-error
-      eslintPluginReact.configs.flat['jsx-runtime'],
-      {
-        ...eslintPluginReactHooks.configs.recommended,
-        plugins: {
-          'react-hooks': eslintPluginReactHooks
-        }
-      },
-      {
-        rules: {
-          ...eslintPluginNext.configs.recommended.rules,
-          ...eslintPluginNext.configs['core-web-vitals'].rules
-        },
-        plugins: {
-          '@next/next': eslintPluginNext
-        }
-      }
+      eslintPluginReact.configs.flat['jsx-runtime']
     ],
     rules: {
+      ...eslintPluginReactHooks.configs.recommended.rules,
+      ...eslintPluginNext.configs.recommended.rules,
+      ...eslintPluginNext.configs['core-web-vitals'].rules,
       'react/prop-types': 'off',
       'react/no-unknown-property': ['error', { ignore: ['jsx'] }],
       'react-hooks/exhaustive-deps': 'error',
