@@ -2,7 +2,7 @@
 
 import { Link } from 'next-view-transitions'
 import { useFSRoute } from 'nextra/hooks'
-import { ComponentProps, FC } from 'react'
+import type { ComponentProps, FC } from 'react'
 
 export const NavbarLink: FC<ComponentProps<typeof Link>> = props => {
   const pathname = useFSRoute()

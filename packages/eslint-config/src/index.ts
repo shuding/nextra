@@ -34,7 +34,7 @@ const TAILWIND_CONFIG = {
 
 const REACT_COMPILER_RESTRICT = {
   name: 'react',
-  importNames: ['memo', 'useCallback', 'useMemo', 'forwardRef']
+  importNames: ['memo', 'useCallback', 'useMemo']
 }
 
 const config: Config = tseslint.config(

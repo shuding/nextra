@@ -1,10 +1,4 @@
-/* eslint-disable react-compiler/react-compiler, no-restricted-imports */
-
 'use client'
-
-// TODO: enable in the future
-// This is a big component and something could be broken after enabling react-compiler
-'use no memo'
 
 import cn from 'clsx'
 import { usePathname } from 'next/navigation'
@@ -14,15 +8,7 @@ import { useFSRoute } from 'nextra/hooks'
 import { ArrowRightIcon, ExpandIcon } from 'nextra/icons'
 import type { Item, MenuItem, PageItem } from 'nextra/normalize-pages'
 import type { FC, FocusEventHandler, MouseEventHandler } from 'react'
-import {
-  forwardRef,
-  useCallback,
-  useEffect,
-  useId,
-  useMemo,
-  useRef,
-  useState
-} from 'react'
+import { forwardRef, useEffect, useId, useRef, useState } from 'react'
 import scrollIntoView from 'scroll-into-view-if-needed'
 import {
   setFocusedRoute,
@@ -99,20 +85,21 @@ const Folder: FC<FolderProps> = ({ item, anchors, onFocus, level }) => {
 
   const [, rerender] = useState<object>()
 
-  const handleClick: MouseEventHandler<HTMLAnchorElement | HTMLButtonElement> =
-    useCallback(event => {
-      const el = event.currentTarget
-      const isClickOnIcon =
-        el /* will be always <a> or <button> */ !==
-        event.target /* can be <svg> or <path> */
-      if (isClickOnIcon) {
-        event.preventDefault()
-      }
-      const isOpen = el.parentElement!.classList.contains('open')
-      const route = el.getAttribute('href') || el.dataset.href || ''
-      TreeState[route] = !isOpen
-      rerender({})
-    }, [])
+  const handleClick: MouseEventHandler<
+    HTMLAnchorElement | HTMLButtonElement
+  > = event => {
+    const el = event.currentTarget
+    const isClickOnIcon =
+      el /* will be always <a> or <button> */ !==
+      event.target /* can be <svg> or <path> */
+    if (isClickOnIcon) {
+      event.preventDefault()
+    }
+    const isOpen = el.parentElement!.classList.contains('open')
+    const route = el.getAttribute('href') || el.dataset.href || ''
+    TreeState[route] = !isOpen
+    rerender({})
+  }
 
   useEffect(() => {
     function updateTreeState() {
@@ -135,21 +122,6 @@ const Folder: FC<FolderProps> = ({ item, anchors, onFocus, level }) => {
       updateTreeState()
     }
   }, [activeRouteInside, focusedRouteInside, item.route, autoCollapse])
-
-  if (item.type === 'menu') {
-    const menu = item as MenuItem
-    const routes = Object.fromEntries(
-      (menu.children || []).map(route => [route.name, route])
-    )
-    // @ts-expect-error
-    item.children = Object.entries(menu.items || {}) // eslint-disable-line @typescript-eslint/no-unnecessary-condition -- fixme
-      .map(([key, item]) => {
-        return {
-          ...(routes[key] || { name: key /* for React key prop */ }),
-          ...(item as object)
-        }
-      })
-  }
 
   const isLink = 'frontMatter' in item
   // use button when link don't have href because it impacts on SEO
@@ -184,7 +156,11 @@ const Folder: FC<FolderProps> = ({ item, anchors, onFocus, level }) => {
         <Collapse isOpen={open}>
           <Menu
             className={classes.border}
-            directories={item.children}
+            // @ts-expect-error -- fixme
+            directories={
+              // @ts-expect-error -- fixme
+              item.type === 'menu' ? getMenuChildren(item) : item.children
+            }
             anchors={anchors}
             level={level}
           />
@@ -192,6 +168,17 @@ const Folder: FC<FolderProps> = ({ item, anchors, onFocus, level }) => {
       )}
     </li>
   )
+}
+
+function getMenuChildren(menu: MenuItem) {
+  const routes = Object.fromEntries(
+    (menu.children || []).map(route => [route.name, route])
+  )
+  return Object.entries(menu.items || {}) // eslint-disable-line @typescript-eslint/no-unnecessary-condition -- fixme
+    .map(([key, item]) => ({
+      ...(routes[key] || { name: key /* for React key prop */ }),
+      ...(item as object)
+    }))
 }
 
 const Separator: FC<{ title: string }> = ({ title }) => {
@@ -307,7 +294,7 @@ export const MobileNav: FC = () => {
     setMenu(false)
   }, [pathname])
 
-  const anchors = useMemo(() => toc.filter(v => v.depth === 2), [toc])
+  const anchors = toc.filter(v => v.depth === 2)
   const sidebarRef = useRef<HTMLUListElement>(null!)
 
   useEffect(() => {
@@ -388,13 +375,11 @@ export const Sidebar: FC<{ toc: Heading[] }> = ({ toc }) => {
   }, [])
 
   const themeConfig = useThemeConfig()
-  const anchors = useMemo(
-    () =>
-      // When the viewport size is larger than `md`, hide the anchors in
-      // the sidebar when `floatTOC` is enabled.
-      themeConfig.toc.float ? [] : toc.filter(v => v.depth === 2),
-    [themeConfig.toc.float, toc]
-  )
+  const anchors =
+    // When the viewport size is larger than `md`, hide the anchors in
+    // the sidebar when `floatTOC` is enabled.
+    themeConfig.toc.float ? [] : toc.filter(v => v.depth === 2)
+
   const hasI18n = themeConfig.i18n.length > 0
   const hasMenu =
     themeConfig.darkMode || hasI18n || themeConfig.sidebar.toggleButton
