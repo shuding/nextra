@@ -58,11 +58,12 @@ export const MyComponent = () => null
     const result = compileMetadata(`
 <!-- export title: "Foo" -->
 
-# world`)
+# world`, { filePath: 'foo.md' })
     expect(result).resolves.toMatchInlineSnapshot(`
       "import {Fragment as _Fragment, jsx as _jsx} from "react/jsx-runtime";
       export const metadata = {
-        "title": "world"
+        "title": "world",
+        "filePath": "foo.md"
       };
       "
     `)

@@ -16,14 +16,9 @@ import {
  */
 export async function compileMetadata(
   source: string,
-  {
-    filePath,
-    lastCommitTime
-  }: { filePath?: string; lastCommitTime?: number } = {}
+  { filePath, lastCommitTime }: { filePath: string; lastCommitTime?: number }
 ): Promise<string> {
-  const format = filePath?.endsWith('.mdx') ? 'mdx' : 'md'
-
-  const fileCompatible = filePath ? { value: source, path: filePath } : source
+  const format = filePath.endsWith('.mdx') ? 'mdx' : 'md'
 
   const compiler = createProcessor({
     format,
@@ -34,20 +29,20 @@ export async function compileMetadata(
       [remarkAssignFrontMatter, { lastCommitTime }],
       remarkExportOnlyMetadata
     ],
-    recmaPlugins: [
-      () => (ast: Program) => {
-        const importReact = ast.body[0]! // always exist
-
-        ast.body = ast.body.filter(
-          node =>
-            node.type === 'ExportNamedDeclaration' &&
-            (node.declaration as any).declarations[0].id.name === 'metadata'
-        )
-        ast.body.unshift(importReact)
-      }
-    ]
+    recmaPlugins: [recmaOnlyMetadata]
   })
-  const vFile = await compiler.process(fileCompatible)
+  const vFile = await compiler.process({ value: source, path: filePath })
 
   return vFile.value as string
+}
+
+const recmaOnlyMetadata = () => (ast: Program) => {
+  const importReact = ast.body[0]! // always exist
+
+  ast.body = ast.body.filter(
+    node =>
+      node.type === 'ExportNamedDeclaration' &&
+      (node.declaration as any).declarations[0].id.name === 'metadata'
+  )
+  ast.body.unshift(importReact)
 }

@@ -102,7 +102,7 @@ const config: Config = tseslint.config(
       'unicorn/prevent-abbreviations': 'off', // Too many cases
       'unicorn/explicit-length-check': 'off', // I don't like
       'unicorn/no-null': 'off', // I don't like
-      'unicorn/prefer-global-this': 'off', // Bundlers are smarter with window
+      'unicorn/prefer-global-this': 'off', // Bundlers are smarter with `typeof window === 'undefined'` checks
       'unicorn/prefer-optional-catch-binding': 'off' // catch by @typescript-eslint/no-unused-vars
     }
   },
