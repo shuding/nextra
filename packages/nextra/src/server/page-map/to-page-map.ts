@@ -10,6 +10,7 @@ type StringMap = Record<string, string>
 function createNested (map: NestedMap, path: string): void {
   let current = map;
   for (const part of path.split('/')) {
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- false positive?
     current[part] ||= {};  // Create the nested object if it doesn't exist
     current = current[part];  // Move to the next level of the structure
   }

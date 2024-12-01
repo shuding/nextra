@@ -9,12 +9,12 @@ export const metadata = {
 export default async function PostsPage() {
   const tags = await getTags()
   const posts = await getPosts()
-  const allTags = tags.reduce((acc, curr) => {
-    acc[curr] ??= 0
-    acc[curr] += 1
-    return acc
-  }, Object.create(null))
+  const allTags = Object.create(null)
 
+  for (const tag of tags) {
+    allTags[tag] ??= 0
+    allTags[tag] += 1
+  }
   return (
     <div data-pagefind-ignore="all">
       <h1>{metadata.title}</h1>
