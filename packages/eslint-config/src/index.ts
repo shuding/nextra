@@ -91,7 +91,6 @@ const config: Config = tseslint.config(
       '@typescript-eslint/no-non-null-assertion': 'off',
       '@typescript-eslint/ban-ts-comment': 'off',
 
-      'unicorn/no-array-reduce': 'off',
       'unicorn/prefer-top-level-await': 'off', // Check if possible to refactor without breaking
 
       'unicorn/prevent-abbreviations': 'off', // Too many cases
