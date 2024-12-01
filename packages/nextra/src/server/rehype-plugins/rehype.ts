@@ -1,6 +1,5 @@
 import type { Element, Root } from 'hast'
 import type { Options as RehypePrettyCodeOptions } from 'rehype-pretty-code'
-import { bundledLanguages, getHighlighter } from 'shiki'
 import type { Plugin } from 'unified'
 import { SKIP, visit } from 'unist-util-visit'
 import type { NextraConfig } from '../../types.js'
@@ -30,14 +29,6 @@ export const DEFAULT_REHYPE_PRETTY_CODE_OPTIONS: RehypePrettyCodeOptions = {
   },
   defaultLang: {
     block: 'plaintext'
-  },
-  getHighlighter(opts) {
-    // eslint-disable-next-line @typescript-eslint/no-deprecated -- TODO: remove deprecation error
-    return getHighlighter({
-      ...opts,
-      // Without `getHighlighter` option ```mdx lang is not highlighted...
-      langs: Object.keys(bundledLanguages)
-    })
   },
   filterMetaString: meta => meta.replace(CODE_BLOCK_FILENAME_RE, '')
 }
