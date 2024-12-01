@@ -36,12 +36,12 @@ const transformer: Transformer<Root> = (ast, file) => {
 
   for (const { key, value } of getFrontMatterASTObject(frontMatterNode)) {
     if (key.type === 'Literal' && key.value === 'title') {
-      // @ts-expect-error
+      // @ts-expect-error -- fixme
       title = value.value
       break
     }
     if (key.type === 'Identifier' && key.name === 'title') {
-      // @ts-expect-error
+      // @ts-expect-error -- fixme
       title = value.value
       break
     }

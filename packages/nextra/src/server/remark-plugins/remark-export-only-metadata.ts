@@ -8,7 +8,7 @@ const transformer: Transformer<Root> = ast => {
 
     if (!isMdxJs) return true
 
-    // @ts-expect-error
+    // @ts-expect-error -- fixme
     const [body] = node.data.estree.body
     const isExportNamed = body.type === 'ExportNamedDeclaration'
 

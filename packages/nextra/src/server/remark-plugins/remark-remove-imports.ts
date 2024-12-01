@@ -7,7 +7,7 @@ const transformer: Transformer<Root> = ast => {
     ast,
     node =>
       node.type === 'mdxjsEsm' &&
-      // @ts-expect-error
+      // @ts-expect-error -- fixme
       node.data.estree.body[0].type === 'ImportDeclaration'
   )
 }

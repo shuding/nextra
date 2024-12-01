@@ -34,7 +34,7 @@ const transformer: Transformer<Root> = (ast, file) => {
 
     const result = isTextOnly
       ? node.children.map(n => (n as Text).value).join('')
-      : // @ts-expect-error
+      : // @ts-expect-error -- fixme
         Object.assign(toEstree(node).body[0].expression, {
           type: 'JSXFragment',
           openingFragment: { type: 'JSXOpeningFragment' },

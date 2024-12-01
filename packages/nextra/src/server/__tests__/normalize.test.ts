@@ -401,7 +401,7 @@ describe('normalize-page', () => {
       list: pageMap,
       route: '/'
     })
-    // @ts-expect-error
+    // @ts-expect-error -- fixme
     expect(normalizedResult.topLevelNavbarItems[0].firstChildRoute).toBe(
       '/blog'
     )

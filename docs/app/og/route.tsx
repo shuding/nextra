@@ -3,9 +3,8 @@ import { NextraLogo } from '@components/icons'
 import { ImageResponse } from 'next/og'
 
 export const runtime = 'edge'
-
-const font = fetch(new URL('Inter-SemiBold.otf', import.meta.url)).then(res =>
-  res.arrayBuffer()
+const font = await fetch(new URL('Inter-SemiBold.otf', import.meta.url)).then(
+  res => res.arrayBuffer()
 )
 
 export async function GET(req: Request): Promise<Response> {
@@ -51,7 +50,7 @@ export async function GET(req: Request): Promise<Response> {
         fonts: [
           {
             name: 'inter',
-            data: await font,
+            data: font,
             style: 'normal'
           }
         ]

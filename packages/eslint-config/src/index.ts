@@ -86,13 +86,8 @@ const config: Config = tseslint.config(
       'sonarjs/no-unused-collection': 'error',
       eqeqeq: ['error', 'always', { null: 'ignore' }],
       'unicorn/switch-case-braces': ['error', 'avoid'],
-      // todo: enable
-      '@typescript-eslint/no-explicit-any': 'off',
-      '@typescript-eslint/no-non-null-assertion': 'off',
-      '@typescript-eslint/ban-ts-comment': 'off',
 
-      'unicorn/prefer-top-level-await': 'off', // Check if possible to refactor without breaking
-
+      '@typescript-eslint/no-explicit-any': 'off', // Too many cases
       'unicorn/prevent-abbreviations': 'off', // Too many cases
       'unicorn/explicit-length-check': 'off', // I don't like
       'unicorn/no-null': 'off', // I don't like
@@ -108,9 +103,9 @@ const config: Config = tseslint.config(
       '@next/next': eslintPluginNext
     },
     extends: [
-      // @ts-expect-error
+      // @ts-expect-error -- always exist
       eslintPluginReact.configs.flat.recommended,
-      // @ts-expect-error
+      // @ts-expect-error -- always exist
       eslintPluginReact.configs.flat['jsx-runtime']
     ],
     rules: {
