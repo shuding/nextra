@@ -89,11 +89,9 @@ const config: Config = tseslint.config(
       // todo: enable
       '@typescript-eslint/no-explicit-any': 'off',
       '@typescript-eslint/no-non-null-assertion': 'off',
-      '@typescript-eslint/no-var-requires': 'off',
       '@typescript-eslint/ban-ts-comment': 'off',
 
       'unicorn/no-hex-escape': 'off', // todo
-      'unicorn/prefer-module': 'off',
       'unicorn/no-array-reduce': 'off',
       'unicorn/prefer-top-level-await': 'off', // Check if possible to refactor without breaking
 
