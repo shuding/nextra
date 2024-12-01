@@ -3,7 +3,7 @@ import { evaluate } from './evaluate.js'
 import type { Scope } from './evaluate.js'
 import type { MDXComponents } from './mdx-components.js'
 
-export type MDXRemoteProps = {
+export type MDXRemoteProps = Readonly<{
   /**
    * An object mapping names to React components.
    * The key used will be the name accessible to MDX.
@@ -16,7 +16,7 @@ export type MDXRemoteProps = {
    */
   scope?: Scope
   compiledSource: string
-}
+}>
 
 export function MDXRemote({
   scope,

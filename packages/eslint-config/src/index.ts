@@ -47,11 +47,11 @@ const config: Config = tseslint.config(
       js.configs.recommended,
       tseslint.configs.recommended,
       eslintPluginUnicorn.configs['flat/recommended'],
+      eslintPluginSonarJs.configs.recommended,
       eslintConfigPrettier
     ],
     plugins: {
-      import: eslintPluginImport,
-      sonarjs: eslintPluginSonarJs
+      import: eslintPluginImport
     },
     rules: {
       'no-extra-boolean-cast': ['error', { enforceForInnerExpressions: true }],
@@ -81,12 +81,36 @@ const config: Config = tseslint.config(
       ],
       'prefer-object-spread': 'error',
       'prefer-arrow-callback': ['error', { allowNamedFunctions: true }],
-      'sonarjs/no-small-switch': 'error',
       'prefer-const': ['error', { destructuring: 'all' }],
-      'sonarjs/no-unused-collection': 'error',
       eqeqeq: ['error', 'always', { null: 'ignore' }],
       'unicorn/switch-case-braces': ['error', 'avoid'],
 
+      'sonarjs/unused-named-groups': 'off', // todo
+      'sonarjs/cognitive-complexity': 'off', // todo
+      'sonarjs/prefer-nullish-coalescing': 'off', // todo
+      'sonarjs/no-nested-conditional': 'off', // todo
+      'sonarjs/slow-regex': 'off', // todo
+      'sonarjs/different-types-comparison': 'off', // todo
+      'sonarjs/default-param-last': 'off', // todo
+      'sonarjs/no-misleading-array-reverse': 'off', // todo
+      'sonarjs/sonar-prefer-regexp-exec': 'off', // todo
+      'sonarjs/no-nested-functions': 'off', // todo
+      'sonarjs/todo-tag': 'off', // todo
+      'sonarjs/no-unknown-property': 'off', // todo
+      'sonarjs/hook-use-state': 'off', // todo
+      'sonarjs/no-nested-template-literals': 'off', // todo
+      'sonarjs/label-has-associated-control': 'off', // todo
+      'sonarjs/no-nested-assignment': 'off', // todo
+      'sonarjs/function-return-type': 'off', // todo
+      'sonarjs/table-header': 'off', // todo
+      'sonarjs/anchor-is-valid': 'off', // todo
+      'sonarjs/sonar-no-unused-vars': 'off', // todo
+      'sonarjs/no-var': 'off', // todo
+      'sonarjs/argument-type': 'off', // todo
+      'sonarjs/no-array-index-key': 'off', // todo
+      'sonarjs/no-unstable-nested-components': 'off', // todo
+
+      'sonarjs/fixme-tag': 'off',
       '@typescript-eslint/no-explicit-any': 'off', // Too many cases
       'unicorn/prevent-abbreviations': 'off', // Too many cases
       'unicorn/explicit-length-check': 'off', // I don't like
