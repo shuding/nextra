@@ -3,6 +3,7 @@ import { includeIgnoreFile } from '@eslint/compat'
 import js from '@eslint/js'
 // @ts-expect-error -- no types
 import eslintPluginNext from '@next/eslint-plugin-next'
+import type { Linter } from 'eslint'
 // @ts-expect-error -- no types
 import eslintConfigPrettier from 'eslint-config-prettier'
 import eslintPluginImport from 'eslint-plugin-import-x'
@@ -28,7 +29,7 @@ const TAILWIND_CONFIG = {
     'tailwindcss/enforces-shorthand': 'error',
     'tailwindcss/migration-from-tailwind-2': 'error',
     'tailwindcss/no-custom-classname': 'error'
-  }
+  } satisfies Linter.RulesRecord
 }
 
 const REACT_COMPILER_RESTRICT = {
@@ -115,13 +116,13 @@ const config: Config = tseslint.config(
       {
         ...eslintPluginReactHooks.configs.recommended,
         plugins: {
-          'react-hooks': eslintPluginReactHooks,
+          'react-hooks': eslintPluginReactHooks
         }
       },
       {
         rules: {
           ...eslintPluginNext.configs.recommended.rules,
-          ...eslintPluginNext.configs['core-web-vitals'].rules,
+          ...eslintPluginNext.configs['core-web-vitals'].rules
         },
         plugins: {
           '@next/next': eslintPluginNext
