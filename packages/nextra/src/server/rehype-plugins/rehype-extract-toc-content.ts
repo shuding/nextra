@@ -2,14 +2,14 @@ import type { SpreadElement } from 'estree'
 import type { Element, Root, Text } from 'hast'
 import { toEstree } from 'hast-util-to-estree'
 import type { MdxjsEsm } from 'hast-util-to-estree/lib/handlers/mdxjs-esm'
-import type { Plugin } from 'unified'
+import type { Plugin, Transformer } from 'unified'
 import { SKIP, visit } from 'unist-util-visit'
 import type { Heading } from '../../types.js'
 import { createAstExportConst, createAstObject } from '../utils.js'
 
 const TOC_HEADING_RE = /^h[2-6]$/
 
-export const rehypeExtractTocContent: Plugin<[], Root> = () => (ast, file) => {
+const transformer: Transformer<Root> = (ast, file) => {
   const TocMap: Record<string, Element> = {}
   visit(ast, 'element', (node, _index, parent) => {
     if (!TOC_HEADING_RE.test(node.tagName)) return
@@ -126,3 +126,5 @@ function createComputedKey(
     }
   }
 }
+
+export const rehypeExtractTocContent: Plugin<[], Root> = () => transformer

@@ -2,7 +2,7 @@ import path from 'node:path'
 import type { Property } from 'estree'
 import type { MdxjsEsm } from 'hast-util-to-estree/lib/handlers/mdxjs-esm'
 import type { Root, RootContent } from 'mdast'
-import type { Plugin } from 'unified'
+import type { Plugin, Transformer } from 'unified'
 import { EXIT, visit } from 'unist-util-visit'
 import { pageTitleFromFilename } from '../utils.js'
 import { getFlattenedValue } from './remark-headings.js'
@@ -27,7 +27,7 @@ export function isExportNode(
   return name === varName
 }
 
-export const remarkMdxTitle: Plugin<[], Root> = () => (ast: Root, file) => {
+const transformer: Transformer<Root> = (ast, file) => {
   let title = ''
 
   const frontMatterNode = ast.children.find(node =>
@@ -66,3 +66,5 @@ export const remarkMdxTitle: Plugin<[], Root> = () => (ast: Root, file) => {
     }
   }
 }
+
+export const remarkMdxTitle: Plugin<[], Root> = () => transformer

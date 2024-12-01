@@ -2,7 +2,7 @@ import path from 'node:path'
 import type { ImportDeclaration } from 'estree'
 import type { MdxjsEsm } from 'hast-util-to-estree/lib/handlers/mdxjs-esm'
 import type { Definition, Image, ImageReference, Root } from 'mdast'
-import type { Plugin } from 'unified'
+import type { Plugin, Transformer } from 'unified'
 import { visit } from 'unist-util-visit'
 import { EXTERNAL_URL_RE } from '../constants.js'
 
@@ -16,7 +16,7 @@ const VARIABLE_PREFIX = '__img'
 
 // Based on the remark-embed-images project
 // https://github.com/remarkjs/remark-embed-images
-export const remarkStaticImage: Plugin<[], Root> = () => ast => {
+const transformer: Transformer<Root> = ast => {
   const definitionNodes: Definition[] = []
 
   const imageImports = new Set<string>()
@@ -131,3 +131,5 @@ export const remarkStaticImage: Plugin<[], Root> = () => ast => {
     )
   }
 }
+
+export const remarkStaticImage: Plugin<[], Root> = () => transformer

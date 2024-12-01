@@ -1,8 +1,8 @@
 import type { Root } from 'mdast'
-import type { Plugin } from 'unified'
+import type { Plugin, Transformer } from 'unified'
 import { remove } from 'unist-util-remove'
 
-export const remarkRemoveImports: Plugin<[], Root> = () => ast => {
+const transformer: Transformer<Root> = ast => {
   remove(
     ast,
     node =>
@@ -11,3 +11,5 @@ export const remarkRemoveImports: Plugin<[], Root> = () => ast => {
       node.data.estree.body[0].type === 'ImportDeclaration'
   )
 }
+
+export const remarkRemoveImports: Plugin<[], Root> = () => transformer

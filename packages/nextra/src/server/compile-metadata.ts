@@ -1,6 +1,7 @@
 import { createProcessor } from '@mdx-js/mdx'
 import type { Program } from 'estree'
 import remarkFrontmatter from 'remark-frontmatter'
+import type { Plugin, Transformer } from 'unified'
 import {
   remarkAssignFrontMatter,
   remarkExportOnlyMetadata,
@@ -29,14 +30,14 @@ export async function compileMetadata(
       [remarkAssignFrontMatter, { lastCommitTime }],
       remarkExportOnlyMetadata
     ],
-    recmaPlugins: [recmaOnlyMetadata]
+    recmaPlugins: [recmaExportOnlyMetadata]
   })
   const vFile = await compiler.process({ value: source, path: filePath })
 
   return vFile.value as string
 }
 
-const recmaOnlyMetadata = () => (ast: Program) => {
+const transformer: Transformer<Program> = ast => {
   const importReact = ast.body[0]! // always exist
 
   ast.body = ast.body.filter(
@@ -46,3 +47,5 @@ const recmaOnlyMetadata = () => (ast: Program) => {
   )
   ast.body.unshift(importReact)
 }
+
+const recmaExportOnlyMetadata: Plugin<[], Program> = () => transformer

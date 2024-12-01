@@ -94,7 +94,6 @@ const config: Config = tseslint.config(
 
       'unicorn/no-hex-escape': 'off', // todo
       'unicorn/escape-case': 'off', // todo
-      'unicorn/consistent-function-scoping': 'off', // todo
       'unicorn/prefer-module': 'off',
       'unicorn/no-array-reduce': 'off',
       'unicorn/prefer-top-level-await': 'off', // Check if possible to refactor without breaking

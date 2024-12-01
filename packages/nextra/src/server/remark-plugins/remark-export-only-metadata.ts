@@ -1,8 +1,8 @@
 import type { Root } from 'mdast'
-import type { Plugin } from 'unified'
+import type { Plugin, Transformer } from 'unified'
 import { remove } from 'unist-util-remove'
 
-export const remarkExportOnlyMetadata: Plugin<[], Root> = () => ast => {
+const transformer: Transformer<Root> = ast => {
   remove(ast, node => {
     const isMdxJs = node.type === 'mdxjsEsm'
 
@@ -22,3 +22,4 @@ export const remarkExportOnlyMetadata: Plugin<[], Root> = () => ast => {
     return !isMetadata
   })
 }
+export const remarkExportOnlyMetadata: Plugin<[], Root> = () => transformer
