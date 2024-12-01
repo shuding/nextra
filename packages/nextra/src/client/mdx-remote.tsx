@@ -1,7 +1,7 @@
 import { useMDXComponents } from 'next-mdx-import-source-file'
 import { evaluate } from './evaluate.js'
 import type { Scope } from './evaluate.js'
-import type { MDXComponents } from './mdx-components'
+import type { MDXComponents } from './mdx-components.js'
 
 export type MDXRemoteProps = {
   /**
