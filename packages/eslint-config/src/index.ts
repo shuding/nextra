@@ -5,7 +5,6 @@ import js from '@eslint/js'
 import eslintPluginNext from '@next/eslint-plugin-next'
 // @ts-expect-error -- no types
 import eslintConfigPrettier from 'eslint-config-prettier'
-import eslintPluginDeprecation from 'eslint-plugin-deprecation'
 import eslintPluginImport from 'eslint-plugin-import-x'
 import eslintPluginReact from 'eslint-plugin-react'
 // @ts-expect-error -- no types
@@ -112,28 +111,30 @@ const config: Config = tseslint.config(
       // @ts-expect-error
       eslintPluginReact.configs.flat.recommended,
       // @ts-expect-error
-      eslintPluginReact.configs.flat['jsx-runtime']
+      eslintPluginReact.configs.flat['jsx-runtime'],
+      {
+        ...eslintPluginReactHooks.configs.recommended,
+        plugins: {
+          'react-hooks': eslintPluginReactHooks,
+        }
+      },
+      {
+        rules: {
+          ...eslintPluginNext.configs.recommended.rules,
+          ...eslintPluginNext.configs['core-web-vitals'].rules,
+        },
+        plugins: {
+          '@next/next': eslintPluginNext
+        }
+      }
     ],
-    plugins: {
-      'react-hooks': eslintPluginReactHooks,
-      '@next/next': eslintPluginNext
-    },
     rules: {
-      ...eslintPluginReactHooks.configs.recommended.rules,
-      ...eslintPluginNext.configs.recommended.rules,
       'react/prop-types': 'off',
       'react/no-unknown-property': ['error', { ignore: ['jsx'] }],
       'react-hooks/exhaustive-deps': 'error',
       'react/self-closing-comp': 'error',
       'no-restricted-syntax': [
         'error',
-        {
-          // ❌ useMemo(…, [])
-          selector:
-            'CallExpression[callee.name=useMemo][arguments.1.type=ArrayExpression][arguments.1.elements.length=0]',
-          message:
-            "`useMemo` with an empty dependency array can't provide a stable reference, use `useRef` instead."
-        },
         {
           // ❌ z.object(…)
           selector: 'MemberExpression[object.name=z] > .property[name=object]',
@@ -155,18 +156,17 @@ const config: Config = tseslint.config(
   {
     files: ['**/*.{ts,tsx,cts,mts}'],
     plugins: {
-      deprecation: eslintPluginDeprecation,
       'typescript-sort-keys': eslintPluginTsSortKeys
     },
     // TODO: fix errors
-    // 'plugin:@typescript-eslint/recommended-requiring-type-checking'
+    // extends: [tseslint.configs.recommendedTypeChecked],
     languageOptions: {
       parserOptions: {
         projectService: true
       }
     },
     rules: {
-      ...eslintPluginDeprecation.configs.recommended.rules,
+      '@typescript-eslint/no-deprecated': 'error',
       '@typescript-eslint/await-thenable': 'error',
       '@typescript-eslint/no-unnecessary-type-assertion': 'error',
       '@typescript-eslint/consistent-type-imports': 'error',

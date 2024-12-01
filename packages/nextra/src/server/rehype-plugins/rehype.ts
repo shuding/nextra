@@ -32,7 +32,7 @@ export const DEFAULT_REHYPE_PRETTY_CODE_OPTIONS: RehypePrettyCodeOptions = {
     block: 'plaintext'
   },
   getHighlighter(opts) {
-    // eslint-disable-next-line deprecation/deprecation -- TODO: remove deprecation error
+    // eslint-disable-next-line @typescript-eslint/no-deprecated -- TODO: remove deprecation error
     return getHighlighter({
       ...opts,
       // Without `getHighlighter` option ```mdx lang is not highlighted...
