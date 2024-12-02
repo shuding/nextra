@@ -1,19 +1,19 @@
 /* eslint-disable react-compiler/react-compiler, no-restricted-imports */
 
-"use client";
+'use client'
 
 // TODO: enable in the future
 // This is a big component and something could be broken after enabling react-compiler
-"use no memo";
+'use no memo'
 
-import cn from "clsx";
-import { usePathname } from "next/navigation";
-import type { Heading } from "nextra";
-import { Anchor, Button, Collapse } from "nextra/components";
-import { useFSRoute } from "nextra/hooks";
-import { ArrowRightIcon, ExpandIcon } from "nextra/icons";
-import type { Item, MenuItem, PageItem } from "nextra/normalize-pages";
-import type { FC, FocusEventHandler, MouseEventHandler } from "react";
+import cn from 'clsx'
+import { usePathname } from 'next/navigation'
+import type { Heading } from 'nextra'
+import { Anchor, Button, Collapse } from 'nextra/components'
+import { useFSRoute } from 'nextra/hooks'
+import { ArrowRightIcon, ExpandIcon } from 'nextra/icons'
+import type { Item, MenuItem, PageItem } from 'nextra/normalize-pages'
+import type { FC, FocusEventHandler, MouseEventHandler } from 'react'
 import {
   forwardRef,
   useCallback,
@@ -21,9 +21,9 @@ import {
   useId,
   useMemo,
   useRef,
-  useState,
-} from "react";
-import scrollIntoView from "scroll-into-view-if-needed";
+  useState
+} from 'react'
+import scrollIntoView from 'scroll-into-view-if-needed'
 import {
   setFocusedRoute,
   setMenu,
@@ -32,128 +32,128 @@ import {
   useFocusedRoute,
   useMenu,
   useThemeConfig,
-  useToc,
-} from "../stores";
-import { LocaleSwitch } from "./locale-switch";
-import { ThemeSwitch } from "./theme-switch";
+  useToc
+} from '../stores'
+import { LocaleSwitch } from './locale-switch'
+import { ThemeSwitch } from './theme-switch'
 
-const TreeState: Record<string, boolean> = Object.create(null);
+const TreeState: Record<string, boolean> = Object.create(null)
 
 const classes = {
   link: cn(
-    "x:flex x:rounded x:px-2 x:py-1.5 x:text-sm x:transition-colors x:[word-break:break-word]",
-    "x:cursor-pointer x:contrast-more:border",
+    'x:flex x:rounded x:px-2 x:py-1.5 x:text-sm x:transition-colors x:[word-break:break-word]',
+    'x:cursor-pointer x:contrast-more:border'
   ),
   inactive: cn(
-    "x:text-gray-500 x:hover:bg-gray-100 x:hover:text-gray-900",
-    "x:dark:text-neutral-400 x:dark:hover:bg-primary-100/5 x:dark:hover:text-gray-50",
-    "x:contrast-more:text-gray-900 x:contrast-more:dark:text-gray-50",
-    "x:contrast-more:border-transparent x:contrast-more:hover:border-gray-900 x:contrast-more:dark:hover:border-gray-50",
+    'x:text-gray-500 x:hover:bg-gray-100 x:hover:text-gray-900',
+    'x:dark:text-neutral-400 x:dark:hover:bg-primary-100/5 x:dark:hover:text-gray-50',
+    'x:contrast-more:text-gray-900 x:contrast-more:dark:text-gray-50',
+    'x:contrast-more:border-transparent x:contrast-more:hover:border-gray-900 x:contrast-more:dark:hover:border-gray-50'
   ),
   active: cn(
-    "x:bg-primary-100 x:font-semibold x:text-primary-800 x:dark:bg-primary-400/10 x:dark:text-primary-600",
-    "x:contrast-more:border-primary-500!",
+    'x:bg-primary-100 x:font-semibold x:text-primary-800 x:dark:bg-primary-400/10 x:dark:text-primary-600',
+    'x:contrast-more:border-primary-500!'
   ),
-  list: cn("x:grid x:gap-1"),
+  list: cn('x:grid x:gap-1'),
   border: cn(
-    "x:relative x:before:absolute x:before:inset-y-1",
+    'x:relative x:before:absolute x:before:inset-y-1',
     'x:before:w-px x:before:bg-gray-200 x:before:content-[""] x:dark:before:bg-neutral-800',
-    "x:ps-3 x:before:start-0 x:pt-1 x:ms-3",
+    'x:ps-3 x:before:start-0 x:pt-1 x:ms-3'
   ),
-  wrapper: cn("x:p-4 x:overflow-y-auto nextra-scrollbar nextra-mask"),
+  wrapper: cn('x:p-4 x:overflow-y-auto nextra-scrollbar nextra-mask'),
   footer: cn(
-    "nextra-sidebar-footer x:border-t nextra-border x:flex x:items-center x:gap-2 x:py-4 x:mx-4",
-  ),
-};
+    'nextra-sidebar-footer x:border-t nextra-border x:flex x:items-center x:gap-2 x:py-4 x:mx-4'
+  )
+}
 
 type FolderProps = {
-  item: PageItem | MenuItem | Item;
-  anchors: Heading[];
-  onFocus: FocusEventHandler;
-  level: number;
-};
+  item: PageItem | MenuItem | Item
+  anchors: Heading[]
+  onFocus: FocusEventHandler
+  level: number
+}
 
 const Folder: FC<FolderProps> = ({ item, anchors, onFocus, level }) => {
-  const routeOriginal = useFSRoute();
-  const route = routeOriginal.split("#", 1)[0]!;
-  const hasRoute = !!item.route; // for item.type === 'menu' will be ''
-  const active = hasRoute && [route, route + "/"].includes(item.route + "/");
+  const routeOriginal = useFSRoute()
+  const route = routeOriginal.split('#', 1)[0]!
+  const hasRoute = !!item.route // for item.type === 'menu' will be ''
+  const active = hasRoute && [route, route + '/'].includes(item.route + '/')
   const activeRouteInside =
-    active || (hasRoute && route.startsWith(item.route + "/"));
+    active || (hasRoute && route.startsWith(item.route + '/'))
 
-  const focusedRoute = useFocusedRoute();
-  const focusedRouteInside = focusedRoute.startsWith(item.route + "/");
+  const focusedRoute = useFocusedRoute()
+  const focusedRouteInside = focusedRoute.startsWith(item.route + '/')
 
-  const { theme } = item as Item;
-  const { defaultMenuCollapseLevel, autoCollapse } = useThemeConfig().sidebar;
+  const { theme } = item as Item
+  const { defaultMenuCollapseLevel, autoCollapse } = useThemeConfig().sidebar
 
   const open =
     TreeState[item.route] === undefined
       ? active ||
         activeRouteInside ||
         focusedRouteInside ||
-        (theme && "collapsed" in theme
+        (theme && 'collapsed' in theme
           ? !theme.collapsed
           : level < defaultMenuCollapseLevel)
-      : TreeState[item.route] || focusedRouteInside;
+      : TreeState[item.route] || focusedRouteInside
 
-  const [, rerender] = useState<object>();
+  const [, rerender] = useState<object>()
 
   const handleClick: MouseEventHandler<HTMLAnchorElement | HTMLButtonElement> =
-    useCallback((event) => {
-      const el = event.currentTarget;
+    useCallback(event => {
+      const el = event.currentTarget
       const isClickOnIcon =
         el /* will be always <a> or <button> */ !==
-        event.target; /* can be <svg> or <path> */
+        event.target /* can be <svg> or <path> */
       if (isClickOnIcon) {
-        event.preventDefault();
+        event.preventDefault()
       }
-      const isOpen = el.parentElement!.classList.contains("open");
-      const route = el.getAttribute("href") || el.dataset.href || "";
-      TreeState[route] = !isOpen;
-      rerender({});
-    }, []);
+      const isOpen = el.parentElement!.classList.contains('open')
+      const route = el.getAttribute('href') || el.dataset.href || ''
+      TreeState[route] = !isOpen
+      rerender({})
+    }, [])
 
   useEffect(() => {
     function updateTreeState() {
       if (activeRouteInside || focusedRouteInside) {
-        TreeState[item.route] = true;
+        TreeState[item.route] = true
       }
     }
 
     function updateAndPruneTreeState() {
       if (activeRouteInside && focusedRouteInside) {
-        TreeState[item.route] = true;
+        TreeState[item.route] = true
       } else {
-        delete TreeState[item.route];
+        delete TreeState[item.route]
       }
     }
 
     if (autoCollapse) {
-      updateAndPruneTreeState();
+      updateAndPruneTreeState()
     } else {
-      updateTreeState();
+      updateTreeState()
     }
-  }, [activeRouteInside, focusedRouteInside, item.route, autoCollapse]);
+  }, [activeRouteInside, focusedRouteInside, item.route, autoCollapse])
 
-  if (item.type === "menu") {
-    const menu = item as MenuItem;
+  if (item.type === 'menu') {
+    const menu = item as MenuItem
     const routes = Object.fromEntries(
-      (menu.children || []).map((route) => [route.name, route]),
-    );
+      (menu.children || []).map(route => [route.name, route])
+    )
     // @ts-expect-error
     item.children = Object.entries(menu.items || {}) // eslint-disable-line @typescript-eslint/no-unnecessary-condition -- fixme
       .map(([key, item]) => {
         return {
           ...(routes[key] || { name: key /* for React key prop */ }),
-          ...(item as object),
-        };
-      });
+          ...(item as object)
+        }
+      })
   }
 
-  const isLink = "frontMatter" in item;
+  const isLink = 'frontMatter' in item
   // use button when link don't have href because it impacts on SEO
-  const ComponentToUse = isLink ? Anchor : Button;
+  const ComponentToUse = isLink ? Anchor : Button
 
   return (
     <li className={cn({ open, active })}>
@@ -161,10 +161,10 @@ const Folder: FC<FolderProps> = ({ item, anchors, onFocus, level }) => {
         href={isLink ? item.route : undefined}
         data-href={isLink ? undefined : item.route}
         className={cn(
-          "x:items-center x:justify-between x:gap-2",
-          !isLink && "x:text-start x:w-full",
+          'x:items-center x:justify-between x:gap-2',
+          !isLink && 'x:text-start x:w-full',
           classes.link,
-          active ? classes.active : classes.inactive,
+          active ? classes.active : classes.inactive
         )}
         onClick={handleClick}
         onFocus={onFocus}
@@ -173,10 +173,10 @@ const Folder: FC<FolderProps> = ({ item, anchors, onFocus, level }) => {
         <ArrowRightIcon
           height="18"
           className={cn(
-            "x:shrink-0",
-            "x:rounded-sm x:p-0.5 x:hover:bg-gray-800/5 x:dark:hover:bg-gray-100/5",
-            "x:motion-reduce:*:transition-none x:*:origin-center x:*:transition-transform x:*:rtl:-rotate-180",
-            open && "x:*:ltr:rotate-90 x:*:rtl:-rotate-270",
+            'x:shrink-0',
+            'x:rounded-sm x:p-0.5 x:hover:bg-gray-800/5 x:dark:hover:bg-gray-100/5',
+            'x:motion-reduce:*:transition-none x:*:origin-center x:*:transition-transform x:*:rtl:-rotate-180',
+            open && 'x:*:ltr:rotate-90 x:*:rtl:-rotate-270'
           )}
         />
       </ComponentToUse>
@@ -191,42 +191,42 @@ const Folder: FC<FolderProps> = ({ item, anchors, onFocus, level }) => {
         </Collapse>
       )}
     </li>
-  );
-};
+  )
+}
 
 const Separator: FC<{ title: string }> = ({ title }) => {
   return (
     <li
       className={cn(
-        "[word-break:break-word]",
+        '[word-break:break-word]',
         title
-          ? "x:not-first:mt-5 x:mb-2 x:px-2 x:py-1.5 x:text-sm x:font-semibold x:text-gray-900 x:dark:text-gray-100"
-          : "x:my-4",
+          ? 'x:not-first:mt-5 x:mb-2 x:px-2 x:py-1.5 x:text-sm x:font-semibold x:text-gray-900 x:dark:text-gray-100'
+          : 'x:my-4'
       )}
     >
       {title || (
         <hr className="x:mx-2 x:border-t x:border-gray-200 x:dark:border-primary-100/10" />
       )}
     </li>
-  );
-};
+  )
+}
 
 const handleClick = () => {
-  setMenu(false);
-};
+  setMenu(false)
+}
 
 const File: FC<{
-  item: PageItem | Item;
-  anchors: Heading[];
-  onFocus: FocusEventHandler;
+  item: PageItem | Item
+  anchors: Heading[]
+  onFocus: FocusEventHandler
 }> = ({ item, anchors, onFocus }) => {
-  const route = useFSRoute();
+  const route = useFSRoute()
   // It is possible that the item doesn't have any route - for example, an external link.
-  const active = item.route && [route, route + "/"].includes(item.route + "/");
-  const activeSlug = useActiveAnchor();
+  const active = item.route && [route, route + '/'].includes(item.route + '/')
+  const activeSlug = useActiveAnchor()
 
-  if (item.type === "separator") {
-    return <Separator title={item.title} />;
+  if (item.type === 'separator') {
+    return <Separator title={item.title} />
   }
 
   return (
@@ -247,7 +247,7 @@ const File: FC<{
                 className={cn(
                   classes.link,
                   'x:focus-visible:nextra-focus x:flex x:gap-2 x:before:opacity-25 x:before:content-["#"]',
-                  id === activeSlug ? classes.active : classes.inactive,
+                  id === activeSlug ? classes.active : classes.inactive
                 )}
                 onClick={handleClick}
               >
@@ -258,28 +258,28 @@ const File: FC<{
         </ul>
       )}
     </li>
-  );
-};
-
-interface MenuProps {
-  directories: PageItem[] | Item[];
-  anchors: Heading[];
-  className?: string;
-  level: number;
+  )
 }
 
-const handleFocus: FocusEventHandler<HTMLAnchorElement> = (event) => {
+interface MenuProps {
+  directories: PageItem[] | Item[]
+  anchors: Heading[]
+  className?: string
+  level: number
+}
+
+const handleFocus: FocusEventHandler<HTMLAnchorElement> = event => {
   const route =
-    event.target.getAttribute("href") || event.target.dataset.href || "";
-  setFocusedRoute(route);
-};
+    event.target.getAttribute('href') || event.target.dataset.href || ''
+  setFocusedRoute(route)
+}
 
 const Menu = forwardRef<HTMLUListElement, MenuProps>(
   ({ directories, anchors, className, level }, forwardedRef) => (
     <ul className={cn(classes.list, className)} ref={forwardedRef}>
-      {directories.map((item) => {
+      {directories.map(item => {
         const ComponentToUse =
-          item.type === "menu" || item.children?.length ? Folder : File;
+          item.type === 'menu' || item.children?.length ? Folder : File
 
         return (
           <ComponentToUse
@@ -289,57 +289,57 @@ const Menu = forwardRef<HTMLUListElement, MenuProps>(
             onFocus={handleFocus}
             level={level + 1}
           />
-        );
+        )
       })}
     </ul>
-  ),
-);
-Menu.displayName = "Menu";
+  )
+)
+Menu.displayName = 'Menu'
 
 export const MobileNav: FC = () => {
-  const { directories } = useConfig().normalizePagesResult;
-  const toc = useToc();
+  const { directories } = useConfig().normalizePagesResult
+  const toc = useToc()
 
-  const menu = useMenu();
-  const pathname = usePathname();
-
-  useEffect(() => {
-    setMenu(false);
-  }, [pathname]);
-
-  const anchors = useMemo(() => toc.filter((v) => v.depth === 2), [toc]);
-  const sidebarRef = useRef<HTMLUListElement>(null!);
+  const menu = useMenu()
+  const pathname = usePathname()
 
   useEffect(() => {
-    const activeElement = sidebarRef.current.querySelector("li.active");
+    setMenu(false)
+  }, [pathname])
+
+  const anchors = useMemo(() => toc.filter(v => v.depth === 2), [toc])
+  const sidebarRef = useRef<HTMLUListElement>(null!)
+
+  useEffect(() => {
+    const activeElement = sidebarRef.current.querySelector('li.active')
 
     if (activeElement && menu) {
       scrollIntoView(activeElement, {
-        block: "center",
-        inline: "center",
-        scrollMode: "always",
-        boundary: sidebarRef.current.parentNode as HTMLElement,
-      });
+        block: 'center',
+        inline: 'center',
+        scrollMode: 'always',
+        boundary: sidebarRef.current.parentNode as HTMLElement
+      })
     }
-  }, [menu]);
+  }, [menu])
 
-  const themeConfig = useThemeConfig();
-  const hasI18n = themeConfig.i18n.length > 0;
-  const hasMenu = themeConfig.darkMode || hasI18n;
+  const themeConfig = useThemeConfig()
+  const hasI18n = themeConfig.i18n.length > 0
+  const hasMenu = themeConfig.darkMode || hasI18n
 
   return (
     <aside
       className={cn(
-        "nextra-sidebar-container",
-        "x:flex x:flex-col",
-        "x:fixed x:inset-0 x:pt-(--nextra-navbar-height) x:z-10 x:overscroll-contain",
-        "x:[contain:layout_style]",
-        "x:md:hidden",
-        "x:[.nextra-banner:not([class$=hidden])~&]:pt-[calc(var(--nextra-banner-height)+var(--nextra-navbar-height))]",
-        "x:bg-nextra-bg",
+        'nextra-sidebar-container', // targeted from userspace
+        'x:flex x:flex-col',
+        'x:fixed x:inset-0 x:pt-(--nextra-navbar-height) x:z-10 x:overscroll-contain',
+        'x:[contain:layout_style]',
+        'x:md:hidden',
+        'x:[.nextra-banner:not([class$=hidden])~&]:pt-[calc(var(--nextra-banner-height)+var(--nextra-navbar-height))]',
+        'x:bg-nextra-bg',
         menu
-          ? "x:[transform:translate3d(0,0,0)]"
-          : "x:[transform:translate3d(0,-100%,0)]",
+          ? 'x:[transform:translate3d(0,0,0)]'
+          : 'x:[transform:translate3d(0,-100%,0)]'
       )}
     >
       {themeConfig.search && (
@@ -356,49 +356,49 @@ export const MobileNav: FC = () => {
       />
 
       {hasMenu && (
-        <div className={cn(classes.footer, "x:mt-auto")}>
+        <div className={cn(classes.footer, 'x:mt-auto')}>
           <ThemeSwitch lite={hasI18n} className="x:grow" />
           <LocaleSwitch />
         </div>
       )}
     </aside>
-  );
-};
+  )
+}
 
 export const Sidebar: FC<{ toc: Heading[] }> = ({ toc }) => {
-  const { normalizePagesResult, hideSidebar } = useConfig();
-  const [isExpanded, setIsExpanded] = useState(true);
-  const [showToggleAnimation, setToggleAnimation] = useState(false);
-  const sidebarRef = useRef<HTMLDivElement>(null);
-  const sidebarControlsId = useId();
+  const { normalizePagesResult, hideSidebar } = useConfig()
+  const [isExpanded, setIsExpanded] = useState(true)
+  const [showToggleAnimation, setToggleAnimation] = useState(false)
+  const sidebarRef = useRef<HTMLDivElement>(null)
+  const sidebarControlsId = useId()
 
-  const { docsDirectories, activeThemeContext } = normalizePagesResult;
-  const includePlaceholder = activeThemeContext.layout === "default";
+  const { docsDirectories, activeThemeContext } = normalizePagesResult
+  const includePlaceholder = activeThemeContext.layout === 'default'
 
   useEffect(() => {
-    const activeElement = sidebarRef.current?.querySelector("li.active");
+    const activeElement = sidebarRef.current?.querySelector('li.active')
 
     if (activeElement && window.innerWidth > 767) {
       scrollIntoView(activeElement, {
-        block: "center",
-        inline: "center",
-        scrollMode: "always",
-        boundary: sidebarRef.current!.parentNode as HTMLDivElement,
-      });
+        block: 'center',
+        inline: 'center',
+        scrollMode: 'always',
+        boundary: sidebarRef.current!.parentNode as HTMLDivElement
+      })
     }
-  }, []);
+  }, [])
 
-  const themeConfig = useThemeConfig();
+  const themeConfig = useThemeConfig()
   const anchors = useMemo(
     () =>
       // When the viewport size is larger than `md`, hide the anchors in
       // the sidebar when `floatTOC` is enabled.
-      themeConfig.toc.float ? [] : toc.filter((v) => v.depth === 2),
-    [themeConfig.toc.float, toc],
-  );
-  const hasI18n = themeConfig.i18n.length > 0;
+      themeConfig.toc.float ? [] : toc.filter(v => v.depth === 2),
+    [themeConfig.toc.float, toc]
+  )
+  const hasI18n = themeConfig.i18n.length > 0
   const hasMenu =
-    themeConfig.darkMode || hasI18n || themeConfig.sidebar.toggleButton;
+    themeConfig.darkMode || hasI18n || themeConfig.sidebar.toggleButton
 
   return (
     <>
@@ -408,20 +408,20 @@ export const Sidebar: FC<{ toc: Heading[] }> = ({ toc }) => {
       <aside
         id={sidebarControlsId}
         className={cn(
-          "nextra-sidebar x:print:hidden",
-          "x:transition-all x:ease-in-out",
-          "x:max-md:hidden x:flex x:flex-col",
-          "x:h-[calc(100dvh-var(--nextra-menu-height))]",
-          "x:top-(--nextra-navbar-height) x:shrink-0",
-          isExpanded ? "x:w-64" : "x:w-20",
-          hideSidebar ? "x:hidden" : "x:sticky",
+          'nextra-sidebar x:print:hidden',
+          'x:transition-all x:ease-in-out',
+          'x:max-md:hidden x:flex x:flex-col',
+          'x:h-[calc(100dvh-var(--nextra-menu-height))]',
+          'x:top-(--nextra-navbar-height) x:shrink-0',
+          isExpanded ? 'x:w-64' : 'x:w-20',
+          hideSidebar ? 'x:hidden' : 'x:sticky'
         )}
       >
         <div
           className={cn(
             classes.wrapper,
-            "x:grow",
-            !isExpanded && "no-scrollbar",
+            'x:grow',
+            !isExpanded && 'no-scrollbar'
           )}
           ref={sidebarRef}
         >
@@ -441,46 +441,45 @@ export const Sidebar: FC<{ toc: Heading[] }> = ({ toc }) => {
           <div
             className={cn(
               classes.footer,
-              !isExpanded && "x:flex-wrap x:justify-center",
+              !isExpanded && 'x:flex-wrap x:justify-center',
               showToggleAnimation && [
-                "x:*:opacity-0",
+                'x:*:opacity-0',
                 isExpanded
-                  ? "x:*:animate-[fade-in_1s_ease_.2s_forwards]"
-                  : "x:*:animate-[fade-in2_1s_ease_.2s_forwards]",
-              ],
+                  ? 'x:*:animate-[fade-in_1s_ease_.2s_forwards]'
+                  : 'x:*:animate-[fade-in2_1s_ease_.2s_forwards]'
+              ]
             )}
           >
             <LocaleSwitch
               lite={!isExpanded}
-              className={isExpanded ? "x:grow" : ""}
+              className={isExpanded ? 'x:grow' : ''}
             />
             <ThemeSwitch
               lite={!isExpanded || hasI18n}
-              className={!isExpanded || hasI18n ? "" : "x:grow"}
+              className={!isExpanded || hasI18n ? '' : 'x:grow'}
             />
             {themeConfig.sidebar.toggleButton && (
               <Button
                 aria-expanded={isExpanded}
                 aria-controls={sidebarControlsId}
-                title={isExpanded ? "Collapse sidebar" : "Expand sidebar"}
+                title={isExpanded ? 'Collapse sidebar' : 'Expand sidebar'}
                 className={({ hover }) =>
                   cn(
-                    "x:rounded-md x:p-2",
+                    'x:rounded-md x:p-2',
                     hover
-                      ? "x:bg-gray-100 x:text-gray-900 x:dark:bg-primary-100/5 x:dark:text-gray-50"
-                      : "x:text-gray-600 x:dark:text-gray-400",
+                      ? 'x:bg-gray-100 x:text-gray-900 x:dark:bg-primary-100/5 x:dark:text-gray-50'
+                      : 'x:text-gray-600 x:dark:text-gray-400'
                   )
                 }
                 onClick={() => {
-                  setIsExpanded((prev) => !prev);
-                  setToggleAnimation(true);
+                  setIsExpanded(prev => !prev)
+                  setToggleAnimation(true)
                 }}
               >
                 <ExpandIcon
                   height="12"
                   className={cn(
-                    !isExpanded &&
-                      "x:*:first:origin-[35%] x:*:first:rotate-180",
+                    !isExpanded && 'x:*:first:origin-[35%] x:*:first:rotate-180'
                   )}
                 />
               </Button>
@@ -489,5 +488,5 @@ export const Sidebar: FC<{ toc: Heading[] }> = ({ toc }) => {
         )}
       </aside>
     </>
-  );
-};
+  )
+}
