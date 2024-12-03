@@ -1,5 +1,5 @@
 ---
-"@fake-scope/fake-pkg": patch
+"nextra-theme-docs": patch
 ---
 
 Add `nextra-mobile-nav` to `<MobileNav>`
