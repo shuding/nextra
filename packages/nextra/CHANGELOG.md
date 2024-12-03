@@ -4,7 +4,8 @@
 
 ### Patch Changes
 
-- fbeef15: setup `@typescript-eslint/no-unnecessary-condition` rule and fix warnings
+- fbeef15: setup `@typescript-eslint/no-unnecessary-condition` rule and fix
+  warnings
 
 ## 4.0.0-app-router.31
 
@@ -285,8 +286,8 @@
     by
 
   ```js
-  import "nextra-theme-docs/style.css"; // for docs theme
-  import "nextra-theme-blog/style.css"; // for blog theme
+  import 'nextra-theme-docs/style.css' // for docs theme
+  import 'nextra-theme-blog/style.css' // for blog theme
   ```
 
 ## 4.0.0-app-router.8
@@ -1223,7 +1224,7 @@
   while importing
 
   ```js
-  import filterRouteLocale from "nextra/filter-route-locale";
+  import filterRouteLocale from 'nextra/filter-route-locale'
   ```
 
 - 4dd720ad: remove `font-weight: 500;` from styles of code blocks since it gives
@@ -1269,19 +1270,19 @@
   and `nextra-theme-docs`
 
   ```js
-  import { Card, Cards } from "nextra/components";
+  import { Card, Cards } from 'nextra/components'
   ```
 
   ```js
-  import { Tab, Tabs } from "nextra/components";
+  import { Tab, Tabs } from 'nextra/components'
   ```
 
   ```js
-  import { Steps } from "nextra/components";
+  import { Steps } from 'nextra/components'
   ```
 
   ```js
-  import { FileTree } from "nextra/components";
+  import { FileTree } from 'nextra/components'
   ```
 
 ### Patch Changes

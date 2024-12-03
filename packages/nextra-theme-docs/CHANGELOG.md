@@ -8,7 +8,8 @@
 
 ### Patch Changes
 
-- fbeef15: setup `@typescript-eslint/no-unnecessary-condition` rule and fix warnings
+- fbeef15: setup `@typescript-eslint/no-unnecessary-condition` rule and fix
+  warnings
 - ea7bece: Add `nextra-mobile-nav` to `<MobileNav>`
 - Updated dependencies [fbeef15]
   - nextra@4.0.0-app-router.32
@@ -377,8 +378,8 @@
     by
 
   ```js
-  import "nextra-theme-docs/style.css"; // for docs theme
-  import "nextra-theme-blog/style.css"; // for blog theme
+  import 'nextra-theme-docs/style.css' // for docs theme
+  import 'nextra-theme-blog/style.css' // for blog theme
   ```
 
 - Updated dependencies [2c8a8ab]
@@ -1877,19 +1878,19 @@
   and `nextra-theme-docs`
 
   ```js
-  import { Card, Cards } from "nextra/components";
+  import { Card, Cards } from 'nextra/components'
   ```
 
   ```js
-  import { Tab, Tabs } from "nextra/components";
+  import { Tab, Tabs } from 'nextra/components'
   ```
 
   ```js
-  import { Steps } from "nextra/components";
+  import { Steps } from 'nextra/components'
   ```
 
   ```js
-  import { FileTree } from "nextra/components";
+  import { FileTree } from 'nextra/components'
   ```
 
 ### Patch Changes
@@ -2465,14 +2466,14 @@
 - 582ad96: feat: bump `rehype-pretty-code` version, support `showLineNumbers`
 - da998e6: move react components to `components` folder and replace exports:
   ```ts
-  import Bleed from "nextra-theme-docs/bleed";
-  import Callout from "nextra-theme-docs/callout";
-  import Collapse from "nextra-theme-docs/collapse";
-  import { Tab, Tabs } from "nextra-theme-docs/tabs";
+  import Bleed from 'nextra-theme-docs/bleed'
+  import Callout from 'nextra-theme-docs/callout'
+  import Collapse from 'nextra-theme-docs/collapse'
+  import { Tab, Tabs } from 'nextra-theme-docs/tabs'
   ```
   by
   ```ts
-  import { Bleed, Callout, Collapse, Tab, Tabs } from "nextra-theme-docs";
+  import { Bleed, Callout, Collapse, Tab, Tabs } from 'nextra-theme-docs'
   ```
 - e6771ca: move `withLayout` logic directly in nextra loader
 - 8ad9507: fix unable expanding folder items in sidebar
@@ -2792,14 +2793,14 @@
 - 48e0ac2: export `useConfig` and `useTheme`
 - da998e6: move react components to `components` folder and replace exports:
   ```ts
-  import Bleed from "nextra-theme-docs/bleed";
-  import Callout from "nextra-theme-docs/callout";
-  import Collapse from "nextra-theme-docs/collapse";
-  import { Tab, Tabs } from "nextra-theme-docs/tabs";
+  import Bleed from 'nextra-theme-docs/bleed'
+  import Callout from 'nextra-theme-docs/callout'
+  import Collapse from 'nextra-theme-docs/collapse'
+  import { Tab, Tabs } from 'nextra-theme-docs/tabs'
   ```
   by
   ```ts
-  import { Bleed, Callout, Collapse, Tab, Tabs } from "nextra-theme-docs";
+  import { Bleed, Callout, Collapse, Tab, Tabs } from 'nextra-theme-docs'
   ```
 - 43409ad: fix: mdx theme is missing
 
