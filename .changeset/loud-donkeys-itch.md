@@ -2,4 +2,4 @@
 "@fake-scope/fake-pkg": patch
 ---
 
-Add `nextra-sidebar-container` back to Sidebar
+Add `nextra-mobile-nav` to `<MobileNav>`

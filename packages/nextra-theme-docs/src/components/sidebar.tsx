@@ -330,7 +330,7 @@ export const MobileNav: FC = () => {
   return (
     <aside
       className={cn(
-        'nextra-sidebar-container', // targeted from userspace
+        'nextra-mobile-nav', // targeted from userspace
         'x:flex x:flex-col',
         'x:fixed x:inset-0 x:pt-(--nextra-navbar-height) x:z-10 x:overscroll-contain',
         'x:[contain:layout_style]',
