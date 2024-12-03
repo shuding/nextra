@@ -1,3 +1,6 @@
+// should be used on server
+'use no memo'
+
 import type { ReactElement } from 'react'
 import { Children, cloneElement } from 'react'
 
@@ -14,6 +17,10 @@ export function removeLinks(node: TOCElement): TOCElement[] | string {
   // @ts-expect-error fixme
   return Children.map(node, child => {
     if (isLink(child)) {
+      // Skip footnotes links
+      if (child.props['data-footnote-ref']) {
+        return
+      }
       child = child.props.children
     }
 

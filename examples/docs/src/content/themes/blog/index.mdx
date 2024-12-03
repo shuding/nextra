@@ -1,0 +1,96 @@
+---
+sidebarTitle: Installation
+---
+
+# Get Started
+
+import { Steps } from 'nextra/components'
+
+## Configurations
+
+Similar to the docs theme, you can install the blog theme with the following
+commands:
+
+<Steps>
+
+### Install Next.js, Nextra and React
+
+```sh npm2yarn
+npm i next nextra react react-dom
+```
+
+### Install the blog theme
+
+```sh npm2yarn
+npm i nextra-theme-blog
+```
+
+### Create the following Next.js config and theme config under the root directory:
+
+```js filename="next.config.mjs"
+import nextra from 'nextra'
+
+const withNextra = nextra({
+  theme: 'nextra-theme-blog',
+  themeConfig: './theme.config.js'
+})
+export default withNextra()
+```
+
+```jsx filename="theme.config.js"
+export default {
+  footer: <p>MIT 2021 © Nextra.</p>,
+  head: ({ title, meta }) => (
+    <>
+      {meta.description && (
+        <meta name="description" content={meta.description} />
+      )}
+      {meta.tag && <meta name="keywords" content={meta.tag} />}
+      {meta.author && <meta name="author" content={meta.author} />}
+    </>
+  ),
+  readMore: 'Read More →',
+  titleSuffix: null,
+  postFooter: null,
+  cusdis: {
+    appId: 'your_app_id',
+    host: 'your_host(optional)',
+    lang: 'your_lang'
+  },
+  darkMode: false,
+  navs: [
+    {
+      url: 'https://github.com/shuding/nextra',
+      name: 'Nextra'
+    }
+  ]
+}
+```
+
+### Create `pages/_app.js` and include the theme stylesheet:
+
+```jsx filename="_app.js"
+import 'nextra-theme-blog/style.css'
+
+export default function Nextra({ Component, pageProps }) {
+  const getLayout = Component.getLayout || (page => page)
+  return <Component {...pageProps} />
+}
+```
+
+### You are good to go!
+
+</Steps>
+
+---
+
+> [!TIP]
+>
+> You can also use
+> [`<style jsx>`](https://nextjs.org/docs/basic-features/built-in-css-support#css-in-js)
+> to style elements inside `theme.config.js`.
+
+> [!NOTE]
+>
+> An example of the blog theme can be found
+> [here](https://github.com/vercel-solutions/nextjs-portfolio-starter).

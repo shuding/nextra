@@ -8,7 +8,7 @@ index 226885535450922fb10e07d26cad66dd2e349ca3..981272bfd587251c552de42930292c9c
          ignoreFiles,
 +        // https://stackoverflow.com/a/72679927
 +        require('@rollup/plugin-alias')({
-+          entries: [{ find: /^.*\.svg$/, replacement: 'src/icon.d.ts' }]
++          entries: [{ find: /^.*\.svg$/, replacement: 'src/icon.ts' }]
 +        }),
          dtsPlugin.default({
            tsconfig: options.tsconfig,

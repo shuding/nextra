@@ -1,0 +1,41 @@
+import type { FC } from 'react'
+import styles from './style.module.css'
+
+export const OptionTable: FC<{ options: [string, string, any] }> = ({
+  options
+}) => {
+  return (
+    <div
+      className={
+        '-mx-6 mt-6 mb-4 overflow-x-auto overscroll-x-contain px-6 pb-4 ' +
+        styles.container
+      }
+    >
+      <table className="w-full border-collapse text-sm">
+        <thead>
+          <tr className="border-b py-4 text-start dark:border-neutral-700">
+            <th className="py-2 font-semibold">Option</th>
+            <th className="py-2 pl-6 font-semibold">Type</th>
+            <th className="px-6 py-2 font-semibold">Description</th>
+          </tr>
+        </thead>
+        <tbody className="align-baseline text-gray-900 dark:text-gray-100">
+          {options.map(([option, type, description]) => (
+            <tr
+              key={option}
+              className="border-b border-gray-100 dark:border-neutral-700/50"
+            >
+              <td className="py-2 font-mono text-xs leading-6 font-semibold whitespace-pre text-violet-600 dark:text-violet-500">
+                {option}
+              </td>
+              <td className="py-2 pl-6 font-mono text-xs leading-6 font-semibold whitespace-pre text-slate-500 dark:text-slate-400">
+                {type}
+              </td>
+              <td className="py-2 pl-6">{description}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  )
+}

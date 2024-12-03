@@ -1,3 +1,5 @@
+'use no memo'
+
 import { gitUrlParse } from './git-url-parse'
 
 export function getGitIssueUrl({
@@ -10,8 +12,6 @@ export function getGitIssueUrl({
   labels?: string
 }): string {
   const repo = gitUrlParse(repository)
-  if (!repo) throw new Error('Invalid `docsRepositoryBase` URL!')
-
   if (repo.origin.includes('gitlab')) {
     return `${repo.origin}/${repo.owner}/${
       repo.name

@@ -1,49 +1,37 @@
-import { useEffect, useState } from 'react'
-import type { ReactElement } from 'react'
-import { CrossCircledIcon } from '../icons/index.js'
-import type { MDXComponents } from '../mdx.js'
-import { Code } from './code.js'
-import { Pre } from './pre.js'
-import { evaluate } from './remote-content.js'
+'use client'
 
-export function Playground({
-  source,
-  scope,
-  components,
-  fallback = null
-}: {
-  /**
-   * String with source MDX
-   *
-   * @example '# hello world <br /> nice to see you'
-   */
-  source: string
-  /**
-   * An object mapping names to React components.
-   * The key used will be the name accessible to MDX.
-   *
-   * @example `{ ComponentName: Component }` will be accessible in the MDX as `<ComponentName/>`.
-   */
-  components?: MDXComponents
-  /**
-   * Pass-through variables for use in the MDX content
-   */
-  scope?: Record<string, unknown>
-  /**
-   * Fallback component for loading
-   */
-  fallback?: ReactElement | null
-}) {
+import { useEffect, useState } from 'react'
+import type { FC, ReactElement } from 'react'
+import { evaluate } from '../evaluate.js'
+import { CrossCircledIcon } from '../icons/index.js'
+import { Code } from '../mdx-components/code.js'
+import { Pre } from '../mdx-components/pre/index.js'
+import type { MDXRemoteProps } from '../mdx-remote.js'
+
+export const Playground: FC<
+  {
+    /**
+     * String with source MDX
+     *
+     * @example '# hello world <br /> nice to see you'
+     */
+    source: string
+    /**
+     * Fallback component for loading
+     */
+    fallback?: ReactElement | null
+  } & Pick<MDXRemoteProps, 'components' | 'scope'>
+> = ({ source, fallback = null, components, scope }) => {
   const [compiledSource, setCompiledSource] = useState('')
   const [error, setError] = useState<unknown>()
 
   useEffect(() => {
     async function doCompile() {
       // Importing in useEffect to not increase global bundle size
-      const { compileMdx } = await import('../../server/compile.js')
+      const { compileMdx } = await importCompile()
       try {
-        const mdx = await compileMdx(source)
-        setCompiledSource(mdx.result)
+        const rawJs = await compileMdx(source)
+        setCompiledSource(rawJs)
         setError(null)
       } catch (error) {
         setError(error)
@@ -55,11 +43,11 @@ export function Playground({
 
   if (error) {
     return (
-      <div className="[&_svg]:_text-red-500">
+      <div className="x:[&_svg]:text-red-500">
         <Pre
           data-filename="Could not compile code"
-          icon={CrossCircledIcon}
-          className="_whitespace-pre-wrap"
+          icon={<CrossCircledIcon height="16" className="x:shrink-0" />}
+          className="x:whitespace-pre-wrap"
         >
           <Code>
             <span>
@@ -74,9 +62,16 @@ export function Playground({
   }
 
   if (compiledSource) {
-    const MDXContent = evaluate(compiledSource, scope).default
-    return <MDXContent components={components} />
+    // `<MDXRemote>` cannot be used here because `useMDXComponents` may include components that
+    // are only available on the server.
+    const MDXContent = evaluate(compiledSource, components, scope).default
+    return <MDXContent />
   }
 
   return fallback
+}
+
+// Otherwise react-compiler fails
+function importCompile() {
+  return import('../../server/compile.js')
 }

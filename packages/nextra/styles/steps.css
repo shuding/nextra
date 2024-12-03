@@ -1,16 +1,18 @@
 .nextra-steps {
   h2,
   h3,
-  h4 {
+  h4,
+  h5,
+  h6 {
     counter-increment: var(--counter-id);
     /* resets from nextra-theme-docs */
-    @apply _border-0 _pb-0 _font-semibold _tracking-tight _mt-8 _text-2xl;
+    @apply x:border-0 x:pb-0 x:font-semibold x:tracking-tight x:mt-8 x:text-2xl;
 
     &:before {
-      @apply _absolute _size-[33px];
-      @apply _border-4 _border-[rgb(var(--nextra-bg))] _bg-gray-100 dark:_bg-neutral-800;
-      @apply _rounded-full _text-neutral-400 _text-base _font-normal _text-center _-indent-px;
-      @apply _mt-[3px] _ms-[-41px];
+      @apply x:absolute x:size-[33px];
+      @apply x:border-4 x:border-nextra-bg x:bg-gray-100 x:dark:bg-neutral-800;
+      @apply x:rounded-full x:text-neutral-400 x:text-base x:font-normal x:text-center x:-indent-px;
+      @apply x:mt-[3px] x:ms-[-41px];
       content: counter(var(--counter-id));
     }
   }

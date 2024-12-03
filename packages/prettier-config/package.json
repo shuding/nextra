@@ -1,0 +1,10 @@
+{
+  "name": "@nextra/prettier-config",
+  "version": "0.0.0",
+  "type": "module",
+  "dependencies": {
+    "@ianvs/prettier-plugin-sort-imports": "4.4.0",
+    "prettier-plugin-pkg": "0.18.1",
+    "prettier-plugin-tailwindcss": "0.6.9"
+  }
+}

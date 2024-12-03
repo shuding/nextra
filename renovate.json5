@@ -10,7 +10,6 @@
         '@typescript-eslint/parser',
         'eslint',
         'eslint-config-prettier',
-        'eslint-plugin-deprecation',
         'eslint-plugin-import',
         'eslint-plugin-react',
         'eslint-plugin-react-hooks',

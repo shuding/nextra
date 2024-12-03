@@ -2,105 +2,65 @@ import bundleAnalyzer from '@next/bundle-analyzer'
 import nextra from 'nextra'
 
 const withNextra = nextra({
-  theme: 'nextra-theme-docs',
-  themeConfig: './theme.config.tsx',
   defaultShowCopyCode: true,
-  transform(content, { route }) {
-    if (route.startsWith('/en/docs/advanced/dynamic-markdown-import')) {
-      return `
-${content}
-export function getStaticProps() {
-  return {
-    props: {
-      foo: 'from nextra config'
-    }
-  }
-}`
-    }
-    return content
-  },
-  transformPageMap(pageMap, locale) {
-    if (locale === 'en') {
-      pageMap = [
-        ...pageMap,
-        {
-          name: 'virtual-page',
-          route: '/en/virtual-page',
-          frontMatter: { sidebarTitle: 'Virtual Page' }
-        }
-      ]
-    }
-    return pageMap
-  },
   latex: true,
-  autoImportThemeStyle: false
+  contentDirBasePath: '/'
 })
 
 const withBundleAnalyzer = bundleAnalyzer({
   enabled: process.env.ANALYZE === 'true'
 })
 
-/**
- * @type {import('next').NextConfig}
- */
-export default withBundleAnalyzer(
+const nextConfig = withBundleAnalyzer(
   withNextra({
+    reactStrictMode: true,
     eslint: {
-      // Eslint behaves weirdly in this monorepo.
+      // Warning: This allows production builds to successfully complete even if
+      // your project has ESLint errors.
       ignoreDuringBuilds: true
     },
     i18n: {
       locales: ['en', 'es', 'ru'],
       defaultLocale: 'en'
-    }, // basePath: "/some-base-path",
-    distDir: './.next', // Nextra supports custom `nextConfig.distDir`
+    },
     redirects: async () => [
-      // {
-      //   source: "/docs.([a-zA-Z-]+)",
-      //   destination: "/docs/getting-started",
-      //   statusCode: 301,
-      // },
-      // {
-      //   source: "/advanced/performance",
-      //   destination: "/docs/advanced/performance",
-      //   statusCode: 301,
-      // },
-      // {
-      //   source: "/advanced/cache",
-      //   destination: "/docs/advanced/cache",
-      //   statusCode: 301,
-      // },
-      // {
-      //   source: "/docs/cache",
-      //   destination: "/docs/advanced/cache",
-      //   statusCode: 301,
-      // },
-      {
-        source: '/change-log',
-        destination: '/docs/change-log',
-        statusCode: 301
-      },
-      {
-        source: '/blog/swr-1',
-        destination: '/blog/swr-v1',
-        statusCode: 301
-      },
-      {
-        source: '/docs.([a-zA-Z-]+)',
-        destination: '/docs/getting-started',
-        statusCode: 302
-      },
       {
         source: '/docs',
         destination: '/docs/getting-started',
         statusCode: 302
-      },
-      {
-        source: '/examples',
-        destination: '/examples/basic',
-        statusCode: 302
       }
     ],
-    reactStrictMode: true
+    webpack(config) {
+      // rule.exclude doesn't work starting from Next.js 15
+      const { test: _test, ...imageLoaderOptions } = config.module.rules.find(
+        rule => rule.test?.test?.('.svg')
+      )
+      config.module.rules.push({
+        test: /\.svg$/,
+        oneOf: [
+          {
+            resourceQuery: /svgr/,
+            use: ['@svgr/webpack']
+          },
+          imageLoaderOptions
+        ]
+      })
+      return config
+    },
+    experimental: {
+      turbo: {
+        rules: {
+          './app/_icons/*.svg': {
+            loaders: ['@svgr/webpack'],
+            as: '*.js'
+          }
+        }
+      },
+      optimizePackageImports: [
+        // '@app/_icons'
+      ]
+    }
   })
 )
+
+export default nextConfig

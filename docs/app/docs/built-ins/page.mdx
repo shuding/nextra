@@ -1,0 +1,34 @@
+---
+asIndexPage: true
+sidebarTitle: Built-In Components
+---
+
+import {
+  CardsIcon,
+  FolderTreeIcon,
+  IdCardIcon,
+  OneIcon,
+  TableIcon,
+  WarningIcon
+} from '@components/icons'
+import { Cards } from 'nextra/components'
+import { MDXRemote } from 'nextra/mdx-remote'
+import { createIndexPage, getPageMap } from 'nextra/page-map'
+
+# Built-ins
+
+Nextra includes a couple of built-in components that you can use to better style
+your content:
+
+<MDXRemote
+  compiledSource={await createIndexPage(await getPageMap('/docs/built-ins'))}
+  components={{
+    Cards,
+    WarningIcon,
+    CardsIcon,
+    IdCardIcon,
+    OneIcon,
+    FolderTreeIcon,
+    TableIcon
+  }}
+/>
