@@ -8,8 +8,8 @@ export const NavbarLink: FC<ComponentProps<typeof Link>> = props => {
   const pathname = useFSRoute()
   return (
     <Link
-      className="x:aria-[current=page]:no-underline x:aria-[current=page]:opacity-60"
-      aria-current={props.href === pathname ? 'page' : undefined}
+      className="x:aria-[current]:no-underline x:aria-[current]:opacity-60"
+      aria-current={props.href === pathname || undefined}
       {...props}
     />
   )
