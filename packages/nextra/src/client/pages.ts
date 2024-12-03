@@ -9,7 +9,7 @@ export async function importPage(pathSegments: string[] = [], lang = '') {
 
   const pagePath = RouteToFilepath[pathSegments.join('/')]
   try {
-    // eslint-disable-next-line @typescript-eslint/no-require-imports -- Require statement enables Fast Refresh
+    // eslint-disable-next-line @typescript-eslint/no-require-imports, unicorn/prefer-module -- Require statement enables Fast Refresh
     return require(`private-next-content-dir/${lang && `${lang}/`}${pagePath}`)
   } catch (error) {
     logger.error('Error while loading', { pathSegments }, error)

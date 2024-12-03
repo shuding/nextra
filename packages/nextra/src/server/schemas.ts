@@ -106,7 +106,7 @@ export const menuSchema = z.strictObject({
   title,
   items: z.record(menuItemSchema).transform(obj => {
     for (const key in obj) {
-      // @ts-expect-error
+      // @ts-expect-error -- fixme
       obj[key].title ||= pageTitleFromFilename(key)
     }
     return obj

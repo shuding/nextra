@@ -1,7 +1,7 @@
 import { valueToEstree } from 'estree-util-value-to-estree'
 import type { MdxjsEsm } from 'hast-util-to-estree/lib/handlers/mdxjs-esm'
 import type { Root } from 'mdast'
-import type { Plugin } from 'unified'
+import type { Plugin, Transformer } from 'unified'
 import { parse as parseYaml } from 'yaml'
 import { createAstExportConst } from '../utils.js'
 import { isExportNode } from './remark-mdx-title.js'
@@ -17,7 +17,7 @@ function createNode(data: Record<string, unknown>) {
   } as MdxjsEsm
 }
 
-export const remarkMdxFrontMatter: Plugin<[], Root> = () => (ast: Root) => {
+const transformer: Transformer<Root> = ast => {
   const yamlNodeIndex = ast.children.findIndex(node => node.type === 'yaml')
   const esmNodeIndex = ast.children.findIndex(node =>
     isExportNode(node, 'metadata')
@@ -38,3 +38,5 @@ export const remarkMdxFrontMatter: Plugin<[], Root> = () => (ast: Root) => {
     ast.children.unshift(createNode({}))
   }
 }
+
+export const remarkMdxFrontMatter: Plugin<[], Root> = () => transformer

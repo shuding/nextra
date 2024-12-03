@@ -2,7 +2,10 @@ import type { Heading as MDASTHeading } from 'mdast'
 import type { Metadata, NextConfig } from 'next'
 import type { FC, ReactElement, ReactNode } from 'react'
 import type { z } from 'zod'
-import type { mathJaxOptionsSchema, nextraConfigSchema } from './server/schemas'
+import type {
+  mathJaxOptionsSchema,
+  nextraConfigSchema
+} from './server/schemas.js'
 
 export interface LoaderOptions extends z.infer<typeof nextraConfigSchema> {
   isPageImport?: boolean

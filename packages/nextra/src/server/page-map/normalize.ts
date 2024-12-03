@@ -43,12 +43,12 @@ function sortFolder(pageMap: PageMapItem[] | Folder) {
           throw fromZodError(error)
         }
         if (key === '*') {
-          // @ts-expect-error
+          // @ts-expect-error -- fixme
           delete data.title
-          // @ts-expect-error
+          // @ts-expect-error -- fixme
           delete data.href
         }
-        // @ts-expect-error
+        // @ts-expect-error -- fixme
         meta[key] = data
       }
     } else {
@@ -123,7 +123,7 @@ The field key "${metaKey}" in \`_meta\` file refers to a page that cannot be fou
   }
 
   if (metaKeys.length) {
-    // @ts-expect-error
+    // @ts-expect-error -- fixme
     items.unshift({ data: meta })
   }
 

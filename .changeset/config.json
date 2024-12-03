@@ -10,5 +10,12 @@
   "___experimentalUnsafeOptions_WILL_CHANGE_IN_PATCH": {
     "onlyUpdatePeerDependentsWhenOutOfRange": true
   },
-  "ignore": ["example-blog", "example-docs", "swr-site", "docs"]
+  "ignore": [
+    "example-blog",
+    "example-docs",
+    "swr-site",
+    "docs",
+    "@nextra/prettier-config",
+    "@nextra/eslint-config"
+  ]
 }

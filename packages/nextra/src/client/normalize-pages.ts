@@ -1,7 +1,7 @@
 'use no memo'
 
 import type { z } from 'zod'
-import type { itemSchema, menuSchema } from '../server/schemas'
+import type { itemSchema, menuSchema } from '../server/schemas.js'
 import type { Folder, FrontMatter, MdxFile, PageMapItem } from '../types.js'
 
 const DEFAULT_PAGE_THEME: PageTheme = {

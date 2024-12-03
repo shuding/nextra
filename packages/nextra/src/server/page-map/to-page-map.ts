@@ -7,9 +7,14 @@ interface NestedMap {
 
 type StringMap = Record<string, string>
 
-const createNested = (prevValue: NestedMap, currVal: string) =>
-  // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- value can be `undefined`
-  (prevValue[currVal] ||= {})
+function createNested(map: NestedMap, path: string): void {
+  let current = map
+  for (const part of path.split('/')) {
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- false positive?
+    current[part] ||= {} // Create the nested object if it doesn't exist
+    current = current[part] // Move to the next level of the structure
+  }
+}
 
 const APP_DIR_SUFFIX_RE = /^(src\/)?app\//
 
@@ -56,13 +61,10 @@ export function convertToPageMap({
   }
 
   for (const path of Object.keys(metaFiles)) {
-    // eslint-disable-next-line unicorn/no-array-callback-reference
-    path.split('/').reduce(createNested, nestedMap)
+    createNested(nestedMap, path)
   }
   for (const path of Object.keys(pages)) {
-    const key = path && `${path}/`
-    // eslint-disable-next-line unicorn/no-array-callback-reference
-    key.split('/').reduce(createNested, nestedMap)
+    createNested(nestedMap, path && `${path}/`)
   }
 
   function fillPageMap(obj: NestedMap, prefix?: string): TItem[] {

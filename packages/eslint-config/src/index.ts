@@ -3,9 +3,9 @@ import { includeIgnoreFile } from '@eslint/compat'
 import js from '@eslint/js'
 // @ts-expect-error -- no types
 import eslintPluginNext from '@next/eslint-plugin-next'
+import type { Linter } from 'eslint'
 // @ts-expect-error -- no types
 import eslintConfigPrettier from 'eslint-config-prettier'
-import eslintPluginDeprecation from 'eslint-plugin-deprecation'
 import eslintPluginImport from 'eslint-plugin-import-x'
 import eslintPluginReact from 'eslint-plugin-react'
 // @ts-expect-error -- no types
@@ -29,12 +29,12 @@ const TAILWIND_CONFIG = {
     'tailwindcss/enforces-shorthand': 'error',
     'tailwindcss/migration-from-tailwind-2': 'error',
     'tailwindcss/no-custom-classname': 'error'
-  }
+  } satisfies Linter.RulesRecord
 }
 
 const REACT_COMPILER_RESTRICT = {
   name: 'react',
-  importNames: ['memo', 'useCallback', 'useMemo', 'forwardRef']
+  importNames: ['memo', 'useCallback', 'useMemo']
 }
 
 const config: Config = tseslint.config(
@@ -47,11 +47,11 @@ const config: Config = tseslint.config(
       js.configs.recommended,
       tseslint.configs.recommended,
       eslintPluginUnicorn.configs['flat/recommended'],
+      eslintPluginSonarJs.configs.recommended,
       eslintConfigPrettier
     ],
     plugins: {
-      import: eslintPluginImport,
-      sonarjs: eslintPluginSonarJs
+      import: eslintPluginImport
     },
     rules: {
       'no-extra-boolean-cast': ['error', { enforceForInnerExpressions: true }],
@@ -81,60 +81,67 @@ const config: Config = tseslint.config(
       ],
       'prefer-object-spread': 'error',
       'prefer-arrow-callback': ['error', { allowNamedFunctions: true }],
-      'sonarjs/no-small-switch': 'error',
       'prefer-const': ['error', { destructuring: 'all' }],
-      'sonarjs/no-unused-collection': 'error',
       eqeqeq: ['error', 'always', { null: 'ignore' }],
       'unicorn/switch-case-braces': ['error', 'avoid'],
-      // todo: enable
-      '@typescript-eslint/no-explicit-any': 'off',
-      '@typescript-eslint/no-non-null-assertion': 'off',
-      '@typescript-eslint/no-var-requires': 'off',
-      '@typescript-eslint/ban-ts-comment': 'off',
 
-      'unicorn/no-hex-escape': 'off', // todo
-      'unicorn/escape-case': 'off', // todo
-      'unicorn/consistent-function-scoping': 'off', // todo
-      'unicorn/prefer-module': 'off',
-      'unicorn/no-array-reduce': 'off',
-      'unicorn/prefer-top-level-await': 'off', // Check if possible to refactor without breaking
+      'sonarjs/unused-named-groups': 'off', // todo
+      'sonarjs/cognitive-complexity': 'off', // todo
+      'sonarjs/prefer-nullish-coalescing': 'off', // todo
+      'sonarjs/no-nested-conditional': 'off', // todo
+      'sonarjs/slow-regex': 'off', // todo
+      'sonarjs/different-types-comparison': 'off', // todo
+      'sonarjs/default-param-last': 'off', // todo
+      'sonarjs/no-misleading-array-reverse': 'off', // todo
+      'sonarjs/sonar-prefer-regexp-exec': 'off', // todo
+      'sonarjs/no-nested-functions': 'off', // todo
+      'sonarjs/todo-tag': 'off', // todo
+      'sonarjs/no-unknown-property': 'off', // todo
+      'sonarjs/hook-use-state': 'off', // todo
+      'sonarjs/no-nested-template-literals': 'off', // todo
+      'sonarjs/label-has-associated-control': 'off', // todo
+      'sonarjs/no-nested-assignment': 'off', // todo
+      'sonarjs/function-return-type': 'off', // todo
+      'sonarjs/table-header': 'off', // todo
+      'sonarjs/anchor-is-valid': 'off', // todo
+      'sonarjs/sonar-no-unused-vars': 'off', // todo
+      'sonarjs/no-var': 'off', // todo
+      'sonarjs/argument-type': 'off', // todo
+      'sonarjs/no-array-index-key': 'off', // todo
+      'sonarjs/no-unstable-nested-components': 'off', // todo
 
+      'sonarjs/fixme-tag': 'off',
+      '@typescript-eslint/no-explicit-any': 'off', // Too many cases
       'unicorn/prevent-abbreviations': 'off', // Too many cases
       'unicorn/explicit-length-check': 'off', // I don't like
       'unicorn/no-null': 'off', // I don't like
-      'unicorn/prefer-global-this': 'off', // Bundlers are smarter with window
+      'unicorn/prefer-global-this': 'off', // Bundlers are smarter with `typeof window === 'undefined'` checks
       'unicorn/prefer-optional-catch-binding': 'off' // catch by @typescript-eslint/no-unused-vars
     }
   },
   // Rules for React files
   {
     files: ['{packages,examples,docs}/**'],
-    extends: [
-      // @ts-expect-error
-      eslintPluginReact.configs.flat.recommended,
-      // @ts-expect-error
-      eslintPluginReact.configs.flat['jsx-runtime']
-    ],
     plugins: {
       'react-hooks': eslintPluginReactHooks,
       '@next/next': eslintPluginNext
     },
+    extends: [
+      // @ts-expect-error -- always exist
+      eslintPluginReact.configs.flat.recommended,
+      // @ts-expect-error -- always exist
+      eslintPluginReact.configs.flat['jsx-runtime']
+    ],
     rules: {
       ...eslintPluginReactHooks.configs.recommended.rules,
       ...eslintPluginNext.configs.recommended.rules,
+      ...eslintPluginNext.configs['core-web-vitals'].rules,
       'react/prop-types': 'off',
       'react/no-unknown-property': ['error', { ignore: ['jsx'] }],
       'react-hooks/exhaustive-deps': 'error',
       'react/self-closing-comp': 'error',
       'no-restricted-syntax': [
         'error',
-        {
-          // ❌ useMemo(…, [])
-          selector:
-            'CallExpression[callee.name=useMemo][arguments.1.type=ArrayExpression][arguments.1.elements.length=0]',
-          message:
-            "`useMemo` with an empty dependency array can't provide a stable reference, use `useRef` instead."
-        },
         {
           // ❌ z.object(…)
           selector: 'MemberExpression[object.name=z] > .property[name=object]',
@@ -156,18 +163,17 @@ const config: Config = tseslint.config(
   {
     files: ['**/*.{ts,tsx,cts,mts}'],
     plugins: {
-      deprecation: eslintPluginDeprecation,
       'typescript-sort-keys': eslintPluginTsSortKeys
     },
     // TODO: fix errors
-    // 'plugin:@typescript-eslint/recommended-requiring-type-checking'
+    // extends: [tseslint.configs.recommendedTypeChecked],
     languageOptions: {
       parserOptions: {
         projectService: true
       }
     },
     rules: {
-      ...eslintPluginDeprecation.configs.recommended.rules,
+      '@typescript-eslint/no-deprecated': 'error',
       '@typescript-eslint/await-thenable': 'error',
       '@typescript-eslint/no-unnecessary-type-assertion': 'error',
       '@typescript-eslint/consistent-type-imports': 'error',

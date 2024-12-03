@@ -18,7 +18,7 @@ export async function clean(content: string): Promise<string> {
 }
 
 export async function getPageMapForFixture(dirName: string) {
-  const dir = path.join(__dirname, 'fixture', 'page-maps', dirName)
+  const dir = path.join(import.meta.dirname, 'fixture', 'page-maps', dirName)
   const filePaths = await findMetaAndPageFilePaths({ dir, cwd: dir })
   const { pageMap, mdxPages } = convertToPageMap({ filePaths })
   const rawJs = convertPageMapToJs({ pageMap, mdxPages })

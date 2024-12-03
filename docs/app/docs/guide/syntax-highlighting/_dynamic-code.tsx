@@ -10,8 +10,7 @@ export const DynamicCode: FC<{ children: ReactNode }> = ({ children }) => {
   // Find the corresponding token from the DOM
   useEffect(() => {
     tokenRef.current = [
-      // @ts-expect-error -- fixme
-      ...ref.current.querySelectorAll('code > span > span')
+      ...ref.current.querySelectorAll<HTMLSpanElement>('code > span > span')
     ].find(el => el.textContent === '1')
   }, [])
   return (

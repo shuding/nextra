@@ -55,14 +55,18 @@ export const MyComponent = () => null
   })
 
   it('should remove everything for `format: "md"` which is by default', () => {
-    const result = compileMetadata(`
+    const result = compileMetadata(
+      `
 <!-- export title: "Foo" -->
 
-# world`)
+# world`,
+      { filePath: 'foo.md' }
+    )
     expect(result).resolves.toMatchInlineSnapshot(`
       "import {Fragment as _Fragment, jsx as _jsx} from "react/jsx-runtime";
       export const metadata = {
-        "title": "world"
+        "title": "world",
+        "filePath": "foo.md"
       };
       "
     `)

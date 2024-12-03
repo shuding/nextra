@@ -1,6 +1,6 @@
 'use client'
 
-import type { ComponentProps, FC } from 'react'
+import type { ComponentProps, FC, MouseEvent } from 'react'
 import { useEffect, useState } from 'react'
 import { Button } from '../../components/button.js'
 import { CheckIcon, CopyIcon } from '../../icons/index.js'
@@ -19,9 +19,7 @@ export const CopyToClipboard: FC<ComponentProps<'button'>> = props => {
     }
   }, [isCopied])
 
-  const handleClick: NonNullable<
-    ComponentProps<'button'>['onClick']
-  > = async event => {
+  const handleClick = async (event: MouseEvent) => {
     setCopied(true)
     const container = event.currentTarget.parentNode!.parentNode!
     const content = container.querySelector('pre code')?.textContent || ''
@@ -37,6 +35,7 @@ export const CopyToClipboard: FC<ComponentProps<'button'>> = props => {
 
   return (
     <Button
+      // eslint-disable-next-line sonarjs/no-misused-promises
       onClick={handleClick}
       title="Copy code"
       variant="outline"

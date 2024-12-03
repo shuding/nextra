@@ -4,7 +4,7 @@ import type { Plugin } from 'unified'
 import { visit } from 'unist-util-visit'
 import type { Heading } from '../../types.js'
 import { MARKDOWN_EXTENSION_RE } from '../constants.js'
-import type { HProperties } from './remark-custom-heading-id'
+import type { HProperties } from './remark-custom-heading-id.js'
 
 export const getFlattenedValue = (node: Parent): string =>
   node.children

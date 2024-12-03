@@ -11,12 +11,12 @@ export async function generateMetadata(props: PageProps) {
   return metadata
 }
 
-type PageProps = {
+type PageProps = Readonly<{
   params: Promise<{
     mdxPath: string[]
     lang: string
   }>
-}
+}>
 const Wrapper = useMDXComponents().wrapper
 
 export default async function Page(props: PageProps) {

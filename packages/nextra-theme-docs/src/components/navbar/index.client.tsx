@@ -16,11 +16,9 @@ import { setMenu, useConfig, useMenu, useThemeConfig } from '../../stores'
 
 const classes = {
   link: cn(
-    'x:text-sm x:contrast-more:text-gray-700 x:contrast-more:dark:text-gray-100 x:max-md:hidden x:whitespace-nowrap',
+    'x:text-sm x:contrast-more:text-gray-700 x:contrast-more:dark:text-gray-100 x:whitespace-nowrap',
+    'x:text-gray-600 x:hover:text-gray-800 x:dark:text-gray-400 x:dark:hover:text-gray-200',
     'x:ring-inset'
-  ),
-  inactive: cn(
-    'x:text-gray-600 x:hover:text-gray-800 x:dark:text-gray-400 x:dark:hover:text-gray-200'
   )
 }
 
@@ -37,7 +35,6 @@ const NavbarMenu: FC<{
         className={({ focus }) =>
           cn(
             classes.link,
-            classes.inactive,
             'x:items-center x:flex x:gap-1.5',
             focus && 'x:nextra-focus'
           )
@@ -98,12 +95,12 @@ export const ClientNavbar: FC<{
   const items = useConfig().normalizePagesResult.topLevelNavbarItems
   const themeConfig = useThemeConfig()
 
-  const activeRoute = useFSRoute()
+  const pathname = useFSRoute()
   const menu = useMenu()
 
   return (
     <>
-      <div className="x:flex x:gap-4 x:overflow-x-auto nextra-scrollbar x:py-1.5">
+      <div className="x:flex x:gap-4 x:overflow-x-auto nextra-scrollbar x:py-1.5 x:max-md:hidden">
         {items.map(page => {
           if ('display' in page && page.display === 'hidden') return
           if (isMenu(page)) {
@@ -122,9 +119,10 @@ export const ClientNavbar: FC<{
               href
           }
 
-          const isActive =
-            page.route === activeRoute ||
-            activeRoute.startsWith(page.route + '/')
+          const isCurrentPage =
+            page.route === pathname ||
+            pathname.startsWith(page.route + '/') ||
+            undefined
 
           return (
             <Anchor
@@ -132,11 +130,9 @@ export const ClientNavbar: FC<{
               key={href}
               className={cn(
                 classes.link,
-                isActive
-                  ? 'x:font-medium x:subpixel-antialiased'
-                  : classes.inactive
+                'x:aria-[current]:font-medium x:aria-[current]:subpixel-antialiased x:aria-[current]:text-current'
               )}
-              aria-current={isActive}
+              aria-current={isCurrentPage}
             >
               {page.title}
             </Anchor>
