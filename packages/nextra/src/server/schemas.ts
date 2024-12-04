@@ -93,11 +93,17 @@ const linkSchema = z.strictObject({
   href: z.string()
 })
 
+const separatorItemSchema = z.strictObject({
+  type: z.literal('separator'),
+  title
+})
+
 const menuItemSchema = z
   .union([
     stringOrElement,
     linkSchema,
-    z.strictObject({ title: stringOrElement })
+    z.strictObject({ title: stringOrElement }),
+    separatorItemSchema
   ])
   .transform(transformTitle)
 
@@ -111,11 +117,6 @@ export const menuSchema = z.strictObject({
     }
     return obj
   })
-})
-
-const separatorItemSchema = z.strictObject({
-  type: z.literal('separator'),
-  title
 })
 
 export const itemSchema = z.strictObject({
