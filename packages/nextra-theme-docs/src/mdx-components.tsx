@@ -399,7 +399,7 @@ const DEFAULT_COMPONENTS: MDXComponents = {
       <div
         className={cn(
           '_mx-auto _flex',
-          themeContext.layout !== 'raw' && '_max-w-[90rem]'
+          themeContext.layout !== 'raw' && '_max-w-[var(--nextra-content-width)]'
         )}
       >
         <Sidebar
