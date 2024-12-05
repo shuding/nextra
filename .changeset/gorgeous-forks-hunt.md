@@ -2,7 +2,7 @@
 "nextra-theme-docs": minor
 ---
 
-export `style-prefixed.css` with prefixed Tailwind CSS v4 layers
+export a `style-prefixed.css` file with Tailwind CSS v4 prefixed layers for projects using Tailwind CSS v3
 
 - `@layer utilities` -> `@layer v4-utilities`
 - `@layer base` -> `@layer v4-base`
