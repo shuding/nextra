@@ -89,7 +89,7 @@ const DEFAULT_COMPONENTS = getNextraMDXComponents({
       value: removeLinks(item.value)
     }))
     return (
-      <div className="x:mx-auto x:flex x:max-w-[90rem]">
+      <div className="x:mx-auto x:flex x:max-w-[var(--nextra-content-width)]">
         <Sidebar toc={toc} />
 
         <ClientWrapper toc={toc} {...props}>

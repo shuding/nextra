@@ -72,6 +72,7 @@ const Head_: FC<HeadProps> = ({ children, ...props }) => {
   --nextra-primary-saturation: ${color.saturation.light}%;
   --nextra-primary-lightness: ${color.lightness.light}%;
   --nextra-bg: ${backgroundColor.light};
+  --nextra-content-width: 90rem;
 }
 .dark {
   --nextra-primary-hue: ${color.hue.dark}deg;
