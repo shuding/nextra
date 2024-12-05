@@ -1,5 +1,11 @@
 # nextra-theme-blog
 
+## 4.0.0-app-router.34
+
+### Patch Changes
+
+- nextra@4.0.0-app-router.34
+
 ## 4.0.0-app-router.33
 
 ### Patch Changes
@@ -349,8 +355,8 @@
     by
 
   ```js
-  import 'nextra-theme-docs/style.css' // for docs theme
-  import 'nextra-theme-blog/style.css' // for blog theme
+  import "nextra-theme-docs/style.css"; // for docs theme
+  import "nextra-theme-blog/style.css"; // for blog theme
   ```
 
 - Updated dependencies [2c8a8ab]
@@ -1402,19 +1408,19 @@
   and `nextra-theme-docs`
 
   ```js
-  import { Card, Cards } from 'nextra/components'
+  import { Card, Cards } from "nextra/components";
   ```
 
   ```js
-  import { Tab, Tabs } from 'nextra/components'
+  import { Tab, Tabs } from "nextra/components";
   ```
 
   ```js
-  import { Steps } from 'nextra/components'
+  import { Steps } from "nextra/components";
   ```
 
   ```js
-  import { FileTree } from 'nextra/components'
+  import { FileTree } from "nextra/components";
   ```
 
 ### Patch Changes
