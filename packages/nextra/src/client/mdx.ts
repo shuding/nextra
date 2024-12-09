@@ -13,10 +13,10 @@ const DEFAULT_COMPONENTS = {
 } satisfies MDXComponents
 
 export const useMDXComponents: typeof originalUseMDXComponents = components => {
-  return originalUseMDXComponents({
+  return {
     ...DEFAULT_COMPONENTS,
-    ...components
-  })
+    ...originalUseMDXComponents(components)
+  }
 }
 
 export { MDXProvider } from '@mdx-js/react'
