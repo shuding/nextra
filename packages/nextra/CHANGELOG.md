@@ -1,5 +1,11 @@
 # nextra
 
+## 3.2.5
+
+### Patch Changes
+
+- 2f5d954: fix unable override injected `img` component
+
 ## 3.2.4
 
 ### Patch Changes
