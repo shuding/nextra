@@ -37,7 +37,7 @@ export const remarkHeadings: Plugin<
         // verify .md/.mdx exports and attach named `toc` export
         'mdxjsEsm'
       ],
-      (node, _index, parent) => {
+      (node, _index) => {
         if (node.type === 'heading') {
           if (node.depth === 1) {
             return

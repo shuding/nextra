@@ -5,7 +5,7 @@ import {
   TabGroup,
   TabList,
   TabPanel,
-  TabPanels,
+  TabPanels
 } from '@headlessui/react'
 import type {
   TabProps as HeadlessTabProps,
@@ -70,7 +70,9 @@ export const Tabs: FC<
         setSelectedIndex(Number(index))
         // Execute on next tick after `selectedIndex` update
         setTimeout(() => {
-          const link = tabPanel.querySelector<HTMLAnchorElement>(`a[href="#${hash}"]`)
+          const link = tabPanel.querySelector<HTMLAnchorElement>(
+            `a[href="#${hash}"]`
+          )
           link?.click()
         }, 0)
       }
