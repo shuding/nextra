@@ -17,8 +17,6 @@ export const getFlattenedValue = (node: Parent): string =>
     )
     .join('')
 
-const SKIP_FOR_PARENT_NAMES = new Set(['Tab', 'Tabs.Tab'])
-
 export const remarkHeadings: Plugin<
   [{ exportName?: string; isRemoteContent?: boolean }],
   Root
@@ -47,15 +45,11 @@ export const remarkHeadings: Plugin<
 
           node.data ||= {}
           const headingProps: HProperties = (node.data.hProperties ||= {})
-          if (SKIP_FOR_PARENT_NAMES.has((parent as any).name)) {
-            delete headingProps.id
-          } else {
-            const value = getFlattenedValue(node)
-            const id = slugger.slug(headingProps.id || value)
-            // Attach flattened/custom #id to heading node
-            headingProps.id = id
-            headings.push({ depth: node.depth, value, id })
-          }
+          const value = getFlattenedValue(node)
+          const id = slugger.slug(headingProps.id || value)
+          // Attach flattened/custom #id to heading node
+          headingProps.id = id
+          headings.push({ depth: node.depth, value, id })
           return
         }
 
