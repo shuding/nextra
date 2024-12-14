@@ -1,5 +1,5 @@
 .content-container {
-  max-width: 90rem;
+  max-width: var(--nextra-content-width);
   padding-left: max(env(safe-area-inset-left), 1.5rem);
   padding-right: max(env(safe-area-inset-right), 1.5rem);
   margin: 0 auto;
