@@ -2,4 +2,4 @@
 'nextra-theme-docs': minor
 ---
 
-Moved content width to a dedicated css variable.
+content width could be configured via CSS `--nextra-content-width` variable
