@@ -15,7 +15,8 @@ import type {
 } from '@headlessui/react'
 import cn from 'clsx'
 import type { FC, ReactElement, ReactNode } from 'react'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
+import { useHash } from './use-hash.js'
 
 type TabItem = string | ReactElement
 
@@ -47,12 +48,36 @@ export const Tabs: FC<
   tabClassName
 }) => {
   const [selectedIndex, setSelectedIndex] = useState(defaultIndex)
+  const hash = useHash()
+  const tabPanelsRef = useRef<HTMLDivElement>(null!)
 
   useEffect(() => {
     if (_selectedIndex !== undefined) {
       setSelectedIndex(_selectedIndex)
     }
   }, [_selectedIndex])
+
+  useEffect(() => {
+    if (!hash) return
+
+    const tabPanel = tabPanelsRef.current.querySelector(
+      `[role=tabpanel]:has([id="${hash}"])`
+    )
+    if (!tabPanel) return
+
+    for (const [index, el] of Object.entries(tabPanelsRef.current.children)) {
+      if (el === tabPanel) {
+        setSelectedIndex(Number(index))
+        // Execute on next tick after `selectedIndex` update
+        setTimeout(() => {
+          const link = tabPanel.querySelector<HTMLAnchorElement>(
+            `a[href="#${hash}"]`
+          )
+          link?.click()
+        }, 0)
+      }
+    }
+  }, [hash])
 
   useEffect(() => {
     if (!storageKey) {
@@ -116,7 +141,7 @@ export const Tabs: FC<
               const { selected, disabled, hover, focus } = args
               return cn(
                 focus && 'x:nextra-focus x:ring-inset',
-                'x:whitespace-nowrap',
+                'x:whitespace-nowrap x:cursor-pointer',
                 'x:rounded-t x:p-2 x:font-medium x:leading-5 x:transition-colors',
                 'x:-mb-0.5 x:select-none x:border-b-2',
                 selected
@@ -141,7 +166,7 @@ export const Tabs: FC<
           </HeadlessTab>
         ))}
       </TabList>
-      <TabPanels>{children}</TabPanels>
+      <TabPanels ref={tabPanelsRef}>{children}</TabPanels>
     </TabGroup>
   )
 }
