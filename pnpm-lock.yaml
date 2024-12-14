@@ -149,7 +149,7 @@ importers:
         version: 15.0.4(@babel/core@7.26.0)(react-dom@18.3.1)(react@18.3.1)
       nextra:
         specifier: workspace:*
-        version: file:packages/nextra(@types/react@18.3.14)(acorn@8.14.0)(next@15.0.4)(react-dom@18.3.1)(react@18.3.1)(typescript@5.7.2)
+        version: file:packages/nextra(@types/react@19.0.1)(acorn@8.14.0)(next@15.0.4)(react-dom@18.3.1)(react@18.3.1)(typescript@5.7.2)
       nextra-theme-blog:
         specifier: workspace:*
         version: file:packages/nextra-theme-blog(next@15.0.4)(nextra@3.2.5)(react-dom@18.3.1)(react@18.3.1)
@@ -172,7 +172,7 @@ importers:
         version: 15.0.4(@babel/core@7.26.0)(react-dom@18.3.1)(react@18.3.1)
       nextra:
         specifier: workspace:*
-        version: file:packages/nextra(@types/react@18.3.14)(acorn@8.14.0)(next@15.0.4)(react-dom@18.3.1)(react@18.3.1)(typescript@5.7.2)
+        version: file:packages/nextra(@types/react@19.0.1)(acorn@8.14.0)(next@15.0.4)(react-dom@18.3.1)(react@18.3.1)(typescript@5.7.2)
       nextra-theme-docs:
         specifier: workspace:*
         version: file:packages/nextra-theme-docs(next@15.0.4)(nextra@3.2.5)(react-dom@18.3.1)(react@18.3.1)
@@ -198,7 +198,7 @@ importers:
         version: 15.0.4(@babel/core@7.26.0)(react-dom@18.3.1)(react@18.3.1)
       nextra:
         specifier: workspace:*
-        version: file:packages/nextra(@types/react@18.3.14)(acorn@8.14.0)(next@15.0.4)(react-dom@18.3.1)(react@18.3.1)(typescript@5.7.2)
+        version: file:packages/nextra(@types/react@19.0.1)(acorn@8.14.0)(next@15.0.4)(react-dom@18.3.1)(react@18.3.1)(typescript@5.7.2)
       nextra-theme-docs:
         specifier: workspace:*
         version: file:packages/nextra-theme-docs(next@15.0.4)(nextra@3.2.5)(react-dom@18.3.1)(react@18.3.1)
@@ -379,7 +379,7 @@ importers:
         version: 5.28.5(esbuild@0.24.0)
       '@vitejs/plugin-react':
         specifier: ^4.3.1
-        version: 4.3.3(vite@5.4.11)
+        version: 4.3.4(vite@6.0.3)
       esbuild-plugin-svgr:
         specifier: ^3.0.0
         version: 3.0.0(esbuild@0.24.0)(typescript@5.7.2)
@@ -492,7 +492,7 @@ importers:
         version: 18.3.3(@types/react@18.3.14)
       '@vitejs/plugin-react':
         specifier: ^4.1.0
-        version: 4.3.3(vite@5.4.11)
+        version: 4.3.4(vite@6.0.3)
       concurrently:
         specifier: ^9.0.0
         version: 9.1.0
@@ -2210,8 +2210,8 @@ packages:
       - supports-color
     dev: true
 
-  /@babel/plugin-transform-react-jsx-self@7.25.7(@babel/core@7.26.0):
-    resolution: {integrity: sha512-JD9MUnLbPL0WdVK8AWC7F7tTG2OS6u/AKKnsK+NdRhUiVdnzyR1S3kKQCaRLOiaULvUiqK6Z4JQE635VgtCFeg==}
+  /@babel/plugin-transform-react-jsx-self@7.25.9(@babel/core@7.26.0):
+    resolution: {integrity: sha512-y8quW6p0WHkEhmErnfe58r7x0A70uKphQm8Sp8cV7tjNQwK56sNVK0M73LK3WuYmsuyrftut4xAkjjgU0twaMg==}
     engines: {node: '>=6.9.0'}
     peerDependencies:
       '@babel/core': ^7.0.0-0
@@ -2220,8 +2220,8 @@ packages:
       '@babel/helper-plugin-utils': 7.25.9
     dev: true
 
-  /@babel/plugin-transform-react-jsx-source@7.25.7(@babel/core@7.26.0):
-    resolution: {integrity: sha512-S/JXG/KrbIY06iyJPKfxr0qRxnhNOdkNXYBl/rmwgDd72cQLH9tEGkDm/yJPGvcSIUoikzfjMios9i+xT/uv9w==}
+  /@babel/plugin-transform-react-jsx-source@7.25.9(@babel/core@7.26.0):
+    resolution: {integrity: sha512-+iqjT8xmXhhYv4/uiYd8FNQsraMFZIfxVSqxxVSZP0WbbSAWvBXAul0m/zu+7Vv4O/3WtApy9pmaTMiumEZgfg==}
     engines: {node: '>=6.9.0'}
     peerDependencies:
       '@babel/core': ^7.0.0-0
@@ -3750,6 +3750,17 @@ packages:
       react: 18.3.1
     dev: false
 
+  /@mdx-js/react@3.1.0(@types/react@19.0.1)(react@18.3.1):
+    resolution: {integrity: sha512-QjHtSaoameoalGnKDT3FoIl4+9RwyTmo9ZJGBdLOks/YOiWHoRDI3PUwEzOE7kEmGcV3AFcp9K6dYu9rEuKLAQ==}
+    peerDependencies:
+      '@types/react': '>=16'
+      react: '>=16'
+    dependencies:
+      '@types/mdx': 2.0.13
+      '@types/react': 19.0.1
+      react: 18.3.1
+    dev: false
+
   /@mermaid-js/parser@0.3.0:
     resolution: {integrity: sha512-HsvL6zgE5sUPGgkIDlmAWR1HTNHz2Iy11BAWPTa4Jjabkpguy4Ze2gzfLrg6pdRuBvFwgUYyxiaNqZwrEEXepA==}
     dependencies:
@@ -4775,8 +4786,8 @@ packages:
   /@types/babel__core@7.20.5:
     resolution: {integrity: sha512-qoQprZvz5wQFJwMDqeseRXWv3rqMvhgpbXFfVyWhbx9X47POIA6i/+dXefEmZKoAgOaTdaIgNSMqMIU61yRyzA==}
     dependencies:
-      '@babel/parser': 7.26.2
-      '@babel/types': 7.26.0
+      '@babel/parser': 7.26.3
+      '@babel/types': 7.26.3
       '@types/babel__generator': 7.6.8
       '@types/babel__template': 7.4.4
       '@types/babel__traverse': 7.20.6
@@ -4785,20 +4796,20 @@ packages:
   /@types/babel__generator@7.6.8:
     resolution: {integrity: sha512-ASsj+tpEDsEiFr1arWrlN6V3mdfjRMZt6LtK/Vp/kreFLnr5QH5+DhvD5nINYZXzwJvXeGq+05iUXcAzVrqWtw==}
     dependencies:
-      '@babel/types': 7.26.0
+      '@babel/types': 7.26.3
     dev: true
 
   /@types/babel__template@7.4.4:
     resolution: {integrity: sha512-h/NUaSyG5EyxBIp8YRxo4RMe2/qQgvyowRwVMzhYhBCONbW8PUsg4lkFMrhgZhUe5z3L3MiLDuvyJ/CaPa2A8A==}
     dependencies:
-      '@babel/parser': 7.26.2
-      '@babel/types': 7.26.0
+      '@babel/parser': 7.26.3
+      '@babel/types': 7.26.3
     dev: true
 
   /@types/babel__traverse@7.20.6:
     resolution: {integrity: sha512-r1bzfrm0tomOI8g1SzvCaQHo6Lcv6zu0EA+W2kHrt8dyrHQxGzBBL4kdkzIS+jBMV+EYcMAEAqXqYaLJq5rOZg==}
     dependencies:
-      '@babel/types': 7.26.0
+      '@babel/types': 7.26.3
     dev: true
 
   /@types/debug@4.1.7:
@@ -4910,6 +4921,12 @@ packages:
     dependencies:
       '@types/prop-types': 15.7.14
       csstype: 3.1.3
+
+  /@types/react@19.0.1:
+    resolution: {integrity: sha512-YW6614BDhqbpR5KtUYzTA+zlA7nayzJRA9ljz9CQoxthR0sDisYZLuvSMsil36t4EH/uAt8T52Xb4sVw17G+SQ==}
+    dependencies:
+      csstype: 3.1.3
+    dev: false
 
   /@types/semver@7.5.8:
     resolution: {integrity: sha512-I8EUhyrgfLrcTkzV3TSsGyl1tSuPrEDzr0yd5m90UgNxQkyDXULk3b6MlQqTCpZpNtWe1K0hzclnZkTcLBe2UQ==}
@@ -5200,18 +5217,18 @@ packages:
     resolution: {integrity: sha512-zuVdFrMJiuCDQUMCzQaD6KL28MjnqqN8XnAqiEq9PNm/hCPTSGfrXCOfwj1ow4LFb/tNymJPwsNbVePc1xFqrQ==}
     dev: false
 
-  /@vitejs/plugin-react@4.3.3(vite@5.4.11):
-    resolution: {integrity: sha512-NooDe9GpHGqNns1i8XDERg0Vsg5SSYRhRxxyTGogUdkdNt47jal+fbuYi+Yfq6pzRCKXyoPcWisfxE6RIM3GKA==}
+  /@vitejs/plugin-react@4.3.4(vite@6.0.3):
+    resolution: {integrity: sha512-SCCPBJtYLdE8PX/7ZQAs1QAZ8Jqwih+0VBLum1EGqmCCQal+MIUqLCzj3ZUy8ufbC0cAM4LRlSTm7IQJwWT4ug==}
     engines: {node: ^14.18.0 || >=16.0.0}
     peerDependencies:
-      vite: ^4.2.0 || ^5.0.0
+      vite: ^4.2.0 || ^5.0.0 || ^6.0.0
     dependencies:
       '@babel/core': 7.26.0
-      '@babel/plugin-transform-react-jsx-self': 7.25.7(@babel/core@7.26.0)
-      '@babel/plugin-transform-react-jsx-source': 7.25.7(@babel/core@7.26.0)
+      '@babel/plugin-transform-react-jsx-self': 7.25.9(@babel/core@7.26.0)
+      '@babel/plugin-transform-react-jsx-source': 7.25.9(@babel/core@7.26.0)
       '@types/babel__core': 7.20.5
       react-refresh: 0.14.2
-      vite: 5.4.11
+      vite: 6.0.3(tsx@4.19.2)(yaml@2.6.1)
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -12278,6 +12295,55 @@ packages:
       fsevents: 2.3.3
     dev: true
 
+  /vite@6.0.3(tsx@4.19.2)(yaml@2.6.1):
+    resolution: {integrity: sha512-Cmuo5P0ENTN6HxLSo6IHsjCLn/81Vgrp81oaiFFMRa8gGDj5xEjIcEpf2ZymZtZR8oU0P2JX5WuUp/rlXcHkAw==}
+    engines: {node: ^18.0.0 || ^20.0.0 || >=22.0.0}
+    hasBin: true
+    peerDependencies:
+      '@types/node': ^18.0.0 || ^20.0.0 || >=22.0.0
+      jiti: '>=1.21.0'
+      less: '*'
+      lightningcss: ^1.21.0
+      sass: '*'
+      sass-embedded: '*'
+      stylus: '*'
+      sugarss: '*'
+      terser: ^5.16.0
+      tsx: ^4.8.1
+      yaml: ^2.4.2
+    peerDependenciesMeta:
+      '@types/node':
+        optional: true
+      jiti:
+        optional: true
+      less:
+        optional: true
+      lightningcss:
+        optional: true
+      sass:
+        optional: true
+      sass-embedded:
+        optional: true
+      stylus:
+        optional: true
+      sugarss:
+        optional: true
+      terser:
+        optional: true
+      tsx:
+        optional: true
+      yaml:
+        optional: true
+    dependencies:
+      esbuild: 0.24.0
+      postcss: 8.4.49
+      rollup: 4.28.1
+      tsx: 4.19.2
+      yaml: 2.6.1
+    optionalDependencies:
+      fsevents: 2.3.3
+    dev: true
+
   /vitest@2.1.8(jsdom@25.0.1):
     resolution: {integrity: sha512-1vBKTZskHw/aosXqQUlVWWlGUxSJR8YtiyZDJAFeW2kPAeX6S3Sool0mjspO+kXLuxVWlEDDowBAeqeAQefqLQ==}
     engines: {node: ^18.0.0 || >=20.0.0}
@@ -12701,7 +12767,7 @@ packages:
     resolution: {integrity: sha512-bXE4cR/kVZhKZX/RjPEflHaKVhUVl85noU3v6b8apfQEc1x4A+zBxjZ4lN8LqGd6WZ3dl98pY4o717VFmoPp+A==}
     dev: false
 
-  file:packages/nextra(@types/react@18.3.14)(acorn@8.14.0)(next@15.0.4)(react-dom@18.3.1)(react@18.3.1)(typescript@5.7.2):
+  file:packages/nextra(@types/react@19.0.1)(acorn@8.14.0)(next@15.0.4)(react-dom@18.3.1)(react@18.3.1)(typescript@5.7.2):
     resolution: {directory: packages/nextra, type: directory}
     id: file:packages/nextra
     name: nextra
@@ -12714,7 +12780,7 @@ packages:
       '@formatjs/intl-localematcher': 0.5.8
       '@headlessui/react': 2.2.0(react-dom@18.3.1)(react@18.3.1)
       '@mdx-js/mdx': 3.1.0(acorn@8.14.0)
-      '@mdx-js/react': 3.1.0(@types/react@18.3.14)(react@18.3.1)
+      '@mdx-js/react': 3.1.0(@types/react@19.0.1)(react@18.3.1)
       '@napi-rs/simple-git': 0.1.19
       '@shikijs/twoslash': 1.23.1(typescript@5.7.2)
       '@theguild/remark-mermaid': 0.1.3(react@18.3.1)
@@ -12775,7 +12841,7 @@ packages:
     dependencies:
       next: 15.0.4(@babel/core@7.26.0)(react-dom@18.3.1)(react@18.3.1)
       next-themes: 0.4.3(react-dom@18.3.1)(react@18.3.1)
-      nextra: file:packages/nextra(@types/react@18.3.14)(acorn@8.14.0)(next@15.0.4)(react-dom@18.3.1)(react@18.3.1)(typescript@5.7.2)
+      nextra: file:packages/nextra(@types/react@19.0.1)(acorn@8.14.0)(next@15.0.4)(react-dom@18.3.1)(react@18.3.1)(typescript@5.7.2)
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
     dev: false
@@ -12796,7 +12862,7 @@ packages:
       flexsearch: 0.7.43
       next: 15.0.4(@babel/core@7.26.0)(react-dom@18.3.1)(react@18.3.1)
       next-themes: 0.4.3(react-dom@18.3.1)(react@18.3.1)
-      nextra: file:packages/nextra(@types/react@18.3.14)(acorn@8.14.0)(next@15.0.4)(react-dom@18.3.1)(react@18.3.1)(typescript@5.7.2)
+      nextra: file:packages/nextra(@types/react@19.0.1)(acorn@8.14.0)(next@15.0.4)(react-dom@18.3.1)(react@18.3.1)(typescript@5.7.2)
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
       scroll-into-view-if-needed: 3.1.0
