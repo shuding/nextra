@@ -52,7 +52,7 @@ export const Navbar: FC<NavbarProps> = props => {
       />
       <nav
         style={{ height: 'var(--nextra-navbar-height)' }}
-        className="x:mx-auto x:flex x:max-w-[var(--nextra-content-width)] x:items-center x:justify-end x:gap-4 x:pl-[max(env(safe-area-inset-left),1.5rem)] x:pr-[max(env(safe-area-inset-right),1.5rem)]"
+        className="x:mx-auto x:flex x:max-w-(--nextra-content-width) x:items-center x:justify-end x:gap-4 x:pl-[max(env(safe-area-inset-left),1.5rem)] x:pr-[max(env(safe-area-inset-right),1.5rem)]"
       >
         {logoLink ? (
           <NextLink
