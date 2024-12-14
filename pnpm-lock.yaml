@@ -345,10 +345,10 @@ importers:
         version: 2.6.1
       zod:
         specifier: ^3.22.3
-        version: 3.24.0
+        version: 3.24.1
       zod-validation-error:
         specifier: ^3.0.0
-        version: 3.4.0(zod@3.24.0)
+        version: 3.4.0(zod@3.24.1)
     devDependencies:
       '@svgr/babel-plugin-remove-jsx-attribute':
         specifier: ^8.0.0
@@ -476,7 +476,7 @@ importers:
         version: 3.1.0
       zod:
         specifier: ^3.22.3
-        version: 3.24.0
+        version: 3.24.1
     devDependencies:
       '@tailwindcss/nesting':
         specifier: ^0.0.0-insiders.565cd3e
@@ -12697,21 +12697,21 @@ packages:
       zod: 3.23.8
     dev: false
 
-  /zod-validation-error@3.4.0(zod@3.24.0):
+  /zod-validation-error@3.4.0(zod@3.24.1):
     resolution: {integrity: sha512-ZOPR9SVY6Pb2qqO5XHt+MkkTRxGXb4EVtnjc9JpXUOtUB1T9Ru7mZOT361AN3MsetVe7R0a1KZshJDZdgp9miQ==}
     engines: {node: '>=18.0.0'}
     peerDependencies:
       zod: ^3.18.0
     dependencies:
-      zod: 3.24.0
+      zod: 3.24.1
     dev: false
 
   /zod@3.23.8:
     resolution: {integrity: sha512-XBx9AXhXktjUqnepgTiE5flcKIYWi/rme0Eaj+5Y0lftuGBq+jyRu/md4WnuxqgP1ubdpNCsYEYPxrzVHD8d6g==}
     dev: false
 
-  /zod@3.24.0:
-    resolution: {integrity: sha512-Hz+wiY8yD0VLA2k/+nsg2Abez674dDGTai33SwNvMPuf9uIrBC9eFgIMQxBBbHFxVXi8W+5nX9DcAh9YNSQm/w==}
+  /zod@3.24.1:
+    resolution: {integrity: sha512-muH7gBL9sI1nciMZV67X5fTKKBLtwpZ5VBp1vsOQzj1MhrBZ4wlVCm3gedKZWLp0Oyel8sIGfeiz54Su+OVT+A==}
     dev: false
 
   /zwitch@2.0.4:
