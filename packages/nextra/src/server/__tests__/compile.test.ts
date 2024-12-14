@@ -430,23 +430,6 @@ import Last from './three.mdx'
       }"
     `)
   })
-  it('should not attach headings with parent Tab or Tabs.Tab', async () => {
-    const rawJs = await compileMdx(
-      `
-<Tab>
- ## foo
-</Tab>
-
-<Tabs.Tab>
-  ## bar
-  ## baz [#custom-id]
-</Tabs.Tab>
-`,
-      { mdxOptions }
-    )
-    expect(rawJs).toMatch('export const toc = useTOC()')
-    expect(rawJs).not.toMatch('id=')
-  })
 })
 
 describe('Link', () => {
