@@ -14,7 +14,7 @@ patchedDependencies:
     path: patches/@changesets__assemble-release-plan.patch
   esbuild-plugin-svgr@3.0.0:
     hash: 5pajtn63olpwhczqjppya6ysmi
-    path: patches/esbuild-plugin-svgr@3.0.0.patch
+    path: patches/esbuild-plugin-svgr.patch
   eslint-plugin-tailwindcss@3.17.3:
     hash: quqasx3lkw2fskc7xdiwuschla
     path: patches/eslint-plugin-tailwindcss.patch
