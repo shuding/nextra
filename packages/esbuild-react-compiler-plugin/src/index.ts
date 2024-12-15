@@ -16,8 +16,7 @@ export const reactCompilerPlugin = (
   name: 'react-compiler',
   setup(build) {
     build.onLoad({ filter }, async args => {
-      // Read the file content
-      const code = await fs.readFile(args.path)
+      const { contents = await fs.readFile(args.path), loader = path.extname(args.path).slice(1) as 'ts' | 'tsx' } = args.pluginData ?? {}
       return new Promise<{
         contents: string
         loader: 'ts' | 'tsx'
@@ -27,8 +26,6 @@ export const reactCompilerPlugin = (
             reject(error)
             return
           }
-          // Mark the file as a ts/tsx file
-          const loader = path.extname(args.path).slice(1) as 'ts' | 'tsx'
           const relativePath = path.relative(process.cwd(), args.path)
 
           if (
@@ -57,7 +54,7 @@ export const reactCompilerPlugin = (
             getOptions: () => reactCompilerConfig,
             resourcePath: args.path
           },
-          code
+          contents
         )
       })
     })

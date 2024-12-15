@@ -10,7 +10,7 @@ import { CWD, IS_PRODUCTION } from './src/server/constants.js'
 const SEP = path.sep === '/' ? '/' : '\\\\'
 
 const CLIENT_FILE_RE = new RegExp(
-  String.raw`/nextra/src/client/.*\.tsx?$`.replaceAll('/', SEP)
+  String.raw`/nextra/src/client/.+$`.replaceAll('/', SEP)
 )
 
 export default defineConfig({
@@ -30,19 +30,17 @@ export default defineConfig({
     svgr({
       exportType: 'named',
       typescript: true,
+      svgoConfig: {
+        plugins: ['removeXMLNS']
+      },
+      plugins: ['@svgr/plugin-svgo'],
       jsx: {
-        // svgo's removeXMLNS plugin doesn't work for some reason...
         babelConfig: {
-          plugins: [
-            [
-              '@svgr/babel-plugin-remove-jsx-attribute',
-              { elements: ['svg'], attributes: ['xmlns'] }
-            ]
-          ]
+          plugins: [babelTransformImplicitReturnPlugin]
         }
       }
     }),
-    reactCompilerPlugin(CLIENT_FILE_RE)
+    reactCompilerPlugin(CLIENT_FILE_RE),
   ],
   plugins: [
     {
@@ -71,3 +69,18 @@ export default defineConfig({
     }
   ]
 })
+
+// Currently react-compiler does not support implicit return in arrow functions
+// This plugin can be removed in the future when react-compiler supports it
+function babelTransformImplicitReturnPlugin({ types: t }) {
+  return {
+    visitor: {
+      ArrowFunctionExpression({ node }) {
+        // Check if the function body is a single expression (i.e., implicit return)
+        if (node.body.type === 'BlockStatement') return
+        // Transform the body to a BlockStatement and wrap the expression with a return
+        node.body = t.blockStatement([t.returnStatement(node.body)])
+      }
+    }
+  }
+}
