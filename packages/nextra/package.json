@@ -109,7 +109,7 @@
     "zod-validation-error": "^3.0.0"
   },
   "devDependencies": {
-    "@svgr/babel-plugin-remove-jsx-attribute": "^8.0.0",
+    "@svgr/plugin-svgo": "^8.1.0",
     "@testing-library/react": "^16.0.0",
     "@types/estree": "^1.0.5",
     "@types/hast": "^3.0.4",

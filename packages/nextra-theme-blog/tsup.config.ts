@@ -11,7 +11,7 @@ export default defineConfig([
     dts: true,
     outExtension: () => ({ js: '.js' }),
     bundle: false,
-    esbuildPlugins: [reactCompilerPlugin(/\.tsx?$/)]
+    esbuildPlugins: [reactCompilerPlugin({ filter: /\.tsx?$/ })]
   },
   {
     name: `${packageJson.name}/css`,
