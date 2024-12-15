@@ -10,13 +10,18 @@ const reactCompilerConfig = {
   target: '18'
 }
 
-export const reactCompilerPlugin = (
+export const reactCompilerPlugin = ({
+  filter
+}: {
   filter: RegExp
-): NonNullable<Options['esbuildPlugins']>[number] => ({
+}): NonNullable<Options['esbuildPlugins']>[number] => ({
   name: 'react-compiler',
   setup(build) {
     build.onLoad({ filter }, async args => {
-      const { contents = await fs.readFile(args.path), loader = path.extname(args.path).slice(1) as 'ts' | 'tsx' } = args.pluginData ?? {}
+      const {
+        contents = await fs.readFile(args.path),
+        loader = path.extname(args.path).slice(1) as 'ts' | 'tsx'
+      } = args.pluginData ?? {}
       return new Promise<{
         contents: string
         loader: 'ts' | 'tsx'
