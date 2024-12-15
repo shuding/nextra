@@ -10,6 +10,7 @@
     "@nextra/prettier-config": "0.0.0"
   },
   "changesets": [
+    "afraid-foxes-deny",
     "afraid-pens-teach",
     "afraid-yaks-kick",
     "angry-books-remember",
@@ -60,6 +61,7 @@
     "many-gifts-cough",
     "mighty-donuts-judge",
     "nasty-monkeys-vanish",
+    "neat-seas-beg",
     "ninety-birds-teach",
     "ninety-houses-warn",
     "olive-seas-clap",
