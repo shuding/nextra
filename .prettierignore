@@ -1,5 +1,6 @@
 pnpm-lock.yaml
 .changeset/*.md
+CHANGELOG.md
 generated-page-map.ts
 
 examples/swr-site/nextra-remote-filepaths/*.json
