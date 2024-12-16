@@ -4,6 +4,7 @@ import type { FC, ReactElement, ReactNode } from 'react'
 import type { z } from 'zod'
 import type {
   mathJaxOptionsSchema,
+  metaSchema,
   nextraConfigSchema
 } from './server/schemas.js'
 
@@ -99,3 +100,5 @@ export type MDXWrapper = FC<{
   children: ReactNode
   metadata: NextraMetadata
 }>
+
+export type MetaRecord = Record<string, z.infer<typeof metaSchema>>
