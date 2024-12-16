@@ -2,8 +2,9 @@ import type { Heading as MDASTHeading } from 'mdast'
 import type { Metadata, NextConfig } from 'next'
 import type { FC, ReactElement, ReactNode } from 'react'
 import type { z } from 'zod'
-import type {
+import {
   mathJaxOptionsSchema,
+  metaSchema,
   nextraConfigSchema
 } from './server/schemas.js'
 
@@ -99,3 +100,5 @@ export type MDXWrapper = FC<{
   children: ReactNode
   metadata: NextraMetadata
 }>
+
+export type MetaRecord = Record<string, z.infer<typeof metaSchema>>
