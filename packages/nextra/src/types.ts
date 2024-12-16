@@ -2,7 +2,7 @@ import type { Heading as MDASTHeading } from 'mdast'
 import type { Metadata, NextConfig } from 'next'
 import type { FC, ReactElement, ReactNode } from 'react'
 import type { z } from 'zod'
-import {
+import type {
   mathJaxOptionsSchema,
   metaSchema,
   nextraConfigSchema
