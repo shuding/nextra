@@ -54,7 +54,7 @@ export function convertToPageMap({
           //
           // will be normalized to:
           // app/posts/aaron-swartz-a-programmable-web/page.mdx
-          dir.replaceAll(/\(.*?\)\//g, '')
+          dir.replaceAll(/\(.*?\)(\/|$)/g, '')
         : [dir, name !== 'index' && name].filter(Boolean).join('/')
       pages[key] = filePath
     }
