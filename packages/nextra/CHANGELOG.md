@@ -1,5 +1,13 @@
 # nextra
 
+## 4.0.0-app-router.36
+
+### Patch Changes
+
+- 739e9eb: Export Meta type from schemas
+- d805f2a: adjust RegEx for folder groups in app router
+- 0ab4ff1: optimize compiled svg icons with react-compiler
+
 ## 4.0.0-app-router.35
 
 ### Patch Changes
