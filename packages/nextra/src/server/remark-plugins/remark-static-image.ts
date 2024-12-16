@@ -1,10 +1,10 @@
 import path from 'node:path'
 import type { ImportDeclaration } from 'estree'
+import type { MdxjsEsm } from 'hast-util-to-estree/lib/handlers/mdxjs-esm'
 import type { Definition, Image, ImageReference, Root } from 'mdast'
-import slash from 'slash'
-import type { Plugin } from 'unified'
+import type { Plugin, Transformer } from 'unified'
 import { visit } from 'unist-util-visit'
-import { EXTERNAL_URL_REGEX, PUBLIC_DIR } from '../constants.js'
+import { EXTERNAL_URL_RE } from '../constants.js'
 
 /**
  * @link https://github.com/vercel/next.js/blob/6cfebfb02c2a52a1f99fca59a2eac2d704d053db/packages/next/build/webpack/loaders/next-image-loader.js#L6
@@ -16,7 +16,7 @@ const VARIABLE_PREFIX = '__img'
 
 // Based on the remark-embed-images project
 // https://github.com/remarkjs/remark-embed-images
-export const remarkStaticImage: Plugin<[], Root> = () => ast => {
+const transformer: Transformer<Root> = ast => {
   const definitionNodes: Definition[] = []
 
   const imageImports = new Set<string>()
@@ -41,14 +41,13 @@ export const remarkStaticImage: Plugin<[], Root> = () => ast => {
       return
     }
 
-    if (EXTERNAL_URL_REGEX.test(url)) {
+    if (EXTERNAL_URL_RE.test(url)) {
       // do nothing with images with external url
       return
     }
 
     if (url.startsWith('/')) {
-      const urlPath = path.join(PUBLIC_DIR, url)
-      url = slash(urlPath)
+      url = path.posix.join('private-next-root-dir', 'public', url)
     }
     imageImports.add(url)
     // @ts-expect-error -- we assign explicitly
@@ -127,8 +126,10 @@ export const remarkStaticImage: Plugin<[], Root> = () => ast => {
                 ]
               }
             }
-          }) as any
+          }) as MdxjsEsm
       )
     )
   }
 }
+
+export const remarkStaticImage: Plugin<[], Root> = () => transformer

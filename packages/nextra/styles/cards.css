@@ -7,18 +7,18 @@
 
 .nextra-card {
   img {
-    @apply _select-none;
+    @apply x:select-none;
   }
 
   svg {
-    @apply _w-6 _h-auto _transition _text-black/30 dark:_text-white/40;
+    @apply x:w-6 x:h-auto x:transition x:text-black/30 x:dark:text-white/40;
   }
 
   &:hover svg {
-    @apply _text-current dark:_text-current;
+    @apply x:text-current x:dark:text-current;
   }
 
   p {
-    @apply _mt-2;
+    @apply x:mt-2;
   }
 }

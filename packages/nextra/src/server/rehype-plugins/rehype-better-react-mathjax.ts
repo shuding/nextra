@@ -1,10 +1,12 @@
 import type { ImportDeclaration } from 'estree'
 import { valueToEstree } from 'estree-util-value-to-estree'
-import type { Element, Root, RootContent } from 'hast'
+import type { Element, ElementContent, Root } from 'hast'
+import type { MdxJsxFlowElement } from 'hast-util-to-estree/lib/handlers/mdx-jsx-element'
+import type { MdxjsEsm } from 'hast-util-to-estree/lib/handlers/mdxjs-esm'
 import type { MdxJsxAttribute } from 'hast-util-to-estree/lib/state'
 import type { Plugin } from 'unified'
 import { visit } from 'unist-util-visit'
-import type { MathJaxOptions } from '../../types'
+import type { MathJaxOptions } from '../../types.js'
 
 const MATHJAX_IMPORTS = {
   type: 'mdxjsEsm',
@@ -23,12 +25,12 @@ const MATHJAX_IMPORTS = {
       ]
     }
   }
-}
+} as MdxjsEsm
 
 function wrapInMathJaxContext(
-  children: RootContent[],
+  children: ElementContent[],
   { config, src }: NonNullable<MathJaxOptions>
-) {
+): MdxJsxFlowElement {
   const attributes: MdxJsxAttribute[] = []
   if (src) {
     attributes.push({ type: 'mdxJsxAttribute', name: 'src', value: src })
@@ -72,8 +74,8 @@ function wrapInBraces(
 ): string {
   const { inlineMath, displayMath } = options.config?.tex || {}
 
-  const inlineBraces = inlineMath?.[0] || ['\\(', '\\)']
-  const displayBraces = displayMath?.[0] || ['\\[', '\\]']
+  const inlineBraces = inlineMath?.[0] || [String.raw`\(`, String.raw`\)`]
+  const displayBraces = displayMath?.[0] || [String.raw`\[`, String.raw`\]`]
   const [before, after] = mathInline ? inlineBraces : displayBraces
   return `${before}${source}${after}`
 }
@@ -114,21 +116,22 @@ export const rehypeBetterReactMathjax: Plugin<
       hasMathJax = true
     })
 
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- fixme
     if (!hasMathJax) return
 
     const mdxjsEsmNodes = []
-    const rest = []
+    const rest: ElementContent[] = []
     for (const child of ast.children) {
-      if (child.type === ('mdxjsEsm' as any)) {
+      if (child.type === 'mdxjsEsm') {
         mdxjsEsmNodes.push(child)
       } else {
-        rest.push(child)
+        rest.push(child as any)
       }
     }
     ast.children = [
       ...mdxjsEsmNodes,
       ...(isRemoteContent ? [] : [MATHJAX_IMPORTS]),
-      // Wrap everything in a `<MathJaxContext />` component.
+      // Wrap everything in a `<MathJaxContext>` component.
       wrapInMathJaxContext(rest, options)
-    ] as any
+    ]
   }

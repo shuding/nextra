@@ -1,0 +1,118 @@
+---
+title: Notes on A Programmable Web by Aaron Swartz
+date: 2016-05-21
+description:
+  At the time when I was getting into web development, I had the chance to read
+  one of the most inspiring book about the web, Aaron Swartz's A Programmable
+  Web. And it completely changed my mind.
+tags: [web development]
+author: Shu
+---
+
+At the time when I was getting into web development, I had the chance to read
+one of the most inspiring book about the web, Aaron Swartz's A Programmable Web.
+And it completely changed my mind.
+
+**Updated in
+2017**: [@tommyjtl](https://github.com/tommyjtl), [@zimine](https://github.com/zimine) and
+I are currently helping translate this post into Simplified Chinese.
+Any [contributions](https://github.com/tommyjtl/the-programmable-web/tree/translation) are
+welcomed :)
+
+---
+
+> Sure, it sounds a little bit crazy. But it paid off the last time they made
+> that gamble: we ended up with a little thing called the World Wide Web. Let's
+> see if they can do it again.
+
+— Aaron
+
+Read Aaron's original post:
+[Building Programmable Web Sites by Aaron Swartz, 2009](http://www.cs.rpi.edu/~hendler/ProgrammableWebSwartz2009.html).
+
+## Quotes About WWW
+
+1. "(the Internet) It should be kept open. It should be kept free." – Steve Jobs
+2. "The third reason it's very exciting is that Microsoft doesn't own it and I
+   don't think they can. It's the one thing in the industry that Microsoft can
+   probably never own. I think one of the things that's essential is that the
+   government continue to fund the Internet as a public trust, as a public
+   facility and remove any of these ridiculous notions of privatizing it that
+   have been brought up. I don't think they're going to fly, thankfully." –
+   Steve Jobs
+3. Jacques Mattheij wrote an article, about the web in 2050, which feels like
+   the *New Speak* in George Orwell's _1984_.
+
+## Quotes from Aaron's Post
+
+About API
+
+> APIs only let you look at the data in a **particular way**, typically the way
+> that the hosting site looks at it
+
+About API, II (Q: differences between data, protocol, API?)
+
+> pass the noun to the verb: /share?v=1234 pass the verb to the noun:
+> /v/1234?m=share
+
+Then he describes the interesting hybrid that the Web adopted, which he terms
+"Representational State Transfer" or REST.
+
+About "standard" vs "design"
+
+> And instead of spending time building things, they've convinced people
+> interested in these ideas that the first thing we need to do is write
+> standards. (**To engineers, this is absurd from the start -- standards are
+> things you write after you've got something working, not before!**)
+
+Fortunately for us, the Web was designed with this future in mind. The protocols
+that underpin it are not designed simply to provide pages for human consumption,
+but also to easily accommodate the menagerie of spiders, bots, and scripts that
+explore its fertile soil. ...for applications.
+
+Then we'll look into what it means for your application to be not just another
+tool for people and software to use, but **part of the ecology** -- a section of
+the programmable web. This means exposing your data to be queried and copied and
+integrated, even without explicit permission, into the larger software
+ecosystem, while protecting users' freedom.
+
+The more likely option is, of course, to break away from the Web altogether, and
+force people to download special software to use your application. ... If that's
+a choice you want to make, you probably shouldn't be reading this book.
+
+This is one of the secrets of success on the Web: the more you send people away,
+the more they come back
+
+About URL and URI
+
+> Moreover, URLs do not just exist as isolated entities
+
+URLs shouldn't change (and if they do change, the old ones should redirect to
+the new ones) so they should only contain information about the page that never
+changes. This leads to some obvious requirements.
+
+First, URLs shouldn't include technical details of the software you used to
+build your website, since that could change at any moment
+
+About TBL
+
+> And even then, they're far more limited than the wide-reaching interactivity
+> that Berners-Lee imagined.
+
+Instead, they used the clone created by a team at the University of Illinois
+Urbana-Champaign (UIUC), which never supported editing because programmer Marc
+Andreesen was too dumb to figure out how to do page editing with inline
+pictures, something Tim Berners-Lee's version had no problem with.
+
+(related: http://www.aaronsw.com/weblog/mylifewithtim)
+
+## External links
+
+1. [Steve Jobs interview: One-on-one in 1995](http://computerworld.com/article/2498543/it-management/steve-jobs-interview--one-on-one-in-1995.html?page=8)
+2. [Solid: Re-decentralizing the web](https://solid.mit.edu)
+3. [Aaron's public links & notes tagged with "web" on Pinboard](https://pinboard.in/u:aaronsw/t:web)
+4. ["URLs shouldn't include technical details": 天猫首页](https://zhihu.com/question/54777923/answer/141058259)
+5. [Semantic Web – W3C](https://w3.org/standards/semanticweb)
+6. [Tim Berners-Lee: The next web](https://ted.com/talks/tim_berners_lee_on_the_next_web)
+7. [The Web in 2050 · Jacques Mattheij](https://jacquesmattheij.com/the-web-in-2050):
+   "reboot the web"

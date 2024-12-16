@@ -1,176 +1,147 @@
 import type { ProcessorOptions } from '@mdx-js/mdx'
 import type { MathJax3Config } from 'better-react-mathjax'
-import type { FC, ReactNode } from 'react'
+import type { ReactElement } from 'react'
 import { isValidElement } from 'react'
 import type { Options as RehypeKatexOptions } from 'rehype-katex'
 import type { Options as RehypePrettyCodeOptions } from 'rehype-pretty-code'
 import { z } from 'zod'
-import type { PageMapItem } from '../types'
+import { pageTitleFromFilename } from './utils.js'
 
-function isFunction(value: unknown): boolean {
-  return typeof value === 'function'
-}
+export const mathJaxOptionsSchema = z.strictObject({
+  /**
+   * URL for MathJax. Defaults to `https://cdnjs.cloudflare.com`
+   */
+  src: z.string().optional(),
+  /**
+   * MathJax config. See https://docs.mathjax.org/en/latest/options/index.html
+   */
+  config: z.custom<MathJax3Config>().optional()
+})
 
-export const fc = [isFunction, { message: 'Must be React.FC' }] as const
-
-function isReactNode(value: unknown): boolean {
-  return (
-    value == null ||
-    typeof value === 'string' ||
-    isFunction(value) ||
-    isValidElement(value as any)
-  )
-}
-
-export const reactNode = [
-  isReactNode,
-  { message: 'Must be React.ReactNode or React.FC' }
-] as const
-
-export const searchSchema = z.boolean().or(
-  z.strictObject({
-    /**
-     * Whether to index code blocks
-     * @default true
-     */
-    codeblocks: z.boolean(),
-    /**
-     * A filter function to filter out files from indexing, and return the
-     * index file key, or null to skip indexing.
-     * A site can have multiple indexes, by default they're separated by
-     * locales as multiple index files.
-     */
-    indexKey: z
-      .custom<
-        (filepath: string, route: string, locale?: string) => null | string
-      >()
-      .optional()
-  })
-)
-
-type Transform = (
-  result: string,
-  options: {
-    route: string
-  }
-) => string | Promise<string>
-
-export const mathJaxOptionsSchema = z
-  .strictObject({
-    /**
-     * URL for MathJax. Defaults to `https://cdnjs.cloudflare.com`
-     */
-    src: z.string(),
-    /**
-     * MathJax config. See https://docs.mathjax.org/en/latest/options/index.html
-     */
-    config: z.custom<MathJax3Config>()
-  })
-  // eslint-disable-next-line deprecation/deprecation -- fixme
-  .deepPartial()
-  .optional()
-
-export const nextraConfigSchema = z
-  .strictObject({
-    themeConfig: z.string(),
-    defaultShowCopyCode: z.boolean(),
-    search: searchSchema,
-    staticImage: z.boolean(),
-    readingTime: z.boolean(),
-    latex: z.union([
+export const nextraConfigSchema = z.strictObject({
+  defaultShowCopyCode: z.boolean().optional(),
+  search: z
+    .union([
+      z.boolean(),
+      z.strictObject({
+        /**
+         * Whether to index code blocks
+         */
+        codeblocks: z.boolean()
+      })
+    ])
+    .default({ codeblocks: false }),
+  staticImage: z.boolean().default(true),
+  readingTime: z.boolean().optional(),
+  latex: z
+    .union([
       z.boolean(),
       z.strictObject({
         renderer: z.literal('mathjax'),
-        options: mathJaxOptionsSchema
+        options: mathJaxOptionsSchema.optional()
       }),
       z.strictObject({
         renderer: z.literal('katex'),
         options: z.custom<RehypeKatexOptions>()
       })
-    ]),
-    codeHighlight: z.boolean(),
-    /**
-     * A function to modify the code of compiled MDX pages.
-     * @experimental
-     */
-    transform: z.custom<Transform>(),
-    /**
-     * A function to modify the `pageMap` passed to theme layouts.
-     * @experimental
-     */
-    transformPageMap:
-      z.custom<(pageMap: PageMapItem[], locale: string) => PageMapItem[]>(),
-    mdxOptions: z.strictObject({
+    ])
+    .optional(),
+  codeHighlight: z.boolean().default(true),
+  mdxOptions: z
+    .strictObject({
       rehypePlugins: z.custom<ProcessorOptions['rehypePlugins']>(),
       remarkPlugins: z.custom<ProcessorOptions['remarkPlugins']>(),
       recmaPlugins: z.custom<ProcessorOptions['recmaPlugins']>(),
-      format: z.enum(['detect', 'mdx', 'md']),
-      rehypePrettyCodeOptions: z.custom<RehypePrettyCodeOptions>()
-    }),
-    autoImportThemeStyle: z.boolean()
-  })
-  // eslint-disable-next-line deprecation/deprecation -- fixme
-  .deepPartial()
-  .extend({ theme: z.string() })
-
-export const pageThemeSchema = z.strictObject({
-  breadcrumb: z.boolean(),
-  collapsed: z.boolean(),
-  footer: z.boolean(),
-  layout: z.enum(['default', 'full', 'raw']),
-  navbar: z.boolean(),
-  pagination: z.boolean(),
-  sidebar: z.boolean(),
-  timestamp: z.boolean(),
-  toc: z.boolean(),
-  typesetting: z.enum(['default', 'article']),
-  topContent: z.custom<ReactNode | FC>(...reactNode),
-  bottomContent: z.custom<ReactNode | FC>(...reactNode)
+      format: z.enum(['detect', 'mdx', 'md']).optional(),
+      rehypePrettyCodeOptions: z.custom<RehypePrettyCodeOptions>().default({})
+    })
+    .default({}),
+  whiteListTagsStyling: z.array(z.string()).optional(),
+  contentDirBasePath: z
+    .string()
+    .startsWith('/')
+    .refine(
+      value => value.length === 1 || !value.endsWith('/'),
+      value => ({ message: `"${value}" must not end with "/"` })
+    )
+    .default('/')
 })
 
-/**
- * An option to control how an item should be displayed in the sidebar:
- * - `normal`: the default behavior, item will be displayed
- * - `hidden`: the item will not be displayed in the sidebar entirely
- * - `children`: if the item is a folder, itself will be hidden but all its children will still be processed
- */
-export const displaySchema = z.enum(['normal', 'hidden', 'children'])
-const titleSchema = z.string()
-
-const linkItemSchema = z.strictObject({
-  href: z.string(),
-  newWindow: z.boolean(),
-  title: titleSchema
+export const element = z.custom<ReactElement>(isValidElement, {
+  message: 'Must be React.ReactElement'
 })
 
-export const menuItemSchema = z.strictObject({
-  display: displaySchema.optional(),
-  items: z.record(linkItemSchema.partial({ href: true, newWindow: true })),
-  title: titleSchema,
-  type: z.literal('menu')
+export const stringOrElement = z.union([z.string(), element])
+
+const pageThemeSchema = z.strictObject({
+  breadcrumb: z.boolean().optional(),
+  collapsed: z.boolean().optional(),
+  footer: z.boolean().optional(),
+  layout: z.enum(['default', 'full']).optional(),
+  navbar: z.boolean().optional(),
+  pagination: z.boolean().optional(),
+  sidebar: z.boolean().optional(),
+  timestamp: z.boolean().optional(),
+  toc: z.boolean().optional(),
+  typesetting: z.enum(['default', 'article']).optional()
+})
+
+const title = stringOrElement.optional()
+
+const linkSchema = z.strictObject({
+  title,
+  href: z.string()
 })
 
 const separatorItemSchema = z.strictObject({
-  title: titleSchema.optional(),
-  type: z.literal('separator')
+  type: z.literal('separator'),
+  title
 })
 
-const itemSchema = linkItemSchema
-  .extend({
-    display: displaySchema,
-    theme: pageThemeSchema,
-    title: titleSchema,
-    type: z.enum(['page', 'doc'])
-  })
-  // eslint-disable-next-line deprecation/deprecation -- fixme
-  .deepPartial()
+const menuItemSchema = z
+  .union([
+    stringOrElement,
+    linkSchema,
+    z.strictObject({ title: stringOrElement }),
+    separatorItemSchema
+  ])
+  .transform(transformTitle)
 
-export type Item = z.infer<typeof itemSchema>
+export const menuSchema = z.strictObject({
+  type: z.literal('menu'),
+  title,
+  items: z.record(menuItemSchema).transform(obj => {
+    for (const key in obj) {
+      // @ts-expect-error -- fixme
+      obj[key].title ||= pageTitleFromFilename(key)
+    }
+    return obj
+  })
+})
+
+export const itemSchema = z.strictObject({
+  type: z.enum(['page', 'doc']).optional(),
+  title,
+  /**
+   * An option to control how an item should be displayed in the sidebar:
+   * - `normal`: the default behavior, item will be displayed
+   * - `hidden`: the item will not be displayed in the sidebar entirely
+   * - `children`: if the item is a folder, itself will be hidden but all its children will still be processed
+   */
+  display: z.enum(['normal', 'hidden', 'children']).optional(),
+  theme: pageThemeSchema.optional()
+})
 
 export const metaSchema = z
-  .string()
-  .or(menuItemSchema)
-  .or(separatorItemSchema)
-  .or(itemSchema)
+  .union([
+    stringOrElement,
+    itemSchema,
+    linkSchema.extend({ type: z.enum(['page', 'doc']).optional() }),
+    separatorItemSchema,
+    menuSchema
+  ])
+  .transform(transformTitle)
 
-export type Meta = z.infer<typeof metaSchema>
+function transformTitle(title: unknown) {
+  return typeof title === 'string' || isValidElement(title) ? { title } : title
+}

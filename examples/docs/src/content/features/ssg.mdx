@@ -1,0 +1,41 @@
+# Next.js SSG
+
+With Next.js, you can pre-render your page using
+[Static Generation (SSG)](https://nextjs.org/docs/basic-features/pages#static-generation-recommended).
+Your pages will be generated at build time and statically served to visitors. It
+can also be cached by a CDN to maximize the performance.
+
+This is supported by Nextra too. Here's an example:
+
+export async function Stars() {
+  let stars = 0
+  try {
+    const response = await fetch('https://api.github.com/repos/shuding/nextra')
+    const repo = await response.json()
+    stars = repo.stargazers_count
+  } catch {
+    /* Ignore if there is an error, due rate limiting on CI */
+  }
+  return <b>{stars}</b>
+}
+
+> Nextra has <Stars /> stars on GitHub!
+
+The number above was generated at build time via MDX server components. With
+[Incremental Static Regeneration](https://nextjs.org/docs/basic-features/data-fetching#incremental-static-regeneration)
+enabled, it will be kept up to date.
+
+---
+
+Here's the MDX code for the example above:
+
+```js filename="ssg.mdx"
+export async function Stars() {
+  const response = await fetch(`https://api.github.com/repos/shuding/nextra`)
+  const repo = await response.json()
+  const stars = repo.stargazers_count || 0
+  return <b>{stars}</b>
+}
+
+> Nextra has <Stars /> stars on GitHub!
+```

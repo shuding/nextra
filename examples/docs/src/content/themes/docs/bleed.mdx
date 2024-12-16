@@ -1,0 +1,82 @@
+export const metadata = {
+  sidebarTitle: 'Bleed'
+}
+
+# Bleed Component
+
+A built-in component provided by `nextra-theme-docs`.
+
+## Example
+
+When wrapping your content with `<Bleed>`, it will be slightly wider than the
+container and will overflow on both sides.
+
+import { Bleed } from 'nextra/components'
+
+<Bleed>
+  <div style={{ border: '1px solid #888', padding: '4rem 2.5rem', textAlign: 'center' }}>
+    _There is nothing to writing. All you do is sit down at a typewriter and **bleed**._
+
+    — Ernest Hemingway
+
+  </div>
+</Bleed>
+
+It provides a better reading experience when you want to present some graphical
+information, which normally looks nicer in a larger size.
+
+For example, you can put text, image, video or any component inside:
+
+<Bleed>
+  <iframe
+    width="100%"
+    height="430"
+    src="https://youtube.com/embed/3hccXiXI0u8"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  />
+</Bleed>
+
+You can even make it full-bleed using `<Bleed full>`:
+
+<Bleed full>![Nextra](../../../app/opengraph-image.png)</Bleed>
+
+## Usage
+
+### MDX component
+
+```mdx filename="bleed.mdx"
+<Bleed>Hey, I can use **Markdown** syntax here.</Bleed>
+
+<Bleed full>![Nextra](https://nextra.site/og.jpeg)</Bleed>
+
+<Bleed full>
+  <iframe
+    src="https://codesandbox.io/embed/swr-states-4une7"
+    width="100%"
+    height="500px"
+    title="SWR-States"
+  />
+</Bleed>
+```
+
+### React Component
+
+```jsx filename="bleed.jsx"
+import { Bleed } from 'nextra/components'
+
+<Bleed>Hey, I can use **Markdown** syntax here.</Bleed>
+
+<Bleed full>
+  ![Nextra](https://nextra.site/og.jpeg)
+</Bleed>
+
+<Bleed full>
+  <iframe
+    src="https://codesandbox.io/embed/swr-states-4une7"
+    width="100%"
+    height="500px"
+    title="SWR-States"
+  />
+</Bleed>
+```

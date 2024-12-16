@@ -1,26 +1,20 @@
-import path from 'path'
 import type {
   ArrayExpression,
   ExportNamedDeclaration,
   Expression,
   ObjectExpression
 } from 'estree'
-import slash from 'slash'
 import title from 'title'
 import { DEFAULT_PROPERTY_PROPS } from './constants.js'
 
 export const logger = {
-  info: console.log.bind(null, '-', '\x1b[36minfo\x1b[0m', '[nextra]'),
-  warn: console.log.bind(null, '-', '\x1b[33mwarn\x1b[0m', '[nextra]'),
-  error: console.log.bind(null, '-', '\x1b[31merror\x1b[0m', '[nextra]')
+  info: console.log.bind(null, '-', '\u001B[36minfo\u001B[0m', '[nextra]'),
+  warn: console.log.bind(null, '-', '\u001B[33mwarn\u001B[0m', '[nextra]'),
+  error: console.log.bind(null, '-', '\u001B[31merror\u001B[0m', '[nextra]')
 }
 
 export function pageTitleFromFilename(fileName: string) {
-  return title(fileName.replaceAll(/[-_]/g, ' '), { special: ['SSR'] })
-}
-
-export function normalizePageRoute(parentRoute: string, route: string): string {
-  return slash(path.join(parentRoute, route.replace(/^index$/, '')))
+  return title(fileName.replaceAll(/[-_]/g, ' '), { special: ['SSR', 'CORS'] })
 }
 
 export function createAstExportConst(

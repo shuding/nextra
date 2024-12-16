@@ -1,0 +1,68 @@
+---
+title: Code blocks
+date: 2022-07-29
+description: En example of using code blocks in your blog.
+tags:
+  [
+    web development,
+    JavaScript,
+    GraphQL,
+    C++,
+    Java,
+    React,
+    Next.js,
+    The Guild,
+    MacBook Pro
+  ]
+author: Dimitri POSTOLOV
+---
+
+## Test `filename`, line highlighting and empty lines
+
+```js filename="test.js" {1}
+console.log('hello world')
+
+console.log('goodbye world')
+```
+
+## Test `showLineNumbers` and word highlighting
+
+```scala showLineNumbers {2-4} /println/
+object Hello {
+  def main(args: Array[String]) = {
+    println("hello, world")
+  }
+}
+
+object Hello {
+  def main(args: Array[String]) = {
+    println("hello, world")
+  }
+}
+```
+
+## Test highlighting inline code
+
+`import React from 'react'{:js}`
+
+## Test without specified language
+
+```text /hello/
+hello world
+```
+
+## Test with code block default language
+
+```
+const links = [
+  { href: '/settings', label: 'Settings' },
+  { href: '/support', label: 'Support' },
+  { href: '/license', label: 'License' },
+]
+```
+
+## Test link in code
+
+Link to [`google`](https://google.com)
+
+Link to [GitHub](https://github.com)
