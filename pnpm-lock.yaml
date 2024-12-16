@@ -13,7 +13,7 @@ patchedDependencies:
     hash: tekp75rilwrgkypl2xdezarfeu
     path: patches/@changesets__assemble-release-plan.patch
   esbuild-plugin-svgr@3.0.0:
-    hash: kmh2qsgxlktkyk6nn2h2tj76dm
+    hash: 5pajtn63olpwhczqjppya6ysmi
     path: patches/esbuild-plugin-svgr.patch
   eslint-plugin-tailwindcss@3.17.3:
     hash: quqasx3lkw2fskc7xdiwuschla
@@ -188,7 +188,7 @@ importers:
     dependencies:
       react-compiler-webpack:
         specifier: 0.1.2
-        version: 0.1.2(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)
+        version: 0.1.2(babel-plugin-react-compiler@19.0.0-beta-37ed2a7-20241206)
     devDependencies:
       '@types/node':
         specifier: ^22.0.0
@@ -354,9 +354,9 @@ importers:
         specifier: ^3.0.0
         version: 3.4.0(zod@3.23.8)
     devDependencies:
-      '@svgr/babel-plugin-remove-jsx-attribute':
-        specifier: ^8.0.0
-        version: 8.0.0(@babel/core@7.26.0)
+      '@svgr/plugin-svgo':
+        specifier: ^8.1.0
+        version: 8.1.0(@svgr/core@8.1.0)(typescript@5.7.2)
       '@testing-library/react':
         specifier: ^16.0.0
         version: 16.0.1(@testing-library/dom@10.4.0)(@types/react@18.3.12)(react-dom@18.3.1)(react@18.3.1)
@@ -383,7 +383,7 @@ importers:
         version: 4.3.3(vite@5.4.11)
       esbuild-plugin-svgr:
         specifier: ^3.0.0
-        version: 3.0.0(patch_hash=kmh2qsgxlktkyk6nn2h2tj76dm)(esbuild@0.24.0)(typescript@5.7.2)
+        version: 3.0.0(patch_hash=5pajtn63olpwhczqjppya6ysmi)(esbuild@0.24.0)(typescript@5.7.2)
       esbuild-react-compiler-plugin:
         specifier: workspace:*
         version: link:../esbuild-react-compiler-plugin
@@ -6005,8 +6005,8 @@ packages:
       - supports-color
     dev: true
 
-  /babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124:
-    resolution: {integrity: sha512-93iSASR20HNsotcOTQ+KPL0zpgfRFVWL86AtXpmHp995HuMVnC9femd8Winr3GxkPEh8lEOyaw3nqY4q2HUm5w==}
+  /babel-plugin-react-compiler@19.0.0-beta-37ed2a7-20241206:
+    resolution: {integrity: sha512-nnkrHpeDKM8A5laq9tmFvvGbbDQ7laGfQLp50cvCkCXmWrPcZdCtaQpNh8UJS/yLREJnv2R4JDL5ADfxyAn+yQ==}
     dependencies:
       '@babel/types': 7.26.0
     dev: false
@@ -7191,7 +7191,7 @@ packages:
       vfile-message: 4.0.2
     dev: false
 
-  /esbuild-plugin-svgr@3.0.0(patch_hash=kmh2qsgxlktkyk6nn2h2tj76dm)(esbuild@0.24.0)(typescript@5.7.2):
+  /esbuild-plugin-svgr@3.0.0(patch_hash=5pajtn63olpwhczqjppya6ysmi)(esbuild@0.24.0)(typescript@5.7.2):
     resolution: {integrity: sha512-8/YuGHKoNVKdcV8HUGFQtAJ16agxzemcX9IvcQvaVKuXqIBDvc5IV9nlPyyHcrgr+IvyKBcljO4wjxrh24DSAQ==}
     peerDependencies:
       esbuild: ^0.24.0
@@ -10746,7 +10746,7 @@ packages:
       react: 18.3.1
     dev: false
 
-  /react-compiler-webpack@0.1.2(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124):
+  /react-compiler-webpack@0.1.2(babel-plugin-react-compiler@19.0.0-beta-37ed2a7-20241206):
     resolution: {integrity: sha512-NaT5Ft4FRqiDAllr8ywjmXWcv0+ouL/4GsYiLHj783C2HbTp4SGUtUC/6vpWT/UQ5LggV+PUMLUrdEdua+LOaQ==}
     peerDependencies:
       babel-plugin-react-compiler: '*'
@@ -10754,7 +10754,7 @@ packages:
       '@babel/core': 7.26.0
       '@babel/plugin-syntax-jsx': 7.25.7(@babel/core@7.26.0)
       '@babel/plugin-syntax-typescript': 7.24.7(@babel/core@7.26.0)
-      babel-plugin-react-compiler: 19.0.0-beta-df7b47d-20241124
+      babel-plugin-react-compiler: 19.0.0-beta-37ed2a7-20241206
       loader-utils: 3.3.1
     transitivePeerDependencies:
       - supports-color
