@@ -165,8 +165,12 @@ const itemSchema = linkItemSchema
   // eslint-disable-next-line deprecation/deprecation -- fixme
   .deepPartial()
 
+export type Item = z.infer<typeof itemSchema>
+
 export const metaSchema = z
   .string()
   .or(menuItemSchema)
   .or(separatorItemSchema)
   .or(itemSchema)
+
+export type Meta = z.infer<typeof metaSchema>
