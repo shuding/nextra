@@ -1,5 +1,11 @@
 # nextra
 
+## 4.0.0-app-router.37
+
+### Patch Changes
+
+- ad80ee1: fix TypeError: Cannot read properties of undefined (reading 'id') when importing partial MDX
+
 ## 4.0.0-app-router.36
 
 ### Patch Changes
