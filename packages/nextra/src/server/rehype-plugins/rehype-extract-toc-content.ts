@@ -41,7 +41,16 @@ const transformer: Transformer<Root> = (ast, file) => {
           closingFragment: { type: 'JSXClosingFragment' }
         })
 
-    // TODO: We can't know right toc index, because we don't know how many headings exist in partial toc
+    // Example:
+    //
+    // ```mdx
+    // import Foo from './foo.mdx'
+    // # One
+    // <Foo />
+    // # Two <- will fails if Foo contains 0 toc items
+    // ```
+    //
+    // TODO: We can't know right toc index, because we don't know how many toc items exist in partial toc
     // maybe we could refactor to have offset in the future
     // this fix TypeError: Cannot read properties of undefined (reading 'id')
 
