@@ -41,22 +41,26 @@ const transformer: Transformer<Root> = (ast, file) => {
           closingFragment: { type: 'JSXClosingFragment' }
         })
 
-    Object.assign(node, {
-      type: 'mdxJsxFlowElement',
-      name: node.tagName,
-      attributes: [
-        {
-          type: 'mdxJsxAttribute',
-          name: 'id',
-          value: createComputedKey(
-            'mdxJsxAttributeValueExpression',
-            index,
-            'id'
-          )
-        }
-      ],
-      children: [createComputedKey('mdxFlowExpression', index, 'value')]
-    })
+    // TODO: We can't know right toc index, because we don't know how many headings exist in partial toc
+    // maybe we could refactor to have offset in the future
+    // this fix TypeError: Cannot read properties of undefined (reading 'id')
+
+    // Object.assign(node, {
+    //   type: 'mdxJsxFlowElement',
+    //   name: node.tagName,
+    //   attributes: [
+    //     {
+    //       type: 'mdxJsxAttribute',
+    //       name: 'id',
+    //       value: createComputedKey(
+    //         'mdxJsxAttributeValueExpression',
+    //         index,
+    //         'id'
+    //       )
+    //     }
+    //   ],
+    //   children: [createComputedKey('mdxFlowExpression', index, 'value')]
+    // })
 
     return createAstObject({
       value: result,
