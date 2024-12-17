@@ -6,7 +6,7 @@ const opts = {
 }
 
 describe('remarkMdxTitle', () => {
-  describe('should prioritize frontmatter', async () => {
+  describe('should prioritize frontmatter', () => {
     it('yaml', async () => {
       const title = 'From yaml frontMatter'
       const rawJs = await compileMdx(
