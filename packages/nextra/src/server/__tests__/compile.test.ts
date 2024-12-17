@@ -387,17 +387,26 @@ import Last from './three.mdx'
       export const toc = useTOC()
       function _createMdxContent(props) {
         const _components = {
-          h2: 'h2',
-          ..._provideComponents(),
-          ...props.components
-        }
+            annotation: 'annotation',
+            code: 'code',
+            h2: 'h2',
+            math: 'math',
+            mi: 'mi',
+            mrow: 'mrow',
+            semantics: 'semantics',
+            span: 'span',
+            ..._provideComponents(),
+            ...props.components
+          },
+          { Kek } = _components
+        if (!Kek) _missingMdxReference('Kek', true)
         return (
           <>
-            <_components.h2 id={toc[0].id}>{toc[0].value}</_components.h2>
+            <_components.h2 id="️">{'❤️'}</_components.h2>
             {'\\n'}
             <FromMdx />
             {'\\n'}
-            <_components.h2 id={toc[2].id}>{toc[2].value}</_components.h2>
+            <_components.h2 id="">{'✅'}</_components.h2>
             {'\\n'}
             <FromMarkdown />
             {'\\n'}
@@ -406,15 +415,55 @@ import Last from './three.mdx'
             {'\\n'}
             <IgnoreMe />
             {'\\n'}
-            <_components.h2 id={toc[5].id}>{toc[5].value}</_components.h2>
+            <_components.h2 id="-1">{'👋'}</_components.h2>
             {'\\n'}
-            <_components.h2 id={toc[6].id}>{toc[6].value}</_components.h2>
+            <_components.h2 id="kek-">
+              {'kek '}
+              <Kek />
+            </_components.h2>
             {'\\n'}
-            <_components.h2 id={toc[7].id}>{toc[7].value}</_components.h2>
+            <_components.h2 id="try-me">
+              <_components.code>{'try'}</_components.code>
+              {' me'}
+            </_components.h2>
             {'\\n'}
-            <_components.h2 id={toc[8].id}>{toc[8].value}</_components.h2>
+            <_components.h2 id="latex-l">
+              {'latex '}
+              <_components.span className="katex">
+                <_components.span className="katex-mathml">
+                  <_components.math xmlns="http://www.w3.org/1998/Math/MathML">
+                    <_components.semantics>
+                      <_components.mrow>
+                        <_components.mi>{'l'}</_components.mi>
+                      </_components.mrow>
+                      <_components.annotation encoding="application/x-tex">{'l'}</_components.annotation>
+                    </_components.semantics>
+                  </_components.math>
+                </_components.span>
+                <_components.span className="katex-html" aria-hidden="true">
+                  <_components.span className="base">
+                    <_components.span
+                      className="strut"
+                      style={{
+                        height: '0.6944em'
+                      }}
+                    />
+                    <_components.span
+                      className="mord mathnormal"
+                      style={{
+                        marginRight: '0.01968em'
+                      }}
+                    >
+                      {'l'}
+                    </_components.span>
+                  </_components.span>
+                </_components.span>
+              </_components.span>
+            </_components.h2>
             {'\\n'}
-            <_components.h2 id={toc[9].id}>{toc[9].value}</_components.h2>
+            <_components.h2 id="interpolate-1-true-null-variable">
+              {'interpolate'} {1} {true} {null} {variable}
+            </_components.h2>
           </>
         )
       }
