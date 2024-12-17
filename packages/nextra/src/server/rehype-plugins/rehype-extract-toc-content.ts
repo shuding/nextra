@@ -20,7 +20,7 @@ const transformer: Transformer<Root> = (ast, file) => {
     TocMap[id as string] = node
   })
 
-  const elements = (file.data.toc as Heading[]).map((name, index) => {
+  const elements = (file.data.toc as Heading[]).map(name => {
     if (typeof name === 'string') {
       return {
         type: 'SpreadElement',
@@ -111,33 +111,33 @@ const transformer: Transformer<Root> = (ast, file) => {
   } as MdxjsEsm)
 }
 
-function createComputedKey(
-  type: 'mdxFlowExpression' | 'mdxJsxAttributeValueExpression',
-  index: number,
-  key: string
-) {
-  return {
-    type,
-    data: {
-      estree: {
-        body: [
-          {
-            type: 'ExpressionStatement',
-            expression: {
-              type: 'MemberExpression',
-              property: { type: 'Identifier', name: key },
-              object: {
-                type: 'MemberExpression',
-                object: { type: 'Identifier', name: 'toc' },
-                property: { type: 'Literal', value: index },
-                computed: true
-              }
-            }
-          }
-        ]
-      }
-    }
-  }
-}
+// function createComputedKey(
+//   type: 'mdxFlowExpression' | 'mdxJsxAttributeValueExpression',
+//   index: number,
+//   key: string
+// ) {
+//   return {
+//     type,
+//     data: {
+//       estree: {
+//         body: [
+//           {
+//             type: 'ExpressionStatement',
+//             expression: {
+//               type: 'MemberExpression',
+//               property: { type: 'Identifier', name: key },
+//               object: {
+//                 type: 'MemberExpression',
+//                 object: { type: 'Identifier', name: 'toc' },
+//                 property: { type: 'Literal', value: index },
+//                 computed: true
+//               }
+//             }
+//           }
+//         ]
+//       }
+//     }
+//   }
+// }
 
 export const rehypeExtractTocContent: Plugin<[], Root> = () => transformer
