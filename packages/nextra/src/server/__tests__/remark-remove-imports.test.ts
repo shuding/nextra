@@ -47,11 +47,7 @@ export const Test = ({value}) => value
           ..._provideComponents(),
           ...props.components
         }
-        return (
-          <_components.h2 id="-myvar">
-            <Test value="Hello" /> {myVar}
-          </_components.h2>
-        )
+        return <_components.h2 id={toc[0].id}>{toc[0].value}</_components.h2>
       }
       return {
         metadata,

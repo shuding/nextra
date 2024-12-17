@@ -1,7 +1,7 @@
 import { compileMetadata } from '../compile-metadata.js'
 
 describe('compileMetadata()', () => {
-  it('should remove everything', () => {
+  it('should remove everything', async () => {
     const mdx = `---
 title: Foo
 description: Bar

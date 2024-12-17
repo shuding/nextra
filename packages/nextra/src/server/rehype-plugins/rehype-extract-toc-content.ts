@@ -20,7 +20,11 @@ const transformer: Transformer<Root> = (ast, file) => {
     TocMap[id as string] = node
   })
 
-  const elements = (file.data.toc as Heading[]).map(name => {
+  const hasPartialMDX = (file.data.toc as Heading[]).some(
+    name => typeof name === 'string'
+  )
+
+  const elements = (file.data.toc as Heading[]).map((name, index) => {
     if (typeof name === 'string') {
       return {
         type: 'SpreadElement',
@@ -53,23 +57,24 @@ const transformer: Transformer<Root> = (ast, file) => {
     // TODO: We can't know right toc index, because we don't know how many toc items exist in partial toc
     // maybe we could refactor to have offset in the future
     // this fix TypeError: Cannot read properties of undefined (reading 'id')
-
-    // Object.assign(node, {
-    //   type: 'mdxJsxFlowElement',
-    //   name: node.tagName,
-    //   attributes: [
-    //     {
-    //       type: 'mdxJsxAttribute',
-    //       name: 'id',
-    //       value: createComputedKey(
-    //         'mdxJsxAttributeValueExpression',
-    //         index,
-    //         'id'
-    //       )
-    //     }
-    //   ],
-    //   children: [createComputedKey('mdxFlowExpression', index, 'value')]
-    // })
+    if (!hasPartialMDX) {
+      Object.assign(node, {
+        type: 'mdxJsxFlowElement',
+        name: node.tagName,
+        attributes: [
+          {
+            type: 'mdxJsxAttribute',
+            name: 'id',
+            value: createComputedKey(
+              'mdxJsxAttributeValueExpression',
+              index,
+              'id'
+            )
+          }
+        ],
+        children: [createComputedKey('mdxFlowExpression', index, 'value')]
+      })
+    }
 
     return createAstObject({
       value: result,
@@ -111,33 +116,33 @@ const transformer: Transformer<Root> = (ast, file) => {
   } as MdxjsEsm)
 }
 
-// function createComputedKey(
-//   type: 'mdxFlowExpression' | 'mdxJsxAttributeValueExpression',
-//   index: number,
-//   key: string
-// ) {
-//   return {
-//     type,
-//     data: {
-//       estree: {
-//         body: [
-//           {
-//             type: 'ExpressionStatement',
-//             expression: {
-//               type: 'MemberExpression',
-//               property: { type: 'Identifier', name: key },
-//               object: {
-//                 type: 'MemberExpression',
-//                 object: { type: 'Identifier', name: 'toc' },
-//                 property: { type: 'Literal', value: index },
-//                 computed: true
-//               }
-//             }
-//           }
-//         ]
-//       }
-//     }
-//   }
-// }
+function createComputedKey(
+  type: 'mdxFlowExpression' | 'mdxJsxAttributeValueExpression',
+  index: number,
+  key: string
+) {
+  return {
+    type,
+    data: {
+      estree: {
+        body: [
+          {
+            type: 'ExpressionStatement',
+            expression: {
+              type: 'MemberExpression',
+              property: { type: 'Identifier', name: key },
+              object: {
+                type: 'MemberExpression',
+                object: { type: 'Identifier', name: 'toc' },
+                property: { type: 'Literal', value: index },
+                computed: true
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}
 
 export const rehypeExtractTocContent: Plugin<[], Root> = () => transformer

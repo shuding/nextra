@@ -59,13 +59,13 @@ export default function Foo(props) {
               }),
               '\\n',
               _jsx(_components.h2, {
-                id: 'h2-content',
-                children: 'h2 content'
+                id: toc[0].id,
+                children: toc[0].value
               }),
               '\\n',
               _jsx(_components.h3, {
-                id: 'h3-content',
-                children: 'h3 content'
+                id: toc[1].id,
+                children: toc[1].value
               }),
               '\\n',
               _jsxs(_components.ul, {
@@ -137,13 +137,13 @@ export default function Foo(props) {
               }),
               '\\n',
               _jsx(_components.h2, {
-                id: 'h2-content',
-                children: 'h2 content'
+                id: toc[0].id,
+                children: toc[0].value
               }),
               '\\n',
               _jsx(_components.h3, {
-                id: 'h3-content',
-                children: 'h3 content'
+                id: toc[1].id,
+                children: toc[1].value
               }),
               '\\n',
               _jsxs(_components.ul, {
@@ -263,9 +263,9 @@ import { MDXRemote } from 'nextra/mdx-remote'
             <>
               <_components.h1>{'h1'}</_components.h1>
               {'\\n'}
-              <_components.h2 id="h2-content">{'h2 content'}</_components.h2>
+              <_components.h2 id={toc[0].id}>{toc[0].value}</_components.h2>
               {'\\n'}
-              <_components.h3 id="h3-content">{'h3 content'}</_components.h3>
+              <_components.h3 id={toc[1].id}>{toc[1].value}</_components.h3>
               {'\\n'}
               <_components.ul>
                 {'\\n'}
@@ -322,9 +322,9 @@ import { MDXRemote } from 'nextra/mdx-remote'
             <>
               <_components.h1>{'h1'}</_components.h1>
               {'\\n'}
-              <_components.h2 id="h2-content">{'h2 content'}</_components.h2>
+              <_components.h2 id={toc[0].id}>{toc[0].value}</_components.h2>
               {'\\n'}
-              <_components.h3 id="h3-content">{'h3 content'}</_components.h3>
+              <_components.h3 id={toc[1].id}>{toc[1].value}</_components.h3>
               {'\\n'}
               <_components.ul>
                 {'\\n'}
@@ -385,9 +385,9 @@ import { MDXRemote } from 'nextra/mdx-remote'
             <>
               <_components.h1>{'h1'}</_components.h1>
               {'\\n'}
-              <_components.h2 id="h2-content">{'h2 content'}</_components.h2>
+              <_components.h2 id={toc[0].id}>{toc[0].value}</_components.h2>
               {'\\n'}
-              <_components.h3 id="h3-content">{'h3 content'}</_components.h3>
+              <_components.h3 id={toc[1].id}>{toc[1].value}</_components.h3>
               {'\\n'}
               <_components.ul>
                 {'\\n'}
@@ -544,110 +544,11 @@ import { MDXRemote } from 'nextra/mdx-remote'
         export const toc = useTOC()
         function _createMdxContent(props) {
           const _components = {
-            a: 'a',
-            annotation: 'annotation',
-            code: 'code',
             h2: 'h2',
-            math: 'math',
-            mi: 'mi',
-            mn: 'mn',
-            mo: 'mo',
-            mrow: 'mrow',
-            msup: 'msup',
-            semantics: 'semantics',
-            span: 'span',
             ..._provideComponents(),
             ...props.components
           }
-          return (
-            <_components.h2 id="a-theme-google-e--mc2">
-              {'A '}
-              <_components.code>{'Theme'}</_components.code> <_components.a href="https://google.com">{'google'}</_components.a>{' '}
-              <_components.span className="katex">
-                <_components.span className="katex-mathml">
-                  <_components.math xmlns="http://www.w3.org/1998/Math/MathML">
-                    <_components.semantics>
-                      <_components.mrow>
-                        <_components.mi>{'e'}</_components.mi>
-                        <_components.mo>{'='}</_components.mo>
-                        <_components.mi>{'m'}</_components.mi>
-                        <_components.msup>
-                          <_components.mi>{'c'}</_components.mi>
-                          <_components.mn>{'2'}</_components.mn>
-                        </_components.msup>
-                      </_components.mrow>
-                      <_components.annotation encoding="application/x-tex">{'e = mc^2'}</_components.annotation>
-                    </_components.semantics>
-                  </_components.math>
-                </_components.span>
-                <_components.span className="katex-html" aria-hidden="true">
-                  <_components.span className="base">
-                    <_components.span
-                      className="strut"
-                      style={{
-                        height: '0.4306em'
-                      }}
-                    />
-                    <_components.span className="mord mathnormal">{'e'}</_components.span>
-                    <_components.span
-                      className="mspace"
-                      style={{
-                        marginRight: '0.2778em'
-                      }}
-                    />
-                    <_components.span className="mrel">{'='}</_components.span>
-                    <_components.span
-                      className="mspace"
-                      style={{
-                        marginRight: '0.2778em'
-                      }}
-                    />
-                  </_components.span>
-                  <_components.span className="base">
-                    <_components.span
-                      className="strut"
-                      style={{
-                        height: '0.8141em'
-                      }}
-                    />
-                    <_components.span className="mord mathnormal">{'m'}</_components.span>
-                    <_components.span className="mord">
-                      <_components.span className="mord mathnormal">{'c'}</_components.span>
-                      <_components.span className="msupsub">
-                        <_components.span className="vlist-t">
-                          <_components.span className="vlist-r">
-                            <_components.span
-                              className="vlist"
-                              style={{
-                                height: '0.8141em'
-                              }}
-                            >
-                              <_components.span
-                                style={{
-                                  top: '-3.063em',
-                                  marginRight: '0.05em'
-                                }}
-                              >
-                                <_components.span
-                                  className="pstrut"
-                                  style={{
-                                    height: '2.7em'
-                                  }}
-                                />
-                                <_components.span className="sizing reset-size6 size3 mtight">
-                                  <_components.span className="mord mtight">{'2'}</_components.span>
-                                </_components.span>
-                              </_components.span>
-                            </_components.span>
-                          </_components.span>
-                        </_components.span>
-                      </_components.span>
-                    </_components.span>
-                  </_components.span>
-                </_components.span>
-              </_components.span>
-            </_components.h2>
-          )
+          return <_components.h2 id={toc[0].id}>{toc[0].value}</_components.h2>
         }
         export default _createMdxContent"
       `)

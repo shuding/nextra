@@ -40,7 +40,7 @@ export default foo`,
           ..._provideComponents(),
           ...props.components
         }
-        return <_components.h2 id="heading">{'heading'}</_components.h2>
+        return <_components.h2 id={toc[0].id}>{toc[0].value}</_components.h2>
       }
       function MDXContent(props = {}) {
         return (
@@ -84,7 +84,7 @@ export { foo as default } from './foo'`,
           ..._provideComponents(),
           ...props.components
         }
-        return <_components.h2 id="heading">{'heading'}</_components.h2>
+        return <_components.h2 id={toc[0].id}>{toc[0].value}</_components.h2>
       }
       export default _createMdxContent"
     `)
@@ -193,17 +193,17 @@ export const TagName = () => {
           <>
             <_components.h1 id="test-id">{'My Header'}</_components.h1>
             {'\\n'}
-            <_components.h2 id="extra-space">{'Some extra space'}</_components.h2>
+            <_components.h2 id={toc[0].id}>{toc[0].value}</_components.h2>
             {'\\n'}
-            <_components.h3 id="extra-space-in-heading">{'Some extra space in heading'}</_components.h3>
+            <_components.h3 id={toc[1].id}>{toc[1].value}</_components.h3>
             {'\\n'}
-            <_components.h3 id="without-space">{'nospace'}</_components.h3>
+            <_components.h3 id={toc[2].id}>{toc[2].value}</_components.h3>
             {'\\n'}
-            <_components.h4 id="другой-язык">{'foo'}</_components.h4>
+            <_components.h4 id={toc[3].id}>{toc[3].value}</_components.h4>
             {'\\n'}
-            <_components.h5 id="bar-baz-">{'bar Baz []'}</_components.h5>
+            <_components.h5 id={toc[4].id}>{toc[4].value}</_components.h5>
             {'\\n'}
-            <_components.h6 id="bar-qux-">{'bar Qux [#]'}</_components.h6>
+            <_components.h6 id={toc[5].id}>{toc[5].value}</_components.h6>
           </>
         )
       }
@@ -233,7 +233,7 @@ export const TagName = () => {
           ..._provideComponents(),
           ...props.components
         }
-        return <_components.h3 id="my-header">{'My Header'}</_components.h3>
+        return <_components.h3 id={toc[0].id}>{toc[0].value}</_components.h3>
       }
       export default _createMdxContent"
     `)
