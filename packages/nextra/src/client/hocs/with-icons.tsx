@@ -25,10 +25,12 @@ import type { PreProps } from '../mdx-components/pre/index.js'
 
 function getIcon(language: string) {
   switch (language) {
+    case 'javascript':
     case 'js':
     case 'mjs':
     case 'cjs':
       return JavaScriptIcon
+    case 'typescript':
     case 'ts':
     case 'mts':
     case 'cts':
