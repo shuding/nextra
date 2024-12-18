@@ -1,4 +1,3 @@
-import path from 'node:path'
 import type { ProcessorOptions } from '@mdx-js/mdx'
 import { createProcessor } from '@mdx-js/mdx'
 import { remarkMermaid } from '@theguild/remark-mermaid'
@@ -13,7 +12,7 @@ import remarkReadingTime from 'remark-reading-time'
 import remarkSmartypants from 'remark-smartypants'
 import type { Pluggable } from 'unified'
 import type { LoaderOptions, NextraConfig } from '../types.js'
-import { CWD, MARKDOWN_URL_EXTENSION_RE } from './constants.js'
+import { MARKDOWN_URL_EXTENSION_RE } from './constants.js'
 import { recmaRewrite } from './recma-plugins/index.js'
 import {
   DEFAULT_REHYPE_PRETTY_CODE_OPTIONS,
@@ -94,17 +93,6 @@ export async function compileMdx(
     _format === 'detect' ? (filePath.endsWith('.mdx') ? 'mdx' : 'md') : _format
 
   const fileCompatible = filePath ? { value: source, path: filePath } : source
-
-  // https://github.com/shuding/nextra/issues/1303
-  const isFileOutsideCWD =
-    typeof window === 'undefined' &&
-    path.relative(CWD, filePath).startsWith('..')
-
-  if (isFileOutsideCWD) {
-    throw new Error(
-      `Unexpected import of "${filePath}" that is outside of working directory, use symlinks instead`
-    )
-  }
 
   const isRemoteContent = outputFormat === 'function-body'
 
