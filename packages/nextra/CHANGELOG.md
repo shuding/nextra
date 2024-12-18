@@ -1,5 +1,11 @@
 # nextra
 
+## 4.0.0-app-router.38
+
+### Patch Changes
+
+- 42eb445: remove check for filepaths outside cwd in `compileMdx`
+
 ## 4.0.0-app-router.37
 
 ### Patch Changes
