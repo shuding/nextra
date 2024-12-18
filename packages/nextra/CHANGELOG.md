@@ -1,5 +1,11 @@
 # nextra
 
+## 4.0.0-app-router.39
+
+### Patch Changes
+
+- 711dbe7: add icons for `javascript and `typescript langs
+
 ## 4.0.0-app-router.38
 
 ### Patch Changes
