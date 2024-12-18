@@ -1,5 +1,12 @@
 # nextra-theme-docs
 
+## 4.0.0-app-router.39
+
+### Patch Changes
+
+- Updated dependencies [711dbe7]
+  - nextra@4.0.0-app-router.39
+
 ## 4.0.0-app-router.38
 
 ### Patch Changes
