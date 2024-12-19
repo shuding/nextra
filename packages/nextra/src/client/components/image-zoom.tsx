@@ -26,6 +26,7 @@ export const ImageZoom: FC<ImageProps> = props => {
   const img = createElement(ComponentToUse, { ...props, ref: imgRef })
 
   if (isInsideAnchor) {
+    // There is no need to add zoom for images inside anchor tags
     return img
   }
 
