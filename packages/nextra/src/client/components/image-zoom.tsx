@@ -21,6 +21,8 @@ export const ImageZoom: FC<ImageProps> = props => {
         src: getImageSrc(props.src),
         alt: props.alt
       }}
+      // fix Expected server HTML to contain a matching <div> in <p>.
+      wrapElement="span"
     >
       {createElement(ComponentToUse, props)}
     </Zoom>
