@@ -1,12 +1,6 @@
-'use client'
-
 import Image, { type ImageProps } from 'next/image'
-import React, { type ImgHTMLAttributes } from 'react'
+import { createElement } from 'react'
 import Zoom from 'react-medium-image-zoom'
-
-interface ImageZoomProps extends ImageProps {
-  children?: React.ReactNode
-}
 
 function getNextImageSrc(src: ImageProps['src']): string {
   if (typeof src === 'string') {
@@ -18,14 +12,8 @@ function getNextImageSrc(src: ImageProps['src']): string {
   return src.src
 }
 
-function ImageZoom(props: ImageZoomProps) {
-  const imgNode =
-    typeof props.src === 'string' ? (
-      <img {...(props as ImgHTMLAttributes<HTMLImageElement>)} />
-    ) : (
-      <Image {...props} />
-    )
-
+export function ImageZoom(props: ImageProps) {
+  const ComponentToUse = typeof props.src === 'string' ? 'img' : Image
   return (
     <Zoom
       zoomMargin={40}
@@ -34,9 +22,7 @@ function ImageZoom(props: ImageZoomProps) {
         alt: props.alt
       }}
     >
-      {imgNode}
+      {createElement(ComponentToUse, props)}
     </Zoom>
   )
 }
-
-export default ImageZoom
