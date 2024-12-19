@@ -1,5 +1,5 @@
 diff --git a/dist/changesets-assemble-release-plan.cjs.js b/dist/changesets-assemble-release-plan.cjs.js
-index 4f7b5e5b37bb05874a5c1d8e583e29d4a9593ecf..118d3eaaa2e0615b6813f48fe2618bfebd82a5ca 100644
+index e32a5e5d39c3bd920201b5694632d2b44c92d486..08b9a101d13d112cfaa39f91fdb3a5e8c29bbedc 100644
 --- a/dist/changesets-assemble-release-plan.cjs.js
 +++ b/dist/changesets-assemble-release-plan.cjs.js
 @@ -347,7 +347,7 @@ function shouldBumpMajor({
