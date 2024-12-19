@@ -15,16 +15,15 @@ function getImageSrc(src: ImageProps['src']): string {
 }
 
 export const ImageZoom: FC<ImageProps> = props => {
-  const ref = useRef<HTMLImageElement>(null!)
+  const imgRef = useRef<HTMLImageElement>(null!)
   const [isInsideAnchor, setIsInsideAnchor] = useState(false)
 
   useEffect(() => {
-    const element = ref.current
-    setIsInsideAnchor(element.closest('a') !== null)
+    setIsInsideAnchor(imgRef.current.closest('a') !== null)
   }, [])
 
   const ComponentToUse = typeof props.src === 'string' ? 'img' : Image
-  const img = createElement(ComponentToUse, { ...props, ref })
+  const img = createElement(ComponentToUse, { ...props, ref: imgRef })
 
   if (isInsideAnchor) {
     return img
