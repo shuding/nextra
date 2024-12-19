@@ -1,7 +1,7 @@
 import { useMDXComponents as originalUseMDXComponents } from '@mdx-js/react'
 import { type ImageProps } from 'next/image'
 import { createElement } from 'react'
-import { ImageZoom } from './components/image-zoom'
+import { ImageZoom } from './components/image-zoom.js'
 
 type MDXComponents = ReturnType<typeof originalUseMDXComponents>
 

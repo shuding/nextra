@@ -1,8 +1,8 @@
 import Image, { type ImageProps } from 'next/image'
-import { createElement } from 'react'
+import { createElement, type FC } from 'react'
 import Zoom from 'react-medium-image-zoom'
 
-function getNextImageSrc(src: ImageProps['src']): string {
+function getImageSrc(src: ImageProps['src']): string {
   if (typeof src === 'string') {
     return src
   }
@@ -12,13 +12,13 @@ function getNextImageSrc(src: ImageProps['src']): string {
   return src.src
 }
 
-export function ImageZoom(props: ImageProps) {
+export const ImageZoom: FC<ImageProps> = props => {
   const ComponentToUse = typeof props.src === 'string' ? 'img' : Image
   return (
     <Zoom
       zoomMargin={40}
       zoomImg={{
-        src: getNextImageSrc(props.src),
+        src: getImageSrc(props.src),
         alt: props.alt
       }}
     >
