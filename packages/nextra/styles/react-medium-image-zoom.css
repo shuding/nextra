@@ -16,26 +16,24 @@
   padding: 9px;
   touch-action: manipulation;
   width: 40px;
-  -webkit-appearance: none;
-  -moz-appearance: none;
   appearance: none;
-}
-
-[data-rmiz-btn-zoom]:not(:focus):not(:active) {
-  position: absolute;
-  clip: rect(0 0 0 0);
-  clip-path: inset(50%);
-  height: 1px;
-  overflow: hidden;
-  pointer-events: none;
-  white-space: nowrap;
-  width: 1px;
 }
 
 [data-rmiz-btn-zoom] {
   position: absolute;
   inset: 10px 10px auto auto;
   cursor: zoom-in;
+
+  &:not(:focus):not(:active) {
+    position: absolute;
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    height: 1px;
+    overflow: hidden;
+    pointer-events: none;
+    white-space: nowrap;
+    width: 1px;
+  }
 }
 
 [data-rmiz-btn-unzoom] {
@@ -45,11 +43,13 @@
   z-index: 1;
 }
 
-[data-rmiz-content='found'] img,
-[data-rmiz-content='found'] svg,
-[data-rmiz-content='found'] [role='img'],
-[data-rmiz-content='found'] [data-zoom] {
-  cursor: zoom-in;
+[data-rmiz-content='found'] {
+  img,
+  svg,
+  [role='img'],
+  [data-zoom] {
+    cursor: zoom-in;
+  }
 }
 
 [data-rmiz-modal]::backdrop {
@@ -78,7 +78,7 @@
 }
 
 [data-rmiz-modal-overlay='hidden'] {
-  background-color: rgba(255, 255, 255, 0);
+  background-color: #fff;
 }
 
 [data-rmiz-modal-overlay='visible'] {
