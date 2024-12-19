@@ -5,11 +5,9 @@
 
 [data-rmiz-btn-zoom],
 [data-rmiz-btn-unzoom] {
-  background-color: rgba(0, 0, 0, 0.7);
-  border-radius: 50%;
+  @apply _bg-black/70 _text-white dark:_bg-white/70 dark:_text-black _rounded-full;
   border: none;
   box-shadow: 0 0 1px rgba(255, 255, 255, 0.5);
-  color: #fff;
   height: 40px;
   margin: 0;
   outline-offset: 2px;
@@ -74,15 +72,16 @@
 [data-rmiz-modal-overlay] {
   position: absolute;
   inset: 0;
-  transition: background-color 0.3s;
+  transition: opacity 0.3s;
+  background: rgba(var(--nextra-bg), 0.8);
 }
 
 [data-rmiz-modal-overlay='hidden'] {
-  background-color: #fff;
+  opacity: 0%;
 }
 
 [data-rmiz-modal-overlay='visible'] {
-  background-color: rgba(255, 255, 255, 0.2);
+  opacity: 100%;
 }
 
 [data-rmiz-modal-content] {
