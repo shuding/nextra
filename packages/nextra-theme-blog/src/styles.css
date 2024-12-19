@@ -6,6 +6,7 @@
 @import 'nextra/styles/scrollbar.css';
 @import 'nextra/styles/steps.css';
 @import 'nextra/styles/cards.css';
+@import 'nextra/styles/rmiz.css';
 
 html {
   @apply _scroll-pt-5;
@@ -32,6 +33,7 @@ h1 {
   &:after {
     @apply _hidden;
   }
+
   .line {
     @apply _font-normal;
   }
