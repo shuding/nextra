@@ -1,8 +1,9 @@
 'use client'
 
-import Image, { type ImageProps } from 'next/image'
-import { createElement, useEffect, useRef, useState, type FC } from 'react'
+import { type ImageProps } from 'next/image'
+import { useEffect, useRef, useState, type FC } from 'react'
 import Zoom from 'react-medium-image-zoom'
+import { Image } from './image.js'
 
 function getImageSrc(src: ImageProps['src']): string {
   if (typeof src === 'string') {
@@ -22,8 +23,7 @@ export const ImageZoom: FC<ImageProps> = props => {
     setIsInsideAnchor(imgRef.current.closest('a') !== null)
   }, [])
 
-  const ComponentToUse = typeof props.src === 'string' ? 'img' : Image
-  const img = createElement(ComponentToUse, { ...props, ref: imgRef })
+  const img = <Image {...props} ref={imgRef} />
 
   if (isInsideAnchor) {
     // There is no need to add zoom for images inside anchor tags

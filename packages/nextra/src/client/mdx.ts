@@ -1,12 +1,11 @@
 import { useMDXComponents as originalUseMDXComponents } from '@mdx-js/react'
-import { type ImageProps } from 'next/image'
-import { createElement } from 'react'
+import { ComponentPropsWithoutRef, FC } from 'react'
 import { ImageZoom } from './components/image-zoom.js'
 
 type MDXComponents = ReturnType<typeof originalUseMDXComponents>
 
 const DEFAULT_COMPONENTS = {
-  img: props => createElement(ImageZoom, props as ImageProps)
+  img: ImageZoom as FC<ComponentPropsWithoutRef<'img'>>
 } satisfies MDXComponents
 
 export const useMDXComponents: typeof originalUseMDXComponents = components => {
