@@ -1,5 +1,11 @@
 # nextra
 
+## 4.0.0-app-router.40
+
+### Patch Changes
+
+- 88135ec: Fix `MetaRecord` type so it's no longer `unknown`
+
 ## 4.0.0-app-router.39
 
 ### Patch Changes
