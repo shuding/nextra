@@ -1,5 +1,3 @@
-'use no memo'
-
 /* eslint typescript-sort-keys/interface: error */
 import type { ReadingTime } from 'nextra'
 
