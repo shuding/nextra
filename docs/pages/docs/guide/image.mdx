@@ -49,11 +49,11 @@ images using `![]()` Markdown syntax.
 
 ### Disable Image Zoom
 
-For `nextra-docs-theme` and `nextra-blog-theme`, You can disable image zoom by
+For `nextra-docs-theme` and `nextra-blog-theme`, you can disable image zoom by
 replacing the `img` component used in MDX.
 
 ```jsx filename="theme.config.jsx"
-import { Image } from 'nextra/image'
+import { Image } from 'nextra/components'
 
 export default {
   // your other configurations...
@@ -63,7 +63,7 @@ export default {
 }
 ```
 
-### Enable/Disable Image Zoom For Specific Images
+### Enable/Disable Image Zoom for Specific Images
 
 When you globally disable image zoom but want to apply zoom to specific images,
 you can use it like this:
