@@ -408,6 +408,21 @@
   Router, something may be broken, check
   https://github.com/shuding/nextra/tree/v4-v2/examples for the migration guide
 
+## 3.3.0
+
+### Minor Changes
+
+- ee69234: add
+  [image zoom feature](http://nextra.site/docs/guide/image#image-zoom) for all
+  images written via [GFM syntax](https://github.github.com/gfm/#images) in
+  md/mdx files (except images inside links)
+
+## 3.2.5
+
+### Patch Changes
+
+- 2f5d954: fix unable override injected `img` component
+
 ## 3.2.4
 
 ### Patch Changes
@@ -1270,7 +1285,7 @@
   while importing
 
   ```js
-  import filterRouteLocale from "nextra/filter-route-locale";
+  import filterRouteLocale from 'nextra/filter-route-locale'
   ```
 
 - 4dd720ad: remove `font-weight: 500;` from styles of code blocks since it gives
@@ -1316,19 +1331,19 @@
   and `nextra-theme-docs`
 
   ```js
-  import { Card, Cards } from "nextra/components";
+  import { Card, Cards } from 'nextra/components'
   ```
 
   ```js
-  import { Tab, Tabs } from "nextra/components";
+  import { Tab, Tabs } from 'nextra/components'
   ```
 
   ```js
-  import { Steps } from "nextra/components";
+  import { Steps } from 'nextra/components'
   ```
 
   ```js
-  import { FileTree } from "nextra/components";
+  import { FileTree } from 'nextra/components'
   ```
 
 ### Patch Changes
