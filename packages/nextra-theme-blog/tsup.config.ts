@@ -13,7 +13,7 @@ export default defineConfig({
   bundle: false,
   esbuildPlugins: [reactCompilerPlugin({ filter: /\.tsx?$/ })],
   async onSuccess() {
-    // Use Tailwind CSS CLI because css processing by tsup produce different result
+    // Use Tailwind CSS CLI because CSS processing by tsup produce different result
     await $`npx @tailwindcss/cli -i src/style.css -o dist/style.css`
   }
 })

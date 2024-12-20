@@ -1,3 +1,5 @@
+'use no memo' // throws TypeError: Cannot read properties of null (reading 'useMemo')
+
 /* eslint sort-keys: error */
 import {
   Callout,
