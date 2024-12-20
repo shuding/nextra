@@ -1,5 +1,5 @@
 import { useMDXComponents as originalUseMDXComponents } from '@mdx-js/react'
-import { ComponentPropsWithoutRef, FC } from 'react'
+import type { ComponentPropsWithoutRef, FC } from 'react'
 import { ImageZoom } from './components/image-zoom.js'
 
 type MDXComponents = ReturnType<typeof originalUseMDXComponents>

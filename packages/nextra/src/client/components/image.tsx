@@ -8,3 +8,5 @@ export const Image = forwardRef<HTMLImageElement, ImageProps>((props, ref) => {
   // @ts-expect-error -- fixme
   return <ComponentToUse {...props} ref={ref} />
 })
+
+Image.displayName = 'Image'
