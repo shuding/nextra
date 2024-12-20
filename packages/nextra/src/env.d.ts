@@ -1,7 +1,7 @@
 declare namespace globalThis {
   var pagefind:
     | {
-        search: <T>(query: string) => Promise<{
+        debouncedSearch: <T>(query: string) => Promise<{
           results: {
             data: () => Promise<T>
             id: string

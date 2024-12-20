@@ -48,7 +48,7 @@ type SearchProps = {
   className?: string
 }
 
-const INPUTS = new Set(['input', 'select', 'button', 'textarea'])
+const INPUTS = new Set(['INPUT', 'SELECT', 'BUTTON', 'TEXTAREA'])
 
 const DEV_SEARCH_NOTICE = (
   <>
@@ -105,7 +105,8 @@ export const Search: FC<SearchProps> = ({
           return
         }
       }
-      const { results } = await window.pagefind!.search<PagefindResult>(value)
+      const { results } =
+        await window.pagefind!.debouncedSearch<PagefindResult>(value)
       const data = await Promise.all(results.map(o => o.data()))
 
       setResults(
@@ -126,15 +127,14 @@ export const Search: FC<SearchProps> = ({
   const router = useRouter()
   const [focused, setFocused] = useState(false)
   const mounted = useMounted()
-  const inputRef = useRef<HTMLInputElement>(null)
+  const inputRef = useRef<HTMLInputElement>(null!)
 
   useEffect(() => {
     function handleKeyDown(event: globalThis.KeyboardEvent) {
       const input = inputRef.current
       const { activeElement } = document
-      const tagName = activeElement?.tagName.toLowerCase()
+      const tagName = activeElement?.tagName
       if (
-        !input ||
         !tagName ||
         INPUTS.has(tagName) ||
         // @ts-expect-error -- fixme
@@ -193,7 +193,7 @@ export const Search: FC<SearchProps> = ({
     if (!searchResult) return
     // Calling before navigation so selector `html:not(:has(*:focus))` in styles.css will work,
     // and we'll have padding top since input is not focused
-    inputRef.current?.blur()
+    inputRef.current.blur()
     router.push(searchResult.url)
     setSearch('')
   }
