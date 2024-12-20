@@ -1,5 +1,3 @@
-'use no memo'
-
 export { useTheme } from 'next-themes'
 export { useThemeConfig, useConfig, useMenu, setMenu } from './stores'
 export { useMDXComponents } from './mdx-components'

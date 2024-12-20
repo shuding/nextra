@@ -18,7 +18,7 @@
     "dist"
   ],
   "scripts": {
-    "build": "tsup",
+    "build": "NODE_ENV=production tsup",
     "dev": "tsup --watch . --watch ../nextra/src --watch ../nextra/styles",
     "prepublishOnly": "pnpm build",
     "test": "vitest run",
@@ -34,14 +34,15 @@
     "@headlessui/react": "^2.1.2",
     "clsx": "^2.1.0",
     "next-themes": "^0.4.0",
-    "react-compiler-runtime": "19.0.0-beta-df7b47d-20241124",
+    "react-compiler-runtime": "0.0.0-experimental-22c6e49-20241219",
     "scroll-into-view-if-needed": "^3.1.0",
     "zod": "^3.22.3",
     "zod-validation-error": "^3.0.0",
     "zustand": "^5.0.1"
   },
   "devDependencies": {
-    "@tailwindcss/postcss": "^4.0.0-beta.2",
+    "@tailwindcss/cli": "^4.0.0-beta.8",
+    "@tailwindcss/postcss": "^4.0.0-beta.8",
     "@testing-library/react": "^16.0.0",
     "@types/react": "^18.2.23",
     "@vitejs/plugin-react": "^4.1.0",
@@ -51,8 +52,9 @@
     "nextra": "workspace:*",
     "postcss": "^8.4.49",
     "react": "18.3.1",
-    "tailwindcss": "^4.0.0-beta.2",
-    "vitest": "^2.0.3"
+    "tailwindcss": "^4.0.0-beta.8",
+    "vitest": "^2.0.3",
+    "zx": "^8.2.4"
   },
   "sideEffects": false
 }

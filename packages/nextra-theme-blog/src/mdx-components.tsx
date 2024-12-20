@@ -1,4 +1,4 @@
-// should be used on server
+// throws TypeError: Cannot read properties of null (reading 'useMemo')
 'use no memo'
 
 /* eslint sort-keys: error */

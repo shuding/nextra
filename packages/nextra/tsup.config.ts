@@ -3,7 +3,7 @@ import path from 'node:path'
 import svgr from 'esbuild-plugin-svgr'
 import { reactCompilerPlugin } from 'esbuild-react-compiler-plugin'
 import { defineConfig } from 'tsup'
-import { defaultEntry } from '../nextra-theme-docs/tsup.config.js'
+import { defaultEntry } from './default-entry.js'
 import packageJson from './package.json'
 import { CWD, IS_PRODUCTION } from './src/server/constants.js'
 
@@ -29,12 +29,7 @@ export default defineConfig({
       svgoConfig: {
         plugins: ['removeXMLNS']
       },
-      plugins: ['@svgr/plugin-svgo'],
-      jsx: {
-        babelConfig: {
-          plugins: [babelTransformImplicitReturnPlugin]
-        }
-      }
+      plugins: ['@svgr/plugin-svgo']
     }),
     reactCompilerPlugin({
       filter: new RegExp(
@@ -69,18 +64,3 @@ export default defineConfig({
     }
   ]
 })
-
-// Currently react-compiler does not support implicit return in arrow functions
-// This plugin can be removed in the future when react-compiler supports it
-function babelTransformImplicitReturnPlugin({ types: t }: { types: any }) {
-  return {
-    visitor: {
-      ArrowFunctionExpression({ node }: any) {
-        // Check if the function body is a single expression (i.e., implicit return)
-        if (node.body.type === 'BlockStatement') return
-        // Transform the body to a BlockStatement and wrap the expression with a return
-        node.body = t.blockStatement([t.returnStatement(node.body)])
-      }
-    }
-  }
-}

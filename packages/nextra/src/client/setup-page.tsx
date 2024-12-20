@@ -1,4 +1,4 @@
-/* should be used on server, and hocs aren't optimized by react-compiler */
+// should be used on server
 'use no memo'
 
 /*

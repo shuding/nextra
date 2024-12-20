@@ -21,11 +21,11 @@
   },
   "devDependencies": {
     "@svgr/webpack": "^8.0.1",
-    "@tailwindcss/postcss": "^4.0.0-beta.2",
+    "@tailwindcss/postcss": "^4.0.0-beta.8",
     "@types/node": "^22.0.0",
     "@types/react": "^18.2.23",
     "pagefind": "^1.1.1",
-    "tailwindcss": "^4.0.0-beta.2"
+    "tailwindcss": "^4.0.0-beta.8"
   },
   "browserslist": [
     ">= .25%",

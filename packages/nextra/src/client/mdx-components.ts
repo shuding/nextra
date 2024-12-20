@@ -1,5 +1,3 @@
-'use no memo'
-
 import type { ComponentPropsWithoutRef, FC, JSX } from 'react'
 import type { MDXWrapper } from '../types.js'
 import { ImageZoom } from './components/image-zoom.js'

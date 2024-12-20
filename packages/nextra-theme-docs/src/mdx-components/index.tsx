@@ -1,4 +1,4 @@
-// should be used on server
+// TODO: check why components in object aren't optimized
 'use no memo'
 
 /* eslint sort-keys: error */

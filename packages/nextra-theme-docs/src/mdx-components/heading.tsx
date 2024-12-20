@@ -1,4 +1,4 @@
-// TODO: Isn't optimized, due HOC?
+// TODO: check why isn't optimized
 'use no memo'
 
 import cn from 'clsx'
