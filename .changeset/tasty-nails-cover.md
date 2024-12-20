@@ -2,4 +2,4 @@
 "nextra-theme-docs": patch
 ---
 
-dd
+fix unclickable `type: menu` on mobile nav
