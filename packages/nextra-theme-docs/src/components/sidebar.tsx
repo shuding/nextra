@@ -59,9 +59,16 @@ type FolderProps = {
   level: number
 }
 
-const Folder: FC<FolderProps> = ({ item, anchors, onFocus, level }) => {
+const Folder: FC<FolderProps> = ({ item: _item, anchors, onFocus, level }) => {
   const routeOriginal = useFSRoute()
   const route = routeOriginal.split('#', 1)[0]!
+
+  const item = {
+    ..._item,
+    children:
+      _item.type === 'menu' ? getMenuChildren(_item as any) : _item.children
+  }
+
   const hasRoute = !!item.route // for item.type === 'menu' will be ''
   const active = hasRoute && [route, route + '/'].includes(item.route + '/')
   const activeRouteInside =
@@ -95,9 +102,8 @@ const Folder: FC<FolderProps> = ({ item, anchors, onFocus, level }) => {
     if (isClickOnIcon) {
       event.preventDefault()
     }
-    const isOpen = el.parentElement!.classList.contains('open')
-    const route = el.getAttribute('href') || el.dataset.href || ''
-    TreeState[route] = !isOpen
+    const open = el.parentElement!.classList.contains('open')
+    TreeState[item.route] = !open
     rerender({})
   }
 
@@ -157,10 +163,7 @@ const Folder: FC<FolderProps> = ({ item, anchors, onFocus, level }) => {
           <Menu
             className={classes.border}
             // @ts-expect-error -- fixme
-            directories={
-              // @ts-expect-error -- fixme
-              item.type === 'menu' ? getMenuChildren(item) : item.children
-            }
+            directories={item.children}
             anchors={anchors}
             level={level}
           />

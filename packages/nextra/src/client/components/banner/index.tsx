@@ -24,7 +24,8 @@ export const Banner: FC<{
         CLASS_NAME,
         'x:max-md:sticky x:top-0 x:z-20 x:flex x:items-center',
         'x:text-slate-50 x:dark:text-white x:bg-neutral-900 x:dark:bg-[linear-gradient(1deg,#383838,#212121)]',
-        'x:px-2 x:print:hidden'
+        'x:px-2',
+        'x:print:[display:none]' // to not match `x:[.nextra-banner:not([class$=hidden])~&]` class
       )}
     >
       <div className="x:w-full x:whitespace-nowrap x:overflow-x-auto x:text-center x:font-medium x:text-sm">
