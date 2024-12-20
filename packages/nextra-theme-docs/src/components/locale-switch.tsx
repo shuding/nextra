@@ -1,9 +1,11 @@
+'use client'
+
 import { addBasePath } from 'next/dist/client/add-base-path'
-import { useRouter } from 'nextra/hooks'
+import { usePathname } from 'next/navigation'
+import { Select } from 'nextra/components'
 import { GlobeIcon } from 'nextra/icons'
-import type { ReactElement } from 'react'
-import { useThemeConfig } from '../contexts'
-import { Select } from './select'
+import type { FC } from 'react'
+import { useThemeConfig } from '../stores'
 
 const ONE_YEAR = 365 * 24 * 60 * 60 * 1000
 
@@ -12,41 +14,30 @@ interface LocaleSwitchProps {
   className?: string
 }
 
-export function LocaleSwitch({
-  lite,
-  className
-}: LocaleSwitchProps): ReactElement | null {
-  const themeConfig = useThemeConfig()
+export const LocaleSwitch: FC<LocaleSwitchProps> = ({ lite, className }) => {
+  const { i18n } = useThemeConfig()
+  const pathname = usePathname()
+  if (!i18n.length) return null
 
-  const { locale, asPath } = useRouter()
-
-  const options = themeConfig.i18n
-  if (!options.length) return null
-
-  const selected = options.find(l => locale === l.locale)
+  const [, locale] = pathname.split('/', 2)
   return (
     <Select
       title="Change language"
       className={className}
-      onChange={option => {
+      onChange={lang => {
         const date = new Date(Date.now() + ONE_YEAR)
-        document.cookie = `NEXT_LOCALE=${
-          option.key
-        }; expires=${date.toUTCString()}; path=/`
-        const href = addBasePath(asPath.replace(`/${locale}`, `/${option.key}`))
-        location.href = href
+        document.cookie = `NEXT_LOCALE=${lang}; expires=${date.toUTCString()}; path=/`
+        location.href = addBasePath(pathname.replace(`/${locale}`, `/${lang}`))
       }}
-      selected={{
-        key: selected?.locale || '',
-        name: (
-          <span className="_flex _items-center _gap-2">
-            <GlobeIcon />
-            <span className={lite ? '_hidden' : ''}>{selected?.name}</span>
-          </span>
-        )
-      }}
-      options={options.map(l => ({
-        key: l.locale,
+      value={locale!}
+      selectedOption={
+        <span className="x:flex x:items-center x:gap-2">
+          <GlobeIcon height="12" />
+          {!lite && i18n.find(l => locale === l.locale)?.name}
+        </span>
+      }
+      options={i18n.map(l => ({
+        id: l.locale,
         name: l.name
       }))}
     />

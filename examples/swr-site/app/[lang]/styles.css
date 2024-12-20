@@ -1,0 +1,21 @@
+@import 'tailwindcss';
+@import 'nextra-theme-docs/style.css';
+@import '../_components/features.css';
+
+@theme {
+}
+
+body {
+  --bg-dot-color: #d1d1d1;
+
+  .dark & {
+    --bg-dot-color: #313131;
+  }
+
+  background:
+    linear-gradient(to bottom, transparent, rgb(var(--nextra-bg)) 300px),
+    fixed 0 0 / 20px 20px
+      radial-gradient(var(--bg-dot-color) 1px, transparent 0),
+    fixed 10px 10px / 20px 20px
+      radial-gradient(var(--bg-dot-color) 1px, transparent 0);
+}

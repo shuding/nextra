@@ -42,11 +42,11 @@ export function middleware(request: NextRequest) {
     return NextResponse.redirect(new URL(url, request.url))
   }
 
-  const requestLocale = pathname.split('/', 2)[1]
+  const [, requestLocale] = pathname.split('/', 2)
 
   if (requestLocale !== cookieLocale) {
     const response = NextResponse.next()
-    response.cookies.set(COOKIE_NAME, requestLocale)
+    response.cookies.set(COOKIE_NAME, requestLocale!)
     return response
   }
 }

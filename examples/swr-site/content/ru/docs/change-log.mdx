@@ -1,0 +1,37 @@
+import Markdown from 'markdown-to-jsx'
+
+export async function ReleasesRenderer() {
+  const releases = await fetch(
+    `https://api.github.com/repos/vercel/swr/releases`
+  ).then(res => res.json())
+  return (
+    <Markdown>
+      {releases
+        // мы показываем здесь крайние 5 релизов
+        .slice(0, 5)
+        .map(release => {
+          const body = release.body
+            .replace(/&#39;/g, "'")
+            .replace(
+              /@([a-zA-Z0-9_-]+)(?=(,| ))/g,
+              '<a href="https://github.com/$1" target="_blank" rel="noopener">@$1</a>'
+            )
+          return `## <a href="${
+            release.html_url
+          }" target="_blank" rel="noopener">${release.tag_name}</a>
+Опубликовано ${new Date(release.published_at).toLocaleDateString(
+            'ru'
+          )}.\n\n${body}`
+        })
+        .join('\n\n')}
+    </Markdown>
+  )
+}
+
+# Журнал изменений
+
+Пожалуйста, посетите
+[страницу релизов SWR](https://github.com/vercel/swr/releases), чтобы увидеть
+всю историю релизов.
+
+<ReleasesRenderer />

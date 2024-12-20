@@ -1,0 +1,51 @@
+---
+sidebarTitle: Banner
+---
+
+import { Screenshot } from 'components/screenshot'
+import { Table } from 'components/table'
+
+# `<Banner>` Component
+
+Show a banner on the top of the website. It can be used to show a warning or a
+notice.
+
+<Table>
+
+|               |                  |                                                                         |
+| ------------- | ---------------- | ----------------------------------------------------------------------- |
+| `dismissible` | `boolean{:ts}`   | Closable banner or not. Default: `"true"{:json}`                        |
+| `key`         | `string{:ts}`    | Storage key to keep the banner state. Default: `"nextra-banner"{:json}` |
+| `children`    | `ReactNode{:ts}` | Content of the banner                                                   |
+
+</Table>
+
+## Banner key
+
+A banner can be dismissed. By default, it's used by
+[localStorage](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage)
+to keep the banner state on the client.
+
+If you have updated your banner text, you should change the key to make sure the
+banner is shown again. The best practice is to always use a descriptive key for
+the current text, for example:
+
+<Screenshot>![Banner](/assets/docs/banner.png)</Screenshot>
+
+```jsx filename="app/layout.jsx" {7-11}
+import { Layout } from 'my-nextra-theme'
+import { Banner } from 'nextra/components'
+
+export default function MyLayout({ children, ...props }) {
+  return (
+    <Layout>
+      <Banner storageKey="2.0-release">
+        <a href="https://nextra.site" target="_blank">
+          🎉 Nextra 2.0 is released. Read more →
+        </a>
+      </Banner>
+      {children}
+    </Layout>
+  )
+}
+```

@@ -1,0 +1,56 @@
+# Code Highlighting
+
+Nextra uses [Shiki](https://shiki.style) and
+[Rehype Pretty Code](https://github.com/FormidableLabs/prism-react-renderer) to
+highlight the code blocks. This section covers how you can customize it.
+
+## Meta strings
+
+### Highlight lines
+
+````mdx
+```jsx {1,3-5}
+import 'nextra-theme-docs/style.css'
+
+export default function Nextra({ Component, pageProps }) {
+  const getLayout = Component.getLayout || (page => page)
+  return getLayout(<Component {...pageProps} />)
+}
+```
+````
+
+```jsx {1,4-5}
+import 'nextra-theme-docs/style.css'
+
+export default function Nextra({ Component, pageProps }) {
+  const getLayout = Component.getLayout || (page => page)
+  return getLayout(<Component {...pageProps} />)
+}
+```
+
+### Title
+
+````mdx
+```jsx filename="_app.js"
+import 'nextra-theme-docs/style.css'
+
+export default function Nextra({ Component, pageProps }) {
+  const getLayout = Component.getLayout || (page => page)
+  return getLayout(<Component {...pageProps} />)
+}
+```
+````
+
+```jsx filename="_app.js"
+import 'nextra-theme-docs/style.css'
+
+export default function Nextra({ Component, pageProps }) {
+  const getLayout = Component.getLayout || (page => page)
+  return getLayout(<Component {...pageProps} />)
+}
+```
+
+## Supported Languages
+
+You can find a list of supported languages
+[here](https://github.com/shikijs/shiki/blob/main/docs/languages.md).

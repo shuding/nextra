@@ -1,0 +1,54 @@
+# Next.js I18n
+
+> [!NOTE]
+>
+> This feature is only available in the docs theme.
+
+Nextra supports
+[Next.js Internationalized Routing](https://nextjs.org/docs/advanced-features/i18n-routing)
+out of the box.
+
+To add multi-language pages to your Nextra application, just need to config
+`i18n` in `next.config.mjs`:
+
+```js filename="next.config.mjs"
+import nextra from 'nextra'
+
+const withNextra = nextra({
+  theme: 'nextra-theme-docs',
+  themeConfig: './theme.config.js'
+})
+
+export default withNextra({
+  i18n: {
+    locales: ['en', 'zh', 'de'],
+    defaultLocale: 'en'
+  }
+})
+```
+
+Then, add the locale codes to your file extensions (required for the default
+locale too):
+
+```text
+/pages
+  index.en.md
+  index.zh.md
+  index.de.md
+  meta.en.json
+  meta.zh.json
+  meta.de.json
+  ...
+```
+
+Finally, add the `i18n` option to your `theme.config.js` to configure the
+language dropdown:
+
+```jsx filename="theme.config.js"
+i18n: [
+  { locale: 'en', text: 'English' },
+  { locale: 'zh', text: '中文' },
+  { locale: 'de', text: 'Deutsch' },
+  { locale: 'ar', text: 'العربية', direction: 'rtl' }
+]
+```

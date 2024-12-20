@@ -1,15 +1,17 @@
 {
   "compilerOptions": {
-    "target": "es2016",
+    "target": "es2021",
     "module": "ESNext",
     "declaration": true,
     "noEmit": true,
     "esModuleInterop": true,
     "strict": true,
     "skipLibCheck": true,
+    "strictNullChecks": true,
     "jsx": "react-jsx",
-    "moduleResolution": "Node",
-    "types": ["vitest/globals"]
+    "moduleResolution": "bundler",
+    "types": ["vitest/globals"],
+    "noUncheckedIndexedAccess": true
   },
   "exclude": ["dist"]
 }

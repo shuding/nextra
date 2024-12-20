@@ -1,0 +1,41 @@
+diff --git a/src/index.js b/src/index.js
+index a2ae141324bcd77291f378488edbaeaf8d3acbd8..b5eb487f3ed1069e279c6469de8870e77345051c 100644
+--- a/src/index.js
++++ b/src/index.js
+@@ -1,9 +1,11 @@
+ const { readFile } = require('node:fs/promises')
+ const { transform } = require('@svgr/core')
++const path = require('node:path')
+ 
+ const svgrPlugin = (options = {}) => ({
+     name: 'svgr',
+     setup(build) {
++      if (build.bundle) {
+         build.onResolve({ filter: /\.svg$/ }, async (args) => {
+             switch (args.kind) {
+                 case 'import-statement':
+@@ -17,8 +19,11 @@ const svgrPlugin = (options = {}) => ({
+                     }
+             }
+         })
++      }
+ 
+-        build.onLoad({ filter: /\.svg$/ }, async (args) => {
++        // esbuild do not run next `onLoad` callbacks if some already returned `contents`,
++        // but we use react-compiler plugin, which should be executed after this plugin
++        build.onResolve({ filter: /\.svg$/ }, async (args) => {
+             const svg = await readFile(args.path, { encoding: 'utf8' })
+ 
+             if (options.plugins && !options.plugins.includes('@svgr/plugin-jsx')) {
+@@ -37,8 +42,11 @@ const svgrPlugin = (options = {}) => ({
+             }
+ 
+             return {
++              path: path.join(args.resolveDir, args.path),
++              pluginData: {
+                 contents,
+                 loader: options.typescript ? 'tsx' : 'jsx',
++              }
+             }
+         })
+     },

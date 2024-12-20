@@ -1,0 +1,3 @@
+# Just Page
+
+{/* this file should not be treated as App Router page */}

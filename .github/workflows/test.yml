@@ -2,7 +2,7 @@ name: Test
 
 on:
   pull_request:
-    branches: [main, v3]
+    branches: [main, v4-v2]
 
 jobs:
   test:
@@ -18,12 +18,21 @@ jobs:
         with:
           access_token: ${{ github.token }}
 
-      - name: Checkout Main
+      - name: Check out code
         uses: actions/checkout@v4
 
-      - uses: pnpm/action-setup@v4
+      - name: Cache turbo build setup
+        uses: actions/cache@v4
+        with:
+          path: .turbo
+          key: ${{ runner.os }}-turbo-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-turbo-
 
-      - name: Use Node.js
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Install Node.js
         uses: actions/setup-node@v4
         with:
           node-version-file: .node-version
