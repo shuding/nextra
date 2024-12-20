@@ -34,10 +34,6 @@ export default defineConfig([
         styleContent
           .replaceAll('@layer utilities', '@layer v4-utilities')
           .replaceAll('@layer base', '@layer v4-base')
-          .replace(
-            '@layer theme, base, components, utilities',
-            '@layer theme, v4-base, components, v4-utilities'
-          )
       )
       console.log('✅ `dist/style-prefixed.css` successfully created')
     }

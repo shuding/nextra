@@ -14,7 +14,7 @@ const Card: FC<{
     <NextLink
       href={href}
       className={cn(
-        'group', // https://github.com/tailwindlabs/tailwindcss/issues/15172
+        'x:group',
         'x:focus-visible:nextra-focus nextra-card x:flex x:flex-col x:justify-start x:overflow-hidden x:rounded-lg x:border x:border-gray-200',
         'x:text-current x:no-underline x:dark:shadow-none',
         'x:hover:shadow-gray-100 x:dark:hover:shadow-none x:shadow-gray-100',
