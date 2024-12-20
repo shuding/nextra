@@ -1,3 +1,5 @@
+'use no memo' // TODO: check why isn't optimized
+
 import cn from 'clsx'
 import type { ComponentProps, FC } from 'react'
 import { HeadingAnchor } from './heading-anchor.client'
