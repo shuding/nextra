@@ -1,14 +1,12 @@
 import cn from 'clsx'
 import type { ComponentProps, FC } from 'react'
 
-const Table_: FC<ComponentProps<'table'>> = props => {
-  return (
-    <table
-      {...props}
-      className={cn('x:block x:overflow-x-auto', props.className)}
-    />
-  )
-}
+const Table_: FC<ComponentProps<'table'>> = props => (
+  <table
+    {...props}
+    className={cn('x:block x:overflow-x-auto', props.className)}
+  />
+)
 const Th: FC<ComponentProps<'th'>> = props => {
   return (
     <th

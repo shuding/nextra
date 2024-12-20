@@ -75,11 +75,11 @@ export const TOC: FC<TOCProps> = ({ toc, filePath, pageTitle }) => {
               className={cn(
                 'x:focus-visible:nextra-focus',
                 {
-                  '2': 'x:font-semibold',
-                  '3': 'x:ms-3',
-                  '4': 'x:ms-6',
-                  '5': 'x:ms-9',
-                  '6': 'x:ms-12'
+                  2: 'x:font-semibold',
+                  3: 'x:ms-3',
+                  4: 'x:ms-6',
+                  5: 'x:ms-9',
+                  6: 'x:ms-12'
                 }[depth],
                 'x:block x:transition-colors x:subpixel-antialiased',
                 id === activeSlug

@@ -3,20 +3,48 @@ import path from 'node:path'
 import reactCompilerLoader from 'react-compiler-webpack/dist/react-compiler-loader.js'
 import type { Options } from 'tsup'
 
-const reactCompilerConfig = {
-  sources(_filename: string) {
-    return true
+const DEFAULT_REACT_COMPILER_CONFIG = {
+  sources(filename: string) {
+    return !filename.includes('node_modules')
   },
-  target: '18'
+  // panicThreshold: 'all_errors',
+  target: '18',
+  logger: {
+    logEvent(
+      filename: string,
+      result: { kind: 'CompileError' | 'CompileSuccess' }
+    ) {
+      if (result.kind === 'CompileSuccess') {
+        console.info('🚀 File', filename, 'was optimized with react-compiler')
+        return
+      }
+      console.error(
+        '❌ File',
+        filename,
+        'was not optimized with react-compiler'
+      )
+      console.error(result)
+      if (process.env.NODE_ENV === 'production') {
+        process.exit(1)
+      }
+    }
+  }
 }
 
 export const reactCompilerPlugin = ({
-  filter
+  filter,
+  config
 }: {
   filter: RegExp
+  config?: object
 }): NonNullable<Options['esbuildPlugins']>[number] => ({
   name: 'react-compiler',
   setup(build) {
+    config = {
+      ...DEFAULT_REACT_COMPILER_CONFIG,
+      ...config
+    }
+
     build.onLoad({ filter }, async args => {
       const {
         contents = await fs.readFile(args.path),
@@ -31,32 +59,13 @@ export const reactCompilerPlugin = ({
             reject(error)
             return
           }
-          const relativePath = path.relative(process.cwd(), args.path)
-
-          if (
-            /^import \{ c as _c } from "react-compiler-runtime";/m.test(result)
-          ) {
-            console.info(
-              '🚀 File',
-              relativePath,
-              'was optimized with react-compiler'
-            )
-          } else if (!/^'use no memo'/m.test(result)) {
-            console.error(
-              '❌ File',
-              relativePath,
-              'was not optimized with react-compiler'
-            )
-            console.log(result)
-          }
-
           resolve({ contents: result, loader })
         }
 
         reactCompilerLoader.call(
           {
             async: () => callback,
-            getOptions: () => reactCompilerConfig,
+            getOptions: () => config,
             resourcePath: args.path
           },
           contents
