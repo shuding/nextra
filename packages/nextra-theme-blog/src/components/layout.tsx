@@ -5,11 +5,11 @@ import type { ComponentProps, FC, ReactElement, ReactNode } from 'react'
 export const Footer: FC<{
   children?: ReactNode
 }> = ({
-  children = `CC BY-NC 4.0 ${new Date().getFullYear()} © Shu Ding.`
+  children
 }) => {
   return (
     <small className="x:mt-32 x:block" data-pagefind-ignore="all">
-      {children}
+      {children || `CC BY-NC 4.0 ${new Date().getFullYear()} © Shu Ding.`}
     </small>
   )
 }

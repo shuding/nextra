@@ -12,6 +12,9 @@ patchedDependencies:
   '@changesets/assemble-release-plan@6.0.4':
     hash: tekp75rilwrgkypl2xdezarfeu
     path: patches/@changesets__assemble-release-plan.patch
+  babel-plugin-react-compiler@0.0.0-experimental-22c6e49-20241219:
+    hash: wgm5lcfm2c33h2dszdvj5fc5tm
+    path: patches/babel-plugin-react-compiler@0.0.0-experimental-22c6e49-20241219.patch
   esbuild-plugin-svgr@3.0.0:
     hash: 5pajtn63olpwhczqjppya6ysmi
     path: patches/esbuild-plugin-svgr.patch
@@ -188,7 +191,7 @@ importers:
     dependencies:
       babel-plugin-react-compiler:
         specifier: 0.0.0-experimental-22c6e49-20241219
-        version: 0.0.0-experimental-22c6e49-20241219
+        version: 0.0.0-experimental-22c6e49-20241219(patch_hash=wgm5lcfm2c33h2dszdvj5fc5tm)
       react-compiler-webpack:
         specifier: 0.1.2
         version: 0.1.2(babel-plugin-react-compiler@0.0.0-experimental-22c6e49-20241219)
@@ -6008,11 +6011,12 @@ packages:
       - supports-color
     dev: true
 
-  /babel-plugin-react-compiler@0.0.0-experimental-22c6e49-20241219:
+  /babel-plugin-react-compiler@0.0.0-experimental-22c6e49-20241219(patch_hash=wgm5lcfm2c33h2dszdvj5fc5tm):
     resolution: {integrity: sha512-jxp6eD6SQqSA7HrhVewq6NoO6tW8Wlgo+gpMf5ovuC0UR086tC9SOHV2k+1Uae/jKiywDfQX7UEyWaU6SQ69PA==}
     dependencies:
       '@babel/types': 7.26.0
     dev: false
+    patched: true
 
   /bail@2.0.2:
     resolution: {integrity: sha512-0xO6mYd7JB2YesxDKplafRpsiOzPt9V02ddPCLbY1xYGPOX24NTyN50qnUxgCPcSoYMhKpAuBTjQoRZCAkUDRw==}
@@ -10757,7 +10761,7 @@ packages:
       '@babel/core': 7.26.0
       '@babel/plugin-syntax-jsx': 7.25.7(@babel/core@7.26.0)
       '@babel/plugin-syntax-typescript': 7.24.7(@babel/core@7.26.0)
-      babel-plugin-react-compiler: 0.0.0-experimental-22c6e49-20241219
+      babel-plugin-react-compiler: 0.0.0-experimental-22c6e49-20241219(patch_hash=wgm5lcfm2c33h2dszdvj5fc5tm)
       loader-utils: 3.3.1
     transitivePeerDependencies:
       - supports-color

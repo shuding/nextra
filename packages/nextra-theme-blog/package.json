@@ -17,7 +17,7 @@
     "dist"
   ],
   "scripts": {
-    "build": "tsup",
+    "build": "NODE_ENV=production tsup",
     "dev": "tsup --watch . --watch ../nextra/src --watch ../nextra/styles",
     "prepublishOnly": "pnpm build",
     "test": "vitest run",

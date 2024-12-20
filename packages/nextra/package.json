@@ -59,7 +59,7 @@
     "styles"
   ],
   "scripts": {
-    "build": "tsup",
+    "build": "NODE_ENV=production tsup",
     "dev": "NODE_OPTIONS=--max_old_space_size=8192 tsup --watch",
     "prepublishOnly": "pnpm build",
     "test": "vitest",
