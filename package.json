@@ -21,29 +21,29 @@
     "version": "changeset version"
   },
   "devDependencies": {
-    "@changesets/cli": "2.27.9",
+    "@changesets/cli": "2.27.11",
     "@rollup/plugin-alias": "^5.1.1",
-    "eslint": "9.15.0",
-    "prettier": "3.3.3",
+    "eslint": "9.17.0",
+    "prettier": "3.4.2",
     "rimraf": "6.0.1",
     "tsup": "8.3.5",
     "tsx": "^4.19.1",
-    "turbo": "2.3.1",
+    "turbo": "2.3.3",
     "typescript": "5.7.2"
   },
   "pnpm": {
     "overrides": {
+      "lightningcss": "1.28.2",
       "esbuild": "^0.24.0",
-      "next": "15.0.3",
-      "lightningcss": "1.28.2"
+      "next": "15.1.2"
     },
     "patchedDependencies": {
+      "babel-plugin-react-compiler@0.0.0-experimental-22c6e49-20241219": "patches/babel-plugin-react-compiler@0.0.0-experimental-22c6e49-20241219.patch",
       "esbuild-plugin-svgr@3.0.0": "patches/esbuild-plugin-svgr.patch",
-      "@changesets/assemble-release-plan@6.0.4": "patches/@changesets__assemble-release-plan.patch",
+      "@changesets/assemble-release-plan@6.0.5": "patches/@changesets__assemble-release-plan.patch",
       "tsup@8.3.5": "patches/tsup@8.3.5.patch",
-      "next@15.0.3": "patches/next@13.5.6.patch",
-      "eslint-plugin-tailwindcss@3.17.3": "patches/eslint-plugin-tailwindcss.patch",
-      "babel-plugin-react-compiler@0.0.0-experimental-22c6e49-20241219": "patches/babel-plugin-react-compiler@0.0.0-experimental-22c6e49-20241219.patch"
+      "next@15.1.2": "patches/next@13.5.6.patch",
+      "eslint-plugin-tailwindcss@3.17.3": "patches/eslint-plugin-tailwindcss.patch"
     }
   }
 }

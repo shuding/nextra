@@ -110,6 +110,8 @@ const config: Config = tseslint.config(
       'sonarjs/no-array-index-key': 'off', // todo
       'sonarjs/no-unstable-nested-components': 'off', // todo
 
+      'sonarjs/no-unused-vars': 'off',
+      'sonarjs/prefer-regexp-exec': 'off',
       'sonarjs/fixme-tag': 'off',
       '@typescript-eslint/no-explicit-any': 'off', // Too many cases
       'unicorn/prevent-abbreviations': 'off', // Too many cases

@@ -41,3 +41,48 @@ With Next.js Image, there will be no layout shift, and a beautiful blurry
 placeholder will be shown by default when loading the images:
 
 ![Nextra](/opengraph-image.jpeg)
+
+## Image Zoom
+
+> [!NOTE]
+>
+> The image zoom feature is enabled globally by default.
+
+In the default configuration, if you want to use this feature, simply insert
+images using `![]()` Markdown syntax.
+
+### Disable Image Zoom
+
+For `nextra-docs-theme` and `nextra-blog-theme`, you can disable image zoom by
+replacing the `img` component used in MDX.
+
+```jsx filename="theme.config.jsx"
+import { Image } from 'nextra/components'
+
+export default {
+  // ... your other configurations
+  components: {
+    img: props => <Image {...props} />
+  }
+}
+```
+
+### Enable/Disable Image Zoom for Specific Images
+
+When zoom is **disabled globally**, but you want to enable it for specific
+images, you can do so by using the `<ImageZoom>` component:
+
+```mdx
+import { ImageZoom } from 'nextra/components'
+
+<ImageZoom src="/demo.png" />
+```
+
+When zoom is **enabled globally**, and you want to disable zoom for a specific
+image, you can simply use the `<Image>` component:
+
+```mdx
+import { Image } from 'nextra/components'
+
+<Image src="/demo.png" />
+```

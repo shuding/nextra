@@ -1,8 +1,8 @@
 import type { ImageProps } from 'next/image'
 import NextImage from 'next/image'
-import type { FC } from 'react'
+import { forwardRef } from 'react'
 
-export const Image: FC<ImageProps> = props => {
+export const Image = forwardRef<HTMLImageElement, ImageProps>((props, ref) => {
   if (
     process.env.NODE_ENV !== 'production' &&
     typeof props.src === 'object' &&
@@ -18,6 +18,8 @@ This is Turbopack bug, which will not occurs on production (since Webpack is use
     }
   }
   const ComponentToUse = typeof props.src === 'object' ? NextImage : 'img'
-  // @ts-expect-error -- createElement isn't optimized by react compiler
-  return <ComponentToUse {...props} />
-}
+  // @ts-expect-error -- fixme
+  return <ComponentToUse {...props} ref={ref} />
+})
+
+Image.displayName = 'Image'

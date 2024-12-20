@@ -1,7 +1,7 @@
 import type { ComponentPropsWithoutRef, FC, JSX } from 'react'
 import type { MDXWrapper } from '../types.js'
+import { ImageZoom } from './components/image-zoom.js'
 import { Anchor } from './mdx-components/anchor.js'
-import { Image } from './mdx-components/image.js'
 
 interface NestedMDXComponents {
   [key: string]: NestedMDXComponents | FC<any> | keyof JSX.IntrinsicElements
@@ -13,14 +13,14 @@ export type MDXComponents = NestedMDXComponents & {
     | keyof JSX.IntrinsicElements
 } & {
   wrapper?: MDXWrapper
-  img?: FC<ComponentPropsWithoutRef<typeof Image>>
+  img?: FC<ComponentPropsWithoutRef<typeof ImageZoom>>
 }
 
 export const useMDXComponents = <T extends Readonly<MDXComponents>>(
   components: T
 ) => {
   return {
-    img: Image,
+    img: ImageZoom,
     a: Anchor,
     ...components
   } satisfies T
