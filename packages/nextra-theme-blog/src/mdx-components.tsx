@@ -1,4 +1,5 @@
-'use no memo' // throws TypeError: Cannot read properties of null (reading 'useMemo')
+// throws TypeError: Cannot read properties of null (reading 'useMemo')
+'use no memo'
 
 /* eslint sort-keys: error */
 import {

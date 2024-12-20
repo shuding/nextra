@@ -1,4 +1,5 @@
-'use no memo' // TODO: check why isn't optimized
+// TODO: check why isn't optimized
+'use no memo'
 
 import cn from 'clsx'
 import type { ComponentProps, FC } from 'react'

@@ -24,6 +24,6 @@
     "react-compiler-webpack": "0.1.2"
   },
   "devDependencies": {
-    "@types/node": "^22.0.0"
+    "@types/node": "^22.10.2"
   }
 }

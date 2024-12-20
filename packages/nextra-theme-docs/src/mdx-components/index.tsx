@@ -1,4 +1,5 @@
-'use no memo' // TODO: check why components in object aren't optimized
+// TODO: check why components in object aren't optimized
+'use no memo'
 
 /* eslint sort-keys: error */
 import cn from 'clsx'

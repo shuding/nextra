@@ -199,7 +199,7 @@ importers:
         version: 0.1.2(babel-plugin-react-compiler@0.0.0-experimental-22c6e49-20241219)
     devDependencies:
       '@types/node':
-        specifier: ^22.0.0
+        specifier: ^22.10.2
         version: 22.10.2
 
   packages/eslint-config:
