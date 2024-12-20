@@ -186,9 +186,12 @@ importers:
 
   packages/esbuild-react-compiler-plugin:
     dependencies:
+      babel-plugin-react-compiler:
+        specifier: 0.0.0-experimental-22c6e49-20241219
+        version: 0.0.0-experimental-22c6e49-20241219
       react-compiler-webpack:
         specifier: 0.1.2
-        version: 0.1.2(babel-plugin-react-compiler@19.0.0-beta-37ed2a7-20241206)
+        version: 0.1.2(babel-plugin-react-compiler@0.0.0-experimental-22c6e49-20241219)
     devDependencies:
       '@types/node':
         specifier: ^22.0.0
@@ -300,8 +303,8 @@ importers:
         specifier: ^1.0.0
         version: 1.0.0
       react-compiler-runtime:
-        specifier: 19.0.0-beta-df7b47d-20241124
-        version: 19.0.0-beta-df7b47d-20241124(react@18.3.1)
+        specifier: 0.0.0-experimental-22c6e49-20241219
+        version: 0.0.0-experimental-22c6e49-20241219(react@18.3.1)
       react-dom:
         specifier: '>=18'
         version: 18.3.1(react@18.3.1)
@@ -409,8 +412,8 @@ importers:
         specifier: ^0.3.0
         version: 0.3.2(next@15.0.3)(react-dom@18.3.1)(react@18.3.1)
       react-compiler-runtime:
-        specifier: 19.0.0-beta-df7b47d-20241124
-        version: 19.0.0-beta-df7b47d-20241124(react@18.3.1)
+        specifier: 0.0.0-experimental-22c6e49-20241219
+        version: 0.0.0-experimental-22c6e49-20241219(react@18.3.1)
       react-dom:
         specifier: '>=18'
         version: 18.3.1(react@18.3.1)
@@ -458,8 +461,8 @@ importers:
         specifier: ^0.4.0
         version: 0.4.3(react-dom@18.3.1)(react@18.3.1)
       react-compiler-runtime:
-        specifier: 19.0.0-beta-df7b47d-20241124
-        version: 19.0.0-beta-df7b47d-20241124(react@18.3.1)
+        specifier: 0.0.0-experimental-22c6e49-20241219
+        version: 0.0.0-experimental-22c6e49-20241219(react@18.3.1)
       react-dom:
         specifier: '>=18'
         version: 18.3.1(react@18.3.1)
@@ -6005,8 +6008,8 @@ packages:
       - supports-color
     dev: true
 
-  /babel-plugin-react-compiler@19.0.0-beta-37ed2a7-20241206:
-    resolution: {integrity: sha512-nnkrHpeDKM8A5laq9tmFvvGbbDQ7laGfQLp50cvCkCXmWrPcZdCtaQpNh8UJS/yLREJnv2R4JDL5ADfxyAn+yQ==}
+  /babel-plugin-react-compiler@0.0.0-experimental-22c6e49-20241219:
+    resolution: {integrity: sha512-jxp6eD6SQqSA7HrhVewq6NoO6tW8Wlgo+gpMf5ovuC0UR086tC9SOHV2k+1Uae/jKiywDfQX7UEyWaU6SQ69PA==}
     dependencies:
       '@babel/types': 7.26.0
     dev: false
@@ -10738,15 +10741,15 @@ packages:
       safe-buffer: 5.2.1
     dev: true
 
-  /react-compiler-runtime@19.0.0-beta-df7b47d-20241124(react@18.3.1):
-    resolution: {integrity: sha512-HLFbEf5rEhynZNxI/f1y26Hw0SCvFWh9aS0gCaDndak202oOAvRhy0qsUhmVyaeuRYqIxvPeltMvqDfvO+9/Fw==}
+  /react-compiler-runtime@0.0.0-experimental-22c6e49-20241219(react@18.3.1):
+    resolution: {integrity: sha512-bOAGaRL1ldfIIpbDsl+uV025Ta6RS6/cOjvvh8r2Vo7KtqB+RSvihVYRsWQz7ECKNPWdq5MClS845acwAwieDw==}
     peerDependencies:
       react: ^17.0.0 || ^18.0.0 || ^19.0.0
     dependencies:
       react: 18.3.1
     dev: false
 
-  /react-compiler-webpack@0.1.2(babel-plugin-react-compiler@19.0.0-beta-37ed2a7-20241206):
+  /react-compiler-webpack@0.1.2(babel-plugin-react-compiler@0.0.0-experimental-22c6e49-20241219):
     resolution: {integrity: sha512-NaT5Ft4FRqiDAllr8ywjmXWcv0+ouL/4GsYiLHj783C2HbTp4SGUtUC/6vpWT/UQ5LggV+PUMLUrdEdua+LOaQ==}
     peerDependencies:
       babel-plugin-react-compiler: '*'
@@ -10754,7 +10757,7 @@ packages:
       '@babel/core': 7.26.0
       '@babel/plugin-syntax-jsx': 7.25.7(@babel/core@7.26.0)
       '@babel/plugin-syntax-typescript': 7.24.7(@babel/core@7.26.0)
-      babel-plugin-react-compiler: 19.0.0-beta-37ed2a7-20241206
+      babel-plugin-react-compiler: 0.0.0-experimental-22c6e49-20241219
       loader-utils: 3.3.1
     transitivePeerDependencies:
       - supports-color

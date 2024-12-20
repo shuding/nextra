@@ -20,6 +20,7 @@
     "types:check": "tsc --noEmit"
   },
   "dependencies": {
+    "babel-plugin-react-compiler": "0.0.0-experimental-22c6e49-20241219",
     "react-compiler-webpack": "0.1.2"
   },
   "devDependencies": {
