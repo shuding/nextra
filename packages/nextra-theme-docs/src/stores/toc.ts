@@ -1,3 +1,5 @@
+'use no memo'
+
 import type { Heading } from 'nextra'
 import type { Dispatch } from 'react'
 import { create } from 'zustand'

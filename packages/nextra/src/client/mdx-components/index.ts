@@ -1,5 +1,3 @@
-'use no memo'
-
 export { Pre } from './pre/index.js'
 export { Anchor } from './anchor.js'
 export { Code } from './code.js'
