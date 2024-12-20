@@ -1,6 +1,3 @@
-// should be used on server
-'use no memo'
-
 /* eslint sort-keys: error */
 import cn from 'clsx'
 import {
