@@ -34,7 +34,8 @@
   "pnpm": {
     "overrides": {
       "esbuild": "^0.24.0",
-      "next": "15.0.3"
+      "next": "15.0.3",
+      "lightningcss": "1.28.2"
     },
     "patchedDependencies": {
       "esbuild-plugin-svgr@3.0.0": "patches/esbuild-plugin-svgr.patch",
