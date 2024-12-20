@@ -132,16 +132,14 @@ export const itemSchema = z.strictObject({
   theme: pageThemeSchema.optional()
 })
 
-export const metaSchema = z
-  .union([
-    stringOrElement,
-    itemSchema,
-    linkSchema.extend({ type: z.enum(['page', 'doc']).optional() }),
-    separatorItemSchema,
-    menuSchema
-  ])
-  .transform(transformTitle)
+export const metaSchema = z.union([
+  stringOrElement.transform(transformTitle),
+  itemSchema,
+  linkSchema.extend({ type: z.enum(['page', 'doc']).optional() }),
+  separatorItemSchema,
+  menuSchema
+])
 
-function transformTitle(title: unknown) {
+function transformTitle<T>(title: T) {
   return typeof title === 'string' || isValidElement(title) ? { title } : title
 }
