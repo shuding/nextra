@@ -102,8 +102,8 @@ const Folder: FC<FolderProps> = ({ item: _item, anchors, onFocus, level }) => {
     if (isClickOnIcon) {
       event.preventDefault()
     }
-    const open = el.parentElement!.classList.contains('open')
-    TreeState[item.route] = !open
+    const isOpen = el.parentElement!.classList.contains('open')
+    TreeState[item.route] = !isOpen
     rerender({})
   }
 
