@@ -1,7 +1,7 @@
 import { reactCompilerPlugin } from 'esbuild-react-compiler-plugin'
 import { defineConfig } from 'tsup'
 import { $ } from 'zx'
-import { defaultEntry } from '../nextra/default-entry'
+import { defaultEntry } from '../nextra/default-entry.js'
 import packageJson from './package.json'
 
 export default defineConfig({

@@ -3,7 +3,7 @@ import path from 'node:path'
 import svgr from 'esbuild-plugin-svgr'
 import { reactCompilerPlugin } from 'esbuild-react-compiler-plugin'
 import { defineConfig } from 'tsup'
-import { defaultEntry } from './default-entry'
+import { defaultEntry } from './default-entry.js'
 import packageJson from './package.json'
 import { CWD, IS_PRODUCTION } from './src/server/constants.js'
 

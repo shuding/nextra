@@ -25,6 +25,7 @@ const DEFAULT_REACT_COMPILER_CONFIG = {
       )
       console.error(result)
       if (process.env.NODE_ENV === 'production') {
+        // eslint-disable-next-line unicorn/no-process-exit
         process.exit(1)
       }
     }
