@@ -2,7 +2,7 @@
 "nextra-theme-blog": minor
 "nextra-theme-docs": minor
 "nextra": minor
-"docs": minor
 ---
 
-add image zoom component
+add image zoom feature for all images written via [GFM syntax](https://github.github.com/gfm/#images)
+in md/mdx files (except images inside links)
