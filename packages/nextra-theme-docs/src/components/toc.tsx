@@ -109,10 +109,14 @@ export const TOC: FC<TOCProps> = ({ toc, filePath, pageTitle }) => {
             </Anchor>
           )}
 
-          {themeConfig.editLink && (
+          {filePath && themeConfig.editLink && (
             <Anchor
               className={linkClassName}
-              href={`${gitUrlParse(themeConfig.docsRepositoryBase).href}/${filePath}`}
+              href={
+                filePath.startsWith('http')
+                  ? filePath
+                  : `${gitUrlParse(themeConfig.docsRepositoryBase).href}/${filePath}`
+              }
             >
               {themeConfig.editLink}
             </Anchor>
