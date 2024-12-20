@@ -35,7 +35,9 @@
     "react-compiler-runtime": "0.0.0-experimental-22c6e49-20241219"
   },
   "devDependencies": {
-    "@tailwindcss/postcss": "^4.0.0-beta.2",
+    "@tailwindcss/cli": "^4.0.0-beta.8",
+    "zx": "^8.2.4",
+    "@tailwindcss/postcss": "^4.0.0-beta.8",
     "@tailwindcss/typography": "^0.5.15",
     "@types/react": "^18.2.23",
     "esbuild-react-compiler-plugin": "workspace:*",

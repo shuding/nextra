@@ -26,7 +26,7 @@
   },
   "devDependencies": {
     "@next/bundle-analyzer": "^14.2.13",
-    "@tailwindcss/postcss": "^4.0.0-beta.2",
+    "@tailwindcss/postcss": "^4.0.0-beta.8",
     "pagefind": "^1.1.1",
     "tailwindcss": "^4.0.0-beta.8"
   },
