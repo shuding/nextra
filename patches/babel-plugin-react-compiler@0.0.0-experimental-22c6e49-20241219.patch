@@ -1,5 +1,5 @@
 diff --git a/dist/index.js b/dist/index.js
-index 7b6fd153b0e00cb3d0662b4e40a0ddae28688c5a..0d2c6830da3f6155e6b4f3a4070d272933341ec8 100644
+index 7b6fd153b0e00cb3d0662b4e40a0ddae28688c5a..a9f3d5024f6a1d831d5ddb93aaa9eb36e84288c3 100644
 --- a/dist/index.js
 +++ b/dist/index.js
 @@ -131137,6 +131137,8 @@ function lowerObjectPropertyKey(builder, property) {
@@ -11,7 +11,16 @@ index 7b6fd153b0e00cb3d0662b4e40a0ddae28688c5a..0d2c6830da3f6155e6b4f3a4070d2729
    }
    builder.errors.push({
      reason: `(BuildHIR::lowerExpression) Expected Identifier, got ${key.type} key in ObjectExpression`,
-@@ -156908,6 +156910,8 @@ function callsHooksOrCreatesJsx(node, hookPattern) {
+@@ -132275,6 +132277,8 @@ function lowerExpression(builder, exprPath) {
+             : GeneratedSource,
+       };
+     }
++    // https://github.com/facebook/react/pull/29818
++    case "TSSatisfiesExpression":
+     case 'TSNonNullExpression': {
+       let expr = exprPath;
+       return lowerExpression(builder, expr.get('expression'));
+@@ -156908,6 +156912,8 @@ function callsHooksOrCreatesJsx(node, hookPattern) {
    return invokesHooks || createsJsx;
  }
  function returnsNonNode(node) {
