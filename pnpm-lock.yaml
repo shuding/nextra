@@ -103,7 +103,7 @@ importers:
         version: 2.1.1
       framer-motion:
         specifier: ^11.0.0
-        version: 11.11.17(react-dom@18.3.1)(react@18.3.1)
+        version: 11.15.0(react-dom@18.3.1)(react@18.3.1)
       next:
         specifier: 15.1.2
         version: 15.1.2(@babel/core@7.26.0)(react-dom@18.3.1)(react@18.3.1)
@@ -152,7 +152,7 @@ importers:
         version: file:packages/nextra(@types/react@19.0.2)(acorn@8.14.0)(next@15.1.2)(react-dom@18.3.1)(react@18.3.1)(typescript@5.7.2)
       nextra-theme-blog:
         specifier: workspace:*
-        version: file:packages/nextra-theme-blog(next@15.1.2)(nextra@3.2.5)(react-dom@18.3.1)(react@18.3.1)
+        version: file:packages/nextra-theme-blog(next@15.1.2)(nextra@3.3.0)(react-dom@18.3.1)(react@18.3.1)
       react:
         specifier: ^18.2.0
         version: 18.3.1
@@ -175,7 +175,7 @@ importers:
         version: file:packages/nextra(@types/react@19.0.2)(acorn@8.14.0)(next@15.1.2)(react-dom@18.3.1)(react@18.3.1)(typescript@5.7.2)
       nextra-theme-docs:
         specifier: workspace:*
-        version: file:packages/nextra-theme-docs(next@15.1.2)(nextra@3.2.5)(react-dom@18.3.1)(react@18.3.1)
+        version: file:packages/nextra-theme-docs(next@15.1.2)(nextra@3.3.0)(react-dom@18.3.1)(react@18.3.1)
       react:
         specifier: ^18.2.0
         version: 18.3.1
@@ -201,7 +201,7 @@ importers:
         version: file:packages/nextra(@types/react@19.0.2)(acorn@8.14.0)(next@15.1.2)(react-dom@18.3.1)(react@18.3.1)(typescript@5.7.2)
       nextra-theme-docs:
         specifier: workspace:*
-        version: file:packages/nextra-theme-docs(next@15.1.2)(nextra@3.2.5)(react-dom@18.3.1)(react@18.3.1)
+        version: file:packages/nextra-theme-docs(next@15.1.2)(nextra@3.3.0)(react-dom@18.3.1)(react@18.3.1)
       react:
         specifier: ^18.2.0
         version: 18.3.1
@@ -7248,12 +7248,12 @@ packages:
     resolution: {integrity: sha512-ZsDfxO51wGAXREY55a7la9LScWpwv9RxIrYABrlvOFBlH/ShPnrtsXeuUIfXKKOVicNxQ+o8JTbJvjS4M89yew==}
     dev: true
 
-  /framer-motion@11.11.17(react-dom@18.3.1)(react@18.3.1):
-    resolution: {integrity: sha512-O8QzvoKiuzI5HSAHbcYuL6xU+ZLXbrH7C8Akaato4JzQbX2ULNeniqC2Vo5eiCtFktX9XsJ+7nUhxcl2E2IjpA==}
+  /framer-motion@11.15.0(react-dom@18.3.1)(react@18.3.1):
+    resolution: {integrity: sha512-MLk8IvZntxOMg7lDBLw2qgTHHv664bYoYmnFTmE0Gm/FW67aOJk0WM3ctMcG+Xhcv+vh5uyyXwxvxhSeJzSe+w==}
     peerDependencies:
       '@emotion/is-prop-valid': '*'
-      react: ^18.0.0
-      react-dom: ^18.0.0
+      react: ^18.0.0 || ^19.0.0
+      react-dom: ^18.0.0 || ^19.0.0
     peerDependenciesMeta:
       '@emotion/is-prop-valid':
         optional: true
@@ -7262,6 +7262,8 @@ packages:
       react-dom:
         optional: true
     dependencies:
+      motion-dom: 11.14.3
+      motion-utils: 11.14.3
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
       tslib: 2.8.1
@@ -9285,6 +9287,14 @@ packages:
       pathe: 1.1.2
       pkg-types: 1.2.0
       ufo: 1.5.4
+    dev: false
+
+  /motion-dom@11.14.3:
+    resolution: {integrity: sha512-lW+D2wBy5vxLJi6aCP0xyxTxlTfiu+b+zcpVbGVFUxotwThqhdpPRSmX8xztAgtZMPMeU0WGVn/k1w4I+TbPqA==}
+    dev: false
+
+  /motion-utils@11.14.3:
+    resolution: {integrity: sha512-Xg+8xnqIJTpr0L/cidfTTBFkvRw26ZtGGuIhA94J9PQ2p4mEa06Xx7QVYZH0BP+EpMSaDlu+q0I0mmvwADPsaQ==}
     dev: false
 
   /mri@1.2.0:
@@ -12388,7 +12398,7 @@ packages:
       - typescript
     dev: false
 
-  file:packages/nextra-theme-blog(next@15.1.2)(nextra@3.2.5)(react-dom@18.3.1)(react@18.3.1):
+  file:packages/nextra-theme-blog(next@15.1.2)(nextra@3.3.0)(react-dom@18.3.1)(react@18.3.1):
     resolution: {directory: packages/nextra-theme-blog, type: directory}
     id: file:packages/nextra-theme-blog
     name: nextra-theme-blog
@@ -12409,7 +12419,7 @@ packages:
       react-dom: 18.3.1(react@18.3.1)
     dev: false
 
-  file:packages/nextra-theme-docs(next@15.1.2)(nextra@3.2.5)(react-dom@18.3.1)(react@18.3.1):
+  file:packages/nextra-theme-docs(next@15.1.2)(nextra@3.3.0)(react-dom@18.3.1)(react@18.3.1):
     resolution: {directory: packages/nextra-theme-docs, type: directory}
     id: file:packages/nextra-theme-docs
     name: nextra-theme-docs
