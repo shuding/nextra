@@ -22,7 +22,7 @@
     "version": "changeset version"
   },
   "devDependencies": {
-    "@changesets/cli": "2.27.9",
+    "@changesets/cli": "2.27.11",
     "@ianvs/prettier-plugin-sort-imports": "4.4.0",
     "@next/eslint-plugin-next": "15.1.0",
     "@rollup/plugin-alias": "^5.1.1",
@@ -53,7 +53,7 @@
       "next": "15.1.0"
     },
     "patchedDependencies": {
-      "@changesets/assemble-release-plan@6.0.4": "patches/@changesets__assemble-release-plan.patch",
+      "@changesets/assemble-release-plan@6.0.5": "patches/@changesets__assemble-release-plan.patch",
       "eslint-plugin-deprecation@3.0.0": "patches/eslint-plugin-deprecation.patch",
       "tsup@8.3.5": "patches/tsup@8.3.5.patch"
     }
