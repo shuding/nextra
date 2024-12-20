@@ -2,15 +2,9 @@ import fs from 'node:fs/promises'
 import path from 'node:path'
 import { reactCompilerPlugin } from 'esbuild-react-compiler-plugin'
 import { defineConfig } from 'tsup'
+import { $ } from 'zx'
+import { defaultEntry } from '../nextra/default-entry'
 import packageJson from './package.json'
-import 'zx/globals'
-
-export const defaultEntry = [
-  'src/**/*.{ts,tsx}',
-  '!**/*.d.ts',
-  '!**/__tests__',
-  '!**/*.{test,spec}.{ts,tsx}'
-]
 
 export default defineConfig({
   name: packageJson.name,
