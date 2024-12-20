@@ -152,7 +152,7 @@ importers:
         version: file:packages/nextra(@types/react@19.0.2)(acorn@8.14.0)(next@15.1.2)(react-dom@18.3.1)(react@18.3.1)(typescript@5.7.2)
       nextra-theme-blog:
         specifier: workspace:*
-        version: file:packages/nextra-theme-blog(next@15.1.2)(nextra@3.2.5)(react-dom@18.3.1)(react@18.3.1)
+        version: file:packages/nextra-theme-blog(next@15.1.2)(nextra@3.3.0)(react-dom@18.3.1)(react@18.3.1)
       react:
         specifier: ^18.2.0
         version: 18.3.1
@@ -175,7 +175,7 @@ importers:
         version: file:packages/nextra(@types/react@19.0.2)(acorn@8.14.0)(next@15.1.2)(react-dom@18.3.1)(react@18.3.1)(typescript@5.7.2)
       nextra-theme-docs:
         specifier: workspace:*
-        version: file:packages/nextra-theme-docs(next@15.1.2)(nextra@3.2.5)(react-dom@18.3.1)(react@18.3.1)
+        version: file:packages/nextra-theme-docs(next@15.1.2)(nextra@3.3.0)(react-dom@18.3.1)(react@18.3.1)
       react:
         specifier: ^18.2.0
         version: 18.3.1
@@ -201,7 +201,7 @@ importers:
         version: file:packages/nextra(@types/react@19.0.2)(acorn@8.14.0)(next@15.1.2)(react-dom@18.3.1)(react@18.3.1)(typescript@5.7.2)
       nextra-theme-docs:
         specifier: workspace:*
-        version: file:packages/nextra-theme-docs(next@15.1.2)(nextra@3.2.5)(react-dom@18.3.1)(react@18.3.1)
+        version: file:packages/nextra-theme-docs(next@15.1.2)(nextra@3.3.0)(react-dom@18.3.1)(react@18.3.1)
       react:
         specifier: ^18.2.0
         version: 18.3.1
@@ -406,7 +406,7 @@ importers:
     dependencies:
       next-themes:
         specifier: ^0.4.0
-        version: 0.4.3(react-dom@18.3.1)(react@18.3.1)
+        version: 0.4.4(react-dom@18.3.1)(react@18.3.1)
     devDependencies:
       '@tailwindcss/nesting':
         specifier: ^0.0.0-insiders.565cd3e
@@ -473,7 +473,7 @@ importers:
         version: 0.7.43
       next-themes:
         specifier: ^0.4.0
-        version: 0.4.3(react-dom@18.3.1)(react@18.3.1)
+        version: 0.4.4(react-dom@18.3.1)(react@18.3.1)
       scroll-into-view-if-needed:
         specifier: ^3.1.0
         version: 3.1.0
@@ -9346,6 +9346,16 @@ packages:
       react-dom: 18.3.1(react@18.3.1)
     dev: false
 
+  /next-themes@0.4.4(react-dom@18.3.1)(react@18.3.1):
+    resolution: {integrity: sha512-LDQ2qIOJF0VnuVrrMSMLrWGjRMkq+0mpgl6e0juCLqdJ+oo8Q84JRWT6Wh11VDQKkMMe+dVzDKLWs5n87T+PkQ==}
+    peerDependencies:
+      react: ^16.8 || ^17 || ^18 || ^19 || ^19.0.0-rc
+      react-dom: ^16.8 || ^17 || ^18 || ^19 || ^19.0.0-rc
+    dependencies:
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
+    dev: false
+
   /next@15.1.2(@babel/core@7.26.0)(react-dom@18.3.1)(react@18.3.1):
     resolution: {integrity: sha512-nLJDV7peNy+0oHlmY2JZjzMfJ8Aj0/dd3jCwSZS8ZiO5nkQfcZRqDrRN3U5rJtqVTQneIOGZzb6LCNrk7trMCQ==}
     engines: {node: ^18.18.0 || ^19.8.0 || >= 20.0.0}
@@ -12388,7 +12398,7 @@ packages:
       - typescript
     dev: false
 
-  file:packages/nextra-theme-blog(next@15.1.2)(nextra@3.2.5)(react-dom@18.3.1)(react@18.3.1):
+  file:packages/nextra-theme-blog(next@15.1.2)(nextra@3.3.0)(react-dom@18.3.1)(react@18.3.1):
     resolution: {directory: packages/nextra-theme-blog, type: directory}
     id: file:packages/nextra-theme-blog
     name: nextra-theme-blog
@@ -12409,7 +12419,7 @@ packages:
       react-dom: 18.3.1(react@18.3.1)
     dev: false
 
-  file:packages/nextra-theme-docs(next@15.1.2)(nextra@3.2.5)(react-dom@18.3.1)(react@18.3.1):
+  file:packages/nextra-theme-docs(next@15.1.2)(nextra@3.3.0)(react-dom@18.3.1)(react@18.3.1):
     resolution: {directory: packages/nextra-theme-docs, type: directory}
     id: file:packages/nextra-theme-docs
     name: nextra-theme-docs
