@@ -35,7 +35,6 @@ export const CopyToClipboard: FC<ComponentProps<'button'>> = props => {
 
   return (
     <Button
-      // eslint-disable-next-line sonarjs/no-misused-promises
       onClick={handleClick}
       title="Copy code"
       variant="outline"

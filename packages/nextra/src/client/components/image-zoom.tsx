@@ -3,7 +3,7 @@
 import { type ImageProps } from 'next/image'
 import { useEffect, useRef, useState, type FC } from 'react'
 import Zoom from 'react-medium-image-zoom'
-import { Image } from './image.js'
+import { Image } from '../mdx-components/image.js'
 
 function getImageSrc(src: ImageProps['src']): string {
   if (typeof src === 'string') {
