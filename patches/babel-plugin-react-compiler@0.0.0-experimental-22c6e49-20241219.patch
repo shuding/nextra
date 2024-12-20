@@ -1,8 +1,17 @@
 diff --git a/dist/index.js b/dist/index.js
-index 7b6fd153b0e00cb3d0662b4e40a0ddae28688c5a..65757ae82d6d5ae018c013b3560b76bbf131b0b5 100644
+index 7b6fd153b0e00cb3d0662b4e40a0ddae28688c5a..0d2c6830da3f6155e6b4f3a4070d272933341ec8 100644
 --- a/dist/index.js
 +++ b/dist/index.js
-@@ -156908,6 +156908,8 @@ function callsHooksOrCreatesJsx(node, hookPattern) {
+@@ -131137,6 +131137,8 @@ function lowerObjectPropertyKey(builder, property) {
+     return {kind: 'computed', name: place};
+   } else if (key.isIdentifier()) {
+     return {kind: 'identifier', name: key.node.name};
++  } else if (key.isNumericLiteral()) { // https://github.com/facebook/react/pull/31791
++    return {kind: 'identifier', name: String(key.node.value)}
+   }
+   builder.errors.push({
+     reason: `(BuildHIR::lowerExpression) Expected Identifier, got ${key.type} key in ObjectExpression`,
+@@ -156908,6 +156910,8 @@ function callsHooksOrCreatesJsx(node, hookPattern) {
    return invokesHooks || createsJsx;
  }
  function returnsNonNode(node) {
