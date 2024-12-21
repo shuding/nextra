@@ -1,5 +1,20 @@
 # nextra
 
+## 3.3.0
+
+### Minor Changes
+
+- ee69234: add
+  [image zoom feature](http://nextra.site/docs/guide/image#image-zoom) for all
+  images written via [GFM syntax](https://github.github.com/gfm/#images) in
+  md/mdx files (except images inside links)
+
+## 3.2.5
+
+### Patch Changes
+
+- 2f5d954: fix unable override injected `img` component
+
 ## 3.2.4
 
 ### Patch Changes
