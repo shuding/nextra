@@ -91,7 +91,7 @@ const DEFAULT_COMPONENTS = getNextraMDXComponents({
     return (
       <div
         className="x:mx-auto x:flex x:max-w-(--nextra-content-width)"
-        // Attach user-defined props to wrapper container, e.g.`data-pagefind-filter`
+        // Attach user-defined props to wrapper container, e.g. `data-pagefind-filter`
         {...props}
       >
         <Sidebar toc={toc} />
