@@ -1,7 +1,13 @@
 declare namespace globalThis {
+  import { PagefindSearchOptions } from './types.js'
   var pagefind:
     | {
-        debouncedSearch: <T>(query: string) => Promise<{
+        // https://github.com/CloudCannon/pagefind/blob/2a0aa90cfb78bb8551645ac9127a1cd49cf54add/pagefind_web_js/lib/coupled_search.ts#L600
+        debouncedSearch: <T>(
+          term: string,
+          options?: PagefindSearchOptions,
+          debounceTimeoutMs?: number
+        ) => Promise<{
           results: {
             data: () => Promise<T>
             id: string

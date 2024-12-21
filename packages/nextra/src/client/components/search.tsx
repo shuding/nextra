@@ -12,6 +12,7 @@ import NextLink from 'next/link'
 import { useRouter } from 'next/navigation'
 import type { FC, FocusEventHandler, ReactElement, SyntheticEvent } from 'react'
 import { useDeferredValue, useEffect, useRef, useState } from 'react'
+import type { PagefindSearchOptions } from '../../types.js'
 import { useMounted } from '../hooks/use-mounted.js'
 import { InformationCircleIcon, SpinnerIcon } from '../icons/index.js'
 
@@ -46,6 +47,7 @@ type SearchProps = {
   loading?: ReactElement | string
   placeholder?: string
   className?: string
+  searchOptions?: PagefindSearchOptions
 }
 
 const INPUTS = new Set(['INPUT', 'SELECT', 'BUTTON', 'TEXTAREA'])
@@ -69,7 +71,8 @@ export const Search: FC<SearchProps> = ({
   emptyResult = 'No results found.',
   errorText = 'Failed to load search index.',
   loading = 'Loading…',
-  placeholder = 'Search documentation…'
+  placeholder = 'Search documentation…',
+  searchOptions
 }) => {
   const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState<ReactElement | string>('')
@@ -106,7 +109,10 @@ export const Search: FC<SearchProps> = ({
         }
       }
       const { results } =
-        await window.pagefind!.debouncedSearch<PagefindResult>(value)
+        await window.pagefind!.debouncedSearch<PagefindResult>(
+          value,
+          searchOptions
+        )
       const data = await Promise.all(results.map(o => o.data()))
 
       setResults(
@@ -131,16 +137,14 @@ export const Search: FC<SearchProps> = ({
 
   useEffect(() => {
     function handleKeyDown(event: globalThis.KeyboardEvent) {
-      const input = inputRef.current
-      const { activeElement } = document
-      const tagName = activeElement?.tagName
+      const el = document.activeElement
       if (
-        !tagName ||
-        INPUTS.has(tagName) ||
-        // @ts-expect-error -- fixme
-        activeElement?.isContentEditable
-      )
+        !el ||
+        INPUTS.has(el.tagName) ||
+        (el as HTMLElement).isContentEditable
+      ) {
         return
+      }
       if (
         event.key === '/' ||
         (event.key === 'k' &&
@@ -148,7 +152,7 @@ export const Search: FC<SearchProps> = ({
       ) {
         event.preventDefault()
         // prevent to scroll to top
-        input.focus({ preventScroll: true })
+        inputRef.current.focus({ preventScroll: true })
       }
     }
 
