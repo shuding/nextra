@@ -111,7 +111,7 @@ export type PagefindSearchOptions = {
   /** Add more verbose console logging for this search query */
   verbose?: boolean
   /** The set of filters to execute with this search. Input type is extremely flexible, see the filtering docs for details */
-  filters?: Object
+  filters?: object
   /** The set of sorts to use for this search, instead of relevancy */
-  sort?: Object
+  sort?: object
 }

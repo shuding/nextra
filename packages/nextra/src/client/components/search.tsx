@@ -128,7 +128,7 @@ export const Search: FC<SearchProps> = ({
       setIsLoading(false)
     }
     handleSearch(deferredSearch)
-  }, [deferredSearch])
+  }, [deferredSearch]) // eslint-disable-line react-hooks/exhaustive-deps -- ignore searchOptions
 
   const router = useRouter()
   const [focused, setFocused] = useState(false)

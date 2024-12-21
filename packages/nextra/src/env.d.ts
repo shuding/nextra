@@ -1,5 +1,5 @@
 declare namespace globalThis {
-  import { PagefindSearchOptions } from './types.js'
+  import type { PagefindSearchOptions } from './types.js'
   var pagefind:
     | {
         // https://github.com/CloudCannon/pagefind/blob/2a0aa90cfb78bb8551645ac9127a1cd49cf54add/pagefind_web_js/lib/coupled_search.ts#L600
