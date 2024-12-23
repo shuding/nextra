@@ -206,6 +206,7 @@ export const Search: FC<SearchProps> = ({
     <Combobox onChange={handleSelect}>
       <div
         className={cn(
+          'nextra-search',
           'x:relative x:flex x:items-center',
           'x:text-gray-900 x:dark:text-gray-300',
           'x:contrast-more:text-gray-800 x:contrast-more:dark:text-gray-300',
