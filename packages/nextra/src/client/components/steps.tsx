@@ -1,5 +1,5 @@
 import cn from 'clsx'
-import type { ComponentProps, CSSProperties, FC } from 'react'
+import type { ComponentProps, FC } from 'react'
 import { useId } from 'react'
 
 export const Steps: FC<ComponentProps<'div'>> = ({
@@ -16,12 +16,11 @@ export const Steps: FC<ComponentProps<'div'>> = ({
         'x:dark:border-neutral-800',
         className
       )}
-      style={
-        {
-          ...style,
-          '--counter-id': id
-        } as CSSProperties
-      }
+      style={{
+        ...style,
+        // @ts-expect-error -- fixme
+        '--counter-id': id
+      }}
       {...props}
     >
       {children}

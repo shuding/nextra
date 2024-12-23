@@ -82,21 +82,25 @@ const DEFAULT_COMPONENTS = getNextraMDXComponents({
       {...props}
     />
   ),
-  wrapper({ toc, children, ...props }) {
+  wrapper({ toc, children, metadata, ...props }) {
     // @ts-expect-error fixme
     toc = toc.map(item => ({
       ...item,
       value: removeLinks(item.value)
     }))
     return (
-      <div className="x:mx-auto x:flex x:max-w-(--nextra-content-width)">
+      <div
+        className="x:mx-auto x:flex x:max-w-(--nextra-content-width)"
+        // Attach user-defined props to wrapper container, e.g. `data-pagefind-filter`
+        {...props}
+      >
         <Sidebar toc={toc} />
 
-        <ClientWrapper toc={toc} {...props}>
+        <ClientWrapper toc={toc} metadata={metadata}>
           <SkipNavContent />
           <main
             data-pagefind-body={
-              (props.metadata as any).searchable !== false || undefined
+              (metadata as any).searchable !== false || undefined
             }
           >
             {children}

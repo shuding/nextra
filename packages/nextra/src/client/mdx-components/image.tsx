@@ -18,8 +18,14 @@ This is Turbopack bug, which will not occurs on production (since Webpack is use
     }
   }
   const ComponentToUse = typeof props.src === 'object' ? NextImage : 'img'
-  // @ts-expect-error -- fixme
-  return <ComponentToUse {...props} ref={ref} />
+  return (
+    // @ts-expect-error -- fixme
+    <ComponentToUse
+      {...props}
+      ref={ref}
+      data-pagefind-index-attrs="title,alt"
+    />
+  )
 })
 
 Image.displayName = 'Image'

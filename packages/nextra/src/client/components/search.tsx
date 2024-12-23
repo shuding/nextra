@@ -12,6 +12,7 @@ import NextLink from 'next/link'
 import { useRouter } from 'next/navigation'
 import type { FC, FocusEventHandler, ReactElement, SyntheticEvent } from 'react'
 import { useDeferredValue, useEffect, useRef, useState } from 'react'
+import type { PagefindSearchOptions } from '../../types.js'
 import { useMounted } from '../hooks/use-mounted.js'
 import { InformationCircleIcon, SpinnerIcon } from '../icons/index.js'
 
@@ -46,9 +47,10 @@ type SearchProps = {
   loading?: ReactElement | string
   placeholder?: string
   className?: string
+  searchOptions?: PagefindSearchOptions
 }
 
-const INPUTS = new Set(['input', 'select', 'button', 'textarea'])
+const INPUTS = new Set(['INPUT', 'SELECT', 'BUTTON', 'TEXTAREA'])
 
 const DEV_SEARCH_NOTICE = (
   <>
@@ -69,7 +71,8 @@ export const Search: FC<SearchProps> = ({
   emptyResult = 'No results found.',
   errorText = 'Failed to load search index.',
   loading = 'Loading…',
-  placeholder = 'Search documentation…'
+  placeholder = 'Search documentation…',
+  searchOptions
 }) => {
   const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState<ReactElement | string>('')
@@ -105,7 +108,11 @@ export const Search: FC<SearchProps> = ({
           return
         }
       }
-      const { results } = await window.pagefind!.search<PagefindResult>(value)
+      const { results } =
+        await window.pagefind!.debouncedSearch<PagefindResult>(
+          value,
+          searchOptions
+        )
       const data = await Promise.all(results.map(o => o.data()))
 
       setResults(
@@ -121,26 +128,23 @@ export const Search: FC<SearchProps> = ({
       setIsLoading(false)
     }
     handleSearch(deferredSearch)
-  }, [deferredSearch])
+  }, [deferredSearch]) // eslint-disable-line react-hooks/exhaustive-deps -- ignore searchOptions
 
   const router = useRouter()
   const [focused, setFocused] = useState(false)
   const mounted = useMounted()
-  const inputRef = useRef<HTMLInputElement>(null)
+  const inputRef = useRef<HTMLInputElement>(null!)
 
   useEffect(() => {
     function handleKeyDown(event: globalThis.KeyboardEvent) {
-      const input = inputRef.current
-      const { activeElement } = document
-      const tagName = activeElement?.tagName.toLowerCase()
+      const el = document.activeElement
       if (
-        !input ||
-        !tagName ||
-        INPUTS.has(tagName) ||
-        // @ts-expect-error -- fixme
-        activeElement?.isContentEditable
-      )
+        !el ||
+        INPUTS.has(el.tagName) ||
+        (el as HTMLElement).isContentEditable
+      ) {
         return
+      }
       if (
         event.key === '/' ||
         (event.key === 'k' &&
@@ -148,7 +152,7 @@ export const Search: FC<SearchProps> = ({
       ) {
         event.preventDefault()
         // prevent to scroll to top
-        input.focus({ preventScroll: true })
+        inputRef.current.focus({ preventScroll: true })
       }
     }
 
@@ -193,7 +197,7 @@ export const Search: FC<SearchProps> = ({
     if (!searchResult) return
     // Calling before navigation so selector `html:not(:has(*:focus))` in styles.css will work,
     // and we'll have padding top since input is not focused
-    inputRef.current?.blur()
+    inputRef.current.blur()
     router.push(searchResult.url)
     setSearch('')
   }
@@ -202,6 +206,7 @@ export const Search: FC<SearchProps> = ({
     <Combobox onChange={handleSelect}>
       <div
         className={cn(
+          'nextra-search',
           'x:relative x:flex x:items-center',
           'x:text-gray-900 x:dark:text-gray-300',
           'x:contrast-more:text-gray-800 x:contrast-more:dark:text-gray-300',

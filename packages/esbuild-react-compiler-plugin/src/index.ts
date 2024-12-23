@@ -14,13 +14,18 @@ const DEFAULT_REACT_COMPILER_CONFIG = {
       filename: string,
       result: { kind: 'CompileError' | 'CompileSuccess' }
     ) {
+      const relativeFilePath = path.relative(process.cwd(), filename)
       if (result.kind === 'CompileSuccess') {
-        console.info('🚀 File', filename, 'was optimized with react-compiler')
+        console.info(
+          '🚀 File',
+          relativeFilePath,
+          'was optimized with react-compiler'
+        )
         return
       }
       console.error(
         '❌ File',
-        filename,
+        relativeFilePath,
         'was not optimized with react-compiler'
       )
       console.error(result)
