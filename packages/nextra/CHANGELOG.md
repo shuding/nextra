@@ -1,5 +1,13 @@
 # nextra
 
+## 4.0.0-app-router.42
+
+### Patch Changes
+
+- 242e0d0: search tweaks
+- 3fc12a0: - Use Tailwind CSS CLI because CSS processing by `tsup` produce different, weird and broken result
+  - Patch react-compiler with some fixes which isn't fixed
+
 ## 4.0.0-app-router.41
 
 ## 4.0.0-app-router.40

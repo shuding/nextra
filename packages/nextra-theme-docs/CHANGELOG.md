@@ -1,5 +1,18 @@
 # nextra-theme-docs
 
+## 4.0.0-app-router.42
+
+### Patch Changes
+
+- 242e0d0: search tweaks
+- 3fc12a0: - Use Tailwind CSS CLI because CSS processing by `tsup` produce different, weird and broken result
+  - Patch react-compiler with some fixes which isn't fixed
+- 25c33dd: - if `filePath` is falsy in client wrapper -> do not render `edit on github` link
+  - if `filePath` starts with `http` do not append `docsRepositoryBase` prefix
+- Updated dependencies [242e0d0]
+- Updated dependencies [3fc12a0]
+  - nextra@4.0.0-app-router.42
+
 ## 4.0.0-app-router.41
 
 ### Patch Changes
