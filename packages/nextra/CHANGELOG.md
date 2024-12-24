@@ -1,5 +1,11 @@
 # nextra
 
+## 3.3.1
+
+### Patch Changes
+
+- bfa61d9: add `text-overflow: ellipsis` for `<Cards.Card>` component
+
 ## 3.3.0
 
 ### Minor Changes
