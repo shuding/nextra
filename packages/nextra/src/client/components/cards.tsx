@@ -47,7 +47,7 @@ function Card({
         <span className="_shrink-0">{icon}</span>
         <span
           className={cn(
-            ellipsis && '_whitespace-nowrap _overflow-hidden _text-ellipsis'
+            ellipsis && '_truncate'
           )}
         >
           {title}
