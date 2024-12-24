@@ -7,14 +7,12 @@ function Card({
   title,
   icon,
   arrow,
-  ellipsis = true,
   href,
   ...props
 }: {
   title: string
   icon?: ReactElement
   arrow?: boolean
-  ellipsis?: boolean
   href: string
   children?: ReactNode
 }) {
@@ -43,9 +41,10 @@ function Card({
             ? 'dark:_text-gray-300 dark:hover:_text-gray-100'
             : 'dark:_text-neutral-200 dark:hover:_text-neutral-50'
         )}
+        title={title}
       >
-        <span className="_shrink-0">{icon}</span>
-        <span className={cn(ellipsis && '_truncate')}>{title}</span>
+        {icon}
+        <span className="_truncate">{title}</span>
       </span>
     </NextLink>
   )
