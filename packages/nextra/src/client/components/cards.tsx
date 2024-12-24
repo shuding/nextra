@@ -45,13 +45,7 @@ function Card({
         )}
       >
         <span className="_shrink-0">{icon}</span>
-        <span
-          className={cn(
-            ellipsis && '_truncate'
-          )}
-        >
-          {title}
-        </span>
+        <span className={cn(ellipsis && '_truncate')}>{title}</span>
       </span>
     </NextLink>
   )
