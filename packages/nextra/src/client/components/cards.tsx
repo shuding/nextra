@@ -41,9 +41,10 @@ function Card({
             ? 'dark:_text-gray-300 dark:hover:_text-gray-100'
             : 'dark:_text-neutral-200 dark:hover:_text-neutral-50'
         )}
+        title={title}
       >
         {icon}
-        {title}
+        <span className="_truncate">{title}</span>
       </span>
     </NextLink>
   )

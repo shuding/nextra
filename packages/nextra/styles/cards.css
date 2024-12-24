@@ -11,11 +11,11 @@
   }
 
   svg {
-    @apply _w-6 _h-auto _transition _text-black/30 dark:_text-white/40;
+    @apply _w-6 _h-auto _transition _text-black/30 dark:_text-white/40 _shrink-0;
   }
 
   &:hover svg {
-    @apply _text-current dark:_text-current;
+    @apply !_text-current;
   }
 
   p {
