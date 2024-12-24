@@ -38,14 +38,20 @@ function Card({
         className={cn(
           '_flex _font-semibold _items-center _gap-2 _p-4 _text-gray-700 hover:_text-gray-900',
           arrow &&
-          'after:_content-["→"] after:_transition-transform after:_duration-75 after:group-hover:_translate-x-0.5',
+            'after:_content-["→"] after:_transition-transform after:_duration-75 after:group-hover:_translate-x-0.5',
           children
             ? 'dark:_text-gray-300 dark:hover:_text-gray-100'
             : 'dark:_text-neutral-200 dark:hover:_text-neutral-50'
         )}
       >
-        <span className='_shrink-0'>{icon}</span>
-        <span className={cn(ellipsis && '_whitespace-nowrap _overflow-hidden _text-ellipsis')}>{title}</span>
+        <span className="_shrink-0">{icon}</span>
+        <span
+          className={cn(
+            ellipsis && '_whitespace-nowrap _overflow-hidden _text-ellipsis'
+          )}
+        >
+          {title}
+        </span>
       </span>
     </NextLink>
   )
