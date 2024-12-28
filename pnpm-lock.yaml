@@ -7,7 +7,7 @@ settings:
 overrides:
   esbuild: ^0.24.0
   vite: 6.0.6
-  next: 15.1.2
+  next: 15.1.3
 
 patchedDependencies:
   '@changesets/assemble-release-plan@6.0.5':
@@ -31,8 +31,8 @@ importers:
         specifier: 4.4.0
         version: 4.4.0(prettier@3.4.2)
       '@next/eslint-plugin-next':
-        specifier: 15.1.2
-        version: 15.1.2
+        specifier: 15.1.3
+        version: 15.1.3
       '@rollup/plugin-alias':
         specifier: ^5.1.1
         version: 5.1.1
@@ -106,8 +106,8 @@ importers:
         specifier: ^11.0.0
         version: 11.15.0(react-dom@18.3.1)(react@18.3.1)
       next:
-        specifier: 15.1.2
-        version: 15.1.2(@babel/core@7.26.0)(react-dom@18.3.1)(react@18.3.1)
+        specifier: 15.1.3
+        version: 15.1.3(@babel/core@7.26.0)(react-dom@18.3.1)(react@18.3.1)
       nextra:
         specifier: workspace:*
         version: link:../packages/nextra
@@ -146,14 +146,14 @@ importers:
   examples/blog:
     dependencies:
       next:
-        specifier: 15.1.2
-        version: 15.1.2(@babel/core@7.26.0)(react-dom@18.3.1)(react@18.3.1)
+        specifier: 15.1.3
+        version: 15.1.3(@babel/core@7.26.0)(react-dom@18.3.1)(react@18.3.1)
       nextra:
         specifier: workspace:*
-        version: file:packages/nextra(@types/react@19.0.2)(acorn@8.14.0)(next@15.1.2)(react-dom@18.3.1)(react@18.3.1)(typescript@5.7.2)
+        version: file:packages/nextra(@types/react@19.0.2)(acorn@8.14.0)(next@15.1.3)(react-dom@18.3.1)(react@18.3.1)(typescript@5.7.2)
       nextra-theme-blog:
         specifier: workspace:*
-        version: file:packages/nextra-theme-blog(next@15.1.2)(nextra@3.3.1)(react-dom@18.3.1)(react@18.3.1)
+        version: file:packages/nextra-theme-blog(next@15.1.3)(nextra@3.3.1)(react-dom@18.3.1)(react@18.3.1)
       react:
         specifier: ^18.2.0
         version: 18.3.1
@@ -169,14 +169,14 @@ importers:
   examples/docs:
     dependencies:
       next:
-        specifier: 15.1.2
-        version: 15.1.2(@babel/core@7.26.0)(react-dom@18.3.1)(react@18.3.1)
+        specifier: 15.1.3
+        version: 15.1.3(@babel/core@7.26.0)(react-dom@18.3.1)(react@18.3.1)
       nextra:
         specifier: workspace:*
-        version: file:packages/nextra(@types/react@19.0.2)(acorn@8.14.0)(next@15.1.2)(react-dom@18.3.1)(react@18.3.1)(typescript@5.7.2)
+        version: file:packages/nextra(@types/react@19.0.2)(acorn@8.14.0)(next@15.1.3)(react-dom@18.3.1)(react@18.3.1)(typescript@5.7.2)
       nextra-theme-docs:
         specifier: workspace:*
-        version: file:packages/nextra-theme-docs(next@15.1.2)(nextra@3.3.1)(react-dom@18.3.1)(react@18.3.1)
+        version: file:packages/nextra-theme-docs(next@15.1.3)(nextra@3.3.1)(react-dom@18.3.1)(react@18.3.1)
       react:
         specifier: ^18.2.0
         version: 18.3.1
@@ -195,14 +195,14 @@ importers:
         specifier: ^7.4.0
         version: 7.4.0(react@18.3.1)
       next:
-        specifier: 15.1.2
-        version: 15.1.2(@babel/core@7.26.0)(react-dom@18.3.1)(react@18.3.1)
+        specifier: 15.1.3
+        version: 15.1.3(@babel/core@7.26.0)(react-dom@18.3.1)(react@18.3.1)
       nextra:
         specifier: workspace:*
-        version: file:packages/nextra(@types/react@19.0.2)(acorn@8.14.0)(next@15.1.2)(react-dom@18.3.1)(react@18.3.1)(typescript@5.7.2)
+        version: file:packages/nextra(@types/react@19.0.2)(acorn@8.14.0)(next@15.1.3)(react-dom@18.3.1)(react@18.3.1)(typescript@5.7.2)
       nextra-theme-docs:
         specifier: workspace:*
-        version: file:packages/nextra-theme-docs(next@15.1.2)(nextra@3.3.1)(react-dom@18.3.1)(react@18.3.1)
+        version: file:packages/nextra-theme-docs(next@15.1.3)(nextra@3.3.1)(react-dom@18.3.1)(react@18.3.1)
       react:
         specifier: ^18.2.0
         version: 18.3.1
@@ -388,8 +388,8 @@ importers:
         specifier: ^3.0.0
         version: 3.0.0(esbuild@0.24.2)(typescript@5.7.2)
       next:
-        specifier: 15.1.2
-        version: 15.1.2(@babel/core@7.26.0)(react-dom@18.3.1)(react@18.3.1)
+        specifier: 15.1.3
+        version: 15.1.3(@babel/core@7.26.0)(react-dom@18.3.1)(react@18.3.1)
       react:
         specifier: ^18.3.1
         version: 18.3.1
@@ -425,8 +425,8 @@ importers:
         specifier: ^9.0.0
         version: 9.1.1
       next:
-        specifier: 15.1.2
-        version: 15.1.2(@babel/core@7.26.0)(react-dom@18.3.1)(react@18.3.1)
+        specifier: 15.1.3
+        version: 15.1.3(@babel/core@7.26.0)(react-dom@18.3.1)(react@18.3.1)
       nextra:
         specifier: workspace:*
         version: link:../nextra
@@ -504,8 +504,8 @@ importers:
         specifier: ^25.0.0
         version: 25.0.1
       next:
-        specifier: 15.1.2
-        version: 15.1.2(@babel/core@7.26.0)(react-dom@18.3.1)(react@18.3.1)
+        specifier: 15.1.3
+        version: 15.1.3(@babel/core@7.26.0)(react-dom@18.3.1)(react@18.3.1)
       nextra:
         specifier: workspace:*
         version: link:../nextra
@@ -4140,73 +4140,73 @@ packages:
       - utf-8-validate
     dev: true
 
-  /@next/env@15.1.2:
-    resolution: {integrity: sha512-Hm3jIGsoUl6RLB1vzY+dZeqb+/kWPZ+h34yiWxW0dV87l8Im/eMOwpOA+a0L78U0HM04syEjXuRlCozqpwuojQ==}
+  /@next/env@15.1.3:
+    resolution: {integrity: sha512-Q1tXwQCGWyA3ehMph3VO+E6xFPHDKdHFYosadt0F78EObYxPio0S09H9UGYznDe6Wc8eLKLG89GqcFJJDiK5xw==}
 
-  /@next/eslint-plugin-next@15.1.2:
-    resolution: {integrity: sha512-sgfw3+WdaYOGPKCvM1L+UucBmRfh8V2Ygefp7ELON0+0vY7uohQwXXnVWg3rY7mXDKharQR3o7uedpfvnU2hlQ==}
+  /@next/eslint-plugin-next@15.1.3:
+    resolution: {integrity: sha512-oeP1vnc5Cq9UoOb8SYHAEPbCXMzOgG70l+Zfd+Ie00R25FOm+CCVNrcIubJvB1tvBgakXE37MmqSycksXVPRqg==}
     dependencies:
       fast-glob: 3.3.1
     dev: true
 
-  /@next/swc-darwin-arm64@15.1.2:
-    resolution: {integrity: sha512-b9TN7q+j5/7+rGLhFAVZiKJGIASuo8tWvInGfAd8wsULjB1uNGRCj1z1WZwwPWzVQbIKWFYqc+9L7W09qwt52w==}
+  /@next/swc-darwin-arm64@15.1.3:
+    resolution: {integrity: sha512-aZtmIh8jU89DZahXQt1La0f2EMPt/i7W+rG1sLtYJERsP7GRnNFghsciFpQcKHcGh4dUiyTB5C1X3Dde/Gw8gg==}
     engines: {node: '>= 10'}
     cpu: [arm64]
     os: [darwin]
     requiresBuild: true
     optional: true
 
-  /@next/swc-darwin-x64@15.1.2:
-    resolution: {integrity: sha512-caR62jNDUCU+qobStO6YJ05p9E+LR0EoXh1EEmyU69cYydsAy7drMcOlUlRtQihM6K6QfvNwJuLhsHcCzNpqtA==}
+  /@next/swc-darwin-x64@15.1.3:
+    resolution: {integrity: sha512-aw8901rjkVBK5mbq5oV32IqkJg+CQa6aULNlN8zyCWSsePzEG3kpDkAFkkTOh3eJ0p95KbkLyWBzslQKamXsLA==}
     engines: {node: '>= 10'}
     cpu: [x64]
     os: [darwin]
     requiresBuild: true
     optional: true
 
-  /@next/swc-linux-arm64-gnu@15.1.2:
-    resolution: {integrity: sha512-fHHXBusURjBmN6VBUtu6/5s7cCeEkuGAb/ZZiGHBLVBXMBy4D5QpM8P33Or8JD1nlOjm/ZT9sEE5HouQ0F+hUA==}
+  /@next/swc-linux-arm64-gnu@15.1.3:
+    resolution: {integrity: sha512-YbdaYjyHa4fPK4GR4k2XgXV0p8vbU1SZh7vv6El4bl9N+ZSiMfbmqCuCuNU1Z4ebJMumafaz6UCC2zaJCsdzjw==}
     engines: {node: '>= 10'}
     cpu: [arm64]
     os: [linux]
     requiresBuild: true
     optional: true
 
-  /@next/swc-linux-arm64-musl@15.1.2:
-    resolution: {integrity: sha512-9CF1Pnivij7+M3G74lxr+e9h6o2YNIe7QtExWq1KUK4hsOLTBv6FJikEwCaC3NeYTflzrm69E5UfwEAbV2U9/g==}
+  /@next/swc-linux-arm64-musl@15.1.3:
+    resolution: {integrity: sha512-qgH/aRj2xcr4BouwKG3XdqNu33SDadqbkqB6KaZZkozar857upxKakbRllpqZgWl/NDeSCBYPmUAZPBHZpbA0w==}
     engines: {node: '>= 10'}
     cpu: [arm64]
     os: [linux]
     requiresBuild: true
     optional: true
 
-  /@next/swc-linux-x64-gnu@15.1.2:
-    resolution: {integrity: sha512-tINV7WmcTUf4oM/eN3Yuu/f8jQ5C6AkueZPKeALs/qfdfX57eNv4Ij7rt0SA6iZ8+fMobVfcFVv664Op0caCCg==}
+  /@next/swc-linux-x64-gnu@15.1.3:
+    resolution: {integrity: sha512-uzafnTFwZCPN499fNVnS2xFME8WLC9y7PLRs/yqz5lz1X/ySoxfaK2Hbz74zYUdEg+iDZPd8KlsWaw9HKkLEVw==}
     engines: {node: '>= 10'}
     cpu: [x64]
     os: [linux]
     requiresBuild: true
     optional: true
 
-  /@next/swc-linux-x64-musl@15.1.2:
-    resolution: {integrity: sha512-jf2IseC4WRsGkzeUw/cK3wci9pxR53GlLAt30+y+B+2qAQxMw6WAC3QrANIKxkcoPU3JFh/10uFfmoMDF9JXKg==}
+  /@next/swc-linux-x64-musl@15.1.3:
+    resolution: {integrity: sha512-el6GUFi4SiDYnMTTlJJFMU+GHvw0UIFnffP1qhurrN1qJV3BqaSRUjkDUgVV44T6zpw1Lc6u+yn0puDKHs+Sbw==}
     engines: {node: '>= 10'}
     cpu: [x64]
     os: [linux]
     requiresBuild: true
     optional: true
 
-  /@next/swc-win32-arm64-msvc@15.1.2:
-    resolution: {integrity: sha512-wvg7MlfnaociP7k8lxLX4s2iBJm4BrNiNFhVUY+Yur5yhAJHfkS8qPPeDEUH8rQiY0PX3u/P7Q/wcg6Mv6GSAA==}
+  /@next/swc-win32-arm64-msvc@15.1.3:
+    resolution: {integrity: sha512-6RxKjvnvVMM89giYGI1qye9ODsBQpHSHVo8vqA8xGhmRPZHDQUE4jcDbhBwK0GnFMqBnu+XMg3nYukNkmLOLWw==}
     engines: {node: '>= 10'}
     cpu: [arm64]
     os: [win32]
     requiresBuild: true
     optional: true
 
-  /@next/swc-win32-x64-msvc@15.1.2:
-    resolution: {integrity: sha512-D3cNA8NoT3aWISWmo7HF5Eyko/0OdOO+VagkoJuiTk7pyX3P/b+n8XA/MYvyR+xSVcbKn68B1rY9fgqjNISqzQ==}
+  /@next/swc-win32-x64-msvc@15.1.3:
+    resolution: {integrity: sha512-VId/f5blObG7IodwC5Grf+aYP0O8Saz1/aeU3YcWqNdIUAmFQY3VEPKPaIzfv32F/clvanOb2K2BR5DtDs6XyQ==}
     engines: {node: '>= 10'}
     cpu: [x64]
     os: [win32]
@@ -4259,7 +4259,7 @@ packages:
       '@react-aria/interactions': 3.22.4(react@18.3.1)
       '@react-aria/utils': 3.25.3(react@18.3.1)
       '@react-types/shared': 3.25.0(react@18.3.1)
-      '@swc/helpers': 0.5.13
+      '@swc/helpers': 0.5.15
       clsx: 2.1.1
       react: 18.3.1
     dev: false
@@ -4272,7 +4272,7 @@ packages:
       '@react-aria/ssr': 3.9.6(react@18.3.1)
       '@react-aria/utils': 3.25.3(react@18.3.1)
       '@react-types/shared': 3.25.0(react@18.3.1)
-      '@swc/helpers': 0.5.13
+      '@swc/helpers': 0.5.15
       react: 18.3.1
     dev: false
 
@@ -4282,7 +4282,7 @@ packages:
     peerDependencies:
       react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0 || ^19.0.0
     dependencies:
-      '@swc/helpers': 0.5.13
+      '@swc/helpers': 0.5.15
       react: 18.3.1
     dev: false
 
@@ -4294,7 +4294,7 @@ packages:
       '@react-aria/ssr': 3.9.6(react@18.3.1)
       '@react-stately/utils': 3.10.4(react@18.3.1)
       '@react-types/shared': 3.25.0(react@18.3.1)
-      '@swc/helpers': 0.5.13
+      '@swc/helpers': 0.5.15
       clsx: 2.1.1
       react: 18.3.1
     dev: false
@@ -4304,7 +4304,7 @@ packages:
     peerDependencies:
       react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0 || ^19.0.0
     dependencies:
-      '@swc/helpers': 0.5.13
+      '@swc/helpers': 0.5.15
       react: 18.3.1
     dev: false
 
@@ -4882,12 +4882,6 @@ packages:
 
   /@swc/counter@0.1.3:
     resolution: {integrity: sha512-e2BR4lsJkkRlKZ/qCHPw9ZaSxc0MVUd7gtbtaB7aMvHeJVYe8sOB8DBZkP2DtISHGSku9sCK6T6cnY0CtXrOCQ==}
-
-  /@swc/helpers@0.5.13:
-    resolution: {integrity: sha512-UoKGxQ3r5kYI9dALKJapMmuK+1zWM/H17Z1+iwnNmzcJRnfFuevZs375TA5rW31pu4BS4NoSy1fRsexDXfWn5w==}
-    dependencies:
-      tslib: 2.8.1
-    dev: false
 
   /@swc/helpers@0.5.15:
     resolution: {integrity: sha512-JQ5TuMi45Owi4/BIMAJBoSQoOJu12oOk/gADqlcUL9JEdHB8vyjUSsxqeNXnmXHjYKMi2WcYtezGEEhqUI/E2g==}
@@ -10242,8 +10236,8 @@ packages:
       react-dom: 18.3.1(react@18.3.1)
     dev: false
 
-  /next@15.1.2(@babel/core@7.26.0)(react-dom@18.3.1)(react@18.3.1):
-    resolution: {integrity: sha512-nLJDV7peNy+0oHlmY2JZjzMfJ8Aj0/dd3jCwSZS8ZiO5nkQfcZRqDrRN3U5rJtqVTQneIOGZzb6LCNrk7trMCQ==}
+  /next@15.1.3(@babel/core@7.26.0)(react-dom@18.3.1)(react@18.3.1):
+    resolution: {integrity: sha512-5igmb8N8AEhWDYzogcJvtcRDU6n4cMGtBklxKD4biYv4LXN8+awc/bbQ2IM2NQHdVPgJ6XumYXfo3hBtErg1DA==}
     engines: {node: ^18.18.0 || ^19.8.0 || >= 20.0.0}
     hasBin: true
     peerDependencies:
@@ -10263,7 +10257,7 @@ packages:
       sass:
         optional: true
     dependencies:
-      '@next/env': 15.1.2
+      '@next/env': 15.1.3
       '@swc/counter': 0.1.3
       '@swc/helpers': 0.5.15
       busboy: 1.6.0
@@ -10273,14 +10267,14 @@ packages:
       react-dom: 18.3.1(react@18.3.1)
       styled-jsx: 5.1.6(@babel/core@7.26.0)(react@18.3.1)
     optionalDependencies:
-      '@next/swc-darwin-arm64': 15.1.2
-      '@next/swc-darwin-x64': 15.1.2
-      '@next/swc-linux-arm64-gnu': 15.1.2
-      '@next/swc-linux-arm64-musl': 15.1.2
-      '@next/swc-linux-x64-gnu': 15.1.2
-      '@next/swc-linux-x64-musl': 15.1.2
-      '@next/swc-win32-arm64-msvc': 15.1.2
-      '@next/swc-win32-x64-msvc': 15.1.2
+      '@next/swc-darwin-arm64': 15.1.3
+      '@next/swc-darwin-x64': 15.1.3
+      '@next/swc-linux-arm64-gnu': 15.1.3
+      '@next/swc-linux-arm64-musl': 15.1.3
+      '@next/swc-linux-x64-gnu': 15.1.3
+      '@next/swc-linux-x64-musl': 15.1.3
+      '@next/swc-win32-arm64-msvc': 15.1.3
+      '@next/swc-win32-x64-msvc': 15.1.3
       sharp: 0.33.5
     transitivePeerDependencies:
       - '@babel/core'
@@ -13588,13 +13582,13 @@ packages:
     resolution: {integrity: sha512-bXE4cR/kVZhKZX/RjPEflHaKVhUVl85noU3v6b8apfQEc1x4A+zBxjZ4lN8LqGd6WZ3dl98pY4o717VFmoPp+A==}
     dev: false
 
-  file:packages/nextra(@types/react@19.0.2)(acorn@8.14.0)(next@15.1.2)(react-dom@18.3.1)(react@18.3.1)(typescript@5.7.2):
+  file:packages/nextra(@types/react@19.0.2)(acorn@8.14.0)(next@15.1.3)(react-dom@18.3.1)(react@18.3.1)(typescript@5.7.2):
     resolution: {directory: packages/nextra, type: directory}
     id: file:packages/nextra
     name: nextra
     engines: {node: '>=18'}
     peerDependencies:
-      next: 15.1.2
+      next: 15.1.3
       react: '>=18'
       react-dom: '>=18'
     dependencies:
@@ -13619,7 +13613,7 @@ packages:
       mdast-util-gfm: 3.0.0
       mdast-util-to-hast: 13.2.0
       negotiator: 1.0.0
-      next: 15.1.2(@babel/core@7.26.0)(react-dom@18.3.1)(react@18.3.1)
+      next: 15.1.3(@babel/core@7.26.0)(react-dom@18.3.1)(react@18.3.1)
       p-limit: 6.2.0
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
@@ -13647,12 +13641,12 @@ packages:
       - typescript
     dev: false
 
-  file:packages/nextra-theme-blog(next@15.1.2)(nextra@3.3.1)(react-dom@18.3.1)(react@18.3.1):
+  file:packages/nextra-theme-blog(next@15.1.3)(nextra@3.3.1)(react-dom@18.3.1)(react@18.3.1):
     resolution: {directory: packages/nextra-theme-blog, type: directory}
     id: file:packages/nextra-theme-blog
     name: nextra-theme-blog
     peerDependencies:
-      next: 15.1.2
+      next: 15.1.3
       nextra: workspace:*
       react: '>=18'
       react-cusdis: ^2.1.3
@@ -13661,19 +13655,19 @@ packages:
       react-cusdis:
         optional: true
     dependencies:
-      next: 15.1.2(@babel/core@7.26.0)(react-dom@18.3.1)(react@18.3.1)
+      next: 15.1.3(@babel/core@7.26.0)(react-dom@18.3.1)(react@18.3.1)
       next-themes: 0.4.3(react-dom@18.3.1)(react@18.3.1)
-      nextra: file:packages/nextra(@types/react@19.0.2)(acorn@8.14.0)(next@15.1.2)(react-dom@18.3.1)(react@18.3.1)(typescript@5.7.2)
+      nextra: file:packages/nextra(@types/react@19.0.2)(acorn@8.14.0)(next@15.1.3)(react-dom@18.3.1)(react@18.3.1)(typescript@5.7.2)
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
     dev: false
 
-  file:packages/nextra-theme-docs(next@15.1.2)(nextra@3.3.1)(react-dom@18.3.1)(react@18.3.1):
+  file:packages/nextra-theme-docs(next@15.1.3)(nextra@3.3.1)(react-dom@18.3.1)(react@18.3.1):
     resolution: {directory: packages/nextra-theme-docs, type: directory}
     id: file:packages/nextra-theme-docs
     name: nextra-theme-docs
     peerDependencies:
-      next: 15.1.2
+      next: 15.1.3
       nextra: workspace:*
       react: '>=18'
       react-dom: '>=18'
@@ -13682,9 +13676,9 @@ packages:
       clsx: 2.1.1
       escape-string-regexp: 5.0.0
       flexsearch: 0.7.43
-      next: 15.1.2(@babel/core@7.26.0)(react-dom@18.3.1)(react@18.3.1)
+      next: 15.1.3(@babel/core@7.26.0)(react-dom@18.3.1)(react@18.3.1)
       next-themes: 0.4.3(react-dom@18.3.1)(react@18.3.1)
-      nextra: file:packages/nextra(@types/react@19.0.2)(acorn@8.14.0)(next@15.1.2)(react-dom@18.3.1)(react@18.3.1)(typescript@5.7.2)
+      nextra: file:packages/nextra(@types/react@19.0.2)(acorn@8.14.0)(next@15.1.3)(react-dom@18.3.1)(react@18.3.1)(typescript@5.7.2)
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
       scroll-into-view-if-needed: 3.1.0
