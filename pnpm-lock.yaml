@@ -150,7 +150,7 @@ importers:
         version: 15.1.3(@babel/core@7.26.0)(react-dom@18.3.1)(react@18.3.1)
       nextra:
         specifier: workspace:*
-        version: file:packages/nextra(@types/react@18.3.18)(acorn@8.14.0)(next@15.1.3)(react-dom@18.3.1)(react@18.3.1)(typescript@5.7.2)
+        version: file:packages/nextra(@types/react@19.0.2)(acorn@8.14.0)(next@15.1.3)(react-dom@18.3.1)(react@18.3.1)(typescript@5.7.2)
       nextra-theme-blog:
         specifier: workspace:*
         version: file:packages/nextra-theme-blog(next@15.1.3)(nextra@3.3.1)(react-dom@18.3.1)(react@18.3.1)
@@ -173,7 +173,7 @@ importers:
         version: 15.1.3(@babel/core@7.26.0)(react-dom@18.3.1)(react@18.3.1)
       nextra:
         specifier: workspace:*
-        version: file:packages/nextra(@types/react@18.3.18)(acorn@8.14.0)(next@15.1.3)(react-dom@18.3.1)(react@18.3.1)(typescript@5.7.2)
+        version: file:packages/nextra(@types/react@19.0.2)(acorn@8.14.0)(next@15.1.3)(react-dom@18.3.1)(react@18.3.1)(typescript@5.7.2)
       nextra-theme-docs:
         specifier: workspace:*
         version: file:packages/nextra-theme-docs(next@15.1.3)(nextra@3.3.1)(react-dom@18.3.1)(react@18.3.1)
@@ -199,7 +199,7 @@ importers:
         version: 15.1.3(@babel/core@7.26.0)(react-dom@18.3.1)(react@18.3.1)
       nextra:
         specifier: workspace:*
-        version: file:packages/nextra(@types/react@18.3.18)(acorn@8.14.0)(next@15.1.3)(react-dom@18.3.1)(react@18.3.1)(typescript@5.7.2)
+        version: file:packages/nextra(@types/react@19.0.2)(acorn@8.14.0)(next@15.1.3)(react-dom@18.3.1)(react@18.3.1)(typescript@5.7.2)
       nextra-theme-docs:
         specifier: workspace:*
         version: file:packages/nextra-theme-docs(next@15.1.3)(nextra@3.3.1)(react-dom@18.3.1)(react@18.3.1)
@@ -346,7 +346,7 @@ importers:
         version: 5.0.0
       yaml:
         specifier: ^2.3.2
-        version: 2.6.1
+        version: 2.7.0
       zod:
         specifier: ^3.22.3
         version: 3.24.1
@@ -401,7 +401,7 @@ importers:
         version: 11.0.5
       vitest:
         specifier: ^2.0.4
-        version: 2.1.8(tsx@4.19.2)(yaml@2.6.1)
+        version: 2.1.8(tsx@4.19.2)(yaml@2.7.0)
 
   packages/nextra-theme-blog:
     dependencies:
@@ -3968,6 +3968,17 @@ packages:
       react: 18.3.1
     dev: false
 
+  /@mdx-js/react@3.1.0(@types/react@19.0.2)(react@18.3.1):
+    resolution: {integrity: sha512-QjHtSaoameoalGnKDT3FoIl4+9RwyTmo9ZJGBdLOks/YOiWHoRDI3PUwEzOE7kEmGcV3AFcp9K6dYu9rEuKLAQ==}
+    peerDependencies:
+      '@types/react': '>=16'
+      react: '>=16'
+    dependencies:
+      '@types/mdx': 2.0.13
+      '@types/react': 19.0.2
+      react: 18.3.1
+    dev: false
+
   /@mermaid-js/parser@0.3.0:
     resolution: {integrity: sha512-HsvL6zgE5sUPGgkIDlmAWR1HTNHz2Iy11BAWPTa4Jjabkpguy4Ze2gzfLrg6pdRuBvFwgUYyxiaNqZwrEEXepA==}
     dependencies:
@@ -5123,6 +5134,12 @@ packages:
       '@types/prop-types': 15.7.14
       csstype: 3.1.3
 
+  /@types/react@19.0.2:
+    resolution: {integrity: sha512-USU8ZI/xyKJwFTpjSVIrSeHBVAGagkHQKPNbxeWwql/vDmnTIBgx+TJnhFnj1NXgz8XfprU0egV2dROLGpsBEg==}
+    dependencies:
+      csstype: 3.1.3
+    dev: false
+
   /@types/semver@7.5.8:
     resolution: {integrity: sha512-I8EUhyrgfLrcTkzV3TSsGyl1tSuPrEDzr0yd5m90UgNxQkyDXULk3b6MlQqTCpZpNtWe1K0hzclnZkTcLBe2UQ==}
     dev: true
@@ -5423,7 +5440,7 @@ packages:
       '@babel/plugin-transform-react-jsx-source': 7.25.9(@babel/core@7.26.0)
       '@types/babel__core': 7.20.5
       react-refresh: 0.14.2
-      vite: 6.0.7(tsx@4.19.2)(yaml@2.6.1)
+      vite: 6.0.7(tsx@4.19.2)(yaml@2.7.0)
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -5451,7 +5468,7 @@ packages:
       '@vitest/spy': 2.1.8
       estree-walker: 3.0.3
       magic-string: 0.30.17
-      vite: 6.0.7(tsx@4.19.2)(yaml@2.6.1)
+      vite: 6.0.7(tsx@4.19.2)(yaml@2.7.0)
     dev: true
 
   /@vitest/pretty-format@2.1.8:
@@ -10773,7 +10790,7 @@ packages:
     dependencies:
       lilconfig: 3.1.3
       postcss: 8.4.49
-      yaml: 2.6.1
+      yaml: 2.7.0
     dev: true
 
   /postcss-load-config@5.1.0(postcss@8.4.49)(tsx@4.19.2):
@@ -10794,7 +10811,7 @@ packages:
       lilconfig: 3.1.2
       postcss: 8.4.49
       tsx: 4.19.2
-      yaml: 2.6.1
+      yaml: 2.7.0
     dev: true
 
   /postcss-load-config@6.0.1(tsx@4.19.2):
@@ -12984,7 +13001,7 @@ packages:
       '@types/unist': 3.0.3
       vfile-message: 4.0.2
 
-  /vite-node@2.1.8(tsx@4.19.2)(yaml@2.6.1):
+  /vite-node@2.1.8(tsx@4.19.2)(yaml@2.7.0):
     resolution: {integrity: sha512-uPAwSr57kYjAUux+8E2j0q0Fxpn8M9VoyfGiRI8Kfktz9NcYMCenwY5RnZxnF1WTu3TGiYipirIzacLL3VVGFg==}
     engines: {node: ^18.0.0 || >=20.0.0}
     hasBin: true
@@ -12993,7 +13010,7 @@ packages:
       debug: 4.4.0
       es-module-lexer: 1.5.4
       pathe: 1.1.2
-      vite: 6.0.7(tsx@4.19.2)(yaml@2.6.1)
+      vite: 6.0.7(tsx@4.19.2)(yaml@2.7.0)
     transitivePeerDependencies:
       - '@types/node'
       - jiti
@@ -13009,7 +13026,7 @@ packages:
       - yaml
     dev: true
 
-  /vite@6.0.7(tsx@4.19.2)(yaml@2.6.1):
+  /vite@6.0.7(tsx@4.19.2)(yaml@2.7.0):
     resolution: {integrity: sha512-RDt8r/7qx9940f8FcOIAH9PTViRrghKaK2K1jY3RaAURrEUbm9Du1mJ72G+jlhtG3WwodnfzY8ORQZbBavZEAQ==}
     engines: {node: ^18.0.0 || ^20.0.0 || >=22.0.0}
     hasBin: true
@@ -13053,7 +13070,7 @@ packages:
       postcss: 8.4.49
       rollup: 4.28.1
       tsx: 4.19.2
-      yaml: 2.6.1
+      yaml: 2.7.0
     optionalDependencies:
       fsevents: 2.3.3
     dev: true
@@ -13101,8 +13118,8 @@ packages:
       tinyexec: 0.3.1
       tinypool: 1.0.2
       tinyrainbow: 1.2.0
-      vite: 6.0.7(tsx@4.19.2)(yaml@2.6.1)
-      vite-node: 2.1.8(tsx@4.19.2)(yaml@2.6.1)
+      vite: 6.0.7(tsx@4.19.2)(yaml@2.7.0)
+      vite-node: 2.1.8(tsx@4.19.2)(yaml@2.7.0)
       why-is-node-running: 2.3.0
     transitivePeerDependencies:
       - jiti
@@ -13119,7 +13136,7 @@ packages:
       - yaml
     dev: true
 
-  /vitest@2.1.8(tsx@4.19.2)(yaml@2.6.1):
+  /vitest@2.1.8(tsx@4.19.2)(yaml@2.7.0):
     resolution: {integrity: sha512-1vBKTZskHw/aosXqQUlVWWlGUxSJR8YtiyZDJAFeW2kPAeX6S3Sool0mjspO+kXLuxVWlEDDowBAeqeAQefqLQ==}
     engines: {node: ^18.0.0 || >=20.0.0}
     hasBin: true
@@ -13161,8 +13178,8 @@ packages:
       tinyexec: 0.3.1
       tinypool: 1.0.2
       tinyrainbow: 1.2.0
-      vite: 6.0.7(tsx@4.19.2)(yaml@2.6.1)
-      vite-node: 2.1.8(tsx@4.19.2)(yaml@2.6.1)
+      vite: 6.0.7(tsx@4.19.2)(yaml@2.7.0)
+      vite-node: 2.1.8(tsx@4.19.2)(yaml@2.7.0)
       why-is-node-running: 2.3.0
     transitivePeerDependencies:
       - jiti
@@ -13516,6 +13533,12 @@ packages:
     resolution: {integrity: sha512-7r0XPzioN/Q9kXBro/XPnA6kznR73DHq+GXh5ON7ZozRO6aMjbmiBuKste2wslTFkC5d1dw0GooOCepZXJ2SAg==}
     engines: {node: '>= 14'}
     hasBin: true
+    dev: false
+
+  /yaml@2.7.0:
+    resolution: {integrity: sha512-+hSoy/QHluxmC9kCIJyL/uyFmLmc+e5CFR5Wa+bpIhIj85LVb9ZH2nVnqrHoSvKogwODv0ClqZkmiSSaIH5LTA==}
+    engines: {node: '>= 14'}
+    hasBin: true
 
   /yargs-parser@21.1.1:
     resolution: {integrity: sha512-tVpsJW7DdjecAiFpbIB1e3qxIQsE6NoPc5/eTdrbbIC4h0LVsWhnoa3g+m2HclBIujHzsxZ4VJVA+GUuc2/LBw==}
@@ -13575,7 +13598,7 @@ packages:
     resolution: {integrity: sha512-bXE4cR/kVZhKZX/RjPEflHaKVhUVl85noU3v6b8apfQEc1x4A+zBxjZ4lN8LqGd6WZ3dl98pY4o717VFmoPp+A==}
     dev: false
 
-  file:packages/nextra(@types/react@18.3.18)(acorn@8.14.0)(next@15.1.3)(react-dom@18.3.1)(react@18.3.1)(typescript@5.7.2):
+  file:packages/nextra(@types/react@19.0.2)(acorn@8.14.0)(next@15.1.3)(react-dom@18.3.1)(react@18.3.1)(typescript@5.7.2):
     resolution: {directory: packages/nextra, type: directory}
     id: file:packages/nextra
     name: nextra
@@ -13588,7 +13611,7 @@ packages:
       '@formatjs/intl-localematcher': 0.5.8
       '@headlessui/react': 2.2.0(react-dom@18.3.1)(react@18.3.1)
       '@mdx-js/mdx': 3.1.0(acorn@8.14.0)
-      '@mdx-js/react': 3.1.0(@types/react@18.3.18)(react@18.3.1)
+      '@mdx-js/react': 3.1.0(@types/react@19.0.2)(react@18.3.1)
       '@napi-rs/simple-git': 0.1.19
       '@shikijs/twoslash': 1.23.1(typescript@5.7.2)
       '@theguild/remark-mermaid': 0.1.3(react@18.3.1)
@@ -13650,7 +13673,7 @@ packages:
     dependencies:
       next: 15.1.3(@babel/core@7.26.0)(react-dom@18.3.1)(react@18.3.1)
       next-themes: 0.4.3(react-dom@18.3.1)(react@18.3.1)
-      nextra: file:packages/nextra(@types/react@18.3.18)(acorn@8.14.0)(next@15.1.3)(react-dom@18.3.1)(react@18.3.1)(typescript@5.7.2)
+      nextra: file:packages/nextra(@types/react@19.0.2)(acorn@8.14.0)(next@15.1.3)(react-dom@18.3.1)(react@18.3.1)(typescript@5.7.2)
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
     dev: false
@@ -13671,7 +13694,7 @@ packages:
       flexsearch: 0.7.43
       next: 15.1.3(@babel/core@7.26.0)(react-dom@18.3.1)(react@18.3.1)
       next-themes: 0.4.3(react-dom@18.3.1)(react@18.3.1)
-      nextra: file:packages/nextra(@types/react@18.3.18)(acorn@8.14.0)(next@15.1.3)(react-dom@18.3.1)(react@18.3.1)(typescript@5.7.2)
+      nextra: file:packages/nextra(@types/react@19.0.2)(acorn@8.14.0)(next@15.1.3)(react-dom@18.3.1)(react@18.3.1)(typescript@5.7.2)
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
       scroll-into-view-if-needed: 3.1.0
