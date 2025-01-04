@@ -65,3 +65,11 @@ the watch mode for both nextra and the theme in separated terminals.
    <img src="/docs/pages/showcase/xyflow.jpg" alt="xyflow preview" width="256">
  </a>
 </div>
+
+## Usage Trend
+
+[Usage Trend of nextra](https://npm-compare.com/nextra#timeRange=THREE_YEARS)
+  
+<a href="https://npm-compare.com/nextra#timeRange=THREE_YEARS" target="_blank">
+  <img src="https://npm-compare.com/img/npm-trend/THREE_YEARS/nextra.png" width="768" alt="NPM Usage Trend of nextra" />
+</a>
