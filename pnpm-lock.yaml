@@ -129,7 +129,7 @@ importers:
         version: 8.1.0(typescript@5.7.2)
       '@types/node':
         specifier: ^22.0.0
-        version: 22.10.2
+        version: 22.10.5
       '@types/react':
         specifier: ^18.2.23
         version: 18.3.18
@@ -5060,7 +5060,7 @@ packages:
   /@types/graceful-fs@4.1.9:
     resolution: {integrity: sha512-olP3sd1qOEe5dXTSaFvQG+02VdRXcdytWLAZsAq1PecU8uqQAhkrnbli7DagjtXKW/Bl7YJbUsa8MPcuc8LHEQ==}
     dependencies:
-      '@types/node': 22.10.2
+      '@types/node': 22.10.5
     dev: true
 
   /@types/hast@3.0.4:
@@ -5107,8 +5107,8 @@ packages:
     resolution: {integrity: sha512-J8xLz7q2OFulZ2cyGTLE1TbbZcjpno7FaN6zdJNrgAdrJ+DZzh/uFR6YrTb4C+nXakvud8Q4+rbhoIWlYQbUFQ==}
     dev: true
 
-  /@types/node@22.10.2:
-    resolution: {integrity: sha512-Xxr6BBRCAOQixvonOye19wnzyDiUtTeqldOOmj3CkeblonbccA12PFwlufvRdrpjXxqnmUaeiU5EOA+7s5diUQ==}
+  /@types/node@22.10.5:
+    resolution: {integrity: sha512-F8Q+SeGimwOo86fiovQh8qiXfFEh2/ocYv7tU5pJ3EXMSSxk1Joj5wefpFK2fHTf/N6HKGSxIDBT9f3gCxXPkQ==}
     dependencies:
       undici-types: 6.20.0
     dev: true
@@ -5154,7 +5154,7 @@ packages:
   /@types/webpack@5.28.5(esbuild@0.24.2):
     resolution: {integrity: sha512-wR87cgvxj3p6D0Crt1r5avwqffqPXUkNlnQ1mjU93G7gCuFjufZR4I6j8cz5g1F1tTYpfOOFvly+cmIQwL9wvw==}
     dependencies:
-      '@types/node': 22.10.2
+      '@types/node': 22.10.5
       tapable: 2.2.1
       webpack: 5.73.0(esbuild@0.24.2)
     transitivePeerDependencies:
@@ -8995,7 +8995,7 @@ packages:
     resolution: {integrity: sha512-7vuh85V5cdDofPyxn58nrPjBktZo0u9x1g8WtjQol+jZDaE+fhN+cIvTj11GndBnMnyfrUOG1sZQxCdjKh+DKg==}
     engines: {node: '>= 10.13.0'}
     dependencies:
-      '@types/node': 22.10.2
+      '@types/node': 22.10.5
       merge-stream: 2.0.0
       supports-color: 8.1.1
     dev: true
