@@ -6,7 +6,7 @@ settings:
 
 overrides:
   esbuild: ^0.24.0
-  vite: 6.0.6
+  vite: 6.0.7
   next: 15.1.3
 
 patchedDependencies:
@@ -150,7 +150,7 @@ importers:
         version: 15.1.3(@babel/core@7.26.0)(react-dom@18.3.1)(react@18.3.1)
       nextra:
         specifier: workspace:*
-        version: file:packages/nextra(@types/react@19.0.2)(acorn@8.14.0)(next@15.1.3)(react-dom@18.3.1)(react@18.3.1)(typescript@5.7.2)
+        version: file:packages/nextra(@types/react@18.3.18)(acorn@8.14.0)(next@15.1.3)(react-dom@18.3.1)(react@18.3.1)(typescript@5.7.2)
       nextra-theme-blog:
         specifier: workspace:*
         version: file:packages/nextra-theme-blog(next@15.1.3)(nextra@3.3.1)(react-dom@18.3.1)(react@18.3.1)
@@ -173,7 +173,7 @@ importers:
         version: 15.1.3(@babel/core@7.26.0)(react-dom@18.3.1)(react@18.3.1)
       nextra:
         specifier: workspace:*
-        version: file:packages/nextra(@types/react@19.0.2)(acorn@8.14.0)(next@15.1.3)(react-dom@18.3.1)(react@18.3.1)(typescript@5.7.2)
+        version: file:packages/nextra(@types/react@18.3.18)(acorn@8.14.0)(next@15.1.3)(react-dom@18.3.1)(react@18.3.1)(typescript@5.7.2)
       nextra-theme-docs:
         specifier: workspace:*
         version: file:packages/nextra-theme-docs(next@15.1.3)(nextra@3.3.1)(react-dom@18.3.1)(react@18.3.1)
@@ -199,7 +199,7 @@ importers:
         version: 15.1.3(@babel/core@7.26.0)(react-dom@18.3.1)(react@18.3.1)
       nextra:
         specifier: workspace:*
-        version: file:packages/nextra(@types/react@19.0.2)(acorn@8.14.0)(next@15.1.3)(react-dom@18.3.1)(react@18.3.1)(typescript@5.7.2)
+        version: file:packages/nextra(@types/react@18.3.18)(acorn@8.14.0)(next@15.1.3)(react-dom@18.3.1)(react@18.3.1)(typescript@5.7.2)
       nextra-theme-docs:
         specifier: workspace:*
         version: file:packages/nextra-theme-docs(next@15.1.3)(nextra@3.3.1)(react-dom@18.3.1)(react@18.3.1)
@@ -383,7 +383,7 @@ importers:
         version: 5.28.5(esbuild@0.24.2)
       '@vitejs/plugin-react':
         specifier: ^4.3.4
-        version: 4.3.4(vite@6.0.6)
+        version: 4.3.4(vite@6.0.7)
       esbuild-plugin-svgr:
         specifier: ^3.0.0
         version: 3.0.0(esbuild@0.24.2)(typescript@5.7.2)
@@ -496,7 +496,7 @@ importers:
         version: 18.3.5(@types/react@18.3.18)
       '@vitejs/plugin-react':
         specifier: ^4.3.4
-        version: 4.3.4(vite@6.0.6)
+        version: 4.3.4(vite@6.0.7)
       concurrently:
         specifier: ^9.0.0
         version: 9.1.1
@@ -3968,17 +3968,6 @@ packages:
       react: 18.3.1
     dev: false
 
-  /@mdx-js/react@3.1.0(@types/react@19.0.2)(react@18.3.1):
-    resolution: {integrity: sha512-QjHtSaoameoalGnKDT3FoIl4+9RwyTmo9ZJGBdLOks/YOiWHoRDI3PUwEzOE7kEmGcV3AFcp9K6dYu9rEuKLAQ==}
-    peerDependencies:
-      '@types/react': '>=16'
-      react: '>=16'
-    dependencies:
-      '@types/mdx': 2.0.13
-      '@types/react': 19.0.2
-      react: 18.3.1
-    dev: false
-
   /@mermaid-js/parser@0.3.0:
     resolution: {integrity: sha512-HsvL6zgE5sUPGgkIDlmAWR1HTNHz2Iy11BAWPTa4Jjabkpguy4Ze2gzfLrg6pdRuBvFwgUYyxiaNqZwrEEXepA==}
     dependencies:
@@ -5134,12 +5123,6 @@ packages:
       '@types/prop-types': 15.7.14
       csstype: 3.1.3
 
-  /@types/react@19.0.2:
-    resolution: {integrity: sha512-USU8ZI/xyKJwFTpjSVIrSeHBVAGagkHQKPNbxeWwql/vDmnTIBgx+TJnhFnj1NXgz8XfprU0egV2dROLGpsBEg==}
-    dependencies:
-      csstype: 3.1.3
-    dev: false
-
   /@types/semver@7.5.8:
     resolution: {integrity: sha512-I8EUhyrgfLrcTkzV3TSsGyl1tSuPrEDzr0yd5m90UgNxQkyDXULk3b6MlQqTCpZpNtWe1K0hzclnZkTcLBe2UQ==}
     dev: true
@@ -5429,18 +5412,18 @@ packages:
     resolution: {integrity: sha512-zuVdFrMJiuCDQUMCzQaD6KL28MjnqqN8XnAqiEq9PNm/hCPTSGfrXCOfwj1ow4LFb/tNymJPwsNbVePc1xFqrQ==}
     dev: false
 
-  /@vitejs/plugin-react@4.3.4(vite@6.0.6):
+  /@vitejs/plugin-react@4.3.4(vite@6.0.7):
     resolution: {integrity: sha512-SCCPBJtYLdE8PX/7ZQAs1QAZ8Jqwih+0VBLum1EGqmCCQal+MIUqLCzj3ZUy8ufbC0cAM4LRlSTm7IQJwWT4ug==}
     engines: {node: ^14.18.0 || >=16.0.0}
     peerDependencies:
-      vite: 6.0.6
+      vite: 6.0.7
     dependencies:
       '@babel/core': 7.26.0
       '@babel/plugin-transform-react-jsx-self': 7.25.9(@babel/core@7.26.0)
       '@babel/plugin-transform-react-jsx-source': 7.25.9(@babel/core@7.26.0)
       '@types/babel__core': 7.20.5
       react-refresh: 0.14.2
-      vite: 6.0.6(tsx@4.19.2)(yaml@2.6.1)
+      vite: 6.0.7(tsx@4.19.2)(yaml@2.6.1)
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -5454,11 +5437,11 @@ packages:
       tinyrainbow: 1.2.0
     dev: true
 
-  /@vitest/mocker@2.1.8(vite@6.0.6):
+  /@vitest/mocker@2.1.8(vite@6.0.7):
     resolution: {integrity: sha512-7guJ/47I6uqfttp33mgo6ga5Gr1VnL58rcqYKyShoRK9ebu8T5Rs6HN3s1NABiBeVTdWNrwUMcHH54uXZBN4zA==}
     peerDependencies:
       msw: ^2.4.9
-      vite: 6.0.6
+      vite: 6.0.7
     peerDependenciesMeta:
       msw:
         optional: true
@@ -5468,7 +5451,7 @@ packages:
       '@vitest/spy': 2.1.8
       estree-walker: 3.0.3
       magic-string: 0.30.17
-      vite: 6.0.6(tsx@4.19.2)(yaml@2.6.1)
+      vite: 6.0.7(tsx@4.19.2)(yaml@2.6.1)
     dev: true
 
   /@vitest/pretty-format@2.1.8:
@@ -13010,7 +12993,7 @@ packages:
       debug: 4.4.0
       es-module-lexer: 1.5.4
       pathe: 1.1.2
-      vite: 6.0.6(tsx@4.19.2)(yaml@2.6.1)
+      vite: 6.0.7(tsx@4.19.2)(yaml@2.6.1)
     transitivePeerDependencies:
       - '@types/node'
       - jiti
@@ -13026,8 +13009,8 @@ packages:
       - yaml
     dev: true
 
-  /vite@6.0.6(tsx@4.19.2)(yaml@2.6.1):
-    resolution: {integrity: sha512-NSjmUuckPmDU18bHz7QZ+bTYhRR0iA72cs2QAxCqDpafJ0S6qetco0LB3WW2OxlMHS0JmAv+yZ/R3uPmMyGTjQ==}
+  /vite@6.0.7(tsx@4.19.2)(yaml@2.6.1):
+    resolution: {integrity: sha512-RDt8r/7qx9940f8FcOIAH9PTViRrghKaK2K1jY3RaAURrEUbm9Du1mJ72G+jlhtG3WwodnfzY8ORQZbBavZEAQ==}
     engines: {node: ^18.0.0 || ^20.0.0 || >=22.0.0}
     hasBin: true
     peerDependencies:
@@ -13101,7 +13084,7 @@ packages:
         optional: true
     dependencies:
       '@vitest/expect': 2.1.8
-      '@vitest/mocker': 2.1.8(vite@6.0.6)
+      '@vitest/mocker': 2.1.8(vite@6.0.7)
       '@vitest/pretty-format': 2.1.8
       '@vitest/runner': 2.1.8
       '@vitest/snapshot': 2.1.8
@@ -13118,7 +13101,7 @@ packages:
       tinyexec: 0.3.1
       tinypool: 1.0.2
       tinyrainbow: 1.2.0
-      vite: 6.0.6(tsx@4.19.2)(yaml@2.6.1)
+      vite: 6.0.7(tsx@4.19.2)(yaml@2.6.1)
       vite-node: 2.1.8(tsx@4.19.2)(yaml@2.6.1)
       why-is-node-running: 2.3.0
     transitivePeerDependencies:
@@ -13162,7 +13145,7 @@ packages:
         optional: true
     dependencies:
       '@vitest/expect': 2.1.8
-      '@vitest/mocker': 2.1.8(vite@6.0.6)
+      '@vitest/mocker': 2.1.8(vite@6.0.7)
       '@vitest/pretty-format': 2.1.8
       '@vitest/runner': 2.1.8
       '@vitest/snapshot': 2.1.8
@@ -13178,7 +13161,7 @@ packages:
       tinyexec: 0.3.1
       tinypool: 1.0.2
       tinyrainbow: 1.2.0
-      vite: 6.0.6(tsx@4.19.2)(yaml@2.6.1)
+      vite: 6.0.7(tsx@4.19.2)(yaml@2.6.1)
       vite-node: 2.1.8(tsx@4.19.2)(yaml@2.6.1)
       why-is-node-running: 2.3.0
     transitivePeerDependencies:
@@ -13592,7 +13575,7 @@ packages:
     resolution: {integrity: sha512-bXE4cR/kVZhKZX/RjPEflHaKVhUVl85noU3v6b8apfQEc1x4A+zBxjZ4lN8LqGd6WZ3dl98pY4o717VFmoPp+A==}
     dev: false
 
-  file:packages/nextra(@types/react@19.0.2)(acorn@8.14.0)(next@15.1.3)(react-dom@18.3.1)(react@18.3.1)(typescript@5.7.2):
+  file:packages/nextra(@types/react@18.3.18)(acorn@8.14.0)(next@15.1.3)(react-dom@18.3.1)(react@18.3.1)(typescript@5.7.2):
     resolution: {directory: packages/nextra, type: directory}
     id: file:packages/nextra
     name: nextra
@@ -13605,7 +13588,7 @@ packages:
       '@formatjs/intl-localematcher': 0.5.8
       '@headlessui/react': 2.2.0(react-dom@18.3.1)(react@18.3.1)
       '@mdx-js/mdx': 3.1.0(acorn@8.14.0)
-      '@mdx-js/react': 3.1.0(@types/react@19.0.2)(react@18.3.1)
+      '@mdx-js/react': 3.1.0(@types/react@18.3.18)(react@18.3.1)
       '@napi-rs/simple-git': 0.1.19
       '@shikijs/twoslash': 1.23.1(typescript@5.7.2)
       '@theguild/remark-mermaid': 0.1.3(react@18.3.1)
@@ -13667,7 +13650,7 @@ packages:
     dependencies:
       next: 15.1.3(@babel/core@7.26.0)(react-dom@18.3.1)(react@18.3.1)
       next-themes: 0.4.3(react-dom@18.3.1)(react@18.3.1)
-      nextra: file:packages/nextra(@types/react@19.0.2)(acorn@8.14.0)(next@15.1.3)(react-dom@18.3.1)(react@18.3.1)(typescript@5.7.2)
+      nextra: file:packages/nextra(@types/react@18.3.18)(acorn@8.14.0)(next@15.1.3)(react-dom@18.3.1)(react@18.3.1)(typescript@5.7.2)
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
     dev: false
@@ -13688,7 +13671,7 @@ packages:
       flexsearch: 0.7.43
       next: 15.1.3(@babel/core@7.26.0)(react-dom@18.3.1)(react@18.3.1)
       next-themes: 0.4.3(react-dom@18.3.1)(react@18.3.1)
-      nextra: file:packages/nextra(@types/react@19.0.2)(acorn@8.14.0)(next@15.1.3)(react-dom@18.3.1)(react@18.3.1)(typescript@5.7.2)
+      nextra: file:packages/nextra(@types/react@18.3.18)(acorn@8.14.0)(next@15.1.3)(react-dom@18.3.1)(react@18.3.1)(typescript@5.7.2)
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
       scroll-into-view-if-needed: 3.1.0
