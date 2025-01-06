@@ -1,6 +1,6 @@
 {
   "mode": "pre",
-  "tag": "app-router",
+  "tag": "rc",
   "initialVersions": {
     "nextra": "3.0.0",
     "nextra-theme-blog": "3.0.0",
