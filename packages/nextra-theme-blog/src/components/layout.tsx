@@ -14,7 +14,7 @@ export const Footer: FC<{
 
 export const Layout: FC<{
   children: ReactNode
-  nextThemes: Omit<ComponentProps<typeof ThemeProvider>, 'children'>
+  nextThemes?: Omit<ComponentProps<typeof ThemeProvider>, 'children'>
   banner?: ReactElement
 }> = ({ children, nextThemes, banner }) => {
   return (
