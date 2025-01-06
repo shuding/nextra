@@ -6,7 +6,12 @@ import { cloneElement, useEffect } from 'react'
 import { Breadcrumb, Pagination, TOC } from '../components'
 import { setToc, useConfig, useThemeConfig } from '../stores'
 
-export const ClientWrapper: MDXWrapper = ({ toc, children, metadata }) => {
+export const ClientWrapper: MDXWrapper = ({
+  toc,
+  children,
+  metadata,
+  bottomContent
+}) => {
   const {
     activeType,
     activeThemeContext: themeContext,
@@ -57,6 +62,7 @@ export const ClientWrapper: MDXWrapper = ({ toc, children, metadata }) => {
           <div className="x:mt-16" />
         )}
         {themeContext.pagination && activeType !== 'page' && <Pagination />}
+        {bottomContent}
       </article>
     </>
   )
