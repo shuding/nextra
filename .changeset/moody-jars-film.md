@@ -1,5 +1,6 @@
 ---
 "nextra-theme-docs": patch
+"nextra": patch
 ---
 
-add `flex flex-col` classes for main `<article>` to have possibility move content, e.g. after pagination
+add `bottomContent` prop for `<Wrapper>` component, e.g. to put some content after pagination in `nextra-theme-docs`

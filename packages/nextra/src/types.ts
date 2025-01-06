@@ -99,6 +99,7 @@ export type MDXWrapper = FC<{
   toc: Heading[]
   children: ReactNode
   metadata: NextraMetadata
+  bottomContent?: ReactNode
 }>
 
 export type MetaRecord = Record<string, z.infer<typeof metaSchema>>
