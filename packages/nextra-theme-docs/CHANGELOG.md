@@ -1,5 +1,15 @@
 # nextra-theme-docs
 
+## 4.0.0-app-router.43
+
+### Patch Changes
+
+- 50c2f76: add `bottomContent` prop for `<Wrapper>` component, e.g. to put some content after pagination in `nextra-theme-docs`
+- 50c2f76: fix `colorSchema` for HEX format with 4 chars, e.g. `#111`
+- Updated dependencies [50c2f76]
+- Updated dependencies [50c2f76]
+  - nextra@4.0.0-app-router.43
+
 ## 4.0.0-app-router.42
 
 ### Patch Changes
