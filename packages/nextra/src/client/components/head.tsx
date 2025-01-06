@@ -12,25 +12,36 @@ const darkLightSchema = z
   ])
   .transform(v => (typeof v === 'number' ? { dark: v, light: v } : v))
 
-function hexToRgb(hex: `#${string}`): string {
-  const bigint = Number.parseInt(hex.slice(1), 16)
+function hexToRgb(hex: string): string {
+  hex = hex.slice(1)
+  if (hex.length === 3) {
+    hex = hex
+      .split('')
+      .map(char => char + char)
+      .join('')
+  }
+  const bigint = Number.parseInt(hex, 16)
   const r = (bigint >> 16) & 255
   const g = (bigint >> 8) & 255
   const b = bigint & 255
   return `${r},${g},${b}`
 }
 
-const colorSchema = z
-  .union([
-    z.string().startsWith('#'),
-    z.string().startsWith('rgb('),
-    z.string().regex(/^\d{1,3},\d{1,3},\d{1,3}$/)
-  ])
+const RGB_RE = /^rgb\((?<rgb>.*?)\)$/
+const HEX_RE = /^#(?<hex>[0-9a-f]{3,6})$/i
+
+const colorSchema = z.string()
+  .refine(str => {
+    if (HEX_RE.test(str) || RGB_RE.test(str)) {
+      return true
+    }
+    throw new Error('Color format should be in HEX or RGB format. E.g. #000, #112233 or rgb(255,255,255)')
+  })
   .transform(value => {
     if (value.startsWith('#')) {
-      return hexToRgb(value as `#${string}`)
+      return hexToRgb(value)
     }
-    const rgb = value.match(/^rgb\((?<rgb>.*?)\)$/)?.groups!.rgb
+    const rgb = value.match(RGB_RE)?.groups!.rgb
     if (rgb) {
       return rgb.replaceAll(' ', '')
     }
