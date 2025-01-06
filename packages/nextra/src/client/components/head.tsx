@@ -16,6 +16,7 @@ function hexToRgb(hex: string): string {
   hex = hex.slice(1)
   if (hex.length === 3) {
     hex = hex
+      // eslint-disable-next-line unicorn/prefer-spread -- https://github.com/sindresorhus/eslint-plugin-unicorn/issues/2521#issuecomment-2564033898
       .split('')
       .map(char => char + char)
       .join('')
