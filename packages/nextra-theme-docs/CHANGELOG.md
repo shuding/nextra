@@ -1,5 +1,16 @@
 # nextra-theme-docs
 
+## 4.0.0-rc.0
+
+### Major Changes
+
+- 28796b4: release Nextra rc.0
+
+### Patch Changes
+
+- Updated dependencies [28796b4]
+  - nextra@4.0.0-rc.0
+
 ## 4.0.0-app-router.43
 
 ### Patch Changes
