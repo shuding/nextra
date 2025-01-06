@@ -2,4 +2,4 @@
 "nextra-theme-blog": patch
 ---
 
-dd
+make nextThemes optional prop, to avoid ts errors
