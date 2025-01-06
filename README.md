@@ -52,7 +52,7 @@ Any change to example/docs will be re-rendered instantly.
 If you update the core or theme packages, a rebuild is required. Or you can use
 the watch mode for both nextra and the theme in separated terminals.
 
-### Sponsors
+## Sponsors
 
 <div>
  <a href="https://the-guild.dev/graphql/hive?utm_source=github&utm_campaign=nextra&utm_content=logolink">
