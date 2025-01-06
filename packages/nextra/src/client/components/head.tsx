@@ -30,12 +30,15 @@ function hexToRgb(hex: string): string {
 const RGB_RE = /^rgb\((?<rgb>.*?)\)$/
 const HEX_RE = /^#(?<hex>[0-9a-f]{3,6})$/i
 
-const colorSchema = z.string()
+const colorSchema = z
+  .string()
   .refine(str => {
     if (HEX_RE.test(str) || RGB_RE.test(str)) {
       return true
     }
-    throw new Error('Color format should be in HEX or RGB format. E.g. #000, #112233 or rgb(255,255,255)')
+    throw new Error(
+      'Color format should be in HEX or RGB format. E.g. #000, #112233 or rgb(255,255,255)'
+    )
   })
   .transform(value => {
     if (value.startsWith('#')) {

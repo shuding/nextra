@@ -41,6 +41,7 @@ export const ClientWrapper: MDXWrapper = ({ toc, children, metadata }) => {
         className={cn(
           'x:w-full x:min-w-0 x:break-words x:min-h-[calc(100vh-var(--nextra-navbar-height))]',
           'x:text-slate-700 x:dark:text-slate-200 x:pb-8 x:px-6 x:pt-4 x:md:px-12',
+          'x:flex x:flex-col', // For moving content, e.g. put after pagination, `order-last`
           themeContext.typesetting === 'article' &&
             'nextra-body-typesetting-article'
         )}
