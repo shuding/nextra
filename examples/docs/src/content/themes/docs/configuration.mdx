@@ -1,0 +1,510 @@
+# Configuration
+
+To configure the theme, edit or create the `theme.config.js` file in the root
+directory. The file looks something like this:
+
+```js filename="theme.config.js"
+export default {
+  projectLink: 'https://gitlab.com/librewolf-community/browser',
+  titleSuffix: ' – Nextra',
+  footerText: `MIT ${new Date().getFullYear()} © Nextra.`
+}
+```
+
+## `projectLink`
+
+The URL that the button in the top right will point to.
+
+**Type:** `string`
+
+**Default:** `https://github.com/shuding/nextra`
+
+**Example:**
+
+```js filename="theme.config.js"
+export default {
+  projectLink: 'https://gitlab.com/librewolf-community/browser'
+}
+```
+
+## `projectLinkIcon`
+
+Changes the icon that is shown in the top right.
+
+**Type:** `ReactNode | React.FC<{ locale: string }>{:ts}`
+
+**Default:** GitHub icon
+
+**Example:**
+
+```jsx filename="theme.config.jsx"
+import Gitlab from '@geist-ui/react-icons/gitlab'
+
+export default {
+  projectLinkIcon: ({ locale }) => <Gitlab />
+}
+```
+
+## `docsRepositoryBase`
+
+The base URL of the GitHub repository the docs are located in. This will be used
+for the `Edit this Page on GitHub` button.
+
+**Type:** `string`
+
+**Default:** `https://github.com/shuding/nextra`
+
+**Example:**
+
+```js filename="theme.config.js"
+export default {
+  docsRepositoryBase: 'https://github.com/shuding/nextra'
+}
+```
+
+## `titleSuffix`
+
+Suffix that will be added to page titles in the URL bar.
+
+**Type:** `string`
+
+**Default:** `– Nextra`
+
+**Example:**
+
+```js filename="theme.config.js"
+export default {
+  titleSuffix: '– Nextra'
+}
+```
+
+## `nextLinks` and `prevLinks`
+
+Specifies if arrows are being shown at the bottom of a page showing the next and
+previous page, like the ones at the bottom of this page.
+
+**Type:** `boolean`
+
+**Default:** `true`
+
+**Example:**
+
+```js filename="theme.config.js"
+export default {
+  nextLinks: true,
+  prevLinks: true
+}
+```
+
+## `search`
+
+Specifies if a search box should be shown in the top right.
+
+**Type:** `boolean`
+
+**Default:** `true`
+
+**Example:**
+
+```js filename="theme.config.js"
+export default {
+  search: true
+}
+```
+
+## `searchPlaceholder`
+
+Specifies if a search box should be shown in the top right.
+
+**Type:** `string | ((props: { locale: string }) => string){:ts}`
+
+**Example:**
+
+```js filename="theme.config.js"
+export default {
+  searchPlaceholder({ locale }) {
+    if (locale === 'zh-CN') return '搜索文档...'
+    return 'Search documentation...'
+  }
+}
+```
+
+## `customSearch`
+
+A custom component to display instead of the search bar in the top right, for
+example Algolia.
+
+**Type:** `ReactNode`
+
+**Example:**
+
+```jsx filename="theme.config.jsx"
+import Search from 'your-search'
+
+export default {
+  customSearch: <Search />
+}
+```
+
+## `darkMode`
+
+Specifies if the user can select a dark mode.
+
+**Type:** `boolean`
+
+**Default:** `true`
+
+**Example:**
+
+```js filename="theme.config.js"
+export default {
+  darkMode: true
+}
+```
+
+## `defaultMenuCollapseLevel`
+
+Specifies the folder level at which the menu on the left is collapsed by
+default.
+
+**Type:** `number`
+
+**Default:** `2`
+
+**Example:**
+
+```js filename="theme.config.js"
+export default {
+  defaultMenuCollapseLevel: 2
+}
+```
+
+## `footer`
+
+Specifies if the footer should be shown.
+
+**Type:** `boolean`
+
+**Default:** `true`
+
+**Example:**
+
+```js filename="theme.config.js"
+export default {
+  footer: true
+}
+```
+
+## `footerText`
+
+The text that is shown on the left of the footer.
+
+**Type:** `ReactNode | React.FC<PropsWithChildren<{ locale: string }>>{:ts}`
+
+**Example:**
+
+```js filename="theme.config.js"
+export default {
+  footerText: ({ locale }) => `MIT ${new Date().getFullYear()} © Nextra.`
+}
+```
+
+## `footerEditLink`
+
+The components that should be shown on the link that leads to the editable page
+on the repository.
+
+**Type:** `ReactNode | React.FC<PropsWithChildren<{ locale: string }>>{:ts}`
+
+**Default:** `Edit this page`
+
+**Example:**
+
+```js filename="theme.config.js"
+export default {
+  footerEditLink: ({ locale }) => 'Edit this page on GitHub'
+}
+```
+
+## `feedbackLink`
+
+The components that should be shown on the link that leads to the issues or
+discussions of the repository.
+
+**Type:** `ReactNode | React.FC<PropsWithChildren<{ locale: string }>>{:ts}`
+
+**Default:** ``
+
+**Example:**
+
+```js filename="theme.config.js"
+export default {
+  feedbackLink: ({ locale }) => 'Question? Give us feedback →'
+}
+```
+
+## `feedbackLabels`
+
+Label used for create issue or discussion.
+
+**Type:** `string`
+
+**Default:** ``
+
+**Example:**
+
+```js filename="theme.config.js"
+export default {
+  feedbackLabels: 'feedbacks'
+}
+```
+
+## `logo`
+
+The logo in the top left.
+
+**Type:** `ReactNode | React.FC<PropsWithChildren<{ locale: string }>>{:ts}`
+
+**Example:**
+
+```jsx filename="theme.config.jsx"
+export default {
+  logo: ({ locale }) => (
+    <>
+      <span className="mr-2 hidden font-extrabold md:inline">Nextra</span>
+      <span className="hidden font-normal text-gray-600 md:inline">
+        The Next Docs Builder
+      </span>
+    </>
+  )
+}
+```
+
+## `logoLink`
+
+Enable automaticaly linking the logo to root, or provide a custom url.
+
+**Type:** `string` | `boolean`
+
+**Default:** `true` (links to `/` by default)
+
+**Example:**
+
+```js filename="theme.config.js"
+export default {
+  logoLink: '/about'
+}
+```
+
+Or to disable the logo link:
+
+```js filename="theme.config.js"
+export default {
+  logoLink: false
+}
+```
+
+## `head`
+
+The head that should be inserted into the html document.
+
+**Type:**
+`ReactNode | React.FC<PropsWithChildren<{ locale: string; config: DocsThemeConfig; title: string; meta: Record<string, any> }>>{:ts}`
+
+**Example:**
+
+```jsx filename="theme.config.jsx"
+export default {
+  head: (
+    <>
+      <meta name="msapplication-TileColor" content="#fff" />
+      <meta httpEquiv="Content-Language" content="en" />
+      <meta name="description" content="Nextra: the next docs builder" />
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:site" content="@shuding_" />
+      <meta property="og:title" content="Nextra: the next docs builder" />
+      <meta property="og:description" content="Nextra: the next docs builder" />
+      <meta name="apple-mobile-web-app-title" content="Nextra" />
+    </>
+  )
+}
+```
+
+## `direction`
+
+The direction of the text on the page
+
+**Type:** `'ltr' | 'rtl'`
+
+**Default:** `'ltr'`
+
+**Example:**
+
+```js filename="theme.config.js"
+export default {
+  direction: 'ltr'
+}
+```
+
+## `floatTOC`
+
+Specifies if the table of contents of a page (the headings) should be displayed
+floating on the right instead of being integrated in the menu on the left.
+
+**Type:** `boolean`
+
+**Default:** `false`
+
+**Example:**
+
+```js filename="theme.config.js"
+export default {
+  floatTOC: false
+}
+```
+
+## `projectChatLink`
+
+The URL that the chat button in the top right will point to.
+
+**Type:** `string`
+
+**Example:**
+
+```js filename="theme.config.js"
+export default {
+  projectChatLink: 'https://discord.gg/hEM84NMkRv'
+}
+```
+
+## `projectChatLinkIcon`
+
+The icon component that is used as the chat button
+
+**Type:** `ReactNode`
+
+**Example:**
+
+```jsx filename="theme.config.jsx"
+export default {
+  projectChatLinkIcon: <Discord />
+}
+```
+
+## `banner`
+
+The banner content that will display at top of the page.
+
+**Type:** `ReactNode | React.FC<PropsWithChildren<{ locale: string }>>{:ts}`
+
+**Example:**
+
+```js filename="theme.config.js"
+export default {
+  banner: ({ locale }) => 'Nextra 2'
+}
+```
+
+## `bannerKey`
+
+The key that is used to control the display of banner in localStorage.
+
+**Type:** `string`
+
+**Default:** `'nextra-banner'`
+
+**Example:**
+
+```js filename="theme.config.js"
+export default {
+  bannerKey: 'Nextra-banner'
+}
+```
+
+## `gitTimestamp`
+
+The component that is used to display timestamp of the last commit of current
+page.
+
+**Type:**
+`string | React.FC<PropsWithChildren<{ locale: string; timestamp: Date }>>{:ts}`
+
+**Example:**
+
+```js filename="theme.config.js"
+export default {
+  gitTimestamp: 'Last updated on'
+}
+```
+
+## `tocExtraContent`
+
+The extra content that is displayed under the table of contents.
+
+**Type:** `ReactNode | React.FC<PropsWithChildren<unknown>>{:ts}`
+
+**Example:**
+
+```jsx filename="theme.config.jsx"
+export default {
+  tocExtraContent() {
+    return <img src="https://placecats.com/300/200" alt="" />
+  }
+}
+```
+
+## `i18n`
+
+The internationalization (i18n) config. See more [here](/features/i18n).
+
+## `faviconGlyph`
+
+A glyph that should be used as a favicon.
+
+**Type:** `char`
+
+**Example:**
+
+```js filename="theme.config.js"
+export default {
+  faviconGlyph: '🐱'
+}
+```
+
+## `search`
+
+Enable Nextra built-in search
+
+**Type:** `boolean | { codeblocks: boolean }`
+
+**Example:**
+
+```js filename="next.config.mjs"
+import nextra from 'nextra'
+
+const withNextra = nextra({
+  theme: 'nextra-theme-blog',
+  themeConfig: './theme.config.js',
+  search: {
+    codeblocks: false
+  }
+})
+export default withNextra()
+```
+
+## `searchResultEmpty`
+
+Empty component for search result.
+
+**Type:** `boolean | { codeblocks: boolean }`
+
+**Example:**
+
+```js filename="theme.config.js"
+export default {
+  searchResultEmpty({ locale }) {
+    if (locale === 'zh-CN') return '未查找到结果'
+    return 'No results found'
+  }
+}
+```

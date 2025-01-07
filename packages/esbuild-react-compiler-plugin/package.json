@@ -1,0 +1,29 @@
+{
+  "name": "esbuild-react-compiler-plugin",
+  "version": "0.0.0",
+  "type": "module",
+  "description": "",
+  "author": "Dimitri POSTOLOV",
+  "license": "ISC",
+  "private": true,
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "types:check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "babel-plugin-react-compiler": "0.0.0-experimental-22c6e49-20241219",
+    "react-compiler-webpack": "0.1.2"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.2"
+  }
+}

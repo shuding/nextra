@@ -7,11 +7,8 @@
         // Run `build` in workspaces I depend on first
         "^build"
       ],
-      "outputs": ["dist/**", ".next/**"]
-    },
-    "build:tailwind": {
-      "dependsOn": [],
-      "outputs": ["style.css"]
+      // Cache all files emitted to the packages's directories
+      "outputs": ["dist/**", ".next/**", "public/_pagefind/**"]
     },
     "test": {
       "outputs": ["dist/**"]
@@ -22,9 +19,6 @@
         "^build"
       ],
       "outputs": ["dist/**", ".next/**"]
-    },
-    "clean": {
-      "cache": false
     },
     "dev": {
       "dependsOn": [

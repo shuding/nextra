@@ -18,36 +18,27 @@ The Nextra repository uses [PNPM Workspaces](https://pnpm.io/workspaces) and
 ### Build Nextra Core
 
 ```bash
-cd packages/nextra
-pnpm build
+pnpm --filter nextra build
 ```
 
-Watch mode: `pnpm dev`
+Watch mode: `pnpm --filter nextra dev`
 
 ### Build Nextra Theme
 
 ```bash
-cd packages/nextra-theme-docs
-pnpm build
+pnpm --filter nextra-theme-docs build
 ```
-
-| Command           | Description              |
-| ----------------- | ------------------------ |
-| pnpm dev          | Watch mode               |
-| pnpm dev:layout   | Watch mode (layout only) |
-| pnpm dev:tailwind | Watch mode (style only)  |
 
 ### Development
 
 You can also debug them together with a website locally. For instance, to start
-examples/docs locally, run
+`examples/docs` locally, run
 
 ```bash
-cd examples/docs
-pnpm dev
+pnpm --filter example-docs dev
 ```
 
-Any change to example/docs will be re-rendered instantly.
+Any change to `example/docs` will be re-rendered instantly.
 
 If you update the core or theme packages, a rebuild is required. Or you can use
 the watch mode for both nextra and the theme in separated terminals.
@@ -56,10 +47,10 @@ the watch mode for both nextra and the theme in separated terminals.
 
 <div>
  <a href="https://the-guild.dev/graphql/hive?utm_source=github&utm_campaign=nextra&utm_content=logolink">
-   <img src="/docs/pages/showcase/graphql-hive.png" alt="GraphQL Hive preview" width="256">
+   <img src="/docs/app/showcase/_logos/graphql-hive.png" alt="GraphQL Hive preview" width="256">
  </a>
  <a href="https://speakeasyapi.dev/docs?utm_source=github&utm_campaign=nextra&utm_content=logolink">
-   <img src="/docs/pages/showcase/speakeasy.png" alt="Speakeasy preview" width="256">
+   <img src="/docs/app/showcase/_logos/speakeasy.png" alt="Speakeasy preview" width="256">
  </a>
  <a href="https://xyflow.com?utm_source=github&utm_campaign=nextra&utm_content=logolink">
    <img src="/docs/pages/showcase/xyflow.jpg" alt="xyflow preview" width="256">

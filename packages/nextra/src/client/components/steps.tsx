@@ -1,27 +1,26 @@
 import cn from 'clsx'
-import type { ComponentProps, CSSProperties, ReactElement } from 'react'
+import type { ComponentProps, FC } from 'react'
 import { useId } from 'react'
 
-export function Steps({
+export const Steps: FC<ComponentProps<'div'>> = ({
   children,
   className,
   style,
   ...props
-}: ComponentProps<'div'>): ReactElement {
+}) => {
   const id = useId().replaceAll(':', '')
   return (
     <div
       className={cn(
-        'nextra-steps _ms-4 _mb-12 _border-s _border-gray-200 _ps-6',
-        'dark:_border-neutral-800',
+        'nextra-steps x:ms-4 x:mb-12 x:border-s x:border-gray-200 x:ps-6',
+        'x:dark:border-neutral-800',
         className
       )}
-      style={
-        {
-          ...style,
-          '--counter-id': id
-        } as CSSProperties
-      }
+      style={{
+        ...style,
+        // @ts-expect-error -- fixme
+        '--counter-id': id
+      }}
       {...props}
     >
       {children}

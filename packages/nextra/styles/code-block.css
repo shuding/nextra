@@ -1,6 +1,6 @@
 .nextra-code span {
-  @apply _bg-[--shiki-light-bg] _text-[--shiki-light];
-  @apply dark:_bg-[--shiki-dark-bg] dark:_text-[--shiki-dark];
+  @apply x:bg-(--shiki-light-bg) x:text-(--shiki-light);
+  @apply x:dark:bg-(--shiki-dark-bg) x:dark:text-(--shiki-dark);
 }
 
 code.nextra-code {
@@ -9,42 +9,42 @@ code.nextra-code {
     'rlig' 1,
     'calt' 1,
     'ss01' 1;
-  @apply _text-sm;
+  @apply x:text-sm;
 
   :not(pre) > &:not([class*='twoslash-']) {
-    @apply _border-black _border-opacity-[0.04] _bg-opacity-[0.03] _bg-black _break-words _rounded-md _border _py-0.5 _px-[.25em] _text-[.9em];
-    @apply dark:_border-white/10 dark:_bg-white/10;
+    @apply x:border-black/[0.04] x:bg-black/[0.03] x:break-words x:rounded-md x:border x:py-0.5 x:px-[.25em] x:text-[.9em];
+    @apply x:dark:border-white/10 x:dark:bg-white/10;
   }
 }
 
 pre code.nextra-code:not([class*='twoslash-']) {
-  @apply _grid;
+  @apply x:grid;
 
   &[data-line-numbers] > span {
-    @apply _pl-2;
+    @apply x:pl-2;
 
     &::before {
       counter-increment: line;
       content: counter(line);
-      @apply _inline-block _pr-4 _text-right _min-w-[2.6rem] _text-gray-500;
+      @apply x:inline-block x:pr-4 x:text-right x:min-w-[2.6rem] x:text-gray-500;
     }
   }
 
   & > span {
-    @apply _px-4;
+    @apply x:px-4;
 
     &[data-highlighted-line] {
-      @apply _bg-primary-600/10 dark:_bg-primary-600/20 !_text-primary-600/80 _shadow-[2px_0_currentColor_inset];
+      @apply x:bg-primary-600/10 x:dark:bg-primary-600/20 x:text-primary-600/80! x:shadow-[2px_0_currentColor_inset];
     }
 
     [data-highlighted-chars] {
-      @apply _rounded-sm _ring-2 _ring-primary-600/20 dark:_ring-primary-600/40;
-      @apply _bg-primary-600/20 dark:_bg-primary-600/40;
+      @apply x:rounded-sm x:ring-2 x:ring-primary-600/20 x:dark:ring-primary-600/40;
+      @apply x:bg-primary-600/20 x:dark:bg-primary-600/40;
     }
   }
 
   html[data-nextra-word-wrap] & {
-    @apply max-md:_whitespace-pre-wrap;
+    @apply x:max-md:whitespace-pre-wrap;
   }
 }
 
@@ -106,7 +106,7 @@ pre code.nextra-code:not([class*='twoslash-']) {
 }
 
 .twoslash-popup-container {
-  @apply _inline-flex _flex-col _absolute _transition-opacity _duration-300 _z-10 _mt-1.5 _rounded;
+  @apply x:inline-flex x:flex-col x:absolute x:transition-opacity x:duration-300 x:z-10 x:mt-1.5 x:rounded;
   transform: translateY(1.1em);
   background: var(--twoslash-popup-bg) !important;
   color: var(--twoslash-popup-color);
@@ -121,8 +121,8 @@ pre code.nextra-code:not([class*='twoslash-']) {
 }
 
 .twoslash-popup-arrow {
-  @apply _absolute _-top-1 _border-t _border-r _size-1.5 _-rotate-45;
-  @apply _border-[--twoslash-border-color] _bg-[--twoslash-popup-bg];
+  @apply x:absolute x:-top-1 x:border-t x:border-r x:size-1.5 x:-rotate-45;
+  @apply x:border-(--twoslash-border-color) x:bg-(--twoslash-popup-bg);
   left: 1em;
   pointer-events: none;
 }
@@ -133,7 +133,7 @@ pre code.nextra-code:not([class*='twoslash-']) {
 }
 
 .twoslash-popup-docs {
-  @apply _text-sm;
+  @apply x:text-sm;
   color: var(--twoslash-docs-color);
   font-family: var(--twoslash-docs-font);
   border-top: 1px solid var(--twoslash-border-color);
@@ -172,14 +172,14 @@ pre code.nextra-code:not([class*='twoslash-']) {
 }
 
 .twoslash-completion-cursor .twoslash-completion-list {
-  @apply _absolute _left-0 _border _top-1 _rounded;
+  @apply x:absolute x:left-0 x:border x:top-1 x:rounded;
   transform: translate(0, 1.2em);
   background: var(--twoslash-popup-bg);
   border-color: var(--twoslash-border-color);
 }
 
 .twoslash-completion-list {
-  @apply _py-1 _px-2 _w-60;
+  @apply x:py-1 x:px-2 x:w-60;
 }
 
 .twoslash-completion-list::before {

@@ -1,0 +1,164 @@
+---
+title: Nextra Components
+date: 2023-05-15
+description: En example of using the Callout component in your blog.
+tags: [web development]
+author: Tristan Dubbeld
+---
+
+import { Bleed, Callout, Cards, FileTree, Steps, Tabs } from 'nextra/components'
+import { CopyIcon, GitHubIcon, MenuIcon } from 'nextra/icons'
+
+## `<Callout>`
+
+### Default
+
+<Callout>This is a default callout.</Callout>
+
+### Error
+
+<Callout type="error">This is an error callout.</Callout>
+
+### Info
+
+<Callout type="info">This is an info callout. [^2]</Callout>
+
+### Warning
+
+<Callout type="warning">This is a warning callout.</Callout>
+
+### With custom emoji [^1]
+
+<Callout emoji="🚀">This is a callout with a custom emoji.</Callout>
+
+## `<Steps>`
+
+<Steps>
+
+### Step 1
+
+Content for step 1.
+
+### Step 2
+
+Contents for step 2.
+
+</Steps>
+
+<Steps>
+  ## Test
+  Run pnpm test
+
+  <Steps>
+    ### nextra:test
+
+    ### nextra-theme-docs:test
+
+    <Steps>
+      #### more
+
+      #### more more
+
+      #### more more more
+
+    </Steps>
+
+    ### nextra-theme-blog:test
+
+  </Steps>
+
+## Lint
+
+</Steps>
+
+## `<Tabs>`
+
+{/* prettier-ignore */}
+<Tabs items={['pnpm', 'npm', 'yarn']}>
+  <Tabs.Tab>**pnpm**: Fast, disk space efficient package manager.</Tabs.Tab>
+  <Tabs.Tab>**npm** is a package manager for the JavaScript programming language.</Tabs.Tab>
+  <Tabs.Tab>**Yarn** is a software packaging system.</Tabs.Tab>
+</Tabs>
+
+## `<FileTree>`
+
+<FileTree>
+  <FileTree.Folder name="pages" defaultOpen>
+    <FileTree.Folder name="fruits" defaultOpen>
+      <FileTree.File name="_meta.js" />
+      <FileTree.File name="apple.mdx" />
+      <FileTree.File name="banana.mdx" />
+    </FileTree.Folder>
+    <FileTree.File name="_meta.js" />
+    <FileTree.File name="about.mdx" />
+    <FileTree.File name="contact.mdx" />
+    <FileTree.File name="index.mdx" />
+  </FileTree.Folder>
+</FileTree>
+
+<FileTree>
+  <FileTree.Folder name="users-service" defaultOpen>
+    <FileTree.File name="schema.graphql" />
+  </FileTree.Folder>
+  <FileTree.Folder name="posts-service" defaultOpen>
+    <FileTree.File name="schema.graphql" />
+  </FileTree.Folder>
+</FileTree>
+
+## `<Cards>`
+
+<Cards num={2}>
+  <Cards.Card arrow title="Documentation theme" href="/docs/docs-theme/start">
+    <>![Documentation theme](https://nextra.site/assets/docs-theme.png)</>
+  </Cards.Card>
+  <Cards.Card arrow title="Blog theme" href="/docs/blog-theme/start">
+    <>![Blog theme](https://nextra.site/assets/blog-theme.png)</>
+  </Cards.Card>
+</Cards>
+
+<Cards>
+  <Cards.Card icon={<CopyIcon />} title="Callout" href="/foo" />
+  <Cards.Card icon={<GitHubIcon />} title="Tabs" href="/bar" />
+  <Cards.Card icon={<MenuIcon />} title="Steps" href="/baz" />
+</Cards>
+
+## `<details>` and `<summary>`
+
+<details>
+  <summary>Summary</summary>
+  Details
+  <details>
+    <summary>Summary 2</summary>
+    Details 2
+  </details>
+</details>
+
+## `<Bleed>`
+
+<Bleed>![Mountain](/img.jpeg)</Bleed>
+
+## GitHub Alert Syntax
+
+> [!NOTE]
+>
+> Useful information that users should know, even when skimming content.
+
+> [!TIP]
+>
+> Helpful advice for doing things better or more easily.
+
+> [!IMPORTANT]
+>
+> Key information users need to know to achieve their goal.
+
+> [!WARNING]
+>
+> Urgent info that needs immediate user attention to avoid problems.
+
+> [!CAUTION]
+>
+> Advises about risks or negative outcomes of certain actions.
+
+[^1]: With custom emoji
+
+[^2]: This is an info callout.

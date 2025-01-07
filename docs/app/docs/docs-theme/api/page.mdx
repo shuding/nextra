@@ -1,0 +1,28 @@
+# API
+
+## `useThemeConfig` hook
+
+The `useThemeConfig` hook returns values of your
+[theme configuration](/docs/docs-theme/theme-configuration) and is made to
+dynamically configure your project.
+
+```js
+import { useThemeConfig } from 'nextra-theme-docs'
+```
+
+## `useConfig` hook
+
+```js
+import { useConfig } from 'nextra-theme-docs'
+```
+
+The `useConfig` hook returns data from your current page context.
+
+## Return Values
+
+- `hideSidebar`: is sidebar hidden
+- `normalizePagesResult`: `ReturnType<typeof normalizePages>{:ts}`
+- `normalizePagesResult.activeMetadata`: parsed
+  [front matter](https://jekyllrb.com/docs/front-matter) or exported
+  [Metadata](https://nextjs.org/docs/app/building-your-application/optimizing/metadata)
+  from page
