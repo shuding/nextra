@@ -431,6 +431,12 @@
   Router, something may be broken, check
   https://github.com/shuding/nextra/tree/v4-v2/examples for the migration guide
 
+## 3.3.1
+
+### Patch Changes
+
+- bfa61d9: add `text-overflow: ellipsis` for `<Cards.Card>` component
+
 ## 3.3.0
 
 ### Minor Changes
@@ -1308,7 +1314,7 @@
   while importing
 
   ```js
-  import filterRouteLocale from "nextra/filter-route-locale";
+  import filterRouteLocale from 'nextra/filter-route-locale'
   ```
 
 - 4dd720ad: remove `font-weight: 500;` from styles of code blocks since it gives
@@ -1354,19 +1360,19 @@
   and `nextra-theme-docs`
 
   ```js
-  import { Card, Cards } from "nextra/components";
+  import { Card, Cards } from 'nextra/components'
   ```
 
   ```js
-  import { Tab, Tabs } from "nextra/components";
+  import { Tab, Tabs } from 'nextra/components'
   ```
 
   ```js
-  import { Steps } from "nextra/components";
+  import { Steps } from 'nextra/components'
   ```
 
   ```js
-  import { FileTree } from "nextra/components";
+  import { FileTree } from 'nextra/components'
   ```
 
 ### Patch Changes

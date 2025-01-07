@@ -40,9 +40,10 @@ const Card: FC<{
             ? 'x:dark:text-gray-300 x:dark:hover:text-gray-100'
             : 'x:dark:text-neutral-200 x:dark:hover:text-neutral-50'
         )}
+        title={title}
       >
         {icon}
-        {title}
+        <span className="_truncate">{title}</span>
       </span>
     </NextLink>
   )

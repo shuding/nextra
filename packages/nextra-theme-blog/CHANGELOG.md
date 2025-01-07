@@ -562,6 +562,14 @@
 - Updated dependencies [99f34d3]
   - nextra@4.0.0-app-router.0
 
+## 3.3.1
+
+### Patch Changes
+
+- bfa61d9: add `text-overflow: ellipsis` for `<Cards.Card>` component
+- Updated dependencies [bfa61d9]
+  - nextra@3.3.1
+
 ## 3.3.0
 
 ### Minor Changes
@@ -1511,19 +1519,19 @@
   and `nextra-theme-docs`
 
   ```js
-  import { Card, Cards } from "nextra/components";
+  import { Card, Cards } from 'nextra/components'
   ```
 
   ```js
-  import { Tab, Tabs } from "nextra/components";
+  import { Tab, Tabs } from 'nextra/components'
   ```
 
   ```js
-  import { Steps } from "nextra/components";
+  import { Steps } from 'nextra/components'
   ```
 
   ```js
-  import { FileTree } from "nextra/components";
+  import { FileTree } from 'nextra/components'
   ```
 
 ### Patch Changes

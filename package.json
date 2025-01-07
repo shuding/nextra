@@ -36,14 +36,15 @@
       "postcss": "8.4.49",
       "lightningcss": "1.28.2",
       "esbuild": "0.24.0",
-      "next": "15.1.2"
+      "vite": "6.0.7",
+      "next": "15.1.3"
     },
     "patchedDependencies": {
       "babel-plugin-react-compiler@0.0.0-experimental-22c6e49-20241219": "patches/babel-plugin-react-compiler@0.0.0-experimental-22c6e49-20241219.patch",
       "esbuild-plugin-svgr@3.0.0": "patches/esbuild-plugin-svgr.patch",
       "@changesets/assemble-release-plan@6.0.5": "patches/@changesets__assemble-release-plan.patch",
       "tsup@8.3.5": "patches/tsup@8.3.5.patch",
-      "next@15.1.2": "patches/next@13.5.6.patch",
+      "next@15.1.3": "patches/next@13.5.6.patch",
       "eslint-plugin-tailwindcss@3.17.3": "patches/eslint-plugin-tailwindcss.patch"
     }
   }
