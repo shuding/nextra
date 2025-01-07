@@ -79,11 +79,11 @@ export default {
       'next.js-link': {
         title: 'Next.js Docs',
         href: 'https://nextjs.org?utm_source=nextra.site&utm_medium=referral&utm_campaign=sidebar'
-      },
-      'migration-from-v3': {
-        title: 'Migration from Nextra v3',
-        href: 'https://the-guild.dev/blog/nextra-4?utm_source=nextra.site&utm_campaign=sidebar&utm_content=sidebar_link'
       }
+      // 'migration-from-v3': {
+      //   title: 'Migration from Nextra v3',
+      //   href: 'https://the-guild.dev/blog/nextra-4?utm_source=nextra.site&utm_campaign=sidebar&utm_content=sidebar_link'
+      // }
     }
   },
   versions: {
@@ -92,7 +92,7 @@ export default {
     items: {
       _3: {
         title: 'Nextra v3 Docs',
-        href: 'https://nextra-v2-pyibc76cq-shud.vercel.app'
+        href: 'https://nextra-v2-7hslbun8z-shud.vercel.app'
       },
       _2: {
         title: 'Nextra v2 Docs',
