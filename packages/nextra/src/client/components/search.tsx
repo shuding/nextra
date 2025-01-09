@@ -136,7 +136,7 @@ export const Search: FC<SearchProps> = ({
   const inputRef = useRef<HTMLInputElement>(null!)
 
   useEffect(() => {
-    function handleKeyDown(event: globalThis.KeyboardEvent) {
+    function handleKeyDown(event: KeyboardEvent) {
       const el = document.activeElement
       if (
         !el ||
@@ -148,7 +148,8 @@ export const Search: FC<SearchProps> = ({
       if (
         event.key === '/' ||
         (event.key === 'k' &&
-          (event.metaKey /* for Mac */ || /* for non-Mac */ event.ctrlKey))
+          !event.shiftKey &&
+          (navigator.userAgent.includes('Mac') ? event.metaKey : event.ctrlKey))
       ) {
         event.preventDefault()
         // prevent to scroll to top
