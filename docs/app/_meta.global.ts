@@ -63,7 +63,11 @@ export default {
         items: {
           start: '',
           'page-configuration': '',
-          'built-ins': ''
+          'built-ins': {
+            items: {
+              layout: ''
+            }
+          }
         }
       },
       'blog-theme': '',
