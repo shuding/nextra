@@ -52,7 +52,7 @@ importers:
         version: 6.0.1
       tsup:
         specifier: 8.3.5
-        version: 8.3.5(patch_hash=omll37iwfpv74y4pqujpifv454)(tsx@4.19.2)(typescript@5.7.2)
+        version: 8.3.5(patch_hash=omll37iwfpv74y4pqujpifv454)(tsx@4.19.2)(typescript@5.7.3)
       tsx:
         specifier: 4.19.2
         version: 4.19.2
@@ -60,8 +60,8 @@ importers:
         specifier: 2.3.3
         version: 2.3.3
       typescript:
-        specifier: 5.7.2
-        version: 5.7.2
+        specifier: 5.7.3
+        version: 5.7.3
 
   docs:
     dependencies:
@@ -92,7 +92,7 @@ importers:
     devDependencies:
       '@svgr/webpack':
         specifier: ^8.0.1
-        version: 8.1.0(typescript@5.7.2)
+        version: 8.1.0(typescript@5.7.3)
       '@tailwindcss/postcss':
         specifier: ^4.0.0-beta.8
         version: 4.0.0-beta.8
@@ -4789,20 +4789,6 @@ packages:
       '@svgr/babel-plugin-transform-svg-component': 8.0.0(@babel/core@7.26.0)
     dev: true
 
-  /@svgr/core@8.1.0(typescript@5.7.2):
-    resolution: {integrity: sha512-8QqtOQT5ACVlmsvKOJNEaWmRPmcojMOzCz4Hs2BGG/toAp/K38LcsMRyLp349glq5AzJbCEeimEoxaX6v/fLrA==}
-    engines: {node: '>=14'}
-    dependencies:
-      '@babel/core': 7.26.0
-      '@svgr/babel-preset': 8.1.0(@babel/core@7.26.0)
-      camelcase: 6.3.0
-      cosmiconfig: 8.3.6(typescript@5.7.2)
-      snake-case: 3.0.4
-    transitivePeerDependencies:
-      - supports-color
-      - typescript
-    dev: true
-
   /@svgr/core@8.1.0(typescript@5.7.3):
     resolution: {integrity: sha512-8QqtOQT5ACVlmsvKOJNEaWmRPmcojMOzCz4Hs2BGG/toAp/K38LcsMRyLp349glq5AzJbCEeimEoxaX6v/fLrA==}
     engines: {node: '>=14'}
@@ -4833,25 +4819,11 @@ packages:
     dependencies:
       '@babel/core': 7.26.0
       '@svgr/babel-preset': 8.1.0(@babel/core@7.26.0)
-      '@svgr/core': 8.1.0(typescript@5.7.2)
+      '@svgr/core': 8.1.0(typescript@5.7.3)
       '@svgr/hast-util-to-babel-ast': 8.0.0
       svg-parser: 2.0.4
     transitivePeerDependencies:
       - supports-color
-    dev: true
-
-  /@svgr/plugin-svgo@8.1.0(@svgr/core@8.1.0)(typescript@5.7.2):
-    resolution: {integrity: sha512-Ywtl837OGO9pTLIN/onoWLmDQ4zFUycI1g76vuKGEz6evR/ZTJlJuz3G/fIkb6OVBJ2g0o6CGJzaEjfmEo3AHA==}
-    engines: {node: '>=14'}
-    peerDependencies:
-      '@svgr/core': '*'
-    dependencies:
-      '@svgr/core': 8.1.0(typescript@5.7.2)
-      cosmiconfig: 8.3.6(typescript@5.7.2)
-      deepmerge: 4.3.1
-      svgo: 3.3.2
-    transitivePeerDependencies:
-      - typescript
     dev: true
 
   /@svgr/plugin-svgo@8.1.0(@svgr/core@8.1.0)(typescript@5.7.3):
@@ -4868,7 +4840,7 @@ packages:
       - typescript
     dev: true
 
-  /@svgr/webpack@8.1.0(typescript@5.7.2):
+  /@svgr/webpack@8.1.0(typescript@5.7.3):
     resolution: {integrity: sha512-LnhVjMWyMQV9ZmeEy26maJk+8HTIbd59cH4F2MJ439k9DqejRisfFNGAPvRYlKETuh9LrImlS8aKsBgKjMA8WA==}
     engines: {node: '>=14'}
     dependencies:
@@ -4877,9 +4849,9 @@ packages:
       '@babel/preset-env': 7.25.4(@babel/core@7.26.0)
       '@babel/preset-react': 7.24.7(@babel/core@7.26.0)
       '@babel/preset-typescript': 7.24.7(@babel/core@7.26.0)
-      '@svgr/core': 8.1.0(typescript@5.7.2)
+      '@svgr/core': 8.1.0(typescript@5.7.3)
       '@svgr/plugin-jsx': 8.1.0(@svgr/core@8.1.0)
-      '@svgr/plugin-svgo': 8.1.0(@svgr/core@8.1.0)(typescript@5.7.2)
+      '@svgr/plugin-svgo': 8.1.0(@svgr/core@8.1.0)(typescript@5.7.3)
     transitivePeerDependencies:
       - supports-color
       - typescript
@@ -6312,6 +6284,7 @@ packages:
 
   /color-name@1.1.4:
     resolution: {integrity: sha512-dOy+3AuW3a2wNbZHIuMZpTcgjGuLU/uBL/ubcZF9OXbDo8ff4O8yVp5Bf0efS8uEoYo5q4Fx7dY9OgQGXgAsQA==}
+    requiresBuild: true
 
   /color-string@1.9.1:
     resolution: {integrity: sha512-shrVawQFojnZv6xM40anx4CkoDP+fZsw/ZerEMsW/pyzsRbElpsL/DBVW7q3ExxwusdNXI3lXpuhEZkzs8p5Eg==}
@@ -6398,22 +6371,6 @@ packages:
     dependencies:
       layout-base: 2.0.1
     dev: false
-
-  /cosmiconfig@8.3.6(typescript@5.7.2):
-    resolution: {integrity: sha512-kcZ6+W5QzcJ3P1Mt+83OUv/oHFqZHIx8DuxG6eZ5RGMERoLqp4BuGjhHLYGK+Kf5XVkQvqBSmAy/nGWN3qDgEA==}
-    engines: {node: '>=14'}
-    peerDependencies:
-      typescript: '>=4.9.5'
-    peerDependenciesMeta:
-      typescript:
-        optional: true
-    dependencies:
-      import-fresh: 3.3.0
-      js-yaml: 4.1.0
-      parse-json: 5.2.0
-      path-type: 4.0.0
-      typescript: 5.7.2
-    dev: true
 
   /cosmiconfig@8.3.6(typescript@5.7.3):
     resolution: {integrity: sha512-kcZ6+W5QzcJ3P1Mt+83OUv/oHFqZHIx8DuxG6eZ5RGMERoLqp4BuGjhHLYGK+Kf5XVkQvqBSmAy/nGWN3qDgEA==}
@@ -11975,7 +11932,7 @@ packages:
     resolution: {integrity: sha512-oJFu94HQb+KVduSUQL7wnpmqnfmLsOA/nAh6b6EH0wCEoK0/mPeXU6c3wKDV83MkOuHPRHtSXKKU99IBazS/2w==}
     requiresBuild: true
 
-  /tsup@8.3.5(patch_hash=omll37iwfpv74y4pqujpifv454)(tsx@4.19.2)(typescript@5.7.2):
+  /tsup@8.3.5(patch_hash=omll37iwfpv74y4pqujpifv454)(tsx@4.19.2)(typescript@5.7.3):
     resolution: {integrity: sha512-Tunf6r6m6tnZsG9GYWndg0z8dEV7fD733VBFzFJ5Vcm1FtlXB8xBD/rtrBi2a3YKEV7hHtxiZtW5EAVADoe1pA==}
     engines: {node: '>=18'}
     hasBin: true
@@ -12010,7 +11967,7 @@ packages:
       tinyexec: 0.3.1
       tinyglobby: 0.2.9
       tree-kill: 1.2.2
-      typescript: 5.7.2
+      typescript: 5.7.3
     transitivePeerDependencies:
       - jiti
       - supports-color
@@ -12202,6 +12159,7 @@ packages:
     resolution: {integrity: sha512-i5t66RHxDvVN40HfDd1PsEThGNnlMCMT3jMUuoh9/0TaqWevNontacunWyN02LA9/fIbEWlcHZcgTKb9QoaLfg==}
     engines: {node: '>=14.17'}
     hasBin: true
+    dev: false
 
   /typescript@5.7.3:
     resolution: {integrity: sha512-84MVSjMEHP+FQRPy3pX9sTVV/INIex71s9TL2Gm5FG/WG1SqXeKyZ0k7/blY/4FdOzI12CBy1vGc4og/eus0fw==}
