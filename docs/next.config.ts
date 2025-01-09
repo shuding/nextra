@@ -31,6 +31,11 @@ const nextConfig = withNextra({
       source: '/docs/guide/advanced/:slug',
       destination: '/docs/advanced/:slug',
       permanent: true
+    },
+    {
+      source: '/docs/docs-theme/theme-configuration',
+      destination: '/docs/docs-theme/built-ins/layout',
+      permanent: true
     }
   ],
   webpack(config) {
