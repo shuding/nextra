@@ -10,7 +10,7 @@
     "strictNullChecks": true,
     "jsx": "react-jsx",
     "lib": ["esnext", "dom"],
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "types": ["vitest/globals"],
     "paths": {
       "unified": ["./node_modules/unified"]

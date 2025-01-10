@@ -10,6 +10,7 @@ import type { ComponentProps, FC } from 'react'
 import { createElement } from 'react'
 import type { MDXWrapper } from '../types.js'
 
+// @ts-expect-error -- ignore undefined
 const Wrapper = getMDXComponents().wrapper
 
 type WrapperProps = ComponentProps<MDXWrapper>
