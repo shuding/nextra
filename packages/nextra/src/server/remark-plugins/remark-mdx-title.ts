@@ -1,21 +1,21 @@
 import path from 'node:path'
 import type { Property } from 'estree'
-import type { MdxjsEsm } from 'hast-util-to-estree/lib/handlers/mdxjs-esm'
 import type { Root, RootContent } from 'mdast'
+import type { MdxjsEsmHast } from 'mdast-util-mdxjs-esm'
 import type { Plugin, Transformer } from 'unified'
 import { EXIT, visit } from 'unist-util-visit'
 import { pageTitleFromFilename } from '../utils.js'
 import { getFlattenedValue } from './remark-headings.js'
 
-export function getFrontMatterASTObject(node: MdxjsEsm): Property[] {
+export function getFrontMatterASTObject(node: MdxjsEsmHast): Property[] {
   const [n] = node.data!.estree!.body
   return (n as any).declaration.declarations[0].init.properties
 }
 
 export function isExportNode(
-  node: MdxjsEsm | RootContent,
+  node: MdxjsEsmHast | RootContent,
   varName: string
-): node is MdxjsEsm {
+): node is MdxjsEsmHast {
   if (node.type !== 'mdxjsEsm') return false
   const n = node.data!.estree!.body[0]!
 

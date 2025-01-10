@@ -1,6 +1,6 @@
 import { valueToEstree } from 'estree-util-value-to-estree'
-import type { MdxjsEsm } from 'hast-util-to-estree/lib/handlers/mdxjs-esm'
 import type { Root } from 'mdast'
+import type { MdxjsEsmHast } from 'mdast-util-mdxjs-esm'
 import type { Plugin, Transformer } from 'unified'
 import { parse as parseYaml } from 'yaml'
 import { createAstExportConst } from '../utils.js'
@@ -14,7 +14,7 @@ function createNode(data: Record<string, unknown>) {
         body: [createAstExportConst('metadata', valueToEstree(data))]
       }
     }
-  } as MdxjsEsm
+  } as MdxjsEsmHast
 }
 
 const transformer: Transformer<Root> = ast => {

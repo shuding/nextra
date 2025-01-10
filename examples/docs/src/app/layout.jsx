@@ -4,8 +4,6 @@ import { Banner, Head } from 'nextra/components'
 import { getPageMap } from 'nextra/page-map'
 import 'nextra-theme-docs/style.css'
 
-export const { viewport } = Head
-
 export const metadata = {
   metadataBase: new URL('https://nextra.site'),
   title: {

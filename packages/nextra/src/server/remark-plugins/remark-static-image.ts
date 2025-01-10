@@ -1,7 +1,7 @@
 import path from 'node:path'
 import type { ImportDeclaration } from 'estree'
-import type { MdxjsEsm } from 'hast-util-to-estree/lib/handlers/mdxjs-esm'
 import type { Definition, Image, ImageReference, Root } from 'mdast'
+import type { MdxjsEsmHast } from 'mdast-util-mdxjs-esm'
 import type { Plugin, Transformer } from 'unified'
 import { visit } from 'unist-util-visit'
 import { EXTERNAL_URL_RE } from '../constants.js'
@@ -126,7 +126,7 @@ const transformer: Transformer<Root> = ast => {
                 ]
               }
             }
-          }) as MdxjsEsm
+          }) as MdxjsEsmHast
       )
     )
   }
