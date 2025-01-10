@@ -13,13 +13,14 @@
     @apply x:opacity-100;
   }
 
-  :target > &:after {
-    @apply x:text-gray-400;
-    @apply x:dark:text-neutral-500;
+  :target > & {
+    /* https://github.com/tailwindlabs/tailwindcss/issues/15597#issuecomment-2582673546 */
+    @apply x:after:text-gray-400 x:dark:after:text-neutral-500;
   }
 
   &:after {
     @apply x:content-['#'] x:px-1;
-    @apply x:text-gray-300 x:dark:text-neutral-700;
   }
+  /* https://github.com/tailwindlabs/tailwindcss/issues/15597#issuecomment-2582673546 */
+  @apply x:after:text-gray-300 x:dark:after:text-neutral-700;
 }
