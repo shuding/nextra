@@ -1,7 +1,4 @@
 .subheading-anchor {
-  --default-color: var(--x-color-gray-300);
-  --linked-color: var(--x-color-gray-400);
-
   @apply x:ms-1;
 
   /* to avoid conflicts with docs heading which has class `target:_animate-[fade-in_1.5s]` */
@@ -16,20 +13,14 @@
     @apply x:opacity-100;
   }
 
-  :target > &:after {
-    /* @apply x:text-gray-400; */
-    /* @apply x:dark:text-neutral-500; */
-    color: var(--linked-color);
+  :target > & {
+    /* https://github.com/tailwindlabs/tailwindcss/issues/15597#issuecomment-2582673546 */
+    @apply x:after:text-gray-400 x:dark:after:text-neutral-500;
   }
 
   &:after {
     @apply x:content-['#'] x:px-1;
-    /* @apply x:text-gray-300 x:dark:text-neutral-700; */
-    color: var(--default-color);
   }
-}
-
-.dark .subheading-anchor {
-  --default-color: var(--x-color-neutral-500);
-  --linked-color: var(--x-color-neutral-700);
+  /* https://github.com/tailwindlabs/tailwindcss/issues/15597#issuecomment-2582673546 */
+  @apply x:after:text-gray-300 x:dark:after:text-neutral-700;
 }
