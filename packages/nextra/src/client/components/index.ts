@@ -16,5 +16,6 @@ export { Search } from './search.js'
 export { Select } from './select.js'
 export { Steps } from './steps.js'
 export * from '../hocs/index.js'
+// @ts-expect-error -- types available only with "moduleResolution": "bundler" in tsconfig
 export { Mermaid } from '@theguild/remark-mermaid/mermaid'
 export * from '../mdx-components/index.js'
