@@ -1,47 +1,48 @@
-import type { ProcessorOptions } from '@mdx-js/mdx'
-import type { GrayMatterFile } from 'gray-matter'
 import type { Heading as MDASTHeading } from 'mdast'
-import type { NextConfig } from 'next'
-import type { FC, ReactNode } from 'react'
-import type { Options as RehypePrettyCodeOptions } from 'rehype-pretty-code'
+import type { Metadata, NextConfig } from 'next'
+import type { FC, ReactElement, ReactNode } from 'react'
+import type { z } from 'zod'
 import type {
-  MARKDOWN_EXTENSIONS,
-  META_FILENAME,
-  NEXTRA_INTERNAL
-} from './constants'
-import type { PageMapCache } from './page-map'
+  mathJaxOptionsSchema,
+  metaSchema,
+  nextraConfigSchema
+} from './server/schemas.js'
 
-type MetaFilename = typeof META_FILENAME
-type MarkdownExtension = (typeof MARKDOWN_EXTENSIONS)[number]
-
-export interface LoaderOptions extends NextraConfig {
-  isMetaImport?: boolean
+export interface LoaderOptions extends z.infer<typeof nextraConfigSchema> {
   isPageImport?: boolean
   locales: string[]
-  defaultLocale: string
-  pageMapCache: PageMapCache
-  newNextLinkBehavior?: boolean
+  contentDir?: string
 }
 
+type TPageItem = { name: string; route: string; __pagePath: string }
+type TMetaItem = { __metaPath: string }
+
+interface TFolder<T = TItem> {
+  name: string
+  route: string
+  children: T[]
+}
+
+export type TItem = TPageItem | TMetaItem | TFolder
+
 export interface Folder<FileType = PageMapItem> {
-  kind: 'Folder'
   name: string
   route: string
   children: FileType[]
 }
 
+export type Import = {
+  importName: string
+  filePath: string
+}
+
 export type MetaJsonFile = {
-  kind: 'Meta'
-  locale?: string
   data: {
     [fileName: string]: Meta
   }
-  // The path to the _meta.json file. This is a private property needed by the loader.
-  __nextra_src?: string
 }
 
 export type DynamicFolder = {
-  type: 'folder'
   items: DynamicMeta
   title?: string
 }
@@ -50,29 +51,13 @@ export type DynamicMetaItem = Meta | DynamicFolder
 
 export type DynamicMeta = Record<string, DynamicMetaItem>
 
-export type DynamicMetaJsonFile = {
-  kind: 'Meta'
-  locale?: string
-  data: DynamicMeta
-}
-
-export type FrontMatter = GrayMatterFile<string>['data']
+export type FrontMatter = Record<string, any>
 export type Meta = string | Record<string, any>
 
 export type MdxFile<FrontMatterType = FrontMatter> = {
-  kind: 'MdxPage'
   name: string
   route: string
-  locale?: string
   frontMatter?: FrontMatterType
-}
-
-export type MetaJsonPath = `${string}/${MetaFilename}`
-export type MdxPath = `${string}.${MarkdownExtension}`
-
-export type FileMap = {
-  [jsonPath: MetaJsonPath]: MetaJsonFile
-  [mdxPath: MdxPath]: MdxFile
 }
 
 export type PageMapItem = Folder | MdxFile | MetaJsonFile
@@ -83,22 +68,15 @@ export type Page = (MdxFile | Folder<Page>) & {
 }
 
 export type Heading = {
-  depth: MDASTHeading['depth']
-  value: string
+  depth: Exclude<MDASTHeading['depth'], 1>
+  value: string | ReactElement
   id: string
 }
 
-export type PageOpts<FrontMatterType = FrontMatter> = {
-  filePath: string
-  route: string
-  frontMatter: FrontMatterType
-  pageMap: PageMapItem[]
+export type NextraMetadata = Omit<Metadata, 'title'> & {
   title: string
-  headings: Heading[]
-  hasJsxInH1?: boolean
+  filePath: string
   timestamp?: number
-  flexsearch?: Flexsearch
-  newNextLinkBehavior?: boolean
   readingTime?: ReadingTime
 }
 
@@ -109,106 +87,32 @@ export type ReadingTime = {
   words: number
 }
 
-type Theme = string
-export type Flexsearch =
-  | boolean
-  | {
-      /**
-       * Whether to index code blocks
-       * @default true
-       */
-      codeblocks: boolean
-      /**
-       * A filter function to filter out files from indexing, and return the
-       * index file key, or null to skip indexing.
-       * A site can have multiple indexes, by default they're separated by
-       * locales as multiple index files.
-       */
-      indexKey?: (
-        filepath: string,
-        route: string,
-        locale?: string
-      ) => null | string
-    }
-type Transform = (
-  result: string,
-  options: {
-    route: string
-  }
-) => string | Promise<string>
+export type NextraConfig = z.input<typeof nextraConfigSchema>
 
-export type NextraConfig = {
-  theme: Theme
-  themeConfig?: string
-  defaultShowCopyCode?: boolean
-  flexsearch?: Flexsearch
-  staticImage?: boolean
-  readingTime?: boolean
-  latex?: boolean
-  codeHighlight?: boolean
-  /**
-   * A function to modify the code of compiled MDX pages.
-   * @experimental
-   */
-  transform?: Transform
-  /**
-   * A function to modify the `pageOpts` prop passed to theme layouts.
-   * @experimental
-   */
-  transformPageOpts?: (pageOpts: PageOpts) => PageOpts
-  mdxOptions?: Pick<ProcessorOptions, 'rehypePlugins' | 'remarkPlugins'> & {
-    format?: 'detect' | 'mdx' | 'md'
-    rehypePrettyCodeOptions?: Partial<RehypePrettyCodeOptions>
-  }
-}
+export type MathJaxOptions = z.infer<typeof mathJaxOptionsSchema>
 
 export type Nextra = (
-  ...args: [NextraConfig] | [theme: Theme, themeConfig: string]
+  nextraConfig: NextraConfig
 ) => (nextConfig: NextConfig) => NextConfig
 
-const nextra: Nextra = () => () => ({})
-
-export default nextra
-
-export type ThemeConfig = any | null
-
-export type NextraThemeLayoutProps = {
-  pageOpts: PageOpts
-  pageProps: any
-  themeConfig: ThemeConfig
+export type MDXWrapper = FC<{
+  toc: Heading[]
   children: ReactNode
-}
+  metadata: NextraMetadata
+  bottomContent?: ReactNode
+}>
 
-export type NextraInternalGlobal = typeof globalThis & {
-  [NEXTRA_INTERNAL]: {
-    pageMap: PageMapItem[]
-    route: string
-    context: Record<
-      string,
-      {
-        Content: FC
-        pageOpts: PageOpts
-        themeConfig: ThemeConfig
-      }
-    >
-    refreshListeners: Record<string, (() => void)[]>
-    Layout: FC<any>
-    themeConfig?: ThemeConfig
-    flexsearch?: Flexsearch
-  }
-}
+export type MetaRecord = Record<string, z.infer<typeof metaSchema>>
 
-export type DynamicMetaDescriptor = {
-  metaFilePath: string
-  metaObjectKeyPath: string
-  metaParentKeyPath: string
-}
-
-export type StructurizedData = Record<string, string>
-
-export type SearchData = {
-  [route: string]: {
-    title: string
-    data: StructurizedData
-  }
+// Copied from https://github.com/CloudCannon/pagefind/blob/2a0aa90cfb78bb8551645ac9127a1cd49cf54add/pagefind_web_js/types/index.d.ts#L72-L82
+/** Options that can be passed to pagefind.search() */
+export type PagefindSearchOptions = {
+  /** If set, this call will load all assets but return before searching. Prefer using pagefind.preload() instead */
+  preload?: boolean
+  /** Add more verbose console logging for this search query */
+  verbose?: boolean
+  /** The set of filters to execute with this search. Input type is extremely flexible, see the filtering docs for details */
+  filters?: object
+  /** The set of sorts to use for this search, instead of relevancy */
+  sort?: object
 }

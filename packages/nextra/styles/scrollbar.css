@@ -1,27 +1,24 @@
 .nextra-scrollbar {
   scrollbar-width: thin; /* Firefox */
-  scrollbar-color: oklch(55.55% 0 0 / 40%) transparent; /* Firefox */
-
+  scrollbar-color: rgba(115, 115, 115, 0.4) transparent; /* Firefox */
   scrollbar-gutter: stable;
+
   &::-webkit-scrollbar {
-    @apply nx-w-3 nx-h-3;
-  }
-  &::-webkit-scrollbar-track {
-    @apply nx-bg-transparent;
-  }
-  &::-webkit-scrollbar-thumb {
-    @apply nx-rounded-[10px];
-  }
-  &:hover::-webkit-scrollbar-thumb {
-    border: 3px solid transparent;
-    background-color: var(--tw-shadow-color);
-    background-clip: content-box;
-    @apply nx-shadow-neutral-500/20 hover:nx-shadow-neutral-500/40;
+    @apply x:size-3;
   }
 
-  @media (max-width: 767px) {
-    .nextra-container & {
-      scrollbar-gutter: auto;
+  &::-webkit-scrollbar-track {
+    @apply x:bg-transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    @apply x:rounded-[10px];
+
+    &:hover {
+      border: 3px solid transparent;
+      background-color: var(--tw-shadow-color);
+      background-clip: content-box;
+      @apply x:shadow-neutral-500/20 x:hover:shadow-neutral-500/40;
     }
   }
 }
@@ -32,6 +29,6 @@
   -ms-overflow-style: none; /* IE and Edge */
 
   &::-webkit-scrollbar {
-    @apply nx-hidden; /* Chrome, Safari and Opera */
+    @apply x:hidden; /* Chrome, Safari and Opera */
   }
 }

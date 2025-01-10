@@ -1,17 +1,22 @@
 {
   "compilerOptions": {
-    "target": "es2016",
+    "target": "es2022",
     "module": "ESNext",
     "declaration": true,
     "noEmit": true,
     "esModuleInterop": true,
     "strict": true,
     "skipLibCheck": true,
-    "allowJs": true,
+    "strictNullChecks": true,
     "jsx": "react-jsx",
-    "lib": ["es2022", "dom"],
+    "lib": ["esnext", "dom"],
     "moduleResolution": "node",
-    "types": ["vitest/globals", "webpack-env"],
-    "resolveJsonModule": true
-  }
+    "types": ["vitest/globals"],
+    "paths": {
+      "unified": ["./node_modules/unified"]
+    },
+    "resolveJsonModule": true,
+    "noUncheckedIndexedAccess": true
+  },
+  "exclude": ["dist"]
 }

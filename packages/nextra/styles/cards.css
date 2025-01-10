@@ -5,28 +5,20 @@
   );
 }
 
-.nextra-card img {
-  user-select: none;
-}
+.nextra-card {
+  img {
+    @apply x:select-none;
+  }
 
-.nextra-card:hover svg {
-  color: currentColor;
-}
+  svg {
+    @apply x:w-6 x:h-auto x:transition x:text-black/30 x:dark:text-white/40 x:shrink-0;
+  }
 
-.nextra-card svg {
-  width: 1.5rem;
-  color: #00000033;
-  transition: color 0.3s ease;
-}
+  &:hover svg {
+    @apply x:text-current!;
+  }
 
-.nextra-card p {
-  margin-top: 0.5rem;
-}
-
-.dark .nextra-card svg {
-  color: #ffffff66;
-}
-
-.dark .nextra-card:hover svg {
-  color: currentColor;
+  p {
+    @apply x:mt-2;
+  }
 }

@@ -1,0 +1,14 @@
+{
+  "user": "B2o5T",
+  "repo": "graphql-eslint",
+  "branch": "34b722a2a520599ce06a4ddcccc9623b76434089",
+  "docsPath": "website/src/pages/docs/",
+  "filePaths": [
+    "configs.mdx",
+    "custom-rules.mdx",
+    "getting-started.mdx",
+    "getting-started/parser-options.mdx",
+    "getting-started/parser.mdx",
+    "index.mdx"
+  ]
+}

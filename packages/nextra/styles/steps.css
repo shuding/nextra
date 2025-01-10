@@ -1,11 +1,20 @@
-.nextra-steps h3 {
-  counter-increment: step;
-
-  &:before {
-    @apply nx-absolute nx-w-[33px] nx-h-[33px];
-    @apply nx-border-4 nx-border-white nx-bg-gray-100 dark:nx-border-dark dark:nx-bg-neutral-800;
-    @apply nx-rounded-full nx-text-neutral-400 nx-text-base nx-font-normal nx-text-center -nx-indent-px;
-    @apply nx-mt-[3px] nx-ml-[-41px];
-    content: counter(step);
+.nextra-steps {
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    counter-increment: var(--counter-id);
+    /* Resets from nextra-theme-docs */
+    @apply x:border-0 x:pb-0 x:font-semibold x:tracking-tight x:mt-8 x:text-2xl;
+    /* https://github.com/tailwindlabs/tailwindcss/issues/15597#issuecomment-2582673546 */
+    @apply x:before:bg-gray-100 x:dark:before:bg-neutral-800;
+    &:before {
+      @apply x:absolute x:size-[33px];
+      @apply x:border-4 x:border-nextra-bg;
+      @apply x:rounded-full x:text-neutral-400 x:text-base x:font-normal x:text-center x:-indent-px;
+      @apply x:mt-[3px] x:ms-[-41px];
+      content: counter(var(--counter-id));
+    }
   }
 }

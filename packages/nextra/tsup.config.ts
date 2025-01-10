@@ -1,94 +1,66 @@
 import fs from 'node:fs/promises'
 import path from 'node:path'
-import fg from 'fast-glob'
-import slash from 'slash'
-import type { Options } from 'tsup'
+import svgr from 'esbuild-plugin-svgr'
+import { reactCompilerPlugin } from 'esbuild-react-compiler-plugin'
 import { defineConfig } from 'tsup'
+import { defaultEntry } from './default-entry.js'
+import packageJson from './package.json'
+import { CWD, IS_PRODUCTION } from './src/server/constants.js'
 
-const CLIENT_ENTRY = [
-  'src/{use-internals,setup-page,normalize-pages,mdx}.ts',
-  'src/{ssg,layout}.tsx',
-  'src/{components,hooks,icons}/*.{ts,tsx}'
-]
+const SEP = path.sep === '/' ? '/' : '\\\\'
 
-const entries = fg.sync(CLIENT_ENTRY, { absolute: true })
-const entriesSet = new Set(entries)
-
-const sharedConfig = {
-  // import.meta is available only from es2020
-  target: 'es2020',
+export default defineConfig({
+  name: packageJson.name,
+  entry: [...defaultEntry, '!src/icon.ts', 'src/**/*.svg'],
   format: 'esm',
   dts: true,
-  splitting: false,
-  external: ['shiki', './__temp__', 'webpack'],
+  splitting: IS_PRODUCTION,
+  bundle: false,
+  external: ['shiki', 'webpack'],
+  async onSuccess() {
+    // Fixes hydration errors in client apps due "type": "module" in root package.json
+    const clientPackageJSON = path.join(CWD, 'dist', 'client', 'package.json')
+    await fs.writeFile(clientPackageJSON, '{"sideEffects":false}')
+  },
   esbuildPlugins: [
-    // https://github.com/evanw/esbuild/issues/622#issuecomment-769462611
+    svgr({
+      exportType: 'named',
+      typescript: true,
+      svgoConfig: {
+        plugins: ['removeXMLNS']
+      },
+      plugins: ['@svgr/plugin-svgo']
+    }),
+    reactCompilerPlugin({
+      filter: new RegExp(
+        String.raw`/nextra/src/client/.+$`.replaceAll('/', SEP)
+      )
+    })
+  ],
+  plugins: [
     {
-      name: 'add-mjs',
-      setup(build) {
-        build.onResolve({ filter: /.*/ }, async args => {
-          if (
-            args.importer &&
-            args.path.startsWith('.') &&
-            !args.path.endsWith('.json')
-          ) {
-            let isDir: boolean
-            const importPath = slash(path.join(args.resolveDir, args.path))
-            try {
-              isDir = (await fs.stat(importPath)).isDirectory()
-            } catch {
-              isDir = false
-            }
-
-            const isClientImporter = entriesSet.has(slash(args.importer))
-
-            if (isClientImporter) {
-              const isClientImport = entries.some(entry =>
-                entry.startsWith(importPath)
-              )
-              if (isClientImport) {
-                return { path: args.path, external: true }
-              }
-            }
-
-            if (isDir) {
-              // it's a directory
-              return { path: args.path + '/index.mjs', external: true }
-            }
-            return { path: args.path + '.mjs', external: true }
-          }
-        })
+      // Strip `node:` prefix from imports
+      // Next.js only polyfills `path` and not `node:path` for browser
+      name: 'strip-node-colon',
+      renderChunk(code) {
+        // (?<= from ")
+        // Positive lookbehind asserts that the pattern we're trying to match is preceded by
+        // ` from "`, but does not include ` from "` in the actual match.
+        //
+        // (?=";)
+        // Positive lookahead asserts that the pattern is followed by `";`, but does not include
+        // `";` in the match.
+        const replaced = code.replaceAll(/(?<= from ")node:(.+)(?=";)/g, '$1')
+        return { code: replaced }
+      }
+    },
+    {
+      // Strip `.svg` suffix from imports
+      name: 'strip-dot-svg',
+      renderChunk(code) {
+        const replaced = code.replaceAll(/(?<= from ")(.+)\.svg(?=";)/g, '$1')
+        return { code: replaced }
       }
     }
   ]
-} satisfies Options
-
-export default defineConfig([
-  {
-    name: 'nextra',
-    entry: ['src/index.js', 'src/__temp__.js', 'src/catch-all.ts'],
-    format: 'cjs',
-    dts: false
-  },
-  {
-    name: 'nextra-esm',
-    entry: [
-      'src/**/*.ts',
-      '!src/**/*.d.ts',
-      '!src/catch-all.ts',
-      ...CLIENT_ENTRY.map(filePath => `!${filePath}`)
-    ],
-    ...sharedConfig
-  },
-  {
-    name: 'nextra-client',
-    entry: CLIENT_ENTRY,
-    outExtension: () => ({ js: '.js' }),
-    ...sharedConfig
-  },
-  {
-    entry: ['src/types.ts'],
-    name: 'nextra-types',
-    dts: { only: true }
-  }
-])
+})

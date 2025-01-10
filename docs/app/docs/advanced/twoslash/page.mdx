@@ -1,0 +1,74 @@
+# Twoslash Support
+
+Twoslash provides an inline type hove inside the code block.
+
+## Basic usage
+
+You can enable twoslash to your code blocks by adding a `twoslash` metadata:
+
+{/* prettier-ignore */}
+````md copy=false filename="Markdown"
+```ts twoslash
+// @errors: 2540
+interface Todo {
+  title: string
+}
+
+const todo: Readonly<Todo> = {
+  title: 'Delete inactive users'.toUpperCase()
+  //  ^?
+}
+
+todo.title = 'Hello'
+
+Number.parseInt('123', 10)
+//      ^|
+               // Just comments, so Popup will be
+               // not behind the viewport of `<code>`
+               // element due his `position: absolute` style
+               //
+```
+````
+
+Renders:
+
+{/* prettier-ignore */}
+```ts twoslash
+// @errors: 2540
+interface Todo {
+  title: string
+}
+
+const todo: Readonly<Todo> = {
+  title: 'Delete inactive users'.toUpperCase()
+  //  ^?
+}
+
+todo.title = 'Hello'
+
+Number.parseInt('123', 10)
+//      ^|
+
+
+
+
+```
+
+## Custom log message
+
+You can add log message to your code by adding:
+
+- `@log: <message>` Custom log message
+- `@error: <message>` Custom error message
+- `@warn: <message>` Custom warn message
+- `@annotate: <message>` Custom annotate message
+
+```ts twoslash
+// @log: Custom log message
+const a = 1
+// @error: Custom error message
+const b = 1
+// @warn: Custom warning message
+const c = 1
+// @annotate: Custom annotation message
+```

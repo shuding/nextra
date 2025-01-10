@@ -1,17 +1,26 @@
 .subheading-anchor {
-  @apply nx-opacity-0 nx-transition-opacity ltr:nx-ml-1 rtl:nx-mr-1;
+  @apply x:ms-1;
 
-  :hover > &,
+  /* to avoid conflicts with docs heading which has class `target:_animate-[fade-in_1.5s]` */
+  :not(:target) > & {
+    @apply x:opacity-0 x:transition;
+  }
+
+  &,
+  :target > &,
+  &:hover,
   &:focus {
-    @apply nx-opacity-100;
+    @apply x:opacity-100;
+  }
+
+  :target > & {
+    /* https://github.com/tailwindlabs/tailwindcss/issues/15597#issuecomment-2582673546 */
+    @apply x:after:text-gray-400 x:dark:after:text-neutral-500;
   }
 
   &:after {
-    @apply nx-content-['#'] nx-px-1;
-    @apply nx-text-gray-300 dark:nx-text-neutral-700;
-    span:target + & {
-      @apply nx-text-gray-400;
-      @apply dark:nx-text-neutral-500;
-    }
+    @apply x:content-['#'] x:px-1;
   }
+  /* https://github.com/tailwindlabs/tailwindcss/issues/15597#issuecomment-2582673546 */
+  @apply x:after:text-gray-300 x:dark:after:text-neutral-700;
 }

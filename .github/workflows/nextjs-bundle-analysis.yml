@@ -3,7 +3,7 @@ name: Next.js Bundle Analysis
 on:
   pull_request:
   push:
-    branches: [main, v3, v4-v2]
+    branches: [main, v4-v2]
   workflow_dispatch:
 
 permissions:
@@ -24,14 +24,24 @@ jobs:
         with:
           access_token: ${{ github.token }}
 
-      - uses: actions/checkout@v4
+      - name: Check out code
+        uses: actions/checkout@v4
 
-      - uses: pnpm/action-setup@v4
+      - name: Cache turbo build setup
+        uses: actions/cache@v4
+        with:
+          path: .turbo
+          key: ${{ runner.os }}-turbo-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-turbo-
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
 
       - name: Install Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version-file: .node-version
           cache: pnpm
 
       - name: Install Dependencies
@@ -66,7 +76,7 @@ jobs:
           path: ${{ matrix.package }}/.next/analyze/__bundle_analysis.json
 
       - name: Download Base Branch Bundle Stats
-        uses: dawidd6/action-download-artifact@v3
+        uses: dawidd6/action-download-artifact@v7
         if: success() && github.event.number
         with:
           name: bundle-${{ matrix.package == 'docs' && 'docs' || 'swr-site' }}

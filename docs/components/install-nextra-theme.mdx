@@ -1,0 +1,60 @@
+Add the following scripts to your `package.json`:
+
+```json filename="package.json"
+"scripts": {
+  "dev": "next",
+  "build": "next build",
+  "start": "next start"
+},
+```
+
+> [!TIP]
+>
+> You can enable Turbopack in development by appending the `--turbopack` flag to
+> the `dev` command:
+>
+> ```diff filename="package.json"
+> - "dev": "next",
+> + "dev": "next --turbopack",
+> ```
+
+You can start the server in development mode with the following command
+according to your package manager:
+
+```sh npm2yarn
+npm run dev
+```
+
+or in production mode:
+
+```sh npm2yarn
+npm run build
+npm run start
+```
+
+> [!NOTE]
+>
+> If you're not familiar with Next.js, note that development mode is
+> significantly slower since Next.js compiles every page you navigate to.
+
+### Add Next.js Config
+
+Create a `next.config.mjs` file in your project's root directory with the
+following content:
+
+```js filename="next.config.mjs"
+import nextra from 'nextra'
+
+const withNextra = nextra({
+  // ... Other Nextra config options
+})
+
+// You can include other Next.js configuration options here, in addition to Nextra settings:
+export default withNextra({
+  // ... Other Next.js config options
+})
+```
+
+With this configuration, Nextra will handle Markdown files in your Next.js
+project. For more Nextra configuration options, check out the
+[Guide](/docs/guide).

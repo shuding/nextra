@@ -1,133 +1,134 @@
+'use client'
+
 import cn from 'clsx'
 import type { Heading } from 'nextra'
-import type { ReactElement } from 'react'
-import { useEffect, useMemo, useRef } from 'react'
+import { Anchor } from 'nextra/components'
+import type { FC } from 'react'
+import { useEffect, useRef } from 'react'
 import scrollIntoView from 'scroll-into-view-if-needed'
-import { useActiveAnchor, useConfig } from '../contexts'
-import { renderComponent } from '../utils'
-import { Anchor } from './anchor'
+import { useActiveAnchor, useThemeConfig } from '../stores'
+import { getGitIssueUrl, gitUrlParse } from '../utils'
 import { BackToTop } from './back-to-top'
 
-export type TOCProps = {
-  headings: Heading[]
+type TOCProps = {
+  toc: Heading[]
   filePath: string
+  pageTitle: string
 }
 
 const linkClassName = cn(
-  'nx-text-xs nx-font-medium nx-text-gray-500 hover:nx-text-gray-900 dark:nx-text-gray-400 dark:hover:nx-text-gray-100',
-  'contrast-more:nx-text-gray-800 contrast-more:dark:nx-text-gray-50'
+  'x:text-xs x:font-medium',
+  'x:text-gray-600 x:dark:text-gray-400',
+  'x:hover:text-gray-800 x:dark:hover:text-gray-200',
+  'x:contrast-more:text-gray-700 x:contrast-more:dark:text-gray-100'
 )
 
-export function TOC({ headings, filePath }: TOCProps): ReactElement {
-  const activeAnchor = useActiveAnchor()
-  const config = useConfig()
-  const tocRef = useRef<HTMLDivElement>(null)
+export const TOC: FC<TOCProps> = ({ toc, filePath, pageTitle }) => {
+  const activeSlug = useActiveAnchor()
+  const tocRef = useRef<HTMLUListElement>(null!)
+  const themeConfig = useThemeConfig()
 
-  const items = useMemo(
-    () => headings.filter(heading => heading.depth > 1),
-    [headings]
-  )
+  const hasMetaInfo =
+    themeConfig.feedback.content ||
+    themeConfig.editLink ||
+    themeConfig.toc.extraContent ||
+    themeConfig.toc.backToTop
 
-  const hasHeadings = items.length > 0
-  const hasMetaInfo = Boolean(
-    config.feedback.content ||
-      config.editLink.component ||
-      config.toc.extraContent
-  )
-
-  const activeSlug = Object.entries(activeAnchor).find(
-    ([, { isActive }]) => isActive
-  )?.[0]
+  const activeIndex = toc.findIndex(({ id }) => id === activeSlug)
 
   useEffect(() => {
     if (!activeSlug) return
-    const anchor = tocRef.current?.querySelector(
-      `li > a[href="#${activeSlug}"]`
-    )
+    const anchor = tocRef.current.querySelector(`a[href="#${activeSlug}"]`)
+    if (!anchor) return
 
-    if (anchor) {
-      scrollIntoView(anchor, {
-        behavior: 'smooth',
-        block: 'center',
-        inline: 'center',
-        scrollMode: 'always',
-        boundary: tocRef.current
-      })
-    }
+    scrollIntoView(anchor, {
+      behavior: 'smooth',
+      block: 'center',
+      inline: 'center',
+      scrollMode: 'if-needed',
+      boundary: tocRef.current
+    })
   }, [activeSlug])
 
   return (
     <div
-      ref={tocRef}
       className={cn(
-        'nextra-scrollbar nx-sticky nx-top-16 nx-overflow-y-auto nx-pr-4 nx-pt-6 nx-text-sm [hyphens:auto]',
-        'nx-max-h-[calc(100vh-var(--nextra-navbar-height)-env(safe-area-inset-bottom))] ltr:-nx-mr-4 rtl:-nx-ml-4'
+        'x:grid x:grid-rows-[min-content_1fr_min-content]', // 1fr: toc headings, min-content: title/footer
+        'x:sticky x:top-(--nextra-navbar-height) x:text-sm',
+        'x:max-h-[calc(100vh-var(--nextra-navbar-height))]'
       )}
     >
-      {hasHeadings && (
-        <>
-          <p className="nx-mb-4 nx-font-semibold nx-tracking-tight">
-            {renderComponent(config.toc.title)}
-          </p>
-          <ul>
-            {items.map(({ id, value, depth }) => (
-              <li className="nx-my-2 nx-scroll-my-6 nx-scroll-py-6" key={id}>
-                <a
-                  href={`#${id}`}
-                  className={cn(
-                    {
-                      2: 'nx-font-semibold',
-                      3: 'ltr:nx-pl-4 rtl:nx-pr-4',
-                      4: 'ltr:nx-pl-8 rtl:nx-pr-8',
-                      5: 'ltr:nx-pl-12 rtl:nx-pr-12',
-                      6: 'ltr:nx-pl-16 rtl:nx-pr-16'
-                    }[depth as Exclude<typeof depth, 1>],
-                    'nx-inline-block',
-                    activeAnchor[id]?.isActive
-                      ? 'nx-text-primary-600 nx-subpixel-antialiased contrast-more:!nx-text-primary-600'
-                      : 'nx-text-gray-500 hover:nx-text-gray-900 dark:nx-text-gray-400 dark:hover:nx-text-gray-300',
-                    'contrast-more:nx-text-gray-900 contrast-more:nx-underline contrast-more:dark:nx-text-gray-50 nx-w-full nx-break-words'
-                  )}
-                >
-                  {config.toc.headingComponent?.({
-                    id,
-                    children: value
-                  }) ?? value}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </>
-      )}
+      <p className="x:pt-6 x:px-4 x:font-semibold x:tracking-tight">
+        {themeConfig.toc.title}
+      </p>
+      <ul
+        ref={tocRef}
+        className={cn(
+          'x:p-4 nextra-scrollbar x:overscroll-y-contain x:overflow-y-auto x:hyphens-auto',
+          'nextra-mask' // for title/footer shadow
+        )}
+      >
+        {toc.map(({ id, value, depth }) => (
+          <li className="x:my-2 x:scroll-my-6 x:scroll-py-6" key={id}>
+            <a
+              href={`#${id}`}
+              className={cn(
+                'x:focus-visible:nextra-focus',
+                {
+                  2: 'x:font-semibold',
+                  3: 'x:ms-3',
+                  4: 'x:ms-6',
+                  5: 'x:ms-9',
+                  6: 'x:ms-12'
+                }[depth],
+                'x:block x:transition-colors x:subpixel-antialiased',
+                id === activeSlug
+                  ? 'x:text-primary-600 x:contrast-more:text-primary-600!'
+                  : 'x:text-gray-500 x:hover:text-gray-900 x:dark:text-gray-400 x:dark:hover:text-gray-300',
+                'x:contrast-more:text-gray-900 x:contrast-more:underline x:contrast-more:dark:text-gray-50 x:break-words'
+              )}
+            >
+              {value}
+            </a>
+          </li>
+        ))}
+      </ul>
 
       {hasMetaInfo && (
-        <div
-          className={cn(
-            hasHeadings &&
-              'nx-mt-8 nx-border-t nx-bg-white nx-pt-8 nx-shadow-[0_-12px_16px_white] dark:nx-bg-dark dark:nx-shadow-[0_-12px_16px_#111]',
-            'nx-sticky nx-bottom-0 nx-flex nx-flex-col nx-items-start nx-gap-2 nx-pb-8 dark:nx-border-neutral-800',
-            'contrast-more:nx-border-t contrast-more:nx-border-neutral-400 contrast-more:nx-shadow-none contrast-more:dark:nx-border-neutral-400'
-          )}
-        >
-          {config.feedback.content ? (
+        <div className="x:border-t nextra-border x:grid x:gap-2 x:py-4 x:mx-4">
+          {themeConfig.feedback.content && (
             <Anchor
               className={linkClassName}
-              href={config.feedback.useLink()}
-              newWindow
+              href={getGitIssueUrl({
+                labels: themeConfig.feedback.labels,
+                repository: themeConfig.docsRepositoryBase,
+                title: `Feedback for “${pageTitle}”`
+              })}
             >
-              {renderComponent(config.feedback.content)}
+              {themeConfig.feedback.content}
             </Anchor>
-          ) : null}
+          )}
 
-          {renderComponent(config.editLink.component, {
-            filePath,
-            className: linkClassName,
-            children: renderComponent(config.editLink.text)
-          })}
+          {filePath && themeConfig.editLink && (
+            <Anchor
+              className={linkClassName}
+              href={
+                filePath.startsWith('http')
+                  ? filePath
+                  : `${gitUrlParse(themeConfig.docsRepositoryBase).href}/${filePath}`
+              }
+            >
+              {themeConfig.editLink}
+            </Anchor>
+          )}
 
-          {renderComponent(config.toc.extraContent)}
+          {themeConfig.toc.extraContent}
 
-          {config.toc.backToTop && <BackToTop className={linkClassName} />}
+          {themeConfig.toc.backToTop && (
+            <BackToTop className={linkClassName} hidden={activeIndex < 2}>
+              {themeConfig.toc.backToTop}
+            </BackToTop>
+          )}
         </div>
       )}
     </div>

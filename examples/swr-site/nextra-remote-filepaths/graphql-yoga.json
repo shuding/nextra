@@ -1,0 +1,31 @@
+{
+  "user": "dotansimha",
+  "repo": "graphql-yoga",
+  "branch": "291daaaf3921b2ab875d988b7a7880ee277f247e",
+  "docsPath": "website/src/pages/v2/",
+  "filePaths": [
+    "features/apollo-federation.mdx",
+    "features/context.mdx",
+    "features/cors.mdx",
+    "features/envelop-plugins.mdx",
+    "features/error-masking.mdx",
+    "features/file-uploads.mdx",
+    "features/graphiql.mdx",
+    "features/subscriptions.mdx",
+    "features/testing.mdx",
+    "index.mdx",
+    "integrations/integration-with-aws-lambda.mdx",
+    "integrations/integration-with-cloudflare-workers.mdx",
+    "integrations/integration-with-deno.mdx",
+    "integrations/integration-with-express.mdx",
+    "integrations/integration-with-fastify.mdx",
+    "integrations/integration-with-koa.mdx",
+    "integrations/integration-with-nestjs.mdx",
+    "integrations/integration-with-nextjs.mdx",
+    "integrations/integration-with-sveltekit.mdx",
+    "integrations/z-other-environments.mdx",
+    "migration/migration-from-apollo-server.mdx",
+    "migration/migration-from-express-graphql.mdx",
+    "migration/migration-from-yoga-v1.mdx"
+  ]
+}
