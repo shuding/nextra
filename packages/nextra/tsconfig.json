@@ -1,20 +1,22 @@
 {
   "compilerOptions": {
-    "target": "es2018",
+    "target": "es2022",
     "module": "ESNext",
     "declaration": true,
     "noEmit": true,
     "esModuleInterop": true,
     "strict": true,
     "skipLibCheck": true,
+    "strictNullChecks": true,
     "jsx": "react-jsx",
-    "lib": ["es2023", "dom"],
+    "lib": ["esnext", "dom"],
     "moduleResolution": "node",
     "types": ["vitest/globals"],
-    "allowImportingTsExtensions": /* for tests */ true,
     "paths": {
       "unified": ["./node_modules/unified"]
-    }
+    },
+    "resolveJsonModule": true,
+    "noUncheckedIndexedAccess": true
   },
   "exclude": ["dist"]
 }

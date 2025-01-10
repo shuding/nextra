@@ -1,21 +1,11 @@
-import path from 'node:path'
 import nextra from 'nextra'
 
 const withNextra = nextra({
-  theme: 'nextra-theme-docs',
-  themeConfig: './theme.config.tsx',
   latex: true,
-  search: {
-    codeblocks: false
-  },
   defaultShowCopyCode: true
 })
 
-const sep = path.sep === '/' ? '/' : '\\\\'
-
-const ALLOWED_SVG_REGEX = new RegExp(`components${sep}icons${sep}.+\\.svg$`)
-
-export default withNextra({
+const nextConfig = withNextra({
   reactStrictMode: true,
   eslint: {
     // ESLint behaves weirdly in this monorepo.
@@ -24,33 +14,58 @@ export default withNextra({
   redirects: async () => [
     {
       source: '/docs/guide/:slug(typescript|latex|tailwind-css|mermaid)',
-      destination: '/docs/guide/advanced/:slug',
+      destination: '/docs/advanced/:slug',
       permanent: true
     },
     {
-      source: '/docs/docs-theme/built-ins/:slug(callout|steps|tabs)',
-      destination: '/docs/guide/built-ins/:slug',
+      source: '/docs/docs-theme/built-ins/:slug(callout|steps|tabs|bleed)',
+      destination: '/docs/built-ins/:slug',
       permanent: true
     },
     {
       source: '/docs/docs-theme/api/use-config',
       destination: '/docs/docs-theme/api',
       permanent: true
+    },
+    {
+      source: '/docs/guide/advanced/:slug',
+      destination: '/docs/advanced/:slug',
+      permanent: true
+    },
+    {
+      source: '/docs/docs-theme/theme-configuration',
+      destination: '/docs/docs-theme/built-ins/layout',
+      permanent: true
     }
   ],
   webpack(config) {
-    const fileLoaderRule = config.module.rules.find(rule =>
-      rule.test?.test?.('.svg')
+    // rule.exclude doesn't work starting from Next.js 15
+    const { test: _test, ...imageLoaderOptions } = config.module.rules.find(
+      rule => rule.test?.test?.('.svg')
     )
-    fileLoaderRule.exclude = ALLOWED_SVG_REGEX
-
     config.module.rules.push({
-      test: ALLOWED_SVG_REGEX,
-      use: ['@svgr/webpack']
+      test: /\.svg$/,
+      oneOf: [
+        {
+          resourceQuery: /svgr/,
+          use: ['@svgr/webpack']
+        },
+        imageLoaderOptions
+      ]
     })
     return config
   },
   experimental: {
-    optimizePackageImports: ['@components/icons', 'framer-motion']
+    turbo: {
+      rules: {
+        './components/icons/*.svg': {
+          loaders: ['@svgr/webpack'],
+          as: '*.js'
+        }
+      }
+    },
+    optimizePackageImports: ['@components/icons']
   }
 })
+
+export default nextConfig

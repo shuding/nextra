@@ -1,25 +1,39 @@
 import type { Heading as MDASTHeading } from 'mdast'
-import type { NextConfig } from 'next'
-import type { FC, ReactNode } from 'react'
+import type { Metadata, NextConfig } from 'next'
+import type { FC, ReactElement, ReactNode } from 'react'
 import type { z } from 'zod'
-import type { NEXTRA_INTERNAL } from './constants.js'
 import type {
   mathJaxOptionsSchema,
-  nextraConfigSchema,
-  searchSchema
-} from './server/schemas'
+  metaSchema,
+  nextraConfigSchema
+} from './server/schemas.js'
 
-export interface LoaderOptions extends NextraConfig {
+export interface LoaderOptions extends z.infer<typeof nextraConfigSchema> {
   isPageImport?: boolean
-  isPageMapImport?: boolean
-  isMetaFile?: boolean
   locales: string[]
+  contentDir?: string
 }
+
+type TPageItem = { name: string; route: string; __pagePath: string }
+type TMetaItem = { __metaPath: string }
+
+interface TFolder<T = TItem> {
+  name: string
+  route: string
+  children: T[]
+}
+
+export type TItem = TPageItem | TMetaItem | TFolder
 
 export interface Folder<FileType = PageMapItem> {
   name: string
   route: string
   children: FileType[]
+}
+
+export type Import = {
+  importName: string
+  filePath: string
 }
 
 export type MetaJsonFile = {
@@ -29,7 +43,6 @@ export type MetaJsonFile = {
 }
 
 export type DynamicFolder = {
-  type: 'folder'
   items: DynamicMeta
   title?: string
 }
@@ -37,10 +50,6 @@ export type DynamicFolder = {
 export type DynamicMetaItem = Meta | DynamicFolder
 
 export type DynamicMeta = Record<string, DynamicMetaItem>
-
-export type DynamicMetaJsonFile = {
-  data: DynamicMeta
-}
 
 export type FrontMatter = Record<string, any>
 export type Meta = string | Record<string, any>
@@ -60,16 +69,13 @@ export type Page = (MdxFile | Folder<Page>) & {
 
 export type Heading = {
   depth: Exclude<MDASTHeading['depth'], 1>
-  value: string
+  value: string | ReactElement
   id: string
 }
 
-export type PageOpts<FrontMatterType = FrontMatter> = {
-  filePath: string
-  frontMatter: FrontMatterType
-  pageMap: PageMapItem[]
+export type NextraMetadata = Omit<Metadata, 'title'> & {
   title: string
-  hasJsxInH1?: boolean
+  filePath: string
   timestamp?: number
   readingTime?: ReadingTime
 }
@@ -81,9 +87,7 @@ export type ReadingTime = {
   words: number
 }
 
-export type Search = z.infer<typeof searchSchema>
-
-export type NextraConfig = z.infer<typeof nextraConfigSchema>
+export type NextraConfig = z.input<typeof nextraConfigSchema>
 
 export type MathJaxOptions = z.infer<typeof mathJaxOptionsSchema>
 
@@ -91,49 +95,24 @@ export type Nextra = (
   nextraConfig: NextraConfig
 ) => (nextConfig: NextConfig) => NextConfig
 
-export type ThemeConfig = any | null
-
-export type NextraThemeLayoutProps<
-  TFrontMatter = FrontMatter,
-  TThemeConfig = ThemeConfig
-> = {
-  pageOpts: PageOpts<TFrontMatter>
-  pageProps: any
-  themeConfig: TThemeConfig
-  children: ReactNode
-}
-
-export type NextraMDXContent = FC<{
+export type MDXWrapper = FC<{
   toc: Heading[]
   children: ReactNode
+  metadata: NextraMetadata
+  bottomContent?: ReactNode
 }>
 
-export type UseTOC = (props: Record<string, any>) => Heading[]
+export type MetaRecord = Record<string, z.infer<typeof metaSchema>>
 
-export type NextraInternalGlobal = typeof globalThis & {
-  [NEXTRA_INTERNAL]: {
-    pageMap: PageMapItem[]
-    route: string
-    context: Record<
-      string,
-      {
-        Content: NextraMDXContent
-        pageOpts: PageOpts
-        useTOC: UseTOC
-      }
-    >
-    Layout: FC<NextraThemeLayoutProps>
-    themeConfig?: ThemeConfig
-  }
-}
-
-export type DynamicMetaDescriptor = Record<string, () => any>
-
-export type StructurizedData = Record<string, string>
-
-export type SearchData = {
-  [route: string]: {
-    title: string
-    data: StructurizedData
-  }
+// Copied from https://github.com/CloudCannon/pagefind/blob/2a0aa90cfb78bb8551645ac9127a1cd49cf54add/pagefind_web_js/types/index.d.ts#L72-L82
+/** Options that can be passed to pagefind.search() */
+export type PagefindSearchOptions = {
+  /** If set, this call will load all assets but return before searching. Prefer using pagefind.preload() instead */
+  preload?: boolean
+  /** Add more verbose console logging for this search query */
+  verbose?: boolean
+  /** The set of filters to execute with this search. Input type is extremely flexible, see the filtering docs for details */
+  filters?: object
+  /** The set of sorts to use for this search, instead of relevancy */
+  sort?: object
 }

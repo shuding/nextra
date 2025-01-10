@@ -1,0 +1,31 @@
+---
+asIndexPage: true
+---
+
+import {
+  CloudIcon,
+  DiagramIcon,
+  FormulaIcon,
+  TableIcon,
+  TailwindIcon
+} from '@components/icons'
+import { Cards } from 'nextra/components'
+import { TerminalIcon, TypeScriptIcon } from 'nextra/icons'
+import { MDXRemote } from 'nextra/mdx-remote'
+import { createIndexPage, getPageMap } from 'nextra/page-map'
+
+# Advanced
+
+<MDXRemote
+  compiledSource={await createIndexPage(await getPageMap('/docs/advanced'))}
+  components={{
+    Cards,
+    TerminalIcon,
+    DiagramIcon,
+    TailwindIcon,
+    FormulaIcon,
+    TableIcon,
+    TypeScriptIcon,
+    CloudIcon
+  }}
+/>

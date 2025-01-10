@@ -4,7 +4,8 @@ import { ImageResponse } from 'next/og'
 
 export const runtime = 'edge'
 
-const font = fetch(new URL('./Inter-SemiBold.otf', import.meta.url)).then(res =>
+// eslint-disable-next-line unicorn/prefer-top-level-await -- this will break og image
+const font = fetch(new URL('Inter-SemiBold.otf', import.meta.url)).then(res =>
   res.arrayBuffer()
 )
 
@@ -33,7 +34,9 @@ export async function GET(req: Request): Promise<Response> {
             style={{
               textShadow: '0 2px 30px #000',
               backgroundImage: 'linear-gradient(90deg, #fff 40%, #aaa)',
-              backgroundClip: 'text'
+              backgroundClip: 'text',
+              // To preserve new line
+              whiteSpace: 'pre'
             }}
           >
             {title}

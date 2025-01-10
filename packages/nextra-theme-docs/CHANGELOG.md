@@ -1,5 +1,673 @@
 # nextra-theme-docs
 
+## 4.0.0-rc.0
+
+### Major Changes
+
+- 28796b4: release Nextra rc.0
+
+### Patch Changes
+
+- Updated dependencies [28796b4]
+  - nextra@4.0.0-rc.0
+
+## 4.0.0-app-router.43
+
+### Patch Changes
+
+- 50c2f76: add `bottomContent` prop for `<Wrapper>` component, e.g. to put some content after pagination in `nextra-theme-docs`
+- 50c2f76: fix `colorSchema` for HEX format with 4 chars, e.g. `#111`
+- Updated dependencies [50c2f76]
+- Updated dependencies [50c2f76]
+  - nextra@4.0.0-app-router.43
+
+## 4.0.0-app-router.42
+
+### Patch Changes
+
+- 242e0d0: search tweaks
+- 3fc12a0: - Use Tailwind CSS CLI because CSS processing by `tsup` produce different, weird and broken result
+  - Patch react-compiler with some fixes which isn't fixed
+- 25c33dd: - if `filePath` is falsy in client wrapper -> do not render `edit on github` link
+  - if `filePath` starts with `http` do not append `docsRepositoryBase` prefix
+- Updated dependencies [242e0d0]
+- Updated dependencies [3fc12a0]
+  - nextra@4.0.0-app-router.42
+
+## 4.0.0-app-router.41
+
+### Patch Changes
+
+- 562c2b1: fix unclickable `type: menu` on mobile nav
+  - nextra@4.0.0-app-router.41
+
+## 4.0.0-app-router.40
+
+### Patch Changes
+
+- Updated dependencies [88135ec]
+  - nextra@4.0.0-app-router.40
+
+## 4.0.0-app-router.39
+
+### Patch Changes
+
+- Updated dependencies [711dbe7]
+  - nextra@4.0.0-app-router.39
+
+## 4.0.0-app-router.38
+
+### Patch Changes
+
+- Updated dependencies [42eb445]
+  - nextra@4.0.0-app-router.38
+
+## 4.0.0-app-router.37
+
+### Patch Changes
+
+- Updated dependencies [ad80ee1]
+  - nextra@4.0.0-app-router.37
+
+## 4.0.0-app-router.36
+
+### Patch Changes
+
+- Updated dependencies [739e9eb]
+- Updated dependencies [d805f2a]
+- Updated dependencies [0ab4ff1]
+  - nextra@4.0.0-app-router.36
+
+## 4.0.0-app-router.35
+
+### Minor Changes
+
+- e43a435: content width could be configured via CSS `--nextra-content-width` variable
+
+### Patch Changes
+
+- Updated dependencies [96fb083]
+  - nextra@4.0.0-app-router.35
+
+## 4.0.0-app-router.34
+
+### Minor Changes
+
+- 6d22c8f: export a `style-prefixed.css` file with Tailwind CSS v4 prefixed
+  layers for projects using Tailwind CSS v3
+
+  - `@layer utilities` -> `@layer v4-utilities`
+  - `@layer base` -> `@layer v4-base`
+
+### Patch Changes
+
+- nextra@4.0.0-app-router.34
+
+## 4.0.0-app-router.33
+
+### Patch Changes
+
+- Updated dependencies [dd2e216]
+  - nextra@4.0.0-app-router.33
+
+## 4.0.0-app-router.32
+
+### Minor Changes
+
+- 2cd964f: compile sidebar components with react compiler
+
+### Patch Changes
+
+- fbeef15: setup `@typescript-eslint/no-unnecessary-condition` rule and fix
+  warnings
+- ea7bece: Add `nextra-mobile-nav` to `<MobileNav>`
+- Updated dependencies [fbeef15]
+  - nextra@4.0.0-app-router.32
+
+## 4.0.0-app-router.31
+
+### Patch Changes
+
+- Updated dependencies [386b620]
+  - nextra@4.0.0-app-router.31
+
+## 4.0.0-app-router.30
+
+### Patch Changes
+
+- f277a7a: fix search, didn't work with Next.js' `basePath` set
+- Updated dependencies [f277a7a]
+  - nextra@4.0.0-app-router.30
+
+## 4.0.0-app-router.29
+
+### Major Changes
+
+- 4bdf82d: - migrate to tailwind css v4.beta2
+  - refactor builtin CSS classes from `_` prefix to `x:` prefix
+  - remove `color-primary-750` theme color variant
+
+### Patch Changes
+
+- Updated dependencies [4bdf82d]
+  - nextra@4.0.0-app-router.29
+
+## 4.0.0-app-router.28
+
+### Patch Changes
+
+- 846552e: - fix missing tailwind class for `json` icon in code blocks
+  - capitalize folders in sidebar even without index pages
+  - sync with nextra 3.2.4
+- Updated dependencies [846552e]
+  - nextra@4.0.0-app-router.28
+
+## 4.0.0-app-router.27
+
+### Major Changes
+
+- 8a0ae0f: - add root `_meta.global.{js,jsx,ts,tsx}` file
+  > See
+  > [working example](https://github.com/shuding/nextra/blob/v4-v2/docs/app/_meta.global.ts)
+  > based on https://nextra.site website
+  - `getPageMap` now receive only 1 argument `root?: string = '/'` instead of 2
+    `lang?: string, route?: string = '/'`
+  - remove `createCatchAllMeta` from `nextra/catch-all`
+  - remove `collectCatchAllRoutes`
+  - remove `normalizePageRoute`
+  - add `mergeMetaWithPageMap` to `nextra/page-map`
+  - move adding `metadata.filePath`, `metadata.title` and `metadata.readingTime`
+    in remark plugin
+  - refactor recma rewrite plugin and add tests
+    - remove `recmaRewriteJsx`
+    - remove `recmaRewriteFunctionBody`
+  - make `convertPageMapToJs` sync
+
+### Patch Changes
+
+- 5e06f57: fix injecting mdx-components into headings and injecting into toc
+- Updated dependencies [8a0ae0f]
+- Updated dependencies [5e06f57]
+  - nextra@4.0.0-app-router.27
+
+## 4.0.0-app-router.26
+
+### Minor Changes
+
+- 0076bad: move TOC logic from `recma-rewrite-jsx` plugin to
+  `rehype-extract-toc-content` plugin
+
+### Patch Changes
+
+- be82724: Fixes when Turbopack is enabled:
+  `Module not found: Can't resolve '@theguild/remark-mermaid/mermaid'`
+- Updated dependencies [be82724]
+- Updated dependencies [0076bad]
+  - nextra@4.0.0-app-router.26
+
+## 4.0.0-app-router.25
+
+### Major Changes
+
+- c095f98: make `compileMdx` from `nextra/compile` return a `string` instead of
+  an `object`
+- 79bbab7: remove `export const title` from generated mdx pages
+- 33ee518: replace `export const useTOC = () = [/* your headings */]` by
+  `export const toc = [/* your headings */]`
+
+### Patch Changes
+
+- 3edc6d7: use `Date.now()` for last edit time on development and git last
+  commit time on production
+- fdbae45: initialize `transformerTwoslash` only 1 time outside of loader
+- Updated dependencies [c095f98]
+- Updated dependencies [79bbab7]
+- Updated dependencies [3edc6d7]
+- Updated dependencies [fdbae45]
+- Updated dependencies [33ee518]
+  - nextra@4.0.0-app-router.25
+
+## 4.0.0-app-router.24
+
+### Patch Changes
+
+- e46dbdf: Cache the result of `repository.getFileLatestModifiedDateAsync`
+  because it can slow down Fast Refresh for uncommitted files.
+- cc33237: avoid unnecessary updates to the config store on initial render
+- Updated dependencies [e46dbdf]
+  - nextra@4.0.0-app-router.24
+
+## 4.0.0-app-router.23
+
+### Patch Changes
+
+- 803e5be: migrate to zustand v5
+- 7212f88: remove `transition` for `transform` property when opening mobile nav
+- b2e44d3: make Nextra works with `src/app` and `src/content` directories
+- Updated dependencies [b2e44d3]
+  - nextra@4.0.0-app-router.23
+
+## 4.0.0-app-router.22
+
+### Patch Changes
+
+- 5f79b77: fix unable to select text and `::selection` style
+- 57fde3f: reduce bundle size of bundled website by compiling svg icons in
+  separated files
+- Updated dependencies [5f79b77]
+- Updated dependencies [57fde3f]
+  - nextra@4.0.0-app-router.22
+
+## 4.0.0-app-router.21
+
+### Major Changes
+
+- 730899e: - add `nextra/components` to `experimental.optimizePackageImports` to
+  optimize `nextra/components` by default
+  - remove `<RemoteContent>` from `nextra/components`
+  - rename `<RemoteContent>` to `MDXRemote` and move to `nextra/mdx-remote`
+
+### Patch Changes
+
+- 4e02ef3: fix error goes from `playground.js` file when your `mdx-components`
+  file contain server-only components
+
+  ```
+  ./app/layout.tsx
+  'client-only' cannot be imported from a Server Component module. It should only be used from a Client Component.
+
+  Import trace for requested module:
+  ../packages/components/dist/index.js
+  ./mdx-components.js
+  ../node_modules/.pnpm/nextra@4.0.0-app-router.20_@types+react@18.3.12_acorn@8.14.0_next@15.0.2_@babel+core@7.26.0_r_73lkrljx3r7g5vsm2cmbm3erma/node_modules/nextra/dist/client/components/remote-content.js
+  ../node_modules/.pnpm/nextra@4.0.0-app-router.20_@types+react@18.3.12_acorn@8.14.0_next@15.0.2_@babel+core@7.26.0_r_73lkrljx3r7g5vsm2cmbm3erma/node_modules/nextra/dist/client/components/playground.js
+  ```
+
+- 0d74f68: fix external svg icon was added for span in `<Anchor>`
+- Updated dependencies [4e02ef3]
+- Updated dependencies [0d74f68]
+- Updated dependencies [730899e]
+  - nextra@4.0.0-app-router.21
+
+## 4.0.0-app-router.20
+
+### Major Changes
+
+- 16816f2: remove `<Th>`, `<Tr>` and `<Td>` exports (since they should be always
+  used with `<Table>` component)
+
+  ```diff
+  - import { Table, Th, Tr, Td } from 'nextra/components'
+  + import { Table } from 'nextra/components'
+
+  // ...
+
+  - <Th>
+  + <Table.Th>
+  - <Tr>
+  + <Table.Tr>
+  - <Td>
+  + <Table.Td>
+  ```
+
+- 0a63ba3: improve performance on projects without Turbopack enabled
+
+### Minor Changes
+
+- 2bd6f41: include `document.referrer` in link in `<NotFoundPage>` component
+
+### Patch Changes
+
+- 7cc8ca1: simplify `generatePageMap`
+- 16816f2: remove false positive warnings on projects without `content/`
+  directory
+
+  ```
+  ⚠ Compiled with warnings
+
+  ../packages/nextra/dist/client/pages.js
+  Module not found: Can't resolve 'private-next-root-dir/content' in '/Users/dmytro/Desktop/nextra/packages/nextra/dist/client'
+  ```
+
+- b873702: `firstChildRoute` should return "index" route as first
+- Updated dependencies [3d8705c]
+- Updated dependencies [16816f2]
+- Updated dependencies [27454c4]
+- Updated dependencies [7cc8ca1]
+- Updated dependencies [aa94d91]
+- Updated dependencies [0a63ba3]
+- Updated dependencies [71a051b]
+- Updated dependencies [0a63ba3]
+- Updated dependencies [16816f2]
+- Updated dependencies [b873702]
+  - nextra@4.0.0-app-router.20
+
+## 4.0.0-app-router.19
+
+### Patch Changes
+
+- Updated dependencies [a3627e5]
+  - nextra@4.0.0-app-router.19
+
+## 4.0.0-app-router.18
+
+### Minor Changes
+
+- 439466a: replace `useContentDir` with `contentDirBasePath` option which
+  configure `content` directory under a catch-all subdirectory
+- b00a560: make `page.{jsx,tsx,mdx}` pages and `_meta` files from `app` dir, and
+  also `content` folder files - all add to `pageMap`, but ignore dynamic pages
+  `[[`
+
+### Patch Changes
+
+- a074a99: add `whiteListTagsStyling` nextra config option
+- Updated dependencies [a074a99]
+- Updated dependencies [439466a]
+- Updated dependencies [b00a560]
+  - nextra@4.0.0-app-router.18
+
+## 4.0.0-app-router.17
+
+### Patch Changes
+
+- 7a48610: export `setMenu`
+- 33568c1: add `normalizePagesResult.activeMetadata` to get value of front
+  matter or exported metadata from page
+- Updated dependencies [33568c1]
+  - nextra@4.0.0-app-router.17
+
+## 4.0.0-app-router.16
+
+### Minor Changes
+
+- ab21db7: - use ReactIcon for code blocks with `jsx`, `tsx` language
+  - add JsonIcon for `json` language
+  - parse language from filename if exist when `diff` language is specified
+  - use JavaScript icon for `cjs` and `mjs`
+  - use TypeScript icon for `cts` and `mts`
+
+### Patch Changes
+
+- 0540e6c: - add `disabled` prop for `<Folder>` component when `open` prop was
+  set (to disable click event and remove `cursor: pointer`)
+  - allow `<h5>` and `<h6>` tags be used with `<Steps>`
+  - fix Webpack module rebuild for pageMap when new files where added or removed
+    in `app` dir or `content` dir
+- Updated dependencies [ab21db7]
+- Updated dependencies [0540e6c]
+- Updated dependencies [5b47509]
+  - nextra@4.0.0-app-router.16
+
+## 4.0.0-app-router.15
+
+### Minor Changes
+
+- 367293e: add opacity animation for `:target` state for headings h2-h6
+
+### Patch Changes
+
+- nextra@4.0.0-app-router.15
+
+## 4.0.0-app-router.14
+
+### Major Changes
+
+- be19dd4: remove `"typesVersions"` field from `package.json`. You need to set
+  `"moduleResolution": "bundler"` in your `tsconfig.json` if you are using
+  TypeScript
+
+### Patch Changes
+
+- 9ca1765: fix mobile nav position
+- 2b41ec7: remove default value of `Navbar.logo`, now this prop is required
+- Updated dependencies [be19dd4]
+  - nextra@4.0.0-app-router.14
+
+## 4.0.0-app-router.13
+
+### Major Changes
+
+- 54657e2: require Next.js minimum v15
+
+### Patch Changes
+
+- 3ade013: - remove `nextra/context`
+  - remove `type NextraThemeLayoutProps`
+- ddc39cc: - parse and transform `_meta` files with zod
+  - remove `_meta` `newWindow` field
+- 54657e2: allow `editLink`/`feedback.content`/`search`/`toc.backToTop` be
+  `null` as value
+- 07213e2: add support for turbopack `next dev --turbopack`
+- 54657e2: add required `Layout.navbar`, `Layout.footer` props and optional
+  `Layout.banner` prop, you don't need to pass them as `children` now
+- Updated dependencies [3ade013]
+- Updated dependencies [ddc39cc]
+- Updated dependencies [07213e2]
+- Updated dependencies [54657e2]
+  - nextra@4.0.0-app-router.13
+
+## 4.0.0-app-router.12
+
+### Patch Changes
+
+- b8defc9: sync with nextra 3.1.0
+- b8defc9: remove `NormalizedResult.flatDirectories`
+
+  remove `Item.withIndexPage`, use `'frontMatter' in Item`
+
+- Updated dependencies [b8defc9]
+- Updated dependencies [b8defc9]
+  - nextra@4.0.0-app-router.12
+
+## 4.0.0-app-router.11
+
+### Patch Changes
+
+- be15165: move `pagefind` output to `public/_pagefind` directory
+  https://github.com/shuding/nextra/pull/3517
+- Updated dependencies [be15165]
+  - nextra@4.0.0-app-router.11
+
+## 4.0.0-app-router.10
+
+### Patch Changes
+
+- 8b1a7c9: defer pagefind results update for prioritizing the user input state
+- Updated dependencies [8b1a7c9]
+  - nextra@4.0.0-app-router.10
+
+## 4.0.0-app-router.9
+
+### Patch Changes
+
+- 2c8a8ab: - sync with nextra 3.0.15
+
+  - bump to Next 15
+  - remove importing of `style.css` in themes, you need to import now manually
+    by
+
+  ```js
+  import "nextra-theme-docs/style.css"; // for docs theme
+  import "nextra-theme-blog/style.css"; // for blog theme
+  ```
+
+- Updated dependencies [2c8a8ab]
+  - nextra@4.0.0-app-router.9
+
+## 4.0.0-app-router.8
+
+### Patch Changes
+
+- 3ce535b: Add aria attrs to the sidebar collapse button
+- 9832af9: add ↗ char for external links
+- ec39959: Use `primaryColor` for `::selection` styles
+- 875842b: support `GitHub Alert Syntax`
+- 47c62c8: fix click on the arrow icon in the folder item in the Sidebar, was
+  always consider clicked on `<a>` or `<button>` due `event.currentTarget`
+- Updated dependencies [9832af9]
+- Updated dependencies [ec39959]
+- Updated dependencies [875842b]
+  - nextra@4.0.0-app-router.8
+
+## 4.0.0-app-router.7
+
+### Patch Changes
+
+- 5201e5f: add helpful error message about not available search on development
+  mode
+- 3ac2c32: add `getPageMap` helper function from `nextra/page-map`
+- b4ca36d: - allow override/add additional icons for code blocks
+  - remove `nextraConfig.mdxOptions.providerImportSource` option in favour of
+    `mdx-components` file
+- 73726ec: - Simplify the class-name of the sidebar file item
+  - fix unclosable active folder when it's `<button>` element and not `<a>`
+  - improve `<Collapse>` to add inner `<div>` only if children != 1
+- 4768dee: replace `nextraConfig.mdxBaseDir: string` by `useContentDir: boolean`
+- Updated dependencies [5201e5f]
+- Updated dependencies [3ac2c32]
+- Updated dependencies [b4ca36d]
+- Updated dependencies [4768dee]
+  - nextra@4.0.0-app-router.7
+
+## 4.0.0-app-router.6
+
+### Patch Changes
+
+- 2092d5e: enable page reload of catch-all routes `app/[[...slug]].jsx` on
+  content change
+- a97e5cf: sync with nextra 3.0.10
+- Updated dependencies [2092d5e]
+- Updated dependencies [a97e5cf]
+  - nextra@4.0.0-app-router.6
+
+## 4.0.0-app-router.5
+
+### Patch Changes
+
+- a15a02d: sync with nextra 3.0.3
+- Updated dependencies [659b36e]
+- Updated dependencies [a15a02d]
+  - nextra@4.0.0-app-router.5
+
+## 4.0.0-app-router.4
+
+### Major Changes
+
+- 17e6da5: remove `i18n.direction` option
+- 0faa569: replace `gitTimestamp` option with `lastUpdated`
+
+  replace `editLink.content` option with `editLink`
+
+- 17e6da5: document removed theme config options
+
+  - `main`
+  - `direction`
+  - `toc.component`
+  - `themeSwitch.component`
+  - `themeSwitch.useOptions`
+  - `search.component`
+  - `feedback.useLink`
+  - `banner.dismissible`
+  - `banner.key`
+  - `banner.content`
+  - `footer.content`
+  - `footer.component`
+  - `head`
+  - `navbar.component`
+  - `navbar.extraContent`
+  - `project.link`
+  - `project.icon`
+  - `chat.link`
+  - `chat.icon`
+  - `search.emptyResult`
+  - `search.loading`
+  - `search.errorText`
+  - `search.placeholder`
+  - `search.className`
+
+  refactor `themeSwitch.useOptions` to `themeSwitch` option
+
+  refactor `editLink.content` to `editLink` option
+
+  rename Search prop `error` to `errorText`
+
+### Patch Changes
+
+- nextra@4.0.0-app-router.4
+
+## 4.0.0-app-router.3
+
+### Major Changes
+
+- 1e77fab: move `<Collapse>`, `<Details>`, `<Summary>`, `<SkipNavContent>`,
+  `SkipNavLink`, `<Select>` and `<Bleed>` from `nextra-theme-docs` to
+  `nextra/components`
+- 1e77fab: remove `renderComponent` and `renderString`
+
+### Patch Changes
+
+- 1e77fab: fix edit on github and last updated at for catch all routes
+- Updated dependencies [1e77fab]
+- Updated dependencies [1e77fab]
+- Updated dependencies [1e77fab]
+- Updated dependencies [1e77fab]
+  - nextra@4.0.0-app-router.3
+
+## 4.0.0-app-router.2
+
+### Major Changes
+
+- 215aa08: fix focusing on first search result item
+- 1c83931: remove `navbar` and `footer` props, pass `<Navbar>` and `<Footer>` as
+  children of `<Layout>`
+- 724f851: migrate from react context to zustand
+- 8ef0f58: move `<Head>` component in `nextra/components`
+- ee4a467: remove `feedback.useLink` and `editLink.component` option, remove
+  `themeConfig` prop on `<Layout>` component
+
+  change `gitTimestamp` option to boolean
+
+  remove `nextraCofig.transform` option
+
+- 62f1553: support `<Head>`'s `backgroundColor.dark/light` props colors in
+  `rgb(...,...,...)` and `#RRGGBB` formats
+
+### Minor Changes
+
+- 8f90ed5: refactor `useMenuActions` to `setMenu`, `useFocusedRouteActions` to
+  `setFocusedRoute`
+
+### Patch Changes
+
+- Updated dependencies [215aa08]
+- Updated dependencies [8ef0f58]
+  - nextra@4.0.0-app-router.2
+
+## 4.0.0-app-router.1
+
+### Major Changes
+
+- 26851b5: migrate search from Flexsearch to Pagefind
+
+### Patch Changes
+
+- Updated dependencies [26851b5]
+  - nextra@4.0.0-app-router.1
+
+## 4.0.0-app-router.0
+
+### Major Changes
+
+- 99f34d3: The initial version which supports App Router instead of Pages
+  Router, something may be broken, check
+  https://github.com/shuding/nextra/tree/v4-v2/examples for the migration guide
+
+### Patch Changes
+
+- Updated dependencies [99f34d3]
+  - nextra@4.0.0-app-router.0
+
 ## 3.3.1
 
 ### Patch Changes
@@ -427,7 +1095,7 @@
 - a8c2196: use dynamic import for loading `mermaid`
 - 0b5cc9d: make nextra compatible with windows
 - 7b0b7e9: fix page scroll jump while entering characters in the search input
-- 45471df: fix “Scroll to top” is not supposed to be interactable when it is
+- 45471df: fix "Scroll to top" is not supposed to be interactable when it is
   hidden.
 
   `display:children` doesn't collapse breadcrumbs
@@ -932,7 +1600,7 @@
 
 ### Patch Changes
 
-- 45471df5: fix “Scroll to top” is not supposed to be interactable when it is
+- 45471df5: fix "Scroll to top" is not supposed to be interactable when it is
   hidden.
 
   `display:children` doesn't collapse breadcrumbs
