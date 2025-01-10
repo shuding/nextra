@@ -1,9 +1,8 @@
 import type { ImportDeclaration } from 'estree'
 import { valueToEstree } from 'estree-util-value-to-estree'
 import type { Element, ElementContent, Root } from 'hast'
-import type { MdxJsxFlowElement } from 'hast-util-to-estree/lib/handlers/mdx-jsx-element'
-import type { MdxjsEsm } from 'hast-util-to-estree/lib/handlers/mdxjs-esm'
-import type { MdxJsxAttribute } from 'hast-util-to-estree/lib/state'
+import type { MdxJsxAttribute, MdxJsxFlowElementHast } from 'mdast-util-mdx-jsx'
+import type { MdxjsEsmHast } from 'mdast-util-mdxjs-esm'
 import type { Plugin } from 'unified'
 import { visit } from 'unist-util-visit'
 import type { MathJaxOptions } from '../../types.js'
@@ -25,12 +24,12 @@ const MATHJAX_IMPORTS = {
       ]
     }
   }
-} as MdxjsEsm
+} as MdxjsEsmHast
 
 function wrapInMathJaxContext(
   children: ElementContent[],
   { config, src }: NonNullable<MathJaxOptions>
-): MdxJsxFlowElement {
+): MdxJsxFlowElementHast {
   const attributes: MdxJsxAttribute[] = []
   if (src) {
     attributes.push({ type: 'mdxJsxAttribute', name: 'src', value: src })

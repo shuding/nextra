@@ -1,7 +1,7 @@
 import type { SpreadElement } from 'estree'
 import type { Element, Root, Text } from 'hast'
 import { toEstree } from 'hast-util-to-estree'
-import type { MdxjsEsm } from 'hast-util-to-estree/lib/handlers/mdxjs-esm'
+import type { MdxjsEsmHast } from 'mdast-util-mdxjs-esm'
 import type { Plugin, Transformer } from 'unified'
 import { SKIP, visit } from 'unist-util-visit'
 import type { Heading } from '../../types.js'
@@ -113,7 +113,7 @@ const transformer: Transformer<Root> = (ast, file) => {
         ]
       }
     }
-  } as MdxjsEsm)
+  } as MdxjsEsmHast)
 }
 
 function createComputedKey(

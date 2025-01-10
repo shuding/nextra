@@ -1,6 +1,6 @@
 import type { ImportDeclaration } from 'estree'
 import type { Root } from 'hast'
-import type { MdxjsEsm } from 'hast-util-to-estree/lib/handlers/mdxjs-esm'
+import type { MdxjsEsmHast } from 'mdast-util-mdxjs-esm'
 import type { Plugin, Transformer } from 'unified'
 import { EXIT, visit } from 'unist-util-visit'
 
@@ -23,7 +23,7 @@ const TWOSLASH_POPUP_IMPORT_AST = {
       ]
     }
   }
-} as MdxjsEsm
+} as MdxjsEsmHast
 
 const transformer: Transformer<Root> = ast => {
   // The tagName is being converted to lowercase when calling the shiki.codeToHtml
