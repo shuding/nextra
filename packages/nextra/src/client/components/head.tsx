@@ -73,7 +73,7 @@ type HeadProps = Partial<z.input<typeof headSchema>> & {
   children?: ReactNode
 }
 
-const Head_: FC<HeadProps> = ({ children, ...props }) => {
+export const Head: FC<HeadProps> = ({ children, ...props }) => {
   const { data, error } = headSchema.safeParse(props)
   if (error) {
     throw fromZodError(error)
@@ -111,6 +111,16 @@ html {
     <head>
       {children}
       <style>{style}</style>
+      <meta
+        name="theme-color"
+        media="(prefers-color-scheme: light)"
+        content={`rgb(${backgroundColor.light})`}
+      />
+      <meta
+        name="theme-color"
+        media="(prefers-color-scheme: dark)"
+        content={`rgb(${backgroundColor.dark})`}
+      />
       {faviconGlyph && (
         <link
           rel="icon"
@@ -127,12 +137,3 @@ function makePrimaryColor(val: string): string {
   const l = `calc(var(--nextra-primary-lightness) ${val})`
   return `hsl(${h + s + l})`
 }
-
-export const Head = Object.assign(Head_, {
-  viewport: {
-    themeColor: [
-      { media: '(prefers-color-scheme: light)', color: '#fff' },
-      { media: '(prefers-color-scheme: dark)', color: '#111' }
-    ]
-  }
-})
