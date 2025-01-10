@@ -25,7 +25,6 @@ export function MDXRemote({
 }: MDXRemoteProps) {
   const MDXContent = evaluate(
     compiledSource,
-    // @ts-expect-error -- ignore undefined
     useMDXComponents(components),
     scope
   ).default
