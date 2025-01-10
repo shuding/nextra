@@ -1,11 +1,7 @@
 {
   $schema: 'https://docs.renovatebot.com/renovate-schema.json',
-  extends: [
-    'config:recommended',
-  ],
-  schedule: [
-    'every weekend',
-  ],
+  extends: ['config:recommended'],
+  schedule: ['every weekend'],
   packageRules: [
     {
       groupName: 'lint',
@@ -23,33 +19,25 @@
         'prettier',
         'prettier-plugin-pkg',
         'prettier-plugin-tailwindcss',
-        '@ianvs/prettier-plugin-sort-imports',
-      ],
+        '@ianvs/prettier-plugin-sort-imports'
+      ]
     },
     {
       groupName: 'latex',
-      matchPackageNames: [
-        'remark-math',
-        'rehype-katex',
-      ],
+      matchPackageNames: ['remark-math', 'rehype-katex']
     },
     {
       groupName: 'next',
-      matchPackageNames: [
-        'next',
-        '@next/eslint-plugin-next',
-      ],
+      matchPackageNames: ['next', '@next/eslint-plugin-next']
     },
     {
       groupName: 'tailwindcss',
       matchPackageNames: [
         '@tailwindcss/cli',
         '@tailwindcss/postcss',
-        'tailwindcss',
-      ],
-    },
+        'tailwindcss'
+      ]
+    }
   ],
-  baseBranches: [
-    'main',
-  ],
+  baseBranches: ['main']
 }
