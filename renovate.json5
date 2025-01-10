@@ -30,6 +30,14 @@
     {
       groupName: 'next',
       matchPackageNames: ['next', '@next/eslint-plugin-next']
+    },
+    {
+      groupName: 'tailwindcss',
+      matchPackageNames: [
+        '@tailwindcss/cli',
+        '@tailwindcss/postcss',
+        'tailwindcss'
+      ]
     }
   ],
   baseBranches: ['main']
