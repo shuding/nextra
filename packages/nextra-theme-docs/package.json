@@ -47,7 +47,7 @@
     "@types/react": "^18.2.23",
     "@vitejs/plugin-react": "^4.3.4",
     "esbuild-react-compiler-plugin": "workspace:*",
-    "jsdom": "^25.0.0",
+    "jsdom": "^26.0.0",
     "next": "^15.0.2",
     "nextra": "workspace:*",
     "postcss": "^8.4.49",
