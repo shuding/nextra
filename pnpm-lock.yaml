@@ -267,8 +267,8 @@ importers:
         specifier: ^1.0.0
         version: 1.26.1(typescript@5.7.3)
       '@theguild/remark-mermaid':
-        specifier: ^0.1.3
-        version: 0.1.3(react@18.3.1)
+        specifier: ^0.2.0
+        version: 0.2.0(react@18.3.1)
       '@theguild/remark-npm2yarn':
         specifier: ^0.3.2
         version: 0.3.3
@@ -2830,7 +2830,7 @@ packages:
       '@babel/parser': 7.26.2
       '@babel/template': 7.25.9
       '@babel/types': 7.26.0
-      debug: 4.3.7
+      debug: 4.4.0
       globals: 11.12.0
     transitivePeerDependencies:
       - supports-color
@@ -5136,8 +5136,8 @@ packages:
       react-dom: 18.3.1(react@18.3.1)
     dev: true
 
-  /@theguild/remark-mermaid@0.1.3(react@18.3.1):
-    resolution: {integrity: sha512-2FjVlaaKXK7Zj7UJAgOVTyaahn/3/EAfqYhyXg0BfDBVUl+lXcoIWRaxzqfnDr2rv8ax6GsC5mNh6hAaT86PDw==}
+  /@theguild/remark-mermaid@0.2.0(react@18.3.1):
+    resolution: {integrity: sha512-o8n57TJy0OI4PCrNw8z6S+vpHtrwoQZzTA5Y3fL0U1NDRIoMg/78duWgEBFsCZcWM1G6zjE91yg1aKCsDwgE2Q==}
     peerDependencies:
       react: ^18.2.0
     dependencies:
@@ -6870,6 +6870,7 @@ packages:
         optional: true
     dependencies:
       ms: 2.1.3
+    dev: true
 
   /debug@4.4.0:
     resolution: {integrity: sha512-6WTZ/IxCY/T6BALoZHaE4ctp9xm+Z5kY/pzYaCHRFeyVhojxlrm+46y68HA6hr0TcwEssoxNiDEUJQjfPZ/RYA==}
