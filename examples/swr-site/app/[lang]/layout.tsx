@@ -16,8 +16,6 @@ import { pageMap as graphqlEslintPageMap } from './remote/graphql-eslint/[[...sl
 import { pageMap as graphqlYogaPageMap } from './remote/graphql-yoga/[[...slug]]/page'
 import './styles.css'
 
-export const { viewport } = Head
-
 export const metadata: Metadata = {
   description:
     'SWR is a React Hooks library for data fetching. SWR first returns the data from cache (stale), then sends the fetch request (revalidate), and finally comes with the up-to-date data again.',
