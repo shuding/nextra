@@ -11,7 +11,7 @@
     "dev:theme-docs": "turbo run dev --filter=example-docs... --filter=!docs",
     "dev:theme-i18n": "turbo run dev --filter=swr-site... --filter=!docs",
     "dev:website": "turbo run dev --filter=docs...",
-    "lint": "ESLINT_USE_FLAT_CONFIG=true eslint --config packages/eslint-config/src/index.ts --cache --max-warnings 0 --flag unstable_ts_config .",
+    "lint": "ESLINT_USE_FLAT_CONFIG=true eslint --config packages/eslint-config/src/index.ts --cache --max-warnings 0 .",
     "lint:prettier": "prettier --config packages/prettier-config/src/index.js --cache --check --ignore-path .gitignore --ignore-path .prettierignore .",
     "postinstall": "pnpm build",
     "prettier": "pnpm lint:prettier --write",
@@ -23,7 +23,7 @@
   "devDependencies": {
     "@changesets/cli": "2.27.11",
     "@rollup/plugin-alias": "5.1.1",
-    "eslint": "9.17.0",
+    "eslint": "9.18.0",
     "prettier": "3.4.2",
     "rimraf": "6.0.1",
     "tsup": "8.3.5",
