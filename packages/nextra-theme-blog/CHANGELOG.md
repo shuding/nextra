@@ -1,5 +1,225 @@
 # nextra-theme-blog
 
+## 4.0.0
+
+### Major Changes
+
+- 283320f: remove `"typesVersions"` field from `package.json`. You need to set `"moduleResolution": "bundler"` in your `tsconfig.json` if you are using TypeScript
+- 283320f: move `<Collapse>`, `<Details>`, `<Summary>`, `<SkipNavContent>`, `SkipNavLink`, `<Select>` and `<Bleed>` from `nextra-theme-docs` to `nextra/components`
+- 283320f: remove `<Th>`, `<Tr>` and `<Td>` exports (since they should be always used with `<Table>` component)
+
+  ```diff
+  - import { Table, Th, Tr, Td } from 'nextra/components'
+  + import { Table } from 'nextra/components'
+
+  // ...
+
+  - <Th>
+  + <Table.Th>
+  - <Tr>
+  + <Table.Tr>
+  - <Td>
+  + <Table.Td>
+  ```
+
+- 283320f: make `compileMdx` from `nextra/compile` return a `string` instead of an `object`
+- 283320f: remove `BlogMetadata.draft`, support \_meta files for `nextra-theme-blog`
+- 283320f: remove `export const title` from generated mdx pages
+- 283320f: The initial version which supports App Router instead of Pages Router, something may be broken, check https://github.com/shuding/nextra/tree/v4-v2/examples for the migration guide
+- 283320f: migrate search from Flexsearch to Pagefind
+- 283320f: - add root `_meta.global.{js,jsx,ts,tsx}` file
+  > See [working example](https://github.com/shuding/nextra/blob/v4-v2/docs/app/_meta.global.ts) based on https://nextra.site website
+  - `getPageMap` now receive only 1 argument `root?: string = '/'` instead of 2 `lang?: string, route?: string = '/'`
+  - remove `createCatchAllMeta` from `nextra/catch-all`
+  - remove `collectCatchAllRoutes`
+  - remove `normalizePageRoute`
+  - add `mergeMetaWithPageMap` to `nextra/page-map`
+  - move adding `metadata.filePath`, `metadata.title` and `metadata.readingTime` in remark plugin
+  - refactor recma rewrite plugin and add tests
+    - remove `recmaRewriteJsx`
+    - remove `recmaRewriteFunctionBody`
+  - make `convertPageMapToJs` sync
+- 283320f: improve performance on projects without Turbopack enabled
+- 283320f: release Nextra rc.0
+- 283320f: - migrate to tailwind css v4.beta2
+  - refactor builtin CSS classes from `_` prefix to `x:` prefix
+  - remove `color-primary-750` theme color variant
+- 283320f: replace `export const useTOC = () = [/* your headings */]` by `export const toc = [/* your headings */]`
+- 283320f: move `<Head>` component in `nextra/components`
+- 283320f: remove `nextra-theme-blog/cusdis` export, export `<Comments>` component from `nextra-theme-blog` directly (because `peerDependency` of `react-cusdis` was removed)
+- 283320f: require Next.js minimum v14
+- 283320f: - add `nextra/components` to `experimental.optimizePackageImports` to optimize `nextra/components` by default
+  - remove `<RemoteContent>` from `nextra/components`
+  - rename `<RemoteContent>` to `MDXRemote` and move to `nextra/mdx-remote`
+
+### Minor Changes
+
+- 283320f: add `nextThemes` prop in `<Layout>` component
+- 283320f: - use ReactIcon for code blocks with `jsx`, `tsx` language
+  - add JsonIcon for `json` language
+  - parse language from filename if exist when `diff` language is specified
+  - use JavaScript icon for `cjs` and `mjs`
+  - use TypeScript icon for `cts` and `mts`
+- 283320f: use `next-view-transitions` for transition in `nextra-theme-blog`
+- 283320f: replace `useContentDir` with `contentDirBasePath` option which configure `content` directory under a catch-all subdirectory
+- 283320f: move TOC logic from `recma-rewrite-jsx` plugin to `rehype-extract-toc-content` plugin
+- 283320f: make `page.{jsx,tsx,mdx}` pages and `_meta` files from `app` dir, and also `content` folder files -
+  all add to `pageMap`, but ignore dynamic pages `[[`
+- e11dbe0: set `content` value for `<meta name="theme-color">` based on background value for light and dark themes
+
+### Patch Changes
+
+- 283320f: search tweaks
+- fdd2c6a: fix steps background on dark mode
+  fix headings anchor link color on dark mode
+- 283320f: setup `@typescript-eslint/no-unnecessary-condition` rule and fix warnings
+- aca79fa: Don't focus search input on `Ctrl + k` on non Mac devices.
+  Don't focus search input on `⌘ + Shift + k` or `Ctrl + Shift + k`.
+- 283320f: add helpful error message about not available search on development mode
+- 283320f: remove `react-cusdis` dependency, use https://cusdis.com/doc#/advanced/sdk directly
+- 283320f: add `getPageMap` helper function to `nextra/page-map`
+- 283320f: Fixes when Turbopack is enabled: `Module not found: Can't resolve '@theguild/remark-mermaid/mermaid'`
+- 283320f: add `whiteListTagsStyling` nextra config option
+- 283320f: fix unable to select text and `::selection` style
+- 283320f: - allow override/add additional icons for code blocks
+  - remove `nextraConfig.mdxOptions.providerImportSource` option in favour of `mdx-components` file
+- 283320f: - Use Tailwind CSS CLI because CSS processing by `tsup` produce different, weird and broken result
+  - Patch react-compiler with some fixes which isn't fixed
+- 283320f: use `Date.now()` for last edit time on development and git last commit time on production
+- 283320f: move `pagefind` output to `public/_pagefind` directory https://github.com/shuding/nextra/pull/3517
+- 283320f: initialize `transformerTwoslash` only 1 time outside of loader
+- 283320f: fix edit on github and last updated at for catch all routes
+- 283320f: simplify `generatePageMap`
+- 283320f: add `banner` prop for `<Layout>` component
+- 283320f: sync with nextra 3.1.0
+- 283320f: Cache the result of `repository.getFileLatestModifiedDateAsync` because it can slow down Fast Refresh for uncommitted files.
+- 283320f: reduce bundle size of bundled website by compiling svg icons in separated files
+- 283320f: enable page reload of catch-all routes `app/[[...slug]].jsx` on content change
+- 283320f: remove false positive warnings on projects without `content/` directory
+
+  ```
+  ⚠ Compiled with warnings
+
+  ../packages/nextra/dist/client/pages.js
+  Module not found: Can't resolve 'private-next-root-dir/content' in '/Users/dmytro/Desktop/nextra/packages/nextra/dist/client'
+  ```
+
+- 283320f: - sync with nextra 3.0.15
+
+  - bump to Next 15
+  - remove importing of `style.css` in themes, you need to import now manually by
+
+  ```js
+  import "nextra-theme-docs/style.css"; // for docs theme
+  import "nextra-theme-blog/style.css"; // for blog theme
+  ```
+
+- 283320f: add support for turbopack `next dev --turbopack`
+- 283320f: fix `colorSchema` for HEX format with 4 chars, e.g. `#111`
+- 283320f: fix external svg icon was added for span in `<Anchor>`
+- 283320f: make nextThemes optional prop, to avoid ts errors
+- 283320f: sync with nextra 3.0.10
+- 283320f: defer pagefind results update for prioritizing the user input state
+- 283320f: make Nextra works with `src/app` and `src/content` directories
+- 283320f: - fix missing tailwind class for `json` icon in code blocks
+  - capitalize folders in sidebar even without index pages
+  - sync with nextra 3.2.4
+- 283320f: add ↗ char for external links
+- 283320f: sync with nextra 3.0.3
+- 283320f: fix injecting mdx-components into headings and injecting into toc
+- 283320f: - add `disabled` prop for `<Folder>` component when `open` prop was set (to disable click event and remove `cursor: pointer`)
+  - allow `<h5>` and `<h6>` tags be used with `<Steps>`
+  - fix Webpack module rebuild for pageMap when new files where added or removed in `app` dir or `content` dir
+- 283320f: Use `primaryColor` for `::selection` styles
+- 283320f: replace `nextraConfig.mdxBaseDir: string` by `useContentDir: boolean`
+- 283320f: support `GitHub Alert Syntax`
+- 283320f: fix search, didn't work with Next.js' `basePath` set
+- Updated dependencies [283320f]
+- Updated dependencies [283320f]
+- Updated dependencies [283320f]
+- Updated dependencies [fdd2c6a]
+- Updated dependencies [283320f]
+- Updated dependencies [aca79fa]
+- Updated dependencies [283320f]
+- Updated dependencies [283320f]
+- Updated dependencies [283320f]
+- Updated dependencies [283320f]
+- Updated dependencies [283320f]
+- Updated dependencies [283320f]
+- Updated dependencies [283320f]
+- Updated dependencies [283320f]
+- Updated dependencies [283320f]
+- Updated dependencies [283320f]
+- Updated dependencies [283320f]
+- Updated dependencies [283320f]
+- Updated dependencies [283320f]
+- Updated dependencies [283320f]
+- Updated dependencies [283320f]
+- Updated dependencies [283320f]
+- Updated dependencies [283320f]
+- Updated dependencies [283320f]
+- Updated dependencies [283320f]
+- Updated dependencies [283320f]
+- Updated dependencies [283320f]
+- Updated dependencies [283320f]
+- Updated dependencies [283320f]
+- Updated dependencies [283320f]
+- Updated dependencies [283320f]
+- Updated dependencies [283320f]
+- Updated dependencies [283320f]
+- Updated dependencies [283320f]
+- Updated dependencies [283320f]
+- Updated dependencies [283320f]
+- Updated dependencies [283320f]
+- Updated dependencies [283320f]
+- Updated dependencies [283320f]
+- Updated dependencies [283320f]
+- Updated dependencies [283320f]
+- Updated dependencies [283320f]
+- Updated dependencies [283320f]
+- Updated dependencies [283320f]
+- Updated dependencies [283320f]
+- Updated dependencies [283320f]
+- Updated dependencies [283320f]
+- Updated dependencies [283320f]
+- Updated dependencies [283320f]
+- Updated dependencies [283320f]
+- Updated dependencies [283320f]
+- Updated dependencies [283320f]
+- Updated dependencies [283320f]
+- Updated dependencies [283320f]
+- Updated dependencies [283320f]
+- Updated dependencies [283320f]
+- Updated dependencies [283320f]
+- Updated dependencies [283320f]
+- Updated dependencies [283320f]
+- Updated dependencies [283320f]
+- Updated dependencies [283320f]
+- Updated dependencies [283320f]
+- Updated dependencies [283320f]
+- Updated dependencies [283320f]
+- Updated dependencies [283320f]
+- Updated dependencies [283320f]
+- Updated dependencies [283320f]
+- Updated dependencies [283320f]
+- Updated dependencies [283320f]
+- Updated dependencies [283320f]
+- Updated dependencies [283320f]
+- Updated dependencies [283320f]
+- Updated dependencies [283320f]
+- Updated dependencies [283320f]
+- Updated dependencies [283320f]
+- Updated dependencies [283320f]
+- Updated dependencies [283320f]
+- Updated dependencies [e11dbe0]
+- Updated dependencies [283320f]
+- Updated dependencies [283320f]
+- Updated dependencies [283320f]
+- Updated dependencies [283320f]
+- Updated dependencies [283320f]
+- Updated dependencies [283320f]
+  - nextra@4.0.0
+
 ## 4.0.0-rc.0
 
 ### Major Changes
@@ -1519,19 +1739,19 @@
   and `nextra-theme-docs`
 
   ```js
-  import { Card, Cards } from 'nextra/components'
+  import { Card, Cards } from "nextra/components";
   ```
 
   ```js
-  import { Tab, Tabs } from 'nextra/components'
+  import { Tab, Tabs } from "nextra/components";
   ```
 
   ```js
-  import { Steps } from 'nextra/components'
+  import { Steps } from "nextra/components";
   ```
 
   ```js
-  import { FileTree } from 'nextra/components'
+  import { FileTree } from "nextra/components";
   ```
 
 ### Patch Changes
