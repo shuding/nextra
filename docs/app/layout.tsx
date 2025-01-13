@@ -28,6 +28,12 @@ export const metadata: Metadata = {
     absolute: '',
     template: '%s | Nextra'
   },
+  openGraph: {
+    url: 'https://nextra.site',
+    siteName: 'Nextra',
+    locale: 'en_US',
+    type: 'website'
+  },
   icons: {
     icon: [
       {
