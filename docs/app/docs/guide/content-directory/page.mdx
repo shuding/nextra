@@ -1,0 +1,87 @@
+import { Steps, FileTree, Callout } from 'nextra/components'
+
+# `content` Directory
+
+Migrate your Pages Router site with minimal changes using this mode. Follow these steps:
+
+<Steps>
+
+<h4>Rename your `pages` folder to `content`</h4>
+
+You can keep `content` directory in root of your project, or in `src` directory.
+
+<h4>Set `contentDirBasePath` option in `next.config` file (_optional_)</h4>
+
+If you want to serve your content from a different path, you can set `contentDirBasePath` option:
+
+```js filename="next.config.mjs" {4}
+import nextra from 'nextra'
+
+const withNextra = nextra({
+  contentDirBasePath: '/docs' // Or even nested e.g. `/docs/advanced`
+})
+```
+
+<h4>Add `[[...mdxPath]]/page.jsx` file</h4>
+
+Place this file in `app` directory with
+[the following content](https://github.com/shuding/nextra/blob/d5cb1bc0e84494cbcc8decbae56fb091ce9999f0/examples/docs/app/%5B%5B...mdxPath%5D%5D/page.jsx),
+you should get the following structure:
+
+<FileTree>
+  <FileTree.Folder name="app" open>
+    <FileTree.File name="layout.jsx" />
+    <FileTree.Folder name="[[...mdxPath]]" open active>
+      <FileTree.File name="page.jsx" active />
+    </FileTree.Folder>
+  </FileTree.Folder>
+  <FileTree.Folder name="content" open>
+    <FileTree.File name="index.mdx" />
+    <FileTree.Folder name="docs" open>
+      <FileTree.File name="index.mdx" />
+      <FileTree.File name="getting-started.mdx" />
+    </FileTree.Folder>
+  </FileTree.Folder>
+</FileTree>
+
+<Callout>
+  **Tip**
+
+  Consider the single catch-all route `[[...mdxPath]]/page.jsx` as a gateway to your `content`
+  directory.
+
+  If you set `contentDirBasePath` option in `next.config` file, you should put
+  `[[...mdxPath]]/page.jsx` in the corresponding directory.
+
+</Callout>
+
+<h4>You are ready to go!</h4>
+
+<Callout type="info">
+  **Note**
+
+  Many existing solutions such as
+  [Refreshing the Next.js App Router When Your Markdown Content Changes](https://steveruiz.me/posts/nextjs-refresh-content)
+  rely on extra dependencies like `concurrently` and `ws`. These approaches include
+  [Dan Abramov workaround with `<AutoRefresh>` component and dev web socket server](https://github.com/hashicorp/next-remote-watch/issues/42#issuecomment-1794052655).
+
+  Nextra's content mode delivers a streamlined solution right out of the box:
+
+  - you don't need to install unnecessary dependencies
+  - you don't need to restart your server on changes in `content` directory
+  - hot reloading works out of the box
+  - you can use `import` statements in MDX files and
+  [static images](https://nextra.site/docs/guide/image#static-image) works as well
+
+  Checkout Nextra's
+  [docs website](https://github.com/shuding/nextra/tree/d5cb1bc0e84494cbcc8decbae56fb091ce9999f0/examples/docs)
+  and
+  [i18n website example](https://github.com/shuding/nextra/tree/d5cb1bc0e84494cbcc8decbae56fb091ce9999f0/examples/swr-site).
+
+</Callout>
+
+</Steps>
+
+> [!TIP]
+>
+> You can also put your `content` directory under [the `src` directory](./src-directory).
