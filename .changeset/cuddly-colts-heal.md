@@ -4,4 +4,4 @@
 "nextra-theme-docs": patch
 ---
 
-fix highlighting for ```mdx lang and improve docs for `/docs/docs-theme/start`
+fix syntax highlighting for `mdx` lang and improve docs for `/docs/docs-theme/start`
