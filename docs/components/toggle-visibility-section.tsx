@@ -11,7 +11,7 @@ export const ToggleVisibilitySection: FC<{
 
 You can toggle visibility of the ${element} on the specific pages by setting \`theme.${property}\` property in the \`_meta.js\` file:
 
-\`\`\`js filename="_meta.js"
+~~~js filename="_meta.js"
 export default {
   'my-page': {
     theme: {
@@ -19,6 +19,6 @@ export default {
     }
   }
 }
-\`\`\``)
+~~~`)
   return <MDXRemote compiledSource={rawJs} />
 }

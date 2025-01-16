@@ -13,7 +13,8 @@ export async function Example() {
     `../examples/swr-site/app/[lang]/remote${filename}`,
     'utf8'
   )
-  const rawJs = await compileMdx(`\`\`\`jsx filename="app${filename}" {27} showLineNumbers
+  const rawJs =
+    await compileMdx(`~~~jsx filename="app${filename}" {27} showLineNumbers
 ${pageContent
   .replace('// @ts-expect-error -- fixme\n', '')
   .replace(
@@ -24,7 +25,7 @@ ${pageContent
   .split('\n')
   .slice(1, -1)
   .join('\n')}
-\`\`\``)
+~~~`)
   return <MDXRemote compiledSource={rawJs} />
 }
 
