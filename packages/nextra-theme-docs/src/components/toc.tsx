@@ -25,7 +25,7 @@ const linkClassName = cn(
 
 export const TOC: FC<TOCProps> = ({ toc, filePath, pageTitle }) => {
   const activeSlug = useActiveAnchor()
-  const tocRef = useRef<HTMLUListElement>(null!)
+  const tocRef = useRef<HTMLUListElement>(null)
   const themeConfig = useThemeConfig()
 
   const hasMetaInfo =
@@ -39,7 +39,7 @@ export const TOC: FC<TOCProps> = ({ toc, filePath, pageTitle }) => {
 
   useEffect(() => {
     if (!activeSlug) return
-    const anchor = tocRef.current.querySelector(`a[href="#${activeSlug}"]`)
+    const anchor = tocRef.current?.querySelector(`a[href="#${activeSlug}"]`)
     if (!anchor) return
 
     scrollIntoView(anchor, {
