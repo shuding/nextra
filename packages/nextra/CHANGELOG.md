@@ -1,5 +1,12 @@
 # nextra
 
+## 4.0.1
+
+### Patch Changes
+
+- 481e0d0: fix syntax highlighting for `mdx` lang and improve docs for `/docs/docs-theme/start`
+- 426cd66: Remove margin-top from `.nextra-steps` `:before` pseudo selector
+
 ## 4.0.0
 
 ### Major Changes
