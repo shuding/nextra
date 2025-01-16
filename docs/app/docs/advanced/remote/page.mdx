@@ -7,18 +7,6 @@ import { compileMdx } from 'nextra/compile'
 import { Steps } from 'nextra/components'
 import { MDXRemote } from 'nextra/mdx-remote'
 
-# Remote Content
-
-> [!NOTE]
->
-> You can check out the
-> [SWR i18n example](https://github.com/shuding/nextra/tree/main/examples/swr-site)
-> source code.
-
-<Steps>
-
-## Create `[[...slug]]/page.tsx` file
-
 export async function Example() {
   const filename = '/graphql-eslint/[[...slug]]/page.tsx'
   const pageContent = await fs.readFile(
@@ -40,6 +28,19 @@ ${pageContent
   return <MDXRemote compiledSource={rawJs} />
 }
 
+# Remote Content
+
+> [!NOTE]
+>
+> You can check out the
+> [SWR i18n example](https://github.com/shuding/nextra/tree/main/examples/swr-site)
+> source code.
+
+<Steps>
+
+## Create `[[...slug]]/page.tsx` file
+
+Create `[[...slug]]/page.tsx` file in `app/` directory with the following content:
 <Example />
 
 ## Enhance `pageMap`
