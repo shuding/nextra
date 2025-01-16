@@ -12,3 +12,6 @@ docs/app/docs/advanced/npm2yarn/page.mdx
 docs/app/docs/built-ins/cards/page.mdx
 docs/app/docs/guide/ssg/page.mdx
 docs/app/docs/guide/syntax-highlighting/page.mdx
+
+# contains mdx comments
+docs/app/docs/blog-theme/start/page.mdx
