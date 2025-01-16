@@ -62,7 +62,7 @@ const RootLayout: FC<{
   const banner = (
     <Banner dismissible={false}>
       🚧 This is WIP documentation for Nextra 4.0. Dima Machina is looking{' '}
-      <Link href="mailto:dmytropostolov@gmail.com">
+      <Link href="https://github.com/dimaMachina">
         for a new job or consulting
       </Link>
       .
