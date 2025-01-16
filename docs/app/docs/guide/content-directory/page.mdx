@@ -7,9 +7,9 @@ export async function MDXPathPage() {
   const filename = '[[...mdxPath]]/page.jsx'
   const rawMdx = `\`\`\`mdx filename="${filename}"
 ${(await fs.readFile(`../examples/docs/src/app/docs/${filename}`, 'utf-8'))
-    .split('\n')
-    .slice(2, -1)
-    .join('\n')}
+  .split('\n')
+  .slice(2, -1)
+  .join('\n')}
 \`\`\``
   const rawJs = await compileMdx(rawMdx)
   return <MDXRemote compiledSource={rawJs} />
@@ -19,8 +19,10 @@ ${(await fs.readFile(`../examples/docs/src/app/docs/${filename}`, 'utf-8'))
 
 This mode is designed to:
 
-1. Migrate your existing Next.js `pages` router with minimal changes, you just need to rename your `pages` directory to `content`.
-1. Avoid having `page` filename convention, e.g. `app/configuration/page.mdx` -> `content/configuration.mdx`
+1. Migrate your existing Next.js `pages` router with minimal changes, you just
+   need to rename your `pages` directory to `content`.
+1. Avoid having `page` filename convention, e.g. `app/configuration/page.mdx` ->
+   `content/configuration.mdx`
 
 ## Setup
 
