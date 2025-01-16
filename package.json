@@ -33,7 +33,7 @@
   },
   "pnpm": {
     "overrides": {
-      "postcss": "8.4.49",
+      "postcss": "8.5.1",
       "lightningcss": "1.29.1",
       "esbuild": "0.24.2",
       "vite": "6.0.7",
