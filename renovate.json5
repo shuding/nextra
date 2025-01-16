@@ -6,8 +6,7 @@
     {
       groupName: 'lint',
       matchPackageNames: [
-        '@typescript-eslint/eslint-plugin',
-        '@typescript-eslint/parser',
+        'typescript-eslint',
         'eslint',
         'eslint-config-prettier',
         'eslint-plugin-import',
