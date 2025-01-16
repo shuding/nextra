@@ -52,9 +52,15 @@ const { wrapper: Wrapper, ...components } = useMDXComponents({
   Callout
 })
 
-export default async function Page(props) {
+type PageProps = Readonly<{
+  params: Promise<{
+    slug: string[]
+  }>
+}>
+
+export default async function Page(props: PageProps) {
   const params = await props.params
-  const route = (params.slug || []).join('/')
+  const route = params.slug.join('/')
   const filePath = mdxPages[route]
 
   if (!filePath) {
