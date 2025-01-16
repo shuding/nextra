@@ -19,7 +19,7 @@
     "eslint-plugin-tailwindcss": "3.17.3",
     "eslint-plugin-typescript-sort-keys": "3.3.0",
     "eslint-plugin-unicorn": "56.0.1",
-    "typescript-eslint": "8.19.1"
+    "typescript-eslint": "8.20.0"
   },
   "devDependencies": {
     "@types/node": "^22.10.5"
