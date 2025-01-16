@@ -546,14 +546,14 @@ importers:
   packages/prettier-config:
     dependencies:
       '@ianvs/prettier-plugin-sort-imports':
-        specifier: 4.4.0
-        version: 4.4.0(prettier@3.4.2)
+        specifier: 4.4.1
+        version: 4.4.1(prettier@3.4.2)
       prettier-plugin-pkg:
         specifier: 0.18.1
         version: 0.18.1(prettier@3.4.2)
       prettier-plugin-tailwindcss:
-        specifier: 0.6.9
-        version: 0.6.9(@ianvs/prettier-plugin-sort-imports@4.4.0)(prettier@3.4.2)
+        specifier: 0.6.10
+        version: 0.6.10(@ianvs/prettier-plugin-sort-imports@4.4.1)(prettier@3.4.2)
 
 packages:
 
@@ -3580,8 +3580,8 @@ packages:
     engines: {node: '>=18.18'}
     dev: true
 
-  /@ianvs/prettier-plugin-sort-imports@4.4.0(prettier@3.4.2):
-    resolution: {integrity: sha512-f4/e+/ANGk3tHuwRW0uh2YuBR50I4h1ZjGQ+5uD8sWfinHTivQsnieR5cz24t8M6Vx4rYvZ5v/IEKZhYpzQm9Q==}
+  /@ianvs/prettier-plugin-sort-imports@4.4.1(prettier@3.4.2):
+    resolution: {integrity: sha512-F0/Hrcfpy8WuxlQyAWJTEren/uxKhYonOGY4OyWmwRdeTvkh9mMSCxowZLjNkhwi/2ipqCgtXwwOk7tW0mWXkA==}
     peerDependencies:
       '@vue/compiler-sfc': 2.7.x || 3.x
       prettier: 2 || 3
@@ -10600,15 +10600,15 @@ packages:
       prettier: 3.4.2
     dev: false
 
-  /prettier-plugin-tailwindcss@0.6.9(@ianvs/prettier-plugin-sort-imports@4.4.0)(prettier@3.4.2):
-    resolution: {integrity: sha512-r0i3uhaZAXYP0At5xGfJH876W3HHGHDp+LCRUJrs57PBeQ6mYHMwr25KH8NPX44F2yGTvdnH7OqCshlQx183Eg==}
+  /prettier-plugin-tailwindcss@0.6.10(@ianvs/prettier-plugin-sort-imports@4.4.1)(prettier@3.4.2):
+    resolution: {integrity: sha512-ndj2WLDaMzACnr1gAYZiZZLs5ZdOeBYgOsbBmHj3nvW/6q8h8PymsXiEnKvj/9qgCCAoHyvLOisoQdIcsDvIgw==}
     engines: {node: '>=14.21.3'}
     peerDependencies:
       '@ianvs/prettier-plugin-sort-imports': '*'
       '@prettier/plugin-pug': '*'
       '@shopify/prettier-plugin-liquid': '*'
       '@trivago/prettier-plugin-sort-imports': '*'
-      '@zackad/prettier-plugin-twig-melody': '*'
+      '@zackad/prettier-plugin-twig': '*'
       prettier: ^3.0
       prettier-plugin-astro: '*'
       prettier-plugin-css-order: '*'
@@ -10630,7 +10630,7 @@ packages:
         optional: true
       '@trivago/prettier-plugin-sort-imports':
         optional: true
-      '@zackad/prettier-plugin-twig-melody':
+      '@zackad/prettier-plugin-twig':
         optional: true
       prettier-plugin-astro:
         optional: true
@@ -10655,7 +10655,7 @@ packages:
       prettier-plugin-svelte:
         optional: true
     dependencies:
-      '@ianvs/prettier-plugin-sort-imports': 4.4.0(prettier@3.4.2)
+      '@ianvs/prettier-plugin-sort-imports': 4.4.1(prettier@3.4.2)
       prettier: 3.4.2
     dev: false
 
