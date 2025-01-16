@@ -1,5 +1,11 @@
 # nextra-theme-blog
 
+## 4.0.2
+
+### Patch Changes
+
+- nextra@4.0.2
+
 ## 4.0.1
 
 ### Patch Changes
