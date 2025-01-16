@@ -4,8 +4,9 @@ icon: ChevronRightIcon
 ---
 
 import InstallNextraTheme from '@components/install-nextra-theme.mdx'
+import ReadyToGo from '@components/ready-to-go.mdx'
 
-import { Steps, Tabs } from 'nextra/components'
+import { Steps } from 'nextra/components'
 
 # Docs Theme
 
@@ -42,27 +43,7 @@ npm i next react react-dom nextra nextra-theme-docs
 
 <InstallNextraTheme />
 
-### Add `mdx-components.js` in the root directory
-
-```ts filename="mdx-components.js"
-import { useMDXComponents as getDocsMDXComponents } from 'nextra-theme-docs'
-
-// Get the default MDX components from Nextra Docs theme
-const docsComponents = getDocsMDXComponents()
-
-// Merge custom components with default Nextra components
-export function useMDXComponents(components) {
-  return {
-    ...docsComponents,
-    ...components
-  }
-}
-```
-
-> [!TIP]
->
-> You can use `.jsx`, `.ts`, or `.tsx` extensions for your `mdx-components`
-> file.
+### Add [`mdx-components` file](/docs/guide/mdx-components-file)
 
 ### Create the Root Layout
 
@@ -121,7 +102,7 @@ export default async function RootLayout({ children }) {
 }
 ```
 
-<ReadeToGo />
+<ReadyToGo />
 
 </Steps>
 

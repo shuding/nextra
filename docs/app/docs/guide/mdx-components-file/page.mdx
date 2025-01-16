@@ -1,1 +1,42 @@
 # `mdx-components` File
+
+The `mdx-components` file is **required**, you use it to customize styles via
+`useMDXComponents` function.
+
+## Exports
+
+### `useMDXComponents` function
+
+The file must export a single function named `useMDXComponents`.
+
+```ts filename="mdx-components.js"
+import { useMDXComponents as mdxComponents } from 'nextra-theme-docs' // nextra-theme-blog or your-custom-theme
+
+// Get the default MDX components
+const myComponents = mdxComponents()
+
+// Merge components
+export function useMDXComponents(components) {
+  return {
+    ...myComponents,
+    ...components
+  }
+}
+```
+
+## Params
+
+### `components`
+
+When defining MDX Components, the export function accepts a single parameter
+`components: MDXComponents`.
+
+- The key is the name of the HTML element to override.
+- The value is the component to render instead.
+
+> [!TIP]
+>
+> You can keep `mdx-components` file in root of your project, or in
+> [`src` directory](./src-directory).
+>
+> The `.js`, `.jsx`, or `.tsx` file extensions can be used for `mdx-components`.
