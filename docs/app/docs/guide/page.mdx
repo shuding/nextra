@@ -4,7 +4,6 @@ asIndexPage: true
 
 import {
   BrushIcon,
-  FilesIcon,
   GlobeIcon,
   LightningIcon,
   LinkIcon,
@@ -12,13 +11,7 @@ import {
   StarsIcon
 } from '@components/icons'
 import { Cards } from 'nextra/components'
-import {
-  FileIcon,
-  FolderIcon,
-  InformationCircleIcon,
-  MarkdownIcon,
-  MdxIcon
-} from 'nextra/icons'
+import { InformationCircleIcon, MarkdownIcon } from 'nextra/icons'
 import { MDXRemote } from 'nextra/mdx-remote'
 import { createIndexPage, getPageMap } from 'nextra/page-map'
 
@@ -31,7 +24,6 @@ available in all themes.
   compiledSource={await createIndexPage(await getPageMap('/docs/guide'))}
   components={{
     Cards,
-    FilesIcon,
     MarkdownIcon,
     StarsIcon,
     LinkIcon,
@@ -39,9 +31,6 @@ available in all themes.
     LightningIcon,
     PictureIcon,
     BrushIcon,
-    FileIcon,
-    FolderIcon,
-    MdxIcon,
     InformationCircleIcon
   }}
 />

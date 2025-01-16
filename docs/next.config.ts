@@ -36,6 +36,16 @@ const nextConfig = withNextra({
       source: '/docs/docs-theme/theme-configuration',
       destination: '/docs/docs-theme/built-ins/layout',
       permanent: true
+    },
+    {
+      source: '/docs/docs-theme/page-configuration',
+      destination: '/docs/file-conventions/meta-file',
+      permanent: true
+    },
+    {
+      source: '/docs/guide/organize-files',
+      destination: '/docs/file-conventions',
+      permanent: true
     }
   ],
   webpack(config) {

@@ -15,9 +15,9 @@ export class Shadow extends Component {
   }
 
   render() {
-    const { children, ...rest } = this.props
+    const { children, ...props } = this.props
     return (
-      <div {...rest} ref={node => (this.node = node)}>
+      <div {...props} ref={node => (this.node = node)}>
         {this.shadowRoot && createPortal(children, this.shadowRoot)}
       </div>
     )

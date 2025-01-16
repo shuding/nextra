@@ -292,15 +292,15 @@ const IndexPage: FC = () => {
               <p className="mr-6">
                 You can leverage the hybrid rendering power from Next.js with
                 your Markdown content including{' '}
-                <Link href="https://nextjs.org/docs/basic-features/pages#static-generation-recommended">
+                <Link href="https://nextjs.org/docs/app/getting-started/layouts-and-pages">
                   SSG
                 </Link>
                 ,{' '}
-                <Link href="https://nextjs.org/docs/basic-features/pages#server-side-rendering">
+                <Link href="https://nextjs.org/docs/app/getting-started/layouts-and-pages">
                   SSR
                 </Link>
                 , and{' '}
-                <Link href="https://nextjs.org/docs/basic-features/data-fetching/incremental-static-regeneration">
+                <Link href="https://nextjs.org/docs/app/building-your-application/data-fetching/incremental-static-regeneration">
                   ISR
                 </Link>
                 .
