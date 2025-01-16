@@ -52,7 +52,7 @@ export default {
           'content-directory': <Code>content</Code>,
           'src-directory': <Code>src</Code>,
           _5: {
-            href: 'https://nextjs.org/docs/app/building-your-application/routing',
+            href: 'https://nextjs.org/docs/app/getting-started/installation#create-the-app-directory',
             title: <ExternalLink>app</ExternalLink>
           },
           _6: {
