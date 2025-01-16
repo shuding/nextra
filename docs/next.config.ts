@@ -2,7 +2,7 @@ import nextra from 'nextra'
 
 function isExportNode(node, varName: string) {
   if (node.type !== 'mdxjsEsm') return false
-  const [n] = node.data!.estree!.body
+  const [n] = node.data.estree.body
 
   if (n.type !== 'ExportNamedDeclaration') return false
 
