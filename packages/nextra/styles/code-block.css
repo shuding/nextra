@@ -19,6 +19,7 @@ code.nextra-code {
 
 pre code.nextra-code:not([class*='twoslash-']) {
   @apply x:grid;
+  counter-reset: line;
 
   &[data-line-numbers] > span {
     @apply x:pl-2;

@@ -13,7 +13,7 @@ export async function Example() {
     `../examples/swr-site/app/[lang]/remote${filename}`,
     'utf8'
   )
-  const rawJs = await compileMdx(`\`\`\`jsx filename="app${filename}" {27}
+  const rawJs = await compileMdx(`\`\`\`jsx filename="app${filename}" {27} showLineNumbers
 ${pageContent
   .replace('// @ts-expect-error -- fixme\n', '')
   .replace(
