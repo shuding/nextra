@@ -10,8 +10,8 @@ import { MDXRemote } from 'nextra/mdx-remote'
 
 export async function MDXPathPage() {
   const filename = '[[...mdxPath]]/page.jsx'
-  const rawMdx = `\`\`\`jsx filename="${filename}"
-${(await fs.readFile(`../examples/docs/src/app/docs/${filename}`, 'utf-8'))
+  const rawMdx = `\`\`\`jsx filename="${filename}" showLineNumbers
+${(await fs.readFile(`../examples/docs/src/app/docs/${filename}`, 'utf8'))
   .split('\n')
   .slice(2, -1)
   .join('\n')}
