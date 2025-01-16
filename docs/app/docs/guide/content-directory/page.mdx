@@ -3,6 +3,18 @@ import { compileMdx } from 'nextra/compile'
 import { FileTree, Steps } from 'nextra/components'
 import { MDXRemote } from 'nextra/mdx-remote'
 
+export async function MDXPathPage() {
+  const filename = '[[...mdxPath]]/page.jsx'
+  const rawMdx = `\`\`\`mdx filename="${filename}"
+${(await fs.readFile(`../examples/docs/src/app/docs/${filename}`, 'utf-8'))
+    .split('\n')
+    .slice(2, -1)
+    .join('\n')}
+\`\`\``
+  const rawJs = await compileMdx(rawMdx)
+  return <MDXRemote compiledSource={rawJs} />
+}
+
 # `content` Directory
 
 Migrate your Pages Router site with minimal changes using this mode. Follow
@@ -16,32 +28,15 @@ Create your first MDX page as `content/index.mdx`:
 Hello, world!
 ```
 
-Add `[[...mdxPath]]/page.jsx` file with the following content
-
-export async function MDXPathPage() {
-  const filename = '[[...mdxPath]]/page.jsx'
-  const rawMdx = `\`\`\`mdx filename="${filename}"
-${(await fs.readFile(`../examples/docs/src/app/docs/${filename}`, 'utf-8'))
-  .split('\n')
-  .slice(2, -1)
-  .join('\n')}
-\`\`\``
-  const rawJs = await compileMdx(rawMdx)
-  return <MDXRemote compiledSource={rawJs} />
-}
-
-<MDXPathPage />
-
 <Steps>
-
-<h4>Rename your `pages` folder to `content`</h4>
+## Rename your `pages` folder to `content`
 
 > [!TIP]
 >
 > You can keep `content` directory in root of your project, or in
 > [`src` directory](./src-directory).
 
-<h4>Set `contentDirBasePath` option in `next.config` file (_optional_)</h4>
+## Set `contentDirBasePath` option in `next.config` file (_optional_)
 
 If you want to serve your content from a different path, you can set
 `contentDirBasePath` option:
@@ -54,10 +49,12 @@ const withNextra = nextra({
 })
 ```
 
-<h4>Add `[[...mdxPath]]/page.jsx` file</h4>
+## Add `[[...mdxPath]]/page.jsx` file
 
-Place this file in `app` directory with
-[the following content](https://github.com/shuding/nextra/blob/d5cb1bc0e84494cbcc8decbae56fb091ce9999f0/examples/docs/app/%5B%5B...mdxPath%5D%5D/page.jsx),
+Place this file in `app` directory with the following content:
+
+<MDXPathPage />
+
 you should get the following structure:
 
 <FileTree>
@@ -69,11 +66,9 @@ you should get the following structure:
   </FileTree.Folder>
   <FileTree.Folder name="content" open>
     <FileTree.File name="index.mdx" />
-    <FileTree.Folder name="docs" open>
-      <FileTree.File name="index.mdx" />
-      <FileTree.File name="getting-started.mdx" />
-    </FileTree.Folder>
   </FileTree.Folder>
+  <FileTree.File name="next.config.js" />
+  <FileTree.File name="package.json" />
 </FileTree>
 
 > [!TIP]
@@ -84,7 +79,7 @@ you should get the following structure:
 > If you set `contentDirBasePath` option in `next.config` file, you should put
 > `[[...mdxPath]]/page.jsx` in the corresponding directory.
 
-<h4>You are ready to go!</h4>
+## You are ready to go!
 
 > [!NOTE]
 >
