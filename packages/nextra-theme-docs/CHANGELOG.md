@@ -1,5 +1,12 @@
 # nextra-theme-docs
 
+## 4.0.2
+
+### Patch Changes
+
+- 865e2ab: hide `On This Page` TOC's title `themeConfig.toc.title` when there is no toc links
+  - nextra@4.0.2
+
 ## 4.0.1
 
 ### Patch Changes
