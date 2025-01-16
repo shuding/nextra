@@ -21,7 +21,11 @@ export default {
           'static-exports': '',
           search: '',
           'github-alert-syntax': '',
-          turbopack: ''
+          turbopack: '',
+          _: {
+            type: 'separator',
+            title: 'File Conventions'
+          }
         }
       },
       advanced: {
