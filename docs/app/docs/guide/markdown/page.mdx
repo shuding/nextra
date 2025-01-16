@@ -2,16 +2,16 @@
 icon: MarkdownIcon
 ---
 
-import { Shadow } from '@components/utils/shadow'
+import { Shadow } from '@components/shadow'
 import { Counter } from './_counter'
 
 # Markdown
 
 ## MDX
 
-With Nextra, all your `.mdx` files under the pages directory will be rendered
-with [MDX](https://mdxjs.com/about), it's an advanced Markdown format with React
-component support.
+With Nextra, all your `.mdx` files under the `content` directory will be
+rendered with [MDX](https://mdxjs.com/about), it's an advanced Markdown format
+with React component support.
 
 For example, you can use import and use React components inside your MDX files
 like this:
@@ -36,12 +36,10 @@ export function Counter({ children }) {
 
 Generates:
 
-<div className="mt-6 rounded-xl border border-gray-200 p-4 dark:border-gray-900">
-  <Shadow mode="open">
-    <h2>Hello MDX</h2>
-    <Counter>**Clicks**: </Counter>
-  </Shadow>
-</div>
+<Shadow mode="open" className="nextra-border mt-6 rounded-xl border p-4">
+  <h2>Hello MDX</h2>
+  <Counter>**Clicks**: </Counter>
+</Shadow>
 
 Besides basic MDX, Nextra also has some advanced Markdown features built-in.
 

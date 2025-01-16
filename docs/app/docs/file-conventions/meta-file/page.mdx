@@ -1,29 +1,49 @@
 ---
-icon: RowsIcon
+icon: FileIcon
+sidebarTitle: _meta.js
 ---
 
 import { Screenshot } from 'components/screenshot'
 import { Video } from 'components/video'
 import { FileTree } from 'nextra/components'
 
-# Page Configuration
+# `_meta.js` File
+
+It's very common to customize each page's title, rather than just relying on
+filenames. Having a page titled "Index" lacks clarity. It is preferable to
+assign a meaningful title that accurately represents the content, such as
+"Home".
+
+That's where `_meta` files comes in. You can have an `_meta` file in each
+directory, and it will be used to override the default configuration of each
+page.
 
 In Nextra, the site and page structure can be configured via the co-located
-`_meta.js` files. In the docs theme, there are some extra options available to
-customize it further.
+`_meta` files. Those configurations affect the overall layout of the theme,
+especially the navigation bar and the sidebar.
 
-Those configurations affect the overall layout of the theme, especially the
-navigation bar and the sidebar.
-
-> [!NOTE]
+> [!TIP]
 >
-> Read more about Nextra's `_meta.js` files
-> [here](/docs/guide/organize-files#_metajs).
+> In `nextra-theme-docs`, there are some extra options available to customize it
+> further.
+
+<FileTree>
+  <FileTree.Folder name="content" defaultOpen>
+    <FileTree.File name="_meta.js" active />
+    <FileTree.File name="contact.md" />
+    <FileTree.File name="index.mdx" />
+    <FileTree.Folder name="about" defaultOpen>
+      <FileTree.File name="_meta.js" active />
+      <FileTree.File name="legal.md" />
+      <FileTree.File name="index.mdx" />
+    </FileTree.Folder>
+  </FileTree.Folder>
+</FileTree>
 
 ## Pages
 
 The title and order of a page shown in the sidebar should be configured in the
-`_meta.js` file as key-value pairs. For example, if you have the following file
+`_meta` file as key-value pairs. For example, if you have the following file
 structure:
 
 <FileTree>
@@ -35,7 +55,7 @@ structure:
   </FileTree.Folder>
 </FileTree>
 
-You can define how the pages are shown in the sidebar via the `_meta.js` file:
+You can define how the pages are shown in the sidebar via the `_meta` file:
 
 ```js filename="_meta.js"
 export default {
@@ -47,9 +67,9 @@ export default {
 
 > [!NOTE]
 >
-> If any routes are not listed in the `_meta.js` file, they will be appended to
-> the end of the sidebar and sorted alphabetically, and the title will be
-> formatted with [Title](https://title.sh) based on filename.
+> If any routes are not listed in the `_meta` file, they will be appended to the
+> end of the sidebar and sorted alphabetically, and the title will be formatted
+> with [Title](https://title.sh) based on filename.
 
 ## Folders
 
@@ -69,8 +89,8 @@ Folders can be configured in the same way as pages. For example:
   </FileTree.Folder>
 </FileTree>
 
-The top-level `_meta.js` file contains the meta information for the top-level
-pages and folders:
+The top-level `_meta` file contains the meta information for the top-level pages
+and folders:
 
 ```js filename="content/_meta.js"
 export default {
@@ -81,8 +101,8 @@ export default {
 }
 ```
 
-And the nested `_meta.js` file contains the meta information for pages in the
-same folder:
+And the nested `_meta` file contains the meta information for pages in the same
+folder:
 
 ```js filename="content/fruits/_meta.js"
 export default {
@@ -92,7 +112,7 @@ export default {
 ```
 
 This way, information for pages are grouped together in directories. You can
-move directories around without having to change the `_meta.js` file.
+move directories around without having to change the `_meta` file.
 
 ### Folders with Index Page
 
@@ -103,7 +123,7 @@ the same name and in the same directory as the folder. Let's say we want to add
 
 <FileTree>
   <FileTree.Folder name="content" defaultOpen>
-    <FileTree.Folder name="fruits" defaultOpen>
+    <FileTree.Folder name="fruits" defaultOpen active>
       <FileTree.File name="_meta.js" />
       <FileTree.File name="apple.mdx" />
       <FileTree.File name="banana.mdx" />
@@ -116,14 +136,14 @@ the same name and in the same directory as the folder. Let's say we want to add
   </FileTree.Folder>
 </FileTree>
 
-Then Nextra knows that the `fruits` key in `_meta.js` defines a folder with an
+Then Nextra knows that the `fruits` key in `_meta` defines a folder with an
 index page. If you click that folder in the sidebar, it will open the folder and
 show you the `fruits.mdx` page at the same time.
 
 ## External Links
 
 You can add external links to the sidebar by adding an item with `href` in
-`_meta.js`:
+`_meta` file:
 
 ```js filename="content/_meta.js" {6-9}
 export default {
@@ -190,8 +210,8 @@ project:
   </FileTree.Folder>
 </FileTree>
 
-In your top-level `_meta.js` file, you can set everything as a page, instead of
-a normal sidebar item:
+In your top-level `_meta` file, you can set everything as a page, instead of a
+normal sidebar item:
 
 ```js filename="content/_meta.js"
 export default {
@@ -216,12 +236,11 @@ export default {
 
 And it will look like this:
 
-<Video src="/assets/docs/sub-docs.mp4" />
-
-<div className="mt-4 text-center text-sm">
-  [Live example on
-  StackBlitz](https://stackblitz.com/edit/nextra-2-docs-eszspq?file=pages%2F_meta.js)
-</div>
+<figure>
+  <Video src="/assets/docs/sub-docs.mp4" />
+  {/* prettier-ignore */}
+  <figcaption>[Live example on StackBlitz](https://stackblitz.com/edit/nextra-2-docs-eszspq?file=pages%2F_meta.js)</figcaption>
+</figure>
 
 You can also hide links like `Home` from the navbar with the
 [`display: 'hidden'`](#hidden-routes) option.
@@ -231,12 +250,12 @@ You can also hide links like `Home` from the navbar with the
 You can also add menus to the navbar using `type: 'menu'` and the `'items'`
 option:
 
-<Screenshot>![Navbar menu](/assets/docs/menu.png)</Screenshot>
-
-<div className="mt-8 text-center text-sm">
-  [Live example on
-  StackBlitz](https://stackblitz.com/edit/nextra-2-docs-2qopvp?file=pages%2F_meta.js)
-</div>
+<figure>
+  <Screenshot>![Navbar menu](/assets/docs/menu.png)</Screenshot>
+  <br />
+  {/* prettier-ignore */}
+  <figcaption>[Live example on StackBlitz](https://stackblitz.com/edit/nextra-2-docs-2qopvp?file=pages%2F_meta.js)</figcaption>
+</figure>
 
 ```js filename="content/_meta.js"
 export default {
@@ -375,6 +394,7 @@ and `'article'` typesettings available in the docs theme.
 The default one is suitable for most cases like documentation, but you can use
 the `'article'` typesetting to make it look like an elegant article page:
 
+<figure className="mt-6">
 ```js filename="content/_meta.js" {5}
 export default {
   about: {
@@ -385,8 +405,72 @@ export default {
   }
 }
 ```
+  <figcaption>[Live example on StackBlitz](https://stackblitz.com/edit/nextra-2-docs-hg77h3?file=pages%2F_meta.js,pages%2Findex.mdx)</figcaption>
+</figure>
 
-<div className="mt-4 text-center text-sm">
-  [Live example on
-  StackBlitz](https://stackblitz.com/edit/nextra-2-docs-hg77h3?file=pages%2F_meta.js,pages%2Findex.mdx)
-</div>
+## Sorting Pages Alphabetically
+
+You can use ESLint's built-in `sort-keys` rule, append
+`/* eslint sort-keys: error */` comment at the top of your `_meta` file, and you
+will receive ESLint's errors about incorrect order.
+
+## Allowed Keys Values
+
+The type of your `_meta` keys should be always `string` and not `number` since
+[numbers are always ordered first](https://dev.to/frehner/the-order-of-js-object-keys-458d)
+for JavaScript objects.
+
+Following:
+
+```js filename="content/_meta.js"
+export default {
+  foo: '',
+  1992_10_21: '',
+  1: ''
+}
+```
+
+Will be converted to:
+
+{/* prettier-ignore */}
+```js filename="content/_meta.js"
+export default {
+  '1': '',
+  '19921021': '',
+  foo: ''
+}
+```
+
+## Example
+
+Put this in your `content/_meta.js` file:
+
+```js filename="content/_meta.js"
+export default {
+  index: 'My Homepage',
+  contact: 'Contact Us',
+  about: 'About Us'
+}
+```
+
+It tells Nextra the order of each page, and the correct title.
+
+Alternatively, you can do it with `title` property and have other configurations
+in there as well:
+
+```js filename="content/_meta.js"
+export default {
+  index: 'My Homepage',
+  contact: 'Contact Us',
+  about: {
+    title: 'About Us'
+    // ... extra configurations
+  }
+}
+```
+
+The extra configurations are passed to the **theme** as additional information.
+
+> [!TIP]
+>
+> The `.js`, `.jsx`, or `.tsx` file extensions can be used for `_meta` file.

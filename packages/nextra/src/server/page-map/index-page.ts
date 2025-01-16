@@ -2,7 +2,10 @@ import type { MdxFile, PageMapItem } from '../../types.js'
 import { compileMdx } from '../compile.js'
 
 function renderCard(item: MdxFile): string {
-  const { icon, sidebarTitle, title } = item.frontMatter!
+  if (!item.frontMatter) {
+    return ''
+  }
+  const { icon, sidebarTitle, title } = item.frontMatter
   const Icon = icon ? `<${icon}/>` : 'null'
   return `<Cards.Card title="${sidebarTitle || title}" href="${item.route}" icon={${Icon}} />`
 }

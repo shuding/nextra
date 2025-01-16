@@ -1,3 +1,23 @@
+import { LinkArrowIcon } from 'nextra/icons'
+import type { FC, ReactNode } from 'react'
+import { useMDXComponents } from '../mdx-components'
+
+// eslint-disable-next-line react-hooks/rules-of-hooks -- isn't react hook
+const { code: Code } = useMDXComponents()
+
+const ExternalLink: FC<{ children: ReactNode }> = ({ children }) => {
+  return (
+    <>
+      <Code>{children}</Code>&thinsp;
+      <LinkArrowIcon
+        // based on font-size
+        height="1em"
+        className="x:inline x:align-baseline x:shrink-0"
+      />
+    </>
+  )
+}
+
 export default {
   index: {
     type: 'page',
@@ -8,9 +28,41 @@ export default {
     title: 'Documentation',
     items: {
       index: '',
+      'file-conventions': {
+        items: {
+          _: {
+            type: 'separator',
+            title: 'Files'
+          },
+          'page-file': <Code>page.mdx</Code>,
+          'meta-file': <Code>_meta.js</Code>,
+          'mdx-components-file': <Code>mdx-components.js</Code>,
+          _2: {
+            href: 'https://nextjs.org/docs/app/api-reference/file-conventions/page',
+            title: <ExternalLink>page.jsx</ExternalLink>
+          },
+          _3: {
+            href: 'https://nextjs.org/docs/app/api-reference/file-conventions/layout',
+            title: <ExternalLink>layout.jsx</ExternalLink>
+          },
+          _4: {
+            type: 'separator',
+            title: 'Top-Level Folders'
+          },
+          'content-directory': <Code>content</Code>,
+          'src-directory': <Code>src</Code>,
+          _5: {
+            href: 'https://nextjs.org/docs/app/building-your-application/routing',
+            title: <ExternalLink>app</ExternalLink>
+          },
+          _6: {
+            href: 'https://nextjs.org/docs/app/building-your-application/optimizing/static-assets',
+            title: <ExternalLink>public</ExternalLink>
+          }
+        }
+      },
       guide: {
         items: {
-          'organize-files': '',
           markdown: '',
           'syntax-highlighting': '',
           link: '',
@@ -21,11 +73,7 @@ export default {
           'static-exports': '',
           search: '',
           'github-alert-syntax': '',
-          turbopack: '',
-          _: {
-            type: 'separator',
-            title: 'File Conventions'
-          }
+          turbopack: ''
         }
       },
       advanced: {
@@ -66,7 +114,6 @@ export default {
       'docs-theme': {
         items: {
           start: '',
-          'page-configuration': '',
           'built-ins': {
             items: {
               layout: ''
