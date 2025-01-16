@@ -1,5 +1,12 @@
 # nextra-theme-docs
 
+## 4.0.3
+
+### Patch Changes
+
+- a0c432f: fix `TypeError: Cannot read properties of null (reading 'querySelector')`
+  - nextra@4.0.3
+
 ## 4.0.2
 
 ### Patch Changes
