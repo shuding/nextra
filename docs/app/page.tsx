@@ -12,9 +12,7 @@ import styles from './page.module.css'
 import './page.css'
 import type { FC } from 'react'
 
-export const metadata: Metadata = {
-  title: 'Nextra – Next.js Static Site Generator'
-}
+export const metadata: Metadata = {}
 
 const IndexPage: FC = () => {
   return (
