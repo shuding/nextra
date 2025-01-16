@@ -1,8 +1,5 @@
 ---
 icon: FormulaIcon
-links:
-  - rel: stylesheet
-    href: 'https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.css'
 ---
 
 import { compileMdx } from 'nextra/compile'
@@ -11,6 +8,12 @@ import {
   MathJax,
   MathJaxContext,
 } from 'nextra/components'
+
+{/* <link rel="stylesheet"> is unsupported https://nextjs.org/docs/app/api-reference/functions/generate-metadata#unsupported-metadata */}
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/katex/dist/katex.css"
+/>
 
 # LaTeX
 
@@ -59,11 +62,12 @@ x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}
 will be rendered as:
 
 <div className="mt-6 rounded-xl border p-4 nextra-border">
-  The **Pythagorean equation** is $a=\sqrt{b^2 + c^2}$ and the quadratic formula:
+The **Pythagorean equation** is $a=\sqrt{b^2 + c^2}$ and the quadratic formula:
 
-  ```math
-  x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}
-  ```
+```math
+x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}
+```
+
 </div>
 
 You can still use [Markdown and MDX syntax](../markdown) in the same line as
@@ -99,6 +103,24 @@ const withNextra = nextra({
 
 See [KaTeX's documentation](https://katex.org/docs/supported) for a list of
 supported commands.
+
+> [!TIP]
+>
+> Add `<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex/dist/katex.css" />{:jsx}`
+> inside `<head>` element in your root `layout` file since `<link rel="stylesheet" />{:jsx}`
+> [isn't supported with Next.js Metadata API](https://nextjs.org/docs/app/api-reference/functions/generate-metadata#unsupported-metadata).
+>
+> Alternatively, you can include `<link rel="stylesheet" />{:jsx}` directly in your MDX file.
+>
+> ~~~mdx filename="katex.mdx"
+> <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex/dist/katex.css" />
+>
+> # My page with single usage of KaTeX
+>
+> ```math
+> \int_2^3x^3\,\mathrm{d}x
+> ```
+> ~~~
 
 ### MathJax
 
@@ -166,7 +188,7 @@ MathJax distribution into your `/public` folder for it to be served locally.
 ## KaTeX vs. MathJax
 
 With KaTeX, math is pre-rendered which means flicker-free and faster page loads.
-However, KaTeX does not support all of the features of MathJax, especially
+However, KaTeX does not support all the features of MathJax, especially
 features related to accessibility.
 
 The following two examples show the same formula rendered with KaTeX (first) and
