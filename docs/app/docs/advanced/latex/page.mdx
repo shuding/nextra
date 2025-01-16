@@ -104,23 +104,23 @@ const withNextra = nextra({
 See [KaTeX's documentation](https://katex.org/docs/supported) for a list of
 supported commands.
 
-> [!TIP]
->
-> Add `<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex/dist/katex.css" />{:jsx}`
-> inside `<head>` element in your root `layout` file since `<link rel="stylesheet" />{:jsx}`
-> [isn't supported with Next.js Metadata API](https://nextjs.org/docs/app/api-reference/functions/generate-metadata#unsupported-metadata).
->
-> Alternatively, you can include `<link rel="stylesheet" />{:jsx}` directly in your MDX file.
->
-> ~~~mdx filename="katex.mdx"
-> <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex/dist/katex.css" />
->
-> # My page with single usage of KaTeX
->
-> ```math
-> \int_2^3x^3\,\mathrm{d}x
-> ```
-> ~~~
+#### Apply KaTeX Styles
+
+Add `<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex/dist/katex.css" />{:jsx}`
+inside `<head>` element in your root `layout` file since `<link rel="stylesheet" />{:jsx}`
+[isn't supported with Next.js Metadata API](https://nextjs.org/docs/app/api-reference/functions/generate-metadata#unsupported-metadata).
+
+Alternatively, you can include `<link rel="stylesheet" />{:jsx}` directly in your MDX file:
+
+~~~mdx filename="katex.mdx"
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex/dist/katex.css" />
+
+# My page with single usage of KaTeX
+
+```math
+\int_2^3x^3\,\mathrm{d}x
+```
+~~~
 
 ### MathJax
 
