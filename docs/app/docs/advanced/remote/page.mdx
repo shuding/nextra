@@ -2,12 +2,32 @@
 icon: CloudIcon
 ---
 
+import fs from 'node:fs/promises'
+import { compileMdx } from 'nextra/compile'
+import { MDXRemote } from 'nextra/mdx-remote'
+
 # Remote Content
 
-import { Callout } from 'nextra/components'
+> [!NOTE]
+>
+> You can find information about remote docs support in
+> [Nextra 3 blogpost](https://the-guild.dev/blog/nextra-3#remote-docs-support)
+> announcement.
 
-<Callout type="info">
-  You can find information about remote docs support in [Nextra 3
-  blogpost](https://the-guild.dev/blog/nextra-3#remote-docs-support)
-  announcement.
-</Callout>
+export async function Example() {
+  const pageContent = await fs.readFile(
+    '../examples/swr-site/app/[lang]/remote/graphql-eslint/[[...slug]]/page.tsx',
+    'utf8'
+  )
+  const rawJs = await compileMdx(`\`\`\`jsx
+${pageContent
+  .replace('// @ts-expect-error -- fixme\n', '')
+  .split('\n')
+  .slice(1, -1)
+  .join('\n')
+    .replace("lang: 'en',\n    ...(route && { slug: route.split('/') })", "slug: route.split('/')")}
+\`\`\``)
+  return <MDXRemote compiledSource={rawJs} />
+}
+
+<Example />
