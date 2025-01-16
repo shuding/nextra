@@ -13,7 +13,7 @@
       @apply x:absolute x:size-[33px];
       @apply x:border-4 x:border-nextra-bg;
       @apply x:rounded-full x:text-neutral-400 x:text-base x:font-normal x:text-center x:-indent-px;
-      @apply x:mt-[3px] x:ms-[-41px];
+      @apply x:ms-[-41px];
       content: counter(var(--counter-id));
     }
   }
