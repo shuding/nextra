@@ -1,7 +1,7 @@
 import { NextraLogo, VercelLogo } from '@components/icons'
 import cn from 'clsx'
 import type { Metadata } from 'next'
-import { Footer, Layout, Navbar } from 'nextra-theme-docs'
+import { Footer, Layout, Link, Navbar } from 'nextra-theme-docs'
 import { Banner, Head } from 'nextra/components'
 import { getPageMap } from 'nextra/page-map'
 import type { FC, ReactNode } from 'react'
@@ -61,7 +61,11 @@ const RootLayout: FC<{
 }> = async ({ children }) => {
   const banner = (
     <Banner dismissible={false}>
-      🚧 This is WIP documentation for Nextra 4.0
+      🚧 This is WIP documentation for Nextra 4.0. Dima Machina is looking{' '}
+      <Link href="mailto:dmytropostolov@gmail.com">
+        for a new job or consulting
+      </Link>
+      .
     </Banner>
   )
   const navbar = (

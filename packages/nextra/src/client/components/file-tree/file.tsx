@@ -16,7 +16,7 @@ export const File: FC<FileProps> = ({ name, active }) => {
       )}
     >
       {/* Text can shrink icon */}
-      <FileIcon height="14 " className="x:shrink-0" />
+      <FileIcon height="14" className="x:shrink-0" />
       {name}
     </li>
   )

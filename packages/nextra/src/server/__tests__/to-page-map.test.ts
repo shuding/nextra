@@ -123,15 +123,20 @@ describe('generatePageMap()', () => {
         "app/docs/docs-theme/page-configuration/page.mdx",
         "app/docs/docs-theme/page.mdx",
         "app/docs/docs-theme/start/page.mdx",
+        "app/docs/guide/content-directory/page.mdx",
         "app/docs/guide/custom-css/page.mdx",
         "app/docs/guide/github-alert-syntax/page.mdx",
         "app/docs/guide/i18n/page.mdx",
         "app/docs/guide/image/page.mdx",
         "app/docs/guide/link/page.mdx",
         "app/docs/guide/markdown/page.mdx",
+        "app/docs/guide/mdx-components-file/page.mdx",
+        "app/docs/guide/meta-file/page.mdx",
         "app/docs/guide/organize-files/page.mdx",
+        "app/docs/guide/page-file/page.mdx",
         "app/docs/guide/page.mdx",
         "app/docs/guide/search/page.mdx",
+        "app/docs/guide/src-directory/page.mdx",
         "app/docs/guide/ssg/page.mdx",
         "app/docs/guide/static-exports/page.mdx",
         "app/docs/guide/syntax-highlighting/page.mdx",
@@ -359,6 +364,11 @@ describe('generatePageMap()', () => {
             {
               "children": [
                 {
+                  "__pagePath": "app/docs/guide/content-directory/page.mdx",
+                  "name": "content-directory",
+                  "route": "/docs/guide/content-directory",
+                },
+                {
                   "__pagePath": "app/docs/guide/custom-css/page.mdx",
                   "name": "custom-css",
                   "route": "/docs/guide/custom-css",
@@ -389,9 +399,24 @@ describe('generatePageMap()', () => {
                   "route": "/docs/guide/markdown",
                 },
                 {
+                  "__pagePath": "app/docs/guide/mdx-components-file/page.mdx",
+                  "name": "mdx-components-file",
+                  "route": "/docs/guide/mdx-components-file",
+                },
+                {
+                  "__pagePath": "app/docs/guide/meta-file/page.mdx",
+                  "name": "meta-file",
+                  "route": "/docs/guide/meta-file",
+                },
+                {
                   "__pagePath": "app/docs/guide/organize-files/page.mdx",
                   "name": "organize-files",
                   "route": "/docs/guide/organize-files",
+                },
+                {
+                  "__pagePath": "app/docs/guide/page-file/page.mdx",
+                  "name": "page-file",
+                  "route": "/docs/guide/page-file",
                 },
                 {
                   "__pagePath": "app/docs/guide/page.mdx",
@@ -402,6 +427,11 @@ describe('generatePageMap()', () => {
                   "__pagePath": "app/docs/guide/search/page.mdx",
                   "name": "search",
                   "route": "/docs/guide/search",
+                },
+                {
+                  "__pagePath": "app/docs/guide/src-directory/page.mdx",
+                  "name": "src-directory",
+                  "route": "/docs/guide/src-directory",
                 },
                 {
                   "__pagePath": "app/docs/guide/ssg/page.mdx",
@@ -498,15 +528,20 @@ describe('generatePageMap()', () => {
         import {metadata as app_docs_docs_theme_page_configuration_page} from "private-next-root-dir/app/docs/docs-theme/page-configuration/page.mdx?metadata";
         import {metadata as app_docs_docs_theme_page} from "private-next-root-dir/app/docs/docs-theme/page.mdx?metadata";
         import {metadata as app_docs_docs_theme_start_page} from "private-next-root-dir/app/docs/docs-theme/start/page.mdx?metadata";
+        import {metadata as app_docs_guide_content_directory_page} from "private-next-root-dir/app/docs/guide/content-directory/page.mdx?metadata";
         import {metadata as app_docs_guide_custom_css_page} from "private-next-root-dir/app/docs/guide/custom-css/page.mdx?metadata";
         import {metadata as app_docs_guide_github_alert_syntax_page} from "private-next-root-dir/app/docs/guide/github-alert-syntax/page.mdx?metadata";
         import {metadata as app_docs_guide_i18n_page} from "private-next-root-dir/app/docs/guide/i18n/page.mdx?metadata";
         import {metadata as app_docs_guide_image_page} from "private-next-root-dir/app/docs/guide/image/page.mdx?metadata";
         import {metadata as app_docs_guide_link_page} from "private-next-root-dir/app/docs/guide/link/page.mdx?metadata";
         import {metadata as app_docs_guide_markdown_page} from "private-next-root-dir/app/docs/guide/markdown/page.mdx?metadata";
+        import {metadata as app_docs_guide_mdx_components_file_page} from "private-next-root-dir/app/docs/guide/mdx-components-file/page.mdx?metadata";
+        import {metadata as app_docs_guide_meta_file_page} from "private-next-root-dir/app/docs/guide/meta-file/page.mdx?metadata";
         import {metadata as app_docs_guide_organize_files_page} from "private-next-root-dir/app/docs/guide/organize-files/page.mdx?metadata";
+        import {metadata as app_docs_guide_page_file_page} from "private-next-root-dir/app/docs/guide/page-file/page.mdx?metadata";
         import {metadata as app_docs_guide_page} from "private-next-root-dir/app/docs/guide/page.mdx?metadata";
         import {metadata as app_docs_guide_search_page} from "private-next-root-dir/app/docs/guide/search/page.mdx?metadata";
+        import {metadata as app_docs_guide_src_directory_page} from "private-next-root-dir/app/docs/guide/src-directory/page.mdx?metadata";
         import {metadata as app_docs_guide_ssg_page} from "private-next-root-dir/app/docs/guide/ssg/page.mdx?metadata";
         import {metadata as app_docs_guide_static_exports_page} from "private-next-root-dir/app/docs/guide/static-exports/page.mdx?metadata";
         import {metadata as app_docs_guide_syntax_highlighting_page} from "private-next-root-dir/app/docs/guide/syntax-highlighting/page.mdx?metadata";
@@ -687,6 +722,10 @@ describe('generatePageMap()', () => {
             name: "guide",
             route: "/docs/guide",
             children: [{
+              name: "content-directory",
+              route: "/docs/guide/content-directory",
+              frontMatter: app_docs_guide_content_directory_page
+            }, {
               name: "custom-css",
               route: "/docs/guide/custom-css",
               frontMatter: app_docs_guide_custom_css_page
@@ -711,9 +750,21 @@ describe('generatePageMap()', () => {
               route: "/docs/guide/markdown",
               frontMatter: app_docs_guide_markdown_page
             }, {
+              name: "mdx-components-file",
+              route: "/docs/guide/mdx-components-file",
+              frontMatter: app_docs_guide_mdx_components_file_page
+            }, {
+              name: "meta-file",
+              route: "/docs/guide/meta-file",
+              frontMatter: app_docs_guide_meta_file_page
+            }, {
               name: "organize-files",
               route: "/docs/guide/organize-files",
               frontMatter: app_docs_guide_organize_files_page
+            }, {
+              name: "page-file",
+              route: "/docs/guide/page-file",
+              frontMatter: app_docs_guide_page_file_page
             }, {
               name: "index",
               route: "/docs/guide",
@@ -722,6 +773,10 @@ describe('generatePageMap()', () => {
               name: "search",
               route: "/docs/guide/search",
               frontMatter: app_docs_guide_search_page
+            }, {
+              name: "src-directory",
+              route: "/docs/guide/src-directory",
+              frontMatter: app_docs_guide_src_directory_page
             }, {
               name: "ssg",
               route: "/docs/guide/ssg",

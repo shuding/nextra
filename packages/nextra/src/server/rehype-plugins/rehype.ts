@@ -1,5 +1,6 @@
 import type { Element, Root } from 'hast'
 import type { Options as RehypePrettyCodeOptions } from 'rehype-pretty-code'
+import { bundledLanguages, createHighlighter } from 'shiki'
 import type { Plugin } from 'unified'
 import { SKIP, visit } from 'unist-util-visit'
 import type { NextraConfig } from '../../types.js'
@@ -30,7 +31,14 @@ export const DEFAULT_REHYPE_PRETTY_CODE_OPTIONS: RehypePrettyCodeOptions = {
   defaultLang: {
     block: 'plaintext'
   },
-  filterMetaString: meta => meta.replace(CODE_BLOCK_FILENAME_RE, '')
+  filterMetaString: meta => meta.replace(CODE_BLOCK_FILENAME_RE, ''),
+  getHighlighter(opts) {
+    return createHighlighter({
+      ...opts,
+      // Without `getHighlighter` option ```mdx lang isn't highlighted
+      langs: Object.keys(bundledLanguages)
+    })
+  }
 }
 
 export const rehypeParseCodeMeta: Plugin<
