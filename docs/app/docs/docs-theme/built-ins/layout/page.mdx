@@ -1,8 +1,13 @@
-import { Screenshot } from 'components/screenshot'
-import { Table } from 'components/table'
+---
+sidebarTitle: Layout
+---
+
+import { MdxLayout } from 'components/table'
 import { ToggleVisibilitySection } from 'components/toggle-visibility-section'
 
-# `Layout`
+export default MdxLayout
+
+# `Layout` Component
 
 The theme is configured with the `<Layout>` component. You should pass your
 config options as Layout's `props`, for example:
@@ -35,13 +40,9 @@ Set the repository URL of the documentation. It's used to generate the
 "[Report of broken link](./not-found)" on
 [not found page](https://nextjs.org/docs/app/api-reference/file-conventions/not-found).
 
-<Table>
-
 |                    |               |                                                                                                |
 | ------------------ | ------------- | ---------------------------------------------------------------------------------------------- |
 | docsRepositoryBase | `string{:ts}` | URL of the documentation repository.<br/>Default: `"https://github.com/shuding/nextra"{:json}` |
-
-</Table>
 
 ### Specify a Path
 
@@ -61,14 +62,10 @@ Then Nextra will automatically generate the correct file path for all pages.
 
 Customize the theme behavior of the website.
 
-<Table>
-
 |            |                |                                                                                                                                                                                                                                 |
 | ---------- | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | darkMode   | `boolean{:ts}` | Show or hide the dark mode select button. Default: `"true"{:json}`                                                                                                                                                              |
 | nextThemes | `object{:ts}`  | Configuration for the [next-themes](https://github.com/pacocoursey/next-themes#themeprovider) package.<br/>Default: `{ attribute: 'class', defaultTheme: 'system', disableTransitionOnChange: true, storageKey: 'theme' }{:ts}` |
-
-</Table>
 
 ## MDX Components [!TODO]
 
@@ -76,26 +73,18 @@ Provide custom [MDX components](https://mdxjs.com/table-of-components) to render
 the content. For example, you can use a custom `pre` component to render code
 blocks.
 
-<Table>
-
 |            |                            |                       |
 | ---------- | -------------------------- | --------------------- |
 | components | `Record<string, React.FC>` | Custom MDX components |
-
-</Table>
 
 ## Edit Link
 
 Show an "Edit this page" link on the page that points to the file URL on GitHub
 (or other places).
 
-<Table>
-
 |          |                                       |                                                              |
 | -------- | ------------------------------------- | ------------------------------------------------------------ |
 | editLink | `string \| ReactElement \| null{:ts}` | Content of the edit link. Default: `"Edit this page"{:json}` |
-
-</Table>
 
 > [!TIP]
 >
@@ -108,14 +97,10 @@ documentation. By default, it's a link that points to the issue creation form of
 the docs repository, with the current website title prefilled:
 [example](https://github.com/shuding/nextra/issues/new?title=Feedback%20for%20%E2%80%9CTheme%20Configuration%E2%80%9D&labels=feedback).
 
-<Table>
-
 |                  |                                       |                                                                                     |
 | ---------------- | ------------------------------------- | ----------------------------------------------------------------------------------- |
 | feedback.content | `string \| ReactElement \| null{:ts}` | Content of the feedback link.<br/>Default: `"Question? Give us feedback"{:json}`    |
 | feedback.labels  | `string{:ts}`                         | Labels that can be added to the new created issue.<br/>Default: `"feedback"{:json}` |
-
-</Table>
 
 > [!TIP]
 >
@@ -126,27 +111,19 @@ the docs repository, with the current website title prefilled:
 Options to configure the language dropdown for
 [the i18n docs website](/docs/guide/i18n).
 
-<Table>
-
 |                     |               |                                                        |
 | ------------------- | ------------- | ------------------------------------------------------ |
 | i18n[number].locale | `string{:ts}` | Locale from `i18n.locales` field in `next.config` file |
 | i18n[number].name   | `string{:ts}` | Locale name in dropdown                                |
-
-</Table>
 
 ## Last Updated Date
 
 Show the last updated date of a page. It's useful for showing the freshness of
 the content.
 
-<Table>
-
 |             |                             |                                                                                |
 | ----------- | --------------------------- | ------------------------------------------------------------------------------ |
 | lastUpdated | `ReactElement \| null{:ts}` | Component to render the last updated info.<br/>Default: `<LastUpdated />{:js}` |
-
-</Table>
 
 <ToggleVisibilitySection element="last update date" property="timestamp" />
 
@@ -155,17 +132,13 @@ the content.
 Show previous and next page links on the bottom of the content. It's useful for
 navigating between pages.
 
-<Table>
-
 |                 |                          |                                                           |
 | --------------- | ------------------------ | --------------------------------------------------------- |
 | navigation      | `boolean \| object{:ts}` | Enable or disable navigation link. Default: `true{:json}` |
 | navigation.prev | `boolean{:ts}`           | Enable or disable the previous page link                  |
 | navigation.next | `boolean{:ts}`           | Enable or disable the next page link                      |
 
-</Table>
-
-<Screenshot>![Navigation](/assets/docs/navigation.png)</Screenshot>
+![Navigation](/assets/docs/navigation.png)
 
 ```jsx filename="app/layout.jsx"
 <Layout
@@ -188,15 +161,11 @@ The above is also equivalent to `navigation: true{:js}`.
 
 ## Sidebar
 
-<Table>
-
 |                                  |                |                                                                                                       |
 | -------------------------------- | -------------- | ----------------------------------------------------------------------------------------------------- |
 | sidebar.autoCollapse             | `boolean{:ts}` | If true, automatically collapse inactive folders above `defaultMenuCollapseLevel`                     |
 | sidebar.defaultMenuCollapseLevel | `number{:ts}`  | Specifies the folder level at which the menu on the left is collapsed by default. Default: `2{:json}` |
 | sidebar.toggleButton             | `boolean{:ts}` | Hide/show sidebar toggle button. Default: `true{:json}`                                               |
-
-</Table>
 
 ### Menu Collapse Level
 
@@ -233,9 +202,7 @@ export default {
 }
 ```
 
-<Screenshot>
-  <>![Customized Sidebar](/assets/docs/sidebar-customized.png)</>
-</Screenshot>
+![Customized Sidebar](/assets/docs/sidebar-customized.png)
 
 <ToggleVisibilitySection element="`<Sidebar>`" property="sidebar" />
 
@@ -259,13 +226,9 @@ The priority of the sidebar title is as follows:
 
 ## Theme Switch
 
-<Table>
-
 |             |                                                        |                                                                                                                    |
 | ----------- | ------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ |
 | themeSwitch | `{ light: string; dark: string; system: string }{:ts}` | Translation of options in the theme switch.<br/>Default: `{ light: 'Light', dark: 'Dark', system: 'System' }{:ts}` |
-
-</Table>
 
 You are able to customize the option names for localization or other purposes:
 
@@ -286,16 +249,12 @@ You are able to customize the option names for localization or other purposes:
 Show a table of contents on the right side of the page. It's useful for
 navigating between headings.
 
-<Table>
-
 |                  |                                       |                                                               |
 | ---------------- | ------------------------------------- | ------------------------------------------------------------- |
 | toc.backToTop    | `string \| ReactElement \| null{:ts}` | Text of back to top button. Default: `"Scroll to top"{:json}` |
 | toc.extraContent | `string \| ReactElement \| null{:ts}` | Display extra content below the TOC content                   |
 | toc.float        | `boolean{:ts}`                        | Float the TOC next to the content. Default: `true{:json}`     |
 | toc.title        | `string \| ReactElement \| null{:ts}` | Title of the TOC sidebar. Default: `"On This Page"{:json}`    |
-
-</Table>
 
 ### Floating TOC
 
