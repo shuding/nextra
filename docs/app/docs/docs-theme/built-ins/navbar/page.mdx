@@ -1,10 +1,9 @@
-import { Screenshot } from 'components/screenshot'
-import { Table } from 'components/table'
+import { MdxLayout } from 'components/table'
 import { ToggleVisibilitySection } from 'components/toggle-visibility-section'
 
-# `Navbar`
+export default MdxLayout
 
-<Table>
+# `Navbar`
 
 |             |                          |                                                                         |
 | ----------- | ------------------------ | ----------------------------------------------------------------------- |
@@ -16,15 +15,12 @@ import { ToggleVisibilitySection } from 'components/toggle-visibility-section'
 | chatIcon    | `ReactNode{:ts}`         | Icon of the chat link. Default: `<DiscordIcon width="24" />{:ts}`       |
 | children    | `ReactNode{:ts}`         | Extra content after last icon                                           |
 
-</Table>
-
 ## Logo
 
 The logo of the website rendered on the navbar.
 
-<figure>
-  <Screenshot>![Customized Logo](/assets/docs/logo.png)</Screenshot>
-  <br />
+<figure className="mt-6">
+  <>![Customized Logo](/assets/docs/logo.png)</>
   {/* prettier-ignore */}
   <figcaption>[Live example on StackBlitz](https://stackblitz.com/edit/nextra-2-docs-yrlccm?file=theme.config.jsx)</figcaption>
 </figure>
@@ -55,7 +51,7 @@ it links to Nextra's GitHub repository.
 You can configure `projectLink` and `projectIcon` to customize the project link,
 for example make it link to your GitLab repository:
 
-<Screenshot full>![Project link](/assets/docs/project-link.png)</Screenshot>
+![Project link](/assets/docs/project-link.png)
 
 ```jsx filename="app/layout.jsx"
 <Navbar

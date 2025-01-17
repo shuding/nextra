@@ -59,7 +59,7 @@ const withNextra = nextra({
   defaultShowCopyCode: true,
   mdxOptions: {
     rehypePlugins: [
-      // Provide only on `build` since turbopack on dev supports only serializable values
+      // Provide only on `build` since turbopack on `dev` supports only serializable values
       process.env.NODE_ENV === 'production' && rehypeOpenGraphImage
     ]
   }
