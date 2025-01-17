@@ -116,29 +116,46 @@ move directories around without having to change the `_meta` file.
 
 ### Folders with Index Page
 
-What if I want to have a folder with an index page? We can add a MDX page with
-the same name and in the same directory as the folder. Let's say we want to add
-`/fruits` route in the example above, we can create a `fruits.mdx` file in
-`content`:
+What if I want to have a folder with an index page? You should set asIndexPage: true in the front matter of docs/page.mdx when using the page file convention.
+When using the content directory convention, you can achieve the same result by setting asIndexPage: true in the front matter of docs/index.mdx
+
+#### Page File Convention
 
 <FileTree>
   <FileTree.Folder name="content" defaultOpen>
     <FileTree.Folder name="fruits" defaultOpen active>
       <FileTree.File name="_meta.js" />
+      <FileTree.File name="page.mdx" active />
       <FileTree.File name="apple.mdx" />
       <FileTree.File name="banana.mdx" />
     </FileTree.Folder>
     <FileTree.File name="_meta.js" />
     <FileTree.File name="about.mdx" />
     <FileTree.File name="contact.mdx" />
-    <FileTree.File name="fruits.mdx" active />
+    <FileTree.File name="index.mdx" />
+  </FileTree.Folder>
+</FileTree>
+
+#### Content Directory Convention
+
+<FileTree>
+  <FileTree.Folder name="content" defaultOpen>
+    <FileTree.Folder name="fruits" defaultOpen active>
+      <FileTree.File name="_meta.js" />
+      <FileTree.File name="index.mdx" active />
+      <FileTree.File name="apple.mdx" />
+      <FileTree.File name="banana.mdx" />
+    </FileTree.Folder>
+    <FileTree.File name="_meta.js" />
+    <FileTree.File name="about.mdx" />
+    <FileTree.File name="contact.mdx" />
     <FileTree.File name="index.mdx" />
   </FileTree.Folder>
 </FileTree>
 
 Then Nextra knows that the `fruits` key in `_meta` defines a folder with an
 index page. If you click that folder in the sidebar, it will open the folder and
-show you the `fruits.mdx` page at the same time.
+show you the `page.mdx`/`index.mdx` page at the same time.
 
 ## External Links
 
