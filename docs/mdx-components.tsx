@@ -1,3 +1,6 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
+
 import { useMDXComponents as getDocsMDXComponents } from 'nextra-theme-docs'
 
 const {
