@@ -116,35 +116,18 @@ move directories around without having to change the `_meta` file.
 
 ### Folders with Index Page
 
-What if I want to have a folder with an index page? You should set asIndexPage: true in the front matter of docs/page.mdx when using the page file convention.
-When using the content directory convention, you can achieve the same result by setting asIndexPage: true in the front matter of docs/index.mdx
-
-#### Page File Convention
+To create a folder with an index page (like a `/fruits` route), make a file named
+`content/fruits/index.mdx` or `app/fruits/page.mdx`. Add `asIndexPage: true` to the
+front matter to mark it as the index page.
 
 <FileTree>
+  **Using [`content` directory](/docs/file-conventions/content-directory)**
   <FileTree.Folder name="content" defaultOpen>
     <FileTree.Folder name="fruits" defaultOpen active>
       <FileTree.File name="_meta.js" />
-      <FileTree.File name="page.mdx" active />
       <FileTree.File name="apple.mdx" />
       <FileTree.File name="banana.mdx" />
-    </FileTree.Folder>
-    <FileTree.File name="_meta.js" />
-    <FileTree.File name="about.mdx" />
-    <FileTree.File name="contact.mdx" />
-    <FileTree.File name="index.mdx" />
-  </FileTree.Folder>
-</FileTree>
-
-#### Content Directory Convention
-
-<FileTree>
-  <FileTree.Folder name="content" defaultOpen>
-    <FileTree.Folder name="fruits" defaultOpen active>
-      <FileTree.File name="_meta.js" />
       <FileTree.File name="index.mdx" active />
-      <FileTree.File name="apple.mdx" />
-      <FileTree.File name="banana.mdx" />
     </FileTree.Folder>
     <FileTree.File name="_meta.js" />
     <FileTree.File name="about.mdx" />
@@ -152,6 +135,39 @@ When using the content directory convention, you can achieve the same result by 
     <FileTree.File name="index.mdx" />
   </FileTree.Folder>
 </FileTree>
+
+<FileTree>
+  **Using [`page.mdx` files](/docs/file-conventions/page-file)**
+  <FileTree.Folder name="app" open>
+    <FileTree.Folder name="fruits" open active>
+      <FileTree.File name="_meta.js" />
+      <FileTree.Folder name="apple">
+        <FileTree.File name="page.mdx" />
+      </FileTree.Folder>
+      <FileTree.Folder name="banana">
+        <FileTree.File name="page.mdx" />
+      </FileTree.Folder>
+      <FileTree.File name="page.mdx" active />
+    </FileTree.Folder>
+    <FileTree.File name="_meta.js" />
+    <FileTree.Folder name="about">
+      <FileTree.File name="page.mdx" />
+    </FileTree.Folder>
+    <FileTree.Folder name="contact">
+      <FileTree.File name="page.mdx" />
+    </FileTree.Folder>
+    <FileTree.File name="page.mdx" />
+  </FileTree.Folder>
+</FileTree>
+
+<div className='inline-flex'>
+```mdx filename="content/fruits/index.mdx or app/fruits/page.mdx" copy=false
+---
+asIndexPage: true
+---
+```
+
+</div>
 
 Then Nextra knows that the `fruits` key in `_meta` defines a folder with an
 index page. If you click that folder in the sidebar, it will open the folder and
