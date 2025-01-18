@@ -25,11 +25,12 @@ export const metadata: Metadata = {
     title: 'Nextra'
   },
   title: {
-    absolute: '',
+    default: 'Nextra – Next.js Static Site Generator',
     template: '%s | Nextra'
   },
   openGraph: {
-    url: 'https://nextra.site',
+    // https://github.com/vercel/next.js/discussions/50189#discussioncomment-10826632
+    url: './',
     siteName: 'Nextra',
     locale: 'en_US',
     type: 'website'
@@ -39,8 +40,13 @@ export const metadata: Metadata = {
   },
   twitter: {
     site: 'https://nextra.site'
+  },
+  alternates: {
+    // https://github.com/vercel/next.js/discussions/50189#discussioncomment-10826632
+    canonical: './'
   }
 }
+
 const banner = (
   <Banner dismissible={false}>
     🚧 This is WIP documentation for Nextra 4.0. Dima Machina is looking{' '}

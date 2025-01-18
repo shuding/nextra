@@ -1,12 +1,13 @@
----
-links:
-  - rel: stylesheet
-    href: 'https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.css'
----
+{/* <link rel="stylesheet"> is unsupported in Metadata API https://nextjs.org/docs/app/api-reference/functions/generate-metadata#unsupported-metadata */}
+
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/katex/dist/katex.css"
+/>
 
 # LaTeX
 
-Nextra uses [KaTeX](https://katex.org/) to render LaTeX expressions directly in
+Nextra uses [KaTeX](https://katex.org) to render LaTeX expressions directly in
 MDX. To enable LaTeX support, you must add the following to your
 `next.config.mjs`:
 

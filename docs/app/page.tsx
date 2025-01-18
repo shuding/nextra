@@ -13,7 +13,8 @@ import './page.css'
 import type { FC } from 'react'
 
 export const metadata: Metadata = {
-  title: 'Nextra – Next.js Static Site Generator'
+  description:
+    'Build fast, customizable, and content-rich websites with Nextra. Powered by Next.js, it offers seamless Markdown support, customizable themes, file conventions, and easy integration with MDX, making it perfect for documentation, blogs, and static websites.'
 }
 
 const IndexPage: FC = () => {

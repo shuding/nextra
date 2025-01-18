@@ -9,9 +9,19 @@ import {
   normalizePageMap
 } from 'nextra/page-map'
 import { useMDXComponents } from '../../../../../mdx-components'
-import json from '../../../../../nextra-remote-filepaths/graphql-eslint.json'
 
-const { branch, docsPath, filePaths, repo, user } = json
+const user = 'graphql-hive'
+const repo = 'graphql-eslint'
+const branch = '34b722a2a520599ce06a4ddcccc9623b76434089'
+const docsPath = 'website/src/pages/docs/'
+const filePaths = [
+  'configs.mdx',
+  'custom-rules.mdx',
+  'getting-started.mdx',
+  'getting-started/parser-options.mdx',
+  'getting-started/parser.mdx',
+  'index.mdx'
+]
 
 const { mdxPages, pageMap: _pageMap } = convertToPageMap({
   filePaths,
@@ -42,9 +52,15 @@ const { wrapper: Wrapper, ...components } = useMDXComponents({
   Callout
 })
 
-export default async function Page(props) {
+type PageProps = Readonly<{
+  params: Promise<{
+    slug: string[]
+  }>
+}>
+
+export default async function Page(props: PageProps) {
   const params = await props.params
-  const route = (params.slug || []).join('/')
+  const route = params.slug.join('/')
   const filePath = mdxPages[route]
 
   if (!filePath) {

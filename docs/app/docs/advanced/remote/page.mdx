@@ -2,12 +2,62 @@
 icon: CloudIcon
 ---
 
+import fs from 'node:fs/promises'
+import { compileMdx } from 'nextra/compile'
+import { Steps } from 'nextra/components'
+import { MDXRemote } from 'nextra/mdx-remote'
+
+export async function Example() {
+  const filename = '/graphql-eslint/[[...slug]]/page.tsx'
+  const pageContent = await fs.readFile(
+    `../examples/swr-site/app/[lang]/remote${filename}`,
+    'utf8'
+  )
+  const rawJs =
+    await compileMdx(`~~~jsx filename="app${filename}" {27} showLineNumbers
+${pageContent
+  .replace('// @ts-expect-error -- fixme\n', '')
+  .replace(
+    "lang: 'en',\n    ...(route && { slug: route.split('/') })",
+    "slug: route.split('/')"
+  )
+  .replace('remote/graphql-eslint', 'graphql-eslint')
+  .split('\n')
+  .slice(1, -1)
+  .join('\n')}
+~~~`)
+  return <MDXRemote compiledSource={rawJs} />
+}
+
 # Remote Content
 
-import { Callout } from 'nextra/components'
+> [!NOTE]
+>
+> You can check out the
+> [SWR i18n example](https://github.com/shuding/nextra/blob/main/examples/swr-site/app/%5Blang%5D/remote/graphql-eslint/%5B%5B...slug%5D%5D/page.tsx)
+> source code.
 
-<Callout type="info">
-  You can find information about remote docs support in [Nextra 3
-  blogpost](https://the-guild.dev/blog/nextra-3#remote-docs-support)
-  announcement.
-</Callout>
+<Steps>
+
+## Create `[[...slug]]/page.tsx` file
+
+Create `[[...slug]]/page.tsx` file in `app/` directory with the following
+content:
+
+<Example />
+
+## Enhance `pageMap`
+
+You need to modify `pageMap` list in `layout` file, to properly display sidebar
+and mobile navigation.
+
+```tsx filename="app/layout.tsx"
+import { getPageMap } from 'nextra/page-map'
+import { pageMap as graphqlEslintPageMap } from './graphql-eslint/[[...slug]]/page'
+
+// ...
+
+const pageMap = [...(await getPageMap()), graphqlEslintPageMap]
+```
+
+</Steps>

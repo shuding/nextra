@@ -1,4 +1,10 @@
-import { Button, Cards } from 'nextra/components'
+---
+description:
+  Support Nextra by exploring its sponsors. Learn how they contribute to the
+  development and success of the Nextra framework
+---
+
+import { Button, Cards, Image } from 'nextra/components'
 import { cloneElement } from 'react'
 
 # Sponsors
@@ -26,6 +32,7 @@ import { cloneElement } from 'react'
 export default function MdxLayout(props) {
   return cloneElement(props.children, {
     components: {
+      img: Image,
       a({ children, href }) {
         const { alt } = children.props
         return (

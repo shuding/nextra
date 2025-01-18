@@ -417,4 +417,16 @@ describe('normalize-page', () => {
       normalizedResult.docsDirectories.find(o => o.name === 'test')!.title
     ).toBe('HELLO')
   })
+
+  it('should move file with `index` name', async () => {
+    const pageMap = await getPageMapForFixture(
+      'should-move-file-with-index-name'
+    )
+    const normalizedResult = normalizePages({
+      list: pageMap,
+      route: '/'
+    })
+    expect(normalizedResult.docsDirectories[0]!.name).toBe('foo')
+    expect(normalizedResult.docsDirectories[1]!.name).toBe('index')
+  })
 })

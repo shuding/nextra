@@ -1,5 +1,19 @@
-export const metadata = {
-  sidebarTitle: 'About'
+---
+sidebarTitle: About
+description:
+  Learn about Nextra's history, team, and contributors, and explore how
+  open-source technologies power Nextra's features.
+---
+
+import { Image } from 'nextra/components'
+import { cloneElement } from 'react'
+
+export default function MdxLayout(props) {
+  return cloneElement(props.children, {
+    components: {
+      img: Image
+    }
+  })
 }
 
 # About Nextra
