@@ -9,13 +9,19 @@ const {
 
 export const useMDXComponents: typeof getDocsMDXComponents = components => ({
   ...docsComponents,
-  thead: props => (
+  tr: Tr,
+  th: Th,
+  thead: ({ children, ...props }) => (
     <thead {...props}>
-      <Tr>
-        <Th align="left">Option</Th>
-        <Th align="left">Type</Th>
-        <Th align="left">Description</Th>
-      </Tr>
+      {children.props.children[0].props.children ? (
+        children
+      ) : (
+        <Tr>
+          <Th align="left">Option</Th>
+          <Th align="left">Type</Th>
+          <Th align="left">Description</Th>
+        </Tr>
+      )}
     </thead>
   ),
   tbody: props => (
