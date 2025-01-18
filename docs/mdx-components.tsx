@@ -1,4 +1,4 @@
-import { useMDXComponents as getDocsMDXComponents } from "nextra-theme-docs";
+import { useMDXComponents as getDocsMDXComponents } from 'nextra-theme-docs'
 
 const {
   tr: Tr,
@@ -6,9 +6,9 @@ const {
   table: Table,
   img: Image,
   ...docsComponents
-} = getDocsMDXComponents();
+} = getDocsMDXComponents()
 
-export const useMDXComponents: typeof getDocsMDXComponents = (components) => ({
+export const useMDXComponents: typeof getDocsMDXComponents = components => ({
   ...docsComponents,
   tr: Tr,
   th: Th,
@@ -25,20 +25,22 @@ export const useMDXComponents: typeof getDocsMDXComponents = (components) => ({
       )}
     </thead>
   ),
-  tbody: (props) => (
+  tbody: props => (
     <tbody
       className="break-words first:[&_td]:font-semibold first:[&_td]:text-violet-600 first:[&_td]:dark:text-violet-500 [&_tr]:!bg-transparent"
       {...props}
     />
   ),
-  table: (props) => <Table className="!table w-full text-sm" {...props} />,
-  img: (props) => (
+  table: props => <Table className="!table w-full text-sm" {...props} />,
+  img: props => (
     <Image
       {...props}
       className="nextra-border rounded-xl border drop-shadow-sm"
     />
   ),
-  figure: (props) => <figure className='mt-6' {...props} />,
-  figcaption: (props) => <figcaption className='text-center text-sm mt-2' {...props} />,
-  ...components,
-});
+  figure: props => <figure className="mt-6" {...props} />,
+  figcaption: props => (
+    <figcaption className="mt-2 text-center text-sm" {...props} />
+  ),
+  ...components
+})

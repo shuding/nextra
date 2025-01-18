@@ -419,7 +419,9 @@ describe('normalize-page', () => {
   })
 
   it('should move file with `index` name', async () => {
-    const pageMap = await getPageMapForFixture('should-move-file-with-index-name')
+    const pageMap = await getPageMapForFixture(
+      'should-move-file-with-index-name'
+    )
     const normalizedResult = normalizePages({
       list: pageMap,
       route: '/'
