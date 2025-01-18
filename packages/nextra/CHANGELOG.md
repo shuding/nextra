@@ -1,5 +1,12 @@
 # nextra
 
+## 4.0.4
+
+### Patch Changes
+
+- 5132295: fix broken `showLineNumbers` setting on code blocks
+- 5132295: fix unable order \_meta key with `index` name
+
 ## 4.0.3
 
 ## 4.0.2
