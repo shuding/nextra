@@ -116,9 +116,12 @@ move directories around without having to change the `_meta` file.
 
 ### Folders with Index Page
 
-To create a folder with an index page (like a `/fruits` route), make a file named
-`content/fruits/index.mdx` or `app/fruits/page.mdx`. Add `asIndexPage: true` to the
-front matter to mark it as the index page.
+To create a folder with an index page, add `asIndexPage: true` to its front
+matter.
+
+For example, to create a `/fruits` route, setting `asIndexPage: true` tells
+Nextra that `/fruits` is a folder with an index page. Clicking the folder in the
+sidebar will expand it and display the MDX page.
 
 <FileTree>
   **Using [`content` directory](/docs/file-conventions/content-directory)**
@@ -168,10 +171,6 @@ asIndexPage: true
 ```
 
 </div>
-
-Then Nextra knows that the `fruits` key in `_meta` defines a folder with an
-index page. If you click that folder in the sidebar, it will open the folder and
-show you the `page.mdx`/`index.mdx` page at the same time.
 
 ## External Links
 
