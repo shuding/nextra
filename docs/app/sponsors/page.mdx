@@ -6,6 +6,7 @@ description:
 
 import { Button, Cards } from 'nextra/components'
 import { cloneElement } from 'react'
+import { Image } from 'nextra/components'
 
 # Sponsors
 
@@ -32,6 +33,7 @@ import { cloneElement } from 'react'
 export default function MdxLayout(props) {
   return cloneElement(props.children, {
     components: {
+      img: Image,
       a({ children, href }) {
         const { alt } = children.props
         return (

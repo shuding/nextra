@@ -5,7 +5,7 @@ description:
   JavaScript resources.
 ---
 
-import { Cards } from 'nextra/components'
+import { Cards, Image } from 'nextra/components'
 import { cloneElement } from 'react'
 
 # Showcase
@@ -64,6 +64,7 @@ Projects powered by Nextra
 export default function MdxLayout(props) {
   return cloneElement(props.children, {
     components: {
+      img: Image,
       a({ children, href }) {
         const { alt } = children.props
         return (
