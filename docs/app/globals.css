@@ -17,14 +17,6 @@ body {
   line-height: 1.75em;
 }
 
-figcaption {
-  font-size: 0.85rem;
-  line-height: 1.5rem;
-  display: block;
-  text-align: center;
-  margin-top: 0.5rem;
-}
-
 code.text-\[\.9em\] {
   font-size: 14px;
 }
