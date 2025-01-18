@@ -1,15 +1,15 @@
-import { useMDXComponents as getDocsMDXComponents } from "nextra-theme-docs";
+import { useMDXComponents as getDocsMDXComponents } from 'nextra-theme-docs'
 
 const {
   tr: Tr,
   th: Th,
   table: Table,
   ...docsComponents
-} = getDocsMDXComponents();
+} = getDocsMDXComponents()
 
-export const useMDXComponents: typeof getDocsMDXComponents = (components) => ({
+export const useMDXComponents: typeof getDocsMDXComponents = components => ({
   ...docsComponents,
-  thead: (props) => (
+  thead: props => (
     <thead {...props}>
       <Tr>
         <Th align="left">Option</Th>
@@ -18,12 +18,12 @@ export const useMDXComponents: typeof getDocsMDXComponents = (components) => ({
       </Tr>
     </thead>
   ),
-  tbody: (props) => (
+  tbody: props => (
     <tbody
       className="break-words first:[&_td]:font-semibold first:[&_td]:text-violet-600 first:[&_td]:dark:text-violet-500 [&_tr]:!bg-transparent"
       {...props}
     />
   ),
-  table: (props) => <Table className="!table w-full text-sm" {...props} />,
-  ...components,
-});
+  table: props => <Table className="!table w-full text-sm" {...props} />,
+  ...components
+})
