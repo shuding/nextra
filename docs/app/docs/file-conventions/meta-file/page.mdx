@@ -391,24 +391,25 @@ export default {
 >
 > This option will be inherited by all child pages if set to a folder.
 
-|               |                               |                                                                                 |
-| ------------- | ----------------------------- | ------------------------------------------------------------------------------- |
-| `breadcrumb`  | `boolean{:ts}`                | Show or hide breadcrumb navigation. Default: `true`.                            |
-| `collapsed`   | `boolean{:ts}`                | Indicates whether the item in sidebar is expanded by default. Default: `false`. |
-| `footer`      | `boolean{:ts}`                | Specifies whether to display the footer. Default: `true`.                       |
-| `layout`      | `'default' \| 'full'{:ts}`    | Defines the layout style. Default: `'default'{:ts}`.                            |
-| `navbar`      | `boolean{:ts}`                | Specifies whether to display the navbar. Default: `true`.                       |
-| `pagination`  | `boolean{:ts}`                | Determines if pagination controls are shown. Default: `true`.                   |
-| `sidebar`     | `boolean{:ts}`                | Specifies whether to display the sidebar. Default: `true`.                      |
-| `timestamp`   | `boolean{:ts}`                | Indicates if "last updated" timestamps are displayed. Default: `true`.          |
-| `toc`         | `boolean{:ts}`                | Determines whether a table of contents is displayed. Default: `true`.           |
-| `typesetting` | `'default' \| 'article'{:ts}` | Configures the text typesetting style. Default: `'default'{:ts}`.               |
+|               |                               |                                                                                  |
+| ------------- | ----------------------------- | -------------------------------------------------------------------------------- |
+| `breadcrumb`  | `boolean{:ts}`                | Show or hide breadcrumb navigation. Default: `true`.                             |
+| `collapsed`   | `boolean{:ts}`                | Indicates whether the item in sidebar is collapsed by default. Default: `false`. |
+| `footer`      | `boolean{:ts}`                | Specifies whether to display the footer. Default: `true`.                        |
+| `layout`      | `'default' \| 'full'{:ts}`    | Defines the layout style. Default: `'default'{:ts}`.                             |
+| `navbar`      | `boolean{:ts}`                | Specifies whether to display the navbar. Default: `true`.                        |
+| `pagination`  | `boolean{:ts}`                | Determines if pagination controls are shown. Default: `true`.                    |
+| `sidebar`     | `boolean{:ts}`                | Specifies whether to display the sidebar. Default: `true`.                       |
+| `timestamp`   | `boolean{:ts}`                | Indicates if "last updated" timestamps are displayed. Default: `true`.           |
+| `toc`         | `boolean{:ts}`                | Determines whether a table of contents is displayed. Default: `true`.            |
+| `typesetting` | `'default' \| 'article'{:ts}` | Configures the text typesetting style. Default: `'default'{:ts}`.                |
 
 ### Layouts
 
 By default, each page has `layout: 'default'` in their theme config, which is
-the default behavior. You might want to render some page with the full container width and height, but
-keep all the other styles. You can use the `'full'` layout to do that:
+the default behavior. You might want to render some page with the full container
+width and height, but keep all the other styles. You can use the `'full'` layout
+to do that:
 
 ```js filename="_meta.js" {4}
 export default {
