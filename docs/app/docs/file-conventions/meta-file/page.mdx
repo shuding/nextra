@@ -11,23 +11,9 @@ import { FileTree } from 'nextra/components'
 
 # `_meta.js` File
 
-It's very common to customize each page's title, rather than just relying on
-filenames. Having a page titled "Index" lacks clarity. It is preferable to
-assign a meaningful title that accurately represents the content, such as
-"Home".
-
-That's where `_meta` files comes in. You can have an `_meta` file in each
-directory, and it will be used to override the default configuration of each
-page.
-
 In Nextra, the site and page structure can be configured via the co-located
 `_meta` files. Those configurations affect the overall layout of the theme,
 especially the navigation bar and the sidebar.
-
-> [!TIP]
->
-> In `nextra-theme-docs`, there are some extra options available to customize it
-> further.
 
 <FileTree>
   <FileTree.Folder name="content" defaultOpen>
@@ -41,6 +27,45 @@ especially the navigation bar and the sidebar.
     </FileTree.Folder>
   </FileTree.Folder>
 </FileTree>
+
+It's very common to customize each page's title, rather than just relying on
+filenames. Having a page titled "Index" lacks clarity. It is preferable to
+assign a meaningful title that accurately represents the content, such as
+"Home".
+
+That's where `_meta` files comes in. You can have an `_meta` file in each
+directory, and it will be used to override the default configuration of each
+page.
+
+## Example
+
+Put this in your `content/_meta.js` file:
+
+```js filename="content/_meta.js"
+export default {
+  index: 'My Homepage',
+  contact: 'Contact Us',
+  about: 'About Us'
+}
+```
+
+It tells Nextra the order of each page, and the correct title.
+
+Alternatively, you can do it with `title` property and have other configurations
+in there as well:
+
+```js filename="content/_meta.js"
+export default {
+  index: 'My Homepage',
+  contact: 'Contact Us',
+  about: {
+    title: 'About Us'
+    // ... extra configurations
+  }
+}
+```
+
+The extra configurations are passed to the **theme** as additional information.
 
 ## Pages
 
@@ -475,36 +500,6 @@ export default {
   foo: ''
 }
 ```
-
-## Example
-
-Put this in your `content/_meta.js` file:
-
-```js filename="content/_meta.js"
-export default {
-  index: 'My Homepage',
-  contact: 'Contact Us',
-  about: 'About Us'
-}
-```
-
-It tells Nextra the order of each page, and the correct title.
-
-Alternatively, you can do it with `title` property and have other configurations
-in there as well:
-
-```js filename="content/_meta.js"
-export default {
-  index: 'My Homepage',
-  contact: 'Contact Us',
-  about: {
-    title: 'About Us'
-    // ... extra configurations
-  }
-}
-```
-
-The extra configurations are passed to the **theme** as additional information.
 
 > [!TIP]
 >
