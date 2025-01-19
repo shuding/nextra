@@ -377,9 +377,9 @@ export default {
 You can configure the theme for each page using the `'theme'` option. For
 example, you can disable or enable specific components for specific pages:
 
-```js filename="_meta.js"
+```js filename="_meta.js" {4}
 export default {
-  index: {
+  about: {
     theme: {
       sidebar: false
     }
@@ -407,17 +407,12 @@ export default {
 ### Layouts
 
 By default, each page has `layout: 'default'` in their theme config, which is
-the default behavior.
-
-#### Full Layout
-
-You might want to render some page with the full container width and height, but
+the default behavior. You might want to render some page with the full container width and height, but
 keep all the other styles. You can use the `'full'` layout to do that:
 
-```js filename="_meta.js" {5}
+```js filename="_meta.js" {4}
 export default {
-  index: {
-    title: 'Home',
+  about: {
     theme: {
       layout: 'full'
     }
@@ -435,10 +430,9 @@ The default one is suitable for most cases like documentation, but you can use
 the `'article'` typesetting to make it look like an elegant article page:
 
 <figure>
-```js filename="_meta.js" {5}
+```js filename="_meta.js" {4}
 export default {
   about: {
-    title: 'About Us',
     theme: {
       typesetting: 'article'
     }
