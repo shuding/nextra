@@ -415,7 +415,7 @@ the default behavior.
 You might want to render some page with the full container width and height, but
 keep all the other styles. You can use the `'full'` layout to do that:
 
-```js filename="content/_meta.js" {5}
+```js filename="_meta.js" {5}
 export default {
   index: {
     title: 'Home',
@@ -436,7 +436,7 @@ The default one is suitable for most cases like documentation, but you can use
 the `'article'` typesetting to make it look like an elegant article page:
 
 <figure>
-```js filename="content/_meta.js" {5}
+```js filename="_meta.js" {5}
 export default {
   about: {
     title: 'About Us',
@@ -463,7 +463,7 @@ for JavaScript objects.
 
 Following:
 
-```js filename="content/_meta.js"
+```js filename="_meta.js"
 export default {
   foo: '',
   1992_10_21: '',
@@ -474,7 +474,7 @@ export default {
 Will be converted to:
 
 {/* prettier-ignore */}
-```js filename="content/_meta.js"
+```js filename="_meta.js"
 export default {
   '1': '',
   '19921021': '',
