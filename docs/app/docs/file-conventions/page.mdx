@@ -7,7 +7,7 @@ description:
   `content` and `src` directories.
 ---
 
-import { Cards, FileTree } from 'nextra/components'
+import { Cards } from 'nextra/components'
 import { FileIcon, FolderIcon, MdxIcon } from 'nextra/icons'
 import { MDXRemote } from 'nextra/mdx-remote'
 import { createIndexPage, getPageMap } from 'nextra/page-map'
@@ -25,95 +25,3 @@ import { createIndexPage, getPageMap } from 'nextra/page-map'
     MdxIcon
   }}
 />
-
-## Page Map Information `pageMap`
-
-Nextra collects all your [`page.mdx` files](/docs/file-conventions/page-file)
-and [`_meta` files](/docs/file-conventions/meta-file) from the Next.js'
-[`app` directory](https://nextjs.org/docs/app/getting-started/project-structure#top-level-folders)
-and from Nextra's
-[`content` directory](/docs/file-conventions/content-directory), and then
-generates the page map information `pageMap` of your entire site, to render
-things such as the navigation bar and sidebar below:
-
-<figure>
-  <>![Example of Nextra Theme Docs](/assets/routing@1x.png)</>
-  {/* prettier-ignore */}
-  <figcaption>Example: [Nextra Docs Theme](/docs/docs-theme) has sidebar and navbar generated automatically from Markdown files.</figcaption>
-</figure>
-
-The `pageMap` contains all `.md` and `.mdx` filenames and the directory
-structure, sorted alphabetically. Then, Nextra will use the
-[title](https://github.com/vercel/title) package to get formatted page names
-from filenames.
-
-For example if you have the following structure:
-
-<FileTree>
-  **Using [`content` directory](/docs/file-conventions/content-directory)**
-  <FileTree.Folder name="app" defaultOpen>
-    <FileTree.Folder name="[[...mdxPath]]" defaultOpen>
-      <FileTree.File name="page.jsx" />
-    </FileTree.Folder>
-    <FileTree.File name="layout.jsx" />
-  </FileTree.Folder>
-  <FileTree.Folder name="content" defaultOpen active>
-    <FileTree.Folder name="about" defaultOpen>
-      <FileTree.File name="_meta.js" />
-      <FileTree.File name="index.mdx" />
-      <FileTree.File name="legal.md" />
-    </FileTree.Folder>
-    <FileTree.File name="_meta.js" />
-    <FileTree.File name="contact.md" />
-    <FileTree.File name="index.mdx" />
-  </FileTree.Folder>
-</FileTree>
-
-<FileTree>
-  **Using [`page.mdx` files](/docs/file-conventions/page-file)**
-  <FileTree.Folder name="app" defaultOpen>
-    <FileTree.Folder name="about" defaultOpen>
-      <FileTree.Folder name="legal" defaultOpen>
-        <FileTree.File name="page.md" active />
-      </FileTree.Folder>
-      <FileTree.File name="_meta.js" />
-      <FileTree.File name="page.mdx" active />
-    </FileTree.Folder>
-    <FileTree.Folder name="contact" defaultOpen>
-      <FileTree.File name="page.md" active />
-    </FileTree.Folder>
-    <FileTree.File name="_meta.js" />
-    <FileTree.File name="layout.jsx" />
-    <FileTree.File name="page.mdx" active />
-  </FileTree.Folder>
-</FileTree>
-
-The resolved `pageMap` will be:
-
-```jsonc filename="pageMap"
-[
-  // content/_meta.js
-  { "data": {} },
-  // content/index.mdx
-  { "name": "index", "route": "/", "frontMatter": {} },
-  // content/contact.md
-  { "name": "contact", "route": "/contact", "frontMatter": {} },
-  {
-    // content/about
-    "name": "about",
-    "route": "/about",
-    "children": [
-      // content/about/_meta.js
-      { "data": {} },
-      // content/about/index.mdx
-      { "name": "index", "route": "/about", "frontMatter": {} },
-      // content/about/legal.md
-      { "name": "legal", "route": "/about/legal", "frontMatter": {} }
-    ],
-    "title": "About"
-  }
-]
-```
-
-And the global `pageMap` will be imported to each page by Nextra. Then,
-configured theme will render the actual UI with that `pageMap`.
