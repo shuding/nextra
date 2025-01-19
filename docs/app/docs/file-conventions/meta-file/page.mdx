@@ -372,11 +372,24 @@ export default {
 > Use JSX elements to change the look of titles and separator lines in the
 > sidebar.
 
-## Advanced
+## Theme Configuration
 
-### Theme Components
+You can configure the theme for each page using the `'theme'` option. For
+example, you can disable or enable specific components for specific pages:
 
-You can configure the theme for each page using the `'theme'` option.
+```js filename="_meta.js"
+export default {
+  index: {
+    theme: {
+      sidebar: false
+    }
+  }
+}
+```
+
+> [!TIP]
+>
+> This option will be inherited by all child pages if set to a folder.
 
 |               |                               |                                                                                 |
 | ------------- | ----------------------------- | ------------------------------------------------------------------------------- |
@@ -390,20 +403,6 @@ You can configure the theme for each page using the `'theme'` option.
 | `timestamp`   | `boolean{:ts}`                | Indicates if "last updated" timestamps are displayed. Default: `true`.          |
 | `toc`         | `boolean{:ts}`                | Determines whether a table of contents is displayed. Default: `true`.           |
 | `typesetting` | `'default' \| 'article'{:ts}` | Configures the text typesetting style. Default: `'default'{:ts}`.               |
-
-For example, you can disable or enable specific components for specific pages:
-
-```js filename="_meta.js"
-export default {
-  index: {
-    theme: {
-      sidebar: false
-    }
-  }
-}
-```
-
-This option will be inherited by all child pages if set to a folder.
 
 ### Layouts
 
