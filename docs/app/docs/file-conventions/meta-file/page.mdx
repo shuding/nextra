@@ -393,17 +393,11 @@ You can configure the theme for each page using the `'theme'` option.
 
 For example, you can disable or enable specific components for specific pages:
 
-```js filename="content/_meta.js"
+```js filename="_meta.js"
 export default {
   index: {
-    title: 'Home',
     theme: {
-      breadcrumb: false,
-      footer: true,
-      sidebar: false,
-      toc: true,
-      navbar: false,
-      pagination: false
+      sidebar: false
     }
   }
 }
