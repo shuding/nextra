@@ -46,18 +46,6 @@ export const ContentAndAppFileTee: FC<{ children: ReactNode }> = ({
       <FileTree>
         <b>
           Using{' '}
-          <Link href="/docs/file-conventions/page-file">
-            <Code>page.mdx</Code> files
-          </Link>
-        </b>
-        <FileTree.Folder name="app" defaultOpen>
-          {/* @ts-expect-error -- fixme */}
-          {mapChildren([layout, ...children])}
-        </FileTree.Folder>
-      </FileTree>
-      <FileTree>
-        <b>
-          Using{' '}
           <Link href="/docs/file-conventions/content-directory">
             <Code>content</Code> directory
           </Link>
@@ -70,6 +58,18 @@ export const ContentAndAppFileTee: FC<{ children: ReactNode }> = ({
         </FileTree.Folder>
         <FileTree.Folder name="content" defaultOpen>
           {children}
+        </FileTree.Folder>
+      </FileTree>
+      <FileTree>
+        <b>
+          Using{' '}
+          <Link href="/docs/file-conventions/page-file">
+            <Code>page.mdx</Code> files
+          </Link>
+        </b>
+        <FileTree.Folder name="app" defaultOpen>
+          {/* @ts-expect-error -- fixme */}
+          {mapChildren([layout, ...children])}
         </FileTree.Folder>
       </FileTree>
     </>
