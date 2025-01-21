@@ -1,5 +1,11 @@
 # nextra
 
+## 4.0.5
+
+### Patch Changes
+
+- 14bf091: fix build crash after renaming mdx pages
+
 ## 4.0.4
 
 ### Patch Changes
