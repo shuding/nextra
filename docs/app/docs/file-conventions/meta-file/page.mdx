@@ -12,26 +12,7 @@ import { FileTree } from 'nextra/components'
 
 # `_meta.js` File
 
-## File Organization
-
-In Nextra you can organizes files as follows:
-
-- **Inside Next.js'
-  [`app` directory](https://nextjs.org/docs/app/getting-started/project-structure#top-level-folders):**
-  Nextra collects all your `page` files, including
-  [`page.md` and `page.mdx` files](/docs/file-conventions/page-file) and
-  [`_meta` files](/docs/file-conventions/meta-file).
-- **Inside Nextra's
-  [`content` directory](/docs/file-conventions/content-directory):** Nextra
-  collects all your `.md` and `.mdx` files along with
-  [`_meta` files](/docs/file-conventions/meta-file).
-
-> [!TIP]
->
-> You can also combine both organization structures in your project and have `content` directory with `.mdx` files and `app` directory with `page.mdx` files
-
-Afterward, Nextra generates the page map information called `pageMap` for your
-entire site. The `pageMap` contains all routes and the directory structure, enabling features like the navigation bar and sidebar shown below:
+## Organizing Files
 
 <figure>
   <>![Example of Nextra Theme Docs](/assets/routing@1x.png)</>
@@ -39,9 +20,31 @@ entire site. The `pageMap` contains all routes and the directory structure, enab
   <figcaption>Example: [Nextra Docs Theme](/docs/docs-theme) has sidebar and navbar generated automatically from Markdown files.</figcaption>
 </figure>
 
-Below the same
-file-based routing structure is represented for `content` and `app`-only
-directories:
+Nextra allows you to organize files in the following ways:
+
+- **In Next.js'
+  [`app` directory](https://nextjs.org/docs/app/getting-started/project-structure#top-level-folders):**
+  Nextra gathers all `page` files, including
+  [`page.md` and `page.mdx` files](/docs/file-conventions/page-file) as well as
+  [`_meta` files](/docs/file-conventions/meta-file).
+
+- **In Nextra's
+  [`content` directory](/docs/file-conventions/content-directory):** Nextra
+  collects all `.md` and `.mdx` files, along with
+  [`_meta` files](/docs/file-conventions/meta-file).
+
+> [!TIP]
+>
+> You can combine both organizational ways in your project, using the `content`
+> directory with `.mdx` files and the `app` directory with `page` files.
+
+Afterward, Nextra generates a `pageMap` array containing information about your
+entire site's routes and directories structure. Features such as **the
+navigation bar** and **sidebar** can be generated based on the `pageMap`
+information.
+
+Below the same file-based routing structure is represented for `content` and
+`app`-only directories:
 
 <ContentAndAppFileTee>
   <FileTree.Folder name="about" defaultOpen>
@@ -54,7 +57,7 @@ directories:
   <FileTree.File name="index.mdx" />
 </ContentAndAppFileTee>
 
-The resolved `pageMap` will be:
+The generated `pageMap` will be:
 
 ```jsonc filename="pageMap"
 [
@@ -147,10 +150,10 @@ The title and order of a page shown in the sidebar should be configured in the
 structure:
 
 <ContentAndAppFileTee>
-    <FileTree.File name="_meta.js" />
-    <FileTree.File name="about.mdx" />
-    <FileTree.File name="contact.mdx" />
-    <FileTree.File name="index.mdx" />
+  <FileTree.File name="_meta.js" />
+  <FileTree.File name="about.mdx" />
+  <FileTree.File name="contact.mdx" />
+  <FileTree.File name="index.mdx" />
 </ContentAndAppFileTee>
 
 You can define how the pages are shown in the sidebar via the `_meta` file:

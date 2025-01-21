@@ -1,7 +1,10 @@
 import cn from 'clsx'
 import type { ComponentPropsWithoutRef, FC } from 'react'
 
-export const Tree: FC<ComponentPropsWithoutRef<'ul'>> = ({ className, ...props }) => {
+export const Tree: FC<ComponentPropsWithoutRef<'ul'>> = ({
+  className,
+  ...props
+}) => {
   return (
     <ul
       className={cn(
