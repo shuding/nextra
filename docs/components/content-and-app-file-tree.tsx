@@ -11,7 +11,7 @@ function mapChildren(children) {
       return child
     }
     if (ext === '.md' || ext === '.mdx') {
-      const file = <FileTree.File name={`page${ext}`} />
+      const file = <FileTree.File {...child.props} name={`page${ext}`} />
       if (name === 'index') {
         return file
       }
@@ -59,7 +59,7 @@ export const ContentAndAppFileTee: FC<{ children: ReactNode }> = ({
         <FileTree.Folder name="content" defaultOpen>
           {children}
         </FileTree.Folder>
-      </FileTree>
+      </FileTree>{' '}
       <FileTree>
         <b>
           Using{' '}

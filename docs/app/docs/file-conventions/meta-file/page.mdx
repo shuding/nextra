@@ -6,20 +6,32 @@ description:
   and theme visibility, enhancing site organization and user experience.
 ---
 
+import { ContentAndAppFileTee } from 'components/content-and-app-file-tree'
 import { Video } from 'components/video'
 import { FileTree } from 'nextra/components'
 
 # `_meta.js` File
 
-## Organize Files
+## File Organization
 
-Nextra collects all your [`page.mdx` files](/docs/file-conventions/page-file)
-and [`_meta` files](/docs/file-conventions/meta-file) from the Next.js'
-[`app` directory](https://nextjs.org/docs/app/getting-started/project-structure#top-level-folders)
-and from Nextra's
-[`content` directory](/docs/file-conventions/content-directory), and then
-generates the page map information `pageMap` of your entire site, to render
-things such as the navigation bar and sidebar below:
+In Nextra you can organizes files as follows:
+
+- **Inside Next.js'
+  [`app` directory](https://nextjs.org/docs/app/getting-started/project-structure#top-level-folders):**
+  Nextra collects all your `page` files, including
+  [`page.md` and `page.mdx` files](/docs/file-conventions/page-file) and
+  [`_meta` files](/docs/file-conventions/meta-file).
+- **Inside Nextra's
+  [`content` directory](/docs/file-conventions/content-directory):** Nextra
+  collects all your `.md` and `.mdx` files along with
+  [`_meta` files](/docs/file-conventions/meta-file).
+
+> [!TIP]
+>
+> You can also combine both organization structures in your project and have `content` directory with `.mdx` files and `app` directory with `page.mdx` files
+
+Afterward, Nextra generates the page map information called `pageMap` for your
+entire site. The `pageMap` contains all routes and the directory structure, enabling features like the navigation bar and sidebar shown below:
 
 <figure>
   <>![Example of Nextra Theme Docs](/assets/routing@1x.png)</>
@@ -27,51 +39,20 @@ things such as the navigation bar and sidebar below:
   <figcaption>Example: [Nextra Docs Theme](/docs/docs-theme) has sidebar and navbar generated automatically from Markdown files.</figcaption>
 </figure>
 
-The `pageMap` contains all `.md` and `.mdx` filenames and the directory
-structure, sorted alphabetically. Then, Nextra will use the
-[title](https://github.com/vercel/title) package to get formatted page names
-from filenames.
+Below the same
+file-based routing structure is represented for `content` and `app`-only
+directories:
 
-For example if you have the following structure:
-
-<FileTree>
-  **Using [`content` directory](/docs/file-conventions/content-directory)**
-  <FileTree.Folder name="app" defaultOpen>
-    <FileTree.Folder name="[[...mdxPath]]" defaultOpen>
-      <FileTree.File name="page.jsx" />
-    </FileTree.Folder>
-    <FileTree.File name="layout.jsx" />
-  </FileTree.Folder>
-  <FileTree.Folder name="content" defaultOpen active>
-    <FileTree.Folder name="about" defaultOpen>
-      <FileTree.File name="_meta.js" />
-      <FileTree.File name="index.mdx" />
-      <FileTree.File name="legal.md" />
-    </FileTree.Folder>
+<ContentAndAppFileTee>
+  <FileTree.Folder name="about" defaultOpen>
     <FileTree.File name="_meta.js" />
-    <FileTree.File name="contact.md" />
     <FileTree.File name="index.mdx" />
+    <FileTree.File name="legal.md" />
   </FileTree.Folder>
-</FileTree>
-
-<FileTree>
-  **Using [`page.mdx` files](/docs/file-conventions/page-file)**
-  <FileTree.Folder name="app" defaultOpen>
-    <FileTree.Folder name="about" defaultOpen>
-      <FileTree.Folder name="legal" defaultOpen>
-        <FileTree.File name="page.md" active />
-      </FileTree.Folder>
-      <FileTree.File name="_meta.js" />
-      <FileTree.File name="page.mdx" active />
-    </FileTree.Folder>
-    <FileTree.Folder name="contact" defaultOpen>
-      <FileTree.File name="page.md" active />
-    </FileTree.Folder>
-    <FileTree.File name="_meta.js" />
-    <FileTree.File name="layout.jsx" />
-    <FileTree.File name="page.mdx" active />
-  </FileTree.Folder>
-</FileTree>
+  <FileTree.File name="_meta.js" />
+  <FileTree.File name="contact.md" />
+  <FileTree.File name="index.mdx" />
+</ContentAndAppFileTee>
 
 The resolved `pageMap` will be:
 
@@ -109,18 +90,16 @@ In Nextra, the site and page structure can be configured via the co-located
 `_meta` files. Those configurations affect the overall layout of the theme,
 especially the navigation bar and the sidebar.
 
-<FileTree>
-  <FileTree.Folder name="content" defaultOpen>
+<ContentAndAppFileTee>
+  <FileTree.File name="_meta.js" active />
+  <FileTree.File name="contact.md" />
+  <FileTree.File name="index.mdx" />
+  <FileTree.Folder name="about" defaultOpen>
     <FileTree.File name="_meta.js" active />
-    <FileTree.File name="contact.md" />
+    <FileTree.File name="legal.md" />
     <FileTree.File name="index.mdx" />
-    <FileTree.Folder name="about" defaultOpen>
-      <FileTree.File name="_meta.js" active />
-      <FileTree.File name="legal.md" />
-      <FileTree.File name="index.mdx" />
-    </FileTree.Folder>
   </FileTree.Folder>
-</FileTree>
+</ContentAndAppFileTee>
 
 It's very common to customize each page's title, rather than just relying on
 filenames. Having a page titled "Index" lacks clarity. It is preferable to
@@ -167,14 +146,12 @@ The title and order of a page shown in the sidebar should be configured in the
 `_meta` file as key-value pairs. For example, if you have the following file
 structure:
 
-<FileTree>
-  <FileTree.Folder name="content" defaultOpen>
+<ContentAndAppFileTee>
     <FileTree.File name="_meta.js" />
     <FileTree.File name="about.mdx" />
     <FileTree.File name="contact.mdx" />
     <FileTree.File name="index.mdx" />
-  </FileTree.Folder>
-</FileTree>
+</ContentAndAppFileTee>
 
 You can define how the pages are shown in the sidebar via the `_meta` file:
 
@@ -196,24 +173,22 @@ export default {
 
 Folders can be configured in the same way as pages. For example:
 
-<FileTree>
-  <FileTree.Folder name="content" defaultOpen>
-    <FileTree.Folder name="fruits" defaultOpen>
-      <FileTree.File name="_meta.js" />
-      <FileTree.File name="apple.mdx" />
-      <FileTree.File name="banana.mdx" />
-    </FileTree.Folder>
+<ContentAndAppFileTee>
+  <FileTree.Folder name="fruits" defaultOpen>
     <FileTree.File name="_meta.js" />
-    <FileTree.File name="about.mdx" />
-    <FileTree.File name="contact.mdx" />
-    <FileTree.File name="index.mdx" />
+    <FileTree.File name="apple.mdx" />
+    <FileTree.File name="banana.mdx" />
   </FileTree.Folder>
-</FileTree>
+  <FileTree.File name="_meta.js" />
+  <FileTree.File name="about.mdx" />
+  <FileTree.File name="contact.mdx" />
+  <FileTree.File name="index.mdx" />
+</ContentAndAppFileTee>
 
 The top-level `_meta` file contains the meta information for the top-level pages
 and folders:
 
-```js filename="content/_meta.js"
+```js filename="_meta.js"
 export default {
   index: 'My Homepage',
   contact: 'Contact Us',
@@ -225,7 +200,7 @@ export default {
 And the nested `_meta` file contains the meta information for pages in the same
 folder:
 
-```js filename="content/fruits/_meta.js"
+```js filename="fruits/_meta.js"
 export default {
   apple: 'Apple',
   banana: 'Banana'
@@ -244,45 +219,18 @@ For example, to create a `/fruits` route, setting `asIndexPage: true` tells
 Nextra that `/fruits` is a folder with an index page. Clicking the folder in the
 sidebar will expand it and display the MDX page.
 
-<FileTree>
-  **Using [`content` directory](/docs/file-conventions/content-directory)**
-  <FileTree.Folder name="content" defaultOpen>
-    <FileTree.Folder name="fruits" defaultOpen active>
-      <FileTree.File name="_meta.js" />
-      <FileTree.File name="apple.mdx" />
-      <FileTree.File name="banana.mdx" />
-      <FileTree.File name="index.mdx" active />
-    </FileTree.Folder>
+<ContentAndAppFileTee>
+  <FileTree.Folder name="fruits" defaultOpen active>
     <FileTree.File name="_meta.js" />
-    <FileTree.File name="about.mdx" />
-    <FileTree.File name="contact.mdx" />
-    <FileTree.File name="index.mdx" />
+    <FileTree.File name="apple.mdx" />
+    <FileTree.File name="banana.mdx" />
+    <FileTree.File name="index.mdx" active />
   </FileTree.Folder>
-</FileTree>
-
-<FileTree>
-  **Using [`page.mdx` files](/docs/file-conventions/page-file)**
-  <FileTree.Folder name="app" defaultOpen>
-    <FileTree.Folder name="fruits" defaultOpen active>
-      <FileTree.File name="_meta.js" />
-      <FileTree.Folder name="apple">
-        <FileTree.File name="page.mdx" />
-      </FileTree.Folder>
-      <FileTree.Folder name="banana">
-        <FileTree.File name="page.mdx" />
-      </FileTree.Folder>
-      <FileTree.File name="page.mdx" active />
-    </FileTree.Folder>
-    <FileTree.File name="_meta.js" />
-    <FileTree.Folder name="about">
-      <FileTree.File name="page.mdx" />
-    </FileTree.Folder>
-    <FileTree.Folder name="contact">
-      <FileTree.File name="page.mdx" />
-    </FileTree.Folder>
-    <FileTree.File name="page.mdx" />
-  </FileTree.Folder>
-</FileTree>
+  <FileTree.File name="_meta.js" />
+  <FileTree.File name="about.mdx" />
+  <FileTree.File name="contact.mdx" />
+  <FileTree.File name="index.mdx" />
+</ContentAndAppFileTee>
 
 <div className='inline-flex'>
 ```mdx filename="content/fruits/index.mdx or app/fruits/page.mdx" copy=false
@@ -298,7 +246,7 @@ asIndexPage: true
 You can add external links to the sidebar by adding an item with `href` in
 `_meta` file:
 
-```js filename="content/_meta.js" {6-9}
+```js filename="_meta.js" {6-9}
 export default {
   index: 'My Homepage',
   contact: 'Contact Us',
@@ -321,7 +269,7 @@ By default, all MDX routes in the filesystem will be shown on the sidebar. But
 you can hide a specific pages or folders by using the `display: 'hidden'`
 configuration:
 
-```js filename="content/_meta.js" {4}
+```js filename="_meta.js" {4}
 export default {
   index: 'My Homepage',
   contact: {
@@ -346,27 +294,25 @@ Us" that are always visible.
 For example, you can have 2 docs folders `frameworks` and `fruits` in your
 project:
 
-<FileTree>
-  <FileTree.Folder name="content" defaultOpen>
-    <FileTree.Folder name="frameworks" defaultOpen>
-      <FileTree.File name="react.mdx" />
-      <FileTree.File name="svelte.mdx" />
-      <FileTree.File name="vue.mdx" />
-    </FileTree.Folder>
-    <FileTree.Folder name="fruits" defaultOpen>
-      <FileTree.File name="apple.mdx" />
-      <FileTree.File name="banana.mdx" />
-    </FileTree.Folder>
-    <FileTree.File name="_meta.js" />
-    <FileTree.File name="about.mdx" />
-    <FileTree.File name="index.mdx" />
+<ContentAndAppFileTee>
+  <FileTree.Folder name="frameworks" defaultOpen>
+    <FileTree.File name="react.mdx" />
+    <FileTree.File name="svelte.mdx" />
+    <FileTree.File name="vue.mdx" />
   </FileTree.Folder>
-</FileTree>
+  <FileTree.Folder name="fruits" defaultOpen>
+    <FileTree.File name="apple.mdx" />
+    <FileTree.File name="banana.mdx" />
+  </FileTree.Folder>
+  <FileTree.File name="_meta.js" />
+  <FileTree.File name="about.mdx" />
+  <FileTree.File name="index.mdx" />
+</ContentAndAppFileTee>
 
 In your top-level `_meta` file, you can set everything as a page, instead of a
 normal sidebar item:
 
-```js filename="content/_meta.js"
+```js filename="_meta.js"
 export default {
   index: {
     title: 'Home',
@@ -409,7 +355,7 @@ option:
   <figcaption>[Live example on StackBlitz](https://stackblitz.com/edit/nextra-2-docs-2qopvp?file=pages%2F_meta.js)</figcaption>
 </figure>
 
-```js filename="content/_meta.js"
+```js filename="_meta.js"
 export default {
   company: {
     title: 'Company',
@@ -433,7 +379,7 @@ export default {
 Same as the [External Links](#external-links) option, you can have external
 links in the navbar too:
 
-```js filename="content/_meta.js"
+```js filename="_meta.js"
 export default {
   index: {
     title: 'Home',
@@ -457,7 +403,7 @@ In the [Sub Docs](#sub-docs) example above, we have to define the `type: 'page'`
 option for every page. To make it easier, you can use the `'*'` key to define
 the fallback configuration for all items in this folder:
 
-```js filename="content/_meta.js" {2-4}
+```js filename="_meta.js" {2-4}
 export default {
   '*': {
     type: 'page'
