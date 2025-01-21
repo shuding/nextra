@@ -3,7 +3,7 @@ import type { FC, ReactElement } from 'react'
 import { FileIcon } from '../../icons/index.js'
 
 export type FileProps = {
-  name: ReactElement
+  name: ReactElement | string
   active?: boolean
 }
 
