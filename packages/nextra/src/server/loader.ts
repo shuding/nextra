@@ -76,12 +76,14 @@ export async function loader(
   // We pass `contentDir` only for `page-map/placeholder.ts`
   if (contentDir) {
     const locale = resourceQuery.replace('?lang=', '')
-    if (!IS_PRODUCTION) {
-      // Add `app` and `content` folders as the dependencies, so Webpack will
-      // rebuild the module if anything in that context changes
-      this.addContextDependency(APP_DIR)
-      this.addContextDependency(path.join(CWD, contentDir, locale))
-    }
+    // Add `app` and `content` folders as the dependencies, so Webpack will
+    // rebuild the module if anything in that context changes
+    //
+    // Note: should be added for dev and prod environment since build can be crashed after renaming
+    // mdx pages https://github.com/shuding/nextra/issues/3988#issuecomment-2605389046
+    this.addContextDependency(APP_DIR)
+    this.addContextDependency(path.join(CWD, contentDir, locale))
+
     const filePaths = await findMetaAndPageFilePaths({
       dir: APP_DIR,
       cwd: CWD,

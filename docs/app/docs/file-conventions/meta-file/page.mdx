@@ -6,10 +6,103 @@ description:
   and theme visibility, enhancing site organization and user experience.
 ---
 
+import { ContentAndAppFileTee } from 'components/content-and-app-file-tree'
 import { Video } from 'components/video'
 import { FileTree } from 'nextra/components'
 
 # `_meta.js` File
+
+## Organizing Files
+
+<figure>
+  <>![Example of Nextra Theme Docs](/assets/routing@1x.png)</>
+  {/* prettier-ignore */}
+  <figcaption>Example: [Nextra Docs Theme](/docs/docs-theme) has sidebar and navbar generated automatically from Markdown files.</figcaption>
+</figure>
+
+Nextra allows you to organize files in the following ways:
+
+- **In Next.js'
+  [`app` directory](https://nextjs.org/docs/app/getting-started/project-structure#top-level-folders):**
+  Nextra gathers all `page` files, including
+  [`page.md` and `page.mdx` files](/docs/file-conventions/page-file) as well as
+  [`_meta` files](/docs/file-conventions/meta-file).
+
+- **In Nextra's
+  [`content` directory](/docs/file-conventions/content-directory):** Nextra
+  collects all `.md` and `.mdx` files, along with
+  [`_meta` files](/docs/file-conventions/meta-file).
+
+> [!TIP]
+>
+> You can combine both organizational ways in your project, using the `content`
+> directory with `.mdx` files and the `app` directory with `page` files.
+
+Afterward, Nextra generates a `pageMap` array containing information about your
+entire site's routes and directories structure. Features such as **the
+navigation bar** and **sidebar** can be generated based on the `pageMap`
+information.
+
+Below the same file-based routing structure is represented for `content` and
+`app`-only directories:
+
+<ContentAndAppFileTee>
+  <FileTree.Folder name="about" defaultOpen>
+    <FileTree.File name="_meta.js" />
+    <FileTree.File name="index.mdx" />
+    <FileTree.File name="legal.md" />
+  </FileTree.Folder>
+  <FileTree.File name="_meta.js" />
+  <FileTree.File name="contact.md" />
+  <FileTree.File name="index.mdx" />
+</ContentAndAppFileTee>
+
+The generated `pageMap` will be:
+
+```jsonc filename="pageMap"
+[
+  // content/_meta.js
+  { "data": {} },
+  // content/index.mdx
+  { "name": "index", "route": "/", "frontMatter": {} },
+  // content/contact.md
+  { "name": "contact", "route": "/contact", "frontMatter": {} },
+  {
+    // content/about
+    "name": "about",
+    "route": "/about",
+    "children": [
+      // content/about/_meta.js
+      { "data": {} },
+      // content/about/index.mdx
+      { "name": "index", "route": "/about", "frontMatter": {} },
+      // content/about/legal.md
+      { "name": "legal", "route": "/about/legal", "frontMatter": {} }
+    ],
+    "title": "About"
+  }
+]
+```
+
+And the global `pageMap` will be imported to each page by Nextra. Then,
+configured theme will render the actual UI with that `pageMap`.
+
+---
+
+In Nextra, the site and page structure can be configured via the co-located
+`_meta` files. Those configurations affect the overall layout of the theme,
+especially the navigation bar and the sidebar.
+
+<ContentAndAppFileTee>
+  <FileTree.File name="_meta.js" active />
+  <FileTree.File name="contact.md" />
+  <FileTree.File name="index.mdx" />
+  <FileTree.Folder name="about" defaultOpen>
+    <FileTree.File name="_meta.js" active />
+    <FileTree.File name="legal.md" />
+    <FileTree.File name="index.mdx" />
+  </FileTree.Folder>
+</ContentAndAppFileTee>
 
 It's very common to customize each page's title, rather than just relying on
 filenames. Having a page titled "Index" lacks clarity. It is preferable to
@@ -20,27 +113,35 @@ That's where `_meta` files comes in. You can have an `_meta` file in each
 directory, and it will be used to override the default configuration of each
 page.
 
-In Nextra, the site and page structure can be configured via the co-located
-`_meta` files. Those configurations affect the overall layout of the theme,
-especially the navigation bar and the sidebar.
+## Example
 
-> [!TIP]
->
-> In `nextra-theme-docs`, there are some extra options available to customize it
-> further.
+Put this in your `content/_meta.js` file:
 
-<FileTree>
-  <FileTree.Folder name="content" defaultOpen>
-    <FileTree.File name="_meta.js" active />
-    <FileTree.File name="contact.md" />
-    <FileTree.File name="index.mdx" />
-    <FileTree.Folder name="about" defaultOpen>
-      <FileTree.File name="_meta.js" active />
-      <FileTree.File name="legal.md" />
-      <FileTree.File name="index.mdx" />
-    </FileTree.Folder>
-  </FileTree.Folder>
-</FileTree>
+```js filename="content/_meta.js"
+export default {
+  index: 'My Homepage',
+  contact: 'Contact Us',
+  about: 'About Us'
+}
+```
+
+It tells Nextra the order of each page, and the correct title.
+
+Alternatively, you can do it with `title` property and have other configurations
+in there as well:
+
+```js filename="content/_meta.js"
+export default {
+  index: 'My Homepage',
+  contact: 'Contact Us',
+  about: {
+    title: 'About Us'
+    // ... extra configurations
+  }
+}
+```
+
+The extra configurations are passed to the **theme** as additional information.
 
 ## Pages
 
@@ -48,14 +149,12 @@ The title and order of a page shown in the sidebar should be configured in the
 `_meta` file as key-value pairs. For example, if you have the following file
 structure:
 
-<FileTree>
-  <FileTree.Folder name="content" defaultOpen>
-    <FileTree.File name="_meta.js" />
-    <FileTree.File name="about.mdx" />
-    <FileTree.File name="contact.mdx" />
-    <FileTree.File name="index.mdx" />
-  </FileTree.Folder>
-</FileTree>
+<ContentAndAppFileTee>
+  <FileTree.File name="_meta.js" />
+  <FileTree.File name="about.mdx" />
+  <FileTree.File name="contact.mdx" />
+  <FileTree.File name="index.mdx" />
+</ContentAndAppFileTee>
 
 You can define how the pages are shown in the sidebar via the `_meta` file:
 
@@ -77,24 +176,22 @@ export default {
 
 Folders can be configured in the same way as pages. For example:
 
-<FileTree>
-  <FileTree.Folder name="content" defaultOpen>
-    <FileTree.Folder name="fruits" defaultOpen>
-      <FileTree.File name="_meta.js" />
-      <FileTree.File name="apple.mdx" />
-      <FileTree.File name="banana.mdx" />
-    </FileTree.Folder>
+<ContentAndAppFileTee>
+  <FileTree.Folder name="fruits" defaultOpen>
     <FileTree.File name="_meta.js" />
-    <FileTree.File name="about.mdx" />
-    <FileTree.File name="contact.mdx" />
-    <FileTree.File name="index.mdx" />
+    <FileTree.File name="apple.mdx" />
+    <FileTree.File name="banana.mdx" />
   </FileTree.Folder>
-</FileTree>
+  <FileTree.File name="_meta.js" />
+  <FileTree.File name="about.mdx" />
+  <FileTree.File name="contact.mdx" />
+  <FileTree.File name="index.mdx" />
+</ContentAndAppFileTee>
 
 The top-level `_meta` file contains the meta information for the top-level pages
 and folders:
 
-```js filename="content/_meta.js"
+```js filename="_meta.js"
 export default {
   index: 'My Homepage',
   contact: 'Contact Us',
@@ -106,7 +203,7 @@ export default {
 And the nested `_meta` file contains the meta information for pages in the same
 folder:
 
-```js filename="content/fruits/_meta.js"
+```js filename="fruits/_meta.js"
 export default {
   apple: 'Apple',
   banana: 'Banana'
@@ -125,45 +222,18 @@ For example, to create a `/fruits` route, setting `asIndexPage: true` tells
 Nextra that `/fruits` is a folder with an index page. Clicking the folder in the
 sidebar will expand it and display the MDX page.
 
-<FileTree>
-  **Using [`content` directory](/docs/file-conventions/content-directory)**
-  <FileTree.Folder name="content" defaultOpen>
-    <FileTree.Folder name="fruits" defaultOpen active>
-      <FileTree.File name="_meta.js" />
-      <FileTree.File name="apple.mdx" />
-      <FileTree.File name="banana.mdx" />
-      <FileTree.File name="index.mdx" active />
-    </FileTree.Folder>
+<ContentAndAppFileTee>
+  <FileTree.Folder name="fruits" defaultOpen active>
     <FileTree.File name="_meta.js" />
-    <FileTree.File name="about.mdx" />
-    <FileTree.File name="contact.mdx" />
-    <FileTree.File name="index.mdx" />
+    <FileTree.File name="apple.mdx" />
+    <FileTree.File name="banana.mdx" />
+    <FileTree.File name="index.mdx" active />
   </FileTree.Folder>
-</FileTree>
-
-<FileTree>
-  **Using [`page.mdx` files](/docs/file-conventions/page-file)**
-  <FileTree.Folder name="app" defaultOpen>
-    <FileTree.Folder name="fruits" defaultOpen active>
-      <FileTree.File name="_meta.js" />
-      <FileTree.Folder name="apple">
-        <FileTree.File name="page.mdx" />
-      </FileTree.Folder>
-      <FileTree.Folder name="banana">
-        <FileTree.File name="page.mdx" />
-      </FileTree.Folder>
-      <FileTree.File name="page.mdx" active />
-    </FileTree.Folder>
-    <FileTree.File name="_meta.js" />
-    <FileTree.Folder name="about">
-      <FileTree.File name="page.mdx" />
-    </FileTree.Folder>
-    <FileTree.Folder name="contact">
-      <FileTree.File name="page.mdx" />
-    </FileTree.Folder>
-    <FileTree.File name="page.mdx" />
-  </FileTree.Folder>
-</FileTree>
+  <FileTree.File name="_meta.js" />
+  <FileTree.File name="about.mdx" />
+  <FileTree.File name="contact.mdx" />
+  <FileTree.File name="index.mdx" />
+</ContentAndAppFileTee>
 
 <div className='inline-flex'>
 ```mdx filename="content/fruits/index.mdx or app/fruits/page.mdx" copy=false
@@ -179,7 +249,7 @@ asIndexPage: true
 You can add external links to the sidebar by adding an item with `href` in
 `_meta` file:
 
-```js filename="content/_meta.js" {6-9}
+```js filename="_meta.js" {6-9}
 export default {
   index: 'My Homepage',
   contact: 'Contact Us',
@@ -202,7 +272,7 @@ By default, all MDX routes in the filesystem will be shown on the sidebar. But
 you can hide a specific pages or folders by using the `display: 'hidden'`
 configuration:
 
-```js filename="content/_meta.js" {4}
+```js filename="_meta.js" {4}
 export default {
   index: 'My Homepage',
   contact: {
@@ -227,27 +297,25 @@ Us" that are always visible.
 For example, you can have 2 docs folders `frameworks` and `fruits` in your
 project:
 
-<FileTree>
-  <FileTree.Folder name="content" defaultOpen>
-    <FileTree.Folder name="frameworks" defaultOpen>
-      <FileTree.File name="react.mdx" />
-      <FileTree.File name="svelte.mdx" />
-      <FileTree.File name="vue.mdx" />
-    </FileTree.Folder>
-    <FileTree.Folder name="fruits" defaultOpen>
-      <FileTree.File name="apple.mdx" />
-      <FileTree.File name="banana.mdx" />
-    </FileTree.Folder>
-    <FileTree.File name="_meta.js" />
-    <FileTree.File name="about.mdx" />
-    <FileTree.File name="index.mdx" />
+<ContentAndAppFileTee>
+  <FileTree.Folder name="frameworks" defaultOpen>
+    <FileTree.File name="react.mdx" />
+    <FileTree.File name="svelte.mdx" />
+    <FileTree.File name="vue.mdx" />
   </FileTree.Folder>
-</FileTree>
+  <FileTree.Folder name="fruits" defaultOpen>
+    <FileTree.File name="apple.mdx" />
+    <FileTree.File name="banana.mdx" />
+  </FileTree.Folder>
+  <FileTree.File name="_meta.js" />
+  <FileTree.File name="about.mdx" />
+  <FileTree.File name="index.mdx" />
+</ContentAndAppFileTee>
 
 In your top-level `_meta` file, you can set everything as a page, instead of a
 normal sidebar item:
 
-```js filename="content/_meta.js"
+```js filename="_meta.js"
 export default {
   index: {
     title: 'Home',
@@ -290,7 +358,7 @@ option:
   <figcaption>[Live example on StackBlitz](https://stackblitz.com/edit/nextra-2-docs-2qopvp?file=pages%2F_meta.js)</figcaption>
 </figure>
 
-```js filename="content/_meta.js"
+```js filename="_meta.js"
 export default {
   company: {
     title: 'Company',
@@ -314,7 +382,7 @@ export default {
 Same as the [External Links](#external-links) option, you can have external
 links in the navbar too:
 
-```js filename="content/_meta.js"
+```js filename="_meta.js"
 export default {
   index: {
     title: 'Home',
@@ -338,7 +406,7 @@ In the [Sub Docs](#sub-docs) example above, we have to define the `type: 'page'`
 option for every page. To make it easier, you can use the `'*'` key to define
 the fallback configuration for all items in this folder:
 
-```js filename="content/_meta.js" {2-4}
+```js filename="_meta.js" {2-4}
 export default {
   '*': {
     type: 'page'
@@ -372,45 +440,48 @@ export default {
 > Use JSX elements to change the look of titles and separator lines in the
 > sidebar.
 
-## Advanced
-
-### Theme Components
+## Theme Configuration
 
 You can configure the theme for each page using the `'theme'` option. For
 example, you can disable or enable specific components for specific pages:
 
-```js filename="content/_meta.js"
+```js filename="_meta.js" {4}
 export default {
-  index: {
-    title: 'Home',
+  about: {
     theme: {
-      breadcrumb: false,
-      footer: true,
-      sidebar: false,
-      toc: true,
-      navbar: false,
-      pagination: false
+      sidebar: false
     }
   }
 }
 ```
 
-This option will be inherited by all child pages if set to a folder.
+> [!WARNING]
+>
+> This option will be inherited by all child pages if set to a folder.
+
+|               |                               |                                                                                  |
+| ------------- | ----------------------------- | -------------------------------------------------------------------------------- |
+| `breadcrumb`  | `boolean{:ts}`                | Show or hide breadcrumb navigation. Default: `true`.                             |
+| `collapsed`   | `boolean{:ts}`                | Indicates whether the item in sidebar is collapsed by default. Default: `false`. |
+| `footer`      | `boolean{:ts}`                | Specifies whether to display the footer. Default: `true`.                        |
+| `layout`      | `'default' \| 'full'{:ts}`    | Defines the layout style. Default: `'default'{:ts}`.                             |
+| `navbar`      | `boolean{:ts}`                | Specifies whether to display the navbar. Default: `true`.                        |
+| `pagination`  | `boolean{:ts}`                | Determines if pagination controls are shown. Default: `true`.                    |
+| `sidebar`     | `boolean{:ts}`                | Specifies whether to display the sidebar. Default: `true`.                       |
+| `timestamp`   | `boolean{:ts}`                | Indicates if "last updated" timestamps are displayed. Default: `true`.           |
+| `toc`         | `boolean{:ts}`                | Determines whether a table of contents is displayed. Default: `true`.            |
+| `typesetting` | `'default' \| 'article'{:ts}` | Configures the text typesetting style. Default: `'default'{:ts}`.                |
 
 ### Layouts
 
 By default, each page has `layout: 'default'` in their theme config, which is
-the default behavior.
+the default behavior. You might want to render some page with the full container
+width and height, but keep all the other styles. You can use the `'full'` layout
+to do that:
 
-#### Full Layout
-
-You might want to render some page with the full container width and height, but
-keep all the other styles. You can use the `'full'` layout to do that:
-
-```js filename="content/_meta.js" {5}
+```js filename="_meta.js" {4}
 export default {
-  index: {
-    title: 'Home',
+  about: {
     theme: {
       layout: 'full'
     }
@@ -428,10 +499,9 @@ The default one is suitable for most cases like documentation, but you can use
 the `'article'` typesetting to make it look like an elegant article page:
 
 <figure>
-```js filename="content/_meta.js" {5}
+```js filename="_meta.js" {4}
 export default {
   about: {
-    title: 'About Us',
     theme: {
       typesetting: 'article'
     }
@@ -455,7 +525,7 @@ for JavaScript objects.
 
 Following:
 
-```js filename="content/_meta.js"
+```js filename="_meta.js"
 export default {
   foo: '',
   1992_10_21: '',
@@ -466,43 +536,13 @@ export default {
 Will be converted to:
 
 {/* prettier-ignore */}
-```js filename="content/_meta.js"
+```js filename="_meta.js"
 export default {
   '1': '',
   '19921021': '',
   foo: ''
 }
 ```
-
-## Example
-
-Put this in your `content/_meta.js` file:
-
-```js filename="content/_meta.js"
-export default {
-  index: 'My Homepage',
-  contact: 'Contact Us',
-  about: 'About Us'
-}
-```
-
-It tells Nextra the order of each page, and the correct title.
-
-Alternatively, you can do it with `title` property and have other configurations
-in there as well:
-
-```js filename="content/_meta.js"
-export default {
-  index: 'My Homepage',
-  contact: 'Contact Us',
-  about: {
-    title: 'About Us'
-    // ... extra configurations
-  }
-}
-```
-
-The extra configurations are passed to the **theme** as additional information.
 
 > [!TIP]
 >
