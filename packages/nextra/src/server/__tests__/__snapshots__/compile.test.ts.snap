@@ -10,7 +10,7 @@ export const metadata = {
 function useTOC(props) {
   return []
 }
-export const toc = useTOC()
+export const toc = useTOC({})
 function _createMdxContent(props) {
   const _components = {
     code: 'code',
@@ -37,7 +37,7 @@ export const metadata = {
 function useTOC(props) {
   return []
 }
-export const toc = useTOC()
+export const toc = useTOC({})
 function _createMdxContent(props) {
   const _components = {
     code: 'code',
@@ -70,7 +70,7 @@ export const TagName = () => {
 function useTOC(props) {
   return []
 }
-export const toc = useTOC()
+export const toc = useTOC({})
 function _createMdxContent(props) {
   const _components = {
     h1: 'h1',
@@ -102,7 +102,7 @@ function useTOC(props) {
     }
   ]
 }
-export const toc = useTOC()
+export const toc = useTOC({})
 function _createMdxContent(props) {
   const _components = {
     h2: 'h2',
@@ -124,7 +124,7 @@ export const metadata = {
 function useTOC(props) {
   return []
 }
-export const toc = useTOC()
+export const toc = useTOC({})
 function _createMdxContent(props) {
   const _components = {
     h1: 'h1',

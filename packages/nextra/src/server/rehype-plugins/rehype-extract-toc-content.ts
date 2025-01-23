@@ -107,7 +107,7 @@ const transformer: Transformer<Root> = (ast, file) => {
           createAstExportConst('toc', {
             type: 'CallExpression',
             callee: { type: 'Identifier', name: 'useTOC' },
-            arguments: [],
+            arguments: [{ type: 'ObjectExpression', properties: [] }],
             optional: false
           })
         ]

@@ -33,7 +33,7 @@ export default foo`,
           }
         ]
       }
-      export const toc = useTOC()
+      export const toc = useTOC({})
       function _createMdxContent(props) {
         const _components = {
           h2: 'h2',
@@ -77,7 +77,7 @@ export { foo as default } from './foo'`,
           }
         ]
       }
-      export const toc = useTOC()
+      export const toc = useTOC({})
       function _createMdxContent(props) {
         const _components = {
           h2: 'h2',
@@ -177,7 +177,7 @@ export const TagName = () => {
           }
         ]
       }
-      export const toc = useTOC()
+      export const toc = useTOC({})
       function _createMdxContent(props) {
         const _components = {
           h1: 'h1',
@@ -226,7 +226,7 @@ export const TagName = () => {
           }
         ]
       }
-      export const toc = useTOC()
+      export const toc = useTOC({})
       function _createMdxContent(props) {
         const _components = {
           h3: 'h3',
@@ -384,7 +384,7 @@ import Last from './three.mdx'
           }
         ]
       }
-      export const toc = useTOC()
+      export const toc = useTOC({})
       function _createMdxContent(props) {
         const _components = {
             annotation: 'annotation',
