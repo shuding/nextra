@@ -431,14 +431,9 @@ describe('normalize-page', () => {
   })
 
   it('non-english characters in filename', async () => {
-    const _pageMap = await getPageMapForFixture(
+    const pageMap = await getPageMapForFixture(
       'non-english-characters-in-filename'
     )
-    // const normalizedResult = normalizePages({
-    //   list: pageMap,
-    //   route: '/'
-    // })
-    // expect(normalizedResult.docsDirectories[0]!.name).toBe('foo')
-    // expect(normalizedResult.docsDirectories[1]!.name).toBe('index')
+    expect(pageMap).toBeInstanceOf(Array)
   })
 })
