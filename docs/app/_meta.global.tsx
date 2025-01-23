@@ -69,7 +69,7 @@ const GUIDE: MetaRecord = {
   turbopack: ''
 }
 
-const ADVANCED = {
+const ADVANCED: MetaRecord = {
   npm2yarn: '',
   mermaid: '',
   'tailwind-css': '',
