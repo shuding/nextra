@@ -61,8 +61,10 @@ const nextra: Nextra = nextraConfig => {
   const pageMapPlaceholderLoader = {
     loader: LOADER_PATH,
     options: {
-      contentDirBasePath: loaderOptions.contentDirBasePath,
-      contentDir: CONTENT_DIR
+      // Remove forward slash
+      contentDirBasePath: loaderOptions.contentDirBasePath.slice(1),
+      contentDir: CONTENT_DIR,
+      shouldAddLocaleToLinks: loaderOptions.unstable_shouldAddLocaleToLinks
     }
   }
 
@@ -95,7 +97,10 @@ const nextra: Nextra = nextraConfig => {
       env: {
         ...nextConfig.env,
         NEXTRA_LOCALES: JSON.stringify(pageMapLoader.options.locales),
-        NEXTRA_DEFAULT_LOCALE: defaultLocale
+        NEXTRA_DEFAULT_LOCALE: defaultLocale,
+        NEXTRA_SHOULD_ADD_LOCALE_TO_LINKS: String(
+          loaderOptions.unstable_shouldAddLocaleToLinks
+        )
       },
       experimental: {
         ...nextConfig.experimental,
