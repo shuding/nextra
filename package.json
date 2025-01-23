@@ -28,7 +28,7 @@
     "rimraf": "6.0.1",
     "tsup": "8.3.5",
     "tsx": "4.19.2",
-    "turbo": "2.3.3",
+    "turbo": "2.3.4",
     "typescript": "5.7.3"
   },
   "pnpm": {
@@ -36,7 +36,7 @@
       "postcss": "8.5.1",
       "lightningcss": "1.29.1",
       "esbuild": "0.24.2",
-      "vite": "6.0.9",
+      "vite": "6.0.11",
       "next": "15.1.4"
     },
     "patchedDependencies": {
