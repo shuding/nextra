@@ -46,11 +46,11 @@ const FILE_CONVENTIONS: MetaRecord = {
   'content-directory': <Code>content</Code>,
   'src-directory': <Code>src</Code>,
   _6: {
-    href: 'https://nextjs.org/docs/app/getting-started/installation#create-the-app-directory',
+    href: 'https://nextjs.org/docs/app/getting-started/installation?utm_source=nextra.site&utm_medium=referral&utm_campaign=sidebar#create-the-app-directory',
     title: <ExternalLink>app</ExternalLink>
   },
   _7: {
-    href: 'https://nextjs.org/docs/app/building-your-application/optimizing/static-assets',
+    href: 'https://nextjs.org/docs/app/building-your-application/optimizing/static-assets?utm_source=nextra.site&utm_medium=referral&utm_campaign=sidebar',
     title: <ExternalLink>public</ExternalLink>
   }
 }
@@ -66,7 +66,11 @@ const GUIDE: MetaRecord = {
   'static-exports': '',
   search: '',
   'github-alert-syntax': '',
-  turbopack: ''
+  turbopack: '',
+  _: {
+    title: 'Deploying',
+    href: 'https://nextjs.org/docs/app/building-your-application/deploying?utm_source=nextra.site&utm_medium=referral&utm_campaign=sidebar'
+  }
 }
 
 const ADVANCED: MetaRecord = {
