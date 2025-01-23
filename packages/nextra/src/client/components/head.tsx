@@ -96,10 +96,7 @@ export const Head: FC<HeadProps> = ({ children, ...props }) => {
   --nextra-bg: ${backgroundColor.dark};
 }
 ::selection {
-  background: ${makePrimaryColor('+ 41%')};
-}
-.dark ::selection {
-  background: ${makePrimaryColor('- 11%')};
+  background: hsla(var(--nextra-primary-hue),var(--nextra-primary-saturation),var(--nextra-primary-lightness),.3);
 }
 html {
   background: rgb(var(--nextra-bg));
@@ -129,11 +126,4 @@ html {
       )}
     </head>
   )
-}
-
-function makePrimaryColor(val: string): string {
-  const h = 'var(--nextra-primary-hue)'
-  const s = 'var(--nextra-primary-saturation)'
-  const l = `calc(var(--nextra-primary-lightness) ${val})`
-  return `hsl(${h + s + l})`
 }
