@@ -6,9 +6,14 @@ import { createAstObject } from '../utils.js'
 function cleanFilePath(filePath: string): string {
   // Remove extension
   const { dir, name } = path.parse(filePath)
+
+  const path = `${dir.replace(/^(src\/)?content\/?/, '')}_${name}`
+  // handle non-"\w" characters
+  const encodePath = encodeURI(path)
+
   return (
     // Remove `content` prefix
-    `${dir.replace(/^(src\/)?content\/?/, '')}_${name}`
+    encodePath
       .replaceAll(/[\W_]+/g, '_')
       // Remove leading `_`
       .replace(/^_/, '')

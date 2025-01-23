@@ -80,7 +80,7 @@ export function convertToPageMap({
       }
       const item = {
         name: key || 'index',
-        route: `/${path}`
+        route: `/${encodeURI(path)}` // handle non-"\w" characters
       }
       const keys = Object.keys(value)
       const isFolder = keys.length > 1 || (keys.length === 1 && keys[0] !== '')
