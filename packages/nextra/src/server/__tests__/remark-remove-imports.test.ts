@@ -40,7 +40,7 @@ export const Test = ({value}) => value
           }
         ]
       }
-      const toc = useTOC()
+      const toc = useTOC({})
       function _createMdxContent(props) {
         const _components = {
           h2: 'h2',

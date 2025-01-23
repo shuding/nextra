@@ -29,7 +29,7 @@ describe('remarkStaticImages', () => {
       function useTOC(props) {
         return []
       }
-      export const toc = useTOC()
+      export const toc = useTOC({})
       function _createMdxContent(props) {
         const _components = {
           img: 'img',
@@ -91,7 +91,7 @@ describe('remarkStaticImages', () => {
       function useTOC(props) {
         return []
       }
-      export const toc = useTOC()
+      export const toc = useTOC({})
       function _createMdxContent(props) {
         const _components = {
           img: 'img',

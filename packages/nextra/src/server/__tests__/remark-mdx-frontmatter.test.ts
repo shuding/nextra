@@ -27,7 +27,7 @@ describe('remarkMdxFrontMatter', () => {
         function useTOC(props) {
           return []
         }
-        const toc = useTOC()
+        const toc = useTOC({})
         function _createMdxContent(props) {
           return _jsx(_Fragment, {})
         }
@@ -58,7 +58,7 @@ describe('remarkMdxFrontMatter', () => {
         function useTOC(props) {
           return []
         }
-        const toc = useTOC()
+        const toc = useTOC({})
         function _createMdxContent(props) {
           return _jsx(_Fragment, {})
         }

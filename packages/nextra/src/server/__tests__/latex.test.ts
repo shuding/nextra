@@ -19,7 +19,7 @@ describe('LaTeX', () => {
         function useTOC(props) {
           return []
         }
-        const toc = useTOC()
+        const toc = useTOC({})
         function _createMdxContent(props) {
           const _components = {
             annotation: 'annotation',
@@ -124,7 +124,7 @@ describe('LaTeX', () => {
         function useTOC(props) {
           return []
         }
-        export const toc = useTOC()
+        export const toc = useTOC({})
         function _createMdxContent(props) {
           const _components = {
             p: 'p',
@@ -155,7 +155,7 @@ describe('LaTeX', () => {
         function useTOC(props) {
           return []
         }
-        export const toc = useTOC()
+        export const toc = useTOC({})
         function _createMdxContent(props) {
           return (
             <MathJaxContext>
@@ -188,7 +188,7 @@ ${MATH_LANG}`
         function useTOC(props) {
           return []
         }
-        export const toc = useTOC()
+        export const toc = useTOC({})
         function _createMdxContent(props) {
           const _components = {
             p: 'p',
