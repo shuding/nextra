@@ -70,7 +70,7 @@ importers:
         version: 2.1.1
       framer-motion:
         specifier: ^11.5.4
-        version: 11.18.1(react-dom@18.3.1)(react@18.3.1)
+        version: 11.18.2(react-dom@18.3.1)(react@18.3.1)
       next:
         specifier: 15.1.4
         version: 15.1.4(patch_hash=ih2n7uyu6sqdsauhnxm6ovrrua)(@babel/core@7.26.0)(react-dom@18.3.1)(react@18.3.1)
@@ -5306,6 +5306,14 @@ packages:
       undici-types: 6.20.0
     dev: true
 
+  /@types/node@22.10.9:
+    resolution: {integrity: sha512-Ir6hwgsKyNESl/gLOcEz3krR4CBGgliDqBQ2ma4wIhEx0w+xnoeTq3tdrNw15kU3SxogDjOgv9sqdtLW8mIHaw==}
+    requiresBuild: true
+    dependencies:
+      undici-types: 6.20.0
+    dev: true
+    optional: true
+
   /@types/normalize-package-data@2.4.4:
     resolution: {integrity: sha512-37i+OaWTh9qeK4LSHPsyRC7NahnGotNuZvjLSgcPzblpHB3rrCJxAOgI5gCdKm7coonsaX1Of0ILiTcnZjbfxA==}
     dev: false
@@ -7970,8 +7978,8 @@ packages:
     engines: {node: '>=0.4.x'}
     dev: false
 
-  /framer-motion@11.18.1(react-dom@18.3.1)(react@18.3.1):
-    resolution: {integrity: sha512-EQa8c9lWVOm4zlz14MsBJWr8woq87HsNmsBnQNvcS0hs8uzw6HtGAxZyIU7EGTVpHD1C1n01ufxRyarXcNzpPg==}
+  /framer-motion@11.18.2(react-dom@18.3.1)(react@18.3.1):
+    resolution: {integrity: sha512-5F5Och7wrvtLVElIpclDT0CBzMVg3dL22B64aZwHtsIY8RB4mXICLrkajK4G9R+ieSAGcgrLeae2SeUTg2pr6w==}
     peerDependencies:
       '@emotion/is-prop-valid': '*'
       react: ^18.0.0 || ^19.0.0
