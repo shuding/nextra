@@ -1,5 +1,14 @@
 # nextra
 
+## 4.0.7
+
+### Patch Changes
+
+- 32e7d55: fix `::selection` styles, use `hsla` instead of `hsl` because it can overlap text with `::selection` background when `background-clip: text` is set
+- 695e428: add new nextra config option `unstable_shouldAddLocaleToLinks` to append locale to all links, for i18n websites which uses static exports and can't use Nextra middleware
+- fc78033: fix crash of Nextra when `props` are used within headings, e.g. `## Hello {props.something}`
+- b2f2458: do not log a bunch of `Failed to get the last modified timestamp from Git for the file` messages if init git repository failed
+
 ## 4.0.6
 
 ### Patch Changes
