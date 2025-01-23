@@ -1,5 +1,11 @@
 # nextra
 
+## 4.0.6
+
+### Patch Changes
+
+- 44ea060: correctly handle non-English characters in filenames for `.md` and `.mdx` pages
+
 ## 4.0.5
 
 ### Patch Changes
