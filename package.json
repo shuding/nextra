@@ -37,7 +37,7 @@
       "lightningcss": "1.29.1",
       "esbuild": "0.24.2",
       "vite": "6.0.11",
-      "next": "15.1.4"
+      "next": "15.1.6"
     },
     "patchedDependencies": {
       "babel-plugin-react-compiler@0.0.0-experimental-22c6e49-20241219": "patches/babel-plugin-react-compiler@0.0.0-experimental-22c6e49-20241219.patch",
