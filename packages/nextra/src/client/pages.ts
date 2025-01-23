@@ -10,7 +10,7 @@ export async function importPage(pathSegments: string[] = [], lang = '') {
   const path = pathSegments.join('/')
   const decodePath = decodeURI(path) // handle non-"\w" characters
 
-  const pagePath = RouteToFilepath[decodePath]
+  const pagePath = RouteToFilepath[decodedPath]
   try {
     // eslint-disable-next-line @typescript-eslint/no-require-imports, unicorn/prefer-module -- Require statement enables Fast Refresh
     return require(`private-next-content-dir/${lang && `${lang}/`}${pagePath}`)
