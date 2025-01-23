@@ -475,7 +475,7 @@ export const myVar = 123
       `)
       expect(rawJs).toMatch('default: _createMdxContent')
       expect(rawJs).toMatch('const metadata = {')
-      expect(rawJs).toMatch('const toc = useTOC()')
+      expect(rawJs).toMatch('const toc = useTOC({})')
       expect(rawJs).not.toMatch('MDXContent')
     })
   })

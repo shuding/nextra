@@ -39,4 +39,17 @@ describe('removeLinks()', () => {
       ]
     `)
   })
+  it('should remove `undefined`', () => {
+    const node = (
+      <>foo{undefined}bar</>
+    )
+    expect(removeLinks(node)).toMatchInlineSnapshot(`
+      [
+        <React.Fragment>
+          foo
+          bar
+        </React.Fragment>,
+      ]
+    `)
+  })
 })
