@@ -1,5 +1,12 @@
 # nextra-theme-docs
 
+## 4.0.6
+
+### Patch Changes
+
+- Updated dependencies [44ea060]
+  - nextra@4.0.6
+
 ## 4.0.5
 
 ### Patch Changes
