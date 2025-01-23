@@ -195,11 +195,12 @@ ${locales
 async function getLastCommitTime(
   filePath: string
 ): Promise<number | undefined> {
+  if (!repository) {
+    // Skip since we already logged logger.warn('Init git repository failed')
+    return
+  }
   const relativePath = path.relative(GIT_ROOT, filePath)
   try {
-    if (!repository) {
-      throw new Error('Init git repository failed')
-    }
     return await repository.getFileLatestModifiedDateAsync(relativePath)
   } catch {
     logger.warn(
