@@ -7,8 +7,8 @@ import { logger } from '../server/utils.js'
 export async function importPage(pathSegments: string[] = [], lang = '') {
   const RouteToFilepath = await getRouteToFilepath(lang)
 
-  const path = pathSegments.join('/')
-  const decodePath = decodeURI(path) // handle non-"\w" characters
+  const pathname = pathSegments.join('/')
+  const decodedPath = decodeURI(pathname) // handle non-"\w" characters
 
   const pagePath = RouteToFilepath[decodedPath]
   try {
