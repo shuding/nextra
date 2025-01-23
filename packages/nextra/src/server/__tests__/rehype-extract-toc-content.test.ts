@@ -34,7 +34,7 @@ bar[^1]
           }
         ]
       }
-      export const toc = useTOC()
+      export const toc = useTOC({})
       function _createMdxContent(props) {
         const _components = {
           a: 'a',
@@ -133,7 +133,7 @@ import { Steps } from 'nextra/components'
           }
         ]
       }
-      export const toc = useTOC()
+      export const toc = useTOC({})
       function _createMdxContent(props) {
         const _components = {
           h2: 'h2',
@@ -302,7 +302,7 @@ export const metadata = {
           }
         ]
       }
-      export const toc = useTOC()
+      export const toc = useTOC({})
       function _createMdxContent(props) {
         const _components = {
           h1: 'h1',
@@ -371,7 +371,7 @@ import { MDXRemote } from 'nextra/mdx-remote'
             }
           ]
         }
-        export const toc = useTOC()
+        export const toc = useTOC({})
         function _createMdxContent(props) {
           const _components = {
             h2: 'h2',
@@ -430,7 +430,7 @@ export const myVar = 123
             }
           ]
         }
-        const toc = useTOC()
+        const toc = useTOC({})
         function _createMdxContent(props) {
           const _components = {
               h2: 'h2',
@@ -475,7 +475,7 @@ export const myVar = 123
       `)
       expect(rawJs).toMatch('default: _createMdxContent')
       expect(rawJs).toMatch('const metadata = {')
-      expect(rawJs).toMatch('const toc = useTOC()')
+      expect(rawJs).toMatch('const toc = useTOC({})')
       expect(rawJs).not.toMatch('MDXContent')
     })
   })

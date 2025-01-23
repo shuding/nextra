@@ -107,7 +107,8 @@ const transformer: Transformer<Root> = (ast, file) => {
           createAstExportConst('toc', {
             type: 'CallExpression',
             callee: { type: 'Identifier', name: 'useTOC' },
-            arguments: [],
+            // https://github.com/shuding/nextra/issues/3979
+            arguments: [{ type: 'ObjectExpression', properties: [] }],
             optional: false
           })
         ]

@@ -41,7 +41,7 @@ export default function Foo(props) {
             }
           ]
         }
-        const toc = useTOC()
+        const toc = useTOC({})
         function _createMdxContent(props) {
           const _components = {
             h1: 'h1',
@@ -119,7 +119,7 @@ export default function Foo(props) {
             }
           ]
         }
-        const toc = useTOC()
+        const toc = useTOC({})
         function _createMdxContent(props) {
           const _components = {
             h1: 'h1',
@@ -191,7 +191,7 @@ import { MDXRemote } from 'nextra/mdx-remote'
         function useTOC(props) {
           return []
         }
-        const toc = useTOC()
+        const toc = useTOC({})
         function _createMdxContent(props) {
           const { MDXRemote } = {
             ..._provideComponents(),
@@ -248,7 +248,7 @@ import { MDXRemote } from 'nextra/mdx-remote'
             }
           ]
         }
-        export const toc = useTOC()
+        export const toc = useTOC({})
         function _createMdxContent(props) {
           const _components = {
             h1: 'h1',
@@ -307,7 +307,7 @@ import { MDXRemote } from 'nextra/mdx-remote'
             }
           ]
         }
-        export const toc = useTOC()
+        export const toc = useTOC({})
         function _createMdxContent(props) {
           const _components = {
             h1: 'h1',
@@ -370,7 +370,7 @@ import { MDXRemote } from 'nextra/mdx-remote'
             }
           ]
         }
-        export const toc = useTOC()
+        export const toc = useTOC({})
         function _createMdxContent(props) {
           const _components = {
             h1: 'h1',
@@ -541,7 +541,7 @@ import { MDXRemote } from 'nextra/mdx-remote'
             }
           ]
         }
-        export const toc = useTOC()
+        export const toc = useTOC({})
         function _createMdxContent(props) {
           const _components = {
             h2: 'h2',
