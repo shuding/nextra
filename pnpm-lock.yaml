@@ -152,6 +152,9 @@ importers:
       pagefind:
         specifier: ^1.3.0
         version: 1.3.0
+      typescript:
+        specifier: ^5.7.3
+        version: 5.7.3
 
   examples/docs:
     dependencies:
@@ -7452,7 +7455,7 @@ packages:
       minimatch: 9.0.5
       scslre: 0.3.0
       semver: 7.6.3
-      typescript: 5.7.2
+      typescript: 5.7.3
     transitivePeerDependencies:
       - supports-color
     dev: false
@@ -12275,12 +12278,6 @@ packages:
       typescript: 5.7.3
     transitivePeerDependencies:
       - supports-color
-    dev: false
-
-  /typescript@5.7.2:
-    resolution: {integrity: sha512-i5t66RHxDvVN40HfDd1PsEThGNnlMCMT3jMUuoh9/0TaqWevNontacunWyN02LA9/fIbEWlcHZcgTKb9QoaLfg==}
-    engines: {node: '>=14.17'}
-    hasBin: true
     dev: false
 
   /typescript@5.7.3:
