@@ -7,7 +7,10 @@ import { logger } from '../server/utils.js'
 export async function importPage(pathSegments: string[] = [], lang = '') {
   const RouteToFilepath = await getRouteToFilepath(lang)
 
-  const pagePath = RouteToFilepath[pathSegments.join('/')]
+  const pathname = pathSegments.join('/')
+  const decodedPath = decodeURI(pathname) // handle non-"\w" characters
+
+  const pagePath = RouteToFilepath[decodedPath]
   try {
     // eslint-disable-next-line @typescript-eslint/no-require-imports, unicorn/prefer-module -- Require statement enables Fast Refresh
     return require(`private-next-content-dir/${lang && `${lang}/`}${pagePath}`)
