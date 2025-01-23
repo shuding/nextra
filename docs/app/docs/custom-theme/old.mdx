@@ -1,0 +1,91 @@
+### Render metadata for the active page
+
+> [!WARNING]
+>
+> Docs from Nextra 3
+
+Other than `children`, some other useful props are passed to the theme layout
+too. With the `pageOpts` props, the theme can access the page's meta
+information.
+
+For example, let's implement these features:
+
+- Render the page title in `<title>`
+- Show a simple Table of Contents via MDX `<Wrapper>` component
+- Add a meta tag for `og:image` via the front matter
+
+```tsx filename="theme.tsx" /pageOpts/
+import Head from 'next/head'
+import type { NextraThemeLayoutProps } from 'nextra'
+import { MDXProvider } from 'nextra/mdx'
+
+export default function Layout({ children, pageOpts }: NextraThemeLayoutProps) {
+  const { title, frontMatter } = pageOpts
+
+  return (
+    <>
+      <Head>
+        <title>{title}</title>
+        <meta name="og:image" content={frontMatter.image} />
+      </Head>
+      <MDXProvider components={{ wrapper: MyWrapper }}>{children}</MDXProvider>
+    </>
+  )
+}
+
+function MyWrapper({ children, toc }) {
+  return (
+    <>
+      <h1>My Theme</h1>
+      Table of Contents:
+      <ul>
+        {toc.map(heading => (
+          <li key={heading.value}>{heading.value}</li>
+        ))}
+      </ul>
+      <div style={{ border: '1px solid' }}>{children}</div>
+    </>
+  )
+}
+```
+
+### Use page map of the entire site
+
+> [!WARNING]
+>
+> Docs from Nextra 3
+
+Now, if you want to render something like a sidebar or a navigation bar, which
+relies on information of not only the current page but also other pages, you can
+use the `pageMap` value.
+
+For example, we can render a simple navigation list with all the pages in the
+top level:
+
+```tsx filename="theme.tsx" /pageMap/
+import Link from 'next/link'
+import type { NextraThemeLayoutProps } from 'nextra'
+
+export default function Layout({ children, pageOpts }: NextraThemeLayoutProps) {
+  const { pageMap } = pageOpts
+
+  return (
+    <div>
+      <h1>My Theme</h1>
+      {pageMap.map(item => {
+        if ('route' in item && !('children' in item)) {
+          return (
+            <Link key={item.name} href={item.route}>
+              {item.route}
+            </Link>
+          )
+        }
+      })}
+      <div style={{ border: '1px solid' }}>{children}</div>
+    </div>
+  )
+}
+```
+
+There are other item kinds such as `Folder` (for directories) and `Meta` (for
+`_meta` files). All the items are typed so you can easily know the properties.

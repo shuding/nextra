@@ -20,7 +20,7 @@ ${(await fs.readFile(`../examples/docs/src/app/docs/${filename}`, 'utf8'))
   .slice(2, -1)
   .join('\n')}
 ~~~`
-  const rawJs = await compileMdx(rawMdx)
+  const rawJs = await compileMdx(rawMdx, { defaultShowCopyCode: true })
   return <MDXRemote compiledSource={rawJs} />
 }
 

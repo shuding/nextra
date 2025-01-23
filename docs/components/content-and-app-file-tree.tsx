@@ -36,14 +36,15 @@ function mapChildren(children) {
   })
 }
 
-export const ContentAndAppFileTee: FC<{ children: ReactNode }> = ({
-  children
-}) => {
+export const ContentAndAppFileTee: FC<{
+  children: ReactNode
+  className: string
+}> = ({ children, className }) => {
   const { a: Link, code: Code } = useMDXComponents()
   const layout = <FileTree.File name="layout.jsx" />
   return (
     <>
-      <FileTree>
+      <FileTree className={className}>
         <b>
           Using{' '}
           <Link href="/docs/file-conventions/content-directory">
@@ -51,7 +52,7 @@ export const ContentAndAppFileTee: FC<{ children: ReactNode }> = ({
           </Link>
         </b>
         <FileTree.Folder name="app" defaultOpen>
-          <FileTree.Folder name="[[...mdxPath]]" defaultOpen>
+          <FileTree.Folder name="[[...mdxPath]]">
             <FileTree.File name="page.jsx" />
           </FileTree.Folder>
           {layout}
@@ -60,7 +61,7 @@ export const ContentAndAppFileTee: FC<{ children: ReactNode }> = ({
           {children}
         </FileTree.Folder>
       </FileTree>{' '}
-      <FileTree>
+      <FileTree className={className}>
         <b>
           Using{' '}
           <Link href="/docs/file-conventions/page-file">

@@ -134,11 +134,11 @@ export const itemSchema = z.strictObject({
 })
 
 export const metaSchema = z.union([
-  stringOrElement.transform(transformTitle),
+  /* ok */ stringOrElement.transform(transformTitle),
   itemSchema,
-  linkSchema.extend({ type: z.enum(['page', 'doc']).optional() }),
-  separatorItemSchema,
-  menuSchema
+  /* ok */ linkSchema.extend({ type: z.enum(['page', 'doc']).optional() }),
+  /* ok */ separatorItemSchema,
+  /* ok */ menuSchema
 ])
 
 function transformTitle<T>(title: T) {
