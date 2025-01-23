@@ -1,3 +1,4 @@
+import type { MetaRecord } from 'nextra'
 import { LinkArrowIcon } from 'nextra/icons'
 import type { FC, ReactNode } from 'react'
 import { useMDXComponents } from '../mdx-components'
@@ -18,6 +19,105 @@ const ExternalLink: FC<{ children: ReactNode }> = ({ children }) => {
   )
 }
 
+const FILE_CONVENTIONS: MetaRecord = {
+  _: {
+    type: 'separator',
+    title: 'Files'
+  },
+  'page-file': <Code>page.mdx</Code>,
+  'meta-file': <Code>_meta.js</Code>,
+  _2: {
+    href: 'https://nextjs.org/docs/app/api-reference/file-conventions/page',
+    title: <ExternalLink>page.jsx</ExternalLink>
+  },
+  _3: {
+    href: 'https://nextjs.org/docs/app/api-reference/file-conventions/layout',
+    title: <ExternalLink>layout.jsx</ExternalLink>
+  },
+  _4: {
+    type: 'separator',
+    title: 'Top-Level Files'
+  },
+  'mdx-components-file': <Code>mdx-components.js</Code>,
+  _5: {
+    type: 'separator',
+    title: 'Top-Level Folders'
+  },
+  'content-directory': <Code>content</Code>,
+  'src-directory': <Code>src</Code>,
+  _6: {
+    href: 'https://nextjs.org/docs/app/getting-started/installation#create-the-app-directory',
+    title: <ExternalLink>app</ExternalLink>
+  },
+  _7: {
+    href: 'https://nextjs.org/docs/app/building-your-application/optimizing/static-assets',
+    title: <ExternalLink>public</ExternalLink>
+  }
+}
+
+const GUIDE: MetaRecord = {
+  markdown: '',
+  'syntax-highlighting': '',
+  link: '',
+  image: '',
+  ssg: '',
+  i18n: '',
+  'custom-css': '',
+  'static-exports': '',
+  search: '',
+  'github-alert-syntax': '',
+  turbopack: ''
+}
+
+const ADVANCED: MetaRecord = {
+  npm2yarn: '',
+  mermaid: '',
+  'tailwind-css': '',
+  latex: '',
+  table: '',
+  typescript: '',
+  remote: '',
+  playground: {
+    theme: {
+      layout: 'full'
+    }
+  }
+}
+
+const NEXTRA_BUILTINS: MetaRecord = {
+  _: {
+    type: 'separator',
+    title: 'Layout Components'
+  },
+  banner: '',
+  head: '',
+  search: '',
+  __: {
+    type: 'separator',
+    title: 'Content Components'
+  }
+}
+
+const BLOG_THEME: MetaRecord = {
+  start: '',
+  'get-posts-and-tags': '',
+  posts: (
+    <>
+      <Code>/posts</Code>&nbsp;Page
+    </>
+  ),
+  tags: (
+    <>
+      <Code>/tags/:id</Code>&nbsp;Page
+    </>
+  ),
+  rss: (
+    <>
+      <Code>/rss.xml</Code>&nbsp;Route
+    </>
+  )
+}
+
 export default {
   index: {
     type: 'page',
@@ -28,85 +128,10 @@ export default {
     title: 'Documentation',
     items: {
       index: '',
-      'file-conventions': {
-        items: {
-          _: {
-            type: 'separator',
-            title: 'Files'
-          },
-          'page-file': <Code>page.mdx</Code>,
-          'meta-file': <Code>_meta.js</Code>,
-          'mdx-components-file': <Code>mdx-components.js</Code>,
-          _2: {
-            href: 'https://nextjs.org/docs/app/api-reference/file-conventions/page',
-            title: <ExternalLink>page.jsx</ExternalLink>
-          },
-          _3: {
-            href: 'https://nextjs.org/docs/app/api-reference/file-conventions/layout',
-            title: <ExternalLink>layout.jsx</ExternalLink>
-          },
-          _4: {
-            type: 'separator',
-            title: 'Top-Level Folders'
-          },
-          'content-directory': <Code>content</Code>,
-          'src-directory': <Code>src</Code>,
-          _5: {
-            href: 'https://nextjs.org/docs/app/getting-started/installation#create-the-app-directory',
-            title: <ExternalLink>app</ExternalLink>
-          },
-          _6: {
-            href: 'https://nextjs.org/docs/app/building-your-application/optimizing/static-assets',
-            title: <ExternalLink>public</ExternalLink>
-          }
-        }
-      },
-      guide: {
-        items: {
-          markdown: '',
-          'syntax-highlighting': '',
-          link: '',
-          image: '',
-          ssg: '',
-          i18n: '',
-          'custom-css': '',
-          'static-exports': '',
-          search: '',
-          'github-alert-syntax': '',
-          turbopack: ''
-        }
-      },
-      advanced: {
-        items: {
-          npm2yarn: '',
-          mermaid: '',
-          'tailwind-css': '',
-          latex: '',
-          table: '',
-          typescript: '',
-          remote: '',
-          playground: {
-            theme: {
-              layout: 'full'
-            }
-          }
-        }
-      },
-      'built-ins': {
-        items: {
-          _: {
-            type: 'separator',
-            title: 'Layout Components'
-          },
-          banner: '',
-          head: '',
-          search: '',
-          __: {
-            type: 'separator',
-            title: 'Content Components'
-          }
-        }
-      },
+      'file-conventions': { items: FILE_CONVENTIONS },
+      guide: { items: GUIDE },
+      advanced: { items: ADVANCED },
+      'built-ins': { items: NEXTRA_BUILTINS },
       _: {
         type: 'separator',
         title: 'Themes'
@@ -121,7 +146,7 @@ export default {
           }
         }
       },
-      'blog-theme': '',
+      'blog-theme': { items: BLOG_THEME },
       'custom-theme': '',
       __: {
         type: 'separator',

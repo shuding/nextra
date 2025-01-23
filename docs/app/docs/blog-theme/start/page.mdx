@@ -4,6 +4,7 @@ icon: ChevronRightIcon
 
 import InstallNextraTheme from '@components/install-nextra-theme.mdx'
 import ReadyToGo from '@components/ready-to-go.mdx'
+import { ExampleCode } from '@components/example-code'
 import { Steps } from 'nextra/components'
 
 # Get Started
@@ -16,7 +17,7 @@ import { Steps } from 'nextra/components'
 Similar to the [Docs Theme](/docs/docs-theme/start), you can install the blog
 theme with the following commands:
 
-## Start as a New Project
+## Start as a new project
 
 <Steps>
 ### Install
@@ -37,6 +38,10 @@ npm i next react react-dom nextra nextra-theme-blog
 <InstallNextraTheme />
 
 ### Add [`mdx-components` file](/docs/file-conventions/mdx-components-file)
+
+### Create root layout
+
+<ExampleCode example="blog" filePath="app/layout.jsx" />
 
 {/*
 
