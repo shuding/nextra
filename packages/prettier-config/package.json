@@ -6,6 +6,6 @@
   "dependencies": {
     "@ianvs/prettier-plugin-sort-imports": "4.4.1",
     "prettier-plugin-pkg": "0.18.1",
-    "prettier-plugin-tailwindcss": "0.6.10"
+    "prettier-plugin-tailwindcss": "0.6.11"
   }
 }
