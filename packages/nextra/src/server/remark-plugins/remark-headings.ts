@@ -1,9 +1,14 @@
 import Slugger from 'github-slugger'
+import type { Literal } from 'hast'
 import type { Parent, Root } from 'mdast'
+import type {
+  MdxJsxAttribute,
+} from 'mdast-util-mdx-jsx'
 import type { Plugin } from 'unified'
 import { visit } from 'unist-util-visit'
 import type { Heading } from '../../types.js'
 import { MARKDOWN_EXTENSION_RE } from '../constants.js'
+import { createAstObject } from '../utils.js'
 import type { HProperties } from './remark-custom-heading-id.js'
 
 export const getFlattenedValue = (node: Parent): string =>
@@ -37,7 +42,7 @@ export const remarkHeadings: Plugin<
         // verify .md/.mdx exports and attach named `toc` export
         'mdxjsEsm'
       ],
-      (node, _index, parent) => {
+      (node, index, parent) => {
         if (node.type === 'heading') {
           if (node.depth === 1) {
             return
@@ -60,11 +65,16 @@ export const remarkHeadings: Plugin<
             parent &&
             parent.type === 'mdxJsxFlowElement' &&
             parent.name === 'Tabs' &&
-            (
-              parent.attributes.find(
-                attr => attr.type === 'mdxJsxAttribute' && attr.name === 'items'
-              )?.value as any
-            ).data.estree.body[0].expression.elements.map((el: any) => el.value)
+            parent.attributes.find(
+              (attr): attr is MdxJsxAttribute =>
+                attr.type === 'mdxJsxAttribute' && attr.name === 'items'
+            )
+          if (!itemsAttr) return
+          const tabName = (
+            itemsAttr as any
+          ).value.data.estree.body[0].expression.elements.map(
+            (el: Literal) => el.value
+          )[index!]
           node.children.unshift({
             type: 'mdxJsxFlowElement',
             name: 'h3',
@@ -72,7 +82,7 @@ export const remarkHeadings: Plugin<
               {
                 type: 'mdxJsxAttribute',
                 name: 'id',
-                value: slugger.slug(itemsAttr[_index as any])
+                value: slugger.slug(tabName)
               },
               {
                 type: 'mdxJsxAttribute',
@@ -86,27 +96,7 @@ export const remarkHeadings: Plugin<
                       body: [
                         {
                           type: 'ExpressionStatement',
-                          expression: {
-                            type: 'ObjectExpression',
-                            properties: [
-                              {
-                                type: 'Property',
-                                method: false,
-                                shorthand: false,
-                                computed: false,
-                                key: {
-                                  type: 'Identifier',
-                                  name: 'display'
-                                },
-                                value: {
-                                  type: 'Literal',
-                                  value: 'hidden',
-                                  raw: "'hidden'"
-                                },
-                                kind: 'init'
-                              }
-                            ]
-                          }
+                          expression: createAstObject({ display: 'hidden' })
                         }
                       ],
                       sourceType: 'module',
@@ -117,12 +107,14 @@ export const remarkHeadings: Plugin<
               }
             ],
             data: {
+              // @ts-expect-error -- false positive
               _mdxExplicitJsx: true
             },
             children: [
               {
+                // @ts-expect-error -- false positive
                 type: 'text',
-                value: itemsAttr[_index as any]
+                value: tabName
               }
             ]
           })
