@@ -605,7 +605,7 @@ describe('Code block', () => {
 
   describe('toc', () => {
     it.only('should attach heading', async () => {
-const rawMdx = `<Tabs items={['pnpm', 'npm', 'yarn']} defaultIndex="1">
+      const rawMdx = `<Tabs items={['pnpm', 'npm', 'yarn']} defaultIndex="1">
   <Tabs.Tab>**pnpm**: Fast, disk space efficient package manager.</Tabs.Tab>
   <Tabs.Tab>**npm** is a package manager for the JavaScript programming language.</Tabs.Tab>
   <Tabs.Tab>**Yarn** is a software packaging system.</Tabs.Tab>
@@ -625,6 +625,7 @@ const rawMdx = `<Tabs items={['pnpm', 'npm', 'yarn']} defaultIndex="1">
         export const toc = useTOC({})
         function _createMdxContent(props) {
           const _components = {
+              h3: 'h3',
               strong: 'strong',
               ..._provideComponents(),
               ...props.components
@@ -636,14 +637,35 @@ const rawMdx = `<Tabs items={['pnpm', 'npm', 'yarn']} defaultIndex="1">
             <>
               <Tabs items={['pnpm', 'npm', 'yarn']} defaultIndex="1">
                 <Tabs.Tab>
+                  <_components.h3
+                    style={{
+                      display: 'hidden'
+                    }}
+                  >
+                    {'hello'}
+                  </_components.h3>
                   <_components.strong>{'pnpm'}</_components.strong>
                   {': Fast, disk space efficient package manager.'}
                 </Tabs.Tab>
                 <Tabs.Tab>
+                  <_components.h3
+                    style={{
+                      display: 'hidden'
+                    }}
+                  >
+                    {'hello'}
+                  </_components.h3>
                   <_components.strong>{'npm'}</_components.strong>
                   {' is a package manager for the JavaScript programming language.'}
                 </Tabs.Tab>
                 <Tabs.Tab>
+                  <_components.h3
+                    style={{
+                      display: 'hidden'
+                    }}
+                  >
+                    {'hello'}
+                  </_components.h3>
                   <_components.strong>{'Yarn'}</_components.strong>
                   {' is a software packaging system.'}
                 </Tabs.Tab>
@@ -651,14 +673,35 @@ const rawMdx = `<Tabs items={['pnpm', 'npm', 'yarn']} defaultIndex="1">
               {'\\n'}
               <Tabs items={['pnpm', 'npm', 'yarn']} defaultIndex="1">
                 <Tabs.Tab>
+                  <_components.h3
+                    style={{
+                      display: 'hidden'
+                    }}
+                  >
+                    {'hello'}
+                  </_components.h3>
                   <_components.strong>{'pnpm'}</_components.strong>
                   {': Fast, disk space efficient package manager.'}
                 </Tabs.Tab>
                 <Tabs.Tab>
+                  <_components.h3
+                    style={{
+                      display: 'hidden'
+                    }}
+                  >
+                    {'hello'}
+                  </_components.h3>
                   <_components.strong>{'npm'}</_components.strong>
                   {' is a package manager for the JavaScript programming language.'}
                 </Tabs.Tab>
                 <Tabs.Tab>
+                  <_components.h3
+                    style={{
+                      display: 'hidden'
+                    }}
+                  >
+                    {'hello'}
+                  </_components.h3>
                   <_components.strong>{'Yarn'}</_components.strong>
                   {' is a software packaging system.'}
                 </Tabs.Tab>
