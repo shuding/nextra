@@ -6,7 +6,7 @@ import { useEffect, useRef } from 'react'
 
 export const DynamicCode: FC<{ children: ReactNode }> = ({ children }) => {
   const ref = useRef<HTMLDivElement>(null!)
-  const tokenRef = useRef<HTMLSpanElement>()
+  const tokenRef = useRef<HTMLSpanElement>(undefined)
   // Find the corresponding token from the DOM
   useEffect(() => {
     tokenRef.current = [

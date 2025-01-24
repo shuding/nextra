@@ -105,21 +105,12 @@ const NEXTRA_BUILTINS: MetaRecord = {
 const BLOG_THEME: MetaRecord = {
   start: '',
   'get-posts-and-tags': '',
-  posts: (
-    <>
-      <Code>/posts</Code>&nbsp;Page
-    </>
-  ),
-  tags: (
-    <>
-      <Code>/tags/:id</Code>&nbsp;Page
-    </>
-  ),
-  rss: (
-    <>
-      <Code>/rss.xml</Code>&nbsp;Route
-    </>
-  )
+  // prettier-ignore
+  posts: <><Code>/posts</Code>&nbsp;Page</>,
+  // prettier-ignore
+  tags: <><Code>/tags/:id</Code>&nbsp;Page</>,
+  // prettier-ignore
+  rss: <><Code>/rss.xml</Code>&nbsp;Route</>
 }
 
 export default {
