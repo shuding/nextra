@@ -43,6 +43,11 @@ describe('remarkMdxFrontMatter', () => {
       const { metadata } = evaluate(rawJs)
       expect(metadata).toEqual({ foo: 'bar' })
     })
+    it('should parse empty front matter', async () => {
+      const rawJs = await compileMdx('---\n---')
+      const { metadata } = evaluate(rawJs)
+      expect(metadata).toEqual({})
+    })
   })
 
   describe('esm frontmatter', async () => {
