@@ -12,7 +12,7 @@ declare namespace globalThis {
             data: () => Promise<T>
             id: string
           }[]
-        }>
+        } | null>
         options: (opts: Record<string, unknown>) => Promise<void>
       }
     | undefined
