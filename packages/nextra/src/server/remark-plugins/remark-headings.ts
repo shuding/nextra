@@ -37,7 +37,7 @@ export const remarkHeadings: Plugin<
         // verify .md/.mdx exports and attach named `toc` export
         'mdxjsEsm'
       ],
-      (node, _index) => {
+      (node, _index, parent) => {
         if (node.type === 'heading') {
           if (node.depth === 1) {
             return
@@ -56,10 +56,24 @@ export const remarkHeadings: Plugin<
         const isTab =
           node.type === 'mdxJsxFlowElement' && node.name === 'Tabs.Tab'
         if (isTab) {
+          const itemsAttr =
+            parent &&
+            parent.type === 'mdxJsxFlowElement' &&
+            parent.name === 'Tabs' &&
+            (
+              parent.attributes.find(
+                attr => attr.type === 'mdxJsxAttribute' && attr.name === 'items'
+              )?.value as any
+            ).data.estree.body[0].expression.elements.map((el: any) => el.value)
           node.children.unshift({
             type: 'mdxJsxFlowElement',
             name: 'h3',
             attributes: [
+              {
+                type: 'mdxJsxAttribute',
+                name: 'id',
+                value: slugger.slug(itemsAttr[_index as any])
+              },
               {
                 type: 'mdxJsxAttribute',
                 name: 'style',
@@ -102,13 +116,13 @@ export const remarkHeadings: Plugin<
                 }
               }
             ],
-            "data": {
-              "_mdxExplicitJsx": true
+            data: {
+              _mdxExplicitJsx: true
             },
             children: [
               {
                 type: 'text',
-                value: 'hello'
+                value: itemsAttr[_index as any]
               }
             ]
           })
