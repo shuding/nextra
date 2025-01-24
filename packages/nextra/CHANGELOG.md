@@ -1,5 +1,11 @@
 # nextra
 
+## 4.0.8
+
+### Patch Changes
+
+- 267ef81: fix parsing empty front matter
+
 ## 4.0.7
 
 ### Patch Changes
