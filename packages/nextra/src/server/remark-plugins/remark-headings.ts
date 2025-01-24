@@ -62,7 +62,7 @@ export const remarkHeadings: Plugin<
         const isTab =
           node.type === 'mdxJsxFlowElement' && node.name === 'Tabs.Tab'
         if (isTab) {
-          const itemsAttr =
+          const itemsAttr: any =
             parent &&
             parent.type === 'mdxJsxFlowElement' &&
             parent.name === 'Tabs' &&
@@ -73,25 +73,18 @@ export const remarkHeadings: Plugin<
                 attr.type === 'mdxJsxAttribute' && attr.name === 'items'
             )
           if (!itemsAttr) return
-          const tabName = (
-            itemsAttr as any
-          ).value.data.estree.body[0].expression.elements.map(
-            (el: Literal) => el.value
-          )[index!]
+          const tabName =
+            itemsAttr.value.data.estree.body[0].expression.elements.map(
+              (el: Literal) => el.value
+            )[index!]
           const id = slugger.slug(tabName)
           node.children.unshift({
             type: 'mdxJsxFlowElement',
             name: 'h3',
-            data: {
-              _mdxExplicitJsx: true
-            },
+            data: { _mdxExplicitJsx: true },
             children: [{ type: 'text', value: tabName }],
             attributes: [
-              {
-                type: 'mdxJsxAttribute',
-                name: 'id',
-                value: id
-              },
+              { type: 'mdxJsxAttribute', name: 'id', value: id },
               {
                 type: 'mdxJsxAttribute',
                 name: 'style',
@@ -113,8 +106,8 @@ export const remarkHeadings: Plugin<
                   }
                 }
               }
-            ]
-          })
+            ] satisfies MdxJsxAttribute[]
+          } as any)
         }
 
         if (isRemoteContent) {
