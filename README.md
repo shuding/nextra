@@ -15,7 +15,7 @@ The Nextra repository uses [PNPM Workspaces](https://pnpm.io/workspaces) and
 [Turborepo](https://github.com/vercel/turborepo). To install dependencies, run
 `pnpm install` in the project root directory.
 
-### Build Nextra Core
+### Build `nextra`
 
 ```bash
 pnpm --filter nextra build
@@ -23,7 +23,7 @@ pnpm --filter nextra build
 
 Watch mode: `pnpm --filter nextra dev`
 
-### Build Nextra Theme
+### Build `nextra-theme-docs`
 
 ```bash
 pnpm --filter nextra-theme-docs build
@@ -41,7 +41,7 @@ pnpm --filter example-docs dev
 Any change to `example/docs` will be re-rendered instantly.
 
 If you update the core or theme packages, a rebuild is required. Or you can use
-the watch mode for both nextra and the theme in separated terminals.
+the watch mode for both Nextra and the theme in separated terminals.
 
 ## Sponsors
 
