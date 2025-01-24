@@ -100,8 +100,12 @@ describe('generatePageMap()', () => {
         "app/docs/advanced/tailwind-css/page.mdx",
         "app/docs/advanced/twoslash/page.mdx",
         "app/docs/advanced/typescript/page.mdx",
+        "app/docs/blog-theme/get-posts-and-tags/page.mdx",
         "app/docs/blog-theme/page.mdx",
+        "app/docs/blog-theme/posts/page.mdx",
+        "app/docs/blog-theme/rss/page.mdx",
         "app/docs/blog-theme/start/page.mdx",
+        "app/docs/blog-theme/tags/page.mdx",
         "app/docs/built-ins/banner/page.mdx",
         "app/docs/built-ins/bleed/page.mdx",
         "app/docs/built-ins/callout/page.mdx",
@@ -224,14 +228,34 @@ describe('generatePageMap()', () => {
             {
               "children": [
                 {
+                  "__pagePath": "app/docs/blog-theme/get-posts-and-tags/page.mdx",
+                  "name": "get-posts-and-tags",
+                  "route": "/docs/blog-theme/get-posts-and-tags",
+                },
+                {
                   "__pagePath": "app/docs/blog-theme/page.mdx",
                   "name": "index",
                   "route": "/docs/blog-theme",
                 },
                 {
+                  "__pagePath": "app/docs/blog-theme/posts/page.mdx",
+                  "name": "posts",
+                  "route": "/docs/blog-theme/posts",
+                },
+                {
+                  "__pagePath": "app/docs/blog-theme/rss/page.mdx",
+                  "name": "rss",
+                  "route": "/docs/blog-theme/rss",
+                },
+                {
                   "__pagePath": "app/docs/blog-theme/start/page.mdx",
                   "name": "start",
                   "route": "/docs/blog-theme/start",
+                },
+                {
+                  "__pagePath": "app/docs/blog-theme/tags/page.mdx",
+                  "name": "tags",
+                  "route": "/docs/blog-theme/tags",
                 },
               ],
               "name": "blog-theme",
@@ -505,8 +529,12 @@ describe('generatePageMap()', () => {
         import {metadata as app_docs_advanced_tailwind_css_page} from "private-next-root-dir/app/docs/advanced/tailwind-css/page.mdx?metadata";
         import {metadata as app_docs_advanced_twoslash_page} from "private-next-root-dir/app/docs/advanced/twoslash/page.mdx?metadata";
         import {metadata as app_docs_advanced_typescript_page} from "private-next-root-dir/app/docs/advanced/typescript/page.mdx?metadata";
+        import {metadata as app_docs_blog_theme_get_posts_and_tags_page} from "private-next-root-dir/app/docs/blog-theme/get-posts-and-tags/page.mdx?metadata";
         import {metadata as app_docs_blog_theme_page} from "private-next-root-dir/app/docs/blog-theme/page.mdx?metadata";
+        import {metadata as app_docs_blog_theme_posts_page} from "private-next-root-dir/app/docs/blog-theme/posts/page.mdx?metadata";
+        import {metadata as app_docs_blog_theme_rss_page} from "private-next-root-dir/app/docs/blog-theme/rss/page.mdx?metadata";
         import {metadata as app_docs_blog_theme_start_page} from "private-next-root-dir/app/docs/blog-theme/start/page.mdx?metadata";
+        import {metadata as app_docs_blog_theme_tags_page} from "private-next-root-dir/app/docs/blog-theme/tags/page.mdx?metadata";
         import {metadata as app_docs_built_ins_banner_page} from "private-next-root-dir/app/docs/built-ins/banner/page.mdx?metadata";
         import {metadata as app_docs_built_ins_bleed_page} from "private-next-root-dir/app/docs/built-ins/bleed/page.mdx?metadata";
         import {metadata as app_docs_built_ins_callout_page} from "private-next-root-dir/app/docs/built-ins/callout/page.mdx?metadata";
@@ -613,13 +641,29 @@ describe('generatePageMap()', () => {
             name: "blog-theme",
             route: "/docs/blog-theme",
             children: [{
+              name: "get-posts-and-tags",
+              route: "/docs/blog-theme/get-posts-and-tags",
+              frontMatter: app_docs_blog_theme_get_posts_and_tags_page
+            }, {
               name: "index",
               route: "/docs/blog-theme",
               frontMatter: app_docs_blog_theme_page
             }, {
+              name: "posts",
+              route: "/docs/blog-theme/posts",
+              frontMatter: app_docs_blog_theme_posts_page
+            }, {
+              name: "rss",
+              route: "/docs/blog-theme/rss",
+              frontMatter: app_docs_blog_theme_rss_page
+            }, {
               name: "start",
               route: "/docs/blog-theme/start",
               frontMatter: app_docs_blog_theme_start_page
+            }, {
+              name: "tags",
+              route: "/docs/blog-theme/tags",
+              frontMatter: app_docs_blog_theme_tags_page
             }]
           }, {
             name: "built-ins",

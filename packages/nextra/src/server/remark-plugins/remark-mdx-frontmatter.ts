@@ -32,7 +32,7 @@ const transformer: Transformer<Root> = ast => {
       )
     }
     const node = ast.children[yamlNodeIndex] as { value: string }
-    ast.children[yamlNodeIndex] = createNode(parseYaml(node.value))
+    ast.children[yamlNodeIndex] = createNode(parseYaml(node.value) ?? {})
   } else if (!hasEsm) {
     // Attach empty node
     ast.children.unshift(createNode({}))
