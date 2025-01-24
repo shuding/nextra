@@ -108,11 +108,14 @@ export const Search: FC<SearchProps> = ({
           return
         }
       }
-      const { results } =
-        await window.pagefind!.debouncedSearch<PagefindResult>(
-          value,
-          searchOptions
-        )
+      const response = await window.pagefind!.debouncedSearch<PagefindResult>(
+        value,
+        searchOptions
+      )
+      if (!response) return
+
+      const { results } = response
+
       const data = await Promise.all(results.map(o => o.data()))
 
       setResults(

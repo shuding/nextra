@@ -639,7 +639,9 @@ describe('Code block', () => {
                   <h3
                     id="pnpm"
                     style={{
-                      display: 'none'
+                      visibility: 'hidden',
+                      height: 0,
+                      width: 0
                     }}
                   >
                     {'pnpm'}
@@ -652,7 +654,9 @@ describe('Code block', () => {
                   <h3
                     id="npm"
                     style={{
-                      display: 'none'
+                      visibility: 'hidden',
+                      height: 0,
+                      width: 0
                     }}
                   >
                     {'npm'}
@@ -665,7 +669,9 @@ describe('Code block', () => {
                   <h3
                     id="yarn"
                     style={{
-                      display: 'none'
+                      visibility: 'hidden',
+                      height: 0,
+                      width: 0
                     }}
                   >
                     {'yarn'}
@@ -681,7 +687,9 @@ describe('Code block', () => {
                   <h3
                     id="pnpm-1"
                     style={{
-                      display: 'none'
+                      visibility: 'hidden',
+                      height: 0,
+                      width: 0
                     }}
                   >
                     {'pnpm'}
@@ -694,7 +702,9 @@ describe('Code block', () => {
                   <h3
                     id="npm-1"
                     style={{
-                      display: 'none'
+                      visibility: 'hidden',
+                      height: 0,
+                      width: 0
                     }}
                   >
                     {'npm'}
@@ -707,7 +717,9 @@ describe('Code block', () => {
                   <h3
                     id="yarn-1"
                     style={{
-                      display: 'none'
+                      visibility: 'hidden',
+                      height: 0,
+                      width: 0
                     }}
                   >
                     {'yarn'}
