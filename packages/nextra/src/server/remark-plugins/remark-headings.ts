@@ -53,6 +53,67 @@ export const remarkHeadings: Plugin<
           return
         }
 
+        const isTab =
+          node.type === 'mdxJsxFlowElement' && node.name === 'Tabs.Tab'
+        if (isTab) {
+          node.children.unshift({
+            type: 'mdxJsxFlowElement',
+            name: 'h3',
+            attributes: [
+              {
+                type: 'mdxJsxAttribute',
+                name: 'style',
+                value: {
+                  type: 'mdxJsxAttributeValueExpression',
+                  value: '',
+                  data: {
+                    estree: {
+                      type: 'Program',
+                      body: [
+                        {
+                          type: 'ExpressionStatement',
+                          expression: {
+                            type: 'ObjectExpression',
+                            properties: [
+                              {
+                                type: 'Property',
+                                method: false,
+                                shorthand: false,
+                                computed: false,
+                                key: {
+                                  type: 'Identifier',
+                                  name: 'display'
+                                },
+                                value: {
+                                  type: 'Literal',
+                                  value: 'hidden',
+                                  raw: "'hidden'"
+                                },
+                                kind: 'init'
+                              }
+                            ]
+                          }
+                        }
+                      ],
+                      sourceType: 'module',
+                      comments: []
+                    }
+                  }
+                }
+              }
+            ],
+            "data": {
+              "_mdxExplicitJsx": true
+            },
+            children: [
+              {
+                type: 'text',
+                value: 'hello'
+              }
+            ]
+          })
+        }
+
         if (isRemoteContent) {
           // skip
         } else if ((node as any).type === 'mdxjsEsm') {
