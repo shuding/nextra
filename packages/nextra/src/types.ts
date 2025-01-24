@@ -12,6 +12,7 @@ export interface LoaderOptions extends z.infer<typeof nextraConfigSchema> {
   isPageImport?: boolean
   locales: string[]
   contentDir?: string
+  shouldAddLocaleToLinks?: boolean
 }
 
 type TPageItem = { name: string; route: string; __pagePath: string }

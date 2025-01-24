@@ -69,7 +69,8 @@ export async function loader(
     contentDirBasePath,
     contentDir,
     locales,
-    whiteListTagsStyling
+    whiteListTagsStyling,
+    shouldAddLocaleToLinks
   } = this.getOptions()
   const { resourcePath, resourceQuery } = this
 
@@ -90,12 +91,16 @@ export async function loader(
       locale,
       contentDir
     })
-    const { pageMap, mdxPages } = convertToPageMap({
+    let { pageMap, mdxPages } = convertToPageMap({
       filePaths,
-      // Remove forward slash
-      basePath: contentDirBasePath.slice(1),
+      basePath: shouldAddLocaleToLinks
+        ? [locale, contentDirBasePath].filter(Boolean).join('/')
+        : contentDirBasePath,
       locale
     })
+    if (shouldAddLocaleToLinks && 'children' in pageMap[0]!) {
+      pageMap = pageMap[0].children
+    }
     const globalMetaPath = filePaths.find(filePath =>
       filePath.includes('/_meta.global.')
     )
@@ -190,11 +195,12 @@ ${locales
 async function getLastCommitTime(
   filePath: string
 ): Promise<number | undefined> {
+  if (!repository) {
+    // Skip since we already logged logger.warn('Init git repository failed')
+    return
+  }
   const relativePath = path.relative(GIT_ROOT, filePath)
   try {
-    if (!repository) {
-      throw new Error('Init git repository failed')
-    }
     return await repository.getFileLatestModifiedDateAsync(relativePath)
   } catch {
     logger.warn(

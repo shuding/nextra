@@ -3,8 +3,14 @@ asIndexPage: true
 sidebarTitle: Blog Theme
 ---
 
-import { ChevronRightIcon } from '@components/icons'
+import {
+  ChevronRightIcon,
+  FilesIcon,
+  RSSIcon,
+  TagsIcon
+} from '@components/icons'
 import { Cards } from 'nextra/components'
+import { FileIcon } from 'nextra/icons'
 import { MDXRemote } from 'nextra/mdx-remote'
 import { createIndexPage, getPageMap } from 'nextra/page-map'
 
@@ -14,6 +20,10 @@ import { createIndexPage, getPageMap } from 'nextra/page-map'
   compiledSource={await createIndexPage(await getPageMap('/docs/blog-theme'))}
   components={{
     Cards,
-    ChevronRightIcon
+    ChevronRightIcon,
+    FileIcon,
+    FilesIcon,
+    RSSIcon,
+    TagsIcon
   }}
 />
