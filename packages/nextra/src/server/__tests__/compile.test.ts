@@ -604,7 +604,7 @@ describe('Code block', () => {
   })
 
   describe('toc', () => {
-    it.only('should attach heading', async () => {
+    it('should attach heading', async () => {
       const rawMdx = `<Tabs items={['pnpm', 'npm', 'yarn']} defaultIndex="1">
   <Tabs.Tab>**pnpm**: Fast, disk space efficient package manager.</Tabs.Tab>
   <Tabs.Tab>**npm** is a package manager for the JavaScript programming language.</Tabs.Tab>
