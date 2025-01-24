@@ -114,9 +114,7 @@ export const Search: FC<SearchProps> = ({
       )
       if (!response) return
 
-      const { results } = response
-
-      const data = await Promise.all(results.map(o => o.data()))
+      const data = await Promise.all(response.results.map(o => o.data()))
 
       setResults(
         data.map(newData => ({
