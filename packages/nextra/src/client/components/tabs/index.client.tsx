@@ -15,7 +15,7 @@ import type {
 } from '@headlessui/react'
 import cn from 'clsx'
 import type { FC, ReactElement, ReactNode } from 'react'
-import { useEffect, useRef, useState } from 'react'
+import { Fragment, useEffect, useRef, useState } from 'react'
 import { useHash } from './use-hash.js'
 
 type TabItem = string | ReactElement
@@ -59,7 +59,6 @@ export const Tabs: FC<
 
   useEffect(() => {
     if (!hash) return
-
     const tabPanel = tabPanelsRef.current.querySelector(
       `[role=tabpanel]:has([id="${hash}"])`
     )
@@ -69,12 +68,16 @@ export const Tabs: FC<
       if (el === tabPanel) {
         setSelectedIndex(Number(index))
         // Execute on next tick after `selectedIndex` update
-        setTimeout(() => {
-          const link = tabPanel.querySelector<HTMLAnchorElement>(
-            `a[href="#${hash}"]`
+        requestAnimationFrame(() => {
+          const heading = tabPanel.querySelector<HTMLHeadingElement>(
+            `[id="${hash}"]`
           )
-          link?.click()
-        }, 0)
+          // @ts-expect-error Property scrollIntoView does not exist on type ChildNod
+          heading?.nextSibling?.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          })
+        })
       }
     }
   }, [hash])
@@ -121,7 +124,7 @@ export const Tabs: FC<
       selectedIndex={selectedIndex}
       defaultIndex={defaultIndex}
       onChange={handleChange}
-      tabIndex={-1} // disables focus in Firefox
+      as={Fragment}
     >
       <TabList
         className={args =>
