@@ -3,6 +3,7 @@ import type { Literal } from 'hast'
 import type { Parent, Root } from 'mdast'
 import type {
   MdxJsxAttribute,
+  MdxJsxExpressionAttribute
 } from 'mdast-util-mdx-jsx'
 import type { Plugin } from 'unified'
 import { visit } from 'unist-util-visit'
@@ -66,7 +67,9 @@ export const remarkHeadings: Plugin<
             parent.type === 'mdxJsxFlowElement' &&
             parent.name === 'Tabs' &&
             parent.attributes.find(
-              (attr): attr is MdxJsxAttribute =>
+              (
+                attr: MdxJsxExpressionAttribute | MdxJsxAttribute
+              ): attr is MdxJsxAttribute =>
                 attr.type === 'mdxJsxAttribute' && attr.name === 'items'
             )
           if (!itemsAttr) return
@@ -75,6 +78,7 @@ export const remarkHeadings: Plugin<
           ).value.data.estree.body[0].expression.elements.map(
             (el: Literal) => el.value
           )[index!]
+          const id = slugger.slug(tabName)
           node.children.unshift({
             type: 'mdxJsxFlowElement',
             name: 'h3',
@@ -82,7 +86,7 @@ export const remarkHeadings: Plugin<
               {
                 type: 'mdxJsxAttribute',
                 name: 'id',
-                value: slugger.slug(tabName)
+                value: id
               },
               {
                 type: 'mdxJsxAttribute',
@@ -96,7 +100,7 @@ export const remarkHeadings: Plugin<
                       body: [
                         {
                           type: 'ExpressionStatement',
-                          expression: createAstObject({ display: 'hidden' })
+                          expression: createAstObject({ display: 'none' })
                         }
                       ],
                       sourceType: 'module',
@@ -107,14 +111,27 @@ export const remarkHeadings: Plugin<
               }
             ],
             data: {
-              // @ts-expect-error -- false positive
               _mdxExplicitJsx: true
             },
             children: [
               {
-                // @ts-expect-error -- false positive
                 type: 'text',
                 value: tabName
+              },
+              {
+                type: 'mdxJsxTextElement',
+                name: 'a',
+                attributes: [
+                  {
+                    type: 'mdxJsxAttribute',
+                    name: 'href',
+                    value: `#${id}`
+                  }
+                ],
+                data: {
+                  _mdxExplicitJsx: true
+                },
+                children: []
               }
             ]
           })
