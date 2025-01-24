@@ -625,7 +625,6 @@ describe('Code block', () => {
         export const toc = useTOC({})
         function _createMdxContent(props) {
           const _components = {
-              h3: 'h3',
               strong: 'strong',
               ..._provideComponents(),
               ...props.components
@@ -637,35 +636,35 @@ describe('Code block', () => {
             <>
               <Tabs items={['pnpm', 'npm', 'yarn']} defaultIndex="1">
                 <Tabs.Tab>
-                  <_components.h3
+                  <h3
                     style={{
                       display: 'hidden'
                     }}
                   >
                     {'hello'}
-                  </_components.h3>
+                  </h3>
                   <_components.strong>{'pnpm'}</_components.strong>
                   {': Fast, disk space efficient package manager.'}
                 </Tabs.Tab>
                 <Tabs.Tab>
-                  <_components.h3
+                  <h3
                     style={{
                       display: 'hidden'
                     }}
                   >
                     {'hello'}
-                  </_components.h3>
+                  </h3>
                   <_components.strong>{'npm'}</_components.strong>
                   {' is a package manager for the JavaScript programming language.'}
                 </Tabs.Tab>
                 <Tabs.Tab>
-                  <_components.h3
+                  <h3
                     style={{
                       display: 'hidden'
                     }}
                   >
                     {'hello'}
-                  </_components.h3>
+                  </h3>
                   <_components.strong>{'Yarn'}</_components.strong>
                   {' is a software packaging system.'}
                 </Tabs.Tab>
@@ -673,35 +672,35 @@ describe('Code block', () => {
               {'\\n'}
               <Tabs items={['pnpm', 'npm', 'yarn']} defaultIndex="1">
                 <Tabs.Tab>
-                  <_components.h3
+                  <h3
                     style={{
                       display: 'hidden'
                     }}
                   >
                     {'hello'}
-                  </_components.h3>
+                  </h3>
                   <_components.strong>{'pnpm'}</_components.strong>
                   {': Fast, disk space efficient package manager.'}
                 </Tabs.Tab>
                 <Tabs.Tab>
-                  <_components.h3
+                  <h3
                     style={{
                       display: 'hidden'
                     }}
                   >
                     {'hello'}
-                  </_components.h3>
+                  </h3>
                   <_components.strong>{'npm'}</_components.strong>
                   {' is a package manager for the JavaScript programming language.'}
                 </Tabs.Tab>
                 <Tabs.Tab>
-                  <_components.h3
+                  <h3
                     style={{
                       display: 'hidden'
                     }}
                   >
                     {'hello'}
-                  </_components.h3>
+                  </h3>
                   <_components.strong>{'Yarn'}</_components.strong>
                   {' is a software packaging system.'}
                 </Tabs.Tab>
