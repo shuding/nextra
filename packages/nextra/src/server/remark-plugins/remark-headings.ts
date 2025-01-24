@@ -82,6 +82,10 @@ export const remarkHeadings: Plugin<
           node.children.unshift({
             type: 'mdxJsxFlowElement',
             name: 'h3',
+            data: {
+              _mdxExplicitJsx: true
+            },
+            children: [{ type: 'text', value: tabName }],
             attributes: [
               {
                 type: 'mdxJsxAttribute',
@@ -97,41 +101,17 @@ export const remarkHeadings: Plugin<
                   data: {
                     estree: {
                       type: 'Program',
+                      sourceType: 'module',
+                      comments: [],
                       body: [
                         {
                           type: 'ExpressionStatement',
                           expression: createAstObject({ display: 'none' })
                         }
-                      ],
-                      sourceType: 'module',
-                      comments: []
+                      ]
                     }
                   }
                 }
-              }
-            ],
-            data: {
-              _mdxExplicitJsx: true
-            },
-            children: [
-              {
-                type: 'text',
-                value: tabName
-              },
-              {
-                type: 'mdxJsxTextElement',
-                name: 'a',
-                attributes: [
-                  {
-                    type: 'mdxJsxAttribute',
-                    name: 'href',
-                    value: `#${id}`
-                  }
-                ],
-                data: {
-                  _mdxExplicitJsx: true
-                },
-                children: []
               }
             ]
           })
