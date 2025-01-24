@@ -9,11 +9,12 @@ type TOCElement = ReactElement | string
 type WithProps = ReactElement | ReactPortal
 
 function isLink(node: ReactNode): node is WithProps {
+  // @ts-expect-error -- fixme
   return hasProps(node) && !!node.props.href
 }
 
 function hasProps(node: ReactNode): node is WithProps {
-  return !!node && typeof node === 'object' && 'props' in node
+  return !!node && typeof node === 'object'
 }
 
 export function removeLinks(node: ReactNode): TOCElement[] | string {
@@ -24,9 +25,11 @@ export function removeLinks(node: ReactNode): TOCElement[] | string {
   return Children.map(node, child => {
     if (isLink(child)) {
       // Skip footnotes links
+      // @ts-expect-error -- fixme
       if (child.props['data-footnote-ref']) {
         return
       }
+      // @ts-expect-error -- fixme
       child = child.props.children
     }
 
@@ -40,9 +43,9 @@ export function removeLinks(node: ReactNode): TOCElement[] | string {
     if (!hasProps(child)) {
       return child
     }
-
+    // @ts-expect-error -- fixme
     const children = removeLinks(child.props.children)
-
+    // @ts-expect-error -- fixme
     return cloneElement(child, { children })
   })
 }

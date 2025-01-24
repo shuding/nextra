@@ -77,6 +77,7 @@ function findSummary(
     ) {
       if (child.type === 'summary') {
         summary = cloneElement(child, {
+          // @ts-expect-error -- fixme
           onClick(event: MouseEvent) {
             event.preventDefault()
             setIsOpen(v => !v)
@@ -84,7 +85,9 @@ function findSummary(
         })
         return
       }
+      // @ts-expect-error -- fixme
       if (child.type !== Details && child.props.children) {
+        // @ts-expect-error -- fixme
         ;[summary, child] = findSummary(child.props.children, setIsOpen)
       }
     }
