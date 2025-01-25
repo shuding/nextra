@@ -48,13 +48,10 @@ export const Details: FC<ComponentProps<'details'>> = ({
   const detailsRef = useRef<HTMLDetailsElement>(null!)
   useEffect(() => {
     if (!hash) return
-    const elementWithHashId = detailsRef.current.querySelector(
-      `[id="${hash}"]`
-    )
+    const elementWithHashId = detailsRef.current.querySelector(`[id="${hash}"]`)
     if (!elementWithHashId) return
     setIsOpen(true)
   }, [hash])
-
 
   return (
     <details
