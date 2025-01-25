@@ -430,6 +430,7 @@ export const Sidebar: FC<{ toc: Heading[] }> = ({ toc }) => {
         {hasMenu && (
           <div
             className={cn(
+              'x:sticky x:bottom-0 x:bg-nextra-bg',
               classes.footer,
               !isExpanded && 'x:flex-wrap x:justify-center',
               showToggleAnimation && [
