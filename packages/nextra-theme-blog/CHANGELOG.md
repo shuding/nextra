@@ -1,5 +1,17 @@
 # nextra-theme-blog
 
+## 4.1.0
+
+### Minor Changes
+
+- 7caf059: - generate unique anchor id for `<summary>` elements based on its content at build time
+  - add anchor link icon for `<summary>`
+
+### Patch Changes
+
+- Updated dependencies [7caf059]
+  - nextra@4.1.0
+
 ## 4.0.9
 
 ### Patch Changes
