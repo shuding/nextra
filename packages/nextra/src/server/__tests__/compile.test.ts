@@ -745,4 +745,55 @@ describe('Code block', () => {
       `)
     })
   })
+
+  it('should attach id to summary', async () => {
+    const rawMdx = `
+<details>
+  <summary>foo</summary>
+  bar
+</details>
+<details>
+  <summary>foo</summary>
+  bar
+</details>
+`
+    const rawJs = await compileMdx(rawMdx, { mdxOptions })
+    expect(clean(rawJs)).resolves.toMatchInlineSnapshot(`
+      "/*@jsxRuntime automatic*/
+      /*@jsxImportSource react*/
+      import { useMDXComponents as _provideComponents } from 'next-mdx-import-source-file'
+      export const metadata = {}
+      function useTOC(props) {
+        return []
+      }
+      export const toc = useTOC({})
+      function _createMdxContent(props) {
+        const _components = {
+          details: 'details',
+          p: 'p',
+          summary: 'summary',
+          ..._provideComponents(),
+          ...props.components
+        }
+        return (
+          <>
+            <_components.details>
+              <_components.p>
+                <_components.summary id="foo">{'foo'}</_components.summary>
+                {'\\nbar'}
+              </_components.p>
+            </_components.details>
+            {'\\n'}
+            <_components.details>
+              <_components.p>
+                <_components.summary id="foo-1">{'foo'}</_components.summary>
+                {'\\nbar'}
+              </_components.p>
+            </_components.details>
+          </>
+        )
+      }
+      export default _createMdxContent"
+    `)
+  })
 })
