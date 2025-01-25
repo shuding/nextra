@@ -135,7 +135,7 @@ describe('normalize-page', () => {
       activeIndex: 0,
       activeThemeContext: {
         breadcrumb: true,
-        collapsed: false,
+        collapsed: undefined,
         footer: true,
         layout: 'default',
         navbar: true,
