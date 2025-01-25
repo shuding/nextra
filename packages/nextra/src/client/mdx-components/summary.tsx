@@ -12,35 +12,40 @@ export const Summary: FC<ComponentProps<'summary'>> = ({
     <summary
       className={cn(
         'x:focus-visible:nextra-focus',
-        'x:cursor-pointer x:p-1 x:transition-colors',
+        'x:cursor-pointer x:transition-colors',
         'x:hover:bg-gray-100 x:dark:hover:bg-neutral-800',
         'x:select-none x:rounded',
         'x:marker:content-[""]',
-        'x:px-[1.7em] x:relative',
+        'x:flex x:items-center',
         className
       )}
       {...props}
     >
       <ArrowRightIcon
-        // ID attached to summary jumps to incorrect position in viewport
-        id={id}
         height="1em"
         className={cn(
-          'x:motion-reduce:transition-none x:absolute x:start-1.5 x:top-2',
+          'x:motion-reduce:transition-none x:ms-2 x:me-1 x:shrink-0',
           'x:rtl:rotate-180 x:[[data-expanded]>summary:first-child>&]:rotate-90 x:transition'
         )}
         strokeWidth="3"
       />
-      {children}
+      <h3
+        // ID attached to summary jumps to incorrect position in viewport
+        id={id}
+        className='x:grow x:hyphens-auto x:p-1'
+      >
+        {children}
+      </h3>
       {id && (
         <a
           href={`#${id}`}
           aria-label="Permalink for this section"
           className={cn(
-            'x:focus-visible:nextra-focus x:absolute x:end-0 x:top-0 x:rounded x:p-2 x:h-full',
+            'x:self-stretch',
+            'x:flex x:items-center',
+            'x:focus-visible:nextra-focus x:rounded x:px-2',
             'x:hover:bg-gray-100 x:dark:hover:bg-neutral-800',
             'x:hover:[summary:has(&)]:bg-transparent',
-            className
           )}
         >
           <LinkIcon height="1em" className="x:pointer-events-none" />
