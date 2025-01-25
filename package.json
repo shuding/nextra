@@ -21,7 +21,7 @@
     "version": "changeset version"
   },
   "devDependencies": {
-    "@changesets/cli": "2.27.11",
+    "@changesets/cli": "2.27.12",
     "@rollup/plugin-alias": "5.1.1",
     "eslint": "9.18.0",
     "prettier": "3.4.2",
