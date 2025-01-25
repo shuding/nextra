@@ -115,7 +115,8 @@ export default async function RootLayout({ children, params }) {
           ]}
           sidebar={{
             defaultMenuCollapseLevel: 1,
-            autoCollapse: true
+            autoCollapse: true,
+            defaultOpen: true
           }}
           toc={{
             backToTop: dictionary.backToTop,
