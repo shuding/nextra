@@ -296,7 +296,7 @@ export const MobileNav: FC = () => {
 
   useEffect(() => {
     setMenu(false)
-  // Close mobile menu when path changes or hash changes (e.g. clicking on search result which points to the current page)
+    // Close mobile menu when path changes or hash changes (e.g. clicking on search result which points to the current page)
   }, [pathname, hash])
 
   const anchors = toc.filter(v => v.depth === 2)
