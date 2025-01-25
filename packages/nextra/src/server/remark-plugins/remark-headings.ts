@@ -83,9 +83,7 @@ export const remarkHeadings: Plugin<
             type: 'mdxJsxFlowElement',
             name: 'h3',
             data: { _mdxExplicitJsx: true },
-            children: [
-              { type: 'text', value: tabName },
-            ],
+            children: [{ type: 'text', value: tabName }],
             attributes: [
               { type: 'mdxJsxAttribute', name: 'id', value: id },
               {
