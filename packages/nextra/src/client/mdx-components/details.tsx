@@ -5,6 +5,7 @@ import type {
   ComponentProps,
   Dispatch,
   FC,
+  MouseEvent,
   ReactNode,
   SetStateAction
 } from 'react'
@@ -79,8 +80,11 @@ function findSummary(
         summary = cloneElement(child, {
           // @ts-expect-error -- fixme
           onClick(event: MouseEvent) {
-            event.preventDefault()
-            setIsOpen(v => !v)
+            // @ts-expect-error -- fixme
+            if (event.target.tagName !== 'A') {
+              event.preventDefault()
+              setIsOpen(v => !v)
+            }
           }
         })
         return
