@@ -69,8 +69,8 @@ importers:
         specifier: ^2.1.0
         version: 2.1.1
       framer-motion:
-        specifier: ^11.5.4
-        version: 11.18.2(react-dom@19.0.0)(react@19.0.0)
+        specifier: ^12.0.0
+        version: 12.0.5(react-dom@19.0.0)(react@19.0.0)
       next:
         specifier: 15.1.6
         version: 15.1.6(patch_hash=ih2n7uyu6sqdsauhnxm6ovrrua)(@babel/core@7.26.0)(react-dom@19.0.0)(react@19.0.0)
@@ -6561,8 +6561,8 @@ packages:
     engines: {node: '>=0.4.x'}
     dev: false
 
-  /framer-motion@11.18.2(react-dom@19.0.0)(react@19.0.0):
-    resolution: {integrity: sha512-5F5Och7wrvtLVElIpclDT0CBzMVg3dL22B64aZwHtsIY8RB4mXICLrkajK4G9R+ieSAGcgrLeae2SeUTg2pr6w==}
+  /framer-motion@12.0.5(react-dom@19.0.0)(react@19.0.0):
+    resolution: {integrity: sha512-OgfUHfL+u80uCf6VzkV7j3+H2W9zPMdV+40bug4ftB0C2+0FpfNca2rbH2Fouq2R7//bjw6tJhOwXsrsM4+LKw==}
     peerDependencies:
       '@emotion/is-prop-valid': '*'
       react: ^18.0.0 || ^19.0.0
@@ -6575,8 +6575,8 @@ packages:
       react-dom:
         optional: true
     dependencies:
-      motion-dom: 11.18.1
-      motion-utils: 11.18.1
+      motion-dom: 12.0.0
+      motion-utils: 12.0.0
       react: 19.0.0
       react-dom: 19.0.0(react@19.0.0)
       tslib: 2.8.1
@@ -8536,14 +8536,14 @@ packages:
       ufo: 1.5.4
     dev: false
 
-  /motion-dom@11.18.1:
-    resolution: {integrity: sha512-g76KvA001z+atjfxczdRtw/RXOM3OMSdd1f4DL77qCTF/+avrRJiawSG4yDibEQ215sr9kpinSlX2pCTJ9zbhw==}
+  /motion-dom@12.0.0:
+    resolution: {integrity: sha512-CvYd15OeIR6kHgMdonCc1ihsaUG4MYh/wrkz8gZ3hBX/uamyZCXN9S9qJoYF03GqfTt7thTV/dxnHYX4+55vDg==}
     dependencies:
-      motion-utils: 11.18.1
+      motion-utils: 12.0.0
     dev: false
 
-  /motion-utils@11.18.1:
-    resolution: {integrity: sha512-49Kt+HKjtbJKLtgO/LKj9Ld+6vw9BjH5d9sc40R/kVyH8GLAXgT42M2NnuPcJNuA3s9ZfZBUcwIgpmZWGEE+hA==}
+  /motion-utils@12.0.0:
+    resolution: {integrity: sha512-MNFiBKbbqnmvOjkPyOKgHUp3Q6oiokLkI1bEwm5QA28cxMZrv0CbbBGDNmhF6DIXsi1pCQBSs0dX8xjeER1tmA==}
     dev: false
 
   /mri@1.2.0:
