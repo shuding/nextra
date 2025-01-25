@@ -159,7 +159,8 @@ export const DEFAULT_THEME: DocsThemeConfig = {
   },
   sidebar: {
     defaultMenuCollapseLevel: 2,
-    toggleButton: true
+    toggleButton: true,
+    defaultOpen: true
   },
   themeSwitch: {
     component: ThemeSwitch,

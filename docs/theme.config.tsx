@@ -113,7 +113,8 @@ const config: DocsThemeConfig = {
   },
   sidebar: {
     defaultMenuCollapseLevel: 1,
-    toggleButton: true
+    toggleButton: true,
+    defaultOpen: true
   },
   footer: {
     content: (

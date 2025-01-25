@@ -121,7 +121,8 @@ export const themeSchema = /* @__PURE__ */ (() =>
     sidebar: z.strictObject({
       autoCollapse: z.boolean().optional(),
       defaultMenuCollapseLevel: z.number().min(1).int(),
-      toggleButton: z.boolean()
+      toggleButton: z.boolean(),
+      defaultOpen: z.boolean()
     }),
     themeSwitch: z.strictObject({
       component: z.custom<

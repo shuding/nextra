@@ -347,8 +347,9 @@ export function Sidebar({
   includePlaceholder
 }: SideBarProps): ReactElement {
   const { menu, setMenu } = useMenu()
+  const themeConfig = useThemeConfig()
   const [focused, setFocused] = useState('')
-  const [showSidebar, setSidebar] = useState(true)
+  const [showSidebar, setSidebar] = useState(themeConfig.sidebar.defaultOpen)
   const [showToggleAnimation, setToggleAnimation] = useState(false)
 
   const anchors = useMemo(() => toc.filter(v => v.depth === 2), [toc])
@@ -377,7 +378,6 @@ export function Sidebar({
     }
   }, [menu])
 
-  const themeConfig = useThemeConfig()
   const hasI18n = themeConfig.i18n.length > 0
   const hasMenu =
     themeConfig.darkMode || hasI18n || themeConfig.sidebar.toggleButton
