@@ -1,5 +1,15 @@
 # nextra
 
+## 4.0.9
+
+### Patch Changes
+
+- e78f796: fix console error from `<Search>` results error `TypeError: Cannot destructure property 'results' of '(intermediate value)' as it is null.`
+
+  select right tab and scroll into view when html element with `location.hash` id is inside `<Tabs.Tab>`
+
+- ff007b2: fix clicking on search result from same page doesn't scroll to the heading
+
 ## 4.0.8
 
 ### Patch Changes

@@ -1,6 +1,5 @@
 export { default as FilesIcon } from './files.svg?svgr'
 export { default as TailwindIcon } from './tailwind.svg?svgr'
-export { default as LinkIcon } from './link.svg?svgr'
 export { default as LightningIcon } from './lightning.svg?svgr'
 export { default as GlobeIcon } from './globe.svg?svgr'
 export { default as PictureIcon } from './picture.svg?svgr'

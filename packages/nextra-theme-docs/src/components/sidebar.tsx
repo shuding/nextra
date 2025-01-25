@@ -4,7 +4,7 @@ import cn from 'clsx'
 import { usePathname } from 'next/navigation'
 import type { Heading } from 'nextra'
 import { Anchor, Button, Collapse } from 'nextra/components'
-import { useFSRoute } from 'nextra/hooks'
+import { useFSRoute, useHash } from 'nextra/hooks'
 import { ArrowRightIcon, ExpandIcon } from 'nextra/icons'
 import type { Item, MenuItem, PageItem } from 'nextra/normalize-pages'
 import type { FC, FocusEventHandler, MouseEventHandler } from 'react'
@@ -292,10 +292,12 @@ export const MobileNav: FC = () => {
 
   const menu = useMenu()
   const pathname = usePathname()
+  const hash = useHash()
 
   useEffect(() => {
     setMenu(false)
-  }, [pathname])
+    // Close mobile menu when path changes or hash changes (e.g. clicking on search result which points to the current page)
+  }, [pathname, hash])
 
   const anchors = toc.filter(v => v.depth === 2)
   const sidebarRef = useRef<HTMLUListElement>(null!)

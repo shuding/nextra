@@ -639,7 +639,9 @@ describe('Code block', () => {
                   <h3
                     id="pnpm"
                     style={{
-                      display: 'none'
+                      visibility: 'hidden',
+                      width: 0,
+                      height: 0
                     }}
                   >
                     {'pnpm'}
@@ -651,7 +653,9 @@ describe('Code block', () => {
                   <h3
                     id="npm"
                     style={{
-                      display: 'none'
+                      visibility: 'hidden',
+                      width: 0,
+                      height: 0
                     }}
                   >
                     {'npm'}
@@ -663,7 +667,9 @@ describe('Code block', () => {
                   <h3
                     id="yarn"
                     style={{
-                      display: 'none'
+                      visibility: 'hidden',
+                      width: 0,
+                      height: 0
                     }}
                   >
                     {'yarn'}
@@ -678,7 +684,9 @@ describe('Code block', () => {
                   <h3
                     id="pnpm-1"
                     style={{
-                      display: 'none'
+                      visibility: 'hidden',
+                      width: 0,
+                      height: 0
                     }}
                   >
                     {'pnpm'}
@@ -690,7 +698,9 @@ describe('Code block', () => {
                   <h3
                     id="npm-1"
                     style={{
-                      display: 'none'
+                      visibility: 'hidden',
+                      width: 0,
+                      height: 0
                     }}
                   >
                     {'npm'}
@@ -702,7 +712,9 @@ describe('Code block', () => {
                   <h3
                     id="yarn-1"
                     style={{
-                      display: 'none'
+                      visibility: 'hidden',
+                      width: 0,
+                      height: 0
                     }}
                   >
                     {'yarn'}
@@ -726,5 +738,56 @@ describe('Code block', () => {
         }"
       `)
     })
+  })
+
+  it('should attach id to summary', async () => {
+    const rawMdx = `
+<details>
+  <summary>foo</summary>
+  bar
+</details>
+<details>
+  <summary>foo</summary>
+  bar
+</details>
+`
+    const rawJs = await compileMdx(rawMdx, { mdxOptions })
+    expect(clean(rawJs)).resolves.toMatchInlineSnapshot(`
+      "/*@jsxRuntime automatic*/
+      /*@jsxImportSource react*/
+      import { useMDXComponents as _provideComponents } from 'next-mdx-import-source-file'
+      export const metadata = {}
+      function useTOC(props) {
+        return []
+      }
+      export const toc = useTOC({})
+      function _createMdxContent(props) {
+        const _components = {
+          details: 'details',
+          p: 'p',
+          summary: 'summary',
+          ..._provideComponents(),
+          ...props.components
+        }
+        return (
+          <>
+            <_components.details>
+              <_components.p>
+                <_components.summary id="foo">{'foo'}</_components.summary>
+                {'\\nbar'}
+              </_components.p>
+            </_components.details>
+            {'\\n'}
+            <_components.details>
+              <_components.p>
+                <_components.summary id="foo-1">{'foo'}</_components.summary>
+                {'\\nbar'}
+              </_components.p>
+            </_components.details>
+          </>
+        )
+      }
+      export default _createMdxContent"
+    `)
   })
 })

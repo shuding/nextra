@@ -200,7 +200,15 @@ export const Search: FC<SearchProps> = ({
     // Calling before navigation so selector `html:not(:has(*:focus))` in styles.css will work,
     // and we'll have padding top since input is not focused
     inputRef.current.blur()
-    router.push(searchResult.url)
+    const [url, hash] = searchResult.url.split('#')
+    const isSamePathname = location.pathname === url
+    // `useHash` hook doesn't work with NextLink, and clicking on search
+    // result from same page doesn't scroll to the heading
+    if (isSamePathname) {
+      location.href = `#${hash}`
+    } else {
+      router.push(searchResult.url)
+    }
     setSearch('')
   }
 
