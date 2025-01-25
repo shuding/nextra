@@ -304,35 +304,41 @@ const Result: FC<{ data: PagefindResult }> = ({ data }) => {
       >
         {data.meta.title}
       </div>
-      {data.sub_results.map(subResult => (
-        <ComboboxOption
-          key={subResult.url}
-          as={NextLink}
-          value={subResult}
-          href={subResult.url}
-          className={({ focus }) =>
-            cn(
-              'x:mx-2.5 x:break-words x:rounded-md',
-              'x:contrast-more:border',
-              focus
-                ? 'x:text-primary-600 x:contrast-more:border-current x:bg-primary-500/10'
-                : 'x:text-gray-800 x:dark:text-gray-300 x:contrast-more:border-transparent',
-              'x:block x:scroll-m-12 x:px-2.5 x:py-2'
-            )
-          }
-        >
-          <div className="x:text-base x:font-semibold x:leading-5">
-            {subResult.title}
-          </div>
-          <div
-            className={cn(
-              'x:mt-1 x:text-sm x:leading-[1.35rem] x:text-gray-600 x:dark:text-gray-400 x:contrast-more:dark:text-gray-50',
-              'x:[&_mark]:bg-primary-600/80 x:[&_mark]:text-white'
-            )}
-            dangerouslySetInnerHTML={{ __html: subResult.excerpt }}
-          />
-        </ComboboxOption>
-      ))}
+      {data.sub_results.map(subResult => {
+        const [url, hash] = subResult.url.split('#')
+        const isSamePathname = location.pathname === url
+        return (
+          <ComboboxOption
+            key={subResult.url}
+            // `useHash` hook doesn't work with NextLink, and clicking on search
+            // result from same page doesn't scroll to the heading
+            as={isSamePathname ? 'a' : NextLink}
+            value={subResult}
+            href={isSamePathname ? `#${hash}` : subResult.url}
+            className={({ focus }) =>
+              cn(
+                'x:mx-2.5 x:break-words x:rounded-md',
+                'x:contrast-more:border',
+                focus
+                  ? 'x:text-primary-600 x:contrast-more:border-current x:bg-primary-500/10'
+                  : 'x:text-gray-800 x:dark:text-gray-300 x:contrast-more:border-transparent',
+                'x:block x:scroll-m-12 x:px-2.5 x:py-2'
+              )
+            }
+          >
+            <div className="x:text-base x:font-semibold x:leading-5">
+              {subResult.title}
+            </div>
+            <div
+              className={cn(
+                'x:mt-1 x:text-sm x:leading-[1.35rem] x:text-gray-600 x:dark:text-gray-400 x:contrast-more:dark:text-gray-50',
+                'x:[&_mark]:bg-primary-600/80 x:[&_mark]:text-white'
+              )}
+              dangerouslySetInnerHTML={{ __html: subResult.excerpt }}
+            />
+          </ComboboxOption>
+        )
+      })}
     </>
   )
 }
