@@ -67,16 +67,16 @@ export const Tabs: FC<
     for (const [index, el] of Object.entries(tabPanelsRef.current.children)) {
       if (el === tabPanel) {
         setSelectedIndex(Number(index))
+        const heading = tabPanel.querySelector<HTMLHeadingElement>(
+          `[id="${hash}"]`
+        )
+        if (!heading) return
         // Execute on next tick after `selectedIndex` update
         requestAnimationFrame(() => {
-          const heading = tabPanel.querySelector<HTMLHeadingElement>(
-            `[id="${hash}"]`
+          const link = tabPanel.querySelector<HTMLAnchorElement>(
+            `a[href="#${hash}"]`
           )
-          // @ts-expect-error Property scrollIntoView does not exist on type ChildNod
-          heading?.nextSibling?.scrollIntoView({
-            behavior: 'smooth',
-            block: 'start'
-          })
+          link?.click()
         })
       }
     }

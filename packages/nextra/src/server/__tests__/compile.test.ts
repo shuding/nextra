@@ -639,10 +639,13 @@ describe('Code block', () => {
                   <h3
                     id="pnpm"
                     style={{
-                      display: 'none'
+                      visibility: 'hidden',
+                      width: 0,
+                      height: 0
                     }}
                   >
                     {'pnpm'}
+                    <a href="#pnpm" />
                   </h3>
                   <_components.strong>{'pnpm'}</_components.strong>
                   {': Fast, disk space efficient package manager.'}
@@ -651,10 +654,13 @@ describe('Code block', () => {
                   <h3
                     id="npm"
                     style={{
-                      display: 'none'
+                      visibility: 'hidden',
+                      width: 0,
+                      height: 0
                     }}
                   >
                     {'npm'}
+                    <a href="#npm" />
                   </h3>
                   <_components.strong>{'npm'}</_components.strong>
                   {' is a package manager for the JavaScript programming language.'}
@@ -663,10 +669,13 @@ describe('Code block', () => {
                   <h3
                     id="yarn"
                     style={{
-                      display: 'none'
+                      visibility: 'hidden',
+                      width: 0,
+                      height: 0
                     }}
                   >
                     {'yarn'}
+                    <a href="#yarn" />
                   </h3>
                   <_components.strong>{'Yarn'}</_components.strong>
                   {' is a software packaging system.'}
@@ -678,10 +687,13 @@ describe('Code block', () => {
                   <h3
                     id="pnpm-1"
                     style={{
-                      display: 'none'
+                      visibility: 'hidden',
+                      width: 0,
+                      height: 0
                     }}
                   >
                     {'pnpm'}
+                    <a href="#pnpm-1" />
                   </h3>
                   <_components.strong>{'pnpm'}</_components.strong>
                   {': Fast, disk space efficient package manager.'}
@@ -690,10 +702,13 @@ describe('Code block', () => {
                   <h3
                     id="npm-1"
                     style={{
-                      display: 'none'
+                      visibility: 'hidden',
+                      width: 0,
+                      height: 0
                     }}
                   >
                     {'npm'}
+                    <a href="#npm-1" />
                   </h3>
                   <_components.strong>{'npm'}</_components.strong>
                   {' is a package manager for the JavaScript programming language.'}
@@ -702,10 +717,13 @@ describe('Code block', () => {
                   <h3
                     id="yarn-1"
                     style={{
-                      display: 'none'
+                      visibility: 'hidden',
+                      width: 0,
+                      height: 0
                     }}
                   >
                     {'yarn'}
+                    <a href="#yarn-1" />
                   </h3>
                   <_components.strong>{'Yarn'}</_components.strong>
                   {' is a software packaging system.'}

@@ -82,7 +82,19 @@ export const remarkHeadings: Plugin<
             type: 'mdxJsxFlowElement',
             name: 'h3',
             data: { _mdxExplicitJsx: true },
-            children: [{ type: 'text', value: tabName }],
+            children: [
+              { type: 'text', value: tabName },
+              {
+                type: 'mdxJsxFlowElement',
+                name: 'a',
+                attributes: [
+                  { type: 'mdxJsxAttribute', name: 'href', value: `#${id}` }
+                ],
+                data: {
+                  _mdxExplicitJsx: true
+                }
+              }
+            ],
             attributes: [
               { type: 'mdxJsxAttribute', name: 'id', value: id },
               {
@@ -99,7 +111,11 @@ export const remarkHeadings: Plugin<
                       body: [
                         {
                           type: 'ExpressionStatement',
-                          expression: createAstObject({ display: 'none' })
+                          expression: createAstObject({
+                            visibility: 'hidden',
+                            width: 0,
+                            height: 0
+                          })
                         }
                       ]
                     }
