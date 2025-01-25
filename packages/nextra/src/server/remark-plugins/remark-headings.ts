@@ -85,16 +85,6 @@ export const remarkHeadings: Plugin<
             data: { _mdxExplicitJsx: true },
             children: [
               { type: 'text', value: tabName },
-              {
-                type: 'mdxJsxFlowElement',
-                name: 'a',
-                attributes: [
-                  { type: 'mdxJsxAttribute', name: 'href', value: `#${id}` }
-                ],
-                data: {
-                  _mdxExplicitJsx: true
-                }
-              }
             ],
             attributes: [
               { type: 'mdxJsxAttribute', name: 'id', value: id },

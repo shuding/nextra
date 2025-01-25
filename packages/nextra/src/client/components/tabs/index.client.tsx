@@ -67,16 +67,11 @@ export const Tabs: FC<
     for (const [index, el] of Object.entries(tabPanelsRef.current.children)) {
       if (el === tabPanel) {
         setSelectedIndex(Number(index))
-        const heading = tabPanel.querySelector<HTMLHeadingElement>(
-          `[id="${hash}"]`
-        )
-        if (!heading) return
+        // Clear hash first, otherwise page isn't scrolled
+        location.hash = ''
         // Execute on next tick after `selectedIndex` update
         requestAnimationFrame(() => {
-          const link = tabPanel.querySelector<HTMLAnchorElement>(
-            `a[href="#${hash}"]`
-          )
-          link?.click()
+          location.hash = `#${hash}`
         })
       }
     }
