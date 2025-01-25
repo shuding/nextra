@@ -20,7 +20,11 @@ export const LastUpdated: FC<{
   return (
     <>
       {children}{' '}
-      <time dateTime={date.toISOString()}>
+      <time
+        dateTime={date.toISOString()}
+        // Can provoke React 418 error https://react.dev/errors/418
+        suppressHydrationWarning
+      >
         {date.toLocaleDateString(dateLocale, {
           day: 'numeric',
           month: 'long',
