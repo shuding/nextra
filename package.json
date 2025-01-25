@@ -23,7 +23,7 @@
   "devDependencies": {
     "@changesets/cli": "2.27.11",
     "@rollup/plugin-alias": "5.1.1",
-    "eslint": "9.18.0",
+    "eslint": "9.19.0",
     "prettier": "3.4.2",
     "rimraf": "6.0.1",
     "tsup": "8.3.5",
