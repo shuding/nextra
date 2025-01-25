@@ -11,6 +11,7 @@ import type {
 } from 'react'
 import { Children, cloneElement, useEffect, useRef, useState } from 'react'
 import { Collapse } from '../components/collapse.js'
+import { useHash } from '../hooks/index.js'
 
 export const Details: FC<ComponentProps<'details'>> = ({
   children,
@@ -43,6 +44,18 @@ export const Details: FC<ComponentProps<'details'>> = ({
 
   const [summaryElement, restChildren] = findSummary(children, setIsOpen)
 
+  const hash = useHash()
+  const detailsRef = useRef<HTMLDetailsElement>(null!)
+  useEffect(() => {
+    if (!hash) return
+    const elementWithHashId = detailsRef.current.querySelector(
+      `[id="${hash}"]`
+    )
+    if (!elementWithHashId) return
+    setIsOpen(true)
+  }, [hash])
+
+
   return (
     <details
       className={cn(
@@ -50,6 +63,7 @@ export const Details: FC<ComponentProps<'details'>> = ({
         'x:overflow-hidden',
         className
       )}
+      ref={detailsRef}
       {...props}
       // `isOpen ||` fix issue on mobile devices while clicking on details, open attribute is still
       // false, and we can't calculate child.clientHeight
