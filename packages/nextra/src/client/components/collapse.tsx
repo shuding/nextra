@@ -36,8 +36,8 @@ export const Collapse: FC<{
 
     if (horizontal) {
       // save initial width to avoid word wrapping when container width will be changed
-      child.style.width = `${child.clientWidth}px`
-      container.style.width = `${child.clientWidth}px`
+      // child.style.width = `${child.clientWidth}px`
+      // container.style.width = `${child.clientWidth}px`
     } else {
       container.style.height = `${child.clientHeight}px`
     }
@@ -49,7 +49,7 @@ export const Collapse: FC<{
     } else {
       setTimeout(() => {
         if (horizontal) {
-          container.style.width = '0'
+          // container.style.width = '0'
         } else {
           container.style.height = '0'
         }
