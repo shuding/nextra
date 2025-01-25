@@ -645,7 +645,6 @@ describe('Code block', () => {
                     }}
                   >
                     {'pnpm'}
-                    <a href="#pnpm" />
                   </h3>
                   <_components.strong>{'pnpm'}</_components.strong>
                   {': Fast, disk space efficient package manager.'}
@@ -660,7 +659,6 @@ describe('Code block', () => {
                     }}
                   >
                     {'npm'}
-                    <a href="#npm" />
                   </h3>
                   <_components.strong>{'npm'}</_components.strong>
                   {' is a package manager for the JavaScript programming language.'}
@@ -675,7 +673,6 @@ describe('Code block', () => {
                     }}
                   >
                     {'yarn'}
-                    <a href="#yarn" />
                   </h3>
                   <_components.strong>{'Yarn'}</_components.strong>
                   {' is a software packaging system.'}
@@ -693,7 +690,6 @@ describe('Code block', () => {
                     }}
                   >
                     {'pnpm'}
-                    <a href="#pnpm-1" />
                   </h3>
                   <_components.strong>{'pnpm'}</_components.strong>
                   {': Fast, disk space efficient package manager.'}
@@ -708,7 +704,6 @@ describe('Code block', () => {
                     }}
                   >
                     {'npm'}
-                    <a href="#npm-1" />
                   </h3>
                   <_components.strong>{'npm'}</_components.strong>
                   {' is a package manager for the JavaScript programming language.'}
@@ -723,7 +718,6 @@ describe('Code block', () => {
                     }}
                   >
                     {'yarn'}
-                    <a href="#yarn-1" />
                   </h3>
                   <_components.strong>{'Yarn'}</_components.strong>
                   {' is a software packaging system.'}
@@ -744,5 +738,56 @@ describe('Code block', () => {
         }"
       `)
     })
+  })
+
+  it('should attach id to summary', async () => {
+    const rawMdx = `
+<details>
+  <summary>foo</summary>
+  bar
+</details>
+<details>
+  <summary>foo</summary>
+  bar
+</details>
+`
+    const rawJs = await compileMdx(rawMdx, { mdxOptions })
+    expect(clean(rawJs)).resolves.toMatchInlineSnapshot(`
+      "/*@jsxRuntime automatic*/
+      /*@jsxImportSource react*/
+      import { useMDXComponents as _provideComponents } from 'next-mdx-import-source-file'
+      export const metadata = {}
+      function useTOC(props) {
+        return []
+      }
+      export const toc = useTOC({})
+      function _createMdxContent(props) {
+        const _components = {
+          details: 'details',
+          p: 'p',
+          summary: 'summary',
+          ..._provideComponents(),
+          ...props.components
+        }
+        return (
+          <>
+            <_components.details>
+              <_components.p>
+                <_components.summary id="foo">{'foo'}</_components.summary>
+                {'\\nbar'}
+              </_components.p>
+            </_components.details>
+            {'\\n'}
+            <_components.details>
+              <_components.p>
+                <_components.summary id="foo-1">{'foo'}</_components.summary>
+                {'\\nbar'}
+              </_components.p>
+            </_components.details>
+          </>
+        )
+      }
+      export default _createMdxContent"
+    `)
   })
 })

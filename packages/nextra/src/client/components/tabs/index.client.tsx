@@ -16,7 +16,7 @@ import type {
 import cn from 'clsx'
 import type { FC, ReactElement, ReactNode } from 'react'
 import { Fragment, useEffect, useRef, useState } from 'react'
-import { useHash } from './use-hash.js'
+import { useHash } from '../../hooks/use-hash.js'
 
 type TabItem = string | ReactElement
 
@@ -67,16 +67,11 @@ export const Tabs: FC<
     for (const [index, el] of Object.entries(tabPanelsRef.current.children)) {
       if (el === tabPanel) {
         setSelectedIndex(Number(index))
-        const heading = tabPanel.querySelector<HTMLHeadingElement>(
-          `[id="${hash}"]`
-        )
-        if (!heading) return
+        // Clear hash first, otherwise page isn't scrolled
+        location.hash = ''
         // Execute on next tick after `selectedIndex` update
         requestAnimationFrame(() => {
-          const link = tabPanel.querySelector<HTMLAnchorElement>(
-            `a[href="#${hash}"]`
-          )
-          link?.click()
+          location.hash = `#${hash}`
         })
       }
     }

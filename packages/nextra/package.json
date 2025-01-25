@@ -105,6 +105,7 @@
     "title": "^4.0.1",
     "unist-util-remove": "^4.0.0",
     "unist-util-visit": "^5.0.0",
+    "unist-util-visit-children": "^3.0.0",
     "yaml": "^2.3.2",
     "zod": "^3.22.3",
     "zod-validation-error": "^3.0.0"
