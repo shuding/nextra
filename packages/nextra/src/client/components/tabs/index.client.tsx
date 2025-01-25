@@ -16,7 +16,7 @@ import type {
 import cn from 'clsx'
 import type { FC, ReactElement, ReactNode } from 'react'
 import { Fragment, useEffect, useRef, useState } from 'react'
-import { useHash } from './use-hash.js'
+import { useHash } from '../../hooks/use-hash.js'
 
 type TabItem = string | ReactElement
 
