@@ -21,14 +21,16 @@ export function Footer({ menu }: { menu?: boolean }): ReactElement {
           renderComponent(themeConfig.themeSwitch.component)}
       </div>
       <hr className="dark:_border-neutral-800" />
-      <div
-        className={cn(
-          '_mx-auto _flex _max-w-[90rem] _justify-center _py-12 _text-gray-600 dark:_text-gray-400 md:_justify-start',
-          '_pl-[max(env(safe-area-inset-left),1.5rem)] _pr-[max(env(safe-area-inset-right),1.5rem)]'
-        )}
-      >
-        {renderComponent(themeConfig.footer.content)}
-      </div>
+      {!!themeConfig.footer.content && (
+        <div
+          className={cn(
+            '_mx-auto _flex _max-w-[90rem] _justify-center _py-12 _text-gray-600 dark:_text-gray-400 md:_justify-start',
+            '_pl-[max(env(safe-area-inset-left),1.5rem)] _pr-[max(env(safe-area-inset-right),1.5rem)]'
+          )}
+        >
+          {renderComponent(themeConfig.footer.content)}
+        </div>
+      )}
     </footer>
   )
 }
