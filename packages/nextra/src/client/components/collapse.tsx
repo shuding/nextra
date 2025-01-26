@@ -81,7 +81,7 @@ export const Collapse: FC<{
       style={{
         ...(initialOpen || horizontal ? undefined : { height: 0 }),
         transitionDuration: (isOpen ? openDuration : closeDuration) + 'ms',
-        whiteSpace: isOpen ? "initial" : "nowrap"
+        whiteSpace: horizontal ? (isOpen ? "initial" : "nowrap") : "initial",
       }}
     >
       {newChildren}
