@@ -228,7 +228,7 @@ export const Search: FC<SearchProps> = ({
           spellCheck={false}
           className={({ focus }) =>
             cn(
-              'x:rounded-lg x:px-3 x:py-2 x:transition-colors',
+              'x:rounded-lg x:px-3 x:py-2 x:transition',
               'x:w-full x:md:w-64',
               'x:text-base x:leading-tight x:md:text-sm',
               focus
