@@ -8,14 +8,21 @@ import {
   TabPanels
 } from '@headlessui/react'
 import type {
+  TabPanelProps as HeadlessTabPanelProps,
   TabProps as HeadlessTabProps,
   TabGroupProps,
-  TabListProps,
-  TabPanelProps as HeadlessTabPanelProps
+  TabListProps
 } from '@headlessui/react'
 import cn from 'clsx'
-import { FC, isValidElement, ReactElement, ReactNode } from 'react'
-import { Children, Fragment, useEffect, useRef, useState } from 'react'
+import type { FC, ReactElement, ReactNode } from 'react'
+import {
+  Children,
+  Fragment,
+  isValidElement,
+  useEffect,
+  useRef,
+  useState
+} from 'react'
 import { useHash } from '../../hooks/use-hash.js'
 
 type TabItem = string | ReactElement
@@ -29,7 +36,9 @@ function isTabObjectItem(item: unknown): item is TabObjectItem {
   return !!item && typeof item === 'object' && 'label' in item
 }
 
-const warnOnce: ((message: string) => void) & { wasWarned?: boolean } = (message) => {
+const warnOnce: ((message: string) => void) & {
+  wasWarned?: boolean
+} = message => {
   if (warnOnce.wasWarned) return
   console.warn(message)
   warnOnce.wasWarned = true
@@ -128,14 +137,17 @@ export const Tabs: FC<
     Children.map(
       children,
       child =>
-        isValidElement<TabPanelProps>(child) && {
-          name: child.props.name,
-          disabled: child.props.disabled,
-        }
+        isValidElement<TabPanelProps>(child) &&
+        ({
+          label: child.props.name!,
+          disabled: child.props.disabled!
+        } satisfies TabObjectItem)
     )!
 
   if (process.env.NODE_ENV !== 'production') {
-    warnOnce('You are using deprecated `Tabs#items` prop, and which will be removed in Nextra 5. Use `Tabs.Tab#name` and `Tabs.Tab#disabled` props instead.')
+    warnOnce(
+      'You are using deprecated `Tabs#items` prop, and which will be removed in Nextra 5. Use `Tabs.Tab#name` and `Tabs.Tab#disabled` props instead.'
+    )
   }
 
   return (
@@ -193,7 +205,7 @@ export const Tabs: FC<
   )
 }
 
-type TabPanelProps = { name?: string, disabled?: boolean }
+type TabPanelProps = { name?: string; disabled?: boolean }
 
 export const Tab: FC<HeadlessTabPanelProps & TabPanelProps> = ({
   children,
