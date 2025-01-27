@@ -50,7 +50,7 @@ export const ClientWrapper: MDXWrapper = ({
             'nextra-body-typesetting-article'
         )}
       >
-        {themeContext.breadcrumb && activeType !== 'page' && (
+        {themeContext.breadcrumb && (
           <Breadcrumb activePath={activePath} />
         )}
         {children}
