@@ -34,11 +34,7 @@ export const Collapse: FC<{
     }
     const child = container.children[0] as HTMLDivElement
 
-    if (horizontal) {
-      // save initial width to avoid word wrapping when container width will be changed
-      // child.style.width = `${child.clientWidth}px`
-      // container.style.width = `${child.clientWidth}px`
-    } else {
+    if (!horizontal) {
       container.style.height = `${child.clientHeight}px`
     }
     if (isOpen) {
@@ -48,9 +44,7 @@ export const Collapse: FC<{
       }, openDuration)
     } else {
       setTimeout(() => {
-        if (horizontal) {
-          // container.style.width = '0'
-        } else {
+        if (!horizontal) {
           container.style.height = '0'
         }
       })
