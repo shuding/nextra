@@ -40,9 +40,8 @@ export function withGitHubAlert(
             ...props,
             type: alertName as T,
             children: [
-              <b key={0}>
-                {alertName[0]!.toUpperCase()}
-                {alertName.slice(1)}
+              <b key={0} className='x:capitalize'>
+                {alertName}
               </b>,
               ...props.children.slice(2)
             ]
