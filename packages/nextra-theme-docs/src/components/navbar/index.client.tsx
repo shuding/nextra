@@ -18,7 +18,7 @@ const classes = {
   link: cn(
     'x:text-sm x:contrast-more:text-gray-700 x:contrast-more:dark:text-gray-100 x:whitespace-nowrap',
     'x:text-gray-600 x:hover:text-gray-800 x:dark:text-gray-400 x:dark:hover:text-gray-200',
-    'x:ring-inset'
+    'x:ring-inset x:transition-colors'
   )
 }
 
@@ -35,7 +35,7 @@ const NavbarMenu: FC<{
         className={({ focus }) =>
           cn(
             classes.link,
-            'x:items-center x:flex x:gap-1.5',
+            'x:items-center x:flex x:gap-1.5 x:cursor-pointer',
             focus && 'x:nextra-focus'
           )
         }

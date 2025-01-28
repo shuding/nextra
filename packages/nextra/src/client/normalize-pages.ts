@@ -6,7 +6,7 @@ import type { Folder, FrontMatter, MdxFile, PageMapItem } from '../types.js'
 
 const DEFAULT_PAGE_THEME: PageTheme = {
   breadcrumb: true,
-  collapsed: false,
+  collapsed: undefined,
   footer: true,
   layout: 'default',
   navbar: true,
@@ -177,6 +177,13 @@ export function normalizePages({
     })
     const item: Item = getItem()
     const docsItem: DocsItem = getItem()
+    if ('children' in docsItem) {
+      const { collapsed } = extendedMeta.theme
+      if (typeof collapsed === 'boolean') {
+        // @ts-expect-error -- fixme
+        docsItem.theme = { collapsed }
+      }
+    }
     const pageItem: PageItem = getItem()
 
     docsItem.isUnderCurrentDocsTree = underCurrentDocsRoot
