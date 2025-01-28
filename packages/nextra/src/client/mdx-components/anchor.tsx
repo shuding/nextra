@@ -1,21 +1,43 @@
+'use client'
+
 import cn from 'clsx'
 import Link from 'next/link'
-import type { ComponentPropsWithoutRef, FC } from 'react'
-import { EXTERNAL_URL_RE } from '../../server/constants.js'
+import {
+  useEffect,
+  useState,
+  type ComponentPropsWithoutRef,
+  type FC
+} from 'react'
 import { LinkArrowIcon } from '../icons/index.js'
+
+const isExternalUrl = (href: string) => {
+  try {
+    const url = new URL(href, window.location.origin)
+    return url.hostname !== window.location.hostname
+  } catch {
+    return false
+  }
+}
 
 export const Anchor: FC<ComponentPropsWithoutRef<'a'>> = ({
   href = '',
   ...props
 }) => {
-  props = {
+  const { children } = props
+  const [isClient, setIsClient] = useState(false)
+
+  useEffect(() => {
+    setIsClient(true)
+  }, [])
+
+  const combinedProps = {
     ...props,
     className: cn('x:focus-visible:nextra-focus', props.className)
   }
-  if (EXTERNAL_URL_RE.test(href)) {
-    const { children } = props
+
+  if (isClient && isExternalUrl(href)) {
     return (
-      <a href={href} target="_blank" rel="noreferrer" {...props}>
+      <Link href={href} target="_blank" rel="noreferrer" {...combinedProps}>
         {children}
         {typeof children === 'string' && (
           <>
@@ -27,9 +49,13 @@ export const Anchor: FC<ComponentPropsWithoutRef<'a'>> = ({
             />
           </>
         )}
-      </a>
+      </Link>
     )
   }
-  const ComponentToUse = href.startsWith('#') ? 'a' : Link
-  return <ComponentToUse href={href} {...props} />
+
+  return (
+    <Link href={href} {...combinedProps}>
+      {children}
+    </Link>
+  )
 }
