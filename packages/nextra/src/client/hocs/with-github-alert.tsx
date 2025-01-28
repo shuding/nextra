@@ -36,13 +36,13 @@ export function withGitHubAlert(
               `Invalid GitHub alert type: "${alertName}". Should be one of: ${GITHUB_ALERTS.join(', ')}.`
             )
           }
+          const capitalizedName =
+            alertName[0]!.toUpperCase() + alertName.slice(1)
           return fn({
             ...props,
             type: alertName as T,
             children: [
-              <b key={0} className='x:capitalize'>
-                {alertName}
-              </b>,
+              <b key={0}>{capitalizedName}</b>,
               ...props.children.slice(2)
             ]
           })
