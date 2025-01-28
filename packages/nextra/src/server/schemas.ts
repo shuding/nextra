@@ -79,7 +79,7 @@ const pageThemeSchema = z.strictObject({
   breadcrumb: z.boolean().optional(),
   collapsed: z.boolean().optional(),
   footer: z.boolean().optional(),
-  layout: z.enum(['default', 'full']).optional(),
+  layout: z.enum(['default', 'full', 'fill']).optional(),
   navbar: z.boolean().optional(),
   pagination: z.boolean().optional(),
   sidebar: z.boolean().optional(),

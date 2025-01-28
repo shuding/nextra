@@ -392,92 +392,97 @@ export const Sidebar: FC<{ toc: Heading[] }> = ({ toc }) => {
 
   return (
     <>
-      {includePlaceholder && hideSidebar && (
-        <div className="x:max-xl:hidden x:h-0 x:w-64 x:shrink-0" />
-      )}
-      <aside
-        id={sidebarControlsId}
-        className={cn(
-          'nextra-sidebar x:print:hidden',
-          'x:transition-all x:ease-in-out',
-          'x:max-md:hidden x:flex x:flex-col',
-          'x:h-[calc(100dvh-var(--nextra-menu-height))]',
-          'x:top-(--nextra-navbar-height) x:shrink-0',
-          isExpanded ? 'x:w-64' : 'x:w-20',
-          hideSidebar ? 'x:hidden' : 'x:sticky'
+      {includePlaceholder &&
+        hideSidebar &&
+        activeThemeContext.layout !== 'fill' && (
+          <div className="x:max-xl:hidden x:h-0 x:w-64 x:shrink-0" />
         )}
-      >
-        <div
+      {activeThemeContext.layout !== 'full' && (
+        <aside
+          id={sidebarControlsId}
           className={cn(
-            classes.wrapper,
-            'x:grow',
-            !isExpanded && 'no-scrollbar'
+            'nextra-sidebar x:print:hidden',
+            'x:transition-all x:ease-in-out',
+            'x:max-md:hidden x:flex x:flex-col',
+            'x:h-[calc(100dvh-var(--nextra-menu-height))]',
+            'x:top-(--nextra-navbar-height) x:shrink-0',
+            isExpanded ? 'x:w-64' : 'x:w-20',
+            hideSidebar ? 'x:hidden' : 'x:sticky'
           )}
-          ref={sidebarRef}
         >
-          {/* without !hideSidebar check <Collapse />'s inner.clientWidth on `layout: "raw"` will be 0 and element will not have width on initial loading */}
-          {(!hideSidebar || !isExpanded) && (
-            <Collapse isOpen={isExpanded} horizontal>
-              <Menu
-                // The sidebar menu, shows only the docs directories.
-                directories={docsDirectories}
-                anchors={anchors}
-                level={0}
-              />
-            </Collapse>
-          )}
-        </div>
-        {hasMenu && (
           <div
             className={cn(
-              'x:sticky x:bottom-0 x:bg-nextra-bg',
-              classes.footer,
-              !isExpanded && 'x:flex-wrap x:justify-center',
-              showToggleAnimation && [
-                'x:*:opacity-0',
-                isExpanded
-                  ? 'x:*:animate-[fade-in_1s_ease_.2s_forwards]'
-                  : 'x:*:animate-[fade-in2_1s_ease_.2s_forwards]'
-              ]
+              classes.wrapper,
+              'x:grow',
+              !isExpanded && 'no-scrollbar'
             )}
+            ref={sidebarRef}
           >
-            <LocaleSwitch
-              lite={!isExpanded}
-              className={isExpanded ? 'x:grow' : ''}
-            />
-            <ThemeSwitch
-              lite={!isExpanded || hasI18n}
-              className={!isExpanded || hasI18n ? '' : 'x:grow'}
-            />
-            {themeConfig.sidebar.toggleButton && (
-              <Button
-                aria-expanded={isExpanded}
-                aria-controls={sidebarControlsId}
-                title={isExpanded ? 'Collapse sidebar' : 'Expand sidebar'}
-                className={({ hover }) =>
-                  cn(
-                    'x:rounded-md x:p-2 x:cursor-pointer',
-                    hover
-                      ? 'x:bg-gray-100 x:text-gray-900 x:dark:bg-primary-100/5 x:dark:text-gray-50'
-                      : 'x:text-gray-600 x:dark:text-gray-400'
-                  )
-                }
-                onClick={() => {
-                  setIsExpanded(prev => !prev)
-                  setToggleAnimation(true)
-                }}
-              >
-                <ExpandIcon
-                  height="12"
-                  className={cn(
-                    !isExpanded && 'x:*:first:origin-[35%] x:*:first:rotate-180'
-                  )}
+            {/* without !hideSidebar check <Collapse />'s inner.clientWidth on `layout: "raw"` will be 0 and element will not have width on initial loading */}
+            {(!hideSidebar || !isExpanded) && (
+              <Collapse isOpen={isExpanded} horizontal>
+                <Menu
+                  // The sidebar menu, shows only the docs directories.
+                  directories={docsDirectories}
+                  anchors={anchors}
+                  level={0}
                 />
-              </Button>
+              </Collapse>
             )}
           </div>
-        )}
-      </aside>
+          {hasMenu && (
+            <div
+              className={cn(
+                'x:sticky x:bottom-0 x:bg-nextra-bg',
+                classes.footer,
+                !isExpanded && 'x:flex-wrap x:justify-center',
+                showToggleAnimation && [
+                  'x:*:opacity-0',
+                  isExpanded
+                    ? 'x:*:animate-[fade-in_1s_ease_.2s_forwards]'
+                    : 'x:*:animate-[fade-in2_1s_ease_.2s_forwards]'
+                ]
+              )}
+            >
+              <LocaleSwitch
+                lite={!isExpanded}
+                className={isExpanded ? 'x:grow' : ''}
+              />
+              <ThemeSwitch
+                lite={!isExpanded || hasI18n}
+                className={!isExpanded || hasI18n ? '' : 'x:grow'}
+              />
+              {themeConfig.sidebar.toggleButton && (
+                <Button
+                  aria-expanded={isExpanded}
+                  aria-controls={sidebarControlsId}
+                  title={isExpanded ? 'Collapse sidebar' : 'Expand sidebar'}
+                  className={({ hover }) =>
+                    cn(
+                      'x:rounded-md x:p-2 x:cursor-pointer',
+                      hover
+                        ? 'x:bg-gray-100 x:text-gray-900 x:dark:bg-primary-100/5 x:dark:text-gray-50'
+                        : 'x:text-gray-600 x:dark:text-gray-400'
+                    )
+                  }
+                  onClick={() => {
+                    setIsExpanded(prev => !prev)
+                    setToggleAnimation(true)
+                  }}
+                >
+                  <ExpandIcon
+                    height="12"
+                    className={cn(
+                      !isExpanded &&
+                        'x:*:first:origin-[35%] x:*:first:rotate-180'
+                    )}
+                  />
+                </Button>
+              )}
+            </div>
+          )}
+        </aside>
+      )}
     </>
   )
 }

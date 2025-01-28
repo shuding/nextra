@@ -28,18 +28,16 @@ export const ClientWrapper: MDXWrapper = ({
 
   return (
     <>
-      {themeContext.layout !== 'full' && (
+      {themeContext.layout !== 'full' && themeContext.toc && (
         <nav
           className="nextra-toc x:order-last x:max-xl:hidden x:w-64 x:shrink-0 x:print:hidden"
           aria-label="table of contents"
         >
-          {themeContext.toc && (
-            <TOC
-              toc={themeConfig.toc.float ? toc : []}
-              filePath={metadata.filePath}
-              pageTitle={metadata.title}
-            />
-          )}
+          <TOC
+            toc={themeConfig.toc.float ? toc : []}
+            filePath={metadata.filePath}
+            pageTitle={metadata.title}
+          />
         </nav>
       )}
       <article
