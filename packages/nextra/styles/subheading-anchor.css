@@ -1,4 +1,4 @@
-:hover>.subheading-anchor {
+:hover > .subheading-anchor {
   @apply x:opacity-100;
 }
 
