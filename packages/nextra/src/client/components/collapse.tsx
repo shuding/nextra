@@ -5,12 +5,14 @@ import type { FC, ReactNode } from 'react'
 import { Children, useEffect, useRef, useState } from 'react'
 
 export const Collapse: FC<{
+  className?: string
   children: ReactNode
   isOpen: boolean
   horizontal?: boolean
   openDuration?: number
   closeDuration?: number
 }> = ({
+  className,
   children,
   isOpen,
   horizontal = false,
@@ -34,7 +36,11 @@ export const Collapse: FC<{
     }
     const child = container.children[0] as HTMLDivElement
 
-    if (!horizontal) {
+    if (horizontal) {
+    // save initial width to avoid word wrapping when container width will be changed
+      child.style.width = `${child.clientWidth}px`
+      container.style.width = `${child.clientWidth}px`
+    } else {
       container.style.height = `${child.clientHeight}px`
     }
     if (isOpen) {
@@ -43,7 +49,7 @@ export const Collapse: FC<{
         container.style.removeProperty('height')
       }, openDuration)
     } else {
-      setTimeout(() => {
+      requestAnimationFrame(() => {
         if (!horizontal) {
           container.style.height = '0'
         }
@@ -52,8 +58,11 @@ export const Collapse: FC<{
   }, [horizontal, isOpen, openDuration])
 
   useEffect(() => {
-    initialRender.current = false
-  }, [])
+    if (isOpen || !horizontal) {
+      initialRender.current = false
+    }
+  }, [horizontal, isOpen])
+
   // Add inner <div> only if children.length != 1
   const newChildren =
     Children.count(children) === 1 &&
@@ -69,13 +78,14 @@ export const Collapse: FC<{
     <div
       ref={containerRef}
       className={cn(
-        'x:transform-gpu x:transition-all x:ease-in-out x:motion-reduce:transition-none',
-        isOpen ? 'x:opacity-100' : ['x:opacity-0', 'x:overflow-hidden']
+        'x:transform-gpu x:transition-all x:motion-reduce:transition-none',
+        isOpen ? 'x:opacity-100' : 'x:opacity-0',
+        'x:overflow-hidden',
+        className
       )}
       style={{
         ...(initialOpen || horizontal ? undefined : { height: 0 }),
-        transitionDuration: (isOpen ? openDuration : closeDuration) + 'ms',
-        whiteSpace: horizontal ? (isOpen ? "initial" : "nowrap") : "initial",
+        transitionDuration: (isOpen ? openDuration : closeDuration) + 'ms'
       }}
     >
       {newChildren}

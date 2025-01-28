@@ -39,6 +39,7 @@ export const Select: FC<MenuProps> = ({
         title={title}
         className={({ hover, open, focus }) =>
           cn(
+            'x:cursor-pointer',
             'x:h-7 x:rounded-md x:px-2 x:text-xs x:font-medium x:transition-colors',
             open
               ? 'x:bg-gray-200 x:text-gray-900 x:dark:bg-primary-100/10 x:dark:text-gray-50'

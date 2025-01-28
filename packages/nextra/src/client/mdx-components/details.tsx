@@ -68,7 +68,9 @@ export const Details: FC<ComponentProps<'details'>> = ({
       data-expanded={isOpen ? '' : undefined}
     >
       {summaryElement}
-      <Collapse isOpen={isOpen}>{restChildren}</Collapse>
+      <Collapse isOpen={isOpen} className="x:*:pt-2">
+        {restChildren}
+      </Collapse>
     </details>
   )
 }
