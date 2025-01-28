@@ -50,7 +50,9 @@ export const Collapse: FC<{
       }, openDuration)
     } else {
       requestAnimationFrame(() => {
-        if (!horizontal) {
+        if (horizontal) {
+          container.style.width = '0'
+        } else {
           container.style.height = '0'
         }
       })
