@@ -78,9 +78,8 @@ export const Collapse: FC<{
     <div
       ref={containerRef}
       className={cn(
-        'x:transform-gpu x:transition-all x:motion-reduce:transition-none',
+        'x:transform-gpu x:transition-all x:ease-in-out x:motion-reduce:transition-none',
         isOpen ? 'x:opacity-100' : 'x:opacity-0',
-        'x:overflow-hidden',
         className
       )}
       style={{
