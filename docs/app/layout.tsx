@@ -62,8 +62,9 @@ const navbar = (
       <NextraLogo
         height="20"
         className={cn(
+          'hover:transition-all hover:duration-1000',
           '[mask-image:linear-gradient(60deg,#000_25%,rgba(0,0,0,.2)_50%,#000_75%)] [mask-position:0] [mask-size:400%]',
-          'hover:[mask-position:100%] hover:[transition:mask-position_1s_ease]'
+          'hover:[mask-position:100%]'
         )}
       />
     }

@@ -57,7 +57,7 @@ export const Navbar: FC<NavbarProps> = props => {
         {logoLink ? (
           <NextLink
             href={typeof logoLink === 'string' ? logoLink : '/'}
-            className="x:focus-visible:nextra-focus x:flex x:items-center x:hover:opacity-75 x:me-auto"
+            className="x:transition-opacity x:focus-visible:nextra-focus x:flex x:items-center x:hover:opacity-75 x:me-auto"
           >
             {logo}
           </NextLink>
