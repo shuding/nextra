@@ -18,16 +18,18 @@ export const Footer: FC<ComponentProps<'footer'>> = ({
         </div>
       </Switchers>
       <hr className="nextra-border" />
-      <footer
-        className={cn(
-          'x:mx-auto x:flex x:max-w-(--nextra-content-width) x:justify-center x:py-12 x:text-gray-600 x:dark:text-gray-400 x:md:justify-start',
-          'x:pl-[max(env(safe-area-inset-left),1.5rem)] x:pr-[max(env(safe-area-inset-right),1.5rem)]',
-          className
-        )}
-        {...props}
-      >
-        {children || `MIT ${new Date().getFullYear()} © Nextra.`}
-      </footer>
+      {children && (
+        <footer
+          className={cn(
+            'x:mx-auto x:flex x:max-w-(--nextra-content-width) x:justify-center x:py-12 x:text-gray-600 x:dark:text-gray-400 x:md:justify-start',
+            'x:pl-[max(env(safe-area-inset-left),1.5rem)] x:pr-[max(env(safe-area-inset-right),1.5rem)]',
+            className
+          )}
+          {...props}
+        >
+          {children}
+        </footer>
+      )}
     </div>
   )
 }
