@@ -33,7 +33,7 @@ export const ClientWrapper: MDXWrapper = ({
           className="nextra-toc x:order-last x:max-xl:hidden x:w-64 x:shrink-0 x:print:hidden"
           aria-label="table of contents"
         >
-          {themeContext.toc && activeType !== 'page' && (
+          {themeContext.toc && (
             <TOC
               toc={themeConfig.toc.float ? toc : []}
               filePath={metadata.filePath}
