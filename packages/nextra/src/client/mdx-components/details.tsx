@@ -72,7 +72,7 @@ export const Details: FC<ComponentProps<'details'>> = ({
         isOpen={isOpen}
         className={cn(
           'x:*:pt-2',
-          'x:grid' // https://github.com/shuding/nextra/issues/4074
+          'x:grid' // fix sudden height jump on open state https://github.com/shuding/nextra/issues/4074
         )}
       >
         {restChildren}
