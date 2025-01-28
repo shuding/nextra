@@ -1,29 +1,25 @@
 'use client'
 
-import cn from 'clsx'
-import type { FC, ReactNode } from 'react'
-import { Button } from '../button.js'
+import type { ComponentPropsWithoutRef, FC } from 'react'
+import { useEffect, useRef } from 'react'
 
-export const CloseBannerButton: FC<{
-  storageKey: string
-  children: ReactNode
-}> = ({ storageKey, children }) => {
+export const ClientBanner: FC<ComponentPropsWithoutRef<'div'>> = props => {
+  const el = useRef<HTMLDivElement>(null!)
+  // Set height on mount because text can be wrapped on next line and height can be different
+  useEffect(() => {
+    const height = el.current.clientHeight
+    document.documentElement.style.setProperty(
+      '--nextra-banner-height',
+      `${height}px`
+    )
+  }, [])
+
   return (
-    <Button
-      aria-label="Dismiss banner"
-      className={({ hover }) =>
-        cn('x:p-2', hover ? 'x:opacity-100' : 'x:opacity-80')
-      }
-      onClick={event => {
-        event.currentTarget.parentElement!.classList.add('x:hidden')
-        try {
-          localStorage.setItem(storageKey, '1')
-        } catch {
-          /* ignore */
-        }
-      }}
-    >
-      {children}
-    </Button>
+    <div
+      ref={el}
+      // Because we update class in `<script>`
+      suppressHydrationWarning
+      {...props}
+    />
   )
 }

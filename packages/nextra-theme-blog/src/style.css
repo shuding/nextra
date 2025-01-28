@@ -16,7 +16,6 @@
 }
 
 html {
-  --nextra-banner-height: 2.5rem;
   @apply x:scroll-pt-5;
 }
 

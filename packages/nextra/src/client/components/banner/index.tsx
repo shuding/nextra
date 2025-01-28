@@ -1,9 +1,10 @@
 import cn from 'clsx'
 import type { FC, ReactNode } from 'react'
 import { XIcon } from '../../icons/index.js'
-import { CloseBannerButton } from './index.client.js'
+import { CloseBannerButton } from './close-banner-button.js'
+import { ClientBanner } from './index.client'
 
-const CLASS_NAME = 'nextra-banner'
+const BANNER_CLASS_NAME = 'nextra-banner'
 
 export const Banner: FC<{
   children: ReactNode
@@ -11,24 +12,21 @@ export const Banner: FC<{
   storageKey?: string
 }> = ({ children, dismissible = true, storageKey = 'nextra-banner' }) => {
   if (!children) {
-    return null
+    return
   }
-  const hideBannerScript = `try{document.querySelector('.${CLASS_NAME}').classList.toggle('x:hidden',localStorage.getItem(${JSON.stringify(storageKey)}))}catch(e){}`
+  const hideBannerScript = `try{document.querySelector('.${BANNER_CLASS_NAME}').classList.toggle('x:hidden',localStorage.getItem(${JSON.stringify(storageKey)}))}catch(e){}`
 
   return (
-    <div
-      // Because we update class in `<script>`
-      suppressHydrationWarning
-      style={{ height: 'var(--nextra-banner-height)' }}
+    <ClientBanner
       className={cn(
-        CLASS_NAME,
+        BANNER_CLASS_NAME,
         'x:max-md:sticky x:top-0 x:z-20 x:flex x:items-center',
         'x:text-slate-50 x:dark:text-white x:bg-neutral-900 x:dark:bg-[linear-gradient(1deg,#383838,#212121)]',
-        'x:px-2',
+        'x:px-2 x:py-2.5',
         'x:print:[display:none]' // to not match `x:[.nextra-banner:not([class$=hidden])~&]` class
       )}
     >
-      <div className="x:w-full x:whitespace-nowrap x:overflow-x-auto x:text-center x:font-medium x:text-sm">
+      <div className="x:w-full x:text-center x:font-medium x:text-sm">
         {children}
       </div>
       {dismissible && (
@@ -37,6 +35,6 @@ export const Banner: FC<{
           <XIcon height="16" />
         </CloseBannerButton>
       )}
-    </div>
+    </ClientBanner>
   )
 }
