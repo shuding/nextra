@@ -179,16 +179,13 @@ export default {
     type: 'page',
     theme: {
       typesetting: 'article',
-      breadcrumb: false,
       toc: false
     }
   },
   about: {
     type: 'page',
     theme: {
-      typesetting: 'article',
-      toc: true,
-      breadcrumb: false
+      typesetting: 'article'
     }
   },
   showcase: {
@@ -196,8 +193,7 @@ export default {
     theme: {
       typesetting: 'article',
       layout: 'full',
-      timestamp: false,
-      breadcrumb: false
+      timestamp: false
     }
   },
   sponsors: {
@@ -205,8 +201,7 @@ export default {
     theme: {
       typesetting: 'article',
       layout: 'full',
-      timestamp: false,
-      breadcrumb: false
+      timestamp: false
     }
   }
 }
