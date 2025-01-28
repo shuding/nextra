@@ -1,5 +1,14 @@
 # nextra-theme-blog
 
+## 4.1.1
+
+### Patch Changes
+
+- 29a44de: fix regression from Nextra 3 setting [`theme.collapsed?: boolean` in `_meta` file](https://nextra.site/docs/file-conventions/meta-file#theme-option) for folders has no effect in sidebar
+- Updated dependencies [29a44de]
+- Updated dependencies [19578c3]
+  - nextra@4.1.1
+
 ## 4.1.0
 
 ### Minor Changes

@@ -1,5 +1,21 @@
 # nextra-theme-docs
 
+## 4.1.1
+
+### Patch Changes
+
+- b9f8bfb: do not render default footer content if the `Footer#children` prop was not provided
+- 8d878dd: fix: show heading anchor when hover on heading itself
+- 20f7aaa: fix `Uncaught Error: Minified React error #418; visit https://react.dev/errors/418` error due mismatch of last updated time date
+- 57e98cd: add `Layout#sidebar.defaultOpen` prop to configure sidebar default open state
+- d586bd6: fix `ThemeSwitch#lite` prop
+- 29a44de: fix regression from Nextra 3 setting [`theme.collapsed?: boolean` in `_meta` file](https://nextra.site/docs/file-conventions/meta-file#theme-option) for folders has no effect in sidebar
+- 5e86a14: add missing transition state for `<Navbar>` links and `<TOC>` extra content links
+- 2ba45de: allow change `_meta` file `theme.toc` property with `type: 'page'`
+- Updated dependencies [29a44de]
+- Updated dependencies [19578c3]
+  - nextra@4.1.1
+
 ## 4.1.0
 
 ### Minor Changes
