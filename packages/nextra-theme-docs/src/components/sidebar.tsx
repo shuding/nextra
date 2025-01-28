@@ -359,7 +359,8 @@ export const MobileNav: FC = () => {
 
 export const Sidebar: FC<{ toc: Heading[] }> = ({ toc }) => {
   const { normalizePagesResult, hideSidebar } = useConfig()
-  const [isExpanded, setIsExpanded] = useState(true)
+  const themeConfig = useThemeConfig()
+  const [isExpanded, setIsExpanded] = useState(themeConfig.sidebar.defaultOpen)
   const [showToggleAnimation, setToggleAnimation] = useState(false)
   const sidebarRef = useRef<HTMLDivElement>(null)
   const sidebarControlsId = useId()
@@ -380,7 +381,6 @@ export const Sidebar: FC<{ toc: Heading[] }> = ({ toc }) => {
     }
   }, [])
 
-  const themeConfig = useThemeConfig()
   const anchors =
     // When the viewport size is larger than `md`, hide the anchors in
     // the sidebar when `floatTOC` is enabled.
@@ -456,7 +456,7 @@ export const Sidebar: FC<{ toc: Heading[] }> = ({ toc }) => {
                 title={isExpanded ? 'Collapse sidebar' : 'Expand sidebar'}
                 className={({ hover }) =>
                   cn(
-                    'x:rounded-md x:p-2',
+                    'x:rounded-md x:p-2 x:cursor-pointer',
                     hover
                       ? 'x:bg-gray-100 x:text-gray-900 x:dark:bg-primary-100/5 x:dark:text-gray-50'
                       : 'x:text-gray-600 x:dark:text-gray-400'

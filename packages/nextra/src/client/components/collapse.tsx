@@ -5,12 +5,14 @@ import type { FC, ReactNode } from 'react'
 import { Children, useEffect, useRef, useState } from 'react'
 
 export const Collapse: FC<{
+  className?: string
   children: ReactNode
   isOpen: boolean
   horizontal?: boolean
   openDuration?: number
   closeDuration?: number
 }> = ({
+  className,
   children,
   isOpen,
   horizontal = false,
@@ -47,7 +49,8 @@ export const Collapse: FC<{
         container.style.removeProperty('height')
       }, openDuration)
     } else {
-      setTimeout(() => {
+      requestAnimationFrame(() => {
+        // Hide content on next tick
         if (horizontal) {
           container.style.width = '0'
         } else {
@@ -58,8 +61,15 @@ export const Collapse: FC<{
   }, [horizontal, isOpen, openDuration])
 
   useEffect(() => {
-    initialRender.current = false
-  }, [])
+    if (
+      // for horizontal only for first open state
+      isOpen ||
+      !horizontal
+    ) {
+      initialRender.current = false
+    }
+  }, [horizontal, isOpen])
+
   // Add inner <div> only if children.length != 1
   const newChildren =
     Children.count(children) === 1 &&
@@ -76,7 +86,8 @@ export const Collapse: FC<{
       ref={containerRef}
       className={cn(
         'x:transform-gpu x:transition-all x:ease-in-out x:motion-reduce:transition-none',
-        isOpen ? 'x:opacity-100' : ['x:opacity-0', 'x:overflow-hidden']
+        isOpen ? 'x:opacity-100' : 'x:opacity-0 x:overflow-hidden',
+        className
       )}
       style={{
         ...(initialOpen || horizontal ? undefined : { height: 0 }),

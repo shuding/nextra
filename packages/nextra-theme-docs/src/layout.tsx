@@ -66,6 +66,7 @@ const theme = z.strictObject({
     .strictObject({
       autoCollapse: z.boolean().optional(),
       defaultMenuCollapseLevel: z.number().min(1).int().default(2),
+      defaultOpen: z.boolean().default(true),
       toggleButton: z.boolean().default(true)
     })
     .default({}),
