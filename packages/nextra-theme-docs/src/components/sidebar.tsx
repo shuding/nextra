@@ -349,8 +349,8 @@ export const MobileNav: FC = () => {
 
       {hasMenu && (
         <div className={cn(classes.footer, 'x:mt-auto')}>
-          <ThemeSwitch className='x:grow' />
-          <LocaleSwitch className='x:grow x:justify-end' />
+          <ThemeSwitch className="x:grow" />
+          <LocaleSwitch className="x:grow x:justify-end" />
         </div>
       )}
     </aside>

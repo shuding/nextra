@@ -1,5 +1,6 @@
 'use client'
 
+import cn from 'clsx'
 import { useTheme } from 'next-themes'
 import { Select } from 'nextra/components'
 import { useMounted } from 'nextra/hooks'
@@ -23,7 +24,7 @@ export const ThemeSwitch: FC<ThemeSwitchProps> = ({ lite, className }) => {
   const id = mounted ? (theme as keyof typeof themeSwitch) : 'light'
   return (
     <Select
-      className={className}
+      className={cn('x:flex x:items-center x:gap-2', className)}
       title="Change theme"
       options={[
         { id: 'light', name: themeSwitch.light },
@@ -33,10 +34,10 @@ export const ThemeSwitch: FC<ThemeSwitchProps> = ({ lite, className }) => {
       onChange={setTheme}
       value={id}
       selectedOption={
-        <span className="x:flex x:items-center x:gap-2 x:capitalize">
+        <>
           <IconToUse height="12" />
           {!lite && themeSwitch[id]}
-        </span>
+        </>
       }
     />
   )
