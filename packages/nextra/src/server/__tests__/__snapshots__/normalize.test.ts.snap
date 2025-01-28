@@ -144,7 +144,7 @@ exports[`normalize-page > en-US getting-started 1`] = `
   ],
   "activeThemeContext": {
     "breadcrumb": true,
-    "collapsed": false,
+    "collapsed": undefined,
     "footer": true,
     "layout": "default",
     "navbar": true,
@@ -838,7 +838,7 @@ exports[`normalize-page > en-US home 1`] = `
   ],
   "activeThemeContext": {
     "breadcrumb": true,
-    "collapsed": false,
+    "collapsed": undefined,
     "footer": true,
     "layout": "default",
     "navbar": true,
@@ -1520,7 +1520,7 @@ exports[`normalize-page > should keep \`activeThemeContext\`, \`activeType\` for
   "activePath": [],
   "activeThemeContext": {
     "breadcrumb": true,
-    "collapsed": false,
+    "collapsed": undefined,
     "footer": true,
     "layout": "full",
     "navbar": true,

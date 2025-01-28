@@ -2,6 +2,7 @@
 icon: GlobeIcon
 ---
 
+import { ExampleCode } from '@components/example-code'
 import { Steps } from 'nextra/components'
 
 # Next.js I18n
@@ -56,30 +57,21 @@ i18n: [
 ]
 ```
 
-## Automatically detect and redirect to user-selected language (optional)
+## Automatically detect and redirect to user-selected language (_optional_)
 
 You can automatically detect the user's preferred language and redirect them to
-the corresponding version of the site. To achieve this, create a `middleware.js`
-file in the root of your project and export Nextra's middleware function from
-`nextra/locales`:
+the corresponding version of the site. To achieve this, create a `middleware.ts`
+or `middleware.js` file in the root of your project and export Nextra's
+middleware function from `nextra/locales`:
 
-```js filename="middleware.js" {1}
-export { middleware } from 'nextra/locales'
-
-export const config = {
-  // Matcher ignoring `/_next/` and `/api/`
-  matcher: [
-    '/((?!api|_next/static|_next/image|favicon.ico|icon.svg|apple-icon.png|manifest).*)'
-  ]
-}
-```
+<ExampleCode example="swr-site" filePath="middleware.ts" metadata="{1}" />
 
 > [!WARNING]
 >
 > This approach will not work for i18n sites that are statically exported with
 > `output: 'export'` in `nextConfig`.
 
-## Custom 404 page (optional)
+## Custom 404 page (_optional_)
 
 You can have a custom `not-found.jsx` with translations for an i18n website that
 uses a shared theme layout. For guidance on implementing this, you can check out

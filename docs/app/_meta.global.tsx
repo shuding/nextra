@@ -178,7 +178,8 @@ export default {
   blog: {
     type: 'page',
     theme: {
-      typesetting: 'article'
+      typesetting: 'article',
+      toc: false
     }
   },
   about: {

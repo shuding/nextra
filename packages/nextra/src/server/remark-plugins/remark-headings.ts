@@ -7,6 +7,7 @@ import type {
 } from 'mdast-util-mdx-jsx'
 import type { Plugin } from 'unified'
 import { visit } from 'unist-util-visit'
+import { visitChildren } from 'unist-util-visit-children'
 import type { Heading } from '../../types.js'
 import { MARKDOWN_EXTENSION_RE } from '../constants.js'
 import { createAstObject } from '../utils.js'
@@ -82,19 +83,7 @@ export const remarkHeadings: Plugin<
             type: 'mdxJsxFlowElement',
             name: 'h3',
             data: { _mdxExplicitJsx: true },
-            children: [
-              { type: 'text', value: tabName },
-              {
-                type: 'mdxJsxFlowElement',
-                name: 'a',
-                attributes: [
-                  { type: 'mdxJsxAttribute', name: 'href', value: `#${id}` }
-                ],
-                data: {
-                  _mdxExplicitJsx: true
-                }
-              }
-            ],
+            children: [{ type: 'text', value: tabName }],
             attributes: [
               { type: 'mdxJsxAttribute', name: 'id', value: id },
               {
@@ -124,6 +113,27 @@ export const remarkHeadings: Plugin<
               }
             ] satisfies MdxJsxAttribute[]
           } as any)
+        }
+
+        const isDetails =
+          node.type === 'mdxJsxFlowElement' && node.name === 'details'
+        if (isDetails) {
+          const visitor = visitChildren((node: any) => {
+            const isSummary =
+              node.type === 'mdxJsxTextElement' && node.name === 'summary'
+            if (isSummary) {
+              const value = getFlattenedValue(node)
+              const id = slugger.slug(value)
+              node.attributes.push({
+                type: 'mdxJsxAttribute',
+                name: 'id',
+                value: id
+              })
+            } else if ('children' in node) {
+              visitor(node)
+            }
+          })
+          visitor(node)
         }
 
         if (isRemoteContent) {

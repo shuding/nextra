@@ -1,5 +1,18 @@
 # nextra-theme-docs
 
+## 4.1.0
+
+### Minor Changes
+
+- 7caf059: - generate unique anchor id for `<summary>` elements based on its content at build time
+  - add anchor link icon for `<summary>`
+
+### Patch Changes
+
+- fa7f1ee: fix cropped sidebar footer on desktop, when Nextra's `<Banner>` is used
+- Updated dependencies [7caf059]
+  - nextra@4.1.0
+
 ## 4.0.9
 
 ### Patch Changes

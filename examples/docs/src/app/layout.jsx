@@ -44,7 +44,7 @@ export default async function RootLayout({ children }) {
         <Layout
           banner={<Banner storageKey="Nextra 2">Nextra 2 Alpha</Banner>}
           navbar={navbar}
-          footer={<Footer />}
+          footer={<Footer>MIT {new Date().getFullYear()} © Nextra.</Footer>}
           editLink="Edit this page on GitHub"
           docsRepositoryBase="https://github.com/shuding/nextra/blob/main/examples/docs"
           sidebar={{ defaultMenuCollapseLevel: 1 }}
