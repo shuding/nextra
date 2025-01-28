@@ -1,26 +1,25 @@
+:hover > .subheading-anchor {
+  @apply x:opacity-100;
+}
+
 .subheading-anchor {
   @apply x:ms-1;
 
-  /* to avoid conflicts with docs heading which has class `target:_animate-[fade-in_1.5s]` */
-  :not(:target) > & {
-    @apply x:opacity-0 x:transition;
-  }
+  @apply x:opacity-0 x:transition;
 
-  &,
   :target > &,
-  &:hover,
   &:focus {
     @apply x:opacity-100;
   }
 
   :target > & {
     /* https://github.com/tailwindlabs/tailwindcss/issues/15597#issuecomment-2582673546 */
-    @apply x:after:text-gray-400 x:dark:after:text-neutral-500;
+    @apply x:after:text-gray-500 x:dark:after:text-neutral-500;
   }
 
   &:after {
     @apply x:content-['#'] x:px-1;
   }
   /* https://github.com/tailwindlabs/tailwindcss/issues/15597#issuecomment-2582673546 */
-  @apply x:after:text-gray-300 x:dark:after:text-neutral-700;
+  @apply x:after:text-gray-400 x:dark:after:text-neutral-600;
 }
