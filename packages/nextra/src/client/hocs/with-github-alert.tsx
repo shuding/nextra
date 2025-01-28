@@ -40,9 +40,14 @@ export function withGitHubAlert(
             ...props,
             type: alertName as T,
             children: [
-              <b key={0} style={{
-                textTransform: 'capitalize',
-              }}>{alertName}</b>,
+              <b
+                key={0}
+                style={{
+                  textTransform: 'capitalize'
+                }}
+              >
+                {alertName}
+              </b>,
               ...props.children.slice(2)
             ]
           })
