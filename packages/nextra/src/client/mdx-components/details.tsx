@@ -68,7 +68,13 @@ export const Details: FC<ComponentProps<'details'>> = ({
       data-expanded={isOpen ? '' : undefined}
     >
       {summaryElement}
-      <Collapse isOpen={isOpen} className="x:*:pt-2">
+      <Collapse
+        isOpen={isOpen}
+        className={cn(
+          'x:*:pt-2',
+          'x:grid' // https://github.com/shuding/nextra/issues/4074
+        )}
+      >
         {restChildren}
       </Collapse>
     </details>
