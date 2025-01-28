@@ -18,7 +18,7 @@ export const Footer: FC<ComponentProps<'footer'>> = ({
         </div>
       </Switchers>
       <hr className="nextra-border" />
-      {!!children && (
+      {children && (
         <footer
           className={cn(
             'x:mx-auto x:flex x:max-w-(--nextra-content-width) x:justify-center x:py-12 x:text-gray-600 x:dark:text-gray-400 x:md:justify-start',
