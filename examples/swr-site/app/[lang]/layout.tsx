@@ -75,7 +75,7 @@ export default async function RootLayout({ children, params }) {
       projectLink="https://github.com/vercel/swr"
       chatLink="https://discord.com"
     >
-      <LocaleSwitch />
+      <LocaleSwitch lite />
     </Navbar>
   )
   const footer = (
