@@ -50,6 +50,7 @@ export const Collapse: FC<{
       }, openDuration)
     } else {
       requestAnimationFrame(() => {
+        // Hide content on next tick
         if (horizontal) {
           container.style.width = '0'
         } else {
@@ -60,7 +61,11 @@ export const Collapse: FC<{
   }, [horizontal, isOpen, openDuration])
 
   useEffect(() => {
-    if (isOpen || !horizontal) {
+    if (
+      // for horizontal only for first open state
+      isOpen ||
+      !horizontal
+    ) {
       initialRender.current = false
     }
   }, [horizontal, isOpen])
