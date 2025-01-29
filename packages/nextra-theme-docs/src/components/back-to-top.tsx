@@ -31,7 +31,7 @@ export const BackToTop: FC<{
       className={({ disabled }) =>
         cn(
           'x:flex x:items-center x:gap-1.5',
-          'x:whitespace-nowrap x:transition-opacity', // Safari
+          'x:whitespace-nowrap', // Safari
           disabled ? 'x:opacity-0' : 'x:opacity-100',
           className
         )

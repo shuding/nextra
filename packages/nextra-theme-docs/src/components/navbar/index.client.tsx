@@ -50,7 +50,7 @@ const NavbarMenu: FC<{
         transition
         className={cn(
           'x:focus-visible:nextra-focus',
-          'x:origin-top x:transition x:duration-200 x:ease-out x:data-closed:scale-95 x:data-closed:opacity-0 x:motion-reduce:transition-none',
+          'nextra-scrollbar x:origin-top x:transition x:duration-200 x:ease-out x:data-closed:scale-95 x:data-closed:opacity-0 x:motion-reduce:transition-none',
           'x:border x:border-black/5 x:dark:border-white/20',
           'x:backdrop-blur-md x:bg-nextra-bg/70',
           'x:z-20 x:rounded-md x:py-1 x:text-sm x:shadow-lg',
