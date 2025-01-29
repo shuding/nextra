@@ -8,14 +8,14 @@ export const Anchor: FC<ComponentPropsWithoutRef<'a'>> = ({
   href = '',
   ...props
 }) => {
-  props = {
+  const combinedProps = {
     ...props,
     className: cn('x:focus-visible:nextra-focus', props.className)
   }
-  if (EXTERNAL_URL_RE.test(href)) {
-    const { children } = props
+  if (!combinedProps.target && EXTERNAL_URL_RE.test(href)) {
+    const { children } = combinedProps
     return (
-      <a href={href} target="_blank" rel="noreferrer" {...props}>
+      <a href={href} target="_blank" rel="noreferrer" {...combinedProps}>
         {children}
         {typeof children === 'string' && (
           <>
@@ -31,5 +31,5 @@ export const Anchor: FC<ComponentPropsWithoutRef<'a'>> = ({
     )
   }
   const ComponentToUse = href.startsWith('#') ? 'a' : Link
-  return <ComponentToUse href={href} {...props} />
+  return <ComponentToUse href={href} {...combinedProps} />
 }
