@@ -1,5 +1,17 @@
 # nextra-theme-blog
 
+## 4.2.0
+
+### Patch Changes
+
+- 427b080: calculate `--nextra-banner-height` after mounting banner, so banner text can be wrapped on multiple lines
+- 6b8053f: fix a sudden height jump on opening for `<detail>` element when his last children contain margins
+- b0e686e: hide default `<summary>` arrow on mobile
+- Updated dependencies [427b080]
+- Updated dependencies [6b8053f]
+- Updated dependencies [b0e686e]
+  - nextra@4.2.0
+
 ## 4.1.1
 
 ### Patch Changes
