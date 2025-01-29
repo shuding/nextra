@@ -193,7 +193,8 @@ export default {
     theme: {
       typesetting: 'article',
       layout: 'full',
-      timestamp: false
+      timestamp: false,
+      toc: false
     }
   },
   sponsors: {
@@ -201,7 +202,8 @@ export default {
     theme: {
       typesetting: 'article',
       layout: 'full',
-      timestamp: false
+      timestamp: false,
+      toc: false
     }
   }
 }
