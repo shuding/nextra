@@ -40,7 +40,7 @@ export const CopyToClipboard: FC<ComponentProps<'button'>> = props => {
       variant="outline"
       {...props}
     >
-      <IconToUse height="16" className="nextra-copy-icon" />
+      <IconToUse height="1em" className="nextra-copy-icon" />
     </Button>
   )
 }

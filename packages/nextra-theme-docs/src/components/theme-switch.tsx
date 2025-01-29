@@ -18,7 +18,7 @@ export const ThemeSwitch: FC<ThemeSwitchProps> = ({ lite, className }) => {
   const mounted = useMounted()
   const { darkMode, themeSwitch } = useThemeConfig()
   if (!darkMode) {
-    return
+    return null
   }
   const IconToUse = mounted && resolvedTheme === 'dark' ? MoonIcon : SunIcon
   const id = mounted ? (theme as keyof typeof themeSwitch) : 'light'

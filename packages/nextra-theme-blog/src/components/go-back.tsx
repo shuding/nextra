@@ -14,7 +14,7 @@ export const GoBack: FC = () => {
   return (
     <Button
       onClick={router.back}
-      className="x:print:hidden x:underline x:cursor-pointer"
+      className="x:print:hidden x:underline"
     >
       Back
     </Button>

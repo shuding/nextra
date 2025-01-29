@@ -13,7 +13,7 @@ import { cloneElement } from 'react'
 Projects powered by Nextra
 
 {/* prettier-ignore */}
-<Cards className="[&_img]:object-cover [&_img]:[aspect-ratio:12/6.3]">
+<Cards>
 <>[![GraphQL Hive preview](./_logos/graphql-hive.png)](https://the-guild.dev/graphql/hive)</>
 <>[![Speakeasy preview](./_logos/speakeasy.png)](https://speakeasyapi.dev/docs)</>
 <>[![React Flow preview](./_logos/react-flow.jpg)](https://reactflow.dev)</>
@@ -64,7 +64,9 @@ Projects powered by Nextra
 export default function MdxLayout(props) {
   return cloneElement(props.children, {
     components: {
-      img: Image,
+      img: props => (
+        <Image {...props} className="[aspect-ratio:12/6.3] object-cover" />
+      ),
       a({ children, href }) {
         const { alt } = children.props
         return (

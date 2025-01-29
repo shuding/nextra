@@ -79,7 +79,7 @@ export const Select: FC<MenuProps> = ({
                 )}
               >
                 {option.name}
-                {selected && <CheckIcon height="16" />}
+                {selected && <CheckIcon height="1em" />}
               </li>
             )}
           </ListboxOption>
