@@ -32,7 +32,7 @@ export const Pre: FC<PreProps> = ({
   ...props
 }) => {
   const copyButton = copy === '' && (
-    <CopyToClipboard className={filename ? 'x:ms-auto' : ''} />
+    <CopyToClipboard className={filename ? 'x:ms-auto x:text-sm' : ''} />
   )
 
   return (
@@ -81,7 +81,7 @@ export const Pre: FC<PreProps> = ({
         >
           {hasWordWrap === '' && (
             <ToggleWordWrapButton>
-              <WordWrapIcon height="16" />
+              <WordWrapIcon height="1em" />
             </ToggleWordWrapButton>
           )}
           {!filename && copyButton}
