@@ -13,7 +13,8 @@ export const Anchor: FC<ComponentPropsWithoutRef<'a'>> = ({
     className: cn('x:focus-visible:nextra-focus', props.className)
   }
   if (
-    (!combinedProps.target && !combinedProps.rel) &&
+    !combinedProps.target &&
+    !combinedProps.rel &&
     EXTERNAL_URL_RE.test(href)
   ) {
     const { children } = combinedProps
