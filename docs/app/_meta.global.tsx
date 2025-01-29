@@ -83,7 +83,8 @@ const ADVANCED: MetaRecord = {
   remote: '',
   playground: {
     theme: {
-      layout: 'full'
+      layout: 'full',
+      toc: false
     }
   }
 }
