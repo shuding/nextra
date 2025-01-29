@@ -30,6 +30,5 @@ export const Anchor: FC<ComponentPropsWithoutRef<'a'>> = ({
       </a>
     )
   }
-  const ComponentToUse = href.startsWith('#') ? 'a' : Link
-  return <ComponentToUse href={href} {...combinedProps} />
+  return <Link href={href} {...combinedProps} />
 }
