@@ -1,5 +1,25 @@
 # nextra-theme-docs
 
+## 4.2.0
+
+### Minor Changes
+
+- 90b8c66: allow configuring `theme.toc` with `layout: 'default'` in `_meta` files
+
+### Patch Changes
+
+- 0b0db89: better animations for open/closed state for the `<NavbarMenu>` component which is rendered with `type: 'menu'` in `_meta` file
+- 427b080: calculate `--nextra-banner-height` after mounting banner, so banner text can be wrapped on multiple lines
+- 6b8053f: fix a sudden height jump on opening for `<detail>` element when his last children contain margins
+- 5d1e75b: add the missing `transition-opacity` style for the `<BackToTop>` component
+- b0e686e: hide default `<summary>` arrow on mobile
+- 2b0b434: add the missing `cursor-pointer` style in the `<BackToTop>` component
+- bcc34cc: reduce main area padding x to from `24px` to `16px` like in next.js docs
+- Updated dependencies [427b080]
+- Updated dependencies [6b8053f]
+- Updated dependencies [b0e686e]
+  - nextra@4.2.0
+
 ## 4.1.1
 
 ### Patch Changes
