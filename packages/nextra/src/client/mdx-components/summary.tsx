@@ -15,7 +15,7 @@ export const Summary: FC<ComponentProps<'summary'>> = ({
         'x:cursor-pointer x:transition-colors',
         'x:hover:bg-gray-100 x:dark:hover:bg-neutral-800',
         'x:select-none x:rounded',
-        'x:marker:content-[""]',
+        'x:[&::-webkit-details-marker]:hidden', // Safari
         'x:flex x:items-center',
         className
       )}
