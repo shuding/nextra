@@ -1,19 +1,12 @@
 // should be used on server
 'use no memo'
 
-import type { ReactElement, ReactNode, ReactPortal } from 'react'
+import type { ReactElement, ReactNode } from 'react'
 import { Children, cloneElement } from 'react'
 
 type TOCElement = ReactElement | string
 
-type WithProps = ReactElement | ReactPortal
-
-function isLink(node: ReactNode): node is WithProps {
-  // @ts-expect-error -- fixme
-  return hasProps(node) && !!node.props.href
-}
-
-function hasProps(node: ReactNode): node is WithProps {
+function hasProps(node: ReactNode) {
   return !!node && typeof node === 'object'
 }
 
@@ -23,7 +16,11 @@ export function removeLinks(node: ReactNode): TOCElement[] | string {
   }
   // @ts-expect-error fixme
   return Children.map(node, child => {
-    if (isLink(child)) {
+    if (
+      hasProps(child) &&
+      // @ts-expect-error -- fixme
+      child.props.href
+    ) {
       // Skip footnotes links
       // @ts-expect-error -- fixme
       if (child.props['data-footnote-ref']) {

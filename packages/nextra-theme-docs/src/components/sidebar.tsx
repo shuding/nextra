@@ -456,7 +456,7 @@ export const Sidebar: FC<{ toc: Heading[] }> = ({ toc }) => {
                 title={isExpanded ? 'Collapse sidebar' : 'Expand sidebar'}
                 className={({ hover }) =>
                   cn(
-                    'x:rounded-md x:p-2 x:cursor-pointer',
+                    'x:rounded-md x:p-2',
                     hover
                       ? 'x:bg-gray-100 x:text-gray-900 x:dark:bg-primary-100/5 x:dark:text-gray-50'
                       : 'x:text-gray-600 x:dark:text-gray-400'

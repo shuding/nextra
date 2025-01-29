@@ -10,9 +10,9 @@ export const Banner: FC<{
   children: ReactNode
   dismissible?: boolean
   storageKey?: string
-}> = ({ children, dismissible = true, storageKey = 'nextra-banner' }) => {
+}> = ({ children, dismissible = true, storageKey = BANNER_CLASS_NAME }) => {
   if (!children) {
-    return
+    return null
   }
   const hideBannerScript = `try{document.querySelector('.${BANNER_CLASS_NAME}').classList.toggle('x:hidden',localStorage.getItem(${JSON.stringify(storageKey)}))}catch(e){}`
 
@@ -24,6 +24,8 @@ export const Banner: FC<{
         'x:text-slate-50 x:dark:text-white x:bg-neutral-900 x:dark:bg-[linear-gradient(1deg,#383838,#212121)]',
         'x:print:[display:none]' // to not match `x:[.nextra-banner:not([class$=hidden])~&]` class
       )}
+      // Because we update class in `<script>`
+      suppressHydrationWarning
     >
       <div className="x:w-full x:text-center x:font-medium x:text-sm x:py-2.5">
         {children}

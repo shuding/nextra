@@ -28,7 +28,7 @@ export const ClientWrapper: MDXWrapper = ({
 
   return (
     <>
-      {themeContext.layout !== 'full' && (
+      {(themeContext.layout === 'default' || themeContext.toc) && (
         <nav
           className="nextra-toc x:order-last x:max-xl:hidden x:w-64 x:shrink-0 x:print:hidden"
           aria-label="table of contents"
