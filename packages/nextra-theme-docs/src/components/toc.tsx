@@ -6,7 +6,7 @@ import { Anchor } from 'nextra/components'
 import type { FC } from 'react'
 import { useEffect, useRef } from 'react'
 import scrollIntoView from 'scroll-into-view-if-needed'
-import { useActiveAnchor, useThemeConfig } from '../stores'
+import { useActiveAnchor, useConfig, useThemeConfig } from '../stores'
 import { getGitIssueUrl, gitUrlParse } from '../utils'
 import { BackToTop } from './back-to-top'
 
@@ -34,7 +34,10 @@ export const TOC: FC<TOCProps> = ({ toc, filePath, pageTitle }) => {
     themeConfig.toc.extraContent ||
     themeConfig.toc.backToTop
 
-  const hasHeadings = toc.length > 0
+  const { activeType } = useConfig().normalizePagesResult
+  const anchors = themeConfig.toc.float || activeType === 'page' ? toc : []
+
+  const hasHeadings = anchors.length > 0
   const activeIndex = toc.findIndex(({ id }) => id === activeSlug)
 
   useEffect(() => {
@@ -71,7 +74,7 @@ export const TOC: FC<TOCProps> = ({ toc, filePath, pageTitle }) => {
               'nextra-mask' // for title/footer shadow
             )}
           >
-            {toc.map(({ id, value, depth }) => (
+            {anchors.map(({ id, value, depth }) => (
               <li className="x:my-2 x:scroll-my-6 x:scroll-py-6" key={id}>
                 <a
                   href={`#${id}`}
