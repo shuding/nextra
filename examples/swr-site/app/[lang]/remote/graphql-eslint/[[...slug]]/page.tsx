@@ -60,7 +60,7 @@ type PageProps = Readonly<{
 
 export default async function Page(props: PageProps) {
   const params = await props.params
-  const route = params.slug ? params.slug.join('/') : ''
+  const route = params.slug?.join('/') ?? ''
   const filePath = mdxPages[route]
 
   if (!filePath) {
