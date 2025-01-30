@@ -33,10 +33,11 @@ export const DEFAULT_REHYPE_PRETTY_CODE_OPTIONS: RehypePrettyCodeOptions = {
   },
   filterMetaString: meta => meta.replace(CODE_BLOCK_FILENAME_RE, ''),
   getHighlighter(opts) {
+    const langs = Object.keys(bundledLanguages).filter(l => l !== 'mermaid')
     return createHighlighter({
       ...opts,
       // Without `getHighlighter` option ```mdx lang isn't highlighted
-      langs: Object.keys(bundledLanguages)
+      langs
     })
   }
 }
