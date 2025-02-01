@@ -496,7 +496,7 @@ importers:
         version: 3.0.4(@types/node@22.13.0)(jiti@2.4.2)(jsdom@26.0.0)(lightningcss@1.29.1)(tsx@4.19.2)(yaml@2.7.0)
       zx:
         specifier: ^8.2.4
-        version: 8.3.1
+        version: 8.3.2
 
   packages/nextra-theme-docs:
     dependencies:
@@ -569,7 +569,7 @@ importers:
         version: 3.0.4(@types/node@22.13.0)(jiti@2.4.2)(jsdom@26.0.0)(lightningcss@1.29.1)(tsx@4.19.2)(yaml@2.7.0)
       zx:
         specifier: ^8.2.4
-        version: 8.3.1
+        version: 8.3.2
 
   packages/prettier-config:
     dependencies:
@@ -6162,8 +6162,8 @@ packages:
   zwitch@2.0.4:
     resolution: {integrity: sha512-bXE4cR/kVZhKZX/RjPEflHaKVhUVl85noU3v6b8apfQEc1x4A+zBxjZ4lN8LqGd6WZ3dl98pY4o717VFmoPp+A==}
 
-  zx@8.3.1:
-    resolution: {integrity: sha512-MjNXfysB0Rv/lMi8oFa3a3flNC/KKqhguuarqxYM/uz/WFoD/AgHDkDdoDD4Y4nRjaCDphJJBTeeaPAE1P7fhA==}
+  zx@8.3.2:
+    resolution: {integrity: sha512-qjTunv1NClO05jDaUjrNZfpqC9yvNCchge/bzOcQevsh1aM5qE3TG6MY24kuQKlOWx+7vNuhqO2wa9nQCIGvZA==}
     engines: {node: '>= 12.17.0'}
     hasBin: true
 
@@ -13377,7 +13377,7 @@ snapshots:
 
   zwitch@2.0.4: {}
 
-  zx@8.3.1:
+  zx@8.3.2:
     optionalDependencies:
       '@types/fs-extra': 11.0.4
       '@types/node': 22.13.0
