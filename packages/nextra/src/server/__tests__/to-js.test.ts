@@ -1,8 +1,8 @@
 import path from 'node:path'
 import { CWD } from '../constants.js'
 import { findMetaAndPageFilePaths } from '../page-map/find-meta-and-page-file-paths.js'
-import { convertToPageMap } from '../page-map/to-page-map.js'
 import { convertPageMapToJs } from '../page-map/to-js.js'
+import { convertToPageMap } from '../page-map/to-page-map.js'
 
 describe('convertPageMapToJs()', () => {
   it('should work for docs example', async () => {
@@ -35,9 +35,9 @@ describe('convertPageMapToJs()', () => {
       import {metadata as themes_docs_configuration} from "private-next-root-dir/src/content/themes/docs/configuration.mdx?metadata";
       import {metadata as themes_docs_index} from "private-next-root-dir/src/content/themes/docs/index.mdx?metadata";
       import {metadata as themes_docs_tabs} from "private-next-root-dir/src/content/themes/docs/tabs.mdx?metadata";
-      import {metadata as src_app_blog_page} from "private-next-root-dir/src/app/blog/page.jsx";
+      import * as src_app_blog_page from "private-next-root-dir/src/app/blog/page.jsx";
       import {metadata as index} from "private-next-root-dir/src/content/index.mdx?metadata";
-      import {metadata as src_app_showcase_overview_page} from "private-next-root-dir/src/app/showcase/(overview)/page.jsx";
+      import * as src_app_showcase_overview_page from "private-next-root-dir/src/app/showcase/(overview)/page.jsx";
       import {metadata as advanced_code_highlighting} from "private-next-root-dir/src/content/advanced/code-highlighting.mdx?metadata";
       import {metadata as get_started} from "private-next-root-dir/src/content/get-started.mdx?metadata";
       import {metadata as mermaid} from "private-next-root-dir/src/content/mermaid.mdx?metadata";
