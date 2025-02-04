@@ -1,5 +1,5 @@
 import path from 'node:path'
-import { normalizeAppPath } from 'next/dist/shared/lib/router/utils/app-paths'
+import { normalizeAppPath } from 'next/dist/shared/lib/router/utils/app-paths.js'
 import type { TItem } from '../../types.js'
 
 interface NestedMap {
