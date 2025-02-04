@@ -1,6 +1,7 @@
 import path from 'node:path'
 import type { ArrayExpression } from 'estree'
 import type { Import, TItem } from '../../types.js'
+import { MARKDOWN_EXTENSION_RE } from '../constants.js'
 import { createAstObject } from '../utils.js'
 
 function cleanFilePath(filePath: string): string {
@@ -38,7 +39,43 @@ export function convertPageMapToAst(
       return createAstObject({
         name: item.name,
         route: item.route,
-        frontMatter: { type: 'Identifier', name: importName }
+        frontMatter: MARKDOWN_EXTENSION_RE.test(filePath)
+          ? { type: 'Identifier', name: importName }
+          : {
+              type: 'LogicalExpression',
+              left: {
+                type: 'MemberExpression',
+                object: {
+                  type: 'Identifier',
+                  name: importName
+                },
+                computed: false,
+                optional: false,
+                property: {
+                  type: 'Identifier',
+                  name: 'metadata'
+                }
+              },
+              operator: '??',
+              right: {
+                type: 'CallExpression',
+                callee: {
+                  type: 'MemberExpression',
+                  object: {
+                    type: 'Identifier',
+                    name: importName
+                  },
+                  optional: false,
+                  computed: false,
+                  property: {
+                    type: 'Identifier',
+                    name: 'generateMetadata'
+                  }
+                },
+                optional: false,
+                arguments: []
+              }
+            }
       })
     }
     const filePath = item.__metaPath
