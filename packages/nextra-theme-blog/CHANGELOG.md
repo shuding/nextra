@@ -1,5 +1,12 @@
 # nextra-theme-blog
 
+## 4.2.2
+
+### Patch Changes
+
+- Updated dependencies [dd32eca]
+  - nextra@4.2.2
+
 ## 4.2.1
 
 ### Patch Changes
