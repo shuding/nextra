@@ -20,7 +20,7 @@ import eslintPluginUnicorn from 'eslint-plugin-unicorn'
 import tseslint from 'typescript-eslint'
 import type { Config } from 'typescript-eslint'
 
-// Enable once `eslint-plugin-tailwindcss` will support Tailwind CSS v4
+// TODO: Enable once `eslint-plugin-tailwindcss` will support Tailwind CSS v4
 // const TAILWIND_CONFIG = {
 //   extends: [eslintPluginTailwindCss.configs['flat/recommended']],
 //   rules: {
