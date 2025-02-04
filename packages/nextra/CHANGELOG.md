@@ -1,5 +1,11 @@
 # nextra
 
+## 4.2.2
+
+### Patch Changes
+
+- dd32eca: fix route group within `app/` dir crash the `convertToPageMap`
+
 ## 4.2.1
 
 ## 4.2.0
