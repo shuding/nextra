@@ -14,7 +14,7 @@ export default function Page() {
         fontWeight: 'bold'
       }}
     >
-      Showcase Homepage
+      Showcase
     </h1>
   )
 }

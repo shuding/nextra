@@ -3,7 +3,7 @@ import { includeIgnoreFile } from '@eslint/compat'
 import js from '@eslint/js'
 // @ts-expect-error -- no types
 import eslintPluginNext from '@next/eslint-plugin-next'
-import type { Linter } from 'eslint'
+// import type { Linter } from 'eslint'
 // @ts-expect-error -- no types
 import eslintConfigPrettier from 'eslint-config-prettier'
 import eslintPluginImport from 'eslint-plugin-import-x'
@@ -13,24 +13,24 @@ import * as eslintPluginReactCompiler from 'eslint-plugin-react-compiler'
 // @ts-expect-error -- no types
 import eslintPluginReactHooks from 'eslint-plugin-react-hooks'
 import eslintPluginSonarJs from 'eslint-plugin-sonarjs'
-// @ts-expect-error -- no types
-import eslintPluginTailwindCss from 'eslint-plugin-tailwindcss'
+// import eslintPluginTailwindCss from 'eslint-plugin-tailwindcss'
 // @ts-expect-error -- no types
 import eslintPluginTsSortKeys from 'eslint-plugin-typescript-sort-keys'
 import eslintPluginUnicorn from 'eslint-plugin-unicorn'
 import tseslint from 'typescript-eslint'
 import type { Config } from 'typescript-eslint'
 
-const TAILWIND_CONFIG = {
-  extends: [eslintPluginTailwindCss.configs['flat/recommended']],
-  rules: {
-    'tailwindcss/classnames-order': 'off', // conflicts with prettier-plugin-tailwindcss
-    'tailwindcss/enforces-negative-arbitrary-values': 'error',
-    'tailwindcss/enforces-shorthand': 'error',
-    'tailwindcss/migration-from-tailwind-2': 'error',
-    'tailwindcss/no-custom-classname': 'error'
-  } satisfies Linter.RulesRecord
-}
+// Enable once `eslint-plugin-tailwindcss` will support Tailwind CSS v4
+// const TAILWIND_CONFIG = {
+//   extends: [eslintPluginTailwindCss.configs['flat/recommended']],
+//   rules: {
+//     'tailwindcss/classnames-order': 'off', // conflicts with prettier-plugin-tailwindcss
+//     'tailwindcss/enforces-negative-arbitrary-values': 'error',
+//     'tailwindcss/enforces-shorthand': 'error',
+//     'tailwindcss/migration-from-tailwind-2': 'error',
+//     'tailwindcss/no-custom-classname': 'error'
+//   } satisfies Linter.RulesRecord
+// }
 
 const REACT_COMPILER_RESTRICT = {
   name: 'react',
@@ -201,7 +201,7 @@ const config: Config = tseslint.config(
   },
   // ⚙️ nextra-theme-docs
   {
-    ...TAILWIND_CONFIG,
+    // ...TAILWIND_CONFIG,
     files: ['packages/nextra-theme-docs/**'],
     settings: {
       tailwindcss: {
@@ -217,7 +217,7 @@ const config: Config = tseslint.config(
       }
     },
     rules: {
-      ...TAILWIND_CONFIG.rules,
+      // ...TAILWIND_CONFIG.rules,
       'no-restricted-imports': [
         'error',
         { name: 'next/link', message: 'Use `<Anchor>` instead' },
@@ -229,10 +229,10 @@ const config: Config = tseslint.config(
   },
   // ⚙️ nextra-theme-blog
   {
-    ...TAILWIND_CONFIG,
+    // ...TAILWIND_CONFIG,
     files: ['packages/nextra-theme-blog/**'],
     rules: {
-      ...TAILWIND_CONFIG.rules,
+      // ...TAILWIND_CONFIG.rules,
       'no-restricted-imports': [
         'error',
         {
@@ -252,7 +252,7 @@ const config: Config = tseslint.config(
   },
   // ⚙️ nextra
   {
-    ...TAILWIND_CONFIG,
+    // ...TAILWIND_CONFIG,
     files: ['packages/nextra/**'],
     settings: {
       tailwindcss: {
@@ -267,7 +267,7 @@ const config: Config = tseslint.config(
       }
     },
     rules: {
-      ...TAILWIND_CONFIG.rules,
+      // ...TAILWIND_CONFIG.rules,
       'import/extensions': ['error', 'ignorePackages'],
       // False positive due Tailwind CSS v4
       'tailwindcss/no-custom-classname': 'off'
@@ -275,7 +275,7 @@ const config: Config = tseslint.config(
   },
   // ⚙️ Docs
   {
-    ...TAILWIND_CONFIG,
+    // ...TAILWIND_CONFIG,
     files: ['docs/**'],
     settings: {
       tailwindcss: {
@@ -307,7 +307,7 @@ const config: Config = tseslint.config(
   },
   // ⚙️ SWR-site example
   {
-    ...TAILWIND_CONFIG,
+    // ...TAILWIND_CONFIG,
     files: ['examples/swr-site/**'],
     settings: {
       tailwindcss: {
