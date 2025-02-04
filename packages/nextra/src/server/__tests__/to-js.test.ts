@@ -120,7 +120,7 @@ describe('convertPageMapToJs()', () => {
       }, {
         name: "blog",
         route: "/blog",
-        frontMatter: src_app_blog_page.metadata ?? src_app_blog_page.generateMetadata?.()
+        frontMatter: src_app_blog_page.metadata ?? src_app_blog_page.generateMetadata?.({})
       }, {
         name: "index",
         route: "/",
@@ -128,7 +128,7 @@ describe('convertPageMapToJs()', () => {
       }, {
         name: "showcase",
         route: "/showcase",
-        frontMatter: src_app_showcase_overview_page.metadata ?? src_app_showcase_overview_page.generateMetadata?.()
+        frontMatter: src_app_showcase_overview_page.metadata ?? src_app_showcase_overview_page.generateMetadata?.({})
       }, {
         name: "advanced",
         route: "/advanced",

@@ -61,19 +61,14 @@ export function convertPageMapToAst(
                 type: 'CallExpression',
                 callee: {
                   type: 'MemberExpression',
-                  object: {
-                    type: 'Identifier',
-                    name: importName
-                  },
+                  object: { type: 'Identifier', name: importName },
                   optional: false,
                   computed: false,
-                  property: {
-                    type: 'Identifier',
-                    name: 'generateMetadata'
-                  }
+                  property: { type: 'Identifier', name: 'generateMetadata' }
                 },
                 optional: true,
-                arguments: []
+                // First argument is object of type `{ params, searchParams }`
+                arguments: [createAstObject({})]
               }
             }
       })
