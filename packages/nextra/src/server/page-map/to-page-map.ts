@@ -1,4 +1,5 @@
 import path from 'node:path'
+import { normalizeAppPath } from 'next/dist/shared/lib/router/utils/app-paths'
 import type { TItem } from '../../types.js'
 
 interface NestedMap {
@@ -54,7 +55,9 @@ export function convertToPageMap({
           //
           // will be normalized to:
           // app/posts/aaron-swartz-a-programmable-web/page.mdx
-          dir.replaceAll(/\(.*?\)(\/|$)/g, '')
+          //
+          // The `normalizeAppPath` function ensures a leading slash is present, so we slice it off.
+          normalizeAppPath(dir).slice(1)
         : [dir, name !== 'index' && name].filter(Boolean).join('/')
       pages[key] = filePath
     }

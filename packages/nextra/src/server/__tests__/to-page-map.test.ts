@@ -873,6 +873,7 @@ describe('generatePageMap()', () => {
           "src/app/_meta.js",
           "src/app/blog/page.jsx",
           "src/app/page.jsx",
+          "src/app/showcase/(overview)/page.jsx",
           "src/content/_meta.js",
           "src/content/advanced/code-highlighting.mdx",
           "src/content/features/_meta.js",
@@ -1010,6 +1011,11 @@ describe('generatePageMap()', () => {
             "__pagePath": "src/content/index.mdx",
             "name": "index",
             "route": "/",
+          },
+          {
+            "__pagePath": "src/app/showcase/(overview)/page.jsx",
+            "name": "showcase",
+            "route": "/showcase",
           },
           {
             "children": [
@@ -1219,6 +1225,11 @@ describe('generatePageMap()', () => {
             "__pagePath": "src/app/page.jsx",
             "name": "index",
             "route": "/",
+          },
+          {
+            "__pagePath": "src/app/showcase/(overview)/page.jsx",
+            "name": "showcase",
+            "route": "/showcase",
           },
         ]
       `)
