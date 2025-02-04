@@ -72,7 +72,7 @@ export function convertPageMapToAst(
                     name: 'generateMetadata'
                   }
                 },
-                optional: false,
+                optional: true,
                 arguments: []
               }
             }
