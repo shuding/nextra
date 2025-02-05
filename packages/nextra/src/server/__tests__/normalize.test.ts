@@ -509,7 +509,7 @@ describe('normalize-page', () => {
           },
           "name": "folder-with-index",
           "route": "/folder-with-index",
-          "title": "Folder with Index",
+          "title": "from sidebarTitle",
         },
         {
           "frontMatter": {

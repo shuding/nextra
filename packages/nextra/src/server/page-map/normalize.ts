@@ -16,6 +16,21 @@ type ParsedFolder = Folder & {
   frontMatter?: FrontMatter
 }
 
+function titlize(item: Folder | MdxFile, meta: MetaRecord): string {
+  const titleFromMeta = meta[item.name]?.title
+  if (titleFromMeta) return titleFromMeta
+  if ('frontMatter' in item && item.frontMatter) {
+    const titleFromFrontMatter =
+      item.frontMatter.sidebarTitle || item.frontMatter.title
+
+    if (titleFromFrontMatter) return titleFromFrontMatter
+  }
+  // We use `title` package for capitalize folders without index page
+  return pageTitleFromFilename(item.name)
+}
+
+type MetaRecord = Record<string, Record<string, any>>
+
 function sortFolder(pageMap: PageMapItem[] | Folder) {
   const newChildren: (Folder | MdxFile)[] = []
 
@@ -25,7 +40,7 @@ function sortFolder(pageMap: PageMapItem[] | Folder) {
     isFolder ? { ...pageMap } : { children: pageMap }
   ) as ParsedFolder
 
-  const meta: Record<string, Record<string, any>> = {}
+  const meta: MetaRecord = {}
   for (const item of folder.children) {
     if (
       isFolder &&
@@ -35,7 +50,9 @@ function sortFolder(pageMap: PageMapItem[] | Folder) {
     ) {
       folder.frontMatter = item.frontMatter
     } else if ('children' in item) {
-      newChildren.push(normalizePageMap(item))
+      const pageItem: any = { ...item }
+      pageItem.title = titlize(item, meta)
+      newChildren.push(normalizePageMap(pageItem))
     } else if ('data' in item) {
       for (const [key, titleOrObject] of Object.entries(item.data)) {
         const { data, error } = metaSchema.safeParse(titleOrObject)
@@ -53,16 +70,9 @@ function sortFolder(pageMap: PageMapItem[] | Folder) {
       }
     } else {
       const pageItem: any = { ...item }
-      pageItem.title ??=
-        meta[item.name]?.title ||
-        item.frontMatter?.sidebarTitle ||
-        item.frontMatter?.title
+      pageItem.title = titlize(item, meta)
       newChildren.push(pageItem)
     }
-  }
-  if (folder.name && !folder.frontMatter?.title) {
-    // @ts-expect-error -- we use title for capitalize folders without index page
-    folder.title = pageTitleFromFilename(folder.name)
   }
 
   const metaKeys = Object.keys(meta)
