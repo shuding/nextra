@@ -202,5 +202,5 @@ export const usPageMap: PageMapItem[] = [
     frontMatter: {
       title: 'React Hooks for Data Fetching'
     }
-  },
+  }
 ]

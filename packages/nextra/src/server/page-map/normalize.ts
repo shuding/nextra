@@ -1,5 +1,12 @@
 import { fromZodError } from 'zod-validation-error'
-import type { Folder, FrontMatter, MdxFile, PageMapItem } from '../../types.js'
+import type {
+  Folder,
+  FrontMatter,
+  MdxFile,
+  MenuItem,
+  PageMapItem,
+  SeparatorItem
+} from '../../types.js'
 import { metaSchema } from '../schemas.js'
 import { pageTitleFromFilename } from '../utils.js'
 
@@ -32,7 +39,10 @@ function titlize(item: Folder | MdxFile, meta: MetaRecord): string {
 type MetaRecord = Record<string, Record<string, any>>
 
 function sortFolder(pageMap: PageMapItem[] | Folder) {
-  const newChildren: ({ title: string } & (Folder | MdxFile))[] = []
+  const newChildren: (
+    | ({ title: string } & (Folder | MdxFile))
+    | ((SeparatorItem | MenuItem) & { name: string })
+  )[] = []
 
   const isFolder = !Array.isArray(pageMap)
 
@@ -69,6 +79,11 @@ function sortFolder(pageMap: PageMapItem[] | Folder) {
         // @ts-expect-error -- fixme
         meta[key] = data
       }
+    } else if (
+      'type' in item &&
+      (item.type === 'separator' || item.type === 'menu')
+    ) {
+      newChildren.push(item as any)
     } else {
       newChildren.push({
         ...item,

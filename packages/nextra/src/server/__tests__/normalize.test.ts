@@ -170,7 +170,6 @@ describe('normalize-page', () => {
                 {
                   "isUnderCurrentDocsTree": true,
                   "name": "---",
-                  "title": "",
                   "type": "separator",
                 },
                 {
