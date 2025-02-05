@@ -50,9 +50,12 @@ function sortFolder(pageMap: PageMapItem[] | Folder) {
     ) {
       folder.frontMatter = item.frontMatter
     } else if ('children' in item) {
-      const pageItem: any = { ...item }
-      pageItem.title = titlize(item, meta)
-      newChildren.push(normalizePageMap(pageItem))
+      newChildren.push(
+        normalizePageMap({
+          ...item,
+          title: titlize(item, meta)
+        } as any)
+      )
     } else if ('data' in item) {
       for (const [key, titleOrObject] of Object.entries(item.data)) {
         const { data, error } = metaSchema.safeParse(titleOrObject)
@@ -69,9 +72,10 @@ function sortFolder(pageMap: PageMapItem[] | Folder) {
         meta[key] = data
       }
     } else {
-      const pageItem: any = { ...item }
-      pageItem.title = titlize(item, meta)
-      newChildren.push(pageItem)
+      newChildren.push({
+        ...item,
+        title: titlize(item, meta)
+      } as any)
     }
   }
 

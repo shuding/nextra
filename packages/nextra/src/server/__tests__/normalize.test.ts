@@ -437,7 +437,7 @@ describe('normalize-page', () => {
     expect(pageMap).toBeInstanceOf(Array)
   })
 
-  it.only('title priority', async () => {
+  it('title priority', async () => {
     const pageMap = await getPageMapForFixture('title')
     expect(pageMap).toMatchInlineSnapshot(`
       [
@@ -480,13 +480,13 @@ describe('normalize-page', () => {
               "frontMatter": undefined,
               "name": "index",
               "route": "/folder",
-              "title": undefined,
+              "title": "Index",
             },
             {
               "frontMatter": undefined,
               "name": "bar",
               "route": "/folder/bar",
-              "title": undefined,
+              "title": "Bar",
             },
           ],
           "name": "folder",
@@ -499,7 +499,7 @@ describe('normalize-page', () => {
               "frontMatter": undefined,
               "name": "foo",
               "route": "/folder-with-index/foo",
-              "title": undefined,
+              "title": "Foo",
             },
           ],
           "frontMatter": {
@@ -541,7 +541,7 @@ describe('normalize-page', () => {
           "frontMatter": undefined,
           "name": "4-from-filename",
           "route": "/4-from-filename",
-          "title": undefined,
+          "title": "4 from Filename",
         },
         {
           "name": "_2",
