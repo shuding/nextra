@@ -52,7 +52,12 @@ function sortFolder(pageMap: PageMapItem[] | Folder) {
         meta[key] = data
       }
     } else {
-      newChildren.push(item)
+      const pageItem: any = { ...item }
+      pageItem.title ??=
+        meta[item.name]?.title ||
+        item.frontMatter?.sidebarTitle ||
+        item.frontMatter?.title
+      newChildren.push(pageItem)
     }
   }
   if (folder.name && !folder.frontMatter?.title) {

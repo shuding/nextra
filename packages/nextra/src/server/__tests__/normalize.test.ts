@@ -533,7 +533,7 @@ describe('normalize-page', () => {
           },
           "name": "3-title",
           "route": "/3-title",
-          "title": undefined,
+          "title": "from title",
         },
         {
           "frontMatter": undefined,
