@@ -4,17 +4,17 @@ import { usPageMap } from './fixture/page-maps/page-map.js'
 import { getPageMapForFixture } from './test-utils.js'
 
 describe('normalize-page', () => {
-  it('en-US home', async () => {
+  it('en-US home', () => {
     const result = normalizePages({
-      list: await normalizePageMap(usPageMap),
+      list: normalizePageMap(usPageMap),
       route: '/'
     })
     expect(result).toMatchSnapshot()
   })
 
-  it('en-US getting-started', async () => {
+  it('en-US getting-started', () => {
     const result = normalizePages({
-      list: await normalizePageMap(usPageMap),
+      list: normalizePageMap(usPageMap),
       route: '/docs/getting-started'
     })
     expect(result).toMatchSnapshot()
@@ -80,7 +80,7 @@ describe('normalize-page', () => {
     ])
 
     const result2 = normalizePages({
-      list: await normalizePageMap(pageMap),
+      list: normalizePageMap(pageMap),
       route: '/1-level/2-level/foo'
     })
     expect(result2).toMatchSnapshot()
@@ -127,7 +127,7 @@ describe('normalize-page', () => {
     ])
 
     const { activeType, activeIndex, activeThemeContext } = normalizePages({
-      list: await normalizePageMap(pageMap),
+      list: normalizePageMap(pageMap),
       route: '/1-level/not-exist'
     })
     expect({ activeType, activeIndex, activeThemeContext }).toEqual({
@@ -154,7 +154,7 @@ describe('normalize-page', () => {
     )
 
     const normalizedResult = normalizePages({
-      list: await normalizePageMap(pageMap),
+      list: normalizePageMap(pageMap),
       route: '/one/two/qux'
     })
     expect(normalizedResult.docsDirectories).toMatchInlineSnapshot(`
@@ -238,7 +238,7 @@ describe('normalize-page', () => {
     const pageMap = await getPageMapForFixture('type-menu-should-contain-items')
 
     const normalizedResult = normalizePages({
-      list: await normalizePageMap(pageMap),
+      list: normalizePageMap(pageMap),
       route: '/pagesOnly/one'
     })
     expect(
@@ -331,7 +331,7 @@ describe('normalize-page', () => {
     const pageMap = await getPageMapForFixture('pages-order-without-type-page')
 
     const normalizedResult = normalizePages({
-      list: await normalizePageMap(pageMap),
+      list: normalizePageMap(pageMap),
       route: '/docs/bar'
     })
     const { docsDirectories } = normalizedResult
