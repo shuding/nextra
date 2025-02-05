@@ -1,5 +1,13 @@
 # nextra-theme-blog
 
+## 4.2.3
+
+### Patch Changes
+
+- ca67a19: remove requirement `page.{jsx,tsx}` pages to have exported `metadata` object
+- Updated dependencies [ca67a19]
+  - nextra@4.2.3
+
 ## 4.2.2
 
 ### Patch Changes
