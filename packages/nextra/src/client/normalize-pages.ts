@@ -164,7 +164,7 @@ export function normalizePages({
     const getItem = (): Item => ({
       ...currentItem,
       type,
-      title: (currentItem as any).title,
+      ...('title' in currentItem && { title: currentItem.title }),
       ...(display && { display }),
       ...(normalizedChildren && { children: [] })
     })
