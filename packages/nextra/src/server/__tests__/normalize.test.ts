@@ -436,4 +436,76 @@ describe('normalize-page', () => {
     )
     expect(pageMap).toBeInstanceOf(Array)
   })
+
+  it.only('title priority', async () => {
+    const pageMap = await getPageMapForFixture('title')
+    expect(pageMap).toMatchInlineSnapshot(`
+      [
+        {
+          "data": {
+            "1-meta": {
+              "title": "from meta",
+            },
+            "2-sidebar-title": {
+              "title": "",
+            },
+            "3-title": {
+              "title": "",
+            },
+            "4-from-filename": {
+              "title": "",
+            },
+            "folder": {
+              "title": "from meta",
+            },
+            "folder-with-index": {
+              "title": "",
+            },
+          },
+        },
+        {
+          "frontMatter": undefined,
+          "name": "folder",
+          "route": "/folder",
+        },
+        {
+          "frontMatter": {
+            "asIndexPage": true,
+            "sidebarTitle": "from sidebarTitle",
+            "title": "from title",
+          },
+          "name": "folder-with-index",
+          "route": "/folder-with-index",
+        },
+        {
+          "frontMatter": {
+            "sidebarTitle": "from sidebarTitle",
+            "title": "from title",
+          },
+          "name": "1-meta",
+          "route": "/1-meta",
+        },
+        {
+          "frontMatter": {
+            "sidebarTitle": "from sidebarTitle",
+            "title": "from title",
+          },
+          "name": "2-sidebar-title",
+          "route": "/2-sidebar-title",
+        },
+        {
+          "frontMatter": {
+            "title": "from title",
+          },
+          "name": "3-title",
+          "route": "/3-title",
+        },
+        {
+          "frontMatter": undefined,
+          "name": "4-from-filename",
+          "route": "/4-from-filename",
+        },
+      ]
+    `)
+  })
 })
