@@ -491,6 +491,7 @@ describe('normalize-page', () => {
           ],
           "name": "folder",
           "route": "/folder",
+          "title": "from meta",
         },
         {
           "children": [
@@ -508,6 +509,7 @@ describe('normalize-page', () => {
           },
           "name": "folder-with-index",
           "route": "/folder-with-index",
+          "title": "Folder with Index",
         },
         {
           "frontMatter": {
