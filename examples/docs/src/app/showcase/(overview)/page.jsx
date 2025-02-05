@@ -1,4 +1,4 @@
-export default function IndexPage() {
+export default function Page() {
   return (
     <h1
       style={{
@@ -8,7 +8,7 @@ export default function IndexPage() {
         fontWeight: 'bold'
       }}
     >
-      Index page
+      Showcase
     </h1>
   )
 }

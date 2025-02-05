@@ -514,7 +514,7 @@ describe('generatePageMap()', () => {
 
     expect(convertPageMapToJs({ pageMap, mdxPages, globalMetaPath }))
       .toMatchInlineSnapshot(`
-        "import { normalizePageMap, mergeMetaWithPageMap } from 'nextra/page-map'
+        "import { normalizePageMap, mergeMetaWithPageMap, getMetadata } from 'nextra/page-map'
         import globalMeta from 'private-next-root-dir/app/_meta.global.tsx'
         import {metadata as app_about_page} from "private-next-root-dir/app/about/page.mdx?metadata";
         import {metadata as app_blog_page} from "private-next-root-dir/app/blog/page.mdx?metadata";
@@ -574,7 +574,7 @@ describe('generatePageMap()', () => {
         import {metadata as app_docs_guide_syntax_highlighting_page} from "private-next-root-dir/app/docs/guide/syntax-highlighting/page.mdx?metadata";
         import {metadata as app_docs_guide_turbopack_page} from "private-next-root-dir/app/docs/guide/turbopack/page.mdx?metadata";
         import {metadata as app_docs_page} from "private-next-root-dir/app/docs/page.mdx?metadata";
-        import {metadata as app_page} from "private-next-root-dir/app/page.tsx";
+        import * as app_page from "private-next-root-dir/app/page.tsx";
         import {metadata as app_showcase_page} from "private-next-root-dir/app/showcase/page.mdx?metadata";
         import {metadata as app_sponsors_page} from "private-next-root-dir/app/sponsors/page.mdx?metadata";
 
@@ -845,7 +845,7 @@ describe('generatePageMap()', () => {
         }, {
           name: "index",
           route: "/",
-          frontMatter: app_page
+          frontMatter: getMetadata(app_page)
         }, {
           name: "showcase",
           route: "/showcase",
@@ -873,6 +873,7 @@ describe('generatePageMap()', () => {
           "src/app/_meta.js",
           "src/app/blog/page.jsx",
           "src/app/page.jsx",
+          "src/app/showcase/(overview)/page.jsx",
           "src/content/_meta.js",
           "src/content/advanced/code-highlighting.mdx",
           "src/content/features/_meta.js",
@@ -1010,6 +1011,11 @@ describe('generatePageMap()', () => {
             "__pagePath": "src/content/index.mdx",
             "name": "index",
             "route": "/",
+          },
+          {
+            "__pagePath": "src/app/showcase/(overview)/page.jsx",
+            "name": "showcase",
+            "route": "/showcase",
           },
           {
             "children": [
@@ -1219,6 +1225,11 @@ describe('generatePageMap()', () => {
             "__pagePath": "src/app/page.jsx",
             "name": "index",
             "route": "/",
+          },
+          {
+            "__pagePath": "src/app/showcase/(overview)/page.jsx",
+            "name": "showcase",
+            "route": "/showcase",
           },
         ]
       `)

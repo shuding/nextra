@@ -49,7 +49,7 @@ export const metadata: Metadata = {
 
 const banner = (
   <Banner dismissible={false}>
-    🎉 Nextra 4.0 is released. Dima Machina is looking{' '}
+    🎉 Nextra 4.0 is released. dimaMachina is looking{' '}
     <Link href="https://github.com/dimaMachina">
       for a new job or consulting
     </Link>

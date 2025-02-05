@@ -1,5 +1,17 @@
 # nextra
 
+## 4.2.3
+
+### Patch Changes
+
+- ca67a19: remove requirement `page.{jsx,tsx}` pages to have exported `metadata` object
+
+## 4.2.2
+
+### Patch Changes
+
+- dd32eca: fix route group within `app/` dir crash the `convertToPageMap`
+
 ## 4.2.1
 
 ## 4.2.0
