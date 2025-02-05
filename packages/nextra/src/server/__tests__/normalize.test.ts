@@ -455,6 +455,13 @@ describe('normalize-page', () => {
             "4-from-filename": {
               "title": "",
             },
+            "_": {
+              "type": "separator",
+            },
+            "_2": {
+              "title": "separator with title",
+              "type": "separator",
+            },
             "folder": {
               "title": "from meta",
             },
@@ -462,6 +469,10 @@ describe('normalize-page', () => {
               "title": "",
             },
           },
+        },
+        {
+          "name": "_",
+          "type": "separator",
         },
         {
           "frontMatter": undefined,
@@ -504,6 +515,11 @@ describe('normalize-page', () => {
           "frontMatter": undefined,
           "name": "4-from-filename",
           "route": "/4-from-filename",
+        },
+        {
+          "name": "_2",
+          "title": "separator with title",
+          "type": "separator",
         },
       ]
     `)
