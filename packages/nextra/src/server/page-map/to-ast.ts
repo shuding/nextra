@@ -45,16 +45,10 @@ export function convertPageMapToAst(
               type: 'LogicalExpression',
               left: {
                 type: 'MemberExpression',
-                object: {
-                  type: 'Identifier',
-                  name: importName
-                },
+                object: { type: 'Identifier', name: importName },
+                property: { type: 'Identifier', name: 'metadata' },
                 computed: false,
-                optional: false,
-                property: {
-                  type: 'Identifier',
-                  name: 'metadata'
-                }
+                optional: false
               },
               operator: '??',
               right: {
@@ -62,9 +56,9 @@ export function convertPageMapToAst(
                 callee: {
                   type: 'MemberExpression',
                   object: { type: 'Identifier', name: importName },
+                  property: { type: 'Identifier', name: 'generateMetadata' },
                   optional: false,
-                  computed: false,
-                  property: { type: 'Identifier', name: 'generateMetadata' }
+                  computed: false
                 },
                 optional: true,
                 // First argument is object of type `{ params, searchParams }`
