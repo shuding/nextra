@@ -2,6 +2,14 @@ import type { PageMapItem } from '../../../../types.js'
 
 export const usPageMap: PageMapItem[] = [
   {
+    data: {
+      index: 'Introduction',
+      docs: 'Docs',
+      examples: 'Examples',
+      blog: 'Blog'
+    }
+  },
+  {
     name: 'blog',
     children: [
       {
@@ -26,18 +34,39 @@ export const usPageMap: PageMapItem[] = [
     name: 'docs',
     children: [
       {
+        data: {
+          'getting-started': 'Getting Started',
+          options: 'Options',
+          'global-configuration': 'Global Configuration',
+          'data-fetching': 'Data Fetching',
+          'error-handling': 'Error Handling',
+          revalidation: 'Auto Revalidation',
+          'conditional-fetching': 'Conditional Data Fetching',
+          arguments: 'Arguments',
+          mutation: 'Mutation',
+          pagination: 'Pagination',
+          prefetching: 'Prefetching',
+          'with-nextjs': 'Next.js SSG and SSR',
+          typescript: 'Typescript',
+          suspense: 'Suspense',
+          middleware: 'Middleware',
+          advanced: 'Advanced',
+          'change-log': 'Change Log'
+        }
+      },
+      {
         name: 'advanced',
         children: [
-          {
-            name: 'cache',
-            route: '/docs/advanced/cache'
-          },
           {
             data: {
               cache: 'Cache',
               performance: 'Performance',
               'react-native': 'React Native'
             }
+          },
+          {
+            name: 'cache',
+            route: '/docs/advanced/cache'
           },
           {
             name: 'performance',
@@ -77,27 +106,6 @@ export const usPageMap: PageMapItem[] = [
       {
         name: 'global-configuration',
         route: '/docs/global-configuration'
-      },
-      {
-        data: {
-          'getting-started': 'Getting Started',
-          options: 'Options',
-          'global-configuration': 'Global Configuration',
-          'data-fetching': 'Data Fetching',
-          'error-handling': 'Error Handling',
-          revalidation: 'Auto Revalidation',
-          'conditional-fetching': 'Conditional Data Fetching',
-          arguments: 'Arguments',
-          mutation: 'Mutation',
-          pagination: 'Pagination',
-          prefetching: 'Prefetching',
-          'with-nextjs': 'Next.js SSG and SSR',
-          typescript: 'Typescript',
-          suspense: 'Suspense',
-          middleware: 'Middleware',
-          advanced: 'Advanced',
-          'change-log': 'Change Log'
-        }
       },
       {
         name: 'middleware',
@@ -142,6 +150,15 @@ export const usPageMap: PageMapItem[] = [
     name: 'examples',
     children: [
       {
+        data: {
+          basic: 'Basic Usage',
+          auth: 'Authentication',
+          'infinite-loading': 'Infinite Loading',
+          'error-handling': 'Error Handling',
+          ssr: 'Next.js SSR'
+        }
+      },
+      {
         name: 'auth',
         route: '/examples/auth',
         frontMatter: {
@@ -170,15 +187,6 @@ export const usPageMap: PageMapItem[] = [
         }
       },
       {
-        data: {
-          basic: 'Basic Usage',
-          auth: 'Authentication',
-          'infinite-loading': 'Infinite Loading',
-          'error-handling': 'Error Handling',
-          ssr: 'Next.js SSR'
-        }
-      },
-      {
         name: 'ssr',
         route: '/examples/ssr',
         frontMatter: {
@@ -195,12 +203,4 @@ export const usPageMap: PageMapItem[] = [
       title: 'React Hooks for Data Fetching'
     }
   },
-  {
-    data: {
-      index: 'Introduction',
-      docs: 'Docs',
-      examples: 'Examples',
-      blog: 'Blog'
-    }
-  }
 ]
