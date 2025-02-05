@@ -1,5 +1,5 @@
 // @ts-nocheck
-import { normalizePageMap, getMetadata } from 'nextra/page-map'
+import { normalizePageMap } from 'nextra/page-map'
 
 import meta from "./_meta.ts";
 import _1_level_meta from "./1-level/_meta.ts";
