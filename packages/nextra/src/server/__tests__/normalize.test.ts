@@ -61,21 +61,24 @@ describe('normalize-page', () => {
               {
                 name: 'foo',
                 route: '/1-level/2-level/foo',
-                frontMatter: undefined
+                frontMatter: undefined,
+                title: 'Foo'
               }
             ]
           },
           {
             name: 'qux',
             route: '/1-level/qux',
-            frontMatter: undefined
+            frontMatter: undefined,
+            title: 'Qux'
           }
         ]
       },
       {
         name: 'bar',
         route: '/bar',
-        frontMatter: undefined
+        frontMatter: undefined,
+        title: 'Bar'
       }
     ])
 
@@ -120,7 +123,8 @@ describe('normalize-page', () => {
           {
             name: 'foo',
             route: '/1-level/foo',
-            frontMatter: undefined
+            frontMatter: undefined,
+            title: 'Foo'
           }
         ]
       }
@@ -174,7 +178,7 @@ describe('normalize-page', () => {
                   "isUnderCurrentDocsTree": true,
                   "name": "qux",
                   "route": "/one/two/qux",
-                  "title": "qux",
+                  "title": "Qux",
                   "type": "doc",
                 },
                 {
@@ -189,7 +193,7 @@ describe('normalize-page', () => {
                   "isUnderCurrentDocsTree": true,
                   "name": "1-one",
                   "route": "/one/two/1-one",
-                  "title": "1-one",
+                  "title": "1 One",
                   "type": "doc",
                 },
                 {
@@ -205,7 +209,7 @@ describe('normalize-page', () => {
                   "isUnderCurrentDocsTree": true,
                   "name": "foo",
                   "route": "/one/two/foo",
-                  "title": "foo",
+                  "title": "Foo",
                   "type": "doc",
                 },
                 {
@@ -213,7 +217,7 @@ describe('normalize-page', () => {
                   "isUnderCurrentDocsTree": true,
                   "name": "one",
                   "route": "/one/two/one",
-                  "title": "one",
+                  "title": "One",
                   "type": "doc",
                 },
               ],
@@ -255,14 +259,14 @@ describe('normalize-page', () => {
               "frontMatter": undefined,
               "name": "not-specified",
               "route": "/mix/not-specified",
-              "title": "not-specified",
+              "title": "Not Specified",
               "type": "doc",
             },
             {
               "frontMatter": undefined,
               "name": "qux",
               "route": "/mix/qux",
-              "title": "qux",
+              "title": "Qux",
               "type": "doc",
             },
           ],
@@ -298,14 +302,14 @@ describe('normalize-page', () => {
               "frontMatter": undefined,
               "name": "one",
               "route": "/pagesOnly/one",
-              "title": "one",
+              "title": "One",
               "type": "doc",
             },
             {
               "frontMatter": undefined,
               "name": "two",
               "route": "/pagesOnly/two",
-              "title": "two",
+              "title": "Two",
               "type": "doc",
             },
           ],
@@ -359,7 +363,7 @@ describe('normalize-page', () => {
             route: '/themes/bar',
             frontMatter: undefined,
             type: 'doc',
-            title: 'bar',
+            title: 'Bar',
             isUnderCurrentDocsTree: true
           }
         ],
@@ -379,7 +383,7 @@ describe('normalize-page', () => {
             route: '/themes-test/foo',
             frontMatter: undefined,
             type: 'doc',
-            title: 'foo',
+            title: 'Foo',
             isUnderCurrentDocsTree: true
           }
         ],
