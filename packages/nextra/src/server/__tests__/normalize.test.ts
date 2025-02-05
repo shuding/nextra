@@ -525,7 +525,7 @@ describe('normalize-page', () => {
           },
           "name": "2-sidebar-title",
           "route": "/2-sidebar-title",
-          "title": "",
+          "title": "from sidebarTitle",
         },
         {
           "frontMatter": {
@@ -533,13 +533,13 @@ describe('normalize-page', () => {
           },
           "name": "3-title",
           "route": "/3-title",
-          "title": "",
+          "title": undefined,
         },
         {
           "frontMatter": undefined,
           "name": "4-from-filename",
           "route": "/4-from-filename",
-          "title": "",
+          "title": undefined,
         },
         {
           "name": "_2",
