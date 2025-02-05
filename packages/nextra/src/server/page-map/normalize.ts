@@ -32,7 +32,7 @@ function titlize(item: Folder | MdxFile, meta: MetaRecord): string {
 type MetaRecord = Record<string, Record<string, any>>
 
 function sortFolder(pageMap: PageMapItem[] | Folder) {
-  const newChildren: (Folder | MdxFile)[] = []
+  const newChildren: ({ title: string } & (Folder | MdxFile))[] = []
 
   const isFolder = !Array.isArray(pageMap)
 
@@ -50,12 +50,10 @@ function sortFolder(pageMap: PageMapItem[] | Folder) {
     ) {
       folder.frontMatter = item.frontMatter
     } else if ('children' in item) {
-      newChildren.push(
-        normalizePageMap({
-          ...item,
-          title: titlize(item, meta)
-        } as any)
-      )
+      newChildren.push({
+        ...normalizePageMap(item),
+        title: titlize(item, meta)
+      })
     } else if ('data' in item) {
       for (const [key, titleOrObject] of Object.entries(item.data)) {
         const { data, error } = metaSchema.safeParse(titleOrObject)
@@ -75,7 +73,7 @@ function sortFolder(pageMap: PageMapItem[] | Folder) {
       newChildren.push({
         ...item,
         title: titlize(item, meta)
-      } as any)
+      })
     }
   }
 
@@ -108,7 +106,7 @@ function sortFolder(pageMap: PageMapItem[] | Folder) {
 
       // Validate menu items, local page should exist
       const { children } = items.find(
-        (i): i is Folder<MdxFile> => i.name === metaKey
+        (i): i is { title: string } & Folder<MdxFile> => i.name === metaKey
       )!
       for (const [key, value] of Object.entries(
         // @ts-expect-error fixme
