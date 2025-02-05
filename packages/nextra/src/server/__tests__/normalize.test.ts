@@ -475,11 +475,32 @@ describe('normalize-page', () => {
           "type": "separator",
         },
         {
-          "frontMatter": undefined,
+          "children": [
+            {
+              "frontMatter": undefined,
+              "name": "index",
+              "route": "/folder",
+              "title": undefined,
+            },
+            {
+              "frontMatter": undefined,
+              "name": "bar",
+              "route": "/folder/bar",
+              "title": undefined,
+            },
+          ],
           "name": "folder",
           "route": "/folder",
         },
         {
+          "children": [
+            {
+              "frontMatter": undefined,
+              "name": "foo",
+              "route": "/folder-with-index/foo",
+              "title": undefined,
+            },
+          ],
           "frontMatter": {
             "asIndexPage": true,
             "sidebarTitle": "from sidebarTitle",
@@ -495,6 +516,7 @@ describe('normalize-page', () => {
           },
           "name": "1-meta",
           "route": "/1-meta",
+          "title": "from meta",
         },
         {
           "frontMatter": {
@@ -503,6 +525,7 @@ describe('normalize-page', () => {
           },
           "name": "2-sidebar-title",
           "route": "/2-sidebar-title",
+          "title": "",
         },
         {
           "frontMatter": {
@@ -510,11 +533,13 @@ describe('normalize-page', () => {
           },
           "name": "3-title",
           "route": "/3-title",
+          "title": "",
         },
         {
           "frontMatter": undefined,
           "name": "4-from-filename",
           "route": "/4-from-filename",
+          "title": "",
         },
         {
           "name": "_2",
