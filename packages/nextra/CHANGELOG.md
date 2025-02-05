@@ -1,5 +1,11 @@
 # nextra
 
+## 4.2.3
+
+### Patch Changes
+
+- ca67a19: remove requirement `page.{jsx,tsx}` pages to have exported `metadata` object
+
 ## 4.2.2
 
 ### Patch Changes
