@@ -3,16 +3,10 @@ import type { Folder, FrontMatter, MdxFile, PageMapItem } from '../../types.js'
 import { metaSchema } from '../schemas.js'
 import { pageTitleFromFilename } from '../utils.js'
 
-export async function normalizePageMap(
-  pageMap: PageMapItem[] | Folder
-): Promise<any> {
+export function normalizePageMap(pageMap: PageMapItem[] | Folder): any {
   if (Array.isArray(pageMap)) {
     return sortFolder(
-      await Promise.all(
-        pageMap.map(item =>
-          'children' in item ? normalizePageMap(item) : item
-        )
-      )
+      pageMap.map(item => ('children' in item ? normalizePageMap(item) : item))
     )
   }
   return sortFolder(pageMap)
@@ -22,7 +16,7 @@ type ParsedFolder = Folder & {
   frontMatter?: FrontMatter
 }
 
-async function sortFolder(pageMap: PageMapItem[] | Folder) {
+function sortFolder(pageMap: PageMapItem[] | Folder) {
   const newChildren: (Folder | MdxFile)[] = []
 
   const isFolder = !Array.isArray(pageMap)
@@ -41,7 +35,7 @@ async function sortFolder(pageMap: PageMapItem[] | Folder) {
     ) {
       folder.frontMatter = item.frontMatter
     } else if ('children' in item) {
-      newChildren.push(await normalizePageMap(item))
+      newChildren.push(normalizePageMap(item))
     } else if ('data' in item) {
       for (const [key, titleOrObject] of Object.entries(item.data)) {
         const { data, error } = metaSchema.safeParse(titleOrObject)
@@ -57,11 +51,6 @@ async function sortFolder(pageMap: PageMapItem[] | Folder) {
         // @ts-expect-error -- fixme
         meta[key] = data
       }
-    } else if (item.frontMatter instanceof Promise) {
-      newChildren.push({
-        ...item,
-        frontMatter: await item.frontMatter
-      })
     } else {
       newChildren.push(item)
     }

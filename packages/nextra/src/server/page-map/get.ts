@@ -1,7 +1,7 @@
 import type { Folder, PageMapItem } from '../../types.js'
 
 function importPageMap(lang = ''): Promise<{
-  pageMap: Promise<PageMapItem[]>
+  pageMap: PageMapItem[]
   RouteToFilepath: Record<string, string>
 }> {
   return import(`./placeholder.js?lang=${lang}`)
@@ -13,7 +13,7 @@ export async function getPageMap(route = '/') {
   const segments = route.split('/')
   // Remove 1 or 2 items from the beginning of the array
   const lang = segments.splice(0, defaultLocale ? 2 : 1).at(-1)!
-  let pageMap = await importPageMap(lang).then(result => result.pageMap)
+  let { pageMap } = await importPageMap(lang)
 
   let segment: string | undefined
   while ((segment = segments.shift())) {
