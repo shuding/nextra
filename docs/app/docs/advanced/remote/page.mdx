@@ -57,7 +57,7 @@ import { pageMap as graphqlEslintPageMap } from './graphql-eslint/[[...slug]]/pa
 
 // ...
 
-const pageMap = [...(await getPageMap()), graphqlEslintPageMap]
+const pageMap = [...(await getPageMap()), await graphqlEslintPageMap]
 ```
 
 </Steps>

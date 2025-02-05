@@ -1,5 +1,5 @@
 // @ts-nocheck
-import { normalizePageMap } from 'nextra/page-map'
+import { normalizePageMap, getMetadata } from 'nextra/page-map'
 
 import {metadata as one_two_2024} from "./one/two/2024.md?metadata";
 import one_two_meta from "./one/two/_meta.ts";

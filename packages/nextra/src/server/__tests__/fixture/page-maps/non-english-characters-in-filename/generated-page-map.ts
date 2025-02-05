@@ -1,5 +1,5 @@
 // @ts-nocheck
-import { normalizePageMap } from 'nextra/page-map'
+import { normalizePageMap, getMetadata } from 'nextra/page-map'
 
 import {metadata as D1_82_D0_B5_D1_81_D1_82} from "./тест.mdx?metadata";
 import {metadata as E6_B5_8B_E8_AF_95} from "./测试.mdx?metadata";
