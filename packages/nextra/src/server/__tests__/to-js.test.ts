@@ -16,7 +16,7 @@ describe('convertPageMapToJs()', () => {
 
     const result = convertPageMapToJs({ pageMap, mdxPages })
     expect(result).toMatchInlineSnapshot(`
-      "import { normalizePageMap } from 'nextra/page-map'
+      "import { normalizePageMap, getMetadata } from 'nextra/page-map'
 
       import meta from "private-next-root-dir/src/content/_meta.js";
       import features_meta from "private-next-root-dir/src/content/features/_meta.js";
@@ -120,7 +120,7 @@ describe('convertPageMapToJs()', () => {
       }, {
         name: "blog",
         route: "/blog",
-        frontMatter: src_app_blog_page.metadata ?? src_app_blog_page.generateMetadata?.({})
+        frontMatter: getMetadata(src_app_blog_page)
       }, {
         name: "index",
         route: "/",
@@ -128,7 +128,7 @@ describe('convertPageMapToJs()', () => {
       }, {
         name: "showcase",
         route: "/showcase",
-        frontMatter: src_app_showcase_overview_page.metadata ?? src_app_showcase_overview_page.generateMetadata?.({})
+        frontMatter: getMetadata(src_app_showcase_overview_page)
       }, {
         name: "advanced",
         route: "/advanced",

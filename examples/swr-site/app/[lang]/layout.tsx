@@ -50,7 +50,7 @@ export default async function RootLayout({ children, params }) {
       {
         name: 'remote',
         route: '/remote',
-        children: [graphqlEslintPageMap, graphqlYogaPageMap]
+        children: [await graphqlEslintPageMap, await graphqlYogaPageMap]
       }
     ]
   }
@@ -65,7 +65,7 @@ export default async function RootLayout({ children, params }) {
         <>
           <SwrIcon height="12" />
           <span
-            className="ms-2 font-extrabold select-none max-md:hidden"
+            className="ms-2 select-none font-extrabold max-md:hidden"
             title={`SWR: ${dictionary.logo.title}`}
           >
             SWR

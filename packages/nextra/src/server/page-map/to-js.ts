@@ -65,7 +65,7 @@ export function convertPageMapToJs({
     pageMapRawJs = `mergeMetaWithPageMap(${pageMapRawJs}, globalMeta)`
   }
 
-  const rawJs = `import { ${['normalizePageMap', globalMetaPath && 'mergeMetaWithPageMap'].filter(Boolean).join(', ')} } from 'nextra/page-map'
+  const rawJs = `import { ${['normalizePageMap', globalMetaPath && 'mergeMetaWithPageMap', 'getMetadata'].filter(Boolean).join(', ')} } from 'nextra/page-map'
 ${globalMetaPath ? `import globalMeta from 'private-next-root-dir/${globalMetaPath}'` : ''}
 ${importsResult.value}
 export const pageMap = normalizePageMap(${pageMapRawJs})

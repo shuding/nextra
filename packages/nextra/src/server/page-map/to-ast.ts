@@ -42,28 +42,10 @@ export function convertPageMapToAst(
         frontMatter: MARKDOWN_EXTENSION_RE.test(filePath)
           ? { type: 'Identifier', name: importName }
           : {
-              type: 'LogicalExpression',
-              left: {
-                type: 'MemberExpression',
-                object: { type: 'Identifier', name: importName },
-                property: { type: 'Identifier', name: 'metadata' },
-                computed: false,
-                optional: false
-              },
-              operator: '??',
-              right: {
-                type: 'CallExpression',
-                callee: {
-                  type: 'MemberExpression',
-                  object: { type: 'Identifier', name: importName },
-                  property: { type: 'Identifier', name: 'generateMetadata' },
-                  optional: false,
-                  computed: false
-                },
-                optional: true,
-                // First argument is object of type `{ params, searchParams }`
-                arguments: [createAstObject({})]
-              }
+              type: 'CallExpression',
+              callee: { type: 'Identifier', name: 'getMetadata' },
+              arguments: [{ type: 'Identifier', name: importName }],
+              optional: false
             }
       })
     }
