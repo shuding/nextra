@@ -29,15 +29,20 @@ export function convertPageMapToJs({
           value: `private-next-root-dir/${filePath}${isMdx ? METADATA_ONLY_RQ : ''}`
         },
         specifiers: [
-          {
-            local: { type: 'Identifier', name: importName },
-            ...(isMeta
-              ? { type: 'ImportDefaultSpecifier' }
-              : {
-                  type: 'ImportSpecifier',
-                  imported: { type: 'Identifier', name: 'metadata' }
-                })
-          }
+          isMeta || isMdx
+            ? {
+                local: { type: 'Identifier', name: importName },
+                ...(isMeta
+                  ? { type: 'ImportDefaultSpecifier' }
+                  : {
+                      type: 'ImportSpecifier',
+                      imported: { type: 'Identifier', name: 'metadata' }
+                    })
+              }
+            : {
+                type: 'ImportNamespaceSpecifier',
+                local: { type: 'Identifier', name: importName }
+              }
         ]
       }
     }
@@ -60,7 +65,15 @@ export function convertPageMapToJs({
     pageMapRawJs = `mergeMetaWithPageMap(${pageMapRawJs}, globalMeta)`
   }
 
-  const rawJs = `import { ${['normalizePageMap', globalMetaPath && 'mergeMetaWithPageMap'].filter(Boolean).join(', ')} } from 'nextra/page-map'
+  const rawJs = `import { ${[
+    'normalizePageMap',
+    globalMetaPath && 'mergeMetaWithPageMap',
+    imports.some(
+      o => !MARKDOWN_EXTENSION_RE.test(o.filePath) && !META_RE.test(o.filePath)
+    ) && 'getMetadata'
+  ]
+    .filter(Boolean)
+    .join(', ')} } from 'nextra/page-map'
 ${globalMetaPath ? `import globalMeta from 'private-next-root-dir/${globalMetaPath}'` : ''}
 ${importsResult.value}
 export const pageMap = normalizePageMap(${pageMapRawJs})

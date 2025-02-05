@@ -1,9 +1,3 @@
-/**
- * @see https://github.com/shuding/nextra/issues/4148
- */
-
-export const metadata = {}
-
 export default function Page() {
   return (
     <h1
