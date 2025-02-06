@@ -95,7 +95,7 @@ const linkSchema = z.strictObject({
   href: z.string()
 })
 
-const separatorItemSchema = z.strictObject({
+export const separatorItemSchema = z.strictObject({
   type: z.literal('separator'),
   title
 })

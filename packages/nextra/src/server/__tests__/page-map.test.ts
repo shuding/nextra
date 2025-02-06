@@ -14,11 +14,13 @@ describe('Page Process', () => {
           "frontMatter": undefined,
           "name": "callout",
           "route": "/callout",
+          "title": "Callout",
         },
         {
           "frontMatter": undefined,
           "name": "tabs",
           "route": "/tabs",
+          "title": "Tabs",
         },
       ]
     `)
@@ -34,6 +36,7 @@ describe('Page Process', () => {
               "frontMatter": undefined,
               "name": "test2",
               "route": "/docs/test2",
+              "title": "Test2",
             },
           ],
           "name": "docs",
@@ -44,6 +47,7 @@ describe('Page Process', () => {
           "frontMatter": undefined,
           "name": "test1",
           "route": "/test1",
+          "title": "Test1",
         },
       ]
     `)

@@ -1,5 +1,12 @@
 import { fromZodError } from 'zod-validation-error'
-import type { Folder, FrontMatter, MdxFile, PageMapItem } from '../../types.js'
+import type {
+  Folder,
+  FrontMatter,
+  MdxFile,
+  MenuItem,
+  PageMapItem,
+  SeparatorItem
+} from '../../types.js'
 import { metaSchema } from '../schemas.js'
 import { pageTitleFromFilename } from '../utils.js'
 
@@ -16,8 +23,26 @@ type ParsedFolder = Folder & {
   frontMatter?: FrontMatter
 }
 
+function titlize(item: Folder | MdxFile, meta: MetaRecord): string {
+  const titleFromMeta = meta[item.name]?.title
+  if (titleFromMeta) return titleFromMeta
+  if ('frontMatter' in item && item.frontMatter) {
+    const titleFromFrontMatter =
+      item.frontMatter.sidebarTitle || item.frontMatter.title
+
+    if (titleFromFrontMatter) return titleFromFrontMatter
+  }
+  // We use `title` package for capitalize folders without index page
+  return pageTitleFromFilename(item.name)
+}
+
+type MetaRecord = Record<string, Record<string, any>>
+
 function sortFolder(pageMap: PageMapItem[] | Folder) {
-  const newChildren: (Folder | MdxFile)[] = []
+  const newChildren: (
+    | ({ title: string } & (Folder | MdxFile))
+    | ((SeparatorItem | MenuItem) & { name: string })
+  )[] = []
 
   const isFolder = !Array.isArray(pageMap)
 
@@ -25,7 +50,7 @@ function sortFolder(pageMap: PageMapItem[] | Folder) {
     isFolder ? { ...pageMap } : { children: pageMap }
   ) as ParsedFolder
 
-  const meta: Record<string, Record<string, any>> = {}
+  const meta: MetaRecord = {}
   for (const item of folder.children) {
     if (
       isFolder &&
@@ -35,7 +60,10 @@ function sortFolder(pageMap: PageMapItem[] | Folder) {
     ) {
       folder.frontMatter = item.frontMatter
     } else if ('children' in item) {
-      newChildren.push(normalizePageMap(item))
+      newChildren.push({
+        ...normalizePageMap(item),
+        title: titlize(item, meta)
+      })
     } else if ('data' in item) {
       for (const [key, titleOrObject] of Object.entries(item.data)) {
         const { data, error } = metaSchema.safeParse(titleOrObject)
@@ -51,13 +79,17 @@ function sortFolder(pageMap: PageMapItem[] | Folder) {
         // @ts-expect-error -- fixme
         meta[key] = data
       }
+    } else if (
+      'type' in item &&
+      (item.type === 'separator' || item.type === 'menu')
+    ) {
+      newChildren.push(item as any)
     } else {
-      newChildren.push(item)
+      newChildren.push({
+        ...item,
+        title: titlize(item, meta)
+      })
     }
-  }
-  if (folder.name && !folder.frontMatter?.title) {
-    // @ts-expect-error -- we use title for capitalize folders without index page
-    folder.title = pageTitleFromFilename(folder.name)
   }
 
   const metaKeys = Object.keys(meta)
@@ -89,7 +121,7 @@ function sortFolder(pageMap: PageMapItem[] | Folder) {
 
       // Validate menu items, local page should exist
       const { children } = items.find(
-        (i): i is Folder<MdxFile> => i.name === metaKey
+        (i): i is { title: string } & Folder<MdxFile> => i.name === metaKey
       )!
       for (const [key, value] of Object.entries(
         // @ts-expect-error fixme

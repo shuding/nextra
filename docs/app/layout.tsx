@@ -92,6 +92,7 @@ const footer = (
 const RootLayout: FC<{
   children: ReactNode
 }> = async ({ children }) => {
+  const pageMap = await getPageMap()
   return (
     <html lang="en" dir="ltr" suppressHydrationWarning>
       <Head />
@@ -99,7 +100,7 @@ const RootLayout: FC<{
         <Layout
           banner={banner}
           navbar={navbar}
-          pageMap={await getPageMap()}
+          pageMap={pageMap}
           docsRepositoryBase="https://github.com/shuding/nextra/tree/main/docs"
           editLink="Edit this page on GitHub"
           sidebar={{ defaultMenuCollapseLevel: 1 }}

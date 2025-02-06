@@ -61,21 +61,24 @@ describe('normalize-page', () => {
               {
                 name: 'foo',
                 route: '/1-level/2-level/foo',
-                frontMatter: undefined
+                frontMatter: undefined,
+                title: 'Foo'
               }
             ]
           },
           {
             name: 'qux',
             route: '/1-level/qux',
-            frontMatter: undefined
+            frontMatter: undefined,
+            title: 'Qux'
           }
         ]
       },
       {
         name: 'bar',
         route: '/bar',
-        frontMatter: undefined
+        frontMatter: undefined,
+        title: 'Bar'
       }
     ])
 
@@ -120,7 +123,8 @@ describe('normalize-page', () => {
           {
             name: 'foo',
             route: '/1-level/foo',
-            frontMatter: undefined
+            frontMatter: undefined,
+            title: 'Foo'
           }
         ]
       }
@@ -166,7 +170,6 @@ describe('normalize-page', () => {
                 {
                   "isUnderCurrentDocsTree": true,
                   "name": "---",
-                  "title": "",
                   "type": "separator",
                 },
                 {
@@ -174,7 +177,7 @@ describe('normalize-page', () => {
                   "isUnderCurrentDocsTree": true,
                   "name": "qux",
                   "route": "/one/two/qux",
-                  "title": "qux",
+                  "title": "Qux",
                   "type": "doc",
                 },
                 {
@@ -189,7 +192,7 @@ describe('normalize-page', () => {
                   "isUnderCurrentDocsTree": true,
                   "name": "1-one",
                   "route": "/one/two/1-one",
-                  "title": "1-one",
+                  "title": "1 One",
                   "type": "doc",
                 },
                 {
@@ -205,7 +208,7 @@ describe('normalize-page', () => {
                   "isUnderCurrentDocsTree": true,
                   "name": "foo",
                   "route": "/one/two/foo",
-                  "title": "foo",
+                  "title": "Foo",
                   "type": "doc",
                 },
                 {
@@ -213,7 +216,7 @@ describe('normalize-page', () => {
                   "isUnderCurrentDocsTree": true,
                   "name": "one",
                   "route": "/one/two/one",
-                  "title": "one",
+                  "title": "One",
                   "type": "doc",
                 },
               ],
@@ -255,14 +258,14 @@ describe('normalize-page', () => {
               "frontMatter": undefined,
               "name": "not-specified",
               "route": "/mix/not-specified",
-              "title": "not-specified",
+              "title": "Not Specified",
               "type": "doc",
             },
             {
               "frontMatter": undefined,
               "name": "qux",
               "route": "/mix/qux",
-              "title": "qux",
+              "title": "Qux",
               "type": "doc",
             },
           ],
@@ -298,14 +301,14 @@ describe('normalize-page', () => {
               "frontMatter": undefined,
               "name": "one",
               "route": "/pagesOnly/one",
-              "title": "one",
+              "title": "One",
               "type": "doc",
             },
             {
               "frontMatter": undefined,
               "name": "two",
               "route": "/pagesOnly/two",
-              "title": "two",
+              "title": "Two",
               "type": "doc",
             },
           ],
@@ -359,7 +362,7 @@ describe('normalize-page', () => {
             route: '/themes/bar',
             frontMatter: undefined,
             type: 'doc',
-            title: 'bar',
+            title: 'Bar',
             isUnderCurrentDocsTree: true
           }
         ],
@@ -379,7 +382,7 @@ describe('normalize-page', () => {
             route: '/themes-test/foo',
             frontMatter: undefined,
             type: 'doc',
-            title: 'foo',
+            title: 'Foo',
             isUnderCurrentDocsTree: true
           }
         ],
@@ -435,5 +438,120 @@ describe('normalize-page', () => {
       'non-english-characters-in-filename'
     )
     expect(pageMap).toBeInstanceOf(Array)
+  })
+
+  it('title priority', async () => {
+    const pageMap = await getPageMapForFixture('title')
+    expect(pageMap).toMatchInlineSnapshot(`
+      [
+        {
+          "data": {
+            "1-meta": {
+              "title": "from meta",
+            },
+            "2-sidebar-title": {
+              "title": "",
+            },
+            "3-title": {
+              "title": "",
+            },
+            "4-from-filename": {
+              "title": "",
+            },
+            "_": {
+              "type": "separator",
+            },
+            "_2": {
+              "title": "separator with title",
+              "type": "separator",
+            },
+            "folder": {
+              "title": "from meta",
+            },
+            "folder-with-index": {
+              "title": "",
+            },
+          },
+        },
+        {
+          "name": "_",
+          "type": "separator",
+        },
+        {
+          "children": [
+            {
+              "frontMatter": undefined,
+              "name": "index",
+              "route": "/folder",
+              "title": "Index",
+            },
+            {
+              "frontMatter": undefined,
+              "name": "bar",
+              "route": "/folder/bar",
+              "title": "Bar",
+            },
+          ],
+          "name": "folder",
+          "route": "/folder",
+          "title": "from meta",
+        },
+        {
+          "children": [
+            {
+              "frontMatter": undefined,
+              "name": "foo",
+              "route": "/folder-with-index/foo",
+              "title": "Foo",
+            },
+          ],
+          "frontMatter": {
+            "asIndexPage": true,
+            "sidebarTitle": "from sidebarTitle",
+            "title": "from title",
+          },
+          "name": "folder-with-index",
+          "route": "/folder-with-index",
+          "title": "from sidebarTitle",
+        },
+        {
+          "frontMatter": {
+            "sidebarTitle": "from sidebarTitle",
+            "title": "from title",
+          },
+          "name": "1-meta",
+          "route": "/1-meta",
+          "title": "from meta",
+        },
+        {
+          "frontMatter": {
+            "sidebarTitle": "from sidebarTitle",
+            "title": "from title",
+          },
+          "name": "2-sidebar-title",
+          "route": "/2-sidebar-title",
+          "title": "from sidebarTitle",
+        },
+        {
+          "frontMatter": {
+            "title": "from title",
+          },
+          "name": "3-title",
+          "route": "/3-title",
+          "title": "from title",
+        },
+        {
+          "frontMatter": undefined,
+          "name": "4-from-filename",
+          "route": "/4-from-filename",
+          "title": "4 from Filename",
+        },
+        {
+          "name": "_2",
+          "title": "separator with title",
+          "type": "separator",
+        },
+      ]
+    `)
   })
 })

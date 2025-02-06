@@ -161,17 +161,10 @@ export function normalizePages({
         pageThemeContext: extendedPageThemeContext
       })
 
-    const title =
-      extendedMeta.title ||
-      currentItem.frontMatter?.sidebarTitle ||
-      currentItem.frontMatter?.title ||
-      // @ts-expect-error -- we use title for capitalize folders without index page
-      (type === 'separator' ? '' : currentItem.title || currentItem.name)
-
     const getItem = (): Item => ({
       ...currentItem,
       type,
-      title,
+      ...('title' in currentItem && { title: currentItem.title }),
       ...(display && { display }),
       ...(normalizedChildren && { children: [] })
     })

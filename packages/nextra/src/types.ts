@@ -4,8 +4,10 @@ import type { FC, ReactElement, ReactNode } from 'react'
 import type { z } from 'zod'
 import type {
   mathJaxOptionsSchema,
+  menuSchema,
   metaSchema,
-  nextraConfigSchema
+  nextraConfigSchema,
+  separatorItemSchema
 } from './server/schemas.js'
 
 export interface LoaderOptions extends z.infer<typeof nextraConfigSchema> {
@@ -104,6 +106,9 @@ export type MDXWrapper = FC<{
 }>
 
 export type MetaRecord = Record<string, z.infer<typeof metaSchema>>
+
+export type SeparatorItem = z.infer<typeof separatorItemSchema>
+export type MenuItem = z.infer<typeof menuSchema>
 
 // Copied from https://github.com/CloudCannon/pagefind/blob/2a0aa90cfb78bb8551645ac9127a1cd49cf54add/pagefind_web_js/types/index.d.ts#L72-L82
 /** Options that can be passed to pagefind.search() */

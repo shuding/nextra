@@ -80,23 +80,43 @@ The generated `pageMap` will be:
 [
   // content/_meta.js
   { "data": {} },
-  // content/index.mdx
-  { "name": "index", "route": "/", "frontMatter": {} },
-  // content/contact.md
-  { "name": "contact", "route": "/contact", "frontMatter": {} },
+  {
+    // content/index.mdx
+    "name": "index",
+    "route": "/",
+    "title": "Index",
+    "frontMatter": {}
+  },
+  {
+    // content/contact.md
+    "name": "contact",
+    "route": "/contact",
+    "title": "Contact",
+    "frontMatter": {}
+  },
   {
     // content/about
     "name": "about",
     "route": "/about",
+    "title": "About",
     "children": [
       // content/about/_meta.js
       { "data": {} },
-      // content/about/index.mdx
-      { "name": "index", "route": "/about", "frontMatter": {} },
-      // content/about/legal.md
-      { "name": "legal", "route": "/about/legal", "frontMatter": {} }
-    ],
-    "title": "About"
+      {
+        // content/about/index.mdx
+        "name": "index",
+        "route": "/about",
+        "title": "Index",
+        "frontMatter": {}
+      },
+      {
+        // content/about/legal.md
+        "name": "legal",
+        "route": "/about/legal",
+        "title": "Legal",
+        "frontMatter": {}
+      }
+    ]
   }
 ]
 ```
