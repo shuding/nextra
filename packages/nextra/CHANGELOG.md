@@ -1,5 +1,12 @@
 # nextra
 
+## 4.2.4
+
+### Patch Changes
+
+- b46d831: fix `Could not parse expression with acorn` for inline math code in `development` mode without turbopack enabled
+- 7949e28: move setting `pageMap` items' `title` property from `normalizePages` to `sortFolder`
+
 ## 4.2.3
 
 ### Patch Changes
