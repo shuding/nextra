@@ -1,6 +1,7 @@
 import { createProcessor } from '@mdx-js/mdx'
 import type { Program } from 'estree'
 import remarkFrontmatter from 'remark-frontmatter'
+import remarkMath from 'remark-math'
 import type { Plugin, Transformer } from 'unified'
 import {
   remarkAssignFrontMatter,
@@ -28,7 +29,8 @@ export async function compileMetadata(
       remarkMdxFrontMatter,
       remarkMdxTitle,
       [remarkAssignFrontMatter, { lastCommitTime }],
-      remarkExportOnlyMetadata
+      remarkExportOnlyMetadata,
+      remarkMath // https://github.com/shuding/nextra/issues/4164
     ],
     recmaPlugins: [recmaExportOnlyMetadata]
   })
