@@ -234,8 +234,8 @@ importers:
         specifier: 1.2.6
         version: 1.2.6(eslint@9.20.0(jiti@2.4.2))
       '@eslint/js':
-        specifier: 9.19.0
-        version: 9.19.0
+        specifier: 9.20.0
+        version: 9.20.0
       '@next/eslint-plugin-next':
         specifier: 15.1.6
         version: 15.1.6
