@@ -9,19 +9,49 @@ description:
 
 import { Cards } from 'nextra/components'
 import { FileIcon, FolderIcon, MdxIcon } from 'nextra/icons'
-import { MDXRemote } from 'nextra/mdx-remote'
-import { createIndexPage, getPageMap } from 'nextra/page-map'
+import { getIndexPageMap, getPageMap } from 'nextra/page-map'
+import { useMDXComponents } from '../../../mdx-components'
 
 # File Conventions
 
-<MDXRemote
-  compiledSource={await createIndexPage(
-    await getPageMap('/docs/file-conventions')
-  )}
-  components={{
+export async function Page() {
+  const { h2: H2 } = useMDXComponents()
+  const currentRoute = metadata.filePath
+    .replace('app', '')
+    .replace('/page.mdx', '')
+  const pageMap = await getPageMap(currentRoute)
+  const icons = {
     Cards,
     FileIcon,
     FolderIcon,
     MdxIcon
-  }}
-/>
+  }
+  return getIndexPageMap(pageMap).map(pageItem => {
+    if (!Array.isArray(pageItem)) {
+      return <H2>{pageItem.title}</H2>
+    }
+    return (
+      <Cards>
+        {pageItem.map(item => {
+          const icon = item.frontMatter?.icon
+          const Icon = icons[icon]
+          if (icon && !Icon) {
+            throw new Error(
+              "Icon is defined in front matter but isn't provided"
+            )
+          }
+          return (
+            <Cards.Card
+              key={item.name}
+              title={item.title}
+              href={item.route || item.href}
+              icon={Icon && <Icon />}
+            />
+          )
+        })}
+      </Cards>
+    )
+  })
+}
+
+<Page />

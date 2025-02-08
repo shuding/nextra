@@ -118,7 +118,8 @@ export const menuSchema = z.strictObject({
       obj[key].title ||= pageTitleFromFilename(key)
     }
     return obj
-  })
+  }),
+  display: z.enum(['normal', 'hidden']).optional()
 })
 
 export const itemSchema = z.strictObject({
