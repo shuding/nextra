@@ -36,7 +36,7 @@
       "postcss": "8.5.1",
       "lightningcss": "1.29.1",
       "esbuild": "0.24.2",
-      "vite": "6.0.11",
+      "vite": "6.1.0",
       "next": "15.1.6"
     },
     "patchedDependencies": {
