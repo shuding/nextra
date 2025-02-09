@@ -10,11 +10,11 @@
     @apply x:select-none;
   }
 
-  svg {
+  & > span > svg {
     @apply x:w-6 x:h-auto x:transition x:text-black/30 x:dark:text-white/40 x:shrink-0;
   }
 
-  &:hover svg {
+  &:hover > span > svg {
     @apply x:text-current!;
   }
 
