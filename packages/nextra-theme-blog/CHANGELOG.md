@@ -1,5 +1,12 @@
 # nextra-theme-blog
 
+## 4.2.5
+
+### Patch Changes
+
+- Updated dependencies [e6c3050]
+  - nextra@4.2.5
+
 ## 4.2.4
 
 ### Patch Changes

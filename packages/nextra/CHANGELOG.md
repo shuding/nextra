@@ -1,5 +1,11 @@
 # nextra
 
+## 4.2.5
+
+### Patch Changes
+
+- e6c3050: add `display: 'normal' | 'hidden'` for `_meta` item `type: 'menu'`
+
 ## 4.2.4
 
 ### Patch Changes
