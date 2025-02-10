@@ -8,7 +8,7 @@ export async function importPage(pathSegments: string[] = [], lang = '') {
   const RouteToFilepath = await getRouteToFilepath(lang)
 
   const pathname = pathSegments.join('/')
-  const decodedPath = decodeURI(pathname) // handle non-"\w" characters
+  const decodedPath = decodeURIComponent(pathname) // handle non-"\w" characters
 
   const pagePath = RouteToFilepath[decodedPath]
   try {
