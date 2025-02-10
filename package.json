@@ -24,7 +24,7 @@
     "@changesets/cli": "2.27.12",
     "@rollup/plugin-alias": "5.1.1",
     "eslint": "9.20.0",
-    "prettier": "3.4.2",
+    "prettier": "3.5.0",
     "rimraf": "6.0.1",
     "tsup": "8.3.5",
     "tsx": "4.19.2",
