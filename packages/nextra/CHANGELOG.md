@@ -1,5 +1,11 @@
 # nextra
 
+## 4.2.6
+
+### Patch Changes
+
+- a7906d1: use `decodeURIComponent` instead `decodeURI` to properly decode `&` character
+
 ## 4.2.5
 
 ### Patch Changes
