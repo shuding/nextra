@@ -62,12 +62,8 @@ html {
 }
 
 .nextra-mask {
-  mask-image: linear-gradient(
-      to bottom,
-      transparent,
-      #000 20px,
-      transparent 100%
-    ),
+  mask-image:
+    linear-gradient(to bottom, transparent, #000 20px, transparent 100%),
     linear-gradient(to top, transparent, #000 20px, transparent 100%);
   @apply x:contrast-more:[mask-image:none];
 }
