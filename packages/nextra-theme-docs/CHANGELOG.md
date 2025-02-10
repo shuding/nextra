@@ -1,5 +1,12 @@
 # nextra-theme-docs
 
+## 4.2.7
+
+### Patch Changes
+
+- 9b5eea6: allow change `nextThemes.forcedTheme` prop
+  - nextra@4.2.7
+
 ## 4.2.6
 
 ### Patch Changes
