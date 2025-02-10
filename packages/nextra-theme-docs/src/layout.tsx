@@ -57,6 +57,7 @@ const theme = z.strictObject({
         .default('class'),
       defaultTheme: z.string().optional(),
       disableTransitionOnChange: z.boolean().default(true),
+      forcedTheme: z.string().optional(),
       storageKey: z.string().optional()
     })
     .default({}),
