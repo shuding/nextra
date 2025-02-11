@@ -111,7 +111,7 @@ export const themeSchema = /* @__PURE__ */ (() =>
       link: z.string().startsWith('https://').optional()
     }),
     search: z.strictObject({
-      component: z.custom<ReactNode | FC<{ className?: string }>>(...reactNode),
+      component: z.custom<ReactNode | FC<{ className?: string, maxResultLength?: number }>>(...reactNode),
       emptyResult: z.custom<ReactNode | FC>(...reactNode),
       error: z.string().or(z.function().returns(z.string())),
       loading: z.custom<ReactNode | FC>(...reactNode),

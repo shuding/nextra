@@ -143,9 +143,11 @@ const loadIndexesImpl = async (
 }
 
 export function Flexsearch({
-  className
+  className,
+  maxResultLength
 }: {
-  className?: string
+  className?: string,
+  maxResultLength?: number
 }): ReactElement {
   const { locale = DEFAULT_LOCALE, basePath } = useRouter()
   const [loading, setLoading] = useState(false)
@@ -212,11 +214,11 @@ export function Flexsearch({
           children: (
             <>
               <div className="_text-base _font-semibold _leading-5">
-                <HighlightMatches match={search} value={title} />
+                <HighlightMatches match={search} value={title} maxResultLength={maxResultLength}/>
               </div>
               {content && (
                 <div className="excerpt _mt-1 _text-sm _leading-[1.35rem] _text-gray-600 dark:_text-gray-400 contrast-more:dark:_text-gray-50">
-                  <HighlightMatches match={search} value={content} />
+                  <HighlightMatches match={search} value={content} maxResultLength={maxResultLength}/>
                 </div>
               )}
             </>
