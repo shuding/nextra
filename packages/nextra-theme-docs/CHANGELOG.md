@@ -1,5 +1,12 @@
 # nextra-theme-docs
 
+## 4.2.9
+
+### Patch Changes
+
+- 31534cb: add `Navbar.className` prop
+  - nextra@4.2.9
+
 ## 4.2.8
 
 ### Patch Changes
