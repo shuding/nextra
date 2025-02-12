@@ -16,7 +16,8 @@ const propsSchema = z.strictObject({
   projectLink: z.string().optional(),
   projectIcon: element.default(<GitHubIcon height="24" />),
   chatLink: z.string().optional(),
-  chatIcon: element.default(<DiscordIcon width="24" />)
+  chatIcon: element.default(<DiscordIcon width="24" />),
+  className: z.string().optional()
 })
 
 type NavbarProps = z.input<typeof propsSchema>
@@ -33,7 +34,8 @@ export const Navbar: FC<NavbarProps> = props => {
     projectLink,
     projectIcon,
     chatLink,
-    chatIcon
+    chatIcon,
+    className
   } = data
   return (
     <header
@@ -52,7 +54,10 @@ export const Navbar: FC<NavbarProps> = props => {
       />
       <nav
         style={{ height: 'var(--nextra-navbar-height)' }}
-        className="x:mx-auto x:flex x:max-w-(--nextra-content-width) x:items-center x:justify-end x:gap-4 x:pl-[max(env(safe-area-inset-left),1.5rem)] x:pr-[max(env(safe-area-inset-right),1.5rem)]"
+        className={cn(
+          'x:mx-auto x:flex x:max-w-(--nextra-content-width) x:items-center x:justify-end x:gap-4 x:pl-[max(env(safe-area-inset-left),1.5rem)] x:pr-[max(env(safe-area-inset-right),1.5rem)]',
+          className
+        )}
       >
         {logoLink ? (
           <NextLink
