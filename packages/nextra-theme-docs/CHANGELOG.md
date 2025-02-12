@@ -1,5 +1,12 @@
 # nextra-theme-docs
 
+## 4.2.8
+
+### Patch Changes
+
+- e610d1d: fix type of `Navbar.children`, should be `ReactNode`, not `ReactElement`
+  - nextra@4.2.8
+
 ## 4.2.7
 
 ### Patch Changes
