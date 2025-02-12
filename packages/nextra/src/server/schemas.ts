@@ -76,9 +76,7 @@ export const reactNode = z.custom<ReactNode>(
   data =>
     isValidElement(data) ||
     (Array.isArray(data) && data.every(value => isValidElement(value))),
-  {
-    message: 'Must be React.ReactNode'
-  }
+  { message: 'Must be React.ReactNode' }
 )
 
 export const stringOrElement = z.union([z.string(), element])
