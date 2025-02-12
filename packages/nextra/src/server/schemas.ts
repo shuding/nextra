@@ -69,7 +69,9 @@ export const nextraConfigSchema = z.strictObject({
 })
 
 export const element = z.custom<ReactElement<Record<string, unknown>>>(
-  isValidElement,
+  data =>
+    isValidElement(data) ||
+    (Array.isArray(data) && data.every(value => isValidElement(value))),
   { message: 'Must be React.ReactElement' }
 )
 export const reactNode = z.custom<ReactNode>(isValidElement, {
