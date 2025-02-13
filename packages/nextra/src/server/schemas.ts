@@ -144,7 +144,10 @@ export const itemSchema = z.strictObject({
 export const metaSchema = z.union([
   stringOrElement.transform(transformTitle),
   itemSchema,
-  linkSchema.extend({ type: z.enum(['page', 'doc']).optional() }),
+  linkSchema.extend({
+    type: z.enum(['page', 'doc']).optional(),
+    display: z.enum(['normal', 'hidden']).optional()
+  }),
   separatorItemSchema,
   menuSchema
 ])

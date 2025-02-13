@@ -854,7 +854,7 @@ describe('generatePageMap()', () => {
           name: "sponsors",
           route: "/sponsors",
           frontMatter: app_sponsors_page
-        }], globalMeta))
+        }], globalMeta, true))
 
         export const RouteToFilepath = {}"
       `)

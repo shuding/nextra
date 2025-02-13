@@ -194,9 +194,7 @@ const Separator: FC<{ title: string }> = ({ title }) => {
           : 'x:my-4'
       )}
     >
-      {title || (
-        <hr className="x:mx-2 x:border-t x:border-gray-200 x:dark:border-primary-100/10" />
-      )}
+      {title || <hr className="x:mx-2 x:border-t nextra-border" />}
     </li>
   )
 }
