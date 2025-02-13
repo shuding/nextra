@@ -1,5 +1,14 @@
 # nextra-theme-docs
 
+## 4.2.10
+
+### Patch Changes
+
+- 5c22495: - add `Navbar.align` prop to align navigation links to the specified side. (default `'right'`)
+  - fix hidden nav links when specified with `type: 'page', href: '...'` in `_meta` files
+- Updated dependencies [5c22495]
+  - nextra@4.2.10
+
 ## 4.2.9
 
 ### Patch Changes
