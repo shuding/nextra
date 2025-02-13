@@ -121,7 +121,8 @@ export const ClientNavbar: FC<{
 
           const isCurrentPage =
             href === pathname ||
-            (pathname.startsWith(page.route + '/') && arr.every(item => !('href' in item) || item.href !== pathname)) ||
+            (pathname.startsWith(page.route + '/') &&
+              arr.every(item => !('href' in item) || item.href !== pathname)) ||
             undefined
 
           return (

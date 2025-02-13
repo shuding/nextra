@@ -86,7 +86,7 @@ export function mergeMetaWithPageMap<T extends Folder | PageMapItem[]>(
         ].join('\n')
       )
     }
-    (result[0] as MetaJsonFile).data = {
+    ;(result[0] as MetaJsonFile).data = {
       ...metaRecord,
       ...normalizedMetaRecord
     }
