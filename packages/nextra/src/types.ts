@@ -76,7 +76,7 @@ export type Heading = {
   id: string
 }
 
-export type NextraMetadata = Omit<Metadata, 'title'> & {
+export type $NextraMetadata = Omit<Metadata, 'title'> & {
   title: string
   filePath: string
   timestamp?: number
@@ -121,4 +121,9 @@ export type PagefindSearchOptions = {
   filters?: object
   /** The set of sorts to use for this search, instead of relevancy */
   sort?: object
+}
+
+export type NextraMetadata = Metadata & {
+  asIndexPage?: boolean
+  sidebarTitle?: string
 }

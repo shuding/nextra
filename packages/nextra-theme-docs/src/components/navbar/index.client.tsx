@@ -88,7 +88,8 @@ const isMenu = (page: any): page is MenuItem => page.type === 'menu'
 
 export const ClientNavbar: FC<{
   children: ReactNode
-}> = ({ children }) => {
+  className?: string
+}> = ({ children, className }) => {
   const items = useConfig().normalizePagesResult.topLevelNavbarItems
   const themeConfig = useThemeConfig()
 
@@ -97,8 +98,13 @@ export const ClientNavbar: FC<{
 
   return (
     <>
-      <div className="x:flex x:gap-4 x:overflow-x-auto nextra-scrollbar x:py-1.5 x:max-md:hidden">
-        {items.map(page => {
+      <div
+        className={cn(
+          'x:flex x:gap-4 x:overflow-x-auto nextra-scrollbar x:py-1.5 x:max-md:hidden',
+          className
+        )}
+      >
+        {items.map((page, _index, arr) => {
           if ('display' in page && page.display === 'hidden') return
           if (isMenu(page)) {
             return (
@@ -107,18 +113,15 @@ export const ClientNavbar: FC<{
               </NavbarMenu>
             )
           }
-          let href = page.href || page.route || '#'
-
-          // If it's a directory
-          if (page.children) {
-            href =
-              ('frontMatter' in page ? page.route : page.firstChildRoute) ||
-              href
-          }
+          const href =
+            // If it's a directory
+            ('frontMatter' in page ? page.route : page.firstChildRoute) ||
+            page.href ||
+            page.route
 
           const isCurrentPage =
-            page.route === pathname ||
-            pathname.startsWith(page.route + '/') ||
+            href === pathname ||
+            (pathname.startsWith(page.route + '/') && arr.every(item => !('href' in item) || item.href !== pathname)) ||
             undefined
 
           return (
