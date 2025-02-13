@@ -5,6 +5,7 @@ import type {
   DynamicMeta,
   DynamicMetaItem,
   Folder,
+  MetaJsonFile,
   PageMapItem
 } from '../../types.js'
 import { pageTitleFromFilename } from '../utils.js'
@@ -85,7 +86,10 @@ export function mergeMetaWithPageMap<T extends Folder | PageMapItem[]>(
         ].join('\n')
       )
     }
-    Object.assign(metaRecord, normalizedMetaRecord)
+    (result[0] as MetaJsonFile).data = {
+      ...metaRecord,
+      ...normalizedMetaRecord
+    }
   } else {
     result.unshift({ data: normalizedMetaRecord })
   }
