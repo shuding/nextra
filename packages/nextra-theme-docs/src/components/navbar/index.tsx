@@ -81,7 +81,7 @@ export const Navbar: FC<NavbarProps> = props => {
         ) : (
           <div className={logoClass}>{logo}</div>
         )}
-        <ClientNavbar>
+        <ClientNavbar className={align === 'left' ? 'x:me-auto' : ''}>
           {projectLink && <Anchor href={projectLink}>{projectIcon}</Anchor>}
           {chatLink && <Anchor href={chatLink}>{chatIcon}</Anchor>}
           {children}
