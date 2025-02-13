@@ -101,7 +101,7 @@ export type Nextra = (
 export type MDXWrapper = FC<{
   toc: Heading[]
   children: ReactNode
-  metadata: NextraMetadata
+  metadata: $NextraMetadata
   bottomContent?: ReactNode
 }>
 
