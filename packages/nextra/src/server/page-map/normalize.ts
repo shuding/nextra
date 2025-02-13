@@ -1,12 +1,5 @@
 import { fromZodError } from 'zod-validation-error'
-import type {
-  Folder,
-  FrontMatter,
-  MdxFile,
-  MenuItem,
-  PageMapItem,
-  SeparatorItem
-} from '../../types.js'
+import type { Folder, FrontMatter, MdxFile, PageMapItem } from '../../types.js'
 import { metaSchema } from '../schemas.js'
 import { pageTitleFromFilename } from '../utils.js'
 
@@ -39,10 +32,7 @@ function titlize(item: Folder | MdxFile, meta: MetaRecord): string {
 type MetaRecord = Record<string, Record<string, any>>
 
 function sortFolder(pageMap: PageMapItem[] | Folder) {
-  const newChildren: (
-    | ({ title: string } & (Folder | MdxFile))
-    | ((SeparatorItem | MenuItem) & { name: string })
-  )[] = []
+  const newChildren: (Folder | MdxFile)[] = []
 
   const isFolder = !Array.isArray(pageMap)
 
@@ -50,7 +40,7 @@ function sortFolder(pageMap: PageMapItem[] | Folder) {
     isFolder ? { ...pageMap } : { children: pageMap }
   ) as ParsedFolder
 
-  const meta: MetaRecord = {}
+  const meta: Record<string, Record<string, any>> = {}
   for (const item of folder.children) {
     if (
       isFolder &&
@@ -60,10 +50,7 @@ function sortFolder(pageMap: PageMapItem[] | Folder) {
     ) {
       folder.frontMatter = item.frontMatter
     } else if ('children' in item) {
-      newChildren.push({
-        ...normalizePageMap(item),
-        title: titlize(item, meta)
-      })
+      newChildren.push(normalizePageMap(item))
     } else if ('data' in item) {
       for (const [key, titleOrObject] of Object.entries(item.data)) {
         const { data, error } = metaSchema.safeParse(titleOrObject)
@@ -79,16 +66,8 @@ function sortFolder(pageMap: PageMapItem[] | Folder) {
         // @ts-expect-error -- fixme
         meta[key] = data
       }
-    } else if (
-      'type' in item &&
-      (item.type === 'separator' || item.type === 'menu')
-    ) {
-      newChildren.push(item as any)
     } else {
-      newChildren.push({
-        ...item,
-        title: titlize(item, meta)
-      })
+      newChildren.push(item)
     }
   }
 
@@ -121,7 +100,7 @@ function sortFolder(pageMap: PageMapItem[] | Folder) {
 
       // Validate menu items, local page should exist
       const { children } = items.find(
-        (i): i is { title: string } & Folder<MdxFile> => i.name === metaKey
+        (i): i is Folder<MdxFile> => i.name === metaKey
       )!
       for (const [key, value] of Object.entries(
         // @ts-expect-error fixme
@@ -162,6 +141,22 @@ The field key "${metaKey}" in \`_meta\` file refers to a page that cannot be fou
     items.unshift({ data: meta })
   }
 
-  const result = isFolder ? { ...folder, children: items } : items
+  const itemsWithTitle = items.map(item => {
+    const isSeparator = 'type' in item && item.type === 'separator'
+    if ('name' in item && !isSeparator) {
+      return {
+        ...item,
+        title: titlize(item, meta)
+      }
+    }
+    return item
+  })
+
+  const result = isFolder
+    ? {
+        ...folder,
+        children: itemsWithTitle
+      }
+    : itemsWithTitle
   return result
 }
