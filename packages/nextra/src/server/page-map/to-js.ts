@@ -62,7 +62,7 @@ export function convertPageMapToJs({
 
   let pageMapRawJs = pageMapResult.value.slice(0, -2 /* replace semicolon */)
   if (globalMetaPath) {
-    pageMapRawJs = `mergeMetaWithPageMap(${pageMapRawJs}, globalMeta)`
+    pageMapRawJs = `mergeMetaWithPageMap(${pageMapRawJs}, globalMeta, true)`
   }
 
   const rawJs = `import { ${[
