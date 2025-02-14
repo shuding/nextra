@@ -42,13 +42,13 @@ export const Navbar: FC<NavbarProps> = props => {
 
   const logoClass = cn(
     'x:flex x:items-center',
-    align === 'right' && 'x:me-auto'
+    align === 'left' ? 'x:max-md:me-auto' : 'x:me-auto'
   )
 
   return (
     <header
       className={cn(
-        'nextra-navbar x:sticky x:top-0 x:z-20 x:w-full x:bg-transparent x:print:hidden',
+        'nextra-navbar x:sticky x:top-0 x:z-30 x:w-full x:bg-transparent x:print:hidden',
         'x:max-md:[.nextra-banner:not([class$=hidden])~&]:top-(--nextra-banner-height)'
       )}
     >
@@ -64,7 +64,7 @@ export const Navbar: FC<NavbarProps> = props => {
         style={{ height: 'var(--nextra-navbar-height)' }}
         className={cn(
           'x:mx-auto x:flex x:max-w-(--nextra-content-width) x:items-center x:gap-4 x:pl-[max(env(safe-area-inset-left),1.5rem)] x:pr-[max(env(safe-area-inset-right),1.5rem)]',
-          align === 'right' && 'x:justify-end',
+          'x:justify-end',
           className
         )}
       >
