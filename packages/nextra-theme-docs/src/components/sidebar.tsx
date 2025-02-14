@@ -322,7 +322,7 @@ export const MobileNav: FC = () => {
       className={cn(
         'nextra-mobile-nav', // targeted from userspace
         'x:flex x:flex-col',
-        'x:fixed x:inset-0 x:pt-(--nextra-navbar-height) x:z-10 x:overscroll-contain',
+        'x:fixed x:inset-0 x:pt-(--nextra-navbar-height) x:z-20 x:overscroll-contain',
         'x:[contain:layout_style]',
         'x:md:hidden',
         'x:[.nextra-banner:not([class$=hidden])~&]:pt-[calc(var(--nextra-banner-height)+var(--nextra-navbar-height))]',
