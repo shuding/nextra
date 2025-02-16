@@ -1,5 +1,12 @@
 # nextra-theme-docs
 
+## 4.2.12
+
+### Patch Changes
+
+- 23b1c48: increate z-index for `type: menu` dropdown from `20` to `30`
+  - nextra@4.2.12
+
 ## 4.2.11
 
 ### Patch Changes
