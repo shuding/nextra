@@ -1,7 +1,7 @@
 {
   "name": "nextra-monorepo",
   "private": true,
-  "packageManager": "pnpm@9.15.5",
+  "packageManager": "pnpm@10.4.1",
   "scripts": {
     "build": "turbo run build --filter=./packages/\\*",
     "build:all": "turbo run build",
