@@ -34,7 +34,7 @@
     "@headlessui/react": "^2.1.2",
     "clsx": "^2.1.0",
     "next-themes": "^0.4.0",
-    "react-compiler-runtime": "0.0.0-experimental-22c6e49-20241219",
+    "react-compiler-runtime": "0.0.0-experimental-fcabbc1-20241106",
     "scroll-into-view-if-needed": "^3.1.0",
     "zod": "^3.22.3",
     "zod-validation-error": "^3.0.0",
