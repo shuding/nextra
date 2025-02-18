@@ -13,17 +13,17 @@ export async function Example() {
     `../examples/swr-site/app/[lang]/${filename}`,
     'utf8'
   )
-  const rawJs =
-    await compileMdx(`~~~jsx filename="app${filename}" {26} showLineNumbers
+  const rawJs = await compileMdx(
+    `~~~jsx filename="app${filename}" {27} showLineNumbers
 ${pageContent
   .replace(
     "lang: 'en',\n    ...(route && { slug: route.split('/') })",
     "slug: route.split('/')"
   )
-  .split('\n')
-  .slice(1, -1)
-  .join('\n')}
-~~~`, { defaultShowCopyCode: true })
+  .trimEnd()}
+~~~`,
+    { defaultShowCopyCode: true }
+  )
   return <MDXRemote compiledSource={rawJs} />
 }
 
