@@ -17,6 +17,7 @@ import {
   PythonIcon,
   ReactIcon,
   RustIcon,
+  SvelteIcon,
   TerminalIcon,
   TerraformIcon,
   TypeScriptIcon
@@ -74,6 +75,8 @@ function getIcon(language: string) {
     case 'json':
     case 'jsonc':
       return JSONIcon
+    case 'svelte':
+      return SvelteIcon
   }
 }
 

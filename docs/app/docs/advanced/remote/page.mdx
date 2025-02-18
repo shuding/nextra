@@ -10,22 +10,20 @@ import { MDXRemote } from 'nextra/mdx-remote'
 export async function Example() {
   const filename = '/graphql-eslint/[[...slug]]/page.tsx'
   const pageContent = await fs.readFile(
-    `../examples/swr-site/app/[lang]/remote${filename}`,
+    `../examples/swr-site/app/[lang]/${filename}`,
     'utf8'
   )
-  const rawJs =
-    await compileMdx(`~~~jsx filename="app${filename}" {27} showLineNumbers
+  const rawJs = await compileMdx(
+    `~~~jsx filename="app${filename}" {27} showLineNumbers
 ${pageContent
-  .replace('// @ts-expect-error -- fixme\n', '')
   .replace(
     "lang: 'en',\n    ...(route && { slug: route.split('/') })",
     "slug: route.split('/')"
   )
-  .replace('remote/graphql-eslint', 'graphql-eslint')
-  .split('\n')
-  .slice(1, -1)
-  .join('\n')}
-~~~`)
+  .trimEnd()}
+~~~`,
+    { defaultShowCopyCode: true }
+  )
   return <MDXRemote compiledSource={rawJs} />
 }
 

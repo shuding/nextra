@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/rules-of-hooks -- false positive, useMDXComponents isn't react hooks */
 import { notFound } from 'next/navigation'
 import { compileMdx } from 'nextra/compile'
 import { Callout, Tabs } from 'nextra/components'
@@ -8,7 +7,7 @@ import {
   mergeMetaWithPageMap,
   normalizePageMap
 } from 'nextra/page-map'
-import { useMDXComponents } from '../../../../../mdx-components'
+import { useMDXComponents as getMDXComponents } from '../../../../mdx-components'
 
 const user = 'graphql-hive'
 const repo = 'graphql-eslint'
@@ -25,16 +24,13 @@ const filePaths = [
 
 const { mdxPages, pageMap: _pageMap } = convertToPageMap({
   filePaths,
-  basePath: 'remote/graphql-eslint'
+  basePath: 'graphql-eslint'
 })
 
-// @ts-expect-error -- fixme
-export const [eslintPage] = _pageMap[0].children
-
-const eslintPageMap = mergeMetaWithPageMap(eslintPage, {
+// `mergeMetaWithPageMap` is used to change sidebar order and title
+const eslintPageMap = mergeMetaWithPageMap(_pageMap[0]!, {
   index: 'Introduction',
   'getting-started': {
-    title: 'Getting Started',
     items: {
       index: 'Overview',
       'parser-options': '',
@@ -47,7 +43,7 @@ const eslintPageMap = mergeMetaWithPageMap(eslintPage, {
 
 export const pageMap = normalizePageMap(eslintPageMap)
 
-const { wrapper: Wrapper, ...components } = useMDXComponents({
+const { wrapper: Wrapper, ...components } = getMDXComponents({
   $Tabs: Tabs,
   Callout
 })

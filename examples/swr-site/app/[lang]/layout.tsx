@@ -12,7 +12,7 @@ import {
 import { Banner, Head } from 'nextra/components'
 import { getPageMap } from 'nextra/page-map'
 import { getDictionary, getDirection } from '../_dictionaries/get-dictionary'
-import { pageMap as graphqlEslintPageMap } from './remote/graphql-eslint/[[...slug]]/page'
+import { pageMap as graphqlEslintPageMap } from './graphql-eslint/[[...slug]]/page'
 import { pageMap as graphqlYogaPageMap } from './remote/graphql-yoga/[[...slug]]/page'
 import './styles.css'
 
@@ -50,8 +50,10 @@ export default async function RootLayout({ children, params }) {
       {
         name: 'remote',
         route: '/remote',
-        children: [graphqlEslintPageMap, graphqlYogaPageMap]
-      }
+        children: [graphqlYogaPageMap],
+        title: 'Remote'
+      },
+      graphqlEslintPageMap
     ]
   }
   const banner = (

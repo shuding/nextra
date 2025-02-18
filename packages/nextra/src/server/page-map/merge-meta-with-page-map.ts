@@ -6,7 +6,8 @@ import type {
   DynamicMetaItem,
   Folder,
   MetaJsonFile,
-  PageMapItem
+  PageMapItem,
+  TItem
 } from '../../types.js'
 import { pageTitleFromFilename } from '../utils.js'
 
@@ -40,7 +41,7 @@ function normalizeMetaRecord(
   )
 }
 
-export function mergeMetaWithPageMap<T extends Folder | PageMapItem[]>(
+export function mergeMetaWithPageMap<T extends Folder | PageMapItem[] | TItem>(
   pageMap: T,
   meta: DynamicMeta,
   shouldCheckIndividualMetaFilesUsage = false
@@ -49,6 +50,7 @@ export function mergeMetaWithPageMap<T extends Folder | PageMapItem[]>(
     return {
       ...pageMap,
       children: mergeMetaWithPageMap(
+        // @ts-expect-error -- fixme
         pageMap.children,
         meta,
         shouldCheckIndividualMetaFilesUsage
@@ -75,7 +77,6 @@ export function mergeMetaWithPageMap<T extends Folder | PageMapItem[]>(
   const metaRecord = result[0] && 'data' in result[0] && result[0].data
   if (metaRecord) {
     if (shouldCheckIndividualMetaFilesUsage) {
-      // @ts-expect-error fixme
       const childRoute = result[1].route
       const { dir } = path.parse(childRoute)
       const metaPath = `${dir.replace(/^\/$/, '')}/_meta`
@@ -93,7 +94,5 @@ export function mergeMetaWithPageMap<T extends Folder | PageMapItem[]>(
   } else {
     result.unshift({ data: normalizedMetaRecord })
   }
-
-  // @ts-expect-error -- fixme
   return result
 }
