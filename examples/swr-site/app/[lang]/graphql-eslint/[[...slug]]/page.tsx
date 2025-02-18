@@ -24,16 +24,13 @@ const filePaths = [
 
 const { mdxPages, pageMap: _pageMap } = convertToPageMap({
   filePaths,
-  basePath: 'remote/graphql-eslint'
+  basePath: 'graphql-eslint'
 })
 
-// @ts-expect-error -- fixme
-export const [eslintPage] = _pageMap[0].children
-
-const eslintPageMap = mergeMetaWithPageMap(eslintPage, {
+// `mergeMetaWithPageMap` is used to change sidebar order and title
+const eslintPageMap = mergeMetaWithPageMap(_pageMap[0]!, {
   index: 'Introduction',
   'getting-started': {
-    title: 'Getting Started',
     items: {
       index: 'Overview',
       'parser-options': '',
