@@ -1,9 +1,15 @@
 import { fromZodError } from 'zod-validation-error'
-import type { Folder, FrontMatter, MdxFile, PageMapItem } from '../../types.js'
+import type {
+  Folder,
+  FrontMatter,
+  MdxFile,
+  PageMapItem,
+  TItem
+} from '../../types.js'
 import { metaSchema } from '../schemas.js'
 import { pageTitleFromFilename } from '../utils.js'
 
-export function normalizePageMap(pageMap: PageMapItem[] | Folder): any {
+export function normalizePageMap(pageMap: PageMapItem[] | Folder | TItem): any {
   if (Array.isArray(pageMap)) {
     return sortFolder(
       pageMap.map(item => ('children' in item ? normalizePageMap(item) : item))
@@ -31,7 +37,7 @@ function titlize(item: Folder | MdxFile, meta: MetaRecord): string {
 
 type MetaRecord = Record<string, Record<string, any>>
 
-function sortFolder(pageMap: PageMapItem[] | Folder) {
+function sortFolder(pageMap: PageMapItem[] | Folder | TItem) {
   const newChildren: (Folder | MdxFile)[] = []
 
   const isFolder = !Array.isArray(pageMap)
