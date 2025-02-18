@@ -1,5 +1,13 @@
 # nextra-theme-blog
 
+## 4.2.13
+
+### Patch Changes
+
+- Updated dependencies [fc4035c]
+- Updated dependencies [fc4035c]
+  - nextra@4.2.13
+
 ## 4.2.12
 
 ### Patch Changes
