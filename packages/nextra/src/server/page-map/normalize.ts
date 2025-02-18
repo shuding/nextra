@@ -155,6 +155,7 @@ The field key "${metaKey}" in \`_meta\` file refers to a page that cannot be fou
   const result = isFolder
     ? {
         ...folder,
+        title: titlize(folder, {}),
         children: itemsWithTitle
       }
     : itemsWithTitle

@@ -14,7 +14,7 @@ export const logger = {
 }
 
 export function pageTitleFromFilename(fileName: string) {
-  return title(fileName.replaceAll(/[-_]/g, ' '), { special: ['SSR', 'CORS'] })
+  return title(fileName.replaceAll(/[-_]/g, ' '), { special: ['SSR', 'CORS', 'ESLint'] })
 }
 
 export function createAstExportConst(
