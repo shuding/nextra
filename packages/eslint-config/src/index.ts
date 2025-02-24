@@ -46,7 +46,7 @@ const config: Config = tseslint.config(
     extends: [
       js.configs.recommended,
       tseslint.configs.recommended,
-      eslintPluginUnicorn.configs['flat/recommended'],
+      eslintPluginUnicorn.configs.recommended,
       eslintPluginSonarJs.configs.recommended,
       eslintConfigPrettier
     ],
