@@ -26,7 +26,8 @@ const theme = z.strictObject({
       content: stringOrElement
         .or(z.null())
         .default('Question? Give us feedback'),
-      labels: z.string().default('feedback')
+      labels: z.string().default('feedback'),
+      customLink: z.string().optional()
     })
     .default({}),
   footer: element,

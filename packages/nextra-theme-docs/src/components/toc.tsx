@@ -112,11 +112,15 @@ export const TOC: FC<TOCProps> = ({ toc, filePath, pageTitle }) => {
           {themeConfig.feedback.content && (
             <Anchor
               className={linkClassName}
-              href={getGitIssueUrl({
-                labels: themeConfig.feedback.labels,
-                repository: themeConfig.docsRepositoryBase,
-                title: `Feedback for “${pageTitle}”`
-              })}
+              href={
+                themeConfig.feedback.customLink
+                  ? themeConfig.feedback.customLink
+                  : getGitIssueUrl({
+                      labels: themeConfig.feedback.labels,
+                      repository: themeConfig.docsRepositoryBase,
+                      title: `Feedback for “${pageTitle}”`
+                    })
+              }
             >
               {themeConfig.feedback.content}
             </Anchor>
