@@ -26,6 +26,7 @@ const theme = z.strictObject({
       content: stringOrElement
         .or(z.null())
         .default('Question? Give us feedback'),
+      customLink: z.string().optional(),
       labels: z.string().default('feedback')
     })
     .default({}),

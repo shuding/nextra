@@ -109,7 +109,16 @@ export const TOC: FC<TOCProps> = ({ toc, filePath, pageTitle }) => {
             hasHeadings && 'x:border-t nextra-border'
           )}
         >
-          {themeConfig.feedback.content && (
+          {themeConfig.feedback.content && themeConfig.feedback.customLink && (
+            <Anchor
+              className={linkClassName}
+              href={themeConfig.feedback.customLink}
+            >
+              {themeConfig.feedback.content}
+            </Anchor>
+          )}
+
+          {themeConfig.feedback.content && !themeConfig.feedback.customLink && (
             <Anchor
               className={linkClassName}
               href={getGitIssueUrl({
