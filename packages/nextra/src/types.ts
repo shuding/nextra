@@ -7,7 +7,8 @@ import type {
   menuSchema,
   metaSchema,
   nextraConfigSchema,
-  separatorItemSchema
+  separatorItemSchema,
+  markdownPreprocessorSchema
 } from './server/schemas.js'
 
 export interface LoaderOptions extends z.infer<typeof nextraConfigSchema> {
@@ -93,6 +94,8 @@ export type ReadingTime = {
 export type NextraConfig = z.input<typeof nextraConfigSchema>
 
 export type MathJaxOptions = z.infer<typeof mathJaxOptionsSchema>
+
+export type MarkdownPreprocessor = z.infer<typeof markdownPreprocessorSchema>
 
 export type Nextra = (
   nextraConfig: NextraConfig

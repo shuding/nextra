@@ -18,6 +18,13 @@ export const mathJaxOptionsSchema = z.strictObject({
   config: z.custom<MathJax3Config>().optional()
 })
 
+export const markdownPreprocessorSchema = z.function()
+  .args(z.strictObject({
+    filePath: z.string(),
+    fileContent: z.string()
+  }))
+  .returns(z.string())
+
 export const nextraConfigSchema = z.strictObject({
   defaultShowCopyCode: z.boolean().optional(),
   search: z
@@ -52,6 +59,7 @@ export const nextraConfigSchema = z.strictObject({
       rehypePlugins: z.custom<ProcessorOptions['rehypePlugins']>(),
       remarkPlugins: z.custom<ProcessorOptions['remarkPlugins']>(),
       recmaPlugins: z.custom<ProcessorOptions['recmaPlugins']>(),
+      preprocessors: z.array(markdownPreprocessorSchema).optional(),
       format: z.enum(['detect', 'mdx', 'md']).optional(),
       rehypePrettyCodeOptions: z.custom<RehypePrettyCodeOptions>().default({})
     })

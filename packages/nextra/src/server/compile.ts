@@ -85,9 +85,17 @@ export async function compileMdx(
     remarkPlugins,
     rehypePlugins,
     recmaPlugins,
+    preprocessors,
     rehypePrettyCodeOptions,
     providerImportSource = 'next-mdx-import-source-file'
   } = mdxOptions
+
+  for (const preprocessor of preprocessors ?? []) {
+    source = preprocessor({
+      filePath,
+      fileContent: source
+    });
+  }
 
   const format =
     _format === 'detect' ? (filePath.endsWith('.mdx') ? 'mdx' : 'md') : _format
