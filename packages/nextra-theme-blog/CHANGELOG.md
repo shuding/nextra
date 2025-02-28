@@ -1,5 +1,13 @@
 # nextra-theme-blog
 
+## 4.2.14
+
+### Patch Changes
+
+- ccb5da2: removing custom nextra's scrollbar styles, allowing the browser's default scrollbars to be used
+- Updated dependencies [ccb5da2]
+  - nextra@4.2.14
+
 ## 4.2.13
 
 ### Patch Changes
