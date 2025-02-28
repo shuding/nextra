@@ -18,8 +18,8 @@ patchedDependencies:
   babel-plugin-react-compiler@0.0.0-experimental-22c6e49-20241219:
     hash: 2jeyfvyv26beb32msydymz54dq
     path: patches/babel-plugin-react-compiler@0.0.0-experimental-22c6e49-20241219.patch
-  esbuild-plugin-svgr@3.0.0:
-    hash: 5pajtn63olpwhczqjppya6ysmi
+  esbuild-plugin-svgr:
+    hash: 556ctonaujh5hcbyug5fzfxura
     path: patches/esbuild-plugin-svgr.patch
   eslint-plugin-tailwindcss@3.17.3:
     hash: quqasx3lkw2fskc7xdiwuschla
@@ -422,8 +422,8 @@ importers:
         specifier: ^4.3.4
         version: 4.3.4(vite@6.2.0(@types/node@22.13.5)(jiti@2.4.2)(lightningcss@1.29.1)(tsx@4.19.3)(yaml@2.7.0))
       esbuild-plugin-svgr:
-        specifier: ^3.0.0
-        version: 3.0.0(patch_hash=5pajtn63olpwhczqjppya6ysmi)(esbuild@0.25.0)(typescript@5.7.3)
+        specifier: ^3.1.0
+        version: 3.1.0(patch_hash=556ctonaujh5hcbyug5fzfxura)(esbuild@0.25.0)(typescript@5.7.3)
       esbuild-react-compiler-plugin:
         specifier: workspace:*
         version: link:../esbuild-react-compiler-plugin
@@ -3393,8 +3393,8 @@ packages:
   esast-util-from-js@2.0.1:
     resolution: {integrity: sha512-8Ja+rNJ0Lt56Pcf3TAmpBZjmx8ZcK5Ts4cAzIOjsjevg9oSXJnl6SUQ2EevU8tv3h6ZLWmoKL5H4fgWvdvfETw==}
 
-  esbuild-plugin-svgr@3.0.0:
-    resolution: {integrity: sha512-8/YuGHKoNVKdcV8HUGFQtAJ16agxzemcX9IvcQvaVKuXqIBDvc5IV9nlPyyHcrgr+IvyKBcljO4wjxrh24DSAQ==}
+  esbuild-plugin-svgr@3.1.0:
+    resolution: {integrity: sha512-SOfjehS9effRn8W/+T05GiXAbT6QHivr2uAUwzbXnqLnezKA4QIjvEt3VCzpzZU9J6oP21GZBB8tbDsJWYXPlw==}
     peerDependencies:
       esbuild: 0.25.0
 
@@ -9337,7 +9337,7 @@ snapshots:
       esast-util-from-estree: 2.0.0
       vfile-message: 4.0.2
 
-  esbuild-plugin-svgr@3.0.0(patch_hash=5pajtn63olpwhczqjppya6ysmi)(esbuild@0.25.0)(typescript@5.7.3):
+  esbuild-plugin-svgr@3.1.0(patch_hash=556ctonaujh5hcbyug5fzfxura)(esbuild@0.25.0)(typescript@5.7.3):
     dependencies:
       '@svgr/core': 8.1.0(typescript@5.7.3)
       '@svgr/plugin-jsx': 8.1.0(@svgr/core@8.1.0(typescript@5.7.3))
