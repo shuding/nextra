@@ -29,7 +29,7 @@ export const I18n: FC = () => {
         ))}
       </div>
       <ArrowRightIcon width="1.2em" />
-      <div className="overflow-auto rounded-md bg-white py-1 text-sm ring-1 shadow-lg ring-black/5 dark:bg-neutral-800 dark:ring-white/20">
+      <div className="overflow-auto rounded-md bg-white py-1 text-sm shadow-lg ring-1 ring-black/5 dark:bg-neutral-800 dark:ring-white/20">
         {LANGUAGES.map(({ lang, name }) => (
           <div
             key={lang}
