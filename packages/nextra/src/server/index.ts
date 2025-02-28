@@ -78,7 +78,8 @@ const nextra: Nextra = nextraConfig => {
     const pageMapLoader = {
       loader: LOADER_PATH,
       options: {
-        locales: locales || ['']
+        // ts complains about readonly array
+        locales: locales ? [...locales] : ['']
       }
     }
     return {
