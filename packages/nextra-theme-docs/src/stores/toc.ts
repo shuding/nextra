@@ -1,17 +1,14 @@
 'use no memo'
+'use client'
 
 import type { Heading } from 'nextra'
-import type { Dispatch } from 'react'
-import { create } from 'zustand'
+import type { ComponentProps } from 'react'
+import { createContext, createElement, useContext } from 'react'
 
-const useTocStore = create<{
-  toc: Heading[]
-}>(() => ({
-  toc: []
-}))
+const TOCContext = createContext<Heading[]>([])
 
-export const useToc = () => useTocStore(state => state.toc)
+export const useTOC = () => useContext(TOCContext)
 
-export const setToc: Dispatch<Heading[]> = toc => {
-  useTocStore.setState({ toc })
-}
+export const TOCProvider = (
+  props: ComponentProps<typeof TOCContext.Provider>
+) => createElement(TOCContext.Provider, props)
