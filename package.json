@@ -26,7 +26,7 @@
     "eslint": "9.21.0",
     "prettier": "3.5.2",
     "rimraf": "6.0.1",
-    "tsup": "8.3.5",
+    "tsup": "8.4.0",
     "tsx": "4.19.3",
     "turbo": "2.4.4",
     "typescript": "5.7.3"
@@ -43,7 +43,7 @@
       "babel-plugin-react-compiler@0.0.0-experimental-22c6e49-20241219": "patches/babel-plugin-react-compiler@0.0.0-experimental-22c6e49-20241219.patch",
       "esbuild-plugin-svgr@3.0.0": "patches/esbuild-plugin-svgr.patch",
       "@changesets/assemble-release-plan": "patches/@changesets__assemble-release-plan.patch",
-      "tsup@8.3.5": "patches/tsup@8.3.5.patch",
+      "tsup": "patches/tsup.patch",
       "next@15.1.6": "patches/next@13.5.6.patch",
       "eslint-plugin-tailwindcss@3.17.3": "patches/eslint-plugin-tailwindcss.patch"
     }
