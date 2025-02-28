@@ -355,26 +355,33 @@ export const MobileNav: FC = () => {
   )
 }
 
+let isInitialLoaded = false
+
 export const Sidebar: FC<{ toc: Heading[] }> = ({ toc }) => {
   const { normalizePagesResult, hideSidebar } = useConfig()
   const themeConfig = useThemeConfig()
   const [isExpanded, setIsExpanded] = useState(themeConfig.sidebar.defaultOpen)
   const [showToggleAnimation, setToggleAnimation] = useState(false)
-  const sidebarRef = useRef<HTMLDivElement>(null)
+  const sidebarRef = useRef<HTMLDivElement>(null!)
   const sidebarControlsId = useId()
 
   const { docsDirectories, activeThemeContext } = normalizePagesResult
   const includePlaceholder = activeThemeContext.layout === 'default'
 
   useEffect(() => {
-    const activeElement = sidebarRef.current?.querySelector('li.active')
-
-    if (activeElement && window.innerWidth > 767) {
+    if (isInitialLoaded || window.innerWidth < 768) {
+      return
+    }
+    // Since `<Sidebar>` is placed in `useMDXComponents.wrapper` on client side navigation he will
+    // be remounted and re-centered to active link, isInitialLoaded prevents this
+    isInitialLoaded = true
+    const activeElement = sidebarRef.current.querySelector('li.active')
+    if (activeElement) {
       scrollIntoView(activeElement, {
         block: 'center',
         inline: 'center',
         scrollMode: 'always',
-        boundary: sidebarRef.current!.parentNode as HTMLDivElement
+        boundary: sidebarRef.current.parentNode as HTMLDivElement
       })
     }
   }, [])
