@@ -1,8 +1,8 @@
 diff --git a/dist/rollup.js b/dist/rollup.js
-index 226885535450922fb10e07d26cad66dd2e349ca3..981272bfd587251c552de42930292c9c71b177ea 100644
+index cc82363277fe849c9460937773d9bc8b5c86beb6..c39cd59993034062a67eb07e4c9b043498633d12 100644
 --- a/dist/rollup.js
 +++ b/dist/rollup.js
-@@ -8402,6 +8402,10 @@ var getRollupConfig = async (options) => {
+@@ -6787,6 +6787,10 @@ var getRollupConfig = async (options) => {
          tsResolveOptions && tsResolvePlugin(tsResolveOptions),
          json(),
          ignoreFiles,
