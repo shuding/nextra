@@ -1,10 +1,17 @@
 import Slugger from 'github-slugger'
+import type { Literal } from 'hast'
 import type { Parent, Root } from 'mdast'
+import type {
+  MdxJsxAttribute,
+  MdxJsxExpressionAttribute
+} from 'mdast-util-mdx-jsx'
 import type { Plugin } from 'unified'
 import { visit } from 'unist-util-visit'
-import type { Heading } from '../../types'
-import { MARKDOWN_EXTENSION_REGEX } from '../constants.js'
-import type { HProperties } from './remark-custom-heading-id'
+import { visitChildren } from 'unist-util-visit-children'
+import type { Heading } from '../../types.js'
+import { MARKDOWN_EXTENSION_RE } from '../constants.js'
+import { createAstObject } from '../utils.js'
+import type { HProperties } from './remark-custom-heading-id.js'
 
 export const getFlattenedValue = (node: Parent): string =>
   node.children
@@ -17,14 +24,11 @@ export const getFlattenedValue = (node: Parent): string =>
     )
     .join('')
 
-const SKIP_FOR_PARENT_NAMES = new Set(['Tab', 'Tabs.Tab'])
-
 export const remarkHeadings: Plugin<
   [{ exportName?: string; isRemoteContent?: boolean }],
   Root
-> = ({ exportName = 'useTOC', isRemoteContent }) => {
+> = ({ exportName = 'toc', isRemoteContent }) => {
   const headings: (Heading | string)[] = []
-  let hasJsxInH1: boolean
 
   const slugger = new Slugger()
   return (ast, file) => {
@@ -35,35 +39,101 @@ export const remarkHeadings: Plugin<
       ast,
       [
         'heading',
-        // push partial component's `useTOC` export name to headings list
+        // push partial component's `toc` export name to headings list
         'mdxJsxFlowElement',
-        // verify .md/.mdx exports and attach named `useTOC` export
+        // verify .md/.mdx exports and attach named `toc` export
         'mdxjsEsm'
       ],
-      (node, _index, parent) => {
+      (node, index, parent) => {
         if (node.type === 'heading') {
           if (node.depth === 1) {
-            const hasJsx = node.children.some(
-              (child: { type: string }) => child.type === 'mdxJsxTextElement'
-            )
-            if (hasJsx) {
-              hasJsxInH1 = true
-            }
             return
           }
 
           node.data ||= {}
           const headingProps: HProperties = (node.data.hProperties ||= {})
-          if (SKIP_FOR_PARENT_NAMES.has((parent as any).name)) {
-            delete headingProps.id
-          } else {
-            const value = getFlattenedValue(node)
-            const id = slugger.slug(headingProps.id || value)
-            // Attach flattened/custom #id to heading node
-            headingProps.id = id
-            headings.push({ depth: node.depth, value, id })
-          }
+          const value = getFlattenedValue(node)
+          const id = slugger.slug(headingProps.id || value)
+          // Attach flattened/custom #id to heading node
+          headingProps.id = id
+          headings.push({ depth: node.depth, value, id })
           return
+        }
+
+        const isTab =
+          node.type === 'mdxJsxFlowElement' && node.name === 'Tabs.Tab'
+        if (isTab) {
+          const itemsAttr: any =
+            parent &&
+            parent.type === 'mdxJsxFlowElement' &&
+            parent.name === 'Tabs' &&
+            parent.attributes.find(
+              (
+                attr: MdxJsxExpressionAttribute | MdxJsxAttribute
+              ): attr is MdxJsxAttribute =>
+                attr.type === 'mdxJsxAttribute' && attr.name === 'items'
+            )
+          if (!itemsAttr) return
+          const tabName =
+            itemsAttr.value.data.estree.body[0].expression.elements.map(
+              (el: Literal) => el.value
+            )[index!]
+          const id = slugger.slug(tabName)
+          node.children.unshift({
+            type: 'mdxJsxFlowElement',
+            name: 'h3',
+            data: { _mdxExplicitJsx: true },
+            children: [{ type: 'text', value: tabName }],
+            attributes: [
+              { type: 'mdxJsxAttribute', name: 'id', value: id },
+              {
+                type: 'mdxJsxAttribute',
+                name: 'style',
+                value: {
+                  type: 'mdxJsxAttributeValueExpression',
+                  value: '',
+                  data: {
+                    estree: {
+                      type: 'Program',
+                      sourceType: 'module',
+                      comments: [],
+                      body: [
+                        {
+                          type: 'ExpressionStatement',
+                          expression: createAstObject({
+                            visibility: 'hidden',
+                            width: 0,
+                            height: 0
+                          })
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            ] satisfies MdxJsxAttribute[]
+          } as any)
+        }
+
+        const isDetails =
+          node.type === 'mdxJsxFlowElement' && node.name === 'details'
+        if (isDetails) {
+          const visitor = visitChildren((node: any) => {
+            const isSummary =
+              node.type === 'mdxJsxTextElement' && node.name === 'summary'
+            if (isSummary) {
+              const value = getFlattenedValue(node)
+              const id = slugger.slug(value)
+              node.attributes.push({
+                type: 'mdxJsxAttribute',
+                name: 'id',
+                value: id
+              })
+            } else if ('children' in node) {
+              visitor(node)
+            }
+          })
+          visitor(node)
         }
 
         if (isRemoteContent) {
@@ -72,7 +142,7 @@ export const remarkHeadings: Plugin<
           for (const child of (node as any).data.estree.body) {
             if (child.type !== 'ImportDeclaration') continue
             const importPath = child.source.value
-            const isMdxImport = MARKDOWN_EXTENSION_REGEX.test(importPath)
+            const isMdxImport = MARKDOWN_EXTENSION_RE.test(importPath)
             if (!isMdxImport) continue
 
             const componentName = child.specifiers.find(
@@ -101,7 +171,6 @@ export const remarkHeadings: Plugin<
       }
     )
 
-    file.data.hasJsxInH1 = hasJsxInH1
     file.data.toc = headings
   }
 }

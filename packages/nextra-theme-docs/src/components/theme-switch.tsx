@@ -1,56 +1,44 @@
+'use client'
+
+import cn from 'clsx'
 import { useTheme } from 'next-themes'
+import { Select } from 'nextra/components'
 import { useMounted } from 'nextra/hooks'
 import { MoonIcon, SunIcon } from 'nextra/icons'
-import type { ReactElement } from 'react'
-import type { z } from 'zod'
-import { useThemeConfig } from '../contexts'
-import type { themeOptionsSchema } from '../schemas'
-import { Select } from './select'
+import type { FC } from 'react'
+import { useThemeConfig } from '../stores'
 
 type ThemeSwitchProps = {
   lite?: boolean
   className?: string
 }
 
-type ThemeOptions = z.infer<typeof themeOptionsSchema>
-
-export function ThemeSwitch({
-  lite,
-  className
-}: ThemeSwitchProps): ReactElement {
-  const { setTheme, resolvedTheme, theme = '' } = useTheme()
+export const ThemeSwitch: FC<ThemeSwitchProps> = ({ lite, className }) => {
+  const { setTheme, resolvedTheme, theme } = useTheme()
   const mounted = useMounted()
-  const config = useThemeConfig().themeSwitch
-
+  const { darkMode, themeSwitch } = useThemeConfig()
+  if (!darkMode) {
+    return null
+  }
   const IconToUse = mounted && resolvedTheme === 'dark' ? MoonIcon : SunIcon
-  const options: ThemeOptions =
-    typeof config.useOptions === 'function'
-      ? config.useOptions()
-      : config.useOptions
-
+  const id = mounted ? (theme as keyof typeof themeSwitch) : 'light'
   return (
     <Select
-      className={className}
+      className={cn('x:flex x:items-center x:gap-2', className)}
       title="Change theme"
       options={[
-        { key: 'light', name: options.light },
-        { key: 'dark', name: options.dark },
-        { key: 'system', name: options.system }
+        { id: 'light', name: themeSwitch.light },
+        { id: 'dark', name: themeSwitch.dark },
+        { id: 'system', name: themeSwitch.system }
       ]}
-      onChange={option => {
-        setTheme(option.key)
-      }}
-      selected={{
-        key: theme,
-        name: (
-          <div className="_flex _items-center _gap-2 _capitalize">
-            <IconToUse />
-            <span className={lite ? 'md:_hidden' : ''}>
-              {mounted ? options[theme as keyof typeof options] : options.light}
-            </span>
-          </div>
-        )
-      }}
+      onChange={setTheme}
+      value={id}
+      selectedOption={
+        <>
+          <IconToUse height="12" />
+          {!lite && themeSwitch[id]}
+        </>
+      }
     />
   )
 }

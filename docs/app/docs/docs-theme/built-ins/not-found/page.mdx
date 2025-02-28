@@ -1,0 +1,25 @@
+---
+sidebarTitle: NotFoundPage
+---
+
+# `<NotFoundPage>` Component
+
+Options to configure report of broken link on not found page.
+
+|            |                  |                                            |                                                    |
+| ---------- | ---------------- | ------------------------------------------ | -------------------------------------------------- |
+| `content`  | `ReactNode{:ts}` | `'Submit an issue about broken link'{:ts}` | Content of the link.                               |
+| `labels`   | `string{:ts}`    | `'bug'{:ts}`                               | Labels that can be added to the new created issue. |
+| `children` | `ReactNode{:ts}` | `<H1>404: Page Not Found</H1>{:ts}`        | Top content of page.                               |
+
+```jsx filename="app/not-found.jsx"
+import { NotFoundPage } from 'nextra-theme-docs'
+
+export default function NotFound() {
+  return (
+    <NotFoundPage content="Submit an issue" labels="broken-link">
+      <h1>The page is not found</h1>
+    </NotFoundPage>
+  )
+}
+```

@@ -1,0 +1,69 @@
+@import 'tailwindcss' source(none) prefix(x);
+
+@source './**/*.{ts,tsx}';
+
+@import '../../nextra/styles/default.css';
+@import '../../nextra/styles/code-block.css';
+@import '../../nextra/styles/subheading-anchor.css';
+@import '../../nextra/styles/scrollbar.css';
+@import '../../nextra/styles/steps.css';
+@import '../../nextra/styles/cards.css';
+@import '../../nextra/styles/react-medium-image-zoom.css';
+@import '../css/hamburger.css';
+@import '../css/typesetting-article.css';
+
+@theme {
+}
+
+@utility nextra-focus {
+  @apply x:focus-visible:outline-none x:ring-2 x:ring-primary-200 x:ring-offset-1 x:ring-offset-primary-300 x:dark:ring-primary-800 x:dark:ring-offset-primary-700;
+}
+
+html {
+  --nextra-navbar-height: 64px;
+  --nextra-menu-height: 3.75rem;
+
+  @apply x:antialiased x:text-base;
+  font-feature-settings:
+    'rlig' 1,
+    'calt' 1,
+    'ss01' 1;
+  -webkit-tap-highlight-color: transparent;
+
+  &:not(:has(*:focus)) {
+    /* adding `:not` with `:has` otherwise page jumps while focusing or while tapping in input https://github.com/shuding/nextra/issues/2840 */
+    @apply x:scroll-pt-(--nextra-navbar-height);
+  }
+}
+
+.contains-task-list {
+  @apply x:mt-6;
+
+  input[type='checkbox'] {
+    @apply x:me-1;
+  }
+}
+
+.footnotes a[data-footnote-backref] {
+  font-family: initial;
+}
+
+@keyframes fade-in2 {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.nextra-border {
+  @apply x:border-gray-200 x:dark:border-neutral-800 x:contrast-more:border-neutral-400!;
+}
+
+.nextra-mask {
+  mask-image:
+    linear-gradient(to bottom, transparent, #000 20px, transparent 100%),
+    linear-gradient(to top, transparent, #000 20px, transparent 100%);
+  @apply x:contrast-more:[mask-image:none];
+}

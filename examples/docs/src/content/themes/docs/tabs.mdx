@@ -1,0 +1,81 @@
+---
+sidebarTitle: Tabs
+---
+
+# Tabs Component
+
+A built-in component provided by `nextra-theme-docs`.
+
+## Example
+
+import { Tabs } from 'nextra/components'
+
+<Tabs items={['JavaScript', 'C++', {label:'C', disabled: true}, 'Python']} defaultIndex={1}>
+  <Tabs.Tab>
+    ```js filename="hi.js"
+    import { useState, useEffect } from 'react';
+    ```
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```cpp filename="hi.cpp"
+    #include <iostream>
+    ```
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```c filename="hi.c"
+    #include <stdio.h>
+    ```
+  </Tabs.Tab>
+  <Tabs.Tab>
+     ```python filename="hello.py"
+    print('Hello, world!')
+    ```
+  </Tabs.Tab>
+</Tabs>
+
+## Usage
+
+### MDX component
+
+````mdx filename="tabs.mdx"
+<Tabs items={['JavaScript', 'C++', {label:'C', disabled: true}, 'Python']} defaultIndex={1}>
+  <Tabs.Tab>
+    ```js filename="hi.js"
+    import { useState, useEffect } from 'react';
+    ```
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```cpp filename="hi.cpp"
+    #include <iostream>
+    ```
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```c filename="hi.c"
+    #include <stdio.h>
+    ```
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```python filename="hello.py"
+    print('Hello, world!')
+    ```
+  </Tabs.Tab>
+</Tabs>
+````
+
+### React Component
+
+```jsx filename="tabs.jsx"
+import { Tabs } from 'nextra/components'
+
+const items = ['1', '2', '3', '4']
+const defaultIndex = 1
+const Component = () => (
+  <Tabs items={items} defaultIndex={defaultIndex}>
+    <Tabs.Tab>1</Tab>
+    <Tabs.Tab>2</Tab>
+    <Tabs.Tab>3</Tab>
+    <Tabs.Tab>4</Tab>
+  </Tabs>
+)
+export default Component
+```

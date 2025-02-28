@@ -1,0 +1,264 @@
+---
+sidebarTitle: Layout
+---
+
+import { ToggleVisibilitySection } from 'components/toggle-visibility-section'
+
+# `<Layout>` Component
+
+The theme is configured with the `<Layout>` component. You should pass your
+config options as Layout's `props`, for example:
+
+```jsx filename="app/layout.jsx" {8-9}
+import { Layout } from 'nextra-theme-docs'
+
+export default function MyLayout({ children, ...props }) {
+  return (
+    <html lang="en">
+      <body>
+        <Layout
+          sidebar={{ autoCollapse: true }}
+          docsRepositoryBase="https://github.com/shuding/nextra/tree/main/docs"
+        >
+          {children}
+        </Layout>
+      </body>
+    </html>
+  )
+}
+```
+
+Detailed information for each option is listed below.
+
+## Docs Repository
+
+Set the repository URL of the documentation. It's used to generate the
+"[Edit this page](#edit-link)" link, the "[Feedback](#feedback-link)" link and
+"[Report of broken link](./not-found)" on
+[not found page](https://nextjs.org/docs/app/api-reference/file-conventions/not-found).
+
+|                      |               |                                            |                                      |
+| -------------------- | ------------- | ------------------------------------------ | ------------------------------------ |
+| `docsRepositoryBase` | `string{:ts}` | `'https://github.com/shuding/nextra'{:ts}` | URL of the documentation repository. |
+
+### Specify a Path
+
+If the documentation is inside a monorepo, a subfolder, or a different branch of
+the repository, you can simply set the `docsRepositoryBase` to the root path of
+the `app/` (App Router) folder of your docs. For example:
+
+```jsx filename="app/layout.jsx"
+<Layout docsRepositoryBase="https://github.com/shuding/nextra/tree/main/docs">
+  {children}
+</Layout>
+```
+
+Then Nextra will automatically generate the correct file path for all pages.
+
+## Dark Mode and Themes
+
+Customize the theme behavior of the website.
+
+|              |                |                                                                                                             |                                                                                                        |
+| ------------ | -------------- | ----------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
+| `darkMode`   | `boolean{:ts}` | `true{:ts}`                                                                                                 | Show or hide the dark mode select button.                                                              |
+| `nextThemes` | `object{:ts}`  | `{ attribute: 'class', defaultTheme: 'system', disableTransitionOnChange: true, storageKey: 'theme' }{:ts}` | Configuration for the [next-themes](https://github.com/pacocoursey/next-themes#themeprovider) package. |
+
+## MDX Components [!TODO]
+
+Provide custom [MDX components](https://mdxjs.com/table-of-components) to render
+the content. For example, you can use a custom `pre` component to render code
+blocks.
+
+|              |                            |     |                        |
+| ------------ | -------------------------- | --- | ---------------------- |
+| `components` | `Record<string, React.FC>` |     | Custom MDX components. |
+
+## Edit Link
+
+Show an "Edit this page" link on the page that points to the file URL on GitHub
+(or other places).
+
+|            |                                       |                         |                           |
+| ---------- | ------------------------------------- | ----------------------- | ------------------------- |
+| `editLink` | `string \| ReactElement \| null{:ts}` | `'Edit this page'{:ts}` | Content of the edit link. |
+
+> [!TIP]
+>
+> To disable it, you can set `editLink` to `null`.
+
+## Feedback Link
+
+The built-in feedback link provides a way for users to submit feedback about the
+documentation. By default, it's a link that points to the issue creation form of
+the docs repository, with the current website title prefilled:
+[example](https://github.com/shuding/nextra/issues/new?title=Feedback%20for%20%E2%80%9CTheme%20Configuration%E2%80%9D&labels=feedback).
+
+|                    |                                       |                                     |                                                    |
+| ------------------ | ------------------------------------- | ----------------------------------- | -------------------------------------------------- |
+| `feedback.content` | `string \| ReactElement \| null{:ts}` | `'Question? Give us feedback'{:ts}` | Content of the feedback link.                      |
+| `feedback.labels`  | `string{:ts}`                         | `'feedback'{:ts}`                   | Labels that can be added to the new created issue. |
+
+> [!TIP]
+>
+> To disable it, you can set `feedback.content` to `null`.
+
+## I18n
+
+Options to configure the language dropdown for
+[the i18n docs website](/docs/guide/i18n).
+
+|                       |               |     |                                                         |
+| --------------------- | ------------- | --- | ------------------------------------------------------- |
+| `i18n[number].locale` | `string{:ts}` |     | Locale from `i18n.locales` field in `next.config` file. |
+| `i18n[number].name`   | `string{:ts}` |     | Locale name in dropdown.                                |
+
+## Last Updated Date
+
+Show the last updated date of a page. It's useful for showing the freshness of
+the content.
+
+|               |                             |                        |                                            |
+| ------------- | --------------------------- | ---------------------- | ------------------------------------------ |
+| `lastUpdated` | `ReactElement \| null{:ts}` | `<LastUpdated />{:ts}` | Component to render the last updated info. |
+
+<ToggleVisibilitySection element="last update date" property="timestamp" />
+
+## Navigation
+
+Show previous and next page links on the bottom of the content. It's useful for
+navigating between pages.
+
+|                   |                          |             |                                           |
+| ----------------- | ------------------------ | ----------- | ----------------------------------------- |
+| `navigation`      | `boolean \| object{:ts}` | `true{:ts}` | Enable or disable navigation link.        |
+| `navigation.prev` | `boolean{:ts}`           |             | Enable or disable the previous page link. |
+| `navigation.next` | `boolean{:ts}`           |             | Enable or disable the next page link.     |
+
+![Navigation](/assets/docs/navigation.png)
+
+```jsx filename="app/layout.jsx"
+<Layout
+  navigation={{
+    prev: true,
+    next: true
+  }}
+>
+  {children}
+</Layout>
+```
+
+The above is also equivalent to `navigation: true{:js}`.
+
+<ToggleVisibilitySection element="navigation" property="pagination" />
+
+## Page Map [!TODO]
+
+## Sidebar
+
+|                                    |                |             |                                                                                    |
+| ---------------------------------- | -------------- | ----------- | ---------------------------------------------------------------------------------- |
+| `sidebar.autoCollapse`             | `boolean{:ts}` |             | If true, automatically collapse inactive folders above `defaultMenuCollapseLevel`. |
+| `sidebar.defaultMenuCollapseLevel` | `number{:ts}`  | `2{:ts}`    | Specifies the folder level at which the menu on the left is collapsed by default.  |
+| `sidebar.toggleButton`             | `boolean{:ts}` | `true{:ts}` | Hide/show sidebar toggle button.                                                   |
+| `sidebar.defaultOpen`              | `boolean{:ts}` | `true{:ts}` | Hide/show sidebar by default.                                                      |
+
+### Menu Collapse Level
+
+By default, the sidebar menu is collapsed at level `2`. You can change it by
+setting `sidebar.defaultMenuCollapseLevel` to a different number. For example,
+when set to `1`, every folder will be collapsed by default and when set to
+`Infinity`, all nested folders will be expanded by default.
+
+If `sidebar.autoCollapse` is set to `true`, then all folders that do not contain
+an active/focused route will automatically collapse up to the level set by
+`sidebar.defaultMenuCollapseLevel`. e.g. if `defaultMenuCollapseLevel` is `2`,
+then top-level folders will not auto-collapse.
+
+### Customize Sidebar Content
+
+Together with the [Separators](/docs/docs-theme/page-configuration#separators)
+item, you can customize how the sidebar content is rendered by using JSX
+elements:
+
+```jsx filename="_meta.jsx" {5-10}
+export default {
+  index: 'Intro',
+  '--': {
+    type: 'separator',
+    title: (
+      <div className="flex items-center gap-2">
+        <MyLogo />
+        {children}
+      </div>
+    )
+  },
+  frameworks: 'JS Frameworks & Libs',
+  about: 'About'
+}
+```
+
+![Customized Sidebar](/assets/docs/sidebar-customized.png)
+
+<ToggleVisibilitySection element="`<Sidebar>`" property="sidebar" />
+
+### Customize Sidebar with Front Matter
+
+In addition, you can customize the sidebar title using the `sidebarTitle`
+property in your front matter:
+
+```mdx filename="getting-started.mdx"
+---
+sidebarTitle: Getting Started 🚀
+---
+```
+
+The priority of the sidebar title is as follows:
+
+1. A non-empty title from the `_meta` file.
+1. `sidebarTitle` in the front matter.
+1. `title` in the front matter.
+1. The title derived from the first `h1` Markdown heading (e.g.
+   `# Dima Machina`).
+1. If none of the above are available, it falls back to the filename of the
+   page, formatted according to [The Chicago Manual of Style](https://title.sh).
+
+## Theme Switch
+
+|               |                                                        |                                                           |                                             |
+| ------------- | ------------------------------------------------------ | --------------------------------------------------------- | ------------------------------------------- |
+| `themeSwitch` | `{ light: string; dark: string; system: string }{:ts}` | `{ light: 'Light', dark: 'Dark', system: 'System' }{:ts}` | Translation of options in the theme switch. |
+
+You are able to customize the option names for localization or other purposes:
+
+```jsx filename="app/layout.jsx"
+<Layout
+  themeSwitch={{
+    dark: 'Темный',
+    light: 'Светлый',
+    system: 'Системный'
+  }}
+>
+  {children}
+</Layout>
+```
+
+## Table of Contents (TOC) Sidebar
+
+Show a table of contents on the right side of the page. It's useful for
+navigating between headings.
+
+|                  |                                       |                        |                                              |
+| ---------------- | ------------------------------------- | ---------------------- | -------------------------------------------- |
+| toc.backToTop    | `string \| ReactElement \| null{:ts}` | `'Scroll to top'{:ts}` | Text of back to top button.                  |
+| toc.extraContent | `string \| ReactElement \| null{:ts}` |                        | Display extra content below the TOC content. |
+| toc.float        | `boolean{:ts}`                        | `true{:ts}`            | Float the TOC next to the content.           |
+| toc.title        | `string \| ReactElement \| null{:ts}` | `'On This Page'{:ts}`  | Title of the TOC sidebar.                    |
+
+### Floating TOC
+
+When enabled, the TOC will be displayed on the right side of the page, and it
+will be sticky when scrolling. If it's disabled, the TOC will be displayed
+directly on the page sidebar.
+
+<ToggleVisibilitySection element="`<TOC>`" property="toc" />

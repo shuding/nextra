@@ -1,27 +1,16 @@
-import { useRouter } from 'next/router'
-import { useMemo } from 'react'
-import { DEFAULT_LOCALE, ERROR_ROUTES } from '../../constants.js'
+import { usePathname } from 'next/navigation'
 
-const template = 'https://nextra.site'
+const defaultLocale = process.env.NEXTRA_DEFAULT_LOCALE
 
-export const useFSRoute = () => {
-  const { locale = DEFAULT_LOCALE, asPath, route } = useRouter()
-
-  return useMemo(() => {
-    // because for the 404 route `asPath` will be redirected URL and `normalizePages` will never return correct pageItem
-    const clientRoute = ERROR_ROUTES.has(route) ? route : asPath
-
-    const { pathname } = new URL(clientRoute, template)
-
-    const cleanedPath = locale
-      ? pathname.replace(new RegExp(`\\.${locale}(\\/|$)`), '$1')
+export function useFSRoute() {
+  const pathname = usePathname()
+  return (
+    (process.env.NEXTRA_SHOULD_ADD_LOCALE_TO_LINKS !== 'true' && defaultLocale
+      ? '/' + pathname.split('/').slice(2).join('/')
       : pathname
-
-    return (
-      cleanedPath
-        .replace(/\.html$/, '')
-        .replace(/\/index(\/|$)/, '$1')
-        .replace(/\/$/, '') || '/'
     )
-  }, [asPath, locale, route])
+      .replace(/\.html$/, '')
+      .replace(/\/index(\/|$)/, '$1')
+      .replace(/\/$/, '') || '/'
+  )
 }

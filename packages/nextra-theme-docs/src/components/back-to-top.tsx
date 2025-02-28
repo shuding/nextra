@@ -1,7 +1,7 @@
 import cn from 'clsx'
 import { Button } from 'nextra/components'
 import { ArrowRightIcon } from 'nextra/icons'
-import type { ComponentProps, ReactElement, ReactNode } from 'react'
+import type { ComponentProps, FC, ReactNode } from 'react'
 
 const SCROLL_TO_OPTIONS = { top: 0, behavior: 'smooth' } as const
 
@@ -17,15 +17,11 @@ const scrollToTop: ComponentProps<'button'>['onClick'] = event => {
   buttonElement.disabled = true
 }
 
-export function BackToTop({
-  children,
-  className,
-  hidden
-}: {
+export const BackToTop: FC<{
   children: ReactNode
   className?: string
   hidden: boolean
-}): ReactElement {
+}> = ({ children, className, hidden }) => {
   return (
     <Button
       // elements with `aria-hidden: true` must not be focusable or contain focusable elements
@@ -34,17 +30,17 @@ export function BackToTop({
       disabled={hidden}
       className={({ disabled }) =>
         cn(
-          '_flex _items-center _gap-1.5',
-          '_whitespace-nowrap', // Safari
-          disabled ? '_opacity-0' : '_opacity-100',
+          'x:flex x:items-center x:gap-1.5',
+          'x:whitespace-nowrap', // Safari
+          disabled ? 'x:opacity-0' : 'x:opacity-100',
           className
         )
       }
     >
       {children}
       <ArrowRightIcon
-        height="16"
-        className="_-rotate-90 _border _rounded-full _border-current"
+        height="1.1em"
+        className="x:-rotate-90 x:border x:rounded-full x:border-current"
       />
     </Button>
   )

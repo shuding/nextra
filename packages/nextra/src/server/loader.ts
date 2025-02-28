@@ -1,170 +1,143 @@
 import path from 'node:path'
 import { transformerTwoslash } from '@shikijs/twoslash'
-import slash from 'slash'
+import { findPagesDir } from 'next/dist/lib/find-pages-dir.js'
 import type { LoaderContext } from 'webpack'
-import type { LoaderOptions, PageOpts } from '../types'
+import type { LoaderOptions } from '../types.js'
+import { compileMetadata } from './compile-metadata.js'
 import { compileMdx } from './compile.js'
-import {
-  CHUNKS_DIR,
-  CWD,
-  MARKDOWN_EXTENSION_REGEX,
-  OFFICIAL_THEMES
-} from './constants.js'
-import { PAGES_DIR } from './file-system.js'
-import { twoslashRenderer } from './rehype-plugins/twoslash.js'
+import { CWD, IS_PRODUCTION, METADATA_ONLY_RQ } from './constants.js'
+import { findMetaAndPageFilePaths } from './page-map/find-meta-and-page-file-paths.js'
+import { convertPageMapToJs } from './page-map/to-js.js'
+import { convertToPageMap } from './page-map/to-page-map.js'
+import { twoslashRenderer } from './twoslash.js'
 import { logger } from './utils.js'
 
-const initGitRepo = (async () => {
-  const IS_WEB_CONTAINER = !!process.versions.webcontainer
+const NOW = Date.now()
+const APP_DIR = findPagesDir(CWD).appDir!
 
-  if (!IS_WEB_CONTAINER) {
-    const { Repository } = await import('@napi-rs/simple-git')
-    try {
-      const repository = Repository.discover(CWD)
-      if (repository.isShallow()) {
-        if (process.env.VERCEL) {
-          logger.warn(
-            'The repository is shallow cloned, so the latest modified time will not be presented. Set the VERCEL_DEEP_CLONE=true environment variable to enable deep cloning.'
-          )
-        } else if (process.env.GITHUB_ACTION) {
-          logger.warn(
-            'The repository is shallow cloned, so the latest modified time will not be presented. See https://github.com/actions/checkout#fetch-all-history-for-all-tags-and-branches to fetch all the history.'
-          )
-        } else {
-          logger.warn(
-            'The repository is shallow cloned, so the latest modified time will not be presented.'
-          )
-        }
+if (!APP_DIR) {
+  throw new Error('Unable to find `app` directory')
+}
+
+const repository = await (async () => {
+  if (process.versions.webcontainer) return
+  const { Repository } = await import('@napi-rs/simple-git')
+  try {
+    const repository = Repository.discover(CWD)
+    if (repository.isShallow()) {
+      if (process.env.VERCEL) {
+        logger.warn(
+          'The repository is shallow cloned, so the latest modified time will not be presented. Set the VERCEL_DEEP_CLONE=true environment variable to enable deep cloning.'
+        )
+      } else if (process.env.GITHUB_ACTION) {
+        logger.warn(
+          'The repository is shallow cloned, so the latest modified time will not be presented. See https://github.com/actions/checkout#fetch-all-history-for-all-tags-and-branches to fetch all the history.'
+        )
+      } else {
+        logger.warn(
+          'The repository is shallow cloned, so the latest modified time will not be presented.'
+        )
       }
-      // repository.path() returns the `/path/to/repo/.git`, we need the parent directory of it
-      const gitRoot = path.join(repository.path(), '..')
-      return { repository, gitRoot }
-    } catch (error) {
-      logger.warn(`Init git repository failed ${(error as Error).message}`)
     }
+    return repository
+  } catch (error) {
+    logger.warn(`Init git repository failed ${(error as Error).message}`)
   }
-  return {}
 })()
+
+// repository.path() returns the `/path/to/repo/.git`, we need the parent directory of it
+const GIT_ROOT = repository ? path.join(repository.path(), '..') : ''
+
+const DEFAULT_TRANSFORMERS = transformerTwoslash({
+  renderer: twoslashRenderer(),
+  explicitTrigger: true
+})
 
 export async function loader(
   this: LoaderContext<LoaderOptions>,
   source: string
 ): Promise<string> {
   const {
-    isPageImport = false,
-    isPageMapImport,
-    isMetaFile,
-    theme,
-    themeConfig,
+    isPageImport,
     defaultShowCopyCode,
     search,
     staticImage,
     readingTime: _readingTime,
     latex,
     codeHighlight,
-    transform,
     mdxOptions,
+    contentDirBasePath,
+    contentDir,
     locales,
-    autoImportThemeStyle
+    whiteListTagsStyling,
+    shouldAddLocaleToLinks
   } = this.getOptions()
+  const { resourcePath, resourceQuery } = this
 
-  const mdxPath = this._module?.resourceResolveData
-    ? // to make it work with symlinks, resolve the mdx path based on the relative path
-      /*
-       * `context.rootContext` could include path chunk of
-       * `context._module.resourceResolveData.relativePath` use
-       * `context._module.resourceResolveData.descriptionFileRoot` instead
-       */
-      path.join(
-        this._module.resourceResolveData.descriptionFileRoot,
-        this._module.resourceResolveData.relativePath
-      )
-    : this.resourcePath
+  // We pass `contentDir` only for `page-map/placeholder.ts`
+  if (contentDir) {
+    const locale = resourceQuery.replace('?lang=', '')
+    // Add `app` and `content` folders as the dependencies, so Webpack will
+    // rebuild the module if anything in that context changes
+    //
+    // Note: should be added for dev and prod environment since build can be crashed after renaming
+    // mdx pages https://github.com/shuding/nextra/issues/3988#issuecomment-2605389046
+    this.addContextDependency(APP_DIR)
+    this.addContextDependency(path.join(CWD, contentDir, locale))
 
-  const currentPath = slash(mdxPath)
-
-  if (currentPath.includes('/pages/api/')) {
-    logger.warn(
-      `Ignoring ${currentPath} because it is located in the "pages/api" folder.`
-    )
-    return ''
-  }
-  if (isMetaFile) {
-    // _meta.[jt]sx? used as a page.
-    return `export default () => null
-
-export const getStaticProps = () => ({ notFound: true })`
-  }
-
-  if (currentPath.includes('/pages/_app.mdx')) {
-    throw new Error(
-      'Nextra v3 no longer supports _app.mdx, use _app.{js,jsx} or _app.{ts,tsx} for TypeScript projects instead.'
-    )
-  }
-
-  const isLocalTheme = theme.startsWith('.') || theme.startsWith('/')
-  const layoutPath = isLocalTheme ? slash(path.resolve(theme)) : theme
-
-  const cssImports = `
-${latex ? "import 'katex/dist/katex.min.css'" : ''}
-${OFFICIAL_THEMES.includes(theme) && autoImportThemeStyle ? `import '${theme}/style.css'` : ''}`
-
-  if (currentPath.includes('/pages/_app.')) {
-    if (currentPath.includes('/node_modules/')) {
-      throw new Error(
-        'Nextra v3 requires to have a custom App component (`pages/_app.jsx`). For additional information, check out https://nextjs.org/docs/pages/building-your-application/routing/custom-app#usage.'
-      )
+    const filePaths = await findMetaAndPageFilePaths({
+      dir: APP_DIR,
+      cwd: CWD,
+      locale,
+      contentDir
+    })
+    let { pageMap, mdxPages } = convertToPageMap({
+      filePaths,
+      basePath: shouldAddLocaleToLinks
+        ? [locale, contentDirBasePath].filter(Boolean).join('/')
+        : contentDirBasePath,
+      locale
+    })
+    if (shouldAddLocaleToLinks && 'children' in pageMap[0]!) {
+      pageMap = pageMap[0].children
     }
-    // Relative path instead of a package name
-    const themeConfigImport = themeConfig
-      ? `import __themeConfig from '${slash(path.resolve(themeConfig))}'`
-      : ''
-    const appRawJs = `import __layout from '${layoutPath}'
-${themeConfigImport}
-${cssImports}
-${source}
-
-const __nextra_internal__ = globalThis[Symbol.for('__nextra_internal__')] ||= Object.create(null)
-__nextra_internal__.context ||= Object.create(null)
-__nextra_internal__.Layout = __layout
-${themeConfigImport && '__nextra_internal__.themeConfig = __themeConfig'}`
-    return appRawJs
+    const globalMetaPath = filePaths.find(filePath =>
+      filePath.includes('/_meta.global.')
+    )
+    return convertPageMapToJs({ pageMap, mdxPages, globalMetaPath })
+  }
+  // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- We pass `locales` only for `page-map/get.ts`
+  if (locales) {
+    return replaceDynamicResourceQuery(
+      source,
+      'import(`./placeholder.js?lang=${lang}`)',
+      locales
+    )
   }
 
-  const relativePath = slash(path.relative(PAGES_DIR, mdxPath))
+  // Run only on production because it can slow down Fast Refresh for uncommitted files
+  // https://github.com/shuding/nextra/issues/3675#issuecomment-2466416366
+  const lastCommitTime = IS_PRODUCTION
+    ? await getLastCommitTime(resourcePath)
+    : NOW
 
-  let locale = locales[0] === '' ? '' : relativePath.split('/')[0]
-  // In case when partial document is placed outside `pages` directory
-  if (locale === '..') locale = ''
-
-  const route =
-    '/' +
-    relativePath
-      .replace(MARKDOWN_EXTENSION_REGEX, '')
-      .replace(/(^|\/)index$/, '')
-
-  const {
-    result,
-    title,
-    frontMatter,
-    structurizedData,
-    searchIndexKey,
-    hasJsxInH1,
-    readingTime
-  } = await compileMdx(source, {
+  if (!IS_PRODUCTION && resourceQuery === METADATA_ONLY_RQ) {
+    return compileMetadata(source, {
+      filePath: resourcePath,
+      lastCommitTime
+    })
+  }
+  return compileMdx(source, {
     mdxOptions: {
       ...mdxOptions,
       jsx: true,
       outputFormat: 'program',
       format: 'detect',
       rehypePrettyCodeOptions: {
-        ...mdxOptions?.rehypePrettyCodeOptions,
+        ...mdxOptions.rehypePrettyCodeOptions,
         transformers: [
-          transformerTwoslash({
-            renderer: twoslashRenderer(),
-            explicitTrigger: true
-          }),
-          ...(mdxOptions?.rehypePrettyCodeOptions?.transformers || [])
+          DEFAULT_TRANSFORMERS,
+          ...(mdxOptions.rehypePrettyCodeOptions.transformers || [])
         ]
       }
     },
@@ -174,67 +147,65 @@ ${themeConfigImport && '__nextra_internal__.themeConfig = __themeConfig'}`
     search,
     latex,
     codeHighlight,
-    route,
-    locale,
-    filePath: mdxPath,
+    filePath: resourcePath,
     useCachedCompiler: true,
     isPageImport,
-    isPageMapImport
+    whiteListTagsStyling,
+    lastCommitTime
   })
-  // Imported as a normal component, no need to add the layout.
-  if (!isPageImport) {
-    return `${result}
-export default MDXLayout`
+}
+
+/*
+ * https://github.com/vercel/next.js/issues/71453#issuecomment-2431810574
+ *
+ * Replace `await import(`./placeholder.js?lang=${lang}`)`
+ *
+ * with:
+ *
+ * await {
+ * "en": () => import("./placeholder.js?lang=en"),
+ * "es": () => import("./placeholder.js?lang=es"),
+ * "ru": () => import("./placeholder.js?lang=ru")
+ * }[locale]()
+ *
+ * So static analyzer will know which `resourceQuery` to pass to the loader
+ **/
+function replaceDynamicResourceQuery(
+  rawJs: string,
+  rawImport: string,
+  locales: string[]
+): string {
+  const { importPath } =
+    rawJs.match(/import\(`(?<importPath>.+?)\?lang=\${lang}`\)/)?.groups || {}
+  if (!importPath) {
+    throw new Error(
+      `Can't find \`${rawImport}\` statement. This is a Nextra bug`
+    )
   }
-  if (searchIndexKey) {
-    // Store all the things in buildInfo.
-    const { buildInfo } = this._module as any
-    buildInfo.nextraSearch = {
-      indexKey: searchIndexKey,
-      ...(frontMatter.searchable !== false && {
-        title,
-        data: structurizedData,
-        route
-      })
-    }
+
+  const replaced = `{
+${locales
+  .map(lang => `"${lang}": () => import("${importPath}?lang=${lang}")`)
+  .join(',\n')}
+}[lang]()`
+
+  return rawJs.replace(rawImport, replaced)
+}
+
+async function getLastCommitTime(
+  filePath: string
+): Promise<number | undefined> {
+  if (!repository) {
+    // Skip since we already logged logger.warn('Init git repository failed')
+    return
   }
-
-  let timestamp: PageOpts['timestamp']
-  const { repository, gitRoot } = await initGitRepo
-  if (repository && gitRoot) {
-    try {
-      timestamp = await repository.getFileLatestModifiedDateAsync(
-        path.relative(gitRoot, mdxPath)
-      )
-    } catch {
-      // Failed to get timestamp for this file. Silently ignore it
-    }
+  const relativePath = path.relative(GIT_ROOT, filePath)
+  try {
+    return await repository.getFileLatestModifiedDateAsync(relativePath)
+  } catch {
+    logger.warn(
+      'Failed to get the last modified timestamp from Git for the file',
+      relativePath
+    )
   }
-
-  const pageOpts: Partial<PageOpts> = {
-    filePath: slash(path.relative(CWD, mdxPath)),
-    hasJsxInH1,
-    timestamp,
-    readingTime
-  }
-  const finalResult = transform ? await transform(result, { route }) : result
-
-  const stringifiedPageOpts = JSON.stringify(pageOpts).slice(0, -1)
-  const pageMapPath = path.join(CHUNKS_DIR, `nextra-page-map-${locale}.mjs`)
-
-  const pageMap = locale.startsWith('[')
-    ? 'const pageMap = []'
-    : `import { pageMap } from '${slash(pageMapPath)}'`
-
-  const rawJs = `import { HOC_MDXWrapper } from 'nextra/setup-page'
-${pageMap}
-${finalResult}
-
-export default HOC_MDXWrapper(
-  MDXLayout,
-  '${route}',
-  ${stringifiedPageOpts},pageMap,frontMatter,title},
-  typeof RemoteContent === 'undefined' ? useTOC : RemoteContent.useTOC
-)`
-  return rawJs
 }

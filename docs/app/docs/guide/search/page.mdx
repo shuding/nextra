@@ -1,0 +1,39 @@
+# Search Engine
+
+Nextra features full-page search, that includes list items, code blocks,
+headings and table cells.
+
+Nextra indexes your content automatically at build-time and performs incredibly
+fast full-text search via
+[FlexSearch](https://github.com/nextapps-de/flexsearch).
+
+## Configuration
+
+### `nextraConfig.search`
+
+- Type: `boolean | { codeblocks: boolean }`
+- Default: `true`
+
+## Example
+
+```js filename="next.config.mjs" {4-6}
+import nextra from 'nextra'
+
+const withNextra = nextra({
+  search: {
+    codeblocks: false
+  }
+})
+```
+
+## Search in code blocks
+
+Inline `<code attr="foo" />{:html}` can be searched as well as code blocks.
+
+```html
+<code>I'm Searchable!</code>
+```
+
+> [!TIP]
+>
+> To disable search in code blocks set `search: { codeblocks: false }{:js}`

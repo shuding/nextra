@@ -1,0 +1,62 @@
+---
+icon: FolderIcon
+sidebarTitle: src
+description:
+  The `src` directory in Nextra allows you to organize your application code
+  separately from project configuration files, enhancing code structure and
+  maintainability.
+---
+
+import { FileTree } from 'nextra/components'
+
+# `src` Directory
+
+As an alternative to having the special Nextra `content` directory and
+`mdx-components` file in the root of your project, Nextra also supports the
+common pattern of placing application code under the `src` directory.
+
+This separates application code from project configuration files which mostly
+live in the root of a project, which is preferred by some individuals and teams.
+
+To use the `src` directory, move the `content` directory and `mdx-components`
+file to `src/content` or `src/mdx-components` respectively.
+
+export const nextConfigPackageJson = (
+  <>
+    <FileTree.File name="next.config.js" />
+    <FileTree.File name="package.json" />
+  </>
+)
+
+export const folders = (
+  <>
+    <FileTree.Folder name="app" open>
+      <FileTree.Folder name="[[...mdxPath]]" open>
+        <FileTree.File name="page.jsx" />
+      </FileTree.Folder>
+      <FileTree.File name="layout.jsx" />
+    </FileTree.Folder>
+    <FileTree.Folder name="content" open active>
+      <FileTree.File name="index.mdx" active />
+    </FileTree.Folder>
+    <FileTree.File name="mdx-components.js" active />
+  </>
+)
+
+<FileTree>
+  **Without `src` directory**
+  <FileTree.Folder name="your-project" open>
+    {folders}
+    {nextConfigPackageJson}
+  </FileTree.Folder>
+</FileTree>
+
+<FileTree>
+  **With `src` directory**
+  <FileTree.Folder name="your-project" open>
+    <FileTree.Folder name="src" open active>
+      {folders}
+    </FileTree.Folder>
+    {nextConfigPackageJson}
+  </FileTree.Folder>
+</FileTree>

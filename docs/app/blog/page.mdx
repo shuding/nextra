@@ -1,0 +1,63 @@
+---
+asIndexPage: true
+description:
+  Stay updated with the latest news and updates from the Nextra team, including
+  new releases, features, and community highlights.
+---
+
+import { Link } from 'nextra-theme-docs'
+
+# Blog
+
+<BlogPage />
+
+export function BlogPage() {
+  return [
+    {
+      route:
+        'https://the-guild.dev/blog/nextra-4?utm_source=nextra.site&utm_campaign=blog_page&utm_content=blog_link',
+      title: 'Nextra 4',
+      description:
+        'App Router support, Turbopack support, compiled by React Compiler, new Rust-powered search Pagefind, RSC i18n, server/client components, smallest bundle size EVER for a Nextra-powered website, GitHub Alert Syntax, new _meta.global file and more.',
+      date: '2024-01-13'
+    },
+    {
+      route:
+        'https://the-guild.dev/blog/nextra-3?utm_source=nextra.site&utm_campaign=blog_page&utm_content=blog_link',
+      title: 'Nextra 3 – Your Favourite MDX Framework, Now on 🧪 Steroids',
+      description:
+        'MDX 3, new i18n, new _meta files with JSX support, more powerful TOC, remote MDX, better bundle size, MathJax, new code block styles, shikiji, ESM-only and more.',
+      date: '2023-12-12'
+    },
+    {
+      route:
+        'https://the-guild.dev/blog/nextra-2?utm_source=nextra.site&utm_campaign=blog_page&utm_content=blog_link',
+      title: 'Nextra 2 – Next.js Static Site Generator',
+      description:
+        'Here are what the new version of Nextra 2 Framework includes.',
+      date: '2023-01-24'
+    }
+  ].map(page => (
+    <div key={page.route} className="mt-12">
+      <h3 className="text-2xl font-semibold">{page.title}</h3>
+      <p className="my-6 leading-7 opacity-80">
+        {page.description}{' '}
+        {page.date && <Link href={page.route}>Read more</Link>}
+      </p>
+      {page.date ? (
+        <time
+          dateTime={new Date(page.date).toISOString()}
+          className="text-sm opacity-50"
+        >
+          {new Date(page.date).toLocaleDateString('en', {
+            month: 'long',
+            day: 'numeric',
+            year: 'numeric'
+          })}
+        </time>
+      ) : (
+        <span className="text-sm opacity-50">Coming soon!</span>
+      )}
+    </div>
+  ))
+}

@@ -1,15 +1,16 @@
 {
   "name": "nextra-theme-docs",
-  "version": "3.2.3",
+  "version": "4.2.13",
   "description": "A Nextra theme for documentation sites.",
   "repository": "https://github.com/shuding/nextra",
   "author": "Shu Ding <g@shud.in>",
   "license": "MIT",
   "exports": {
     "./style.css": "./dist/style.css",
+    "./style-prefixed.css": "./dist/style-prefixed.css",
     ".": {
-      "import": "./dist/index.js",
-      "types": "./dist/index.d.mts"
+      "types": "./dist/index.d.mts",
+      "import": "./dist/index.js"
     }
   },
   "types": "./dist/index.d.mts",
@@ -17,51 +18,43 @@
     "dist"
   ],
   "scripts": {
-    "build": "tsup",
-    "build:all": "pnpm build && pnpm build:tailwind",
-    "build:tailwind": "pnpm postcss css/styles.css -o dist/style.css --verbose",
-    "clean": "rimraf ./dist ./style.css",
-    "dev": "concurrently \"pnpm dev:layout\" \"pnpm dev:tailwind\"",
-    "dev:layout": "tsup --watch",
-    "dev:tailwind": "TAILWIND_MODE=watch pnpm postcss css/styles.css -o dist/style.css --watch",
-    "prepublishOnly": "pnpm build:all",
+    "build": "NODE_ENV=production tsup",
+    "dev": "tsup --watch . --watch ../nextra/src --watch ../nextra/styles",
+    "prepublishOnly": "pnpm build",
     "test": "vitest run",
-    "types": "tsup --dts-only",
     "types:check": "tsc --noEmit"
   },
   "peerDependencies": {
-    "next": ">=13",
+    "next": ">=14",
     "nextra": "workspace:*",
     "react": ">=18",
     "react-dom": ">=18"
   },
   "dependencies": {
     "@headlessui/react": "^2.1.2",
-    "clsx": "^2.0.0",
-    "escape-string-regexp": "^5.0.0",
-    "flexsearch": "^0.7.43",
+    "clsx": "^2.1.0",
     "next-themes": "^0.4.0",
+    "react-compiler-runtime": "0.0.0-experimental-22c6e49-20241219",
     "scroll-into-view-if-needed": "^3.1.0",
-    "zod": "^3.22.3"
+    "zod": "^3.22.3",
+    "zod-validation-error": "^3.0.0",
+    "zustand": "^5.0.1"
   },
   "devDependencies": {
-    "@tailwindcss/nesting": "^0.0.0-insiders.565cd3e",
+    "@tailwindcss/cli": "^4.0.0-beta.8",
+    "@tailwindcss/postcss": "^4.0.0-beta.8",
     "@testing-library/react": "^16.0.0",
-    "@types/react": "^18.2.23",
-    "@types/react-dom": "^18.2.8",
-    "@vitejs/plugin-react": "^4.1.0",
-    "concurrently": "^9.0.0",
-    "jsdom": "^25.0.0",
-    "next": "^15.0.0-rc.1",
+    "@types/react": "^19.0.10",
+    "@vitejs/plugin-react": "^4.3.4",
+    "esbuild-react-compiler-plugin": "workspace:*",
+    "jsdom": "^26.0.0",
+    "next": "^15.0.2",
     "nextra": "workspace:*",
-    "postcss": "^8.4.33",
-    "postcss-cli": "^11.0.0",
-    "postcss-import": "^16.0.0",
-    "postcss-lightningcss": "^1.0.0",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "tailwindcss": "^3.4.1",
-    "vitest": "^2.0.3"
+    "postcss": "^8.4.49",
+    "react": "19.0.0",
+    "tailwindcss": "^4.0.0-beta.8",
+    "vitest": "^3.0.0",
+    "zx": "^8.2.4"
   },
   "sideEffects": false
 }

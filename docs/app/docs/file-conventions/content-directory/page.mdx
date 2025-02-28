@@ -1,0 +1,119 @@
+---
+icon: FolderIcon
+sidebarTitle: content
+description:
+  The `content` directory in Nextra allows you to organize your Markdown files
+  without adhering to the `page` filename convention, simplifying the migration
+  from Next.js `pages` router.
+---
+
+import fs from 'node:fs/promises'
+import { compileMdx } from 'nextra/compile'
+import { FileTree, Steps } from 'nextra/components'
+import { MDXRemote } from 'nextra/mdx-remote'
+
+export async function MDXPathPage() {
+  const filename = '[[...mdxPath]]/page.jsx'
+  const rawMdx = `~~~jsx filename="${filename}" showLineNumbers
+${(await fs.readFile(`../examples/docs/src/app/docs/${filename}`, 'utf8'))
+  .split('\n')
+  .slice(2, -1)
+  .join('\n')}
+~~~`
+  const rawJs = await compileMdx(rawMdx, { defaultShowCopyCode: true })
+  return <MDXRemote compiledSource={rawJs} />
+}
+
+# `content` Directory
+
+The `content` directory is designed to:
+
+1. Migrate your existing Next.js `pages` router with minimal changes, you just
+   need to rename your `pages` directory to `content`.
+1. Avoid having `page` filename convention, e.g. `app/configuration/page.mdx` ->
+   `content/configuration.mdx`
+
+## Setup
+
+<Steps>
+
+### Create your first MDX page as `content/index.mdx`:
+
+```mdx filename="content/index.mdx"
+# Welcome to Nextra
+
+Hello, world!
+```
+
+> [!TIP]
+>
+> You can keep `content` directory in root of your project, or in
+> [`src` directory](./src-directory).
+
+### Set `contentDirBasePath` option in `next.config` file (_optional_)
+
+If you want to serve your content from a different path, you can set
+`contentDirBasePath` option:
+
+```js filename="next.config.mjs" {4}
+import nextra from 'nextra'
+
+const withNextra = nextra({
+  contentDirBasePath: '/docs' // Or even nested e.g. `/docs/advanced`
+})
+```
+
+### Add `[[...mdxPath]]/page.jsx` file
+
+Place this file in `app` directory with the following content:
+
+<MDXPathPage />
+
+you should get the following structure:
+
+<FileTree>
+  <FileTree.Folder name="app" open>
+    <FileTree.File name="layout.jsx" />
+    <FileTree.Folder name="[[...mdxPath]]" open active>
+      <FileTree.File name="page.jsx" active />
+    </FileTree.Folder>
+  </FileTree.Folder>
+  <FileTree.Folder name="content" open>
+    <FileTree.File name="index.mdx" />
+  </FileTree.Folder>
+  <FileTree.File name="next.config.js" />
+  <FileTree.File name="package.json" />
+</FileTree>
+
+> [!TIP]
+>
+> Consider the single catch-all route `[[...mdxPath]]/page.jsx` as a gateway to
+> your `content` directory.
+>
+> If you set `contentDirBasePath` option in `next.config` file, you should put
+> `[[...mdxPath]]/page.jsx` in the corresponding directory.
+
+### You are ready to go!
+
+> [!NOTE]
+>
+> Many existing solutions such as
+> [Refreshing the Next.js App Router When Your Markdown Content Changes](https://steveruiz.me/posts/nextjs-refresh-content)
+> rely on extra dependencies like `concurrently` and `ws`. These approaches
+> include
+> [Dan Abramov workaround with `<AutoRefresh>` component and dev web socket server](https://github.com/hashicorp/next-remote-watch/issues/42#issuecomment-1794052655).
+>
+> Nextra's `content` directory delivers a streamlined solution right out of the
+> box:
+>
+> - you don't need to install unnecessary dependencies
+> - you don't need to restart your server on changes in `content` directory
+> - hot reloading works out of the box
+> - you can use `import` statements in MDX files and
+>   [static images](/docs/guide/image#static-image) works as well
+>
+> Checkout Nextra's
+> [docs website](https://github.com/shuding/nextra/tree/main/examples/docs) and
+> [i18n website example](https://github.com/shuding/nextra/tree/main/examples/swr-site).
+
+</Steps>

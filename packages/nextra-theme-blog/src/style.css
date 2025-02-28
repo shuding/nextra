@@ -1,0 +1,59 @@
+@import 'tailwindcss' source(none) prefix(x);
+
+@source './**/*.{ts,tsx}';
+
+@plugin "@tailwindcss/typography";
+
+@import '../../nextra/styles/default.css';
+@import '../../nextra/styles/code-block.css';
+@import '../../nextra/styles/subheading-anchor.css';
+@import '../../nextra/styles/scrollbar.css';
+@import '../../nextra/styles/steps.css';
+@import '../../nextra/styles/cards.css';
+@import '../../nextra/styles/react-medium-image-zoom.css';
+
+@theme {
+}
+
+html {
+  @apply x:scroll-pt-5;
+}
+
+article {
+  @apply x:mx-auto x:block x:pt-20 x:pb-32;
+  img {
+    @apply x:mx-auto;
+  }
+}
+
+h1 {
+  letter-spacing: -0.03em;
+}
+
+.x\:prose code {
+  &:before,
+  &:after {
+    @apply x:hidden;
+  }
+  .line {
+    @apply x:font-normal;
+  }
+}
+
+.x\:prose .nextra-callout p {
+  @apply x:m-0;
+}
+
+.footnotes a[data-footnote-backref] {
+  font-family: initial;
+}
+
+.nextra-tag {
+  @apply x:select-none x:rounded-md x:bg-gray-200 x:px-1 x:text-sm x:text-gray-400 x:transition-colors;
+  @apply x:dark:bg-gray-600 x:dark:text-gray-300;
+
+  &:hover {
+    @apply x:bg-gray-300 x:text-gray-500;
+    @apply x:dark:bg-gray-700 x:dark:text-gray-200;
+  }
+}

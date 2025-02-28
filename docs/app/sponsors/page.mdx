@@ -1,0 +1,55 @@
+---
+description:
+  Support Nextra by exploring its sponsors. Learn how they contribute to the
+  development and success of the Nextra framework
+---
+
+import { Button, Cards, Image } from 'nextra/components'
+import { cloneElement } from 'react'
+
+# Sponsors
+
+<div className="mb-12 text-center">
+  <Button
+    className="mt-3 inline-block !px-6 hover:!no-underline"
+    variant="outline"
+    href="https://github.com/sponsors/dimaMachina"
+    as="a"
+    target="_blank"
+    rel="noreferrer"
+  >
+    {'Become a Sponsor'}
+  </Button>
+</div>
+
+{/* prettier-ignore */}
+<Cards num={3}>
+<>[![GraphQL Hive preview](../showcase/_logos/graphql-hive.png)](https://the-guild.dev/graphql/hive?utm_source=nextra.site&utm_campaign=nextra&utm_content=logolink)</>
+<>[![Speakeasy preview](../showcase/_logos/speakeasy.png)](https://speakeasyapi.dev/docs?utm_source=nextra.site&utm_campaign=nextra&utm_content=logolink)</>
+<>[![xyflow preview](../showcase/_logos/xyflow.jpg)](https://xyflow.com?utm_source=nextra.site&utm_campaign=nextra&utm_content=logolink)</>
+</Cards>
+
+export default function MdxLayout(props) {
+  return cloneElement(props.children, {
+    components: {
+      img: props => (
+        <Image {...props} className="[aspect-ratio:12/6.3] object-cover" />
+      ),
+      a({ children, href }) {
+        const { alt } = children.props
+        return (
+          <Cards.Card
+            href={href}
+            title={alt.replace(/ preview$/i, '')}
+            target="_blank"
+            rel="noreferrer"
+            arrow
+            className="!no-underline"
+          >
+            {children}
+          </Cards.Card>
+        )
+      }
+    }
+  })
+}

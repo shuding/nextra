@@ -1,0 +1,77 @@
+---
+sidebarTitle: About
+description:
+  Learn about Nextra's history, team, and contributors, and explore how
+  open-source technologies power Nextra's features.
+---
+
+import { Image } from 'nextra/components'
+import { cloneElement } from 'react'
+
+export default function MdxLayout(props) {
+  return cloneElement(props.children, {
+    components: {
+      img: props => <Image {...props} className="inline" />
+    }
+  })
+}
+
+# About Nextra
+
+Nextra was initially created by [Vercel](https://vercel.com) members
+[Shu Ding](https://twitter.com/shuding_) and
+[Paco Coursey](https://twitter.com/pacocoursey) in 2020. Since 2021,
+[Yixuan Xu](https://twitter.com/yixuanxu94) contributed tremendously to the
+project.
+
+In 2022, [Dimitri Postolov](https://twitter.com/dimaMachina_) from
+[The Guild](https://the-guild.dev) joined the core team to help with the
+development of Nextra 2.
+
+In 2024 Nextra 3 was released, current primary maintainer Dimitri Postolov fully
+developed it, and [Oscar Xie](https://github.com/87xie)
+[actively contributed](https://github.com/shuding/nextra/pulls?q=sort%3Aupdated-desc+is%3Apr+author%3A87xie+is%3Aclosed+created%3A%3C2024-10-03)
+to this release.
+
+In 2025 Nextra 4 with [App Router](https://nextjs.org/docs/app) support was
+released, Dimitri Postolov fully developed it too.
+
+## Team
+
+Currently, the project is maintained by Dimitri Postolov. You can check out
+[the full list of contributors](https://github.com/shuding/nextra/graphs/contributors)
+on GitHub.
+
+## Credits
+
+Nextra is powered by these incredible open source projects:
+
+- https://reactjs.org
+- https://nextjs.org
+- https://turbo.build
+- https://mdxjs.com
+- https://pnpm.io
+- https://tailwindcss.com
+- https://github.com/pacocoursey/next-themes
+- https://github.com/shikijs/shiki
+- https://github.com/cloudcannon/pagefind
+- https://github.com/atomiks/rehype-pretty-code
+- https://github.com/Brooooooklyn/simple-git
+- https://github.com/francoismassart/eslint-plugin-tailwindcss
+
+## Design assets
+
+Feel free to use the Nextra logo and other assets in your project. But please
+don't modify the logo, and don't use the logo to represent your project or
+product.
+
+|    Name     |                   Description                    |                Preview                |
+| :---------: | :----------------------------------------------: | :-----------------------------------: |
+|    Icon     | Useful for favicons, app icons, link icons, etc. |      ![Nextra icon](../icon.svg)      |
+|    Logo     |                 Full Nextra logo                 |       ![Nextra logo](/logo.svg)       |
+| Social Card |              The Nextra social card              | ![Nextra card](/opengraph-image.jpeg) |
+
+## License
+
+The Nextra project and themes are licensed under
+[the MIT license](https://github.com/shuding/nextra/blob/main/LICENSE).

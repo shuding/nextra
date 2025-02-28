@@ -1,0 +1,58 @@
+---
+sidebarTitle: Customize Cascade Layers
+---
+
+import { Steps } from 'nextra/components'
+
+# Customize the Cascade Layers
+
+In some scenarios, you may need more control over the Nextra predefined CSS to
+avoid unintended overrides of styles within cascade layers. Below is an example
+of how `nextra-theme-docs` uses
+[postcss-import](https://github.com/postcss/postcss-import) to place predefined
+CSS into a specified cascade layer:
+
+<Steps>
+
+## Install `postcss-import`
+
+Install `postcss-import` and add it to `postcss.config.mjs`:
+
+```js filename="postcss.config.mjs"
+export default {
+  plugins: {
+    'postcss-import': {}
+    // ... your other PostCSS plugins (e.g., `autoprefixer`, `cssnano`)
+  }
+}
+```
+
+## Set up the cascade layers
+
+In your CSS file (e.g. `styles.css`), import the `nextra-docs-theme` CSS and
+specify the layers:
+
+```css filename="styles.css"
+@layer nextra, my-base;
+
+@import 'nextra-theme-docs/dist/style.css' layer(nextra);
+
+@layer my-base {
+  /* my base styles */
+}
+```
+
+## Import your CSS file
+
+Import your CSS file at the top-level layout of your application (e.g.
+`app/layout.jsx`) to apply the styles.
+
+```jsx filename="app/layout.jsx"
+import '../path/to/your/styles.css'
+
+export default async function RootLayout({ children }) {
+  // ... Your layout logic here
+}
+```
+
+</Steps>

@@ -1,12 +1,9 @@
 <svg
-  version="1.1"
   xmlns="http://www.w3.org/2000/svg"
   viewBox="0 0 1230.9077358360364 438.33413843075004"
   width="2461.815471672073"
   height="876.6682768615001"
 >
-  <!-- svg-source:excalidraw -->
-
   <defs>
     <style>
       @font-face {
@@ -25,7 +22,7 @@
     width="1230.9077358360364"
     height="438.33413843075004"
     fill="#ffffff"
-  ></rect>
+  />
   <g
     stroke-linecap="round"
     transform="translate(94.78256038945676 262.8329719679723) rotate(0 86.5 37)"
@@ -35,7 +32,7 @@
       stroke="#000000"
       stroke-width="1"
       fill="none"
-    ></path>
+    />
   </g>
   <g
     transform="translate(134.78256038945676 284.3329719679723) rotate(0 45 13)"
@@ -62,14 +59,14 @@
       stroke="#fab005"
       stroke-width="0.5"
       fill="none"
-    ></path>
+    />
     <path
       d="M-1.99 -1.36 C38.15 -2.14, 73.2 -0.91, 171.7 -0.74 M174 1.18 C170.73 16.49, 173.8 35.09, 172.78 54.01 M173.3 56.46 C123.93 56.32, 76.24 55.6, 0.64 57.39 M0.78 57.25 C0.52 40.47, -0.1 23.08, -1.43 1.2"
       stroke="#c92a2a"
       stroke-width="1.5"
       fill="none"
       stroke-dasharray="1.5 7"
-    ></path>
+    />
   </g>
   <g
     transform="translate(98.28256038945676 196.8329719679723) rotate(0 81.5 12)"
@@ -96,14 +93,14 @@
       stroke="#15aabf"
       stroke-width="0.5"
       fill="none"
-    ></path>
+    />
     <path
       d="M1.02 -1.78 C54.38 0.62, 109.59 0.43, 173.6 -1.19 M171.07 -2 C174.35 10.04, 172.99 21.86, 172.58 40.12 M172.2 40.84 C106.11 40.52, 40.33 43.79, -0.4 41.13 M0.28 42.15 C-0.51 25.73, -1.59 13.75, 1.88 -0.78"
       stroke="#1864ab"
       stroke-width="1.5"
       fill="none"
       stroke-dasharray="1.5 7"
-    ></path>
+    />
   </g>
   <g
     transform="translate(98.28256038945676 117.8329719679723) rotate(0 81.5 12)"
@@ -131,7 +128,7 @@
         stroke-width="1.5"
         fill="none"
         stroke-dasharray="1.5 7"
-      ></path>
+      />
     </g>
     <g
       transform="translate(98.78256038945676 371.8329719679723) rotate(0 81.298247172311 0.2892546217888139)"
@@ -142,7 +139,7 @@
         stroke-width="1.5"
         fill="none"
         stroke-dasharray="1.5 5"
-      ></path>
+      />
     </g>
     <g
       transform="translate(98.78256038945676 371.8329719679723) rotate(0 81.298247172311 0.2892546217888139)"
@@ -153,7 +150,7 @@
         stroke-width="1.5"
         fill="none"
         stroke-dasharray="1.5 5"
-      ></path>
+      />
     </g>
   </g>
   <g
@@ -181,7 +178,7 @@
       stroke="#000000"
       stroke-width="1"
       fill="none"
-    ></path>
+    />
   </g>
   <g
     transform="translate(351.78256038945676 284.3329719679723) rotate(0 36.5 13)"
@@ -209,7 +206,7 @@
         stroke-width="1.5"
         fill="none"
         stroke-dasharray="1.5 7"
-      ></path>
+      />
     </g>
     <g
       transform="translate(524.7825603894568 359.8329719679723) rotate(0 83.41918096728625 1.0844718735665992)"
@@ -220,7 +217,7 @@
         stroke-width="1.5"
         fill="none"
         stroke-dasharray="1.5 5"
-      ></path>
+      />
     </g>
     <g
       transform="translate(524.7825603894568 359.8329719679723) rotate(0 83.41918096728625 1.0844718735665992)"
@@ -231,7 +228,7 @@
         stroke-width="1.5"
         fill="none"
         stroke-dasharray="1.5 5"
-      ></path>
+      />
     </g>
   </g>
   <g
@@ -243,14 +240,14 @@
       stroke="#fab005"
       stroke-width="0.5"
       fill="none"
-    ></path>
+    />
     <path
       d="M-0.32 1 C46.66 -0.9, 88.95 2.17, 171.11 -0.22 M174.71 0.3 C173.34 10.21, 171.73 21.8, 171.12 55.64 M174.01 55.78 C110.32 54.53, 45.29 53.91, -1.55 53.57 M1.22 55.56 C-1.98 35.07, -0.84 17.33, 1.93 -1.03"
       stroke="#c92a2a"
       stroke-width="1.5"
       fill="none"
       stroke-dasharray="1.5 7"
-    ></path>
+    />
   </g>
   <g
     transform="translate(812.2825603894568 190.3329719679723) rotate(0 81.5 12)"
@@ -277,7 +274,7 @@
       stroke="#000000"
       stroke-width="1"
       fill="none"
-    ></path>
+    />
   </g>
   <g
     transform="translate(37.59775602812908 27.616768807389803) rotate(0 55 12.999999999999943)"
@@ -305,7 +302,7 @@
         stroke-width="1.5"
         fill="none"
         stroke-dasharray="1.5 7"
-      ></path>
+      />
     </g>
   </g>
   <g transform="translate(427.78256038945676 61.8329719679723) rotate(0 55 13)">
@@ -345,14 +342,14 @@
       stroke="#fab005"
       stroke-width="0.5"
       fill="none"
-    ></path>
+    />
     <path
       d="M-0.9 0.73 C53.79 -0.25, 107.97 0.88, 173.26 -0.62 M172.95 -1.79 C171.78 13.51, 172.53 24.22, 174.68 56.45 M174.37 57.69 C115.75 58.49, 54.86 58.93, 1.7 55.81 M-1.12 57.57 C2.24 42.38, 0.39 33.57, 1.39 0.75"
       stroke="#c92a2a"
       stroke-width="1.5"
       fill="none"
       stroke-dasharray="1.5 7"
-    ></path>
+    />
   </g>
   <g
     transform="translate(526.7825603894568 189.8329719679723) rotate(0 81.5 12)"
@@ -379,14 +376,14 @@
       stroke="#15aabf"
       stroke-width="0.5"
       fill="none"
-    ></path>
+    />
     <path
       d="M0.92 0.23 C64.26 0.9, 123.55 0.42, 172.79 1.27 M172.29 -0.74 C173.53 12.95, 171.24 27.1, 173.71 43.64 M172.54 43.04 C107.07 38.4, 40.21 40.62, -0.22 42.12 M0.15 43.58 C1.79 25.27, 0.41 8.55, 0.2 1.83"
       stroke="#1864ab"
       stroke-width="1.5"
       fill="none"
       stroke-dasharray="1.5 7"
-    ></path>
+    />
   </g>
   <g
     transform="translate(523.7825603894568 110.8329719679723) rotate(0 81.5 12)"
@@ -429,7 +426,7 @@
       stroke="#000000"
       stroke-width="1"
       fill="none"
-    ></path>
+    />
   </g>
   <g transform="translate(824.2825603894568 282.3329719679723) rotate(0 41 13)">
     <text
@@ -455,7 +452,7 @@
         stroke-width="1.5"
         fill="none"
         stroke-dasharray="1.5 7"
-      ></path>
+      />
     </g>
   </g>
   <g transform="translate(738.2825603894568 58.8329719679723) rotate(0 53 13)">
@@ -481,7 +478,7 @@
       stroke="#000000"
       stroke-width="1"
       fill="none"
-    ></path>
+    />
   </g>
   <g
     transform="translate(1043.2825603894566 279.3329719679723) rotate(0 62 13)"
@@ -525,6 +522,6 @@
       stroke-width="1.5"
       fill="none"
       stroke-dasharray="1.5 7"
-    ></path>
+    />
   </g>
 </svg>

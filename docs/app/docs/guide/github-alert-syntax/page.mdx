@@ -1,0 +1,101 @@
+---
+icon: InformationCircleIcon
+---
+
+# GitHub Alert Syntax
+
+`nextra-theme-docs` and `nextra-theme-blog` support replacing
+[GitHub alert syntax](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax#alerts)
+with `<Callout>` component for `.md`/`.mdx` files.
+
+## Usage
+
+```md filename="Markdown"
+> [!NOTE]
+>
+> Useful information that users should know, even when skimming content.
+
+> [!TIP]
+>
+> Helpful advice for doing things better or more easily.
+
+> [!IMPORTANT]
+>
+> Key information users need to know to achieve their goal.
+
+> [!WARNING]
+>
+> Urgent info that needs immediate user attention to avoid problems.
+
+> [!CAUTION]
+>
+> Advises about risks or negative outcomes of certain actions.
+```
+
+## Example
+
+> [!NOTE]
+>
+> Useful information that users should know, even when skimming content.
+
+> [!TIP]
+>
+> Helpful advice for doing things better or more easily.
+
+> [!IMPORTANT]
+>
+> Key information users need to know to achieve their goal.
+
+> [!WARNING]
+>
+> Urgent info that needs immediate user attention to avoid problems.
+
+> [!CAUTION]
+>
+> Advises about risks or negative outcomes of certain actions.
+
+## Usage with your own theme
+
+If you want to benefit this feature with your own theme and your own `<Callout>`
+component:
+
+import { Steps } from 'nextra/components'
+
+<Steps>
+
+### Create a `<Blockquote>` component
+
+To create a `<Blockquote>` component, start by importing `withGitHubAlert` from
+`nextra/components`. You should then create the `<Blockquote>` component by
+invoking the `withGitHubAlert` function.
+
+The first argument should be a React HOC component that handles the GitHub alert
+syntax, and the second argument should be your standard `<blockquote>`
+component.
+
+The `type` prop can be one of the following:
+`'note' | 'tip' | 'important' | 'warning' | 'caution'{:ts}`.
+
+```jsx
+import { withGitHubAlert } from 'nextra/components'
+
+const Blockquote = withGitHubAlert(({ type, ...props }) => {
+  return <MyCalloutComponent type={type} {...props} />
+}, MyBlockquoteComponent)
+```
+
+### Provide `<Blockquote>` to `useMDXComponents`
+
+To make the `<Blockquote>` component available, you should integrate it into the
+`useMDXComponents` function:
+
+```jsx filename="mdx-components.jsx"
+export function useMDXComponents(components) {
+  return {
+    blockquote: Blockquote,
+    ...components
+  }
+}
+```
+
+</Steps>

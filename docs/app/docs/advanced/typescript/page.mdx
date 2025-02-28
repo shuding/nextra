@@ -1,0 +1,50 @@
+---
+icon: TypeScriptIcon
+---
+
+import { Steps } from 'nextra/components'
+
+# TypeScript
+
+Nextra is built with TypeScript and provides excellent TypeScript support out of
+the box. This guide will help you leverage TypeScript in your Nextra project.
+
+## Getting started
+
+To use TypeScript in your Nextra project, you need to:
+
+<Steps>
+### Install TypeScript and types packages as `devDependencies`
+
+```sh npm2yarn
+npm i -D typescript @types/react @types/node
+```
+
+### `tsconfig.json`
+
+You can manually create a `tsconfig.json` file in the root of your project or
+rename the extension of some of the existing files to `.ts` or `.tsx` and then
+Next.js will detect TypeScript in your project and create a `tsconfig.json` file
+for you.
+
+</Steps>
+
+## Type definitions
+
+Nextra provides type definitions for distribution code for its components and
+configurations. You can leverage these types by renaming your theme
+configuration file to `.ts` or `.tsx` extension and importing a theme config
+type, e.g. for `nextra-theme-docs`:
+
+```tsx filename="theme.config.tsx"
+import type { DocsThemeConfig } from 'nextra-theme-docs'
+
+const config: DocsThemeConfig = {
+  // Your theme configuration
+}
+export default config
+```
+
+By leveraging TypeScript in your Nextra project, you can catch errors early,
+improve code quality, and enhance the developer experience with better
+autocompletion and type inference.

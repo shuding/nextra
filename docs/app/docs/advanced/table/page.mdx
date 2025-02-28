@@ -1,0 +1,67 @@
+---
+icon: TableIcon
+---
+
+# Rendering Tables
+
+This guide covers different ways to render tables in MDX, including GFM syntax
+and literal HTML tag.
+
+## GFM syntax
+
+In Markdown, it is preferable to write tables via
+[GFM syntax](https://github.github.com/gfm/#tables-extension-).
+
+```mdx filename="MDX"
+| left   | center | right |
+| :----- | :----: | ----: |
+| foo    |  bar   |   baz |
+| banana | apple  |  kiwi |
+```
+
+will be rendered as:
+
+| left   | center | right |
+| :----- | :----: | ----: |
+| foo    |  bar   |   baz |
+| banana | apple  |  kiwi |
+
+## Literal HTML tables
+
+If you try to render table with literal HTML elements `<table>{:js}`,
+`<thead>{:js}`, `<tbody>{:js}`, `<tr>{:js}`, `<th>{:js}` and `<td>{:js}` – your
+table will be unstyled because
+[MDX](https://mdxjs.com/docs/using-mdx/#components) doesn't replace literal HTML
+elements with components provided by `useMDXComponents(){:js}`[^1].
+
+> [!TIP]
+>
+> Instead, use the [built-in `<Table>` component](/docs/guide/built-ins/table)
+> available via `nextra/components`.
+
+## Changing default behaviour
+
+If you want to use standard HTML elements for your tables but have them styled
+with components provided by `useMDXComponents(){:js}`[^1], you can do this by
+configuring Nextra.
+
+To achieve this, pass the `whiteListTagsStyling` option to the Nextra function,
+including an array of tags you want to replace.
+
+Here's an example configuration in your `next.config.mjs` file:
+
+```js filename="next.config.mjs" {4}
+import nextra from 'nextra'
+
+const withNextra = nextra({
+  whiteListTagsStyling: ['table', 'thead', 'tbody', 'tr', 'th', 'td']
+})
+
+export default withNextra()
+```
+
+In this example, the tags `<table>`, `<thead>`, `<tbody>`, `<tr>`, `<th>`, and
+`<td>` will be replaced with corresponding MDX components, allowing for
+customized styling.
+
+[^1]: https://mdxjs.com/packages/react/#usemdxcomponentscomponents

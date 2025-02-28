@@ -1,0 +1,46 @@
+# Usage with Turbopack
+
+To use [Turbopack](https://nextjs.org/docs/architecture/turbopack), simple
+append the `--turbopack` flag to your development command:
+
+```diff filename="package.json"
+"scripts": {
+-  "dev": "next dev"
++  "dev": "next dev --turbopack"
+}
+```
+
+> [!NOTE]
+>
+> Without `--turbopack` flag Next.js under the hood uses
+> [Webpack](https://github.com/webpack/webpack), written in JavaScript.
+
+## Only serializable options are supported
+
+For this moment only JSON serializable values can be passed in `nextra`
+function. This mean that with Turbopack enabled you can't pass custom
+`remarkPlugins`, `rehypePlugins` or `recmaPlugins` since they are functions.
+
+The following options could be passed only without Turbopack or only while
+building your app with `next build`
+([since Turbopack isn't support `next build` for now](https://nextjs.org/docs/architecture/turbopack#unsupported-features)
+and Webpack is used instead).
+
+```js filename="next.config.js" {5-7}
+import nextra from 'nextra'
+
+const withNextra = nextra({
+  mdxOptions: {
+    remarkPlugins: [myRemarkPlugin],
+    rehypePlugins: [myRehypePlugin],
+    recmaPlugins: [myRecmaPlugin]
+  }
+})
+```
+
+If you try to pass them, you'll get an error from Turbopack:
+
+```text copy=false
+Error: loader nextra/loader for match "./{src/app,app}/**/page.{md,mdx}" does not have serializable options.
+Ensure that options passed are plain JavaScript objects and values.
+```

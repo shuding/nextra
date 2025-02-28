@@ -1,0 +1,34 @@
+{/* <link rel="stylesheet"> is unsupported in Metadata API https://nextjs.org/docs/app/api-reference/functions/generate-metadata#unsupported-metadata */}
+
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/katex/dist/katex.css"
+/>
+
+# LaTeX
+
+Nextra uses [KaTeX](https://katex.org) to render LaTeX expressions directly in
+MDX. To enable LaTeX support, you must add the following to your
+`next.config.mjs`:
+
+```js filename="next.config.mjs"
+import nextra from 'nextra'
+
+const withNextra = nextra({
+  latex: true
+})
+
+export default withNextra()
+```
+
+Using LaTeX within MDX is as simple as wrapping your expression in `$$` or `$`.
+For example, the following code
+
+```latex
+$\sqrt{a^2 + b^2}$
+```
+
+will be rendered as: $\sqrt{a^2 + b^2}$
+
+To learn more about KaTeX and its supported functions, visit their
+[documentation](https://katex.org/docs/supported.html).

@@ -1,0 +1,29 @@
+---
+asIndexPage: true
+sidebarTitle: Blog Theme
+---
+
+import {
+  ChevronRightIcon,
+  FilesIcon,
+  RSSIcon,
+  TagsIcon
+} from '@components/icons'
+import { Cards } from 'nextra/components'
+import { FileIcon } from 'nextra/icons'
+import { MDXRemote } from 'nextra/mdx-remote'
+import { createIndexPage, getPageMap } from 'nextra/page-map'
+
+# Nextra Blog Theme
+
+<MDXRemote
+  compiledSource={await createIndexPage(await getPageMap('/docs/blog-theme'))}
+  components={{
+    Cards,
+    ChevronRightIcon,
+    FileIcon,
+    FilesIcon,
+    RSSIcon,
+    TagsIcon
+  }}
+/>

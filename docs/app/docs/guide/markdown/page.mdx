@@ -1,0 +1,105 @@
+---
+icon: MarkdownIcon
+---
+
+import { Shadow } from '@components/shadow'
+import { Counter } from './_counter'
+
+# Markdown
+
+## MDX
+
+With Nextra, all your `.mdx` files under the `content` directory will be
+rendered with [MDX](https://mdxjs.com/about), it's an advanced Markdown format
+with React component support.
+
+For example, you can use import and use React components inside your MDX files
+like this:
+
+```mdx filename="MDX"
+## Hello MDX
+
+import { useState } from 'react'
+
+export function Counter({ children }) {
+  const [count, setCount] = useState(0)
+  return (
+    <button onClick={() => setCount(prev => prev + 1)}>
+      {children}
+      {count}
+    </button>
+  )
+}
+
+<Counter>**Clicks**: </Counter>
+```
+
+Generates:
+
+<Shadow mode="open" className="nextra-border mt-6 rounded-xl border p-4">
+  <h2>Hello MDX</h2>
+  <Counter>**Clicks**: </Counter>
+</Shadow>
+
+Besides basic MDX, Nextra also has some advanced Markdown features built-in.
+
+## GitHub Flavored Markdown
+
+[GFM](https://github.github.com/gfm) is an extension of Markdown, created by
+GitHub, that adds support for strikethrough, task lists, tables, and more.
+
+### Strikethrough
+
+~~removed~~
+
+```md filename="Markdown"
+~~removed~~
+```
+
+### Task list
+
+- [x] Write the press release
+- [ ] Update the website
+- [ ] Contact the media
+
+```md filename="Markdown"
+- [x] Write the press release
+- [ ] Update the website
+- [ ] Contact the media
+```
+
+### Table
+
+| Syntax        | Description |   Test Text |
+| :------------ | :---------: | ----------: |
+| Header        |    Title    | Here's this |
+| Paragraph     |    Text     |    And more |
+| Strikethrough |             |    ~~Text~~ |
+
+```md filename="Markdown"
+| Syntax        | Description |   Test Text |
+| :------------ | :---------: | ----------: |
+| Header        |    Title    | Here's this |
+| Paragraph     |    Text     |    And more |
+| Strikethrough |             |    ~~Text~~ |
+```
+
+### Autolinks
+
+Visit https://nextjs.org.
+
+```md
+Visit https://nextjs.org.
+```
+
+### Custom heading id
+
+You can specify custom heading id using the format `## My heading [#custom-id]`.
+For example:
+
+```md filename="Markdown"
+## Long heading about Nextra [#about-nextra]
+```
+
+In this example, `#about-nextra` will be used as the heading link, replacing the
+default `#long-heading-about-nextra`.

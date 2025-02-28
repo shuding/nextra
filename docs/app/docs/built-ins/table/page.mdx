@@ -1,0 +1,57 @@
+---
+sidebarTitle: Table
+icon: TableIcon
+---
+
+import { Table } from 'nextra/components'
+
+# `<Table>` Component
+
+A collection of built-in components designed to create styled, non-markdown
+(i.e., literal) HTML tables.
+
+## Example
+
+<Table className="mt-6">
+  <thead>
+    <Table.Tr>
+      <Table.Th>Country</Table.Th>
+      <Table.Th>Flag</Table.Th>
+    </Table.Tr>
+  </thead>
+  <tbody>
+    <Table.Tr>
+      <Table.Td>France</Table.Td>
+      <Table.Td>🇫🇷</Table.Td>
+    </Table.Tr>
+    <Table.Tr>
+      <Table.Td>Ukraine</Table.Td>
+      <Table.Td>🇺🇦</Table.Td>
+    </Table.Tr>
+  </tbody>
+</Table>
+
+## Usage
+
+```mdx
+import { Table } from 'nextra/components'
+
+<Table>
+  <thead>
+    <Table.Tr>
+      <Table.Th>Country</Table.Th>
+      <Table.Th>Flag</Table.Th>
+    </Table.Tr>
+  </thead>
+  <tbody>
+    <Table.Tr>
+      <Table.Td>France</Table.Td>
+      <Table.Td>🇫🇷</Table.Td>
+    </Table.Tr>
+    <Table.Tr>
+      <Table.Td>Ukraine</Table.Td>
+      <Table.Td>🇺🇦</Table.Td>
+    </Table.Tr>
+  </tbody>
+</Table>
+```

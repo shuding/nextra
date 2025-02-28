@@ -1,0 +1,308 @@
+---
+icon: StarsIcon
+---
+
+import { OptionTable } from 'components/_table'
+import { compileMdx } from 'nextra/compile'
+import { MDXRemote } from 'nextra/mdx-remote'
+
+# Syntax Highlighting
+
+Nextra uses [Shiki](https://shiki.style) to do syntax highlighting at build
+time. It's very reliable and performant. For example, adding this in your
+Markdown file:
+
+````md copy=false filename="Markdown"
+```js
+console.log('hello, world')
+```
+````
+
+Results in:
+
+```js copy=false
+console.log('hello, world')
+```
+
+## Features
+
+### Inlined code
+
+Inlined syntax highlighting like `let x = 1{:jsx}` is also supported via the
+`{:}` syntax:
+
+```md copy=false filename="Markdown"
+Inlined syntax highlighting is also supported `let x = 1{:jsx}` via:
+```
+
+### Highlighting lines
+
+You can highlight specific lines of code by adding a `{}` attribute to the code
+block:
+
+````md copy=false filename="Markdown"
+```js {1,4-5}
+import { useState } from 'react'
+
+function Counter() {
+  const [count, setCount] = useState(0)
+  return <button onClick={() => setCount(count + 1)}>{count}</button>
+}
+```
+````
+
+Result:
+
+```js copy=false {1,4-5}
+import { useState } from 'react'
+
+function Counter() {
+  const [count, setCount] = useState(0)
+  return <button onClick={() => setCount(count + 1)}>{count}</button>
+}
+```
+
+### Highlighting substrings
+
+You can highlight specific substrings of code by adding a `//` attribute to the
+code block:
+
+````md copy=false filename="Markdown"
+```js /useState/
+import { useState } from 'react'
+
+function Counter() {
+  const [count, setCount] = useState(0)
+  return <button onClick={() => setCount(count + 1)}>{count}</button>
+}
+```
+````
+
+```js copy=false /useState/
+import { useState } from 'react'
+
+function Counter() {
+  const [count, setCount] = useState(0)
+  return <button onClick={() => setCount(count + 1)}>{count}</button>
+}
+```
+
+You can highlight only a part of the occurrences of that substring by adding a
+number it: `/str/1`, or multiple: `/str/1-3`, `/str/1,3`.
+
+### Copy button
+
+By adding a `copy` attribute, a copy button will be added to the code block when
+the user hovers over it:
+
+````md copy=false filename="Markdown"
+```js copy
+console.log('hello, world')
+```
+````
+
+Renders:
+
+```js copy
+console.log('hello, world')
+```
+
+> [!NOTE]
+>
+>  You can enable this feature globally by setting `defaultShowCopyCode: true` in
+>  your Nextra configuration (`next.config.mjs` file). Once it's enabled
+>  globally, you can disable it via the `copy=false` attribute.
+
+### Line numbers
+
+You can add line numbers to your code blocks by adding a `showLineNumbers`
+attribute:
+
+````md copy=false filename="Markdown"
+```js showLineNumbers
+import { useState } from 'react'
+
+function Counter() {
+  const [count, setCount] = useState(0)
+  return <button onClick={() => setCount(count + 1)}>{count}</button>
+}
+```
+````
+
+Renders:
+
+```js copy=false showLineNumbers
+import { useState } from 'react'
+
+function Counter() {
+  const [count, setCount] = useState(0)
+  return <button onClick={() => setCount(count + 1)}>{count}</button>
+}
+```
+
+### Filenames and titles
+
+You can add a filename or a title to your code blocks by adding a `filename`
+attribute:
+
+````md copy=false filename="Markdown"
+```js filename="example.js"
+console.log('hello, world')
+```
+````
+
+Renders:
+
+```js copy=false filename="example.js"
+console.log('hello, world')
+```
+
+### ANSI highlighting
+
+You can highlight ANSI escape codes:
+
+<ANSI />
+
+export async function ANSI() {
+  const rawAnsi = `\`\`\`ansi
+[0m [0;32m✓[0m [0;2msrc/[0mindex[0;2m.test.ts (1)[0m
+  [0;2m Test Files [0m [0;1;32m1 passed[0;98m (1)[0m
+  [0;2m      Tests [0m [0;1;32m1 passed[0;98m (1)[0m
+  [0;2m   Start at [0m 23:32:41
+  [0;2m   Duration [0m 11ms
+  [42;1;39;0m PASS [0;32m Waiting for file changes...[0m
+         [0;2mpress [0;1mh[0;2m to show help, press [0;1mq[0;2m to quit
+\`\`\``
+  const rawJs = await compileMdx(`~~~md filename="Markdown"
+${rawAnsi}
+~~~
+
+Renders:
+
+${rawAnsi}
+`)
+  return <MDXRemote compiledSource={rawJs} />
+}
+
+## Supported languages
+
+Check [this list](https://github.com/shikijs/shiki/blob/main/docs/languages.md)
+for all supported languages.
+
+{/* ## Customize the Theme */}
+
+{/* Nextra uses CSS variables to define the colors for tokens. */}
+
+## With dynamic content
+
+Since syntax highlighting is done at build time, you can't use dynamic content
+in your code blocks. However, since MDX is very powerful there is a workaround
+via client JS. For example:
+
+import { DynamicCode } from './_dynamic-code'
+
+<DynamicCode>
+```js copy=false filename="dynamic-code.js"
+function hello() {
+  const x = 2 + 3
+  console.log(1)
+}
+```
+</DynamicCode>
+
+This workaround has a limitation that updated content won't be re-highlighted.
+For example if we update the number to `1 + 1`, it will be incorrectly
+highlighted.
+
+Check out the
+[code](https://github.com/shuding/nextra/blob/main/docs/app/docs/guide/syntax-highlighting/_dynamic-code.tsx)
+to see how it works.
+
+## Disable syntax highlighting
+
+You can opt out of syntax highlighting for using one of your own. You can
+disable syntax highlighting globally by setting `codeHighlight: false` in your
+Nextra configuration (`next.config.mjs` file).
+
+<OptionTable
+  options={[
+    [
+      'codeHighlight',
+      'boolean',
+      'Enable or disable syntax highlighting. Defaults to `true`.'
+    ]
+  ]}
+/>
+
+## Custom grammar
+
+Shiki accepts a
+[VSCode TextMate Grammar](https://code.visualstudio.com/api/language-extensions/syntax-highlight-guide)
+for syntax highlighting with custom language grammars.
+
+You can provide these grammars by overriding the `getHighlighter` function in
+`mdxOptions.rehypePrettyCodeOptions` option in your Nextra config inside
+`next.config.mjs`:
+
+```js copy=false filename="next.config.mjs" {13-18}
+import { BUNDLED_LANGUAGES } from 'shiki'
+
+nextra({
+  // ... other Nextra config options
+  mdxOptions: {
+    rehypePrettyCodeOptions: {
+      getHighlighter: options =>
+        getHighlighter({
+          ...options,
+          langs: [
+            ...BUNDLED_LANGUAGES,
+            // custom grammar options, see the Shiki documentation for how to provide these options
+            {
+              id: 'my-lang',
+              scopeName: 'source.my-lang',
+              aliases: ['mylang'], // Along with id, aliases will be included in the allowed names you can use when writing Markdown
+              path: '../../public/syntax/grammar.tmLanguage.json'
+            }
+          ]
+        })
+    }
+  }
+})
+```
+
+## Custom themes
+
+Within `mdxOptions.rehypePrettyCodeOptions` you may also provide custom themes
+instead of [relying on CSS Variables](/docs/guide/syntax-highlighting):
+
+```js copy=false filename="next.config.mjs" {4}
+nextra({
+  // ... other Nextra config options
+  mdxOptions: {
+    rehypePrettyCodeOptions: {
+      // VSCode theme or built-in Shiki theme, see Shiki documentation for more information
+      theme: JSON.parse(
+        readFileSync('./public/syntax/arctis_light.json', 'utf8')
+      )
+    }
+  }
+})
+```
+
+### Multiple themes (dark and light mode)
+
+Pass your themes to `theme`, where the keys represent the color mode:
+
+```js copy=false filename="next.config.mjs" {5-8}
+nextra({
+  // ... other Nextra config options
+  mdxOptions: {
+    rehypePrettyCodeOptions: {
+      theme: {
+        dark: 'nord',
+        light: 'min-light'
+      }
+    }
+  }
+})
+```

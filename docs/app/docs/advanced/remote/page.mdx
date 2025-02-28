@@ -1,0 +1,61 @@
+---
+icon: CloudIcon
+---
+
+import fs from 'node:fs/promises'
+import { compileMdx } from 'nextra/compile'
+import { Steps } from 'nextra/components'
+import { MDXRemote } from 'nextra/mdx-remote'
+
+export async function Example() {
+  const filename = '/graphql-eslint/[[...slug]]/page.tsx'
+  const pageContent = await fs.readFile(
+    `../examples/swr-site/app/[lang]/${filename}`,
+    'utf8'
+  )
+  const rawJs = await compileMdx(
+    `~~~jsx filename="app${filename}" {27} showLineNumbers
+${pageContent
+  .replace(
+    "lang: 'en',\n    ...(route && { slug: route.split('/') })",
+    "slug: route.split('/')"
+  )
+  .trimEnd()}
+~~~`,
+    { defaultShowCopyCode: true }
+  )
+  return <MDXRemote compiledSource={rawJs} />
+}
+
+# Remote Content
+
+> [!NOTE]
+>
+> You can check out the
+> [SWR i18n example](https://github.com/shuding/nextra/blob/main/examples/swr-site/app/%5Blang%5D/graphql-eslint/%5B%5B...slug%5D%5D/page.tsx)
+> source code.
+
+<Steps>
+
+## Create `[[...slug]]/page.tsx` file
+
+Create `[[...slug]]/page.tsx` file in `app/` directory with the following
+content:
+
+<Example />
+
+## Enhance `pageMap`
+
+You need to modify `pageMap` list in `layout` file, to properly display sidebar
+and mobile navigation.
+
+```tsx filename="app/layout.tsx"
+import { getPageMap } from 'nextra/page-map'
+import { pageMap as graphqlEslintPageMap } from './graphql-eslint/[[...slug]]/page'
+
+// ...
+
+const pageMap = [...(await getPageMap()), graphqlEslintPageMap]
+```
+
+</Steps>

@@ -1,0 +1,37 @@
+---
+sidebarTitle: Custom CSS
+icon: BrushIcon
+---
+
+# Custom CSS Support
+
+Nextra is 100% compatible with the
+[built-in CSS support of Next.js](https://nextjs.org/docs/basic-features/built-in-css-support),
+including `.css`, `.module.css`, and Sass (`.scss`, `.sass`, `.module.scss`,
+`.module.sass`) files.
+
+For example, consider the following stylesheet named `styles.css`:
+
+```css filename="styles.css"
+body {
+  font-family:
+    'SF Pro Text', 'SF Pro Icons', 'Helvetica Neue', 'Helvetica', 'Arial',
+    sans-serif;
+  padding: 20px 20px 60px;
+  max-width: 680px;
+  margin: 0 auto;
+}
+```
+
+To apply your global styles, import your CSS file in the root layout file:
+
+```jsx filename="app/layout.jsx"
+import '../path/to/your/styles.css'
+
+export default async function RootLayout({ children }) {
+  // ... Your layout logic here
+}
+```
+
+For more information on how to use CSS in Next.js, check out the
+[Next.js CSS Support documentation](https://nextjs.org/docs/basic-features/built-in-css-support).

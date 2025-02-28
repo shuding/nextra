@@ -1,0 +1,66 @@
+---
+sidebarTitle: Callout
+---
+
+# Callout Component
+
+A built-in component provided by `nextra/components`.
+
+## Example
+
+import { Callout } from 'nextra/components'
+
+<Callout>
+  A **callout** is a short piece of text intended to attract attention.
+</Callout>
+
+## Usage
+
+### Default
+
+<Callout emoji="👾">
+  **Space Invaders** is a 1978 shoot 'em up arcade game developed by Tomohiro
+  Nishikado.
+</Callout>
+
+```mdx
+<Callout emoji="👾">
+  **Space Invaders** is a 1978 shoot 'em up arcade game developed by Tomohiro
+  Nishikado.
+</Callout>
+```
+
+### Warning
+
+<Callout type="warning">This API will be deprecated soon.</Callout>
+
+```mdx
+<Callout type="warning">This API will be deprecated soon.</Callout>
+```
+
+### Error
+
+<Callout type="error">
+  This is a dangerous feature that can cause everything to explode.
+</Callout>
+
+```mdx
+<Callout type="error">
+  This is a dangerous feature that can cause everything to explode.
+</Callout>
+```
+
+### React Component
+
+```jsx filename="callout.jsx"
+import { Callout } from 'nextra/components'
+
+const Component = () => {
+  return (
+    <Callout emoji="👾">
+      **Space Invaders** is a 1978 shoot 'em up arcade game developed by
+      Tomohiro Nishikado.
+    </Callout>
+  )
+}
+```

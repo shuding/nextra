@@ -1,118 +1,156 @@
 /* eslint-env node */
-import { sep } from 'node:path'
-import type { NextConfig } from 'next'
+import { createRequire } from 'node:module'
+import path from 'node:path'
+import { fileURLToPath } from 'node:url'
+import fg from 'fast-glob'
 import type { RuleSetRule } from 'webpack'
 import { fromZodError } from 'zod-validation-error'
-import type { Nextra } from '../types'
-import {
-  DEFAULT_CONFIG,
-  DEFAULT_LOCALE,
-  DEFAULT_LOCALES,
-  MARKDOWN_EXTENSION_REGEX,
-  MARKDOWN_EXTENSIONS,
-  META_REGEX
-} from './constants.js'
+import type { Nextra } from '../types.js'
+import { CWD, MARKDOWN_EXTENSION_RE } from './constants.js'
 import { nextraConfigSchema } from './schemas.js'
 import { logger } from './utils.js'
-import { NextraPlugin, NextraSearchPlugin } from './webpack-plugins/index.js'
 
-const DEFAULT_EXTENSIONS = ['js', 'jsx', 'ts', 'tsx']
+const require = createRequire(import.meta.url)
 
-const AGNOSTIC_PAGE_MAP_PATH = `.next${sep}static${sep}chunks${sep}nextra-page-map`
+const MARKDOWN_EXTENSIONS = ['md', 'mdx'] as const
 
-const RE_SEP = sep === '/' ? '/' : '\\\\'
+const DEFAULT_EXTENSIONS = ['js', 'jsx', 'ts', 'tsx'] as const
+
+const FILENAME = fileURLToPath(import.meta.url)
+
+const LOADER_PATH = path.join(FILENAME, '..', '..', '..', 'loader.cjs')
+
+const SEP = path.sep === '/' ? '/' : '\\\\'
+
+const GET_PAGE_MAP_PATH = '/nextra/dist/server/page-map/get.js'
+
+const PAGE_MAP_PLACEHOLDER_PATH = '/nextra/dist/server/page-map/placeholder.js'
+
+const GET_PAGE_MAP_RE = new RegExp(
+  GET_PAGE_MAP_PATH.replaceAll('/', SEP).replaceAll('.', String.raw`\.`)
+)
+const PAGE_MAP_PLACEHOLDER_RE = new RegExp(
+  PAGE_MAP_PLACEHOLDER_PATH.replaceAll('/', SEP).replaceAll('.', String.raw`\.`)
+)
+const CONTENT_DIR = getContentDirectory()
+
+function getContentDirectory() {
+  // Next.js gives priority to `app` over `src/app`, we do the same for `content` directory
+  const [contentDir = 'content'] = fg.sync(['{src/,}content'], {
+    onlyDirectories: true
+  })
+  return contentDir
+}
 
 const nextra: Nextra = nextraConfig => {
-  const { error } = nextraConfigSchema.safeParse(nextraConfig)
+  const { error, data: loaderOptions } =
+    nextraConfigSchema.safeParse(nextraConfig)
   if (error) {
     logger.error('Error validating nextraConfig')
     throw fromZodError(error)
   }
 
+  const loader = {
+    loader: LOADER_PATH,
+    options: loaderOptions
+  }
+  const pageImportLoader = {
+    loader: LOADER_PATH,
+    options: { ...loaderOptions, isPageImport: true }
+  }
+  const pageMapPlaceholderLoader = {
+    loader: LOADER_PATH,
+    options: {
+      // Remove forward slash
+      contentDirBasePath: loaderOptions.contentDirBasePath.slice(1),
+      contentDir: CONTENT_DIR,
+      shouldAddLocaleToLinks: loaderOptions.unstable_shouldAddLocaleToLinks
+    }
+  }
+
   return function withNextra(nextConfig = {}) {
-    const hasI18n = !!nextConfig.i18n?.locales
-
-    if (hasI18n) {
+    const { locales, defaultLocale } = nextConfig.i18n || {}
+    if (locales) {
       logger.info(
-        'You have Next.js i18n enabled, read here https://nextjs.org/docs/advanced-features/i18n-routing for the docs.'
-      )
-      logger.warn(
-        "Next.js doesn't support i18n by locale folder names.\n" +
-          'When i18n enabled, Nextra unset nextConfig.i18n to `undefined`, use `useRouter` from `nextra/hooks` if you need `locale` or `defaultLocale` values.'
+        'You have Next.js i18n enabled, read here https://nextjs.org/docs/app/building-your-application/routing/internationalization for the docs.'
       )
     }
-    const locales = nextConfig.i18n?.locales || DEFAULT_LOCALES
-
-    const rewrites: NextConfig['rewrites'] = async () => {
-      const rules = [{ source: '/:path*/_meta', destination: '/404' }]
-
-      if (nextConfig.rewrites) {
-        const originalRewrites = await nextConfig.rewrites()
-        if (Array.isArray(originalRewrites)) {
-          return [...originalRewrites, ...rules]
-        }
-        return {
-          ...originalRewrites,
-          beforeFiles: [...(originalRewrites.beforeFiles || []), ...rules]
-        }
+    const pageMapLoader = {
+      loader: LOADER_PATH,
+      options: {
+        // ts complains about readonly array
+        locales: locales ? [...locales] : ['']
       }
-
-      return rules
     }
-
-    const loaderOptions = {
-      ...DEFAULT_CONFIG,
-      ...nextraConfig,
-      locales
-    }
-
-    // Check if there's a theme provided
-    if (!nextraConfig.theme) {
-      throw new Error('No Nextra theme found!')
-    }
-
-    // const optimizedImports = new Set(
-    //   nextConfig.experimental?.optimizePackageImports || []
-    // )
-    //
-    // optimizedImports.add('nextra/components')
-
     return {
       ...nextConfig,
-      // experimental: {
-      //   ...nextConfig.experimental,
-      //   optimizePackageImports: [...optimizedImports]
-      // },
-      ...(nextConfig.output !== 'export' && { rewrites }),
-      env: {
-        ...nextConfig.env,
-        ...(hasI18n && {
-          NEXTRA_DEFAULT_LOCALE:
-            nextConfig.i18n?.defaultLocale || DEFAULT_LOCALE,
-          NEXTRA_LOCALES: JSON.stringify(nextConfig.i18n?.locales)
-        }),
-        NEXTRA_SEARCH: String(!!loaderOptions.search)
-      },
-      ...(hasI18n && { i18n: undefined }),
+      transpilePackages: [
+        // To import ESM-only packages with `next dev --turbopack`. Source: https://github.com/vercel/next.js/issues/63318#issuecomment-2079677098
+        ...(process.env.TURBOPACK === '1' ? ['shiki'] : []),
+        ...(nextConfig.transpilePackages || [])
+      ],
       pageExtensions: [
         ...(nextConfig.pageExtensions || DEFAULT_EXTENSIONS),
         ...MARKDOWN_EXTENSIONS
       ],
-      webpack(config, options) {
-        if (options.nextRuntime !== 'edge' && options.isServer) {
-          config.plugins ||= []
-          config.plugins.push(
-            new NextraPlugin({
-              locales,
-              transformPageMap: nextraConfig.transformPageMap
-            })
-          )
-
-          if (loaderOptions.search) {
-            config.plugins.push(new NextraSearchPlugin())
+      // We always unset `nextConfig.i18n` property
+      i18n: undefined,
+      env: {
+        ...nextConfig.env,
+        NEXTRA_LOCALES: JSON.stringify(pageMapLoader.options.locales),
+        NEXTRA_DEFAULT_LOCALE: defaultLocale,
+        NEXTRA_SHOULD_ADD_LOCALE_TO_LINKS: String(
+          loaderOptions.unstable_shouldAddLocaleToLinks
+        )
+      },
+      experimental: {
+        ...nextConfig.experimental,
+        optimizePackageImports: [
+          'nextra/components',
+          'nextra-theme-docs',
+          'nextra-theme-blog',
+          ...(nextConfig.experimental?.optimizePackageImports || [])
+        ],
+        turbo: {
+          ...nextConfig.experimental?.turbo,
+          rules: {
+            ...nextConfig.experimental?.turbo?.rules,
+            [`./{src/,}app/**/page.{${MARKDOWN_EXTENSIONS}}`]: {
+              as: '*.tsx',
+              loaders: [pageImportLoader as any]
+            },
+            // Order matter here, pages match first -> after partial files
+            [`*.{${MARKDOWN_EXTENSIONS}}`]: {
+              as: '*.tsx',
+              loaders: [loader as any]
+            },
+            [`**${PAGE_MAP_PLACEHOLDER_PATH}`]: {
+              loaders: [pageMapPlaceholderLoader]
+            },
+            [`**${GET_PAGE_MAP_PATH}`]: {
+              loaders: [pageMapLoader]
+            }
+          },
+          resolveAlias: {
+            ...nextConfig.experimental?.turbo?.resolveAlias,
+            'next-mdx-import-source-file':
+              '@vercel/turbopack-next/mdx-import-source',
+            'private-next-root-dir/*': './*',
+            'private-next-content-dir/*': `./${CONTENT_DIR}/*`,
+            // Fixes when Turbopack is enabled: Module not found: Can't resolve '@theguild/remark-mermaid/mermaid'
+            '@theguild/remark-mermaid/mermaid': path.relative(
+              CWD,
+              path.join(
+                require.resolve('@theguild/remark-mermaid/package.json'),
+                '..',
+                'dist',
+                'mermaid.js'
+              )
+            )
           }
         }
-
+      },
+      webpack(config, options) {
         // Fixes https://github.com/vercel/next.js/issues/55872
         if (config.watchOptions.ignored instanceof RegExp) {
           const ignored = config.watchOptions.ignored.source
@@ -120,65 +158,50 @@ const nextra: Nextra = nextraConfig => {
           config.watchOptions = {
             ...config.watchOptions,
             ignored: new RegExp(
-              ignored.replace('(\\.(git|next)|node_modules)', '\\.(git|next)')
+              ignored.replace(
+                String.raw`(\.(git|next)|node_modules)`,
+                String.raw`\.(git|next)`
+              )
             )
           }
         }
-        config.resolve.alias = { ...config.resolve.alias }
-        const rules = config.module.rules as RuleSetRule[]
-
-        const defaultLoaderOptions = [
-          options.defaultLoaders.babel,
-          {
-            loader: 'nextra/loader',
-            options: loaderOptions
-          }
+        config.resolve.alias['private-next-content-dir'] = [
+          'private-next-root-dir/content',
+          'private-next-root-dir/src/content'
         ]
+        config.resolve.alias['next-mdx-import-source-file'] = [
+          'private-next-root-dir/mdx-components',
+          'private-next-root-dir/src/mdx-components'
+        ]
+        const rules = config.module.rules as RuleSetRule[]
 
         rules.push(
           {
-            test: MARKDOWN_EXTENSION_REGEX,
+            test: PAGE_MAP_PLACEHOLDER_RE,
+            use: [options.defaultLoaders.babel, pageMapPlaceholderLoader]
+          },
+          {
+            test: GET_PAGE_MAP_RE,
+            use: [options.defaultLoaders.babel, pageMapLoader]
+          },
+          {
+            test: MARKDOWN_EXTENSION_RE,
             oneOf: [
               {
                 // Match pages (imports without an issuer request).
                 issuer: request => request === '',
-                use: [
-                  options.defaultLoaders.babel,
-                  {
-                    loader: 'nextra/loader',
-                    options: { ...loaderOptions, isPageImport: true }
-                  }
-                ]
+                use: [options.defaultLoaders.babel, pageImportLoader]
               },
               {
                 // Match Markdown imports from non-pages. These imports have an
                 // issuer, which can be anything as long as it's not empty string.
                 // When the issuer is `null`, it means that it can be imported via a
                 // runtime import call such as `import('...')`.
-                issuer: request => !request?.includes(AGNOSTIC_PAGE_MAP_PATH),
-                use: defaultLoaderOptions
+                // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- types are wrong, value can be null
+                issuer: request => request === null || !!request,
+                use: [options.defaultLoaders.babel, loader]
               }
             ]
-          },
-          {
-            // Match dynamic meta files inside pages.
-            test: META_REGEX,
-            issuer: request => !request,
-            use: [
-              options.defaultLoaders.babel,
-              {
-                loader: 'nextra/loader',
-                options: {
-                  isMetaFile: true
-                }
-              }
-            ]
-          },
-          {
-            // Use platform separator because /pages\/_app\./ will not work on windows
-            test: new RegExp(`pages${RE_SEP}_app\\.`),
-            issuer: request => !request,
-            use: defaultLoaderOptions
           }
         )
 
@@ -190,4 +213,4 @@ const nextra: Nextra = nextraConfig => {
 
 export default nextra
 
-export type * from '../types'
+export type * from '../types.js'

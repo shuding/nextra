@@ -1,0 +1,110 @@
+---
+sidebarTitle: Get Started
+icon: ChevronRightIcon
+---
+
+import InstallNextraTheme from '@components/install-nextra-theme.mdx'
+import ReadyToGo from '@components/ready-to-go.mdx'
+
+import { Steps } from 'nextra/components'
+
+# Docs Theme
+
+Nextra Docs Theme is a theme that includes almost everything you need to build a
+modern documentation website. It includes:
+
+- a top navigation bar
+- a search bar
+- a pages sidebar
+- a table of contents (TOC)
+- and other built-in components
+
+> [!TIP]
+>
+> This website itself is built with the Nextra Docs Theme.
+
+## Start as a New Project
+
+<Steps>
+### Install
+
+To create a Nextra Docs site manually, you have to install **Next.js**,
+**React**, **Nextra**, and **Nextra Docs Theme**. In your project directory, run
+the following command to install the dependencies:
+
+```sh npm2yarn
+npm i next react react-dom nextra nextra-theme-docs
+```
+
+> [!NOTE]
+>
+> If you already have Next.js installed in your project, you only need to
+> install `nextra` and `nextra-theme-docs` as the add-ons.
+
+<InstallNextraTheme />
+
+### Add [`mdx-components` file](/docs/file-conventions/mdx-components-file)
+
+### Create the Root Layout
+
+Next, create the root layout of your application inside the `app` folder. This
+layout will be used to configure the Nextra Docs Theme:
+
+```jsx filename="app/layout.jsx"
+import { Footer, Layout, Navbar } from 'nextra-theme-docs'
+import { Banner, Head } from 'nextra/components'
+import { getPageMap } from 'nextra/page-map'
+import 'nextra-theme-docs/style.css'
+
+export const metadata = {
+  // Define your metadata here
+  // For more information on metadata API, see: https://nextjs.org/docs/app/building-your-application/optimizing/metadata
+}
+
+const banner = <Banner storageKey="some-key">Nextra 4.0 is released 🎉</Banner>
+const navbar = (
+  <Navbar
+    logo={<b>Nextra</b>}
+    // ... Your additional navbar options
+  />
+)
+const footer = <Footer>MIT {new Date().getFullYear()} © Nextra.</Footer>
+
+export default async function RootLayout({ children }) {
+  return (
+    <html
+      // Not required, but good for SEO
+      lang="en"
+      // Required to be set
+      dir="ltr"
+      // Suggested by `next-themes` package https://github.com/pacocoursey/next-themes#with-app
+      suppressHydrationWarning
+    >
+      <Head
+      // ... Your additional head options
+      >
+        {/* Your additional tags should be passed as `children` of `<Head>` element */}
+      </Head>
+      <body>
+        <Layout
+          banner={banner}
+          navbar={navbar}
+          pageMap={await getPageMap()}
+          docsRepositoryBase="https://github.com/shuding/nextra/tree/main/docs"
+          footer={footer}
+          // ... Your additional layout options
+        >
+          {children}
+        </Layout>
+      </body>
+    </html>
+  )
+}
+```
+
+<ReadyToGo />
+
+</Steps>
+
+Next, check out the next section to learn about organizing the documentation
+structure and configuring the website theme.

@@ -1,0 +1,88 @@
+---
+icon: PictureIcon
+---
+
+# Next.js Image
+
+The standard way to use
+[Next.js Image](https://nextjs.org/docs/basic-features/image-optimization)
+inside MDX is to directly import the component:
+
+```mdx filename="MDX"
+import Image from 'next/image'
+
+<Image src="/demo.png" alt="Hello" width={500} height={500} />
+```
+
+## Static image
+
+> [!NOTE]
+>
+> This feature is enabled via `staticImage: true` in the Nextra config by
+> default.
+
+Nextra supports automatically optimizing your static image imports with the
+Markdown syntax. You do not need to specify the width and height of the image,
+just use the `![]()` Markdown syntax:
+
+```md filename="Markdown"
+![Hello](/demo.png)
+```
+
+This loads the `demo.png` file inside the `public` folder, and automatically
+wraps it with Next.js `<Image>`.
+
+> [!TIP]
+>
+> You can also use `![](../public/demo.png)` to load the image from a relative
+> path, if you don't want to host it via `public`.
+
+With Next.js Image, there will be no layout shift, and a beautiful blurry
+placeholder will be shown by default when loading the images:
+
+![Nextra](/opengraph-image.jpeg)
+
+## Image zoom
+
+> [!NOTE]
+>
+> The image zoom feature is enabled globally by default.
+
+In the default configuration, if you want to use this feature, simply insert
+images using `![]()` Markdown syntax.
+
+### Disable image zoom
+
+For `nextra-docs-theme` and `nextra-blog-theme`, you can disable image zoom by
+replacing the `img` component used in MDX.
+
+```jsx filename="theme.config.jsx"
+import { Image } from 'nextra/components'
+
+export default {
+  // ... your other configurations
+  components: {
+    img: props => <Image {...props} />
+  }
+}
+```
+
+### Enable/disable image zoom for specific images
+
+When zoom is **disabled globally**, but you want to enable it for specific
+images, you can do so by using the `<ImageZoom>` component:
+
+```mdx
+import { ImageZoom } from 'nextra/components'
+
+<ImageZoom src="/demo.png" />
+```
+
+When zoom is **enabled globally**, and you want to disable zoom for a specific
+image, you can simply use the `<Image>` component:
+
+```mdx
+import { Image } from 'nextra/components'
+
+<Image src="/demo.png" />
+```

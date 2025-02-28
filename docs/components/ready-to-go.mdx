@@ -1,24 +1,12 @@
-### Create Next.js [`App` Component](https://nextjs.org/docs/pages/building-your-application/routing/custom-app)
+### Render MDX files
 
-Create `pages/_app.jsx` file with the following content:
+There are two ways to render MDX files using file-based routing, add your MDX
+files via [`page` files](/docs/file-conventions/page-file) or
+[`content` directory](/docs/file-conventions/content-directory) convention.
 
-```jsx filename="pages/_app.jsx"
-export default function App({ Component, pageProps }) {
-  return <Component {...pageProps} />
-}
-```
+### Run the project
 
-### Ready to Go!
-
-Now, you can create your first MDX page as `pages/index.mdx`:
-
-```mdx filename="pages/index.mdx"
-# Welcome to Nextra
-
-Hello, world!
-```
-
-And run the `dev` command specified in `package.json` to start developing the
+Run the `dev` command specified in `package.json` to start developing the
 project! 🎉
 
 ```sh npm2yarn

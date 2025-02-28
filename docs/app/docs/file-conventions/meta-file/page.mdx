@@ -1,0 +1,674 @@
+---
+icon: FileIcon
+sidebarTitle: _meta.js
+description:
+  The `_meta` file in Nextra allows you to customize page sidebar titles, order,
+  and theme visibility, enhancing site organization and user experience.
+---
+
+import { ContentAndAppFileTee } from 'components/content-and-app-file-tree'
+import { Video } from 'components/video'
+import { FileTree } from 'nextra/components'
+
+export function Block({ children }) {
+  return (
+    <div className="flex gap-2 *:last:w-full *:last:min-w-0 max-lg:flex-wrap">
+      {children}
+    </div>
+  )
+}
+
+# `_meta.js` File
+
+In Nextra, the site and individual page structure can be configured via the
+co-located `_meta` files. Those configurations affect the overall layout of your
+Nextra theme, especially the navigation bar and the sidebar:
+
+<figure>
+  <>![Example of Nextra Theme Docs](/assets/routing@1x.png)</>
+  {/* prettier-ignore */}
+  <figcaption>Example: [Nextra Docs Theme](/docs/docs-theme) has sidebar and navbar generated automatically from Markdown files.</figcaption>
+</figure>
+
+{/* It's very common to customize each page's title, rather than just relying on filenames. Having a page titled "Index" lacks clarity. It is preferable to assign a meaningful title that accurately represents the content, such as "Home". */}
+{/* That's where `_meta` files comes in. You can have an `_meta` file in each directory, and it will be used to override the default configuration of each page. */}
+
+## Organizing files
+
+Nextra allows you to organize files in the following ways:
+
+- **In Next.js'
+  [`app` directory](https://nextjs.org/docs/app/getting-started/project-structure#top-level-folders):**<br />Nextra
+  gathers all `page` files, including
+  [`page.md` and `page.mdx` files](/docs/file-conventions/page-file) as well as
+  `_meta` files.
+
+- **In Nextra's
+  [`content` directory](/docs/file-conventions/content-directory):**<br/>Nextra
+  collects all `.md` and `.mdx` files, along with `_meta` files.
+
+Below the same file-based routing structure is represented for `content` and
+`app`-only directories:
+
+<ContentAndAppFileTee>
+  <FileTree.Folder name="about" defaultOpen>
+    <FileTree.File name="_meta.js" active />
+    <FileTree.File name="index.mdx" />
+    <FileTree.File name="legal.md" />
+  </FileTree.Folder>
+  <FileTree.File name="_meta.js" active />
+  <FileTree.File name="contact.md" />
+  <FileTree.File name="index.mdx" />
+</ContentAndAppFileTee>
+
+> [!NOTE]
+>
+> You can combine both organizational ways for your project:
+>
+> - [x] the `content` directory with `.mdx` files
+> - [x] the `app` directory with `page` files
+
+### `pageMap` structure
+
+Afterward, Nextra generates a `pageMap` array containing information about your
+entire site's routes and directories structure. Features such as the navigation
+bar and sidebar can be generated based on the `pageMap` information.
+
+The generated `pageMap` will be:
+
+```jsonc filename="pageMap" copy=false
+[
+  // content/_meta.js
+  { "data": {} },
+  {
+    // content/index.mdx
+    "name": "index",
+    "route": "/",
+    "title": "Index",
+    "frontMatter": {}
+  },
+  {
+    // content/contact.md
+    "name": "contact",
+    "route": "/contact",
+    "title": "Contact",
+    "frontMatter": {}
+  },
+  {
+    // content/about
+    "name": "about",
+    "route": "/about",
+    "title": "About",
+    "children": [
+      // content/about/_meta.js
+      { "data": {} },
+      {
+        // content/about/index.mdx
+        "name": "index",
+        "route": "/about",
+        "title": "Index",
+        "frontMatter": {}
+      },
+      {
+        // content/about/legal.md
+        "name": "legal",
+        "route": "/about/legal",
+        "title": "Legal",
+        "frontMatter": {}
+      }
+    ]
+  }
+]
+```
+
+And the global `pageMap` will be imported to each page by Nextra. Then,
+configured theme will render the actual UI with that `pageMap`.
+
+## API
+
+The title and order of a page shown in the sidebar/navbar can be configured in
+the `_meta` file as key-value pairs.
+
+```ts filename="_meta.ts"
+import type { MetaRecord } from 'nextra'
+
+/**
+ * type MetaRecordValue =
+ *  | TitleSchema
+ *  | PageItemSchema
+ *  | SeparatorSchema
+ *  | MenuSchema
+ *
+ * type MetaRecord = Record<string, MetaRecordValue>
+ **/
+const meta: MetaRecord = {
+  // ...
+}
+
+export default meta
+```
+
+### `title` type
+
+When specifying a `title` in `_meta` file, you can define it as either a simple
+string or a JSX element.
+
+```ts copy=false
+type TitleSchema = string | ReactElement
+```
+
+For the below file structure:
+
+<ContentAndAppFileTee className="shrink-0">
+  <FileTree.File name="_meta.js" active />
+  <FileTree.File name="about.mdx" />
+  <FileTree.File name="contact.mdx" />
+  <FileTree.File name="index.mdx" />
+</ContentAndAppFileTee>
+
+The following `_meta` file defines pages titles:
+
+```jsx filename="_meta.jsx"
+import { GitHubIcon } from 'nextra/icons'
+
+export default {
+  index: 'My Homepage',
+  // You can use JSX elements to change the look of titles in the sidebar, e.g. insert icons
+  contact: (
+    <Italic className="my-class">
+      <GitHubIcon height="20" />
+      Contact Us
+    </Italic>
+  ),
+  about: {
+    // Alternatively, you can set title with `title` property
+    title: 'About Us'
+    // ... and provide extra configurations
+  }
+}
+
+// Custom component for italicized text
+function Italic({ children, ...props }) {
+  return <i {...props}>{children}</i>
+}
+```
+
+### Pages
+
+In `_meta` file you can define how the pages are shown in the sidebar, e.g. for
+the following file structure:
+
+<Block>
+<ContentAndAppFileTee className='shrink-0'>
+  <FileTree.File name="_meta.js" active />
+  <FileTree.File name="about.mdx" />
+  <FileTree.File name="contact.mdx" />
+  <FileTree.File name="index.mdx" />
+</ContentAndAppFileTee>
+```js filename="_meta.js" copy=false
+export default {
+  index: 'My Homepage',
+  contact: 'Contact Us',
+  about: 'About Us'
+}
+```
+</Block>
+
+> [!NOTE]
+>
+> If any routes are not listed in the `_meta` file, they will be appended to the
+> end of the sidebar and sorted alphabetically (except for `index` key which
+> comes first if it's not specified in `_meta` file).
+
+```ts
+type PageItemSchema = {
+  type: 'page' | 'doc' // @default 'doc'
+  display: 'normal' | 'hidden' | 'children' // @default 'normal'
+  title?: TitleSchema
+  theme?: PageThemeSchema
+}
+```
+
+#### `type: 'page'` option
+
+By defining a top-level page or folder as `type: 'page'{:js}`, it will be shown
+as a special page on the navigation bar, instead of the sidebar. With this
+feature, you can have multiple "sub docs", and special pages or links such as
+"Contact Us" that are always visible.
+
+For example, you can have 2 docs folders `frameworks` and `fruits` in your
+project. In your top-level `_meta` file, you can set everything as a page,
+instead of a normal sidebar item:
+
+<Block>
+<ContentAndAppFileTee className='shrink-0'>
+  <FileTree.Folder name="frameworks" defaultOpen active>
+    <FileTree.File name="react.mdx" />
+    <FileTree.File name="svelte.mdx" />
+    <FileTree.File name="vue.mdx" />
+  </FileTree.Folder>
+  <FileTree.Folder name="fruits" defaultOpen active>
+    <FileTree.File name="apple.mdx" />
+    <FileTree.File name="banana.mdx" />
+  </FileTree.Folder>
+  <FileTree.File name="_meta.js" active />
+  <FileTree.File name="about.mdx" />
+  <FileTree.File name="index.mdx" />
+</ContentAndAppFileTee>
+```js filename="_meta.js" copy=false {4,8,12,16}
+export default {
+  index: {
+    title: 'Home',
+    type: 'page'
+  },
+  frameworks: {
+    title: 'Frameworks',
+    type: 'page'
+  },
+  fruits: {
+    title: 'Fruits',
+    type: 'page'
+  },
+  about: {
+    title: 'About',
+    type: 'page'
+  }
+}
+```
+</Block>
+
+And it will look like this:
+
+<figure>
+  <Video src="/assets/docs/sub-docs.mp4" />
+  {/* prettier-ignore */}
+  <figcaption>[Live example on StackBlitz](https://stackblitz.com/edit/nextra-2-docs-eszspq?file=pages%2F_meta.js)</figcaption>
+</figure>
+
+> [!TIP]
+>
+> You can also hide links like `Home` from the navbar with the
+> [`display: 'hidden'{:js}`](#display-hidden-option) option.
+>
+> You can have external links in the navbar, similar to the
+> [links section](#links):
+>
+> ```js filename="_meta.js" {4-5}
+> export default {
+>   contact: {
+>     title: 'Contact Us',
+>     type: 'page',
+>     href: 'https://example.com/contact'
+>   }
+> }
+> ```
+
+#### `display: 'hidden'` option
+
+By default, all MDX routes in the filesystem will be shown on the sidebar. But
+you can hide a specific pages or folders by using the `display: 'hidden'{:ts}`
+configuration:
+
+```js filename="_meta.js" {3}
+export default {
+  contact: {
+    display: 'hidden'
+  }
+}
+```
+
+> [!NOTE]
+>
+> The page will still be accessible via the `/contact` URL, but it will not be
+> shown in the sidebar.
+
+#### `theme` option
+
+You can configure the theme for each page using the `theme` option. For example,
+you can disable or enable specific components for specific pages:
+
+```js filename="_meta.js" {4}
+export default {
+  about: {
+    theme: {
+      sidebar: false
+    }
+  }
+}
+```
+
+> [!WARNING]
+>
+> This option will be inherited by all child pages if set to a folder.
+
+|               |                               |                  |                                                                |
+| ------------- | ----------------------------- | ---------------- | -------------------------------------------------------------- |
+| `breadcrumb`  | `boolean{:ts}`                | `true`           | Show or hide breadcrumb navigation.                            |
+| `collapsed`   | `boolean{:ts}`                | `false`          | Indicates whether the item in sidebar is collapsed by default. |
+| `footer`      | `boolean{:ts}`                | `true`           | Specifies whether to display the footer.                       |
+| `layout`      | `'default' \| 'full'{:ts}`    | `'default'{:ts}` | Defines the layout style.                                      |
+| `navbar`      | `boolean{:ts}`                | `true`           | Specifies whether to display the navbar.                       |
+| `pagination`  | `boolean{:ts}`                | `true`           | Determines if pagination controls are shown.                   |
+| `sidebar`     | `boolean{:ts}`                | `true`           | Specifies whether to display the sidebar.                      |
+| `timestamp`   | `boolean{:ts}`                | `true`           | Indicates if "last updated" timestamps are displayed.          |
+| `toc`         | `boolean{:ts}`                | `true`           | Determines whether a table of contents is displayed.           |
+| `typesetting` | `'default' \| 'article'{:ts}` | `'default'{:ts}` | Configures the text typesetting style.                         |
+
+##### Layouts
+
+By default, each page has `layout: 'default'{:js}` in their theme config, which
+is the default behavior. You might want to render some page with the full
+container width and height, but keep all the other styles. You can use the
+`'full'{:js}` layout to do that:
+
+```js filename="_meta.js" {4}
+export default {
+  about: {
+    theme: {
+      layout: 'full'
+    }
+  }
+}
+```
+
+##### Typesetting
+
+The `typesetting` option controls typesetting details like font features,
+heading styles and components like `<li>` and `<code>`. There are
+`'default'{:js}` and `'article'{:js}` typesettings available in the docs theme.
+
+The default one is suitable for most cases like documentation, but you can use
+the `'article'{:js}` typesetting to make it look like an elegant article page:
+
+<figure>
+```js filename="_meta.js" {4}
+export default {
+  about: {
+    theme: {
+      typesetting: 'article'
+    }
+  }
+}
+```
+  <figcaption>[Live example on StackBlitz](https://stackblitz.com/edit/nextra-2-docs-hg77h3?file=pages%2F_meta.js,pages%2Findex.mdx)</figcaption>
+</figure>
+### Folders
+
+Folders can be configured in the same way as pages.
+
+For example, the following top-level `_meta` file contains the meta information
+for the top-level pages and folders.<br/> The nested `_meta` file contains the
+meta information for pages in the same folder:
+
+<Block>
+<ContentAndAppFileTee className='shrink-0'>
+  <FileTree.Folder name="fruits" defaultOpen>
+    <FileTree.File name="_meta.js" active />
+    <FileTree.File name="apple.mdx" />
+    <FileTree.File name="banana.mdx" />
+  </FileTree.Folder>
+  <FileTree.File name="_meta.js" active />
+  <FileTree.File name="about.mdx" />
+  <FileTree.File name="contact.mdx" />
+  <FileTree.File name="index.mdx" />
+</ContentAndAppFileTee>
+<div className='mt-6'>
+```js filename="_meta.js" copy=false
+export default {
+  index: 'My Homepage',
+  contact: 'Contact Us',
+  fruits: 'Delicious Fruits',
+  about: 'About Us'
+}
+```
+```js filename="fruits/_meta.js" copy=false
+export default {
+  apple: 'Apple',
+  banana: 'Banana'
+}
+```
+</div>
+</Block>
+
+> [!NOTE]
+>
+> You can move directories around without having to change the `_meta` file
+> since information for pages are grouped together in directories.
+
+#### With `/index` page
+
+To create a folder with an index page, add `asIndexPage: true{:js}` to its front
+matter.
+
+For example, to create a `/fruits` route, setting `asIndexPage: true{:js}` tells
+Nextra that `/fruits` is a folder with an index page. Clicking the folder in the
+sidebar will expand it and display the MDX page.
+
+<Block>
+<ContentAndAppFileTee className="shrink-0">
+  <FileTree.Folder name="fruits" defaultOpen active>
+    <FileTree.File name="_meta.js" />
+    <FileTree.File name="apple.mdx" />
+    <FileTree.File name="banana.mdx" />
+    <FileTree.File name="index.mdx" active />
+  </FileTree.Folder>
+  <FileTree.File name="_meta.js" />
+  <FileTree.File name="about.mdx" />
+  <FileTree.File name="contact.mdx" />
+  <FileTree.File name="index.mdx" />
+</ContentAndAppFileTee>
+```mdx filename="content/fruits/index.mdx or app/fruits/page.mdx" copy=false {4}
+---
+title: All Fruits
+sidebarTitle: 🍒 Fruits
+asIndexPage: true
+---
+```
+
+</Block>
+
+### Links
+
+```ts
+type LinkSchema = {
+  href: string
+  title?: TitleSchema
+}
+```
+
+You can add external links to the sidebar by adding an item with `href` in
+`_meta` file:
+
+```js filename="_meta.js" {2-5}
+export default {
+  github_link: {
+    title: 'Nextra',
+    href: 'https://github.com/shuding/nextra'
+  }
+}
+```
+
+> [!TIP]
+>
+> You can use this option to link to relative internal links too.
+
+### Separators
+
+```ts
+type SeparatorSchema = {
+  type: 'separator'
+  title?: TitleSchema
+}
+```
+
+You can use a "placeholder" item with `type: 'separator'{:js}` to create a
+separator line between items in the sidebar:
+
+```js filename="_meta.js" {3-4}
+export default {
+  '###': {
+    type: 'separator',
+    title: 'My Items' // Title is optional
+  }
+}
+```
+
+### Menus
+
+You can also add menus to the navbar using `type: 'menu'{:js}` and the `items`
+option:
+
+<figure>
+  <>![Navbar menu](/assets/docs/menu.png)</>
+  {/* prettier-ignore */}
+  <figcaption>[Live example on StackBlitz](https://stackblitz.com/edit/nextra-2-docs-2qopvp?file=pages%2F_meta.js)</figcaption>
+</figure>
+
+```ts
+type MenuItemSchema =
+  | TitleSchema
+  | { title: TitleSchema }
+  | (LinkSchema & { type?: 'page' | 'doc' })
+  | SeparatorSchema
+
+type MenuSchema = {
+  type: 'menu'
+  title?: TitleSchema
+  items: Record<string, MenuItemSchema>
+}
+```
+
+```js filename="_meta.js"
+export default {
+  company: {
+    title: 'Company',
+    type: 'menu',
+    items: {
+      about: {
+        title: 'About',
+        href: '/about'
+      },
+      contact: {
+        title: 'Contact Us',
+        href: 'mailto:hi@example.com'
+      }
+    }
+  }
+}
+```
+
+### Fallbacks
+
+In the [`type: 'page'{:js}` option](#type-page-option) above, we have to define
+the `type: 'page'{:js}` option for every page. To make it easier, you can use
+the `'*'` key to define the fallback configuration for all items in this folder:
+
+```js filename="_meta.js" {2-4}
+export default {
+  '*': {
+    type: 'page'
+  },
+  index: 'Home',
+  frameworks: 'Frameworks',
+  fruits: 'Fruits',
+  about: 'About'
+}
+```
+
+They are equivalent where all items have `type: 'page'{:js}` set.
+
+### `_meta.global` file
+
+You can also define all your pages in a single `_meta` file, suffixed with
+`.global`. The API remains the same as for folder-specific `_meta` files, with 1
+exception: **folder items must include an `items` field**.
+
+For the following structure, you might use the following `_meta` files:
+
+<Block>
+
+<ContentAndAppFileTee className='shrink-0'>
+  <FileTree.Folder name="fruits" open>
+    <FileTree.File name="_meta.js" active />
+    <FileTree.File name="apple.mdx" />
+    <FileTree.File name="banana.mdx" />
+  </FileTree.Folder>
+  <FileTree.File name="_meta.js" active />
+  <FileTree.File name="index.mdx" />
+</ContentAndAppFileTee>
+<div className='mt-6'>
+```js filename="_meta.js" copy=false
+export default {
+  fruits: {
+    type: 'page',
+    title: '✨ Fruits'
+  }
+}
+```
+```js filename="fruits/_meta.js" copy=false
+export default {
+  apple: '🍎 Apple',
+  banana: '🍌 BaNaNa'
+}
+```
+</div>
+</Block>
+
+With single `_meta.global` file it can be defined as below:
+
+```js filename="_meta.global.js" copy=false
+export default {
+  fruits: {
+    type: 'page',
+    title: '✨ Fruits',
+    items: {
+      apple: '🍎 Apple',
+      banana: '🍌 BaNaNa'
+    }
+  }
+}
+```
+
+> [!WARNING]
+>
+> You can't use both `_meta.global` and `_meta` files in your project.
+
+## Good to know
+
+### Sorting pages
+
+You can use ESLint's built-in `sort-keys` rule, append
+`/* eslint sort-keys: error */` comment at the top of your `_meta` file, and you
+will receive ESLint's errors about incorrect order.
+
+### Type of `_meta` keys
+
+The type of your `_meta` keys should always **be a string** and **not a number**
+because
+[numbers are always ordered first](https://dev.to/frehner/the-order-of-js-object-keys-458d)
+in JavaScript objects.
+
+For example, consider the following:
+
+```js filename="_meta.js" copy=false
+export default {
+  foo: '',
+  1992_10_21: '',
+  1: ''
+}
+```
+
+will be converted to:
+
+{/* prettier-ignore */}
+```js filename="_meta.js" copy=false
+export default {
+  '1': '',
+  '19921021': '',
+  foo: ''
+}
+```
+
+> [!TIP]
+>
+> The `.js`, `.jsx`, or `.tsx` file extensions can be used for `_meta` file.

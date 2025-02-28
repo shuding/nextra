@@ -1,0 +1,81 @@
+---
+icon: ChevronRightIcon
+---
+
+import InstallNextraTheme from '@components/install-nextra-theme.mdx'
+import ReadyToGo from '@components/ready-to-go.mdx'
+import { ExampleCode } from '@components/example-code'
+import { Steps } from 'nextra/components'
+
+# Get Started
+
+> [!NOTE]
+>
+> An example of the blog theme can be found [here](https://demo.vercel.blog),
+> with source code [here](https://github.com/vercel/nextjs-portfolio-starter).
+
+Similar to the [Docs Theme](/docs/docs-theme/start), you can install the blog
+theme with the following commands:
+
+## Start as a new project
+
+<Steps>
+### Install
+
+To create a Nextra Blog site manually, you have to install **Next.js**,
+**React**, **Nextra**, and **Nextra Blog Theme**. In your project directory, run
+the following command to install the dependencies:
+
+```sh npm2yarn
+npm i next react react-dom nextra nextra-theme-blog
+```
+
+> [!NOTE]
+>
+> If you already have Next.js installed in your project, you only need to
+> install `nextra` and `nextra-theme-blog` as the add-ons.
+
+<InstallNextraTheme />
+
+### Add [`mdx-components` file](/docs/file-conventions/mdx-components-file)
+
+### Create root layout
+
+<ExampleCode example="blog" filePath="app/layout.jsx" />
+
+{/*
+
+### Create Blog Theme Config
+
+Lastly, create the corresponding `theme.config.jsx` file in your project's root
+directory. This will be used to configure the Nextra Blog theme:
+
+```jsx filename="theme.config.jsx"
+export default {
+  footer: <p>MIT 2023 © Nextra.</p>,
+  head: ({ title, meta }) => (
+    <>
+      {meta.description && (
+        <meta name="description" content={meta.description} />
+      )}
+      {meta.tag && <meta name="keywords" content={meta.tag} />}
+      {meta.author && <meta name="author" content={meta.author} />}
+    </>
+  ),
+  readMore: 'Read More →',
+  postFooter: null,
+  darkMode: false,
+  navs: [
+    {
+      url: 'https://github.com/shuding/nextra',
+      name: 'Nextra'
+    }
+  ]
+}
+```
+
+*/}
+
+<ReadyToGo />
+
+</Steps>

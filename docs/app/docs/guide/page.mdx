@@ -1,0 +1,35 @@
+---
+asIndexPage: true
+---
+
+import {
+  BrushIcon,
+  GlobeIcon,
+  LightningIcon,
+  PictureIcon,
+  StarsIcon
+} from '@components/icons'
+import { Cards } from 'nextra/components'
+import { InformationCircleIcon, LinkIcon, MarkdownIcon } from 'nextra/icons'
+import { MDXRemote } from 'nextra/mdx-remote'
+import { createIndexPage, getPageMap } from 'nextra/page-map'
+
+# Guide
+
+The following features are configured via the Next.js configuration and are
+available in all themes.
+
+<MDXRemote
+  compiledSource={await createIndexPage(await getPageMap('/docs/guide'))}
+  components={{
+    Cards,
+    MarkdownIcon,
+    StarsIcon,
+    LinkIcon,
+    GlobeIcon,
+    LightningIcon,
+    PictureIcon,
+    BrushIcon,
+    InformationCircleIcon
+  }}
+/>
