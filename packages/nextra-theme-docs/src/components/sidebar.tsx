@@ -372,8 +372,8 @@ export const Sidebar: FC<{ toc: Heading[] }> = ({ toc }) => {
     if (isInitialLoaded || window.innerWidth < 768) {
       return
     }
-    // Since `<Sidebar>` is placed in `useMDXComponents.wrapper` this prevents
-    // scroll on client side navigation
+    // Since `<Sidebar>` is placed in `useMDXComponents.wrapper` on client side navigation he will
+    // be remounted and re-centered to active link, isInitialLoaded prevents this
     isInitialLoaded = true
     const activeElement = sidebarRef.current.querySelector('li.active')
     if (activeElement) {
