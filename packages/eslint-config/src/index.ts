@@ -10,7 +10,6 @@ import eslintPluginImport from 'eslint-plugin-import-x'
 import eslintPluginReact from 'eslint-plugin-react'
 // @ts-expect-error -- no types
 import * as eslintPluginReactCompiler from 'eslint-plugin-react-compiler'
-// @ts-expect-error -- no types
 import eslintPluginReactHooks from 'eslint-plugin-react-hooks'
 import eslintPluginSonarJs from 'eslint-plugin-sonarjs'
 // import eslintPluginTailwindCss from 'eslint-plugin-tailwindcss'

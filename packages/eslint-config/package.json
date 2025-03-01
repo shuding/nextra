@@ -14,7 +14,7 @@
     "eslint-plugin-import-x": "4.6.1",
     "eslint-plugin-react": "7.37.4",
     "eslint-plugin-react-compiler": "0.0.0-experimental-22c6e49-20241219",
-    "eslint-plugin-react-hooks": "5.1.0",
+    "eslint-plugin-react-hooks": "5.2.0",
     "eslint-plugin-sonarjs": "3.0.2",
     "eslint-plugin-tailwindcss": "3.17.3",
     "eslint-plugin-typescript-sort-keys": "3.3.0",
