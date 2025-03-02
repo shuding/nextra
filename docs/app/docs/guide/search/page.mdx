@@ -1,4 +1,4 @@
-import { Steps } from 'nextra/components'
+import { Steps, Tabs } from 'nextra/components'
 
 # Search Engine
 
@@ -22,18 +22,25 @@ npm i -D pagefind
 
 ### Add a `postbuild` script
 
-A `postbuild` script must be added to the `package.json` file to generate the
+You need to add a `postbuild` script to the `package.json` file to generate the
 search index. The script should be:
 
-```json filename="package.json"
-"postbuild": "pagefind --site .next/server/app --output-path public/_pagefind"
-```
-
-For Static Exports, adjust to:
-
-```json filename="package.json"
-"postbuild": "pagefind --site .next/server/app --output-path out/_pagefind"
-```
+<Tabs items={['Server builds', 'Static exports']}>
+  <Tabs.Tab>
+    ```json filename="package.json" {2}
+    "scripts": {
+      "postbuild": "pagefind --site .next/server/app --output-path public/_pagefind"
+    }
+    ```
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```json filename="package.json" {2}
+    "scripts": {
+      "postbuild": "pagefind --site .next/server/app --output-path out/_pagefind"
+    }
+    ```
+  </Tabs.Tab>
+</Tabs>
 
 ### Ignore genereated files
 
