@@ -5,7 +5,9 @@ import { Steps } from 'nextra/components'
 Nextra features full-page search, that includes list items, code blocks,
 headings and table cells.
 
-Check the [migration guide](https://the-guild.dev/blog/nextra-4#new-search-engine--pagefind) for more information.
+Check the
+[migration guide](https://the-guild.dev/blog/nextra-4#new-search-engine--pagefind)
+for more information.
 
 ## Setup
 
@@ -20,8 +22,8 @@ npm i -D pagefind
 
 ### Add a `postbuild` script
 
-A `postbuild` script must be added to the `package.json` file to generate the search index. The script should be:
-
+A `postbuild` script must be added to the `package.json` file to generate the
+search index. The script should be:
 
 ```json filename="package.json"
 "postbuild": "pagefind --site .next/server/app --output-path public/_pagefind"
@@ -35,12 +37,15 @@ For Static Exports, adjust to:
 
 ### Ignore genereated files
 
-Add `_pagefind/` to `.gitignore`. This prevents committing the generated search index files,
+Add `_pagefind/` to `.gitignore`. This prevents committing the generated search
+index files,
+
 </Steps>
 
 ## Configuration
 
-The search feature is enabled by default, but you can disable it entirely by setting `search: false{:js}`:
+The search feature is enabled by default, but you can disable it entirely by
+setting `search: false{:js}`:
 
 ```js filename="next.config.mjs" {4}
 import nextra from 'nextra'
@@ -50,7 +55,8 @@ const withNextra = nextra({
 })
 ```
 
-To keep search enabled but exclude code blocks, set `search: { codeblocks: false }{:js}`:
+To keep search enabled but exclude code blocks, set
+`search: { codeblocks: false }{:js}`:
 
 ```js filename="next.config.mjs" {4}
 import nextra from 'nextra'
