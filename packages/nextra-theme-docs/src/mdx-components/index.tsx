@@ -19,6 +19,7 @@ import type { MDXComponents } from 'nextra/mdx-components'
 import { removeLinks } from 'nextra/remove-links'
 import type { ComponentProps, FC } from 'react'
 import { Sidebar } from '../components'
+import { TOCProvider } from '../stores'
 import { H1, H2, H3, H4, H5, H6 } from './heading'
 import { Link } from './link'
 import { ClientWrapper } from './wrapper.client'
@@ -94,22 +95,19 @@ const DEFAULT_COMPONENTS = getNextraMDXComponents({
         // Attach user-defined props to wrapper container, e.g. `data-pagefind-filter`
         {...props}
       >
-        <Sidebar toc={toc} />
-
-        <ClientWrapper
-          toc={toc}
-          metadata={metadata}
-          bottomContent={bottomContent}
-        >
-          <SkipNavContent />
-          <main
-            data-pagefind-body={
-              (metadata as any).searchable !== false || undefined
-            }
-          >
-            {children}
-          </main>
-        </ClientWrapper>
+        <TOCProvider value={toc}>
+          <Sidebar />
+          <ClientWrapper metadata={metadata} bottomContent={bottomContent}>
+            <SkipNavContent />
+            <main
+              data-pagefind-body={
+                (metadata as any).searchable !== false || undefined
+              }
+            >
+              {children}
+            </main>
+          </ClientWrapper>
+        </TOCProvider>
       </div>
     )
   }

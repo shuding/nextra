@@ -2,12 +2,12 @@
 
 import cn from 'clsx'
 import type { MDXWrapper } from 'nextra'
-import { cloneElement, useEffect } from 'react'
+import type { ComponentProps, FC } from 'react'
+import { cloneElement } from 'react'
 import { Breadcrumb, Pagination, TOC } from '../components'
-import { setToc, useConfig, useThemeConfig } from '../stores'
+import { useConfig, useThemeConfig } from '../stores'
 
-export const ClientWrapper: MDXWrapper = ({
-  toc,
+export const ClientWrapper: FC<Omit<ComponentProps<MDXWrapper>, 'toc'>> = ({
   children,
   metadata,
   bottomContent
@@ -18,13 +18,7 @@ export const ClientWrapper: MDXWrapper = ({
     activePath
   } = useConfig().normalizePagesResult
   const themeConfig = useThemeConfig()
-
   const date = themeContext.timestamp && metadata.timestamp
-
-  // We can't update store in server component so doing it in client component
-  useEffect(() => {
-    setToc(toc)
-  }, [toc])
 
   return (
     <>
@@ -34,11 +28,7 @@ export const ClientWrapper: MDXWrapper = ({
           aria-label="table of contents"
         >
           {themeContext.toc && (
-            <TOC
-              toc={toc}
-              filePath={metadata.filePath}
-              pageTitle={metadata.title}
-            />
+            <TOC filePath={metadata.filePath} pageTitle={metadata.title} />
           )}
         </nav>
       )}

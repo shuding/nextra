@@ -1,17 +1,15 @@
 'use client'
 
 import cn from 'clsx'
-import type { Heading } from 'nextra'
 import { Anchor } from 'nextra/components'
 import type { FC } from 'react'
 import { useEffect, useRef } from 'react'
 import scrollIntoView from 'scroll-into-view-if-needed'
-import { useActiveAnchor, useConfig, useThemeConfig } from '../stores'
+import { useActiveAnchor, useConfig, useThemeConfig, useTOC } from '../stores'
 import { getGitIssueUrl, gitUrlParse } from '../utils'
 import { BackToTop } from './back-to-top'
 
 type TOCProps = {
-  toc: Heading[]
   filePath: string
   pageTitle: string
 }
@@ -23,11 +21,11 @@ const linkClassName = cn(
   'x:contrast-more:text-gray-700 x:contrast-more:dark:text-gray-100'
 )
 
-export const TOC: FC<TOCProps> = ({ toc, filePath, pageTitle }) => {
+export const TOC: FC<TOCProps> = ({ filePath, pageTitle }) => {
   const activeSlug = useActiveAnchor()
   const tocRef = useRef<HTMLUListElement>(null)
   const themeConfig = useThemeConfig()
-
+  const toc = useTOC()
   const hasMetaInfo =
     themeConfig.feedback.content ||
     themeConfig.editLink ||
