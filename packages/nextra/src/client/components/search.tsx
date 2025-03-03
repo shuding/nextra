@@ -257,7 +257,7 @@ export const Search: FC<SearchProps> = ({
             'nextra-search-results', // for user styling
             'nextra-scrollbar x:max-md:h-full',
             'x:border x:border-gray-200 x:text-gray-100 x:dark:border-neutral-800',
-            'x:z-20 x:rounded-xl x:py-2.5 x:shadow-xl',
+            'x:z-30 x:rounded-xl x:py-2.5 x:shadow-xl',
             'x:contrast-more:border x:contrast-more:border-gray-900 x:contrast-more:dark:border-gray-50',
             'x:backdrop-blur-md x:bg-nextra-bg/70',
             'x:motion-reduce:transition-none x:transition-opacity',
