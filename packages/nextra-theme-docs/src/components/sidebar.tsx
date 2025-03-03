@@ -18,7 +18,7 @@ import {
   useFocusedRoute,
   useMenu,
   useThemeConfig,
-  useToc
+  useTOC
 } from '../stores'
 import { LocaleSwitch } from './locale-switch'
 import { ThemeSwitch } from './theme-switch'
@@ -286,7 +286,7 @@ Menu.displayName = 'Menu'
 
 export const MobileNav: FC = () => {
   const { directories } = useConfig().normalizePagesResult
-  const toc = useToc()
+  const toc = useTOC()
 
   const menu = useMenu()
   const pathname = usePathname()
@@ -301,14 +301,15 @@ export const MobileNav: FC = () => {
   const sidebarRef = useRef<HTMLUListElement>(null!)
 
   useEffect(() => {
-    const activeElement = sidebarRef.current.querySelector('li.active')
+    const sidebar = sidebarRef.current
+    const activeLink = sidebar.querySelector('li.active')
 
-    if (activeElement && menu) {
-      scrollIntoView(activeElement, {
+    if (activeLink && menu) {
+      scrollIntoView(activeLink, {
         block: 'center',
         inline: 'center',
         scrollMode: 'always',
-        boundary: sidebarRef.current.parentNode as HTMLElement
+        boundary: sidebar.parentNode as HTMLElement
       })
     }
   }, [menu])
@@ -355,9 +356,10 @@ export const MobileNav: FC = () => {
   )
 }
 
-let isInitialLoaded = false
+let lastScrollPosition = 0
 
-export const Sidebar: FC<{ toc: Heading[] }> = ({ toc }) => {
+export const Sidebar: FC = () => {
+  const toc = useTOC()
   const { normalizePagesResult, hideSidebar } = useConfig()
   const themeConfig = useThemeConfig()
   const [isExpanded, setIsExpanded] = useState(themeConfig.sidebar.defaultOpen)
@@ -369,26 +371,31 @@ export const Sidebar: FC<{ toc: Heading[] }> = ({ toc }) => {
   const includePlaceholder = activeThemeContext.layout === 'default'
 
   useEffect(() => {
-    if (isInitialLoaded || window.innerWidth < 768) {
+    if (window.innerWidth < 768) {
       return
     }
+    const sidebar = sidebarRef.current
+
     // Since `<Sidebar>` is placed in `useMDXComponents.wrapper` on client side navigation he will
-    // be remounted and re-centered to active link, isInitialLoaded prevents this
-    isInitialLoaded = true
-    const activeElement = sidebarRef.current.querySelector('li.active')
-    if (activeElement) {
-      scrollIntoView(activeElement, {
+    // be remounted, this is workaround to restore scroll position, this will be fixed in Nextra 5
+    if (lastScrollPosition) {
+      sidebar.scrollTop = lastScrollPosition
+      return
+    }
+
+    const activeLink = sidebar.querySelector('li.active')
+    if (activeLink) {
+      scrollIntoView(activeLink, {
         block: 'center',
         inline: 'center',
         scrollMode: 'always',
-        boundary: sidebarRef.current.parentNode as HTMLDivElement
+        boundary: sidebar.parentNode as HTMLDivElement
       })
     }
   }, [])
 
   const anchors =
-    // When the viewport size is larger than `md`, hide the anchors in
-    // the sidebar when `floatTOC` is enabled.
+    // hide the anchors in the sidebar when `floatTOC` is enabled.
     themeConfig.toc.float ? [] : toc.filter(v => v.depth === 2)
 
   const hasI18n = themeConfig.i18n.length > 0
@@ -419,6 +426,10 @@ export const Sidebar: FC<{ toc: Heading[] }> = ({ toc }) => {
             !isExpanded && 'no-scrollbar'
           )}
           ref={sidebarRef}
+          // @ts-expect-error -- false positive https://github.com/DefinitelyTyped/DefinitelyTyped/pull/72078
+          onScrollEnd={(event) => { // eslint-disable-line react/no-unknown-property
+            lastScrollPosition = event.currentTarget.scrollTop
+          }}
         >
           {/* without !hideSidebar check <Collapse />'s inner.clientWidth on `layout: "raw"` will be 0 and element will not have width on initial loading */}
           {(!hideSidebar || !isExpanded) && (
