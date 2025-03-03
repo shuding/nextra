@@ -2,4 +2,4 @@
 "nextra-theme-docs": patch
 ---
 
-fix: sidebar is scrolled on client side navigation
+fix: make scroll position in sidebar stable between client-side navigation
