@@ -386,7 +386,7 @@ export const Sidebar: FC = () => {
     const sidebar = sidebarRef.current
 
     // Since `<Sidebar>` is placed in `useMDXComponents.wrapper` on client side navigation he will
-    // be remounted, this is workaround to restore scroll position, this will be fixed in Nextra 5
+    // be remounted, this is a workaround to restore the scroll position, and be fixed in Nextra 5
     if (lastScrollPosition) {
       sidebar.scrollTop = lastScrollPosition
       return
