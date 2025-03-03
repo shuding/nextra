@@ -1,5 +1,16 @@
 # nextra-theme-docs
 
+## 4.2.14
+
+### Patch Changes
+
+- ccb5da2: removing custom nextra's scrollbar styles, allowing the browser's default scrollbars to be used
+- 05a202d: fix: make search results appear above the navbar
+- fd4e6d1: fix: make scroll position in sidebar stable between client-side navigation
+- Updated dependencies [ccb5da2]
+- Updated dependencies [05a202d]
+  - nextra@4.2.14
+
 ## 4.2.13
 
 ### Patch Changes
