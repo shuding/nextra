@@ -11,9 +11,13 @@ https://nextra.site
 
 ### Installation
 
-The Nextra repository uses [PNPM Workspaces](https://pnpm.io/workspaces) and
-[Turborepo](https://github.com/vercel/turborepo). To install dependencies, run
-`pnpm install` in the project root directory.
+The Nextra repository uses [PNPM Workspaces](https://pnpm.io/workspaces) and [Turborepo](https://github.com/vercel/turborepo).
+
+1. Run `corepack enable` to enable Corepack.
+
+  > If the command above fails, run `npm install -g corepack@latest` to install the latest version of [Corepack](https://github.com/nodejs/corepack?tab=readme-ov-file#manual-installs).
+
+2. Run `pnpm install` to install the website's workspace dependencies.
 
 ### Build `nextra`
 
