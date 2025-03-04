@@ -17,7 +17,7 @@ The Nextra repository uses [PNPM Workspaces](https://pnpm.io/workspaces) and [Tu
 
   > If the command above fails, run `npm install -g corepack@latest` to install the latest version of [Corepack](https://github.com/nodejs/corepack?tab=readme-ov-file#manual-installs).
 
-2. Run `pnpm install` to install the website's workspace dependencies.
+2. Run `pnpm install` to install the project's dependencies.
 
 ### Build `nextra`
 
