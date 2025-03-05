@@ -1,5 +1,14 @@
 # nextra-theme-docs
 
+## 4.2.15
+
+### Patch Changes
+
+- 27dcd23: fix: better error message for `Layout#lastUpdated` prop. Ensure `lastUpdated` is React component and not React fragment.
+- 5617e04: fix: loading state in search results was only visible during the first search
+- Updated dependencies [5617e04]
+  - nextra@4.2.15
+
 ## 4.2.14
 
 ### Patch Changes
