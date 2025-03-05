@@ -1,5 +1,11 @@
 # nextra
 
+## 4.2.16
+
+### Patch Changes
+
+- 2cfaacc: fix: frozen spinner on loading state in search results by updating Tailwind CSS to v4.0.10
+
 ## 4.2.15
 
 ### Patch Changes
