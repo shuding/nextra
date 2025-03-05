@@ -1,5 +1,11 @@
 # nextra
 
+## 4.2.15
+
+### Patch Changes
+
+- 5617e04: fix: loading state in search results was only visible during the first search
+
 ## 4.2.14
 
 ### Patch Changes
