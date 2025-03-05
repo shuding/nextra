@@ -1,6 +1,13 @@
 import cn from 'clsx'
 import type { FC, ReactElement, ReactNode } from 'react'
-import { InformationCircleIcon, GitHubAlertNoteIcon, GitHubAlertTipIcon, GitHubAlertImportantIcon, GitHubAlertWarningIcon, GitHubAlertCautionIcon } from '../icons/index.js'
+import {
+  GitHubAlertCautionIcon,
+  GitHubAlertImportantIcon,
+  GitHubAlertNoteIcon,
+  GitHubAlertTipIcon,
+  GitHubAlertWarningIcon,
+  InformationCircleIcon
+} from '../icons/index.js'
 
 const TypeToEmoji = {
   default: '💡',
@@ -15,7 +22,12 @@ const TypeToEmoji = {
 }
 
 type CalloutType = keyof typeof TypeToEmoji
-type GitHubAlertType = 'github-note' | 'github-tip' | 'github-important' | 'github-warning' | 'github-caution'
+type GitHubAlertType =
+  | 'github-note'
+  | 'github-tip'
+  | 'github-important'
+  | 'github-warning'
+  | 'github-caution'
 
 const errorClasses = cn(
   'x:border-red-200 x:bg-red-100 x:text-red-900 x:dark:border-red-200/30 x:dark:bg-red-900/30 x:dark:text-red-200'
