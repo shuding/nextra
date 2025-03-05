@@ -3,6 +3,7 @@ import { ThemeProvider } from 'next-themes'
 import { Search, SkipNavLink } from 'nextra/components'
 import { element, stringOrElement } from 'nextra/schemas'
 import type { FC, ReactNode } from 'react'
+import { Fragment } from 'react'
 import { z } from 'zod'
 import { fromZodError } from 'zod-validation-error'
 import { LastUpdated } from './components/last-updated'
@@ -38,7 +39,22 @@ const theme = z.strictObject({
       })
     )
     .default([]),
-  lastUpdated: element.default(<LastUpdated />),
+  lastUpdated: element
+    .default(<LastUpdated />)
+    .refine(el => el.type !== Fragment && typeof el.type !== 'string', {
+      message: `\`Layout#lastUpdated\` must be a \`<LastUpdated />\` component:
+
+\`\`\`js
+import { Layout, LastUpdated } from 'nextra-theme-docs'
+
+<Layout
+  lastUpdated={<LastUpdated locale="YOUR_LOCALE">YOUR_CONTENT</LastUpdated>}
+>
+  {children}
+</Layout>
+\`\`\`
+`
+    }),
   navbar: element,
   navigation: z
     .union([
