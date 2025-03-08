@@ -34,7 +34,7 @@
   "pnpm": {
     "overrides": {
       "postcss": "8.5.3",
-      "lightningcss": "1.29.1",
+      "lightningcss": "1.29.2",
       "esbuild": "0.25.0",
       "vite": "6.2.1",
       "next": "15.2.1"
