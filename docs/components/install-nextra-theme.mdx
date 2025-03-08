@@ -1,10 +1,18 @@
+To support default search functionality, install **Pagefind** as a dev
+dependency:
+
+```sh npm2yarn
+npm i -D pagefind
+```
+
 Add the following scripts to your `package.json`:
 
 ```json filename="package.json"
 "scripts": {
   "dev": "next",
   "build": "next build",
-  "start": "next start"
+  "start": "next start",
+  "postbuild": "pagefind --site .next/server/app --output-path public/_pagefind"
 },
 ```
 
@@ -16,6 +24,13 @@ Add the following scripts to your `package.json`:
 > ```diff filename="package.json"
 > - "dev": "next",
 > + "dev": "next --turbopack",
+> ```
+>
+> For Static Exports, adjust the postbuild script to
+>
+> ```diff filename="package.json"
+> - "postbuild": "pagefind --site .next/server/app --output-path public/_pagefind",
+> + "postbuild": "pagefind --site .next/server/app --output-path out/_pagefind"
 > ```
 
 You can start the server in development mode with the following command
@@ -36,6 +51,15 @@ npm run start
 >
 > If you're not familiar with Next.js, note that development mode is
 > significantly slower since Next.js compiles every page you navigate to.
+
+### Ignore Pagefind generated files
+
+Add `_pagefind/` to `.gitignore`. This prevents committing the generated search
+index files, which are not necessary for version control.
+
+```plaintext filename=".gitignore"
+_pagefind/
+```
 
 ### Add Next.js config
 
