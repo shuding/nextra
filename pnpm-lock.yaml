@@ -234,8 +234,8 @@ importers:
         specifier: 1.2.7
         version: 1.2.7(eslint@9.21.0(jiti@2.4.2))
       '@eslint/js':
-        specifier: 9.21.0
-        version: 9.21.0
+        specifier: 9.22.0
+        version: 9.22.0
       '@next/eslint-plugin-next':
         specifier: 15.2.1
         version: 15.2.1
@@ -1464,6 +1464,10 @@ packages:
 
   '@eslint/js@9.21.0':
     resolution: {integrity: sha512-BqStZ3HX8Yz6LvsF5ByXYrtigrV5AXADWLAGc7PH/1SxOb7/FIYYMszZZWiUou/GB9P2lXWk2SV4d+Z8h0nknw==}
+    engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
+
+  '@eslint/js@9.22.0':
+    resolution: {integrity: sha512-vLFajx9o8d1/oL2ZkpMYbkLv8nDB6yaIwFNt7nI4+I80U/z03SxmfOMsLbvWr3p7C+Wnoh//aOu2pQW8cS0HCQ==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
 
   '@eslint/object-schema@2.1.6':
@@ -7270,6 +7274,8 @@ snapshots:
       - supports-color
 
   '@eslint/js@9.21.0': {}
+
+  '@eslint/js@9.22.0': {}
 
   '@eslint/object-schema@2.1.6': {}
 
