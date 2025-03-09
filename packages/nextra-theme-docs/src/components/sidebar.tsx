@@ -182,11 +182,10 @@ function getMenuChildren(menu: MenuItem) {
   const routes = Object.fromEntries(
     (menu.children || []).map(route => [route.name, route])
   )
-  return Object.entries(menu.items || {})  
-    .map(([key, item]) => ({
-      ...(routes[key] || { name: key /* for React key prop */ }),
-      ...(item as object)
-    }))
+  return Object.entries(menu.items || {}).map(([key, item]) => ({
+    ...(routes[key] || { name: key /* for React key prop */ }),
+    ...(item as object)
+  }))
 }
 
 const Separator: FC<{ title: string }> = ({ title }) => {

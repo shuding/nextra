@@ -14,7 +14,7 @@ import {
   withGitHubAlert,
   withIcons
 } from 'nextra/components'
-import type { CalloutGitHubAlertType} from 'nextra/components';
+import type { CalloutGitHubAlertType } from 'nextra/components'
 import { useMDXComponents as getNextraMDXComponents } from 'nextra/mdx-components'
 import type { MDXComponents } from 'nextra/mdx-components'
 import { removeLinks } from 'nextra/remove-links'
