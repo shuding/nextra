@@ -89,10 +89,8 @@ export const Search: FC<SearchProps> = ({
         setError('')
         return
       }
-
+      setIsLoading(true)
       if (!window.pagefind) {
-        setIsLoading(true)
-        setError('')
         try {
           await importPagefind()
         } catch (error) {
@@ -115,7 +113,8 @@ export const Search: FC<SearchProps> = ({
       if (!response) return
 
       const data = await Promise.all(response.results.map(o => o.data()))
-
+      setIsLoading(false)
+      setError('')
       setResults(
         data.map(newData => ({
           ...newData,
@@ -126,7 +125,6 @@ export const Search: FC<SearchProps> = ({
           })
         }))
       )
-      setIsLoading(false)
     }
     handleSearch(deferredSearch)
   }, [deferredSearch]) // eslint-disable-line react-hooks/exhaustive-deps -- ignore searchOptions
