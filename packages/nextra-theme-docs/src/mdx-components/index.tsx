@@ -5,7 +5,6 @@
 import cn from 'clsx'
 import {
   Callout,
-  CalloutGitHubAlertType,
   Code,
   Details,
   Pre,
@@ -15,6 +14,7 @@ import {
   withGitHubAlert,
   withIcons
 } from 'nextra/components'
+import type { CalloutGitHubAlertType} from 'nextra/components';
 import { useMDXComponents as getNextraMDXComponents } from 'nextra/mdx-components'
 import type { MDXComponents } from 'nextra/mdx-components'
 import { removeLinks } from 'nextra/remove-links'
@@ -94,7 +94,7 @@ const DEFAULT_COMPONENTS = getNextraMDXComponents({
             <SkipNavContent />
             <main
               data-pagefind-body={
-                (metadata as any).searchable !== false || undefined
+                (metadata).searchable !== false || undefined
               }
             >
               {children}

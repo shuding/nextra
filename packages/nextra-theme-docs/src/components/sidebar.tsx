@@ -182,7 +182,7 @@ function getMenuChildren(menu: MenuItem) {
   const routes = Object.fromEntries(
     (menu.children || []).map(route => [route.name, route])
   )
-  return Object.entries(menu.items || {}) // eslint-disable-line @typescript-eslint/no-unnecessary-condition -- fixme
+  return Object.entries(menu.items || {})  
     .map(([key, item]) => ({
       ...(routes[key] || { name: key /* for React key prop */ }),
       ...(item as object)

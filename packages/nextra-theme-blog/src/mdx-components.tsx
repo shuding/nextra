@@ -4,7 +4,6 @@
 /* eslint sort-keys: error */
 import {
   Callout,
-  CalloutGitHubAlertType,
   Code,
   Details,
   Pre,
@@ -13,6 +12,7 @@ import {
   withGitHubAlert,
   withIcons
 } from 'nextra/components'
+import type { CalloutGitHubAlertType} from 'nextra/components';
 import { useMDXComponents as getNextraMDXComponents } from 'nextra/mdx-components'
 import type { MDXComponents } from 'nextra/mdx-components'
 import type { ComponentProps, FC } from 'react'
@@ -78,7 +78,7 @@ export const useMDXComponents = ({
   ({
     ...DEFAULT_COMPONENTS,
     wrapper({ children, metadata }) {
-      const date = (metadata as any).date as string
+      const date = (metadata).date as string
       if (date && !isValidDate(date)) {
         throw new Error(
           `Invalid date "${date}". Provide date in "YYYY/M/D", "YYYY/M/D H:m", "YYYY-MM-DD", "[YYYY-MM-DD]T[HH:mm]" or "[YYYY-MM-DD]T[HH:mm:ss.SSS]Z" format.`
