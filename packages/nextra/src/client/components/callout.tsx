@@ -12,13 +12,13 @@ import {
 const TypeToEmoji = {
   default: '💡',
   error: '🚫',
-  info: <InformationCircleIcon height="20" className="x:mt-1" />,
+  info: <InformationCircleIcon height="16" className="x:mt-1" />,
   warning: '⚠️',
-  'github-note': <GitHubAlertNoteIcon />,
-  'github-tip': <GitHubAlertTipIcon />,
-  'github-important': <GitHubAlertImportantIcon />,
-  'github-warning': <GitHubAlertWarningIcon />,
-  'github-caution': <GitHubAlertCautionIcon />
+  'github-note': <GitHubAlertNoteIcon height="16" className="x:mt-1.5" />,
+  'github-tip': <GitHubAlertTipIcon height="16" className="x:mt-1.5" />,
+  'github-important': <GitHubAlertImportantIcon height="16" className="x:mt-1.5" />,
+  'github-warning': <GitHubAlertWarningIcon height="16" className="x:mt-1.5" />,
+  'github-caution': <GitHubAlertCautionIcon height="16" className="x:mt-1.5" />
 }
 
 type CalloutType = keyof typeof TypeToEmoji
