@@ -28,7 +28,7 @@ const { mdxPages, pageMap: _pageMap } = convertToPageMap({
 })
 
 // `mergeMetaWithPageMap` is used to change sidebar order and title
-const eslintPageMap = mergeMetaWithPageMap(_pageMap[0], {
+const eslintPageMap = mergeMetaWithPageMap(_pageMap[0]!, {
   index: 'Introduction',
   'getting-started': {
     items: {

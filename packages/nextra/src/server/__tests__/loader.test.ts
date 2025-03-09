@@ -20,7 +20,7 @@ describe('tree shaking', async () => {
     const appFile = await fs.readFile(
       path.join(
         pageChunksDirPath,
-        pageChunkFileNames.find(name => name.startsWith('_app-'))
+        pageChunkFileNames.find(name => name.startsWith('_app-'))!
       ),
       'utf8'
     )
