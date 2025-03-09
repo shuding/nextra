@@ -4,6 +4,7 @@
 /* eslint sort-keys: error */
 import {
   Callout,
+  CalloutGitHubAlertType,
   Code,
   Details,
   Pre,
@@ -42,7 +43,9 @@ const createHeading = (
     )
   }
 const Blockquote = withGitHubAlert(({ type, ...props }) => {
-  return <Callout type={'github-' + type} {...props} />
+  return (
+    <Callout type={('github' + type) as CalloutGitHubAlertType} {...props} />
+  )
 })
 
 type BlogMDXComponents = Readonly<

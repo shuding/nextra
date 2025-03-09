@@ -5,6 +5,7 @@
 import cn from 'clsx'
 import {
   Callout,
+  CalloutGitHubAlertType,
   Code,
   Details,
   Pre,
@@ -37,7 +38,9 @@ const Blockquote: FC<ComponentProps<'blockquote'>> = props => (
 const DEFAULT_COMPONENTS = getNextraMDXComponents({
   a: Link,
   blockquote: withGitHubAlert(({ type, ...props }) => {
-    return <Callout type={'github-' + type} {...props} />
+    return (
+      <Callout type={('github-' + type) as CalloutGitHubAlertType} {...props} />
+    )
   }, Blockquote),
   code: Code,
   details: Details,

@@ -5,7 +5,10 @@ export { Popup } from './popup/index.js'
 export { Tabs } from './tabs/index.js'
 export { Bleed } from './bleed.js'
 export { Button } from './button.js'
-export { Callout } from './callout.js'
+export {
+  Callout,
+  GitHubAlertType as CalloutGitHubAlertType
+} from './callout.js'
 export { Cards } from './cards.js'
 export { Collapse } from './collapse.js'
 export { Head } from './head.js'

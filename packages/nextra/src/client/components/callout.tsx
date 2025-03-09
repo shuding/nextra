@@ -16,13 +16,15 @@ const TypeToEmoji = {
   warning: '⚠️',
   'github-note': <GitHubAlertNoteIcon height="16" className="x:mt-1.5" />,
   'github-tip': <GitHubAlertTipIcon height="16" className="x:mt-1.5" />,
-  'github-important': <GitHubAlertImportantIcon height="16" className="x:mt-1.5" />,
+  'github-important': (
+    <GitHubAlertImportantIcon height="16" className="x:mt-1.5" />
+  ),
   'github-warning': <GitHubAlertWarningIcon height="16" className="x:mt-1.5" />,
   'github-caution': <GitHubAlertCautionIcon height="16" className="x:mt-1.5" />
 }
 
 type CalloutType = keyof typeof TypeToEmoji
-type GitHubAlertType =
+export type GitHubAlertType =
   | 'github-note'
   | 'github-tip'
   | 'github-important'
