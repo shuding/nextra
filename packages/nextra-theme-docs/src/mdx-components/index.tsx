@@ -94,7 +94,7 @@ const DEFAULT_COMPONENTS = getNextraMDXComponents({
             <SkipNavContent />
             <main
               data-pagefind-body={
-                (metadata).searchable !== false || undefined
+                (metadata as any).searchable !== false || undefined
               }
             >
               {children}
