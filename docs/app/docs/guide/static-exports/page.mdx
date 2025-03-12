@@ -11,7 +11,9 @@ Export your pages statically, and deploy with [Nginx](https://nginx.org),
 
 ### Configuration
 
-```js filename="next.config.mjs"
+To enable a static export, update the options in `next.config.mjs` as follows:
+
+```js filename="next.config.mjs" {7-10}
 import nextra from 'nextra'
 
 /**
@@ -30,6 +32,12 @@ const withNextra = nextra({
 })
 
 export default withNextra(nextConfig)
+```
+
+Update the Pagefind output path for static exports:
+
+```json filename="package.json"
+"postbuild": "pagefind --site .next/server/app --output-path out/_pagefind""
 ```
 
 ### Building
