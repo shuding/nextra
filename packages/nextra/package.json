@@ -90,7 +90,7 @@
     "mdast-util-gfm": "^3.0.0",
     "mdast-util-to-hast": "^13.2.0",
     "negotiator": "^1.0.0",
-    "react-compiler-runtime": "0.0.0-experimental-22c6e49-20241219",
+    "react-compiler-runtime": "0.0.0-experimental-fcabbc1-20241106",
     "react-medium-image-zoom": "^5.2.12",
     "rehype-katex": "^7.0.0",
     "rehype-pretty-code": "0.14.0",
