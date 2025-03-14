@@ -1,5 +1,30 @@
 # nextra-theme-blog
 
+## 4.2.16
+
+### Patch Changes
+
+- 2cfaacc: fix: frozen spinner on loading state in search results by updating Tailwind CSS to v4.0.10
+- Updated dependencies [2cfaacc]
+  - nextra@4.2.16
+
+## 4.2.15
+
+### Patch Changes
+
+- 5617e04: fix: loading state in search results was only visible during the first search
+- Updated dependencies [5617e04]
+  - nextra@4.2.15
+
+## 4.2.14
+
+### Patch Changes
+
+- ccb5da2: removing custom nextra's scrollbar styles, allowing the browser's default scrollbars to be used
+- Updated dependencies [ccb5da2]
+- Updated dependencies [05a202d]
+  - nextra@4.2.14
+
 ## 4.2.13
 
 ### Patch Changes

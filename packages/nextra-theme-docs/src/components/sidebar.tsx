@@ -7,7 +7,12 @@ import { Anchor, Button, Collapse } from 'nextra/components'
 import { useFSRoute, useHash } from 'nextra/hooks'
 import { ArrowRightIcon, ExpandIcon } from 'nextra/icons'
 import type { Item, MenuItem, PageItem } from 'nextra/normalize-pages'
-import type { FC, FocusEventHandler, MouseEventHandler } from 'react'
+import type {
+  ComponentProps,
+  FC,
+  FocusEventHandler,
+  MouseEventHandler
+} from 'react'
 import { forwardRef, useEffect, useId, useRef, useState } from 'react'
 import scrollIntoView from 'scroll-into-view-if-needed'
 import {
@@ -18,7 +23,7 @@ import {
   useFocusedRoute,
   useMenu,
   useThemeConfig,
-  useToc
+  useTOC
 } from '../stores'
 import { LocaleSwitch } from './locale-switch'
 import { ThemeSwitch } from './theme-switch'
@@ -286,7 +291,7 @@ Menu.displayName = 'Menu'
 
 export const MobileNav: FC = () => {
   const { directories } = useConfig().normalizePagesResult
-  const toc = useToc()
+  const toc = useTOC()
 
   const menu = useMenu()
   const pathname = usePathname()
@@ -301,14 +306,15 @@ export const MobileNav: FC = () => {
   const sidebarRef = useRef<HTMLUListElement>(null!)
 
   useEffect(() => {
-    const activeElement = sidebarRef.current.querySelector('li.active')
+    const sidebar = sidebarRef.current
+    const activeLink = sidebar.querySelector('li.active')
 
-    if (activeElement && menu) {
-      scrollIntoView(activeElement, {
+    if (activeLink && menu) {
+      scrollIntoView(activeLink, {
         block: 'center',
         inline: 'center',
         scrollMode: 'always',
-        boundary: sidebarRef.current.parentNode as HTMLElement
+        boundary: sidebar.parentNode as HTMLElement
       })
     }
   }, [menu])
@@ -355,33 +361,50 @@ export const MobileNav: FC = () => {
   )
 }
 
-export const Sidebar: FC<{ toc: Heading[] }> = ({ toc }) => {
+let lastScrollPosition = 0
+
+const handleScrollEnd: ComponentProps<'div'>['onScroll'] = event => {
+  lastScrollPosition = event.currentTarget.scrollTop
+}
+
+export const Sidebar: FC = () => {
+  const toc = useTOC()
   const { normalizePagesResult, hideSidebar } = useConfig()
   const themeConfig = useThemeConfig()
   const [isExpanded, setIsExpanded] = useState(themeConfig.sidebar.defaultOpen)
   const [showToggleAnimation, setToggleAnimation] = useState(false)
-  const sidebarRef = useRef<HTMLDivElement>(null)
+  const sidebarRef = useRef<HTMLDivElement>(null!)
   const sidebarControlsId = useId()
 
   const { docsDirectories, activeThemeContext } = normalizePagesResult
   const includePlaceholder = activeThemeContext.layout === 'default'
 
   useEffect(() => {
-    const activeElement = sidebarRef.current?.querySelector('li.active')
+    if (window.innerWidth < 768) {
+      return
+    }
+    const sidebar = sidebarRef.current
 
-    if (activeElement && window.innerWidth > 767) {
-      scrollIntoView(activeElement, {
+    // Since `<Sidebar>` is placed in `useMDXComponents.wrapper` on client side navigation he will
+    // be remounted, this is a workaround to restore the scroll position, and will be fixed in Nextra 5
+    if (lastScrollPosition) {
+      sidebar.scrollTop = lastScrollPosition
+      return
+    }
+
+    const activeLink = sidebar.querySelector('li.active')
+    if (activeLink) {
+      scrollIntoView(activeLink, {
         block: 'center',
         inline: 'center',
         scrollMode: 'always',
-        boundary: sidebarRef.current!.parentNode as HTMLDivElement
+        boundary: sidebar.parentNode as HTMLDivElement
       })
     }
   }, [])
 
   const anchors =
-    // When the viewport size is larger than `md`, hide the anchors in
-    // the sidebar when `floatTOC` is enabled.
+    // hide the anchors in the sidebar when `floatTOC` is enabled.
     themeConfig.toc.float ? [] : toc.filter(v => v.depth === 2)
 
   const hasI18n = themeConfig.i18n.length > 0
@@ -412,6 +435,8 @@ export const Sidebar: FC<{ toc: Heading[] }> = ({ toc }) => {
             !isExpanded && 'no-scrollbar'
           )}
           ref={sidebarRef}
+          // @ts-expect-error -- false positive https://github.com/DefinitelyTyped/DefinitelyTyped/pull/72078
+          onScrollEnd={handleScrollEnd} // eslint-disable-line react/no-unknown-property
         >
           {/* without !hideSidebar check <Collapse />'s inner.clientWidth on `layout: "raw"` will be 0 and element will not have width on initial loading */}
           {(!hideSidebar || !isExpanded) && (

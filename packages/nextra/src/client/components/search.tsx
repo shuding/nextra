@@ -89,10 +89,8 @@ export const Search: FC<SearchProps> = ({
         setError('')
         return
       }
-
+      setIsLoading(true)
       if (!window.pagefind) {
-        setIsLoading(true)
-        setError('')
         try {
           await importPagefind()
         } catch (error) {
@@ -115,7 +113,8 @@ export const Search: FC<SearchProps> = ({
       if (!response) return
 
       const data = await Promise.all(response.results.map(o => o.data()))
-
+      setIsLoading(false)
+      setError('')
       setResults(
         data.map(newData => ({
           ...newData,
@@ -126,7 +125,6 @@ export const Search: FC<SearchProps> = ({
           })
         }))
       )
-      setIsLoading(false)
     }
     handleSearch(deferredSearch)
   }, [deferredSearch]) // eslint-disable-line react-hooks/exhaustive-deps -- ignore searchOptions
@@ -257,7 +255,7 @@ export const Search: FC<SearchProps> = ({
             'nextra-search-results', // for user styling
             'nextra-scrollbar x:max-md:h-full',
             'x:border x:border-gray-200 x:text-gray-100 x:dark:border-neutral-800',
-            'x:z-20 x:rounded-xl x:py-2.5 x:shadow-xl',
+            'x:z-30 x:rounded-xl x:py-2.5 x:shadow-xl',
             'x:contrast-more:border x:contrast-more:border-gray-900 x:contrast-more:dark:border-gray-50',
             'x:backdrop-blur-md x:bg-nextra-bg/70',
             'x:motion-reduce:transition-none x:transition-opacity',
