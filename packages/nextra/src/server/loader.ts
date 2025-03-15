@@ -129,10 +129,10 @@ export async function loader(
   }
   return compileMdx(source, {
     mdxOptions: {
-      ...mdxOptions,
       jsx: true,
       outputFormat: 'program',
       format: 'detect',
+      ...mdxOptions,
       rehypePrettyCodeOptions: {
         ...mdxOptions.rehypePrettyCodeOptions,
         transformers: [
