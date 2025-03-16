@@ -21,7 +21,7 @@
   },
   "dependencies": {
     "babel-plugin-react-compiler": "0.0.0-experimental-22c6e49-20241219",
-    "react-compiler-webpack": "0.1.2"
+    "react-compiler-webpack": "0.2.0"
   },
   "devDependencies": {
     "@types/node": "^22.10.2"
