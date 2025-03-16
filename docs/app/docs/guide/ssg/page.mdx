@@ -6,14 +6,18 @@ import { compileMdx } from 'nextra/compile'
 import { Callout } from 'nextra/components'
 import { MDXRemote } from 'nextra/mdx-remote'
 
-# Next.js SSG
+# Next.js Static Rendering
 
-With Next.js, you can pre-render your page using
-[Static Generation (SSG)](https://nextjs.org/docs/basic-features/pages#static-generation-recommended).
-Your pages will be generated at build time and statically served to visitors. It
-can also be cached by a CDN to maximize the performance.
+[Static Rendering](https://nextjs.org/docs/app/building-your-application/rendering/server-components#static-rendering-default)
+is default server rendering strategy, where routes are rendered at **build
+time** or in the background after
+[data revalidation](https://nextjs.org/docs/app/building-your-application/data-fetching/incremental-static-regeneration).
+The result is cached and can be distributed via a
+[Content Delivery Network (CDN)](https://developer.mozilla.org/docs/Glossary/CDN)
+for optimal performance.
 
-This is supported by Nextra too. Here's an example:
+Static rendering is ideal for routes with non-personalized data that can be
+determined at build time, such as blog posts or product pages.
 
 <SSGPage />
 
@@ -42,7 +46,7 @@ export async function getUpdatedAt() {
   const mdx = `${starsComponent}
 
 The number above was generated at build time via MDX server components. With
-[Incremental Static Regeneration](https://nextjs.org/docs/basic-features/data-fetching#incremental-static-regeneration)
+[Incremental Static Regeneration](https://nextjs.org/docs/app/building-your-application/data-fetching/incremental-static-regeneration)
 enabled, it will be kept up to date.
 
 ---
