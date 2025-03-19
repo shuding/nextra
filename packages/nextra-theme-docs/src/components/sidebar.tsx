@@ -36,7 +36,7 @@ const classes = {
     'x:cursor-pointer x:contrast-more:border'
   ),
   inactive: cn(
-    'x:text-gray-500 x:hover:bg-gray-100 x:hover:text-gray-900',
+    'x:text-gray-600 x:hover:bg-gray-100 x:hover:text-gray-900',
     'x:dark:text-neutral-400 x:dark:hover:bg-primary-100/5 x:dark:hover:text-gray-50',
     'x:contrast-more:text-gray-900 x:contrast-more:dark:text-gray-50',
     'x:contrast-more:border-transparent x:contrast-more:hover:border-gray-900 x:contrast-more:dark:hover:border-gray-50'
