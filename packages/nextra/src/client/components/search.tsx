@@ -162,15 +162,16 @@ export const Search: FC<SearchProps> = ({
     }
   }, [])
 
-  const icon = mounted && !focused && (
+  const icon = (
     <kbd
       className={cn(
-        'x:absolute x:my-1.5 x:select-none x:end-1.5',
+        'x:absolute x:my-1.5 x:select-none x:pointer-events-none x:end-1.5 x:transition-all',
         'x:h-5 x:rounded x:bg-nextra-bg x:px-1.5 x:font-mono x:text-[11px] x:font-medium x:text-gray-500',
         'x:border nextra-border',
         'x:contrast-more:text-current',
         'x:items-center x:gap-1 x:flex',
-        'x:max-sm:hidden not-prose'
+        'x:max-sm:hidden not-prose',
+        !(mounted && !focused) && 'x:invisible x:opacity-0'
       )}
     >
       {navigator.userAgent.includes('Mac') ? (
@@ -226,7 +227,7 @@ export const Search: FC<SearchProps> = ({
           spellCheck={false}
           className={({ focus }) =>
             cn(
-              'x:rounded-lg x:px-3 x:py-2 x:transition-colors',
+              'x:rounded-lg x:px-3 x:py-2 x:transition-all',
               'x:w-full x:md:w-64',
               'x:text-base x:leading-tight x:md:text-sm',
               focus
