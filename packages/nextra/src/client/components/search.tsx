@@ -174,7 +174,7 @@ export const Search: FC<SearchProps> = ({
         !(mounted && !focused) && 'x:invisible x:opacity-0'
       )}
     >
-      {navigator.userAgent.includes('Mac') ? (
+      {mounted && navigator.userAgent.includes('Mac') ? (
         <>
           <span className="x:text-xs">⌘</span>K
         </>
