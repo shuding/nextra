@@ -1,7 +1,7 @@
 /* eslint sort-keys: error */
 import { ThemeProvider } from 'next-themes'
 import { Search, SkipNavLink } from 'nextra/components'
-import { element, stringOrElement } from 'nextra/schemas'
+import { element, reactNode, stringOrElement } from 'nextra/schemas'
 import type { FC, ReactNode } from 'react'
 import { Fragment } from 'react'
 import { z } from 'zod'
@@ -30,7 +30,7 @@ const theme = z.strictObject({
       labels: z.string().default('feedback')
     })
     .default({}),
-  footer: element,
+  footer: reactNode.optional(),
   i18n: z
     .array(
       z.strictObject({
