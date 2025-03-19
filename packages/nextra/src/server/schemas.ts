@@ -79,27 +79,27 @@ export const element = z.custom<ReactElement<Record<string, unknown>>>(
 export const reactNode = z.custom<ReactNode>(
   (data): data is ReactNode => {
     // Check if it's a valid React element
-    if (isValidElement(data)) return true;
-    
+    if (isValidElement(data)) return true
+
     // Check if it's null or undefined
-    if (data === null || data === undefined) return true;
-    
+    if (data === null || data === undefined) return true
+
     // Check if it's a string or number
-    if (typeof data === 'string' || typeof data === 'number') return true;
-    
+    if (typeof data === 'string' || typeof data === 'number') return true
+
     // Check if it's a boolean
-    if (typeof data === 'boolean') return true;
-    
+    if (typeof data === 'boolean') return true
+
     // Check if it's an array of React nodes
     if (Array.isArray(data)) {
-      return data.every(item => reactNode.safeParse(item).success);
+      return data.every(item => reactNode.safeParse(item).success)
     }
-    
+
     // If it's none of the above, it's not a valid React node
-    return false;
+    return false
   },
   { message: 'Must be a valid React node' }
-);
+)
 
 export const stringOrElement = z.union([z.string(), element])
 
