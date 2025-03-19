@@ -27,7 +27,7 @@ pre code.nextra-code:not([class*='twoslash-']) {
     &::before {
       counter-increment: line;
       content: counter(line);
-      @apply x:inline-block x:pr-4 x:text-right x:min-w-[2.6rem] x:text-gray-500;
+      @apply x:inline-block x:pr-4 x:text-right x:min-w-[2.6rem] x:text-gray-600 x:dark:text-gray-400;
     }
   }
 
