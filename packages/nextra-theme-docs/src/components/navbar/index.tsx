@@ -14,7 +14,7 @@ const propsSchema = z.strictObject({
   logoLink: z.union([z.string(), z.boolean()]).default(true),
   logo: element,
   projectLink: z.string().optional(),
-  projectIcon: element.default(<GitHubIcon height="24" />),
+  projectIcon: element.default(<GitHubIcon height="24" aria-label="Project repository" />),
   chatLink: z.string().optional(),
   chatIcon: element.default(<DiscordIcon width="24" />),
   className: z.string().optional(),
@@ -75,6 +75,7 @@ export const Navbar: FC<NavbarProps> = props => {
               logoClass,
               'x:transition-opacity x:focus-visible:nextra-focus x:hover:opacity-75'
             )}
+            aria-label="Home page"
           >
             {logo}
           </NextLink>
