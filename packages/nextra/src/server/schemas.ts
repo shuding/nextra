@@ -70,13 +70,32 @@ export const nextraConfigSchema = z.strictObject({
 
 export const element = z.custom<ReactElement<Record<string, unknown>>>(
   isValidElement,
-  { message: 'Must be React.ReactElement' }
+  { message: 'Must be a valid React element' }
 )
+/**
+ * https://react.dev/reference/react/isValidElement#react-elements-vs-react-nodes
+ */
 export const reactNode = z.custom<ReactNode>(
-  data =>
-    isValidElement(data) ||
-    (Array.isArray(data) && data.every(value => isValidElement(value))),
-  { message: 'Must be React.ReactNode' }
+  function checkReactNode(data): data is ReactNode {
+    if (
+      // Check if it's a valid React element
+      isValidElement(data) ||
+      // Check if it's null or undefined
+      data == null ||
+      typeof data === 'string' ||
+      typeof data === 'number' ||
+      typeof data === 'boolean'
+    ) {
+      return true
+    }
+    // Check if it's an array of React nodes
+    if (Array.isArray(data)) {
+      return data.every(item => checkReactNode(item))
+    }
+    // If it's none of the above, it's not a valid React node
+    return false
+  },
+  { message: 'Must be a valid React node' }
 )
 
 export const stringOrElement = z.union([z.string(), element])
