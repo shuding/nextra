@@ -94,10 +94,10 @@ import { Layout, LastUpdated } from 'nextra-theme-docs'
     .default({}),
   toc: z
     .strictObject({
-      backToTop: stringOrElement.or(z.null()).default('Scroll to top'),
-      extraContent: stringOrElement.optional(),
+      backToTop: reactNode.default('Scroll to top'),
+      extraContent: reactNode,
       float: z.boolean().default(true),
-      title: stringOrElement.default('On This Page')
+      title: reactNode.default('On This Page')
     })
     .default({})
 })
