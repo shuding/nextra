@@ -98,7 +98,7 @@ export const reactNode = z.custom<ReactNode>(
   { message: 'Must be a valid React node' }
 )
 
-export const stringOrElement = z.union([z.string(), element])
+const stringOrElement = z.union([z.string(), element])
 
 const pageThemeSchema = z.strictObject({
   breadcrumb: z.boolean().optional(),
