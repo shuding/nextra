@@ -76,7 +76,7 @@ import { Layout, LastUpdated } from 'nextra-theme-docs'
     })
     .default({}),
   pageMap: z.array(z.any({})),
-  search: z.union([element, z.null()]).default(<Search />),
+  search: reactNode.default(<Search />),
   sidebar: z
     .strictObject({
       autoCollapse: z.boolean().optional(),
