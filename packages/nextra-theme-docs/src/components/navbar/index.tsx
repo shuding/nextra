@@ -10,7 +10,7 @@ import { fromZodError } from 'zod-validation-error'
 import { ClientNavbar } from './index.client'
 
 const propsSchema = z.strictObject({
-  children: reactNode.optional(),
+  children: reactNode,
   logoLink: z.union([z.string(), z.boolean()]).default(true),
   logo: element,
   projectLink: z.string().optional(),
