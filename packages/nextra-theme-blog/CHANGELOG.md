@@ -1,5 +1,13 @@
 # nextra-theme-blog
 
+## 4.2.17
+
+### Patch Changes
+
+- Updated dependencies [a7db0e6]
+- Updated dependencies [18e7fb9]
+  - nextra@4.2.17
+
 ## 4.2.16
 
 ### Patch Changes
