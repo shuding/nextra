@@ -1,7 +1,7 @@
 /* eslint sort-keys: error */
 import { ThemeProvider } from 'next-themes'
 import { Search, SkipNavLink } from 'nextra/components'
-import { element, stringOrElement } from 'nextra/schemas'
+import { element, reactNode } from 'nextra/schemas'
 import type { FC, ReactNode } from 'react'
 import { Fragment } from 'react'
 import { z } from 'zod'
@@ -15,22 +15,20 @@ const attributeSchema = z.custom<'class' | `data-${string}`>(
 )
 
 const theme = z.strictObject({
-  banner: element.optional(),
+  banner: reactNode,
   darkMode: z.boolean().default(true),
   docsRepositoryBase: z
     .string()
     .startsWith('https://')
     .default('https://github.com/shuding/nextra'),
-  editLink: stringOrElement.or(z.null()).default('Edit this page'),
+  editLink: reactNode.default('Edit this page'),
   feedback: z
     .strictObject({
-      content: stringOrElement
-        .or(z.null())
-        .default('Question? Give us feedback'),
+      content: reactNode.default('Question? Give us feedback'),
       labels: z.string().default('feedback')
     })
     .default({}),
-  footer: element,
+  footer: reactNode,
   i18n: z
     .array(
       z.strictObject({
@@ -55,7 +53,7 @@ import { Layout, LastUpdated } from 'nextra-theme-docs'
 \`\`\`
 `
     }),
-  navbar: element,
+  navbar: reactNode,
   navigation: z
     .union([
       z.boolean(),
@@ -78,7 +76,7 @@ import { Layout, LastUpdated } from 'nextra-theme-docs'
     })
     .default({}),
   pageMap: z.array(z.any({})),
-  search: z.union([element, z.null()]).default(<Search />),
+  search: reactNode.default(<Search />),
   sidebar: z
     .strictObject({
       autoCollapse: z.boolean().optional(),
@@ -96,10 +94,10 @@ import { Layout, LastUpdated } from 'nextra-theme-docs'
     .default({}),
   toc: z
     .strictObject({
-      backToTop: stringOrElement.or(z.null()).default('Scroll to top'),
-      extraContent: stringOrElement.optional(),
+      backToTop: reactNode.default('Scroll to top'),
+      extraContent: reactNode,
       float: z.boolean().default(true),
-      title: stringOrElement.default('On This Page')
+      title: reactNode.default('On This Page')
     })
     .default({})
 })
