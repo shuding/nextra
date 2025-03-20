@@ -10,13 +10,13 @@ import { fromZodError } from 'zod-validation-error'
 import { ClientNavbar } from './index.client'
 
 const propsSchema = z.strictObject({
-  children: reactNode.optional(),
+  children: reactNode,
   logoLink: z.union([z.string(), z.boolean()]).default(true),
   logo: element,
   projectLink: z.string().optional(),
-  projectIcon: element.default(<GitHubIcon height="24" />),
+  projectIcon: reactNode.default(<GitHubIcon height="24" />),
   chatLink: z.string().optional(),
-  chatIcon: element.default(<DiscordIcon width="24" />),
+  chatIcon: reactNode.default(<DiscordIcon width="24" />),
   className: z.string().optional(),
   align: z.enum(['left', 'right']).default('right')
 })

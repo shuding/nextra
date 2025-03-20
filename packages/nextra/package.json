@@ -117,7 +117,7 @@
     "@types/hast": "^3.0.4",
     "@types/mdast": "^4.0.4",
     "@types/negotiator": "^0.6.3",
-    "@types/react": "^19.0.10",
+    "@types/react": "^19.0.12",
     "@types/webpack": "^5.28.5",
     "@vitejs/plugin-react": "^4.3.4",
     "esbuild-plugin-svgr": "^3.1.0",

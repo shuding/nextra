@@ -363,7 +363,7 @@ export const MobileNav: FC = () => {
 
 let lastScrollPosition = 0
 
-const handleScrollEnd: ComponentProps<'div'>['onScroll'] = event => {
+const handleScrollEnd: ComponentProps<'div'>['onScrollEnd'] = event => {
   lastScrollPosition = event.currentTarget.scrollTop
 }
 
@@ -435,7 +435,6 @@ export const Sidebar: FC = () => {
             !isExpanded && 'no-scrollbar'
           )}
           ref={sidebarRef}
-          // @ts-expect-error -- false positive https://github.com/DefinitelyTyped/DefinitelyTyped/pull/72078
           onScrollEnd={handleScrollEnd} // eslint-disable-line react/no-unknown-property
         >
           {/* without !hideSidebar check <Collapse />'s inner.clientWidth on `layout: "raw"` will be 0 and element will not have width on initial loading */}
