@@ -20,8 +20,8 @@ export const Banner: FC<{
     <ClientBanner
       className={cn(
         BANNER_CLASS_NAME,
-        'x:max-md:sticky x:top-0 x:z-30 x:flex x:items-center x:px-2',
-        'x:text-slate-50 x:dark:text-white x:bg-neutral-900 x:dark:bg-[linear-gradient(1deg,#383838,#212121)]',
+        'x:max-md:sticky x:top-0 x:z-30 x:flex x:items-center x:px-2 x:border-b nextra-border',
+        'x:text-slate-700 x:dark:text-slate-50 x:bg-neutral-100 dark:x:bg-neutral-900 x:dark:bg-[linear-gradient(1deg,#383838,#212121)]',
         'x:print:[display:none]' // to not match `x:[.nextra-banner:not([class$=hidden])~&]` class
       )}
       // Because we update class in `<script>`
