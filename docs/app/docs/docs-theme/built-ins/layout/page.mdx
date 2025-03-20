@@ -30,6 +30,30 @@ export default function MyLayout({ children, ...props }) {
 
 Detailed information for each option is listed below.
 
+## Page Map
+
+|           |                      |     |                                                                   |
+| --------- | -------------------- | --- | ----------------------------------------------------------------- |
+| `pageMap` | `PageMapItem[]{:ts}` |     | Page map list. Result of `getPageMap(locale?: string){:ts}` call. |
+
+## Banner
+
+|          |                  |     |                                                                                                  |
+| -------- | ---------------- | --- | ------------------------------------------------------------------------------------------------ |
+| `banner` | `ReactNode{:ts}` |     | Rendered [`<Banner>` component](/docs/built-ins/banner). E.g. `<Banner {...bannerProps} />{:ts}` |
+
+## Navbar
+
+|          |                  |     |                                                                                                             |
+| -------- | ---------------- | --- | ----------------------------------------------------------------------------------------------------------- |
+| `navbar` | `ReactNode{:ts}` |     | Rendered [`<Navbar>` component](/docs/docs-theme/built-ins/navbar). E.g. `<Navbar {...navbarProps} />{:ts}` |
+
+## Footer
+
+|          |                  |     |                                                                                                             |
+| -------- | ---------------- | --- | ----------------------------------------------------------------------------------------------------------- |
+| `footer` | `ReactNode{:ts}` |     | Rendered [`<Footer>` component](/docs/docs-theme/built-ins/footer). E.g. `<Footer {...footerProps} />{:ts}` |
+
 ## Docs Repository
 
 Set the repository URL of the documentation. It's used to generate the
@@ -64,11 +88,9 @@ Customize the theme behavior of the website.
 | `darkMode`   | `boolean{:ts}` | `true{:ts}`                                                                                                 | Show or hide the dark mode select button.                                                              |
 | `nextThemes` | `object{:ts}`  | `{ attribute: 'class', defaultTheme: 'system', disableTransitionOnChange: true, storageKey: 'theme' }{:ts}` | Configuration for the [next-themes](https://github.com/pacocoursey/next-themes#themeprovider) package. |
 
-## MDX Components [!TODO]
+import Old from './old.mdx'
 
-Provide custom [MDX components](https://mdxjs.com/table-of-components) to render
-the content. For example, you can use a custom `pre` component to render code
-blocks.
+{process.env.NODE_ENV !== 'production' && <Old />}
 
 |              |                            |     |                        |
 | ------------ | -------------------------- | --- | ---------------------- |
@@ -151,8 +173,6 @@ navigating between pages.
 The above is also equivalent to `navigation: true{:js}`.
 
 <ToggleVisibilitySection element="navigation" property="pagination" />
-
-## Page Map [!TODO]
 
 ## Sidebar
 
@@ -243,7 +263,7 @@ You are able to customize the option names for localization or other purposes:
 </Layout>
 ```
 
-## Table of Contents (TOC) Sidebar
+## Table of Contents (TOC)
 
 Show a table of contents on the right side of the page. It's useful for
 navigating between headings.

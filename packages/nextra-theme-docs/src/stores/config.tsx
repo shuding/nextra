@@ -25,7 +25,7 @@ export function useConfig() {
 export const ConfigProvider: FC<{
   children: ReactNode
   pageMap: PageMapItem[]
-  navbar: ReactElement
+  navbar: ReactNode
   footer: ReactNode
 }> = ({ children, pageMap, navbar, footer }) => {
   const pathname = useFSRoute()
