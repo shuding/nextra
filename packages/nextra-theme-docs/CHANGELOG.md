@@ -1,5 +1,15 @@
 # nextra-theme-docs
 
+## 4.2.17
+
+### Patch Changes
+
+- a7db0e6: fix: use correct `ReactNode` zod validation for `Layout.footer/banner/editLink/feedback.content/toc.backToTop/toc.extraContent/toc.title/search` and `Navbar.children/projectIcon/chatIcon`
+- aac469e: fix: improve sidebar folder item arrow animation
+- Updated dependencies [a7db0e6]
+- Updated dependencies [18e7fb9]
+  - nextra@4.2.17
+
 ## 4.2.16
 
 ### Patch Changes
