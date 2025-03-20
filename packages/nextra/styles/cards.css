@@ -11,7 +11,7 @@
   }
 
   & > span > svg {
-    @apply x:w-6 x:h-auto x:transition x:text-black/30 x:dark:text-white/40 x:shrink-0;
+    @apply x:w-6 x:h-auto x:transition x:text-black/50 x:dark:text-white/50 x:shrink-0;
   }
 
   &:hover > span > svg {
