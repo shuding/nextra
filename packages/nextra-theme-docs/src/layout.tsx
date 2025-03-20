@@ -30,7 +30,7 @@ const theme = z.strictObject({
       labels: z.string().default('feedback')
     })
     .default({}),
-  footer: element,
+  footer: reactNode,
   i18n: z
     .array(
       z.strictObject({
