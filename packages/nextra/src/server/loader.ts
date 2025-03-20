@@ -132,7 +132,6 @@ export async function loader(
       ...mdxOptions,
       jsx: true,
       outputFormat: 'program',
-      format: 'detect',
       rehypePrettyCodeOptions: {
         ...mdxOptions.rehypePrettyCodeOptions,
         transformers: [
