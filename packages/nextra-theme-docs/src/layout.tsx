@@ -15,18 +15,16 @@ const attributeSchema = z.custom<'class' | `data-${string}`>(
 )
 
 const theme = z.strictObject({
-  banner: element.optional(),
+  banner: reactNode,
   darkMode: z.boolean().default(true),
   docsRepositoryBase: z
     .string()
     .startsWith('https://')
     .default('https://github.com/shuding/nextra'),
-  editLink: stringOrElement.or(z.null()).default('Edit this page'),
+  editLink: reactNode.default('Edit this page'),
   feedback: z
     .strictObject({
-      content: stringOrElement
-        .or(z.null())
-        .default('Question? Give us feedback'),
+      content: reactNode.default('Question? Give us feedback'),
       labels: z.string().default('feedback')
     })
     .default({}),
@@ -55,7 +53,7 @@ import { Layout, LastUpdated } from 'nextra-theme-docs'
 \`\`\`
 `
     }),
-  navbar: element,
+  navbar: reactNode,
   navigation: z
     .union([
       z.boolean(),
