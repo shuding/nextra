@@ -121,7 +121,7 @@ export function generate(
 function getDocEntry(
   prop: TsSymbol,
   context: EntryContext
-): DocEntry | undefined {
+): DocEntry | void {
   const { transform, program } = context
 
   if (context.type.isClass() && prop.getName().startsWith('#')) {
