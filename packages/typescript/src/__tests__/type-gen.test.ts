@@ -2,11 +2,10 @@ import fs from 'node:fs/promises'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { createProcessor } from '@mdx-js/mdx'
-
+import { clean } from '../../../nextra/src/server/__tests__/test-utils.js'
+import type { TypescriptConfig } from '../get-project.js'
 import type { RemarkAutoTypeTableOptions } from '../index.js'
 import { generateDocumentation, remarkAutoTypeTable } from '../index.js'
-import type { TypescriptConfig } from '../get-project.js'
-import { clean } from '../../../nextra/src/server/__tests__/test-utils.js'
 
 const relative = (s: string): string =>
   path.resolve(fileURLToPath(new URL(s, import.meta.url)))
@@ -49,15 +48,15 @@ test('Run on MDX files', async () => {
 
   const output = await processor.process({
     path: file,
-    value: await fs.readFile(file, 'utf8'),
+    value: await fs.readFile(file, 'utf8')
   })
   await expect(
     clean(
-    [
-      '/* eslint-disable quotes, @typescript-eslint/ban-ts-comment */',
-      '// @ts-nocheck',
-      output.value
-    ].join('\n')
+      [
+        '/* eslint-disable quotes, @typescript-eslint/ban-ts-comment */',
+        '// @ts-nocheck',
+        output.value
+      ].join('\n')
     )
   ).resolves.toMatchFileSnapshot('./fixtures/test.output.js')
 })

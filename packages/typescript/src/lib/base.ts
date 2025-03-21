@@ -118,10 +118,7 @@ export function generate(
   }
 }
 
-function getDocEntry(
-  prop: TsSymbol,
-  context: EntryContext
-): DocEntry | void {
+function getDocEntry(prop: TsSymbol, context: EntryContext): DocEntry | void {
   const { transform, program } = context
 
   if (context.type.isClass() && prop.getName().startsWith('#')) {

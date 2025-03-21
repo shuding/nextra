@@ -1,7 +1,6 @@
 import { mkdir, readFile, writeFile } from 'node:fs/promises'
 import path from 'node:path'
 import fg from 'fast-glob'
-
 import { getProject } from '../get-project.js'
 import { generateMDX, type GenerateMDXOptions } from './mdx.js'
 
