@@ -76,7 +76,7 @@
     "@mdx-js/mdx": "^3.0.0",
     "@napi-rs/simple-git": "^0.1.9",
     "@shikijs/twoslash": "^3.2.1",
-    "@theguild/remark-mermaid": "^0.2.0",
+    "@theguild/remark-mermaid": "^0.3.0",
     "@theguild/remark-npm2yarn": "^0.3.2",
     "better-react-mathjax": "^2.0.3",
     "clsx": "^2.1.0",
