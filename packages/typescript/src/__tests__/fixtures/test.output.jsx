@@ -1,4 +1,4 @@
-/* eslint-disable quotes, @typescript-eslint/ban-ts-comment */
+/* eslint-disable react/jsx-curly-brace-presence, @typescript-eslint/ban-ts-comment */
 // @ts-nocheck
 /*@jsxRuntime automatic*/
 /*@jsxImportSource react*/

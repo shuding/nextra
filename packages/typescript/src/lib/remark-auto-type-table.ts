@@ -11,11 +11,11 @@ import { toEstree } from 'hast-util-to-estree'
 import type { Root } from 'mdast'
 import type { Transformer } from 'unified'
 import { visit } from 'unist-util-visit'
-
 import { getProject } from '../get-project.js'
 import type { DocEntry } from '../lib/base.js'
 import { renderMarkdownToHast } from '../markdown.js'
-import { getTypeTableOutput, type BaseTypeTableProps } from '../utils/type-table.js'
+import type { BaseTypeTableProps} from '../utils/type-table.js'
+import { getTypeTableOutput } from '../utils/type-table.js'
 
 function expressionToAttribute(key: string, value: Expression) {
   return {
