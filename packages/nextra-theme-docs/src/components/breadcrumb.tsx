@@ -38,7 +38,7 @@ export const Breadcrumb: FC<{
                 'x:whitespace-nowrap x:transition-colors',
                 nextItem
                   ? 'x:min-w-6 x:overflow-hidden x:text-ellipsis'
-                  : 'x:font-medium x:text-gray-700 x:dark:text-gray-100',
+                  : 'x:font-medium x:text-gray-900 x:dark:text-gray-100',
                 href &&
                   'x:focus-visible:nextra-focus x:ring-inset x:hover:text-gray-900 x:dark:hover:text-gray-100'
               )}
