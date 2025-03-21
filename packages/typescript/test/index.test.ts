@@ -1,5 +1,5 @@
-import { expect, test } from 'vitest';
-import { generateDocumentation } from '@/lib/base';
+import { generateDocumentation } from '@/lib/base'
+import { expect, test } from 'vitest'
 
 test('class members', () => {
   const out = generateDocumentation(
@@ -15,8 +15,8 @@ test('class members', () => {
             this.#name = name;
         }
     }
-    `,
-  );
+    `
+  )
 
   expect(out).toMatchInlineSnapshot(`
     [
@@ -41,8 +41,8 @@ test('class members', () => {
         "name": "MyClass",
       },
     ]
-  `);
-});
+  `)
+})
 
 test('interface members', () => {
   const out = generateDocumentation(
@@ -53,8 +53,8 @@ test('interface members', () => {
         "#name": string;
         age: number
     }
-    `,
-  );
+    `
+  )
 
   expect(out).toMatchInlineSnapshot(`
     [
@@ -79,5 +79,5 @@ test('interface members', () => {
         "name": "MyInterface",
       },
     ]
-  `);
-});
+  `)
+})

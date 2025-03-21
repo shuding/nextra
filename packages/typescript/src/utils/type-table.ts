@@ -1,20 +1,20 @@
-import * as fs from 'node:fs/promises';
+import fs from 'node:fs/promises'
+import { join } from 'node:path'
 import {
   generateDocumentation,
-  type GenerateDocumentationOptions,
-} from '@/lib/base';
-import { join } from 'node:path';
+  type GenerateDocumentationOptions
+} from '@/lib/base'
 
 export interface BaseTypeTableProps {
   /**
    * The path to source TypeScript file.
    */
-  path?: string;
+  path?: string
 
   /**
    * Exported type name to generate from.
    */
-  name?: string;
+  name?: string
 
   /**
    * Set the type to generate from.
@@ -37,14 +37,14 @@ export interface BaseTypeTableProps {
    * />
    * ```
    */
-  type?: string;
+  type?: string
 
   options?: GenerateDocumentationOptions & {
     /**
      * base path to resolve `path` prop
      */
-    basePath?: string;
-  };
+    basePath?: string
+  }
 }
 
 export async function getTypeTableOutput({
@@ -56,30 +56,30 @@ export async function getTypeTableOutput({
   const file =
     props.path && options?.basePath
       ? join(options.basePath, props.path)
-      : props.path;
-  let typeName = name;
-  let content = '';
+      : props.path
+  let typeName = name
+  let content = ''
 
   if (file) {
-    content = (await fs.readFile(file)).toString();
+    content = (await fs.readFile(file)).toString()
   }
 
   if (type && type.split('\n').length > 1) {
-    content += `\n${type}`;
+    content += `\n${type}`
   } else if (type) {
-    typeName ??= '$Fumadocs';
-    content += `\nexport type ${typeName} = ${type}`;
+    typeName ??= '$Fumadocs'
+    content += `\nexport type ${typeName} = ${type}`
   }
 
   const output = generateDocumentation(
     file ?? 'temp.ts',
     typeName,
     content,
-    options,
-  );
+    options
+  )
 
   if (name && output.length === 0)
-    throw new Error(`${name} in ${file ?? 'empty file'} doesn't exist`);
+    throw new Error(`${name} in ${file ?? 'empty file'} doesn't exist`)
 
-  return output;
+  return output
 }

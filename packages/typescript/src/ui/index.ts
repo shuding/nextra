@@ -1,1 +1,1 @@
-export * from './auto-type-table';
+export * from './auto-type-table'

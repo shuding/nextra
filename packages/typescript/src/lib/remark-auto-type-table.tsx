@@ -1,18 +1,20 @@
-import type { Root } from 'mdast';
-import type { Transformer } from 'unified';
-import type { ExpressionStatement, ObjectExpression, Property } from 'estree';
-import type { Expression, Program } from 'estree';
-import type { DocEntry } from '@/lib/base';
-import { renderMarkdownToHast } from '@/markdown';
-import { valueToEstree } from 'estree-util-value-to-estree';
-import { visit } from 'unist-util-visit';
-import {
-  type BaseTypeTableProps,
-  getTypeTableOutput,
-} from '@/utils/type-table';
-import { getProject } from '@/get-project';
-import { toEstree } from 'hast-util-to-estree';
-import { dirname } from 'node:path';
+import { dirname } from 'node:path'
+import { getProject } from '@/get-project'
+import type { DocEntry } from '@/lib/base'
+import { renderMarkdownToHast } from '@/markdown'
+import { getTypeTableOutput, type BaseTypeTableProps } from '@/utils/type-table'
+import type {
+  Expression,
+  ExpressionStatement,
+  ObjectExpression,
+  Program,
+  Property
+} from 'estree'
+import { valueToEstree } from 'estree-util-value-to-estree'
+import { toEstree } from 'hast-util-to-estree'
+import type { Root } from 'mdast'
+import type { Transformer } from 'unified'
+import { visit } from 'unist-util-visit'
 
 function expressionToAttribute(key: string, value: Expression) {
   return {
@@ -26,28 +28,28 @@ function expressionToAttribute(key: string, value: Expression) {
           body: [
             {
               type: 'ExpressionStatement',
-              expression: value,
-            },
-          ],
-        } as Program,
-      },
-    },
-  };
+              expression: value
+            }
+          ]
+        } as Program
+      }
+    }
+  }
 }
 
 async function mapProperty(
   entry: DocEntry,
-  renderMarkdown: typeof renderMarkdownToHast,
+  renderMarkdown: typeof renderMarkdownToHast
 ): Promise<Property> {
   const value = valueToEstree({
     type: entry.type,
-    default: entry.tags.default || entry.tags.defaultValue,
-  }) as ObjectExpression;
+    default: entry.tags.default || entry.tags.defaultValue
+  }) as ObjectExpression
 
   if (entry.description) {
     const hast = toEstree(await renderMarkdown(entry.description), {
-      elementAttributeNameCase: 'react',
-    }).body[0] as ExpressionStatement;
+      elementAttributeNameCase: 'react'
+    }).body[0] as ExpressionStatement
 
     value.properties.push({
       type: 'Property',
@@ -56,11 +58,11 @@ async function mapProperty(
       computed: false,
       key: {
         type: 'Identifier',
-        name: 'description',
+        name: 'description'
       },
       kind: 'init',
-      value: hast.expression,
-    });
+      value: hast.expression
+    })
   }
 
   return {
@@ -70,30 +72,30 @@ async function mapProperty(
     computed: false,
     key: {
       type: 'Identifier',
-      name: entry.name,
+      name: entry.name
     },
     kind: 'init',
-    value,
-  };
+    value
+  }
 }
 
 export interface RemarkAutoTypeTableOptions {
   /**
    * @defaultValue 'auto-type-table'
    */
-  name?: string;
+  name?: string
 
   /**
    * @defaultValue 'TypeTable'
    */
-  outputName?: string;
+  outputName?: string
 
-  renderMarkdown?: typeof renderMarkdownToHast;
+  renderMarkdown?: typeof renderMarkdownToHast
 
   /**
    * Override some type table props
    */
-  options?: BaseTypeTableProps['options'];
+  options?: BaseTypeTableProps['options']
 }
 
 /**
@@ -105,26 +107,26 @@ export function remarkAutoTypeTable({
   name = 'auto-type-table',
   outputName = 'TypeTable',
   renderMarkdown = renderMarkdownToHast,
-  options = {},
+  options = {}
 }: RemarkAutoTypeTableOptions = {}): Transformer<Root, Root> {
-  const project = options.project ?? getProject(options.config);
+  const project = options.project ?? getProject(options.config)
 
   return async (tree, file) => {
-    const queue: Promise<void>[] = [];
-    let basePath = options?.basePath;
-    if (!basePath && file.path) basePath = dirname(file.path);
+    const queue: Promise<void>[] = []
+    let basePath = options?.basePath
+    if (!basePath && file.path) basePath = dirname(file.path)
 
-    visit(tree, 'mdxJsxFlowElement', (node) => {
-      if (node.name !== name) return;
-      const props: Record<string, string> = {};
+    visit(tree, 'mdxJsxFlowElement', node => {
+      if (node.name !== name) return
+      const props: Record<string, string> = {}
 
       for (const attr of node.attributes) {
         if (attr.type !== 'mdxJsxAttribute' || typeof attr.value !== 'string')
           throw new Error(
-            '`auto-type-table` does not support non-string attributes',
-          );
+            '`auto-type-table` does not support non-string attributes'
+          )
 
-        props[attr.name] = attr.value;
+        props[attr.name] = attr.value
       }
 
       async function run() {
@@ -133,14 +135,14 @@ export function remarkAutoTypeTable({
           options: {
             ...options,
             project,
-            basePath,
-          },
-        } as BaseTypeTableProps);
+            basePath
+          }
+        } as BaseTypeTableProps)
 
-        const rendered = output.map(async (doc) => {
+        const rendered = output.map(async doc => {
           const properties = await Promise.all(
-            doc.entries.map((entry) => mapProperty(entry, renderMarkdown)),
-          );
+            doc.entries.map(entry => mapProperty(entry, renderMarkdown))
+          )
 
           return {
             type: 'mdxJsxFlowElement',
@@ -148,35 +150,35 @@ export function remarkAutoTypeTable({
             attributes: [
               expressionToAttribute('type', {
                 type: 'ObjectExpression',
-                properties,
-              }),
+                properties
+              })
             ],
             data: {
               // for Fumadocs `remarkStructure`
               _string: [
                 doc.name,
                 doc.description,
-                ...doc.entries.flatMap((entry) => [
+                ...doc.entries.flatMap(entry => [
                   `${entry.name}: ${entry.type}`,
-                  entry.description,
-                ]),
-              ],
+                  entry.description
+                ])
+              ]
             },
-            children: [],
-          };
-        });
+            children: []
+          }
+        })
 
         Object.assign(node, {
           type: 'root',
           attributes: [],
-          children: await Promise.all(rendered),
-        } as Root);
+          children: await Promise.all(rendered)
+        } as Root)
       }
 
-      queue.push(run());
-      return 'skip';
-    });
+      queue.push(run())
+      return 'skip'
+    })
 
-    await Promise.all(queue);
-  };
+    await Promise.all(queue)
+  }
 }

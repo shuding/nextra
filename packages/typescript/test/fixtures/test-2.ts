@@ -8,7 +8,7 @@ export interface Player {
    * @see https://fumadocs.vercel.app
    * @defaultValue Henry
    */
-  name: string;
+  name: string
 
   /**
    * @example
@@ -18,10 +18,10 @@ export interface Player {
    * @remarks `timestamp`
    * Returned by API
    */
-  age: number;
+  age: number
 
   /**
    * @internal
    */
-  privateValue: string;
+  privateValue: string
 }

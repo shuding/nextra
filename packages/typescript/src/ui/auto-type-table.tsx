@@ -1,37 +1,34 @@
-import { TypeTable } from 'fumadocs-ui/components/type-table';
-import { type Jsx, toJsxRuntime } from 'hast-util-to-jsx-runtime';
-import * as runtime from 'react/jsx-runtime';
-import defaultMdxComponents from 'fumadocs-ui/mdx';
-import { renderMarkdownToHast } from '@/markdown';
-import { type GenerateDocumentationOptions } from '@/lib/base';
-import 'server-only';
-import { getProject } from '@/get-project';
-import type { ReactNode } from 'react';
-import {
-  type BaseTypeTableProps,
-  getTypeTableOutput,
-} from '@/utils/type-table';
+import 'server-only'
+import { getProject } from '@/get-project'
+import { type GenerateDocumentationOptions } from '@/lib/base'
+import { renderMarkdownToHast } from '@/markdown'
+import { getTypeTableOutput, type BaseTypeTableProps } from '@/utils/type-table'
+import { TypeTable } from 'fumadocs-ui/components/type-table'
+import defaultMdxComponents from 'fumadocs-ui/mdx'
+import { toJsxRuntime, type Jsx } from 'hast-util-to-jsx-runtime'
+import type { ReactNode } from 'react'
+import * as runtime from 'react/jsx-runtime'
 
 export interface AutoTypeTableProps extends BaseTypeTableProps {
   /**
    * Override the function to render markdown into JSX nodes
    */
-  renderMarkdown?: typeof renderMarkdownDefault;
+  renderMarkdown?: typeof renderMarkdownDefault
 }
 
 export function createTypeTable(options: GenerateDocumentationOptions = {}): {
-  AutoTypeTable: (props: Omit<AutoTypeTableProps, 'options'>) => ReactNode;
+  AutoTypeTable: (props: Omit<AutoTypeTableProps, 'options'>) => ReactNode
 } {
   const overrideOptions = {
     ...options,
-    project: options.project ?? getProject(options.config),
-  };
+    project: options.project ?? getProject(options.config)
+  }
 
   return {
     AutoTypeTable(props) {
-      return <AutoTypeTable {...props} options={overrideOptions} />;
-    },
-  };
+      return <AutoTypeTable {...props} options={overrideOptions} />
+    }
+  }
 }
 
 /**
@@ -43,21 +40,21 @@ export async function AutoTypeTable({
   renderMarkdown = renderMarkdownDefault,
   ...props
 }: AutoTypeTableProps): Promise<ReactNode> {
-  const output = await getTypeTableOutput(props);
+  const output = await getTypeTableOutput(props)
 
-  return output.map(async (item) => {
+  return output.map(async item => {
     const entries = item.entries.map(
-      async (entry) =>
+      async entry =>
         [
           entry.name,
           {
             type: entry.type,
             description: await renderMarkdown(entry.description),
             default: entry.tags.default || entry.tags.defaultValue,
-            required: entry.required,
-          },
-        ] as const,
-    );
+            required: entry.required
+          }
+        ] as const
+    )
 
     return (
       <TypeTable
@@ -65,8 +62,8 @@ export async function AutoTypeTable({
         // @ts-expect-error -- fixme
         type={Object.fromEntries(await Promise.all(entries))}
       />
-    );
-  });
+    )
+  })
 }
 
 async function renderMarkdownDefault(md: string): Promise<ReactNode> {
@@ -74,6 +71,6 @@ async function renderMarkdownDefault(md: string): Promise<ReactNode> {
     Fragment: runtime.Fragment,
     jsx: runtime.jsx as Jsx,
     jsxs: runtime.jsxs as Jsx,
-    components: { ...defaultMdxComponents, img: undefined },
-  });
+    components: { ...defaultMdxComponents, img: undefined }
+  })
 }

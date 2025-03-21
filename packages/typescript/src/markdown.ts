@@ -1,11 +1,11 @@
-import type { Nodes } from 'hast';
-import { remark } from 'remark';
 import {
-  remarkGfm,
   rehypeCode,
-  type RehypeCodeOptions,
-} from 'fumadocs-core/mdx-plugins';
-import remarkRehype from 'remark-rehype';
+  remarkGfm,
+  type RehypeCodeOptions
+} from 'fumadocs-core/mdx-plugins'
+import type { Nodes } from 'hast'
+import { remark } from 'remark'
+import remarkRehype from 'remark-rehype'
 
 const processor = remark()
   .use(remarkGfm)
@@ -15,22 +15,22 @@ const processor = remark()
 
     themes: {
       light: 'github-light',
-      dark: 'github-dark',
-    },
+      dark: 'github-dark'
+    }
   } satisfies RehypeCodeOptions)
   // @ts-expect-error -- safe
   .use(() => {
     return (tree, file: { data: Record<string, unknown> }) => {
-      file.data.tree = tree;
+      file.data.tree = tree
 
-      return '';
-    };
-  });
+      return ''
+    }
+  })
 
 export async function renderMarkdownToHast(md: string): Promise<Nodes> {
-  md = md.replace(/{@link (?<link>[^}]*)}/g, '$1'); // replace jsdoc links
+  md = md.replaceAll(/{@link (?<link>[^}]*)}/g, '$1') // replace jsdoc links
 
-  const out = await processor.process(md);
+  const out = await processor.process(md)
 
-  return out.data.tree as Nodes;
+  return out.data.tree as Nodes
 }

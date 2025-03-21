@@ -1,9 +1,11 @@
-import { defineConfig } from 'tsup';
+import { defineConfig } from 'tsup'
+import { defaultEntry } from '../nextra/default-entry.js'
+import packageJson from './package.json'
 
 export default defineConfig({
-  external: ['server-only', 'fumadocs-ui', 'fumadocs-core', 'react'],
-  dts: true,
-  target: 'es6',
+  name: packageJson.name,
   format: 'esm',
-  entry: ['src/index.ts', 'src/ui/index.ts'],
-});
+  dts: true,
+  bundle: false,
+  entry: defaultEntry
+})

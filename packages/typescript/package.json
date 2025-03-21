@@ -1,18 +1,13 @@
 {
   "name": "@nextra/typescript",
   "version": "0.0.0",
-  "description": "Typescript Integration for Nextra",
-  "keywords": [
-    "next.js",
-    "nextra",
-    "docs",
-    "typescript"
-  ],
-  "homepage": "https://nextra.site",
-  "repository": "github:shuding/nextra",
-  "license": "MIT",
-  "author": "Dimitri POSTOLOV",
   "type": "module",
+  "description": "Typescript Integration for Nextra",
+  "repository": "github:shuding/nextra",
+  "homepage": "https://nextra.site",
+  "author": "Dimitri POSTOLOV",
+  "license": "MIT",
+  "main": "./dist/index.js",
   "exports": {
     ".": {
       "import": "./dist/index.js",
@@ -23,10 +18,15 @@
       "types": "./dist/ui/index.d.ts"
     }
   },
-  "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "files": [
     "dist/*"
+  ],
+  "keywords": [
+    "next.js",
+    "nextra",
+    "docs",
+    "typescript"
   ],
   "scripts": {
     "build": "tsup",
@@ -34,6 +34,9 @@
     "dev": "tsup --watch",
     "lint": "eslint .",
     "types:check": "tsc --noEmit"
+  },
+  "peerDependencies": {
+    "typescript": "*"
   },
   "dependencies": {
     "estree-util-value-to-estree": "^3.3.2",
@@ -48,6 +51,7 @@
   },
   "devDependencies": {
     "@mdx-js/mdx": "^3.1.0",
+    "@tsconfig/strictest": "^2.0.5",
     "@types/estree": "^1.0.6",
     "@types/hast": "^3.0.4",
     "@types/mdast": "^4.0.3",
@@ -56,12 +60,8 @@
     "@types/react-dom": "19.0.4",
     "fumadocs-core": "^15.1.1",
     "fumadocs-ui": "^15.1.1",
-    "@tsconfig/strictest": "^2.0.5",
     "typescript": "^5.8.2",
     "unified": "^11.0.5"
-  },
-  "peerDependencies": {
-    "typescript": "*"
   },
   "publishConfig": {
     "access": "public"

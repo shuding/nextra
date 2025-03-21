@@ -1,29 +1,29 @@
-import * as path from 'node:path';
-import fs from 'node:fs';
-import { getProject } from '@/get-project';
+import fs from 'node:fs'
+import path from 'node:path'
+import { getProject } from '@/get-project'
 import {
+  generateDocumentation,
   type DocEntry,
   type GeneratedDoc,
-  generateDocumentation,
-  type GenerateDocumentationOptions,
-} from './base';
+  type GenerateDocumentationOptions
+} from './base'
 
 interface Templates {
-  block: (doc: GeneratedDoc, children: string) => string;
-  property: (entry: DocEntry) => string;
+  block: (doc: GeneratedDoc, children: string) => string
+  property: (entry: DocEntry) => string
 }
 
 export interface GenerateMDXOptions extends GenerateDocumentationOptions {
   /**
    * a root directory to resolve relative file paths
    */
-  basePath?: string;
-  templates?: Partial<Templates>;
+  basePath?: string
+  templates?: Partial<Templates>
 }
 
 // \r?\n is required for cross-platform compatibility
 const regex =
-  /^---type-table---\r?\n(?<file>.+?)(?:#(?<name>.+))?\r?\n---end---$/gm;
+  /^---type-table---\r?\n(?<file>.+?)(?:#(?<name>.+))?\r?\n---end---$/gm
 
 const defaultTemplates: Templates = {
   block: (doc, c) => `### ${doc.name}
@@ -32,7 +32,7 @@ ${doc.description}
 
 <div className='*:border-b [&>*:last-child]:border-b-0'>${c}</div>`,
 
-  property: (c) => `<div className='text-sm text-fd-muted-foreground py-4'>
+  property: c => `<div className='text-sm text-fd-muted-foreground py-4'>
 
 <div className="flex flex-row items-center gap-4">
   <code className="text-sm">${c.name}</code>
@@ -45,36 +45,36 @@ ${Object.entries(c.tags)
   .map(([tag, value]) => `- ${tag}:\n${replaceJsDocLinks(value)}`)
   .join('\n')}
 
-</div>`,
-};
+</div>`
+}
 
 export function generateMDX(
   source: string,
-  { basePath = './', templates: overrides, ...rest }: GenerateMDXOptions = {},
+  { basePath = './', templates: overrides, ...rest }: GenerateMDXOptions = {}
 ): string {
-  const templates = { ...defaultTemplates, ...overrides };
-  const project = rest.project ?? getProject(rest.config);
+  const templates = { ...defaultTemplates, ...overrides }
+  const project = rest.project ?? getProject(rest.config)
 
   return source.replace(regex, (...args) => {
     const groups = args[args.length - 1] as {
-      file: string;
-      name: string | undefined;
-    };
-    const file = path.resolve(basePath, groups.file);
-    const content = fs.readFileSync(file);
+      file: string
+      name: string | undefined
+    }
+    const file = path.resolve(basePath, groups.file)
+    const content = fs.readFileSync(file)
     const docs = generateDocumentation(file, groups.name, content.toString(), {
       ...rest,
-      project,
-    });
+      project
+    })
 
     return docs
-      .map((doc) =>
-        templates.block(doc, doc.entries.map(templates.property).join('\n')),
+      .map(doc =>
+        templates.block(doc, doc.entries.map(templates.property).join('\n'))
       )
-      .join('\n\n');
-  });
+      .join('\n\n')
+  })
 }
 
 function replaceJsDocLinks(md: string): string {
-  return md.replace(/{@link (?<link>[^}]*)}/g, '$1');
+  return md.replaceAll(/{@link (?<link>[^}]*)}/g, '$1')
 }
