@@ -27,18 +27,15 @@ export const Banner: FC<{
     case 'dark':
       themeClass =
         'x:text-slate-50 x:bg-neutral-900 x:bg-[linear-gradient(1deg,#383838,#212121)]'
-
       break
 
     case 'light':
       themeClass = 'x:text-slate-700 x:bg-neutral-100'
       break
-    case undefined:
-      themeClass =
-        'x:text-slate-700 x:dark:text-slate-50 x:bg-neutral-100 dark:x:bg-neutral-900 x:dark:bg-[linear-gradient(1deg,#383838,#212121)]'
-      break
 
     default:
+      themeClass =
+        'x:text-slate-700 x:dark:text-slate-50 x:bg-neutral-100 dark:x:bg-neutral-900 x:dark:bg-[linear-gradient(1deg,#383838,#212121)]'
       break
   }
 
