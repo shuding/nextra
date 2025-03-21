@@ -1,11 +1,11 @@
 import { getProject, type TypescriptConfig } from '@/get-project'
-import {
-  ts,
+import type {
   ExportedDeclarations,
   Project,
   Symbol as TsSymbol,
   Type
 } from 'ts-morph'
+import { ts } from 'ts-morph'
 
 export interface GeneratedDoc {
   name: string

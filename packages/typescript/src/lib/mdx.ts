@@ -1,12 +1,12 @@
 import fs from 'node:fs'
 import path from 'node:path'
 import { getProject } from '@/get-project'
-import {
-  generateDocumentation,
+import type {
   DocEntry,
   GeneratedDoc,
   GenerateDocumentationOptions
 } from './base'
+import { generateDocumentation } from './base'
 
 interface Templates {
   block: (doc: GeneratedDoc, children: string) => string
@@ -56,7 +56,7 @@ export function generateMDX(
   const project = rest.project ?? getProject(rest.config)
 
   return source.replaceAll(regex, (...args) => {
-    const groups = args[args.length - 1] as {
+    const groups = args.at(-1) as {
       file: string
       name?: string
     }

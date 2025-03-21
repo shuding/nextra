@@ -4,11 +4,8 @@ import { fileURLToPath } from 'node:url'
 import type { TypescriptConfig } from '@/get-project'
 import { createProcessor } from '@mdx-js/mdx'
 import { expect, test } from 'vitest'
-import {
-  generateDocumentation,
-  remarkAutoTypeTable,
-  RemarkAutoTypeTableOptions
-} from '../src'
+import type { RemarkAutoTypeTableOptions } from '../src'
+import { generateDocumentation, remarkAutoTypeTable } from '../src'
 
 const relative = (s: string): string =>
   path.resolve(fileURLToPath(new URL(s, import.meta.url)))
