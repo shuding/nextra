@@ -292,8 +292,8 @@ importers:
         specifier: ^3.2.1
         version: 3.2.1(typescript@5.8.2)
       '@theguild/remark-mermaid':
-        specifier: ^0.2.0
-        version: 0.2.0(react@19.0.0)
+        specifier: ^0.3.0
+        version: 0.3.0(react@19.0.0)
       '@theguild/remark-npm2yarn':
         specifier: ^0.3.2
         version: 0.3.3
@@ -2461,10 +2461,10 @@ packages:
       '@types/react-dom':
         optional: true
 
-  '@theguild/remark-mermaid@0.2.0':
-    resolution: {integrity: sha512-o8n57TJy0OI4PCrNw8z6S+vpHtrwoQZzTA5Y3fL0U1NDRIoMg/78duWgEBFsCZcWM1G6zjE91yg1aKCsDwgE2Q==}
+  '@theguild/remark-mermaid@0.3.0':
+    resolution: {integrity: sha512-Fy1J4FSj8totuHsHFpaeWyWRaRSIvpzGTRoEfnNJc1JmLV9uV70sYE3zcT+Jj5Yw20Xq4iCsiT+3Ho49BBZcBQ==}
     peerDependencies:
-      react: ^18.2.0
+      react: ^18.2.0 || ^19.0.0
 
   '@theguild/remark-npm2yarn@0.3.3':
     resolution: {integrity: sha512-ma6DvR03gdbvwqfKx1omqhg9May/VYGdMHvTzB4VuxkyS7KzfZ/lzrj43hmcsggpMje0x7SADA/pcMph0ejRnA==}
@@ -8432,7 +8432,7 @@ snapshots:
     optionalDependencies:
       '@types/react': 19.0.12
 
-  '@theguild/remark-mermaid@0.2.0(react@19.0.0)':
+  '@theguild/remark-mermaid@0.3.0(react@19.0.0)':
     dependencies:
       mermaid: 11.2.1
       react: 19.0.0
