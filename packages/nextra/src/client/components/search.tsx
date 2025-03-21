@@ -251,7 +251,7 @@ export const Search: FC<SearchProps> = ({
       <ComboboxOptions
         transition
         anchor={{ to: 'top end', gap: 10, padding: 16 }}
-        className={({}) =>
+        className={() =>
           cn(
             'nextra-search-results', // for user styling
             'nextra-scrollbar x:max-md:h-full',
