@@ -79,8 +79,7 @@ export function generateDocumentation(
       console.warn(
         `export ${k} should not have more than one type declaration.`,
       );
-
-    out.push(generate(project, k, d[0], options));
+    out.push(generate(project, k, d[0]!, options));
   }
 
   return out;
@@ -92,6 +91,7 @@ export function generate(
   declaration: ExportedDeclarations,
   { allowInternal = false, transform }: GenerateOptions,
 ): GeneratedDoc {
+  // @ts-expect-error -- fixme
   const entryContext: EntryContext = {
     transform,
     program,

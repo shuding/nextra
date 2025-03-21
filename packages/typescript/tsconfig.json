@@ -1,9 +1,13 @@
 {
-  "extends": "tsconfig/react-library.json",
+  "extends": ["@tsconfig/strictest/tsconfig.json"],
   "compilerOptions": {
     "paths": {
       "@/*": ["./src/*"]
-    }
+    },
+    "jsx": "react-jsx",
+    "moduleResolution": "bundler",
+    "target": "es2022",
+    "noPropertyAccessFromIndexSignature": false
   },
   "exclude": ["node_modules", "dist"]
 }

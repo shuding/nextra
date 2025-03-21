@@ -62,6 +62,7 @@ export async function AutoTypeTable({
     return (
       <TypeTable
         key={item.name}
+        // @ts-expect-error -- fixme
         type={Object.fromEntries(await Promise.all(entries))}
       />
     );
