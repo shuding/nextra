@@ -1,3 +1,3 @@
 # `@nextra/typescript`
 
-Typescript Integration for Nextra.
+TypeScript Integration for Nextra.

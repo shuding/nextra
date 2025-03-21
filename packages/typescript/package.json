@@ -2,12 +2,11 @@
   "name": "@nextra/typescript",
   "version": "0.0.0",
   "type": "module",
-  "description": "Typescript Integration for Nextra",
+  "description": "TypeScript Integration for Nextra",
   "repository": "github:shuding/nextra",
   "homepage": "https://nextra.site",
   "author": "Dimitri POSTOLOV",
   "license": "MIT",
-  "main": "./dist/index.js",
   "exports": {
     ".": {
       "import": "./dist/index.js",
@@ -20,7 +19,7 @@
   },
   "types": "./dist/index.d.ts",
   "files": [
-    "dist/*"
+    "dist"
   ],
   "keywords": [
     "next.js",
@@ -29,10 +28,9 @@
     "typescript"
   ],
   "scripts": {
-    "build": "tsup",
-    "clean": "rimraf dist",
+    "build": "NODE_ENV=production tsup",
     "dev": "tsup --watch",
-    "lint": "eslint .",
+    "test": "vitest",
     "types:check": "tsc --noEmit"
   },
   "peerDependencies": {
@@ -57,11 +55,10 @@
     "@types/mdast": "^4.0.3",
     "@types/node": "22.13.10",
     "@types/react": "19.0.11",
-    "@types/react-dom": "19.0.4",
     "fumadocs-core": "^15.1.1",
     "fumadocs-ui": "^15.1.1",
-    "typescript": "^5.8.2",
-    "unified": "^11.0.5"
+    "unified": "^11.0.5",
+    "vitest": "^3.0.9"
   },
   "publishConfig": {
     "access": "public"

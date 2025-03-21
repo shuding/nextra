@@ -20,7 +20,7 @@ const tsconfig: TypescriptConfig = {
 
 test('Run', async () => {
   const file = relative('./fixtures/test.ts')
-  const content = (await fs.readFile(file)).toString()
+  const content = await fs.readFile(file, 'utf8')
 
   const result = ['Test1', 'Test2', 'Test3'].flatMap(name =>
     generateDocumentation(file, name, content, {
@@ -28,7 +28,7 @@ test('Run', async () => {
     })
   )
 
-  await expect(JSON.stringify(result, null, 2)).toMatchFileSnapshot(
+  await expect(JSON.stringify(result, null, 2) + '\n').toMatchFileSnapshot(
     './fixtures/test.output.json'
   )
 })
@@ -50,7 +50,7 @@ test('Run on MDX files', async () => {
 
   const output = await processor.process({
     path: file,
-    value: (await fs.readFile(file)).toString()
+    value: await fs.readFile(file, 'utf8')
   })
   await expect(String(output.value)).toMatchFileSnapshot(
     './fixtures/test.output.js'
