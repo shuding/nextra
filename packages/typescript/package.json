@@ -43,7 +43,6 @@
     "hast-util-to-jsx-runtime": "^2.3.6",
     "remark": "^15.0.1",
     "remark-rehype": "^11.1.1",
-    "shiki": "^3.2.1",
     "ts-morph": "^25.0.1",
     "unist-util-visit": "^5.0.0"
   },
