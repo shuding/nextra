@@ -1,7 +1,6 @@
 import 'server-only'
-import { TypeTable } from 'fumadocs-ui/components/type-table'
-import defaultMdxComponents from 'fumadocs-ui/mdx'
-import type { Jsx } from 'hast-util-to-jsx-runtime'
+import { TypeTable } from './type-table.js'
+import { useMDXComponents } from 'next-mdx-import-source-file'
 import { toJsxRuntime } from 'hast-util-to-jsx-runtime'
 import type { ReactNode } from 'react'
 import * as runtime from 'react/jsx-runtime'
@@ -58,11 +57,13 @@ export async function AutoTypeTable({
         ] as const
     )
 
+    const type = Object.fromEntries(await Promise.all(entries))
+
     return (
       <TypeTable
         key={item.name}
         // @ts-expect-error -- fixme
-        type={Object.fromEntries(await Promise.all(entries))}
+        type={type}
       />
     )
   })
@@ -71,8 +72,8 @@ export async function AutoTypeTable({
 async function renderMarkdownDefault(md: string): Promise<ReactNode> {
   return toJsxRuntime(await renderMarkdownToHast(md), {
     Fragment: runtime.Fragment,
-    jsx: runtime.jsx as Jsx,
-    jsxs: runtime.jsxs as Jsx,
-    components: { ...defaultMdxComponents, img: undefined }
+    jsx: runtime.jsx,
+    jsxs: runtime.jsxs,
+    components: useMDXComponents()
   })
 }
