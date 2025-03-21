@@ -69,7 +69,10 @@ export function generateMDX(
 
     return docs
       .map(doc =>
-        templates.block(doc, doc.entries.map(templates.property).join('\n'))
+        templates.block(
+          doc,
+          doc.entries.map(entry => templates.property(entry)).join('\n')
+        )
       )
       .join('\n\n')
   })
