@@ -42,12 +42,13 @@ test('Run on MDX files', async () => {
           }
         } satisfies RemarkAutoTypeTableOptions
       ]
-    ]
+    ],
+    jsx: true
   })
 
   const output = await processor.process({
     path: file,
-    value: await fs.readFile(file, 'utf8')
+    value: await fs.readFile(file, 'utf8'),
   })
   await expect(
     [
