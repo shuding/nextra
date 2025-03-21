@@ -49,7 +49,11 @@ test('Run on MDX files', async () => {
     path: file,
     value: await fs.readFile(file, 'utf8')
   })
-  await expect(String(output.value)).toMatchFileSnapshot(
-    './fixtures/test.output.js'
-  )
+  await expect(
+    [
+      '/* eslint-disable quotes, @typescript-eslint/ban-ts-comment */',
+      '// @ts-nocheck',
+      output.value
+    ].join('\n')
+  ).toMatchFileSnapshot('./fixtures/test.output.js')
 })

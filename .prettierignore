@@ -16,4 +16,4 @@ docs/app/docs/guide/syntax-highlighting/page.mdx
 # contains mdx comments
 docs/app/docs/blog-theme/start/page.mdx
 
-packages/typescript/test/fixtures/test.output.js
+packages/typescript/src/__tests__/fixtures/test.output.js

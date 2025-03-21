@@ -1,3 +1,5 @@
+/* eslint-disable quotes, @typescript-eslint/ban-ts-comment */
+// @ts-nocheck
 import {Fragment as _Fragment, jsx as _jsx} from "react/jsx-runtime";
 function _createMdxContent(props) {
   const _components = {
