@@ -1,15 +1,16 @@
 import 'server-only'
-import { getProject } from '@/get-project'
-import type { GenerateDocumentationOptions } from '@/lib/base'
-import { renderMarkdownToHast } from '@/markdown'
-import type { BaseTypeTableProps } from '@/utils/type-table'
-import { getTypeTableOutput } from '@/utils/type-table'
-import { TypeTable } from 'fumadocs-ui/components/type-table'
-import defaultMdxComponents from 'fumadocs-ui/mdx'
-import type { Jsx } from 'hast-util-to-jsx-runtime'
-import { toJsxRuntime } from 'hast-util-to-jsx-runtime'
 import type { ReactNode } from 'react'
 import * as runtime from 'react/jsx-runtime'
+import type { Jsx } from 'hast-util-to-jsx-runtime'
+import { toJsxRuntime } from 'hast-util-to-jsx-runtime'
+import { TypeTable } from 'fumadocs-ui/components/type-table'
+import defaultMdxComponents from 'fumadocs-ui/mdx'
+
+import { getProject } from '../get-project.js'
+import type { GenerateDocumentationOptions } from '../lib/base.js'
+import { renderMarkdownToHast } from '../markdown.js'
+import type { BaseTypeTableProps } from '../utils/type-table.js'
+import { getTypeTableOutput } from '../utils/type-table.js'
 
 export interface AutoTypeTableProps extends BaseTypeTableProps {
   /**

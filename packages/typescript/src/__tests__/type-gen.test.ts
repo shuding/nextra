@@ -1,11 +1,11 @@
 import fs from 'node:fs/promises'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
-import type { TypescriptConfig } from '@/get-project'
 import { createProcessor } from '@mdx-js/mdx'
-import { expect, test } from 'vitest'
+
 import type { RemarkAutoTypeTableOptions } from '../index.js'
 import { generateDocumentation, remarkAutoTypeTable } from '../index.js'
+import type { TypescriptConfig } from '../get-project.js'
 
 const relative = (s: string): string =>
   path.resolve(fileURLToPath(new URL(s, import.meta.url)))

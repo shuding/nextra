@@ -1,12 +1,12 @@
 import fs from 'node:fs'
 import path from 'node:path'
-import { getProject } from '@/get-project'
+import { getProject } from '../get-project.js'
 import type {
   DocEntry,
   GeneratedDoc,
   GenerateDocumentationOptions
-} from './base'
-import { generateDocumentation } from './base'
+} from './base.js'
+import { generateDocumentation } from './base.js'
 
 interface Templates {
   block: (doc: GeneratedDoc, children: string) => string

@@ -1,8 +1,9 @@
 import { mkdir, readFile, writeFile } from 'node:fs/promises'
 import path from 'node:path'
-import { getProject } from '@/get-project'
 import fg from 'fast-glob'
-import { generateMDX, type GenerateMDXOptions } from './mdx'
+
+import { getProject } from '../get-project.js'
+import { generateMDX, type GenerateMDXOptions } from './mdx.js'
 
 export interface GenerateFilesOptions {
   input: string | string[]

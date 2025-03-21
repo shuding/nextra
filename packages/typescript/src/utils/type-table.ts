@@ -1,7 +1,7 @@
 import fs from 'node:fs/promises'
 import path from 'node:path'
-import type { GenerateDocumentationOptions } from '@/lib/base'
-import { generateDocumentation } from '@/lib/base'
+import type { GenerateDocumentationOptions } from '../lib/base.js'
+import { generateDocumentation } from '../lib/base.js'
 
 export interface BaseTypeTableProps {
   /**

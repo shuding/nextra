@@ -5,5 +5,8 @@ export default defineProject({
     alias: {
       '@/': new URL('src/', import.meta.url).pathname
     }
+  },
+  test: {
+    globals: true,
   }
 })
