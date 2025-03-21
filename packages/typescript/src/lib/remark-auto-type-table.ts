@@ -1,4 +1,4 @@
-import { dirname } from 'node:path'
+import path from 'node:path'
 import { getProject } from '@/get-project'
 import type { DocEntry } from '@/lib/base'
 import { renderMarkdownToHast } from '@/markdown'
@@ -113,8 +113,8 @@ export function remarkAutoTypeTable({
 
   return async (tree, file) => {
     const queue: Promise<void>[] = []
-    let basePath = options?.basePath
-    if (!basePath && file.path) basePath = dirname(file.path)
+    let { basePath } = options
+    if (!basePath && file.path) basePath = path.dirname(file.path)
 
     visit(tree, 'mdxJsxFlowElement', node => {
       if (node.name !== name) return

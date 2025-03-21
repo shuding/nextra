@@ -36,7 +36,7 @@ export async function generateFiles(
             `${path.basename(file, path.extname(file))}.mdx`
           )
 
-    const content = (await readFile(absolutePath)).toString()
+    const content = await readFile(absolutePath, 'utf8')
     let result = generateMDX(content, {
       basePath: path.dirname(absolutePath),
       ...options.options,

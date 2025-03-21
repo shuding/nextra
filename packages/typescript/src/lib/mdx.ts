@@ -3,9 +3,9 @@ import path from 'node:path'
 import { getProject } from '@/get-project'
 import {
   generateDocumentation,
-  type DocEntry,
-  type GeneratedDoc,
-  type GenerateDocumentationOptions
+  DocEntry,
+  GeneratedDoc,
+  GenerateDocumentationOptions
 } from './base'
 
 interface Templates {
@@ -55,10 +55,10 @@ export function generateMDX(
   const templates = { ...defaultTemplates, ...overrides }
   const project = rest.project ?? getProject(rest.config)
 
-  return source.replace(regex, (...args) => {
+  return source.replaceAll(regex, (...args) => {
     const groups = args[args.length - 1] as {
       file: string
-      name: string | undefined
+      name?: string
     }
     const file = path.resolve(basePath, groups.file)
     const content = fs.readFileSync(file)

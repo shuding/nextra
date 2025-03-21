@@ -7,7 +7,7 @@ import { expect, test } from 'vitest'
 import {
   generateDocumentation,
   remarkAutoTypeTable,
-  type RemarkAutoTypeTableOptions
+  RemarkAutoTypeTableOptions
 } from '../src'
 
 const relative = (s: string): string =>

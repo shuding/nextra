@@ -1,8 +1,8 @@
 import fs from 'node:fs/promises'
-import { join } from 'node:path'
+import path from 'node:path'
 import {
   generateDocumentation,
-  type GenerateDocumentationOptions
+  GenerateDocumentationOptions
 } from '@/lib/base'
 
 export interface BaseTypeTableProps {
@@ -55,13 +55,13 @@ export async function getTypeTableOutput({
 }: BaseTypeTableProps) {
   const file =
     props.path && options?.basePath
-      ? join(options.basePath, props.path)
+      ? path.join(options.basePath, props.path)
       : props.path
   let typeName = name
   let content = ''
 
   if (file) {
-    content = (await fs.readFile(file)).toString()
+    content = await fs.readFile(file, 'utf8')
   }
 
   if (type && type.split('\n').length > 1) {
