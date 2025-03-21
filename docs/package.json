@@ -10,6 +10,8 @@
     "start": "next start"
   },
   "dependencies": {
+    "@sindresorhus/slugify": "^2.2.1",
+    "@nextra/typescript": "workspace:*",
     "clsx": "^2.1.0",
     "framer-motion": "^12.0.0",
     "next": "^15.0.2",
