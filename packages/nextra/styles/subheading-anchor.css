@@ -21,5 +21,5 @@
     @apply x:content-['#'] x:px-1;
   }
   /* https://github.com/tailwindlabs/tailwindcss/issues/15597#issuecomment-2582673546 */
-  @apply x:after:text-gray-400 x:dark:after:text-neutral-600;
+  @apply x:after:text-gray-600 x:dark:after:text-neutral-400;
 }
