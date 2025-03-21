@@ -606,6 +606,9 @@ importers:
       hast-util-to-jsx-runtime:
         specifier: ^2.3.6
         version: 2.3.6
+      nextra:
+        specifier: workspace:*
+        version: link:../nextra
       remark:
         specifier: ^15.0.1
         version: 15.0.1
@@ -646,6 +649,9 @@ importers:
       fumadocs-core:
         specifier: ^15.1.1
         version: 15.1.1(@types/react@19.0.11)(next@15.2.2(patch_hash=7jofu3qtudpcn7yuwfpdpiosuy)(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+      next:
+        specifier: 15.2.2
+        version: 15.2.2(patch_hash=7jofu3qtudpcn7yuwfpdpiosuy)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       unified:
         specifier: ^11.0.5
         version: 11.0.5

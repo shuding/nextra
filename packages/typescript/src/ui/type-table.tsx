@@ -1,62 +1,52 @@
-'use client';
+import cn from 'clsx'
+import Link from 'next/link'
+import { Popup } from 'nextra/components'
+import { InformationCircleIcon as InfoIcon } from 'nextra/icons'
+import type { FC, ReactNode } from 'react'
 
-import { InfoIcon } from 'lucide-react';
-import Link from 'next/link';
-import { cva } from 'class-variance-authority';
-import { cn } from '@/utils/cn';
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from 'nextra/components';
-import type { ReactNode } from 'react';
-
-export function Info({ children }: { children: ReactNode }): ReactNode {
+const Info: FC<{ children: ReactNode }> = ({ children }) => {
   return (
-    <Popover>
-      <PopoverTrigger>
+    <Popup>
+      <Popup.Button>
         <InfoIcon className="size-4" />
-      </PopoverTrigger>
-      <PopoverContent className="prose max-h-[400px] min-w-[220px] max-w-[400px] overflow-auto text-sm prose-no-margin">
+      </Popup.Button>
+      <Popup.Panel className="prose prose-no-margin max-h-[400px] max-w-[400px] min-w-[220px] overflow-auto text-sm">
         {children}
-      </PopoverContent>
-    </Popover>
-  );
+      </Popup.Panel>
+    </Popup>
+  )
 }
 
 interface ObjectType {
   /**
    * Additional description of the field
    */
-  description?: ReactNode;
-  type: string;
-  typeDescription?: ReactNode;
+  description?: ReactNode
+  type: string
+  typeDescription?: ReactNode
   /**
    * Optional link to the type
    */
-  typeDescriptionLink?: string;
-  default?: string;
-
-  required?: boolean;
+  typeDescriptionLink?: string
+  default?: string
+  required?: boolean
 }
 
-const field = cva('inline-flex flex-row items-center gap-1');
-const code = cva(
-  'rounded-md bg-fd-secondary p-1 text-fd-secondary-foreground',
-  {
-    variants: {
-      color: { primary: 'bg-fd-primary/10 text-fd-primary' },
-    },
-  },
-);
+const classes = {
+  field: cn('inline-flex flex-row items-center gap-1'),
+  code: cn('rounded-md bg-fd-secondary p-1 text-fd-secondary-foreground'),
+  blue: 'bg-fd-primary/10 text-fd-primary'
+}
 
-export function TypeTable({ type }: { type: Record<string, ObjectType> }) {
+export const TypeTable: FC<{ type: Record<string, ObjectType> }> = ({
+  type
+}) => {
   return (
-    <div className="prose my-6 overflow-auto prose-no-margin">
-      <table className="whitespace-nowrap text-sm text-fd-muted-foreground">
+    <div className="prose prose-no-margin my-6 overflow-auto">
+      <table className="text-fd-muted-foreground text-sm whitespace-nowrap">
         <thead>
           <tr>
-            <th className="w-[45%]">Prop</th>
+            <th className="w-[45%]">Name</th>
             <th className="w-[30%]">Type</th>
             <th className="w-1/4">Default</th>
           </tr>
@@ -65,30 +55,30 @@ export function TypeTable({ type }: { type: Record<string, ObjectType> }) {
           {Object.entries(type).map(([key, value]) => (
             <tr key={key}>
               <td>
-                <div className={field()}>
-                  <code className={cn(code({ color: 'primary' }))}>
+                <div className={classes.field}>
+                  <code className={cn(classes.code, classes.blue)}>
                     {key}
                     {!value.required && '?'}
                   </code>
-                  {value.description ? <Info>{value.description}</Info> : null}
+                  {value.description && <Info>{value.description}</Info>}
                 </div>
               </td>
               <td>
-                <div className={field()}>
-                  <code className={code()}>{value.type}</code>
-                  {value.typeDescription ? (
+                <div className={classes.field}>
+                  <code className={classes.code}>{value.type}</code>
+                  {value.typeDescription && (
                     <Info>{value.typeDescription}</Info>
-                  ) : null}
-                  {value.typeDescriptionLink ? (
+                  )}
+                  {value.typeDescriptionLink && (
                     <Link href={value.typeDescriptionLink}>
                       <InfoIcon className="size-4" />
                     </Link>
-                  ) : null}
+                  )}
                 </div>
               </td>
               <td>
                 {value.default ? (
-                  <code className={code()}>{value.default}</code>
+                  <code className={classes.code}>{value.default}</code>
                 ) : (
                   <span>-</span>
                 )}
@@ -98,5 +88,5 @@ export function TypeTable({ type }: { type: Record<string, ObjectType> }) {
         </tbody>
       </table>
     </div>
-  );
+  )
 }

@@ -33,7 +33,7 @@ export const PropsTable: FC<PropsTableProps> = ({
         <Link
           key={`${chunk}-${i}`}
           href={links[chunk] ?? ''}
-          className="text-primary"
+          className="text-primary-600"
         >
           {chunk}
         </Link>
@@ -64,12 +64,12 @@ export const PropsTable: FC<PropsTableProps> = ({
             <tr className="border-b border-gray-200 [&>td]:p-3 max-lg:[&>td]:block">
               <td className="lg:!pl-0">
                 <div className="relative">
-                  <Link
+                  <a
                     href={`#${slug}`}
                     className="absolute right-0 flex items-center text-lg font-black group-hover:opacity-100 lg:top-1/2 lg:right-auto lg:left-0 lg:w-[25px] lg:-translate-x-[22px] lg:-translate-y-1/2 lg:opacity-0"
                   >
                     #
-                  </Link>
+                  </a>
                   {prop.name &&
                     (isHeading ? (
                       <span className="px-1.5 py-0.5 font-bold">
@@ -110,7 +110,7 @@ export const PropsTable: FC<PropsTableProps> = ({
                 <td
                   className={cn(
                     '!px-0',
-                    prop.default ? '' : '!hidden lg:table-cell'
+                    !prop.default && '!hidden lg:table-cell'
                   )}
                 >
                   <pre className="inline-block rounded-sm border border-gray-200 bg-gray-50 !px-1.5 py-0.5">
