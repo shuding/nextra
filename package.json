@@ -24,9 +24,6 @@
     "types:check": "turbo run types:check",
     "version": "changeset version"
   },
-  "dependencies": {
-    "lefthook": "^1.11.3"
-  },
   "devDependencies": {
     "@changesets/cli": "2.28.1",
     "@rollup/plugin-alias": "5.1.1",
