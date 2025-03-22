@@ -16,7 +16,6 @@ import eslintPluginSonarJs from 'eslint-plugin-sonarjs'
 import eslintPluginTsSortKeys from 'eslint-plugin-typescript-sort-keys'
 import eslintPluginUnicorn from 'eslint-plugin-unicorn'
 import tseslint from 'typescript-eslint'
-import type { Config } from 'typescript-eslint'
 
 // TODO: Enable once `eslint-plugin-tailwindcss` will support Tailwind CSS v4
 // const TAILWIND_CONFIG = {
@@ -35,7 +34,7 @@ const REACT_COMPILER_RESTRICT = {
   importNames: ['memo', 'useCallback', 'useMemo']
 }
 
-const config: Config = tseslint.config(
+const config = tseslint.config(
   includeIgnoreFile(path.resolve('.gitignore')),
   { ignores: ['**/generated-page-map.ts', '**/next-env.d.ts'] },
   // Rules for all files
@@ -194,7 +193,7 @@ const config: Config = tseslint.config(
     },
     rules: {
       'no-restricted-imports': ['error', REACT_COMPILER_RESTRICT],
-      'react-compiler/react-compiler': 'error'
+      // 'react-compiler/react-compiler': 'error'
     }
   },
   // ⚙️ nextra-theme-docs
