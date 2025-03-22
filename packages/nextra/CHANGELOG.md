@@ -1,5 +1,12 @@
 # nextra
 
+## 4.2.17
+
+### Patch Changes
+
+- a7db0e6: fix: use correct `ReactNode` zod validation for `Layout.footer/banner/editLink/feedback.content/toc.backToTop/toc.extraContent/toc.title/search` and `Navbar.children/projectIcon/chatIcon`
+- 18e7fb9: fix: allow override `NextraConfig.mdxOptions.format` option in `next.config` file
+
 ## 4.2.16
 
 ### Patch Changes
