@@ -87,7 +87,7 @@ const IndexPage: FC = () => {
                 </div>
                 <ArrowRightIcon
                   width="1.2em"
-                  className="mx-auto my-6 rotate-90 text-neutral-400"
+                  className="mx-auto my-6 rotate-90 text-neutral-600 dark:text-neutral-400"
                 />
                 <div className={styles.optimization}>
                   <div style={{ fontSize: '.9rem' }} className="leading-8">

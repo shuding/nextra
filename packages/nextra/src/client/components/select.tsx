@@ -44,7 +44,7 @@ export const Select: FC<MenuProps> = ({
             open
               ? 'x:bg-gray-200 x:text-gray-900 x:dark:bg-primary-100/10 x:dark:text-gray-50'
               : hover
-                ? 'x:bg-gray-100 x:text-gray-900 x:dark:bg-primary-100/5 x:dark:text-gray-50'
+                ? 'x:bg-gray-200 x:text-gray-900 x:dark:bg-primary-100/5 x:dark:text-gray-50'
                 : 'x:text-gray-600 x:dark:text-gray-400',
             focus && 'x:nextra-focus',
             className
@@ -61,7 +61,7 @@ export const Select: FC<MenuProps> = ({
           cn(
             'x:focus-visible:nextra-focus',
             open ? 'x:opacity-100' : 'x:opacity-0',
-            'x:motion-reduce:transition-none x:transition-opacity x:min-w-(--button-width) x:z-20 x:max-h-64 x:rounded-md x:border x:border-black/5 x:backdrop-blur-md x:bg-nextra-bg/70 x:py-1 x:text-sm x:shadow-lg x:dark:border-white/20'
+            'x:motion-reduce:transition-none x:transition-opacity x:min-w-(--button-width) x:z-20 x:max-h-64 x:rounded-md x:border x:border-black/5 x:backdrop-blur-md x:bg-nextra-bg/70 x:text-sm x:shadow-lg x:dark:border-white/20'
           )
         }
       >
@@ -71,7 +71,7 @@ export const Select: FC<MenuProps> = ({
               <li
                 className={cn(
                   focus
-                    ? 'x:bg-primary-50 x:text-primary-600 x:dark:bg-primary-500/10'
+                    ? 'x:bg-primary-100 x:text-primary-900 x:dark:text-primary-600 x:dark:bg-primary-500/10'
                     : 'x:text-gray-800 x:dark:text-gray-100',
                   'x:cursor-pointer x:whitespace-nowrap x:py-1.5 x:px-3',
                   'x:transition-colors',

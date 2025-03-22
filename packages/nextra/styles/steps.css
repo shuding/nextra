@@ -9,10 +9,12 @@
     @apply x:border-0 x:pb-0 x:font-semibold x:tracking-tight x:mt-8 x:text-2xl;
     /* https://github.com/tailwindlabs/tailwindcss/issues/15597#issuecomment-2582673546 */
     @apply x:before:bg-gray-100 x:dark:before:bg-neutral-800;
+    @apply x:before:text-neutral-600 x:dark:before:text-neutral-400;
+    @apply x:before:border-gray-200 x:dark:before:border-neutral-700;
     &:before {
       @apply x:absolute x:size-[33px];
-      @apply x:border-4 x:border-nextra-bg;
-      @apply x:rounded-full x:text-neutral-400 x:text-base x:font-normal x:text-center x:-indent-px;
+      @apply x:border-4;
+      @apply x:rounded-full x:text-base x:font-normal x:text-center x:-indent-px;
       @apply x:ms-[-41px];
       content: counter(var(--counter-id));
     }

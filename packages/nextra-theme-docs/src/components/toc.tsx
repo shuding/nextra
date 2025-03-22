@@ -88,7 +88,7 @@ export const TOC: FC<TOCProps> = ({ filePath, pageTitle }) => {
                     'x:block x:transition-colors x:subpixel-antialiased',
                     id === activeSlug
                       ? 'x:text-primary-600 x:contrast-more:text-primary-600!'
-                      : 'x:text-gray-500 x:hover:text-gray-900 x:dark:text-gray-400 x:dark:hover:text-gray-300',
+                      : 'x:text-gray-600 x:hover:text-gray-900 x:dark:text-gray-400 x:dark:hover:text-gray-300',
                     'x:contrast-more:text-gray-900 x:contrast-more:underline x:contrast-more:dark:text-gray-50 x:break-words'
                   )}
                 >
