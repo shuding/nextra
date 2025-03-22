@@ -1,39 +1,74 @@
+import { Steps, Tabs } from 'nextra/components'
+
 # Search Engine
 
 Nextra features full-page search, that includes list items, code blocks,
 headings and table cells.
 
-Nextra indexes your content automatically at build-time and performs incredibly
-fast full-text search via
-[FlexSearch](https://github.com/nextapps-de/flexsearch).
+Check the
+[migration guide](https://the-guild.dev/blog/nextra-4#new-search-engine--pagefind)
+for more information.
+
+## Setup
+
+Nextra's search engine requires a few steps to set up:
+
+<Steps>
+### Install `pagefind` as a dev dependency
+
+```sh npm2yarn
+npm i -D pagefind
+```
+
+### Add a `postbuild` script
+
+You need to add a `postbuild` script to the `package.json` file to generate the
+search index. The script should be:
+
+<Tabs items={['Server builds', 'Static exports']}>
+  <Tabs.Tab>
+    ```json filename="package.json" {2}
+    "scripts": {
+      "postbuild": "pagefind --site .next/server/app --output-path public/_pagefind"
+    }
+    ```
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```json filename="package.json" {2}
+    "scripts": {
+      "postbuild": "pagefind --site .next/server/app --output-path out/_pagefind"
+    }
+    ```
+  </Tabs.Tab>
+</Tabs>
+
+### Ignore genereated files
+
+Add `_pagefind/` to `.gitignore`. This prevents committing the generated search
+index files,
+
+</Steps>
 
 ## Configuration
 
-### `nextraConfig.search`
+The search feature is enabled by default, but you can disable it entirely by
+setting `search: false{:js}`:
 
-- Type: `boolean | { codeblocks: boolean }`
-- Default: `true`
-
-## Example
-
-```js filename="next.config.mjs" {4-6}
+```js filename="next.config.mjs" {4}
 import nextra from 'nextra'
 
 const withNextra = nextra({
-  search: {
-    codeblocks: false
-  }
+  search: false
 })
 ```
 
-## Search in code blocks
+To keep search enabled but exclude code blocks, set
+`search: { codeblocks: false }{:js}`:
 
-Inline `<code attr="foo" />{:html}` can be searched as well as code blocks.
+```js filename="next.config.mjs" {4}
+import nextra from 'nextra'
 
-```html
-<code>I'm Searchable!</code>
+const withNextra = nextra({
+  search: { codeblocks: false }
+})
 ```
-
-> [!TIP]
->
-> To disable search in code blocks set `search: { codeblocks: false }{:js}`
