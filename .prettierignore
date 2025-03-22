@@ -5,6 +5,7 @@ generated-page-map.ts
 
 examples/swr-site/nextra-remote-filepaths/*.json
 
-# Ignore all MDX files because prettier doesn't support mdx v3
+# Ignore all MD files because prettier doesn't support mdx v3
 # https://github.com/prettier/prettier/issues/12209
+**/*.md
 **/*.mdx
