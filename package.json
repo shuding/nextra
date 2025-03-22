@@ -16,12 +16,13 @@
     "dev:website": "turbo run dev --filter=docs...",
     "lint": "ESLINT_USE_FLAT_CONFIG=true eslint --config packages/eslint-config/src/index.ts --cache --max-warnings 0 .",
     "lint:prettier": "prettier --config packages/prettier-config/src/index.js --cache --check --ignore-path .gitignore --ignore-path .prettierignore .",
-    "postinstall": "lefthook install && pnpm build",
+    "postinstall": "pnpm build",
     "prettier": "pnpm lint:prettier --write",
     "release": "changeset publish",
     "test": "turbo run test",
     "types:check": "turbo run types:check",
-    "version": "changeset version"
+    "version": "changeset version",
+    "prepare": "lefthook install"
   },
   "devDependencies": {
     "@changesets/cli": "2.28.1",
