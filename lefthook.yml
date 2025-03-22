@@ -1,0 +1,8 @@
+#   Refer for explanation to following link:
+#   https://lefthook.dev/configuration/
+post-commit:
+  parallel: false
+  jobs:
+    - run: npm run prettier
+    - run: git add .
+    - run: git commit -m "format files"
