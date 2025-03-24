@@ -1,3 +1,3 @@
-import config from "./packages/eslint-config/src/index"
+import config from './packages/eslint-config/src/index'
 
-export default config;
+export default config

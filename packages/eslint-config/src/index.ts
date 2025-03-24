@@ -35,7 +35,7 @@ const REACT_COMPILER_RESTRICT = {
   importNames: ['memo', 'useCallback', 'useMemo']
 }
 
-const config:Config = tseslint.config(
+const config: Config = tseslint.config(
   includeIgnoreFile(path.resolve('.gitignore')),
   { ignores: ['**/generated-page-map.ts', '**/next-env.d.ts'] },
   // Rules for all files
