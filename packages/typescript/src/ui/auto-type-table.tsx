@@ -8,7 +8,7 @@ import type { GenerateDocumentationOptions } from '../lib/base.js'
 import { renderMarkdownToHast } from '../markdown.js'
 import type { BaseTypeTableProps } from '../utils/type-table.js'
 import { getTypeTableOutput } from '../utils/type-table.js'
-import { TypeTable } from './type-table.js'
+import { PropsTable } from './props-table.js'
 
 export interface AutoTypeTableProps extends BaseTypeTableProps {
   /**
@@ -60,7 +60,7 @@ export async function AutoTypeTable({
     const type = Object.fromEntries(await Promise.all(entries))
 
     return (
-      <TypeTable
+      <PropsTable
         key={item.name}
         // @ts-expect-error -- fixme
         type={type}

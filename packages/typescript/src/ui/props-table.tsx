@@ -1,22 +1,22 @@
 import slugify from '@sindresorhus/slugify'
 import cn from 'clsx'
-import Link from 'next/link'
+// import Link from 'next/link'
 import { Code } from 'nextra/components'
 import type { FC, ReactNode } from 'react'
 
-type PropsTableProps = {
-  props: {
-    name: string
-    type?: string
-    default?: string
-    description?: string
-    example?: string
-    optional?: boolean
-  }[]
-  links?: Record<string, string>
-  info?: Record<string, string>
-  deeplinkPrefix?: string
-}
+// type PropsTableProps = {
+//   props: {
+//     name: string
+//     type?: string
+//     default?: string
+//     description?: string
+//     example?: string
+//     optional?: boolean
+//   }[]
+//   links?: Record<string, string>
+//   info?: Record<string, string>
+//   deeplinkPrefix?: string
+// }
 
 interface ObjectType {
   /**
@@ -33,28 +33,29 @@ interface ObjectType {
   required?: boolean
 }
 
-
-export const PropsTable: FC<{ type: Record<string, ObjectType> }> = ({ type }) => {
+export const PropsTable: FC<{ type: Record<string, ObjectType> }> = ({
+  type
+}) => {
   // We can hide the default column entirely if none of the props have a default
   // value to document.
   const showDefaultColumn = true as any // data.some(prop => prop.default)
 
   // This function takes a string representing some type and attempts to turn any
   // types referenced inside into links, either internal or external.
-  const linkify = (type?: string) =>
-    type?.match(/(\w+|\W+)/g)?.map((chunk, i) =>
-      chunk in links ? (
-        <Link
-          key={`${chunk}-${i}`}
-          href={links[chunk] ?? ''}
-          className="x:text-primary-600"
-        >
-          {chunk}
-        </Link>
-      ) : (
-        chunk
-      )
-    )
+  const linkify = (type?: string) => type
+  // type?.match(/(\w+|\W+)/g)?.map((chunk, i) =>
+  //   chunk in links ? (
+  //     <Link
+  //       key={`${chunk}-${i}`}
+  //       href={links[chunk] ?? ''}
+  //       className="x:text-primary-600"
+  //     >
+  //       {chunk}
+  //     </Link>
+  //   ) : (
+  //     chunk
+  //   )
+  // )
 
   return (
     <table className="x:my-8 x:w-full x:text-sm">
@@ -65,39 +66,30 @@ export const PropsTable: FC<{ type: Record<string, ObjectType> }> = ({ type }) =
           {showDefaultColumn && <th className="x:py-1.5">Default</th>}
         </tr>
       </thead>
-      {data.map(prop => {
-        const slug = slugify(prop.name)
-        const isHeading = !prop.type && !prop.description && !prop.default
-
+      {Object.entries(type).map(([key, prop]) => {
+        const id = slugify(key)
         return (
           <tbody
-            key={slug}
+            key={id}
             className="x:group nextra-border x:hover:bg-gray-100 x:dark:hover:bg-primary-100/5 x:mb-5 x:rounded-xl x:max-lg:block x:max-lg:border"
           >
             <tr
               className="nextra-border x:max-lg:block x:lg:border-b x:lg:not-target:[&>td>a]:opacity-0"
-              id={slug}
+              id={id}
             >
               <td className="x:relative x:py-3 x:max-lg:block x:max-lg:px-3">
                 <a
-                  href={`#${slug}`}
+                  href={`#${id}`}
                   className={cn(
                     'x:absolute x:top-0 x:right-0 x:text-lg x:font-black x:lg:top-1/2 x:lg:right-full x:lg:-translate-y-1/2',
                     'x:group-hover:opacity-100! x:before:content-["#"] x:hover:text-black x:dark:hover:text-white',
                     'x:p-3' // Increase hit box
                   )}
                 />
-                {prop.name &&
-                  (isHeading ? (
-                    <span className="x:px-1.5 x:py-0.5 x:font-bold">{prop.name}</span>
-                  ) : (
-                    <>
-                      <Code>{prop.name}</Code>
-                      {prop.optional && (
-                        <span className="x:ml-1 x:text-gray-500">(optional)</span>
-                      )}
-                    </>
-                  ))}
+                <Code>
+                  {key}
+                  {!prop.required && '?'}
+                </Code>
               </td>
               <td className='x:p-3 x:max-lg:block x:max-lg:before:content-["Type:_"]'>
                 <Code>{linkify(prop.type)}</Code>
@@ -106,13 +98,13 @@ export const PropsTable: FC<{ type: Record<string, ObjectType> }> = ({ type }) =
                     {prop.description}
                   </div>
                 )}
-                {prop.example && (
-                  <div className="x:mt-2 x:rounded-lg x:border x:border-gray-200 x:bg-gray-50">
-                    <pre>
-                      <code>{prop.example}</code>
-                    </pre>
-                  </div>
-                )}
+                {/*{prop.example && (*/}
+                {/*  <div className="x:mt-2 x:rounded-lg x:border x:border-gray-200 x:bg-gray-50">*/}
+                {/*    <pre>*/}
+                {/*      <code>{prop.example}</code>*/}
+                {/*    </pre>*/}
+                {/*  </div>*/}
+                {/*)}*/}
               </td>
               {showDefaultColumn && (
                 // For the mobile view, we want to hide the default column entirely
@@ -122,8 +114,9 @@ export const PropsTable: FC<{ type: Record<string, ObjectType> }> = ({ type }) =
                 <td
                   className={cn(
                     'x:max-lg:block',
-                    prop.default &&
-                      'x:py-3 x:max-lg:px-3 x:max-lg:before:content-["Default:_"]'
+                    prop.default
+                      ? 'x:py-3 x:max-lg:px-3 x:max-lg:before:content-["Default:_"]'
+                      : 'x:lg:after:content-["–"]'
                   )}
                 >
                   {prop.default && <Code>{linkify(prop.default)}</Code>}
