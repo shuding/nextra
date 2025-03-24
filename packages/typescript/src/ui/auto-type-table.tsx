@@ -1,11 +1,9 @@
 import 'server-only'
-import { toJsxRuntime } from 'hast-util-to-jsx-runtime'
-import { useMDXComponents } from 'next-mdx-import-source-file'
+import { compileMdx } from 'nextra/compile'
+import { MDXRemote } from 'nextra/mdx-remote'
 import type { ReactNode } from 'react'
-import * as runtime from 'react/jsx-runtime'
 import { getProject } from '../get-project.js'
 import type { GenerateDocumentationOptions } from '../lib/base.js'
-import { renderMarkdownToHast } from '../markdown.js'
 import type { BaseTypeTableProps } from '../utils/type-table.js'
 import { getTypeTableOutput } from '../utils/type-table.js'
 import { PropsTable } from './props-table.js'
@@ -70,11 +68,7 @@ export async function AutoTypeTable({
 }
 
 async function renderMarkdownDefault(md: string): Promise<ReactNode> {
-  return toJsxRuntime(await renderMarkdownToHast(md), {
-    Fragment: runtime.Fragment,
-    jsx: runtime.jsx,
-    jsxs: runtime.jsxs,
-    // @ts-expect-error -- fixme
-    components: useMDXComponents()
-  })
+  if (!md) return
+  const rawJs = await compileMdx(md)
+  return <MDXRemote compiledSource={rawJs} />
 }

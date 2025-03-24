@@ -1,6 +1,5 @@
 export * from './lib/base.js'
 export * from './lib/mdx.js'
 export * from './lib/file.js'
-export { renderMarkdownToHast } from './markdown.js'
 export { getProject } from './get-project.js'
 export * from './lib/remark-auto-type-table.js'
