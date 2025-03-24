@@ -1,5 +1,6 @@
 /* eslint sort-keys: error */
 import { ThemeProvider } from 'next-themes'
+import type { PageMapItem } from 'nextra'
 import { Search, SkipNavLink } from 'nextra/components'
 import { element, reactNode } from 'nextra/schemas'
 import type { FC, ReactNode } from 'react'
@@ -14,7 +15,7 @@ const attributeSchema = z.custom<'class' | `data-${string}`>(
   value => value === 'class' || value.startsWith('data-')
 )
 
-const theme = z.strictObject({
+export const LayoutPropsSchema = z.strictObject({
   banner: reactNode,
   darkMode: z.boolean().default(true),
   docsRepositoryBase: z
@@ -75,7 +76,7 @@ import { Layout, LastUpdated } from 'nextra-theme-docs'
       storageKey: z.string().optional()
     })
     .default({}),
-  pageMap: z.array(z.any({})),
+  pageMap: z.array(z.custom<PageMapItem>()),
   search: reactNode.default(<Search />),
   sidebar: z
     .strictObject({
@@ -102,12 +103,12 @@ import { Layout, LastUpdated } from 'nextra-theme-docs'
     .default({})
 })
 
-export type ThemeConfigProps = z.infer<typeof theme>
+export type ThemeConfigProps = z.infer<typeof LayoutPropsSchema>
 
-type LayoutProps = z.input<typeof theme> & { children: ReactNode }
+type LayoutProps = z.input<typeof LayoutPropsSchema> & { children: ReactNode }
 
 export const Layout: FC<LayoutProps> = ({ children, ...themeConfig }) => {
-  const { data, error } = theme.safeParse(themeConfig)
+  const { data, error } = LayoutPropsSchema.safeParse(themeConfig)
   if (error) {
     throw fromZodError(error)
   }
