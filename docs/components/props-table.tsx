@@ -1,6 +1,7 @@
 import slugify from '@sindresorhus/slugify'
 import cn from 'clsx'
 import Link from 'next/link'
+import { Code } from 'nextra/components'
 import type { FC } from 'react'
 
 type PropsTableProps = {
@@ -61,36 +62,27 @@ export const PropsTable: FC<PropsTableProps> = ({
             id={slug}
             className="group mb-5 rounded-xl border border-gray-200 bg-gray-100 hover:bg-gray-50 max-lg:block lg:border-none lg:bg-transparent max-lg:[&>tr]:block"
           >
-            <tr className="border-b border-gray-200 [&>td]:p-3 max-lg:[&>td]:block">
-              <td className="lg:!pl-0">
-                <div className="relative">
-                  <a
-                    href={`#${slug}`}
-                    className="absolute right-0 flex items-center text-lg font-black group-hover:opacity-100 lg:top-1/2 lg:right-auto lg:left-0 lg:w-[25px] lg:-translate-x-[22px] lg:-translate-y-1/2 lg:opacity-0"
-                  >
-                    #
-                  </a>
-                  {prop.name &&
-                    (isHeading ? (
-                      <span className="px-1.5 py-0.5 font-bold">
-                        {prop.name}
-                      </span>
-                    ) : (
-                      <>
-                        <code className="rounded-sm border border-gray-200 bg-gray-50 px-1.5 py-0.5">
-                          {prop.name}
-                        </code>
-                        {prop.optional && (
-                          <span className="ml-1 text-gray-500">(optional)</span>
-                        )}
-                      </>
-                    ))}
-                </div>
+            <tr className="border-b border-gray-200">
+              <td className="relative p-3 max-lg:block">
+                <a
+                  href={`#${slug}`}
+                  className='absolute text-lg font-black transition-all group-hover:opacity-100 before:content-["#"] max-lg:right-3 lg:top-1/2 lg:-left-4 lg:-translate-y-1/2 lg:opacity-0'
+                  //className="right-0 lg:right-auto lg:w-[25px] lg:-translate-x-[22px]"
+                />
+                {prop.name &&
+                  (isHeading ? (
+                    <span className="px-1.5 py-0.5 font-bold">{prop.name}</span>
+                  ) : (
+                    <>
+                      <Code>{prop.name}</Code>
+                      {prop.optional && (
+                        <span className="ml-1 text-gray-500">(optional)</span>
+                      )}
+                    </>
+                  ))}
               </td>
-              <td>
-                <div>
-                  <code className="break-all">{linkify(prop.type)}</code>
-                </div>
+              <td className='p-3 max-lg:before:content-["Type:_"] max-lg:block'>
+                <Code>{linkify(prop.type)}</Code>
                 {prop.description && (
                   <div className="mt-2 max-w-md">{prop.description}</div>
                 )}
@@ -109,13 +101,11 @@ export const PropsTable: FC<PropsTableProps> = ({
                 // blank space we don't want.
                 <td
                   className={cn(
-                    '!px-0',
-                    !prop.default && '!hidden lg:table-cell'
+                    'max-lg:block',
+                    prop.default && 'p-3 max-lg:before:content-["Default:_"]'
                   )}
                 >
-                  <pre className="inline-block rounded-sm border border-gray-200 bg-gray-50 !px-1.5 py-0.5">
-                    <code className="text-xs">{linkify(prop.default)}</code>
-                  </pre>
+                  {prop.default && <Code>{linkify(prop.default)}</Code>}
                 </td>
               )}
             </tr>
