@@ -45,19 +45,11 @@ export const PropsTable: FC<PropsTableProps> = ({
 
   return (
     <table className="my-8 w-full text-sm">
-      <thead className="border-b nextra-border max-lg:hidden text-left">
+      <thead className="nextra-border border-b text-left max-lg:hidden">
         <tr>
-          <th className="py-1.5">
-            Name
-          </th>
-          <th className="p-1.5 px-3">
-            Type
-          </th>
-          {showDefaultColumn && (
-            <th className="py-1.5">
-              Default
-            </th>
-          )}
+          <th className="py-1.5">Name</th>
+          <th className="p-1.5 px-3">Type</th>
+          {showDefaultColumn && <th className="py-1.5">Default</th>}
         </tr>
       </thead>
       {data.map(prop => {
@@ -67,7 +59,7 @@ export const PropsTable: FC<PropsTableProps> = ({
         return (
           <tbody
             key={slug}
-            className="group mb-5 rounded-xl max-lg:border nextra-border max-lg:block x:hover:bg-gray-100 x:dark:hover:bg-primary-100/5"
+            className="group nextra-border x:hover:bg-gray-100 x:dark:hover:bg-primary-100/5 mb-5 rounded-xl max-lg:block max-lg:border"
           >
             <tr
               className="nextra-border max-lg:block lg:border-b lg:not-target:[&>td>a]:opacity-0"
@@ -77,9 +69,9 @@ export const PropsTable: FC<PropsTableProps> = ({
                 <a
                   href={`#${slug}`}
                   className={cn(
-                    'absolute text-lg font-black top-0 right-0 lg:top-1/2 lg:right-full lg:-translate-y-1/2',
+                    'absolute top-0 right-0 text-lg font-black lg:top-1/2 lg:right-full lg:-translate-y-1/2',
                     'group-hover:opacity-100! before:content-["#"] hover:text-black dark:hover:text-white',
-                    'p-3', // Increase hit box
+                    'p-3' // Increase hit box
                   )}
                 />
                 {prop.name &&
