@@ -50,7 +50,7 @@ export const metadata: Metadata = {
 const banner = (
   <Banner dismissible={false}>
     🎉 Nextra 4.0 is released. dimaMachina is looking{' '}
-    <Link href="https://github.com/dimaMachina">
+    <Link href="https://github.com/dimaMachina" className="text-current!">
       for a new job or consulting
     </Link>
     .

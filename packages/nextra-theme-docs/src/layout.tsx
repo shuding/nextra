@@ -28,14 +28,18 @@ export const LayoutPropsSchema = z.strictObject({
     .startsWith('https://')
     .default('https://github.com/shuding/nextra')
     .describe('URL of the documentation repository.'),
-  editLink: reactNode.default('Edit this page'),
+  editLink: reactNode
+    .default('Edit this page')
+    .describe('Content of the edit link.'),
   feedback: z
     .strictObject({
       content: reactNode.default('Question? Give us feedback'),
       labels: z.string().default('feedback')
     })
     .default({}),
-  footer: reactNode,
+  footer: reactNode.describe(
+    'Rendered [`<Footer>` component](/docs/docs-theme/built-ins/footer). E.g. `<Footer {...footerProps} />{:ts}`'
+  ),
   i18n: z
     .array(
       z.strictObject({
@@ -59,8 +63,11 @@ import { Layout, LastUpdated } from 'nextra-theme-docs'
 </Layout>
 \`\`\`
 `
-    }),
-  navbar: reactNode,
+    })
+    .describe('Component to render the last updated info.'),
+  navbar: reactNode.describe(
+    'Rendered [`<Navbar>` component](/docs/docs-theme/built-ins/navbar). E.g. `<Navbar {...navbarProps} />{:ts}`'
+  ),
   navigation: z
     .union([
       z.boolean(),
@@ -70,7 +77,8 @@ import { Layout, LastUpdated } from 'nextra-theme-docs'
       })
     ])
     .default(true)
-    .transform(v => (typeof v === 'boolean' ? { next: v, prev: v } : v)),
+    .transform(v => (typeof v === 'boolean' ? { next: v, prev: v } : v))
+    .describe('Enable or disable navigation link.'),
   nextThemes: z
     .strictObject({
       attribute: z
@@ -81,9 +89,18 @@ import { Layout, LastUpdated } from 'nextra-theme-docs'
       forcedTheme: z.string().optional(),
       storageKey: z.string().optional()
     })
-    .default({}),
-  pageMap: z.array(z.custom<PageMapItem>()),
-  search: reactNode.default(<Search />),
+    .default({})
+    .describe(
+      'Configuration for the [next-themes](https://github.com/pacocoursey/next-themes#themeprovider) package.'
+    ),
+  pageMap: z
+    .array(z.custom<PageMapItem>())
+    .describe("Page map list. Result of `getPageMap(route = '/'){:ts}` call."),
+  search: reactNode
+    .default(<Search />)
+    .describe(
+      'Rendered [`<Search>` component](/docs/built-ins/search). E.g. `<Search {...searchProps} />{:ts}`'
+    ),
   sidebar: z
     .strictObject({
       autoCollapse: z.boolean().optional(),
@@ -98,7 +115,8 @@ import { Layout, LastUpdated } from 'nextra-theme-docs'
       light: z.string().default('Light'),
       system: z.string().default('System')
     })
-    .default({}),
+    .default({})
+    .describe('Translation of options in the theme switch.'),
   toc: z
     .strictObject({
       backToTop: reactNode.default('Scroll to top'),

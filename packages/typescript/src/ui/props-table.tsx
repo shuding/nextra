@@ -94,9 +94,7 @@ export const PropsTable: FC<{ type: Record<string, ObjectType> }> = ({
               <td className='x:p-3 x:max-lg:block x:max-lg:before:content-["Type:_"]'>
                 <Code>{linkify(prop.type)}</Code>
                 {prop.description && (
-                  <div className="x:mt-2 x:max-w-md x:text-sm">
-                    {prop.description}
-                  </div>
+                  <div className="x:mt-2 x:text-sm">{prop.description}</div>
                 )}
                 {/*{prop.example && (*/}
                 {/*  <div className="x:mt-2 x:rounded-lg x:border x:border-gray-200 x:bg-gray-50">*/}
