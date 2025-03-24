@@ -39,6 +39,7 @@
     "typescript": "*"
   },
   "dependencies": {
+    "@sindresorhus/slugify": "^2.2.1",
     "clsx": "^2.1.1",
     "estree-util-value-to-estree": "^3.3.2",
     "fast-glob": "^3.3.3",

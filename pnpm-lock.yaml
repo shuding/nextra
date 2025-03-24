@@ -594,6 +594,9 @@ importers:
 
   packages/typescript:
     dependencies:
+      '@sindresorhus/slugify':
+        specifier: ^2.2.1
+        version: 2.2.1
       clsx:
         specifier: ^2.1.1
         version: 2.1.1
@@ -609,9 +612,6 @@ importers:
       hast-util-to-jsx-runtime:
         specifier: ^2.3.6
         version: 2.3.6
-      nextra:
-        specifier: workspace:*
-        version: link:../nextra
       remark:
         specifier: ^15.0.1
         version: 15.0.1
@@ -655,6 +655,9 @@ importers:
       next:
         specifier: 15.2.2
         version: 15.2.2(patch_hash=7jofu3qtudpcn7yuwfpdpiosuy)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+      nextra:
+        specifier: workspace:*
+        version: link:../nextra
       unified:
         specifier: ^11.0.5
         version: 11.0.5
