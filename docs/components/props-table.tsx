@@ -45,11 +45,19 @@ export const PropsTable: FC<PropsTableProps> = ({
 
   return (
     <table className="my-8 w-full text-sm">
-      <thead className="hidden border-b border-gray-200 text-left lg:table-header-group">
-        <tr className="[&>th]:p-1.5">
-          <th>Name</th>
-          <th>Type</th>
-          {showDefaultColumn && <th>Default</th>}
+      <thead className="border-b nextra-border max-lg:hidden text-left">
+        <tr>
+          <th className="py-1.5">
+            Name
+          </th>
+          <th className="p-1.5 px-3">
+            Type
+          </th>
+          {showDefaultColumn && (
+            <th className="py-1.5">
+              Default
+            </th>
+          )}
         </tr>
       </thead>
       {data.map(prop => {
@@ -59,15 +67,20 @@ export const PropsTable: FC<PropsTableProps> = ({
         return (
           <tbody
             key={slug}
-            id={slug}
-            className="group mb-5 rounded-xl border border-gray-200 bg-gray-100 hover:bg-gray-50 max-lg:block lg:border-none lg:bg-transparent max-lg:[&>tr]:block"
+            className="group mb-5 rounded-xl max-lg:border nextra-border max-lg:block x:hover:bg-gray-100 x:dark:hover:bg-primary-100/5"
           >
-            <tr className="border-b border-gray-200">
-              <td className="relative p-3 max-lg:block">
+            <tr
+              className="nextra-border max-lg:block lg:border-b lg:not-target:[&>td>a]:opacity-0"
+              id={slug}
+            >
+              <td className="relative py-3 max-lg:block max-lg:px-3">
                 <a
                   href={`#${slug}`}
-                  className='absolute text-lg font-black transition-all group-hover:opacity-100 before:content-["#"] max-lg:right-3 lg:top-1/2 lg:-left-4 lg:-translate-y-1/2 lg:opacity-0'
-                  //className="right-0 lg:right-auto lg:w-[25px] lg:-translate-x-[22px]"
+                  className={cn(
+                    'absolute text-lg font-black top-0 right-0 lg:top-1/2 lg:right-full lg:-translate-y-1/2',
+                    'group-hover:opacity-100! before:content-["#"] hover:text-black dark:hover:text-white',
+                    'p-3', // Increase hit box
+                  )}
                 />
                 {prop.name &&
                   (isHeading ? (
@@ -81,10 +94,12 @@ export const PropsTable: FC<PropsTableProps> = ({
                     </>
                   ))}
               </td>
-              <td className='p-3 max-lg:before:content-["Type:_"] max-lg:block'>
+              <td className='p-3 max-lg:block max-lg:before:content-["Type:_"]'>
                 <Code>{linkify(prop.type)}</Code>
                 {prop.description && (
-                  <div className="mt-2 max-w-md">{prop.description}</div>
+                  <div className="mt-2 max-w-md text-sm">
+                    {prop.description}
+                  </div>
                 )}
                 {prop.example && (
                   <div className="mt-2 rounded-lg border border-gray-200 bg-gray-50">
@@ -102,7 +117,8 @@ export const PropsTable: FC<PropsTableProps> = ({
                 <td
                   className={cn(
                     'max-lg:block',
-                    prop.default && 'p-3 max-lg:before:content-["Default:_"]'
+                    prop.default &&
+                      'py-3 max-lg:px-3 max-lg:before:content-["Default:_"]'
                   )}
                 >
                   {prop.default && <Code>{linkify(prop.default)}</Code>}
