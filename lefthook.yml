@@ -1,4 +1,3 @@
-#   Refer for explanation to following link:
 #   https://lefthook.dev/configuration/
 post-commit:
   parallel: false
