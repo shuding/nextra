@@ -16,12 +16,18 @@ const attributeSchema = z.custom<'class' | `data-${string}`>(
 )
 
 export const LayoutPropsSchema = z.strictObject({
-  banner: reactNode,
-  darkMode: z.boolean().default(true),
+  banner: reactNode.describe(
+    'Rendered [`<Banner>` component](/docs/built-ins/banner). E.g. `<Banner {...bannerProps} />{:ts}`'
+  ),
+  darkMode: z
+    .boolean()
+    .default(true)
+    .describe('Show or hide the dark mode select button.'),
   docsRepositoryBase: z
     .string()
     .startsWith('https://')
-    .default('https://github.com/shuding/nextra'),
+    .default('https://github.com/shuding/nextra')
+    .describe('URL of the documentation repository.'),
   editLink: reactNode.default('Edit this page'),
   feedback: z
     .strictObject({
