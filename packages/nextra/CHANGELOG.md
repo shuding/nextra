@@ -1,5 +1,11 @@
 # nextra
 
+## 4.2.18
+
+### Patch Changes
+
+- e1c2b1b: chore: update `shiki` and `@shikijs/twoslash` packages to version 3
+
 ## 4.2.17
 
 ### Patch Changes
