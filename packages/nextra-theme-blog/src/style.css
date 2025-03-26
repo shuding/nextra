@@ -49,11 +49,11 @@ h1 {
 }
 
 .nextra-tag {
-  @apply x:select-none x:rounded-md x:bg-gray-200 x:px-1 x:text-sm x:text-gray-400 x:transition-colors;
-  @apply x:dark:bg-gray-600 x:dark:text-gray-300;
+  @apply x:select-none x:rounded-md x:bg-gray-200 x:px-1 x:text-sm x:text-gray-700 x:transition-colors;
+  @apply x:dark:bg-gray-600 x:dark:text-gray-50;
 
   &:hover {
-    @apply x:bg-gray-300 x:text-gray-500;
+    @apply x:bg-gray-300 x:text-gray-900;
     @apply x:dark:bg-gray-700 x:dark:text-gray-200;
   }
 }

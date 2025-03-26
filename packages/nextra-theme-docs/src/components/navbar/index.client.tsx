@@ -17,7 +17,7 @@ import { setMenu, useConfig, useMenu, useThemeConfig } from '../../stores'
 const classes = {
   link: cn(
     'x:text-sm x:contrast-more:text-gray-700 x:contrast-more:dark:text-gray-100 x:whitespace-nowrap',
-    'x:text-gray-600 x:hover:text-gray-800 x:dark:text-gray-400 x:dark:hover:text-gray-200',
+    'x:text-gray-600 x:hover:text-black x:dark:text-gray-400 x:dark:hover:text-gray-200',
     'x:ring-inset x:transition-colors'
   )
 }
