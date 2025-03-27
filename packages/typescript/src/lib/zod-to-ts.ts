@@ -3,6 +3,7 @@ import { z } from 'zod'
 type TsType = string | { type: string; optional: boolean }
 
 export function generateTsFromZod(schema: z.ZodTypeAny, indent = 2): string {
+  // Handle objects explicitly
   if (schema instanceof z.ZodObject) {
     return `{\n${Object.entries(schema.shape)
       .map(([key, value]) => {
@@ -12,7 +13,7 @@ export function generateTsFromZod(schema: z.ZodTypeAny, indent = 2): string {
         const docComment = getDocComment(value, indent)
         return `${docComment}${' '.repeat(indent)}${key}${optional ? '?' : ''}: ${tsType};\n`
       })
-      .join('')}${' '.repeat(indent - 2)}}`
+      .join('\n')}${' '.repeat(indent - 2)}}`
   }
 
   return generateTsFromZodType(schema, indent)
@@ -56,7 +57,7 @@ function generateTsFromZodType(schema: z.ZodTypeAny, indent: number): TsType {
 }
 
 function getDocComment(schema: z.ZodTypeAny, indent: number): string {
-  const description = (schema._def as any).description
+  const { description } = schema._def as any
   const defaultValue =
     schema instanceof z.ZodDefault ? schema._def.defaultValue() : undefined
   const comments: string[] = []

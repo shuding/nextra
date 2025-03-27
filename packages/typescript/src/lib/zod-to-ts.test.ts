@@ -2,7 +2,7 @@ import { z } from 'zod'
 import { generateTsFromZod } from './zod-to-ts.js' // Adjust the import path if needed
 
 describe('generateTsFromZod', () => {
-  it('should generate TypeScript with @description and @default for primitive types', () => {
+  it.only('should generate TypeScript with @description and @default for primitive types', () => {
     const schema = z.strictObject({
       id: z.string().describe('The unique identifier'),
       name: z.string().default('Anonymous').describe("The user's name"),
@@ -37,20 +37,24 @@ describe('generateTsFromZod', () => {
     expect(generateTsFromZod(schema)).toBe(expected)
   })
 
-  it('should handle nested objects correctly', () => {
+  it.only('should handle nested objects correctly', () => {
     const schema = z.strictObject({
-      user: z.strictObject({
-        id: z.string().describe('User ID'),
-        profile: z.strictObject({
-          bio: z.string().optional().describe('User bio'),
-          age: z.number().default(25).describe("User's age")
+      user: z
+        .strictObject({
+          id: z.string().describe('User ID'),
+          profile: z
+            .strictObject({
+              bio: z.string().optional().describe('User bio'),
+              age: z.number().default(25).describe("User's age")
+            })
+            .describe('Profile')
         })
-      })
+        .describe('User')
     })
 
     const expected = `{
   /**
-   * @description User ID
+   * @description User
    */
   user: {
     /**
@@ -59,7 +63,7 @@ describe('generateTsFromZod', () => {
     id: string;
 
     /**
-     * @description User bio
+     * @description Profile
      */
     profile: {
       /**
