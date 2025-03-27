@@ -141,15 +141,12 @@ function getDocEntry(prop: TsSymbol, context: EntryContext): DocEntry | void {
   let typeName = subType
     .getNonNullableType()
     .getText(undefined, ts.TypeFormatFlags.UseAliasDefinedOutsideCurrentScope)
+  const aliasSymbol = subType.getAliasSymbol()
 
-  if (
-    subType.getAliasSymbol() &&
-    subType.getAliasTypeArguments().length === 0
-  ) {
-    typeName = subType.getAliasSymbol()?.getEscapedName() ?? typeName
+  if (aliasSymbol && !subType.getAliasTypeArguments().length) {
+    typeName = aliasSymbol.getEscapedName()
   }
-
-  if ('remarks' in tags) {
+  if (tags.remarks) {
     typeName = /^`(?<name>.+)`/.exec(tags.remarks)?.[1] ?? typeName
   }
 

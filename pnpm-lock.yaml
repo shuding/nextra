@@ -68,9 +68,6 @@ importers:
       '@nextra/tsdoc':
         specifier: workspace:*
         version: link:../packages/tsdoc
-      '@sindresorhus/slugify':
-        specifier: ^2.2.1
-        version: 2.2.1
       clsx:
         specifier: ^2.1.0
         version: 2.1.1
@@ -92,9 +89,6 @@ importers:
       react-dom:
         specifier: 19.0.0
         version: 19.0.0(react@19.0.0)
-      zod-to-ts:
-        specifier: ^1.2.0
-        version: 1.2.0(typescript@5.8.2)(zod@3.24.2)
     devDependencies:
       '@svgr/webpack':
         specifier: ^8.0.1
@@ -6523,12 +6517,6 @@ packages:
   yocto-queue@0.1.0:
     resolution: {integrity: sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==}
     engines: {node: '>=10'}
-
-  zod-to-ts@1.2.0:
-    resolution: {integrity: sha512-x30XE43V+InwGpvTySRNz9kB7qFU8DlyEy7BsSTCHPH1R0QasMmHWZDCzYm6bVXtj/9NNJAZF3jW8rzFvH5OFA==}
-    peerDependencies:
-      typescript: ^4.9.4 || ^5.0.2
-      zod: ^3
 
   zod-validation-error@3.4.0:
     resolution: {integrity: sha512-ZOPR9SVY6Pb2qqO5XHt+MkkTRxGXb4EVtnjc9JpXUOtUB1T9Ru7mZOT361AN3MsetVe7R0a1KZshJDZdgp9miQ==}
@@ -13608,11 +13596,6 @@ snapshots:
   yaml@2.7.0: {}
 
   yocto-queue@0.1.0: {}
-
-  zod-to-ts@1.2.0(typescript@5.8.2)(zod@3.24.2):
-    dependencies:
-      typescript: 5.8.2
-      zod: 3.24.2
 
   zod-validation-error@3.4.0(zod@3.24.1):
     dependencies:
