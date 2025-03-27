@@ -36,6 +36,49 @@ exports[`TypeTable > <Banner /> 1`] = `
 ]
 `;
 
+exports[`TypeTable > <Callout /> 1`] = `
+[
+  {
+    "description": "",
+    "entries": [
+      {
+        "description": "Specifies the type of callout.
+Determines the default icon if none is provided.",
+        "name": "type",
+        "required": false,
+        "tags": {
+          "default": "'default'",
+        },
+        "type": ""default" | "error" | "info" | "warning"",
+      },
+      {
+        "description": "Icon displayed in the callout. Can be a string emoji or a custom React element.
+
+Default values based on \`type\`:
+- \`'💡'\` for \`type: 'default'\`
+- \`'🚫'\` for \`type: 'error'\`
+- \`<InformationCircleIcon />\` for \`type: 'info'\`
+- \`'⚠️'\` for \`type: 'warning'\`",
+        "name": "emoji",
+        "required": false,
+        "tags": {
+          "default": "Determined by \`type\`",
+        },
+        "type": "ReactNode",
+      },
+      {
+        "description": "Content to be displayed inside the callout.",
+        "name": "children",
+        "required": true,
+        "tags": {},
+        "type": "ReactNode",
+      },
+    ],
+    "name": "default",
+  },
+]
+`;
+
 exports[`TypeTable > <Search /> 1`] = `
 [
   {

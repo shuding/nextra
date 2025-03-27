@@ -1,15 +1,27 @@
 ---
 sidebarTitle: Callout
+description: A built-in component to show important information to the reader
 icon: WarningIcon
 ---
 
 import { useMDXComponents } from 'next-mdx-import-source-file'
 import { Callout } from 'nextra/components'
 import { InformationCircleIcon } from 'nextra/icons'
+import { createTypeTable } from '@nextra/tsdoc'
+
+export const { TSDoc } = createTypeTable()
 
 # `<Callout>` Component
 
-A built-in component to show important information to the reader.
+{metadata.description}.
+
+## Props
+
+<TSDoc
+  code={`import type { Callout } from 'nextra/components'
+type $ = React.ComponentProps<typeof Callout>
+export default $`}
+/>
 
 ## Example
 
@@ -88,33 +100,3 @@ import { Callout } from 'nextra/components'
   This is a dangerous feature that can cause everything to explode.
 </Callout>
 ```
-
-## API
-
-The callout component takes the following props:
-
-export function Emoji() {
-  const { code: Code } = useMDXComponents()
-  return (
-    <div className="whitespace-nowrap">
-      <Code>'💡'</Code> for <Code>type: 'default'</Code>
-      <br />
-      <Code>'🚫'</Code> for <Code>type: 'error'</Code>
-      <br />
-      <InformationCircleIcon
-        height="1.2em"
-        className="x:text-blue-900 x:dark:text-blue-200 mx-2.5 inline"
-      />{' '}
-      for <Code>type: 'info'</Code>
-      <br />
-      <Code>'⚠️'</Code> for <Code>type: 'warning'</Code>
-      <br />
-    </div>
-  )
-}
-
-|            |                                                    |             |                                                                        |
-| ---------- | -------------------------------------------------- | ----------- | ---------------------------------------------------------------------- |
-| `type`     | `'default' \| 'info' \| 'warning' \| 'error'{:ts}` | `'default'` | The type of the callout.                                               |
-| `emoji`    | `string \| ReactNode{:ts}`                         | <Emoji/>    | The icon to show in the callout. You can also render your custom icon. |
-| `children` | `ReactNode{:ts}`                                   |             | The content of the callout.                                            |
