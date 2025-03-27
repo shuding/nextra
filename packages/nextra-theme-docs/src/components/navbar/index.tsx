@@ -9,22 +9,34 @@ import { z } from 'zod'
 import { fromZodError } from 'zod-validation-error'
 import { ClientNavbar } from './index.client'
 
-const propsSchema = z.strictObject({
-  children: reactNode,
-  logoLink: z.union([z.string(), z.boolean()]).default(true),
-  logo: element,
-  projectLink: z.string().optional(),
-  projectIcon: reactNode.default(<GitHubIcon height="24" />),
-  chatLink: z.string().optional(),
-  chatIcon: reactNode.default(<DiscordIcon width="24" />),
-  className: z.string().optional(),
-  align: z.enum(['left', 'right']).default('right')
+export const NavbarPropsSchema = z.strictObject({
+  children: reactNode.describe('Extra content after last icon.'),
+  logoLink: z
+    .union([z.string(), z.boolean()])
+    .default(true)
+    .describe(
+      "Specifies whether the logo should have a link or provides the URL for the logo's link."
+    ),
+  logo: element.describe('Logo of the website.'),
+  projectLink: z.string().optional().describe('URL of the project homepage.'),
+  projectIcon: reactNode
+    .default(<GitHubIcon height="24" />)
+    .describe('Icon of the project link.'),
+  chatLink: z.string().optional().describe('URL of the chat link.'),
+  chatIcon: reactNode
+    .default(<DiscordIcon width="24" />)
+    .describe('Icon of the chat link.'),
+  className: z.string().optional().describe('CSS class name.'),
+  align: z
+    .enum(['left', 'right'])
+    .default('right')
+    .describe('Aligns navigation links to the specified side.')
 })
 
-type NavbarProps = z.input<typeof propsSchema>
+type NavbarProps = z.input<typeof NavbarPropsSchema>
 
 export const Navbar: FC<NavbarProps> = props => {
-  const { data, error } = propsSchema.safeParse(props)
+  const { data, error } = NavbarPropsSchema.safeParse(props)
   if (error) {
     throw fromZodError(error)
   }

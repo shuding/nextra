@@ -151,13 +151,17 @@ describe('generateTsFromZod', () => {
   })
 
   it('should handle enum', () => {
-    expect(generateTsFromZod(z.strictObject({
-      layout: z
-        .enum(['default', 'full'])
-        .optional()
-        .default('default')
-        .describe('Defines the layout style.'),
-    }))).toMatchInlineSnapshot(`
+    expect(
+      generateTsFromZod(
+        z.strictObject({
+          layout: z
+            .enum(['default', 'full'])
+            .optional()
+            .default('default')
+            .describe('Defines the layout style.')
+        })
+      )
+    ).toMatchInlineSnapshot(`
       "{
         /**
          * Defines the layout style.

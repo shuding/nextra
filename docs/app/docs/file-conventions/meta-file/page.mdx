@@ -6,10 +6,10 @@ description:
   and theme visibility, enhancing site organization and user experience.
 ---
 
+import { createTypeTable, generateTsFromZod } from '@nextra/tsdoc'
 import { ContentAndAppFileTee } from 'components/content-and-app-file-tree'
 import { Video } from 'components/video'
 import { FileTree } from 'nextra/components'
-import { createTypeTable, generateTsFromZod } from '@nextra/tsdoc'
 import { pageThemeSchema } from 'private-next-root-dir/../packages/nextra/src/server/page-theme-schema'
 
 export const { TSDoc } = createTypeTable()

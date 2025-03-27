@@ -5,8 +5,8 @@ import { isValidElement } from 'react'
 import type { Options as RehypeKatexOptions } from 'rehype-katex'
 import type { Options as RehypePrettyCodeOptions } from 'rehype-pretty-code'
 import { z } from 'zod'
-import { pageTitleFromFilename } from './utils.js'
 import { pageThemeSchema } from './page-theme-schema.js'
+import { pageTitleFromFilename } from './utils.js'
 
 export const mathJaxOptionsSchema = z.strictObject({
   /**
