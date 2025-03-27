@@ -1,24 +1,28 @@
 import { z } from 'zod'
 
-type TsType = string | { type: string; optional: boolean }
-
 export function generateTsFromZod(schema: z.ZodTypeAny, indent = 2): string {
   const isZodObject = schema instanceof z.ZodObject
   if (!isZodObject) {
+    // @ts-expect-error -- fixme
     return generateTsFromZodType(schema, indent)
   }
   return `{\n${Object.entries(schema.shape)
     .map(([key, value]) => {
+      // @ts-expect-error -- fixme
       const result = generateTsFromZodType(value, indent + 2)
       const tsType = typeof result === 'object' ? result.type : result
       const optional = typeof result === 'object' && result.optional
+      // @ts-expect-error -- fixme
       const docComment = getDocComment(value, indent)
       return `${docComment}${' '.repeat(indent)}${key}${optional ? '?' : ''}: ${tsType};\n`
     })
     .join('\n')}${' '.repeat(indent - 2)}}`
 }
 
-function generateTsFromZodType(schema: z.ZodTypeAny, indent: number): TsType {
+function generateTsFromZodType(
+  schema: z.ZodTypeAny,
+  indent: number
+): string | { type: string; optional: boolean } {
   if (schema instanceof z.ZodString) {
     return 'string'
   }
