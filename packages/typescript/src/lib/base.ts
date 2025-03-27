@@ -35,7 +35,7 @@ type Transformer = (
   propertySymbol: TsSymbol
 ) => void
 
-export interface GenerateOptions {
+interface GenerateOptions {
   /**
    * Allow fields with `@internal` tag
    *
@@ -71,15 +71,17 @@ export function generateDocumentation(
     overwrite: true
   })
   const out: GeneratedDoc[] = []
-
   for (const [k, d] of sourceFile.getExportedDeclarations()) {
     if (name && name !== k) continue
-
-    if (d.length > 1)
+    if (!d[0]) {
+      throw new Error(`Declaration '${k}' isn't found`)
+    }
+    if (d.length > 1) {
       console.warn(
-        `export ${k} should not have more than one type declaration.`
+        `Export '${k}' should not have more than one type declaration.`
       )
-    out.push(generate(project, k, d[0]!, options))
+    }
+    out.push(generate(project, k, d[0], options))
   }
 
   return out

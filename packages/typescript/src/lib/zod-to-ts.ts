@@ -29,7 +29,8 @@ export function generateTsFromZod(schema: z.ZodTypeAny, indent = 0): string {
     return schema._def.options
       .map((opt: any) => generateTsFromZod(opt, indent))
       .join(' | ')
-  } if (schema instanceof z.ZodDefault) {
+  }
+  if (schema instanceof z.ZodDefault) {
     return generateTsFromZod(schema._def.innerType, indent)
   }
 
