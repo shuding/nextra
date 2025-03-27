@@ -2,16 +2,21 @@
 sidebarTitle: Banner
 ---
 
+import { createTypeTable } from '@nextra/typescript'
+
+export const { AutoTypeTable } = createTypeTable()
+
 # `<Banner>` Component
 
 Show a banner on the top of the website. It can be used to show a warning or a
 notice.
 
-|               |                  |                        |                                       |
-| ------------- | ---------------- | ---------------------- | ------------------------------------- |
-| `dismissible` | `boolean{:ts}`   | `true`                 | Closable banner or not.               |
-| `key`         | `string{:ts}`    | `'nextra-banner'{:ts}` | Storage key to keep the banner state. |
-| `children`    | `ReactNode{:ts}` |                        | Content of the banner.                |
+<AutoTypeTable
+  code={`import type { ComponentProps } from 'react'
+import type { Banner } from 'nextra/components'
+type BannerProps = ComponentProps<typeof Banner>
+export default BannerProps`}
+/>
 
 ## Banner key
 

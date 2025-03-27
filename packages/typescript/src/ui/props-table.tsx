@@ -55,7 +55,10 @@ export const PropsTable: FC<{
         return (
           <tbody
             key={id}
-            className="x:group nextra-border x:dark:hover:bg-primary-100/5 x:mb-5 x:rounded-xl x:hover:bg-gray-100 x:max-lg:block x:max-lg:border"
+            className={cn(
+              'x:group nextra-border x:mb-5 x:rounded-xl x:max-lg:block x:max-lg:border',
+              'x:hover:bg-primary-50 x:dark:hover:bg-primary-500/10'
+            )}
           >
             <tr
               className="nextra-border x:max-lg:block x:lg:border-b x:lg:not-target:[&>td>a]:opacity-0"
