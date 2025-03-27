@@ -48,7 +48,6 @@
     "unist-util-visit": "^5.0.0"
   },
   "devDependencies": {
-    "zod": "^3.24.2",
     "@mdx-js/mdx": "^3.1.0",
     "@tsconfig/strictest": "^2.0.5",
     "@types/estree": "^1.0.6",
@@ -57,8 +56,10 @@
     "@types/react": "19.0.11",
     "next": "^15.2.3",
     "nextra": "workspace:*",
+    "nextra-theme-docs": "workspace:*",
     "unified": "^11.0.5",
-    "vitest": "^3.0.9"
+    "vitest": "^3.0.9",
+    "zod": "^3.24.2"
   },
   "publishConfig": {
     "access": "public"

@@ -643,6 +643,9 @@ importers:
       nextra:
         specifier: workspace:*
         version: link:../nextra
+      nextra-theme-docs:
+        specifier: workspace:*
+        version: link:../nextra-theme-docs
       unified:
         specifier: ^11.0.5
         version: 11.0.5

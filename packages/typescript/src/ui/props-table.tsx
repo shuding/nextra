@@ -1,22 +1,8 @@
 import slugify from '@sindresorhus/slugify'
 import cn from 'clsx'
-// import Link from 'next/link'
+import { Link } from 'nextra-theme-docs'
 import { Code } from 'nextra/components'
 import type { FC, ReactNode } from 'react'
-
-// type PropsTableProps = {
-//   props: {
-//     name: string
-//     type?: string
-//     default?: string
-//     description?: string
-//     example?: string
-//     optional?: boolean
-//   }[]
-//   links?: Record<string, string>
-//   info?: Record<string, string>
-//   deeplinkPrefix?: string
-// }
 
 interface ObjectType {
   /**
@@ -33,33 +19,31 @@ interface ObjectType {
   required?: boolean
 }
 
-export const PropsTable: FC<{ type: Record<string, ObjectType> }> = ({
-  type
-}) => {
+export const PropsTable: FC<{
+  type: Record<string, ObjectType>
+  typeLinkMap: Record<string, string>
+}> = ({ type, typeLinkMap }) => {
   // We can hide the default column entirely if none of the props have a default
   // value to document.
   const showDefaultColumn = true as any // data.some(prop => prop.default)
 
   // This function takes a string representing some type and attempts to turn any
   // types referenced inside into links, either internal or external.
-  const linkify = (type?: string) => type
-  // type?.match(/(\w+|\W+)/g)?.map((chunk, i) =>
-  //   chunk in links ? (
-  //     <Link
-  //       key={`${chunk}-${i}`}
-  //       href={links[chunk] ?? ''}
-  //       className="x:text-primary-600"
-  //     >
-  //       {chunk}
-  //     </Link>
-  //   ) : (
-  //     chunk
-  //   )
-  // )
+  const linkify = (type: string) => {
+    const [rootType, ...rest] = type.split('.')
+    if (rest.length) rest.unshift('')
+    const href = typeLinkMap[rootType!]
+    return (
+      <Code>
+        {href ? <Link href={href}>{rootType}</Link> : type}
+        {rest.join('.')}
+      </Code>
+    )
+  }
 
   return (
-    <table className="x:my-8 x:w-full x:text-sm">
-      <thead className="nextra-border x:border-b x:text-left x:max-lg:hidden">
+    <table className="my-8 w-full text-sm">
+      <thead className="nextra-border border-b text-left max-lg:hidden">
         <tr>
           <th className="x:py-1.5">Name</th>
           <th className="x:p-1.5 x:px-3">Type</th>
@@ -96,13 +80,6 @@ export const PropsTable: FC<{ type: Record<string, ObjectType> }> = ({
                 {prop.description && (
                   <div className="x:mt-2 x:text-sm">{prop.description}</div>
                 )}
-                {/*{prop.example && (*/}
-                {/*  <div className="x:mt-2 x:rounded-lg x:border x:border-gray-200 x:bg-gray-50">*/}
-                {/*    <pre>*/}
-                {/*      <code>{prop.example}</code>*/}
-                {/*    </pre>*/}
-                {/*  </div>*/}
-                {/*)}*/}
               </td>
               {showDefaultColumn && (
                 // For the mobile view, we want to hide the default column entirely
