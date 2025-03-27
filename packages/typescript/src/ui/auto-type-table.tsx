@@ -1,4 +1,3 @@
-import 'server-only'
 import { compileMdx } from 'nextra/compile'
 import { MDXRemote } from 'nextra/mdx-remote'
 import type { ComponentProps, ReactNode } from 'react'
