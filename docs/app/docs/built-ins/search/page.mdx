@@ -4,17 +4,16 @@ sidebarTitle: Search
 
 # `<Search>` Component
 
-import { createTypeTable } from '@nextra/typescript'
+import { createTypeTable } from '@nextra/tsdoc'
 
-export const { AutoTypeTable } = createTypeTable()
+export const { TSDoc } = createTypeTable()
 
 ## Props
 
-<AutoTypeTable
-  code={`import type { ComponentProps } from 'react'
-import type { Search } from 'nextra/components'
-type SearchProps = ComponentProps<typeof Search>
-export default SearchProps`}
+<TSDoc
+  code={`import type { Search } from 'nextra/components'
+type $ = React.ComponentProps<typeof Search>
+export default $`}
   typeLinkMap={{
     PagefindSearchOptions:
       'https://github.com/CloudCannon/pagefind/blob/248f81d172316a642a83527fa92180abbb7f9c49/pagefind_web_js/types/index.d.ts#L72-L82',
