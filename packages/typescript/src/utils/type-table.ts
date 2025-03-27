@@ -1,41 +1,17 @@
-import fs from 'node:fs/promises'
-import path from 'node:path'
 import type { GenerateDocumentationOptions } from '../lib/base.js'
 import { generateDocumentation } from '../lib/base.js'
 
 export interface BaseTypeTableProps {
   /**
-   * The path to source TypeScript file.
-   */
-  path?: string
-
-  /**
    * Exported type name to generate from.
+   * @default 'default'
    */
-  name?: string
+  exportName?: string
 
   /**
    * Set the type to generate from.
-   *
-   * When used with `name`, it generates the type with `name` as export name.
-   *
-   * ```ts
-   * export const myName = MyType;
-   * ```
-   *
-   * When `type` contains multiple lines, `export const` is not added.
-   * You need to export it manually, and specify the type name with `name`.
-   *
-   * ```tsx
-   * <AutoTypeTable
-   *   path="./file.ts"
-   *   type={`import { ReactNode } from "react"
-   *   export const MyName = ReactNode`}
-   *   name="MyName"
-   * />
-   * ```
    */
-  type?: string
+  code: string
 
   options?: GenerateDocumentationOptions & {
     /**
@@ -46,38 +22,13 @@ export interface BaseTypeTableProps {
 }
 
 export async function getTypeTableOutput({
-  name,
-  type,
-  options,
-  ...props
+  exportName = 'default',
+  code,
+  options
 }: BaseTypeTableProps) {
-  const file =
-    props.path && options?.basePath
-      ? path.join(options.basePath, props.path)
-      : props.path
-  let typeName = name
-  let content = ''
-
-  if (file) {
-    content = await fs.readFile(file, 'utf8')
+  const output = generateDocumentation('temp.ts', exportName, code, options)
+  if (!output.length) {
+    throw new Error(`Type "${exportName}" in code doesn't exist`)
   }
-
-  if (type && type.split('\n').length > 1) {
-    content += `\n${type}`
-  } else if (type) {
-    typeName ??= '$Fumadocs'
-    content += `\nexport type ${typeName} = ${type}`
-  }
-
-  const output = generateDocumentation(
-    file ?? 'temp.ts',
-    typeName,
-    content,
-    options
-  )
-
-  if (name && output.length === 0)
-    throw new Error(`${name} in ${file ?? 'empty file'} doesn't exist`)
-
   return output
 }

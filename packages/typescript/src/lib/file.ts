@@ -4,7 +4,7 @@ import fg from 'fast-glob'
 import { getProject } from '../get-project.js'
 import { generateMDX, type GenerateMDXOptions } from './mdx.js'
 
-export interface GenerateFilesOptions {
+interface GenerateFilesOptions {
   input: string | string[]
   /**
    * Output directory, or a function that returns the output path

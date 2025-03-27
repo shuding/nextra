@@ -1,5 +1,1 @@
-export * from './lib/base.js'
-export * from './lib/mdx.js'
-export * from './lib/file.js'
-export { getProject } from './get-project.js'
-export * from './lib/remark-auto-type-table.js'
+export { createTypeTable } from './ui/auto-type-table'
