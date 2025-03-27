@@ -5,18 +5,18 @@ import { getProject } from '../get-project.js'
 import type { GenerateDocumentationOptions } from '../lib/base.js'
 import type { BaseTypeTableProps } from '../utils/type-table.js'
 import { getTypeTableOutput } from '../utils/type-table.js'
-import { PropsTable } from './props-table.js'
+import { TSDoc } from './tsdoc.js'
 
 interface AutoTypeTableProps extends BaseTypeTableProps {
   /**
    * Override the function to render markdown into JSX nodes
    */
   renderMarkdown?: typeof renderMarkdownDefault
-  typeLinkMap?: ComponentProps<typeof PropsTable>['typeLinkMap']
+  typeLinkMap?: ComponentProps<typeof TSDoc>['typeLinkMap']
 }
 
 export function createTypeTable(options: GenerateDocumentationOptions = {}): {
-  AutoTypeTable: (props: Omit<AutoTypeTableProps, 'options'>) => ReactNode
+  TSDoc: (props: Omit<AutoTypeTableProps, 'options'>) => ReactNode
 } {
   const overrideOptions = {
     ...options,
@@ -24,15 +24,13 @@ export function createTypeTable(options: GenerateDocumentationOptions = {}): {
   }
 
   return {
-    AutoTypeTable(props) {
+    TSDoc(props) {
       return <AutoTypeTable {...props} options={overrideOptions} />
     }
   }
 }
 
 /**
- * **Server Component Only**
- *
  * Display properties in an exported interface via Type Table
  */
 async function AutoTypeTable({
@@ -59,7 +57,7 @@ async function AutoTypeTable({
     const type = Object.fromEntries(await Promise.all(entries))
 
     return (
-      <PropsTable
+      <TSDoc
         key={item.name}
         // @ts-expect-error -- fixme
         type={type}
