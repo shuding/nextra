@@ -20,15 +20,10 @@ export function generateTsFromZod(schema: z.ZodTypeAny, indent = 2): string {
 }
 
 function generateTsFromZodType(schema: z.ZodTypeAny, indent: number): string {
-  if (schema instanceof z.ZodString) {
-    return 'string'
-  }
-  if (schema instanceof z.ZodNumber) {
-    return 'number'
-  }
-  if (schema instanceof z.ZodBoolean) {
-    return 'boolean'
-  }
+  if (schema instanceof z.ZodString) return 'string'
+  if (schema instanceof z.ZodNumber) return 'number'
+  if (schema instanceof z.ZodBoolean) return 'boolean'
+  if (schema instanceof z.ZodLiteral) return `"${schema._def.value}"`
   if (schema instanceof z.ZodOptional) {
     return generateTsFromZodType(schema._def.innerType, indent)
   }
@@ -45,9 +40,6 @@ function generateTsFromZodType(schema: z.ZodTypeAny, indent: number): string {
   }
   if (schema instanceof z.ZodDefault) {
     return generateTsFromZodType(schema._def.innerType, indent)
-  }
-  if (schema instanceof z.ZodLiteral) {
-    return `"${schema._def.value}"`
   }
   if (schema instanceof z.ZodObject) {
     return generateTsFromZod(schema, indent)
