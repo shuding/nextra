@@ -2,10 +2,7 @@
 sidebarTitle: Footer
 ---
 
-import { createTypeTable } from '@nextra/tsdoc'
 import { ToggleVisibilitySection } from 'components/toggle-visibility-section'
-
-export const { TSDoc } = createTypeTable()
 
 # `<Footer>` Component
 
@@ -14,7 +11,8 @@ The footer area of the website. You can specify content for your default footer.
 ## Props
 
 <TSDoc
-  code={`type $ = {
+  code={`
+type $ = {
   '...props': React.ComponentProps<'footer'>
 }
 export default $`}
