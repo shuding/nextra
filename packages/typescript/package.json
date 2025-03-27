@@ -48,6 +48,7 @@
     "unist-util-visit": "^5.0.0"
   },
   "devDependencies": {
+    "zod": "^3.24.2",
     "@mdx-js/mdx": "^3.1.0",
     "@tsconfig/strictest": "^2.0.5",
     "@types/estree": "^1.0.6",
