@@ -8,26 +8,20 @@ import { NavbarPropsSchema } from 'private-next-root-dir/../packages/nextra-them
 
 # `<Navbar>` Component
 
-|               |                          |                                         |                                                                                        |
-| ------------- | ------------------------ | --------------------------------------- | -------------------------------------------------------------------------------------- |
-| `logo`        | `ReactNode{:ts}`         | `'Nextra - The Next Docs Builder'{:ts}` | Logo of the website.                                                                   |
-| `logoLink`    | `boolean \| string{:ts}` | `true{:ts}`                             | Specifies whether the logo should have a link or provides the URL for the logo's link. |
-| `projectLink` | `string{:ts}`            |                                         | URL of the project homepage.                                                           |
-| `projectIcon` | `ReactNode{:ts}`         | `<GitHubIcon height="24" />{:ts}`       | Icon of the project link.                                                              |
-| `chatLink`    | `string{:ts}`            |                                         | URL of the chat link.                                                                  |
-| `chatIcon`    | `ReactNode{:ts}`         | `<DiscordIcon width="24" />{:ts}`       | Icon of the chat link.                                                                 |
-| `children`    | `ReactNode{:ts}`         |                                         | Extra content after last icon.                                                         |
-| `className`   | `string{:ts}`            |                                         | CSS class name.                                                                        |
-| `align`       | `'left' \| 'right'`      | `'right'`                               | Aligns navigation links to the specified side.                                         |
-
 export const { TSDoc } = createTypeTable()
+
+## Props
 
 <TSDoc
   code={`type $ = ${generateTsFromZod(NavbarPropsSchema)}
 export default $`}
+  typeLinkMap={{
+    GitHubIcon: 'https://github.com/shuding/nextra/blob/main/packages/nextra/src/client/icons/github.svg',
+    DiscordIcon: 'https://github.com/shuding/nextra/blob/main/packages/nextra/src/client/icons/discord.svg'
+  }}
 />
 
-## Logo
+### Logo
 
 The logo of the website rendered on the navbar.
 
@@ -55,7 +49,7 @@ The logo of the website rendered on the navbar.
 />
 ```
 
-## Project Link
+### Project link
 
 Show a button that links to your project's homepage on the navbar. By default,
 it links to Nextra's GitHub repository.
@@ -76,7 +70,7 @@ for example make it link to your GitLab repository:
 />
 ```
 
-## Chat Link
+### Chat link
 
 Show a button that links to your project's forum or other social media on the
 navbar.
@@ -98,7 +92,7 @@ example make it link to your Twitter account:
 />
 ```
 
-## Menu and Custom Links
+### Menu and custom links
 
 Check out [Page Configuration](/docs/docs-theme/page-configuration#navbar-items)
 to learn how to add custom menus or links to the navbar.

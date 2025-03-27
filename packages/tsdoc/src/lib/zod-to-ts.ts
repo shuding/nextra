@@ -65,7 +65,7 @@ function getDocComment(schema: z.ZodTypeAny, indent: number): string {
   if (description) {
     comments.push(` * ${description}`)
   }
-  if (defaultValue !== undefined) {
+  if (!description.includes('* @default') && defaultValue !== undefined) {
     comments.push(` * @default ${JSON.stringify(defaultValue)}`)
   }
 
