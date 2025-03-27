@@ -59,17 +59,17 @@ export const PropsTable: FC<PropsTableProps> = ({
         return (
           <tbody
             key={slug}
-            className="group nextra-border x:hover:bg-gray-100 x:dark:hover:bg-primary-100/5 mb-5 rounded-xl max-lg:block max-lg:border"
+            className="nextra-border x:hover:bg-gray-100 x:dark:hover:bg-primary-100/5 group mb-5 rounded-xl max-lg:block max-lg:border"
           >
             <tr
-              className="nextra-border max-lg:block lg:border-b lg:not-target:[&>td>a]:opacity-0"
+              className="nextra-border lg:not-target:[&>td>a]:opacity-0 max-lg:block lg:border-b"
               id={slug}
             >
               <td className="relative py-3 max-lg:block max-lg:px-3">
                 <a
                   href={`#${slug}`}
                   className={cn(
-                    'absolute top-0 right-0 text-lg font-black lg:top-1/2 lg:right-full lg:-translate-y-1/2',
+                    'absolute right-0 top-0 text-lg font-black lg:right-full lg:top-1/2 lg:-translate-y-1/2',
                     'group-hover:opacity-100! before:content-["#"] hover:text-black dark:hover:text-white',
                     'p-3' // Increase hit box
                   )}
