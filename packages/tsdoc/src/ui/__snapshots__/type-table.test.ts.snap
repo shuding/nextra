@@ -79,6 +79,51 @@ Default values based on \`type\`:
 ]
 `;
 
+exports[`TypeTable > <NotFoundPage /> 1`] = `
+[
+  {
+    "description": "",
+    "entries": [
+      {
+        "description": "Content of the link.",
+        "name": "content",
+        "required": false,
+        "tags": {
+          "default": "'Submit an issue about broken link'",
+        },
+        "type": "ReactNode",
+      },
+      {
+        "description": "Labels that can be added to the new created issue.",
+        "name": "labels",
+        "required": false,
+        "tags": {
+          "default": "'bug'",
+        },
+        "type": "string",
+      },
+      {
+        "description": "Top content of page.",
+        "name": "children",
+        "required": false,
+        "tags": {
+          "default": "<H1>404: Page Not Found</H1>",
+        },
+        "type": "ReactNode",
+      },
+      {
+        "description": "CSS class name.",
+        "name": "className",
+        "required": false,
+        "tags": {},
+        "type": "string",
+      },
+    ],
+    "name": "default",
+  },
+]
+`;
+
 exports[`TypeTable > <Search /> 1`] = `
 [
   {

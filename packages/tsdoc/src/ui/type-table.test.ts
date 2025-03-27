@@ -22,4 +22,11 @@ export default $`
     const result = await getTypeTableOutput({ code })
     expect(result).toMatchSnapshot()
   })
+  it('<NotFoundPage />', async () => {
+    const code = `import type { NotFoundPage } from 'nextra-theme-docs'
+type $ = React.ComponentProps<typeof NotFoundPage>
+export default $`
+    const result = await getTypeTableOutput({ code })
+    expect(result).toMatchSnapshot()
+  })
 })
