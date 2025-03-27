@@ -1,5 +1,5 @@
 import { z } from 'zod'
-import { generateTsFromZod } from './zod-to-ts.js' // Adjust the import path if needed
+import { generateTsFromZod } from './zod-to-ts.js'
 
 describe('generateTsFromZod', () => {
   it('should generate TypeScript with @description and @default for primitive types', () => {
@@ -148,5 +148,23 @@ describe('generateTsFromZod', () => {
 }`
 
     expect(generateTsFromZod(schema)).toBe(expected)
+  })
+
+  it('should handle enum', () => {
+    expect(generateTsFromZod(z.strictObject({
+      layout: z
+        .enum(['default', 'full'])
+        .optional()
+        .default('default')
+        .describe('Defines the layout style.'),
+    }))).toMatchInlineSnapshot(`
+      "{
+        /**
+         * @description Defines the layout style.
+         * @default "default"
+         */
+        layout?: "default" | "full";
+      }"
+    `)
   })
 })

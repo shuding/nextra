@@ -59,10 +59,13 @@ function generateTsFromZodType(
     return generateTsFromZod(schema, indent)
   }
   if (schema instanceof z.ZodEffects) {
-    return 'unknown'
+    return '"TO IMPLEMENT"'
   }
   if (schema instanceof z.ZodAny) {
-    return 'unknown'
+    return '"TO IMPLEMENT"'
+  }
+  if (schema instanceof z.ZodEnum) {
+    return schema._def.values.map((v: string) => `"${v}"`).join(' | ')
   }
   throw new Error(`Unknown schema type '${schema.constructor.name}'`)
 }
