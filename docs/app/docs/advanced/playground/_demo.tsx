@@ -4,7 +4,9 @@ import { Code, Mermaid, Playground, Pre, Tabs } from 'nextra/components'
 import { MdxIcon } from 'nextra/icons'
 import type { FC } from 'react'
 import { useCallback, useEffect, useRef, useState } from 'react'
-import { useMDXComponents } from '../../../../mdx-components'
+// NOTE: We have intentionally omitted a local mdx-components file because it
+// includes the server-only `<TSDoc>` component
+import { useMDXComponents } from 'nextra-theme-docs'
 
 export const Demo: FC = () => {
   const [rawMdx, setRawMdx] =

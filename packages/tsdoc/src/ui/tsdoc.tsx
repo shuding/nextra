@@ -28,10 +28,10 @@ export const TSDoc: FC<{
   function linkify(type: string) {
     return (
       <Code>
-        {type.match(/(\w+|\W+)/g)!.map(chunk => {
+        {type.match(/(\w+|\W+)/g)!.map((chunk, index) => {
           const href = typeLinkMap[chunk]
           return href ? (
-            <Link key={chunk} href={href}>
+            <Link key={index} href={href}>
               {chunk}
             </Link>
           ) : (
