@@ -47,7 +47,7 @@ async function AutoTypeTable({
           entry.name,
           {
             type: entry.type,
-            description: await renderMarkdown(entry.description),
+            description: await renderMarkdown(entry.description || entry.tags.description || ''),
             default: entry.tags.default || entry.tags.defaultValue,
             required: entry.required
           }

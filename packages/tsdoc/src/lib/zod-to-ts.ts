@@ -14,7 +14,7 @@ export function generateTsFromZod(schema: z.ZodTypeAny, indent = 2): string {
       const optional = typeof result === 'object' && result.optional
       // @ts-expect-error -- fixme
       const docComment = getDocComment(value, indent)
-      return `${docComment}${' '.repeat(indent)}${key}${optional ? '?' : ''}: ${tsType};\n`
+      return `${docComment}${' '.repeat(indent)}${key}${optional ? '?' : ''}: ${tsType}\n`
     })
     .join('\n')}${' '.repeat(indent - 2)}}`
 }
@@ -77,7 +77,7 @@ function getDocComment(schema: z.ZodTypeAny, indent: number): string {
   const comments: string[] = []
 
   if (description) {
-    comments.push(` * @description ${description}`)
+    comments.push(` * ${description}`)
   }
   if (defaultValue !== undefined) {
     comments.push(` * @default ${JSON.stringify(defaultValue)}`)

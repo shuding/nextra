@@ -1,4 +1,4 @@
-import { getTypeTableOutput } from '../utils/type-table'
+import { getTypeTableOutput } from '../utils/type-table.js'
 
 describe('TypeTable', () => {
   it('<Banner />', async () => {
@@ -28,5 +28,48 @@ type $ = React.ComponentProps<typeof NotFoundPage>
 export default $`
     const result = await getTypeTableOutput({ code })
     expect(result).toMatchSnapshot()
+  })
+  it('@description as tag and inline description', async () => {
+    const code = `type $ = {
+/**
+ * @description Show or hide breadcrumb navigation.
+ */
+breadcrumb?: boolean
+
+/**
+ * Indicates whether the item in sidebar is collapsed by default.
+ */
+collapsed?: boolean
+}
+export default $`
+    const result = await getTypeTableOutput({ code })
+    expect(result).toMatchInlineSnapshot(`
+      [
+        {
+          "description": "",
+          "entries": [
+            {
+              "description": "",
+              "name": "breadcrumb",
+              "required": false,
+              "tags": {
+                "description": "Show or hide breadcrumb navigation.",
+              },
+              "type": "boolean",
+            },
+            {
+              "description": "",
+              "name": "collapsed",
+              "required": false,
+              "tags": {
+                "description": "Indicates whether the item in sidebar is collapsed by default.",
+              },
+              "type": "boolean",
+            },
+          ],
+          "name": "default",
+        },
+      ]
+    `)
   })
 })

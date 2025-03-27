@@ -14,24 +14,24 @@ describe('generateTsFromZod', () => {
   /**
    * @description The unique identifier
    */
-  id: string;
+  id: string
 
   /**
    * @description The user's name
    * @default "Anonymous"
    */
-  name: string;
+  name: string
 
   /**
    * @description User's age
    */
-  age?: number;
+  age?: number
 
   /**
    * @description Admin status
    * @default false
    */
-  isAdmin: boolean;
+  isAdmin: boolean
 }`
 
     expect(generateTsFromZod(schema)).toBe(expected)
@@ -60,7 +60,7 @@ describe('generateTsFromZod', () => {
     /**
      * @description User ID
      */
-    id: string;
+    id: string
 
     /**
      * @description Profile
@@ -69,15 +69,15 @@ describe('generateTsFromZod', () => {
       /**
        * @description User bio
        */
-      bio?: string;
+      bio?: string
 
       /**
        * @description User's age
        * @default 25
        */
-      age: number;
-    };
-  };
+      age: number
+    }
+  }
 }`
 
     expect(generateTsFromZod(schema)).toBe(expected)
@@ -95,12 +95,12 @@ describe('generateTsFromZod', () => {
   /**
    * @description User tags
    */
-  tags: string[];
+  tags: string[]
 
   /**
    * @description User status
    */
-  status: "active" | "inactive";
+  status: "active" | "inactive"
 }`
 
     expect(generateTsFromZod(schema)).toBe(expected)
@@ -116,12 +116,12 @@ describe('generateTsFromZod', () => {
   /**
    * @description User nickname
    */
-  nickname: string | null;
+  nickname: string | null
 
   /**
    * @description User's country
    */
-  country?: string;
+  country?: string
 }`
 
     expect(generateTsFromZod(schema)).toBe(expected)
@@ -138,13 +138,13 @@ describe('generateTsFromZod', () => {
    * @description User active status
    * @default true
    */
-  active: boolean;
+  active: boolean
 
   /**
    * @description User count
    * @default 0
    */
-  count: number;
+  count: number
 }`
 
     expect(generateTsFromZod(schema)).toBe(expected)
@@ -163,7 +163,7 @@ describe('generateTsFromZod', () => {
          * @description Defines the layout style.
          * @default "default"
          */
-        layout?: "default" | "full";
+        layout?: "default" | "full"
       }"
     `)
   })
