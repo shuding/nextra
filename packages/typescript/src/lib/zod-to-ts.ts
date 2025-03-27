@@ -58,6 +58,12 @@ function generateTsFromZodType(
   if (schema instanceof z.ZodObject) {
     return generateTsFromZod(schema, indent)
   }
+  if (schema instanceof z.ZodEffects) {
+    return 'unknown'
+  }
+  if (schema instanceof z.ZodAny) {
+    return 'unknown'
+  }
   throw new Error(`Unknown schema type '${schema.constructor.name}'`)
 }
 

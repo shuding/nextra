@@ -12,7 +12,7 @@ interface AutoTypeTableProps extends BaseTypeTableProps {
    * Override the function to render markdown into JSX nodes
    */
   renderMarkdown?: typeof renderMarkdownDefault
-  typeLinkMap: ComponentProps<typeof PropsTable>['typeLinkMap']
+  typeLinkMap?: ComponentProps<typeof PropsTable>['typeLinkMap']
 }
 
 export function createTypeTable(options: GenerateDocumentationOptions = {}): {
@@ -37,7 +37,7 @@ export function createTypeTable(options: GenerateDocumentationOptions = {}): {
  */
 async function AutoTypeTable({
   renderMarkdown = renderMarkdownDefault,
-  typeLinkMap,
+  typeLinkMap = {},
   ...props
 }: AutoTypeTableProps): Promise<ReactNode> {
   const output = await getTypeTableOutput(props)
