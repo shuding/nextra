@@ -1,15 +1,24 @@
 import { z } from 'zod'
 
-export function generateTsFromZod(schema: z.ZodTypeAny, indent = 0): string {
+type TsType = string | { type: string; optional: boolean }
+
+export function generateTsFromZod(schema: z.ZodTypeAny, indent = 2): string {
   if (schema instanceof z.ZodObject) {
     return `{\n${Object.entries(schema.shape)
       .map(([key, value]) => {
-        const tsType = generateTsFromZod(value, indent + 2)
-        const docComment = getDocComment(value)
-        return `${' '.repeat(indent + 2)}${docComment}${key}: ${tsType};\n`
+        const result = generateTsFromZodType(value, indent + 2)
+        const tsType = typeof result === 'object' ? result.type : result
+        const optional = typeof result === 'object' && result.optional
+        const docComment = getDocComment(value, indent)
+        return `${docComment}${' '.repeat(indent)}${key}${optional ? '?' : ''}: ${tsType};\n`
       })
-      .join('')}${' '.repeat(indent)}}`
+      .join('')}${' '.repeat(indent - 2)}}`
   }
+
+  return generateTsFromZodType(schema, indent)
+}
+
+function generateTsFromZodType(schema: z.ZodTypeAny, indent: number): TsType {
   if (schema instanceof z.ZodString) {
     return 'string'
   }
@@ -19,25 +28,31 @@ export function generateTsFromZod(schema: z.ZodTypeAny, indent = 0): string {
   if (schema instanceof z.ZodBoolean) {
     return 'boolean'
   }
-  if (schema instanceof z.ZodOptional || schema instanceof z.ZodNullable) {
-    return `${generateTsFromZod(schema._def.innerType, indent)}?`
+  if (schema instanceof z.ZodOptional) {
+    return {
+      type: generateTsFromZodType(schema._def.innerType, indent) as string,
+      optional: true
+    }
+  }
+  if (schema instanceof z.ZodNullable) {
+    return `${generateTsFromZodType(schema._def.innerType, indent)} | null`
   }
   if (schema instanceof z.ZodArray) {
-    return `${generateTsFromZod(schema._def.type, indent)}[]`
+    return `${generateTsFromZodType(schema._def.type, indent)}[]`
   }
   if (schema instanceof z.ZodUnion) {
     return schema._def.options
-      .map((opt: any) => generateTsFromZod(opt, indent))
+      .map((opt: any) => generateTsFromZodType(opt, indent))
       .join(' | ')
   }
   if (schema instanceof z.ZodDefault) {
-    return generateTsFromZod(schema._def.innerType, indent)
+    return generateTsFromZodType(schema._def.innerType, indent)
   }
 
   return 'unknown'
 }
 
-function getDocComment(schema: z.ZodTypeAny): string {
+function getDocComment(schema: z.ZodTypeAny, indent: number): string {
   const description = (schema._def as any).description
   const defaultValue =
     schema instanceof z.ZodDefault ? schema._def.defaultValue() : undefined
@@ -47,5 +62,9 @@ function getDocComment(schema: z.ZodTypeAny): string {
   if (defaultValue !== undefined)
     comments.push(` * @default ${JSON.stringify(defaultValue)}`)
 
-  return comments.length ? `/**\n${comments.join('\n')}\n */\n` : ''
+  if (comments.length) {
+    const spacing = ' '.repeat(indent)
+    return `${spacing}/**\n${comments.map(line => `${spacing}${line}`).join('\n')}\n${spacing} */\n`
+  }
+  return ''
 }
