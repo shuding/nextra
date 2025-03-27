@@ -106,17 +106,19 @@ function generate(
     ?.compilerSymbol.getDocumentationComment(
       program.getTypeChecker().compilerObject
     )
+  const properties = declaration.getType().getProperties()
+
+  const entries = properties
+    .map(prop => getDocEntry(prop, entryContext))
+    .filter(
+      (entry): entry is DocEntry =>
+        !!entry && (allowInternal || !('internal' in entry.tags))
+    )
 
   return {
     name,
     description: comment ? ts.displayPartsToString(comment) : '',
-    entries: declaration
-      .getType()
-      .getProperties()
-      .map(prop => getDocEntry(prop, entryContext))
-      .filter(
-        entry => entry && (allowInternal || !('internal' in entry.tags))
-      ) as DocEntry[]
+    entries
   }
 }
 

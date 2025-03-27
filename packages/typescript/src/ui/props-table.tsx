@@ -62,8 +62,8 @@ export const PropsTable: FC<{
             )}
           >
             <tr
-              className="nextra-border x:max-lg:block x:lg:border-b x:lg:not-target:[&>td>a]:opacity-0"
               id={id}
+              className="nextra-border x:max-lg:block x:lg:border-b x:lg:not-target:[&>td>a]:opacity-0"
             >
               <td className="x:relative x:py-3 x:max-lg:block x:max-lg:px-3">
                 <a
@@ -71,12 +71,14 @@ export const PropsTable: FC<{
                   className={cn(
                     'x:absolute x:top-0 x:right-0 x:text-lg x:font-black x:lg:top-1/2 x:lg:right-full x:lg:-translate-y-1/2',
                     'x:group-hover:opacity-100! x:before:content-["#"] x:hover:text-black x:dark:hover:text-white',
-                    'x:p-3' // Increase hit box
+                    'x:p-3' // Increase click box
                   )}
                 />
-                <Code>
+                <Code
+                  // add `?` via CSS `content` property so value will be not selectable
+                  className={cn(!prop.required && 'x:after:content-["?"]')}
+                >
                   {key}
-                  {!prop.required && '?'}
                 </Code>
               </td>
               <td
