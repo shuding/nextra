@@ -3,7 +3,7 @@ import { generateTsFromZod } from './zod-to-ts.js' // Adjust the import path if 
 
 describe('generateTsFromZod', () => {
   it('should generate TypeScript with @description and @default for primitive types', () => {
-    const schema = z.object({
+    const schema = z.strictObject({
       id: z.string().describe('The unique identifier'),
       name: z.string().default('Anonymous').describe("The user's name"),
       age: z.number().optional().describe("User's age"),
@@ -38,10 +38,10 @@ describe('generateTsFromZod', () => {
   })
 
   it('should handle nested objects correctly', () => {
-    const schema = z.object({
-      user: z.object({
+    const schema = z.strictObject({
+      user: z.strictObject({
         id: z.string().describe('User ID'),
-        profile: z.object({
+        profile: z.strictObject({
           bio: z.string().optional().describe('User bio'),
           age: z.number().default(25).describe("User's age")
         })
@@ -80,7 +80,7 @@ describe('generateTsFromZod', () => {
   })
 
   it('should handle arrays and unions', () => {
-    const schema = z.object({
+    const schema = z.strictObject({
       tags: z.array(z.string()).describe('User tags'),
       status: z
         .union([z.literal('active'), z.literal('inactive')])
@@ -103,7 +103,7 @@ describe('generateTsFromZod', () => {
   })
 
   it('should handle nullable and optional types', () => {
-    const schema = z.object({
+    const schema = z.strictObject({
       nickname: z.string().nullable().describe('User nickname'),
       country: z.string().optional().describe("User's country")
     })
@@ -124,7 +124,7 @@ describe('generateTsFromZod', () => {
   })
 
   it('should handle default values correctly', () => {
-    const schema = z.object({
+    const schema = z.strictObject({
       active: z.boolean().default(true).describe('User active status'),
       count: z.number().default(0).describe('User count')
     })

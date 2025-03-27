@@ -649,6 +649,9 @@ importers:
       vitest:
         specifier: ^3.0.9
         version: 3.0.9(@types/node@22.13.10)(jiti@2.4.2)(jsdom@26.0.0)(lightningcss@1.29.1)(tsx@4.19.3)(yaml@2.7.0)
+      zod:
+        specifier: ^3.24.2
+        version: 3.24.2
 
 packages:
 

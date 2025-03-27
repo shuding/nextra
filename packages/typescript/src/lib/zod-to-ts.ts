@@ -1,6 +1,6 @@
 import { z } from 'zod'
 
-function generateTsFromZod(schema: z.ZodTypeAny, indent = 0): string {
+export function generateTsFromZod(schema: z.ZodTypeAny, indent = 0): string {
   if (schema instanceof z.ZodObject) {
     return `{\n${Object.entries(schema.shape)
       .map(([key, value]) => {
@@ -9,24 +9,27 @@ function generateTsFromZod(schema: z.ZodTypeAny, indent = 0): string {
         return `${' '.repeat(indent + 2)}${docComment}${key}: ${tsType};\n`
       })
       .join('')}${' '.repeat(indent)}}`
-  } else if (schema instanceof z.ZodString) {
+  }
+  if (schema instanceof z.ZodString) {
     return 'string'
-  } else if (schema instanceof z.ZodNumber) {
+  }
+  if (schema instanceof z.ZodNumber) {
     return 'number'
-  } else if (schema instanceof z.ZodBoolean) {
+  }
+  if (schema instanceof z.ZodBoolean) {
     return 'boolean'
-  } else if (
-    schema instanceof z.ZodOptional ||
-    schema instanceof z.ZodNullable
-  ) {
+  }
+  if (schema instanceof z.ZodOptional || schema instanceof z.ZodNullable) {
     return `${generateTsFromZod(schema._def.innerType, indent)}?`
-  } else if (schema instanceof z.ZodArray) {
+  }
+  if (schema instanceof z.ZodArray) {
     return `${generateTsFromZod(schema._def.type, indent)}[]`
-  } else if (schema instanceof z.ZodUnion) {
+  }
+  if (schema instanceof z.ZodUnion) {
     return schema._def.options
       .map((opt: any) => generateTsFromZod(opt, indent))
       .join(' | ')
-  } else if (schema instanceof z.ZodDefault) {
+  } if (schema instanceof z.ZodDefault) {
     return generateTsFromZod(schema._def.innerType, indent)
   }
 
