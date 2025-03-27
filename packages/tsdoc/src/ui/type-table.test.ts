@@ -250,7 +250,10 @@ export default $`
   it.only('should work with anonymous type', async () => {
     const code = `
 type $ = {
-  /** test */
+  /**
+   * test
+   * @default null
+   */
   foo: React.ReactNode
 }
 export default $`
@@ -264,7 +267,9 @@ export default $`
               "description": "test",
               "name": "foo",
               "required": true,
-              "tags": {},
+              "tags": {
+                "default": "null",
+              },
               "type": "ReactNode",
             },
           ],
