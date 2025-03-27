@@ -26,12 +26,12 @@ export async function Page() {
     FolderIcon,
     MdxIcon
   }
-  return getIndexPageMap(pageMap).map(pageItem => {
+  return getIndexPageMap(pageMap).map((pageItem, index) => {
     if (!Array.isArray(pageItem)) {
-      return <H2>{pageItem.title}</H2>
+      return <H2 key={index}>{pageItem.title}</H2>
     }
     return (
-      <Cards>
+      <Cards key={index}>
         {pageItem.map(item => {
           const icon = item.frontMatter?.icon
           const Icon = icons[icon]

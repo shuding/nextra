@@ -12,23 +12,23 @@ describe('generateTsFromZod', () => {
 
     const expected = `{
   /**
-   * @description The unique identifier
+   * The unique identifier
    */
   id: string
 
   /**
-   * @description The user's name
+   * The user's name
    * @default "Anonymous"
    */
   name: string
 
   /**
-   * @description User's age
+   * User's age
    */
   age?: number
 
   /**
-   * @description Admin status
+   * Admin status
    * @default false
    */
   isAdmin: boolean
@@ -54,25 +54,25 @@ describe('generateTsFromZod', () => {
 
     const expected = `{
   /**
-   * @description User
+   * User
    */
   user: {
     /**
-     * @description User ID
+     * User ID
      */
     id: string
 
     /**
-     * @description Profile
+     * Profile
      */
     profile: {
       /**
-       * @description User bio
+       * User bio
        */
       bio?: string
 
       /**
-       * @description User's age
+       * User's age
        * @default 25
        */
       age: number
@@ -93,12 +93,12 @@ describe('generateTsFromZod', () => {
 
     const expected = `{
   /**
-   * @description User tags
+   * User tags
    */
   tags: string[]
 
   /**
-   * @description User status
+   * User status
    */
   status: "active" | "inactive"
 }`
@@ -114,12 +114,12 @@ describe('generateTsFromZod', () => {
 
     const expected = `{
   /**
-   * @description User nickname
+   * User nickname
    */
   nickname: string | null
 
   /**
-   * @description User's country
+   * User's country
    */
   country?: string
 }`
@@ -135,13 +135,13 @@ describe('generateTsFromZod', () => {
 
     const expected = `{
   /**
-   * @description User active status
+   * User active status
    * @default true
    */
   active: boolean
 
   /**
-   * @description User count
+   * User count
    * @default 0
    */
   count: number
@@ -160,7 +160,7 @@ describe('generateTsFromZod', () => {
     }))).toMatchInlineSnapshot(`
       "{
         /**
-         * @description Defines the layout style.
+         * Defines the layout style.
          * @default "default"
          */
         layout?: "default" | "full"
