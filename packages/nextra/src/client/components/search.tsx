@@ -10,7 +10,13 @@ import cn from 'clsx'
 import { addBasePath } from 'next/dist/client/add-base-path'
 import NextLink from 'next/link'
 import { useRouter } from 'next/navigation'
-import type { FC, FocusEventHandler, ReactElement, ReactNode, SyntheticEvent } from 'react'
+import type {
+  FC,
+  FocusEventHandler,
+  ReactElement,
+  ReactNode,
+  SyntheticEvent
+} from 'react'
 import { useDeferredValue, useEffect, useRef, useState } from 'react'
 import type { PagefindSearchOptions } from '../../types.js'
 import { useMounted } from '../hooks/use-mounted.js'

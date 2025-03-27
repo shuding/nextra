@@ -6,9 +6,7 @@ describe('TypeTable', () => {
 import type { Banner } from 'nextra/components'
 type BannerProps = ComponentProps<typeof Banner>
 export default BannerProps`
-    const result = await getTypeTableOutput({
-      code
-    })
+    const result = await getTypeTableOutput({ code })
     expect(result).toMatchInlineSnapshot(`
       [
         {
@@ -45,14 +43,12 @@ export default BannerProps`
       ]
     `)
   })
-  it('<Search />',  async () => {
+  it('<Search />', async () => {
     const code = `import type { ComponentProps } from 'react'
 import type { Search } from 'nextra/components'
 type SearchProps = ComponentProps<typeof Search>
 export default SearchProps`
-    const result = await getTypeTableOutput({
-      code
-    })
+    const result = await getTypeTableOutput({ code })
     expect(result).toMatchInlineSnapshot(`
       [
         {

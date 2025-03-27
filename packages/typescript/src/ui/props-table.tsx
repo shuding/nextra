@@ -23,20 +23,21 @@ export const PropsTable: FC<{
   type: Record<string, ObjectType>
   typeLinkMap: Record<string, string>
 }> = ({ type, typeLinkMap }) => {
-  // We can hide the default column entirely if none of the props have a default
-  // value to document.
-  const showDefaultColumn = true as any // data.some(prop => prop.default)
-
   // This function takes a string representing some type and attempts to turn any
   // types referenced inside into links, either internal or external.
-  const linkify = (type: string) => {
-    const [rootType, ...rest] = type.split('.')
-    if (rest.length) rest.unshift('')
-    const href = typeLinkMap[rootType!]
+  function linkify(type: string) {
     return (
       <Code>
-        {href ? <Link href={href}>{rootType}</Link> : type}
-        {rest.join('.')}
+        {type.match(/(\w+|\W+)/g)!.map(chunk => {
+          const href = typeLinkMap[chunk]
+          return href ? (
+            <Link key={chunk} href={href}>
+              {chunk}
+            </Link>
+          ) : (
+            chunk
+          )
+        })}
       </Code>
     )
   }
@@ -47,7 +48,7 @@ export const PropsTable: FC<{
         <tr>
           <th className="x:py-1.5">Name</th>
           <th className="x:p-1.5 x:px-3">Type</th>
-          {showDefaultColumn && <th className="x:py-1.5">Default</th>}
+          <th className="x:py-1.5">Default</th>
         </tr>
       </thead>
       {Object.entries(type).map(([key, prop]) => {
@@ -84,22 +85,20 @@ export const PropsTable: FC<{
                   <div className="x:mt-2 x:text-sm">{prop.description}</div>
                 )}
               </td>
-              {showDefaultColumn && (
-                // For the mobile view, we want to hide the default column entirely
-                // if there is no content for it. We want this because otherwise
-                // the default padding applied to table cells will add some extra
-                // blank space we don't want.
-                <td
-                  className={cn(
-                    'x:max-lg:block',
-                    prop.default
-                      ? 'x:py-3 x:max-lg:px-3 x:max-lg:before:content-["Default:_"]'
-                      : 'x:lg:after:content-["–"]'
-                  )}
-                >
-                  {prop.default && linkify(prop.default)}
-                </td>
-              )}
+              <td
+                className={cn(
+                  'x:max-lg:block',
+                  // For the mobile view, we want to hide the default column entirely
+                  // if there is no content for it. We want this because otherwise
+                  // the default padding applied to table cells will add some extra
+                  // blank space we don't want.
+                  prop.default
+                    ? 'x:py-3 x:max-lg:px-3 x:max-lg:before:content-["Default:_"]'
+                    : 'x:lg:after:content-["–"]'
+                )}
+              >
+                {prop.default && linkify(prop.default)}
+              </td>
             </tr>
           </tbody>
         )
