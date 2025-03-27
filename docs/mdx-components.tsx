@@ -1,7 +1,10 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
 
+import { createTypeTable } from '@nextra/tsdoc'
 import { useMDXComponents as getDocsMDXComponents } from 'nextra-theme-docs'
+
+const { TSDoc } = createTypeTable()
 
 const {
   tr: Tr,
@@ -9,7 +12,27 @@ const {
   table: Table,
   img: Image,
   ...docsComponents
-} = getDocsMDXComponents()
+} = getDocsMDXComponents({
+  TSDoc(props) {
+    return (
+      <TSDoc
+        {...props}
+        typeLinkMap={{
+          GitHubIcon:
+            'https://github.com/shuding/nextra/blob/main/packages/nextra/src/client/icons/github.svg',
+          DiscordIcon:
+            'https://github.com/shuding/nextra/blob/main/packages/nextra/src/client/icons/discord.svg',
+          PagefindSearchOptions:
+            'https://github.com/CloudCannon/pagefind/blob/248f81d172316a642a83527fa92180abbb7f9c49/pagefind_web_js/types/index.d.ts#L72-L82',
+          ReactNode:
+            'https://github.com/DefinitelyTyped/DefinitelyTyped/blob/51fcf2a1c5da6da885c1f8c11224917bbc011493/types/react/index.d.ts#L426-L439',
+          ReactElement:
+            'https://github.com/DefinitelyTyped/DefinitelyTyped/blob/d44fce6cd8765acbdb0256195e5f16f67471430d/types/react/index.d.ts#L315-L322'
+        }}
+      />
+    )
+  }
+})
 
 export const useMDXComponents: typeof getDocsMDXComponents = components => ({
   ...docsComponents,

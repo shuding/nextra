@@ -21,14 +21,12 @@ export const NavbarPropsSchema = z.strictObject({
   logo: element.describe(`Logo of the website.
 @remarks \`ReactElement\``),
   projectLink: z.string().optional().describe('URL of the project homepage.'),
-  projectIcon: reactNode
-    .default(<GitHubIcon height="24" />)
+  projectIcon: reactNode.default(<GitHubIcon height="24" />)
     .describe(`Icon of the project link.
 @remarks \`ReactNode\`
 @default <GitHubIcon />`),
   chatLink: z.string().optional().describe('URL of the chat link.'),
-  chatIcon: reactNode
-    .default(<DiscordIcon width="24" />)
+  chatIcon: reactNode.default(<DiscordIcon width="24" />)
     .describe(`Icon of the chat link.
 @remarks \`ReactNode\`
 @default <DiscordIcon />`),

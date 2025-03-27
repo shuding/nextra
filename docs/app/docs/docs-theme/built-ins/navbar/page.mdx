@@ -8,17 +8,11 @@ import { NavbarPropsSchema } from 'private-next-root-dir/../packages/nextra-them
 
 # `<Navbar>` Component
 
-export const { TSDoc } = createTypeTable()
-
 ## Props
 
 <TSDoc
   code={`type $ = ${generateTsFromZod(NavbarPropsSchema)}
 export default $`}
-  typeLinkMap={{
-    GitHubIcon: 'https://github.com/shuding/nextra/blob/main/packages/nextra/src/client/icons/github.svg',
-    DiscordIcon: 'https://github.com/shuding/nextra/blob/main/packages/nextra/src/client/icons/discord.svg'
-  }}
 />
 
 ### Logo
