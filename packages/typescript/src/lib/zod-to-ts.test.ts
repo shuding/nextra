@@ -2,7 +2,7 @@ import { z } from 'zod'
 import { generateTsFromZod } from './zod-to-ts.js' // Adjust the import path if needed
 
 describe('generateTsFromZod', () => {
-  it.only('should generate TypeScript with @description and @default for primitive types', () => {
+  it('should generate TypeScript with @description and @default for primitive types', () => {
     const schema = z.strictObject({
       id: z.string().describe('The unique identifier'),
       name: z.string().default('Anonymous').describe("The user's name"),
@@ -37,7 +37,7 @@ describe('generateTsFromZod', () => {
     expect(generateTsFromZod(schema)).toBe(expected)
   })
 
-  it.only('should handle nested objects correctly', () => {
+  it('should handle nested objects correctly', () => {
     const schema = z.strictObject({
       user: z
         .strictObject({

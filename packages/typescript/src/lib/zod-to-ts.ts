@@ -48,11 +48,13 @@ function generateTsFromZodType(schema: z.ZodTypeAny, indent: number): TsType {
   if (schema instanceof z.ZodDefault) {
     return generateTsFromZodType(schema._def.innerType, indent)
   }
+  if (schema instanceof z.ZodLiteral) {
+    return `"${schema._def.value}"`
+  }
   if (schema instanceof z.ZodObject) {
     return generateTsFromZod(schema, indent)
   }
-
-  throw new Error('Unknown schema type')
+  throw new Error(`Unknown schema type '${schema.constructor.name}'`)
 }
 
 function getDocComment(schema: z.ZodTypeAny, indent: number): string {
@@ -72,5 +74,11 @@ function getDocComment(schema: z.ZodTypeAny, indent: number): string {
     return ''
   }
   const spacing = ' '.repeat(indent)
-  return `${spacing}/**\n${comments.map(line => `${spacing}${line}`).join('\n')}\n${spacing} */\n`
+  const comment = [
+    `${spacing}/**`,
+    ...comments.map(line => `${spacing}${line}`),
+    `${spacing} */`
+  ].join('\n')
+
+  return comment + '\n'
 }
