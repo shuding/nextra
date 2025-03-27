@@ -58,12 +58,10 @@ export default $`
               "type": "boolean",
             },
             {
-              "description": "",
+              "description": "Indicates whether the item in sidebar is collapsed by default.",
               "name": "collapsed",
               "required": false,
-              "tags": {
-                "description": "Indicates whether the item in sidebar is collapsed by default.",
-              },
+              "tags": {},
               "type": "boolean",
             },
           ],
