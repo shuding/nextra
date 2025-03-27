@@ -188,7 +188,7 @@ describe('generateTsFromZod', () => {
          * Extra content after last icon.
          * @default null
          */
-        children?: "TO IMPLEMENT2"
+        children?: "@TODO TO IMPLEMENT"
       }"
     `)
   })

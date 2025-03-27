@@ -7,12 +7,8 @@ export function generateTsFromZod(schema: z.ZodTypeAny, indent = 2): string {
   }
   return `{\n${Object.entries(schema.shape)
     .map(([key, value]) => {
-      // @ts-expect-error -- fixme
-      const result = generateTsFromZodType(value, indent + 2)
-      // @ts-expect-error -- fixme
-      const tsType = typeof result === 'object' ? result.type : result
-      // @ts-expect-error -- fixme
-      const docComment = getDocComment(value, indent)
+      const tsType = generateTsFromZodType(value as z.ZodTypeAny, indent + 2)
+      const docComment = getDocComment(value as z.ZodTypeAny, indent)
       // @ts-expect-error -- fixme
       return `${docComment}${' '.repeat(indent)}${key}${value.isOptional() ? '?' : ''}: ${tsType}\n`
     })
@@ -48,7 +44,7 @@ function generateTsFromZodType(schema: z.ZodTypeAny, indent: number): string {
     return generateTsFromZodType(schema._def.schema, indent)
   }
   if (schema instanceof z.ZodAny) {
-    return '"TO IMPLEMENT2"'
+    return '"@TODO TO IMPLEMENT"'
   }
   if (schema instanceof z.ZodEnum) {
     return schema._def.values.map((v: string) => `"${v}"`).join(' | ')
@@ -65,7 +61,7 @@ function getDocComment(schema: z.ZodTypeAny, indent: number): string {
   if (description) {
     comments.push(` * ${description}`)
   }
-  if (!description.includes('\n@default') && defaultValue !== undefined) {
+  if (!description?.includes('\n@default') && defaultValue !== undefined) {
     comments.push(` * @default ${JSON.stringify(defaultValue)}`)
   }
   if (!comments.length) {
