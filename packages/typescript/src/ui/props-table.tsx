@@ -42,8 +42,8 @@ export const PropsTable: FC<{
   }
 
   return (
-    <table className="my-8 w-full text-sm">
-      <thead className="nextra-border border-b text-left max-lg:hidden">
+    <table className="x:my-8 x:w-full x:text-sm">
+      <thead className="nextra-border x:border-b x:text-left x:max-lg:hidden">
         <tr>
           <th className="x:py-1.5">Name</th>
           <th className="x:p-1.5 x:px-3">Type</th>
@@ -55,7 +55,7 @@ export const PropsTable: FC<{
         return (
           <tbody
             key={id}
-            className="x:group nextra-border x:hover:bg-gray-100 x:dark:hover:bg-primary-100/5 x:mb-5 x:rounded-xl x:max-lg:block x:max-lg:border"
+            className="x:group nextra-border x:dark:hover:bg-primary-100/5 x:mb-5 x:rounded-xl x:hover:bg-gray-100 x:max-lg:block x:max-lg:border"
           >
             <tr
               className="nextra-border x:max-lg:block x:lg:border-b x:lg:not-target:[&>td>a]:opacity-0"
@@ -76,7 +76,7 @@ export const PropsTable: FC<{
                 </Code>
               </td>
               <td className='x:p-3 x:max-lg:block x:max-lg:before:content-["Type:_"]'>
-                <Code>{linkify(prop.type)}</Code>
+                {linkify(prop.type)}
                 {prop.description && (
                   <div className="x:mt-2 x:text-sm">{prop.description}</div>
                 )}
@@ -94,7 +94,7 @@ export const PropsTable: FC<{
                       : 'x:lg:after:content-["–"]'
                   )}
                 >
-                  {prop.default && <Code>{linkify(prop.default)}</Code>}
+                  {prop.default && linkify(prop.default)}
                 </td>
               )}
             </tr>

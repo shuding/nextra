@@ -87,7 +87,7 @@ export function generateDocumentation(
   return out
 }
 
-export function generate(
+function generate(
   program: Project,
   name: string,
   declaration: ExportedDeclarations,
