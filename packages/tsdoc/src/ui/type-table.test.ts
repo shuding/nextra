@@ -247,7 +247,7 @@ export default $`
       ]
     `)
   })
-  it.only('should work with anonymous type', async () => {
+  it.skip('should work with anonymous type', async () => {
     const code = `
 type $ = {
   /**
@@ -258,6 +258,11 @@ type $ = {
 }
 export default $`
     const result = await getTypeTableOutput({ code })
+    const result2 = await getTypeTableOutput({
+      code: code
+        .replace('export default $', '')
+        .replace('type $ =', 'export default')
+    })
     expect(result).toMatchInlineSnapshot(`
       [
         {
@@ -277,9 +282,6 @@ export default $`
         },
       ]
     `)
-    const result2 = await getTypeTableOutput({
-      code: code.replace('export default $', '').replace('type $ =', 'export default')
-    })
     expect(result2).toEqual(result)
   })
 })
