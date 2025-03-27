@@ -2,7 +2,9 @@
 sidebarTitle: Layout
 ---
 
+import { generateTsFromZod } from '@nextra/tsdoc'
 import { ToggleVisibilitySection } from 'components/toggle-visibility-section'
+import { LayoutPropsSchema } from 'private-next-root-dir/../packages/nextra-theme-docs/src/layout'
 
 # `<Layout>` Component
 
@@ -29,6 +31,13 @@ export default function MyLayout({ children, ...props }) {
 ```
 
 Detailed information for each option is listed below.
+
+## Props
+
+<TSDoc
+  code={`type $ = ${generateTsFromZod(LayoutPropsSchema)}
+export default $`}
+/>
 
 ## Page Map
 

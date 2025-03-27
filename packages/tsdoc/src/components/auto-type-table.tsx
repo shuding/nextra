@@ -1,10 +1,10 @@
 import { compileMdx } from 'nextra/compile'
 import { MDXRemote } from 'nextra/mdx-remote'
 import type { ComponentProps, ReactNode } from 'react'
+import type { GenerateDocumentationOptions } from '../base.js'
 import { getProject } from '../get-project.js'
-import type { GenerateDocumentationOptions } from '../lib/base.js'
-import type { BaseTypeTableProps } from '../utils/type-table.js'
-import { getTypeTableOutput } from '../utils/type-table.js'
+import type { BaseTypeTableProps } from '../type-table.js'
+import { getTypeTableOutput } from '../type-table.js'
 import { TSDoc } from './tsdoc.js'
 
 interface AutoTypeTableProps extends BaseTypeTableProps {

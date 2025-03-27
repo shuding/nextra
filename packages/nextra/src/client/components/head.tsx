@@ -1,6 +1,7 @@
-import type { FC, ReactNode } from 'react'
+import type { FC } from 'react'
 import { z } from 'zod'
 import { fromZodError } from 'zod-validation-error'
+import { reactNode } from '../../server/schemas.js'
 
 const darkLightSchema = z
   .union([
@@ -66,12 +67,11 @@ const headSchema = z.strictObject({
       dark: colorSchema.default('rgb(17,17,17)'),
       light: colorSchema.default('rgb(250,250,250)')
     })
-    .default({})
+    .default({}),
+  children: reactNode
 })
 
-type HeadProps = Partial<z.input<typeof headSchema>> & {
-  children: ReactNode
-}
+type HeadProps = Partial<z.input<typeof headSchema>>
 
 export const Head: FC<HeadProps> = ({ children, ...props }) => {
   const { data, error } = headSchema.safeParse(props)

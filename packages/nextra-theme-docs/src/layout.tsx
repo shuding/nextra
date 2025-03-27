@@ -3,7 +3,7 @@ import { ThemeProvider } from 'next-themes'
 import type { PageMapItem } from 'nextra'
 import { Search, SkipNavLink } from 'nextra/components'
 import { element, reactNode } from 'nextra/schemas'
-import type { FC, ReactNode } from 'react'
+import type { FC } from 'react'
 import { Fragment } from 'react'
 import { z } from 'zod'
 import { fromZodError } from 'zod-validation-error'
@@ -19,6 +19,7 @@ export const LayoutPropsSchema = z.strictObject({
   banner: reactNode.describe(
     'Rendered [`<Banner>` component](/docs/built-ins/banner). E.g. `<Banner {...bannerProps} />{:ts}`'
   ),
+  children: reactNode,
   darkMode: z
     .boolean()
     .default(true)
@@ -129,7 +130,7 @@ import { Layout, LastUpdated } from 'nextra-theme-docs'
 
 export type ThemeConfigProps = z.infer<typeof LayoutPropsSchema>
 
-type LayoutProps = z.input<typeof LayoutPropsSchema> & { children: ReactNode }
+type LayoutProps = z.input<typeof LayoutPropsSchema>
 
 export const Layout: FC<LayoutProps> = ({ children, ...themeConfig }) => {
   const { data, error } = LayoutPropsSchema.safeParse(themeConfig)

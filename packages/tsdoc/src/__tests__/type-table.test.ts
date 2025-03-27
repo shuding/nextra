@@ -1,4 +1,4 @@
-import { getTypeTableOutput } from '../utils/type-table.js'
+import { getTypeTableOutput } from '../type-table.js'
 
 describe('TypeTable', () => {
   it('<Banner />', async () => {
