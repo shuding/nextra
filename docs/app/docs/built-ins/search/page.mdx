@@ -8,6 +8,8 @@ import { createTypeTable } from '@nextra/typescript'
 
 export const { AutoTypeTable } = createTypeTable()
 
+## Props
+
 <AutoTypeTable
   code={`import type { ComponentProps } from 'react'
 import type { Search } from 'nextra/components'
@@ -15,6 +17,8 @@ type SearchProps = ComponentProps<typeof Search>
 export default SearchProps`}
   typeLinkMap={{
     PagefindSearchOptions:
-      'https://github.com/CloudCannon/pagefind/blob/248f81d172316a642a83527fa92180abbb7f9c49/pagefind_web_js/types/index.d.ts#L72-L82'
+      'https://github.com/CloudCannon/pagefind/blob/248f81d172316a642a83527fa92180abbb7f9c49/pagefind_web_js/types/index.d.ts#L72-L82',
+    ReactNode:
+      'https://github.com/DefinitelyTyped/DefinitelyTyped/blob/51fcf2a1c5da6da885c1f8c11224917bbc011493/types/react/index.d.ts#L426-L439'
   }}
 />

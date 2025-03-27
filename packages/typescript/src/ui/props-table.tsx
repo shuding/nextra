@@ -79,7 +79,10 @@ export const PropsTable: FC<{
                   {!prop.required && '?'}
                 </Code>
               </td>
-              <td className='x:p-3 x:max-lg:block x:max-lg:before:content-["Type:_"]'>
+              <td
+                // add `Type: ` via CSS `content` property so value will be not selectable
+                className='x:p-3 x:max-lg:block x:max-lg:before:content-["Type:_"]'
+              >
                 {linkify(prop.type)}
                 {prop.description && (
                   <div className="x:mt-2 x:text-sm">{prop.description}</div>
@@ -88,12 +91,12 @@ export const PropsTable: FC<{
               <td
                 className={cn(
                   'x:max-lg:block',
-                  // For the mobile view, we want to hide the default column entirely
-                  // if there is no content for it. We want this because otherwise
-                  // the default padding applied to table cells will add some extra
-                  // blank space we don't want.
+                  // For the mobile view, we want to hide the default column entirely if there is no
+                  // content for it. We want this because otherwise the default padding applied to
+                  // table cells will add some extra blank space we don't want.
                   prop.default
-                    ? 'x:py-3 x:max-lg:px-3 x:max-lg:before:content-["Default:_"]'
+                    ? // add `Default: ` via CSS `content` property so value will be not selectable
+                      'x:py-3 x:max-lg:px-3 x:max-lg:before:content-["Default:_"]'
                     : 'x:lg:after:content-["–"]'
                 )}
               >
