@@ -29,7 +29,7 @@ export default $`
     const result = await getTypeTableOutput({ code })
     expect(result).toMatchSnapshot()
   })
-  it('@description as tag and inline description', async () => {
+  it('inline description and @description as tag', async () => {
     const code = `type $ = {
 /**
  * @description Show or hide breadcrumb navigation.

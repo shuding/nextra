@@ -9,6 +9,10 @@ description:
 import { ContentAndAppFileTee } from 'components/content-and-app-file-tree'
 import { Video } from 'components/video'
 import { FileTree } from 'nextra/components'
+import { createTypeTable, generateTsFromZod } from '@nextra/tsdoc'
+import { pageThemeSchema } from 'private-next-root-dir/../packages/nextra/src/server/page-theme-schema'
+
+export const { TSDoc } = createTypeTable()
 
 export function Block({ children }) {
   return (
@@ -341,18 +345,10 @@ export default {
 >
 > This option will be inherited by all child pages if set to a folder.
 
-|               |                               |                  |                                                                |
-| ------------- | ----------------------------- | ---------------- | -------------------------------------------------------------- |
-| `breadcrumb`  | `boolean{:ts}`                | `true`           | Show or hide breadcrumb navigation.                            |
-| `collapsed`   | `boolean{:ts}`                | `false`          | Indicates whether the item in sidebar is collapsed by default. |
-| `footer`      | `boolean{:ts}`                | `true`           | Specifies whether to display the footer.                       |
-| `layout`      | `'default' \| 'full'{:ts}`    | `'default'{:ts}` | Defines the layout style.                                      |
-| `navbar`      | `boolean{:ts}`                | `true`           | Specifies whether to display the navbar.                       |
-| `pagination`  | `boolean{:ts}`                | `true`           | Determines if pagination controls are shown.                   |
-| `sidebar`     | `boolean{:ts}`                | `true`           | Specifies whether to display the sidebar.                      |
-| `timestamp`   | `boolean{:ts}`                | `true`           | Indicates if "last updated" timestamps are displayed.          |
-| `toc`         | `boolean{:ts}`                | `true`           | Determines whether a table of contents is displayed.           |
-| `typesetting` | `'default' \| 'article'{:ts}` | `'default'{:ts}` | Configures the text typesetting style.                         |
+<TSDoc
+  code={`type $ = ${generateTsFromZod(pageThemeSchema)}
+export default $`}
+/>
 
 ##### Layouts
 
