@@ -10,7 +10,7 @@ import cn from 'clsx'
 import { addBasePath } from 'next/dist/client/add-base-path'
 import NextLink from 'next/link'
 import { useRouter } from 'next/navigation'
-import type { FC, FocusEventHandler, ReactElement, SyntheticEvent } from 'react'
+import type { FC, FocusEventHandler, ReactElement, ReactNode, SyntheticEvent } from 'react'
 import { useDeferredValue, useEffect, useRef, useState } from 'react'
 import type { PagefindSearchOptions } from '../../types.js'
 import { useMounted } from '../hooks/use-mounted.js'
@@ -42,10 +42,27 @@ type PagefindResult = {
 }
 
 type SearchProps = {
-  emptyResult?: ReactElement | string
-  errorText?: ReactElement | string
-  loading?: ReactElement | string
+  /**
+   * Not found text.
+   * @default 'No results found.'
+   */
+  emptyResult?: ReactNode
+  /**
+   * Error text.
+   * @default 'Failed to load search index.'
+   * */
+  errorText?: ReactNode
+  /**
+   * Loading text.
+   * @default 'Loading…'
+   */
+  loading?: ReactNode
+  /**
+   * Placeholder text.
+   * @default 'Search documentation…'
+   */
   placeholder?: string
+  /** CSS class name. */
   className?: string
   searchOptions?: PagefindSearchOptions
 }

@@ -4,11 +4,16 @@ sidebarTitle: Search
 
 # `<Search>` Component
 
-|                 |                               |                                       |                                                                                 |
-| --------------- | ----------------------------- | ------------------------------------- | ------------------------------------------------------------------------------- |
-| `emptyResult`   | `string \| ReactElement{:ts}` | `'No results found.'{:ts}`            | Not found text.                                                                 |
-| `loading`       | `string \| ReactElement{:ts}` | `'Loading…'{:ts}`                     | Loading text.                                                                   |
-| `errorText`     | `string \| ReactElement{:ts}` | `'Failed to load search index.'{:ts}` | Error text.                                                                     |
-| `placeholder`   | `string{:ts}`                 | `'Search documentation…'{:ts}`        | Placeholder text.                                                               |
-| `className`     | `string{:ts}`                 |                                       | CSS class name.                                                                 |
-| `searchOptions` | `PagefindSearchOptions{:ts}`  |                                       | `{preload?: boolean; verbose?: boolean; filters?: object; sort?: object}{:ts}`. |
+import { createTypeTable } from '@nextra/typescript'
+
+export const { AutoTypeTable } = createTypeTable()
+
+<AutoTypeTable
+  code={`import type { ComponentProps } from 'react'
+import type { Search } from 'nextra/components'
+type SearchProps = ComponentProps<typeof Search>
+export default SearchProps`}
+  typeLinkMap={{
+    PagefindSearchOptions: 'https://github.com/CloudCannon/pagefind/blob/248f81d172316a642a83527fa92180abbb7f9c49/pagefind_web_js/types/index.d.ts#L72-L82'
+  }}
+/>

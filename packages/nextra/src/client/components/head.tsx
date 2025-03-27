@@ -70,7 +70,7 @@ const headSchema = z.strictObject({
 })
 
 type HeadProps = Partial<z.input<typeof headSchema>> & {
-  children?: ReactNode
+  children: ReactNode
 }
 
 export const Head: FC<HeadProps> = ({ children, ...props }) => {
