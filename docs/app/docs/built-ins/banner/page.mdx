@@ -11,13 +11,15 @@ export const { TSDoc } = createTypeTable()
 Show a banner on the top of the website. It can be used to show a warning or a
 notice.
 
+## Props
+
 <TSDoc
   code={`import type { Banner } from 'nextra/components'
 type $ = React.ComponentProps<typeof Banner>
 export default $`}
 />
 
-## Banner key
+### Banner key
 
 A banner can be dismissed. By default, it's used by
 [localStorage](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage)
