@@ -247,4 +247,34 @@ export default $`
       ]
     `)
   })
+  it.only('should work with anonymous type', async () => {
+    const code = `
+type $ = {
+  /** test */
+  foo: React.ReactNode
+}
+export default $`
+    const result = await getTypeTableOutput({ code })
+    expect(result).toMatchInlineSnapshot(`
+      [
+        {
+          "description": "",
+          "entries": [
+            {
+              "description": "test",
+              "name": "foo",
+              "required": true,
+              "tags": {},
+              "type": "ReactNode",
+            },
+          ],
+          "name": "default",
+        },
+      ]
+    `)
+    const result2 = await getTypeTableOutput({
+      code: code.replace('export default $', '').replace('type $ =', 'export default')
+    })
+    expect(result2).toEqual(result)
+  })
 })
