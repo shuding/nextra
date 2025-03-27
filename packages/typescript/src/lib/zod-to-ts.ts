@@ -48,8 +48,11 @@ function generateTsFromZodType(schema: z.ZodTypeAny, indent: number): TsType {
   if (schema instanceof z.ZodDefault) {
     return generateTsFromZodType(schema._def.innerType, indent)
   }
+  if (schema instanceof z.ZodObject) {
+    return generateTsFromZod(schema, indent)
+  }
 
-  return 'unknown'
+  throw new Error('Unknown schema type')
 }
 
 function getDocComment(schema: z.ZodTypeAny, indent: number): string {
