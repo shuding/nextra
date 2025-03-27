@@ -3,26 +3,23 @@ import { z } from 'zod'
 export function generateTsFromZod(schema: z.ZodTypeAny, indent = 2): string {
   const isZodObject = schema instanceof z.ZodObject
   if (!isZodObject) {
-    // @ts-expect-error -- fixme
     return generateTsFromZodType(schema, indent)
   }
   return `{\n${Object.entries(schema.shape)
     .map(([key, value]) => {
       // @ts-expect-error -- fixme
       const result = generateTsFromZodType(value, indent + 2)
+      // @ts-expect-error -- fixme
       const tsType = typeof result === 'object' ? result.type : result
-      const optional = typeof result === 'object' && result.optional
       // @ts-expect-error -- fixme
       const docComment = getDocComment(value, indent)
-      return `${docComment}${' '.repeat(indent)}${key}${optional ? '?' : ''}: ${tsType}\n`
+      // @ts-expect-error -- fixme
+      return `${docComment}${' '.repeat(indent)}${key}${value.isOptional() ? '?' : ''}: ${tsType}\n`
     })
     .join('\n')}${' '.repeat(indent - 2)}}`
 }
 
-function generateTsFromZodType(
-  schema: z.ZodTypeAny,
-  indent: number
-): string | { type: string; optional: boolean } {
+function generateTsFromZodType(schema: z.ZodTypeAny, indent: number): string {
   if (schema instanceof z.ZodString) {
     return 'string'
   }
@@ -33,10 +30,7 @@ function generateTsFromZodType(
     return 'boolean'
   }
   if (schema instanceof z.ZodOptional) {
-    return {
-      type: generateTsFromZodType(schema._def.innerType, indent) as string,
-      optional: true
-    }
+    return generateTsFromZodType(schema._def.innerType, indent)
   }
   if (schema instanceof z.ZodNullable) {
     return `${generateTsFromZodType(schema._def.innerType, indent)} | null`
@@ -59,10 +53,10 @@ function generateTsFromZodType(
     return generateTsFromZod(schema, indent)
   }
   if (schema instanceof z.ZodEffects) {
-    return '"TO IMPLEMENT"'
+    return generateTsFromZodType(schema._def.schema, indent)
   }
   if (schema instanceof z.ZodAny) {
-    return '"TO IMPLEMENT"'
+    return '"TO IMPLEMENT2"'
   }
   if (schema instanceof z.ZodEnum) {
     return schema._def.values.map((v: string) => `"${v}"`).join(' | ')

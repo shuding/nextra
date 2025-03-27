@@ -1,3 +1,4 @@
+import { reactNode } from 'nextra/schemas'
 import { z } from 'zod'
 import { generateTsFromZod } from './zod-to-ts.js'
 
@@ -20,7 +21,7 @@ describe('generateTsFromZod', () => {
    * The user's name
    * @default "Anonymous"
    */
-  name: string
+  name?: string
 
   /**
    * User's age
@@ -31,7 +32,7 @@ describe('generateTsFromZod', () => {
    * Admin status
    * @default false
    */
-  isAdmin: boolean
+  isAdmin?: boolean
 }`
 
     expect(generateTsFromZod(schema)).toBe(expected)
@@ -75,7 +76,7 @@ describe('generateTsFromZod', () => {
        * User's age
        * @default 25
        */
-      age: number
+      age?: number
     }
   }
 }`
@@ -138,13 +139,13 @@ describe('generateTsFromZod', () => {
    * User active status
    * @default true
    */
-  active: boolean
+  active?: boolean
 
   /**
    * User count
    * @default 0
    */
-  count: number
+  count?: number
 }`
 
     expect(generateTsFromZod(schema)).toBe(expected)
@@ -168,6 +169,26 @@ describe('generateTsFromZod', () => {
          * @default "default"
          */
         layout?: "default" | "full"
+      }"
+    `)
+  })
+
+  it('should handle ReactNode', () => {
+    expect(
+      generateTsFromZod(
+        z.strictObject({
+          children: reactNode
+            .describe('Extra content after last icon.')
+            .default(null)
+        })
+      )
+    ).toMatchInlineSnapshot(`
+      "{
+        /**
+         * Extra content after last icon.
+         * @default null
+         */
+        children?: "TO IMPLEMENT2"
       }"
     `)
   })
