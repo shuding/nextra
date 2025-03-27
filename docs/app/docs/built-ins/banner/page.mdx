@@ -2,20 +2,19 @@
 sidebarTitle: Banner
 ---
 
-import { createTypeTable } from '@nextra/typescript'
+import { createTypeTable } from '@nextra/tsdoc'
 
-export const { AutoTypeTable } = createTypeTable()
+export const { TSDoc } = createTypeTable()
 
 # `<Banner>` Component
 
 Show a banner on the top of the website. It can be used to show a warning or a
 notice.
 
-<AutoTypeTable
-  code={`import type { ComponentProps } from 'react'
-import type { Banner } from 'nextra/components'
-type BannerProps = ComponentProps<typeof Banner>
-export default BannerProps`}
+<TSDoc
+  code={`import type { Banner } from 'nextra/components'
+type $ = React.ComponentProps<typeof Banner>
+export default $`}
 />
 
 ## Banner key

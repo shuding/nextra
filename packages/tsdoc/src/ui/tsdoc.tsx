@@ -19,7 +19,7 @@ interface ObjectType {
   required?: boolean
 }
 
-export const PropsTable: FC<{
+export const TSDoc: FC<{
   type: Record<string, ObjectType>
   typeLinkMap: Record<string, string>
 }> = ({ type, typeLinkMap }) => {

@@ -1,5 +1,5 @@
 {
-  "name": "@nextra/typescript",
+  "name": "@nextra/tsdoc",
   "version": "0.0.0",
   "type": "module",
   "description": "TypeScript Integration for Nextra",
