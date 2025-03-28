@@ -34,9 +34,8 @@ export function createAstObject(obj) {
   }
 }
 
-
-// @ts-expect-error -- fixme
-const rehypeOpenGraphImage = () => ast => { // eslint-disable-line unicorn/consistent-function-scoping
+// eslint-disable-next-line unicorn/consistent-function-scoping
+const rehypeOpenGraphImage = () => (ast: any) => {
   // @ts-expect-error -- fixme
   const frontMatterNode = ast.children.find(node =>
     isExportNode(node, 'metadata')
