@@ -5,16 +5,9 @@ import { Code } from 'nextra/components'
 import type { FC, ReactNode } from 'react'
 
 interface ObjectType {
-  /**
-   * Additional description of the field
-   */
+  /** Additional description of the field */
   description: ReactNode
   type: string
-  typeDescription: ReactNode
-  /**
-   * Optional link to the type
-   */
-  typeDescriptionLink?: string
   default?: string
   required?: boolean
 }
