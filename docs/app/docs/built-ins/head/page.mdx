@@ -20,7 +20,8 @@ of the website.
 | `backgroundColor.light` | `"rgb(RRR,GGG,BBB)" \| "#RRGGBB"{:ts}`           | `'rgb(250,250,250)'{:ts}`        | Background color for dark theme.                     |
 
 <TSDoc
-  code={`type  $ = ${generateTsFromZod(HeadPropsSchema)}
+  flattened
+  code={`type $ = ${generateTsFromZod(HeadPropsSchema)}
 export default $`}
 />
 

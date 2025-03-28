@@ -23,12 +23,17 @@ type DocEntry = {
 }
 
 export type BaseTypeTableProps = {
-  /** TypeScript source code. */
+  /** TypeScript source code to be processed. */
   code: string
-  /** Should flatten nested objects. */
+  /**
+   * Whether to flatten nested objects.
+   * > [!Warning]
+   * > Requires `exactOptionalPropertyTypes: true` in `tsconfig.json`
+   * @default false
+   */
   flattened?: boolean
   /**
-   * Name of exported declaration.
+   * The name of the exported declaration.
    * @default 'default'
    */
   exportName?: string
@@ -39,7 +44,8 @@ export type BaseTypeTableProps = {
  */
 export function generateDocumentation({
   code,
-  exportName = 'default'
+  exportName = 'default',
+  flattened = false
 }: BaseTypeTableProps): GeneratedDoc {
   const sourceFile = project.createSourceFile('temp.ts', code, {
     overwrite: true
@@ -64,7 +70,7 @@ export function generateDocumentation({
   const entries = declaration
     .getType()
     .getProperties()
-    .map(prop => getDocEntry(prop, declaration))
+    .flatMap(prop => getDocEntry(prop, { declaration, flattened }))
     .filter(entry => !('internal' in entry.tags))
   return {
     name: exportName,
@@ -75,11 +81,28 @@ export function generateDocumentation({
 
 function getDocEntry(
   prop: TsSymbol,
-  declaration: ExportedDeclarations
-): DocEntry {
+  {
+    declaration,
+    flattened,
+    prefix = ''
+  }: { declaration: ExportedDeclarations; flattened: boolean; prefix?: string }
+): DocEntry | DocEntry[] {
   const subType = project
     .getTypeChecker()
     .getTypeOfSymbolAtLocation(prop, declaration)
+
+  if (flattened && subType.isObject()) {
+    return subType
+      .getProperties()
+      .flatMap(childProp =>
+        getDocEntry(childProp, {
+          declaration,
+          flattened,
+          prefix: prop.getName()
+        })
+      )
+  }
+
   const tags = Object.fromEntries(
     prop
       .getJsDocTags()
@@ -97,9 +120,10 @@ function getDocEntry(
   if (tags.remarks) {
     typeName = /^`(?<name>.+)`/.exec(tags.remarks)?.[1] ?? typeName
   }
+  const name = prop.getName()
 
-  const entry: DocEntry = {
-    name: prop.getName(),
+  return {
+    name: prefix ? [prefix, name].join('.') : name,
     description: ts.displayPartsToString(
       prop.compilerSymbol.getDocumentationComment(compilerObject)
     ),
@@ -107,6 +131,4 @@ function getDocEntry(
     type: typeName,
     required: !prop.isOptional()
   }
-  console.log(entry, subType.isObject())
-  return entry
 }
