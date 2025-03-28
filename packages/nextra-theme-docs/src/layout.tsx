@@ -104,7 +104,7 @@ import { Layout, LastUpdated } from 'nextra-theme-docs'
 @remarks \`PageMapItem[]\``),
   search: reactNode.default(<Search />).describe(
     `Rendered [\`<Search>\` component](/docs/built-ins/search). E.g. \`<Search {...searchProps} />\`
-@default \`<Search />\`
+@default <Search />
 @remarks \`ReactNode\``
   ),
   sidebar: z

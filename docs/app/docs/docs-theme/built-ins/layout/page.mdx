@@ -6,6 +6,8 @@ import { generateTsFromZod } from '@nextra/tsdoc'
 import { ToggleVisibilitySection } from 'components/toggle-visibility-section'
 import { LayoutPropsSchema } from 'private-next-root-dir/../packages/nextra-theme-docs/src/layout'
 
+export const layoutProps = generateTsFromZod(LayoutPropsSchema)
+
 # `<Layout>` Component
 
 The theme is configured with the `<Layout>` component. You should pass your
@@ -34,17 +36,9 @@ Detailed information for each option is listed below.
 
 ## Props
 
-<TSDoc
-  flattened
-  code={`type $ = ${generateTsFromZod(LayoutPropsSchema)}
-export default $`}
-/>
-
 ## Page Map
 
-|           |                      |     |                                                               |
-| --------- | -------------------- | --- | ------------------------------------------------------------- |
-| `pageMap` | `PageMapItem[]{:ts}` |     | Page map list. Result of `getPageMap(route = '/'){:ts}` call. |
+<TSDoc code={`type $ = Pick<${layoutProps}, 'pageMap'>\nexport default $`} />
 
 ## Banner
 
