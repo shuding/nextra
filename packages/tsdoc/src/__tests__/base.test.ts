@@ -4,7 +4,7 @@ import { HeadPropsSchema } from '../../../nextra/src/client/components/head.js'
 import { generateDocumentation } from '../base.js'
 import { generateTsFromZod } from '../zod-to-ts.js'
 
-describe('TypeTable', () => {
+describe('<TSDoc />', () => {
   it('<Banner />', async () => {
     const code = `import type { Banner } from 'nextra/components'
 type $ = React.ComponentProps<typeof Banner>
@@ -416,8 +416,9 @@ export default $`
             "required": false,
             "tags": {
               "default": ""Edit this page"",
+              "remarks": "\`ReactNode\`",
             },
-            "type": ""@TODO TO IMPLEMENT"",
+            "type": "ReactNode",
           },
           {
             "description": "",
@@ -425,8 +426,9 @@ export default $`
             "required": false,
             "tags": {
               "default": ""Question? Give us feedback"",
+              "remarks": "\`ReactNode\`",
             },
-            "type": ""@TODO TO IMPLEMENT"",
+            "type": "ReactNode",
           },
           {
             "description": "",
@@ -438,11 +440,13 @@ export default $`
             "type": "string",
           },
           {
-            "description": "Rendered [\`<Footer>\` component](/docs/docs-theme/built-ins/footer). E.g. \`<Footer {...footerProps} />{:ts}\`",
+            "description": "Rendered [\`<Footer>\` component](/docs/docs-theme/built-ins/footer). E.g. \`<Footer {...footerProps} />\`",
             "name": "footer",
             "required": false,
-            "tags": {},
-            "type": ""@TODO TO IMPLEMENT"",
+            "tags": {
+              "remarks": "\`ReactNode\`",
+            },
+            "type": "ReactNode",
           },
           {
             "description": "",
@@ -461,11 +465,13 @@ export default $`
             "type": ""@TODO TO IMPLEMENT"",
           },
           {
-            "description": "Rendered [\`<Navbar>\` component](/docs/docs-theme/built-ins/navbar). E.g. \`<Navbar {...navbarProps} />{:ts}\`",
+            "description": "Rendered [\`<Navbar>\` component](/docs/docs-theme/built-ins/navbar). E.g. \`<Navbar {...navbarProps} />\`",
             "name": "navbar",
             "required": false,
-            "tags": {},
-            "type": ""@TODO TO IMPLEMENT"",
+            "tags": {
+              "remarks": "\`ReactNode\`",
+            },
+            "type": "ReactNode",
           },
           {
             "description": "Enable or disable navigation link.",
@@ -518,16 +524,16 @@ export default $`
             "name": "pageMap",
             "required": true,
             "tags": {
-              "remarks": "\`PageMapItem\`",
+              "remarks": "\`PageMapItem[]\`",
             },
-            "type": "PageMapItem",
+            "type": "PageMapItem[]",
           },
           {
             "description": "Rendered [\`<Search>\` component](/docs/built-ins/search). E.g. \`<Search {...searchProps} />\`",
             "name": "search",
             "required": false,
             "tags": {
-              "default": "{"key":null,"props":{},"_owner":null,"_store":{}}",
+              "default": "\`<Search />\`",
               "remarks": "\`ReactNode\`",
             },
             "type": "ReactNode",
