@@ -1,6 +1,6 @@
 import { NavbarPropsSchema } from '../../../nextra-theme-docs/src/components/navbar/index.js'
 import { HeadPropsSchema } from '../../../nextra/src/client/components/head.js'
-import { getTypeTableOutput } from '../base.js'
+import { generateDocumentation } from '../base.js'
 import { generateTsFromZod } from '../zod-to-ts.js'
 
 describe('TypeTable', () => {
@@ -8,7 +8,7 @@ describe('TypeTable', () => {
     const code = `import type { Banner } from 'nextra/components'
 type $ = React.ComponentProps<typeof Banner>
 export default $`
-    const result = await getTypeTableOutput({ code })
+    const result = generateDocumentation({ code })
     expect(result).toMatchInlineSnapshot(`
       [
         {
@@ -49,7 +49,7 @@ export default $`
     const code = `import type { Search } from 'nextra/components'
 type $ = React.ComponentProps<typeof Search>
 export default $`
-    const result = await getTypeTableOutput({ code })
+    const result = generateDocumentation({ code })
     expect(result).toMatchInlineSnapshot(`
       [
         {
@@ -115,7 +115,7 @@ export default $`
     const code = `import type { Callout } from 'nextra/components'
 type $ = React.ComponentProps<typeof Callout>
 export default $`
-    const result = await getTypeTableOutput({ code })
+    const result = generateDocumentation({ code })
     expect(result).toMatchInlineSnapshot(`
       [
         {
@@ -163,7 +163,7 @@ export default $`
     const code = `import type { NotFoundPage } from 'nextra-theme-docs'
 type $ = React.ComponentProps<typeof NotFoundPage>
 export default $`
-    const result = await getTypeTableOutput({ code })
+    const result = generateDocumentation({ code })
     expect(result).toMatchInlineSnapshot(`
       [
         {
@@ -212,7 +212,7 @@ export default $`
   it('<Navbar />', async () => {
     const code = `type $ = ${generateTsFromZod(NavbarPropsSchema)}
 export default $`
-    const result = await getTypeTableOutput({ code })
+    const result = generateDocumentation({ code })
     expect(result).toMatchInlineSnapshot(`
       [
         {
@@ -301,10 +301,10 @@ export default $`
       ]
     `)
   })
-  it.only('<Head />', async () => {
+  it('<Head />', async () => {
     const code = `type $ = ${generateTsFromZod(HeadPropsSchema)}
 export default $`
-    const result = await getTypeTableOutput({ code, flattened: true })
+    const result = generateDocumentation({ code, flattened: true })
     expect(result).toMatchInlineSnapshot(`
       [
         {
@@ -350,6 +350,30 @@ export default $`
       ]
     `)
   })
+  it('two declarations', async () => {
+    const code = `
+type A = { foo: string }
+type A = { bar: string }
+export default A`
+    const result = generateDocumentation({ code })
+    expect(result).toMatchInlineSnapshot(`
+      [
+        {
+          "description": "",
+          "entries": [
+            {
+              "description": "",
+              "name": "foo",
+              "required": true,
+              "tags": {},
+              "type": "string",
+            },
+          ],
+          "name": "default",
+        },
+      ]
+    `)
+  })
   it('inline description and @description as tag', async () => {
     const code = `type $ = {
 /**
@@ -363,7 +387,7 @@ breadcrumb?: boolean
 collapsed?: boolean
 }
 export default $`
-    const result = await getTypeTableOutput({ code })
+    const result = generateDocumentation({ code })
     expect(result).toMatchInlineSnapshot(`
       [
         {
@@ -401,8 +425,8 @@ type $ = {
   foo: React.ReactNode
 }
 export default $`
-    const result = await getTypeTableOutput({ code })
-    const result2 = await getTypeTableOutput({
+    const result = generateDocumentation({ code })
+    const result2 = generateDocumentation({
       code: code
         .replace('export default $', '')
         .replace('type $ =', 'export default')

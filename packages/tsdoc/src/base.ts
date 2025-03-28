@@ -33,37 +33,33 @@ export interface BaseTypeTableProps {
   flattened?: boolean
 }
 
-export async function getTypeTableOutput({ code }: BaseTypeTableProps) {
-  const output = generateDocumentation('temp.ts', 'default', code)
-  if (!output.length) {
-    throw new Error("Can't find `export default` statement")
-  }
-  return output
-}
-
 /**
  * Generate documentation for properties in an exported type/interface
  */
-function generateDocumentation(
-  file: string,
-  name: string,
-  content: string
-): GeneratedDoc[] {
-  const sourceFile = project.createSourceFile(file, content, { overwrite: true })
-  const out: GeneratedDoc[] = []
+export function generateDocumentation(
+  { code }: BaseTypeTableProps
+): GeneratedDoc {
+  const sourceFile = project.createSourceFile('temp.ts', code, { overwrite: true })
+  const output: GeneratedDoc[] = []
   for (const [key, declaration] of sourceFile.getExportedDeclarations()) {
-    if (name !== key) continue
+    if ('default' !== key) continue
     if (!declaration[0]) {
-      throw new Error(`Declaration '${key}' isn't found`)
+      throw new Error("Declaration 'default' isn't found")
     }
     if (declaration.length > 1) {
       throw new Error(
-        `Export '${key}' should not have more than one type declaration.`
+        "Export 'default' should not have more than one type declaration."
       )
     }
-    out.push(generate(project, key, declaration[0]))
+    output.push(generate(project, key, declaration[0]))
   }
-  return out
+  if (!output[0]) {
+    throw new Error("Can't find `export default` statement")
+  }
+  if (output.length > 1) {
+    throw new Error('Export "default" should not have more than one type declaration.')
+  }
+  return output[0]
 }
 
 function generate(

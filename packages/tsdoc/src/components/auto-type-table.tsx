@@ -2,7 +2,7 @@ import { compileMdx } from 'nextra/compile'
 import { MDXRemote } from 'nextra/mdx-remote'
 import type { ComponentProps, ReactNode } from 'react'
 import type { BaseTypeTableProps } from '../base.js'
-import { getTypeTableOutput } from '../base.js'
+import { generateDocumentation } from '../base.js'
 import { TSDoc } from './tsdoc.js'
 
 interface AutoTypeTableProps extends BaseTypeTableProps {
@@ -21,7 +21,7 @@ export async function AutoTypeTable({
   typeLinkMap = {},
   ...props
 }: AutoTypeTableProps): Promise<ReactNode> {
-  const output = await getTypeTableOutput(props)
+  const output = generateDocumentation(props)
 
   return output.map(async item => {
     const entries = item.entries.map(
