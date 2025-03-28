@@ -291,7 +291,7 @@ export default $`
       }
     `)
   })
-  it.only('<Head /> with `flattened: true`', async () => {
+  it('<Head /> with `flattened: true`', async () => {
     const code = `type $ = ${generateTsFromZod(HeadPropsSchema)}
 export default $`
     const result = generateDocumentation({ code, flattened: true })
