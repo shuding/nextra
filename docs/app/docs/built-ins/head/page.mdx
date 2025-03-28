@@ -11,13 +11,10 @@ import { BackgroundColor, Slider } from './_slider'
 Configure the `<head>` tags, primary color, background color and favicon glyph
 of the website.
 
-|                         |                                                  |                                  |                                                      |
-| ----------------------- | ------------------------------------------------ | -------------------------------- | ---------------------------------------------------- |
-| `color.hue`             | `number \| { dark: number; light: number }{:ts}` | `{ dark: 204, light: 212 }{:ts}` | The hue of the primary theme color. (0 - 360)        |
-| `color.saturation`      | `number \| { dark: number; light: number }{:ts}` | `100{:ts}`                       | The saturation of the primary theme color. (0 - 100) |
-| `color.lightness`       | `number \| { dark: number; light: number }`      | `{ dark: 55, light: 45 }{:ts}`   | The lightness of the primary theme color. (0 - 100)  |
-| `backgroundColor.dark`  | `"rgb(RRR,GGG,BBB)" \| "#RRGGBB"{:ts}`           | `'rgb(17,17,17)'{:ts}`           | Background color for light theme.                    |
-| `backgroundColor.light` | `"rgb(RRR,GGG,BBB)" \| "#RRGGBB"{:ts}`           | `'rgb(250,250,250)'{:ts}`        | Background color for dark theme.                     |
+|                         |                                        |                           |                                   |
+| ----------------------- | -------------------------------------- | ------------------------- | --------------------------------- |
+| `backgroundColor.dark`  | `"rgb(RRR,GGG,BBB)" \| "#RRGGBB"{:ts}` | `'rgb(17,17,17)'{:ts}`    | Background color for light theme. |
+| `backgroundColor.light` | `"rgb(RRR,GGG,BBB)" \| "#RRGGBB"{:ts}` | `'rgb(250,250,250)'{:ts}` | Background color for dark theme.  |
 
 <TSDoc
   flattened
@@ -25,7 +22,7 @@ of the website.
 export default $`}
 />
 
-## Static Head Tags
+## Static head tags
 
 If you have static head tags, they should be put as `children` in `Head`. For
 example:
@@ -48,7 +45,7 @@ export default function MyLayout({ children, ...props }) {
 }
 ```
 
-## Dynamic Tags Based on Page
+## Dynamic tags based on page
 
 You can dynamically generate the head tags based on the current page's front
 matter. For example:
@@ -72,7 +69,7 @@ export const metadata = {
 }
 ```
 
-### in [dynamic routes with Catch-all segment](https://nextjs.org/docs/app/building-your-application/routing/dynamic-routes#catch-all-segments)
+### in [dynamic routes with catch-all segment](https://nextjs.org/docs/app/building-your-application/routing/dynamic-routes#catch-all-segments)
 
 ```jsx filename="app/[[...mdxPath]]/page.jsx"
 import { importPage } from 'nextra/pages'
@@ -90,7 +87,7 @@ export async function generateMetadata(props) {
 You can refer to the [`useConfig`](/docs/docs-theme/api) API section for more
 information about the `useConfig` hook and the `frontMatter` object.
 
-## Theme Color
+## Theme color
 
 You can adjust the theme color of the website by setting primary Hue, Saturation
 and Lightness (HSL) values for light and dark themes. Try it out for this
@@ -120,7 +117,7 @@ website:
 > />
 > ```
 
-## Favicon Glyph
+## Favicon glyph
 
 This isn't supported by all browsers, but it's a nice way to customize the
 favicon of the website simply by using an emoji or character.

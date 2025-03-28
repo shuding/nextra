@@ -300,7 +300,7 @@ export default $`
         "description": "",
         "entries": [
           {
-            "description": "",
+            "description": "The hue of the primary theme color. (0 - 360)",
             "name": "color.hue",
             "required": false,
             "tags": {
@@ -309,7 +309,7 @@ export default $`
             "type": "number | { dark: number; light: number; }",
           },
           {
-            "description": "",
+            "description": "The saturation of the primary theme color. (0 - 100)",
             "name": "color.saturation",
             "required": false,
             "tags": {
@@ -318,7 +318,7 @@ export default $`
             "type": "number | { dark: number; light: number; }",
           },
           {
-            "description": "",
+            "description": "The lightness of the primary theme color. (0 - 100)",
             "name": "color.lightness",
             "required": false,
             "tags": {
@@ -334,7 +334,7 @@ export default $`
             "type": "string",
           },
           {
-            "description": "",
+            "description": "Background color for dark theme.",
             "name": "backgroundColor.dark",
             "required": false,
             "tags": {
@@ -343,7 +343,7 @@ export default $`
             "type": "string",
           },
           {
-            "description": "",
+            "description": "Background color for light theme.",
             "name": "backgroundColor.light",
             "required": false,
             "tags": {
