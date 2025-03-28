@@ -6,7 +6,6 @@ export interface BaseTypeTableProps {
    * Set the type to generate from.
    */
   code: string
-
   options?: GenerateDocumentationOptions & {
     /**
      * base path to resolve `path` prop

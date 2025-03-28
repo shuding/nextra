@@ -41,7 +41,6 @@ interface GenerateOptions {
    * @default false
    */
   allowInternal?: boolean
-
   /**
    * Modify output property entry
    */
