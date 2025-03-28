@@ -38,8 +38,7 @@ type Transformer = (
 interface GenerateOptions {
   /**
    * Allow fields with `@internal` tag
-   *
-   * @defaultValue false
+   * @default false
    */
   allowInternal?: boolean
 
