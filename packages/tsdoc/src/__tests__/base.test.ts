@@ -10,39 +10,37 @@ type $ = React.ComponentProps<typeof Banner>
 export default $`
     const result = generateDocumentation({ code })
     expect(result).toMatchInlineSnapshot(`
-      [
-        {
-          "description": "",
-          "entries": [
-            {
-              "description": "Content of the banner.",
-              "name": "children",
-              "required": true,
-              "tags": {},
-              "type": "ReactNode",
+      {
+        "description": "",
+        "entries": [
+          {
+            "description": "Content of the banner.",
+            "name": "children",
+            "required": true,
+            "tags": {},
+            "type": "ReactNode",
+          },
+          {
+            "description": "Closable banner or not.",
+            "name": "dismissible",
+            "required": false,
+            "tags": {
+              "default": "true",
             },
-            {
-              "description": "Closable banner or not.",
-              "name": "dismissible",
-              "required": false,
-              "tags": {
-                "default": "true",
-              },
-              "type": "boolean",
+            "type": "boolean",
+          },
+          {
+            "description": "Storage key to keep the banner state.",
+            "name": "storageKey",
+            "required": false,
+            "tags": {
+              "default": "'nextra-banner'",
             },
-            {
-              "description": "Storage key to keep the banner state.",
-              "name": "storageKey",
-              "required": false,
-              "tags": {
-                "default": "'nextra-banner'",
-              },
-              "type": "string",
-            },
-          ],
-          "name": "default",
-        },
-      ]
+            "type": "string",
+          },
+        ],
+        "name": "default",
+      }
     `)
   })
   it('<Search />', async () => {
@@ -51,64 +49,62 @@ type $ = React.ComponentProps<typeof Search>
 export default $`
     const result = generateDocumentation({ code })
     expect(result).toMatchInlineSnapshot(`
-      [
-        {
-          "description": "",
-          "entries": [
-            {
-              "description": "Not found text.",
-              "name": "emptyResult",
-              "required": false,
-              "tags": {
-                "default": "'No results found.'",
-              },
-              "type": "ReactNode",
+      {
+        "description": "",
+        "entries": [
+          {
+            "description": "Not found text.",
+            "name": "emptyResult",
+            "required": false,
+            "tags": {
+              "default": "'No results found.'",
             },
-            {
-              "description": "Error text.",
-              "name": "errorText",
-              "required": false,
-              "tags": {
-                "default": "'Failed to load search index.'",
-              },
-              "type": "ReactNode",
+            "type": "ReactNode",
+          },
+          {
+            "description": "Error text.",
+            "name": "errorText",
+            "required": false,
+            "tags": {
+              "default": "'Failed to load search index.'",
             },
-            {
-              "description": "Loading text.",
-              "name": "loading",
-              "required": false,
-              "tags": {
-                "default": "'Loading…'",
-              },
-              "type": "ReactNode",
+            "type": "ReactNode",
+          },
+          {
+            "description": "Loading text.",
+            "name": "loading",
+            "required": false,
+            "tags": {
+              "default": "'Loading…'",
             },
-            {
-              "description": "Placeholder text.",
-              "name": "placeholder",
-              "required": false,
-              "tags": {
-                "default": "'Search documentation…'",
-              },
-              "type": "string",
+            "type": "ReactNode",
+          },
+          {
+            "description": "Placeholder text.",
+            "name": "placeholder",
+            "required": false,
+            "tags": {
+              "default": "'Search documentation…'",
             },
-            {
-              "description": "CSS class name.",
-              "name": "className",
-              "required": false,
-              "tags": {},
-              "type": "string",
-            },
-            {
-              "description": "",
-              "name": "searchOptions",
-              "required": false,
-              "tags": {},
-              "type": "PagefindSearchOptions",
-            },
-          ],
-          "name": "default",
-        },
-      ]
+            "type": "string",
+          },
+          {
+            "description": "CSS class name.",
+            "name": "className",
+            "required": false,
+            "tags": {},
+            "type": "string",
+          },
+          {
+            "description": "",
+            "name": "searchOptions",
+            "required": false,
+            "tags": {},
+            "type": "PagefindSearchOptions",
+          },
+        ],
+        "name": "default",
+      }
     `)
   })
   it('<Callout />', async () => {
@@ -117,46 +113,44 @@ type $ = React.ComponentProps<typeof Callout>
 export default $`
     const result = generateDocumentation({ code })
     expect(result).toMatchInlineSnapshot(`
-      [
-        {
-          "description": "",
-          "entries": [
-            {
-              "description": "Specifies the type of callout.
+      {
+        "description": "",
+        "entries": [
+          {
+            "description": "Specifies the type of callout.
       Determines the default icon if none is provided.",
-              "name": "type",
-              "required": false,
-              "tags": {
-                "default": "'default'",
-              },
-              "type": ""default" | "error" | "info" | "warning"",
+            "name": "type",
+            "required": false,
+            "tags": {
+              "default": "'default'",
             },
-            {
-              "description": "Icon displayed in the callout. Can be a string emoji or a custom React element.
+            "type": ""default" | "error" | "info" | "warning"",
+          },
+          {
+            "description": "Icon displayed in the callout. Can be a string emoji or a custom React element.
 
       Default values based on \`type\`:
       - \`'💡'\` for \`type: 'default'\`
       - \`'🚫'\` for \`type: 'error'\`
       - \`<InformationCircleIcon />\` for \`type: 'info'\`
       - \`'⚠️'\` for \`type: 'warning'\`",
-              "name": "emoji",
-              "required": false,
-              "tags": {
-                "default": "Determined by \`type\`",
-              },
-              "type": "ReactNode",
+            "name": "emoji",
+            "required": false,
+            "tags": {
+              "default": "Determined by \`type\`",
             },
-            {
-              "description": "Content to be displayed inside the callout.",
-              "name": "children",
-              "required": true,
-              "tags": {},
-              "type": "ReactNode",
-            },
-          ],
-          "name": "default",
-        },
-      ]
+            "type": "ReactNode",
+          },
+          {
+            "description": "Content to be displayed inside the callout.",
+            "name": "children",
+            "required": true,
+            "tags": {},
+            "type": "ReactNode",
+          },
+        ],
+        "name": "default",
+      }
     `)
   })
   it('<NotFoundPage />', async () => {
@@ -165,48 +159,46 @@ type $ = React.ComponentProps<typeof NotFoundPage>
 export default $`
     const result = generateDocumentation({ code })
     expect(result).toMatchInlineSnapshot(`
-      [
-        {
-          "description": "",
-          "entries": [
-            {
-              "description": "Content of the link.",
-              "name": "content",
-              "required": false,
-              "tags": {
-                "default": "'Submit an issue about broken link'",
-              },
-              "type": "ReactNode",
+      {
+        "description": "",
+        "entries": [
+          {
+            "description": "Content of the link.",
+            "name": "content",
+            "required": false,
+            "tags": {
+              "default": "'Submit an issue about broken link'",
             },
-            {
-              "description": "Labels that can be added to the new created issue.",
-              "name": "labels",
-              "required": false,
-              "tags": {
-                "default": "'bug'",
-              },
-              "type": "string",
+            "type": "ReactNode",
+          },
+          {
+            "description": "Labels that can be added to the new created issue.",
+            "name": "labels",
+            "required": false,
+            "tags": {
+              "default": "'bug'",
             },
-            {
-              "description": "Top content of page.",
-              "name": "children",
-              "required": false,
-              "tags": {
-                "default": "<H1>404: Page Not Found</H1>",
-              },
-              "type": "ReactNode",
+            "type": "string",
+          },
+          {
+            "description": "Top content of page.",
+            "name": "children",
+            "required": false,
+            "tags": {
+              "default": "<H1>404: Page Not Found</H1>",
             },
-            {
-              "description": "CSS class name.",
-              "name": "className",
-              "required": false,
-              "tags": {},
-              "type": "string",
-            },
-          ],
-          "name": "default",
-        },
-      ]
+            "type": "ReactNode",
+          },
+          {
+            "description": "CSS class name.",
+            "name": "className",
+            "required": false,
+            "tags": {},
+            "type": "string",
+          },
+        ],
+        "name": "default",
+      }
     `)
   })
   it('<Navbar />', async () => {
@@ -214,91 +206,89 @@ export default $`
 export default $`
     const result = generateDocumentation({ code })
     expect(result).toMatchInlineSnapshot(`
-      [
-        {
-          "description": "",
-          "entries": [
-            {
-              "description": "Extra content after last icon.",
-              "name": "children",
-              "required": false,
-              "tags": {
-                "remarks": "\`ReactNode\`",
-              },
-              "type": "ReactNode",
+      {
+        "description": "",
+        "entries": [
+          {
+            "description": "Extra content after last icon.",
+            "name": "children",
+            "required": false,
+            "tags": {
+              "remarks": "\`ReactNode\`",
             },
-            {
-              "description": "Specifies whether the logo should have a link or provides the URL for the logo's link.",
-              "name": "logoLink",
-              "required": false,
-              "tags": {
-                "default": "true",
-              },
-              "type": "string | boolean",
+            "type": "ReactNode",
+          },
+          {
+            "description": "Specifies whether the logo should have a link or provides the URL for the logo's link.",
+            "name": "logoLink",
+            "required": false,
+            "tags": {
+              "default": "true",
             },
-            {
-              "description": "Logo of the website.",
-              "name": "logo",
-              "required": true,
-              "tags": {
-                "remarks": "\`ReactElement\`",
-              },
-              "type": "ReactElement",
+            "type": "string | boolean",
+          },
+          {
+            "description": "Logo of the website.",
+            "name": "logo",
+            "required": true,
+            "tags": {
+              "remarks": "\`ReactElement\`",
             },
-            {
-              "description": "URL of the project homepage.",
-              "name": "projectLink",
-              "required": false,
-              "tags": {},
-              "type": "string",
+            "type": "ReactElement",
+          },
+          {
+            "description": "URL of the project homepage.",
+            "name": "projectLink",
+            "required": false,
+            "tags": {},
+            "type": "string",
+          },
+          {
+            "description": "Icon of the project link.",
+            "name": "projectIcon",
+            "required": false,
+            "tags": {
+              "default": "<GitHubIcon />",
+              "remarks": "\`ReactNode\`",
             },
-            {
-              "description": "Icon of the project link.",
-              "name": "projectIcon",
-              "required": false,
-              "tags": {
-                "default": "<GitHubIcon />",
-                "remarks": "\`ReactNode\`",
-              },
-              "type": "ReactNode",
+            "type": "ReactNode",
+          },
+          {
+            "description": "URL of the chat link.",
+            "name": "chatLink",
+            "required": false,
+            "tags": {},
+            "type": "string",
+          },
+          {
+            "description": "Icon of the chat link.",
+            "name": "chatIcon",
+            "required": false,
+            "tags": {
+              "default": "<DiscordIcon />",
+              "remarks": "\`ReactNode\`",
             },
-            {
-              "description": "URL of the chat link.",
-              "name": "chatLink",
-              "required": false,
-              "tags": {},
-              "type": "string",
+            "type": "ReactNode",
+          },
+          {
+            "description": "CSS class name.",
+            "name": "className",
+            "required": false,
+            "tags": {},
+            "type": "string",
+          },
+          {
+            "description": "Aligns navigation links to the specified side.",
+            "name": "align",
+            "required": false,
+            "tags": {
+              "default": ""right"",
             },
-            {
-              "description": "Icon of the chat link.",
-              "name": "chatIcon",
-              "required": false,
-              "tags": {
-                "default": "<DiscordIcon />",
-                "remarks": "\`ReactNode\`",
-              },
-              "type": "ReactNode",
-            },
-            {
-              "description": "CSS class name.",
-              "name": "className",
-              "required": false,
-              "tags": {},
-              "type": "string",
-            },
-            {
-              "description": "Aligns navigation links to the specified side.",
-              "name": "align",
-              "required": false,
-              "tags": {
-                "default": ""right"",
-              },
-              "type": ""left" | "right"",
-            },
-          ],
-          "name": "default",
-        },
-      ]
+            "type": ""left" | "right"",
+          },
+        ],
+        "name": "default",
+      }
     `)
   })
   it('<Head />', async () => {
@@ -306,48 +296,46 @@ export default $`
 export default $`
     const result = generateDocumentation({ code, flattened: true })
     expect(result).toMatchInlineSnapshot(`
-      [
-        {
-          "description": "",
-          "entries": [
-            {
-              "description": "",
-              "name": "color",
-              "required": false,
-              "tags": {
-                "default": "{}",
-              },
-              "type": "{ hue?: number | { dark: number; light: number; }; saturation?: number | { dark: number; light: number; }; lightness?: number | { dark: number; light: number; }; }",
+      {
+        "description": "",
+        "entries": [
+          {
+            "description": "",
+            "name": "color",
+            "required": false,
+            "tags": {
+              "default": "{}",
             },
-            {
-              "description": "The glyph to use as the favicon.",
-              "name": "faviconGlyph",
-              "required": false,
-              "tags": {},
-              "type": "string",
+            "type": "{ hue?: number | { dark: number; light: number; }; saturation?: number | { dark: number; light: number; }; lightness?: number | { dark: number; light: number; }; }",
+          },
+          {
+            "description": "The glyph to use as the favicon.",
+            "name": "faviconGlyph",
+            "required": false,
+            "tags": {},
+            "type": "string",
+          },
+          {
+            "description": "",
+            "name": "backgroundColor",
+            "required": false,
+            "tags": {
+              "default": "{}",
             },
-            {
-              "description": "",
-              "name": "backgroundColor",
-              "required": false,
-              "tags": {
-                "default": "{}",
-              },
-              "type": "{ dark?: string; light?: string; }",
+            "type": "{ dark?: string; light?: string; }",
+          },
+          {
+            "description": "Content of \`<head>\`",
+            "name": "children",
+            "required": false,
+            "tags": {
+              "remarks": "\`ReactNode\`",
             },
-            {
-              "description": "Content of \`<head>\`",
-              "name": "children",
-              "required": false,
-              "tags": {
-                "remarks": "\`ReactNode\`",
-              },
-              "type": "ReactNode",
-            },
-          ],
-          "name": "default",
-        },
-      ]
+            "type": "ReactNode",
+          },
+        ],
+        "name": "default",
+      }
     `)
   })
   it('two declarations', async () => {
@@ -357,21 +345,19 @@ type A = { bar: string }
 export default A`
     const result = generateDocumentation({ code })
     expect(result).toMatchInlineSnapshot(`
-      [
-        {
-          "description": "",
-          "entries": [
-            {
-              "description": "",
-              "name": "foo",
-              "required": true,
-              "tags": {},
-              "type": "string",
-            },
-          ],
-          "name": "default",
-        },
-      ]
+      {
+        "description": "",
+        "entries": [
+          {
+            "description": "",
+            "name": "foo",
+            "required": true,
+            "tags": {},
+            "type": "string",
+          },
+        ],
+        "name": "default",
+      }
     `)
   })
   it('inline description and @description as tag', async () => {
@@ -389,30 +375,28 @@ collapsed?: boolean
 export default $`
     const result = generateDocumentation({ code })
     expect(result).toMatchInlineSnapshot(`
-      [
-        {
-          "description": "",
-          "entries": [
-            {
-              "description": "",
-              "name": "breadcrumb",
-              "required": false,
-              "tags": {
-                "description": "Show or hide breadcrumb navigation.",
-              },
-              "type": "boolean",
+      {
+        "description": "",
+        "entries": [
+          {
+            "description": "",
+            "name": "breadcrumb",
+            "required": false,
+            "tags": {
+              "description": "Show or hide breadcrumb navigation.",
             },
-            {
-              "description": "Indicates whether the item in sidebar is collapsed by default.",
-              "name": "collapsed",
-              "required": false,
-              "tags": {},
-              "type": "boolean",
-            },
-          ],
-          "name": "default",
-        },
-      ]
+            "type": "boolean",
+          },
+          {
+            "description": "Indicates whether the item in sidebar is collapsed by default.",
+            "name": "collapsed",
+            "required": false,
+            "tags": {},
+            "type": "boolean",
+          },
+        ],
+        "name": "default",
+      }
     `)
   })
   it.skip('should work with anonymous type', async () => {
