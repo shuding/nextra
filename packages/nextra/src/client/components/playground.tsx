@@ -11,13 +11,13 @@ import type { MDXRemoteProps } from '../mdx-remote.js'
 export const Playground: FC<
   {
     /**
-     * String with source MDX
-     *
+     * String with source MDX.
      * @example '# hello world <br /> nice to see you'
      */
     source: string
     /**
-     * Fallback component for loading
+     * Fallback component for loading.
+     * @default null
      */
     fallback?: ReactElement | null
   } & Pick<MDXRemoteProps, 'components' | 'scope'>
