@@ -18,7 +18,7 @@ const attributeSchema = z.custom<'class' | `data-${string}`>(
 export const LayoutPropsSchema = z.strictObject({
   banner: reactNode.describe(
     `Rendered [\`<Banner>\` component](/docs/built-ins/banner). E.g. \`<Banner {...bannerProps} />\`
-@remarks \`<Banner />\``
+@remarks \`ReactNode\``
   ),
   children: reactNode.describe('@remarks `ReactNode`'),
   darkMode: z
