@@ -58,13 +58,17 @@ export const HeadPropsSchema = z.strictObject({
     .strictObject({
       hue: darkLightSchema
         .default({ dark: 204, light: 212 })
-        .describe('The hue of the primary theme color.<br/>`(0 - 360)`'),
+        .describe('The hue of the primary theme color.<br/>Range: `0 - 360`'),
       saturation: darkLightSchema
         .default(100)
-        .describe('The saturation of the primary theme color.<br/>`(0 - 100)`'),
+        .describe(
+          'The saturation of the primary theme color.<br/>Range: `0 - 100`'
+        ),
       lightness: darkLightSchema
         .default({ dark: 55, light: 45 })
-        .describe('The lightness of the primary theme color.<br/>`(0 - 100)`')
+        .describe(
+          'The lightness of the primary theme color.<br/>Range: `0 - 100`'
+        )
     })
     .default({}),
   faviconGlyph: z
@@ -75,10 +79,14 @@ export const HeadPropsSchema = z.strictObject({
     .strictObject({
       dark: colorSchema
         .default('rgb(17,17,17)')
-        .describe('Background color for dark theme. `"rgb(RRR,GGG,BBB)" | "#RRGGBB"`'),
+        .describe(
+          'Background color for dark theme.<br/>Format: `"rgb(RRR,GGG,BBB)" | "#RRGGBB"`'
+        ),
       light: colorSchema
         .default('rgb(250,250,250)')
-        .describe('Background color for light theme. `"rgb(RRR,GGG,BBB)" | "#RRGGBB"`')
+        .describe(
+          'Background color for light theme.<br/>Format: `"rgb(RRR,GGG,BBB)" | "#RRGGBB"`'
+        )
     })
     .default({}),
   children: reactNode.describe(`Content of \`<head>\`
