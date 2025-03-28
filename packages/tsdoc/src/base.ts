@@ -99,7 +99,7 @@ function getDocEntry(
     .getTypeChecker()
     .getTypeOfSymbolAtLocation(prop, declaration)
 
-  if (flattened && subType.isObject()) {
+  if (flattened && subType.isObject() && !subType.isArray()) {
     return subType.getProperties().flatMap(childProp =>
       getDocEntry(childProp, {
         declaration,
