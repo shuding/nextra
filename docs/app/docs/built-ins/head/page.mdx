@@ -2,6 +2,8 @@
 sidebarTitle: Head
 ---
 
+import { generateTsFromZod } from '@nextra/tsdoc'
+import { HeadPropsSchema } from 'private-next-root-dir/../packages/nextra/dist/client/components/head'
 import { BackgroundColor, Slider } from './_slider'
 
 # `<Head>` Component
@@ -18,6 +20,11 @@ of the website.
 | `backgroundColor.dark`  | `"rgb(RRR,GGG,BBB)" \| "#RRGGBB"{:ts}`           | `'rgb(17,17,17)'{:ts}`           | Background color for light theme.                    |
 | `backgroundColor.light` | `"rgb(RRR,GGG,BBB)" \| "#RRGGBB"{:ts}`           | `'rgb(250,250,250)'{:ts}`        | Background color for dark theme.                     |
 | `faviconGlyph`          | `string{:ts}`                                    |                                  | The glyph to use as the favicon.                     |
+
+<TSDoc
+  code={`type  $ = ${generateTsFromZod(HeadPropsSchema)}
+export default $`}
+/>
 
 ## Static Head Tags
 

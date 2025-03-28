@@ -53,7 +53,7 @@ const colorSchema = z
     return value
   })
 
-const headSchema = z.strictObject({
+export const HeadPropsSchema = z.strictObject({
   color: z
     .strictObject({
       hue: darkLightSchema.default({ dark: 204, light: 212 }),
@@ -71,10 +71,10 @@ const headSchema = z.strictObject({
   children: reactNode
 })
 
-type HeadProps = Partial<z.input<typeof headSchema>>
+type HeadProps = Partial<z.input<typeof HeadPropsSchema>>
 
 export const Head: FC<HeadProps> = ({ children, ...props }) => {
-  const { data, error } = headSchema.safeParse(props)
+  const { data, error } = HeadPropsSchema.safeParse(props)
   if (error) {
     throw fromZodError(error)
   }

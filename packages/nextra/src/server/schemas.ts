@@ -5,7 +5,6 @@ import { isValidElement } from 'react'
 import type { Options as RehypeKatexOptions } from 'rehype-katex'
 import type { Options as RehypePrettyCodeOptions } from 'rehype-pretty-code'
 import { z } from 'zod'
-import { pageThemeSchema } from './page-theme-schema.js'
 import { pageTitleFromFilename } from './utils.js'
 
 export const mathJaxOptionsSchema = z.strictObject({
@@ -100,6 +99,49 @@ export const reactNode = z.custom<ReactNode>(
 )
 
 const stringOrElement = z.union([z.string(), element])
+
+export const pageThemeSchema = z.strictObject({
+  breadcrumb: z
+    .boolean()
+    .optional()
+    .describe('Show or hide breadcrumb navigation.'),
+  collapsed: z
+    .boolean()
+    .optional()
+    .describe('Indicates whether the item in sidebar is collapsed by default.'),
+  footer: z
+    .boolean()
+    .optional()
+    .describe('Specifies whether to display the footer.'),
+  layout: z
+    .enum(['default', 'full'])
+    .optional()
+    .describe('Defines the layout style.'),
+  navbar: z
+    .boolean()
+    .optional()
+    .describe('Specifies whether to display the navbar.'),
+  pagination: z
+    .boolean()
+    .optional()
+    .describe('Determines if pagination controls are shown.'),
+  sidebar: z
+    .boolean()
+    .optional()
+    .describe('Specifies whether to display the sidebar.'),
+  timestamp: z
+    .boolean()
+    .optional()
+    .describe('Indicates if "last updated" timestamps are displayed.'),
+  toc: z
+    .boolean()
+    .optional()
+    .describe('Determines whether a table of contents is displayed.'),
+  typesetting: z
+    .enum(['default', 'article'])
+    .optional()
+    .describe('Configures the text typesetting style.')
+})
 
 const title = stringOrElement.optional()
 
