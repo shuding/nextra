@@ -375,18 +375,22 @@ export default $`
         "description": "",
         "entries": [
           {
-            "description": "Rendered [\`<Banner>\` component](/docs/built-ins/banner). E.g. \`<Banner {...bannerProps} />{:ts}\`",
+            "description": "Rendered [\`<Banner>\` component](/docs/built-ins/banner). E.g. \`<Banner {...bannerProps} />\`",
             "name": "banner",
             "required": false,
-            "tags": {},
-            "type": ""@TODO TO IMPLEMENT"",
+            "tags": {
+              "remarks": "\`<Banner />\`",
+            },
+            "type": "<Banner />",
           },
           {
             "description": "",
             "name": "children",
             "required": false,
-            "tags": {},
-            "type": ""@TODO TO IMPLEMENT"",
+            "tags": {
+              "remarks": "\`ReactNode\`",
+            },
+            "type": "ReactNode",
           },
           {
             "description": "Show or hide the dark mode select button.",
@@ -510,20 +514,23 @@ export default $`
             "type": "string",
           },
           {
-            "description": "Page map list. Result of \`getPageMap(route = '/'){:ts}\` call.",
+            "description": "Page map list. Result of \`getPageMap(route = '/')\` call.",
             "name": "pageMap",
             "required": true,
-            "tags": {},
-            "type": ""@TODO TO IMPLEMENT"[]",
+            "tags": {
+              "remarks": "\`PageMapItem\`",
+            },
+            "type": "PageMapItem",
           },
           {
-            "description": "Rendered [\`<Search>\` component](/docs/built-ins/search). E.g. \`<Search {...searchProps} />{:ts}\`",
+            "description": "Rendered [\`<Search>\` component](/docs/built-ins/search). E.g. \`<Search {...searchProps} />\`",
             "name": "search",
             "required": false,
             "tags": {
               "default": "{"key":null,"props":{},"_owner":null,"_store":{}}",
+              "remarks": "\`ReactNode\`",
             },
-            "type": ""@TODO TO IMPLEMENT"",
+            "type": "ReactNode",
           },
           {
             "description": "",
@@ -592,15 +599,18 @@ export default $`
             "required": false,
             "tags": {
               "default": ""Scroll to top"",
+              "remarks": "\`ReactNode\`",
             },
-            "type": ""@TODO TO IMPLEMENT"",
+            "type": "ReactNode",
           },
           {
             "description": "",
             "name": "toc.extraContent",
             "required": false,
-            "tags": {},
-            "type": ""@TODO TO IMPLEMENT"",
+            "tags": {
+              "remarks": "\`ReactNode\`",
+            },
+            "type": "ReactNode",
           },
           {
             "description": "",
@@ -617,8 +627,9 @@ export default $`
             "required": false,
             "tags": {
               "default": ""On This Page"",
+              "remarks": "\`ReactNode\`",
             },
-            "type": ""@TODO TO IMPLEMENT"",
+            "type": "ReactNode",
           },
         ],
         "name": "default",
