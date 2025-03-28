@@ -13,6 +13,31 @@ import { MDXRemote } from 'nextra/mdx-remote'
 A built-in component that allows you to display content in a visually appealing card format. It
 includes options for adding an icon, title, link and an image to related content.
 
+## Cards props
+
+<TSDoc
+  code={`
+import type { ComponentProps } from 'react'
+import type { Cards } from 'nextra/components'
+
+type $ = Omit<
+ ComponentProps<typeof Cards>,
+ keyof ComponentProps<'div'>
+> & {
+ '...props': ComponentProps<'div'>
+}
+
+export default $`}
+/>
+
+## Card props
+
+<TSDoc
+  code={`import type { Cards } from 'nextra/components'
+type $ = React.ComponentProps<typeof Cards.Card>
+export default $`}
+/>
+
 export async function CardsPage() {
   const mdx2 = `<Cards.Card
   icon={<BoxIcon />}
