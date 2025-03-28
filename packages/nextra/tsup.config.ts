@@ -15,6 +15,7 @@ export default defineConfig({
   format: 'esm',
   dts: true,
   splitting: IS_PRODUCTION,
+  clean: IS_PRODUCTION,
   bundle: false,
   external: ['shiki', 'webpack'],
   async onSuccess() {

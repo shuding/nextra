@@ -61,14 +61,15 @@ export const HeadPropsSchema = z.strictObject({
       lightness: darkLightSchema.default({ dark: 55, light: 45 })
     })
     .default({}),
-  faviconGlyph: z.string().optional(),
+  faviconGlyph: z.string().optional().describe('The glyph to use as the favicon.'),
   backgroundColor: z
     .strictObject({
       dark: colorSchema.default('rgb(17,17,17)'),
       light: colorSchema.default('rgb(250,250,250)')
     })
     .default({}),
-  children: reactNode
+  children: reactNode.describe(`Content of \`<head>\`
+@remarks \`ReactNode\``)
 })
 
 type HeadProps = Partial<z.input<typeof HeadPropsSchema>>
