@@ -33,7 +33,9 @@ const {
           TabObjectItem:
             'https://github.com/shuding/nextra/blob/fb376a635de7fa287d5ffec9dbb5f40f1cfdb0f6/packages/nextra/src/client/components/tabs/index.client.tsx#L23',
           PageMapItem:
-            'https://github.com/shuding/nextra/blob/fb376a635de7fa287d5ffec9dbb5f40f1cfdb0f6/packages/nextra/src/types.ts#L66'
+            'https://github.com/shuding/nextra/blob/fb376a635de7fa287d5ffec9dbb5f40f1cfdb0f6/packages/nextra/src/types.ts#L66',
+          ThemeProviderProps:
+            'https://github.com/pacocoursey/next-themes/blob/c89d0191ce0f19215d7ddfa9eb28e1e4f94d37e5/next-themes/src/types.ts#L34-L57'
         }}
       />
     )

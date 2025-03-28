@@ -37,8 +37,9 @@ export const LayoutPropsSchema = z.strictObject({
     .strictObject({
       content: reactNode
         .default('Question? Give us feedback')
-        .describe('@remarks `ReactNode`'),
-      labels: z.string().default('feedback')
+        .describe(`Content of the feedback link.
+@remarks \`ReactNode\``),
+      labels: z.string().default('feedback').describe('Labels that can be added to the new created issue.')
     })
     .default({}),
   footer: reactNode.describe(
@@ -97,7 +98,9 @@ import { Layout, LastUpdated } from 'nextra-theme-docs'
     })
     .default({})
     .describe(
-      'Configuration for the [next-themes](https://github.com/pacocoursey/next-themes#themeprovider) package.'
+      `Configuration for the [next-themes](https://github.com/pacocoursey/next-themes#themeprovider) package.
+@default { attribute: "class", defaultTheme: "system", disableTransitionOnChange: true, storageKey: "theme" }
+@remarks \`ThemeProviderProps\``
     ),
   pageMap: z.array(z.custom<PageMapItem>())
     .describe(`Page map list. Result of \`getPageMap(route = '/')\` call.

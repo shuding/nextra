@@ -9,12 +9,14 @@ import { LayoutPropsSchema } from 'private-next-root-dir/../packages/nextra-them
 export const layoutProps = generateTsFromZod(LayoutPropsSchema)
 
 export function PartialTSDoc({ flattened, props }) {
-  return <TSDoc
-  flattened={flattened}
-  code={`
+  return (
+    <TSDoc
+      flattened={flattened}
+      code={`
 type $ = Pick<${layoutProps}, ${props.map(prop => JSON.stringify(prop)).join('|')}>
 export default $`}
-  />
+    />
+  )
 }
 
 # `<Layout>` Component
@@ -67,9 +69,7 @@ Detailed information for each option is listed below.
 
 ## Search
 
-|          |                  |              |                                                                                                  |
-| -------- | ---------------- | ------------ | ------------------------------------------------------------------------------------------------ |
-| `search` | `ReactNode{:ts}` | `<Search />` | Rendered [`<Search>` component](/docs/built-ins/search). E.g. `<Search {...searchProps} />{:ts}` |
+<PartialTSDoc props={['search']} />
 
 ## Docs Repository
 
@@ -78,9 +78,7 @@ Set the repository URL of the documentation. It's used to generate the
 "[Report of broken link](./not-found)" on
 [not found page](https://nextjs.org/docs/app/api-reference/file-conventions/not-found).
 
-|                      |               |                                            |                                      |
-| -------------------- | ------------- | ------------------------------------------ | ------------------------------------ |
-| `docsRepositoryBase` | `string{:ts}` | `'https://github.com/shuding/nextra'{:ts}` | URL of the documentation repository. |
+<PartialTSDoc props={['docsRepositoryBase']} />
 
 ### Specify a Path
 
@@ -100,27 +98,18 @@ Then Nextra will automatically generate the correct file path for all pages.
 
 Customize the theme behavior of the website.
 
-|              |                |                                                                                                             |                                                                                                        |
-| ------------ | -------------- | ----------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
-| `darkMode`   | `boolean{:ts}` | `true{:ts}`                                                                                                 | Show or hide the dark mode select button.                                                              |
-| `nextThemes` | `object{:ts}`  | `{ attribute: 'class', defaultTheme: 'system', disableTransitionOnChange: true, storageKey: 'theme' }{:ts}` | Configuration for the [next-themes](https://github.com/pacocoursey/next-themes#themeprovider) package. |
+<PartialTSDoc props={['darkMode', 'nextThemes']} />
 
 import Old from './old.mdx'
 
 {process.env.NODE_ENV !== 'production' && <Old />}
-
-|              |                            |     |                        |
-| ------------ | -------------------------- | --- | ---------------------- |
-| `components` | `Record<string, React.FC>` |     | Custom MDX components. |
 
 ## Edit Link
 
 Show an "Edit this page" link on the page that points to the file URL on GitHub
 (or other places).
 
-|            |                  |                         |                           |
-| ---------- | ---------------- | ----------------------- | ------------------------- |
-| `editLink` | `ReactNode{:ts}` | `'Edit this page'{:ts}` | Content of the edit link. |
+<PartialTSDoc props={['editLink']} />
 
 > [!TIP]
 >
@@ -133,10 +122,7 @@ documentation. By default, it's a link that points to the issue creation form of
 the docs repository, with the current website title prefilled:
 [example](https://github.com/shuding/nextra/issues/new?title=Feedback%20for%20%E2%80%9CTheme%20Configuration%E2%80%9D&labels=feedback).
 
-|                    |                  |                                     |                                                    |
-| ------------------ | ---------------- | ----------------------------------- | -------------------------------------------------- |
-| `feedback.content` | `ReactNode{:ts}` | `'Question? Give us feedback'{:ts}` | Content of the feedback link.                      |
-| `feedback.labels`  | `string{:ts}`    | `'feedback'{:ts}`                   | Labels that can be added to the new created issue. |
+<PartialTSDoc props={['feedback']} flattened />
 
 > [!TIP]
 >
