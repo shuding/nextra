@@ -27,7 +27,9 @@ export type BaseTypeTableProps = {
   code: string
   /**
    * Whether to flatten nested objects.
-   * > [!Warning]
+   * E.g. `{ foo: { bar: string } }` will be represented as: `{ foo.bar: string }`
+   * > [!WARNING]
+   * >
    * > Requires `exactOptionalPropertyTypes: true` in `tsconfig.json`
    * @default false
    */
@@ -72,9 +74,8 @@ export function generateDocumentation({
     .getProperties()
     .flatMap(prop => getDocEntry(prop, { declaration, flattened }))
     .filter(entry => !('internal' in entry.tags))
-
   if (!entries.length) {
-    throw new Error('No properties found, check if your type exist')
+    throw new Error(`No properties found, check if your type "${declaration.getType().getText()}" exist`)
   }
 
   return {

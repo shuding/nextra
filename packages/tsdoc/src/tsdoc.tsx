@@ -10,19 +10,20 @@ import { generateDocumentation } from './base.js'
 
 type TSDocProps = BaseTypeTableProps & {
   /**
-   * Override the function to render markdown into JSX nodes
+   * Override the function to render markdown into JSX nodes.
+   * @default `compileMdx`
    */
   renderMarkdown?: typeof renderMarkdownDefault
   /**
-   * Type links map
+   * Type links map.
    * @default `{}`
    */
   typeLinkMap?: Record<string, string>
 }
 
-async function renderMarkdownDefault(md: string): Promise<ReactNode> {
-  if (!md) return
-  const rawJs = await compileMdx(md)
+async function renderMarkdownDefault(rawMarkdown: string): Promise<ReactNode> {
+  if (!rawMarkdown) return
+  const rawJs = await compileMdx(rawMarkdown)
   return <MDXRemote compiledSource={rawJs} />
 }
 
