@@ -1,6 +1,6 @@
+import { NavbarPropsSchema } from '../../../nextra-theme-docs/src/components/navbar/index.js'
 import { getTypeTableOutput } from '../type-table.js'
 import { generateTsFromZod } from '../zod-to-ts.js'
-import { NavbarPropsSchema } from '../../../nextra-theme-docs/src/components/navbar/index.js'
 
 describe('TypeTable', () => {
   it('<Banner />', async () => {

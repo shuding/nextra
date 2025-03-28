@@ -10,7 +10,6 @@ describe('generateTsFromZod', () => {
       age: z.number().optional().describe("User's age"),
       isAdmin: z.boolean().default(false).describe('Admin status')
     })
-
     const expected = `{
   /**
    * The unique identifier
@@ -34,7 +33,6 @@ describe('generateTsFromZod', () => {
    */
   isAdmin?: boolean
 }`
-
     expect(generateTsFromZod(schema)).toBe(expected)
   })
 
@@ -52,7 +50,6 @@ describe('generateTsFromZod', () => {
         })
         .describe('User')
     })
-
     const expected = `{
   /**
    * User
@@ -80,7 +77,6 @@ describe('generateTsFromZod', () => {
     }
   }
 }`
-
     expect(generateTsFromZod(schema)).toBe(expected)
   })
 
@@ -91,7 +87,6 @@ describe('generateTsFromZod', () => {
         .union([z.literal('active'), z.literal('inactive')])
         .describe('User status')
     })
-
     const expected = `{
   /**
    * User tags
@@ -103,7 +98,6 @@ describe('generateTsFromZod', () => {
    */
   status: "active" | "inactive"
 }`
-
     expect(generateTsFromZod(schema)).toBe(expected)
   })
 
@@ -112,7 +106,6 @@ describe('generateTsFromZod', () => {
       nickname: z.string().nullable().describe('User nickname'),
       country: z.string().optional().describe("User's country")
     })
-
     const expected = `{
   /**
    * User nickname
@@ -124,7 +117,6 @@ describe('generateTsFromZod', () => {
    */
   country?: string
 }`
-
     expect(generateTsFromZod(schema)).toBe(expected)
   })
 
@@ -133,7 +125,6 @@ describe('generateTsFromZod', () => {
       active: z.boolean().default(true).describe('User active status'),
       count: z.number().default(0).describe('User count')
     })
-
     const expected = `{
   /**
    * User active status
@@ -147,22 +138,18 @@ describe('generateTsFromZod', () => {
    */
   count?: number
 }`
-
     expect(generateTsFromZod(schema)).toBe(expected)
   })
 
   it('should handle enum', () => {
-    expect(
-      generateTsFromZod(
-        z.strictObject({
-          layout: z
-            .enum(['default', 'full'])
-            .optional()
-            .default('default')
-            .describe('Defines the layout style.')
-        })
-      )
-    ).toMatchInlineSnapshot(`
+    const schema = z.strictObject({
+      layout: z
+        .enum(['default', 'full'])
+        .optional()
+        .default('default')
+        .describe('Defines the layout style.')
+    })
+    expect(generateTsFromZod(schema)).toMatchInlineSnapshot(`
       "{
         /**
          * Defines the layout style.
@@ -174,15 +161,12 @@ describe('generateTsFromZod', () => {
   })
 
   it('should handle ReactNode', () => {
-    expect(
-      generateTsFromZod(
-        z.strictObject({
-          children: reactNode
-            .describe('Extra content after last icon.')
-            .default(null)
-        })
-      )
-    ).toMatchInlineSnapshot(`
+    const schema = z.strictObject({
+      children: reactNode
+        .describe('Extra content after last icon.')
+        .default(null)
+    })
+    expect(generateTsFromZod(schema)).toMatchInlineSnapshot(`
       "{
         /**
          * Extra content after last icon.
