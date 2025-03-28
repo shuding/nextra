@@ -461,8 +461,10 @@ export default $`
             "description": "Component to render the last updated info.",
             "name": "lastUpdated",
             "required": false,
-            "tags": {},
-            "type": ""@TODO TO IMPLEMENT"",
+            "tags": {
+              "remarks": "\`ReactElement\`",
+            },
+            "type": "ReactElement",
           },
           {
             "description": "Rendered [\`<Navbar>\` component](/docs/docs-theme/built-ins/navbar). E.g. \`<Navbar {...navbarProps} />\`",

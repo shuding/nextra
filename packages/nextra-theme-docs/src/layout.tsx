@@ -68,8 +68,8 @@ import { Layout, LastUpdated } from 'nextra-theme-docs'
 </Layout>
 \`\`\`
 `
-    })
-    .describe('Component to render the last updated info.'),
+    }).describe(`Component to render the last updated info.
+@remarks \`ReactElement\``),
   navbar: reactNode.describe(
     `Rendered [\`<Navbar>\` component](/docs/docs-theme/built-ins/navbar). E.g. \`<Navbar {...navbarProps} />\`
 @remarks \`ReactNode\``
