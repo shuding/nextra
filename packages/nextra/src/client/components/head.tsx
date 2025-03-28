@@ -56,9 +56,15 @@ const colorSchema = z
 export const HeadPropsSchema = z.strictObject({
   color: z
     .strictObject({
-      hue: darkLightSchema.default({ dark: 204, light: 212 }),
-      saturation: darkLightSchema.default(100),
-      lightness: darkLightSchema.default({ dark: 55, light: 45 })
+      hue: darkLightSchema
+        .default({ dark: 204, light: 212 })
+        .describe('The hue of the primary theme color.<br/>`(0 - 360)`'),
+      saturation: darkLightSchema
+        .default(100)
+        .describe('The saturation of the primary theme color.<br/>`(0 - 100)`'),
+      lightness: darkLightSchema
+        .default({ dark: 55, light: 45 })
+        .describe('The lightness of the primary theme color.<br/>`(0 - 100)`')
     })
     .default({}),
   faviconGlyph: z
@@ -67,8 +73,12 @@ export const HeadPropsSchema = z.strictObject({
     .describe('The glyph to use as the favicon.'),
   backgroundColor: z
     .strictObject({
-      dark: colorSchema.default('rgb(17,17,17)'),
-      light: colorSchema.default('rgb(250,250,250)')
+      dark: colorSchema
+        .default('rgb(17,17,17)')
+        .describe('Background color for dark theme. `"rgb(RRR,GGG,BBB)" | "#RRGGBB"`'),
+      light: colorSchema
+        .default('rgb(250,250,250)')
+        .describe('Background color for light theme. `"rgb(RRR,GGG,BBB)" | "#RRGGBB"`')
     })
     .default({}),
   children: reactNode.describe(`Content of \`<head>\`
