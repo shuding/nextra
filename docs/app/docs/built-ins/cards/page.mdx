@@ -13,7 +13,9 @@ import { MDXRemote } from 'nextra/mdx-remote'
 A built-in component that allows you to display content in a visually appealing card format. It
 includes options for adding an icon, title, link and an image to related content.
 
-## Cards props
+## Props
+
+### Cards
 
 <TSDoc
   code={`
@@ -30,7 +32,7 @@ type $ = Omit<
 export default $`}
 />
 
-## Card props
+### Card
 
 <TSDoc
   code={`import type { Cards } from 'nextra/components'
@@ -64,7 +66,7 @@ export async function CardsPage() {
   />
 </Cards>`
   const rawJs = await compileMdx(`
-## Grouped Cards
+## Grouped cards
 
 ### Example
 
@@ -74,7 +76,7 @@ ${mdx}
 
 Import the \`<Cards>\` component to your page, which includes the \`<Card>\` component.
 
-Then, _optionally_ import the icons that you want to use. To create a set of cards, follow the
+Then, optionally import the icons that you want to use. To create a set of cards, follow the
 example below where the \`<Cards.Card>\` component is used to create a card and the \`<Cards>\`
 component is used to group multiple cards together.
 
@@ -84,7 +86,7 @@ import { CardsIcon, OneIcon, WarningIcon } from '../path/with/your/icons'
 ${mdx}
 ~~~
 
-## Single Card
+## Single card
 
 A \`<Card>\` not wrapped in a \`<Cards>\` component will not be grouped with other cards. This can
 be useful if you want to display a single card in a different format than the other cards on the
