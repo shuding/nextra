@@ -291,7 +291,7 @@ export default $`
       }
     `)
   })
-  it('<Head />', async () => {
+  it.only('<Head /> with `flattened: true`', async () => {
     const code = `type $ = ${generateTsFromZod(HeadPropsSchema)}
 export default $`
     const result = generateDocumentation({ code, flattened: true })
@@ -301,12 +301,30 @@ export default $`
         "entries": [
           {
             "description": "",
-            "name": "color",
+            "name": "color.hue",
             "required": false,
             "tags": {
-              "default": "{}",
+              "default": "{"dark":204,"light":212}",
             },
-            "type": "{ hue?: number | { dark: number; light: number; }; saturation?: number | { dark: number; light: number; }; lightness?: number | { dark: number; light: number; }; }",
+            "type": "number | { dark: number; light: number; }",
+          },
+          {
+            "description": "",
+            "name": "color.saturation",
+            "required": false,
+            "tags": {
+              "default": "100",
+            },
+            "type": "number | { dark: number; light: number; }",
+          },
+          {
+            "description": "",
+            "name": "color.lightness",
+            "required": false,
+            "tags": {
+              "default": "{"dark":55,"light":45}",
+            },
+            "type": "number | { dark: number; light: number; }",
           },
           {
             "description": "The glyph to use as the favicon.",
@@ -317,12 +335,21 @@ export default $`
           },
           {
             "description": "",
-            "name": "backgroundColor",
+            "name": "backgroundColor.dark",
             "required": false,
             "tags": {
-              "default": "{}",
+              "default": ""rgb(17,17,17)"",
             },
-            "type": "{ dark?: string; light?: string; }",
+            "type": "string",
+          },
+          {
+            "description": "",
+            "name": "backgroundColor.light",
+            "required": false,
+            "tags": {
+              "default": ""rgb(250,250,250)"",
+            },
+            "type": "string",
           },
           {
             "description": "Content of \`<head>\`",
