@@ -1,4 +1,4 @@
-import type { ExportedDeclarations, Symbol as TsSymbol, Type } from 'ts-morph'
+import type { ExportedDeclarations, Symbol as TsSymbol } from 'ts-morph'
 import { Project, ts } from 'ts-morph'
 
 const project = new Project({
@@ -20,16 +20,11 @@ interface DocEntry {
   required: boolean
 }
 
-interface EntryContext {
-  type: Type
-  declaration: ExportedDeclarations
-}
-
 export interface BaseTypeTableProps {
   /** TypeScript source code. */
   code: string
   /** Should flatten nested objects. */
-  flattened?: boolean,
+  flattened?: boolean
   /**
    * Name of exported declaration.
    * @default 'default'
@@ -40,10 +35,13 @@ export interface BaseTypeTableProps {
 /**
  * Generate documentation for properties in an exported type/interface
  */
-export function generateDocumentation(
-  { code, exportName = 'default' }: BaseTypeTableProps
-): GeneratedDoc {
-  const sourceFile = project.createSourceFile('temp.ts', code, { overwrite: true })
+export function generateDocumentation({
+  code,
+  exportName = 'default'
+}: BaseTypeTableProps): GeneratedDoc {
+  const sourceFile = project.createSourceFile('temp.ts', code, {
+    overwrite: true
+  })
   const output: ExportedDeclarations[] = []
   for (const [key, declaration] of sourceFile.getExportedDeclarations()) {
     if (key === exportName) output.push(...declaration)
@@ -53,24 +51,21 @@ export function generateDocumentation(
     throw new Error(`Can't find "${exportName}" declaration`)
   }
   if (output.length > 1) {
-    throw new Error(`Export "${exportName}" should not have more than one type declaration.`)
+    throw new Error(
+      `Export "${exportName}" should not have more than one type declaration.`
+    )
   }
-  const entryContext: EntryContext = {
-    type: declaration.getType(),
-    declaration
-  }
+
   const comment = declaration
     .getSymbol()
     ?.compilerSymbol.getDocumentationComment(
       project.getTypeChecker().compilerObject
     )
-  const properties = declaration.getType().getProperties()
-
-  const entries = properties
-    .map(prop => getDocEntry(prop, entryContext))
-    .filter(
-      (entry) => !('internal' in entry.tags)
-    )
+  const entries = declaration
+    .getType()
+    .getProperties()
+    .map(prop => getDocEntry(prop, declaration))
+    .filter(entry => !('internal' in entry.tags))
   return {
     name: exportName,
     description: comment ? ts.displayPartsToString(comment) : '',
@@ -78,19 +73,22 @@ export function generateDocumentation(
   }
 }
 
-function getDocEntry(prop: TsSymbol, context: EntryContext): DocEntry {
+function getDocEntry(
+  prop: TsSymbol,
+  declaration: ExportedDeclarations
+): DocEntry {
   const subType = project
     .getTypeChecker()
-    .getTypeOfSymbolAtLocation(prop, context.declaration)
+    .getTypeOfSymbolAtLocation(prop, declaration)
   const tags = Object.fromEntries(
     prop
       .getJsDocTags()
       .map(tag => [tag.getName(), ts.displayPartsToString(tag.getText())])
   )
-
   let typeName = subType
     .getNonNullableType()
     .getText(undefined, ts.TypeFormatFlags.UseAliasDefinedOutsideCurrentScope)
+
   const aliasSymbol = subType.getAliasSymbol()
 
   if (aliasSymbol && !subType.getAliasTypeArguments().length) {
