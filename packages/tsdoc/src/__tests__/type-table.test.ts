@@ -1,4 +1,6 @@
 import { getTypeTableOutput } from '../type-table.js'
+import { generateTsFromZod } from '../zod-to-ts.js'
+import { NavbarPropsSchema } from '../../../nextra-theme-docs/src/components/navbar/index.js'
 
 describe('TypeTable', () => {
   it('<Banner />', async () => {
@@ -199,6 +201,98 @@ export default $`
               "required": false,
               "tags": {},
               "type": "string",
+            },
+          ],
+          "name": "default",
+        },
+      ]
+    `)
+  })
+  it('<Navbar />', async () => {
+    const code = `type $ = ${generateTsFromZod(NavbarPropsSchema)}
+export default $`
+    const result = await getTypeTableOutput({ code })
+    expect(result).toMatchInlineSnapshot(`
+      [
+        {
+          "description": "",
+          "entries": [
+            {
+              "description": "Extra content after last icon.",
+              "name": "children",
+              "required": false,
+              "tags": {
+                "remarks": "\`ReactNode\`",
+              },
+              "type": "ReactNode",
+            },
+            {
+              "description": "Specifies whether the logo should have a link or provides the URL for the logo's link.",
+              "name": "logoLink",
+              "required": false,
+              "tags": {
+                "default": "true",
+              },
+              "type": "string | boolean",
+            },
+            {
+              "description": "Logo of the website.",
+              "name": "logo",
+              "required": true,
+              "tags": {
+                "remarks": "\`ReactElement\`",
+              },
+              "type": "ReactElement",
+            },
+            {
+              "description": "URL of the project homepage.",
+              "name": "projectLink",
+              "required": false,
+              "tags": {},
+              "type": "string",
+            },
+            {
+              "description": "Icon of the project link.",
+              "name": "projectIcon",
+              "required": false,
+              "tags": {
+                "default": "<GitHubIcon />",
+                "remarks": "\`ReactNode\`",
+              },
+              "type": "ReactNode",
+            },
+            {
+              "description": "URL of the chat link.",
+              "name": "chatLink",
+              "required": false,
+              "tags": {},
+              "type": "string",
+            },
+            {
+              "description": "Icon of the chat link.",
+              "name": "chatIcon",
+              "required": false,
+              "tags": {
+                "default": "<DiscordIcon />",
+                "remarks": "\`ReactNode\`",
+              },
+              "type": "ReactNode",
+            },
+            {
+              "description": "CSS class name.",
+              "name": "className",
+              "required": false,
+              "tags": {},
+              "type": "string",
+            },
+            {
+              "description": "Aligns navigation links to the specified side.",
+              "name": "align",
+              "required": false,
+              "tags": {
+                "default": ""right"",
+              },
+              "type": ""left" | "right"",
             },
           ],
           "name": "default",

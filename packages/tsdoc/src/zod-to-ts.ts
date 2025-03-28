@@ -66,7 +66,11 @@ function getDocComment(schema: z.ZodTypeAny, indent: number): string {
   if (description) {
     comments.push(` * ${description}`)
   }
-  if (!description?.includes('\n@default') && defaultValue !== undefined) {
+  if (
+    // Do not add zod's `.default()` value, if already exist in TSDoc description
+    !description?.includes('\n@default') &&
+    defaultValue !== undefined
+  ) {
     comments.push(` * @default ${JSON.stringify(defaultValue)}`)
   }
   if (!comments.length) {
