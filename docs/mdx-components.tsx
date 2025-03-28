@@ -1,10 +1,8 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
 
-import { createTypeTable } from '@nextra/tsdoc'
+import { unstable_TSDoc as TSDoc } from '@nextra/tsdoc'
 import { useMDXComponents as getDocsMDXComponents } from 'nextra-theme-docs'
-
-const { TSDoc } = createTypeTable()
 
 const {
   tr: Tr,

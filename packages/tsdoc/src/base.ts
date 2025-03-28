@@ -6,13 +6,15 @@ const project = new Project({
   skipAddingFilesFromTsConfig: true
 })
 
-interface GeneratedDoc {
+const { compilerObject } = project.getTypeChecker()
+
+type GeneratedDoc = {
   name: string
   description: string
   entries: DocEntry[]
 }
 
-interface DocEntry {
+type DocEntry = {
   name: string
   description: string
   type: string
@@ -20,7 +22,7 @@ interface DocEntry {
   required: boolean
 }
 
-export interface BaseTypeTableProps {
+export type BaseTypeTableProps = {
   /** TypeScript source code. */
   code: string
   /** Should flatten nested objects. */
@@ -58,9 +60,7 @@ export function generateDocumentation({
 
   const comment = declaration
     .getSymbol()
-    ?.compilerSymbol.getDocumentationComment(
-      project.getTypeChecker().compilerObject
-    )
+    ?.compilerSymbol.getDocumentationComment(compilerObject)
   const entries = declaration
     .getType()
     .getProperties()
@@ -101,9 +101,7 @@ function getDocEntry(
   const entry: DocEntry = {
     name: prop.getName(),
     description: ts.displayPartsToString(
-      prop.compilerSymbol.getDocumentationComment(
-        project.getTypeChecker().compilerObject
-      )
+      prop.compilerSymbol.getDocumentationComment(compilerObject)
     ),
     tags,
     type: typeName,

@@ -1,21 +1,36 @@
 import slugify from '@sindresorhus/slugify'
 import cn from 'clsx'
 import { Link } from 'nextra-theme-docs'
+import { compileMdx } from 'nextra/compile'
 import { Code } from 'nextra/components'
+import { MDXRemote } from 'nextra/mdx-remote'
 import type { FC, ReactNode } from 'react'
+import type { BaseTypeTableProps } from './base.js'
+import { generateDocumentation } from './base.js'
 
-interface ObjectType {
-  /** Additional description of the field */
-  description: ReactNode
-  type: string
-  default?: string
-  required?: boolean
+type TSDocProps = BaseTypeTableProps & {
+  /**
+   * Override the function to render markdown into JSX nodes
+   */
+  renderMarkdown?: typeof renderMarkdownDefault
+  /**
+   * Type links map
+   * @default `{}`
+   */
+  typeLinkMap?: Record<string, string>
 }
 
-export const TSDoc: FC<{
-  type: Record<string, ObjectType>
-  typeLinkMap: Record<string, string>
-}> = ({ type, typeLinkMap }) => {
+async function renderMarkdownDefault(md: string): Promise<ReactNode> {
+  if (!md) return
+  const rawJs = await compileMdx(md)
+  return <MDXRemote compiledSource={rawJs} />
+}
+
+export const TSDoc: FC<TSDocProps> = async ({
+  renderMarkdown = renderMarkdownDefault,
+  typeLinkMap = {},
+  ...props
+}) => {
   // This function takes a string representing some type and attempts to turn any
   // types referenced inside into links, either internal or external.
   function linkify(type: string) {
@@ -34,6 +49,16 @@ export const TSDoc: FC<{
       </Code>
     )
   }
+  const promises = generateDocumentation(props).entries.map(async entry => ({
+    name: entry.name,
+    type: entry.type,
+    description: await renderMarkdown(
+      entry.description || entry.tags.description || ''
+    ),
+    default: entry.tags.default || entry.tags.defaultValue,
+    required: entry.required
+  }))
+  const entries = await Promise.all(promises)
 
   return (
     <table className="x:my-8 x:w-full x:text-sm">
@@ -44,8 +69,8 @@ export const TSDoc: FC<{
           <th className="x:py-1.5">Default</th>
         </tr>
       </thead>
-      {Object.entries(type).map(([key, prop]) => {
-        const id = slugify(key)
+      {entries.map(prop => {
+        const id = slugify(prop.name)
         return (
           <tbody
             key={id}
@@ -71,7 +96,7 @@ export const TSDoc: FC<{
                   // add `?` via CSS `content` property so value will be not selectable
                   className={cn(!prop.required && 'x:after:content-["?"]')}
                 >
-                  {key}
+                  {prop.name}
                 </Code>
               </td>
               <td
