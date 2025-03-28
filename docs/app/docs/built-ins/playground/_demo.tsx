@@ -5,7 +5,7 @@
 import { useMDXComponents } from 'nextra-theme-docs'
 import { Code, Mermaid, Playground, Pre, Tabs } from 'nextra/components'
 import { MdxIcon } from 'nextra/icons'
-import type { FC } from 'react'
+import type { ComponentProps, FC } from 'react'
 import { useCallback, useEffect, useRef, useState } from 'react'
 
 export const Demo: FC = () => {
@@ -46,9 +46,10 @@ Z --> E
 Z --> F
 Z --> G
 \`\`\``)
-  const handleInput = useCallback(e => {
-    setRawMdx(e.currentTarget.textContent ?? '')
-  }, [])
+  const handleInput: NonNullable<ComponentProps<'span'>['onInput']> =
+    useCallback(e => {
+      setRawMdx(e.currentTarget.textContent ?? '')
+    }, [])
 
   const spanRef = useRef<HTMLSpanElement>(null!)
   const initialRender = useRef(false)
@@ -84,6 +85,7 @@ Z --> G
             </div>
           }
           source={rawMdx}
+          // @ts-expect-error -- fixme
           components={useMDXComponents({ Mermaid, $Tabs: Tabs })}
         />
       </div>

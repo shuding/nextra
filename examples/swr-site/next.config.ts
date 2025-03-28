@@ -33,6 +33,7 @@ const nextConfig = withBundleAnalyzer(
     webpack(config) {
       // rule.exclude doesn't work starting from Next.js 15
       const { test: _test, ...imageLoaderOptions } = config.module.rules.find(
+        // @ts-expect-error -- fixme
         rule => rule.test?.test?.('.svg')
       )
       config.module.rules.push({

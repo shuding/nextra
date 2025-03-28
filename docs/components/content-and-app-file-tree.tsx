@@ -4,6 +4,7 @@ import type { FC, ReactNode } from 'react'
 import { Children } from 'react'
 import { useMDXComponents } from '../mdx-components'
 
+// @ts-expect-error -- fixme
 function mapChildren(children) {
   return Children.map(children, child => {
     const { name, ext } = path.parse(child.props.name)
@@ -25,6 +26,7 @@ function mapChildren(children) {
       )
     }
     return child
+    // @ts-expect-error -- fixme
   }).sort((a, b) => {
     const aName = a.props.name
     const bName = b.props.name

@@ -1,34 +1,38 @@
 'use client'
 
+import type { FC, ReactNode } from 'react'
 import { useCallback, useEffect, useRef } from 'react'
 import { useInView } from 'react-intersection-observer'
 
-export function Video({ src, caption, ratio }) {
+export const Video: FC<{ src: string; caption?: ReactNode; ratio: number }> = ({
+  src,
+  caption,
+  ratio
+}) => {
   const [inViewRef, inView] = useInView({ threshold: 1 })
-  const videoRef = useRef()
+  const videoRef = useRef<HTMLVideoElement>(null)
 
   const setRefs = useCallback(
+    // @ts-expect-error -- fixme
     node => {
       // Ref's from useRef needs to have the node assigned to `current`
       videoRef.current = node
       // Callback refs, like the one from `useInView`, is a function that takes the node as an argument
       inViewRef(node)
 
-      if (node) {
-        node.addEventListener('click', function () {
-          if (this.paused) {
-            this.play()
-          } else {
-            this.pause()
-          }
-        })
-      }
+      node.addEventListener('click', function (this: HTMLVideoElement) {
+        if (this.paused) {
+          this.play()
+        } else {
+          this.pause()
+        }
+      })
     },
     [inViewRef]
   )
 
   useEffect(() => {
-    if (!videoRef?.current) {
+    if (!videoRef.current) {
       return
     }
 
