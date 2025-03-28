@@ -1,4 +1,5 @@
 import { NavbarPropsSchema } from '../../../nextra-theme-docs/src/components/navbar/index.js'
+import { HeadPropsSchema } from '../../../nextra/src/client/components/head.js'
 import { getTypeTableOutput } from '../type-table.js'
 import { generateTsFromZod } from '../zod-to-ts.js'
 
@@ -293,6 +294,55 @@ export default $`
                 "default": ""right"",
               },
               "type": ""left" | "right"",
+            },
+          ],
+          "name": "default",
+        },
+      ]
+    `)
+  })
+  it('<Head />', async () => {
+    const code = `type $ = ${generateTsFromZod(HeadPropsSchema)}
+export default $`
+    const result = await getTypeTableOutput({ code })
+    expect(result).toMatchInlineSnapshot(`
+      [
+        {
+          "description": "",
+          "entries": [
+            {
+              "description": "",
+              "name": "color",
+              "required": false,
+              "tags": {
+                "default": "{}",
+              },
+              "type": "{ hue?: number | { dark: number; light: number; }; saturation?: number | { dark: number; light: number; }; lightness?: number | { dark: number; light: number; }; }",
+            },
+            {
+              "description": "The glyph to use as the favicon.",
+              "name": "faviconGlyph",
+              "required": false,
+              "tags": {},
+              "type": "string",
+            },
+            {
+              "description": "",
+              "name": "backgroundColor",
+              "required": false,
+              "tags": {
+                "default": "{}",
+              },
+              "type": "{ dark?: string; light?: string; }",
+            },
+            {
+              "description": "Content of \`<head>\`",
+              "name": "children",
+              "required": false,
+              "tags": {
+                "remarks": "\`ReactNode\`",
+              },
+              "type": "ReactNode",
             },
           ],
           "name": "default",
