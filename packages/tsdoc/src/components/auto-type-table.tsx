@@ -1,10 +1,8 @@
 import { compileMdx } from 'nextra/compile'
 import { MDXRemote } from 'nextra/mdx-remote'
 import type { ComponentProps, ReactNode } from 'react'
-import type { GenerateDocumentationOptions } from '../base.js'
-import { getProject } from '../get-project.js'
-import type { BaseTypeTableProps } from '../type-table.js'
-import { getTypeTableOutput } from '../type-table.js'
+import type { BaseTypeTableProps } from '../base.js'
+import { getTypeTableOutput } from '../base.js'
 import { TSDoc } from './tsdoc.js'
 
 interface AutoTypeTableProps extends BaseTypeTableProps {
@@ -15,25 +13,10 @@ interface AutoTypeTableProps extends BaseTypeTableProps {
   typeLinkMap?: ComponentProps<typeof TSDoc>['typeLinkMap']
 }
 
-export function createTypeTable(options: GenerateDocumentationOptions = {}): {
-  TSDoc: (props: Omit<AutoTypeTableProps, 'options'>) => ReactNode
-} {
-  const overrideOptions = {
-    ...options,
-    project: options.project ?? getProject(options.config)
-  }
-
-  return {
-    TSDoc(props) {
-      return <AutoTypeTable {...props} options={overrideOptions} />
-    }
-  }
-}
-
 /**
  * Display properties in an exported interface via Type Table
  */
-async function AutoTypeTable({
+export async function AutoTypeTable({
   renderMarkdown = renderMarkdownDefault,
   typeLinkMap = {},
   ...props

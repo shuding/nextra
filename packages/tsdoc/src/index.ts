@@ -1,4 +1,4 @@
 import 'server-only'
 
-export { createTypeTable } from './components/auto-type-table.js'
+export { AutoTypeTable as unstable_TSDoc } from './components/auto-type-table.js'
 export { generateTsFromZod } from './zod-to-ts.js'

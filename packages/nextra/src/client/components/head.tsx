@@ -61,7 +61,10 @@ export const HeadPropsSchema = z.strictObject({
       lightness: darkLightSchema.default({ dark: 55, light: 45 })
     })
     .default({}),
-  faviconGlyph: z.string().optional().describe('The glyph to use as the favicon.'),
+  faviconGlyph: z
+    .string()
+    .optional()
+    .describe('The glyph to use as the favicon.'),
   backgroundColor: z
     .strictObject({
       dark: colorSchema.default('rgb(17,17,17)'),

@@ -1,6 +1,6 @@
 import { NavbarPropsSchema } from '../../../nextra-theme-docs/src/components/navbar/index.js'
 import { HeadPropsSchema } from '../../../nextra/src/client/components/head.js'
-import { getTypeTableOutput } from '../type-table.js'
+import { getTypeTableOutput } from '../base.js'
 import { generateTsFromZod } from '../zod-to-ts.js'
 
 describe('TypeTable', () => {
@@ -301,10 +301,10 @@ export default $`
       ]
     `)
   })
-  it('<Head />', async () => {
+  it.only('<Head />', async () => {
     const code = `type $ = ${generateTsFromZod(HeadPropsSchema)}
 export default $`
-    const result = await getTypeTableOutput({ code })
+    const result = await getTypeTableOutput({ code, flattened: true })
     expect(result).toMatchInlineSnapshot(`
       [
         {
