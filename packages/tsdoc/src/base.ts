@@ -49,23 +49,20 @@ function generateDocumentation(
   name: string,
   content: string
 ): GeneratedDoc[] {
-  const sourceFile = project.createSourceFile(file, content, {
-    overwrite: true
-  })
+  const sourceFile = project.createSourceFile(file, content, { overwrite: true })
   const out: GeneratedDoc[] = []
-  for (const [k, d] of sourceFile.getExportedDeclarations()) {
-    if (name !== k) continue
-    if (!d[0]) {
-      throw new Error(`Declaration '${k}' isn't found`)
+  for (const [key, declaration] of sourceFile.getExportedDeclarations()) {
+    if (name !== key) continue
+    if (!declaration[0]) {
+      throw new Error(`Declaration '${key}' isn't found`)
     }
-    if (d.length > 1) {
-      console.warn(
-        `Export '${k}' should not have more than one type declaration.`
+    if (declaration.length > 1) {
+      throw new Error(
+        `Export '${key}' should not have more than one type declaration.`
       )
     }
-    out.push(generate(project, k, d[0]))
+    out.push(generate(project, key, declaration[0]))
   }
-
   return out
 }
 
