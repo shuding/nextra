@@ -2,12 +2,12 @@
   "name": "@nextra/tsdoc",
   "version": "0.0.0",
   "type": "module",
-  "private": true,
   "description": "TSDoc integration for Nextra",
   "repository": "github:shuding/nextra",
   "homepage": "https://nextra.site",
   "author": "Dimitri POSTOLOV",
   "license": "MIT",
+  "private": true,
   "exports": {
     ".": {
       "import": "./dist/index.js",
@@ -22,7 +22,8 @@
     "next.js",
     "nextra",
     "docs",
-    "typescript"
+    "typescript",
+    "tsdoc"
   ],
   "scripts": {
     "build": "NODE_ENV=production tsup",
