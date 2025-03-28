@@ -300,7 +300,7 @@ export default $`
         "description": "",
         "entries": [
           {
-            "description": "The hue of the primary theme color. (0 - 360)",
+            "description": "The hue of the primary theme color.<br/>Range: \`0 - 360\`",
             "name": "color.hue",
             "required": false,
             "tags": {
@@ -309,7 +309,7 @@ export default $`
             "type": "number | { dark: number; light: number; }",
           },
           {
-            "description": "The saturation of the primary theme color. (0 - 100)",
+            "description": "The saturation of the primary theme color.<br/>Range: \`0 - 100\`",
             "name": "color.saturation",
             "required": false,
             "tags": {
@@ -318,7 +318,7 @@ export default $`
             "type": "number | { dark: number; light: number; }",
           },
           {
-            "description": "The lightness of the primary theme color. (0 - 100)",
+            "description": "The lightness of the primary theme color.<br/>Range: \`0 - 100\`",
             "name": "color.lightness",
             "required": false,
             "tags": {
@@ -334,7 +334,7 @@ export default $`
             "type": "string",
           },
           {
-            "description": "Background color for dark theme.",
+            "description": "Background color for dark theme.<br/>Format: \`"rgb(RRR,GGG,BBB)" | "#RRGGBB"\`",
             "name": "backgroundColor.dark",
             "required": false,
             "tags": {
@@ -343,7 +343,7 @@ export default $`
             "type": "string",
           },
           {
-            "description": "Background color for light theme.",
+            "description": "Background color for light theme.<br/>Format: \`"rgb(RRR,GGG,BBB)" | "#RRGGBB"\`",
             "name": "backgroundColor.light",
             "required": false,
             "tags": {
