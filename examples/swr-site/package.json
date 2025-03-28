@@ -20,13 +20,14 @@
     "next": "^15.0.2",
     "nextra": "workspace:*",
     "nextra-theme-docs": "workspace:*",
-    "react": "18.3.1",
-    "react-dom": "18.3.1",
+    "react": "19.0.0",
+    "react-dom": "19.0.0",
     "react-intersection-observer": "^8.26.2"
   },
   "devDependencies": {
     "@next/bundle-analyzer": "^14.2.13",
     "@tailwindcss/postcss": "^4.0.0-beta.8",
+    "@types/react": "^19.0.12",
     "pagefind": "^1.3.0",
     "tailwindcss": "^4.0.0-beta.8"
   },

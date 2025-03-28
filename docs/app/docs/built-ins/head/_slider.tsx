@@ -3,13 +3,10 @@
 import type { ComponentProps, FC } from 'react'
 import { useCallback, useEffect, useState } from 'react'
 
-export const Slider: FC = ({
-  cssVar,
-  max
-}: {
+export const Slider: FC<{
   cssVar: string
   max: number
-}) => {
+}> = ({ cssVar, max }) => {
   const handleChange: NonNullable<ComponentProps<'input'>['onChange']> =
     useCallback(
       e => {

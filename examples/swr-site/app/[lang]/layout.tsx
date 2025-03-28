@@ -14,6 +14,7 @@ import { getPageMap } from 'nextra/page-map'
 import { getDictionary, getDirection } from '../_dictionaries/get-dictionary'
 import { pageMap as graphqlEslintPageMap } from './graphql-eslint/[[...slug]]/page'
 import { pageMap as graphqlYogaPageMap } from './remote/graphql-yoga/[[...slug]]/page'
+import type { FC, ReactNode } from 'react'
 import './styles.css'
 
 export const metadata: Metadata = {
@@ -39,7 +40,14 @@ export const metadata: Metadata = {
   }
 }
 
-export default async function RootLayout({ children, params }) {
+type LayoutProps = Readonly<{
+  children: ReactNode
+  params: Promise<{
+    lang: string
+  }>
+}>
+
+const RootLayout: FC<LayoutProps> = async ({ children, params }) => {
   const { lang } = await params
   const dictionary = await getDictionary(lang)
   let pageMap = await getPageMap(`/${lang}`)
@@ -142,3 +150,5 @@ export default async function RootLayout({ children, params }) {
     </html>
   )
 }
+
+export default RootLayout
