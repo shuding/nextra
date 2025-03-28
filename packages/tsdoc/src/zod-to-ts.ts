@@ -9,8 +9,13 @@ export function generateTsFromZod(schema: z.ZodTypeAny, indent = 2): string {
     .map(([key, value]) => {
       const tsType = generateTsFromZodType(value as z.ZodTypeAny, indent + 2)
       const docComment = getDocComment(value as z.ZodTypeAny, indent)
-      // @ts-expect-error -- fixme
-      return `${docComment}${' '.repeat(indent)}${key}${value.isOptional() ? '?' : ''}: ${tsType}\n`
+      return [
+        docComment,
+        ' '.repeat(indent),
+        key,
+        (value as z.ZodTypeAny).isOptional() ? '?' : '',
+        `: ${tsType}\n`
+      ].join('')
     })
     .join('\n')}${' '.repeat(indent - 2)}}`
 }
