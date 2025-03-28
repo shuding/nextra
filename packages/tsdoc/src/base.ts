@@ -92,15 +92,13 @@ function getDocEntry(
     .getTypeOfSymbolAtLocation(prop, declaration)
 
   if (flattened && subType.isObject()) {
-    return subType
-      .getProperties()
-      .flatMap(childProp =>
-        getDocEntry(childProp, {
-          declaration,
-          flattened,
-          prefix: prop.getName()
-        })
-      )
+    return subType.getProperties().flatMap(childProp =>
+      getDocEntry(childProp, {
+        declaration,
+        flattened,
+        prefix: prop.getName()
+      })
+    )
   }
 
   const tags = Object.fromEntries(
