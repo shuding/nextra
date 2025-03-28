@@ -107,6 +107,11 @@ const nextConfig = withNextra({
       source: '/docs/guide/organize-files',
       destination: '/docs/file-conventions',
       permanent: true
+    },
+    {
+      source: '/docs/advanced/playground',
+      destination: '/docs/built-ins/playground',
+      permanent: true
     }
   ],
   webpack(config) {

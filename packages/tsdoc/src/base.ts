@@ -72,6 +72,11 @@ export function generateDocumentation({
     .getProperties()
     .flatMap(prop => getDocEntry(prop, { declaration, flattened }))
     .filter(entry => !('internal' in entry.tags))
+
+  if (!entries.length) {
+    throw new Error('No properties found, check if your type exist')
+  }
+
   return {
     name: exportName,
     description: comment ? ts.displayPartsToString(comment) : '',
