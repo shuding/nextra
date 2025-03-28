@@ -17,9 +17,10 @@ const attributeSchema = z.custom<'class' | `data-${string}`>(
 
 export const LayoutPropsSchema = z.strictObject({
   banner: reactNode.describe(
-    'Rendered [`<Banner>` component](/docs/built-ins/banner). E.g. `<Banner {...bannerProps} />{:ts}`'
+    `Rendered [\`<Banner>\` component](/docs/built-ins/banner). E.g. \`<Banner {...bannerProps} />\`
+@remarks \`<Banner />\``
   ),
-  children: reactNode,
+  children: reactNode.describe('@remarks `ReactNode`'),
   darkMode: z
     .boolean()
     .default(true)
@@ -94,14 +95,13 @@ import { Layout, LastUpdated } from 'nextra-theme-docs'
     .describe(
       'Configuration for the [next-themes](https://github.com/pacocoursey/next-themes#themeprovider) package.'
     ),
-  pageMap: z
-    .array(z.custom<PageMapItem>())
-    .describe("Page map list. Result of `getPageMap(route = '/'){:ts}` call."),
-  search: reactNode
-    .default(<Search />)
-    .describe(
-      'Rendered [`<Search>` component](/docs/built-ins/search). E.g. `<Search {...searchProps} />{:ts}`'
-    ),
+  pageMap: z.array(z.custom<PageMapItem>())
+    .describe(`Page map list. Result of \`getPageMap(route = '/')\` call.
+@remarks \`PageMapItem\``),
+  search: reactNode.default(<Search />).describe(
+    `Rendered [\`<Search>\` component](/docs/built-ins/search). E.g. \`<Search {...searchProps} />\`
+@remarks \`ReactNode\``
+  ),
   sidebar: z
     .strictObject({
       autoCollapse: z.boolean().optional(),
@@ -120,10 +120,12 @@ import { Layout, LastUpdated } from 'nextra-theme-docs'
     .describe('Translation of options in the theme switch.'),
   toc: z
     .strictObject({
-      backToTop: reactNode.default('Scroll to top'),
-      extraContent: reactNode,
+      backToTop: reactNode
+        .default('Scroll to top')
+        .describe('@remarks `ReactNode`'),
+      extraContent: reactNode.describe('@remarks `ReactNode`'),
       float: z.boolean().default(true),
-      title: reactNode.default('On This Page')
+      title: reactNode.default('On This Page').describe('@remarks `ReactNode`')
     })
     .default({})
 })
