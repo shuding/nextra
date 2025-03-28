@@ -21,84 +21,65 @@ interface DocEntry {
 }
 
 interface EntryContext {
-  program: Project
   type: Type
   declaration: ExportedDeclarations
 }
 
 export interface BaseTypeTableProps {
-  /** Set the type to generate from. */
+  /** TypeScript source code. */
   code: string
-  /** Flatten nested objects */
-  flattened?: boolean
+  /** Should flatten nested objects. */
+  flattened?: boolean,
+  /**
+   * Name of exported declaration.
+   * @default 'default'
+   */
+  exportName?: string
 }
 
 /**
  * Generate documentation for properties in an exported type/interface
  */
 export function generateDocumentation(
-  { code }: BaseTypeTableProps
+  { code, exportName = 'default' }: BaseTypeTableProps
 ): GeneratedDoc {
   const sourceFile = project.createSourceFile('temp.ts', code, { overwrite: true })
-  const output: GeneratedDoc[] = []
+  const output: ExportedDeclarations[] = []
   for (const [key, declaration] of sourceFile.getExportedDeclarations()) {
-    if ('default' !== key) continue
-    if (!declaration[0]) {
-      throw new Error("Declaration 'default' isn't found")
-    }
-    if (declaration.length > 1) {
-      throw new Error(
-        "Export 'default' should not have more than one type declaration."
-      )
-    }
-    output.push(generate(project, key, declaration[0]))
+    if (key === exportName) output.push(...declaration)
   }
-  if (!output[0]) {
-    throw new Error("Can't find `export default` statement")
+  const declaration = output[0]
+  if (!declaration) {
+    throw new Error(`Can't find "${exportName}" declaration`)
   }
   if (output.length > 1) {
-    throw new Error('Export "default" should not have more than one type declaration.')
+    throw new Error(`Export "${exportName}" should not have more than one type declaration.`)
   }
-  return output[0]
-}
-
-function generate(
-  program: Project,
-  name: string,
-  declaration: ExportedDeclarations
-): GeneratedDoc {
   const entryContext: EntryContext = {
-    program,
     type: declaration.getType(),
     declaration
   }
   const comment = declaration
     .getSymbol()
     ?.compilerSymbol.getDocumentationComment(
-      program.getTypeChecker().compilerObject
+      project.getTypeChecker().compilerObject
     )
   const properties = declaration.getType().getProperties()
 
   const entries = properties
     .map(prop => getDocEntry(prop, entryContext))
     .filter(
-      (entry): entry is DocEntry => !!entry && !('internal' in entry.tags)
+      (entry) => !('internal' in entry.tags)
     )
   return {
-    name,
+    name: exportName,
     description: comment ? ts.displayPartsToString(comment) : '',
     entries
   }
 }
 
-function getDocEntry(prop: TsSymbol, context: EntryContext): DocEntry | void {
-  const { program } = context
-
-  if (context.type.isClass() && prop.getName().startsWith('#')) {
-    return
-  }
-
-  const subType = program
+function getDocEntry(prop: TsSymbol, context: EntryContext): DocEntry {
+  const subType = project
     .getTypeChecker()
     .getTypeOfSymbolAtLocation(prop, context.declaration)
   const tags = Object.fromEntries(
@@ -123,15 +104,13 @@ function getDocEntry(prop: TsSymbol, context: EntryContext): DocEntry | void {
     name: prop.getName(),
     description: ts.displayPartsToString(
       prop.compilerSymbol.getDocumentationComment(
-        program.getTypeChecker().compilerObject
+        project.getTypeChecker().compilerObject
       )
     ),
     tags,
     type: typeName,
     required: !prop.isOptional()
   }
-
-  transform?.call(context, entry, subType, prop)
-
+  console.log(entry, subType.isObject())
   return entry
 }
