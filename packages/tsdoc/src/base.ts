@@ -75,7 +75,9 @@ export function generateDocumentation({
     .flatMap(prop => getDocEntry(prop, { declaration, flattened }))
     .filter(entry => !('internal' in entry.tags))
   if (!entries.length) {
-    throw new Error(`No properties found, check if your type "${declaration.getType().getText()}" exist`)
+    throw new Error(
+      `No properties found, check if your type "${declaration.getType().getText()}" exist`
+    )
   }
 
   return {
