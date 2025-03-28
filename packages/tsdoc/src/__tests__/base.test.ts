@@ -379,9 +379,9 @@ export default $`
             "name": "banner",
             "required": false,
             "tags": {
-              "remarks": "\`<Banner />\`",
+              "remarks": "\`ReactNode\`",
             },
-            "type": "<Banner />",
+            "type": "ReactNode",
           },
           {
             "description": "",
@@ -421,7 +421,7 @@ export default $`
             "type": "ReactNode",
           },
           {
-            "description": "",
+            "description": "Content of the feedback link.",
             "name": "feedback.content",
             "required": false,
             "tags": {
@@ -431,7 +431,7 @@ export default $`
             "type": "ReactNode",
           },
           {
-            "description": "",
+            "description": "Labels that can be added to the new created issue.",
             "name": "feedback.labels",
             "required": false,
             "tags": {
@@ -535,7 +535,7 @@ export default $`
             "name": "search",
             "required": false,
             "tags": {
-              "default": "\`<Search />\`",
+              "default": "<Search />",
               "remarks": "\`ReactNode\`",
             },
             "type": "ReactNode",

@@ -35,11 +35,13 @@ export const LayoutPropsSchema = z.strictObject({
 @remarks \`ReactNode\``),
   feedback: z
     .strictObject({
-      content: reactNode
-        .default('Question? Give us feedback')
+      content: reactNode.default('Question? Give us feedback')
         .describe(`Content of the feedback link.
 @remarks \`ReactNode\``),
-      labels: z.string().default('feedback').describe('Labels that can be added to the new created issue.')
+      labels: z
+        .string()
+        .default('feedback')
+        .describe('Labels that can be added to the new created issue.')
     })
     .default({}),
   footer: reactNode.describe(
