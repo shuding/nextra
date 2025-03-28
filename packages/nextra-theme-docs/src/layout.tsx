@@ -30,17 +30,20 @@ export const LayoutPropsSchema = z.strictObject({
     .startsWith('https://')
     .default('https://github.com/shuding/nextra')
     .describe('URL of the documentation repository.'),
-  editLink: reactNode
-    .default('Edit this page')
-    .describe('Content of the edit link.'),
+  editLink: reactNode.default('Edit this page')
+    .describe(`Content of the edit link.
+@remarks \`ReactNode\``),
   feedback: z
     .strictObject({
-      content: reactNode.default('Question? Give us feedback'),
+      content: reactNode
+        .default('Question? Give us feedback')
+        .describe('@remarks `ReactNode`'),
       labels: z.string().default('feedback')
     })
     .default({}),
   footer: reactNode.describe(
-    'Rendered [`<Footer>` component](/docs/docs-theme/built-ins/footer). E.g. `<Footer {...footerProps} />{:ts}`'
+    `Rendered [\`<Footer>\` component](/docs/docs-theme/built-ins/footer). E.g. \`<Footer {...footerProps} />\`
+@remarks \`ReactNode\``
   ),
   i18n: z
     .array(
@@ -68,7 +71,8 @@ import { Layout, LastUpdated } from 'nextra-theme-docs'
     })
     .describe('Component to render the last updated info.'),
   navbar: reactNode.describe(
-    'Rendered [`<Navbar>` component](/docs/docs-theme/built-ins/navbar). E.g. `<Navbar {...navbarProps} />{:ts}`'
+    `Rendered [\`<Navbar>\` component](/docs/docs-theme/built-ins/navbar). E.g. \`<Navbar {...navbarProps} />\`
+@remarks \`ReactNode\``
   ),
   navigation: z
     .union([
@@ -97,9 +101,10 @@ import { Layout, LastUpdated } from 'nextra-theme-docs'
     ),
   pageMap: z.array(z.custom<PageMapItem>())
     .describe(`Page map list. Result of \`getPageMap(route = '/')\` call.
-@remarks \`PageMapItem\``),
+@remarks \`PageMapItem[]\``),
   search: reactNode.default(<Search />).describe(
     `Rendered [\`<Search>\` component](/docs/built-ins/search). E.g. \`<Search {...searchProps} />\`
+@default \`<Search />\`
 @remarks \`ReactNode\``
   ),
   sidebar: z
