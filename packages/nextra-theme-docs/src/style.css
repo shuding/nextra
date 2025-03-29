@@ -1,7 +1,6 @@
 @import 'tailwindcss' source(none) prefix(x);
 
 @source './**/*.{ts,tsx}';
-@source '../../tsdoc/src/**/*.{ts,tsx}';
 
 @import '../../nextra/styles/default.css';
 @import '../../nextra/styles/code-block.css';

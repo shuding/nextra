@@ -1,10 +1,10 @@
-import slugify from '@sindresorhus/slugify'
 import cn from 'clsx'
-import { Link } from 'nextra-theme-docs'
-import { compileMdx } from 'nextra/compile'
-import { Code } from 'nextra/components'
-import { MDXRemote } from 'nextra/mdx-remote'
+import Slugger from 'github-slugger'
 import type { FC, ReactNode } from 'react'
+import { Anchor } from '../../client/mdx-components/anchor.js'
+import { Code } from '../../client/mdx-components/code.js'
+import { MDXRemote } from '../../client/mdx-remote.js'
+import { compileMdx } from '../compile.js'
 import type { BaseTypeTableProps } from './base.js'
 import { generateDocumentation } from './base.js'
 
@@ -19,6 +19,18 @@ type TSDocProps = BaseTypeTableProps & {
    * @default {}
    */
   typeLinkMap?: Record<string, string>
+}
+
+const Link: typeof Anchor = ({ className, ...props }) => {
+  return (
+    <Anchor
+      className={cn(
+        'x:text-primary-600 x:underline x:hover:no-underline x:decoration-from-font x:[text-underline-position:from-font]',
+        className
+      )}
+      {...props}
+    />
+  )
 }
 
 async function renderMarkdownDefault(description: string): Promise<ReactNode> {
@@ -60,7 +72,7 @@ export const TSDoc: FC<TSDocProps> = async ({
     required: entry.required
   }))
   const entries = await Promise.all(promises)
-
+  const slugger = new Slugger()
   return (
     <table className="x:my-8 x:w-full x:text-sm">
       <thead className="nextra-border x:border-b x:text-left x:max-lg:hidden">
@@ -71,7 +83,7 @@ export const TSDoc: FC<TSDocProps> = async ({
         </tr>
       </thead>
       {entries.map(prop => {
-        const id = slugify(prop.name)
+        const id = slugger.slug(prop.name)
         return (
           <tbody
             key={id}
