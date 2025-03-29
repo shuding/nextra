@@ -51,11 +51,11 @@ export const LayoutPropsSchema = z.strictObject({
   i18n: z
     .array(
       z.strictObject({
-        locale: z.string(),
-        name: z.string()
+        locale: z.string().describe('Locale from `i18n.locales` field in `next.config` file.'),
+        name: z.string().describe('Locale name in dropdown.')
       })
     )
-    .default([]),
+    .default([]).describe('Options to configure the language dropdown for [the i18n docs website](/docs/guide/i18n).'),
   lastUpdated: element
     .default(<LastUpdated />)
     .refine(el => el.type !== Fragment && typeof el.type !== 'string', {
@@ -72,6 +72,7 @@ import { Layout, LastUpdated } from 'nextra-theme-docs'
 \`\`\`
 `
     }).describe(`Component to render the last updated info.
+@default <LastUpdated />
 @remarks \`ReactElement\``),
   navbar: reactNode.describe(
     `Rendered [\`<Navbar>\` component](/docs/docs-theme/built-ins/navbar). E.g. \`<Navbar {...navbarProps} />\`

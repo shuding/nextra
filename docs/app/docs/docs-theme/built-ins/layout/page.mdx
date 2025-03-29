@@ -130,22 +130,14 @@ the docs repository, with the current website title prefilled:
 
 ## I18n
 
-Options to configure the language dropdown for
-[the i18n docs website](/docs/guide/i18n).
-
-|                       |               |     |                                                         |
-| --------------------- | ------------- | --- | ------------------------------------------------------- |
-| `i18n[number].locale` | `string{:ts}` |     | Locale from `i18n.locales` field in `next.config` file. |
-| `i18n[number].name`   | `string{:ts}` |     | Locale name in dropdown.                                |
+<PartialTSDoc props={['i18n']} />
 
 ## Last Updated Date
 
 Show the last updated date of a page. It's useful for showing the freshness of
 the content.
 
-|               |                             |                        |                                            |
-| ------------- | --------------------------- | ---------------------- | ------------------------------------------ |
-| `lastUpdated` | `ReactElement \| null{:ts}` | `<LastUpdated />{:ts}` | Component to render the last updated info. |
+<PartialTSDoc props={['lastUpdated']} />
 
 <ToggleVisibilitySection element="last update date" property="timestamp" />
 

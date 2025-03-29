@@ -449,7 +449,7 @@ export default $`
             "type": "ReactNode",
           },
           {
-            "description": "",
+            "description": "Options to configure the language dropdown for [the i18n docs website](/docs/guide/i18n).",
             "name": "i18n",
             "required": false,
             "tags": {
@@ -462,6 +462,7 @@ export default $`
             "name": "lastUpdated",
             "required": false,
             "tags": {
+              "default": "<LastUpdated />",
               "remarks": "\`ReactElement\`",
             },
             "type": "ReactElement",
