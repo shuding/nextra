@@ -42,7 +42,7 @@
   },
   "devDependencies": {
     "@tsconfig/strictest": "^2.0.5",
-    "@types/react": "19.0.11",
+    "@types/react": "19.0.12",
     "nextra": "workspace:*",
     "nextra-theme-docs": "workspace:*",
     "tsup": "^8.4.0",
