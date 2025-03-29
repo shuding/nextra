@@ -15,5 +15,6 @@ displays:
   description or the `@description` tag. You can use any Markdown/MDX syntax
   here.
 - **Default value** - are extracted from the `@default` or `@defaultValue` tag.
+- **Permalink** - a `#` anchor link to the property row for easy reference.
 
 More info can be found in https://nextra.site/docs/built-ins/tsdoc
