@@ -2,7 +2,41 @@
 sidebarTitle: TSDoc
 ---
 
+export function RemarksExample() {
+  const code = `
+type Example = {
+  /**
+   * **Foo** description.
+   * @default "dimaMachina"
+   * @remarks \`"not dimaMachina"\`
+   */
+  foo: string
+}
+export default Example`
+  return <TSDoc code={code} />
+}
+
 # `<TSDoc>` Component
+
+`<TSDoc>` component from `nextra/tsdoc` for generating properties table with
+property name, his TypeScript type and default value.
+
+- Property type is parsed from [TSDoc](https://tsdoc.org) inline description or
+  `@description` tag. You can use any markdown/mdx syntax here.
+- Property default values is parsed from `@default` or `@defaultValue` tag.
+- Overriden type can be marked in `@remarks` tag, inside backticks \`, e.g.
+  ```ts filename="Example of overriden type"
+  type Example = {
+    /**
+     * **Foo** description.
+     * @default "dimaMachina"
+     * @remarks `"not dimaMachina"`
+     */
+    foo: string
+  }
+  ```
+
+  <RemarksExample />
 
 > [!NOTE]
 >
