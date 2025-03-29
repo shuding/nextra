@@ -273,7 +273,7 @@ export const Search: FC<SearchProps> = ({
       <ComboboxOptions
         transition
         anchor={{ to: 'top end', gap: 10, padding: 16 }}
-        className={({ open }) =>
+        className={({}) =>
           cn(
             'nextra-search-results', // for user styling
             'nextra-scrollbar x:max-md:h-full',
@@ -282,7 +282,7 @@ export const Search: FC<SearchProps> = ({
             'x:contrast-more:border x:contrast-more:border-gray-900 x:contrast-more:dark:border-gray-50',
             'x:backdrop-blur-md x:bg-nextra-bg/70',
             'x:motion-reduce:transition-none x:transition-opacity',
-            open ? 'x:opacity-100' : 'x:opacity-0',
+            // open ? 'x:opacity-100' : 'x:opacity-0',
             error || isLoading || !results.length
               ? [
                   'x:md:min-h-28 x:grow x:flex x:justify-center x:text-sm x:gap-2 x:px-8',
