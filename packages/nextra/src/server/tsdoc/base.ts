@@ -36,7 +36,7 @@ export type BaseTypeTableProps = {
   flattened?: boolean
   /**
    * The name of the exported declaration.
-   * @default 'default'
+   * @default "default"
    */
   exportName?: string
 }
