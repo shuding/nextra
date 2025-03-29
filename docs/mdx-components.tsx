@@ -1,8 +1,8 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
 
-import { unstable_TSDoc as TSDoc } from 'nextra/tsdoc'
 import { useMDXComponents as getDocsMDXComponents } from 'nextra-theme-docs'
+import { unstable_TSDoc as TSDoc } from 'nextra/tsdoc'
 
 const { img: Image, ...docsComponents } = getDocsMDXComponents({
   TSDoc(props) {

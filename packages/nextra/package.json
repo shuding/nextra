@@ -75,8 +75,6 @@
     "react-dom": ">=18"
   },
   "dependencies": {
-    "server-only": "^0.0.1",
-    "ts-morph": "^25.0.1",
     "@formatjs/intl-localematcher": "^0.6.0",
     "@headlessui/react": "^2.1.2",
     "@mdx-js/mdx": "^3.0.0",
@@ -106,9 +104,11 @@
     "remark-math": "^6.0.0",
     "remark-reading-time": "^2.0.1",
     "remark-smartypants": "^3.0.0",
+    "server-only": "^0.0.1",
     "shiki": "^3.2.1",
     "slash": "^5.1.0",
     "title": "^4.0.1",
+    "ts-morph": "^25.0.1",
     "unist-util-remove": "^4.0.0",
     "unist-util-visit": "^5.0.0",
     "unist-util-visit-children": "^3.0.0",

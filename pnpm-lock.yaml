@@ -65,9 +65,6 @@ importers:
 
   docs:
     dependencies:
-      '@nextra/tsdoc':
-        specifier: workspace:*
-        version: link:../packages/tsdoc
       clsx:
         specifier: ^2.1.0
         version: 2.1.1
@@ -372,6 +369,9 @@ importers:
       remark-smartypants:
         specifier: ^3.0.0
         version: 3.0.2
+      server-only:
+        specifier: ^0.0.1
+        version: 0.0.1
       shiki:
         specifier: ^3.2.1
         version: 3.2.1
@@ -381,6 +381,9 @@ importers:
       title:
         specifier: ^4.0.1
         version: 4.0.1
+      ts-morph:
+        specifier: ^25.0.1
+        version: 25.0.1
       unist-util-remove:
         specifier: ^4.0.0
         version: 4.0.0
@@ -597,12 +600,6 @@ importers:
       clsx:
         specifier: ^2.1.1
         version: 2.1.1
-      server-only:
-        specifier: ^0.0.1
-        version: 0.0.1
-      ts-morph:
-        specifier: ^25.0.1
-        version: 25.0.1
       typescript:
         specifier: '*'
         version: 5.8.2
