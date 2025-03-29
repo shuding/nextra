@@ -1,6 +1,6 @@
 import { reactNode } from 'nextra/schemas'
-import { generateTsFromZod } from '../../../nextra/src/server/tsdoc/zod-to-ts.js'
 import { z } from 'zod'
+import { generateTsFromZod } from '../../../nextra/src/server/tsdoc/zod-to-ts.js'
 
 describe('generateTsFromZod', () => {
   it('should generate TypeScript with @description and @default for primitive types', () => {
