@@ -2,42 +2,14 @@
 sidebarTitle: TSDoc
 ---
 
-export function RemarksExample() {
-  const code = `
-type Example = {
-  /**
-   * **Foo** description.
-   * @default "dimaMachina"
-   * @remarks \`"not dimaMachina"\`
-   */
-  foo: string
-}
-export default Example`
-  return <TSDoc code={code} />
-}
-
 # `<TSDoc>` Component
 
-`<TSDoc>` component from `nextra/tsdoc` for generating properties table with
-property name, his TypeScript type and default value.
+The `<TSDoc>` component from `nextra/tsdoc` generates a properties table that displays:
 
-- Property type is parsed from [TSDoc](https://tsdoc.org) inline description or
-  `@description` tag. You can use any markdown/mdx syntax here.
-- Property default values is parsed from `@default` or `@defaultValue` tag.
-- Overriden type can be marked in `@remarks` tag, inside backticks \`\`, e.g.
-
-  ```ts filename="Example of overriden type"
-  type Example = {
-    /**
-     * **Foo** description.
-     * @default "dimaMachina"
-     * @remarks `"not dimaMachina"`
-     */
-    foo: string
-  }
-  ```
-
-  <RemarksExample />
+- **Property name**
+- **TypeScript type**
+- **Property description** - is parsed from [TSDoc](https://tsdoc.org) inline description or the `@description` tag. You can use Markdown/MDX syntax here.
+- **Default value** - are extracted from the `@default` or `@defaultValue` tag.
 
 > [!NOTE]
 >
@@ -66,3 +38,36 @@ type MyProps = React.ComponentProps<typeof TSDoc>
 export default MyProps`}
 />
 ```
+
+### Overriding a type
+
+Overridden type can be specified inside the `@remarks` tag using backticks (`).
+
+```ts filename="Overridden Type Example"
+type Example = {
+  /**
+   * **Foo** description.
+   * @default "dimaMachina"
+   * @remarks `"not dimaMachina"`
+   */
+  foo: string
+}
+```
+
+This means that while the default value is `"dimaMachina"`, an alternative type annotation or behavior is described in `@remarks`.
+
+<RemarksExample />
+
+export function RemarksExample() {
+  const code = `
+type Example = {
+  /**
+   * **Foo** description.
+   * @default "dimaMachina"
+   * @remarks \`"not dimaMachina"\`
+   */
+  foo: string
+}
+export default Example`
+  return <TSDoc code={code} />
+}
