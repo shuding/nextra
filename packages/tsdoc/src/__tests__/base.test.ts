@@ -366,7 +366,7 @@ export default $`
       }
     `)
   })
-  it.only('<Layout /> with `flattened: true`', async () => {
+  it('<Layout /> with `flattened: true`', async () => {
     const code = `type $ = ${generateTsFromZod(LayoutPropsSchema)}
 export default $`
     const result = generateDocumentation({ code, flattened: true })
