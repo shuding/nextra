@@ -47,6 +47,10 @@
       "types": "./dist/server/schemas.d.ts",
       "import": "./dist/server/schemas.js"
     },
+    "./tsdoc": {
+      "types": "./dist/server/tsdoc/index.d.ts",
+      "import": "./dist/server/tsdoc/index.js"
+    },
     "./*": {
       "types": "./dist/client/*.d.ts",
       "import": "./dist/client/*.js"
@@ -71,6 +75,8 @@
     "react-dom": ">=18"
   },
   "dependencies": {
+    "server-only": "^0.0.1",
+    "ts-morph": "^25.0.1",
     "@formatjs/intl-localematcher": "^0.6.0",
     "@headlessui/react": "^2.1.2",
     "@mdx-js/mdx": "^3.0.0",

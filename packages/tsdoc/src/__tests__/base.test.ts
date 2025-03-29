@@ -1,8 +1,7 @@
 import { NavbarPropsSchema } from '../../../nextra-theme-docs/src/components/navbar/index.js'
 import { LayoutPropsSchema } from '../../../nextra-theme-docs/src/layout.js'
 import { HeadPropsSchema } from '../../../nextra/src/client/components/head.js'
-import { generateDocumentation } from '../base.js'
-import { generateTsFromZod } from '../zod-to-ts.js'
+import { generateTsFromZod, generateDocumentation } from 'nextra/tsdoc'
 
 describe('<TSDoc />', () => {
   it('<Banner />', async () => {
