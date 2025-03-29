@@ -1,5 +1,5 @@
 import cn from 'clsx'
-import type { FC, ReactElement, ReactNode } from 'react'
+import type { FC, ReactNode } from 'react'
 import { InformationCircleIcon } from '../icons/index.js'
 
 const TypeToEmoji = {
@@ -27,8 +27,24 @@ const classes: Record<CalloutType, string> = {
 }
 
 type CalloutProps = {
+  /**
+   * Specifies the type of callout.
+   * Determines the default icon if none is provided.
+   * @default 'default'
+   */
   type?: CalloutType
-  emoji?: string | ReactElement
+  /**
+   * Icon displayed in the callout. Can be a string emoji or a custom React element.
+   *
+   * Default values based on `type`:
+   * - `'💡'` for `type: 'default'`
+   * - `'🚫'` for `type: 'error'`
+   * - `<InformationCircleIcon />` for `type: 'info'`
+   * - `'⚠️'` for `type: 'warning'`
+   * @default Determined by `type`
+   */
+  emoji?: ReactNode
+  /** Content to be displayed inside the callout. */
   children: ReactNode
 }
 

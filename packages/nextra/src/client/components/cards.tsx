@@ -8,6 +8,7 @@ const Card: FC<{
   arrow?: boolean
   href: string
   children?: ReactNode
+  /** CSS class name. */
   className?: string
 }> = ({ children, title, icon, arrow, href, className, ...props }) => {
   return (
@@ -49,13 +50,15 @@ const Card: FC<{
   )
 }
 
-const _Cards: FC<{ num?: number } & ComponentProps<'div'>> = ({
-  children,
-  num = 3,
-  className,
-  style,
-  ...props
-}) => {
+const _Cards: FC<
+  {
+    /**
+     * Number of columns.
+     * @default 3
+     */
+    num?: number
+  } & ComponentProps<'div'>
+> = ({ children, num = 3, className, style, ...props }) => {
   return (
     <div
       className={cn(

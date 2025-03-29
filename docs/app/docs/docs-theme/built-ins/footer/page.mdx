@@ -8,10 +8,15 @@ import { ToggleVisibilitySection } from 'components/toggle-visibility-section'
 
 The footer area of the website. You can specify content for your default footer.
 
-|             |                  |                                                     |                        |
-| ----------- | ---------------- | --------------------------------------------------- | ---------------------- |
-| `children`  | `ReactNode{:ts}` | `'MIT ${new Date().getFullYear()} © Nextra.'{:ts}` | Content of the footer. |
-| `className` | `string{:ts}`    |                                                     | CSS class name.        |
+## Props
+
+<TSDoc
+  code={`
+type $ = {
+  '...props': React.ComponentProps<'footer'>
+}
+export default $`}
+/>
 
 ## Example
 

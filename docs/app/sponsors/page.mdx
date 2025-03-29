@@ -33,7 +33,7 @@ export default function MdxLayout(props) {
   return cloneElement(props.children, {
     components: {
       img: props => (
-        <Image {...props} className="[aspect-ratio:12/6.3] object-cover" />
+        <Image {...props} className="object-cover [aspect-ratio:12/6.3]" />
       ),
       a({ children, href }) {
         const { alt } = children.props
