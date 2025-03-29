@@ -4,11 +4,14 @@ sidebarTitle: TSDoc
 
 # `<TSDoc>` Component
 
-The `<TSDoc>` component from `nextra/tsdoc` generates a properties table that displays:
+The `<TSDoc>` component from `nextra/tsdoc` generates a properties table that
+displays:
 
 - **Property name**
 - **TypeScript type**
-- **Property description** - is parsed from [TSDoc](https://tsdoc.org) inline description or the `@description` tag. You can use Markdown/MDX syntax here.
+- **Property description** - is parsed from [TSDoc](https://tsdoc.org) inline
+  description or the `@description` tag. You can use any Markdown/MDX syntax
+  here.
 - **Default value** - are extracted from the `@default` or `@defaultValue` tag.
 
 > [!NOTE]
@@ -43,7 +46,7 @@ export default MyProps`}
 
 Overridden type can be specified inside the `@remarks` tag using backticks (`).
 
-```ts filename="Overridden Type Example"
+```ts
 type Example = {
   /**
    * **Foo** description.
@@ -54,7 +57,8 @@ type Example = {
 }
 ```
 
-This means that while the default value is `"dimaMachina"`, an alternative type annotation or behavior is described in `@remarks`.
+This means that while the property `foo` type is `string`, an alternative type
+annotation is described in `@remarks`.
 
 <RemarksExample />
 
