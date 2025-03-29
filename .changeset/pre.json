@@ -10,5 +10,7 @@
     "@nextra/prettier-config": "0.0.0",
     "@nextra/tsdoc": "0.0.0"
   },
-  "changesets": []
+  "changesets": [
+    "rich-symbols-wash"
+  ]
 }
