@@ -18,3 +18,7 @@ displays:
 - **Permalink** - a `#` anchor link to the property row for easy reference.
 
 More info can be found in https://nextra.site/docs/built-ins/tsdoc
+
+> [!IMPORTANT]
+> 
+> Huge thanks to [xyflow - Node Based UIs for React and Svelte](https://xyflow.com/?utm_source=github&utm_campaign=nextra-4.3&utm_content=changelog) for sponsoring this feature!
