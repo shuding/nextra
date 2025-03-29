@@ -51,11 +51,16 @@ export const LayoutPropsSchema = z.strictObject({
   i18n: z
     .array(
       z.strictObject({
-        locale: z.string().describe('Locale from `i18n.locales` field in `next.config` file.'),
+        locale: z
+          .string()
+          .describe('Locale from `i18n.locales` field in `next.config` file.'),
         name: z.string().describe('Locale name in dropdown.')
       })
     )
-    .default([]).describe('Options to configure the language dropdown for [the i18n docs website](/docs/guide/i18n).'),
+    .default([])
+    .describe(
+      'Options to configure the language dropdown for [the i18n docs website](/docs/guide/i18n).'
+    ),
   lastUpdated: element
     .default(<LastUpdated />)
     .refine(el => el.type !== Fragment && typeof el.type !== 'string', {
@@ -116,10 +121,28 @@ import { Layout, LastUpdated } from 'nextra-theme-docs'
   ),
   sidebar: z
     .strictObject({
-      autoCollapse: z.boolean().optional().describe('If true, automatically collapse inactive folders above `defaultMenuCollapseLevel`.'),
-      defaultMenuCollapseLevel: z.number().min(1).int().default(2).describe('Specifies the folder level at which the menu on the left is collapsed by default.'),
-      defaultOpen: z.boolean().default(true).describe('Hide/show sidebar by default.'),
-      toggleButton: z.boolean().default(true).describe('Hide/show sidebar toggle button.')
+      autoCollapse: z
+        .boolean()
+        .optional()
+        .describe(
+          'If true, automatically collapse inactive folders above `defaultMenuCollapseLevel`.'
+        ),
+      defaultMenuCollapseLevel: z
+        .number()
+        .min(1)
+        .int()
+        .default(2)
+        .describe(
+          'Specifies the folder level at which the menu on the left is collapsed by default.'
+        ),
+      defaultOpen: z
+        .boolean()
+        .default(true)
+        .describe('Hide/show sidebar by default.'),
+      toggleButton: z
+        .boolean()
+        .default(true)
+        .describe('Hide/show sidebar toggle button.')
     })
     .default({}),
   themeSwitch: z
@@ -128,17 +151,23 @@ import { Layout, LastUpdated } from 'nextra-theme-docs'
       light: z.string().default('Light'),
       system: z.string().default('System')
     })
-    .default({})
-    .describe(`Translation of options in the theme switch.
+    .default({}).describe(`Translation of options in the theme switch.
 @default { dark: "Dark", light: "Light", system: "System" }`),
   toc: z
     .strictObject({
       backToTop: reactNode
         .default('Scroll to top')
         .describe('Text of back to top button.\n@remarks `ReactNode`'),
-      extraContent: reactNode.describe('Display extra content below the TOC content.\n@remarks `ReactNode`'),
-      float: z.boolean().default(true).describe('Float the TOC next to the content.'),
-      title: reactNode.default('On This Page').describe('Title of the TOC sidebar.\n@remarks `ReactNode`')
+      extraContent: reactNode.describe(
+        'Display extra content below the TOC content.\n@remarks `ReactNode`'
+      ),
+      float: z
+        .boolean()
+        .default(true)
+        .describe('Float the TOC next to the content.'),
+      title: reactNode
+        .default('On This Page')
+        .describe('Title of the TOC sidebar.\n@remarks `ReactNode`')
     })
     .default({})
 })
