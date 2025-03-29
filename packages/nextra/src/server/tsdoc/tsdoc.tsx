@@ -21,6 +21,7 @@ type TSDocProps = BaseTypeTableProps & {
   typeLinkMap?: Record<string, string>
 }
 
+// copied from nextra-theme-docs
 const Link: typeof Anchor = ({ className, ...props }) => {
   return (
     <Anchor
@@ -53,7 +54,8 @@ export const TSDoc: FC<TSDocProps> = async ({
           const href = typeLinkMap[chunk]
           return href ? (
             <Link key={index} href={href}>
-              {chunk}
+              {/* use React fragment to avoid rendering external link icon */}
+              <>{chunk}</>
             </Link>
           ) : (
             chunk
