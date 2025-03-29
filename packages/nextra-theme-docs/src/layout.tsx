@@ -88,7 +88,8 @@ import { Layout, LastUpdated } from 'nextra-theme-docs'
     ])
     .default(true)
     .transform(v => (typeof v === 'boolean' ? { next: v, prev: v } : v))
-    .describe('Enable or disable navigation link.'),
+    .describe(`Enable or disable navigation link.
+@default true`),
   nextThemes: z
     .strictObject({
       attribute: z
@@ -115,10 +116,10 @@ import { Layout, LastUpdated } from 'nextra-theme-docs'
   ),
   sidebar: z
     .strictObject({
-      autoCollapse: z.boolean().optional(),
-      defaultMenuCollapseLevel: z.number().min(1).int().default(2),
-      defaultOpen: z.boolean().default(true),
-      toggleButton: z.boolean().default(true)
+      autoCollapse: z.boolean().optional().describe('If true, automatically collapse inactive folders above `defaultMenuCollapseLevel`.'),
+      defaultMenuCollapseLevel: z.number().min(1).int().default(2).describe('Specifies the folder level at which the menu on the left is collapsed by default.'),
+      defaultOpen: z.boolean().default(true).describe('Hide/show sidebar by default.'),
+      toggleButton: z.boolean().default(true).describe('Hide/show sidebar toggle button.')
     })
     .default({}),
   themeSwitch: z
@@ -128,15 +129,16 @@ import { Layout, LastUpdated } from 'nextra-theme-docs'
       system: z.string().default('System')
     })
     .default({})
-    .describe('Translation of options in the theme switch.'),
+    .describe(`Translation of options in the theme switch.
+@default { dark: "Dark", light: "Light", system: "System" }`),
   toc: z
     .strictObject({
       backToTop: reactNode
         .default('Scroll to top')
-        .describe('@remarks `ReactNode`'),
-      extraContent: reactNode.describe('@remarks `ReactNode`'),
-      float: z.boolean().default(true),
-      title: reactNode.default('On This Page').describe('@remarks `ReactNode`')
+        .describe('Text of back to top button.\n@remarks `ReactNode`'),
+      extraContent: reactNode.describe('Display extra content below the TOC content.\n@remarks `ReactNode`'),
+      float: z.boolean().default(true).describe('Float the TOC next to the content.'),
+      title: reactNode.default('On This Page').describe('Title of the TOC sidebar.\n@remarks `ReactNode`')
     })
     .default({})
 })

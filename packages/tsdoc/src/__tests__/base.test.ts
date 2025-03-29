@@ -480,7 +480,9 @@ export default $`
             "description": "Enable or disable navigation link.",
             "name": "navigation",
             "required": false,
-            "tags": {},
+            "tags": {
+              "default": "true",
+            },
             "type": "boolean | { next: boolean; prev: boolean; }",
           },
           {
@@ -542,14 +544,14 @@ export default $`
             "type": "ReactNode",
           },
           {
-            "description": "",
+            "description": "If true, automatically collapse inactive folders above \`defaultMenuCollapseLevel\`.",
             "name": "sidebar.autoCollapse",
             "required": false,
             "tags": {},
             "type": "boolean",
           },
           {
-            "description": "",
+            "description": "Specifies the folder level at which the menu on the left is collapsed by default.",
             "name": "sidebar.defaultMenuCollapseLevel",
             "required": false,
             "tags": {
@@ -558,7 +560,7 @@ export default $`
             "type": "number",
           },
           {
-            "description": "",
+            "description": "Hide/show sidebar toggle button.",
             "name": "sidebar.defaultOpen",
             "required": false,
             "tags": {
@@ -567,7 +569,7 @@ export default $`
             "type": "boolean",
           },
           {
-            "description": "",
+            "description": "Hide/show sidebar by default.",
             "name": "sidebar.toggleButton",
             "required": false,
             "tags": {

@@ -146,11 +146,7 @@ the content.
 Show previous and next page links on the bottom of the content. It's useful for
 navigating between pages.
 
-|                   |                          |             |                                           |
-| ----------------- | ------------------------ | ----------- | ----------------------------------------- |
-| `navigation`      | `boolean \| object{:ts}` | `true{:ts}` | Enable or disable navigation link.        |
-| `navigation.prev` | `boolean{:ts}`           |             | Enable or disable the previous page link. |
-| `navigation.next` | `boolean{:ts}`           |             | Enable or disable the next page link.     |
+<PartialTSDoc props={['navigation']} />
 
 ![Navigation](/assets/docs/navigation.png)
 
@@ -171,12 +167,7 @@ The above is also equivalent to `navigation: true{:js}`.
 
 ## Sidebar
 
-|                                    |                |             |                                                                                    |
-| ---------------------------------- | -------------- | ----------- | ---------------------------------------------------------------------------------- |
-| `sidebar.autoCollapse`             | `boolean{:ts}` |             | If true, automatically collapse inactive folders above `defaultMenuCollapseLevel`. |
-| `sidebar.defaultMenuCollapseLevel` | `number{:ts}`  | `2{:ts}`    | Specifies the folder level at which the menu on the left is collapsed by default.  |
-| `sidebar.toggleButton`             | `boolean{:ts}` | `true{:ts}` | Hide/show sidebar toggle button.                                                   |
-| `sidebar.defaultOpen`              | `boolean{:ts}` | `true{:ts}` | Hide/show sidebar by default.                                                      |
+<PartialTSDoc props={['sidebar']} flattened />
 
 ### Menu Collapse Level
 
@@ -240,9 +231,7 @@ The priority of the sidebar title is as follows:
 
 ## Theme Switch
 
-|               |                                                        |                                                           |                                             |
-| ------------- | ------------------------------------------------------ | --------------------------------------------------------- | ------------------------------------------- |
-| `themeSwitch` | `{ light: string; dark: string; system: string }{:ts}` | `{ light: 'Light', dark: 'Dark', system: 'System' }{:ts}` | Translation of options in the theme switch. |
+<PartialTSDoc props={['themeSwitch']} />
 
 You are able to customize the option names for localization or other purposes:
 
@@ -269,6 +258,8 @@ navigating between headings.
 | toc.extraContent | `ReactNode{:ts}` |                        | Display extra content below the TOC content. |
 | toc.float        | `boolean{:ts}`   | `true{:ts}`            | Float the TOC next to the content.           |
 | toc.title        | `ReactNode{:ts}` | `'On This Page'{:ts}`  | Title of the TOC sidebar.                    |
+
+<PartialTSDoc props={['toc']} flattened />
 
 ### Floating TOC
 
