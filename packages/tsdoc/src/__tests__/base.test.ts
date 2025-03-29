@@ -560,7 +560,7 @@ export default $`
             "type": "number",
           },
           {
-            "description": "Hide/show sidebar toggle button.",
+            "description": "Hide/show sidebar by default.",
             "name": "sidebar.defaultOpen",
             "required": false,
             "tags": {
@@ -569,7 +569,7 @@ export default $`
             "type": "boolean",
           },
           {
-            "description": "Hide/show sidebar by default.",
+            "description": "Hide/show sidebar toggle button.",
             "name": "sidebar.toggleButton",
             "required": false,
             "tags": {
@@ -605,7 +605,7 @@ export default $`
             "type": "string",
           },
           {
-            "description": "",
+            "description": "Text of back to top button.",
             "name": "toc.backToTop",
             "required": false,
             "tags": {
@@ -615,7 +615,7 @@ export default $`
             "type": "ReactNode",
           },
           {
-            "description": "",
+            "description": "Display extra content below the TOC content.",
             "name": "toc.extraContent",
             "required": false,
             "tags": {
@@ -624,7 +624,7 @@ export default $`
             "type": "ReactNode",
           },
           {
-            "description": "",
+            "description": "Float the TOC next to the content.",
             "name": "toc.float",
             "required": false,
             "tags": {
@@ -633,7 +633,7 @@ export default $`
             "type": "boolean",
           },
           {
-            "description": "",
+            "description": "Title of the TOC sidebar.",
             "name": "toc.title",
             "required": false,
             "tags": {
