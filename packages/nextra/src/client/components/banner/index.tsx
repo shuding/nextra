@@ -21,6 +21,7 @@ type BannerProps = {
   storageKey?: string
   /**
    * Theme of the banner.
+   * @default 'auto'
    */
   theme?: 'dark' | 'light'
 }
@@ -29,7 +30,7 @@ export const Banner: FC<BannerProps> = ({
   children,
   dismissible = true,
   storageKey = BANNER_CLASS_NAME,
-  theme
+  theme = 'auto'
 }) => {
   if (!children) {
     return null
