@@ -2,6 +2,9 @@
   "name": "nextra-monorepo",
   "private": true,
   "packageManager": "pnpm@9.15.9",
+  "engines": {
+    "node": ">=20"
+  },
   "scripts": {
     "build": "turbo run build --filter=./packages/\\*",
     "build:all": "turbo run build",
@@ -14,6 +17,7 @@
     "lint": "ESLINT_USE_FLAT_CONFIG=true eslint --config packages/eslint-config/src/index.ts --cache --max-warnings 0 .",
     "lint:prettier": "prettier --config packages/prettier-config/src/index.js --cache --check --ignore-path .gitignore --ignore-path .prettierignore .",
     "postinstall": "pnpm build",
+    "prepare": "lefthook install",
     "prettier": "pnpm lint:prettier --write",
     "release": "changeset publish",
     "test": "turbo run test",
@@ -24,6 +28,7 @@
     "@changesets/cli": "2.28.1",
     "@rollup/plugin-alias": "5.1.1",
     "eslint": "9.23.0",
+    "lefthook": "^1.11.3",
     "prettier": "3.5.3",
     "rimraf": "6.0.1",
     "tsup": "8.4.0",
