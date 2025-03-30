@@ -7,7 +7,7 @@ export const OptionTable: FC<{ options: [string, string, any] }> = ({
   return (
     <div
       className={
-        '-mx-6 mt-6 mb-4 overflow-x-auto overscroll-x-contain px-6 pb-4 ' +
+        '-mx-6 mb-4 mt-6 overflow-x-auto overscroll-x-contain px-6 pb-4 ' +
         styles.container
       }
     >
@@ -25,10 +25,10 @@ export const OptionTable: FC<{ options: [string, string, any] }> = ({
               key={option}
               className="border-b border-gray-100 dark:border-neutral-700/50"
             >
-              <td className="py-2 font-mono text-xs leading-6 font-semibold whitespace-pre text-violet-600 dark:text-violet-500">
+              <td className="whitespace-pre py-2 font-mono text-xs font-semibold leading-6 text-violet-600 dark:text-violet-500">
                 {option}
               </td>
-              <td className="py-2 pl-6 font-mono text-xs leading-6 font-semibold whitespace-pre text-slate-500 dark:text-slate-400">
+              <td className="whitespace-pre py-2 pl-6 font-mono text-xs font-semibold leading-6 text-slate-500 dark:text-slate-400">
                 {type}
               </td>
               <td className="py-2 pl-6">{description}</td>

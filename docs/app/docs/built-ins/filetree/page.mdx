@@ -9,6 +9,34 @@ import { FileTree } from 'nextra/components'
 
 A built-in component to visually represent a file tree.
 
+## Props
+
+### FileTree
+
+<TSDoc
+  code={`
+type $ = {
+  '...props': React.ComponentProps<'ul'>
+}
+export default $`}
+/>
+
+### Folder
+
+<TSDoc
+  code={`import type { FileTree } from 'nextra/components'
+type $ = React.ComponentProps<typeof FileTree.Folder>
+export default $`}
+/>
+
+### File
+
+<TSDoc
+  code={`import type { FileTree } from 'nextra/components'
+type $ = React.ComponentProps<typeof FileTree.File>
+export default $`}
+/>
+
 ## Example
 
 Click the folder to test the dynamic functionality of the file tree.
