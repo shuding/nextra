@@ -11,9 +11,7 @@ export type MDXRemoteProps = Readonly<{
    * @example `{ ComponentName: Component }` will be accessible in the MDX as `<ComponentName>`.
    */
   components?: MDXComponents
-  /**
-   * Pass-through variables for use in the MDX content
-   */
+  /** Pass-through variables for use in the MDX content. */
   scope?: Scope
   compiledSource: string
 }>

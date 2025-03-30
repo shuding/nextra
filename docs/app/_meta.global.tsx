@@ -80,13 +80,7 @@ const ADVANCED: MetaRecord = {
   latex: '',
   table: '',
   typescript: '',
-  remote: '',
-  playground: {
-    theme: {
-      layout: 'full',
-      toc: false
-    }
-  }
+  remote: ''
 }
 
 const NEXTRA_BUILTINS: MetaRecord = {
@@ -97,10 +91,28 @@ const NEXTRA_BUILTINS: MetaRecord = {
   banner: '',
   head: '',
   search: '',
-  __: {
+  _2: {
     type: 'separator',
     title: 'Content Components'
-  }
+  },
+  bleed: '',
+  callout: '',
+  cards: '',
+  filetree: '',
+  steps: '',
+  table: '',
+  tabs: '',
+  _3: {
+    type: 'separator',
+    title: 'Other Components'
+  },
+  playground: {
+    theme: {
+      layout: 'full',
+      toc: false
+    }
+  },
+  tsdoc: <span className="badge-new">TSDoc</span>
 }
 
 const BLOG_THEME: MetaRecord = {

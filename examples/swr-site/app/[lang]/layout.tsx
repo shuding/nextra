@@ -11,6 +11,7 @@ import {
 } from 'nextra-theme-docs'
 import { Banner, Head } from 'nextra/components'
 import { getPageMap } from 'nextra/page-map'
+import type { FC, ReactNode } from 'react'
 import { getDictionary, getDirection } from '../_dictionaries/get-dictionary'
 import { pageMap as graphqlEslintPageMap } from './graphql-eslint/[[...slug]]/page'
 import { pageMap as graphqlYogaPageMap } from './remote/graphql-yoga/[[...slug]]/page'
@@ -39,7 +40,14 @@ export const metadata: Metadata = {
   }
 }
 
-export default async function RootLayout({ children, params }) {
+type LayoutProps = Readonly<{
+  children: ReactNode
+  params: Promise<{
+    lang: string
+  }>
+}>
+
+const RootLayout: FC<LayoutProps> = async ({ children, params }) => {
   const { lang } = await params
   const dictionary = await getDictionary(lang)
   let pageMap = await getPageMap(`/${lang}`)
@@ -67,7 +75,7 @@ export default async function RootLayout({ children, params }) {
         <>
           <SwrIcon height="12" />
           <span
-            className="ms-2 font-extrabold select-none max-md:hidden"
+            className="ms-2 select-none font-extrabold max-md:hidden"
             title={`SWR: ${dictionary.logo.title}`}
           >
             SWR
@@ -142,3 +150,5 @@ export default async function RootLayout({ children, params }) {
     </html>
   )
 }
+
+export default RootLayout

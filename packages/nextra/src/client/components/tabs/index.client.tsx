@@ -33,8 +33,11 @@ export const Tabs: FC<
   {
     items: (TabItem | TabObjectItem)[]
     children: ReactNode
+    /** LocalStorage key for persisting the selected tab. */
     storageKey?: string
+    /** Tabs CSS class name. */
     className?: TabListProps['className']
+    /** Tab CSS class name. */
     tabClassName?: HeadlessTabProps['className']
   } & Pick<TabGroupProps, 'defaultIndex' | 'selectedIndex' | 'onChange'>
 > = ({
