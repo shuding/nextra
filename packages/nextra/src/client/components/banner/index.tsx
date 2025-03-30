@@ -19,24 +19,47 @@ type BannerProps = {
    * @default 'nextra-banner'
    */
   storageKey?: string
+  /**
+   * Theme of the banner.
+   * @default 'auto'
+   */
+  theme?: 'dark' | 'light'
 }
 
 export const Banner: FC<BannerProps> = ({
   children,
   dismissible = true,
-  storageKey = BANNER_CLASS_NAME
+  storageKey = BANNER_CLASS_NAME,
+  theme = 'auto'
 }) => {
   if (!children) {
     return null
   }
   const hideBannerScript = `try{document.querySelector('.${BANNER_CLASS_NAME}').classList.toggle('x:hidden',localStorage.getItem(${JSON.stringify(storageKey)}))}catch(e){}`
+  let themeClass
+
+  switch (theme) {
+    case 'dark':
+      themeClass =
+        'x:text-slate-50 x:bg-neutral-900 x:bg-[linear-gradient(1deg,#383838,#212121)]'
+      break
+
+    case 'light':
+      themeClass = 'x:text-slate-700 x:bg-neutral-100'
+      break
+
+    default:
+      themeClass =
+        'x:text-slate-700 x:dark:text-slate-50 x:bg-neutral-100 dark:x:bg-neutral-900 x:dark:bg-[linear-gradient(1deg,#383838,#212121)]'
+      break
+  }
 
   return (
     <ClientBanner
       className={cn(
         BANNER_CLASS_NAME,
-        'x:max-md:sticky x:top-0 x:z-30 x:flex x:items-center x:px-2',
-        'x:text-slate-50 x:dark:text-white x:bg-neutral-900 x:dark:bg-[linear-gradient(1deg,#383838,#212121)]',
+        'x:max-md:sticky x:top-0 x:z-30 x:flex x:items-center x:px-2 x:border-b nextra-border',
+        themeClass,
         'x:print:[display:none]' // to not match `x:[.nextra-banner:not([class$=hidden])~&]` class
       )}
       // Because we update class in `<script>`

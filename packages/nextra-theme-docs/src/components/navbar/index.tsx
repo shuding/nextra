@@ -21,8 +21,9 @@ export const NavbarPropsSchema = z.strictObject({
   logo: element.describe(`Logo of the website.
 @remarks \`ReactElement\``),
   projectLink: z.string().optional().describe('URL of the project homepage.'),
-  projectIcon: reactNode.default(<GitHubIcon height="24" />)
-    .describe(`Icon of the project link.
+  projectIcon: reactNode.default(
+    <GitHubIcon height="24" aria-label="Project repository" />
+  ).describe(`Icon of the project link.
 @remarks \`ReactNode\`
 @default <GitHubIcon />`),
   chatLink: z.string().optional().describe('URL of the chat link.'),
@@ -91,6 +92,7 @@ export const Navbar: FC<NavbarProps> = props => {
               logoClass,
               'x:transition-opacity x:focus-visible:nextra-focus x:hover:opacity-75'
             )}
+            aria-label="Home page"
           >
             {logo}
           </NextLink>
