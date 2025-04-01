@@ -20,8 +20,8 @@
     "next": "^15.0.2",
     "nextra": "workspace:*",
     "nextra-theme-docs": "workspace:*",
-    "react": "19.0.0",
-    "react-dom": "19.0.0",
+    "react": "19.1.0",
+    "react-dom": "19.1.0",
     "react-intersection-observer": "^8.26.2"
   },
   "devDependencies": {
