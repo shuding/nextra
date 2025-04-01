@@ -114,9 +114,10 @@ function getDocEntry(
       .getJsDocTags()
       .map(tag => [tag.getName(), ts.displayPartsToString(tag.getText())])
   )
-  let typeName = subType
-    .getNonNullableType()
-    .getText(undefined, ts.TypeFormatFlags.UseAliasDefinedOutsideCurrentScope)
+  let typeName = subType.getText(
+    undefined,
+    ts.TypeFormatFlags.UseAliasDefinedOutsideCurrentScope
+  )
 
   const aliasSymbol = subType.getAliasSymbol()
 

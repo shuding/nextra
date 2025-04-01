@@ -708,6 +708,29 @@ export default $`
       }
     `)
   })
+  it('should show null type', async () => {
+    const code = `
+type Connection = {
+  targetHandle: string | null;
+};
+export default Connection`
+    const result = generateDocumentation({ code })
+    expect(result).toMatchInlineSnapshot(`
+      {
+        "description": "",
+        "entries": [
+          {
+            "description": "",
+            "name": "targetHandle",
+            "required": true,
+            "tags": {},
+            "type": "string | null",
+          },
+        ],
+        "name": "default",
+      }
+    `)
+  })
   it.skip('should work with anonymous type', async () => {
     const code = `
 type $ = {
