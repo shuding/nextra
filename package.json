@@ -35,7 +35,7 @@
     "overrides": {
       "postcss": "8.5.3",
       "lightningcss": "1.29.1",
-      "esbuild": "0.25.1",
+      "esbuild": "0.25.2",
       "vite": "6.2.4",
       "next": "15.2.4"
     },
