@@ -1,5 +1,11 @@
 # nextra
 
+## 4.3.0-alpha.1
+
+### Patch Changes
+
+- 9f449e5: fix(TSDoc): should show `null` type in properties table
+
 ## 4.3.0-alpha.0
 
 ### Minor Changes
