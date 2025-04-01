@@ -1,5 +1,12 @@
 # nextra
 
+## 4.3.0-alpha.3
+
+### Patch Changes
+
+- f717156: feat(TSDoc): enable `exactOptionalPropertyTypes` and
+  `strictNullChecks` in ts-morph `compilerOptions`
+
 ## 4.3.0-alpha.2
 
 ### Patch Changes
