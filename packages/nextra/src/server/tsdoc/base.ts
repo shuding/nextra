@@ -3,7 +3,13 @@ import { Project, ts } from 'ts-morph'
 
 const project = new Project({
   tsConfigFilePath: './tsconfig.json',
-  skipAddingFilesFromTsConfig: true
+  skipAddingFilesFromTsConfig: true,
+  compilerOptions: {
+    // Do not show `undefined` value in type for optional value
+    exactOptionalPropertyTypes: true,
+    // Show `null` value in type if exist
+    strictNullChecks: true
+  }
 })
 
 const { compilerObject } = project.getTypeChecker()
