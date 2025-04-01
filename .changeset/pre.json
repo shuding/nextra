@@ -10,9 +10,5 @@
     "@nextra/prettier-config": "0.0.0",
     "@nextra/tsdoc": "0.0.0"
   },
-  "changesets": [
-    "lovely-webs-wash",
-    "lucky-apes-teach",
-    "rich-symbols-wash"
-  ]
+  "changesets": ["lovely-webs-wash", "lucky-apes-teach", "rich-symbols-wash"]
 }
