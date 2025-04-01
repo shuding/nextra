@@ -15,9 +15,6 @@ patchedDependencies:
   '@changesets/assemble-release-plan':
     hash: auf2jxmw44xswrllmvngoy3z54
     path: patches/@changesets__assemble-release-plan.patch
-  babel-plugin-react-compiler@0.0.0-experimental-22c6e49-20241219:
-    hash: 2jeyfvyv26beb32msydymz54dq
-    path: patches/babel-plugin-react-compiler@0.0.0-experimental-22c6e49-20241219.patch
   esbuild-plugin-svgr:
     hash: 556ctonaujh5hcbyug5fzfxura
     path: patches/esbuild-plugin-svgr.patch
@@ -221,11 +218,11 @@ importers:
   packages/esbuild-react-compiler-plugin:
     dependencies:
       babel-plugin-react-compiler:
-        specifier: 0.0.0-experimental-22c6e49-20241219
-        version: 0.0.0-experimental-22c6e49-20241219(patch_hash=2jeyfvyv26beb32msydymz54dq)
+        specifier: 0.0.0-experimental-e993439-20250328
+        version: 0.0.0-experimental-e993439-20250328
       react-compiler-webpack:
         specifier: 0.2.0
-        version: 0.2.0(babel-plugin-react-compiler@0.0.0-experimental-22c6e49-20241219(patch_hash=2jeyfvyv26beb32msydymz54dq))
+        version: 0.2.0(babel-plugin-react-compiler@0.0.0-experimental-e993439-20250328)
     devDependencies:
       '@types/node':
         specifier: ^22.10.2
@@ -337,8 +334,8 @@ importers:
         specifier: ^1.0.0
         version: 1.0.0
       react-compiler-runtime:
-        specifier: 0.0.0-experimental-22c6e49-20241219
-        version: 0.0.0-experimental-22c6e49-20241219(react@19.0.0)
+        specifier: 0.0.0-experimental-e993439-20250328
+        version: 0.0.0-experimental-e993439-20250328(react@19.0.0)
       react-dom:
         specifier: '>=18'
         version: 19.0.0(react@19.0.0)
@@ -464,8 +461,8 @@ importers:
         specifier: ^0.3.0
         version: 0.3.4(next@15.2.4(patch_hash=7jofu3qtudpcn7yuwfpdpiosuy)(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       react-compiler-runtime:
-        specifier: 0.0.0-experimental-22c6e49-20241219
-        version: 0.0.0-experimental-22c6e49-20241219(react@19.0.0)
+        specifier: 0.0.0-experimental-e993439-20250328
+        version: 0.0.0-experimental-e993439-20250328(react@19.0.0)
       react-dom:
         specifier: '>=18'
         version: 19.0.0(react@19.0.0)
@@ -519,8 +516,8 @@ importers:
         specifier: ^0.4.0
         version: 0.4.6(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       react-compiler-runtime:
-        specifier: 0.0.0-experimental-22c6e49-20241219
-        version: 0.0.0-experimental-22c6e49-20241219(react@19.0.0)
+        specifier: 0.0.0-experimental-e993439-20250328
+        version: 0.0.0-experimental-e993439-20250328(react@19.0.0)
       react-dom:
         specifier: '>=18'
         version: 19.0.0(react@19.0.0)
@@ -3006,8 +3003,8 @@ packages:
     peerDependencies:
       '@babel/core': ^7.4.0 || ^8.0.0-0 <8.0.0
 
-  babel-plugin-react-compiler@0.0.0-experimental-22c6e49-20241219:
-    resolution: {integrity: sha512-jxp6eD6SQqSA7HrhVewq6NoO6tW8Wlgo+gpMf5ovuC0UR086tC9SOHV2k+1Uae/jKiywDfQX7UEyWaU6SQ69PA==}
+  babel-plugin-react-compiler@0.0.0-experimental-e993439-20250328:
+    resolution: {integrity: sha512-IZBR7saBXbtNuSKA7P4zYC1rptcrHrbDspA9Nm+FtLeN/WhgXXhMn0AtNAMWHUNtdhXJHE+ebdfteUT1b9o7Eg==}
 
   bail@2.0.2:
     resolution: {integrity: sha512-0xO6mYd7JB2YesxDKplafRpsiOzPt9V02ddPCLbY1xYGPOX24NTyN50qnUxgCPcSoYMhKpAuBTjQoRZCAkUDRw==}
@@ -5341,10 +5338,10 @@ packages:
   randombytes@2.1.0:
     resolution: {integrity: sha512-vYl3iOX+4CKUWuxGi9Ukhie6fsqXqS9FE2Zaic4tNFD2N2QQaXOMFbuKK4QmDHC0JO6B1Zp41J0LpT0oR68amQ==}
 
-  react-compiler-runtime@0.0.0-experimental-22c6e49-20241219:
-    resolution: {integrity: sha512-bOAGaRL1ldfIIpbDsl+uV025Ta6RS6/cOjvvh8r2Vo7KtqB+RSvihVYRsWQz7ECKNPWdq5MClS845acwAwieDw==}
+  react-compiler-runtime@0.0.0-experimental-e993439-20250328:
+    resolution: {integrity: sha512-YjJ57RaXiwXVPlLCpAfoyGtSUDnLjgAGhw0ThY8YOp80CO+iUZAZH2TIVaulSJxax418CfXzPmKcEo3BS3Uz6w==}
     peerDependencies:
-      react: ^17.0.0 || ^18.0.0 || ^19.0.0
+      react: ^17.0.0 || ^18.0.0 || ^19.0.0 || ^0.0.0-experimental
 
   react-compiler-webpack@0.2.0:
     resolution: {integrity: sha512-jb5CTWYGvcmVLlArg1wvCOKpefFQxbH6riBgaeIKGFaKPBtXdxHjyU0wk2GU+aY41SgARWci38UjXYGvZshZhg==}
@@ -6686,7 +6683,7 @@ snapshots:
     dependencies:
       '@babel/template': 7.25.9
       '@babel/traverse': 7.26.7
-      '@babel/types': 7.26.7
+      '@babel/types': 7.26.10
     transitivePeerDependencies:
       - supports-color
 
@@ -9091,9 +9088,9 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  babel-plugin-react-compiler@0.0.0-experimental-22c6e49-20241219(patch_hash=2jeyfvyv26beb32msydymz54dq):
+  babel-plugin-react-compiler@0.0.0-experimental-e993439-20250328:
     dependencies:
-      '@babel/types': 7.26.7
+      '@babel/types': 7.26.10
 
   bail@2.0.2: {}
 
@@ -12009,16 +12006,16 @@ snapshots:
     dependencies:
       safe-buffer: 5.2.1
 
-  react-compiler-runtime@0.0.0-experimental-22c6e49-20241219(react@19.0.0):
+  react-compiler-runtime@0.0.0-experimental-e993439-20250328(react@19.0.0):
     dependencies:
       react: 19.0.0
 
-  react-compiler-webpack@0.2.0(babel-plugin-react-compiler@0.0.0-experimental-22c6e49-20241219(patch_hash=2jeyfvyv26beb32msydymz54dq)):
+  react-compiler-webpack@0.2.0(babel-plugin-react-compiler@0.0.0-experimental-e993439-20250328):
     dependencies:
       '@babel/core': 7.26.10
       '@babel/plugin-syntax-jsx': 7.25.9(@babel/core@7.26.10)
       '@babel/plugin-syntax-typescript': 7.25.9(@babel/core@7.26.10)
-      babel-plugin-react-compiler: 0.0.0-experimental-22c6e49-20241219(patch_hash=2jeyfvyv26beb32msydymz54dq)
+      babel-plugin-react-compiler: 0.0.0-experimental-e993439-20250328
       loader-utils: 3.3.1
     transitivePeerDependencies:
       - supports-color
