@@ -20,11 +20,24 @@ type GeneratedDoc = {
   entries: DocEntry[]
 }
 
+type Tags = Record<string, string>
+
+type GeneratedFunc = {
+  name: string
+  description: string
+  params: DocEntry[]
+  return: {
+    description?: string
+    type: string
+  }
+  tags: Tags
+}
+
 type DocEntry = {
   name: string
   description: string
   type: string
-  tags: Record<string, string>
+  tags: Tags
   required: boolean
 }
 
@@ -54,7 +67,7 @@ export function generateDocumentation({
   code,
   exportName = 'default',
   flattened = false
-}: BaseTypeTableProps): GeneratedDoc {
+}: BaseTypeTableProps): GeneratedDoc | GeneratedFunc {
   const sourceFile = project.createSourceFile('temp.ts', code, {
     overwrite: true
   })
@@ -103,13 +116,14 @@ export function generateDocumentation({
     const returnType = signature
       .getReturnType()
       .getText(undefined, ts.TypeFormatFlags.UseAliasDefinedOutsideCurrentScope)
+    const tags = getTags(declarationType.getSymbol()!)
     return {
       name: declarationType.getSymbol()!.getName(),
       description,
-      tags: getTags(declarationType.getSymbol()!),
-      // @ts-expect-error
+      tags,
       params: typeParams,
       return: {
+        description: tags.returns,
         type: returnType
       }
     }

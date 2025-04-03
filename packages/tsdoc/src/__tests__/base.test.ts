@@ -765,31 +765,30 @@ export default $
           "description": "This hook returns an array of connections on a specific node, handle type ('source', 'target') or handle ID.",
           "name": "useNodeConnections",
           "params": [
-            [
-              {
-                "description": "Node id - if called inside a custom node.",
-                "name": "0?.id",
-                "required": false,
-                "tags": {},
-                "type": "string",
-              },
-              {
-                "description": "Filter by handle type.",
-                "name": "0?.handleType",
-                "required": false,
-                "tags": {},
-                "type": "HandleType",
-              },
-              {
-                "description": "Filter by handle id (this is only needed if the node has multiple handles of the same type).",
-                "name": "0?.handleId",
-                "required": false,
-                "tags": {},
-                "type": "string",
-              },
-            ],
+            {
+              "description": "Node id - if called inside a custom node.",
+              "name": "0?.id",
+              "required": false,
+              "tags": {},
+              "type": "string",
+            },
+            {
+              "description": "Filter by handle type.",
+              "name": "0?.handleType",
+              "required": false,
+              "tags": {},
+              "type": "HandleType",
+            },
+            {
+              "description": "Filter by handle id (this is only needed if the node has multiple handles of the same type).",
+              "name": "0?.handleId",
+              "required": false,
+              "tags": {},
+              "type": "string",
+            },
           ],
           "return": {
+            "description": "An array with connections.",
             "type": "NodeConnection[]",
           },
           "tags": {
@@ -825,7 +824,7 @@ export default $
           "name": "useInternalNode",
           "params": [
             {
-              "description": "- Id of the node.",
+              "description": "Id of the node.",
               "name": "id",
               "required": true,
               "tags": {
@@ -835,6 +834,7 @@ export default $
             },
           ],
           "return": {
+            "description": "Array with visible node ids.",
             "type": "InternalNode<NodeType> | undefined",
           },
           "tags": {
@@ -856,7 +856,7 @@ export default $
         \`\`\`",
             "param": "id - Id of the node.",
             "public": "",
-            "returns": "array with visible node ids",
+            "returns": "Array with visible node ids.",
           },
         }
       `)
