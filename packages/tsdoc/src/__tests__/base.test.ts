@@ -825,11 +825,11 @@ export default $
           "name": "useInternalNode",
           "params": [
             {
-              "description": "- id of the node",
+              "description": "- Id of the node.",
               "name": "id",
               "required": true,
               "tags": {
-                "param": "id - id of the node",
+                "param": "id - Id of the node.",
               },
               "type": "string",
             },
@@ -854,7 +854,7 @@ export default $
          );
         }
         \`\`\`",
-            "param": "id - id of the node",
+            "param": "id - Id of the node.",
             "public": "",
             "returns": "array with visible node ids",
           },
