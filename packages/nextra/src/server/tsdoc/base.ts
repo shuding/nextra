@@ -14,30 +14,45 @@ const project = new Project({
 
 const { compilerObject } = project.getTypeChecker()
 
-type GeneratedDoc = {
+type GeneratedType = {
+  /** Type name. */
   name: string
+  /** Type description. */
   description: string
-  entries: DocEntry[]
+  /** Type fields. */
+  entries: TypeField[]
 }
 
 type Tags = Record<string, string>
 
-type GeneratedFunc = {
+type GeneratedFunction = {
+  /** Function name. */
   name: string
+  /** Function description. */
   description: string
-  params: DocEntry[]
+  /** Function tags. */
+  tags: Tags
+  /** Function parameters. */
+  params: TypeField[]
+  /** Function return. */
   return: {
+    /** Function return description. */
     description?: string
+    /** Function return type. */
     type: string
   }
-  tags: Tags
 }
 
-type DocEntry = {
+type TypeField = {
+  /** Field name. */
   name: string
+  /** Field description. */
   description: string
-  type: string
+  /** Field tags. */
   tags: Tags
+  /** Field type. */
+  type: string
+  /** Is field required. */
   required: boolean
 }
 
@@ -47,9 +62,6 @@ export type BaseTypeTableProps = {
   /**
    * Whether to flatten nested objects.
    * E.g. `{ foo: { bar: string } }` will be represented as: `{ foo.bar: string }`
-   * > [!WARNING]
-   * >
-   * > Requires `exactOptionalPropertyTypes: true` in `tsconfig.json`
    * @default false
    */
   flattened?: boolean
@@ -67,7 +79,7 @@ export function generateDocumentation({
   code,
   exportName = 'default',
   flattened = false
-}: BaseTypeTableProps): GeneratedDoc | GeneratedFunc {
+}: BaseTypeTableProps): GeneratedType | GeneratedFunction {
   const sourceFile = project.createSourceFile('temp.ts', code, {
     overwrite: true
   })
@@ -181,7 +193,7 @@ function getDocEntry(
     /** @default false */
     isFunctionParameter?: boolean
   }
-): DocEntry | DocEntry[] {
+): TypeField | TypeField[] {
   const originalSubType = project
     .getTypeChecker()
     .getTypeOfSymbolAtLocation(prop, declaration)
@@ -224,7 +236,7 @@ function getDocEntry(
   }
 }
 
-function getTags(prop: TsSymbol): DocEntry['tags'] {
+function getTags(prop: TsSymbol): Tags {
   return Object.fromEntries(
     prop
       .getJsDocTags()
