@@ -197,21 +197,23 @@ function getDocEntry({
     tags,
     type: typeName,
     optional: isFunctionParameter
-      // @ts-expect-error -- fixme
-      ? getDeclaration(symbol).isOptional()
+      ? // @ts-expect-error -- fixme
+        getDeclaration(symbol).isOptional()
       : symbol.isOptional()
   }
 }
 
 function getDeclaration(s: TsSymbol): Node {
-  const name = s.getName()
+  const parameterName = s.getName()
   const declarations = s.getDeclarations()
   if (declarations.length > 1) {
-    throw new Error(`"${name}" should not have more than one type declaration.`)
+    throw new Error(
+      `"${parameterName}" should not have more than one type declaration.`
+    )
   }
   const declaration = declarations[0]
   if (!declaration) {
-    throw new Error(`Can't find "${name}" declaration`)
+    throw new Error(`Can't find "${parameterName}" declaration`)
   }
   return declaration
 }
