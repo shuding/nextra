@@ -767,21 +767,21 @@ export default $
             [
               {
                 "description": "",
-                "name": "__0.id",
+                "name": "0?.id",
                 "required": false,
                 "tags": {},
                 "type": "string",
               },
               {
                 "description": "",
-                "name": "__0.handleType",
+                "name": "0?.handleType",
                 "required": false,
                 "tags": {},
                 "type": "HandleType",
               },
               {
                 "description": "",
-                "name": "__0.handleId",
+                "name": "0?.handleId",
                 "required": false,
                 "tags": {},
                 "type": "string",
