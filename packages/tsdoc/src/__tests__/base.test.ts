@@ -767,21 +767,21 @@ export default $
           "params": [
             [
               {
-                "description": "",
+                "description": "Node id - if called inside a custom node.",
                 "name": "0?.id",
                 "required": false,
                 "tags": {},
                 "type": "string",
               },
               {
-                "description": "",
+                "description": "Filter by handle type.",
                 "name": "0?.handleType",
                 "required": false,
                 "tags": {},
                 "type": "HandleType",
               },
               {
-                "description": "",
+                "description": ". Filter by handle id (this is only needed if the node has multiple handles of the same type).",
                 "name": "0?.handleId",
                 "required": false,
                 "tags": {},
@@ -793,23 +793,22 @@ export default $
             "type": "NodeConnection[]",
           },
           "tags": {
-            "example": " \`\`\`jsx
+            "example": "\`\`\`jsx
         import { useNodeConnections } from '@xyflow/react';
 
         export default function () {
-          const connections = useNodeConnections({
-            handleType: 'target',
-            handleId: 'my-handle',
-          });
+         const connections = useNodeConnections({
+           handleType: 'target',
+           handleId: 'my-handle',
+         });
 
-          return (
-            <div>There are currently {connections.length} incoming connections!</div>
-          );
+         return (
+           <div>There are currently {connections.length} incoming connections!</div>
+         );
         }
         \`\`\`",
-            "param": "param.onDisconnect - gets called when a connection is removed",
             "public": "",
-            "returns": "an array with connections",
+            "returns": "An array with connections.",
           },
         }
       `)
