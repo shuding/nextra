@@ -5,8 +5,8 @@ import { Anchor } from '../../client/mdx-components/anchor.js'
 import { Code } from '../../client/mdx-components/code.js'
 import { MDXRemote } from '../../client/mdx-remote.js'
 import { compileMdx } from '../compile.js'
-import type { BaseTypeTableProps, TypeField } from './base.js'
 import { generateDocumentation } from './base.js'
+import type { BaseTypeTableProps, TypeField } from './types.js'
 
 type TSDocProps = BaseTypeTableProps & {
   /**

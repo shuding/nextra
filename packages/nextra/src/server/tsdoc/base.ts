@@ -1,5 +1,12 @@
 import type { ExportedDeclarations, Symbol as TsSymbol, Type } from 'ts-morph'
 import { Project, ts } from 'ts-morph'
+import type {
+  BaseTypeTableProps,
+  GeneratedFunction,
+  GeneratedType,
+  Tags,
+  TypeField
+} from './types.js'
 
 const project = new Project({
   tsConfigFilePath: './tsconfig.json',
@@ -13,64 +20,6 @@ const project = new Project({
 })
 
 const { compilerObject } = project.getTypeChecker()
-
-type GeneratedType = {
-  /** Type name. */
-  name: string
-  /** Type description. */
-  description: string
-  /** Type fields. */
-  entries: TypeField[]
-}
-
-type Tags = Record<string, string>
-
-type GeneratedFunction = {
-  /** Function name. */
-  name: string
-  /** Function description. */
-  description: string
-  /** Function tags. */
-  tags: Tags
-  /** Function parameters. */
-  params: TypeField[]
-  /** Function return. */
-  return: {
-    /** Function return description. */
-    description?: string
-    /** Function return type. */
-    type: string
-  }
-}
-
-export type TypeField = {
-  /** Field name. */
-  name: string
-  /** Field description. */
-  description: string
-  /** Field tags. */
-  tags: Tags
-  /** Field type. */
-  type: string
-  /** Is field optional. */
-  optional: boolean
-}
-
-export type BaseTypeTableProps = {
-  /** TypeScript source code to be processed. */
-  code: string
-  /**
-   * Whether to flatten nested objects.
-   * E.g. `{ foo: { bar: string } }` will be represented as: `{ foo.bar: string }`
-   * @default false
-   */
-  flattened?: boolean
-  /**
-   * The name of the exported declaration.
-   * @default "default"
-   */
-  exportName?: string
-}
 
 /**
  * Generate documentation for properties in an exported type/interface
@@ -213,7 +162,7 @@ function getDocEntry({
         declaration,
         flattened,
         prefix:
-          typeof +prefix === 'number'
+          typeof +prefix === 'number' && !Number.isNaN(+prefix)
             ? `[${prefix}]` + (originalSubType.isNullable() ? '?' : '')
             : prefix
       })

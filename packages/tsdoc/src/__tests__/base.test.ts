@@ -767,21 +767,21 @@ export default $
           "params": [
             {
               "description": "Node id - if called inside a custom node.",
-              "name": "0?.id",
+              "name": "[0]?.id",
               "optional": true,
               "tags": {},
               "type": "string",
             },
             {
               "description": "Filter by handle type.",
-              "name": "0?.handleType",
+              "name": "[0]?.handleType",
               "optional": true,
               "tags": {},
               "type": "HandleType",
             },
             {
               "description": "Filter by handle id (this is only needed if the node has multiple handles of the same type).",
-              "name": "0?.handleId",
+              "name": "[0]?.handleId",
               "optional": true,
               "tags": {},
               "type": "string",
