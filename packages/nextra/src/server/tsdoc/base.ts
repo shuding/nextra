@@ -1,4 +1,9 @@
-import type { ExportedDeclarations, Symbol as TsSymbol, Type } from 'ts-morph'
+import type {
+  ExportedDeclarations,
+  Node,
+  Symbol as TsSymbol,
+  Type
+} from 'ts-morph'
 import { Project, ts } from 'ts-morph'
 import type {
   BaseTypeTableProps,
@@ -191,8 +196,24 @@ function getDocEntry({
     ),
     tags,
     type: typeName,
-    optional: symbol.isOptional()
+    optional: isFunctionParameter
+      // @ts-expect-error -- fixme
+      ? getDeclaration(symbol).isOptional()
+      : symbol.isOptional()
   }
+}
+
+function getDeclaration(s: TsSymbol): Node {
+  const name = s.getName()
+  const declarations = s.getDeclarations()
+  if (declarations.length > 1) {
+    throw new Error(`"${name}" should not have more than one type declaration.`)
+  }
+  const declaration = declarations[0]
+  if (!declaration) {
+    throw new Error(`Can't find "${name}" declaration`)
+  }
+  return declaration
 }
 
 function getTags(prop: TsSymbol): Tags {
