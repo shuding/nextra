@@ -86,9 +86,9 @@ export const TSDoc: FC<TSDocProps> = async ({
   const returns = await Promise.all(promises2)
   return (
     <>
-      <h3>Parameters</h3>
+      <b>Parameters:</b>
       <FieldsTable fields={entries} typeLinkMap={typeLinkMap} />
-      <h3>Returns</h3>
+      <b>Returns:</b>
       <table className="x:my-8 x:w-full x:text-sm">
         <thead className="nextra-border x:border-b x:text-left x:max-lg:hidden">
           <tr>
@@ -119,12 +119,14 @@ export const TSDoc: FC<TSDocProps> = async ({
                       'x:p-3' // Increase click box
                     )}
                   />
-                  <Code
-                    // add `?` via CSS `content` property so value will be not selectable
-                    className={cn(prop.optional && 'x:after:content-["?"]')}
-                  >
-                    {prop.name}
-                  </Code>
+                  {prop.name && (
+                    <Code
+                      // add `?` via CSS `content` property so value will be not selectable
+                      className={cn(prop.optional && 'x:after:content-["?"]')}
+                    >
+                      {prop.name}
+                    </Code>
+                  )}
                 </td>
                 <td
                   // add `Type: ` via CSS `content` property so value will be not selectable

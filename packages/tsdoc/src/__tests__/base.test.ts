@@ -17,14 +17,14 @@ export default $`
           {
             "description": "Content of the banner.",
             "name": "children",
-            "required": true,
+            "optional": false,
             "tags": {},
             "type": "ReactNode",
           },
           {
             "description": "Closable banner or not.",
             "name": "dismissible",
-            "required": false,
+            "optional": true,
             "tags": {
               "default": "true",
             },
@@ -33,7 +33,7 @@ export default $`
           {
             "description": "Storage key to keep the banner state.",
             "name": "storageKey",
-            "required": false,
+            "optional": true,
             "tags": {
               "default": "'nextra-banner'",
             },
@@ -56,7 +56,7 @@ export default $`
           {
             "description": "Not found text.",
             "name": "emptyResult",
-            "required": false,
+            "optional": true,
             "tags": {
               "default": "'No results found.'",
             },
@@ -65,7 +65,7 @@ export default $`
           {
             "description": "Error text.",
             "name": "errorText",
-            "required": false,
+            "optional": true,
             "tags": {
               "default": "'Failed to load search index.'",
             },
@@ -74,7 +74,7 @@ export default $`
           {
             "description": "Loading text.",
             "name": "loading",
-            "required": false,
+            "optional": true,
             "tags": {
               "default": "'Loading…'",
             },
@@ -83,7 +83,7 @@ export default $`
           {
             "description": "Placeholder text.",
             "name": "placeholder",
-            "required": false,
+            "optional": true,
             "tags": {
               "default": "'Search documentation…'",
             },
@@ -92,14 +92,14 @@ export default $`
           {
             "description": "CSS class name.",
             "name": "className",
-            "required": false,
+            "optional": true,
             "tags": {},
             "type": "string",
           },
           {
             "description": "",
             "name": "searchOptions",
-            "required": false,
+            "optional": true,
             "tags": {},
             "type": "PagefindSearchOptions",
           },
@@ -121,7 +121,7 @@ export default $`
             "description": "Specifies the type of callout.
       Determines the default icon if none is provided.",
             "name": "type",
-            "required": false,
+            "optional": true,
             "tags": {
               "default": "'default'",
             },
@@ -136,7 +136,7 @@ export default $`
       - \`<InformationCircleIcon />\` for \`type: 'info'\`
       - \`'⚠️'\` for \`type: 'warning'\`",
             "name": "emoji",
-            "required": false,
+            "optional": true,
             "tags": {
               "default": "Determined by \`type\`",
             },
@@ -145,7 +145,7 @@ export default $`
           {
             "description": "Content to be displayed inside the callout.",
             "name": "children",
-            "required": true,
+            "optional": false,
             "tags": {},
             "type": "ReactNode",
           },
@@ -166,7 +166,7 @@ export default $`
           {
             "description": "Content of the link.",
             "name": "content",
-            "required": false,
+            "optional": true,
             "tags": {
               "default": "'Submit an issue about broken link'",
             },
@@ -175,7 +175,7 @@ export default $`
           {
             "description": "Labels that can be added to the new created issue.",
             "name": "labels",
-            "required": false,
+            "optional": true,
             "tags": {
               "default": "'bug'",
             },
@@ -184,7 +184,7 @@ export default $`
           {
             "description": "Top content of page.",
             "name": "children",
-            "required": false,
+            "optional": true,
             "tags": {
               "default": "<H1>404: Page Not Found</H1>",
             },
@@ -193,7 +193,7 @@ export default $`
           {
             "description": "CSS class name.",
             "name": "className",
-            "required": false,
+            "optional": true,
             "tags": {},
             "type": "string",
           },
@@ -213,7 +213,7 @@ export default $`
           {
             "description": "Extra content after last icon.",
             "name": "children",
-            "required": false,
+            "optional": true,
             "tags": {
               "remarks": "\`ReactNode\`",
             },
@@ -222,7 +222,7 @@ export default $`
           {
             "description": "Specifies whether the logo should have a link or provides the URL for the logo's link.",
             "name": "logoLink",
-            "required": false,
+            "optional": true,
             "tags": {
               "default": "true",
             },
@@ -231,7 +231,7 @@ export default $`
           {
             "description": "Logo of the website.",
             "name": "logo",
-            "required": true,
+            "optional": false,
             "tags": {
               "remarks": "\`ReactElement\`",
             },
@@ -240,14 +240,14 @@ export default $`
           {
             "description": "URL of the project homepage.",
             "name": "projectLink",
-            "required": false,
+            "optional": true,
             "tags": {},
             "type": "string",
           },
           {
             "description": "Icon of the project link.",
             "name": "projectIcon",
-            "required": false,
+            "optional": true,
             "tags": {
               "default": "<GitHubIcon />",
               "remarks": "\`ReactNode\`",
@@ -257,14 +257,14 @@ export default $`
           {
             "description": "URL of the chat link.",
             "name": "chatLink",
-            "required": false,
+            "optional": true,
             "tags": {},
             "type": "string",
           },
           {
             "description": "Icon of the chat link.",
             "name": "chatIcon",
-            "required": false,
+            "optional": true,
             "tags": {
               "default": "<DiscordIcon />",
               "remarks": "\`ReactNode\`",
@@ -274,14 +274,14 @@ export default $`
           {
             "description": "CSS class name.",
             "name": "className",
-            "required": false,
+            "optional": true,
             "tags": {},
             "type": "string",
           },
           {
             "description": "Aligns navigation links to the specified side.",
             "name": "align",
-            "required": false,
+            "optional": true,
             "tags": {
               "default": ""right"",
             },
@@ -303,7 +303,7 @@ export default $`
           {
             "description": "The hue of the primary theme color.<br/>Range: \`0 - 360\`",
             "name": "color.hue",
-            "required": false,
+            "optional": true,
             "tags": {
               "default": "{"dark":204,"light":212}",
             },
@@ -312,7 +312,7 @@ export default $`
           {
             "description": "The saturation of the primary theme color.<br/>Range: \`0 - 100\`",
             "name": "color.saturation",
-            "required": false,
+            "optional": true,
             "tags": {
               "default": "100",
             },
@@ -321,7 +321,7 @@ export default $`
           {
             "description": "The lightness of the primary theme color.<br/>Range: \`0 - 100\`",
             "name": "color.lightness",
-            "required": false,
+            "optional": true,
             "tags": {
               "default": "{"dark":55,"light":45}",
             },
@@ -330,14 +330,14 @@ export default $`
           {
             "description": "The glyph to use as the favicon.",
             "name": "faviconGlyph",
-            "required": false,
+            "optional": true,
             "tags": {},
             "type": "string",
           },
           {
             "description": "Background color for dark theme.<br/>Format: \`"rgb(RRR,GGG,BBB)" | "#RRGGBB"\`",
             "name": "backgroundColor.dark",
-            "required": false,
+            "optional": true,
             "tags": {
               "default": ""rgb(17,17,17)"",
             },
@@ -346,7 +346,7 @@ export default $`
           {
             "description": "Background color for light theme.<br/>Format: \`"rgb(RRR,GGG,BBB)" | "#RRGGBB"\`",
             "name": "backgroundColor.light",
-            "required": false,
+            "optional": true,
             "tags": {
               "default": ""rgb(250,250,250)"",
             },
@@ -355,7 +355,7 @@ export default $`
           {
             "description": "Content of \`<head>\`",
             "name": "children",
-            "required": false,
+            "optional": true,
             "tags": {
               "remarks": "\`ReactNode\`",
             },
@@ -377,7 +377,7 @@ export default $`
           {
             "description": "Rendered [\`<Banner>\` component](/docs/built-ins/banner). E.g. \`<Banner {...bannerProps} />\`",
             "name": "banner",
-            "required": false,
+            "optional": true,
             "tags": {
               "remarks": "\`ReactNode\`",
             },
@@ -386,7 +386,7 @@ export default $`
           {
             "description": "",
             "name": "children",
-            "required": false,
+            "optional": true,
             "tags": {
               "remarks": "\`ReactNode\`",
             },
@@ -395,7 +395,7 @@ export default $`
           {
             "description": "Show or hide the dark mode select button.",
             "name": "darkMode",
-            "required": false,
+            "optional": true,
             "tags": {
               "default": "true",
             },
@@ -404,7 +404,7 @@ export default $`
           {
             "description": "URL of the documentation repository.",
             "name": "docsRepositoryBase",
-            "required": false,
+            "optional": true,
             "tags": {
               "default": ""https://github.com/shuding/nextra"",
             },
@@ -413,7 +413,7 @@ export default $`
           {
             "description": "Content of the edit link.",
             "name": "editLink",
-            "required": false,
+            "optional": true,
             "tags": {
               "default": ""Edit this page"",
               "remarks": "\`ReactNode\`",
@@ -423,7 +423,7 @@ export default $`
           {
             "description": "Content of the feedback link.",
             "name": "feedback.content",
-            "required": false,
+            "optional": true,
             "tags": {
               "default": ""Question? Give us feedback"",
               "remarks": "\`ReactNode\`",
@@ -433,7 +433,7 @@ export default $`
           {
             "description": "Labels that can be added to the new created issue.",
             "name": "feedback.labels",
-            "required": false,
+            "optional": true,
             "tags": {
               "default": ""feedback"",
             },
@@ -442,7 +442,7 @@ export default $`
           {
             "description": "Rendered [\`<Footer>\` component](/docs/docs-theme/built-ins/footer). E.g. \`<Footer {...footerProps} />\`",
             "name": "footer",
-            "required": false,
+            "optional": true,
             "tags": {
               "remarks": "\`ReactNode\`",
             },
@@ -451,7 +451,7 @@ export default $`
           {
             "description": "Options to configure the language dropdown for [the i18n docs website](/docs/guide/i18n).",
             "name": "i18n",
-            "required": false,
+            "optional": true,
             "tags": {
               "default": "[]",
             },
@@ -460,7 +460,7 @@ export default $`
           {
             "description": "Component to render the last updated info.",
             "name": "lastUpdated",
-            "required": false,
+            "optional": true,
             "tags": {
               "default": "<LastUpdated />",
               "remarks": "\`ReactElement\`",
@@ -470,7 +470,7 @@ export default $`
           {
             "description": "Rendered [\`<Navbar>\` component](/docs/docs-theme/built-ins/navbar). E.g. \`<Navbar {...navbarProps} />\`",
             "name": "navbar",
-            "required": false,
+            "optional": true,
             "tags": {
               "remarks": "\`ReactNode\`",
             },
@@ -479,7 +479,7 @@ export default $`
           {
             "description": "Enable or disable navigation link.",
             "name": "navigation",
-            "required": false,
+            "optional": true,
             "tags": {
               "default": "true",
             },
@@ -488,7 +488,7 @@ export default $`
           {
             "description": "",
             "name": "nextThemes.attribute",
-            "required": false,
+            "optional": true,
             "tags": {
               "default": ""class"",
             },
@@ -497,14 +497,14 @@ export default $`
           {
             "description": "",
             "name": "nextThemes.defaultTheme",
-            "required": false,
+            "optional": true,
             "tags": {},
             "type": "string",
           },
           {
             "description": "",
             "name": "nextThemes.disableTransitionOnChange",
-            "required": false,
+            "optional": true,
             "tags": {
               "default": "true",
             },
@@ -513,21 +513,21 @@ export default $`
           {
             "description": "",
             "name": "nextThemes.forcedTheme",
-            "required": false,
+            "optional": true,
             "tags": {},
             "type": "string",
           },
           {
             "description": "",
             "name": "nextThemes.storageKey",
-            "required": false,
+            "optional": true,
             "tags": {},
             "type": "string",
           },
           {
             "description": "Page map list. Result of \`getPageMap(route = '/')\` call.",
             "name": "pageMap",
-            "required": true,
+            "optional": false,
             "tags": {
               "remarks": "\`PageMapItem[]\`",
             },
@@ -536,7 +536,7 @@ export default $`
           {
             "description": "Rendered [\`<Search>\` component](/docs/built-ins/search). E.g. \`<Search {...searchProps} />\`",
             "name": "search",
-            "required": false,
+            "optional": true,
             "tags": {
               "default": "<Search />",
               "remarks": "\`ReactNode\`",
@@ -546,14 +546,14 @@ export default $`
           {
             "description": "If true, automatically collapse inactive folders above \`defaultMenuCollapseLevel\`.",
             "name": "sidebar.autoCollapse",
-            "required": false,
+            "optional": true,
             "tags": {},
             "type": "boolean",
           },
           {
             "description": "Specifies the folder level at which the menu on the left is collapsed by default.",
             "name": "sidebar.defaultMenuCollapseLevel",
-            "required": false,
+            "optional": true,
             "tags": {
               "default": "2",
             },
@@ -562,7 +562,7 @@ export default $`
           {
             "description": "Hide/show sidebar by default.",
             "name": "sidebar.defaultOpen",
-            "required": false,
+            "optional": true,
             "tags": {
               "default": "true",
             },
@@ -571,7 +571,7 @@ export default $`
           {
             "description": "Hide/show sidebar toggle button.",
             "name": "sidebar.toggleButton",
-            "required": false,
+            "optional": true,
             "tags": {
               "default": "true",
             },
@@ -580,7 +580,7 @@ export default $`
           {
             "description": "",
             "name": "themeSwitch.dark",
-            "required": false,
+            "optional": true,
             "tags": {
               "default": ""Dark"",
             },
@@ -589,7 +589,7 @@ export default $`
           {
             "description": "",
             "name": "themeSwitch.light",
-            "required": false,
+            "optional": true,
             "tags": {
               "default": ""Light"",
             },
@@ -598,7 +598,7 @@ export default $`
           {
             "description": "",
             "name": "themeSwitch.system",
-            "required": false,
+            "optional": true,
             "tags": {
               "default": ""System"",
             },
@@ -607,7 +607,7 @@ export default $`
           {
             "description": "Text of back to top button.",
             "name": "toc.backToTop",
-            "required": false,
+            "optional": true,
             "tags": {
               "default": ""Scroll to top"",
               "remarks": "\`ReactNode\`",
@@ -617,7 +617,7 @@ export default $`
           {
             "description": "Display extra content below the TOC content.",
             "name": "toc.extraContent",
-            "required": false,
+            "optional": true,
             "tags": {
               "remarks": "\`ReactNode\`",
             },
@@ -626,7 +626,7 @@ export default $`
           {
             "description": "Float the TOC next to the content.",
             "name": "toc.float",
-            "required": false,
+            "optional": true,
             "tags": {
               "default": "true",
             },
@@ -635,7 +635,7 @@ export default $`
           {
             "description": "Title of the TOC sidebar.",
             "name": "toc.title",
-            "required": false,
+            "optional": true,
             "tags": {
               "default": ""On This Page"",
               "remarks": "\`ReactNode\`",
@@ -660,7 +660,7 @@ export default A`
           {
             "description": "",
             "name": "foo",
-            "required": true,
+            "optional": false,
             "tags": {},
             "type": "string",
           },
@@ -690,7 +690,7 @@ export default $`
           {
             "description": "",
             "name": "breadcrumb",
-            "required": false,
+            "optional": true,
             "tags": {
               "description": "Show or hide breadcrumb navigation.",
             },
@@ -699,7 +699,7 @@ export default $`
           {
             "description": "Indicates whether the item in sidebar is collapsed by default.",
             "name": "collapsed",
-            "required": false,
+            "optional": true,
             "tags": {},
             "type": "boolean",
           },
@@ -722,7 +722,7 @@ export default Connection`
           {
             "description": "",
             "name": "targetHandle",
-            "required": true,
+            "optional": false,
             "tags": {},
             "type": "string | null",
           },
@@ -747,7 +747,7 @@ export default $
             {
               "description": "",
               "name": "useNodeConnections",
-              "required": true,
+              "optional": false,
               "tags": {},
               "type": "({ id, handleType, handleId, onConnect, onDisconnect, }?: UseNodeConnectionsParams | undefined) => NodeConnection[]",
             },
@@ -768,21 +768,21 @@ export default $
             {
               "description": "Node id - if called inside a custom node.",
               "name": "0?.id",
-              "required": false,
+              "optional": true,
               "tags": {},
               "type": "string",
             },
             {
               "description": "Filter by handle type.",
               "name": "0?.handleType",
-              "required": false,
+              "optional": true,
               "tags": {},
               "type": "HandleType",
             },
             {
               "description": "Filter by handle id (this is only needed if the node has multiple handles of the same type).",
               "name": "0?.handleId",
-              "required": false,
+              "optional": true,
               "tags": {},
               "type": "string",
             },
@@ -824,17 +824,17 @@ export default $
           "name": "useInternalNode",
           "params": [
             {
-              "description": "Id of the node.",
+              "description": "The ID of a node you want to observe.",
               "name": "id",
-              "required": true,
+              "optional": false,
               "tags": {
-                "param": "id - Id of the node.",
+                "param": "id - The ID of a node you want to observe.",
               },
               "type": "string",
             },
           ],
           "return": {
-            "description": "Array with visible node ids.",
+            "description": "The \`InternalNode\` object for the node with the given ID.",
             "type": "InternalNode<NodeType> | undefined",
           },
           "tags": {
@@ -854,9 +854,9 @@ export default $
          );
         }
         \`\`\`",
-            "param": "id - Id of the node.",
+            "param": "id - The ID of a node you want to observe.",
             "public": "",
-            "returns": "Array with visible node ids.",
+            "returns": "The \`InternalNode\` object for the node with the given ID.",
           },
         }
       `)
