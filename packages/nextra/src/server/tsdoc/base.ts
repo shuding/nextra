@@ -104,6 +104,7 @@ export function generateDocumentation({
       .getText(undefined, ts.TypeFormatFlags.UseAliasDefinedOutsideCurrentScope)
     return {
       ...baseFields,
+      tags: getTags(declarationType.getSymbol()!),
       // @ts-expect-error
       params: typeParams,
       return: {
@@ -183,12 +184,7 @@ function getDocEntry(
       })
     )
   }
-
-  const tags = Object.fromEntries(
-    prop
-      .getJsDocTags()
-      .map(tag => [tag.getName(), ts.displayPartsToString(tag.getText())])
-  )
+  const tags = getTags(prop)
   let typeName = subType.getText(
     undefined,
     ts.TypeFormatFlags.UseAliasDefinedOutsideCurrentScope
@@ -214,6 +210,10 @@ function getDocEntry(
   }
 }
 
-function getDescription(): string {
-
+function getTags(prop: TsSymbol): DocEntry['tags'] {
+  return Object.fromEntries(
+    prop
+      .getJsDocTags()
+      .map(tag => [tag.getName(), ts.displayPartsToString(tag.getText())])
+  )
 }

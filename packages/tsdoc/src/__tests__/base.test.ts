@@ -792,6 +792,25 @@ export default $
           "return": {
             "type": "NodeConnection[]",
           },
+          "tags": {
+            "example": " \`\`\`jsx
+        import { useNodeConnections } from '@xyflow/react';
+
+        export default function () {
+          const connections = useNodeConnections({
+            handleType: 'target',
+            handleId: 'my-handle',
+          });
+
+          return (
+            <div>There are currently {connections.length} incoming connections!</div>
+          );
+        }
+        \`\`\`",
+            "param": "param.onDisconnect - gets called when a connection is removed",
+            "public": "",
+            "returns": "an array with connections",
+          },
         }
       `)
     })
@@ -818,6 +837,27 @@ export default $
           ],
           "return": {
             "type": "InternalNode<NodeType> | undefined",
+          },
+          "tags": {
+            "example": "\`\`\`tsx
+        import { useInternalNode } from '@xyflow/react';
+
+        export default function () {
+         const internalNode = useInternalNode('node-1');
+         const absolutePosition = internalNode.internals.positionAbsolute;
+
+         return (
+           <div>
+             The absolute position of the node is at:
+             <p>x: {absolutePosition.x}</p>
+             <p>y: {absolutePosition.y}</p>
+           </div>
+         );
+        }
+        \`\`\`",
+            "param": "id - id of the node",
+            "public": "",
+            "returns": "array with visible node ids",
           },
         }
       `)
