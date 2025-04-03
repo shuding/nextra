@@ -1,4 +1,4 @@
-import type { ExportedDeclarations, Symbol as TsSymbol } from 'ts-morph'
+import type { ExportedDeclarations, Symbol as TsSymbol, Type } from 'ts-morph'
 import { Project, ts } from 'ts-morph'
 
 const project = new Project({
@@ -75,11 +75,7 @@ export function generateDocumentation({
   const comment = declaration
     .getSymbol()
     ?.compilerSymbol.getDocumentationComment(compilerObject)
-
-  const baseFields = {
-    name: exportName,
-    description: comment ? ts.displayPartsToString(comment) : '',
-  }
+  const description = comment ? ts.displayPartsToString(comment) : ''
 
   const declarationType = declaration.getType()
   const callSignatures = declarationType.getCallSignatures()
@@ -103,7 +99,8 @@ export function generateDocumentation({
       .getReturnType()
       .getText(undefined, ts.TypeFormatFlags.UseAliasDefinedOutsideCurrentScope)
     return {
-      ...baseFields,
+      name: declarationType.getSymbol()!.getName(),
+      description,
       tags: getTags(declarationType.getSymbol()!),
       // @ts-expect-error
       params: typeParams,
@@ -145,7 +142,8 @@ export function generateDocumentation({
   }
 
   return {
-    ...baseFields,
+    name: exportName,
+    description,
     entries
   }
 }
@@ -185,10 +183,7 @@ function getDocEntry(
     )
   }
   const tags = getTags(prop)
-  let typeName = subType.getText(
-    undefined,
-    ts.TypeFormatFlags.UseAliasDefinedOutsideCurrentScope
-  )
+  let typeName = getFormattedText(subType)
 
   const aliasSymbol = subType.getAliasSymbol()
 
@@ -215,5 +210,12 @@ function getTags(prop: TsSymbol): DocEntry['tags'] {
     prop
       .getJsDocTags()
       .map(tag => [tag.getName(), ts.displayPartsToString(tag.getText())])
+  )
+}
+
+function getFormattedText(t: Type): string {
+  return t.getText(
+    undefined,
+    ts.TypeFormatFlags.UseAliasDefinedOutsideCurrentScope
   )
 }
