@@ -88,13 +88,18 @@ export function generateDocumentation({
     const signature = callSignatures[0]! // Function can have multiple signatures
     const params = signature.getParameters()
 
-    const typeParams = params.map(param =>
-      getDocEntry(param, {
-        declaration,
-        flattened,
-        isFunctionParameter: true
-      })
-    )
+    const typeParams = params
+      .flatMap(param =>
+        getDocEntry(param, {
+          declaration,
+          flattened,
+          isFunctionParameter: true
+        })
+      )
+      .map(entry => ({
+        ...entry,
+        description: entry.description.replace(/^- /, '')
+      }))
     const returnType = signature
       .getReturnType()
       .getText(undefined, ts.TypeFormatFlags.UseAliasDefinedOutsideCurrentScope)
