@@ -734,10 +734,8 @@ export default Connection`
 
   describe.only('should work with function', () => {
     it('in object', () => {
-      const code =
-        `import type { useNodeConnections } from '@xyflow/react'
-type $ = {
-  useNodeConnections: typeof useNodeConnections
+      const code = `type $ = {
+  useNodeConnections: typeof import('@xyflow/react').useNodeConnections
 }
 export default $
 `
@@ -758,25 +756,23 @@ export default $
         }
       `)
     })
-    it('as function',() => {
+    it('as function', () => {
       const code =
         "export { useNodeConnections as default } from '@xyflow/react'"
-      const result = generateDocumentation({ code, flattened: true })
+      const result = generateDocumentation({ code })
       expect(result).toMatchInlineSnapshot(`
         {
           "returnType": "NodeConnection[]",
           "typeParams": [
-            [
-              {
-                "description": "",
-                "name": "__0.__0",
-                "required": true,
-                "tags": {
-                  "param": "param",
-                },
-                "type": "UseNodeConnectionsParams | undefined",
+            {
+              "description": "",
+              "name": "__0",
+              "required": true,
+              "tags": {
+                "param": "param",
               },
-            ],
+              "type": "UseNodeConnectionsParams | undefined",
+            },
           ],
         }
       `)
