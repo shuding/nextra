@@ -762,8 +762,7 @@ export default $
       const result = generateDocumentation({ code, flattened: true })
       expect(result).toMatchInlineSnapshot(`
         {
-          "returnType": "NodeConnection[]",
-          "typeParams": [
+          "params": [
             [
               {
                 "description": "",
@@ -788,6 +787,9 @@ export default $
               },
             ],
           ],
+          "return": {
+            "type": "NodeConnection[]",
+          },
         }
       `)
     })
@@ -797,8 +799,7 @@ export default $
       const result = generateDocumentation({ code, flattened: true })
       expect(result).toMatchInlineSnapshot(`
         {
-          "returnType": "InternalNode<NodeType> | undefined",
-          "typeParams": [
+          "params": [
             {
               "description": "- id of the node",
               "name": "id",
@@ -809,6 +810,9 @@ export default $
               "type": "string",
             },
           ],
+          "return": {
+            "type": "InternalNode<NodeType> | undefined",
+          },
         }
       `)
     })

@@ -98,8 +98,10 @@ export function generateDocumentation({
       .getText(undefined, ts.TypeFormatFlags.UseAliasDefinedOutsideCurrentScope)
     return {
       // @ts-expect-error
-      typeParams,
-      returnType
+      params: typeParams,
+      return: {
+        type: returnType
+      }
     }
 
     // const func = sourceFile.getFunctionOrThrow('useNodeConnections')
@@ -204,4 +206,8 @@ function getDocEntry(
     type: typeName,
     required: !prop.isOptional()
   }
+}
+
+function getDescription(): string {
+
 }
