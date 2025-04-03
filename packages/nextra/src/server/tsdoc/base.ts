@@ -115,7 +115,8 @@ export function generateDocumentation({
 
     const typeParams = params
       .flatMap(param =>
-        getDocEntry(param, {
+        getDocEntry({
+          symbol: param,
           declaration,
           flattened,
           isFunctionParameter: true
@@ -153,7 +154,8 @@ export function generateDocumentation({
   const entries = declarationType
     .getProperties()
     .flatMap(prop =>
-      getDocEntry(prop, {
+      getDocEntry({
+        symbol: prop,
         declaration,
         flattened
       })
@@ -180,13 +182,14 @@ export function generateDocumentation({
 }
 
 function getDocEntry(
-  prop: TsSymbol,
   {
+    symbol,
     declaration,
     flattened,
     prefix = '',
     isFunctionParameter = false
   }: {
+    symbol: TsSymbol,
     declaration: ExportedDeclarations
     flattened: boolean
     prefix?: string
@@ -196,24 +199,25 @@ function getDocEntry(
 ): TypeField | TypeField[] {
   const originalSubType = project
     .getTypeChecker()
-    .getTypeOfSymbolAtLocation(prop, declaration)
+    .getTypeOfSymbolAtLocation(symbol, declaration)
   const subType = isFunctionParameter
     ? originalSubType.getNonNullableType()
     : originalSubType
 
   if (flattened && subType.isObject() && !subType.isArray()) {
     return subType.getProperties().flatMap(childProp =>
-      getDocEntry(childProp, {
+      getDocEntry({
+        symbol: childProp,
         declaration,
         flattened,
         prefix: isFunctionParameter
-          ? prop.getName().replace(/^_+/, '') +
+          ? symbol.getName().replace(/^_+/, '') +
             (originalSubType.isNullable() ? '?' : '')
-          : prop.getName()
+          : symbol.getName()
       })
     )
   }
-  const tags = getTags(prop)
+  const tags = getTags(symbol)
   let typeName = getFormattedText(subType)
 
   const aliasSymbol = subType.getAliasSymbol()
@@ -224,15 +228,15 @@ function getDocEntry(
   if (tags.remarks) {
     typeName = /^`(?<name>.+)`/.exec(tags.remarks)?.[1] ?? typeName
   }
-  const name = prop.getName()
+  const name = symbol.getName()
   return {
     name: prefix ? [prefix, name].join('.') : name,
     description: ts.displayPartsToString(
-      prop.compilerSymbol.getDocumentationComment(compilerObject)
+      symbol.compilerSymbol.getDocumentationComment(compilerObject)
     ),
     tags,
     type: typeName,
-    required: !prop.isOptional()
+    required: !symbol.isOptional()
   }
 }
 
