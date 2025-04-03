@@ -75,14 +75,63 @@ export function generateDocumentation({
   const comment = declaration
     .getSymbol()
     ?.compilerSymbol.getDocumentationComment(compilerObject)
-  const entries = declaration
-    .getType()
+  const declarationType = declaration.getType()
+  const callSignatures = declarationType.getCallSignatures()
+  const isFunction = callSignatures.length > 0
+
+  if (isFunction) {
+    if (callSignatures.length > 1) {
+      throw new Error("Functions with multiple signatures aren't supported yet")
+    }
+    const signature = callSignatures[0]! // Function can have multiple signatures
+    const params = signature.getParameters()
+    // console.log('params', params)
+    const typeParams = params.map(param =>
+      getDocEntry(param, {
+        declaration,
+        flattened,
+        isFunctionParameter: true
+      })
+    )
+    const returnType = signature
+      .getReturnType()
+      .getText(undefined, ts.TypeFormatFlags.UseAliasDefinedOutsideCurrentScope)
+    return {
+      // @ts-expect-error
+      typeParams,
+      returnType
+    }
+
+    // const func = sourceFile.getFunctionOrThrow('useNodeConnections')
+    //
+    // // Get type parameters
+    // const typeParams2 = func.getTypeParameters().map(tp => tp.getText())
+    //
+    // // Get return type
+    // const returnType2 = func.getReturnType().getText()
+    // console.log({typeParams2, returnType2})
+  }
+
+  const entries = declarationType
     .getProperties()
-    .flatMap(prop => getDocEntry(prop, { declaration, flattened }))
+    .flatMap(prop =>
+      getDocEntry(prop, {
+        declaration,
+        flattened,
+        isFunctionParameter: false
+      })
+    )
     .filter(entry => !('internal' in entry.tags))
+
   if (!entries.length) {
+    const typeName = declarationType.getText()
+    if (typeName === 'any') {
+      throw new Error(
+        'Your type is resolved as "any", it seems like you have an issue in "TSDoc.code" prop'
+      )
+    }
     throw new Error(
-      `No properties found, check if your type "${declaration.getType().getText()}" exist`
+      `No properties found, check if your type "${typeName}" exist`
     )
   }
 
@@ -98,21 +147,42 @@ function getDocEntry(
   {
     declaration,
     flattened,
-    prefix = ''
-  }: { declaration: ExportedDeclarations; flattened: boolean; prefix?: string }
+    prefix = '',
+    isFunctionParameter = false
+  }: {
+    declaration: ExportedDeclarations
+    flattened: boolean
+    prefix?: string
+    isFunctionParameter: boolean
+  }
 ): DocEntry | DocEntry[] {
-  const subType = project
+  let subType = project
     .getTypeChecker()
     .getTypeOfSymbolAtLocation(prop, declaration)
 
+  subType = isFunctionParameter ? subType.getNonNullableType() : subType
+
   if (flattened && subType.isObject() && !subType.isArray()) {
-    return subType.getProperties().flatMap(childProp =>
-      getDocEntry(childProp, {
-        declaration,
-        flattened,
-        prefix: prop.getName()
-      })
-    )
+    // console.log({
+    //   text: subType.getText(),
+    //   text2: subType.getText(
+    //     undefined,
+    //     ts.TypeFormatFlags.UseAliasDefinedOutsideCurrentScope
+    //   ),
+    //   subType,
+    //   optional: prop.isOptional()
+    // })
+    //
+    return subType
+      .getProperties()
+      .flatMap(childProp =>
+        getDocEntry(childProp, {
+          declaration,
+          flattened,
+          prefix: prop.getName(),
+          isFunctionParameter: false
+        })
+      )
   }
 
   const tags = Object.fromEntries(
@@ -134,9 +204,8 @@ function getDocEntry(
     typeName = /^`(?<name>.+)`/.exec(tags.remarks)?.[1] ?? typeName
   }
   const name = prop.getName()
-
   return {
-    name: prefix ? [prefix, name].join('.') : name,
+    name: [prefix, isFunctionParameter && prop.isOptional() && '?', name].filter(Boolean).join('.'),
     description: ts.displayPartsToString(
       prop.compilerSymbol.getDocumentationComment(compilerObject)
     ),

@@ -732,7 +732,7 @@ export default Connection`
     `)
   })
 
-  describe.only('should work with function', () => {
+  describe('should work with function', () => {
     it('in object', () => {
       const code = `type $ = {
   useNodeConnections: typeof import('@xyflow/react').useNodeConnections
@@ -767,21 +767,21 @@ export default $
             [
               {
                 "description": "",
-                "name": "__0.?.id",
+                "name": "__0.id",
                 "required": false,
                 "tags": {},
                 "type": "string",
               },
               {
                 "description": "",
-                "name": "__0.?.handleType",
+                "name": "__0.handleType",
                 "required": false,
                 "tags": {},
                 "type": "HandleType",
               },
               {
                 "description": "",
-                "name": "__0.?.handleId",
+                "name": "__0.handleId",
                 "required": false,
                 "tags": {},
                 "type": "string",
