@@ -43,7 +43,7 @@ type GeneratedFunction = {
   }
 }
 
-type TypeField = {
+export type TypeField = {
   /** Field name. */
   name: string
   /** Field description. */
