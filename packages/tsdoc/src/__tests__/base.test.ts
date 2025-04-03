@@ -759,20 +759,34 @@ export default $
     it('as function', () => {
       const code =
         "export { useNodeConnections as default } from '@xyflow/react'"
-      const result = generateDocumentation({ code })
+      const result = generateDocumentation({ code, flattened: true })
       expect(result).toMatchInlineSnapshot(`
         {
           "returnType": "NodeConnection[]",
           "typeParams": [
-            {
-              "description": "",
-              "name": "__0",
-              "required": true,
-              "tags": {
-                "param": "param",
+            [
+              {
+                "description": "",
+                "name": "__0.?.id",
+                "required": false,
+                "tags": {},
+                "type": "string",
               },
-              "type": "UseNodeConnectionsParams | undefined",
-            },
+              {
+                "description": "",
+                "name": "__0.?.handleType",
+                "required": false,
+                "tags": {},
+                "type": "HandleType",
+              },
+              {
+                "description": "",
+                "name": "__0.?.handleId",
+                "required": false,
+                "tags": {},
+                "type": "string",
+              },
+            ],
           ],
         }
       `)
