@@ -791,6 +791,27 @@ export default $
         }
       `)
     })
+    it('as function with description', () => {
+      const code =
+        "export { useInternalNode as default } from '@xyflow/react'"
+      const result = generateDocumentation({ code, flattened: true })
+      expect(result).toMatchInlineSnapshot(`
+        {
+          "returnType": "InternalNode<NodeType> | undefined",
+          "typeParams": [
+            {
+              "description": "- id of the node",
+              "name": "id",
+              "required": true,
+              "tags": {
+                "param": "id - id of the node",
+              },
+              "type": "string",
+            },
+          ],
+        }
+      `)
+    })
   })
 
   it.skip('should work with anonymous type', async () => {
