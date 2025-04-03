@@ -75,6 +75,12 @@ export function generateDocumentation({
   const comment = declaration
     .getSymbol()
     ?.compilerSymbol.getDocumentationComment(compilerObject)
+
+  const baseFields = {
+    name: exportName,
+    description: comment ? ts.displayPartsToString(comment) : '',
+  }
+
   const declarationType = declaration.getType()
   const callSignatures = declarationType.getCallSignatures()
   const isFunction = callSignatures.length > 0
@@ -97,6 +103,7 @@ export function generateDocumentation({
       .getReturnType()
       .getText(undefined, ts.TypeFormatFlags.UseAliasDefinedOutsideCurrentScope)
     return {
+      ...baseFields,
       // @ts-expect-error
       params: typeParams,
       return: {
@@ -137,8 +144,7 @@ export function generateDocumentation({
   }
 
   return {
-    name: exportName,
-    description: comment ? ts.displayPartsToString(comment) : '',
+    ...baseFields,
     entries
   }
 }

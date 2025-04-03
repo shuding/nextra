@@ -762,6 +762,8 @@ export default $
       const result = generateDocumentation({ code, flattened: true })
       expect(result).toMatchInlineSnapshot(`
         {
+          "description": "This hook returns an array of connections on a specific node, handle type ('source', 'target') or handle ID.",
+          "name": "default",
           "params": [
             [
               {
@@ -799,6 +801,10 @@ export default $
       const result = generateDocumentation({ code, flattened: true })
       expect(result).toMatchInlineSnapshot(`
         {
+          "description": "This hook returns the internal representation of a specific node.
+        Components that use this hook will re-render **whenever the node changes**,
+        including when a node is selected or moved.",
+          "name": "default",
           "params": [
             {
               "description": "- id of the node",
