@@ -781,7 +781,7 @@ export default $
                 "type": "HandleType",
               },
               {
-                "description": ". Filter by handle id (this is only needed if the node has multiple handles of the same type).",
+                "description": "Filter by handle id (this is only needed if the node has multiple handles of the same type).",
                 "name": "0?.handleId",
                 "required": false,
                 "tags": {},
