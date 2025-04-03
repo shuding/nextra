@@ -86,7 +86,7 @@ export const TSDoc: FC<TSDocProps> = async ({
   const returns = await Promise.all(promises2)
   return (
     <>
-      <b className="x:mt-6">Parameters:</b>
+      <b className="x:mt-6 x:block">Parameters:</b>
       <FieldsTable fields={entries} typeLinkMap={typeLinkMap} />
       <b>Returns:</b>
       <table className="x:my-8 x:w-full x:text-sm">
