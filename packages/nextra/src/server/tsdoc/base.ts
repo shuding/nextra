@@ -118,7 +118,6 @@ export function generateDocumentation({
       getDocEntry(prop, {
         declaration,
         flattened,
-        isFunctionParameter: false
       })
     )
     .filter(entry => !('internal' in entry.tags))
@@ -153,7 +152,8 @@ function getDocEntry(
     declaration: ExportedDeclarations
     flattened: boolean
     prefix?: string
-    isFunctionParameter: boolean
+    /** @default false */
+    isFunctionParameter?: boolean
   }
 ): DocEntry | DocEntry[] {
   let subType = project
@@ -180,7 +180,6 @@ function getDocEntry(
           declaration,
           flattened,
           prefix: prop.getName(),
-          isFunctionParameter: false
         })
       )
   }
