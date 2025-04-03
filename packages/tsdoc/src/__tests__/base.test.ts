@@ -731,6 +731,58 @@ export default Connection`
       }
     `)
   })
+
+  describe.only('should work with function', () => {
+    it('in object', () => {
+      const code =
+        `import type { useNodeConnections } from '@xyflow/react'
+type $ = {
+  useNodeConnections: typeof useNodeConnections
+}
+export default $
+`
+      const result = generateDocumentation({ code })
+      expect(result).toMatchInlineSnapshot(`
+        {
+          "description": "",
+          "entries": [
+            {
+              "description": "",
+              "name": "useNodeConnections",
+              "required": true,
+              "tags": {},
+              "type": "({ id, handleType, handleId, onConnect, onDisconnect, }?: UseNodeConnectionsParams | undefined) => NodeConnection[]",
+            },
+          ],
+          "name": "default",
+        }
+      `)
+    })
+    it('as function',() => {
+      const code =
+        "export { useNodeConnections as default } from '@xyflow/react'"
+      const result = generateDocumentation({ code, flattened: true })
+      expect(result).toMatchInlineSnapshot(`
+        {
+          "returnType": "NodeConnection[]",
+          "typeParams": [
+            [
+              {
+                "description": "",
+                "name": "__0.__0",
+                "required": true,
+                "tags": {
+                  "param": "param",
+                },
+                "type": "UseNodeConnectionsParams | undefined",
+              },
+            ],
+          ],
+        }
+      `)
+    })
+  })
+
   it.skip('should work with anonymous type', async () => {
     const code = `
 type $ = {
