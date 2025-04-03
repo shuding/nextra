@@ -181,22 +181,20 @@ export function generateDocumentation({
   }
 }
 
-function getDocEntry(
-  {
-    symbol,
-    declaration,
-    flattened,
-    prefix = '',
-    isFunctionParameter = false
-  }: {
-    symbol: TsSymbol,
-    declaration: ExportedDeclarations
-    flattened: boolean
-    prefix?: string
-    /** @default false */
-    isFunctionParameter?: boolean
-  }
-): TypeField | TypeField[] {
+function getDocEntry({
+  symbol,
+  declaration,
+  flattened,
+  prefix = '',
+  isFunctionParameter = false
+}: {
+  symbol: TsSymbol
+  declaration: ExportedDeclarations
+  flattened: boolean
+  prefix?: string
+  /** @default false */
+  isFunctionParameter?: boolean
+}): TypeField | TypeField[] {
   const originalSubType = project
     .getTypeChecker()
     .getTypeOfSymbolAtLocation(symbol, declaration)
@@ -205,17 +203,21 @@ function getDocEntry(
     : originalSubType
 
   if (flattened && subType.isObject() && !subType.isArray()) {
-    return subType.getProperties().flatMap(childProp =>
-      getDocEntry({
+    return subType.getProperties().flatMap(childProp => {
+      const prefix = isFunctionParameter
+        ? symbol.getName().replace(/^_+/, '')
+        : symbol.getName()
+
+      return getDocEntry({
         symbol: childProp,
         declaration,
         flattened,
-        prefix: isFunctionParameter
-          ? symbol.getName().replace(/^_+/, '') +
-            (originalSubType.isNullable() ? '?' : '')
-          : symbol.getName()
+        prefix:
+          typeof +prefix === 'number'
+            ? `[${prefix}]` + (originalSubType.isNullable() ? '?' : '')
+            : prefix
       })
-    )
+    })
   }
   const tags = getTags(symbol)
   let typeName = getFormattedText(subType)
