@@ -61,7 +61,6 @@ export function generateDocumentation({
     }
     const signature = callSignatures[0]! // Function can have multiple signatures
     const params = signature.getParameters()
-
     const typeParams = params
       .flatMap(param =>
         getDocEntry({
@@ -151,12 +150,17 @@ function getDocEntry({
     ? originalSubType.getNonNullableType()
     : originalSubType
 
-  if (flattened && subType.isObject() && !subType.isArray()) {
+  if (
+    flattened &&
+    subType.isObject() &&
+    !subType.isArray() &&
+    // Is not function
+    !subType.getCallSignatures().length
+  ) {
     return subType.getProperties().flatMap(childProp => {
       const prefix = isFunctionParameter
         ? symbol.getName().replace(/^_+/, '')
         : symbol.getName()
-
       return getDocEntry({
         symbol: childProp,
         declaration,

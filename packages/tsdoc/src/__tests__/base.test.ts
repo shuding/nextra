@@ -786,6 +786,20 @@ export default $
               "tags": {},
               "type": "string",
             },
+            {
+              "description": "Gets called when a connection is established.",
+              "name": "[0]?.onConnect",
+              "optional": true,
+              "tags": {},
+              "type": "(connections: Connection[]) => void",
+            },
+            {
+              "description": "Gets called when a connection is removed.",
+              "name": "[0]?.onDisconnect",
+              "optional": true,
+              "tags": {},
+              "type": "(connections: Connection[]) => void",
+            },
           ],
           "return": {
             "description": "An array with connections.",
