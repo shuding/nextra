@@ -45,7 +45,7 @@ type Entry = {
   type: string
   description: ReactNode
   default?: string
-  required: boolean
+  optional: boolean
 }
 
 export const TSDoc: FC<TSDocProps> = async ({
@@ -64,7 +64,7 @@ export const TSDoc: FC<TSDocProps> = async ({
         entry.description || tags.description || ''
       ),
       default: tags.default || tags.defaultValue,
-      required: entry.required
+      optional: entry.optional
     }
   }
   if ('entries' in result) {
@@ -121,7 +121,7 @@ export const TSDoc: FC<TSDocProps> = async ({
                   />
                   <Code
                     // add `?` via CSS `content` property so value will be not selectable
-                    className={cn(!prop.required && 'x:after:content-["?"]')}
+                    className={cn(prop.optional && 'x:after:content-["?"]')}
                   >
                     {prop.name}
                   </Code>
@@ -183,7 +183,7 @@ const FieldsTable: FC<{
                 />
                 <Code
                   // add `?` via CSS `content` property so value will be not selectable
-                  className={cn(!prop.required && 'x:after:content-["?"]')}
+                  className={cn(prop.optional && 'x:after:content-["?"]')}
                 >
                   {prop.name}
                 </Code>

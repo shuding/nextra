@@ -52,8 +52,8 @@ export type TypeField = {
   tags: Tags
   /** Field type. */
   type: string
-  /** Is field required. */
-  required: boolean
+  /** Is field optional. */
+  optional: boolean
 }
 
 export type BaseTypeTableProps = {
@@ -236,7 +236,7 @@ function getDocEntry(
     ),
     tags,
     type: typeName,
-    required: !symbol.isOptional()
+    optional: symbol.isOptional()
   }
 }
 
