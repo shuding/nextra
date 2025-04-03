@@ -85,7 +85,7 @@ export function generateDocumentation({
     }
     const signature = callSignatures[0]! // Function can have multiple signatures
     const params = signature.getParameters()
-    // console.log('params', params)
+
     const typeParams = params.map(param =>
       getDocEntry(param, {
         declaration,
@@ -117,7 +117,7 @@ export function generateDocumentation({
     .flatMap(prop =>
       getDocEntry(prop, {
         declaration,
-        flattened,
+        flattened
       })
     )
     .filter(entry => !('internal' in entry.tags))
@@ -156,32 +156,24 @@ function getDocEntry(
     isFunctionParameter?: boolean
   }
 ): DocEntry | DocEntry[] {
-  let subType = project
+  const originalSubType = project
     .getTypeChecker()
     .getTypeOfSymbolAtLocation(prop, declaration)
-
-  subType = isFunctionParameter ? subType.getNonNullableType() : subType
+  const subType = isFunctionParameter
+    ? originalSubType.getNonNullableType()
+    : originalSubType
 
   if (flattened && subType.isObject() && !subType.isArray()) {
-    // console.log({
-    //   text: subType.getText(),
-    //   text2: subType.getText(
-    //     undefined,
-    //     ts.TypeFormatFlags.UseAliasDefinedOutsideCurrentScope
-    //   ),
-    //   subType,
-    //   optional: prop.isOptional()
-    // })
-    //
-    return subType
-      .getProperties()
-      .flatMap(childProp =>
-        getDocEntry(childProp, {
-          declaration,
-          flattened,
-          prefix: prop.getName(),
-        })
-      )
+    return subType.getProperties().flatMap(childProp =>
+      getDocEntry(childProp, {
+        declaration,
+        flattened,
+        prefix: isFunctionParameter
+          ? prop.getName().replace(/^_+/, '') +
+            (originalSubType.isNullable() ? '?' : '')
+          : prop.getName()
+      })
+    )
   }
 
   const tags = Object.fromEntries(
@@ -204,7 +196,7 @@ function getDocEntry(
   }
   const name = prop.getName()
   return {
-    name: [prefix, isFunctionParameter && prop.isOptional() && '?', name].filter(Boolean).join('.'),
+    name: prefix ? [prefix, name].join('.') : name,
     description: ts.displayPartsToString(
       prop.compilerSymbol.getDocumentationComment(compilerObject)
     ),
