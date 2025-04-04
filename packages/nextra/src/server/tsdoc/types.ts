@@ -37,7 +37,7 @@ export type TypeField = {
   /** Field type. */
   type: string
   /** Is field optional. */
-  optional: boolean
+  optional?: boolean
 }
 
 export type BaseTypeTableProps = {

@@ -205,9 +205,9 @@ function getDocEntry({
 
   return {
     name: prefix ? [prefix, name].join('.') : name,
+    type: typeName,
     ...(typeDescription && { description: typeDescription }),
     ...(Object.keys(tags).length && { tags }),
-    type: typeName,
     ...(isOptional && { optional: isOptional })
   }
 }
