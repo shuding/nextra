@@ -916,8 +916,7 @@ export default $
     })
   })
 
-
-  it.only('as function with {@link ...}', () => {
+  it('as function with {@link ...}', () => {
     const code =
       "export { getViewportForBounds as default } from '@xyflow/react'"
     const result = generateDocumentation({ code, flattened: true })
@@ -994,6 +993,31 @@ export default $
           "remarks": "You can determine bounds of nodes with {@link getNodesBounds } and {@link getBoundsOfRects}",
           "returns": "A transformed {@link Viewport} that encloses the given bounds which you can pass to e.g. {@link setViewport }.",
         },
+      }
+    `)
+  })
+
+  it('as function with unknown', () => {
+    const code = 'function foo(a?: unknown) {}\nexport default foo'
+    const result = generateDocumentation({ code, flattened: true })
+    expect(result).toMatchInlineSnapshot(`
+      {
+        "description": "",
+        "name": "foo",
+        "params": [
+          {
+            "description": "",
+            "name": "a",
+            "optional": true,
+            "tags": {},
+            "type": "unknown",
+          },
+        ],
+        "return": {
+          "description": undefined,
+          "type": "void",
+        },
+        "tags": {},
       }
     `)
   })

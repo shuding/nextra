@@ -155,12 +155,15 @@ function getDocEntry({
     ? originalSubType.getNonNullableType()
     : originalSubType
 
+  const typeOf = getDeclaration(symbol).getType()
+
   if (
     flattened &&
     subType.isObject() &&
     !subType.isArray() &&
     // Is not function
-    !subType.getCallSignatures().length
+    !subType.getCallSignatures().length &&
+    !typeOf.isUnknown()
   ) {
     return subType.getProperties().flatMap(childProp => {
       const prefix = isFunctionParameter
@@ -178,7 +181,9 @@ function getDocEntry({
     })
   }
   const tags = getTags(symbol)
-  let typeName = getFormattedText(subType)
+  let typeName = typeOf.isUnknown()
+    ? typeOf.getText()
+    : getFormattedText(subType)
 
   const aliasSymbol = subType.getAliasSymbol()
 
@@ -234,5 +239,5 @@ function getFormattedText(t: Type): string {
 }
 
 function replaceJsDocLinks(md: string): string {
-  return md.replaceAll(/{@link (?<link>[^}]*)}/g, '$1');
+  return md.replaceAll(/{@link (?<link>[^}]*)}/g, '$1')
 }
