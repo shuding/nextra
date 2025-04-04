@@ -982,7 +982,7 @@ export default $
           },
         ],
         "return": {
-          "description": "A transforned {@link Viewport} that encloses the given bounds which you can pass to e.g. {@link setViewport }",
+          "description": "A transforned Viewport that encloses the given bounds which you can pass to e.g. setViewport ",
           "type": "Viewport",
         },
         "tags": {

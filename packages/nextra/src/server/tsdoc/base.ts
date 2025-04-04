@@ -89,7 +89,7 @@ export function generateDocumentation({
       tags,
       params: typeParams,
       return: {
-        description: tags.returns,
+        description: tags.returns && replaceJsDocLinks(tags.returns),
         type: returnType
       }
     }
@@ -231,4 +231,8 @@ function getFormattedText(t: Type): string {
     undefined,
     ts.TypeFormatFlags.UseAliasDefinedOutsideCurrentScope
   )
+}
+
+function replaceJsDocLinks(md: string): string {
+  return md.replaceAll(/{@link (?<link>[^}]*)}/g, '$1');
 }
