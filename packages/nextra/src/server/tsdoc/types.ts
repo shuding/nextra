@@ -33,7 +33,7 @@ export type TypeField = {
   /** Field description. */
   description?: string
   /** Field tags. */
-  tags: Tags
+  tags?: Tags
   /** Field type. */
   type: string
   /** Is field optional. */

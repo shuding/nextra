@@ -18,7 +18,6 @@ export default $`
             "description": "Content of the banner.",
             "name": "children",
             "optional": false,
-            "tags": {},
             "type": "ReactNode",
           },
           {
@@ -93,13 +92,11 @@ export default $`
             "description": "CSS class name.",
             "name": "className",
             "optional": true,
-            "tags": {},
             "type": "string",
           },
           {
             "name": "searchOptions",
             "optional": true,
-            "tags": {},
             "type": "PagefindSearchOptions",
           },
         ],
@@ -146,7 +143,6 @@ export default $`
             "description": "Content to be displayed inside the callout.",
             "name": "children",
             "optional": false,
-            "tags": {},
             "type": "ReactNode",
           },
         ],
@@ -194,7 +190,6 @@ export default $`
             "description": "CSS class name.",
             "name": "className",
             "optional": true,
-            "tags": {},
             "type": "string",
           },
         ],
@@ -241,7 +236,6 @@ export default $`
             "description": "URL of the project homepage.",
             "name": "projectLink",
             "optional": true,
-            "tags": {},
             "type": "string",
           },
           {
@@ -258,7 +252,6 @@ export default $`
             "description": "URL of the chat link.",
             "name": "chatLink",
             "optional": true,
-            "tags": {},
             "type": "string",
           },
           {
@@ -275,7 +268,6 @@ export default $`
             "description": "CSS class name.",
             "name": "className",
             "optional": true,
-            "tags": {},
             "type": "string",
           },
           {
@@ -331,7 +323,6 @@ export default $`
             "description": "The glyph to use as the favicon.",
             "name": "faviconGlyph",
             "optional": true,
-            "tags": {},
             "type": "string",
           },
           {
@@ -495,7 +486,6 @@ export default $`
           {
             "name": "nextThemes.defaultTheme",
             "optional": true,
-            "tags": {},
             "type": "string",
           },
           {
@@ -509,13 +499,11 @@ export default $`
           {
             "name": "nextThemes.forcedTheme",
             "optional": true,
-            "tags": {},
             "type": "string",
           },
           {
             "name": "nextThemes.storageKey",
             "optional": true,
-            "tags": {},
             "type": "string",
           },
           {
@@ -541,7 +529,6 @@ export default $`
             "description": "If true, automatically collapse inactive folders above \`defaultMenuCollapseLevel\`.",
             "name": "sidebar.autoCollapse",
             "optional": true,
-            "tags": {},
             "type": "boolean",
           },
           {
@@ -651,7 +638,6 @@ export default A`
           {
             "name": "foo",
             "optional": false,
-            "tags": {},
             "type": "string",
           },
         ],
@@ -689,7 +675,6 @@ export default $`
             "description": "Indicates whether the item in sidebar is collapsed by default.",
             "name": "collapsed",
             "optional": true,
-            "tags": {},
             "type": "boolean",
           },
         ],
@@ -711,7 +696,6 @@ export default Connection`
           {
             "name": "targetHandle",
             "optional": false,
-            "tags": {},
             "type": "string | null",
           },
         ],
@@ -735,7 +719,6 @@ export default $
             {
               "name": "useNodeConnections",
               "optional": false,
-              "tags": {},
               "type": "({ id, handleType, handleId, onConnect, onDisconnect, }?: UseNodeConnectionsParams | undefined) => NodeConnection[]",
             },
           ],
@@ -756,35 +739,30 @@ export default $
               "description": "ID of the node, filled in automatically if used inside custom node.",
               "name": "[0]?.id",
               "optional": true,
-              "tags": {},
               "type": "string",
             },
             {
               "description": "What type of handle connections do you want to observe?",
               "name": "[0]?.handleType",
               "optional": true,
-              "tags": {},
               "type": "HandleType",
             },
             {
               "description": "Filter by handle id (this is only needed if the node has multiple handles of the same type).",
               "name": "[0]?.handleId",
               "optional": true,
-              "tags": {},
               "type": "string",
             },
             {
               "description": "Gets called when a connection is established.",
               "name": "[0]?.onConnect",
               "optional": true,
-              "tags": {},
               "type": "(connections: Connection[]) => void",
             },
             {
               "description": "Gets called when a connection is removed.",
               "name": "[0]?.onDisconnect",
               "optional": true,
-              "tags": {},
               "type": "(connections: Connection[]) => void",
             },
           ],
@@ -916,19 +894,16 @@ export default $
             {
               "name": "a",
               "optional": false,
-              "tags": {},
               "type": "string",
             },
             {
               "name": "b",
               "optional": true,
-              "tags": {},
               "type": "number",
             },
             {
               "name": "c",
               "optional": true,
-              "tags": {},
               "type": "boolean",
             },
           ],
@@ -958,19 +933,16 @@ export default foo`
             {
               "name": "params.tuple",
               "optional": true,
-              "tags": {},
               "type": "[number, number]",
             },
             {
               "name": "params.set",
               "optional": true,
-              "tags": {},
               "type": "Set<string>",
             },
             {
               "name": "params.map",
               "optional": true,
-              "tags": {},
               "type": "Map<string, number>",
             },
           ],
@@ -1075,7 +1047,6 @@ export default foo`
           {
             "name": "a",
             "optional": true,
-            "tags": {},
             "type": "unknown",
           },
         ],
@@ -1113,7 +1084,6 @@ export default $`
       before doing so.",
             "name": "proOptions",
             "optional": true,
-            "tags": {},
             "type": "unknown",
           },
         ],

@@ -109,7 +109,7 @@ export function generateDocumentation({
         flattened
       })
     )
-    .filter(entry => !('internal' in entry.tags))
+    .filter(entry => !entry.tags || !('internal' in entry.tags))
 
   if (!entries.length) {
     const typeName = declarationType.getText()
@@ -202,7 +202,7 @@ function getDocEntry({
   return {
     name: prefix ? [prefix, name].join('.') : name,
     ...(typeDescription && { description: typeDescription }),
-    tags,
+    ...(Object.keys(tags).length && { tags }),
     type: typeName,
     optional: isFunctionParameter
       ? // @ts-expect-error -- fixme

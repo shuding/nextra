@@ -57,7 +57,6 @@ export const TSDoc: FC<TSDocProps> = async ({
 }) => {
   const result = generateDocumentation(props)
   const mapEntry = async (entry: TypeField): Promise<Entry> => {
-    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- @TODO
     const tags = entry.tags ?? {}
     return {
       name: entry.name,
