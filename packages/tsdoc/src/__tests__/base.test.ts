@@ -118,14 +118,15 @@ export default $`
         "description": "",
         "entries": [
           {
-            "description": "Specifies the type of callout.
-      Determines the default icon if none is provided.",
+            "description": "Defines the style of the callout and determines the default icon if \`emoji\` is not provided.
+
+      If set to \`null\`, no border, background, or text styling will be applied.",
             "name": "type",
             "optional": true,
             "tags": {
               "default": "'default'",
             },
-            "type": ""default" | "error" | "info" | "warning"",
+            "type": ""default" | "error" | "info" | "warning" | null",
           },
           {
             "description": "Icon displayed in the callout. Can be a string emoji or a custom React element.
@@ -870,6 +871,48 @@ export default $
             "param": "id - The ID of a node you want to observe.",
             "public": "",
             "returns": "The \`InternalNode\` object for the node with the given ID.",
+          },
+        }
+      `)
+    })
+
+    it('when multiple type declarations, should take only first for now', () => {
+      const code =
+        "export { useNodesData as default } from '@xyflow/react'"
+      const result = generateDocumentation({ code, flattened: true })
+      expect(result).toMatchInlineSnapshot(`
+        {
+          "description": "This hook lets you subscribe to changes of a specific nodes \`data\` object.",
+          "name": "useNodesData",
+          "params": [
+            {
+              "description": "The id (or ids) of the node to get the data from",
+              "name": "nodeId",
+              "optional": false,
+              "tags": {
+                "param": "nodeId - The id (or ids) of the node to get the data from",
+              },
+              "type": "string",
+            },
+          ],
+          "return": {
+            "description": "An object (or array of object) with {id, type, data} representing each node",
+            "type": "Pick<NodeType, "id" | "type" | "data"> | null",
+          },
+          "tags": {
+            "example": "\`\`\`jsx
+        import { useNodesData } from '@xyflow/react';
+
+        export default function() {
+         const nodeData = useNodesData('nodeId-1');
+         const nodesData = useNodesData(['nodeId-1', 'nodeId-2']);
+
+         return null;
+        }
+        \`\`\`",
+            "param": "nodeId - The id (or ids) of the node to get the data from",
+            "public": "",
+            "returns": "An object (or array of object) with {id, type, data} representing each node",
           },
         }
       `)

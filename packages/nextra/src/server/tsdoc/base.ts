@@ -45,11 +45,11 @@ export function generateDocumentation({
   if (!declaration) {
     throw new Error(`Can't find "${exportName}" declaration`)
   }
-  if (output.length > 1) {
-    throw new Error(
-      `Export "${exportName}" should not have more than one type declaration.`
-    )
-  }
+  // if (output.length > 1) {
+  //   throw new Error(
+  //     `Export "${exportName}" should not have more than one type declaration.`
+  //   )
+  // }
 
   const comment = declaration
     .getSymbol()
@@ -61,9 +61,9 @@ export function generateDocumentation({
   const isFunction = callSignatures.length > 0
 
   if (isFunction) {
-    if (callSignatures.length > 1) {
-      throw new Error("Functions with multiple signatures aren't supported yet")
-    }
+    // if (callSignatures.length > 1) {
+    //   throw new Error("Functions with multiple signatures aren't supported yet")
+    // }
     const signature = callSignatures[0]! // Function can have multiple signatures
     const params = signature.getParameters()
     const typeParams = params
@@ -231,11 +231,11 @@ function getDeclaration(s: TsSymbol): Node {
   const parameterName = s.getName()
   const declarations = s.getDeclarations()
 
-  if (declarations.length > 1) {
-    throw new Error(
-      `"${parameterName}" should not have more than one type declaration.`
-    )
-  }
+  // if (declarations.length > 1) {
+  //   throw new Error(
+  //     `"${parameterName}" should not have more than one type declaration.`
+  //   )
+  // }
   const declaration = declarations[0]
   if (!declaration) {
     throw new Error(`Can't find "${parameterName}" declaration`)

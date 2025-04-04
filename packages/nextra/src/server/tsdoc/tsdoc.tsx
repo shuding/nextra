@@ -1,6 +1,8 @@
 import cn from 'clsx'
 import Slugger from 'github-slugger'
 import type { FC, ReactNode } from 'react'
+import { Callout } from '../../client/components/callout.js'
+import { InformationCircleIcon } from '../../client/icons/index.js'
 import { Anchor } from '../../client/mdx-components/anchor.js'
 import { Code } from '../../client/mdx-components/code.js'
 import { MDXRemote } from '../../client/mdx-remote.js'
@@ -87,8 +89,17 @@ export const TSDoc: FC<TSDocProps> = async ({
   return (
     <>
       <b className="x:mt-6 x:block">Parameters:</b>
-      <FieldsTable fields={entries} typeLinkMap={typeLinkMap} />
-      <b>Returns:</b>
+      {entries.length ? (
+        <FieldsTable fields={entries} typeLinkMap={typeLinkMap} />
+      ) : (
+        <Callout
+          type={null}
+          emoji={<InformationCircleIcon height="20" className="x:mt-1" />}
+        >
+          This function does not accept any parameters.
+        </Callout>
+      )}
+      <b className="x:mt-6 x:block">Returns:</b>
       <table className="x:my-8 x:w-full x:text-sm">
         <thead className="nextra-border x:border-b x:text-left x:max-lg:hidden">
           <tr>
