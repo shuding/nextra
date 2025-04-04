@@ -1022,6 +1022,41 @@ export default $
     `)
   })
 
+  it('jsdoc links in description', () => {
+    const code = `type $ = {
+  /**
+   * By default, we render a small attribution in the corner of your flows that links back to the project.
+   *
+   * Anyone is free to remove this attribution whether they're a Pro subscriber or not
+   * but we ask that you take a quick look at our {@link https://reactflow.dev/learn/troubleshooting/remove-attribution | removing attribution guide}
+   * before doing so.
+   */
+  proOptions?: unknown;
+}
+
+export default $`
+    const result = generateDocumentation({ code })
+    expect(result).toMatchInlineSnapshot(`
+      {
+        "description": "",
+        "entries": [
+          {
+            "description": "By default, we render a small attribution in the corner of your flows that links back to the project.
+
+      Anyone is free to remove this attribution whether they're a Pro subscriber or not
+      but we ask that you take a quick look at our {@link https://reactflow.dev/learn/troubleshooting/remove-attribution removing attribution guide}
+      before doing so.",
+            "name": "proOptions",
+            "optional": true,
+            "tags": {},
+            "type": "unknown",
+          },
+        ],
+        "name": "default",
+      }
+    `)
+  })
+
   it.skip('should work with anonymous type', async () => {
     const code = `
 type $ = {
