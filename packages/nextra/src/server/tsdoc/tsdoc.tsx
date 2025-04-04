@@ -45,7 +45,7 @@ async function renderMarkdownDefault(description: string): Promise<ReactNode> {
 type Entry = {
   name: string
   type: string
-  description: ReactNode
+  description?: ReactNode
   default?: string
   optional: boolean
 }

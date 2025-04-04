@@ -83,13 +83,14 @@ export function generateDocumentation({
       .getReturnType()
       .getText(undefined, ts.TypeFormatFlags.UseAliasDefinedOutsideCurrentScope)
     const tags = getTags(declarationType.getSymbol()!)
+    const returnsDescription = tags.returns && replaceJsDocLinks(tags.returns)
     return {
       name: declarationType.getSymbol()!.getName(),
       description,
       tags,
       params: typeParams,
       return: {
-        description: tags.returns && replaceJsDocLinks(tags.returns),
+        ...(returnsDescription && { description: returnsDescription }),
         type: returnType
       }
     }

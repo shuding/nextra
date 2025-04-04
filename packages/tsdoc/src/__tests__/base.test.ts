@@ -950,7 +950,6 @@ export default $
             },
           ],
           "return": {
-            "description": undefined,
             "type": "void",
           },
           "tags": {},
@@ -996,7 +995,6 @@ export default foo`
             },
           ],
           "return": {
-            "description": undefined,
             "type": "void",
           },
           "tags": {},
@@ -1103,7 +1101,6 @@ export default foo`
           },
         ],
         "return": {
-          "description": undefined,
           "type": "void",
         },
         "tags": {},
