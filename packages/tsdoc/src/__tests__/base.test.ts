@@ -923,76 +923,76 @@ export default $
     const result = generateDocumentation({ code, flattened: true })
     expect(result).toMatchInlineSnapshot(`
       {
-        "description": "Returns a viewport that encloses the given bounds with optional padding.",
+        "description": "Returns a viewport that encloses the given bounds with padding.",
         "name": "__type",
         "params": [
           {
-            "description": "Bounds to fit inside viewport",
+            "description": "Bounds to fit inside viewport.",
             "name": "bounds",
             "optional": false,
             "tags": {
-              "param": "bounds - Bounds to fit inside viewport",
+              "param": "bounds - Bounds to fit inside viewport.",
             },
             "type": "Rect",
           },
           {
-            "description": "Width of the viewport",
+            "description": "Width of the viewport.",
             "name": "width",
             "optional": false,
             "tags": {
-              "param": "width - Width of the viewport",
+              "param": "width - Width of the viewport.",
             },
             "type": "number",
           },
           {
-            "description": "Height of the viewport",
+            "description": "Height of the viewport.",
             "name": "height",
             "optional": false,
             "tags": {
-              "param": "height - Height of the viewport",
+              "param": "height - Height of the viewport.",
             },
             "type": "number",
           },
           {
-            "description": "Minimum zoom level of the resulting viewport",
+            "description": "Minimum zoom level of the resulting viewport.",
             "name": "minZoom",
             "optional": false,
             "tags": {
-              "param": "minZoom - Minimum zoom level of the resulting viewport",
+              "param": "minZoom - Minimum zoom level of the resulting viewport.",
             },
             "type": "number",
           },
           {
-            "description": "Maximum zoom level of the resulting viewport",
+            "description": "Maximum zoom level of the resulting viewport.",
             "name": "maxZoom",
             "optional": false,
             "tags": {
-              "param": "maxZoom - Maximum zoom level of the resulting viewport",
+              "param": "maxZoom - Maximum zoom level of the resulting viewport.",
             },
             "type": "number",
           },
           {
-            "description": "Optional padding around the bounds",
+            "description": "Padding around the bounds.",
             "name": "padding",
             "optional": false,
             "tags": {
-              "param": "padding - Optional padding around the bounds",
+              "param": "padding - Padding around the bounds.",
             },
             "type": "Padding",
           },
         ],
         "return": {
-          "description": "A transforned Viewport that encloses the given bounds which you can pass to e.g. setViewport ",
+          "description": "A transformed Viewport that encloses the given bounds which you can pass to e.g. setViewport .",
           "type": "Viewport",
         },
         "tags": {
           "example": "const { x, y, zoom } = getViewportForBounds(
       { x: 0, y: 0, width: 100, height: 100},
       1200, 800, 0.5, 2);",
-          "param": "padding - Optional padding around the bounds",
+          "param": "padding - Padding around the bounds.",
           "public": "",
           "remarks": "You can determine bounds of nodes with {@link getNodesBounds } and {@link getBoundsOfRects}",
-          "returns": "A transforned {@link Viewport} that encloses the given bounds which you can pass to e.g. {@link setViewport }",
+          "returns": "A transformed {@link Viewport} that encloses the given bounds which you can pass to e.g. {@link setViewport }.",
         },
       }
     `)
