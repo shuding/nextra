@@ -161,6 +161,7 @@ function getDocEntry({
     flattened &&
     subType.isObject() &&
     !subType.isArray() &&
+    !subType.isTuple() &&
     // Is not function
     !subType.getCallSignatures().length &&
     !typeOf.isUnknown()
@@ -213,6 +214,7 @@ function getDocEntry({
 function getDeclaration(s: TsSymbol): Node {
   const parameterName = s.getName()
   const declarations = s.getDeclarations()
+
   if (declarations.length > 1) {
     throw new Error(
       `"${parameterName}" should not have more than one type declaration.`

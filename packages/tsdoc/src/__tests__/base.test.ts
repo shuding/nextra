@@ -732,8 +732,8 @@ export default Connection`
     `)
   })
 
-  describe('should work with function', () => {
-    it('in object', () => {
+  describe('functions', () => {
+    it('should be parsed in object field', () => {
       const code = `type $ = {
   useNodeConnections: typeof import('@xyflow/react').useNodeConnections
 }
@@ -756,7 +756,7 @@ export default $
         }
       `)
     })
-    it('as function', () => {
+    it('should be parsed as function type', () => {
       const code =
         "export { useNodeConnections as default } from '@xyflow/react'"
       const result = generateDocumentation({ code, flattened: true })
@@ -875,7 +875,7 @@ export default $
       `)
     })
 
-    it('as function with optional argument', () => {
+    it('should parse optional parameters', () => {
       const code =
         'function foo(a: string, b?: number, c = true) {}\nexport default foo'
       const result = generateDocumentation({ code, flattened: true })
@@ -914,9 +914,39 @@ export default $
         }
       `)
     })
+
+    it('should not flatten tuple type', () => {
+      const code =
+        `
+type foo = (params: {
+  nodeOrigin?: [number, number],
+}) => void
+export default foo`
+      const result = generateDocumentation({ code, flattened: true })
+      expect(result).toMatchInlineSnapshot(`
+        {
+          "description": "",
+          "name": "__type",
+          "params": [
+            {
+              "description": "",
+              "name": "params.nodeOrigin",
+              "optional": true,
+              "tags": {},
+              "type": "[number, number]",
+            },
+          ],
+          "return": {
+            "description": undefined,
+            "type": "void",
+          },
+          "tags": {},
+        }
+      `)
+    })
   })
 
-  it('as function with {@link ...}', () => {
+  it('should exclude {@link ...}', () => {
     const code =
       "export { getViewportForBounds as default } from '@xyflow/react'"
     const result = generateDocumentation({ code, flattened: true })
@@ -997,7 +1027,7 @@ export default $
     `)
   })
 
-  it('as function with unknown', () => {
+  it('should parse `unknown` type', () => {
     const code = 'function foo(a?: unknown) {}\nexport default foo'
     const result = generateDocumentation({ code, flattened: true })
     expect(result).toMatchInlineSnapshot(`
@@ -1022,7 +1052,7 @@ export default $
     `)
   })
 
-  it('jsdoc links in description', () => {
+  it('should exclude JSDoc @link in description', () => {
     const code = `type $ = {
   /**
    * By default, we render a small attribution in the corner of your flows that links back to the project.
