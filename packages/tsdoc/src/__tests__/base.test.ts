@@ -97,7 +97,6 @@ export default $`
             "type": "string",
           },
           {
-            "description": "",
             "name": "searchOptions",
             "optional": true,
             "tags": {},
@@ -385,7 +384,6 @@ export default $`
             "type": "ReactNode",
           },
           {
-            "description": "",
             "name": "children",
             "optional": true,
             "tags": {
@@ -487,7 +485,6 @@ export default $`
             "type": "boolean | { next: boolean; prev: boolean; }",
           },
           {
-            "description": "",
             "name": "nextThemes.attribute",
             "optional": true,
             "tags": {
@@ -496,14 +493,12 @@ export default $`
             "type": ""@TODO TO IMPLEMENT" | "@TODO TO IMPLEMENT"[]",
           },
           {
-            "description": "",
             "name": "nextThemes.defaultTheme",
             "optional": true,
             "tags": {},
             "type": "string",
           },
           {
-            "description": "",
             "name": "nextThemes.disableTransitionOnChange",
             "optional": true,
             "tags": {
@@ -512,14 +507,12 @@ export default $`
             "type": "boolean",
           },
           {
-            "description": "",
             "name": "nextThemes.forcedTheme",
             "optional": true,
             "tags": {},
             "type": "string",
           },
           {
-            "description": "",
             "name": "nextThemes.storageKey",
             "optional": true,
             "tags": {},
@@ -579,7 +572,6 @@ export default $`
             "type": "boolean",
           },
           {
-            "description": "",
             "name": "themeSwitch.dark",
             "optional": true,
             "tags": {
@@ -588,7 +580,6 @@ export default $`
             "type": "string",
           },
           {
-            "description": "",
             "name": "themeSwitch.light",
             "optional": true,
             "tags": {
@@ -597,7 +588,6 @@ export default $`
             "type": "string",
           },
           {
-            "description": "",
             "name": "themeSwitch.system",
             "optional": true,
             "tags": {
@@ -659,7 +649,6 @@ export default A`
         "description": "",
         "entries": [
           {
-            "description": "",
             "name": "foo",
             "optional": false,
             "tags": {},
@@ -689,7 +678,6 @@ export default $`
         "description": "",
         "entries": [
           {
-            "description": "",
             "name": "breadcrumb",
             "optional": true,
             "tags": {
@@ -721,7 +709,6 @@ export default Connection`
         "description": "",
         "entries": [
           {
-            "description": "",
             "name": "targetHandle",
             "optional": false,
             "tags": {},
@@ -746,7 +733,6 @@ export default $
           "description": "",
           "entries": [
             {
-              "description": "",
               "name": "useNodeConnections",
               "optional": false,
               "tags": {},
@@ -928,21 +914,18 @@ export default $
           "name": "foo",
           "params": [
             {
-              "description": "",
               "name": "a",
               "optional": false,
               "tags": {},
               "type": "string",
             },
             {
-              "description": "",
               "name": "b",
               "optional": true,
               "tags": {},
               "type": "number",
             },
             {
-              "description": "",
               "name": "c",
               "optional": true,
               "tags": {},
@@ -973,21 +956,18 @@ export default foo`
           "name": "__type",
           "params": [
             {
-              "description": "",
               "name": "params.tuple",
               "optional": true,
               "tags": {},
               "type": "[number, number]",
             },
             {
-              "description": "",
               "name": "params.set",
               "optional": true,
               "tags": {},
               "type": "Set<string>",
             },
             {
-              "description": "",
               "name": "params.map",
               "optional": true,
               "tags": {},
@@ -1093,7 +1073,6 @@ export default foo`
         "name": "foo",
         "params": [
           {
-            "description": "",
             "name": "a",
             "optional": true,
             "tags": {},

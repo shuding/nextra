@@ -66,19 +66,14 @@ export function generateDocumentation({
     // }
     const signature = callSignatures[0]! // Function can have multiple signatures
     const params = signature.getParameters()
-    const typeParams = params
-      .flatMap(param =>
-        getDocEntry({
-          symbol: param,
-          declaration,
-          flattened,
-          isFunctionParameter: true
-        })
-      )
-      .map(entry => ({
-        ...entry,
-        description: entry.description.replace(/^- /, '')
-      }))
+    const typeParams = params.flatMap(param =>
+      getDocEntry({
+        symbol: param,
+        declaration,
+        flattened,
+        isFunctionParameter: true
+      })
+    )
     const returnType = signature
       .getReturnType()
       .getText(undefined, ts.TypeFormatFlags.UseAliasDefinedOutsideCurrentScope)
@@ -198,13 +193,15 @@ function getDocEntry({
     typeName = /^`(?<name>.+)`/.exec(tags.remarks)?.[1] ?? typeName
   }
   const name = symbol.getName()
+  const typeDescription = replaceJsDocLinks(
+    ts.displayPartsToString(
+      symbol.compilerSymbol.getDocumentationComment(compilerObject)
+    )
+  ).replace(/^- /, '')
+
   return {
     name: prefix ? [prefix, name].join('.') : name,
-    description: replaceJsDocLinks(
-      ts.displayPartsToString(
-        symbol.compilerSymbol.getDocumentationComment(compilerObject)
-      )
-    ),
+    ...(typeDescription && { description: typeDescription }),
     tags,
     type: typeName,
     optional: isFunctionParameter
