@@ -198,16 +198,17 @@ function getDocEntry({
       symbol.compilerSymbol.getDocumentationComment(compilerObject)
     )
   ).replace(/^- /, '')
+  const isOptional = isFunctionParameter
+    ? // @ts-expect-error -- fixme
+      getDeclaration(symbol).isOptional()
+    : symbol.isOptional()
 
   return {
     name: prefix ? [prefix, name].join('.') : name,
     ...(typeDescription && { description: typeDescription }),
     ...(Object.keys(tags).length && { tags }),
     type: typeName,
-    optional: isFunctionParameter
-      ? // @ts-expect-error -- fixme
-        getDeclaration(symbol).isOptional()
-      : symbol.isOptional()
+    ...(isOptional && { optional: isOptional })
   }
 }
 

@@ -17,7 +17,6 @@ export default $`
           {
             "description": "Content of the banner.",
             "name": "children",
-            "optional": false,
             "type": "ReactNode",
           },
           {
@@ -142,7 +141,6 @@ export default $`
           {
             "description": "Content to be displayed inside the callout.",
             "name": "children",
-            "optional": false,
             "type": "ReactNode",
           },
         ],
@@ -226,7 +224,6 @@ export default $`
           {
             "description": "Logo of the website.",
             "name": "logo",
-            "optional": false,
             "tags": {
               "remarks": "\`ReactElement\`",
             },
@@ -509,7 +506,6 @@ export default $`
           {
             "description": "Page map list. Result of \`getPageMap(route = '/')\` call.",
             "name": "pageMap",
-            "optional": false,
             "tags": {
               "remarks": "\`PageMapItem[]\`",
             },
@@ -637,7 +633,6 @@ export default A`
         "entries": [
           {
             "name": "foo",
-            "optional": false,
             "type": "string",
           },
         ],
@@ -695,7 +690,6 @@ export default Connection`
         "entries": [
           {
             "name": "targetHandle",
-            "optional": false,
             "type": "string | null",
           },
         ],
@@ -718,7 +712,6 @@ export default $
           "entries": [
             {
               "name": "useNodeConnections",
-              "optional": false,
               "type": "({ id, handleType, handleId, onConnect, onDisconnect, }?: UseNodeConnectionsParams | undefined) => NodeConnection[]",
             },
           ],
@@ -804,7 +797,6 @@ export default $
             {
               "description": "The ID of a node you want to observe.",
               "name": "id",
-              "optional": false,
               "tags": {
                 "param": "id - The ID of a node you want to observe.",
               },
@@ -852,7 +844,6 @@ export default $
             {
               "description": "The id (or ids) of the node to get the data from",
               "name": "nodeId",
-              "optional": false,
               "tags": {
                 "param": "nodeId - The id (or ids) of the node to get the data from",
               },
@@ -893,7 +884,6 @@ export default $
           "params": [
             {
               "name": "a",
-              "optional": false,
               "type": "string",
             },
             {
@@ -967,7 +957,6 @@ export default foo`
           {
             "description": "Bounds to fit inside viewport.",
             "name": "bounds",
-            "optional": false,
             "tags": {
               "param": "bounds - Bounds to fit inside viewport.",
             },
@@ -976,7 +965,6 @@ export default foo`
           {
             "description": "Width of the viewport.",
             "name": "width",
-            "optional": false,
             "tags": {
               "param": "width - Width of the viewport.",
             },
@@ -985,7 +973,6 @@ export default foo`
           {
             "description": "Height of the viewport.",
             "name": "height",
-            "optional": false,
             "tags": {
               "param": "height - Height of the viewport.",
             },
@@ -994,7 +981,6 @@ export default foo`
           {
             "description": "Minimum zoom level of the resulting viewport.",
             "name": "minZoom",
-            "optional": false,
             "tags": {
               "param": "minZoom - Minimum zoom level of the resulting viewport.",
             },
@@ -1003,7 +989,6 @@ export default foo`
           {
             "description": "Maximum zoom level of the resulting viewport.",
             "name": "maxZoom",
-            "optional": false,
             "tags": {
               "param": "maxZoom - Maximum zoom level of the resulting viewport.",
             },
@@ -1012,7 +997,6 @@ export default foo`
           {
             "description": "Padding around the bounds.",
             "name": "padding",
-            "optional": false,
             "tags": {
               "param": "padding - Padding around the bounds.",
             },
