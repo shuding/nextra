@@ -196,8 +196,10 @@ function getDocEntry({
   const name = symbol.getName()
   return {
     name: prefix ? [prefix, name].join('.') : name,
-    description: ts.displayPartsToString(
-      symbol.compilerSymbol.getDocumentationComment(compilerObject)
+    description: replaceJsDocLinks(
+      ts.displayPartsToString(
+        symbol.compilerSymbol.getDocumentationComment(compilerObject)
+      )
     ),
     tags,
     type: typeName,
