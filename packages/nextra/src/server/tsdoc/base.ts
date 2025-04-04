@@ -162,6 +162,8 @@ function getDocEntry({
     subType.isObject() &&
     !subType.isArray() &&
     !subType.isTuple() &&
+    !isSetType(subType) &&
+    !isMapType(subType) &&
     // Is not function
     !subType.getCallSignatures().length &&
     !typeOf.isUnknown()
@@ -209,6 +211,20 @@ function getDocEntry({
         getDeclaration(symbol).isOptional()
       : symbol.isOptional()
   }
+}
+
+function isSetType(type: Type): boolean {
+  const baseName = type.getSymbol()?.getName()
+
+  // Handles: Set<T>, ReadonlySet<T>
+  return baseName === 'Set' || baseName === 'ReadonlySet'
+}
+
+function isMapType(type: Type): boolean {
+  const baseName = type.getSymbol()?.getName()
+
+  // Handles: Map<T>, ReadonlyMap<T>
+  return baseName === 'Map' || baseName === 'ReadonlyMap'
 }
 
 function getDeclaration(s: TsSymbol): Node {

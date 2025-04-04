@@ -915,11 +915,13 @@ export default $
       `)
     })
 
-    it('should not flatten tuple type', () => {
+    it('should not flatten tuple type, set, map', () => {
       const code =
         `
 type foo = (params: {
-  nodeOrigin?: [number, number],
+  tuple?: [number, number],
+  set?: Set<string>,
+  map?: Map<string, number>,
 }) => void
 export default foo`
       const result = generateDocumentation({ code, flattened: true })
@@ -930,10 +932,24 @@ export default foo`
           "params": [
             {
               "description": "",
-              "name": "params.nodeOrigin",
+              "name": "params.tuple",
               "optional": true,
               "tags": {},
               "type": "[number, number]",
+            },
+            {
+              "description": "",
+              "name": "params.set",
+              "optional": true,
+              "tags": {},
+              "type": "Set<string>",
+            },
+            {
+              "description": "",
+              "name": "params.map",
+              "optional": true,
+              "tags": {},
+              "type": "Map<string, number>",
             },
           ],
           "return": {
