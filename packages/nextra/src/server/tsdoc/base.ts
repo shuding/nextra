@@ -84,16 +84,13 @@ export function generateDocumentation({
       tags,
       params: typeParams,
       return: returnType.isTuple()
-        ? returnType.getTupleElements().map(element => ({
-            type: element.getText()
+        ? returnType.getTupleElements().map((element, index) => ({
+            type: `[${index}].${getFormattedText(element)}`
           }))
         : [
             {
               ...(returnsDescription && { description: returnsDescription }),
-              type: returnType.getText(
-                undefined,
-                ts.TypeFormatFlags.UseAliasDefinedOutsideCurrentScope
-              )
+              type: getFormattedText(returnType)
             }
           ]
     }

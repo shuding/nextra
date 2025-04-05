@@ -1040,13 +1040,13 @@ export default foo`
         ],
         "return": [
           {
-            "type": "EdgeType[]",
+            "type": "[0].EdgeType[]",
           },
           {
-            "type": "React.Dispatch<React.SetStateAction<EdgeType[]>>",
+            "type": "[1].Dispatch<SetStateAction<EdgeType[]>>",
           },
           {
-            "type": "import("/Users/dmytro/Desktop/nextra/node_modules/.pnpm/@xyflow+react@file+..+repros+xyflow+packages+react_@types+react@19.0.12_react-dom@19.1.0_react@19.1.0__react@19.1.0/node_modules/@xyflow/react/dist/esm/types/general").OnEdgesChange<EdgeType>",
+            "type": "[2].OnEdgesChange<EdgeType>",
           },
         ],
         "tags": {
