@@ -759,10 +759,12 @@ export default $
               "type": "(connections: Connection[]) => void",
             },
           ],
-          "return": {
-            "description": "An array with connections.",
-            "type": "NodeConnection[]",
-          },
+          "return": [
+            {
+              "description": "An array with connections.",
+              "type": "NodeConnection[]",
+            },
+          ],
           "tags": {
             "example": "\`\`\`jsx
         import { useNodeConnections } from '@xyflow/react';
@@ -803,10 +805,12 @@ export default $
               "type": "string",
             },
           ],
-          "return": {
-            "description": "The \`InternalNode\` object for the node with the given ID.",
-            "type": "InternalNode<NodeType> | undefined",
-          },
+          "return": [
+            {
+              "description": "The \`InternalNode\` object for the node with the given ID.",
+              "type": "InternalNode<NodeType> | undefined",
+            },
+          ],
           "tags": {
             "example": "\`\`\`tsx
         import { useInternalNode } from '@xyflow/react';
@@ -850,10 +854,12 @@ export default $
               "type": "string",
             },
           ],
-          "return": {
-            "description": "An object (or array of object) with {id, type, data} representing each node",
-            "type": "Pick<NodeType, "id" | "type" | "data"> | null",
-          },
+          "return": [
+            {
+              "description": "An object (or array of object) with {id, type, data} representing each node",
+              "type": "Pick<NodeType, "id" | "type" | "data"> | null",
+            },
+          ],
           "tags": {
             "example": "\`\`\`jsx
         import { useNodesData } from '@xyflow/react';
@@ -897,9 +903,11 @@ export default $
               "type": "boolean",
             },
           ],
-          "return": {
-            "type": "void",
-          },
+          "return": [
+            {
+              "type": "void",
+            },
+          ],
           "tags": {},
         }
       `)
@@ -936,9 +944,11 @@ export default foo`
               "type": "Map<string, number>",
             },
           ],
-          "return": {
-            "type": "void",
-          },
+          "return": [
+            {
+              "type": "void",
+            },
+          ],
           "tags": {},
         }
       `)
@@ -1003,10 +1013,12 @@ export default foo`
             "type": "Padding",
           },
         ],
-        "return": {
-          "description": "A transformed Viewport that encloses the given bounds which you can pass to e.g. setViewport .",
-          "type": "Viewport",
-        },
+        "return": [
+          {
+            "description": "A transformed Viewport that encloses the given bounds which you can pass to e.g. setViewport .",
+            "type": "Viewport",
+          },
+        ],
         "tags": {
           "example": "const { x, y, zoom } = getViewportForBounds(
       { x: 0, y: 0, width: 100, height: 100},
@@ -1111,9 +1123,11 @@ export default foo`
             "type": "unknown",
           },
         ],
-        "return": {
-          "type": "void",
-        },
+        "return": [
+          {
+            "type": "void",
+          },
+        ],
         "tags": {},
       }
     `)

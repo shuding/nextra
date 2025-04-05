@@ -83,26 +83,13 @@ export function generateDocumentation({
       description,
       tags,
       params: typeParams,
-      return: returnType.isTuple()
-        ? returnType.getTupleElements().map((element, index) => ({
-            type: `[${index}].${getFormattedText(element)}`
-          }))
-        : [
-            {
-              ...(returnsDescription && { description: returnsDescription }),
-              type: getFormattedText(returnType)
-            }
-          ]
+      return: [
+        {
+          ...(returnsDescription && { description: returnsDescription }),
+          type: getFormattedText(returnType)
+        }
+      ]
     }
-
-    // const func = sourceFile.getFunctionOrThrow('useNodeConnections')
-    //
-    // // Get type parameters
-    // const typeParams2 = func.getTypeParameters().map(tp => tp.getText())
-    //
-    // // Get return type
-    // const returnType2 = func.getReturnType().getText()
-    // console.log({typeParams2, returnType2})
   }
 
   const entries = declarationType
