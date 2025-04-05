@@ -83,7 +83,7 @@ export function generateDocumentation({
       description,
       tags,
       params: typeParams,
-      return: [
+      returns: [
         {
           ...(returnsDescription && { description: returnsDescription }),
           type: getFormattedText(returnType)

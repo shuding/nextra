@@ -19,7 +19,7 @@ export type GeneratedFunction = {
   /** Function parameters. */
   params: TypeField[]
   /** Function return. */
-  return: {
+  returns: {
     /** Function return description. */
     description?: string
     /** Function return type. */

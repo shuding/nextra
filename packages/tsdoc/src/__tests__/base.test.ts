@@ -759,7 +759,7 @@ export default $
               "type": "(connections: Connection[]) => void",
             },
           ],
-          "return": [
+          "returns": [
             {
               "description": "An array with connections.",
               "type": "NodeConnection[]",
@@ -805,7 +805,7 @@ export default $
               "type": "string",
             },
           ],
-          "return": [
+          "returns": [
             {
               "description": "The \`InternalNode\` object for the node with the given ID.",
               "type": "InternalNode<NodeType> | undefined",
@@ -854,7 +854,7 @@ export default $
               "type": "string",
             },
           ],
-          "return": [
+          "returns": [
             {
               "description": "An object (or array of object) with {id, type, data} representing each node",
               "type": "Pick<NodeType, "id" | "type" | "data"> | null",
@@ -903,7 +903,7 @@ export default $
               "type": "boolean",
             },
           ],
-          "return": [
+          "returns": [
             {
               "type": "void",
             },
@@ -944,7 +944,7 @@ export default foo`
               "type": "Map<string, number>",
             },
           ],
-          "return": [
+          "returns": [
             {
               "type": "void",
             },
@@ -1013,7 +1013,7 @@ export default foo`
             "type": "Padding",
           },
         ],
-        "return": [
+        "returns": [
           {
             "description": "A transformed Viewport that encloses the given bounds which you can pass to e.g. setViewport .",
             "type": "Viewport",
@@ -1050,7 +1050,7 @@ export default foo`
             "type": "EdgeType[]",
           },
         ],
-        "return": [
+        "returns": [
           {
             "description": "- \`edges\`: The current array of edges. You might pass this directly to the edges prop of your
       \`<ReactFlow />\` component, or you may want to manipulate it first to perform some layouting,
@@ -1123,7 +1123,7 @@ export default foo`
             "type": "unknown",
           },
         ],
-        "return": [
+        "returns": [
           {
             "type": "void",
           },

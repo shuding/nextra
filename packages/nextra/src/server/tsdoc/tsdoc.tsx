@@ -78,7 +78,7 @@ export const TSDoc: FC<TSDocProps> = async ({
   const entries = await Promise.all(promises)
   const slugger = new Slugger()
 
-  const promises2 = result.return.map(entry =>
+  const promises2 = result.returns.map(entry =>
     mapEntry(
       // @ts-expect-error -- fixme
       entry
