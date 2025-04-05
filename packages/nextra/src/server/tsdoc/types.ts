@@ -24,7 +24,7 @@ export type GeneratedFunction = {
     description?: string
     /** Function return type. */
     type: string
-  }
+  }[]
 }
 
 export type TypeField = {

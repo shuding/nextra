@@ -1038,10 +1038,17 @@ export default foo`
             "type": "EdgeType[]",
           },
         ],
-        "return": {
-          "description": "an array [edges, setEdges, onEdgesChange]",
-          "type": "[EdgeType[], Dispatch<SetStateAction<EdgeType[]>>, OnEdgesChange<EdgeType>]",
-        },
+        "return": [
+          {
+            "type": "EdgeType[]",
+          },
+          {
+            "type": "React.Dispatch<React.SetStateAction<EdgeType[]>>",
+          },
+          {
+            "type": "import("/Users/dmytro/Desktop/nextra/node_modules/.pnpm/@xyflow+react@file+..+repros+xyflow+packages+react_@types+react@19.0.12_react-dom@19.1.0_react@19.1.0__react@19.1.0/node_modules/@xyflow/react/dist/esm/types/general").OnEdgesChange<EdgeType>",
+          },
+        ],
         "tags": {
           "example": "\`\`\`tsx
       import { ReactFlow, useNodesState, useEdgesState } from '@xyflow/react';

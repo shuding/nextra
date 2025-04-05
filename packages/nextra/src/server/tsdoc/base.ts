@@ -74,9 +74,8 @@ export function generateDocumentation({
         isFunctionParameter: true
       })
     )
-    const returnType = signature
-      .getReturnType()
-      .getText(undefined, ts.TypeFormatFlags.UseAliasDefinedOutsideCurrentScope)
+    const returnType = signature.getReturnType()
+
     const tags = getTags(declarationType.getSymbol()!)
     const returnsDescription = tags.returns && replaceJsDocLinks(tags.returns)
     return {
@@ -84,10 +83,19 @@ export function generateDocumentation({
       description,
       tags,
       params: typeParams,
-      return: {
-        ...(returnsDescription && { description: returnsDescription }),
-        type: returnType
-      }
+      return: returnType.isTuple()
+        ? returnType.getTupleElements().map(element => ({
+            type: element.getText()
+          }))
+        : [
+            {
+              ...(returnsDescription && { description: returnsDescription }),
+              type: returnType.getText(
+                undefined,
+                ts.TypeFormatFlags.UseAliasDefinedOutsideCurrentScope
+              )
+            }
+          ]
     }
 
     // const func = sourceFile.getFunctionOrThrow('useNodeConnections')
