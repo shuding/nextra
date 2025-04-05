@@ -1020,6 +1020,61 @@ export default foo`
     `)
   })
 
+  it('should flatten array return type', () => {
+    const code = 'export { useEdgesState as default } from "@xyflow/react"'
+    const result = generateDocumentation({ code, flattened: true })
+    expect(result).toMatchInlineSnapshot(`
+      {
+        "description": "This hook makes it easy to prototype a controlled flow where you manage the
+      state of nodes and edges outside the \`ReactFlowInstance\`. You can think of it
+      like React's \`useState\` hook with an additional helper callback.",
+        "name": "useEdgesState",
+        "params": [
+          {
+            "name": "initialEdges",
+            "tags": {
+              "param": "initialEdges",
+            },
+            "type": "EdgeType[]",
+          },
+        ],
+        "return": {
+          "description": "an array [edges, setEdges, onEdgesChange]",
+          "type": "[EdgeType[], Dispatch<SetStateAction<EdgeType[]>>, OnEdgesChange<EdgeType>]",
+        },
+        "tags": {
+          "example": "\`\`\`tsx
+      import { ReactFlow, useNodesState, useEdgesState } from '@xyflow/react';
+
+      const initialNodes = [];
+      const initialEdges = [];
+
+      export default function () {
+       const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
+       const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
+
+       return (
+         <ReactFlow
+           nodes={nodes}
+           edges={edges}
+           onNodesChange={onNodesChange}
+           onEdgesChange={onEdgesChange}
+         />
+       );
+      }
+      \`\`\`",
+          "param": "initialEdges",
+          "public": "",
+          "remarks": "This hook was created to make prototyping easier and our documentation
+      examples clearer. Although it is OK to use this hook in production, in
+      practice you may want to use a more sophisticated state management solution
+      like Zustand {@link https://reactflow.dev/docs/guides/state-management/} instead.",
+          "returns": "an array [edges, setEdges, onEdgesChange]",
+        },
+      }
+    `)
+  })
+
   it('should parse `unknown` type', () => {
     const code = 'function foo(a?: unknown) {}\nexport default foo'
     const result = generateDocumentation({ code, flattened: true })
