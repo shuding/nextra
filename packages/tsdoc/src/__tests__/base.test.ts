@@ -1040,13 +1040,18 @@ export default foo`
         ],
         "return": [
           {
-            "type": "[0].EdgeType[]",
-          },
-          {
-            "type": "[1].Dispatch<SetStateAction<EdgeType[]>>",
-          },
-          {
-            "type": "[2].OnEdgesChange<EdgeType>",
+            "description": "- \`edges\`: The current array of edges. You might pass this directly to the edges prop of your
+      \`<ReactFlow />\` component, or you may want to manipulate it first to perform some layouting,
+      for example.
+
+      - \`setEdges\`: A function that you can use to update the edges. You can pass it a new array of
+      edges or a callback that receives the current array of edges and returns a new array of edges.
+      This is the same as the second element of the tuple returned by React's useState hook.
+
+      - \`onEdgesChange\`: A handy callback that can take an array of \`EdgeChanges\` and update the edges
+      state accordingly. You'll typically pass this directly to the onEdgesChange prop of your
+      \`<ReactFlow />\` component.",
+            "type": "[edges: EdgeType[], setEdges: Dispatch<SetStateAction<EdgeType[]>>, onEdgesChange: OnEdgesChange<EdgeType>]",
           },
         ],
         "tags": {
@@ -1076,7 +1081,17 @@ export default foo`
       examples clearer. Although it is OK to use this hook in production, in
       practice you may want to use a more sophisticated state management solution
       like Zustand {@link https://reactflow.dev/docs/guides/state-management/} instead.",
-          "returns": "an array [edges, setEdges, onEdgesChange]",
+          "returns": "- \`edges\`: The current array of edges. You might pass this directly to the edges prop of your
+      \`<ReactFlow />\` component, or you may want to manipulate it first to perform some layouting,
+      for example.
+
+      - \`setEdges\`: A function that you can use to update the edges. You can pass it a new array of
+      edges or a callback that receives the current array of edges and returns a new array of edges.
+      This is the same as the second element of the tuple returned by React's useState hook.
+
+      - \`onEdgesChange\`: A handy callback that can take an array of \`EdgeChanges\` and update the edges
+      state accordingly. You'll typically pass this directly to the onEdgesChange prop of your
+      \`<ReactFlow />\` component.",
         },
       }
     `)
