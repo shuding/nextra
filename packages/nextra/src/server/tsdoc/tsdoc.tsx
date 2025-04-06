@@ -127,7 +127,7 @@ export const TSDoc: FC<TSDocProps> = async ({
         ) : (
           <Callout
             type={null}
-            emoji={<InformationCircleIcon height="20" className="x:mt-1" />}
+            emoji={<InformationCircleIcon height="16" className="x:mt-1.5" />}
           >
             This function does not accept any parameters.
           </Callout>

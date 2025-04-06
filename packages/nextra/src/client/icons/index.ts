@@ -6,7 +6,6 @@ export { ReactComponent as ExpandIcon } from './expand.svg'
 export { ReactComponent as GitHubIcon } from './github.svg'
 export { ReactComponent as GlobeIcon } from './globe.svg'
 export { ReactComponent as GoIcon } from './go.svg'
-export { ReactComponent as InformationCircleIcon } from './information-circle.svg'
 export { ReactComponent as MenuIcon } from './menu.svg'
 export { ReactComponent as MoonIcon } from './moon.svg'
 export { ReactComponent as SpinnerIcon } from './spinner.svg'
@@ -35,3 +34,12 @@ export { ReactComponent as FileIcon } from './file.svg'
 export { ReactComponent as FolderIcon } from './folder.svg'
 export { ReactComponent as FolderOpenIcon } from './folder-open.svg'
 export { ReactComponent as LinkIcon } from './link.svg'
+export {
+  ReactComponent as GitHubNoteIcon,
+  // Backward compatibility
+  ReactComponent as InformationCircleIcon
+} from './github-note.svg'
+export { ReactComponent as GitHubTipIcon } from './github-tip.svg'
+export { ReactComponent as GitHubImportantIcon } from './github-important.svg'
+export { ReactComponent as GitHubWarningIcon } from './github-warning.svg'
+export { ReactComponent as GitHubCautionIcon } from './github-caution.svg'
