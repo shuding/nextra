@@ -5,10 +5,29 @@ import { useMDXComponents as getDocsMDXComponents } from 'nextra-theme-docs'
 import { unstable_TSDoc as TSDoc } from 'nextra/tsdoc'
 
 const { img: Image, ...docsComponents } = getDocsMDXComponents({
-  TSDoc(props) {
+  TSDoc({ componentName, groupKeys, ...props }) {
+    let code: string
+
+    if (componentName) {
+      const result = groupKeys
+        ? `Omit<MyProps, keyof ${groupKeys}> & { '...props': ${groupKeys} }>`
+        : 'MyProps'
+
+      code = `
+import { ComponentProps } from 'react'
+import type { ${componentName} } from 'nextra/components'
+type MyProps = ComponentProps<typeof ${componentName}>
+type $ = ${result}
+
+export default $`
+    } else {
+      code = props.code
+    }
+
     return (
       <TSDoc
         {...props}
+        code={code}
         typeLinkMap={{
           GitHubIcon:
             'https://github.com/shuding/nextra/blob/main/packages/nextra/src/client/icons/github.svg',
