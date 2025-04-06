@@ -844,20 +844,38 @@ export default $
         {
           "description": "This hook lets you subscribe to changes of a specific nodes \`data\` object.",
           "name": "useNodesData",
-          "params": [
+          "signatures": [
             {
-              "description": "The id (or ids) of the node to get the data from",
-              "name": "nodeId",
-              "tags": {
-                "param": "nodeId - The id (or ids) of the node to get the data from",
-              },
-              "type": "string",
+              "params": [
+                {
+                  "description": "The id (or ids) of the node to get the data from",
+                  "name": "nodeId",
+                  "tags": {
+                    "param": "nodeId - The id (or ids) of the node to get the data from",
+                  },
+                  "type": "string",
+                },
+              ],
+              "returns": [
+                {
+                  "description": "An object (or array of object) with \`{id, type, data}\` representing each node",
+                  "type": "Pick<NodeType, "id" | "type" | "data"> | null",
+                },
+              ],
             },
-          ],
-          "returns": [
             {
-              "description": "An object (or array of object) with {id, type, data} representing each node",
-              "type": "Pick<NodeType, "id" | "type" | "data"> | null",
+              "params": [
+                {
+                  "name": "nodeIds",
+                  "type": "string[]",
+                },
+              ],
+              "returns": [
+                {
+                  "description": "An object (or array of object) with \`{id, type, data}\` representing each node",
+                  "type": "Pick<NodeType, "id" | "type" | "data">[]",
+                },
+              ],
             },
           ],
           "tags": {
@@ -873,7 +891,7 @@ export default $
         \`\`\`",
             "param": "nodeId - The id (or ids) of the node to get the data from",
             "public": "",
-            "returns": "An object (or array of object) with {id, type, data} representing each node",
+            "returns": "An object (or array of object) with \`{id, type, data}\` representing each node",
           },
         }
       `)

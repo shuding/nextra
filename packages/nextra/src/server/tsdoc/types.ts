@@ -16,14 +16,16 @@ export type GeneratedFunction = {
   description: string
   /** Function tags. */
   tags: Tags
-  /** Function parameters. */
-  params: TypeField[]
-  /** Function return. */
-  returns: {
-    /** Function return description. */
-    description?: string
-    /** Function return type. */
-    type: string
+  signatures: {
+    /** Function parameters. */
+    params: TypeField[]
+    /** Function return. */
+    returns: {
+      /** Function return description. */
+      description?: string
+      /** Function return type. */
+      type: string
+    }[]
   }[]
 }
 
