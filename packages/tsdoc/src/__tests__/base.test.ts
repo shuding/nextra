@@ -836,9 +836,8 @@ export default $
       `)
     })
 
-    it.only("should not throw when symbol isn't found", () => {
-      const code =
-        "export { isEdge as default } from '@xyflow/react'"
+    it("should not throw when symbol isn't found", () => {
+      const code = "export { isEdge as default } from '@xyflow/react'"
       const result = generateDocumentation({ code, flattened: true })
       expect(result).toMatchInlineSnapshot(`
         {
@@ -887,9 +886,8 @@ export default $
       `)
     })
 
-    it.only('when multiple type declarations, should take only first for now', () => {
-      const code =
-        "export { useNodesData as default } from '@xyflow/react'"
+    it('when multiple type declarations, should take only first for now', () => {
+      const code = "export { useNodesData as default } from '@xyflow/react'"
       const result = generateDocumentation({ code, flattened: true })
       expect(result).toMatchInlineSnapshot(`
         {
@@ -980,8 +978,7 @@ export default $
     })
 
     it('should not flatten tuple type, set, map', () => {
-      const code =
-        `
+      const code = `
 type foo = (params: {
   tuple?: [number, number],
   set?: Set<string>,
