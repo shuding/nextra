@@ -6,6 +6,7 @@
   "author": "Dimitri POSTOLOV",
   "license": "ISC",
   "private": true,
+  "types": "./dist/index.d.ts",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
@@ -13,7 +14,6 @@
     },
     "./package.json": "./package.json"
   },
-  "types": "./dist/index.d.ts",
   "scripts": {
     "build": "tsup",
     "dev": "tsup --watch",
