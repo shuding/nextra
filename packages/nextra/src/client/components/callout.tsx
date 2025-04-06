@@ -9,6 +9,14 @@ import {
   InformationCircleIcon
 } from '../icons/index.js'
 
+const test = {
+  i: ['#0969da', '#0969da', '#1f6feb', '#4493f8'],
+  t: ['#1a7f37', '#1a7f37', '#238636', '#3fb950'],
+  im: ['#8250df', '#8250df', '#8957e5', '#ab7df8'],
+  w: ['#9a6700', '#9a6700', '#9e6a03', '#d29922'],
+  c: ['#cf222e', '#d1242f', '#da3633', '#f85149'],
+}
+
 const TypeToEmoji = {
   default: '💡',
   error: '🚫',
@@ -31,32 +39,34 @@ export type GitHubAlertType =
   | 'github-warning'
   | 'github-caution'
 
-const errorClasses = cn(
-  'x:border-red-200 x:bg-red-100 x:text-red-900 x:dark:border-red-200/30 x:dark:bg-red-900/30 x:dark:text-red-200'
-)
-const infoClasses = cn(
-  'x:border-blue-200 x:bg-blue-100 x:text-blue-900 x:dark:border-blue-200/30 x:dark:bg-blue-900/30 x:dark:text-blue-200'
-)
-const warningClasses = cn(
-  'x:border-yellow-100 x:bg-yellow-50 x:text-yellow-900 x:dark:border-yellow-200/30 x:dark:bg-yellow-700/30 x:dark:text-yellow-200'
-)
-
 const classes: Record<CalloutType, string> = {
   default: cn(
     'x:border-orange-100 x:bg-orange-50 x:text-orange-800 x:dark:border-orange-400/30 x:dark:bg-orange-400/20 x:dark:text-orange-300'
   ),
-  error: errorClasses,
-  info: infoClasses,
-  warning: warningClasses,
-  'github-note': infoClasses,
+  error: cn(
+    'x:border-red-200 x:bg-red-100 x:text-red-900 x:dark:border-red-200/30 x:dark:bg-red-900/30 x:dark:text-red-200'
+  ),
+  info: cn(
+    'x:border-blue-200 x:bg-blue-100 x:text-blue-900 x:dark:border-blue-200/30 x:dark:bg-blue-900/30 x:dark:text-blue-200'
+  ),
+  warning: cn(
+    'x:border-yellow-100 x:bg-yellow-50 x:text-yellow-900 x:dark:border-yellow-200/30 x:dark:bg-yellow-700/30 x:dark:text-yellow-200'
+  ),
+  'github-note': cn(
+    'x:border-blue-200 x:bg-blue-100 x:text-blue-900 x:dark:border-blue-200/30 x:dark:bg-blue-900/30 x:dark:text-blue-200'
+  ),
   'github-tip': cn(
     'x:border-green-200 x:bg-green-100 x:text-green-900 x:dark:border-green-200/30 x:dark:bg-green-900/30 x:dark:text-green-200'
   ),
   'github-important': cn(
     'x:border-purple-200 x:bg-purple-100 x:text-purple-900 x:dark:border-purple-200/30 x:dark:bg-purple-900/30 x:dark:text-purple-200'
   ),
-  'github-warning': warningClasses,
-  'github-caution': errorClasses
+  'github-warning': cn(
+    'x:border-yellow-100 x:bg-yellow-50 x:text-yellow-900 x:dark:border-yellow-200/30 x:dark:bg-yellow-700/30 x:dark:text-yellow-200'
+  ),
+  'github-caution': cn(
+    'x:border-red-200 x:bg-red-100 x:text-red-900 x:dark:border-red-200/30 x:dark:bg-red-900/30 x:dark:text-red-200'
+  )
 }
 
 type CalloutProps = {
