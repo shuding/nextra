@@ -66,7 +66,7 @@ type CalloutProps = {
    * If set to `null`, no border, background, or text styling will be applied.
    * @default 'default'
    */
-  type?:  CalloutType | GitHubAlertType | null
+  type?: CalloutType | null
   /**
    * Icon displayed in the callout. Can be a string emoji or a custom React element.
    *
