@@ -59,36 +59,35 @@ export function generateDocumentation({
   const declarationType = declaration.getType()
   const callSignatures = declarationType.getCallSignatures()
   const isFunction = callSignatures.length > 0
-
   if (isFunction) {
-    // if (callSignatures.length > 1) {
-    //   throw new Error("Functions with multiple signatures aren't supported yet")
-    // }
-    const signature = callSignatures[0]! // Function can have multiple signatures
-    const params = signature.getParameters()
-    const typeParams = params.flatMap(param =>
-      getDocEntry({
-        symbol: param,
-        declaration,
-        flattened,
-        isFunctionParameter: true
-      })
-    )
-    const returnType = signature.getReturnType()
-
-    const tags = getTags(declarationType.getSymbol()!)
-    const returnsDescription = tags.returns && replaceJsDocLinks(tags.returns)
+    const tags = getTags(declarationType.getSymbolOrThrow())
     return {
-      name: declarationType.getSymbol()!.getName(),
+      name: declarationType.getSymbolOrThrow().getName(),
       description,
       tags,
-      params: typeParams,
-      returns: [
-        {
-          ...(returnsDescription && { description: returnsDescription }),
-          type: getFormattedText(returnType)
+      signatures: callSignatures.map(signature => {
+        const params = signature.getParameters()
+        const typeParams = params.flatMap(param =>
+          getDocEntry({
+            symbol: param,
+            declaration,
+            flattened,
+            isFunctionParameter: true
+          })
+        )
+        const returnType = signature.getReturnType()
+        const returnsDescription =
+          tags.returns && replaceJsDocLinks(tags.returns)
+        return {
+          params: typeParams,
+          returns: [
+            {
+              ...(returnsDescription && { description: returnsDescription }),
+              type: getFormattedText(returnType)
+            }
+          ]
         }
-      ]
+      })
     }
   }
 
@@ -133,6 +132,7 @@ function getDocEntry({
   declaration: ExportedDeclarations
   flattened: boolean
   prefix?: string
+  /* @TODO: find a way to remove this */
   /** @default false */
   isFunctionParameter?: boolean
 }): TypeField | TypeField[] {
@@ -222,11 +222,11 @@ function getDeclaration(s: TsSymbol): Node {
   const parameterName = s.getName()
   const declarations = s.getDeclarations()
 
-  // if (declarations.length > 1) {
-  //   throw new Error(
-  //     `"${parameterName}" should not have more than one type declaration.`
-  //   )
-  // }
+  if (declarations.length > 1) {
+    throw new Error(
+      `"${parameterName}" should not have more than one type declaration.`
+    )
+  }
   const declaration = declarations[0]
   if (!declaration) {
     throw new Error(`Can't find "${parameterName}" declaration`)
