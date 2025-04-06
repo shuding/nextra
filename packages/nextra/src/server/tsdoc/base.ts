@@ -52,9 +52,9 @@ export function generateDocumentation({
   // }
 
   const comment = declaration
-    .getSymbol()
-    ?.compilerSymbol.getDocumentationComment(compilerObject)
-  const description = comment ? ts.displayPartsToString(comment) : ''
+    .getSymbolOrThrow()
+    .compilerSymbol.getDocumentationComment(compilerObject)
+  const description = ts.displayPartsToString(comment)
 
   const declarationType = declaration.getType()
   const callSignatures = declarationType.getCallSignatures()
@@ -222,11 +222,12 @@ function getDeclaration(s: TsSymbol): Node {
   const parameterName = s.getName()
   const declarations = s.getDeclarations()
 
-  if (declarations.length > 1) {
-    throw new Error(
-      `"${parameterName}" should not have more than one type declaration.`
-    )
-  }
+  // @TODO add test for ConnectionState
+  // if (declarations.length > 1) {
+  //   throw new Error(
+  //     `"${parameterName}" should not have more than one type declaration.`
+  //   )
+  // }
   const declaration = declarations[0]
   if (!declaration) {
     throw new Error(`Can't find "${parameterName}" declaration`)
