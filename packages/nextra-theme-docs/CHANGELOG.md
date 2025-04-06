@@ -1,5 +1,14 @@
 # nextra-theme-docs
 
+## 4.3.0-alpha.4
+
+### Patch Changes
+
+- 4547eb9: feat(TSDoc): add support for functions and functions with multiple
+  signatures
+- Updated dependencies [4547eb9]
+  - nextra@4.3.0-alpha.4
+
 ## 4.3.0-alpha.3
 
 ### Patch Changes
