@@ -886,7 +886,7 @@ export default $
       `)
     })
 
-    it('when multiple type declarations, should take only first for now', () => {
+    it('should parse multiple function signatures', () => {
       const code = "export { useNodesData as default } from '@xyflow/react'"
       const result = generateDocumentation({ code, flattened: true })
       expect(result).toMatchInlineSnapshot(`
@@ -1179,16 +1179,20 @@ export default foo`
       {
         "description": "",
         "name": "foo",
-        "params": [
+        "signatures": [
           {
-            "name": "a",
-            "optional": true,
-            "type": "unknown",
-          },
-        ],
-        "returns": [
-          {
-            "type": "void",
+            "params": [
+              {
+                "name": "a",
+                "optional": true,
+                "type": "unknown",
+              },
+            ],
+            "returns": [
+              {
+                "type": "void",
+              },
+            ],
           },
         ],
         "tags": {},
