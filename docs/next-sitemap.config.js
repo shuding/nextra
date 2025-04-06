@@ -3,5 +3,6 @@ export default {
   siteUrl: 'https://nextra.site',
   changefreq: 'weekly',
   priority: '0.5',
-  generateIndexSitemap: false
+  generateIndexSitemap: false,
+  exclude: ['/icon.svg']
 }

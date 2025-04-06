@@ -36,3 +36,11 @@ code.text-\[\.9em\] {
     display: none;
   }
 }
+
+/* adds labels to the sidebar links */
+.badge-new {
+  @apply dark:after:border-blue-200/30 dark:after:bg-blue-900/30 dark:after:text-blue-200;
+  &:after {
+    @apply ms-1.5 rounded-full border border-blue-200 bg-blue-100 px-1.5 text-xs font-bold text-blue-900 content-["New"];
+  }
+}

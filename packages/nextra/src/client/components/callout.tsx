@@ -1,5 +1,5 @@
 import cn from 'clsx'
-import type { FC, ReactElement, ReactNode } from 'react'
+import type { FC, ReactNode } from 'react'
 import {
   GitHubAlertCautionIcon,
   GitHubAlertImportantIcon,
@@ -60,22 +60,39 @@ const classes: Record<CalloutType, string> = {
 }
 
 type CalloutProps = {
-  type?: CalloutType | GitHubAlertType
-  emoji?: string | ReactElement
+  /**
+   * Defines the style of the callout and determines the default icon if `emoji` is not provided.
+   *
+   * If set to `null`, no border, background, or text styling will be applied.
+   * @default 'default'
+   */
+  type?:  CalloutType | GitHubAlertType | null
+  /**
+   * Icon displayed in the callout. Can be a string emoji or a custom React element.
+   *
+   * Default values based on `type`:
+   * - `'💡'` for `type: 'default'`
+   * - `'🚫'` for `type: 'error'`
+   * - `<InformationCircleIcon />` for `type: 'info'`
+   * - `'⚠️'` for `type: 'warning'`
+   * @default Determined by `type`
+   */
+  emoji?: ReactNode
+  /** Content to be displayed inside the callout. */
   children: ReactNode
 }
 
 export const Callout: FC<CalloutProps> = ({
   children,
   type = 'default',
-  emoji = TypeToEmoji[type]
+  emoji = type && TypeToEmoji[type]
 }) => {
   return (
     <div
       className={cn(
         'nextra-callout x:overflow-x-auto x:mt-6 x:flex x:rounded-lg x:border x:py-2 x:pe-4',
         'x:contrast-more:border-current!',
-        classes[type]
+        type && classes[type]
       )}
     >
       <div
