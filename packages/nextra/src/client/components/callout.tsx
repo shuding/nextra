@@ -28,11 +28,12 @@ const classes: Record<CalloutType, string> = {
 
 type CalloutProps = {
   /**
-   * Specifies the type of callout.
-   * Determines the default icon if none is provided.
+   * Defines the style of the callout and determines the default icon if `emoji` is not provided.
+   *
+   * If set to `null`, no border, background, or text styling will be applied.
    * @default 'default'
    */
-  type?: CalloutType
+  type?: CalloutType | null
   /**
    * Icon displayed in the callout. Can be a string emoji or a custom React element.
    *
@@ -51,14 +52,14 @@ type CalloutProps = {
 export const Callout: FC<CalloutProps> = ({
   children,
   type = 'default',
-  emoji = TypeToEmoji[type]
+  emoji = type && TypeToEmoji[type]
 }) => {
   return (
     <div
       className={cn(
         'nextra-callout x:overflow-x-auto x:mt-6 x:flex x:rounded-lg x:border x:py-2 x:pe-4',
         'x:contrast-more:border-current!',
-        classes[type]
+        type && classes[type]
       )}
     >
       <div
