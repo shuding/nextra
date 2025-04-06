@@ -15,7 +15,7 @@ const { img: Image, ...docsComponents } = getDocsMDXComponents({
 
       code = `
 import { ComponentProps } from 'react'
-import type { ${componentName} } from 'nextra/components'
+import type { ${componentName.split('.')[0]} } from 'nextra/components'
 type MyProps = ComponentProps<typeof ${componentName}>
 type $ = ${result}
 
