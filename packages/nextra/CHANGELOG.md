@@ -1,5 +1,17 @@
 # nextra
 
+## 4.3.0-alpha.5
+
+### Minor Changes
+
+- eed8328: feat: adapt colors and icons from original GitHub alerts syntax
+
+  feat: new Callout type `important`
+
+  fix: inconsistent built-in Callout's icons size
+
+  feat: improve Callout's accessibility colors
+
 ## 4.3.0-alpha.4
 
 ### Patch Changes

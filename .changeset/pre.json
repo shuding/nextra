@@ -11,6 +11,7 @@
     "@nextra/tsdoc": "0.0.0"
   },
   "changesets": [
+    "adapt-original-gh-alerts",
     "lazy-pugs-tie",
     "lovely-webs-wash",
     "lucky-apes-teach",
