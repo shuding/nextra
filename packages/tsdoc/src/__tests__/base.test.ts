@@ -124,16 +124,17 @@ export default $`
             "tags": {
               "default": "'default'",
             },
-            "type": ""default" | "error" | "info" | "warning" | null",
+            "type": ""default" | "error" | "info" | "warning" | "important" | null",
           },
           {
             "description": "Icon displayed in the callout. Can be a string emoji or a custom React element.
 
       Default values based on \`type\`:
-      - \`'💡'\` for \`type: 'default'\`
-      - \`'🚫'\` for \`type: 'error'\`
-      - \`<InformationCircleIcon />\` for \`type: 'info'\`
-      - \`'⚠️'\` for \`type: 'warning'\`",
+      - \`<GitHubTipIcon />\` for \`type: 'default'\`
+      - \`<GitHubCautionIcon />\` for \`type: 'error'\`
+      - \`<GitHubNoteIcon />\` for \`type: 'info'\`
+      - \`<GitHubWarningIcon />\` for \`type: 'warning'\`
+      - \`<GitHubImportantIcon />\` for \`type: 'important'\`",
             "name": "emoji",
             "optional": true,
             "tags": {
