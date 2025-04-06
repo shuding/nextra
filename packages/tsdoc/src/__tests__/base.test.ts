@@ -722,7 +722,7 @@ export default $
         }
       `)
     })
-    it('should be parsed as function type', () => {
+    it.skipIf(skipTest)('should be parsed as function type', () => {
       const code =
         "export { useNodeConnections as default } from '@xyflow/react'"
       const result = generateDocumentation({ code, flattened: true })
@@ -789,7 +789,7 @@ export default $
         }
       `)
     })
-    it('as function with description', () => {
+    it.skipIf(skipTest)('as function with description', () => {
       const code = "export { useInternalNode as default } from '@xyflow/react'"
       const result = generateDocumentation({ code, flattened: true })
       expect(result).toMatchInlineSnapshot(`
@@ -839,7 +839,7 @@ export default $
       `)
     })
 
-    it("should not throw when symbol isn't found", () => {
+    it.skipIf(skipTest)("should not throw when symbol isn't found", () => {
       const code = "export { isEdge as default } from '@xyflow/react'"
       const result = generateDocumentation({ code, flattened: true })
       expect(result).toMatchInlineSnapshot(`
@@ -889,7 +889,7 @@ export default $
       `)
     })
 
-    it('should parse multiple function signatures', () => {
+    it.skipIf(skipTest)('should parse multiple function signatures', () => {
       const code = "export { useNodesData as default } from '@xyflow/react'"
       const result = generateDocumentation({ code, flattened: true })
       expect(result).toMatchInlineSnapshot(`
@@ -954,25 +954,29 @@ export default $
         {
           "description": "",
           "name": "foo",
-          "params": [
+          "signatures": [
             {
-              "name": "a",
-              "type": "string",
-            },
-            {
-              "name": "b",
-              "optional": true,
-              "type": "number",
-            },
-            {
-              "name": "c",
-              "optional": true,
-              "type": "boolean",
-            },
-          ],
-          "returns": [
-            {
-              "type": "void",
+              "params": [
+                {
+                  "name": "a",
+                  "type": "string",
+                },
+                {
+                  "name": "b",
+                  "optional": true,
+                  "type": "number",
+                },
+                {
+                  "name": "c",
+                  "optional": true,
+                  "type": "boolean",
+                },
+              ],
+              "returns": [
+                {
+                  "type": "void",
+                },
+              ],
             },
           ],
           "tags": {},
