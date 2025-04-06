@@ -5,7 +5,12 @@ import { useMDXComponents as getDocsMDXComponents } from 'nextra-theme-docs'
 import { unstable_TSDoc as TSDoc } from 'nextra/tsdoc'
 
 const { img: Image, ...docsComponents } = getDocsMDXComponents({
-  TSDoc({ componentName, groupKeys, ...props }) {
+  TSDoc({
+    componentName,
+    groupKeys,
+    packageName = 'nextra/components',
+    ...props
+  }) {
     let code: string
 
     if (componentName) {
@@ -15,7 +20,7 @@ const { img: Image, ...docsComponents } = getDocsMDXComponents({
 
       code = `
 import { ComponentProps } from 'react'
-import type { ${componentName.split('.')[0]} } from 'nextra/components'
+import type { ${componentName.split('.')[0]} } from '${packageName}'
 type MyProps = ComponentProps<typeof ${componentName}>
 type $ = ${result}
 
