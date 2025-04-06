@@ -29,14 +29,14 @@
     "tsup": "8.4.0",
     "tsx": "4.19.3",
     "turbo": "2.4.4",
-    "typescript": "5.8.2"
+    "typescript": "5.8.3"
   },
   "pnpm": {
     "overrides": {
       "postcss": "8.5.3",
       "lightningcss": "1.29.3",
       "esbuild": "0.25.2",
-      "vite": "6.2.4",
+      "vite": "6.2.5",
       "next": "15.2.4"
     },
     "patchedDependencies": {
