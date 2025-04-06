@@ -14,7 +14,7 @@ const test = {
   t: ['#1a7f37', '#1a7f37', '#238636', '#3fb950'],
   im: ['#8250df', '#8250df', '#8957e5', '#ab7df8'],
   w: ['#9a6700', '#9a6700', '#9e6a03', '#d29922'],
-  c: ['#cf222e', '#d1242f', '#da3633', '#f85149'],
+  c: ['#cf222e', '#d1242f', '#da3633', '#f85149']
 }
 
 const TypeToEmoji = {
@@ -53,34 +53,29 @@ const classes: Record<CalloutType, string> = {
     'x:border-yellow-100 x:bg-yellow-50 x:text-yellow-900 x:dark:border-yellow-200/30 x:dark:bg-yellow-700/30 x:dark:text-yellow-200'
   ),
   'github-note': cn(
-    // 'x:border-blue-200 x:text-blue-900 x:dark:border-blue-200/30 x:dark:text-blue-200',
     'x:bg-blue-100 x:dark:bg-blue-900/30',
     'x:text-blue-700 x:dark:text-blue-400',
     'x:border-blue-700 x:dark:border-blue-600'
   ),
   'github-tip': cn(
-    // 'x:border-green-200 x:text-green-900 x:dark:border-green-200/30 x:dark:text-green-200',
     'x:bg-green-100 x:dark:bg-green-900/30',
     'x:text-green-700 x:dark:text-green-500',
-    'x:border-green-700 x:dark:border-green-800',
+    'x:border-green-700 x:dark:border-green-800'
   ),
   'github-important': cn(
-    // 'x:border-purple-200 x:text-purple-900 x:dark:border-purple-200/30 x:dark:text-purple-200',
     'x:bg-purple-100 x:dark:bg-purple-900/30',
     'x:text-purple-600 x:dark:text-purple-400',
-    'x:border-purple-600',
+    'x:border-purple-600'
   ),
   'github-warning': cn(
-    // 'x:border-yellow-100 x:text-yellow-900 x:dark:border-yellow-200/30 x:dark:text-yellow-200',
     'x:bg-yellow-50 x:dark:bg-yellow-700/30',
     'x:text-yellow-700 x:dark:text-yellow-500',
-    'x:border-yellow-700',
+    'x:border-yellow-700'
   ),
   'github-caution': cn(
-    // 'x:border-red-200 x:text-red-900 x:dark:border-red-200/30  x:dark:text-red-200',
     'x:bg-red-100 x:dark:bg-red-900/30',
     'x:text-red-700 x:dark:text-red-500',
-    'x:border-red-700 x:dark:border-red-600',
+    'x:border-red-700 x:dark:border-red-600'
   )
 }
 
