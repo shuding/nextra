@@ -836,7 +836,58 @@ export default $
       `)
     })
 
-    it('when multiple type declarations, should take only first for now', () => {
+    it.only("should not throw when symbol isn't found", () => {
+      const code =
+        "export { isEdge as default } from '@xyflow/react'"
+      const result = generateDocumentation({ code, flattened: true })
+      expect(result).toMatchInlineSnapshot(`
+        {
+          "description": "Test whether an object is usable as an [\`Edge\`](/api-reference/types/edge).
+        In TypeScript this is a type guard that will narrow the type of whatever you pass in to
+        [\`Edge\`](/api-reference/types/edge) if it returns \`true\`.",
+          "name": "__type",
+          "signatures": [
+            {
+              "params": [
+                {
+                  "description": "The element to test",
+                  "name": "element",
+                  "tags": {
+                    "param": "element - The element to test",
+                  },
+                  "type": "unknown",
+                },
+              ],
+              "returns": [
+                {
+                  "description": "Tests whether the provided value can be used as an \`Edge\`. If you're using TypeScript,
+        this function acts as a type guard and will narrow the type of the value to \`Edge\` if it returns
+        \`true\`.",
+                  "type": "boolean",
+                },
+              ],
+            },
+          ],
+          "tags": {
+            "example": "\`\`\`js
+        import { isEdge } from '@xyflow/react';
+
+        if (isEdge(edge)) {
+        // ...
+        }
+        \`\`\`",
+            "param": "element - The element to test",
+            "public": "",
+            "remarks": "In TypeScript this is a type guard that will narrow the type of whatever you pass in to Edge if it returns true",
+            "returns": "Tests whether the provided value can be used as an \`Edge\`. If you're using TypeScript,
+        this function acts as a type guard and will narrow the type of the value to \`Edge\` if it returns
+        \`true\`.",
+          },
+        }
+      `)
+    })
+
+    it.only('when multiple type declarations, should take only first for now', () => {
       const code =
         "export { useNodesData as default } from '@xyflow/react'"
       const result = generateDocumentation({ code, flattened: true })
@@ -848,17 +899,14 @@ export default $
             {
               "params": [
                 {
-                  "description": "The id (or ids) of the node to get the data from",
+                  "description": "The id of the node to get the data from.",
                   "name": "nodeId",
-                  "tags": {
-                    "param": "nodeId - The id (or ids) of the node to get the data from",
-                  },
                   "type": "string",
                 },
               ],
               "returns": [
                 {
-                  "description": "An object (or array of object) with \`{id, type, data}\` representing each node",
+                  "description": "An object (or array of object) with \`id\`, \`type\`, \`data\` representing each node.",
                   "type": "Pick<NodeType, "id" | "type" | "data"> | null",
                 },
               ],
@@ -866,13 +914,14 @@ export default $
             {
               "params": [
                 {
+                  "description": "The ids of the nodes to get the data from.",
                   "name": "nodeIds",
                   "type": "string[]",
                 },
               ],
               "returns": [
                 {
-                  "description": "An object (or array of object) with \`{id, type, data}\` representing each node",
+                  "description": "An object (or array of object) with \`id\`, \`type\`, \`data\` representing each node.",
                   "type": "Pick<NodeType, "id" | "type" | "data">[]",
                 },
               ],
@@ -889,9 +938,8 @@ export default $
          return null;
         }
         \`\`\`",
-            "param": "nodeId - The id (or ids) of the node to get the data from",
             "public": "",
-            "returns": "An object (or array of object) with \`{id, type, data}\` representing each node",
+            "returns": "An object (or array of object) with \`id\`, \`type\`, \`data\` representing each node.",
           },
         }
       `)
