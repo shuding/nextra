@@ -10,8 +10,6 @@ overrides:
   esbuild: 0.25.2
   vite: 6.2.4
   next: 15.2.4
-  '@xyflow/react': file:/Users/dmytro/Desktop/repros/xyflow/packages/react
-  '@xyflow/system': file:/Users/dmytro/Desktop/repros/xyflow/packages/system
 
 patchedDependencies:
   '@changesets/assemble-release-plan':
@@ -610,8 +608,8 @@ importers:
         specifier: 19.0.12
         version: 19.0.12
       '@xyflow/react':
-        specifier: file:/Users/dmytro/Desktop/repros/xyflow/packages/react
-        version: file:../repros/xyflow/packages/react(@types/react@19.0.12)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+        specifier: 12.5.4
+        version: 12.5.4(@types/react@19.0.12)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       nextra:
         specifier: workspace:*
         version: link:../nextra
@@ -2888,14 +2886,14 @@ packages:
   '@xtuc/long@4.2.2':
     resolution: {integrity: sha512-NuHqBY1PB/D8xU6s/thBgOAiAP7HOYDQ32+BFZILJ8ivkUkAHQnWfn6WhL79Owj1qmUnoN/YPhktdIoucipkAQ==}
 
-  '@xyflow/react@file:../repros/xyflow/packages/react':
-    resolution: {directory: ../repros/xyflow/packages/react, type: directory}
+  '@xyflow/react@12.5.4':
+    resolution: {integrity: sha512-ITCW3h/pXVKwb0j3w8CxPyfmmxIqToctE55R+BcfTAe9j+qr/6Uc+NUsbIgnvEyiziJKq/sS0ovVfZ4482txww==}
     peerDependencies:
       react: '>=17'
       react-dom: '>=17'
 
-  '@xyflow/system@file:../repros/xyflow/packages/system':
-    resolution: {directory: ../repros/xyflow/packages/system, type: directory}
+  '@xyflow/system@0.0.54':
+    resolution: {integrity: sha512-DBoQTcSQ2620WMfakCcjRLrlqalWcZBPgMNrfSAybnVeyZm73rT1592GAXPcC3eoVmWcvGfBgqwAmmNtlrowdw==}
 
   acorn-import-assertions@1.8.0:
     resolution: {integrity: sha512-m7VZ3jwz4eK6A4Vtt8Ew1/mNbP24u0FhdyfA7fSvnJR6LMdfOYnmuIrrJAgrYfYJ10F/otaHTtrtrtmHdMNzEw==}
@@ -9074,9 +9072,9 @@ snapshots:
 
   '@xtuc/long@4.2.2': {}
 
-  '@xyflow/react@file:../repros/xyflow/packages/react(@types/react@19.0.12)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)':
+  '@xyflow/react@12.5.4(@types/react@19.0.12)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)':
     dependencies:
-      '@xyflow/system': file:../repros/xyflow/packages/system
+      '@xyflow/system': 0.0.54
       classcat: 5.0.5
       react: 19.1.0
       react-dom: 19.1.0(react@19.1.0)
@@ -9085,7 +9083,7 @@ snapshots:
       - '@types/react'
       - immer
 
-  '@xyflow/system@file:../repros/xyflow/packages/system':
+  '@xyflow/system@0.0.54':
     dependencies:
       '@types/d3-drag': 3.0.7
       '@types/d3-selection': 3.0.11
