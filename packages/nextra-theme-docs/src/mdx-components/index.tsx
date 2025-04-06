@@ -14,7 +14,6 @@ import {
   withGitHubAlert,
   withIcons
 } from 'nextra/components'
-import type { CalloutGitHubAlertType } from 'nextra/components'
 import { useMDXComponents as getNextraMDXComponents } from 'nextra/mdx-components'
 import type { MDXComponents } from 'nextra/mdx-components'
 import { removeLinks } from 'nextra/remove-links'
@@ -35,13 +34,20 @@ const Blockquote: FC<ComponentProps<'blockquote'>> = props => (
   />
 )
 
+const CALLOUT_TYPE = Object.freeze({
+  caution: 'error',
+  important: 'important',
+  note: 'info',
+  tip: 'default',
+  warning: 'warning'
+})
+
 const DEFAULT_COMPONENTS = getNextraMDXComponents({
   a: Link,
-  blockquote: withGitHubAlert(({ type, ...props }) => {
-    return (
-      <Callout type={('github-' + type) as CalloutGitHubAlertType} {...props} />
-    )
-  }, Blockquote),
+  blockquote: withGitHubAlert(
+    ({ type, ...props }) => <Callout type={CALLOUT_TYPE[type]} {...props} />,
+    Blockquote
+  ),
   code: Code,
   details: Details,
   h1: H1,

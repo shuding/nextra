@@ -12,7 +12,6 @@ import {
   withGitHubAlert,
   withIcons
 } from 'nextra/components'
-import type { CalloutGitHubAlertType } from 'nextra/components'
 import { useMDXComponents as getNextraMDXComponents } from 'nextra/mdx-components'
 import type { MDXComponents } from 'nextra/mdx-components'
 import type { ComponentProps, FC } from 'react'
@@ -42,11 +41,16 @@ const createHeading = (
       </Tag>
     )
   }
-const Blockquote = withGitHubAlert(({ type, ...props }) => {
-  return (
-    <Callout type={('github' + type) as CalloutGitHubAlertType} {...props} />
-  )
+const CALLOUT_TYPE = Object.freeze({
+  caution: 'error',
+  important: 'important',
+  note: 'info',
+  tip: 'default',
+  warning: 'warning'
 })
+const Blockquote = withGitHubAlert(({ type, ...props }) => (
+  <Callout type={CALLOUT_TYPE[type]} {...props} />
+))
 
 type BlogMDXComponents = Readonly<
   MDXComponents & {
