@@ -1,8 +1,11 @@
+import xyflowReactPackageJson from '@xyflow/react/package.json'
 import { NavbarPropsSchema } from '../../../nextra-theme-docs/src/components/navbar/index.js'
 import { LayoutPropsSchema } from '../../../nextra-theme-docs/src/layout.js'
 import { HeadPropsSchema } from '../../../nextra/src/client/components/head.js'
 import { generateDocumentation } from '../../../nextra/src/server/tsdoc/base.js'
 import { generateTsFromZod } from '../../../nextra/src/server/tsdoc/zod-to-ts.js'
+
+const skipTest = xyflowReactPackageJson.version === '12.5.4'
 
 describe('<TSDoc />', () => {
   it('<Banner />', async () => {
@@ -17,14 +20,12 @@ export default $`
           {
             "description": "Content of the banner.",
             "name": "children",
-            "required": true,
-            "tags": {},
             "type": "ReactNode",
           },
           {
             "description": "Closable banner or not.",
             "name": "dismissible",
-            "required": false,
+            "optional": true,
             "tags": {
               "default": "true",
             },
@@ -33,7 +34,7 @@ export default $`
           {
             "description": "Storage key to keep the banner state.",
             "name": "storageKey",
-            "required": false,
+            "optional": true,
             "tags": {
               "default": "'nextra-banner'",
             },
@@ -56,7 +57,7 @@ export default $`
           {
             "description": "Not found text.",
             "name": "emptyResult",
-            "required": false,
+            "optional": true,
             "tags": {
               "default": "'No results found.'",
             },
@@ -65,7 +66,7 @@ export default $`
           {
             "description": "Error text.",
             "name": "errorText",
-            "required": false,
+            "optional": true,
             "tags": {
               "default": "'Failed to load search index.'",
             },
@@ -74,7 +75,7 @@ export default $`
           {
             "description": "Loading text.",
             "name": "loading",
-            "required": false,
+            "optional": true,
             "tags": {
               "default": "'Loading…'",
             },
@@ -83,7 +84,7 @@ export default $`
           {
             "description": "Placeholder text.",
             "name": "placeholder",
-            "required": false,
+            "optional": true,
             "tags": {
               "default": "'Search documentation…'",
             },
@@ -92,15 +93,12 @@ export default $`
           {
             "description": "CSS class name.",
             "name": "className",
-            "required": false,
-            "tags": {},
+            "optional": true,
             "type": "string",
           },
           {
-            "description": "",
             "name": "searchOptions",
-            "required": false,
-            "tags": {},
+            "optional": true,
             "type": "PagefindSearchOptions",
           },
         ],
@@ -118,25 +116,27 @@ export default $`
         "description": "",
         "entries": [
           {
-            "description": "Specifies the type of callout.
-      Determines the default icon if none is provided.",
+            "description": "Defines the style of the callout and determines the default icon if \`emoji\` is not provided.
+
+      If set to \`null\`, no border, background, or text styling will be applied.",
             "name": "type",
-            "required": false,
+            "optional": true,
             "tags": {
               "default": "'default'",
             },
-            "type": ""default" | "error" | "info" | "warning"",
+            "type": ""default" | "error" | "info" | "warning" | "important" | null",
           },
           {
             "description": "Icon displayed in the callout. Can be a string emoji or a custom React element.
 
       Default values based on \`type\`:
-      - \`'💡'\` for \`type: 'default'\`
-      - \`'🚫'\` for \`type: 'error'\`
-      - \`<InformationCircleIcon />\` for \`type: 'info'\`
-      - \`'⚠️'\` for \`type: 'warning'\`",
+      - \`<GitHubTipIcon />\` for \`type: 'default'\`
+      - \`<GitHubCautionIcon />\` for \`type: 'error'\`
+      - \`<GitHubNoteIcon />\` for \`type: 'info'\`
+      - \`<GitHubWarningIcon />\` for \`type: 'warning'\`
+      - \`<GitHubImportantIcon />\` for \`type: 'important'\`",
             "name": "emoji",
-            "required": false,
+            "optional": true,
             "tags": {
               "default": "Determined by \`type\`",
             },
@@ -145,8 +145,6 @@ export default $`
           {
             "description": "Content to be displayed inside the callout.",
             "name": "children",
-            "required": true,
-            "tags": {},
             "type": "ReactNode",
           },
         ],
@@ -166,7 +164,7 @@ export default $`
           {
             "description": "Content of the link.",
             "name": "content",
-            "required": false,
+            "optional": true,
             "tags": {
               "default": "'Submit an issue about broken link'",
             },
@@ -175,7 +173,7 @@ export default $`
           {
             "description": "Labels that can be added to the new created issue.",
             "name": "labels",
-            "required": false,
+            "optional": true,
             "tags": {
               "default": "'bug'",
             },
@@ -184,7 +182,7 @@ export default $`
           {
             "description": "Top content of page.",
             "name": "children",
-            "required": false,
+            "optional": true,
             "tags": {
               "default": "<H1>404: Page Not Found</H1>",
             },
@@ -193,8 +191,7 @@ export default $`
           {
             "description": "CSS class name.",
             "name": "className",
-            "required": false,
-            "tags": {},
+            "optional": true,
             "type": "string",
           },
         ],
@@ -213,7 +210,7 @@ export default $`
           {
             "description": "Extra content after last icon.",
             "name": "children",
-            "required": false,
+            "optional": true,
             "tags": {
               "remarks": "\`ReactNode\`",
             },
@@ -222,7 +219,7 @@ export default $`
           {
             "description": "Specifies whether the logo should have a link or provides the URL for the logo's link.",
             "name": "logoLink",
-            "required": false,
+            "optional": true,
             "tags": {
               "default": "true",
             },
@@ -231,7 +228,6 @@ export default $`
           {
             "description": "Logo of the website.",
             "name": "logo",
-            "required": true,
             "tags": {
               "remarks": "\`ReactElement\`",
             },
@@ -240,14 +236,13 @@ export default $`
           {
             "description": "URL of the project homepage.",
             "name": "projectLink",
-            "required": false,
-            "tags": {},
+            "optional": true,
             "type": "string",
           },
           {
             "description": "Icon of the project link.",
             "name": "projectIcon",
-            "required": false,
+            "optional": true,
             "tags": {
               "default": "<GitHubIcon />",
               "remarks": "\`ReactNode\`",
@@ -257,14 +252,13 @@ export default $`
           {
             "description": "URL of the chat link.",
             "name": "chatLink",
-            "required": false,
-            "tags": {},
+            "optional": true,
             "type": "string",
           },
           {
             "description": "Icon of the chat link.",
             "name": "chatIcon",
-            "required": false,
+            "optional": true,
             "tags": {
               "default": "<DiscordIcon />",
               "remarks": "\`ReactNode\`",
@@ -274,14 +268,13 @@ export default $`
           {
             "description": "CSS class name.",
             "name": "className",
-            "required": false,
-            "tags": {},
+            "optional": true,
             "type": "string",
           },
           {
             "description": "Aligns navigation links to the specified side.",
             "name": "align",
-            "required": false,
+            "optional": true,
             "tags": {
               "default": ""right"",
             },
@@ -303,7 +296,7 @@ export default $`
           {
             "description": "The hue of the primary theme color.<br/>Range: \`0 - 360\`",
             "name": "color.hue",
-            "required": false,
+            "optional": true,
             "tags": {
               "default": "{"dark":204,"light":212}",
             },
@@ -312,7 +305,7 @@ export default $`
           {
             "description": "The saturation of the primary theme color.<br/>Range: \`0 - 100\`",
             "name": "color.saturation",
-            "required": false,
+            "optional": true,
             "tags": {
               "default": "100",
             },
@@ -321,7 +314,7 @@ export default $`
           {
             "description": "The lightness of the primary theme color.<br/>Range: \`0 - 100\`",
             "name": "color.lightness",
-            "required": false,
+            "optional": true,
             "tags": {
               "default": "{"dark":55,"light":45}",
             },
@@ -330,14 +323,13 @@ export default $`
           {
             "description": "The glyph to use as the favicon.",
             "name": "faviconGlyph",
-            "required": false,
-            "tags": {},
+            "optional": true,
             "type": "string",
           },
           {
             "description": "Background color for dark theme.<br/>Format: \`"rgb(RRR,GGG,BBB)" | "#RRGGBB"\`",
             "name": "backgroundColor.dark",
-            "required": false,
+            "optional": true,
             "tags": {
               "default": ""rgb(17,17,17)"",
             },
@@ -346,7 +338,7 @@ export default $`
           {
             "description": "Background color for light theme.<br/>Format: \`"rgb(RRR,GGG,BBB)" | "#RRGGBB"\`",
             "name": "backgroundColor.light",
-            "required": false,
+            "optional": true,
             "tags": {
               "default": ""rgb(250,250,250)"",
             },
@@ -355,7 +347,7 @@ export default $`
           {
             "description": "Content of \`<head>\`",
             "name": "children",
-            "required": false,
+            "optional": true,
             "tags": {
               "remarks": "\`ReactNode\`",
             },
@@ -377,16 +369,15 @@ export default $`
           {
             "description": "Rendered [\`<Banner>\` component](/docs/built-ins/banner). E.g. \`<Banner {...bannerProps} />\`",
             "name": "banner",
-            "required": false,
+            "optional": true,
             "tags": {
               "remarks": "\`ReactNode\`",
             },
             "type": "ReactNode",
           },
           {
-            "description": "",
             "name": "children",
-            "required": false,
+            "optional": true,
             "tags": {
               "remarks": "\`ReactNode\`",
             },
@@ -395,7 +386,7 @@ export default $`
           {
             "description": "Show or hide the dark mode select button.",
             "name": "darkMode",
-            "required": false,
+            "optional": true,
             "tags": {
               "default": "true",
             },
@@ -404,7 +395,7 @@ export default $`
           {
             "description": "URL of the documentation repository.",
             "name": "docsRepositoryBase",
-            "required": false,
+            "optional": true,
             "tags": {
               "default": ""https://github.com/shuding/nextra"",
             },
@@ -413,7 +404,7 @@ export default $`
           {
             "description": "Content of the edit link.",
             "name": "editLink",
-            "required": false,
+            "optional": true,
             "tags": {
               "default": ""Edit this page"",
               "remarks": "\`ReactNode\`",
@@ -423,7 +414,7 @@ export default $`
           {
             "description": "Content of the feedback link.",
             "name": "feedback.content",
-            "required": false,
+            "optional": true,
             "tags": {
               "default": ""Question? Give us feedback"",
               "remarks": "\`ReactNode\`",
@@ -433,7 +424,7 @@ export default $`
           {
             "description": "Labels that can be added to the new created issue.",
             "name": "feedback.labels",
-            "required": false,
+            "optional": true,
             "tags": {
               "default": ""feedback"",
             },
@@ -442,7 +433,7 @@ export default $`
           {
             "description": "Rendered [\`<Footer>\` component](/docs/docs-theme/built-ins/footer). E.g. \`<Footer {...footerProps} />\`",
             "name": "footer",
-            "required": false,
+            "optional": true,
             "tags": {
               "remarks": "\`ReactNode\`",
             },
@@ -451,7 +442,7 @@ export default $`
           {
             "description": "Options to configure the language dropdown for [the i18n docs website](/docs/guide/i18n).",
             "name": "i18n",
-            "required": false,
+            "optional": true,
             "tags": {
               "default": "[]",
             },
@@ -460,7 +451,7 @@ export default $`
           {
             "description": "Component to render the last updated info.",
             "name": "lastUpdated",
-            "required": false,
+            "optional": true,
             "tags": {
               "default": "<LastUpdated />",
               "remarks": "\`ReactElement\`",
@@ -470,7 +461,7 @@ export default $`
           {
             "description": "Rendered [\`<Navbar>\` component](/docs/docs-theme/built-ins/navbar). E.g. \`<Navbar {...navbarProps} />\`",
             "name": "navbar",
-            "required": false,
+            "optional": true,
             "tags": {
               "remarks": "\`ReactNode\`",
             },
@@ -479,55 +470,46 @@ export default $`
           {
             "description": "Enable or disable navigation link.",
             "name": "navigation",
-            "required": false,
+            "optional": true,
             "tags": {
               "default": "true",
             },
             "type": "boolean | { next: boolean; prev: boolean; }",
           },
           {
-            "description": "",
             "name": "nextThemes.attribute",
-            "required": false,
+            "optional": true,
             "tags": {
               "default": ""class"",
             },
             "type": ""@TODO TO IMPLEMENT" | "@TODO TO IMPLEMENT"[]",
           },
           {
-            "description": "",
             "name": "nextThemes.defaultTheme",
-            "required": false,
-            "tags": {},
+            "optional": true,
             "type": "string",
           },
           {
-            "description": "",
             "name": "nextThemes.disableTransitionOnChange",
-            "required": false,
+            "optional": true,
             "tags": {
               "default": "true",
             },
             "type": "boolean",
           },
           {
-            "description": "",
             "name": "nextThemes.forcedTheme",
-            "required": false,
-            "tags": {},
+            "optional": true,
             "type": "string",
           },
           {
-            "description": "",
             "name": "nextThemes.storageKey",
-            "required": false,
-            "tags": {},
+            "optional": true,
             "type": "string",
           },
           {
             "description": "Page map list. Result of \`getPageMap(route = '/')\` call.",
             "name": "pageMap",
-            "required": true,
             "tags": {
               "remarks": "\`PageMapItem[]\`",
             },
@@ -536,7 +518,7 @@ export default $`
           {
             "description": "Rendered [\`<Search>\` component](/docs/built-ins/search). E.g. \`<Search {...searchProps} />\`",
             "name": "search",
-            "required": false,
+            "optional": true,
             "tags": {
               "default": "<Search />",
               "remarks": "\`ReactNode\`",
@@ -546,14 +528,13 @@ export default $`
           {
             "description": "If true, automatically collapse inactive folders above \`defaultMenuCollapseLevel\`.",
             "name": "sidebar.autoCollapse",
-            "required": false,
-            "tags": {},
+            "optional": true,
             "type": "boolean",
           },
           {
             "description": "Specifies the folder level at which the menu on the left is collapsed by default.",
             "name": "sidebar.defaultMenuCollapseLevel",
-            "required": false,
+            "optional": true,
             "tags": {
               "default": "2",
             },
@@ -562,7 +543,7 @@ export default $`
           {
             "description": "Hide/show sidebar by default.",
             "name": "sidebar.defaultOpen",
-            "required": false,
+            "optional": true,
             "tags": {
               "default": "true",
             },
@@ -571,34 +552,31 @@ export default $`
           {
             "description": "Hide/show sidebar toggle button.",
             "name": "sidebar.toggleButton",
-            "required": false,
+            "optional": true,
             "tags": {
               "default": "true",
             },
             "type": "boolean",
           },
           {
-            "description": "",
             "name": "themeSwitch.dark",
-            "required": false,
+            "optional": true,
             "tags": {
               "default": ""Dark"",
             },
             "type": "string",
           },
           {
-            "description": "",
             "name": "themeSwitch.light",
-            "required": false,
+            "optional": true,
             "tags": {
               "default": ""Light"",
             },
             "type": "string",
           },
           {
-            "description": "",
             "name": "themeSwitch.system",
-            "required": false,
+            "optional": true,
             "tags": {
               "default": ""System"",
             },
@@ -607,7 +585,7 @@ export default $`
           {
             "description": "Text of back to top button.",
             "name": "toc.backToTop",
-            "required": false,
+            "optional": true,
             "tags": {
               "default": ""Scroll to top"",
               "remarks": "\`ReactNode\`",
@@ -617,7 +595,7 @@ export default $`
           {
             "description": "Display extra content below the TOC content.",
             "name": "toc.extraContent",
-            "required": false,
+            "optional": true,
             "tags": {
               "remarks": "\`ReactNode\`",
             },
@@ -626,7 +604,7 @@ export default $`
           {
             "description": "Float the TOC next to the content.",
             "name": "toc.float",
-            "required": false,
+            "optional": true,
             "tags": {
               "default": "true",
             },
@@ -635,7 +613,7 @@ export default $`
           {
             "description": "Title of the TOC sidebar.",
             "name": "toc.title",
-            "required": false,
+            "optional": true,
             "tags": {
               "default": ""On This Page"",
               "remarks": "\`ReactNode\`",
@@ -658,10 +636,7 @@ export default A`
         "description": "",
         "entries": [
           {
-            "description": "",
             "name": "foo",
-            "required": true,
-            "tags": {},
             "type": "string",
           },
         ],
@@ -688,9 +663,8 @@ export default $`
         "description": "",
         "entries": [
           {
-            "description": "",
             "name": "breadcrumb",
-            "required": false,
+            "optional": true,
             "tags": {
               "description": "Show or hide breadcrumb navigation.",
             },
@@ -699,8 +673,7 @@ export default $`
           {
             "description": "Indicates whether the item in sidebar is collapsed by default.",
             "name": "collapsed",
-            "required": false,
-            "tags": {},
+            "optional": true,
             "type": "boolean",
           },
         ],
@@ -708,6 +681,571 @@ export default $`
       }
     `)
   })
+  it('should show null type', async () => {
+    const code = `
+type Connection = {
+  targetHandle: string | null;
+};
+export default Connection`
+    const result = generateDocumentation({ code })
+    expect(result).toMatchInlineSnapshot(`
+      {
+        "description": "",
+        "entries": [
+          {
+            "name": "targetHandle",
+            "type": "string | null",
+          },
+        ],
+        "name": "default",
+      }
+    `)
+  })
+
+  describe('functions', () => {
+    it('should be parsed in object field', () => {
+      const code = `type $ = {
+  useNodeConnections: typeof import('@xyflow/react').useNodeConnections
+}
+export default $
+`
+      const result = generateDocumentation({ code })
+      expect(result).toMatchInlineSnapshot(`
+        {
+          "description": "",
+          "entries": [
+            {
+              "name": "useNodeConnections",
+              "type": "({ id, handleType, handleId, onConnect, onDisconnect, }?: UseNodeConnectionsParams | undefined) => NodeConnection[]",
+            },
+          ],
+          "name": "default",
+        }
+      `)
+    })
+    it.skipIf(skipTest)('should be parsed as function type', () => {
+      const code =
+        "export { useNodeConnections as default } from '@xyflow/react'"
+      const result = generateDocumentation({ code, flattened: true })
+      expect(result).toMatchInlineSnapshot(`
+        {
+          "description": "This hook returns an array of connections on a specific node, handle type ('source', 'target') or handle ID.",
+          "name": "useNodeConnections",
+          "params": [
+            {
+              "description": "ID of the node, filled in automatically if used inside custom node.",
+              "name": "[0]?.id",
+              "optional": true,
+              "type": "string",
+            },
+            {
+              "description": "What type of handle connections do you want to observe?",
+              "name": "[0]?.handleType",
+              "optional": true,
+              "type": "HandleType",
+            },
+            {
+              "description": "Filter by handle id (this is only needed if the node has multiple handles of the same type).",
+              "name": "[0]?.handleId",
+              "optional": true,
+              "type": "string",
+            },
+            {
+              "description": "Gets called when a connection is established.",
+              "name": "[0]?.onConnect",
+              "optional": true,
+              "type": "(connections: Connection[]) => void",
+            },
+            {
+              "description": "Gets called when a connection is removed.",
+              "name": "[0]?.onDisconnect",
+              "optional": true,
+              "type": "(connections: Connection[]) => void",
+            },
+          ],
+          "returns": [
+            {
+              "description": "An array with connections.",
+              "type": "NodeConnection[]",
+            },
+          ],
+          "tags": {
+            "example": "\`\`\`jsx
+        import { useNodeConnections } from '@xyflow/react';
+
+        export default function () {
+         const connections = useNodeConnections({
+           handleType: 'target',
+           handleId: 'my-handle',
+         });
+
+         return (
+           <div>There are currently {connections.length} incoming connections!</div>
+         );
+        }
+        \`\`\`",
+            "public": "",
+            "returns": "An array with connections.",
+          },
+        }
+      `)
+    })
+    it.skipIf(skipTest)('as function with description', () => {
+      const code = "export { useInternalNode as default } from '@xyflow/react'"
+      const result = generateDocumentation({ code, flattened: true })
+      expect(result).toMatchInlineSnapshot(`
+        {
+          "description": "This hook returns the internal representation of a specific node.
+        Components that use this hook will re-render **whenever the node changes**,
+        including when a node is selected or moved.",
+          "name": "useInternalNode",
+          "params": [
+            {
+              "description": "The ID of a node you want to observe.",
+              "name": "id",
+              "tags": {
+                "param": "id - The ID of a node you want to observe.",
+              },
+              "type": "string",
+            },
+          ],
+          "returns": [
+            {
+              "description": "The \`InternalNode\` object for the node with the given ID.",
+              "type": "InternalNode<NodeType> | undefined",
+            },
+          ],
+          "tags": {
+            "example": "\`\`\`tsx
+        import { useInternalNode } from '@xyflow/react';
+
+        export default function () {
+         const internalNode = useInternalNode('node-1');
+         const absolutePosition = internalNode.internals.positionAbsolute;
+
+         return (
+           <div>
+             The absolute position of the node is at:
+             <p>x: {absolutePosition.x}</p>
+             <p>y: {absolutePosition.y}</p>
+           </div>
+         );
+        }
+        \`\`\`",
+            "param": "id - The ID of a node you want to observe.",
+            "public": "",
+            "returns": "The \`InternalNode\` object for the node with the given ID.",
+          },
+        }
+      `)
+    })
+
+    it.skipIf(skipTest)("should not throw when symbol isn't found", () => {
+      const code = "export { isEdge as default } from '@xyflow/react'"
+      const result = generateDocumentation({ code, flattened: true })
+      expect(result).toMatchInlineSnapshot(`
+        {
+          "description": "Test whether an object is usable as an [\`Edge\`](/api-reference/types/edge).
+        In TypeScript this is a type guard that will narrow the type of whatever you pass in to
+        [\`Edge\`](/api-reference/types/edge) if it returns \`true\`.",
+          "name": "__type",
+          "signatures": [
+            {
+              "params": [
+                {
+                  "description": "The element to test",
+                  "name": "element",
+                  "tags": {
+                    "param": "element - The element to test",
+                  },
+                  "type": "unknown",
+                },
+              ],
+              "returns": [
+                {
+                  "description": "Tests whether the provided value can be used as an \`Edge\`. If you're using TypeScript,
+        this function acts as a type guard and will narrow the type of the value to \`Edge\` if it returns
+        \`true\`.",
+                  "type": "boolean",
+                },
+              ],
+            },
+          ],
+          "tags": {
+            "example": "\`\`\`js
+        import { isEdge } from '@xyflow/react';
+
+        if (isEdge(edge)) {
+        // ...
+        }
+        \`\`\`",
+            "param": "element - The element to test",
+            "public": "",
+            "remarks": "In TypeScript this is a type guard that will narrow the type of whatever you pass in to Edge if it returns true",
+            "returns": "Tests whether the provided value can be used as an \`Edge\`. If you're using TypeScript,
+        this function acts as a type guard and will narrow the type of the value to \`Edge\` if it returns
+        \`true\`.",
+          },
+        }
+      `)
+    })
+
+    it.skipIf(skipTest)('should parse multiple function signatures', () => {
+      const code = "export { useNodesData as default } from '@xyflow/react'"
+      const result = generateDocumentation({ code, flattened: true })
+      expect(result).toMatchInlineSnapshot(`
+        {
+          "description": "This hook lets you subscribe to changes of a specific nodes \`data\` object.",
+          "name": "useNodesData",
+          "signatures": [
+            {
+              "params": [
+                {
+                  "description": "The id of the node to get the data from.",
+                  "name": "nodeId",
+                  "type": "string",
+                },
+              ],
+              "returns": [
+                {
+                  "description": "An object (or array of object) with \`id\`, \`type\`, \`data\` representing each node.",
+                  "type": "Pick<NodeType, "id" | "type" | "data"> | null",
+                },
+              ],
+            },
+            {
+              "params": [
+                {
+                  "description": "The ids of the nodes to get the data from.",
+                  "name": "nodeIds",
+                  "type": "string[]",
+                },
+              ],
+              "returns": [
+                {
+                  "description": "An object (or array of object) with \`id\`, \`type\`, \`data\` representing each node.",
+                  "type": "Pick<NodeType, "id" | "type" | "data">[]",
+                },
+              ],
+            },
+          ],
+          "tags": {
+            "example": "\`\`\`jsx
+        import { useNodesData } from '@xyflow/react';
+
+        export default function() {
+         const nodeData = useNodesData('nodeId-1');
+         const nodesData = useNodesData(['nodeId-1', 'nodeId-2']);
+
+         return null;
+        }
+        \`\`\`",
+            "public": "",
+            "returns": "An object (or array of object) with \`id\`, \`type\`, \`data\` representing each node.",
+          },
+        }
+      `)
+    })
+
+    it('should parse optional parameters', () => {
+      const code =
+        'function foo(a: string, b?: number, c = true) {}\nexport default foo'
+      const result = generateDocumentation({ code, flattened: true })
+      expect(result).toMatchInlineSnapshot(`
+        {
+          "description": "",
+          "name": "foo",
+          "signatures": [
+            {
+              "params": [
+                {
+                  "name": "a",
+                  "type": "string",
+                },
+                {
+                  "name": "b",
+                  "optional": true,
+                  "type": "number",
+                },
+                {
+                  "name": "c",
+                  "optional": true,
+                  "type": "boolean",
+                },
+              ],
+              "returns": [
+                {
+                  "type": "void",
+                },
+              ],
+            },
+          ],
+          "tags": {},
+        }
+      `)
+    })
+
+    it('should not flatten tuple type, set, map', () => {
+      const code = `
+type foo = (params: {
+  tuple?: [number, number],
+  set?: Set<string>,
+  map?: Map<string, number>,
+}) => void
+export default foo`
+      const result = generateDocumentation({ code, flattened: true })
+      expect(result).toMatchInlineSnapshot(`
+        {
+          "description": "",
+          "name": "__type",
+          "signatures": [
+            {
+              "params": [
+                {
+                  "name": "params.tuple",
+                  "optional": true,
+                  "type": "[number, number]",
+                },
+                {
+                  "name": "params.set",
+                  "optional": true,
+                  "type": "Set<string>",
+                },
+                {
+                  "name": "params.map",
+                  "optional": true,
+                  "type": "Map<string, number>",
+                },
+              ],
+              "returns": [
+                {
+                  "type": "void",
+                },
+              ],
+            },
+          ],
+          "tags": {},
+        }
+      `)
+    })
+  })
+
+  it.skipIf(skipTest)('should exclude {@link ...}', () => {
+    const code =
+      "export { getViewportForBounds as default } from '@xyflow/react'"
+    const result = generateDocumentation({ code, flattened: true })
+    expect(result).toMatchInlineSnapshot(`
+      {
+        "description": "Returns a viewport that encloses the given bounds with padding.",
+        "name": "__type",
+        "params": [
+          {
+            "description": "Bounds to fit inside viewport.",
+            "name": "bounds",
+            "tags": {
+              "param": "bounds - Bounds to fit inside viewport.",
+            },
+            "type": "Rect",
+          },
+          {
+            "description": "Width of the viewport.",
+            "name": "width",
+            "tags": {
+              "param": "width - Width of the viewport.",
+            },
+            "type": "number",
+          },
+          {
+            "description": "Height of the viewport.",
+            "name": "height",
+            "tags": {
+              "param": "height - Height of the viewport.",
+            },
+            "type": "number",
+          },
+          {
+            "description": "Minimum zoom level of the resulting viewport.",
+            "name": "minZoom",
+            "tags": {
+              "param": "minZoom - Minimum zoom level of the resulting viewport.",
+            },
+            "type": "number",
+          },
+          {
+            "description": "Maximum zoom level of the resulting viewport.",
+            "name": "maxZoom",
+            "tags": {
+              "param": "maxZoom - Maximum zoom level of the resulting viewport.",
+            },
+            "type": "number",
+          },
+          {
+            "description": "Padding around the bounds.",
+            "name": "padding",
+            "tags": {
+              "param": "padding - Padding around the bounds.",
+            },
+            "type": "Padding",
+          },
+        ],
+        "returns": [
+          {
+            "description": "A transformed Viewport that encloses the given bounds which you can pass to e.g. setViewport .",
+            "type": "Viewport",
+          },
+        ],
+        "tags": {
+          "example": "const { x, y, zoom } = getViewportForBounds(
+      { x: 0, y: 0, width: 100, height: 100},
+      1200, 800, 0.5, 2);",
+          "param": "padding - Padding around the bounds.",
+          "public": "",
+          "remarks": "You can determine bounds of nodes with {@link getNodesBounds } and {@link getBoundsOfRects}",
+          "returns": "A transformed {@link Viewport} that encloses the given bounds which you can pass to e.g. {@link setViewport }.",
+        },
+      }
+    `)
+  })
+
+  it.skipIf(skipTest)('should flatten array return type', () => {
+    const code = 'export { useEdgesState as default } from "@xyflow/react"'
+    const result = generateDocumentation({ code, flattened: true })
+    expect(result).toMatchInlineSnapshot(`
+      {
+        "description": "This hook makes it easy to prototype a controlled flow where you manage the
+      state of nodes and edges outside the \`ReactFlowInstance\`. You can think of it
+      like React's \`useState\` hook with an additional helper callback.",
+        "name": "useEdgesState",
+        "params": [
+          {
+            "name": "initialEdges",
+            "tags": {
+              "param": "initialEdges",
+            },
+            "type": "EdgeType[]",
+          },
+        ],
+        "returns": [
+          {
+            "description": "- \`edges\`: The current array of edges. You might pass this directly to the edges prop of your
+      \`<ReactFlow />\` component, or you may want to manipulate it first to perform some layouting,
+      for example.
+
+      - \`setEdges\`: A function that you can use to update the edges. You can pass it a new array of
+      edges or a callback that receives the current array of edges and returns a new array of edges.
+      This is the same as the second element of the tuple returned by React's useState hook.
+
+      - \`onEdgesChange\`: A handy callback that can take an array of \`EdgeChanges\` and update the edges
+      state accordingly. You'll typically pass this directly to the onEdgesChange prop of your
+      \`<ReactFlow />\` component.",
+            "type": "[edges: EdgeType[], setEdges: Dispatch<SetStateAction<EdgeType[]>>, onEdgesChange: OnEdgesChange<EdgeType>]",
+          },
+        ],
+        "tags": {
+          "example": "\`\`\`tsx
+      import { ReactFlow, useNodesState, useEdgesState } from '@xyflow/react';
+
+      const initialNodes = [];
+      const initialEdges = [];
+
+      export default function () {
+       const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
+       const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
+
+       return (
+         <ReactFlow
+           nodes={nodes}
+           edges={edges}
+           onNodesChange={onNodesChange}
+           onEdgesChange={onEdgesChange}
+         />
+       );
+      }
+      \`\`\`",
+          "param": "initialEdges",
+          "public": "",
+          "remarks": "This hook was created to make prototyping easier and our documentation
+      examples clearer. Although it is OK to use this hook in production, in
+      practice you may want to use a more sophisticated state management solution
+      like Zustand {@link https://reactflow.dev/docs/guides/state-management/} instead.",
+          "returns": "- \`edges\`: The current array of edges. You might pass this directly to the edges prop of your
+      \`<ReactFlow />\` component, or you may want to manipulate it first to perform some layouting,
+      for example.
+
+      - \`setEdges\`: A function that you can use to update the edges. You can pass it a new array of
+      edges or a callback that receives the current array of edges and returns a new array of edges.
+      This is the same as the second element of the tuple returned by React's useState hook.
+
+      - \`onEdgesChange\`: A handy callback that can take an array of \`EdgeChanges\` and update the edges
+      state accordingly. You'll typically pass this directly to the onEdgesChange prop of your
+      \`<ReactFlow />\` component.",
+        },
+      }
+    `)
+  })
+
+  it('should parse `unknown` type', () => {
+    const code = 'function foo(a?: unknown) {}\nexport default foo'
+    const result = generateDocumentation({ code, flattened: true })
+    expect(result).toMatchInlineSnapshot(`
+      {
+        "description": "",
+        "name": "foo",
+        "signatures": [
+          {
+            "params": [
+              {
+                "name": "a",
+                "optional": true,
+                "type": "unknown",
+              },
+            ],
+            "returns": [
+              {
+                "type": "void",
+              },
+            ],
+          },
+        ],
+        "tags": {},
+      }
+    `)
+  })
+
+  it('should exclude JSDoc @link in description', () => {
+    const code = `type $ = {
+  /**
+   * By default, we render a small attribution in the corner of your flows that links back to the project.
+   *
+   * Anyone is free to remove this attribution whether they're a Pro subscriber or not
+   * but we ask that you take a quick look at our {@link https://reactflow.dev/learn/troubleshooting/remove-attribution | removing attribution guide}
+   * before doing so.
+   */
+  proOptions?: unknown;
+}
+
+export default $`
+    const result = generateDocumentation({ code })
+    expect(result).toMatchInlineSnapshot(`
+      {
+        "description": "",
+        "entries": [
+          {
+            "description": "By default, we render a small attribution in the corner of your flows that links back to the project.
+
+      Anyone is free to remove this attribution whether they're a Pro subscriber or not
+      but we ask that you take a quick look at our https://reactflow.dev/learn/troubleshooting/remove-attribution removing attribution guide
+      before doing so.",
+            "name": "proOptions",
+            "optional": true,
+            "type": "unknown",
+          },
+        ],
+        "name": "default",
+      }
+    `)
+  })
+
   it.skip('should work with anonymous type', async () => {
     const code = `
 type $ = {

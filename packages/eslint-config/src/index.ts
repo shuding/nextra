@@ -7,7 +7,6 @@ import eslintPluginNext from '@next/eslint-plugin-next'
 import eslintConfigPrettier from 'eslint-config-prettier'
 import eslintPluginImport from 'eslint-plugin-import-x'
 import eslintPluginReact from 'eslint-plugin-react'
-// @ts-expect-error -- no types
 import * as eslintPluginReactCompiler from 'eslint-plugin-react-compiler'
 import eslintPluginReactHooks from 'eslint-plugin-react-hooks'
 import eslintPluginSonarJs from 'eslint-plugin-sonarjs'
@@ -108,6 +107,7 @@ const config: Config = tseslint.config(
       'sonarjs/no-array-index-key': 'off', // todo
       'sonarjs/no-unstable-nested-components': 'off', // todo
 
+      'sonarjs/no-duplicate-in-composite': 'off', // covered by @typescript-eslint/no-duplicate-type-constituents
       'sonarjs/no-unused-vars': 'off',
       'sonarjs/prefer-regexp-exec': 'off',
       'sonarjs/fixme-tag': 'off',
@@ -173,6 +173,8 @@ const config: Config = tseslint.config(
       }
     },
     rules: {
+      '@typescript-eslint/no-duplicate-type-constituents': 'error',
+      '@typescript-eslint/no-redundant-type-constituents': 'error',
       '@typescript-eslint/no-deprecated': 'error',
       '@typescript-eslint/await-thenable': 'error',
       '@typescript-eslint/no-unnecessary-type-assertion': 'error',

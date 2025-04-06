@@ -6,6 +6,7 @@
   "author": "Dimitri POSTOLOV",
   "license": "ISC",
   "private": true,
+  "types": "./dist/index.d.ts",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
@@ -13,14 +14,13 @@
     },
     "./package.json": "./package.json"
   },
-  "types": "./dist/index.d.ts",
   "scripts": {
     "build": "tsup",
     "dev": "tsup --watch",
     "types:check": "tsc --noEmit"
   },
   "dependencies": {
-    "babel-plugin-react-compiler": "0.0.0-experimental-22c6e49-20241219",
+    "babel-plugin-react-compiler": "0.0.0-experimental-e993439-20250328",
     "react-compiler-webpack": "0.2.0"
   },
   "devDependencies": {

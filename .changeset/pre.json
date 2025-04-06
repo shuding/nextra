@@ -10,5 +10,12 @@
     "@nextra/prettier-config": "0.0.0",
     "@nextra/tsdoc": "0.0.0"
   },
-  "changesets": ["rich-symbols-wash"]
+  "changesets": [
+    "adapt-original-gh-alerts",
+    "lazy-pugs-tie",
+    "lovely-webs-wash",
+    "lucky-apes-teach",
+    "puny-peas-shout",
+    "rich-symbols-wash"
+  ]
 }

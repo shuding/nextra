@@ -1,5 +1,45 @@
 # nextra
 
+## 4.3.0-alpha.5
+
+### Minor Changes
+
+- eed8328: feat: adapt colors and icons from original GitHub alerts syntax
+
+  feat: new Callout type `important`
+
+  fix: inconsistent built-in Callout's icons size
+
+  feat: improve Callout's accessibility colors
+
+## 4.3.0-alpha.4
+
+### Patch Changes
+
+- 4547eb9: feat(TSDoc): add support for functions and functions with multiple
+  signatures
+
+## 4.3.0-alpha.3
+
+### Patch Changes
+
+- f717156: feat(TSDoc): enable `exactOptionalPropertyTypes` and
+  `strictNullChecks` in ts-morph `compilerOptions`
+
+## 4.3.0-alpha.2
+
+### Patch Changes
+
+- 8ac2506: chore: bump `babel-plugin-react-compiler` and
+  `react-compiler-runtime`, remove custom pnpm patch for
+  `babel-plugin-react-compiler`
+
+## 4.3.0-alpha.1
+
+### Patch Changes
+
+- 9f449e5: fix(TSDoc): should show `null` type in properties table
+
 ## 4.3.0-alpha.0
 
 ### Minor Changes

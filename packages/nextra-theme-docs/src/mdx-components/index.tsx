@@ -34,21 +34,20 @@ const Blockquote: FC<ComponentProps<'blockquote'>> = props => (
   />
 )
 
+const CALLOUT_TYPE = Object.freeze({
+  caution: 'error',
+  important: 'important',
+  note: 'info',
+  tip: 'default',
+  warning: 'warning'
+})
+
 const DEFAULT_COMPONENTS = getNextraMDXComponents({
   a: Link,
-  blockquote: withGitHubAlert(({ type, ...props }) => {
-    const calloutType = (
-      {
-        caution: 'error',
-        important: 'error', // TODO
-        note: 'info',
-        tip: 'default',
-        warning: 'warning'
-      } as const
-    )[type]
-
-    return <Callout type={calloutType} {...props} />
-  }, Blockquote),
+  blockquote: withGitHubAlert(
+    ({ type, ...props }) => <Callout type={CALLOUT_TYPE[type]} {...props} />,
+    Blockquote
+  ),
   code: Code,
   details: Details,
   h1: H1,

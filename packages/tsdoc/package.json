@@ -8,13 +8,13 @@
   "author": "Dimitri POSTOLOV",
   "license": "MIT",
   "private": true,
+  "types": "./dist/index.d.ts",
   "exports": {
     ".": {
       "import": "./dist/index.js",
       "types": "./dist/index.d.ts"
     }
   },
-  "types": "./dist/index.d.ts",
   "files": [
     "dist"
   ],
@@ -42,7 +42,8 @@
   },
   "devDependencies": {
     "@tsconfig/strictest": "^2.0.5",
-    "@types/react": "19.0.11",
+    "@types/react": "19.1.0",
+    "@xyflow/react": "12.5.4",
     "nextra": "workspace:*",
     "nextra-theme-docs": "workspace:*",
     "tsup": "^8.4.0",
