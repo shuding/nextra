@@ -9,6 +9,7 @@ import type {
   BaseTypeTableProps,
   GeneratedFunction,
   GeneratedType,
+  ReturnField,
   Tags,
   TypeField
 } from './types.js'
@@ -78,23 +79,32 @@ export function generateDocumentation({
         const returnType = signature.getReturnType()
         const returnsDescription =
           tags.returns && replaceJsDocLinks(tags.returns)
+
+        const flattenedReturnType: ReturnField[] =
+          flattened && isObjectType(returnType)
+            ? returnType.getProperties().flatMap(childProp =>
+                getDocEntry({
+                  symbol: childProp,
+                  declaration,
+                  flattened
+                })
+              )
+            : []
+
+        if (flattenedReturnType.length) {
+          if (returnsDescription) {
+            flattenedReturnType.unshift({ description: returnsDescription })
+          }
+        } else {
+          flattenedReturnType.push({
+            ...(returnsDescription && { description: returnsDescription }),
+            type: getFormattedText(returnType)
+          })
+        }
+
         return {
           params: typeParams,
-          returns: [
-            {
-              ...(returnsDescription && { description: returnsDescription }),
-              type: getFormattedText(returnType)
-            },
-            ...(flattened && isObjectType(returnType)
-              ? returnType.getProperties().flatMap(childProp =>
-                  getDocEntry({
-                    symbol: childProp,
-                    declaration,
-                    flattened
-                  })
-                )
-              : [])
-          ]
+          returns: flattenedReturnType
         }
       })
     }
@@ -151,7 +161,6 @@ function getDocEntry({
   const subType = isFunctionParameter
     ? originalSubType.getNonNullableType()
     : originalSubType
-
   const typeOf = getDeclaration(symbol).getType()
   if (flattened && isObjectType(subType, typeOf)) {
     return subType.getProperties().flatMap(childProp => {
@@ -202,10 +211,13 @@ function getDocEntry({
   }
 }
 
-function isObjectType(
-  t: Type,
-  typeOf: Type = getDeclaration(t.getSymbolOrThrow()).getType()
-): boolean {
+function isObjectType(t: Type, typeOf?: Type): boolean {
+  if (typeOf === undefined) {
+    const symbol = t.getSymbol()
+    if (symbol) {
+      typeOf = getDeclaration(symbol).getType()
+    }
+  }
   return (
     t.isObject() &&
     !t.isArray() &&
@@ -214,7 +226,7 @@ function isObjectType(
     !isMapType(t) &&
     // Is not function
     !t.getCallSignatures().length &&
-    !typeOf.isUnknown()
+    !typeOf?.isUnknown()
   )
 }
 

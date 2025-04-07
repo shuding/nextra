@@ -715,9 +715,6 @@ export default Connection`
               "params": [],
               "returns": [
                 {
-                  "type": "{ normalizePagesResult: { activeType?: string; activeIndex: number; activeThemeContext: { pagination?: boolean | undefined; breadcrumb?: boolean | undefined; collapsed?: boolean | undefined; ... 6 more ...; typesetting?: "default" | ... 1 more ... | undefined; }; ... 5 more ...; topLevelNavbarItems: (PageItem | Menu...",
-                },
-                {
                   "name": "normalizePagesResult.activeType",
                   "optional": true,
                   "type": "string",
