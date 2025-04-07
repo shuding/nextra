@@ -703,7 +703,7 @@ export default Connection`
   })
 
   describe('functions', () => {
-    it.only('should flatten return type', () => {
+    it('should flatten return type', () => {
       const code = 'export { useConfig as default } from "nextra-theme-docs"'
       const result = generateDocumentation({ code, flattened: true })
       expect(result).toMatchInlineSnapshot(`
@@ -1055,7 +1055,6 @@ export default $
       const result = generateDocumentation({ code, flattened: true })
       expect(result).toMatchInlineSnapshot(`
         {
-          "description": "",
           "name": "foo",
           "signatures": [
             {
@@ -1082,7 +1081,6 @@ export default $
               ],
             },
           ],
-          "tags": {},
         }
       `)
     })
@@ -1098,7 +1096,6 @@ export default foo`
       const result = generateDocumentation({ code, flattened: true })
       expect(result).toMatchInlineSnapshot(`
         {
-          "description": "",
           "name": "__type",
           "signatures": [
             {
@@ -1126,7 +1123,6 @@ export default foo`
               ],
             },
           ],
-          "tags": {},
         }
       `)
     })
@@ -1291,7 +1287,6 @@ export default foo`
     const result = generateDocumentation({ code, flattened: true })
     expect(result).toMatchInlineSnapshot(`
       {
-        "description": "",
         "name": "foo",
         "signatures": [
           {
@@ -1309,7 +1304,6 @@ export default foo`
             ],
           },
         ],
-        "tags": {},
       }
     `)
   })
