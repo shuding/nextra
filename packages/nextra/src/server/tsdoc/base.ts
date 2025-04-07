@@ -84,7 +84,16 @@ export function generateDocumentation({
             {
               ...(returnsDescription && { description: returnsDescription }),
               type: getFormattedText(returnType)
-            }
+            },
+            ...(flattened && isObjectType(returnType)
+              ? returnType.getProperties().flatMap(childProp =>
+                  getDocEntry({
+                    symbol: childProp,
+                    declaration,
+                    flattened
+                  })
+                )
+              : [])
           ]
         }
       })
@@ -144,18 +153,7 @@ function getDocEntry({
     : originalSubType
 
   const typeOf = getDeclaration(symbol).getType()
-
-  if (
-    flattened &&
-    subType.isObject() &&
-    !subType.isArray() &&
-    !subType.isTuple() &&
-    !isSetType(subType) &&
-    !isMapType(subType) &&
-    // Is not function
-    !subType.getCallSignatures().length &&
-    !typeOf.isUnknown()
-  ) {
+  if (flattened && isObjectType(subType, typeOf)) {
     return subType.getProperties().flatMap(childProp => {
       const prefix = isFunctionParameter
         ? symbol.getName().replace(/^_+/, '')
@@ -202,6 +200,22 @@ function getDocEntry({
     ...(Object.keys(tags).length && { tags }),
     ...(isOptional && { optional: isOptional })
   }
+}
+
+function isObjectType(
+  t: Type,
+  typeOf: Type = getDeclaration(t.getSymbolOrThrow()).getType()
+): boolean {
+  return (
+    t.isObject() &&
+    !t.isArray() &&
+    !t.isTuple() &&
+    !isSetType(t) &&
+    !isMapType(t) &&
+    // Is not function
+    !t.getCallSignatures().length &&
+    !typeOf.isUnknown()
+  )
 }
 
 function isSetType(type: Type): boolean {
