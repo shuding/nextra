@@ -703,7 +703,119 @@ export default Connection`
   })
 
   describe('functions', () => {
-    it('should flatten return type', () => {
+    it.only('should flatten return type for useThemeConfig', () => {
+      const code = 'export { useThemeConfig as default } from "nextra-theme-docs"'
+      const result = generateDocumentation({ code, flattened: true })
+      expect(result).toMatchInlineSnapshot(`
+        {
+          "name": "__type",
+          "signatures": [
+            {
+              "params": [],
+              "returns": [
+                {
+                  "name": "search",
+                  "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | ReactPortal | Iterable<ReactNode> | Promise<...> | null",
+                },
+                {
+                  "name": "darkMode",
+                  "type": "boolean",
+                },
+                {
+                  "name": "docsRepositoryBase",
+                  "type": "string",
+                },
+                {
+                  "name": "editLink",
+                  "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | ReactPortal | Iterable<ReactNode> | Promise<...> | null",
+                },
+                {
+                  "name": "feedback.content",
+                  "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | ReactPortal | Iterable<ReactNode> | Promise<...> | null",
+                },
+                {
+                  "name": "feedback.labels",
+                  "type": "string",
+                },
+                {
+                  "name": "i18n",
+                  "type": "{ name: string; locale: string; }[]",
+                },
+                {
+                  "name": "lastUpdated.type",
+                  "type": "string | JSXElementConstructor<any>",
+                },
+                {
+                  "name": "lastUpdated.key",
+                  "type": "string | null",
+                },
+                {
+                  "name": "navigation.next",
+                  "type": "boolean",
+                },
+                {
+                  "name": "navigation.prev",
+                  "type": "boolean",
+                },
+                {
+                  "name": "sidebar.defaultMenuCollapseLevel",
+                  "type": "number",
+                },
+                {
+                  "name": "sidebar.defaultOpen",
+                  "type": "boolean",
+                },
+                {
+                  "name": "sidebar.toggleButton",
+                  "type": "boolean",
+                },
+                {
+                  "name": "sidebar.autoCollapse",
+                  "optional": true,
+                  "type": "boolean | undefined",
+                },
+                {
+                  "name": "themeSwitch.dark",
+                  "type": "string",
+                },
+                {
+                  "name": "themeSwitch.light",
+                  "type": "string",
+                },
+                {
+                  "name": "themeSwitch.system",
+                  "type": "string",
+                },
+                {
+                  "name": "toc.float",
+                  "type": "boolean",
+                },
+                {
+                  "name": "toc.backToTop",
+                  "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | ReactPortal | Iterable<ReactNode> | Promise<...> | null",
+                },
+                {
+                  "name": "toc.title",
+                  "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | ReactPortal | Iterable<ReactNode> | Promise<...> | null",
+                },
+                {
+                  "name": "toc.extraContent",
+                  "optional": true,
+                  "type": "ReactNode",
+                },
+                {
+                  "name": "children",
+                  "optional": true,
+                  "type": "ReactNode",
+                },
+              ],
+            },
+          ],
+        }
+      `)
+    })
+
+    it('should flatten return type for useConfig', () => {
       const code = 'export { useConfig as default } from "nextra-theme-docs"'
       const result = generateDocumentation({ code, flattened: true })
       expect(result).toMatchInlineSnapshot(`
