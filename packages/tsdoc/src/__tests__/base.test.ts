@@ -793,7 +793,8 @@ export default Connection`
                   "type": "(PageItem | MenuItem)[]",
                 },
                 {
-                  "description": "Whether sidebar is shown, if \`false\`, theme/locale switchers shown in \`<Footer>\`",
+                  "description": "Whether the sidebar is shown. If \`false\`, the theme and locale switchers are displayed in the
+        \`<Footer>\`.",
                   "name": "hideSidebar",
                   "type": "boolean",
                 },
