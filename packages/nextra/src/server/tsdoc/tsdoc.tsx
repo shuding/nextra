@@ -3,7 +3,6 @@ import Slugger from 'github-slugger'
 import type { FC, ReactNode } from 'react'
 import { Callout } from '../../client/components/callout.js'
 import { Tabs } from '../../client/components/tabs/index.js'
-import { InformationCircleIcon } from '../../client/icons/index.js'
 import { Anchor } from '../../client/mdx-components/anchor.js'
 import { Code } from '../../client/mdx-components/code.js'
 import { MDXRemote } from '../../client/mdx-remote.js'
@@ -125,10 +124,7 @@ export const TSDoc: FC<TSDocProps> = async ({
         {entries.length ? (
           <FieldsTable fields={entries} typeLinkMap={typeLinkMap} />
         ) : (
-          <Callout
-            type={null}
-            emoji={<InformationCircleIcon height="16" className="x:mt-1.5" />}
-          >
+          <Callout type="info">
             This function does not accept any parameters.
           </Callout>
         )}

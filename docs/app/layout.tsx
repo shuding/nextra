@@ -1,10 +1,12 @@
 import { NextraLogo, VercelLogo } from '@components/icons'
 import cn from 'clsx'
 import type { Metadata } from 'next'
+import NextImage from 'next/image'
 import { Footer, Layout, Link, Navbar } from 'nextra-theme-docs'
-import { Banner, Head } from 'nextra/components'
+import { Anchor, Banner, Head } from 'nextra/components'
 import { getPageMap } from 'nextra/page-map'
 import type { FC, ReactNode } from 'react'
+import xyflow from './showcase/_logos/xyflow.jpg'
 import './globals.css'
 
 export const metadata: Metadata = {
@@ -105,6 +107,20 @@ const RootLayout: FC<{
           editLink="Edit this page on GitHub"
           sidebar={{ defaultMenuCollapseLevel: 1 }}
           footer={footer}
+          toc={{
+            extraContent: (
+              <>
+                <b className="mt-2 text-xs">Sponsored by:</b>
+                <Anchor href="https://xyflow.com?utm_source=nextra.site&utm_campaign=nextra&utm_content=sidebarLink">
+                  <NextImage
+                    src={xyflow}
+                    alt="Wire your ideas with xyflow!"
+                    className="nextra-border rounded-sm border"
+                  />
+                </Anchor>
+              </>
+            )
+          }}
         >
           {children}
         </Layout>
