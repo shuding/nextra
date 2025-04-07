@@ -64,8 +64,8 @@ export function generateDocumentation({
     const tags = getTags(declarationType.getSymbolOrThrow())
     return {
       name: declarationType.getSymbolOrThrow().getName(),
-      description,
-      tags,
+      ...(description && { description }),
+      ...(Object.keys(tags).length && { tags }),
       signatures: callSignatures.map(signature => {
         const params = signature.getParameters()
         const typeParams = params.flatMap(param =>

@@ -87,7 +87,8 @@ function findFirstRoute(items: DocsItem[]): string | undefined {
 }
 
 type NormalizedResult = {
-  activeType?: string
+  /** Active type for current page, used to determine layout in theme. */
+  activeType?: 'doc' | 'page'
   /**
    * Active index for current page, used for pagination in combination with `flatDocsDirectories`
    * items.

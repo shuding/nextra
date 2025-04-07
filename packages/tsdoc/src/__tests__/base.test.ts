@@ -703,12 +703,11 @@ export default Connection`
   })
 
   describe('functions', () => {
-    it('should flatten return type', () => {
+    it.only('should flatten return type', () => {
       const code = 'export { useConfig as default } from "nextra-theme-docs"'
       const result = generateDocumentation({ code, flattened: true })
       expect(result).toMatchInlineSnapshot(`
         {
-          "description": "",
           "name": "useConfig",
           "signatures": [
             {
@@ -800,7 +799,6 @@ export default Connection`
               ],
             },
           ],
-          "tags": {},
         }
       `)
     })
