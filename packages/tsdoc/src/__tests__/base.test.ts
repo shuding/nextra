@@ -703,6 +703,28 @@ export default Connection`
   })
 
   describe('functions', () => {
+    it.only('should flatten return type', () => {
+      const code = 'export { useConfig as default } from "nextra-theme-docs"'
+      const result = generateDocumentation({ code, flattened: true })
+      expect(result).toMatchInlineSnapshot(`
+        {
+          "description": "",
+          "name": "useConfig",
+          "signatures": [
+            {
+              "params": [],
+              "returns": [
+                {
+                  "type": "{ normalizePagesResult: { activeType?: string; activeIndex: number; activeThemeContext: { pagination?: boolean | undefined; breadcrumb?: boolean | undefined; collapsed?: boolean | undefined; ... 6 more ...; typesetting?: "default" | ... 1 more ... | undefined; }; ... 5 more ...; topLevelNavbarItems: (PageItem | Menu...",
+                },
+              ],
+            },
+          ],
+          "tags": {},
+        }
+      `)
+    })
+
     it('should be parsed in object field', () => {
       const code = `type $ = {
   useNodeConnections: typeof import('@xyflow/react').useNodeConnections
