@@ -703,7 +703,7 @@ export default Connection`
   })
 
   describe('functions', () => {
-    it.only('should flatten return type', () => {
+    it('should flatten return type', () => {
       const code = 'export { useConfig as default } from "nextra-theme-docs"'
       const result = generateDocumentation({ code, flattened: true })
       expect(result).toMatchInlineSnapshot(`
@@ -716,6 +716,89 @@ export default Connection`
               "returns": [
                 {
                   "type": "{ normalizePagesResult: { activeType?: string; activeIndex: number; activeThemeContext: { pagination?: boolean | undefined; breadcrumb?: boolean | undefined; collapsed?: boolean | undefined; ... 6 more ...; typesetting?: "default" | ... 1 more ... | undefined; }; ... 5 more ...; topLevelNavbarItems: (PageItem | Menu...",
+                },
+                {
+                  "name": "normalizePagesResult.activeType",
+                  "optional": true,
+                  "type": "string",
+                },
+                {
+                  "name": "normalizePagesResult.activeIndex",
+                  "type": "number",
+                },
+                {
+                  "name": "activeThemeContext.pagination",
+                  "optional": true,
+                  "type": "boolean | undefined",
+                },
+                {
+                  "name": "activeThemeContext.breadcrumb",
+                  "optional": true,
+                  "type": "boolean | undefined",
+                },
+                {
+                  "name": "activeThemeContext.collapsed",
+                  "optional": true,
+                  "type": "boolean | undefined",
+                },
+                {
+                  "name": "activeThemeContext.footer",
+                  "optional": true,
+                  "type": "boolean | undefined",
+                },
+                {
+                  "name": "activeThemeContext.layout",
+                  "optional": true,
+                  "type": ""default" | "full" | undefined",
+                },
+                {
+                  "name": "activeThemeContext.navbar",
+                  "optional": true,
+                  "type": "boolean | undefined",
+                },
+                {
+                  "name": "activeThemeContext.sidebar",
+                  "optional": true,
+                  "type": "boolean | undefined",
+                },
+                {
+                  "name": "activeThemeContext.timestamp",
+                  "optional": true,
+                  "type": "boolean | undefined",
+                },
+                {
+                  "name": "activeThemeContext.toc",
+                  "optional": true,
+                  "type": "boolean | undefined",
+                },
+                {
+                  "name": "activeThemeContext.typesetting",
+                  "optional": true,
+                  "type": ""default" | "article" | undefined",
+                },
+                {
+                  "name": "normalizePagesResult.activePath",
+                  "type": "Item[]",
+                },
+                {
+                  "name": "normalizePagesResult.directories",
+                  "type": "Item[]",
+                },
+                {
+                  "name": "normalizePagesResult.docsDirectories",
+                  "type": "((MdxFile | { name: string; route: string; }) & { title: string; type: string; children: any[]; firstChildRoute?: string; isUnderCurrentDocsTree?: boolean; })[]",
+                },
+                {
+                  "name": "normalizePagesResult.flatDocsDirectories",
+                  "type": "((MdxFile | { name: string; route: string; }) & { title: string; type: string; children: any[]; firstChildRoute?: string; isUnderCurrentDocsTree?: boolean; })[]",
+                },
+                {
+                  "name": "normalizePagesResult.topLevelNavbarItems",
+                  "type": "(PageItem | MenuItem)[]",
+                },
+                {
+                  "name": "hideSidebar",
+                  "type": "boolean",
                 },
               ],
             },
