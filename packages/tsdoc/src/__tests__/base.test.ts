@@ -716,7 +716,7 @@ export default Connection`
                 {
                   "name": "normalizePagesResult.activeType",
                   "optional": true,
-                  "type": "string",
+                  "type": ""doc" | "page" | "menu"",
                 },
                 {
                   "name": "normalizePagesResult.activeIndex",
@@ -793,6 +793,7 @@ export default Connection`
                   "type": "(PageItem | MenuItem)[]",
                 },
                 {
+                  "description": "Whether sidebar is shown, if \`false\`, theme/locale switchers shown in \`<Footer>\`",
                   "name": "hideSidebar",
                   "type": "boolean",
                 },

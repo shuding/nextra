@@ -88,7 +88,7 @@ function findFirstRoute(items: DocsItem[]): string | undefined {
 
 type NormalizedResult = {
   /** Active type for current page, used to determine layout in theme. */
-  activeType?: 'doc' | 'page'
+  activeType?: 'doc' | 'page' | 'menu'
   /**
    * Active index for current page, used for pagination in combination with `flatDocsDirectories`
    * items.
@@ -140,7 +140,7 @@ export function normalizePages({
 
   const fallbackMeta = meta['*'] || {}
 
-  let activeType: string = fallbackMeta.type
+  let activeType: NormalizedResult['activeType'] = fallbackMeta.type
   let activeIndex = 0
   let activeThemeContext = {
     ...pageThemeContext,
