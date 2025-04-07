@@ -703,8 +703,9 @@ export default Connection`
   })
 
   describe('functions', () => {
-    it.only('should flatten return type for useThemeConfig', () => {
-      const code = 'export { useThemeConfig as default } from "nextra-theme-docs"'
+    it('should flatten return type for useThemeConfig', () => {
+      const code =
+        'export { useThemeConfig as default } from "nextra-theme-docs"'
       const result = generateDocumentation({ code, flattened: true })
       expect(result).toMatchInlineSnapshot(`
         {
