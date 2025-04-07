@@ -1,11 +1,8 @@
-import xyflowReactPackageJson from '@xyflow/react/package.json'
 import { NavbarPropsSchema } from '../../../nextra-theme-docs/src/components/navbar/index.js'
 import { LayoutPropsSchema } from '../../../nextra-theme-docs/src/layout.js'
 import { HeadPropsSchema } from '../../../nextra/src/client/components/head.js'
 import { generateDocumentation } from '../../../nextra/src/server/tsdoc/base.js'
 import { generateTsFromZod } from '../../../nextra/src/server/tsdoc/zod-to-ts.js'
-
-const skipTest = xyflowReactPackageJson.version === '12.5.4'
 
 describe('<TSDoc />', () => {
   it('<Banner />', async () => {
@@ -723,7 +720,7 @@ export default $
         }
       `)
     })
-    it.skipIf(skipTest)('should be parsed as function type', () => {
+    it('should be parsed as function type', () => {
       const code =
         "export { useNodeConnections as default } from '@xyflow/react'"
       const result = generateDocumentation({ code, flattened: true })
@@ -731,42 +728,46 @@ export default $
         {
           "description": "This hook returns an array of connections on a specific node, handle type ('source', 'target') or handle ID.",
           "name": "useNodeConnections",
-          "params": [
+          "signatures": [
             {
-              "description": "ID of the node, filled in automatically if used inside custom node.",
-              "name": "[0]?.id",
-              "optional": true,
-              "type": "string",
-            },
-            {
-              "description": "What type of handle connections do you want to observe?",
-              "name": "[0]?.handleType",
-              "optional": true,
-              "type": "HandleType",
-            },
-            {
-              "description": "Filter by handle id (this is only needed if the node has multiple handles of the same type).",
-              "name": "[0]?.handleId",
-              "optional": true,
-              "type": "string",
-            },
-            {
-              "description": "Gets called when a connection is established.",
-              "name": "[0]?.onConnect",
-              "optional": true,
-              "type": "(connections: Connection[]) => void",
-            },
-            {
-              "description": "Gets called when a connection is removed.",
-              "name": "[0]?.onDisconnect",
-              "optional": true,
-              "type": "(connections: Connection[]) => void",
-            },
-          ],
-          "returns": [
-            {
-              "description": "An array with connections.",
-              "type": "NodeConnection[]",
+              "params": [
+                {
+                  "description": "ID of the node, filled in automatically if used inside custom node.",
+                  "name": "[0]?.id",
+                  "optional": true,
+                  "type": "string",
+                },
+                {
+                  "description": "What type of handle connections do you want to observe?",
+                  "name": "[0]?.handleType",
+                  "optional": true,
+                  "type": "HandleType",
+                },
+                {
+                  "description": "Filter by handle id (this is only needed if the node has multiple handles of the same type).",
+                  "name": "[0]?.handleId",
+                  "optional": true,
+                  "type": "string",
+                },
+                {
+                  "description": "Gets called when a connection is established.",
+                  "name": "[0]?.onConnect",
+                  "optional": true,
+                  "type": "(connections: Connection[]) => void",
+                },
+                {
+                  "description": "Gets called when a connection is removed.",
+                  "name": "[0]?.onDisconnect",
+                  "optional": true,
+                  "type": "(connections: Connection[]) => void",
+                },
+              ],
+              "returns": [
+                {
+                  "description": "An array with connections.",
+                  "type": "NodeConnection[]",
+                },
+              ],
             },
           ],
           "tags": {
@@ -790,7 +791,7 @@ export default $
         }
       `)
     })
-    it.skipIf(skipTest)('as function with description', () => {
+    it('as function with description', () => {
       const code = "export { useInternalNode as default } from '@xyflow/react'"
       const result = generateDocumentation({ code, flattened: true })
       expect(result).toMatchInlineSnapshot(`
@@ -799,20 +800,24 @@ export default $
         Components that use this hook will re-render **whenever the node changes**,
         including when a node is selected or moved.",
           "name": "useInternalNode",
-          "params": [
+          "signatures": [
             {
-              "description": "The ID of a node you want to observe.",
-              "name": "id",
-              "tags": {
-                "param": "id - The ID of a node you want to observe.",
-              },
-              "type": "string",
-            },
-          ],
-          "returns": [
-            {
-              "description": "The \`InternalNode\` object for the node with the given ID.",
-              "type": "InternalNode<NodeType> | undefined",
+              "params": [
+                {
+                  "description": "The ID of a node you want to observe.",
+                  "name": "id",
+                  "tags": {
+                    "param": "id - The ID of a node you want to observe.",
+                  },
+                  "type": "string",
+                },
+              ],
+              "returns": [
+                {
+                  "description": "The \`InternalNode\` object for the node with the given ID.",
+                  "type": "InternalNode<NodeType> | undefined",
+                },
+              ],
             },
           ],
           "tags": {
@@ -840,7 +845,7 @@ export default $
       `)
     })
 
-    it.skipIf(skipTest)("should not throw when symbol isn't found", () => {
+    it("should not throw when symbol isn't found", () => {
       const code = "export { isEdge as default } from '@xyflow/react'"
       const result = generateDocumentation({ code, flattened: true })
       expect(result).toMatchInlineSnapshot(`
@@ -890,7 +895,7 @@ export default $
       `)
     })
 
-    it.skipIf(skipTest)('should parse multiple function signatures', () => {
+    it('should parse multiple function signatures', () => {
       const code = "export { useNodesData as default } from '@xyflow/react'"
       const result = generateDocumentation({ code, flattened: true })
       expect(result).toMatchInlineSnapshot(`
@@ -1030,7 +1035,7 @@ export default foo`
     })
   })
 
-  it.skipIf(skipTest)('should exclude {@link ...}', () => {
+  it('should exclude {@link ...}', () => {
     const code =
       "export { getViewportForBounds as default } from '@xyflow/react'"
     const result = generateDocumentation({ code, flattened: true })
@@ -1038,60 +1043,64 @@ export default foo`
       {
         "description": "Returns a viewport that encloses the given bounds with padding.",
         "name": "__type",
-        "params": [
+        "signatures": [
           {
-            "description": "Bounds to fit inside viewport.",
-            "name": "bounds",
-            "tags": {
-              "param": "bounds - Bounds to fit inside viewport.",
-            },
-            "type": "Rect",
-          },
-          {
-            "description": "Width of the viewport.",
-            "name": "width",
-            "tags": {
-              "param": "width - Width of the viewport.",
-            },
-            "type": "number",
-          },
-          {
-            "description": "Height of the viewport.",
-            "name": "height",
-            "tags": {
-              "param": "height - Height of the viewport.",
-            },
-            "type": "number",
-          },
-          {
-            "description": "Minimum zoom level of the resulting viewport.",
-            "name": "minZoom",
-            "tags": {
-              "param": "minZoom - Minimum zoom level of the resulting viewport.",
-            },
-            "type": "number",
-          },
-          {
-            "description": "Maximum zoom level of the resulting viewport.",
-            "name": "maxZoom",
-            "tags": {
-              "param": "maxZoom - Maximum zoom level of the resulting viewport.",
-            },
-            "type": "number",
-          },
-          {
-            "description": "Padding around the bounds.",
-            "name": "padding",
-            "tags": {
-              "param": "padding - Padding around the bounds.",
-            },
-            "type": "Padding",
-          },
-        ],
-        "returns": [
-          {
-            "description": "A transformed Viewport that encloses the given bounds which you can pass to e.g. setViewport .",
-            "type": "Viewport",
+            "params": [
+              {
+                "description": "Bounds to fit inside viewport.",
+                "name": "bounds",
+                "tags": {
+                  "param": "bounds - Bounds to fit inside viewport.",
+                },
+                "type": "Rect",
+              },
+              {
+                "description": "Width of the viewport.",
+                "name": "width",
+                "tags": {
+                  "param": "width - Width of the viewport.",
+                },
+                "type": "number",
+              },
+              {
+                "description": "Height of the viewport.",
+                "name": "height",
+                "tags": {
+                  "param": "height - Height of the viewport.",
+                },
+                "type": "number",
+              },
+              {
+                "description": "Minimum zoom level of the resulting viewport.",
+                "name": "minZoom",
+                "tags": {
+                  "param": "minZoom - Minimum zoom level of the resulting viewport.",
+                },
+                "type": "number",
+              },
+              {
+                "description": "Maximum zoom level of the resulting viewport.",
+                "name": "maxZoom",
+                "tags": {
+                  "param": "maxZoom - Maximum zoom level of the resulting viewport.",
+                },
+                "type": "number",
+              },
+              {
+                "description": "Padding around the bounds.",
+                "name": "padding",
+                "tags": {
+                  "param": "padding - Padding around the bounds.",
+                },
+                "type": "Padding",
+              },
+            ],
+            "returns": [
+              {
+                "description": "A transformed Viewport that encloses the given bounds which you can pass to e.g. setViewport .",
+                "type": "Viewport",
+              },
+            ],
           },
         ],
         "tags": {
@@ -1107,7 +1116,7 @@ export default foo`
     `)
   })
 
-  it.skipIf(skipTest)('should flatten array return type', () => {
+  it('should flatten array return type', () => {
     const code = 'export { useEdgesState as default } from "@xyflow/react"'
     const result = generateDocumentation({ code, flattened: true })
     expect(result).toMatchInlineSnapshot(`
@@ -1116,29 +1125,30 @@ export default foo`
       state of nodes and edges outside the \`ReactFlowInstance\`. You can think of it
       like React's \`useState\` hook with an additional helper callback.",
         "name": "useEdgesState",
-        "params": [
+        "signatures": [
           {
-            "name": "initialEdges",
-            "tags": {
-              "param": "initialEdges",
-            },
-            "type": "EdgeType[]",
-          },
-        ],
-        "returns": [
-          {
-            "description": "- \`edges\`: The current array of edges. You might pass this directly to the edges prop of your
+            "params": [
+              {
+                "name": "initialEdges",
+                "type": "EdgeType[]",
+              },
+            ],
+            "returns": [
+              {
+                "description": "- \`edges\`: The current array of edges. You might pass this directly to the \`edges\` prop of your
       \`<ReactFlow />\` component, or you may want to manipulate it first to perform some layouting,
       for example.
 
       - \`setEdges\`: A function that you can use to update the edges. You can pass it a new array of
       edges or a callback that receives the current array of edges and returns a new array of edges.
-      This is the same as the second element of the tuple returned by React's useState hook.
+      This is the same as the second element of the tuple returned by React's \`useState\` hook.
 
       - \`onEdgesChange\`: A handy callback that can take an array of \`EdgeChanges\` and update the edges
-      state accordingly. You'll typically pass this directly to the onEdgesChange prop of your
+      state accordingly. You'll typically pass this directly to the \`onEdgesChange\` prop of your
       \`<ReactFlow />\` component.",
-            "type": "[edges: EdgeType[], setEdges: Dispatch<SetStateAction<EdgeType[]>>, onEdgesChange: OnEdgesChange<EdgeType>]",
+                "type": "[edges: EdgeType[], setEdges: Dispatch<SetStateAction<EdgeType[]>>, onEdgesChange: OnEdgesChange<EdgeType>]",
+              },
+            ],
           },
         ],
         "tags": {
@@ -1162,22 +1172,21 @@ export default foo`
        );
       }
       \`\`\`",
-          "param": "initialEdges",
           "public": "",
           "remarks": "This hook was created to make prototyping easier and our documentation
       examples clearer. Although it is OK to use this hook in production, in
       practice you may want to use a more sophisticated state management solution
       like Zustand {@link https://reactflow.dev/docs/guides/state-management/} instead.",
-          "returns": "- \`edges\`: The current array of edges. You might pass this directly to the edges prop of your
+          "returns": "- \`edges\`: The current array of edges. You might pass this directly to the \`edges\` prop of your
       \`<ReactFlow />\` component, or you may want to manipulate it first to perform some layouting,
       for example.
 
       - \`setEdges\`: A function that you can use to update the edges. You can pass it a new array of
       edges or a callback that receives the current array of edges and returns a new array of edges.
-      This is the same as the second element of the tuple returned by React's useState hook.
+      This is the same as the second element of the tuple returned by React's \`useState\` hook.
 
       - \`onEdgesChange\`: A handy callback that can take an array of \`EdgeChanges\` and update the edges
-      state accordingly. You'll typically pass this directly to the onEdgesChange prop of your
+      state accordingly. You'll typically pass this directly to the \`onEdgesChange\` prop of your
       \`<ReactFlow />\` component.",
         },
       }
