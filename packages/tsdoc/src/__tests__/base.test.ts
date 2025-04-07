@@ -742,12 +742,8 @@ export default Connection`
                   "type": "{ name: string; locale: string; }[]",
                 },
                 {
-                  "name": "lastUpdated.type",
-                  "type": "string | JSXElementConstructor<any>",
-                },
-                {
-                  "name": "lastUpdated.key",
-                  "type": "string | null",
+                  "name": "lastUpdated",
+                  "type": "ReactElement<Record<string, unknown>, string | JSXElementConstructor<any>>",
                 },
                 {
                   "name": "navigation.next",

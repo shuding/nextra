@@ -218,31 +218,25 @@ function isObjectType(t: Type, typeOf?: Type): boolean {
       typeOf = getDeclaration(symbol).getType()
     }
   }
+  const baseName = t.getSymbol()?.getName()
   return (
     t.isObject() &&
     !t.isArray() &&
     !t.isTuple() &&
-    !isSetType(t) &&
-    !isMapType(t) &&
+    (!baseName || !IGNORED_TYPES.has(baseName)) &&
     // Is not function
     !t.getCallSignatures().length &&
     !typeOf?.isUnknown()
   )
 }
 
-function isSetType(type: Type): boolean {
-  const baseName = type.getSymbol()?.getName()
-
-  // Handles: Set<T>, ReadonlySet<T>
-  return baseName === 'Set' || baseName === 'ReadonlySet'
-}
-
-function isMapType(type: Type): boolean {
-  const baseName = type.getSymbol()?.getName()
-
-  // Handles: Map<T>, ReadonlyMap<T>
-  return baseName === 'Map' || baseName === 'ReadonlyMap'
-}
+const IGNORED_TYPES = new Set([
+  'Set',
+  'ReadonlySet',
+  'Map',
+  'ReadonlyMap',
+  'ReactElement'
+])
 
 function getDeclaration(s: TsSymbol): Node {
   const parameterName = s.getName()
