@@ -4,4 +4,4 @@
 'nextra-theme-docs': minor
 ---
 
-feat(TSDoc): support flattening return fields
+feat(TSDoc): support flattening return object fields
