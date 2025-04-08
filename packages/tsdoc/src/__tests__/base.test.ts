@@ -1507,16 +1507,8 @@ export default foo`
             "type": "RegExp",
           },
           {
-            "name": "jsx.type",
-            "type": "any",
-          },
-          {
-            "name": "jsx.props",
-            "type": "any",
-          },
-          {
-            "name": "jsx.key",
-            "type": "string | null",
+            "name": "jsx",
+            "type": "Element",
           },
           {
             "name": "object",

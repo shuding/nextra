@@ -210,16 +210,24 @@ function isObjectType(t: Type, typeOf?: Type): boolean {
       typeOf = getDeclaration(symbol).getType()
     }
   }
-  const baseName = t.getSymbol()?.getName()
+  if (
+    !t.isObject() ||
+    t.isArray() ||
+    t.isTuple() ||
+    // If empty object
+    !t.getProperties().length
+  ) {
+    return false
+  }
+
+  // console.log(1, t.getText())
+  const baseName = t.getSymbolOrThrow().getName()
+  // console.log(2, baseName)
   return (
-    t.isObject() &&
-    !t.isArray() &&
-    !t.isTuple() &&
     (!baseName || !IGNORED_TYPES.has(baseName)) &&
     // Is not function
     !t.getCallSignatures().length &&
-    !typeOf?.isUnknown() &&
-    t.getProperties().length > 0
+    !typeOf?.isUnknown()
   )
 }
 
@@ -233,7 +241,8 @@ const IGNORED_TYPES = new Set([
   'RegExp',
   'Promise',
   'WeakMap',
-  'WeakSet'
+  'WeakSet',
+  'Element' // React.JSX.Element
 ])
 
 function getDeclaration(s: TsSymbol): Node {
