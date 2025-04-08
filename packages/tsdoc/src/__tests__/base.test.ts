@@ -1368,10 +1368,10 @@ export default foo`
 
        return (
          <ReactFlow
-           nodes={nodes}
-           edges={edges}
-           onNodesChange={onNodesChange}
-           onEdgesChange={onEdgesChange}
+           nodes='{nodes}'
+           edges='{edges}'
+           onNodesChange='{onNodesChange}'
+           onEdgesChange='{onEdgesChange}'
          />
        );
       }
@@ -1532,6 +1532,40 @@ export default foo`
       - \`offsetY\`: the absolute difference between the source \`y\` position and the \`y\` position of the
       middle of this path.",
         },
+      }
+    `)
+  })
+
+  test.only('should remove `undefined` from optional fields', () => {
+    const result = generateDocumentation({
+      code: `
+type $ = {
+  a?: string
+  b: string | undefined
+  c?: string | undefined
+}
+export default $`,
+      flattened: true
+    })
+    expect(result).toMatchInlineSnapshot(`
+      {
+        "entries": [
+          {
+            "name": "a",
+            "optional": true,
+            "type": "string",
+          },
+          {
+            "name": "b",
+            "type": "string | undefined",
+          },
+          {
+            "name": "c",
+            "optional": true,
+            "type": "string | undefined",
+          },
+        ],
+        "name": "default",
       }
     `)
   })

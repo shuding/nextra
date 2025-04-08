@@ -2,7 +2,7 @@ export type GeneratedType = {
   /** Type name. */
   name: string
   /** Type description. */
-  description: string
+  description?: string
   /** Type fields. */
   entries: TypeField[]
 }

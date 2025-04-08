@@ -128,7 +128,7 @@ export function generateDocumentation({
 
   return {
     name: exportName,
-    description,
+    ...(description && { description }),
     entries
   }
 }
