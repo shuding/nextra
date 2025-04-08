@@ -42,7 +42,7 @@ async function renderMarkdownDefault(description?: string): Promise<ReactNode> {
   return <MDXRemote compiledSource={rawJs} />
 }
 
-export const TSDoc: FC<TSDocProps> = async ({
+export const TSDoc: FC<TSDocProps> = ({
   renderMarkdown = renderMarkdownDefault,
   typeLinkMap = {},
   ...props
@@ -113,7 +113,7 @@ export const TSDoc: FC<TSDocProps> = async ({
           </Callout>
         )}
         <b className="x:mt-6 x:block">Returns:</b>
-        {tags?.returns && <p className="x:mt-6">{tags.returns}</p>}
+        {await renderMarkdown(tags?.returns)}
         <table className="x:my-6 x:w-full x:text-sm">
           <thead className="nextra-border x:border-b x:text-left x:max-lg:hidden">
             <tr>
