@@ -218,7 +218,7 @@ function shouldFlattenType(t: Type): boolean {
   }
   try {
     const baseName = t.getSymbolOrThrow().getName()
-    return baseName === '__type'
+    return t.isInterface() || baseName === '__type'
   } catch {
     logger.error(`Symbol "${t.getText()}" isn't found.`)
     return false

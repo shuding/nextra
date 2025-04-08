@@ -1416,7 +1416,7 @@ export default foo`
     `)
   })
 
-  test.only('should flatten params', () => {
+  test('should flatten params', () => {
     const result = generateDocumentation({
       code: "export { getSmoothStepPath as default } from '@xyflow/react'",
       flattened: true
@@ -1431,8 +1431,68 @@ export default foo`
           {
             "params": [
               {
-                "name": "__0",
-                "type": "GetSmoothStepPathParams",
+                "description": "The \`x\` position of the source handle.",
+                "name": "[0].sourceX",
+                "type": "number",
+              },
+              {
+                "description": "The \`y\` position of the source handle.",
+                "name": "[0].sourceY",
+                "type": "number",
+              },
+              {
+                "description": "The position of the source handle.",
+                "name": "[0].sourcePosition",
+                "optional": true,
+                "tags": {
+                  "default": "Position.Bottom",
+                },
+                "type": "Position",
+              },
+              {
+                "description": "The \`x\` position of the target handle.",
+                "name": "[0].targetX",
+                "type": "number",
+              },
+              {
+                "description": "The \`y\` position of the target handle.",
+                "name": "[0].targetY",
+                "type": "number",
+              },
+              {
+                "description": "The position of the target handle.",
+                "name": "[0].targetPosition",
+                "optional": true,
+                "tags": {
+                  "default": "Position.Top",
+                },
+                "type": "Position",
+              },
+              {
+                "name": "[0].borderRadius",
+                "optional": true,
+                "tags": {
+                  "default": "5",
+                },
+                "type": "number",
+              },
+              {
+                "name": "[0].centerX",
+                "optional": true,
+                "type": "number",
+              },
+              {
+                "name": "[0].centerY",
+                "optional": true,
+                "type": "number",
+              },
+              {
+                "name": "[0].offset",
+                "optional": true,
+                "tags": {
+                  "default": "20",
+                },
+                "type": "number",
               },
             ],
             "returns": {
