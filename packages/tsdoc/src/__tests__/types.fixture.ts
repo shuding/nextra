@@ -12,9 +12,9 @@ type $ = {
   tuple: [unknown, unknown]
   function: (a: unknown) => unknown
   map: Map<unknown, unknown>
-  readonlyMap: Map<unknown, unknown>
+  readonlyMap: ReadonlyMap<unknown, unknown>
   set: Set<unknown>
-  readonlySet: Set<unknown>
+  readonlySet: ReadonlySet<unknown>
   weakSet: WeakSet<any>
   weakMap: WeakMap<any, unknown>
   reactElement: ReactElement

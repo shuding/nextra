@@ -1468,7 +1468,7 @@ export default foo`
           },
           {
             "name": "readonlyMap",
-            "type": "Map<unknown, unknown>",
+            "type": "ReadonlyMap<unknown, unknown>",
           },
           {
             "name": "set",
@@ -1476,7 +1476,7 @@ export default foo`
           },
           {
             "name": "readonlySet",
-            "type": "Set<unknown>",
+            "type": "ReadonlySet<unknown>",
           },
           {
             "name": "weakSet",
