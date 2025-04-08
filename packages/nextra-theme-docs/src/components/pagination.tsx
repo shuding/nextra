@@ -4,6 +4,7 @@ import NextLink from 'next/link'
 import { ArrowRightIcon } from 'nextra/icons'
 import type { FC } from 'react'
 import { useConfig, useThemeConfig } from '../stores'
+import getLastStringChild from '../utils/get-last-string-child'
 
 const classes = {
   link: cn(
@@ -36,7 +37,7 @@ export const Pagination: FC = () => {
     >
       {prev && (
         <NextLink
-          href={prev.route}
+          href={getLastStringChild(prev.route)}
           title={prev.title}
           className={cn(classes.link, 'x:pe-4')}
         >
@@ -49,7 +50,7 @@ export const Pagination: FC = () => {
       )}
       {next && (
         <NextLink
-          href={next.route}
+          href={getLastStringChild(next.route)}
           title={next.title}
           className={cn(classes.link, 'x:ps-4 x:ms-auto x:text-end')}
         >

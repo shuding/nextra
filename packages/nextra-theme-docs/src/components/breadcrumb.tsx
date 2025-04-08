@@ -5,6 +5,7 @@ import { ArrowRightIcon } from 'nextra/icons'
 import type { Item } from 'nextra/normalize-pages'
 import type { FC } from 'react'
 import { Fragment } from 'react'
+import getLastStringChild from '../utils/get-last-string-child'
 
 export const Breadcrumb: FC<{
   activePath: Item[]
@@ -42,7 +43,7 @@ export const Breadcrumb: FC<{
                 href &&
                   'x:focus-visible:nextra-focus x:ring-inset x:hover:text-gray-900 x:dark:hover:text-gray-100'
               )}
-              title={item.title}
+              title={getLastStringChild(item.title)}
               {...(href && ({ href } as any))}
             >
               {item.title}
