@@ -62,6 +62,7 @@ export function generateDocumentation({
   const isFunction = callSignatures.length > 0
   if (isFunction) {
     const tags = getTags(declarationType.getSymbolOrThrow())
+    tags.returns &&= replaceJsDocLinks(tags.returns)
     return {
       name: declarationType.getSymbolOrThrow().getName(),
       ...(description && { description }),
@@ -77,10 +78,7 @@ export function generateDocumentation({
           })
         )
         const returnType = signature.getReturnType()
-        const returnsDescription =
-          tags.returns && replaceJsDocLinks(tags.returns)
-
-        const flattenedReturnType: ReturnField[] =
+        let flattenedReturnType: GeneratedFunction['signatures'][number]['returns'] =
           flattened && isObjectType(returnType)
             ? returnType.getProperties().flatMap(childProp =>
                 getDocEntry({
@@ -91,15 +89,10 @@ export function generateDocumentation({
               )
             : []
 
-        if (flattenedReturnType.length) {
-          if (returnsDescription) {
-            flattenedReturnType.unshift({ description: returnsDescription })
-          }
-        } else {
-          flattenedReturnType.push({
-            ...(returnsDescription && { description: returnsDescription }),
+        if (!flattenedReturnType.length) {
+          flattenedReturnType = {
             type: getFormattedText(returnType)
-          })
+          }
         }
 
         return {

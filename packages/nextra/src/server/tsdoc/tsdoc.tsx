@@ -168,19 +168,11 @@ export const TSDoc: FC<TSDocProps> = async ({
                       </>
                     )}
                   </td>
-                  <td
-                    // add `Type: ` via CSS `content` property so value will be not selectable
-                    className={cn(
-                      'x:max-lg:block',
-                      prop.type && 'x:max-lg:before:content-["Type:_"]',
-                      hasName ? 'x:p-3' : 'x:lg:p-3'
-                    )}
-                  >
-                    {prop.type && linkify(prop.type, typeLinkMap)}
-                    {description && (
-                      <div className="x:mt-2 x:text-sm">{description}</div>
-                    )}
-                  </td>
+                  <TypeAndDescriptionCell
+                    type={prop.type}
+                    description={description}
+                    typeLinkMap={typeLinkMap}
+                  />
                 </tr>
               </tbody>
             )
@@ -189,6 +181,22 @@ export const TSDoc: FC<TSDocProps> = async ({
       </>
     )
   }
+}
+
+const TypeAndDescriptionCell: FC<{
+  type: string
+  description: ReactNode
+  typeLinkMap: TSDocProps['typeLinkMap']
+}> = ({ type, description, typeLinkMap }) => {
+  return (
+    <td
+      // add `Type: ` via CSS `content` property so value will be not selectable
+      className='x:p-3 x:max-lg:block x:max-lg:before:content-["Type:_"]'
+    >
+      {linkify(type, typeLinkMap)}
+      {description && <div className="x:mt-2 x:text-sm">{description}</div>}
+    </td>
+  )
 }
 
 const FieldsTable: FC<
@@ -242,15 +250,11 @@ const FieldsTable: FC<
                   {field.name}
                 </Code>
               </td>
-              <td
-                // add `Type: ` via CSS `content` property so value will be not selectable
-                className='x:p-3 x:max-lg:block x:max-lg:before:content-["Type:_"]'
-              >
-                {linkify(field.type, typeLinkMap)}
-                {description && (
-                  <div className="x:mt-2 x:text-sm">{description}</div>
-                )}
-              </td>
+              <TypeAndDescriptionCell
+                type={field.type}
+                description={description}
+                typeLinkMap={typeLinkMap}
+              />
               <td
                 className={cn(
                   'x:max-lg:block',

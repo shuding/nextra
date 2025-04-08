@@ -11,9 +11,7 @@ export type Tags = Record<string, string>
 
 export type ReturnField = {
   /** Function return type. */
-  type?: string
-  /** Function return description. */
-  description?: string
+  type: string
 }
 
 export type GeneratedFunction = {
@@ -27,7 +25,7 @@ export type GeneratedFunction = {
     /** Function parameters. */
     params: TypeField[]
     /** Function return. */
-    returns: (ReturnField | TypeField)[]
+    returns: TypeField[] | ReturnField
   }[]
 }
 
