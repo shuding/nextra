@@ -4,6 +4,8 @@ import { LayoutPropsSchema } from '../../../nextra-theme-docs/src/layout.js'
 import { HeadPropsSchema } from '../../../nextra/src/client/components/head.js'
 import { generateDocumentation } from '../../../nextra/src/server/tsdoc/base.js'
 import { generateTsFromZod } from '../../../nextra/src/server/tsdoc/zod-to-ts.js'
+// @ts-expect-error -- fixme
+import typesFixture from './types.fixture?raw'
 
 const skipTest = xyflowReactPackageJson.version === '12.5.4'
 
@@ -1422,6 +1424,406 @@ export default foo`
             },
           },
         ],
+      }
+    `)
+  })
+
+  test.only('should flatten only object', () => {
+    const result = generateDocumentation({ code: typesFixture, flattened: true })
+    expect(result).toMatchInlineSnapshot(`
+      {
+        "description": "",
+        "entries": [
+          {
+            "name": "any",
+            "type": "any",
+          },
+          {
+            "name": "unknown",
+            "type": "unknown",
+          },
+          {
+            "name": "array",
+            "type": "unknown[]",
+          },
+          {
+            "name": "boolean",
+            "type": "boolean",
+          },
+          {
+            "name": "string",
+            "type": "string",
+          },
+          {
+            "name": "number",
+            "type": "number",
+          },
+          {
+            "name": "symbol",
+            "type": "symbol",
+          },
+          {
+            "name": "readonlyArray",
+            "type": "readonly unknown[]",
+          },
+          {
+            "name": "tuple",
+            "type": "[unknown, unknown]",
+          },
+          {
+            "name": "function",
+            "type": "(a: unknown) => unknown",
+          },
+          {
+            "name": "map",
+            "type": "Map<unknown, unknown>",
+          },
+          {
+            "name": "readonlyMap",
+            "type": "Map<unknown, unknown>",
+          },
+          {
+            "name": "set",
+            "type": "Set<unknown>",
+          },
+          {
+            "name": "readonlySet",
+            "type": "Set<unknown>",
+          },
+          {
+            "name": "weakSet.add",
+            "type": "(value: any) => WeakSet<any>",
+          },
+          {
+            "name": "weakSet.delete",
+            "type": "(value: any) => boolean",
+          },
+          {
+            "name": "weakSet.has",
+            "type": "(value: any) => boolean",
+          },
+          {
+            "name": "weakSet.__@toStringTag@66",
+            "type": "string",
+          },
+          {
+            "name": "weakMap.delete",
+            "type": "(key: any) => boolean",
+          },
+          {
+            "name": "weakMap.get",
+            "type": "(key: any) => unknown",
+          },
+          {
+            "name": "weakMap.has",
+            "type": "(key: any) => boolean",
+          },
+          {
+            "name": "weakMap.set",
+            "type": "(key: any, value: unknown) => WeakMap<any, unknown>",
+          },
+          {
+            "name": "weakMap.__@toStringTag@66",
+            "type": "string",
+          },
+          {
+            "name": "reactElement",
+            "type": "ReactElement<unknown, string | JSXElementConstructor<any>>",
+          },
+          {
+            "name": "reactNode",
+            "type": "ReactNode",
+          },
+          {
+            "name": "promise.then",
+            "type": "<TResult1 = unknown, TResult2 = never>(onfulfilled?: ((value: unknown) => TResult1 | PromiseLike<TResult1>) | null | undefined, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | null | undefined) => Promise<...>",
+          },
+          {
+            "name": "promise.catch",
+            "type": "<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | null | undefined) => Promise<unknown>",
+          },
+          {
+            "name": "promise.finally",
+            "type": "(onfinally?: (() => void) | null | undefined) => Promise<unknown>",
+          },
+          {
+            "name": "promise.__@toStringTag@66",
+            "type": "string",
+          },
+          {
+            "name": "date.toString",
+            "type": "() => string",
+          },
+          {
+            "name": "date.toDateString",
+            "type": "() => string",
+          },
+          {
+            "name": "date.toTimeString",
+            "type": "() => string",
+          },
+          {
+            "name": "date.toLocaleString",
+            "type": "{ (): string; (locales?: string | string[] | undefined, options?: DateTimeFormatOptions | undefined): string; (locales?: LocalesArgument, options?: DateTimeFormatOptions | undefined): string; }",
+          },
+          {
+            "name": "date.toLocaleDateString",
+            "type": "{ (): string; (locales?: string | string[] | undefined, options?: DateTimeFormatOptions | undefined): string; (locales?: LocalesArgument, options?: DateTimeFormatOptions | undefined): string; }",
+          },
+          {
+            "name": "date.toLocaleTimeString",
+            "type": "{ (): string; (locales?: string | string[] | undefined, options?: DateTimeFormatOptions | undefined): string; (locales?: LocalesArgument, options?: DateTimeFormatOptions | undefined): string; }",
+          },
+          {
+            "name": "date.valueOf",
+            "type": "() => number",
+          },
+          {
+            "name": "date.getTime",
+            "type": "() => number",
+          },
+          {
+            "name": "date.getFullYear",
+            "type": "() => number",
+          },
+          {
+            "name": "date.getUTCFullYear",
+            "type": "() => number",
+          },
+          {
+            "name": "date.getMonth",
+            "type": "() => number",
+          },
+          {
+            "name": "date.getUTCMonth",
+            "type": "() => number",
+          },
+          {
+            "name": "date.getDate",
+            "type": "() => number",
+          },
+          {
+            "name": "date.getUTCDate",
+            "type": "() => number",
+          },
+          {
+            "name": "date.getDay",
+            "type": "() => number",
+          },
+          {
+            "name": "date.getUTCDay",
+            "type": "() => number",
+          },
+          {
+            "name": "date.getHours",
+            "type": "() => number",
+          },
+          {
+            "name": "date.getUTCHours",
+            "type": "() => number",
+          },
+          {
+            "name": "date.getMinutes",
+            "type": "() => number",
+          },
+          {
+            "name": "date.getUTCMinutes",
+            "type": "() => number",
+          },
+          {
+            "name": "date.getSeconds",
+            "type": "() => number",
+          },
+          {
+            "name": "date.getUTCSeconds",
+            "type": "() => number",
+          },
+          {
+            "name": "date.getMilliseconds",
+            "type": "() => number",
+          },
+          {
+            "name": "date.getUTCMilliseconds",
+            "type": "() => number",
+          },
+          {
+            "name": "date.getTimezoneOffset",
+            "type": "() => number",
+          },
+          {
+            "name": "date.setTime",
+            "type": "(time: number) => number",
+          },
+          {
+            "name": "date.setMilliseconds",
+            "type": "(ms: number) => number",
+          },
+          {
+            "name": "date.setUTCMilliseconds",
+            "type": "(ms: number) => number",
+          },
+          {
+            "name": "date.setSeconds",
+            "type": "(sec: number, ms?: number | undefined) => number",
+          },
+          {
+            "name": "date.setUTCSeconds",
+            "type": "(sec: number, ms?: number | undefined) => number",
+          },
+          {
+            "name": "date.setMinutes",
+            "type": "(min: number, sec?: number | undefined, ms?: number | undefined) => number",
+          },
+          {
+            "name": "date.setUTCMinutes",
+            "type": "(min: number, sec?: number | undefined, ms?: number | undefined) => number",
+          },
+          {
+            "name": "date.setHours",
+            "type": "(hours: number, min?: number | undefined, sec?: number | undefined, ms?: number | undefined) => number",
+          },
+          {
+            "name": "date.setUTCHours",
+            "type": "(hours: number, min?: number | undefined, sec?: number | undefined, ms?: number | undefined) => number",
+          },
+          {
+            "name": "date.setDate",
+            "type": "(date: number) => number",
+          },
+          {
+            "name": "date.setUTCDate",
+            "type": "(date: number) => number",
+          },
+          {
+            "name": "date.setMonth",
+            "type": "(month: number, date?: number | undefined) => number",
+          },
+          {
+            "name": "date.setUTCMonth",
+            "type": "(month: number, date?: number | undefined) => number",
+          },
+          {
+            "name": "date.setFullYear",
+            "type": "(year: number, month?: number | undefined, date?: number | undefined) => number",
+          },
+          {
+            "name": "date.setUTCFullYear",
+            "type": "(year: number, month?: number | undefined, date?: number | undefined) => number",
+          },
+          {
+            "name": "date.toUTCString",
+            "type": "() => string",
+          },
+          {
+            "name": "date.toISOString",
+            "type": "() => string",
+          },
+          {
+            "name": "date.toJSON",
+            "type": "(key?: any) => string",
+          },
+          {
+            "name": "date.getVarDate",
+            "type": "() => VarDate",
+          },
+          {
+            "name": "date.__@toPrimitive@138",
+            "type": "{ (hint: "default"): string; (hint: "string"): string; (hint: "number"): number; (hint: string): string | number; }",
+          },
+          {
+            "name": "regex.exec",
+            "type": "(string: string) => RegExpExecArray | null",
+          },
+          {
+            "name": "regex.test",
+            "type": "(string: string) => boolean",
+          },
+          {
+            "name": "regex.source",
+            "type": "string",
+          },
+          {
+            "name": "regex.global",
+            "type": "boolean",
+          },
+          {
+            "name": "regex.ignoreCase",
+            "type": "boolean",
+          },
+          {
+            "name": "regex.multiline",
+            "type": "boolean",
+          },
+          {
+            "name": "regex.lastIndex",
+            "type": "number",
+          },
+          {
+            "name": "regex.compile",
+            "type": "(pattern: string, flags?: string | undefined) => RegExp",
+          },
+          {
+            "name": "regex.flags",
+            "type": "string",
+          },
+          {
+            "name": "regex.sticky",
+            "type": "boolean",
+          },
+          {
+            "name": "regex.unicode",
+            "type": "boolean",
+          },
+          {
+            "name": "regex.dotAll",
+            "type": "boolean",
+          },
+          {
+            "name": "regex.hasIndices",
+            "type": "boolean",
+          },
+          {
+            "name": "regex.__@match@245",
+            "type": "(string: string) => RegExpMatchArray | null",
+          },
+          {
+            "name": "regex.__@replace@247",
+            "type": "{ (string: string, replaceValue: string): string; (string: string, replacer: (substring: string, ...args: any[]) => string): string; }",
+          },
+          {
+            "name": "regex.__@search@250",
+            "type": "(string: string) => number",
+          },
+          {
+            "name": "regex.__@split@252",
+            "type": "(string: string, limit?: number | undefined) => string[]",
+          },
+          {
+            "name": "regex.__@matchAll@254",
+            "type": "(str: string) => RegExpStringIterator<RegExpMatchArray>",
+          },
+          {
+            "name": "jsx.type",
+            "type": "any",
+          },
+          {
+            "name": "jsx.props",
+            "type": "any",
+          },
+          {
+            "name": "jsx.key",
+            "type": "string | null",
+          },
+          {
+            "name": "object",
+            "type": "object",
+          },
+          {
+            "name": "a.b",
+            "type": "unknown",
+          },
+        ],
+        "name": "default",
       }
     `)
   })
