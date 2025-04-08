@@ -170,24 +170,27 @@ const NameCell: FC<{
   optional?: boolean
 }> = ({ name, id, optional }) => {
   return (
-    <td className="x:relative x:py-3 x:max-lg:block x:max-lg:px-3">
+    <td
+      className={cn(
+        'x:relative x:max-lg:block',
+        name && 'x:py-3 x:max-lg:px-3'
+      )}
+    >
+      <a
+        href={`#${id}`}
+        className={cn(
+          'x:absolute x:top-0 x:right-0 x:text-lg x:font-black x:lg:top-1/2 x:lg:right-full x:lg:-translate-y-1/2',
+          'x:group-hover:opacity-100! x:before:content-["#"] x:hover:text-black x:dark:hover:text-white',
+          'x:p-3' // Increase click box
+        )}
+      />
       {name && (
-        <>
-          <a
-            href={`#${id}`}
-            className={cn(
-              'x:absolute x:top-0 x:right-0 x:text-lg x:font-black x:lg:top-1/2 x:lg:right-full x:lg:-translate-y-1/2',
-              'x:group-hover:opacity-100! x:before:content-["#"] x:hover:text-black x:dark:hover:text-white',
-              'x:p-3' // Increase click box
-            )}
-          />
-          <Code
-            // add `?` via CSS `content` property so value will be not selectable
-            className={optional ? 'x:after:content-["?"]' : ''}
-          >
-            {name}
-          </Code>
-        </>
+        <Code
+          // add `?` via CSS `content` property so value will be not selectable
+          className={optional ? 'x:after:content-["?"]' : ''}
+        >
+          {name}
+        </Code>
       )}
     </td>
   )
