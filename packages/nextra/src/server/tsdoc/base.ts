@@ -156,17 +156,18 @@ function getDocEntry({
     : originalSubType
   if (flattened && shouldFlattenType(subType)) {
     return subType.getProperties().flatMap(childProp => {
-      const prefix = isFunctionParameter
+      const childPrefix = isFunctionParameter
         ? symbol.getName().replace(/^_+/, '')
         : symbol.getName()
+      const newPrefix =
+        typeof +childPrefix === 'number' && !Number.isNaN(+childPrefix)
+          ? `[${childPrefix}]` + (originalSubType.isNullable() ? '?' : '')
+          : childPrefix
       return getDocEntry({
         symbol: childProp,
         declaration,
         flattened,
-        prefix:
-          typeof +prefix === 'number' && !Number.isNaN(+prefix)
-            ? `[${prefix}]` + (originalSubType.isNullable() ? '?' : '')
-            : prefix
+        prefix: prexify(prefix, newPrefix)
       })
     })
   }
@@ -199,12 +200,16 @@ function getDocEntry({
       : symbol.isOptional())
 
   return {
-    name: prefix ? [prefix, name].join('.') : name,
+    name: prexify(prefix, name),
     type: typeName,
     ...(typeDescription && { description: typeDescription }),
     ...(Object.keys(tags).length && { tags }),
     ...(isOptional && { optional: isOptional })
   }
+}
+
+function prexify(prefix: string, name: string): string {
+  return prefix ? [prefix, name].join('.') : name
 }
 
 function shouldFlattenType(t: Type): boolean {

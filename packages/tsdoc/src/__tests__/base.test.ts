@@ -716,10 +716,6 @@ export default Connection`
               "params": [],
               "returns": [
                 {
-                  "name": "search",
-                  "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | ReactPortal | Iterable<ReactNode> | Promise<...> | null",
-                },
-                {
                   "name": "darkMode",
                   "type": "boolean",
                 },
@@ -741,7 +737,7 @@ export default Connection`
                 },
                 {
                   "name": "i18n",
-                  "type": "{ name: string; locale: string; }[]",
+                  "type": "{ locale: string; name: string; }[]",
                 },
                 {
                   "name": "lastUpdated",
@@ -754,6 +750,10 @@ export default Connection`
                 {
                   "name": "navigation.prev",
                   "type": "boolean",
+                },
+                {
+                  "name": "search",
+                  "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | ReactPortal | Iterable<ReactNode> | Promise<...> | null",
                 },
                 {
                   "name": "sidebar.defaultMenuCollapseLevel",
@@ -835,52 +835,52 @@ export default Connection`
                   "type": "number",
                 },
                 {
-                  "name": "activeThemeContext.pagination",
+                  "name": "normalizePagesResult.activeThemeContext.pagination",
                   "optional": true,
                   "type": "boolean | undefined",
                 },
                 {
-                  "name": "activeThemeContext.breadcrumb",
+                  "name": "normalizePagesResult.activeThemeContext.breadcrumb",
                   "optional": true,
                   "type": "boolean | undefined",
                 },
                 {
-                  "name": "activeThemeContext.collapsed",
+                  "name": "normalizePagesResult.activeThemeContext.collapsed",
                   "optional": true,
                   "type": "boolean | undefined",
                 },
                 {
-                  "name": "activeThemeContext.footer",
+                  "name": "normalizePagesResult.activeThemeContext.footer",
                   "optional": true,
                   "type": "boolean | undefined",
                 },
                 {
-                  "name": "activeThemeContext.layout",
+                  "name": "normalizePagesResult.activeThemeContext.layout",
                   "optional": true,
                   "type": ""default" | "full" | undefined",
                 },
                 {
-                  "name": "activeThemeContext.navbar",
+                  "name": "normalizePagesResult.activeThemeContext.navbar",
                   "optional": true,
                   "type": "boolean | undefined",
                 },
                 {
-                  "name": "activeThemeContext.sidebar",
+                  "name": "normalizePagesResult.activeThemeContext.sidebar",
                   "optional": true,
                   "type": "boolean | undefined",
                 },
                 {
-                  "name": "activeThemeContext.timestamp",
+                  "name": "normalizePagesResult.activeThemeContext.timestamp",
                   "optional": true,
                   "type": "boolean | undefined",
                 },
                 {
-                  "name": "activeThemeContext.toc",
+                  "name": "normalizePagesResult.activeThemeContext.toc",
                   "optional": true,
                   "type": "boolean | undefined",
                 },
                 {
-                  "name": "activeThemeContext.typesetting",
+                  "name": "normalizePagesResult.activeThemeContext.typesetting",
                   "optional": true,
                   "type": ""default" | "article" | undefined",
                 },
@@ -1668,7 +1668,7 @@ export default $`,
             "type": "EmptyInterface",
           },
           {
-            "name": "a.b",
+            "name": "ok.a.b",
             "type": "unknown",
           },
         ],
@@ -1729,7 +1729,6 @@ export default $`
     expect(result).toMatchInlineSnapshot(`
       [
         {
-          "description": "",
           "entries": [
             {
               "description": "test",
