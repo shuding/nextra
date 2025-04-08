@@ -227,7 +227,9 @@ const IGNORED_TYPES = new Set([
   'ReadonlySet',
   'Map',
   'ReadonlyMap',
-  'ReactElement'
+  'ReactElement',
+  'Date',
+  'RegExp'
 ])
 
 function getDeclaration(s: TsSymbol): Node {

@@ -724,10 +724,6 @@ export default Connection`
               "params": [],
               "returns": [
                 {
-                  "name": "search",
-                  "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | ReactPortal | Iterable<ReactNode> | Promise<...> | null",
-                },
-                {
                   "name": "darkMode",
                   "type": "boolean",
                 },
@@ -749,7 +745,7 @@ export default Connection`
                 },
                 {
                   "name": "i18n",
-                  "type": "{ name: string; locale: string; }[]",
+                  "type": "{ locale: string; name: string; }[]",
                 },
                 {
                   "name": "lastUpdated",
@@ -762,6 +758,10 @@ export default Connection`
                 {
                   "name": "navigation.prev",
                   "type": "boolean",
+                },
+                {
+                  "name": "search",
+                  "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | ReactPortal | Iterable<ReactNode> | Promise<...> | null",
                 },
                 {
                   "name": "sidebar.defaultMenuCollapseLevel",
@@ -1539,256 +1539,12 @@ export default foo`
             "type": "string",
           },
           {
-            "name": "date.toString",
-            "type": "() => string",
+            "name": "date",
+            "type": "Date",
           },
           {
-            "name": "date.toDateString",
-            "type": "() => string",
-          },
-          {
-            "name": "date.toTimeString",
-            "type": "() => string",
-          },
-          {
-            "name": "date.toLocaleString",
-            "type": "{ (): string; (locales?: string | string[] | undefined, options?: DateTimeFormatOptions | undefined): string; (locales?: LocalesArgument, options?: DateTimeFormatOptions | undefined): string; }",
-          },
-          {
-            "name": "date.toLocaleDateString",
-            "type": "{ (): string; (locales?: string | string[] | undefined, options?: DateTimeFormatOptions | undefined): string; (locales?: LocalesArgument, options?: DateTimeFormatOptions | undefined): string; }",
-          },
-          {
-            "name": "date.toLocaleTimeString",
-            "type": "{ (): string; (locales?: string | string[] | undefined, options?: DateTimeFormatOptions | undefined): string; (locales?: LocalesArgument, options?: DateTimeFormatOptions | undefined): string; }",
-          },
-          {
-            "name": "date.valueOf",
-            "type": "() => number",
-          },
-          {
-            "name": "date.getTime",
-            "type": "() => number",
-          },
-          {
-            "name": "date.getFullYear",
-            "type": "() => number",
-          },
-          {
-            "name": "date.getUTCFullYear",
-            "type": "() => number",
-          },
-          {
-            "name": "date.getMonth",
-            "type": "() => number",
-          },
-          {
-            "name": "date.getUTCMonth",
-            "type": "() => number",
-          },
-          {
-            "name": "date.getDate",
-            "type": "() => number",
-          },
-          {
-            "name": "date.getUTCDate",
-            "type": "() => number",
-          },
-          {
-            "name": "date.getDay",
-            "type": "() => number",
-          },
-          {
-            "name": "date.getUTCDay",
-            "type": "() => number",
-          },
-          {
-            "name": "date.getHours",
-            "type": "() => number",
-          },
-          {
-            "name": "date.getUTCHours",
-            "type": "() => number",
-          },
-          {
-            "name": "date.getMinutes",
-            "type": "() => number",
-          },
-          {
-            "name": "date.getUTCMinutes",
-            "type": "() => number",
-          },
-          {
-            "name": "date.getSeconds",
-            "type": "() => number",
-          },
-          {
-            "name": "date.getUTCSeconds",
-            "type": "() => number",
-          },
-          {
-            "name": "date.getMilliseconds",
-            "type": "() => number",
-          },
-          {
-            "name": "date.getUTCMilliseconds",
-            "type": "() => number",
-          },
-          {
-            "name": "date.getTimezoneOffset",
-            "type": "() => number",
-          },
-          {
-            "name": "date.setTime",
-            "type": "(time: number) => number",
-          },
-          {
-            "name": "date.setMilliseconds",
-            "type": "(ms: number) => number",
-          },
-          {
-            "name": "date.setUTCMilliseconds",
-            "type": "(ms: number) => number",
-          },
-          {
-            "name": "date.setSeconds",
-            "type": "(sec: number, ms?: number | undefined) => number",
-          },
-          {
-            "name": "date.setUTCSeconds",
-            "type": "(sec: number, ms?: number | undefined) => number",
-          },
-          {
-            "name": "date.setMinutes",
-            "type": "(min: number, sec?: number | undefined, ms?: number | undefined) => number",
-          },
-          {
-            "name": "date.setUTCMinutes",
-            "type": "(min: number, sec?: number | undefined, ms?: number | undefined) => number",
-          },
-          {
-            "name": "date.setHours",
-            "type": "(hours: number, min?: number | undefined, sec?: number | undefined, ms?: number | undefined) => number",
-          },
-          {
-            "name": "date.setUTCHours",
-            "type": "(hours: number, min?: number | undefined, sec?: number | undefined, ms?: number | undefined) => number",
-          },
-          {
-            "name": "date.setDate",
-            "type": "(date: number) => number",
-          },
-          {
-            "name": "date.setUTCDate",
-            "type": "(date: number) => number",
-          },
-          {
-            "name": "date.setMonth",
-            "type": "(month: number, date?: number | undefined) => number",
-          },
-          {
-            "name": "date.setUTCMonth",
-            "type": "(month: number, date?: number | undefined) => number",
-          },
-          {
-            "name": "date.setFullYear",
-            "type": "(year: number, month?: number | undefined, date?: number | undefined) => number",
-          },
-          {
-            "name": "date.setUTCFullYear",
-            "type": "(year: number, month?: number | undefined, date?: number | undefined) => number",
-          },
-          {
-            "name": "date.toUTCString",
-            "type": "() => string",
-          },
-          {
-            "name": "date.toISOString",
-            "type": "() => string",
-          },
-          {
-            "name": "date.toJSON",
-            "type": "(key?: any) => string",
-          },
-          {
-            "name": "date.getVarDate",
-            "type": "() => VarDate",
-          },
-          {
-            "name": "date.__@toPrimitive@1915",
-            "type": "{ (hint: "default"): string; (hint: "string"): string; (hint: "number"): number; (hint: string): string | number; }",
-          },
-          {
-            "name": "regex.exec",
-            "type": "(string: string) => RegExpExecArray | null",
-          },
-          {
-            "name": "regex.test",
-            "type": "(string: string) => boolean",
-          },
-          {
-            "name": "regex.source",
-            "type": "string",
-          },
-          {
-            "name": "regex.global",
-            "type": "boolean",
-          },
-          {
-            "name": "regex.ignoreCase",
-            "type": "boolean",
-          },
-          {
-            "name": "regex.multiline",
-            "type": "boolean",
-          },
-          {
-            "name": "regex.lastIndex",
-            "type": "number",
-          },
-          {
-            "name": "regex.compile",
-            "type": "(pattern: string, flags?: string | undefined) => RegExp",
-          },
-          {
-            "name": "regex.flags",
-            "type": "string",
-          },
-          {
-            "name": "regex.sticky",
-            "type": "boolean",
-          },
-          {
-            "name": "regex.unicode",
-            "type": "boolean",
-          },
-          {
-            "name": "regex.dotAll",
-            "type": "boolean",
-          },
-          {
-            "name": "regex.hasIndices",
-            "type": "boolean",
-          },
-          {
-            "name": "regex.__@match@2022",
-            "type": "(string: string) => RegExpMatchArray | null",
-          },
-          {
-            "name": "regex.__@replace@2024",
-            "type": "{ (string: string, replaceValue: string): string; (string: string, replacer: (substring: string, ...args: any[]) => string): string; }",
-          },
-          {
-            "name": "regex.__@search@2027",
-            "type": "(string: string) => number",
-          },
-          {
-            "name": "regex.__@split@2029",
-            "type": "(string: string, limit?: number | undefined) => string[]",
-          },
-          {
-            "name": "regex.__@matchAll@2031",
-            "type": "(str: string) => RegExpStringIterator<RegExpMatchArray>",
+            "name": "regex",
+            "type": "RegExp",
           },
           {
             "name": "jsx.type",
