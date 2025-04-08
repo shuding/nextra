@@ -922,6 +922,7 @@ export default Connection`
             },
           ],
           "tags": {
+            "returns": "An object containing the \`normalizePagesResult\` and a \`hideSidebar\` value.",
             "throws": "If used outside of a \`ConfigContext.Provider\`.",
           },
         }
@@ -990,12 +991,9 @@ export default $
                   "type": "(connections: Connection[]) => void",
                 },
               ],
-              "returns": [
-                {
-                  "description": "An array with connections.",
-                  "type": "NodeConnection[]",
-                },
-              ],
+              "returns": {
+                "type": "NodeConnection[]",
+              },
             },
           ],
           "tags": {
@@ -1040,12 +1038,9 @@ export default $
                   "type": "string",
                 },
               ],
-              "returns": [
-                {
-                  "description": "The \`InternalNode\` object for the node with the given ID.",
-                  "type": "InternalNode<NodeType> | undefined",
-                },
-              ],
+              "returns": {
+                "type": "InternalNode<NodeType> | undefined",
+              },
             },
           ],
           "tags": {
@@ -1094,14 +1089,9 @@ export default $
                   "type": "unknown",
                 },
               ],
-              "returns": [
-                {
-                  "description": "Tests whether the provided value can be used as an \`Edge\`. If you're using TypeScript,
-        this function acts as a type guard and will narrow the type of the value to \`Edge\` if it returns
-        \`true\`.",
-                  "type": "boolean",
-                },
-              ],
+              "returns": {
+                "type": "boolean",
+              },
             },
           ],
           "tags": {
@@ -1139,12 +1129,9 @@ export default $
                   "type": "string",
                 },
               ],
-              "returns": [
-                {
-                  "description": "An object (or array of object) with \`id\`, \`type\`, \`data\` representing each node.",
-                  "type": "Pick<NodeType, "id" | "type" | "data"> | null",
-                },
-              ],
+              "returns": {
+                "type": "Pick<NodeType, "id" | "type" | "data"> | null",
+              },
             },
             {
               "params": [
@@ -1154,12 +1141,9 @@ export default $
                   "type": "string[]",
                 },
               ],
-              "returns": [
-                {
-                  "description": "An object (or array of object) with \`id\`, \`type\`, \`data\` representing each node.",
-                  "type": "Pick<NodeType, "id" | "type" | "data">[]",
-                },
-              ],
+              "returns": {
+                "type": "Pick<NodeType, "id" | "type" | "data">[]",
+              },
             },
           ],
           "tags": {
@@ -1317,8 +1301,16 @@ export default foo`
             ],
             "returns": [
               {
-                "description": "A transformed Viewport that encloses the given bounds which you can pass to e.g. setViewport .",
-                "type": "Viewport",
+                "name": "x",
+                "type": "number",
+              },
+              {
+                "name": "y",
+                "type": "number",
+              },
+              {
+                "name": "zoom",
+                "type": "number",
               },
             ],
           },
@@ -1330,7 +1322,7 @@ export default foo`
           "param": "padding - Padding around the bounds.",
           "public": "",
           "remarks": "You can determine bounds of nodes with {@link getNodesBounds } and {@link getBoundsOfRects}",
-          "returns": "A transformed {@link Viewport} that encloses the given bounds which you can pass to e.g. {@link setViewport }.",
+          "returns": "A transformed Viewport that encloses the given bounds which you can pass to e.g. setViewport .",
         },
       }
     `)
@@ -1353,22 +1345,9 @@ export default foo`
                 "type": "EdgeType[]",
               },
             ],
-            "returns": [
-              {
-                "description": "- \`edges\`: The current array of edges. You might pass this directly to the \`edges\` prop of your
-      \`<ReactFlow />\` component, or you may want to manipulate it first to perform some layouting,
-      for example.
-
-      - \`setEdges\`: A function that you can use to update the edges. You can pass it a new array of
-      edges or a callback that receives the current array of edges and returns a new array of edges.
-      This is the same as the second element of the tuple returned by React's \`useState\` hook.
-
-      - \`onEdgesChange\`: A handy callback that can take an array of \`EdgeChanges\` and update the edges
-      state accordingly. You'll typically pass this directly to the \`onEdgesChange\` prop of your
-      \`<ReactFlow />\` component.",
-                "type": "[edges: EdgeType[], setEdges: Dispatch<SetStateAction<EdgeType[]>>, onEdgesChange: OnEdgesChange<EdgeType>]",
-              },
-            ],
+            "returns": {
+              "type": "[edges: EdgeType[], setEdges: Dispatch<SetStateAction<EdgeType[]>>, onEdgesChange: OnEdgesChange<EdgeType>]",
+            },
           },
         ],
         "tags": {
@@ -1437,7 +1416,7 @@ export default foo`
     `)
   })
 
-  test.only('should flatten only object', () => {
+  test('should flatten only object', () => {
     const result = generateDocumentation({ code: typesFixture, flattened: true })
     expect(result).toMatchInlineSnapshot(`
       {
@@ -1512,7 +1491,7 @@ export default foo`
             "type": "(value: any) => boolean",
           },
           {
-            "name": "weakSet.__@toStringTag@66",
+            "name": "weakSet.__@toStringTag@299",
             "type": "string",
           },
           {
@@ -1532,7 +1511,7 @@ export default foo`
             "type": "(key: any, value: unknown) => WeakMap<any, unknown>",
           },
           {
-            "name": "weakMap.__@toStringTag@66",
+            "name": "weakMap.__@toStringTag@299",
             "type": "string",
           },
           {
@@ -1556,7 +1535,7 @@ export default foo`
             "type": "(onfinally?: (() => void) | null | undefined) => Promise<unknown>",
           },
           {
-            "name": "promise.__@toStringTag@66",
+            "name": "promise.__@toStringTag@299",
             "type": "string",
           },
           {
@@ -1736,7 +1715,7 @@ export default foo`
             "type": "() => VarDate",
           },
           {
-            "name": "date.__@toPrimitive@138",
+            "name": "date.__@toPrimitive@1915",
             "type": "{ (hint: "default"): string; (hint: "string"): string; (hint: "number"): number; (hint: string): string | number; }",
           },
           {
@@ -1792,23 +1771,23 @@ export default foo`
             "type": "boolean",
           },
           {
-            "name": "regex.__@match@245",
+            "name": "regex.__@match@2022",
             "type": "(string: string) => RegExpMatchArray | null",
           },
           {
-            "name": "regex.__@replace@247",
+            "name": "regex.__@replace@2024",
             "type": "{ (string: string, replaceValue: string): string; (string: string, replacer: (substring: string, ...args: any[]) => string): string; }",
           },
           {
-            "name": "regex.__@search@250",
+            "name": "regex.__@search@2027",
             "type": "(string: string) => number",
           },
           {
-            "name": "regex.__@split@252",
+            "name": "regex.__@split@2029",
             "type": "(string: string, limit?: number | undefined) => string[]",
           },
           {
-            "name": "regex.__@matchAll@254",
+            "name": "regex.__@matchAll@2031",
             "type": "(str: string) => RegExpStringIterator<RegExpMatchArray>",
           },
           {
