@@ -95,9 +95,9 @@ export const TSDoc: FC<TSDocProps> = async ({
     tags: GeneratedFunction['tags']
   }>) {
     const slugger = new Slugger()
-    const returns = Array.isArray(signature.returns)
+    const returns: TypeField[] = Array.isArray(signature.returns)
       ? signature.returns
-      : [{ name: `returns${index}`, type: signature.returns.type }]
+      : [{ name: '', type: signature.returns.type }]
     return (
       <>
         <b className="x:mt-6 x:block">Parameters:</b>
@@ -123,7 +123,7 @@ export const TSDoc: FC<TSDocProps> = async ({
           </thead>
           <tbody>
             {returns.map(async prop => {
-              const id = slugger.slug(prop.name)
+              const id = slugger.slug(prop.name || `returns${index}`)
               const description =
                 //
                 await renderMarkdown(prop.description || prop.tags?.description)
@@ -171,20 +171,24 @@ const NameCell: FC<{
 }> = ({ name, id, optional }) => {
   return (
     <td className="x:relative x:py-3 x:max-lg:block x:max-lg:px-3">
-      <a
-        href={`#${id}`}
-        className={cn(
-          'x:absolute x:top-0 x:right-0 x:text-lg x:font-black x:lg:top-1/2 x:lg:right-full x:lg:-translate-y-1/2',
-          'x:group-hover:opacity-100! x:before:content-["#"] x:hover:text-black x:dark:hover:text-white',
-          'x:p-3' // Increase click box
-        )}
-      />
-      <Code
-        // add `?` via CSS `content` property so value will be not selectable
-        className={optional ? 'x:after:content-["?"]' : ''}
-      >
-        {name}
-      </Code>
+      {name && (
+        <>
+          <a
+            href={`#${id}`}
+            className={cn(
+              'x:absolute x:top-0 x:right-0 x:text-lg x:font-black x:lg:top-1/2 x:lg:right-full x:lg:-translate-y-1/2',
+              'x:group-hover:opacity-100! x:before:content-["#"] x:hover:text-black x:dark:hover:text-white',
+              'x:p-3' // Increase click box
+            )}
+          />
+          <Code
+            // add `?` via CSS `content` property so value will be not selectable
+            className={optional ? 'x:after:content-["?"]' : ''}
+          >
+            {name}
+          </Code>
+        </>
+      )}
     </td>
   )
 }
