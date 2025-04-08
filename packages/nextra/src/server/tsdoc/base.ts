@@ -212,18 +212,29 @@ function shouldFlattenType(t: Type): boolean {
     // Is not function
     t.getCallSignatures().length > 0 ||
     // Is not `unknown`
-    t.getText() === '{}'
+    t.getText() === '{}' ||
+    // Is not empty object
+    !t.getProperties().length
   ) {
     return false
   }
   try {
     const baseName = t.getSymbolOrThrow().getName()
+    if (IGNORED_TYPES.has(baseName)) return false
     return t.isInterface() || baseName === '__type'
   } catch {
     logger.error(`Symbol "${t.getText()}" isn't found.`)
     return false
   }
 }
+
+const IGNORED_TYPES = new Set([
+  'Date',
+  'RegExp',
+  'ReactElement',
+  'Element',
+  'CSSProperties'
+])
 
 function getDeclaration(s: TsSymbol): Node {
   const parameterName = s.getName()

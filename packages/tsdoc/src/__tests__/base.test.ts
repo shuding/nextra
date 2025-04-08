@@ -893,6 +893,11 @@ export default Connection`
                   "type": ""default" | "article" | undefined",
                 },
                 {
+                  "name": "normalizePagesResult.activeMetadata",
+                  "optional": true,
+                  "type": "FrontMatter",
+                },
+                {
                   "name": "normalizePagesResult.activePath",
                   "type": "Item[]",
                 },
@@ -1363,10 +1368,10 @@ export default foo`
 
        return (
          <ReactFlow
-           nodes='{nodes}'
-           edges='{edges}'
-           onNodesChange='{onNodesChange}'
-           onEdgesChange='{onEdgesChange}'
+           nodes={nodes}
+           edges={edges}
+           onNodesChange={onNodesChange}
+           onEdgesChange={onEdgesChange}
          />
        );
       }
