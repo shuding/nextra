@@ -37,6 +37,7 @@ export const Pagination: FC = () => {
       {prev && (
         <NextLink
           href={prev.route}
+          // Fix `[object Object]` tooltip when title is ReactNode
           title={typeof prev.title === 'string' ? prev.title : undefined}
           className={cn(classes.link, 'x:pe-4')}
         >
