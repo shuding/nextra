@@ -4,7 +4,7 @@ import NextLink from 'next/link'
 import { ArrowRightIcon } from 'nextra/icons'
 import type { FC } from 'react'
 import { useConfig, useThemeConfig } from '../stores'
-import getLastStringChild from '../utils/get-last-string-child'
+import { getLastStringChild } from '../utils'
 
 const classes = {
   link: cn(

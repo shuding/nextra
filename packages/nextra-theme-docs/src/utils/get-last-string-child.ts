@@ -1,7 +1,7 @@
-import React from "react";
+import React from 'react'
 
-const getLastStringChild = (element) => {
-  if (typeof element === "string") {
+const getLastStringChild = (element: React.ReactNode): string | null => {
+  if (typeof element === 'string') {
     return element;
   }
 

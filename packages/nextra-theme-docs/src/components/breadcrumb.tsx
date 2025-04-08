@@ -5,7 +5,7 @@ import { ArrowRightIcon } from 'nextra/icons'
 import type { Item } from 'nextra/normalize-pages'
 import type { FC } from 'react'
 import { Fragment } from 'react'
-import getLastStringChild from '../utils/get-last-string-child'
+import { getLastStringChild } from '../utils'
 
 export const Breadcrumb: FC<{
   activePath: Item[]
