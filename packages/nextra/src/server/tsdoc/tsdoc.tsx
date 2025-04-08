@@ -113,74 +113,75 @@ export const TSDoc: FC<TSDocProps> = async ({
               <th className="x:p-1.5 x:px-3">Type</th>
             </tr>
           </thead>
-          {signature.returns.map(async prop => {
-            const id =
-              'name' in prop
-                ? slugger.slug(prop.name || `returns${index}`)
-                : undefined
+          {(Array.isArray(signature.returns)
+            ? signature.returns
+            : [{ name: `returns${index}`, type: signature.returns.type }]
+          ).map(async prop => {
+            const id = slugger.slug(prop.name)
             const description = await renderMarkdown(
               prop.description || ('tags' in prop ? prop.tags?.description : '')
             )
-            const hasName = 'name' in prop && prop.name
             return (
-              <tbody
-                key={id}
-                className={cn(
-                  'x:mb-5 x:max-lg:block',
-                  hasName && [
-                    'x:group x:hover:bg-primary-50 x:dark:hover:bg-primary-500/10',
-                    'x:rounded-xl x:max-lg:border nextra-border'
-                  ]
-                )}
-              >
-                <tr
-                  id={id}
-                  className={cn(
-                    'nextra-border x:max-lg:block x:lg:border-b',
-                    hasName && 'x:lg:not-target:[&>td>a]:opacity-0'
-                  )}
-                >
-                  <td
-                    className={
-                      hasName
-                        ? 'x:relative x:py-3 x:max-lg:px-3 x:max-lg:block'
-                        : 'x:max-lg:hidden'
-                    }
-                  >
-                    {hasName && (
-                      <>
-                        <a
-                          href={`#${id}`}
-                          className={cn(
-                            'x:absolute x:top-0 x:right-0 x:text-lg x:font-black x:lg:top-1/2 x:lg:right-full x:lg:-translate-y-1/2',
-                            'x:group-hover:opacity-100! x:before:content-["#"] x:hover:text-black x:dark:hover:text-white',
-                            'x:p-3' // Increase click box
-                          )}
-                        />
-                        <Code
-                          // add `?` via CSS `content` property so value will be not selectable
-                          className={cn(
-                            prop.optional && 'x:after:content-["?"]'
-                          )}
-                        >
-                          {prop.name}
-                        </Code>
-                      </>
-                    )}
-                  </td>
-                  <TypeAndDescriptionCell
-                    type={prop.type}
-                    description={description}
-                    typeLinkMap={typeLinkMap}
-                  />
-                </tr>
-              </tbody>
+              <Row key={id}>
+                <NameCell id={id} optional={prop.optional} name={prop.name} />
+                <TypeAndDescriptionCell
+                  type={prop.type}
+                  description={description}
+                  typeLinkMap={typeLinkMap}
+                />
+              </Row>
             )
           })}
         </table>
       </>
     )
   }
+}
+
+const Row: FC<{
+  children: ReactNode
+  id: string
+}> = ({ children, id }) => {
+  return (
+    <tbody
+      className={cn(
+        'x:group nextra-border x:mb-5 x:rounded-xl x:max-lg:block x:max-lg:border',
+        'x:hover:bg-primary-50 x:dark:hover:bg-primary-500/10'
+      )}
+    >
+      <tr
+        id={id}
+        className="nextra-border x:max-lg:block x:lg:border-b x:lg:not-target:[&>td>a]:opacity-0"
+      >
+        {children}
+      </tr>
+    </tbody>
+  )
+}
+
+const NameCell: FC<{
+  name: string
+  id: string
+  optional?: boolean
+}> = ({ name, id, optional }) => {
+  return (
+    <td className="x:relative x:py-3 x:max-lg:block x:max-lg:px-3">
+      <a
+        href={`#${id}`}
+        className={cn(
+          'x:absolute x:top-0 x:right-0 x:text-lg x:font-black x:lg:top-1/2 x:lg:right-full x:lg:-translate-y-1/2',
+          'x:group-hover:opacity-100! x:before:content-["#"] x:hover:text-black x:dark:hover:text-white',
+          'x:p-3' // Increase click box
+        )}
+      />
+      <Code
+        // add `?` via CSS `content` property so value will be not selectable
+        className={optional ? 'x:after:content-["?"]' : ''}
+      >
+        {name}
+      </Code>
+    </td>
+  )
 }
 
 const TypeAndDescriptionCell: FC<{
@@ -223,54 +224,28 @@ const FieldsTable: FC<
           await renderMarkdown(field.description || tags.description)
 
         return (
-          <tbody
-            key={id}
-            className={cn(
-              'x:group nextra-border x:mb-5 x:rounded-xl x:max-lg:block x:max-lg:border',
-              'x:hover:bg-primary-50 x:dark:hover:bg-primary-500/10'
-            )}
-          >
-            <tr
-              id={id}
-              className="nextra-border x:max-lg:block x:lg:border-b x:lg:not-target:[&>td>a]:opacity-0"
+          <Row key={id} id={id}>
+            <NameCell id={id} optional={field.optional} name={field.name} />
+            <TypeAndDescriptionCell
+              type={field.type}
+              description={description}
+              typeLinkMap={typeLinkMap}
+            />
+            <td
+              className={cn(
+                'x:max-lg:block',
+                // For the mobile view, we want to hide the default column entirely if there is no
+                // content for it. We want this because otherwise the default padding applied to
+                // table cells will add some extra blank space we don't want.
+                defaultValue
+                  ? // add `Default: ` via CSS `content` property so value will be not selectable
+                    'x:py-3 x:max-lg:px-3 x:max-lg:before:content-["Default:_"]'
+                  : 'x:lg:after:content-["–"]'
+              )}
             >
-              <td className="x:relative x:py-3 x:max-lg:block x:max-lg:px-3">
-                <a
-                  href={`#${id}`}
-                  className={cn(
-                    'x:absolute x:top-0 x:right-0 x:text-lg x:font-black x:lg:top-1/2 x:lg:right-full x:lg:-translate-y-1/2',
-                    'x:group-hover:opacity-100! x:before:content-["#"] x:hover:text-black x:dark:hover:text-white',
-                    'x:p-3' // Increase click box
-                  )}
-                />
-                <Code
-                  // add `?` via CSS `content` property so value will be not selectable
-                  className={cn(field.optional && 'x:after:content-["?"]')}
-                >
-                  {field.name}
-                </Code>
-              </td>
-              <TypeAndDescriptionCell
-                type={field.type}
-                description={description}
-                typeLinkMap={typeLinkMap}
-              />
-              <td
-                className={cn(
-                  'x:max-lg:block',
-                  // For the mobile view, we want to hide the default column entirely if there is no
-                  // content for it. We want this because otherwise the default padding applied to
-                  // table cells will add some extra blank space we don't want.
-                  defaultValue
-                    ? // add `Default: ` via CSS `content` property so value will be not selectable
-                      'x:py-3 x:max-lg:px-3 x:max-lg:before:content-["Default:_"]'
-                    : 'x:lg:after:content-["–"]'
-                )}
-              >
-                {defaultValue && linkify(defaultValue, typeLinkMap)}
-              </td>
-            </tr>
-          </tbody>
+              {defaultValue && linkify(defaultValue, typeLinkMap)}
+            </td>
+          </Row>
         )
       })}
     </table>
