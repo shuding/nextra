@@ -1,5 +1,13 @@
 # nextra-theme-docs
 
+## 4.3.0-alpha.6
+
+### Patch Changes
+
+- a070fdc: Fix `[object Object]` text on hovering breadcrumbs and pagination
+  links
+  - nextra@4.3.0-alpha.6
+
 ## 4.3.0-alpha.5
 
 ### Minor Changes
