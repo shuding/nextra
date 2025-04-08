@@ -5,6 +5,7 @@ import type {
   Type
 } from 'ts-morph'
 import { Project, ts } from 'ts-morph'
+import { logger } from '../utils.js'
 import type {
   BaseArgs,
   GeneratedFunction,
@@ -78,7 +79,7 @@ export function generateDocumentation({
         )
         const returnType = signature.getReturnType()
         let flattenedReturnType: GeneratedFunction['signatures'][number]['returns'] =
-          flattened && isObjectType(returnType)
+          flattened && shouldFlattenType(returnType)
             ? returnType.getProperties().flatMap(childProp =>
                 getDocEntry({
                   symbol: childProp,
@@ -153,8 +154,7 @@ function getDocEntry({
   const subType = isFunctionParameter
     ? originalSubType.getNonNullableType()
     : originalSubType
-  const typeOf = getDeclaration(symbol).getType()
-  if (flattened && isObjectType(subType, typeOf)) {
+  if (flattened && shouldFlattenType(subType)) {
     return subType.getProperties().flatMap(childProp => {
       const prefix = isFunctionParameter
         ? symbol.getName().replace(/^_+/, '')
@@ -171,6 +171,7 @@ function getDocEntry({
     })
   }
   const tags = getTags(symbol)
+  const typeOf = getDeclaration(symbol).getType()
   let typeName = typeOf.isUnknown()
     ? typeOf.getText()
     : getFormattedText(subType)
@@ -203,47 +204,26 @@ function getDocEntry({
   }
 }
 
-function isObjectType(t: Type, typeOf?: Type): boolean {
-  if (typeOf === undefined) {
-    const symbol = t.getSymbol()
-    if (symbol) {
-      typeOf = getDeclaration(symbol).getType()
-    }
-  }
+function shouldFlattenType(t: Type): boolean {
   if (
     !t.isObject() ||
     t.isArray() ||
     t.isTuple() ||
-    // If empty object
-    !t.getProperties().length
+    // Is not function
+    t.getCallSignatures().length > 0 ||
+    // Is not `unknown`
+    t.getText() === '{}'
   ) {
     return false
   }
-
-  // console.log(1, t.getText())
-  const baseName = t.getSymbolOrThrow().getName()
-  // console.log(2, baseName)
-  return (
-    (!baseName || !IGNORED_TYPES.has(baseName)) &&
-    // Is not function
-    !t.getCallSignatures().length &&
-    !typeOf?.isUnknown()
-  )
+  try {
+    const baseName = t.getSymbolOrThrow().getName()
+    return baseName === '__type'
+  } catch {
+    logger.error(`Symbol "${t.getText()}" isn't found.`)
+    return false
+  }
 }
-
-const IGNORED_TYPES = new Set([
-  'Set',
-  'ReadonlySet',
-  'Map',
-  'ReadonlyMap',
-  'ReactElement',
-  'Date',
-  'RegExp',
-  'Promise',
-  'WeakMap',
-  'WeakSet',
-  'Element' // React.JSX.Element
-])
 
 function getDeclaration(s: TsSymbol): Node {
   const parameterName = s.getName()
