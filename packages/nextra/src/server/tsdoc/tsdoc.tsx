@@ -106,7 +106,7 @@ export const TSDoc: FC<TSDocProps> = async ({
           </Callout>
         )}
         <b className="x:mt-6 x:block">Returns:</b>
-        <table className="x:my-8 x:w-full x:text-sm">
+        <table className="x:my-6 x:w-full x:text-sm">
           <thead className="nextra-border x:border-b x:text-left x:max-lg:hidden">
             <tr>
               <th className="x:py-1.5">Name</th>
@@ -126,9 +126,11 @@ export const TSDoc: FC<TSDocProps> = async ({
               <tbody
                 key={id}
                 className={cn(
-                  'nextra-border x:mb-5 x:rounded-xl x:max-lg:block x:max-lg:border',
-                  hasName &&
-                    'x:group x:hover:bg-primary-50 x:dark:hover:bg-primary-500/10'
+                  'x:mb-5 x:max-lg:block',
+                  hasName && [
+                    'x:group x:hover:bg-primary-50 x:dark:hover:bg-primary-500/10',
+                    'x:rounded-xl x:max-lg:border nextra-border'
+                  ]
                 )}
               >
                 <tr
@@ -139,10 +141,11 @@ export const TSDoc: FC<TSDocProps> = async ({
                   )}
                 >
                   <td
-                    className={cn(
-                      'x:relative x:py-3 x:max-lg:px-3',
-                      hasName ? 'x:max-lg:block' : 'x:max-lg:hidden'
-                    )}
+                    className={
+                      hasName
+                        ? 'x:relative x:py-3 x:max-lg:px-3 x:max-lg:block'
+                        : 'x:max-lg:hidden'
+                    }
                   >
                     {hasName && (
                       <>
@@ -168,8 +171,9 @@ export const TSDoc: FC<TSDocProps> = async ({
                   <td
                     // add `Type: ` via CSS `content` property so value will be not selectable
                     className={cn(
-                      'x:p-3 x:max-lg:block',
-                      prop.type && 'x:max-lg:before:content-["Type:_"]'
+                      'x:max-lg:block',
+                      prop.type && 'x:max-lg:before:content-["Type:_"]',
+                      hasName ? 'x:p-3' : 'x:lg:p-3'
                     )}
                   >
                     {prop.type && linkify(prop.type, typeLinkMap)}
