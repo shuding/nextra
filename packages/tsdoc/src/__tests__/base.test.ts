@@ -709,6 +709,16 @@ export default Connection`
       const result = generateDocumentation({ code, flattened: true })
       expect(result).toMatchInlineSnapshot(`
         {
+          "description": "Accesses the current [theme configuration](https://nextra.site/docs/docs-theme/theme-configuration)
+        values, excluding layout-specific elements like:
+        - \`footer\`
+        - \`navbar\`
+        - \`pageMap\`
+        - \`nextThemes\`
+        - \`banner\`
+        - \`children\`
+
+        This hook is useful for dynamically configuring your project based on shared theme values.",
           "name": "__type",
           "signatures": [
             {
@@ -800,14 +810,12 @@ export default Connection`
                   "optional": true,
                   "type": "ReactNode",
                 },
-                {
-                  "name": "children",
-                  "optional": true,
-                  "type": "ReactNode",
-                },
               ],
             },
           ],
+          "tags": {
+            "returns": "A subset of your theme configuration context.",
+          },
         }
       `)
     })
@@ -817,6 +825,10 @@ export default Connection`
       const result = generateDocumentation({ code, flattened: true })
       expect(result).toMatchInlineSnapshot(`
         {
+          "description": "Provides normalized data for the current page from \`ConfigContext\`.
+
+        This includes the full result of \`normalizePages\`, along with a derived value \`hideSidebar\`
+        that determines whether the sidebar should be hidden on the current page.",
           "name": "useConfig",
           "signatures": [
             {
@@ -910,6 +922,9 @@ export default Connection`
               ],
             },
           ],
+          "tags": {
+            "throws": "If used outside of a \`ConfigContext.Provider\`.",
+          },
         }
       `)
     })
@@ -1183,11 +1198,9 @@ export default $
                   "type": "boolean",
                 },
               ],
-              "returns": [
-                {
-                  "type": "void",
-                },
-              ],
+              "returns": {
+                "type": "void",
+              },
             },
           ],
         }
@@ -1225,11 +1238,9 @@ export default foo`
                   "type": "Map<string, number>",
                 },
               ],
-              "returns": [
-                {
-                  "type": "void",
-                },
-              ],
+              "returns": {
+                "type": "void",
+              },
             },
           ],
         }
@@ -1406,11 +1417,9 @@ export default foo`
                 "type": "unknown",
               },
             ],
-            "returns": [
-              {
-                "type": "void",
-              },
-            ],
+            "returns": {
+              "type": "void",
+            },
           },
         ],
       }
