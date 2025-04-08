@@ -1479,40 +1479,12 @@ export default foo`
             "type": "Set<unknown>",
           },
           {
-            "name": "weakSet.add",
-            "type": "(value: any) => WeakSet<any>",
+            "name": "weakSet",
+            "type": "WeakSet<any>",
           },
           {
-            "name": "weakSet.delete",
-            "type": "(value: any) => boolean",
-          },
-          {
-            "name": "weakSet.has",
-            "type": "(value: any) => boolean",
-          },
-          {
-            "name": "weakSet.__@toStringTag@299",
-            "type": "string",
-          },
-          {
-            "name": "weakMap.delete",
-            "type": "(key: any) => boolean",
-          },
-          {
-            "name": "weakMap.get",
-            "type": "(key: any) => unknown",
-          },
-          {
-            "name": "weakMap.has",
-            "type": "(key: any) => boolean",
-          },
-          {
-            "name": "weakMap.set",
-            "type": "(key: any, value: unknown) => WeakMap<any, unknown>",
-          },
-          {
-            "name": "weakMap.__@toStringTag@299",
-            "type": "string",
+            "name": "weakMap",
+            "type": "WeakMap<any, unknown>",
           },
           {
             "name": "reactElement",
@@ -1523,20 +1495,8 @@ export default foo`
             "type": "ReactNode",
           },
           {
-            "name": "promise.then",
-            "type": "<TResult1 = unknown, TResult2 = never>(onfulfilled?: ((value: unknown) => TResult1 | PromiseLike<TResult1>) | null | undefined, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | null | undefined) => Promise<...>",
-          },
-          {
-            "name": "promise.catch",
-            "type": "<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | null | undefined) => Promise<unknown>",
-          },
-          {
-            "name": "promise.finally",
-            "type": "(onfinally?: (() => void) | null | undefined) => Promise<unknown>",
-          },
-          {
-            "name": "promise.__@toStringTag@299",
-            "type": "string",
+            "name": "promise",
+            "type": "Promise<unknown>",
           },
           {
             "name": "date",
