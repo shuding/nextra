@@ -10,6 +10,15 @@ const ConfigContext = createContext<ReturnType<typeof normalizePages> | null>(
   null
 )
 
+/**
+ * Provides normalized data for the current page from `ConfigContext`.
+ *
+ * This includes the full result of `normalizePages`, along with a derived value `hideSidebar`
+ * that determines whether the sidebar should be hidden on the current page.
+ *
+ * @returns An object containing the `normalizePagesResult` and a `hideSidebar` value.
+ * @throws If used outside of a `ConfigContext.Provider`.
+ */
 export function useConfig() {
   const normalizePagesResult = useContext(ConfigContext)
   if (!normalizePagesResult) {
