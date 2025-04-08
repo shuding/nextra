@@ -121,6 +121,7 @@ export const TSDoc: FC<TSDocProps> = async ({
             const description = await renderMarkdown(
               prop.description || ('tags' in prop ? prop.tags?.description : '')
             )
+            const hasName = 'name' in prop && prop.name
             return (
               <tbody
                 key={id}
@@ -131,24 +132,31 @@ export const TSDoc: FC<TSDocProps> = async ({
               >
                 <tr
                   id={id}
-                  className="nextra-border x:max-lg:block x:lg:border-b x:lg:not-target:[&>td>a]:opacity-0"
+                  className={cn(
+                    'nextra-border x:max-lg:block x:lg:border-b',
+                    hasName && 'x:lg:not-target:[&>td>a]:opacity-0'
+                  )}
                 >
                   <td className="x:relative x:py-3 x:max-lg:block x:max-lg:px-3">
-                    <a
-                      href={`#${id}`}
-                      className={cn(
-                        'x:absolute x:top-0 x:right-0 x:text-lg x:font-black x:lg:top-1/2 x:lg:right-full x:lg:-translate-y-1/2',
-                        'x:group-hover:opacity-100! x:before:content-["#"] x:hover:text-black x:dark:hover:text-white',
-                        'x:p-3' // Increase click box
-                      )}
-                    />
-                    {'name' in prop && prop.name && (
-                      <Code
-                        // add `?` via CSS `content` property so value will be not selectable
-                        className={cn(prop.optional && 'x:after:content-["?"]')}
-                      >
-                        {prop.name}
-                      </Code>
+                    {hasName && (
+                      <>
+                        <a
+                          href={`#${id}`}
+                          className={cn(
+                            'x:absolute x:top-0 x:right-0 x:text-lg x:font-black x:lg:top-1/2 x:lg:right-full x:lg:-translate-y-1/2',
+                            'x:group-hover:opacity-100! x:before:content-["#"] x:hover:text-black x:dark:hover:text-white',
+                            'x:p-3' // Increase click box
+                          )}
+                        />
+                        <Code
+                          // add `?` via CSS `content` property so value will be not selectable
+                          className={cn(
+                            prop.optional && 'x:after:content-["?"]'
+                          )}
+                        >
+                          {prop.name}
+                        </Code>
+                      </>
                     )}
                   </td>
                   <td
