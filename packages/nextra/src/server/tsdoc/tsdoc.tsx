@@ -61,7 +61,9 @@ export const TSDoc: FC<TSDocProps> = async ({
   const withSignatures = result.signatures.length > 1
 
   if (!withSignatures) {
-    return <FunctionSignature signature={result.signatures[0]!} />
+    return (
+      <FunctionSignature signature={result.signatures[0]!} tags={result.tags} />
+    )
   }
 
   return (
@@ -72,7 +74,11 @@ export const TSDoc: FC<TSDocProps> = async ({
     >
       {result.signatures.map((signature, index) => (
         <Tabs.Tab key={index}>
-          <FunctionSignature signature={signature} index={index + 1} />
+          <FunctionSignature
+            signature={signature}
+            index={index + 1}
+            tags={result.tags}
+          />
         </Tabs.Tab>
       ))}
     </Tabs>
@@ -80,11 +86,13 @@ export const TSDoc: FC<TSDocProps> = async ({
 
   async function FunctionSignature({
     signature,
-    index = ''
+    index = '',
+    tags
   }: Readonly<{
     signature: GeneratedFunction['signatures'][number]
     /** Signature index, will be appended to returns anchor. */
     index?: string | number
+    tags: GeneratedFunction['tags']
   }>) {
     const slugger = new Slugger()
     const returns = Array.isArray(signature.returns)
@@ -105,6 +113,7 @@ export const TSDoc: FC<TSDocProps> = async ({
           </Callout>
         )}
         <b className="x:mt-6 x:block">Returns:</b>
+        {tags?.returns && <p className="x:mt-6">{tags.returns}</p>}
         <table className="x:my-6 x:w-full x:text-sm">
           <thead className="nextra-border x:border-b x:text-left x:max-lg:hidden">
             <tr>
@@ -112,22 +121,24 @@ export const TSDoc: FC<TSDocProps> = async ({
               <th className="x:p-1.5 x:px-3">Type</th>
             </tr>
           </thead>
-          {returns.map(async prop => {
-            const id = slugger.slug(prop.name)
-            const description =
-              //
-              await renderMarkdown(prop.description || prop.tags?.description)
-            return (
-              <Row key={id} id={id}>
-                <NameCell id={id} optional={prop.optional} name={prop.name} />
-                <TypeAndDescriptionCell
-                  type={prop.type}
-                  description={description}
-                  typeLinkMap={typeLinkMap}
-                />
-              </Row>
-            )
-          })}
+          <tbody>
+            {returns.map(async prop => {
+              const id = slugger.slug(prop.name)
+              const description =
+                //
+                await renderMarkdown(prop.description || prop.tags?.description)
+              return (
+                <Row key={id} id={id}>
+                  <NameCell id={id} optional={prop.optional} name={prop.name} />
+                  <TypeAndDescriptionCell
+                    type={prop.type}
+                    description={description}
+                    typeLinkMap={typeLinkMap}
+                  />
+                </Row>
+              )
+            })}
+          </tbody>
         </table>
       </>
     )
@@ -139,19 +150,17 @@ const Row: FC<{
   id: string
 }> = ({ children, id }) => {
   return (
-    <tbody
+    <tr
+      id={id}
       className={cn(
-        'x:group nextra-border x:mb-5 x:rounded-xl x:max-lg:block x:max-lg:border',
-        'x:hover:bg-primary-50 x:dark:hover:bg-primary-500/10'
+        'x:group x:mb-5 x:rounded-xl x:max-lg:block',
+        'x:hover:bg-primary-50 x:dark:hover:bg-primary-500/10',
+        'nextra-border x:max-lg:border x:lg:border-b',
+        'x:lg:not-target:[&>td>a]:opacity-0'
       )}
     >
-      <tr
-        id={id}
-        className="nextra-border x:max-lg:block x:lg:border-b x:lg:not-target:[&>td>a]:opacity-0"
-      >
-        {children}
-      </tr>
-    </tbody>
+      {children}
+    </tr>
   )
 }
 
@@ -211,39 +220,41 @@ const FieldsTable: FC<
           <th className="x:py-1.5">Default</th>
         </tr>
       </thead>
-      {fields.map(async field => {
-        const id = slugger.slug(field.name)
-        const tags = field.tags ?? {}
-        const defaultValue = tags.default || tags.defaultValue
-        const description =
-          //
-          await renderMarkdown(field.description || tags.description)
+      <tbody>
+        {fields.map(async field => {
+          const id = slugger.slug(field.name)
+          const tags = field.tags ?? {}
+          const defaultValue = tags.default || tags.defaultValue
+          const description =
+            //
+            await renderMarkdown(field.description || tags.description)
 
-        return (
-          <Row key={id} id={id}>
-            <NameCell id={id} optional={field.optional} name={field.name} />
-            <TypeAndDescriptionCell
-              type={field.type}
-              description={description}
-              typeLinkMap={typeLinkMap}
-            />
-            <td
-              className={cn(
-                'x:max-lg:block',
-                // For the mobile view, we want to hide the default column entirely if there is no
-                // content for it. We want this because otherwise the default padding applied to
-                // table cells will add some extra blank space we don't want.
-                defaultValue
-                  ? // add `Default: ` via CSS `content` property so value will be not selectable
-                    'x:py-3 x:max-lg:px-3 x:max-lg:before:content-["Default:_"]'
-                  : 'x:lg:after:content-["–"]'
-              )}
-            >
-              {defaultValue && linkify(defaultValue, typeLinkMap)}
-            </td>
-          </Row>
-        )
-      })}
+          return (
+            <Row key={id} id={id}>
+              <NameCell id={id} optional={field.optional} name={field.name} />
+              <TypeAndDescriptionCell
+                type={field.type}
+                description={description}
+                typeLinkMap={typeLinkMap}
+              />
+              <td
+                className={cn(
+                  'x:max-lg:block',
+                  // For the mobile view, we want to hide the default column entirely if there is no
+                  // content for it. We want this because otherwise the default padding applied to
+                  // table cells will add some extra blank space we don't want.
+                  defaultValue
+                    ? // add `Default: ` via CSS `content` property so value will be not selectable
+                      'x:py-3 x:max-lg:px-3 x:max-lg:before:content-["Default:_"]'
+                    : 'x:lg:after:content-["–"]'
+                )}
+              >
+                {defaultValue && linkify(defaultValue, typeLinkMap)}
+              </td>
+            </Row>
+          )
+        })}
+      </tbody>
     </table>
   )
 }
