@@ -14,11 +14,11 @@ export default $`
     const result = generateDocumentation({ code })
     expect(result).toMatchInlineSnapshot(`
       {
-        "description": "",
         "entries": [
           {
             "description": "Content of the banner.",
             "name": "children",
+            "optional": true,
             "type": "ReactNode",
           },
           {
@@ -51,7 +51,6 @@ export default $`
     const result = generateDocumentation({ code })
     expect(result).toMatchInlineSnapshot(`
       {
-        "description": "",
         "entries": [
           {
             "description": "Not found text.",
@@ -112,7 +111,6 @@ export default $`
     const result = generateDocumentation({ code })
     expect(result).toMatchInlineSnapshot(`
       {
-        "description": "",
         "entries": [
           {
             "description": "Defines the style of the callout and determines the default icon if \`emoji\` is not provided.
@@ -144,6 +142,7 @@ export default $`
           {
             "description": "Content to be displayed inside the callout.",
             "name": "children",
+            "optional": true,
             "type": "ReactNode",
           },
         ],
@@ -158,7 +157,6 @@ export default $`
     const result = generateDocumentation({ code })
     expect(result).toMatchInlineSnapshot(`
       {
-        "description": "",
         "entries": [
           {
             "description": "Content of the link.",
@@ -204,7 +202,6 @@ export default $`
     const result = generateDocumentation({ code })
     expect(result).toMatchInlineSnapshot(`
       {
-        "description": "",
         "entries": [
           {
             "description": "Extra content after last icon.",
@@ -290,7 +287,6 @@ export default $`
     const result = generateDocumentation({ code, flattened: true })
     expect(result).toMatchInlineSnapshot(`
       {
-        "description": "",
         "entries": [
           {
             "description": "The hue of the primary theme color.<br/>Range: \`0 - 360\`",
@@ -363,7 +359,6 @@ export default $`
     const result = generateDocumentation({ code, flattened: true })
     expect(result).toMatchInlineSnapshot(`
       {
-        "description": "",
         "entries": [
           {
             "description": "Rendered [\`<Banner>\` component](/docs/built-ins/banner). E.g. \`<Banner {...bannerProps} />\`",
@@ -632,7 +627,6 @@ export default A`
     const result = generateDocumentation({ code })
     expect(result).toMatchInlineSnapshot(`
       {
-        "description": "",
         "entries": [
           {
             "name": "foo",
@@ -659,7 +653,6 @@ export default $`
     const result = generateDocumentation({ code })
     expect(result).toMatchInlineSnapshot(`
       {
-        "description": "",
         "entries": [
           {
             "name": "breadcrumb",
@@ -689,7 +682,6 @@ export default Connection`
     const result = generateDocumentation({ code })
     expect(result).toMatchInlineSnapshot(`
       {
-        "description": "",
         "entries": [
           {
             "name": "targetHandle",
@@ -724,6 +716,10 @@ export default Connection`
               "params": [],
               "returns": [
                 {
+                  "name": "search",
+                  "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | ReactPortal | Iterable<ReactNode> | Promise<...> | null",
+                },
+                {
                   "name": "darkMode",
                   "type": "boolean",
                 },
@@ -745,7 +741,7 @@ export default Connection`
                 },
                 {
                   "name": "i18n",
-                  "type": "{ locale: string; name: string; }[]",
+                  "type": "{ name: string; locale: string; }[]",
                 },
                 {
                   "name": "lastUpdated",
@@ -758,10 +754,6 @@ export default Connection`
                 {
                   "name": "navigation.prev",
                   "type": "boolean",
-                },
-                {
-                  "name": "search",
-                  "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | ReactPortal | Iterable<ReactNode> | Promise<...> | null",
                 },
                 {
                   "name": "sidebar.defaultMenuCollapseLevel",
@@ -943,7 +935,6 @@ export default $
       const result = generateDocumentation({ code })
       expect(result).toMatchInlineSnapshot(`
         {
-          "description": "",
           "entries": [
             {
               "name": "useNodeConnections",
@@ -1368,10 +1359,10 @@ export default foo`
 
        return (
          <ReactFlow
-           nodes='{nodes}'
-           edges='{edges}'
-           onNodesChange='{onNodesChange}'
-           onEdgesChange='{onEdgesChange}'
+           nodes={nodes}
+           edges={edges}
+           onNodesChange={onNodesChange}
+           onEdgesChange={onEdgesChange}
          />
        );
       }
@@ -1536,7 +1527,7 @@ export default foo`
     `)
   })
 
-  test.only('should remove `undefined` from optional fields', () => {
+  test('should remove `undefined` from optional fields', () => {
     const result = generateDocumentation({
       code: `
 type $ = {
@@ -1557,6 +1548,7 @@ export default $`,
           },
           {
             "name": "b",
+            "optional": true,
             "type": "string | undefined",
           },
           {
@@ -1577,7 +1569,6 @@ export default $`,
     })
     expect(result).toMatchInlineSnapshot(`
       {
-        "description": "",
         "entries": [
           {
             "name": "any",
@@ -1649,6 +1640,7 @@ export default $`,
           },
           {
             "name": "reactNode",
+            "optional": true,
             "type": "ReactNode",
           },
           {
@@ -1701,7 +1693,6 @@ export default $`
     const result = generateDocumentation({ code })
     expect(result).toMatchInlineSnapshot(`
       {
-        "description": "",
         "entries": [
           {
             "description": "By default, we render a small attribution in the corner of your flows that links back to the project.
