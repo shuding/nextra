@@ -40,18 +40,10 @@ const Link: typeof Anchor = ({ className, ...props }) => {
   )
 }
 
-async function renderMarkdownDefault(description: string): Promise<ReactNode> {
+async function renderMarkdownDefault(description?: string): Promise<ReactNode> {
   if (!description) return
   const rawJs = await compileMdx(description)
   return <MDXRemote compiledSource={rawJs} />
-}
-
-type Entry = {
-  name: string
-  type: string
-  description?: ReactNode
-  default?: string
-  optional?: boolean
 }
 
 export const TSDoc: FC<TSDocProps> = async ({
@@ -60,22 +52,14 @@ export const TSDoc: FC<TSDocProps> = async ({
   ...props
 }) => {
   const result = generateDocumentation(props)
-  const mapEntry = async (entry: TypeField): Promise<Entry> => {
-    const tags = entry.tags ?? {}
-    return {
-      name: entry.name,
-      type: entry.type,
-      description: await renderMarkdown(
-        entry.description || tags.description || ''
-      ),
-      default: tags.default || tags.defaultValue,
-      optional: entry.optional
-    }
-  }
   if ('entries' in result) {
-    const promises = result.entries.map(entry => mapEntry(entry))
-    const entries = await Promise.all(promises)
-    return <FieldsTable fields={entries} typeLinkMap={typeLinkMap} />
+    return (
+      <FieldsTable
+        fields={result.entries}
+        typeLinkMap={typeLinkMap}
+        renderMarkdown={renderMarkdown}
+      />
+    )
   }
 
   const withSignatures = result.signatures.length > 1
@@ -106,23 +90,16 @@ export const TSDoc: FC<TSDocProps> = async ({
     /** Signature index, will be appended to returns anchor. */
     index?: string | number
   }>) {
-    const promises = signature.params.map(entry => mapEntry(entry))
-    const entries = await Promise.all(promises)
     const slugger = new Slugger()
-
-    const promises2 = signature.returns.map(entry =>
-      mapEntry(
-        // @ts-expect-error -- fixme
-        entry
-      )
-    )
-    const returns = await Promise.all(promises2)
-
     return (
       <>
         <b className="x:mt-6 x:block">Parameters:</b>
-        {entries.length ? (
-          <FieldsTable fields={entries} typeLinkMap={typeLinkMap} />
+        {signature.params.length ? (
+          <FieldsTable
+            fields={signature.params}
+            typeLinkMap={typeLinkMap}
+            renderMarkdown={renderMarkdown}
+          />
         ) : (
           <Callout type="info">
             This function does not accept any parameters.
@@ -136,8 +113,14 @@ export const TSDoc: FC<TSDocProps> = async ({
               <th className="x:p-1.5 x:px-3">Type</th>
             </tr>
           </thead>
-          {returns.map(prop => {
-            const id = slugger.slug(prop.name || `returns${index}`)
+          {signature.returns.map(async prop => {
+            const id =
+              'name' in prop
+                ? slugger.slug(prop.name || `returns${index}`)
+                : undefined
+            const description = await renderMarkdown(
+              prop.description || ('tags' in prop ? prop.tags?.description : '')
+            )
             return (
               <tbody
                 key={id}
@@ -159,7 +142,7 @@ export const TSDoc: FC<TSDocProps> = async ({
                         'x:p-3' // Increase click box
                       )}
                     />
-                    {prop.name && (
+                    {'name' in prop && prop.name && (
                       <Code
                         // add `?` via CSS `content` property so value will be not selectable
                         className={cn(prop.optional && 'x:after:content-["?"]')}
@@ -172,9 +155,9 @@ export const TSDoc: FC<TSDocProps> = async ({
                     // add `Type: ` via CSS `content` property so value will be not selectable
                     className='x:p-3 x:max-lg:block x:max-lg:before:content-["Type:_"]'
                   >
-                    {linkify(prop.type, typeLinkMap)}
-                    {prop.description && (
-                      <div className="x:mt-2 x:text-sm">{prop.description}</div>
+                    {prop.type && linkify(prop.type, typeLinkMap)}
+                    {description && (
+                      <div className="x:mt-2 x:text-sm">{description}</div>
                     )}
                   </td>
                 </tr>
@@ -187,10 +170,11 @@ export const TSDoc: FC<TSDocProps> = async ({
   }
 }
 
-const FieldsTable: FC<{
-  fields: Entry[]
-  typeLinkMap: TSDocProps['typeLinkMap']
-}> = ({ fields, typeLinkMap }) => {
+const FieldsTable: FC<
+  {
+    fields: TypeField[]
+  } & Required<Pick<TSDocProps, 'renderMarkdown' | 'typeLinkMap'>>
+> = ({ fields, typeLinkMap, renderMarkdown }) => {
   const slugger = new Slugger()
   return (
     <table className="x:my-8 x:w-full x:text-sm">
@@ -201,8 +185,14 @@ const FieldsTable: FC<{
           <th className="x:py-1.5">Default</th>
         </tr>
       </thead>
-      {fields.map(prop => {
-        const id = slugger.slug(prop.name)
+      {fields.map(async field => {
+        const id = slugger.slug(field.name)
+        const tags = field.tags ?? {}
+        const defaultValue = tags.default || tags.defaultValue
+        const description =
+          //
+          await renderMarkdown(field.description || tags.description)
+
         return (
           <tbody
             key={id}
@@ -226,18 +216,18 @@ const FieldsTable: FC<{
                 />
                 <Code
                   // add `?` via CSS `content` property so value will be not selectable
-                  className={cn(prop.optional && 'x:after:content-["?"]')}
+                  className={cn(field.optional && 'x:after:content-["?"]')}
                 >
-                  {prop.name}
+                  {field.name}
                 </Code>
               </td>
               <td
                 // add `Type: ` via CSS `content` property so value will be not selectable
                 className='x:p-3 x:max-lg:block x:max-lg:before:content-["Type:_"]'
               >
-                {linkify(prop.type, typeLinkMap)}
-                {prop.description && (
-                  <div className="x:mt-2 x:text-sm">{prop.description}</div>
+                {linkify(field.type, typeLinkMap)}
+                {description && (
+                  <div className="x:mt-2 x:text-sm">{description}</div>
                 )}
               </td>
               <td
@@ -246,13 +236,13 @@ const FieldsTable: FC<{
                   // For the mobile view, we want to hide the default column entirely if there is no
                   // content for it. We want this because otherwise the default padding applied to
                   // table cells will add some extra blank space we don't want.
-                  prop.default
+                  defaultValue
                     ? // add `Default: ` via CSS `content` property so value will be not selectable
                       'x:py-3 x:max-lg:px-3 x:max-lg:before:content-["Default:_"]'
                     : 'x:lg:after:content-["–"]'
                 )}
               >
-                {prop.default && linkify(prop.default, typeLinkMap)}
+                {defaultValue && linkify(defaultValue, typeLinkMap)}
               </td>
             </tr>
           </tbody>

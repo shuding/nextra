@@ -10,10 +10,10 @@ export type GeneratedType = {
 export type Tags = Record<string, string>
 
 export type ReturnField = {
-  /** Function return description. */
-  description?: string
   /** Function return type. */
   type?: string
+  /** Function return description. */
+  description?: string
 }
 
 export type GeneratedFunction = {
@@ -27,35 +27,35 @@ export type GeneratedFunction = {
     /** Function parameters. */
     params: TypeField[]
     /** Function return. */
-    returns: ReturnField[]
+    returns: (ReturnField | TypeField)[]
   }[]
 }
 
 export type TypeField = {
   /** Field name. */
   name: string
-  /** Field description. */
-  description?: string
-  /** Field tags. */
-  tags?: Tags
   /** Field type. */
   type: string
+  /** Field description. */
+  description?: string
   /** Is field optional. */
   optional?: boolean
+  /** Field tags. */
+  tags?: Tags
 }
 
 export type BaseTypeTableProps = {
   /** TypeScript source code to be processed. */
   code: string
   /**
+   * The name of the exported declaration.
+   * @default "default"
+   */
+  exportName?: string
+  /**
    * Whether to flatten nested objects.
    * E.g. `{ foo: { bar: string } }` will be represented as: `{ foo.bar: string }`
    * @default false
    */
   flattened?: boolean
-  /**
-   * The name of the exported declaration.
-   * @default "default"
-   */
-  exportName?: string
 }
