@@ -8,13 +8,9 @@ import { Code } from '../../client/mdx-components/code.js'
 import { MDXRemote } from '../../client/mdx-remote.js'
 import { compileMdx } from '../compile.js'
 import { generateDocumentation } from './base.js'
-import type {
-  BaseTypeTableProps,
-  GeneratedFunction,
-  TypeField
-} from './types.js'
+import type { BaseArgs, GeneratedFunction, TypeField } from './types.js'
 
-type TSDocProps = BaseTypeTableProps & {
+type TSDocProps = BaseArgs & {
   /**
    * Override the function to render markdown into JSX nodes.
    * @default compileMdx
@@ -91,6 +87,9 @@ export const TSDoc: FC<TSDocProps> = async ({
     index?: string | number
   }>) {
     const slugger = new Slugger()
+    const returns = Array.isArray(signature.returns)
+      ? signature.returns
+      : [{ name: `returns${index}`, type: signature.returns.type }]
     return (
       <>
         <b className="x:mt-6 x:block">Parameters:</b>
@@ -113,16 +112,13 @@ export const TSDoc: FC<TSDocProps> = async ({
               <th className="x:p-1.5 x:px-3">Type</th>
             </tr>
           </thead>
-          {(Array.isArray(signature.returns)
-            ? signature.returns
-            : [{ name: `returns${index}`, type: signature.returns.type }]
-          ).map(async prop => {
+          {returns.map(async prop => {
             const id = slugger.slug(prop.name)
-            const description = await renderMarkdown(
-              prop.description || ('tags' in prop ? prop.tags?.description : '')
-            )
+            const description =
+              //
+              await renderMarkdown(prop.description || prop.tags?.description)
             return (
-              <Row key={id}>
+              <Row key={id} id={id}>
                 <NameCell id={id} optional={prop.optional} name={prop.name} />
                 <TypeAndDescriptionCell
                   type={prop.type}

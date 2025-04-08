@@ -42,7 +42,7 @@ export type TypeField = {
   tags?: Tags
 }
 
-export type BaseTypeTableProps = {
+export type BaseArgs = {
   /** TypeScript source code to be processed. */
   code: string
   /**

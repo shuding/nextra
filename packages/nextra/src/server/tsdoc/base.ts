@@ -6,10 +6,9 @@ import type {
 } from 'ts-morph'
 import { Project, ts } from 'ts-morph'
 import type {
-  BaseTypeTableProps,
+  BaseArgs,
   GeneratedFunction,
   GeneratedType,
-  ReturnField,
   Tags,
   TypeField
 } from './types.js'
@@ -34,7 +33,7 @@ export function generateDocumentation({
   code,
   exportName = 'default',
   flattened = false
-}: BaseTypeTableProps): GeneratedType | GeneratedFunction {
+}: BaseArgs): GeneratedType | GeneratedFunction {
   const sourceFile = project.createSourceFile('temp.ts', code, {
     overwrite: true
   })
