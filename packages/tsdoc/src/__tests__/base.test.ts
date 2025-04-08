@@ -1523,6 +1523,10 @@ export default foo`
             "type": "object",
           },
           {
+            "name": "emptyObject",
+            "type": "EmptyInterface",
+          },
+          {
             "name": "a.b",
             "type": "unknown",
           },

@@ -1,5 +1,8 @@
 import type { JSX, ReactElement, ReactNode } from 'react'
 
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
+interface EmptyInterface {}
+
 type $ = {
   any: any
   unknown: unknown
@@ -24,6 +27,7 @@ type $ = {
   regex: RegExp
   jsx: JSX.Element
   object: object
+  emptyObject: EmptyInterface
   ok: {
     a: {
       b: unknown

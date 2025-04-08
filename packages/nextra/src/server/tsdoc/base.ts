@@ -218,7 +218,8 @@ function isObjectType(t: Type, typeOf?: Type): boolean {
     (!baseName || !IGNORED_TYPES.has(baseName)) &&
     // Is not function
     !t.getCallSignatures().length &&
-    !typeOf?.isUnknown()
+    !typeOf?.isUnknown() &&
+    t.getProperties().length > 0
   )
 }
 
