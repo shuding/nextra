@@ -126,8 +126,9 @@ export const TSDoc: FC<TSDocProps> = async ({
               <tbody
                 key={id}
                 className={cn(
-                  'x:group nextra-border x:mb-5 x:rounded-xl x:max-lg:block x:max-lg:border',
-                  'x:hover:bg-primary-50 x:dark:hover:bg-primary-500/10'
+                  'nextra-border x:mb-5 x:rounded-xl x:max-lg:block x:max-lg:border',
+                  hasName &&
+                    'x:group x:hover:bg-primary-50 x:dark:hover:bg-primary-500/10'
                 )}
               >
                 <tr
@@ -137,7 +138,12 @@ export const TSDoc: FC<TSDocProps> = async ({
                     hasName && 'x:lg:not-target:[&>td>a]:opacity-0'
                   )}
                 >
-                  <td className="x:relative x:py-3 x:max-lg:block x:max-lg:px-3">
+                  <td
+                    className={cn(
+                      'x:relative x:py-3 x:max-lg:px-3',
+                      hasName ? 'x:max-lg:block' : 'x:max-lg:hidden'
+                    )}
+                  >
                     {hasName && (
                       <>
                         <a
@@ -161,7 +167,10 @@ export const TSDoc: FC<TSDocProps> = async ({
                   </td>
                   <td
                     // add `Type: ` via CSS `content` property so value will be not selectable
-                    className='x:p-3 x:max-lg:block x:max-lg:before:content-["Type:_"]'
+                    className={cn(
+                      'x:p-3 x:max-lg:block',
+                      prop.type && 'x:max-lg:before:content-["Type:_"]'
+                    )}
                   >
                     {prop.type && linkify(prop.type, typeLinkMap)}
                     {description && (
