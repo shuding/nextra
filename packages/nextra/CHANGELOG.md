@@ -1,5 +1,7 @@
 # nextra
 
+## 4.3.0-alpha.6
+
 ## 4.3.0-alpha.5
 
 ### Minor Changes
