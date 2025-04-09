@@ -4,6 +4,7 @@ import { HeadPropsSchema } from '../../../nextra/src/client/components/head.js'
 import { generateDocumentation } from '../../../nextra/src/server/tsdoc/base.js'
 import { generateTsFromZod } from '../../../nextra/src/server/tsdoc/zod-to-ts.js'
 import typesFixture from './fixtures/flattened?raw'
+import returnsObjectDescriptionFixture from './fixtures/returns-object-description?raw'
 
 describe('<TSDoc />', () => {
   it('<Banner />', async () => {
@@ -651,6 +652,16 @@ export default $`,
       flattened: true
     })
     await expect(result).toMatchFileSnapshot('./snapshots/flattened.json')
+  })
+
+  test.only('should returns object description', async () => {
+    const result = generateDocumentation({
+      code: returnsObjectDescriptionFixture,
+      flattened: true
+    })
+    await expect(result).toMatchFileSnapshot(
+      './snapshots/returns-object-description-fixture.json'
+    )
   })
 
   it('should exclude JSDoc @link in description', () => {

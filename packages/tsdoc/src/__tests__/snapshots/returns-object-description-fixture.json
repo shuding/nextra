@@ -1,0 +1,11 @@
+{
+  "name": "foo",
+  "signatures": [
+    {
+      "params": [],
+      "returns": {
+        "type": "{ a: number; b: B; }",
+      },
+    },
+  ],
+}
