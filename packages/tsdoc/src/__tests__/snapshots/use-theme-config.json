@@ -9,7 +9,7 @@ values, excluding layout-specific elements like:
 - `children`
 
 This hook is useful for dynamically configuring your project based on shared theme values.",
-  "name": "__type",
+  "name": "__function",
   "signatures": [
     {
       "params": [],
@@ -24,11 +24,11 @@ This hook is useful for dynamically configuring your project based on shared the
         },
         {
           "name": "editLink",
-          "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | ReactPortal | Iterable<ReactNode> | Promise<...> | null",
+          "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...> | null",
         },
         {
           "name": "feedback.content",
-          "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | ReactPortal | Iterable<ReactNode> | Promise<...> | null",
+          "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...> | null",
         },
         {
           "name": "feedback.labels",
@@ -52,7 +52,7 @@ This hook is useful for dynamically configuring your project based on shared the
         },
         {
           "name": "search",
-          "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | ReactPortal | Iterable<ReactNode> | Promise<...> | null",
+          "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...> | null",
         },
         {
           "name": "sidebar.defaultMenuCollapseLevel",
@@ -89,11 +89,11 @@ This hook is useful for dynamically configuring your project based on shared the
         },
         {
           "name": "toc.backToTop",
-          "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | ReactPortal | Iterable<ReactNode> | Promise<...> | null",
+          "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...> | null",
         },
         {
           "name": "toc.title",
-          "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | ReactPortal | Iterable<ReactNode> | Promise<...> | null",
+          "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...> | null",
         },
         {
           "name": "toc.extraContent",
