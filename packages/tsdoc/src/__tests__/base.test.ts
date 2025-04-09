@@ -923,119 +923,12 @@ export default $`,
     `)
   })
 
-  test('should flatten only object', () => {
+  test('should flatten only object', async () => {
     const result = generateDocumentation({
       code: typesFixture,
       flattened: true
     })
-    expect(result).toMatchInlineSnapshot(`
-      {
-        "entries": [
-          {
-            "name": "any",
-            "type": "any",
-          },
-          {
-            "name": "unknown",
-            "type": "unknown",
-          },
-          {
-            "name": "array",
-            "type": "unknown[]",
-          },
-          {
-            "name": "boolean",
-            "type": "boolean",
-          },
-          {
-            "name": "string",
-            "type": "string",
-          },
-          {
-            "name": "number",
-            "type": "number",
-          },
-          {
-            "name": "symbol",
-            "type": "symbol",
-          },
-          {
-            "name": "readonlyArray",
-            "type": "readonly unknown[]",
-          },
-          {
-            "name": "tuple",
-            "type": "[unknown, unknown]",
-          },
-          {
-            "name": "function",
-            "type": "(a: unknown) => unknown",
-          },
-          {
-            "name": "map",
-            "type": "Map<unknown, unknown>",
-          },
-          {
-            "name": "readonlyMap",
-            "type": "ReadonlyMap<unknown, unknown>",
-          },
-          {
-            "name": "set",
-            "type": "Set<unknown>",
-          },
-          {
-            "name": "readonlySet",
-            "type": "ReadonlySet<unknown>",
-          },
-          {
-            "name": "weakSet",
-            "type": "WeakSet<any>",
-          },
-          {
-            "name": "weakMap",
-            "type": "WeakMap<any, unknown>",
-          },
-          {
-            "name": "reactElement",
-            "type": "ReactElement<unknown, string | JSXElementConstructor<any>>",
-          },
-          {
-            "name": "reactNode",
-            "optional": true,
-            "type": "ReactNode",
-          },
-          {
-            "name": "promise",
-            "type": "Promise<unknown>",
-          },
-          {
-            "name": "date",
-            "type": "Date",
-          },
-          {
-            "name": "regex",
-            "type": "RegExp",
-          },
-          {
-            "name": "jsx",
-            "type": "Element",
-          },
-          {
-            "name": "object",
-            "type": "object",
-          },
-          {
-            "name": "emptyObject",
-            "type": "EmptyInterface",
-          },
-          {
-            "name": "ok.a.b",
-            "type": "unknown",
-          },
-        ],
-        "name": "default",
-      }
-    `)
+    await expect(result).toMatchFileSnapshot('./snapshots/flattened.json')
   })
 
   it('should exclude JSDoc @link in description', () => {
