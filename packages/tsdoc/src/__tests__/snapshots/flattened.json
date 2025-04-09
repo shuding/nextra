@@ -98,6 +98,10 @@
       "type": "EmptyInterface",
     },
     {
+      "name": "class",
+      "type": "Class",
+    },
+    {
       "name": "ok.a.b",
       "type": "unknown",
     },

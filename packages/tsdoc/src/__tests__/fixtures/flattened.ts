@@ -3,6 +3,10 @@ import type { JSX, ReactElement, ReactNode } from 'react'
 // eslint-disable-next-line @typescript-eslint/no-empty-object-type
 interface EmptyInterface {}
 
+class Class {
+  foo = 123
+}
+
 type $ = {
   any: any
   unknown: unknown
@@ -28,6 +32,7 @@ type $ = {
   jsx: JSX.Element
   object: object
   emptyObject: EmptyInterface
+  class: Class
   ok: {
     a: {
       b: unknown
