@@ -5,8 +5,9 @@ import type {
   Type
 } from 'ts-morph'
 import { Project, ts } from 'ts-morph'
+import { logger } from '../utils.js'
 import type {
-  BaseTypeTableProps,
+  BaseArgs,
   GeneratedFunction,
   GeneratedType,
   Tags,
@@ -33,7 +34,7 @@ export function generateDocumentation({
   code,
   exportName = 'default',
   flattened = false
-}: BaseTypeTableProps): GeneratedType | GeneratedFunction {
+}: BaseArgs): GeneratedType | GeneratedFunction {
   const sourceFile = project.createSourceFile('temp.ts', code, {
     overwrite: true
   })
@@ -61,10 +62,11 @@ export function generateDocumentation({
   const isFunction = callSignatures.length > 0
   if (isFunction) {
     const tags = getTags(declarationType.getSymbolOrThrow())
+    tags.returns &&= replaceJsDocLinks(tags.returns)
     return {
       name: declarationType.getSymbolOrThrow().getName(),
-      description,
-      tags,
+      ...(description && { description }),
+      ...(Object.keys(tags).length && { tags }),
       signatures: callSignatures.map(signature => {
         const params = signature.getParameters()
         const typeParams = params.flatMap(param =>
@@ -76,16 +78,26 @@ export function generateDocumentation({
           })
         )
         const returnType = signature.getReturnType()
-        const returnsDescription =
-          tags.returns && replaceJsDocLinks(tags.returns)
+        let flattenedReturnType: GeneratedFunction['signatures'][number]['returns'] =
+          flattened && shouldFlattenType(returnType)
+            ? returnType.getProperties().flatMap(childProp =>
+                getDocEntry({
+                  symbol: childProp,
+                  declaration,
+                  flattened
+                })
+              )
+            : []
+
+        if (!flattenedReturnType.length) {
+          flattenedReturnType = {
+            type: getFormattedText(returnType)
+          }
+        }
+
         return {
           params: typeParams,
-          returns: [
-            {
-              ...(returnsDescription && { description: returnsDescription }),
-              type: getFormattedText(returnType)
-            }
-          ]
+          returns: flattenedReturnType
         }
       })
     }
@@ -116,7 +128,7 @@ export function generateDocumentation({
 
   return {
     name: exportName,
-    description,
+    ...(description && { description }),
     entries
   }
 }
@@ -142,36 +154,25 @@ function getDocEntry({
   const subType = isFunctionParameter
     ? originalSubType.getNonNullableType()
     : originalSubType
-
-  const typeOf = getDeclaration(symbol).getType()
-
-  if (
-    flattened &&
-    subType.isObject() &&
-    !subType.isArray() &&
-    !subType.isTuple() &&
-    !isSetType(subType) &&
-    !isMapType(subType) &&
-    // Is not function
-    !subType.getCallSignatures().length &&
-    !typeOf.isUnknown()
-  ) {
+  if (flattened && shouldFlattenType(subType)) {
     return subType.getProperties().flatMap(childProp => {
-      const prefix = isFunctionParameter
+      const childPrefix = isFunctionParameter
         ? symbol.getName().replace(/^_+/, '')
         : symbol.getName()
+      const newPrefix =
+        typeof +childPrefix === 'number' && !Number.isNaN(+childPrefix)
+          ? `[${childPrefix}]` + (originalSubType.isNullable() ? '?' : '')
+          : childPrefix
       return getDocEntry({
         symbol: childProp,
         declaration,
         flattened,
-        prefix:
-          typeof +prefix === 'number' && !Number.isNaN(+prefix)
-            ? `[${prefix}]` + (originalSubType.isNullable() ? '?' : '')
-            : prefix
+        prefix: prexify(prefix, newPrefix)
       })
     })
   }
   const tags = getTags(symbol)
+  const typeOf = getDeclaration(symbol).getType()
   let typeName = typeOf.isUnknown()
     ? typeOf.getText()
     : getFormattedText(subType)
@@ -190,13 +191,16 @@ function getDocEntry({
       symbol.compilerSymbol.getDocumentationComment(compilerObject)
     )
   ).replace(/^- /, '')
-  const isOptional = isFunctionParameter
-    ? // @ts-expect-error -- fixme
-      getDeclaration(symbol).isOptional()
-    : symbol.isOptional()
+  const isOptional =
+    // If some union type has `undefined` -> mark as optional
+    subType.getUnionTypes().some(t => t.isUndefined()) ||
+    (isFunctionParameter
+      ? // @ts-expect-error -- fixme
+        getDeclaration(symbol).isOptional()
+      : symbol.isOptional())
 
   return {
-    name: prefix ? [prefix, name].join('.') : name,
+    name: prexify(prefix, name),
     type: typeName,
     ...(typeDescription && { description: typeDescription }),
     ...(Object.keys(tags).length && { tags }),
@@ -204,19 +208,41 @@ function getDocEntry({
   }
 }
 
-function isSetType(type: Type): boolean {
-  const baseName = type.getSymbol()?.getName()
-
-  // Handles: Set<T>, ReadonlySet<T>
-  return baseName === 'Set' || baseName === 'ReadonlySet'
+function prexify(prefix: string, name: string): string {
+  return prefix ? [prefix, name].join('.') : name
 }
 
-function isMapType(type: Type): boolean {
-  const baseName = type.getSymbol()?.getName()
-
-  // Handles: Map<T>, ReadonlyMap<T>
-  return baseName === 'Map' || baseName === 'ReadonlyMap'
+function shouldFlattenType(t: Type): boolean {
+  if (
+    !t.isObject() ||
+    t.isArray() ||
+    t.isTuple() ||
+    // Is not function
+    t.getCallSignatures().length > 0 ||
+    // Is not `unknown`
+    t.getText() === '{}' ||
+    // Is not empty object
+    !t.getProperties().length
+  ) {
+    return false
+  }
+  try {
+    const baseName = t.getSymbolOrThrow().getName()
+    if (IGNORED_TYPES.has(baseName)) return false
+    return t.isInterface() || baseName === '__type' || baseName === '__object'
+  } catch {
+    logger.error(`Symbol "${t.getText()}" isn't found.`)
+    return false
+  }
 }
+
+const IGNORED_TYPES = new Set([
+  'Date',
+  'RegExp',
+  'ReactElement',
+  'Element',
+  'CSSProperties'
+])
 
 function getDeclaration(s: TsSymbol): Node {
   const parameterName = s.getName()

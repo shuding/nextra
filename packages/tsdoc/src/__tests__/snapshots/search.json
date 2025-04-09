@@ -1,0 +1,52 @@
+{
+  "entries": [
+    {
+      "description": "Not found text.",
+      "name": "emptyResult",
+      "optional": true,
+      "tags": {
+        "default": "'No results found.'",
+      },
+      "type": "ReactNode",
+    },
+    {
+      "description": "Error text.",
+      "name": "errorText",
+      "optional": true,
+      "tags": {
+        "default": "'Failed to load search index.'",
+      },
+      "type": "ReactNode",
+    },
+    {
+      "description": "Loading text.",
+      "name": "loading",
+      "optional": true,
+      "tags": {
+        "default": "'Loading…'",
+      },
+      "type": "ReactNode",
+    },
+    {
+      "description": "Placeholder text.",
+      "name": "placeholder",
+      "optional": true,
+      "tags": {
+        "default": "'Search documentation…'",
+      },
+      "type": "string",
+    },
+    {
+      "description": "CSS class name.",
+      "name": "className",
+      "optional": true,
+      "type": "string",
+    },
+    {
+      "name": "searchOptions",
+      "optional": true,
+      "type": "PagefindSearchOptions",
+    },
+  ],
+  "name": "default",
+}

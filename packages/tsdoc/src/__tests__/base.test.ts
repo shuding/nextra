@@ -3,20 +3,21 @@ import { LayoutPropsSchema } from '../../../nextra-theme-docs/src/layout.js'
 import { HeadPropsSchema } from '../../../nextra/src/client/components/head.js'
 import { generateDocumentation } from '../../../nextra/src/server/tsdoc/base.js'
 import { generateTsFromZod } from '../../../nextra/src/server/tsdoc/zod-to-ts.js'
+import typesFixture from './fixtures/flattened?raw'
 
 describe('<TSDoc />', () => {
-  it('<Banner />', async () => {
+  test('<Banner />', async () => {
     const code = `import type { Banner } from 'nextra/components'
 type $ = React.ComponentProps<typeof Banner>
 export default $`
     const result = generateDocumentation({ code })
     expect(result).toMatchInlineSnapshot(`
       {
-        "description": "",
         "entries": [
           {
             "description": "Content of the banner.",
             "name": "children",
+            "optional": true,
             "type": "ReactNode",
           },
           {
@@ -42,75 +43,20 @@ export default $`
       }
     `)
   })
-  it('<Search />', async () => {
+  test('<Search />', async () => {
     const code = `import type { Search } from 'nextra/components'
 type $ = React.ComponentProps<typeof Search>
 export default $`
     const result = generateDocumentation({ code })
-    expect(result).toMatchInlineSnapshot(`
-      {
-        "description": "",
-        "entries": [
-          {
-            "description": "Not found text.",
-            "name": "emptyResult",
-            "optional": true,
-            "tags": {
-              "default": "'No results found.'",
-            },
-            "type": "ReactNode",
-          },
-          {
-            "description": "Error text.",
-            "name": "errorText",
-            "optional": true,
-            "tags": {
-              "default": "'Failed to load search index.'",
-            },
-            "type": "ReactNode",
-          },
-          {
-            "description": "Loading text.",
-            "name": "loading",
-            "optional": true,
-            "tags": {
-              "default": "'Loading…'",
-            },
-            "type": "ReactNode",
-          },
-          {
-            "description": "Placeholder text.",
-            "name": "placeholder",
-            "optional": true,
-            "tags": {
-              "default": "'Search documentation…'",
-            },
-            "type": "string",
-          },
-          {
-            "description": "CSS class name.",
-            "name": "className",
-            "optional": true,
-            "type": "string",
-          },
-          {
-            "name": "searchOptions",
-            "optional": true,
-            "type": "PagefindSearchOptions",
-          },
-        ],
-        "name": "default",
-      }
-    `)
+    await expect(result).toMatchFileSnapshot('./snapshots/search.json')
   })
-  it('<Callout />', async () => {
+  test('<Callout />', async () => {
     const code = `import type { Callout } from 'nextra/components'
 type $ = React.ComponentProps<typeof Callout>
 export default $`
     const result = generateDocumentation({ code })
     expect(result).toMatchInlineSnapshot(`
       {
-        "description": "",
         "entries": [
           {
             "description": "Defines the style of the callout and determines the default icon if \`emoji\` is not provided.
@@ -142,6 +88,7 @@ export default $`
           {
             "description": "Content to be displayed inside the callout.",
             "name": "children",
+            "optional": true,
             "type": "ReactNode",
           },
         ],
@@ -149,14 +96,13 @@ export default $`
       }
     `)
   })
-  it('<NotFoundPage />', async () => {
+  test('<NotFoundPage />', async () => {
     const code = `import type { NotFoundPage } from 'nextra-theme-docs'
 type $ = React.ComponentProps<typeof NotFoundPage>
 export default $`
     const result = generateDocumentation({ code })
     expect(result).toMatchInlineSnapshot(`
       {
-        "description": "",
         "entries": [
           {
             "description": "Content of the link.",
@@ -196,433 +142,27 @@ export default $`
       }
     `)
   })
-  it('<Navbar />', async () => {
+  test('<Navbar />', async () => {
     const code = `type $ = ${generateTsFromZod(NavbarPropsSchema)}
 export default $`
     const result = generateDocumentation({ code })
-    expect(result).toMatchInlineSnapshot(`
-      {
-        "description": "",
-        "entries": [
-          {
-            "description": "Extra content after last icon.",
-            "name": "children",
-            "optional": true,
-            "tags": {
-              "remarks": "\`ReactNode\`",
-            },
-            "type": "ReactNode",
-          },
-          {
-            "description": "Specifies whether the logo should have a link or provides the URL for the logo's link.",
-            "name": "logoLink",
-            "optional": true,
-            "tags": {
-              "default": "true",
-            },
-            "type": "string | boolean",
-          },
-          {
-            "description": "Logo of the website.",
-            "name": "logo",
-            "tags": {
-              "remarks": "\`ReactElement\`",
-            },
-            "type": "ReactElement",
-          },
-          {
-            "description": "URL of the project homepage.",
-            "name": "projectLink",
-            "optional": true,
-            "type": "string",
-          },
-          {
-            "description": "Icon of the project link.",
-            "name": "projectIcon",
-            "optional": true,
-            "tags": {
-              "default": "<GitHubIcon />",
-              "remarks": "\`ReactNode\`",
-            },
-            "type": "ReactNode",
-          },
-          {
-            "description": "URL of the chat link.",
-            "name": "chatLink",
-            "optional": true,
-            "type": "string",
-          },
-          {
-            "description": "Icon of the chat link.",
-            "name": "chatIcon",
-            "optional": true,
-            "tags": {
-              "default": "<DiscordIcon />",
-              "remarks": "\`ReactNode\`",
-            },
-            "type": "ReactNode",
-          },
-          {
-            "description": "CSS class name.",
-            "name": "className",
-            "optional": true,
-            "type": "string",
-          },
-          {
-            "description": "Aligns navigation links to the specified side.",
-            "name": "align",
-            "optional": true,
-            "tags": {
-              "default": ""right"",
-            },
-            "type": ""left" | "right"",
-          },
-        ],
-        "name": "default",
-      }
-    `)
+    await expect(result).toMatchFileSnapshot('./snapshots/navbar.json')
   })
-  it('<Head /> with `flattened: true`', async () => {
+  test('<Head /> with `flattened: true`', async () => {
     const code = `type $ = ${generateTsFromZod(HeadPropsSchema)}
 export default $`
     const result = generateDocumentation({ code, flattened: true })
-    expect(result).toMatchInlineSnapshot(`
-      {
-        "description": "",
-        "entries": [
-          {
-            "description": "The hue of the primary theme color.<br/>Range: \`0 - 360\`",
-            "name": "color.hue",
-            "optional": true,
-            "tags": {
-              "default": "{"dark":204,"light":212}",
-            },
-            "type": "number | { dark: number; light: number; }",
-          },
-          {
-            "description": "The saturation of the primary theme color.<br/>Range: \`0 - 100\`",
-            "name": "color.saturation",
-            "optional": true,
-            "tags": {
-              "default": "100",
-            },
-            "type": "number | { dark: number; light: number; }",
-          },
-          {
-            "description": "The lightness of the primary theme color.<br/>Range: \`0 - 100\`",
-            "name": "color.lightness",
-            "optional": true,
-            "tags": {
-              "default": "{"dark":55,"light":45}",
-            },
-            "type": "number | { dark: number; light: number; }",
-          },
-          {
-            "description": "The glyph to use as the favicon.",
-            "name": "faviconGlyph",
-            "optional": true,
-            "type": "string",
-          },
-          {
-            "description": "Background color for dark theme.<br/>Format: \`"rgb(RRR,GGG,BBB)" | "#RRGGBB"\`",
-            "name": "backgroundColor.dark",
-            "optional": true,
-            "tags": {
-              "default": ""rgb(17,17,17)"",
-            },
-            "type": "string",
-          },
-          {
-            "description": "Background color for light theme.<br/>Format: \`"rgb(RRR,GGG,BBB)" | "#RRGGBB"\`",
-            "name": "backgroundColor.light",
-            "optional": true,
-            "tags": {
-              "default": ""rgb(250,250,250)"",
-            },
-            "type": "string",
-          },
-          {
-            "description": "Content of \`<head>\`",
-            "name": "children",
-            "optional": true,
-            "tags": {
-              "remarks": "\`ReactNode\`",
-            },
-            "type": "ReactNode",
-          },
-        ],
-        "name": "default",
-      }
-    `)
+    await expect(result).toMatchFileSnapshot('./snapshots/head.json')
   })
-  it('<Layout /> with `flattened: true`', async () => {
+  test('<Layout /> with `flattened: true`', async () => {
     const code = `type $ = ${generateTsFromZod(LayoutPropsSchema)}
 export default $`
     const result = generateDocumentation({ code, flattened: true })
-    expect(result).toMatchInlineSnapshot(`
-      {
-        "description": "",
-        "entries": [
-          {
-            "description": "Rendered [\`<Banner>\` component](/docs/built-ins/banner). E.g. \`<Banner {...bannerProps} />\`",
-            "name": "banner",
-            "optional": true,
-            "tags": {
-              "remarks": "\`ReactNode\`",
-            },
-            "type": "ReactNode",
-          },
-          {
-            "name": "children",
-            "optional": true,
-            "tags": {
-              "remarks": "\`ReactNode\`",
-            },
-            "type": "ReactNode",
-          },
-          {
-            "description": "Show or hide the dark mode select button.",
-            "name": "darkMode",
-            "optional": true,
-            "tags": {
-              "default": "true",
-            },
-            "type": "boolean",
-          },
-          {
-            "description": "URL of the documentation repository.",
-            "name": "docsRepositoryBase",
-            "optional": true,
-            "tags": {
-              "default": ""https://github.com/shuding/nextra"",
-            },
-            "type": "string",
-          },
-          {
-            "description": "Content of the edit link.",
-            "name": "editLink",
-            "optional": true,
-            "tags": {
-              "default": ""Edit this page"",
-              "remarks": "\`ReactNode\`",
-            },
-            "type": "ReactNode",
-          },
-          {
-            "description": "Content of the feedback link.",
-            "name": "feedback.content",
-            "optional": true,
-            "tags": {
-              "default": ""Question? Give us feedback"",
-              "remarks": "\`ReactNode\`",
-            },
-            "type": "ReactNode",
-          },
-          {
-            "description": "Labels that can be added to the new created issue.",
-            "name": "feedback.labels",
-            "optional": true,
-            "tags": {
-              "default": ""feedback"",
-            },
-            "type": "string",
-          },
-          {
-            "description": "Rendered [\`<Footer>\` component](/docs/docs-theme/built-ins/footer). E.g. \`<Footer {...footerProps} />\`",
-            "name": "footer",
-            "optional": true,
-            "tags": {
-              "remarks": "\`ReactNode\`",
-            },
-            "type": "ReactNode",
-          },
-          {
-            "description": "Options to configure the language dropdown for [the i18n docs website](/docs/guide/i18n).",
-            "name": "i18n",
-            "optional": true,
-            "tags": {
-              "default": "[]",
-            },
-            "type": "{ locale: string; name: string; }[]",
-          },
-          {
-            "description": "Component to render the last updated info.",
-            "name": "lastUpdated",
-            "optional": true,
-            "tags": {
-              "default": "<LastUpdated />",
-              "remarks": "\`ReactElement\`",
-            },
-            "type": "ReactElement",
-          },
-          {
-            "description": "Rendered [\`<Navbar>\` component](/docs/docs-theme/built-ins/navbar). E.g. \`<Navbar {...navbarProps} />\`",
-            "name": "navbar",
-            "optional": true,
-            "tags": {
-              "remarks": "\`ReactNode\`",
-            },
-            "type": "ReactNode",
-          },
-          {
-            "description": "Enable or disable navigation link.",
-            "name": "navigation",
-            "optional": true,
-            "tags": {
-              "default": "true",
-            },
-            "type": "boolean | { next: boolean; prev: boolean; }",
-          },
-          {
-            "name": "nextThemes.attribute",
-            "optional": true,
-            "tags": {
-              "default": ""class"",
-            },
-            "type": ""@TODO TO IMPLEMENT" | "@TODO TO IMPLEMENT"[]",
-          },
-          {
-            "name": "nextThemes.defaultTheme",
-            "optional": true,
-            "type": "string",
-          },
-          {
-            "name": "nextThemes.disableTransitionOnChange",
-            "optional": true,
-            "tags": {
-              "default": "true",
-            },
-            "type": "boolean",
-          },
-          {
-            "name": "nextThemes.forcedTheme",
-            "optional": true,
-            "type": "string",
-          },
-          {
-            "name": "nextThemes.storageKey",
-            "optional": true,
-            "type": "string",
-          },
-          {
-            "description": "Page map list. Result of \`getPageMap(route = '/')\` call.",
-            "name": "pageMap",
-            "tags": {
-              "remarks": "\`PageMapItem[]\`",
-            },
-            "type": "PageMapItem[]",
-          },
-          {
-            "description": "Rendered [\`<Search>\` component](/docs/built-ins/search). E.g. \`<Search {...searchProps} />\`",
-            "name": "search",
-            "optional": true,
-            "tags": {
-              "default": "<Search />",
-              "remarks": "\`ReactNode\`",
-            },
-            "type": "ReactNode",
-          },
-          {
-            "description": "If true, automatically collapse inactive folders above \`defaultMenuCollapseLevel\`.",
-            "name": "sidebar.autoCollapse",
-            "optional": true,
-            "type": "boolean",
-          },
-          {
-            "description": "Specifies the folder level at which the menu on the left is collapsed by default.",
-            "name": "sidebar.defaultMenuCollapseLevel",
-            "optional": true,
-            "tags": {
-              "default": "2",
-            },
-            "type": "number",
-          },
-          {
-            "description": "Hide/show sidebar by default.",
-            "name": "sidebar.defaultOpen",
-            "optional": true,
-            "tags": {
-              "default": "true",
-            },
-            "type": "boolean",
-          },
-          {
-            "description": "Hide/show sidebar toggle button.",
-            "name": "sidebar.toggleButton",
-            "optional": true,
-            "tags": {
-              "default": "true",
-            },
-            "type": "boolean",
-          },
-          {
-            "name": "themeSwitch.dark",
-            "optional": true,
-            "tags": {
-              "default": ""Dark"",
-            },
-            "type": "string",
-          },
-          {
-            "name": "themeSwitch.light",
-            "optional": true,
-            "tags": {
-              "default": ""Light"",
-            },
-            "type": "string",
-          },
-          {
-            "name": "themeSwitch.system",
-            "optional": true,
-            "tags": {
-              "default": ""System"",
-            },
-            "type": "string",
-          },
-          {
-            "description": "Text of back to top button.",
-            "name": "toc.backToTop",
-            "optional": true,
-            "tags": {
-              "default": ""Scroll to top"",
-              "remarks": "\`ReactNode\`",
-            },
-            "type": "ReactNode",
-          },
-          {
-            "description": "Display extra content below the TOC content.",
-            "name": "toc.extraContent",
-            "optional": true,
-            "tags": {
-              "remarks": "\`ReactNode\`",
-            },
-            "type": "ReactNode",
-          },
-          {
-            "description": "Float the TOC next to the content.",
-            "name": "toc.float",
-            "optional": true,
-            "tags": {
-              "default": "true",
-            },
-            "type": "boolean",
-          },
-          {
-            "description": "Title of the TOC sidebar.",
-            "name": "toc.title",
-            "optional": true,
-            "tags": {
-              "default": ""On This Page"",
-              "remarks": "\`ReactNode\`",
-            },
-            "type": "ReactNode",
-          },
-        ],
-        "name": "default",
-      }
-    `)
+    await expect(result).toMatchFileSnapshot(
+      './snapshots/theme-docs-layout.json'
+    )
   })
-  it('two declarations', async () => {
+  test('two declarations', async () => {
     const code = `
 type A = { foo: string }
 type A = { bar: string }
@@ -630,7 +170,6 @@ export default A`
     const result = generateDocumentation({ code })
     expect(result).toMatchInlineSnapshot(`
       {
-        "description": "",
         "entries": [
           {
             "name": "foo",
@@ -641,7 +180,7 @@ export default A`
       }
     `)
   })
-  it('inline description and @description as tag', async () => {
+  test('inline description and @description as tag', async () => {
     const code = `type $ = {
 /**
  * @description Show or hide breadcrumb navigation.
@@ -657,7 +196,6 @@ export default $`
     const result = generateDocumentation({ code })
     expect(result).toMatchInlineSnapshot(`
       {
-        "description": "",
         "entries": [
           {
             "name": "breadcrumb",
@@ -678,7 +216,7 @@ export default $`
       }
     `)
   })
-  it('should show null type', async () => {
+  test('should show null type', async () => {
     const code = `
 type Connection = {
   targetHandle: string | null;
@@ -687,7 +225,6 @@ export default Connection`
     const result = generateDocumentation({ code })
     expect(result).toMatchInlineSnapshot(`
       {
-        "description": "",
         "entries": [
           {
             "name": "targetHandle",
@@ -700,7 +237,22 @@ export default Connection`
   })
 
   describe('functions', () => {
-    it('should be parsed in object field', () => {
+    test('should flatten return type for useThemeConfig', async () => {
+      const code =
+        'export { useThemeConfig as default } from "../nextra-theme-docs/src"'
+      const result = generateDocumentation({ code, flattened: true })
+      await expect(result).toMatchFileSnapshot(
+        './snapshots/use-theme-config.json'
+      )
+    })
+
+    test('should flatten return type for useConfig', async () => {
+      const code = 'export { useConfig as default } from "nextra-theme-docs"'
+      const result = generateDocumentation({ code, flattened: true })
+      await expect(result).toMatchFileSnapshot('./snapshots/use-config.json')
+    })
+
+    test('should be parsed in object field', () => {
       const code = `type $ = {
   useNodeConnections: typeof import('@xyflow/react').useNodeConnections
 }
@@ -709,7 +261,6 @@ export default $
       const result = generateDocumentation({ code })
       expect(result).toMatchInlineSnapshot(`
         {
-          "description": "",
           "entries": [
             {
               "name": "useNodeConnections",
@@ -720,7 +271,7 @@ export default $
         }
       `)
     })
-    it('should be parsed as function type', () => {
+    test('should be parsed as function type', () => {
       const code =
         "export { useNodeConnections as default } from '@xyflow/react'"
       const result = generateDocumentation({ code, flattened: true })
@@ -762,12 +313,9 @@ export default $
                   "type": "(connections: Connection[]) => void",
                 },
               ],
-              "returns": [
-                {
-                  "description": "An array with connections.",
-                  "type": "NodeConnection[]",
-                },
-              ],
+              "returns": {
+                "type": "NodeConnection[]",
+              },
             },
           ],
           "tags": {
@@ -791,7 +339,7 @@ export default $
         }
       `)
     })
-    it('as function with description', () => {
+    test('as function with description', () => {
       const code = "export { useInternalNode as default } from '@xyflow/react'"
       const result = generateDocumentation({ code, flattened: true })
       expect(result).toMatchInlineSnapshot(`
@@ -812,12 +360,9 @@ export default $
                   "type": "string",
                 },
               ],
-              "returns": [
-                {
-                  "description": "The \`InternalNode\` object for the node with the given ID.",
-                  "type": "InternalNode<NodeType> | undefined",
-                },
-              ],
+              "returns": {
+                "type": "InternalNode<NodeType> | undefined",
+              },
             },
           ],
           "tags": {
@@ -845,7 +390,7 @@ export default $
       `)
     })
 
-    it("should not throw when symbol isn't found", () => {
+    test("should not throw when symbol isn't found", () => {
       const code = "export { isEdge as default } from '@xyflow/react'"
       const result = generateDocumentation({ code, flattened: true })
       expect(result).toMatchInlineSnapshot(`
@@ -866,14 +411,9 @@ export default $
                   "type": "unknown",
                 },
               ],
-              "returns": [
-                {
-                  "description": "Tests whether the provided value can be used as an \`Edge\`. If you're using TypeScript,
-        this function acts as a type guard and will narrow the type of the value to \`Edge\` if it returns
-        \`true\`.",
-                  "type": "boolean",
-                },
-              ],
+              "returns": {
+                "type": "boolean",
+              },
             },
           ],
           "tags": {
@@ -895,7 +435,7 @@ export default $
       `)
     })
 
-    it('should parse multiple function signatures', () => {
+    test('should parse multiple function signatures', () => {
       const code = "export { useNodesData as default } from '@xyflow/react'"
       const result = generateDocumentation({ code, flattened: true })
       expect(result).toMatchInlineSnapshot(`
@@ -911,12 +451,9 @@ export default $
                   "type": "string",
                 },
               ],
-              "returns": [
-                {
-                  "description": "An object (or array of object) with \`id\`, \`type\`, \`data\` representing each node.",
-                  "type": "Pick<NodeType, "id" | "type" | "data"> | null",
-                },
-              ],
+              "returns": {
+                "type": "Pick<NodeType, "id" | "type" | "data"> | null",
+              },
             },
             {
               "params": [
@@ -926,12 +463,9 @@ export default $
                   "type": "string[]",
                 },
               ],
-              "returns": [
-                {
-                  "description": "An object (or array of object) with \`id\`, \`type\`, \`data\` representing each node.",
-                  "type": "Pick<NodeType, "id" | "type" | "data">[]",
-                },
-              ],
+              "returns": {
+                "type": "Pick<NodeType, "id" | "type" | "data">[]",
+              },
             },
           ],
           "tags": {
@@ -952,13 +486,12 @@ export default $
       `)
     })
 
-    it('should parse optional parameters', () => {
+    test('should parse optional parameters', () => {
       const code =
         'function foo(a: string, b?: number, c = true) {}\nexport default foo'
       const result = generateDocumentation({ code, flattened: true })
       expect(result).toMatchInlineSnapshot(`
         {
-          "description": "",
           "name": "foo",
           "signatures": [
             {
@@ -978,19 +511,16 @@ export default $
                   "type": "boolean",
                 },
               ],
-              "returns": [
-                {
-                  "type": "void",
-                },
-              ],
+              "returns": {
+                "type": "void",
+              },
             },
           ],
-          "tags": {},
         }
       `)
     })
 
-    it('should not flatten tuple type, set, map', () => {
+    test('should not flatten tuple type, set, map', () => {
       const code = `
 type foo = (params: {
   tuple?: [number, number],
@@ -1001,7 +531,6 @@ export default foo`
       const result = generateDocumentation({ code, flattened: true })
       expect(result).toMatchInlineSnapshot(`
         {
-          "description": "",
           "name": "__type",
           "signatures": [
             {
@@ -1022,183 +551,36 @@ export default foo`
                   "type": "Map<string, number>",
                 },
               ],
-              "returns": [
-                {
-                  "type": "void",
-                },
-              ],
+              "returns": {
+                "type": "void",
+              },
             },
           ],
-          "tags": {},
         }
       `)
     })
   })
 
-  it('should exclude {@link ...}', () => {
+  test('should exclude {@link ...}', async () => {
     const code =
       "export { getViewportForBounds as default } from '@xyflow/react'"
     const result = generateDocumentation({ code, flattened: true })
-    expect(result).toMatchInlineSnapshot(`
-      {
-        "description": "Returns a viewport that encloses the given bounds with padding.",
-        "name": "__type",
-        "signatures": [
-          {
-            "params": [
-              {
-                "description": "Bounds to fit inside viewport.",
-                "name": "bounds",
-                "tags": {
-                  "param": "bounds - Bounds to fit inside viewport.",
-                },
-                "type": "Rect",
-              },
-              {
-                "description": "Width of the viewport.",
-                "name": "width",
-                "tags": {
-                  "param": "width - Width of the viewport.",
-                },
-                "type": "number",
-              },
-              {
-                "description": "Height of the viewport.",
-                "name": "height",
-                "tags": {
-                  "param": "height - Height of the viewport.",
-                },
-                "type": "number",
-              },
-              {
-                "description": "Minimum zoom level of the resulting viewport.",
-                "name": "minZoom",
-                "tags": {
-                  "param": "minZoom - Minimum zoom level of the resulting viewport.",
-                },
-                "type": "number",
-              },
-              {
-                "description": "Maximum zoom level of the resulting viewport.",
-                "name": "maxZoom",
-                "tags": {
-                  "param": "maxZoom - Maximum zoom level of the resulting viewport.",
-                },
-                "type": "number",
-              },
-              {
-                "description": "Padding around the bounds.",
-                "name": "padding",
-                "tags": {
-                  "param": "padding - Padding around the bounds.",
-                },
-                "type": "Padding",
-              },
-            ],
-            "returns": [
-              {
-                "description": "A transformed Viewport that encloses the given bounds which you can pass to e.g. setViewport .",
-                "type": "Viewport",
-              },
-            ],
-          },
-        ],
-        "tags": {
-          "example": "const { x, y, zoom } = getViewportForBounds(
-      { x: 0, y: 0, width: 100, height: 100},
-      1200, 800, 0.5, 2);",
-          "param": "padding - Padding around the bounds.",
-          "public": "",
-          "remarks": "You can determine bounds of nodes with {@link getNodesBounds } and {@link getBoundsOfRects}",
-          "returns": "A transformed {@link Viewport} that encloses the given bounds which you can pass to e.g. {@link setViewport }.",
-        },
-      }
-    `)
+    await expect(result).toMatchFileSnapshot(
+      './snapshots/get-viewport-for-bounds.json'
+    )
   })
 
-  it('should flatten array return type', () => {
+  test('should flatten array return type', async () => {
     const code = 'export { useEdgesState as default } from "@xyflow/react"'
     const result = generateDocumentation({ code, flattened: true })
-    expect(result).toMatchInlineSnapshot(`
-      {
-        "description": "This hook makes it easy to prototype a controlled flow where you manage the
-      state of nodes and edges outside the \`ReactFlowInstance\`. You can think of it
-      like React's \`useState\` hook with an additional helper callback.",
-        "name": "useEdgesState",
-        "signatures": [
-          {
-            "params": [
-              {
-                "name": "initialEdges",
-                "type": "EdgeType[]",
-              },
-            ],
-            "returns": [
-              {
-                "description": "- \`edges\`: The current array of edges. You might pass this directly to the \`edges\` prop of your
-      \`<ReactFlow />\` component, or you may want to manipulate it first to perform some layouting,
-      for example.
-
-      - \`setEdges\`: A function that you can use to update the edges. You can pass it a new array of
-      edges or a callback that receives the current array of edges and returns a new array of edges.
-      This is the same as the second element of the tuple returned by React's \`useState\` hook.
-
-      - \`onEdgesChange\`: A handy callback that can take an array of \`EdgeChanges\` and update the edges
-      state accordingly. You'll typically pass this directly to the \`onEdgesChange\` prop of your
-      \`<ReactFlow />\` component.",
-                "type": "[edges: EdgeType[], setEdges: Dispatch<SetStateAction<EdgeType[]>>, onEdgesChange: OnEdgesChange<EdgeType>]",
-              },
-            ],
-          },
-        ],
-        "tags": {
-          "example": "\`\`\`tsx
-      import { ReactFlow, useNodesState, useEdgesState } from '@xyflow/react';
-
-      const initialNodes = [];
-      const initialEdges = [];
-
-      export default function () {
-       const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
-       const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
-
-       return (
-         <ReactFlow
-           nodes={nodes}
-           edges={edges}
-           onNodesChange={onNodesChange}
-           onEdgesChange={onEdgesChange}
-         />
-       );
-      }
-      \`\`\`",
-          "public": "",
-          "remarks": "This hook was created to make prototyping easier and our documentation
-      examples clearer. Although it is OK to use this hook in production, in
-      practice you may want to use a more sophisticated state management solution
-      like Zustand {@link https://reactflow.dev/docs/guides/state-management/} instead.",
-          "returns": "- \`edges\`: The current array of edges. You might pass this directly to the \`edges\` prop of your
-      \`<ReactFlow />\` component, or you may want to manipulate it first to perform some layouting,
-      for example.
-
-      - \`setEdges\`: A function that you can use to update the edges. You can pass it a new array of
-      edges or a callback that receives the current array of edges and returns a new array of edges.
-      This is the same as the second element of the tuple returned by React's \`useState\` hook.
-
-      - \`onEdgesChange\`: A handy callback that can take an array of \`EdgeChanges\` and update the edges
-      state accordingly. You'll typically pass this directly to the \`onEdgesChange\` prop of your
-      \`<ReactFlow />\` component.",
-        },
-      }
-    `)
+    await expect(result).toMatchFileSnapshot('./snapshots/use-edges-state.json')
   })
 
-  it('should parse `unknown` type', () => {
+  test('should parse `unknown` type', () => {
     const code = 'function foo(a?: unknown) {}\nexport default foo'
     const result = generateDocumentation({ code, flattened: true })
     expect(result).toMatchInlineSnapshot(`
       {
-        "description": "",
         "name": "foo",
         "signatures": [
           {
@@ -1209,19 +591,69 @@ export default foo`
                 "type": "unknown",
               },
             ],
-            "returns": [
-              {
-                "type": "void",
-              },
-            ],
+            "returns": {
+              "type": "void",
+            },
           },
         ],
-        "tags": {},
       }
     `)
   })
 
-  it('should exclude JSDoc @link in description', () => {
+  test('should flatten params', async () => {
+    const result = generateDocumentation({
+      code: "export { getSmoothStepPath as default } from '@xyflow/react'",
+      flattened: true
+    })
+    await expect(result).toMatchFileSnapshot(
+      './snapshots/get-smooth-step-path.json'
+    )
+  })
+
+  test('should remove `undefined` from optional fields', () => {
+    const result = generateDocumentation({
+      code: `
+type $ = {
+  a?: string
+  b: string | undefined
+  c?: string | undefined
+}
+export default $`,
+      flattened: true
+    })
+    expect(result).toMatchInlineSnapshot(`
+      {
+        "entries": [
+          {
+            "name": "a",
+            "optional": true,
+            "type": "string",
+          },
+          {
+            "name": "b",
+            "optional": true,
+            "type": "string | undefined",
+          },
+          {
+            "name": "c",
+            "optional": true,
+            "type": "string | undefined",
+          },
+        ],
+        "name": "default",
+      }
+    `)
+  })
+
+  test('should flatten only object', async () => {
+    const result = generateDocumentation({
+      code: typesFixture,
+      flattened: true
+    })
+    await expect(result).toMatchFileSnapshot('./snapshots/flattened.json')
+  })
+
+  test('should exclude JSDoc @link in description', () => {
     const code = `type $ = {
   /**
    * By default, we render a small attribution in the corner of your flows that links back to the project.
@@ -1237,7 +669,6 @@ export default $`
     const result = generateDocumentation({ code })
     expect(result).toMatchInlineSnapshot(`
       {
-        "description": "",
         "entries": [
           {
             "description": "By default, we render a small attribution in the corner of your flows that links back to the project.
@@ -1274,7 +705,6 @@ export default $`
     expect(result).toMatchInlineSnapshot(`
       [
         {
-          "description": "",
           "entries": [
             {
               "description": "test",

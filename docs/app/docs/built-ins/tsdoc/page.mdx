@@ -24,11 +24,7 @@ displays:
 
 ## Props
 
-<TSDoc
-  code={`import type { unstable_TSDoc as TSDoc } from 'nextra/tsdoc'
-type $ = React.ComponentProps<typeof TSDoc>
-export default $`}
-/>
+<TSDoc componentName="unstable_TSDoc" packageName="nextra/tsdoc" />
 
 ## Example
 
@@ -61,10 +57,8 @@ type Example = {
 This means that while the property `foo` type is `string`, an alternative type
 annotation is described in `@remarks`.
 
-<RemarksExample />
-
-export function RemarksExample() {
-  const code = `
+<TSDoc
+  code={`
 type Example = {
   /**
    * **Foo** description.
@@ -73,6 +67,5 @@ type Example = {
    */
   foo: string
 }
-export default Example`
-  return <TSDoc code={code} />
-}
+export default Example`}
+/>
