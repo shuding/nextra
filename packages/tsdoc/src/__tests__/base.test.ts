@@ -249,7 +249,8 @@ export default Connection`
 
     test('should flatten return type for useConfig', async () => {
       // Description are lost for `normalizePagesResult` if import from `nextra-theme-docs`
-      const code = 'export { useConfig as default } from "../nextra-theme-docs/src"'
+      const code =
+        'export { useConfig as default } from "../nextra-theme-docs/src"'
       const result = generateDocumentation({ code, flattened: true })
       await expect(result).toMatchFileSnapshot('./snapshots/use-config.json')
     })
