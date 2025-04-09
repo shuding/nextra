@@ -1,7 +1,7 @@
 /** Type B */
 type B = {
   /** Field c */
-  c: 1
+  c: number
   d: {
     /** Field e */
     e: string

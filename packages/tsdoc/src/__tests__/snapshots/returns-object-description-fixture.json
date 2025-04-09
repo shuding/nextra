@@ -13,7 +13,7 @@
         {
           "description": "Field c",
           "name": "b.c",
-          "type": "1",
+          "type": "number",
         },
         {
           "description": "Field e",
