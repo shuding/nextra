@@ -1,5 +1,11 @@
 # nextra
 
+## 4.3.0-alpha.7
+
+### Minor Changes
+
+- 07debf9: feat(TSDoc): support flattening return object fields
+
 ## 4.3.0-alpha.6
 
 ## 4.3.0-alpha.5
