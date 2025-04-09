@@ -440,122 +440,15 @@ export default Connection`
       const code =
         'export { useThemeConfig as default } from "nextra-theme-docs"'
       const result = generateDocumentation({ code, flattened: true })
-      await expect(result).toMatchFileSnapshot('./snapshots/use-theme-config.json')
+      await expect(result).toMatchFileSnapshot(
+        './snapshots/use-theme-config.json'
+      )
     })
 
-    it('should flatten return type for useConfig', () => {
+    it('should flatten return type for useConfig', async () => {
       const code = 'export { useConfig as default } from "nextra-theme-docs"'
       const result = generateDocumentation({ code, flattened: true })
-      expect(result).toMatchInlineSnapshot(`
-        {
-          "description": "Provides normalized data for the current page from \`ConfigContext\`.
-
-        This includes the full result of \`normalizePages\`, along with a derived value \`hideSidebar\`
-        that determines whether the sidebar should be hidden on the current page.",
-          "name": "useConfig",
-          "signatures": [
-            {
-              "params": [],
-              "returns": [
-                {
-                  "name": "normalizePagesResult.activeType",
-                  "optional": true,
-                  "type": ""doc" | "page" | "menu"",
-                },
-                {
-                  "name": "normalizePagesResult.activeIndex",
-                  "type": "number",
-                },
-                {
-                  "name": "normalizePagesResult.activeThemeContext.pagination",
-                  "optional": true,
-                  "type": "boolean | undefined",
-                },
-                {
-                  "name": "normalizePagesResult.activeThemeContext.breadcrumb",
-                  "optional": true,
-                  "type": "boolean | undefined",
-                },
-                {
-                  "name": "normalizePagesResult.activeThemeContext.collapsed",
-                  "optional": true,
-                  "type": "boolean | undefined",
-                },
-                {
-                  "name": "normalizePagesResult.activeThemeContext.footer",
-                  "optional": true,
-                  "type": "boolean | undefined",
-                },
-                {
-                  "name": "normalizePagesResult.activeThemeContext.layout",
-                  "optional": true,
-                  "type": ""default" | "full" | undefined",
-                },
-                {
-                  "name": "normalizePagesResult.activeThemeContext.navbar",
-                  "optional": true,
-                  "type": "boolean | undefined",
-                },
-                {
-                  "name": "normalizePagesResult.activeThemeContext.sidebar",
-                  "optional": true,
-                  "type": "boolean | undefined",
-                },
-                {
-                  "name": "normalizePagesResult.activeThemeContext.timestamp",
-                  "optional": true,
-                  "type": "boolean | undefined",
-                },
-                {
-                  "name": "normalizePagesResult.activeThemeContext.toc",
-                  "optional": true,
-                  "type": "boolean | undefined",
-                },
-                {
-                  "name": "normalizePagesResult.activeThemeContext.typesetting",
-                  "optional": true,
-                  "type": ""default" | "article" | undefined",
-                },
-                {
-                  "name": "normalizePagesResult.activeMetadata",
-                  "optional": true,
-                  "type": "FrontMatter",
-                },
-                {
-                  "name": "normalizePagesResult.activePath",
-                  "type": "Item[]",
-                },
-                {
-                  "name": "normalizePagesResult.directories",
-                  "type": "Item[]",
-                },
-                {
-                  "name": "normalizePagesResult.docsDirectories",
-                  "type": "((MdxFile | { name: string; route: string; }) & { title: string; type: string; children: any[]; firstChildRoute?: string; isUnderCurrentDocsTree?: boolean; })[]",
-                },
-                {
-                  "name": "normalizePagesResult.flatDocsDirectories",
-                  "type": "((MdxFile | { name: string; route: string; }) & { title: string; type: string; children: any[]; firstChildRoute?: string; isUnderCurrentDocsTree?: boolean; })[]",
-                },
-                {
-                  "name": "normalizePagesResult.topLevelNavbarItems",
-                  "type": "(PageItem | MenuItem)[]",
-                },
-                {
-                  "description": "Whether the sidebar is shown. If \`false\`, the theme and locale switchers are displayed in the
-        \`<Footer>\`.",
-                  "name": "hideSidebar",
-                  "type": "boolean",
-                },
-              ],
-            },
-          ],
-          "tags": {
-            "returns": "An object containing the \`normalizePagesResult\` and a \`hideSidebar\` value.",
-            "throws": "If used outside of a \`ConfigContext.Provider\`.",
-          },
-        }
-      `)
+      await expect(result).toMatchFileSnapshot('./snapshots/use-config.json')
     })
 
     it('should be parsed in object field', () => {
