@@ -3,9 +3,18 @@
   "signatures": [
     {
       "params": [],
-      "returns": {
-        "type": "{ a: number; b: B; }",
-      },
+      "returns": [
+        {
+          "description": "A",
+          "name": "a",
+          "type": "number",
+        },
+        {
+          "description": "D",
+          "name": "b.c.d",
+          "type": "string",
+        },
+      ],
     },
   ],
 }
