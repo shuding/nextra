@@ -190,11 +190,10 @@ export const Search: FC<SearchProps> = ({
       className={cn(
         'x:absolute x:my-1.5 x:select-none x:pointer-events-none x:end-1.5 x:transition-all',
         'x:h-5 x:rounded x:bg-nextra-bg x:px-1.5 x:font-mono x:text-[11px] x:font-medium x:text-gray-600 x:dark:text-gray-400',
-        'x:border nextra-border',
         'x:contrast-more:text-current',
         'x:items-center x:gap-1 x:flex',
         'x:max-sm:hidden not-prose',
-        !(mounted && !focused) && 'x:invisible x:opacity-0'
+        (!mounted || focused) && 'x:invisible x:opacity-0'
       )}
     >
       {mounted && navigator.userAgent.includes('Mac') ? (
@@ -274,28 +273,27 @@ export const Search: FC<SearchProps> = ({
       <ComboboxOptions
         transition
         anchor={{ to: 'top end', gap: 10, padding: 16 }}
-        className={() =>
-          cn(
-            'nextra-search-results', // for user styling
-            'nextra-scrollbar x:max-md:h-full',
-            'x:border x:border-gray-200 x:text-gray-100 x:dark:border-neutral-800',
-            'x:z-30 x:rounded-xl x:py-2.5 x:shadow-xl',
-            'x:contrast-more:border x:contrast-more:border-gray-900 x:contrast-more:dark:border-gray-50',
-            'x:backdrop-blur-md x:bg-nextra-bg/70',
-            'x:motion-reduce:transition-none',
-            'x:origin-top x:transition x:duration-200 x:ease-out x:empty:invisible x:data-[closed]:scale-95 x:data-[closed]:opacity-0',
-            error || isLoading || !results.length
-              ? [
-                  'x:md:min-h-28 x:grow x:flex x:justify-center x:text-sm x:gap-2 x:px-8',
-                  error
-                    ? 'x:text-red-500 x:items-start'
-                    : 'x:text-gray-400 x:items-center'
-                ]
-              : // headlessui adds max-height as style, use !important to override
-                'x:md:max-h-[min(calc(100vh-5rem),400px)]!',
-            'x:w-full x:md:w-[576px]'
-          )
-        }
+        className={cn(
+          'nextra-search-results', // for user styling
+          'nextra-scrollbar x:max-md:h-full',
+          'x:border x:border-gray-200 x:text-gray-100 x:dark:border-neutral-800',
+          'x:z-30 x:rounded-xl x:py-2.5 x:shadow-xl',
+          'x:contrast-more:border x:contrast-more:border-gray-900 x:contrast-more:dark:border-gray-50',
+          'x:backdrop-blur-md x:bg-nextra-bg/70',
+          'x:motion-reduce:transition-none',
+          // From https://headlessui.com/react/combobox#adding-transitions
+          'x:origin-top x:transition x:duration-200 x:ease-out x:data-closed:scale-95 x:data-closed:opacity-0 x:empty:invisible',
+          error || isLoading || !results.length
+            ? [
+                'x:md:min-h-28 x:grow x:flex x:justify-center x:text-sm x:gap-2 x:px-8',
+                error
+                  ? 'x:text-red-500 x:items-start'
+                  : 'x:text-gray-400 x:items-center'
+              ]
+            : // headlessui adds max-height as style, use !important to override
+              'x:md:max-h-[min(calc(100vh-5rem),400px)]!',
+          'x:w-full x:md:w-[576px]'
+        )}
       >
         {error ? (
           <>
