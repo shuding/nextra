@@ -1,10 +1,124 @@
 # nextra-theme-blog
 
+## 4.3.0-alpha.7
+
+### Minor Changes
+
+- 07debf9: feat(TSDoc): support flattening return object fields
+
+### Patch Changes
+
+- Updated dependencies [07debf9]
+  - nextra@4.3.0-alpha.7
+
+## 4.3.0-alpha.6
+
+### Patch Changes
+
+- nextra@4.3.0-alpha.6
+
+## 4.3.0-alpha.5
+
+### Minor Changes
+
+- eed8328: feat: adapt colors and icons from original GitHub alerts syntax
+
+  feat: new Callout type `important`
+
+  fix: inconsistent built-in Callout's icons size
+
+  feat: improve Callout's accessibility colors
+
+### Patch Changes
+
+- Updated dependencies [eed8328]
+  - nextra@4.3.0-alpha.5
+
+## 4.3.0-alpha.4
+
+### Patch Changes
+
+- 4547eb9: feat(TSDoc): add support for functions and functions with multiple
+  signatures
+- Updated dependencies [4547eb9]
+  - nextra@4.3.0-alpha.4
+
+## 4.3.0-alpha.3
+
+### Patch Changes
+
+- Updated dependencies [f717156]
+  - nextra@4.3.0-alpha.3
+
+## 4.3.0-alpha.2
+
+### Patch Changes
+
+- 8ac2506: chore: bump `babel-plugin-react-compiler` and
+  `react-compiler-runtime`, remove custom pnpm patch for
+  `babel-plugin-react-compiler`
+- Updated dependencies [8ac2506]
+  - nextra@4.3.0-alpha.2
+
+## 4.3.0-alpha.1
+
+### Patch Changes
+
+- Updated dependencies [9f449e5]
+  - nextra@4.3.0-alpha.1
+
+## 4.3.0-alpha.0
+
+### Minor Changes
+
+- 83f6c57: feat: introduce new `<TSDoc />` component
+
+  The `<TSDoc>` component from `nextra/tsdoc` generates a properties table that
+  displays:
+
+  - **Property name**
+  - **TypeScript type**
+  - **Property description** - is parsed from [TSDoc](https://tsdoc.org) inline
+    description or the `@description` tag. You can use any Markdown/MDX syntax
+    here.
+  - **Default value** - are extracted from the `@default` or `@defaultValue`
+    tag.
+  - **Permalink** - a `#` anchor link to the property row for easy reference.
+
+  More info can be found in https://nextra.site/docs/built-ins/tsdoc
+
+  > [!IMPORTANT]
+  >
+  > Huge thanks to
+  > [xyflow - Node Based UIs for React and Svelte](https://xyflow.com/?utm_source=github&utm_campaign=nextra-4.3&utm_content=changelog)
+  > for sponsoring this feature!
+
+### Patch Changes
+
+- Updated dependencies [83f6c57]
+  - nextra@4.3.0-alpha.0
+
+## 4.2.18
+
+### Patch Changes
+
+- Updated dependencies [e1c2b1b]
+  - nextra@4.2.18
+
+## 4.2.17
+
+### Patch Changes
+
+- Updated dependencies [a7db0e6]
+- Updated dependencies [18e7fb9]
+  - nextra@4.2.17
+
 ## 4.2.16
 
 ### Patch Changes
 
-- 2cfaacc: fix: frozen spinner on loading state in search results by updating Tailwind CSS to v4.0.10
+- 2cfaacc: fix: frozen spinner on loading state in search results by updating
+  Tailwind CSS to v4.0.10
 - Updated dependencies [2cfaacc]
   - nextra@4.2.16
 
@@ -12,7 +126,8 @@
 
 ### Patch Changes
 
-- 5617e04: fix: loading state in search results was only visible during the first search
+- 5617e04: fix: loading state in search results was only visible during the
+  first search
 - Updated dependencies [5617e04]
   - nextra@4.2.15
 
@@ -20,7 +135,8 @@
 
 ### Patch Changes
 
-- ccb5da2: removing custom nextra's scrollbar styles, allowing the browser's default scrollbars to be used
+- ccb5da2: removing custom nextra's scrollbar styles, allowing the browser's
+  default scrollbars to be used
 - Updated dependencies [ccb5da2]
 - Updated dependencies [05a202d]
   - nextra@4.2.14
@@ -96,7 +212,8 @@
 
 ### Patch Changes
 
-- ca67a19: remove requirement `page.{jsx,tsx}` pages to have exported `metadata` object
+- ca67a19: remove requirement `page.{jsx,tsx}` pages to have exported `metadata`
+  object
 - Updated dependencies [ca67a19]
   - nextra@4.2.3
 
@@ -117,8 +234,10 @@
 
 ### Patch Changes
 
-- 427b080: calculate `--nextra-banner-height` after mounting banner, so banner text can be wrapped on multiple lines
-- 6b8053f: fix a sudden height jump on opening for `<detail>` element when his last children contain margins
+- 427b080: calculate `--nextra-banner-height` after mounting banner, so banner
+  text can be wrapped on multiple lines
+- 6b8053f: fix a sudden height jump on opening for `<detail>` element when his
+  last children contain margins
 - b0e686e: hide default `<summary>` arrow on mobile
 - Updated dependencies [427b080]
 - Updated dependencies [6b8053f]
@@ -129,7 +248,9 @@
 
 ### Patch Changes
 
-- 29a44de: fix regression from Nextra 3 setting [`theme.collapsed?: boolean` in `_meta` file](https://nextra.site/docs/file-conventions/meta-file#theme-option) for folders has no effect in sidebar
+- 29a44de: fix regression from Nextra 3 setting
+  [`theme.collapsed?: boolean` in `_meta` file](https://nextra.site/docs/file-conventions/meta-file#theme-option)
+  for folders has no effect in sidebar
 - Updated dependencies [29a44de]
 - Updated dependencies [19578c3]
   - nextra@4.1.1
@@ -138,7 +259,8 @@
 
 ### Minor Changes
 
-- 7caf059: - generate unique anchor id for `<summary>` elements based on its content at build time
+- 7caf059: - generate unique anchor id for `<summary>` elements based on its
+  content at build time
   - add anchor link icon for `<summary>`
 
 ### Patch Changes
@@ -211,7 +333,8 @@
 
 ### Patch Changes
 
-- 481e0d0: fix syntax highlighting for `mdx` lang and improve docs for `/docs/docs-theme/start`
+- 481e0d0: fix syntax highlighting for `mdx` lang and improve docs for
+  `/docs/docs-theme/start`
 - 426cd66: Remove margin-top from `.nextra-steps` `:before` pseudo selector
 - Updated dependencies [481e0d0]
 - Updated dependencies [426cd66]
@@ -221,9 +344,14 @@
 
 ### Major Changes
 
-- 283320f: remove `"typesVersions"` field from `package.json`. You need to set `"moduleResolution": "bundler"` in your `tsconfig.json` if you are using TypeScript
-- 283320f: move `<Collapse>`, `<Details>`, `<Summary>`, `<SkipNavContent>`, `SkipNavLink`, `<Select>` and `<Bleed>` from `nextra-theme-docs` to `nextra/components`
-- 283320f: remove `<Th>`, `<Tr>` and `<Td>` exports (since they should be always used with `<Table>` component)
+- 283320f: remove `"typesVersions"` field from `package.json`. You need to set
+  `"moduleResolution": "bundler"` in your `tsconfig.json` if you are using
+  TypeScript
+- 283320f: move `<Collapse>`, `<Details>`, `<Summary>`, `<SkipNavContent>`,
+  `SkipNavLink`, `<Select>` and `<Bleed>` from `nextra-theme-docs` to
+  `nextra/components`
+- 283320f: remove `<Th>`, `<Tr>` and `<Td>` exports (since they should be always
+  used with `<Table>` component)
 
   ```diff
   - import { Table, Th, Tr, Td } from 'nextra/components'
@@ -239,19 +367,27 @@
   + <Table.Td>
   ```
 
-- 283320f: make `compileMdx` from `nextra/compile` return a `string` instead of an `object`
-- 283320f: remove `BlogMetadata.draft`, support \_meta files for `nextra-theme-blog`
+- 283320f: make `compileMdx` from `nextra/compile` return a `string` instead of
+  an `object`
+- 283320f: remove `BlogMetadata.draft`, support \_meta files for
+  `nextra-theme-blog`
 - 283320f: remove `export const title` from generated mdx pages
-- 283320f: The initial version which supports App Router instead of Pages Router, something may be broken, check https://github.com/shuding/nextra/tree/v4-v2/examples for the migration guide
+- 283320f: The initial version which supports App Router instead of Pages
+  Router, something may be broken, check
+  https://github.com/shuding/nextra/tree/v4-v2/examples for the migration guide
 - 283320f: migrate search from Flexsearch to Pagefind
 - 283320f: - add root `_meta.global.{js,jsx,ts,tsx}` file
-  > See [working example](https://github.com/shuding/nextra/blob/v4-v2/docs/app/_meta.global.ts) based on https://nextra.site website
-  - `getPageMap` now receive only 1 argument `root?: string = '/'` instead of 2 `lang?: string, route?: string = '/'`
+  > See
+  > [working example](https://github.com/shuding/nextra/blob/v4-v2/docs/app/_meta.global.ts)
+  > based on https://nextra.site website
+  - `getPageMap` now receive only 1 argument `root?: string = '/'` instead of 2
+    `lang?: string, route?: string = '/'`
   - remove `createCatchAllMeta` from `nextra/catch-all`
   - remove `collectCatchAllRoutes`
   - remove `normalizePageRoute`
   - add `mergeMetaWithPageMap` to `nextra/page-map`
-  - move adding `metadata.filePath`, `metadata.title` and `metadata.readingTime` in remark plugin
+  - move adding `metadata.filePath`, `metadata.title` and `metadata.readingTime`
+    in remark plugin
   - refactor recma rewrite plugin and add tests
     - remove `recmaRewriteJsx`
     - remove `recmaRewriteFunctionBody`
@@ -261,11 +397,15 @@
 - 283320f: - migrate to tailwind css v4.beta2
   - refactor builtin CSS classes from `_` prefix to `x:` prefix
   - remove `color-primary-750` theme color variant
-- 283320f: replace `export const useTOC = () = [/* your headings */]` by `export const toc = [/* your headings */]`
+- 283320f: replace `export const useTOC = () = [/* your headings */]` by
+  `export const toc = [/* your headings */]`
 - 283320f: move `<Head>` component in `nextra/components`
-- 283320f: remove `nextra-theme-blog/cusdis` export, export `<Comments>` component from `nextra-theme-blog` directly (because `peerDependency` of `react-cusdis` was removed)
+- 283320f: remove `nextra-theme-blog/cusdis` export, export `<Comments>`
+  component from `nextra-theme-blog` directly (because `peerDependency` of
+  `react-cusdis` was removed)
 - 283320f: require Next.js minimum v14
-- 283320f: - add `nextra/components` to `experimental.optimizePackageImports` to optimize `nextra/components` by default
+- 283320f: - add `nextra/components` to `experimental.optimizePackageImports` to
+  optimize `nextra/components` by default
   - remove `<RemoteContent>` from `nextra/components`
   - rename `<RemoteContent>` to `MDXRemote` and move to `nextra/mdx-remote`
 
@@ -278,41 +418,57 @@
   - use JavaScript icon for `cjs` and `mjs`
   - use TypeScript icon for `cts` and `mts`
 - 283320f: use `next-view-transitions` for transition in `nextra-theme-blog`
-- 283320f: replace `useContentDir` with `contentDirBasePath` option which configure `content` directory under a catch-all subdirectory
-- 283320f: move TOC logic from `recma-rewrite-jsx` plugin to `rehype-extract-toc-content` plugin
-- 283320f: make `page.{jsx,tsx,mdx}` pages and `_meta` files from `app` dir, and also `content` folder files -
-  all add to `pageMap`, but ignore dynamic pages `[[`
-- e11dbe0: set `content` value for `<meta name="theme-color">` based on background value for light and dark themes
+- 283320f: replace `useContentDir` with `contentDirBasePath` option which
+  configure `content` directory under a catch-all subdirectory
+- 283320f: move TOC logic from `recma-rewrite-jsx` plugin to
+  `rehype-extract-toc-content` plugin
+- 283320f: make `page.{jsx,tsx,mdx}` pages and `_meta` files from `app` dir, and
+  also `content` folder files - all add to `pageMap`, but ignore dynamic pages
+  `[[`
+- e11dbe0: set `content` value for `<meta name="theme-color">` based on
+  background value for light and dark themes
 
 ### Patch Changes
 
 - 283320f: search tweaks
-- fdd2c6a: fix steps background on dark mode
-  fix headings anchor link color on dark mode
-- 283320f: setup `@typescript-eslint/no-unnecessary-condition` rule and fix warnings
-- aca79fa: Don't focus search input on `Ctrl + k` on non Mac devices.
-  Don't focus search input on `⌘ + Shift + k` or `Ctrl + Shift + k`.
-- 283320f: add helpful error message about not available search on development mode
-- 283320f: remove `react-cusdis` dependency, use https://cusdis.com/doc#/advanced/sdk directly
+- fdd2c6a: fix steps background on dark mode fix headings anchor link color on
+  dark mode
+- 283320f: setup `@typescript-eslint/no-unnecessary-condition` rule and fix
+  warnings
+- aca79fa: Don't focus search input on `Ctrl + k` on non Mac devices. Don't
+  focus search input on `⌘ + Shift + k` or `Ctrl + Shift + k`.
+- 283320f: add helpful error message about not available search on development
+  mode
+- 283320f: remove `react-cusdis` dependency, use
+  https://cusdis.com/doc#/advanced/sdk directly
 - 283320f: add `getPageMap` helper function to `nextra/page-map`
-- 283320f: Fixes when Turbopack is enabled: `Module not found: Can't resolve '@theguild/remark-mermaid/mermaid'`
+- 283320f: Fixes when Turbopack is enabled:
+  `Module not found: Can't resolve '@theguild/remark-mermaid/mermaid'`
 - 283320f: add `whiteListTagsStyling` nextra config option
 - 283320f: fix unable to select text and `::selection` style
 - 283320f: - allow override/add additional icons for code blocks
-  - remove `nextraConfig.mdxOptions.providerImportSource` option in favour of `mdx-components` file
-- 283320f: - Use Tailwind CSS CLI because CSS processing by `tsup` produce different, weird and broken result
+  - remove `nextraConfig.mdxOptions.providerImportSource` option in favour of
+    `mdx-components` file
+- 283320f: - Use Tailwind CSS CLI because CSS processing by `tsup` produce
+  different, weird and broken result
   - Patch react-compiler with some fixes which isn't fixed
-- 283320f: use `Date.now()` for last edit time on development and git last commit time on production
-- 283320f: move `pagefind` output to `public/_pagefind` directory https://github.com/shuding/nextra/pull/3517
+- 283320f: use `Date.now()` for last edit time on development and git last
+  commit time on production
+- 283320f: move `pagefind` output to `public/_pagefind` directory
+  https://github.com/shuding/nextra/pull/3517
 - 283320f: initialize `transformerTwoslash` only 1 time outside of loader
 - 283320f: fix edit on github and last updated at for catch all routes
 - 283320f: simplify `generatePageMap`
 - 283320f: add `banner` prop for `<Layout>` component
 - 283320f: sync with nextra 3.1.0
-- 283320f: Cache the result of `repository.getFileLatestModifiedDateAsync` because it can slow down Fast Refresh for uncommitted files.
-- 283320f: reduce bundle size of bundled website by compiling svg icons in separated files
-- 283320f: enable page reload of catch-all routes `app/[[...slug]].jsx` on content change
-- 283320f: remove false positive warnings on projects without `content/` directory
+- 283320f: Cache the result of `repository.getFileLatestModifiedDateAsync`
+  because it can slow down Fast Refresh for uncommitted files.
+- 283320f: reduce bundle size of bundled website by compiling svg icons in
+  separated files
+- 283320f: enable page reload of catch-all routes `app/[[...slug]].jsx` on
+  content change
+- 283320f: remove false positive warnings on projects without `content/`
+  directory
 
   ```
   ⚠ Compiled with warnings
@@ -324,11 +480,12 @@
 - 283320f: - sync with nextra 3.0.15
 
   - bump to Next 15
-  - remove importing of `style.css` in themes, you need to import now manually by
+  - remove importing of `style.css` in themes, you need to import now manually
+    by
 
   ```js
-  import "nextra-theme-docs/style.css"; // for docs theme
-  import "nextra-theme-blog/style.css"; // for blog theme
+  import 'nextra-theme-docs/style.css' // for docs theme
+  import 'nextra-theme-blog/style.css' // for blog theme
   ```
 
 - 283320f: add support for turbopack `next dev --turbopack`
@@ -344,9 +501,11 @@
 - 283320f: add ↗ char for external links
 - 283320f: sync with nextra 3.0.3
 - 283320f: fix injecting mdx-components into headings and injecting into toc
-- 283320f: - add `disabled` prop for `<Folder>` component when `open` prop was set (to disable click event and remove `cursor: pointer`)
+- 283320f: - add `disabled` prop for `<Folder>` component when `open` prop was
+  set (to disable click event and remove `cursor: pointer`)
   - allow `<h5>` and `<h6>` tags be used with `<Steps>`
-  - fix Webpack module rebuild for pageMap when new files where added or removed in `app` dir or `content` dir
+  - fix Webpack module rebuild for pageMap when new files where added or removed
+    in `app` dir or `content` dir
 - 283320f: Use `primaryColor` for `::selection` styles
 - 283320f: replace `nextraConfig.mdxBaseDir: string` by `useContentDir: boolean`
 - 283320f: support `GitHub Alert Syntax`
@@ -463,7 +622,8 @@
 ### Patch Changes
 
 - 242e0d0: search tweaks
-- 3fc12a0: - Use Tailwind CSS CLI because CSS processing by `tsup` produce different, weird and broken result
+- 3fc12a0: - Use Tailwind CSS CLI because CSS processing by `tsup` produce
+  different, weird and broken result
   - Patch react-compiler with some fixes which isn't fixed
 - Updated dependencies [242e0d0]
 - Updated dependencies [3fc12a0]
@@ -874,8 +1034,8 @@
     by
 
   ```js
-  import "nextra-theme-docs/style.css"; // for docs theme
-  import "nextra-theme-blog/style.css"; // for blog theme
+  import 'nextra-theme-docs/style.css' // for docs theme
+  import 'nextra-theme-blog/style.css' // for blog theme
   ```
 
 - Updated dependencies [2c8a8ab]
@@ -1956,19 +2116,19 @@
   and `nextra-theme-docs`
 
   ```js
-  import { Card, Cards } from "nextra/components";
+  import { Card, Cards } from 'nextra/components'
   ```
 
   ```js
-  import { Tab, Tabs } from "nextra/components";
+  import { Tab, Tabs } from 'nextra/components'
   ```
 
   ```js
-  import { Steps } from "nextra/components";
+  import { Steps } from 'nextra/components'
   ```
 
   ```js
-  import { FileTree } from "nextra/components";
+  import { FileTree } from 'nextra/components'
   ```
 
 ### Patch Changes

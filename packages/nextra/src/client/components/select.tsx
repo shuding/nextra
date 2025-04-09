@@ -44,7 +44,7 @@ export const Select: FC<MenuProps> = ({
             open
               ? 'x:bg-gray-200 x:text-gray-900 x:dark:bg-primary-100/10 x:dark:text-gray-50'
               : hover
-                ? 'x:bg-gray-100 x:text-gray-900 x:dark:bg-primary-100/5 x:dark:text-gray-50'
+                ? 'x:bg-gray-200 x:text-gray-900 x:dark:bg-primary-100/5 x:dark:text-gray-50'
                 : 'x:text-gray-600 x:dark:text-gray-400',
             focus && 'x:nextra-focus',
             className
@@ -71,7 +71,7 @@ export const Select: FC<MenuProps> = ({
               <li
                 className={cn(
                   focus
-                    ? 'x:bg-primary-50 x:text-primary-600 x:dark:bg-primary-500/10'
+                    ? 'x:bg-primary-100 x:text-primary-800 x:dark:text-primary-500 x:dark:bg-primary-500/10'
                     : 'x:text-gray-800 x:dark:text-gray-100',
                   'x:cursor-pointer x:whitespace-nowrap x:py-1.5 x:px-3',
                   'x:transition-colors',

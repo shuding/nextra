@@ -36,7 +36,7 @@ const classes = {
     'x:cursor-pointer x:contrast-more:border'
   ),
   inactive: cn(
-    'x:text-gray-500 x:hover:bg-gray-100 x:hover:text-gray-900',
+    'x:text-gray-600 x:hover:bg-gray-100 x:hover:text-gray-900',
     'x:dark:text-neutral-400 x:dark:hover:bg-primary-100/5 x:dark:hover:text-gray-50',
     'x:contrast-more:text-gray-900 x:contrast-more:dark:text-gray-50',
     'x:contrast-more:border-transparent x:contrast-more:hover:border-gray-900 x:contrast-more:dark:hover:border-gray-50'
@@ -158,8 +158,8 @@ const Folder: FC<FolderProps> = ({ item: _item, anchors, onFocus, level }) => {
           className={cn(
             'x:shrink-0',
             'x:rounded-sm x:p-0.5 x:hover:bg-gray-800/5 x:dark:hover:bg-gray-100/5',
-            'x:motion-reduce:*:transition-none x:*:origin-center x:*:transition-transform x:*:rtl:-rotate-180',
-            open && 'x:*:ltr:rotate-90 x:*:rtl:-rotate-270'
+            'x:motion-reduce:transition-none x:origin-center x:transition-all x:rtl:-rotate-180',
+            open && 'x:ltr:rotate-90 x:rtl:-rotate-270'
           )}
         />
       </ComponentToUse>
@@ -363,7 +363,7 @@ export const MobileNav: FC = () => {
 
 let lastScrollPosition = 0
 
-const handleScrollEnd: ComponentProps<'div'>['onScroll'] = event => {
+const handleScrollEnd: ComponentProps<'div'>['onScrollEnd'] = event => {
   lastScrollPosition = event.currentTarget.scrollTop
 }
 
@@ -435,7 +435,6 @@ export const Sidebar: FC = () => {
             !isExpanded && 'no-scrollbar'
           )}
           ref={sidebarRef}
-          // @ts-expect-error -- false positive https://github.com/DefinitelyTyped/DefinitelyTyped/pull/72078
           onScrollEnd={handleScrollEnd} // eslint-disable-line react/no-unknown-property
         >
           {/* without !hideSidebar check <Collapse />'s inner.clientWidth on `layout: "raw"` will be 0 and element will not have width on initial loading */}
@@ -481,7 +480,7 @@ export const Sidebar: FC = () => {
                   cn(
                     'x:rounded-md x:p-2',
                     hover
-                      ? 'x:bg-gray-100 x:text-gray-900 x:dark:bg-primary-100/5 x:dark:text-gray-50'
+                      ? 'x:bg-gray-200 x:text-gray-900 x:dark:bg-primary-100/5 x:dark:text-gray-50'
                       : 'x:text-gray-600 x:dark:text-gray-400'
                   )
                 }

@@ -2,6 +2,7 @@ import cn from 'clsx'
 import type { FC, ReactNode } from 'react'
 
 export const Bleed: FC<{
+  /** Extend content to the very edges of its container. */
   full: boolean
   children: ReactNode
 }> = ({ full, children }) => {
