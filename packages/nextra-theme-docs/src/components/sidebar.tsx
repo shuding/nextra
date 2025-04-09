@@ -480,7 +480,7 @@ export const Sidebar: FC = () => {
                   cn(
                     'x:rounded-md x:p-2',
                     hover
-                      ? 'x:bg-gray-100 x:text-gray-900 x:dark:bg-primary-100/5 x:dark:text-gray-50'
+                      ? 'x:bg-gray-200 x:text-gray-900 x:dark:bg-primary-100/5 x:dark:text-gray-50'
                       : 'x:text-gray-600 x:dark:text-gray-400'
                   )
                 }
