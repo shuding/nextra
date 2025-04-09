@@ -6,9 +6,9 @@ import { normalizePages } from 'nextra/normalize-pages'
 import type { FC, ReactNode } from 'react'
 import { createContext, useContext } from 'react'
 
-const ConfigContext = createContext<ReturnType<typeof normalizePages> | null>(
-  null
-)
+type NormalizePagesResult = ReturnType<typeof normalizePages>
+
+const ConfigContext = createContext<NormalizePagesResult | null>(null)
 
 /**
  * Provides normalized data for the current page from `ConfigContext`.
@@ -19,7 +19,14 @@ const ConfigContext = createContext<ReturnType<typeof normalizePages> | null>(
  * @returns An object containing the `normalizePagesResult` and a `hideSidebar` value.
  * @throws If used outside of a `ConfigContext.Provider`.
  */
-export function useConfig() {
+export function useConfig(): {
+  normalizePagesResult: NormalizePagesResult
+  /**
+   * Whether the sidebar is shown. If `false`, the theme and locale switchers are displayed in the
+   * `<Footer>`.
+   */
+  hideSidebar: boolean
+} {
   const normalizePagesResult = useContext(ConfigContext)
   if (!normalizePagesResult) {
     throw new Error('Missing ConfigContext.Provider')
@@ -27,10 +34,6 @@ export function useConfig() {
   const { activeThemeContext, activeType } = normalizePagesResult
   return {
     normalizePagesResult,
-    /**
-     * Whether the sidebar is shown. If `false`, the theme and locale switchers are displayed in the
-     * `<Footer>`.
-     */
     hideSidebar: !activeThemeContext.sidebar || activeType === 'page'
   }
 }

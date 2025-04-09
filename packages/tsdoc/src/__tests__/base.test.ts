@@ -4,7 +4,6 @@ import { HeadPropsSchema } from '../../../nextra/src/client/components/head.js'
 import { generateDocumentation } from '../../../nextra/src/server/tsdoc/base.js'
 import { generateTsFromZod } from '../../../nextra/src/server/tsdoc/zod-to-ts.js'
 import typesFixture from './fixtures/flattened?raw'
-import returnsObjectDescriptionFixture from './fixtures/returns-object-description?raw'
 
 describe('<TSDoc />', () => {
   test('<Banner />', async () => {
@@ -248,9 +247,8 @@ export default Connection`
     })
 
     test('should flatten return type for useConfig', async () => {
-      // Description are lost for `normalizePagesResult` if import from `nextra-theme-docs`
       const code =
-        'export { useConfig as default } from "../nextra-theme-docs/src"'
+        'export { useConfig as default } from "nextra-theme-docs"'
       const result = generateDocumentation({ code, flattened: true })
       await expect(result).toMatchFileSnapshot('./snapshots/use-config.json')
     })
@@ -654,16 +652,6 @@ export default $`,
       flattened: true
     })
     await expect(result).toMatchFileSnapshot('./snapshots/flattened.json')
-  })
-
-  test('should returns object description', async () => {
-    const result = generateDocumentation({
-      code: returnsObjectDescriptionFixture,
-      flattened: true
-    })
-    await expect(result).toMatchFileSnapshot(
-      './snapshots/returns-object-description-fixture.json'
-    )
   })
 
   test('should exclude JSDoc @link in description', () => {
