@@ -247,8 +247,7 @@ export default Connection`
     })
 
     test('should flatten return type for useConfig', async () => {
-      const code =
-        'export { useConfig as default } from "nextra-theme-docs"'
+      const code = 'export { useConfig as default } from "nextra-theme-docs"'
       const result = generateDocumentation({ code, flattened: true })
       await expect(result).toMatchFileSnapshot('./snapshots/use-config.json')
     })
