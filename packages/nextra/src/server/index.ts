@@ -78,14 +78,15 @@ const nextra: Nextra = nextraConfig => {
     const pageMapLoader = {
       loader: LOADER_PATH,
       options: {
-        locales: locales || ['']
+        // ts complains about readonly array
+        locales: locales ? [...locales] : ['']
       }
     }
     return {
       ...nextConfig,
       transpilePackages: [
         // To import ESM-only packages with `next dev --turbopack`. Source: https://github.com/vercel/next.js/issues/63318#issuecomment-2079677098
-        ...(process.env.TURBOPACK === '1' ? ['shiki'] : []),
+        ...(process.env.TURBOPACK === '1' ? ['shiki', 'ts-morph'] : []),
         ...(nextConfig.transpilePackages || [])
       ],
       pageExtensions: [

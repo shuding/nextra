@@ -19,6 +19,7 @@ import type { MDXComponents } from 'nextra/mdx-components'
 import { removeLinks } from 'nextra/remove-links'
 import type { ComponentProps, FC } from 'react'
 import { Sidebar } from '../components'
+import { TOCProvider } from '../stores'
 import { H1, H2, H3, H4, H5, H6 } from './heading'
 import { Link } from './link'
 import { ClientWrapper } from './wrapper.client'
@@ -33,21 +34,20 @@ const Blockquote: FC<ComponentProps<'blockquote'>> = props => (
   />
 )
 
+const CALLOUT_TYPE = Object.freeze({
+  caution: 'error',
+  important: 'important',
+  note: 'info',
+  tip: 'default',
+  warning: 'warning'
+})
+
 const DEFAULT_COMPONENTS = getNextraMDXComponents({
   a: Link,
-  blockquote: withGitHubAlert(({ type, ...props }) => {
-    const calloutType = (
-      {
-        caution: 'error',
-        important: 'error', // TODO
-        note: 'info',
-        tip: 'default',
-        warning: 'warning'
-      } as const
-    )[type]
-
-    return <Callout type={calloutType} {...props} />
-  }, Blockquote),
+  blockquote: withGitHubAlert(
+    ({ type, ...props }) => <Callout type={CALLOUT_TYPE[type]} {...props} />,
+    Blockquote
+  ),
   code: Code,
   details: Details,
   h1: H1,
@@ -94,22 +94,19 @@ const DEFAULT_COMPONENTS = getNextraMDXComponents({
         // Attach user-defined props to wrapper container, e.g. `data-pagefind-filter`
         {...props}
       >
-        <Sidebar toc={toc} />
-
-        <ClientWrapper
-          toc={toc}
-          metadata={metadata}
-          bottomContent={bottomContent}
-        >
-          <SkipNavContent />
-          <main
-            data-pagefind-body={
-              (metadata as any).searchable !== false || undefined
-            }
-          >
-            {children}
-          </main>
-        </ClientWrapper>
+        <TOCProvider value={toc}>
+          <Sidebar />
+          <ClientWrapper metadata={metadata} bottomContent={bottomContent}>
+            <SkipNavContent />
+            <main
+              data-pagefind-body={
+                (metadata as any).searchable !== false || undefined
+              }
+            >
+              {children}
+            </main>
+          </ClientWrapper>
+        </TOCProvider>
       </div>
     )
   }

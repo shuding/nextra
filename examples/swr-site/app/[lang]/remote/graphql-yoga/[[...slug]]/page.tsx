@@ -1,6 +1,5 @@
-/* eslint-disable react-hooks/rules-of-hooks -- false positive, useMDXComponents isn't react hooks */
 import { notFound } from 'next/navigation'
-import { useMDXComponents } from 'nextra-theme-docs'
+import { useMDXComponents as getMDXComponents } from 'nextra-theme-docs'
 import { compileMdx } from 'nextra/compile'
 import { Callout, Tabs } from 'nextra/components'
 import { evaluate } from 'nextra/evaluate'
@@ -61,7 +60,7 @@ const yogaPageMap = mergeMetaWithPageMap(yogaPage, {
 
 export const pageMap = normalizePageMap(yogaPageMap)
 
-const { wrapper: Wrapper, ...components } = useMDXComponents({
+const { wrapper: Wrapper, ...components } = getMDXComponents({
   Callout,
   Tabs,
   Tab: Tabs.Tab,

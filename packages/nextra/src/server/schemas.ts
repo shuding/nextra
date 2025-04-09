@@ -52,7 +52,7 @@ export const nextraConfigSchema = z.strictObject({
       rehypePlugins: z.custom<ProcessorOptions['rehypePlugins']>(),
       remarkPlugins: z.custom<ProcessorOptions['remarkPlugins']>(),
       recmaPlugins: z.custom<ProcessorOptions['recmaPlugins']>(),
-      format: z.enum(['detect', 'mdx', 'md']).optional(),
+      format: z.enum(['detect', 'mdx', 'md']).default('detect'),
       rehypePrettyCodeOptions: z.custom<RehypePrettyCodeOptions>().default({})
     })
     .default({}),
@@ -70,28 +70,77 @@ export const nextraConfigSchema = z.strictObject({
 
 export const element = z.custom<ReactElement<Record<string, unknown>>>(
   isValidElement,
-  { message: 'Must be React.ReactElement' }
+  { message: 'Must be a valid React element' }
 )
+/**
+ * https://react.dev/reference/react/isValidElement#react-elements-vs-react-nodes
+ */
 export const reactNode = z.custom<ReactNode>(
-  data =>
-    isValidElement(data) ||
-    (Array.isArray(data) && data.every(value => isValidElement(value))),
-  { message: 'Must be React.ReactNode' }
+  function checkReactNode(data): data is ReactNode {
+    if (
+      // Check if it's a valid React element
+      isValidElement(data) ||
+      // Check if it's null or undefined
+      data == null ||
+      typeof data === 'string' ||
+      typeof data === 'number' ||
+      typeof data === 'boolean'
+    ) {
+      return true
+    }
+    // Check if it's an array of React nodes
+    if (Array.isArray(data)) {
+      return data.every(item => checkReactNode(item))
+    }
+    // If it's none of the above, it's not a valid React node
+    return false
+  },
+  { message: 'Must be a valid React node' }
 )
 
-export const stringOrElement = z.union([z.string(), element])
+const stringOrElement = z.union([z.string(), element])
 
-const pageThemeSchema = z.strictObject({
-  breadcrumb: z.boolean().optional(),
-  collapsed: z.boolean().optional(),
-  footer: z.boolean().optional(),
-  layout: z.enum(['default', 'full']).optional(),
-  navbar: z.boolean().optional(),
-  pagination: z.boolean().optional(),
-  sidebar: z.boolean().optional(),
-  timestamp: z.boolean().optional(),
-  toc: z.boolean().optional(),
-  typesetting: z.enum(['default', 'article']).optional()
+export const pageThemeSchema = z.strictObject({
+  breadcrumb: z
+    .boolean()
+    .optional()
+    .describe('Show or hide breadcrumb navigation.'),
+  collapsed: z
+    .boolean()
+    .optional()
+    .describe('Indicates whether the item in sidebar is collapsed by default.'),
+  footer: z
+    .boolean()
+    .optional()
+    .describe('Specifies whether to display the footer.'),
+  layout: z
+    .enum(['default', 'full'])
+    .optional()
+    .describe('Defines the layout style.'),
+  navbar: z
+    .boolean()
+    .optional()
+    .describe('Specifies whether to display the navbar.'),
+  pagination: z
+    .boolean()
+    .optional()
+    .describe('Determines if pagination controls are shown.'),
+  sidebar: z
+    .boolean()
+    .optional()
+    .describe('Specifies whether to display the sidebar.'),
+  timestamp: z
+    .boolean()
+    .optional()
+    .describe('Indicates if "last updated" timestamps are displayed.'),
+  toc: z
+    .boolean()
+    .optional()
+    .describe('Determines whether a table of contents is displayed.'),
+  typesetting: z
+    .enum(['default', 'article'])
+    .optional()
+    .describe('Configures the text typesetting style.')
 })
 
 const title = stringOrElement.optional()

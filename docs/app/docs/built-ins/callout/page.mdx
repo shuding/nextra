@@ -1,15 +1,18 @@
 ---
 sidebarTitle: Callout
+description: A built-in component to show important information to the reader
 icon: WarningIcon
 ---
 
-import { useMDXComponents } from 'next-mdx-import-source-file'
 import { Callout } from 'nextra/components'
-import { InformationCircleIcon } from 'nextra/icons'
 
 # `<Callout>` Component
 
-A built-in component to show important information to the reader.
+{metadata.description}.
+
+## Props
+
+<TSDoc componentName="Callout" />
 
 ## Example
 
@@ -29,92 +32,88 @@ A built-in component to show important information to the reader.
   A **callout** is a short piece of text intended to attract attention.
 </Callout>
 
+<Callout type="important">
+  A **callout** is a short piece of text intended to attract attention.
+</Callout>
+
 ## Usage
 
 ### Default
 
-<Callout emoji="👾">
-  **Space Invaders** is a 1978 shoot 'em up arcade game developed by Tomohiro
-  Nishikado.
-</Callout>
+<Callout>Helpful advice for doing things better or more easily.</Callout>
 
 ```mdx
 import { Callout } from 'nextra/components'
 
-<Callout emoji="👾">
-  **Space Invaders** is a 1978 shoot 'em up arcade game developed by Tomohiro
-  Nishikado.
-</Callout>
+<Callout>Helpful advice for doing things better or more easily.</Callout>
 ```
 
 ### Info
 
-<Callout type="info" emoji="ℹ️">
-  Today is Friday.
+<Callout type="info">
+  Useful information that users should know, even when skimming content.
 </Callout>
 
 ```mdx
 import { Callout } from 'nextra/components'
 
-<Callout type="info" emoji="ℹ️">
-  Today is Friday.
+<Callout type="info">
+  Useful information that users should know, even when skimming content.
 </Callout>
 ```
 
 ### Warning
 
-<Callout type="warning" emoji="⚠️">
-  This API will be deprecated soon.
+<Callout type="warning">
+  Urgent info that needs immediate user attention to avoid problems.
 </Callout>
 
 ```mdx
 import { Callout } from 'nextra/components'
 
-<Callout type="warning" emoji="⚠️">
-  This API will be deprecated soon.
+<Callout type="warning">
+  Urgent info that needs immediate user attention to avoid problems.
 </Callout>
 ```
 
 ### Error
 
-<Callout type="error" emoji="🚫">
-  This is a dangerous feature that can cause everything to explode.
+<Callout type="error">
+  Advises about risks or negative outcomes of certain actions.
 </Callout>
 
 ```mdx
 import { Callout } from 'nextra/components'
 
-<Callout type="error" emoji="️🚫">
-  This is a dangerous feature that can cause everything to explode.
+<Callout type="error">
+  Advises about risks or negative outcomes of certain actions.
 </Callout>
 ```
 
-## API
+### Important
 
-The callout component takes the following props:
+<Callout type="important">
+  Key information users need to know to achieve their goal.
+</Callout>
 
-export function Emoji() {
-  const { code: Code } = useMDXComponents()
-  return (
-    <div className="whitespace-nowrap">
-      <Code>'💡'</Code> for <Code>type: 'default'</Code>
-      <br />
-      <Code>'🚫'</Code> for <Code>type: 'error'</Code>
-      <br />
-      <InformationCircleIcon
-        height="1.2em"
-        className="x:text-blue-900 x:dark:text-blue-200 mx-2.5 inline"
-      />{' '}
-      for <Code>type: 'info'</Code>
-      <br />
-      <Code>'⚠️'</Code> for <Code>type: 'warning'</Code>
-      <br />
-    </div>
-  )
-}
+```mdx
+import { Callout } from 'nextra/components'
 
-|            |                                                    |             |                                                                        |
-| ---------- | -------------------------------------------------- | ----------- | ---------------------------------------------------------------------- |
-| `type`     | `'default' \| 'info' \| 'warning' \| 'error'{:ts}` | `'default'` | The type of the callout.                                               |
-| `emoji`    | `string \| ReactNode{:ts}`                         | <Emoji/>    | The icon to show in the callout. You can also render your custom icon. |
-| `children` | `ReactNode{:ts}`                                   |             | The content of the callout.                                            |
+<Callout type="important">
+  Key information users need to know to achieve their goal.
+</Callout>
+```
+
+### Custom icon
+
+<Callout type="info" emoji="⭐">
+  Nextra has 13k stars on GitHub!
+</Callout>
+
+```mdx
+import { Callout } from 'nextra/components'
+
+<Callout type="info" emoji="⭐">
+  Nextra has 13k stars on GitHub!
+</Callout>
+```

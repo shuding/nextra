@@ -10,7 +10,13 @@ import cn from 'clsx'
 import { addBasePath } from 'next/dist/client/add-base-path'
 import NextLink from 'next/link'
 import { useRouter } from 'next/navigation'
-import type { FC, FocusEventHandler, ReactElement, SyntheticEvent } from 'react'
+import type {
+  FC,
+  FocusEventHandler,
+  ReactElement,
+  ReactNode,
+  SyntheticEvent
+} from 'react'
 import { useDeferredValue, useEffect, useRef, useState } from 'react'
 import type { PagefindSearchOptions } from '../../types.js'
 import { useMounted } from '../hooks/use-mounted.js'
@@ -42,10 +48,27 @@ type PagefindResult = {
 }
 
 type SearchProps = {
-  emptyResult?: ReactElement | string
-  errorText?: ReactElement | string
-  loading?: ReactElement | string
+  /**
+   * Not found text.
+   * @default 'No results found.'
+   */
+  emptyResult?: ReactNode
+  /**
+   * Error text.
+   * @default 'Failed to load search index.'
+   * */
+  errorText?: ReactNode
+  /**
+   * Loading text.
+   * @default 'Loading…'
+   */
+  loading?: ReactNode
+  /**
+   * Placeholder text.
+   * @default 'Search documentation…'
+   */
   placeholder?: string
+  /** CSS class name. */
   className?: string
   searchOptions?: PagefindSearchOptions
 }
@@ -89,10 +112,8 @@ export const Search: FC<SearchProps> = ({
         setError('')
         return
       }
-
+      setIsLoading(true)
       if (!window.pagefind) {
-        setIsLoading(true)
-        setError('')
         try {
           await importPagefind()
         } catch (error) {
@@ -115,7 +136,8 @@ export const Search: FC<SearchProps> = ({
       if (!response) return
 
       const data = await Promise.all(response.results.map(o => o.data()))
-
+      setIsLoading(false)
+      setError('')
       setResults(
         data.map(newData => ({
           ...newData,
@@ -126,7 +148,6 @@ export const Search: FC<SearchProps> = ({
           })
         }))
       )
-      setIsLoading(false)
     }
     handleSearch(deferredSearch)
   }, [deferredSearch]) // eslint-disable-line react-hooks/exhaustive-deps -- ignore searchOptions
@@ -257,7 +278,7 @@ export const Search: FC<SearchProps> = ({
             'nextra-search-results', // for user styling
             'nextra-scrollbar x:max-md:h-full',
             'x:border x:border-gray-200 x:text-gray-100 x:dark:border-neutral-800',
-            'x:z-20 x:rounded-xl x:py-2.5 x:shadow-xl',
+            'x:z-30 x:rounded-xl x:py-2.5 x:shadow-xl',
             'x:contrast-more:border x:contrast-more:border-gray-900 x:contrast-more:dark:border-gray-50',
             'x:backdrop-blur-md x:bg-nextra-bg/70',
             'x:motion-reduce:transition-none x:transition-opacity',
