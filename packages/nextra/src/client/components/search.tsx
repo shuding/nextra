@@ -189,7 +189,7 @@ export const Search: FC<SearchProps> = ({
     <kbd
       className={cn(
         'x:absolute x:my-1.5 x:select-none x:end-1.5',
-        'x:h-5 x:rounded x:bg-nextra-bg x:px-1.5 x:font-mono x:text-[11px] x:font-medium x:text-gray-500',
+        'x:h-5 x:rounded x:bg-nextra-bg x:px-1.5 x:font-mono x:text-[11px] x:font-medium x:text-gray-600 x:dark:text-gray-400',
         'x:border nextra-border',
         'x:contrast-more:text-current',
         'x:items-center x:gap-1 x:flex',
@@ -255,7 +255,7 @@ export const Search: FC<SearchProps> = ({
               focus
                 ? 'x:bg-transparent x:nextra-focus'
                 : 'x:bg-black/[.05] x:dark:bg-gray-50/10',
-              'x:placeholder:text-gray-500 x:dark:placeholder:text-gray-400',
+              'x:placeholder:text-gray-600 x:dark:placeholder:text-gray-400',
               'x:contrast-more:border x:contrast-more:border-current',
               'x:[&::-webkit-search-cancel-button]:appearance-none'
             )
@@ -327,7 +327,7 @@ const Result: FC<{ data: PagefindResult }> = ({ data }) => {
     <>
       <div
         className={cn(
-          'x:mx-2.5 x:mb-2 x:not-first:mt-6 x:select-none x:border-b x:border-black/10 x:px-2.5 x:pb-1.5 x:text-xs x:font-semibold x:uppercase x:text-gray-500 x:dark:border-white/20 x:dark:text-gray-300',
+          'x:mx-2.5 x:mb-2 x:not-first:mt-6 x:select-none x:border-b x:border-black/10 x:px-2.5 x:pb-1.5 x:text-xs x:font-semibold x:uppercase x:text-gray-600 x:dark:border-white/20 x:dark:text-gray-300',
           'x:contrast-more:border-gray-600 x:contrast-more:text-gray-900 x:contrast-more:dark:border-gray-50 x:contrast-more:dark:text-gray-50'
         )}
       >

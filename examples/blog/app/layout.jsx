@@ -11,7 +11,13 @@ export default async function RootLayout({ children }) {
   const banner = (
     <Banner storageKey="4.0-release">
       🎉 Nextra 4.0 is released.{' '}
-      <a href="#" className="x:text-primary-600">
+      <a
+        href="#"
+        style={{
+          textDecoration: 'underline',
+          textUnderlinePosition: 'from-font'
+        }}
+      >
         Read more →
       </a>
     </Banner>

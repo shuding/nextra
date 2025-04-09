@@ -23,11 +23,11 @@ pre code.nextra-code:not([class*='twoslash-']) {
 
   &[data-line-numbers] > span {
     @apply x:pl-2;
-
+    @apply x:before:text-gray-600 x:dark:before:text-gray-400;
     &::before {
       counter-increment: line;
       content: counter(line);
-      @apply x:inline-block x:pr-4 x:text-right x:min-w-[2.6rem] x:text-gray-500;
+      @apply x:inline-block x:pr-4 x:text-right x:min-w-[2.6rem];
     }
   }
 
