@@ -849,68 +849,10 @@ export default foo`
     `)
   })
 
-  it('should flatten array return type', () => {
+  it('should flatten array return type', async () => {
     const code = 'export { useEdgesState as default } from "@xyflow/react"'
     const result = generateDocumentation({ code, flattened: true })
-    expect(result).toMatchInlineSnapshot(`
-      {
-        "description": "This hook makes it easy to prototype a controlled flow where you manage the
-      state of nodes and edges outside the \`ReactFlowInstance\`. You can think of it
-      like React's \`useState\` hook with an additional helper callback.",
-        "name": "useEdgesState",
-        "signatures": [
-          {
-            "params": [
-              {
-                "name": "initialEdges",
-                "type": "EdgeType[]",
-              },
-            ],
-            "returns": {
-              "type": "[edges: EdgeType[], setEdges: Dispatch<SetStateAction<EdgeType[]>>, onEdgesChange: OnEdgesChange<EdgeType>]",
-            },
-          },
-        ],
-        "tags": {
-          "example": "\`\`\`tsx
-      import { ReactFlow, useNodesState, useEdgesState } from '@xyflow/react';
-
-      const initialNodes = [];
-      const initialEdges = [];
-
-      export default function () {
-       const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
-       const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
-
-       return (
-         <ReactFlow
-           nodes={nodes}
-           edges={edges}
-           onNodesChange={onNodesChange}
-           onEdgesChange={onEdgesChange}
-         />
-       );
-      }
-      \`\`\`",
-          "public": "",
-          "remarks": "This hook was created to make prototyping easier and our documentation
-      examples clearer. Although it is OK to use this hook in production, in
-      practice you may want to use a more sophisticated state management solution
-      like Zustand {@link https://reactflow.dev/docs/guides/state-management/} instead.",
-          "returns": "- \`edges\`: The current array of edges. You might pass this directly to the \`edges\` prop of your
-      \`<ReactFlow />\` component, or you may want to manipulate it first to perform some layouting,
-      for example.
-
-      - \`setEdges\`: A function that you can use to update the edges. You can pass it a new array of
-      edges or a callback that receives the current array of edges and returns a new array of edges.
-      This is the same as the second element of the tuple returned by React's \`useState\` hook.
-
-      - \`onEdgesChange\`: A handy callback that can take an array of \`EdgeChanges\` and update the edges
-      state accordingly. You'll typically pass this directly to the \`onEdgesChange\` prop of your
-      \`<ReactFlow />\` component.",
-        },
-      }
-    `)
+    await expect(result).toMatchFileSnapshot('./snapshots/use-edges-state.json')
   })
 
   it('should parse `unknown` type', () => {
@@ -937,119 +879,14 @@ export default foo`
     `)
   })
 
-  test('should flatten params', () => {
+  test('should flatten params', async () => {
     const result = generateDocumentation({
       code: "export { getSmoothStepPath as default } from '@xyflow/react'",
       flattened: true
     })
-    expect(result).toMatchInlineSnapshot(`
-      {
-        "description": "The \`getSmoothStepPath\` util returns everything you need to render a stepped path
-      between two nodes. The \`borderRadius\` property can be used to choose how rounded
-      the corners of those steps are.",
-        "name": "getSmoothStepPath",
-        "signatures": [
-          {
-            "params": [
-              {
-                "description": "The \`x\` position of the source handle.",
-                "name": "[0].sourceX",
-                "type": "number",
-              },
-              {
-                "description": "The \`y\` position of the source handle.",
-                "name": "[0].sourceY",
-                "type": "number",
-              },
-              {
-                "description": "The position of the source handle.",
-                "name": "[0].sourcePosition",
-                "optional": true,
-                "tags": {
-                  "default": "Position.Bottom",
-                },
-                "type": "Position",
-              },
-              {
-                "description": "The \`x\` position of the target handle.",
-                "name": "[0].targetX",
-                "type": "number",
-              },
-              {
-                "description": "The \`y\` position of the target handle.",
-                "name": "[0].targetY",
-                "type": "number",
-              },
-              {
-                "description": "The position of the target handle.",
-                "name": "[0].targetPosition",
-                "optional": true,
-                "tags": {
-                  "default": "Position.Top",
-                },
-                "type": "Position",
-              },
-              {
-                "name": "[0].borderRadius",
-                "optional": true,
-                "tags": {
-                  "default": "5",
-                },
-                "type": "number",
-              },
-              {
-                "name": "[0].centerX",
-                "optional": true,
-                "type": "number",
-              },
-              {
-                "name": "[0].centerY",
-                "optional": true,
-                "type": "number",
-              },
-              {
-                "name": "[0].offset",
-                "optional": true,
-                "tags": {
-                  "default": "20",
-                },
-                "type": "number",
-              },
-            ],
-            "returns": {
-              "type": "[path: string, labelX: number, labelY: number, offsetX: number, offsetY: number]",
-            },
-          },
-        ],
-        "tags": {
-          "example": "\`\`\`js
-       const source = { x: 0, y: 20 };
-       const target = { x: 150, y: 100 };
-
-       const [path, labelX, labelY, offsetX, offsetY] = getSmoothStepPath({
-         sourceX: source.x,
-         sourceY: source.y,
-         sourcePosition: Position.Right,
-         targetX: target.x,
-         targetY: target.y,
-         targetPosition: Position.Left,
-       });
-      \`\`\`",
-          "public": "",
-          "remarks": "This function returns a tuple (aka a fixed-size array) to make it easier to work with multiple edge paths at once.",
-          "returns": "A path string you can use in an SVG, the \`labelX\` and \`labelY\` position (center of path)
-      and \`offsetX\`, \`offsetY\` between source handle and label.
-
-      - \`path\`: the path to use in an SVG \`<path>\` element.
-      - \`labelX\`: the \`x\` position you can use to render a label for this edge.
-      - \`labelY\`: the \`y\` position you can use to render a label for this edge.
-      - \`offsetX\`: the absolute difference between the source \`x\` position and the \`x\` position of the
-      middle of this path.
-      - \`offsetY\`: the absolute difference between the source \`y\` position and the \`y\` position of the
-      middle of this path.",
-        },
-      }
-    `)
+    await expect(result).toMatchFileSnapshot(
+      './snapshots/get-smooth-step-path.json'
+    )
   })
 
   test('should remove `undefined` from optional fields', () => {
