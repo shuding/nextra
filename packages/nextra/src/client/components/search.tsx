@@ -185,7 +185,7 @@ export const Search: FC<SearchProps> = ({
     }
   }, [])
 
-  const icon = (
+  const shortcut = (
     <kbd
       className={cn(
         'x:absolute x:my-1.5 x:select-none x:pointer-events-none x:end-1.5 x:transition-all',
@@ -269,7 +269,7 @@ export const Search: FC<SearchProps> = ({
           value={search}
           placeholder={placeholder}
         />
-        {icon}
+        {shortcut}
       </div>
       <ComboboxOptions
         transition
