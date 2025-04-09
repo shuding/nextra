@@ -1,5 +1,17 @@
 # nextra-theme-docs
 
+## 4.3.0-alpha.8
+
+### Minor Changes
+
+- c134abe: feat: improve overall accessibility, makes text/colors easier to read
+  and achieves WCAG Level AAA compliance in many places
+
+### Patch Changes
+
+- Updated dependencies [c134abe]
+  - nextra@4.3.0-alpha.8
+
 ## 4.3.0-alpha.7
 
 ### Minor Changes
