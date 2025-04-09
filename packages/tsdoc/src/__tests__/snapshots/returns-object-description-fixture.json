@@ -1,17 +1,23 @@
 {
+  "description": "Function foo",
   "name": "foo",
   "signatures": [
     {
       "params": [],
       "returns": [
         {
-          "description": "A",
+          "description": "Field a",
           "name": "a",
           "type": "number",
         },
         {
-          "description": "D",
-          "name": "b.c.d",
+          "description": "Field c",
+          "name": "b.c",
+          "type": "1",
+        },
+        {
+          "description": "Field e",
+          "name": "b.d.e",
           "type": "string",
         },
       ],
