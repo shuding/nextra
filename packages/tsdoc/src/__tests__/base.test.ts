@@ -48,60 +48,7 @@ export default $`
 type $ = React.ComponentProps<typeof Search>
 export default $`
     const result = generateDocumentation({ code })
-    expect(result).toMatchInlineSnapshot(`
-      {
-        "entries": [
-          {
-            "description": "Not found text.",
-            "name": "emptyResult",
-            "optional": true,
-            "tags": {
-              "default": "'No results found.'",
-            },
-            "type": "ReactNode",
-          },
-          {
-            "description": "Error text.",
-            "name": "errorText",
-            "optional": true,
-            "tags": {
-              "default": "'Failed to load search index.'",
-            },
-            "type": "ReactNode",
-          },
-          {
-            "description": "Loading text.",
-            "name": "loading",
-            "optional": true,
-            "tags": {
-              "default": "'Loading…'",
-            },
-            "type": "ReactNode",
-          },
-          {
-            "description": "Placeholder text.",
-            "name": "placeholder",
-            "optional": true,
-            "tags": {
-              "default": "'Search documentation…'",
-            },
-            "type": "string",
-          },
-          {
-            "description": "CSS class name.",
-            "name": "className",
-            "optional": true,
-            "type": "string",
-          },
-          {
-            "name": "searchOptions",
-            "optional": true,
-            "type": "PagefindSearchOptions",
-          },
-        ],
-        "name": "default",
-      }
-    `)
+    await expect(result).toMatchFileSnapshot('./snapshots/search.json')
   })
   it('<Callout />', async () => {
     const code = `import type { Callout } from 'nextra/components'
@@ -199,86 +146,7 @@ export default $`
     const code = `type $ = ${generateTsFromZod(NavbarPropsSchema)}
 export default $`
     const result = generateDocumentation({ code })
-    expect(result).toMatchInlineSnapshot(`
-      {
-        "entries": [
-          {
-            "description": "Extra content after last icon.",
-            "name": "children",
-            "optional": true,
-            "tags": {
-              "remarks": "\`ReactNode\`",
-            },
-            "type": "ReactNode",
-          },
-          {
-            "description": "Specifies whether the logo should have a link or provides the URL for the logo's link.",
-            "name": "logoLink",
-            "optional": true,
-            "tags": {
-              "default": "true",
-            },
-            "type": "string | boolean",
-          },
-          {
-            "description": "Logo of the website.",
-            "name": "logo",
-            "tags": {
-              "remarks": "\`ReactElement\`",
-            },
-            "type": "ReactElement",
-          },
-          {
-            "description": "URL of the project homepage.",
-            "name": "projectLink",
-            "optional": true,
-            "type": "string",
-          },
-          {
-            "description": "Icon of the project link.",
-            "name": "projectIcon",
-            "optional": true,
-            "tags": {
-              "default": "<GitHubIcon />",
-              "remarks": "\`ReactNode\`",
-            },
-            "type": "ReactNode",
-          },
-          {
-            "description": "URL of the chat link.",
-            "name": "chatLink",
-            "optional": true,
-            "type": "string",
-          },
-          {
-            "description": "Icon of the chat link.",
-            "name": "chatIcon",
-            "optional": true,
-            "tags": {
-              "default": "<DiscordIcon />",
-              "remarks": "\`ReactNode\`",
-            },
-            "type": "ReactNode",
-          },
-          {
-            "description": "CSS class name.",
-            "name": "className",
-            "optional": true,
-            "type": "string",
-          },
-          {
-            "description": "Aligns navigation links to the specified side.",
-            "name": "align",
-            "optional": true,
-            "tags": {
-              "default": ""right"",
-            },
-            "type": ""left" | "right"",
-          },
-        ],
-        "name": "default",
-      }
-    `)
+    await expect(result).toMatchFileSnapshot('./snapshots/navbar.json')
   })
   it('<Head /> with `flattened: true`', async () => {
     const code = `type $ = ${generateTsFromZod(HeadPropsSchema)}
