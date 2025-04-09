@@ -240,7 +240,7 @@ export default Connection`
   describe('functions', () => {
     test('should flatten return type for useThemeConfig', async () => {
       const code =
-        'export { useThemeConfig as default } from "nextra-theme-docs"'
+        'export { useThemeConfig as default } from "../nextra-theme-docs/src"'
       const result = generateDocumentation({ code, flattened: true })
       await expect(result).toMatchFileSnapshot(
         './snapshots/use-theme-config.json'
