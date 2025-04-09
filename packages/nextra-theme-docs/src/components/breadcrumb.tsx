@@ -42,7 +42,8 @@ export const Breadcrumb: FC<{
                 href &&
                   'x:focus-visible:nextra-focus x:ring-inset x:hover:text-gray-900 x:dark:hover:text-gray-100'
               )}
-              title={item.title}
+              // Fix `[object Object]` tooltip when title is ReactNode
+              title={typeof item.title === 'string' ? item.title : undefined}
               {...(href && ({ href } as any))}
             >
               {item.title}

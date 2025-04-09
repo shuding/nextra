@@ -87,14 +87,28 @@ function findFirstRoute(items: DocsItem[]): string | undefined {
 }
 
 type NormalizedResult = {
-  activeType?: string
+  /** Active type for current page, used to determine layout in theme. */
+  activeType?: 'doc' | 'page' | 'menu'
+  /**
+   * Active index for current page, used for pagination in combination with `flatDocsDirectories`
+   * items.
+   */
   activeIndex: number
   activeThemeContext: PageTheme
+  /**
+   * Parsed [front matter](https://jekyllrb.com/docs/front-matter) or exported
+   * [Metadata](https://nextjs.org/docs/app/building-your-application/optimizing/metadata) from page.
+   */
   activeMetadata?: FrontMatter
+  /** Active path for current page, used for breadcrumb navigation. */
   activePath: Item[]
+  /** All directories in the tree structure. */
   directories: Item[]
+  /** Directories with `type: 'doc'` in `_meta` file. */
   docsDirectories: DocsItem[]
+  /** Flattened directories with `type: 'doc'` in `_meta` file. */
   flatDocsDirectories: DocsItem[]
+  /** Navbar items, items which have `type: 'page'` in `_meta` file. */
   topLevelNavbarItems: (PageItem | MenuItem)[]
 }
 
@@ -112,12 +126,9 @@ export function normalizePages({
 }): NormalizedResult {
   // If the doc is under the active page root.
   const underCurrentDocsRoot = route.startsWith(docsRoot)
-  // - directories: all directories in the tree structure
   const directories: Item[] = []
-  // Docs directories
   const docsDirectories: DocsItem[] = []
   const flatDocsDirectories: DocsItem[] = []
-  // Page directories
   const topLevelNavbarItems: (PageItem | MenuItem)[] = []
   const firstItem = list[0]! // always exists
   const meta = 'data' in firstItem ? (firstItem.data as MetaType) : {}
@@ -129,7 +140,7 @@ export function normalizePages({
 
   const fallbackMeta = meta['*'] || {}
 
-  let activeType: string = fallbackMeta.type
+  let activeType: NormalizedResult['activeType'] = fallbackMeta.type
   let activeIndex = 0
   let activeThemeContext = {
     ...pageThemeContext,

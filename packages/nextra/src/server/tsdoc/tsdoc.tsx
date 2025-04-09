@@ -3,19 +3,14 @@ import Slugger from 'github-slugger'
 import type { FC, ReactNode } from 'react'
 import { Callout } from '../../client/components/callout.js'
 import { Tabs } from '../../client/components/tabs/index.js'
-import { InformationCircleIcon } from '../../client/icons/index.js'
 import { Anchor } from '../../client/mdx-components/anchor.js'
 import { Code } from '../../client/mdx-components/code.js'
 import { MDXRemote } from '../../client/mdx-remote.js'
 import { compileMdx } from '../compile.js'
 import { generateDocumentation } from './base.js'
-import type {
-  BaseTypeTableProps,
-  GeneratedFunction,
-  TypeField
-} from './types.js'
+import type { BaseArgs, GeneratedFunction, TypeField } from './types.js'
 
-type TSDocProps = BaseTypeTableProps & {
+type TSDocProps = BaseArgs & {
   /**
    * Override the function to render markdown into JSX nodes.
    * @default compileMdx
@@ -41,48 +36,34 @@ const Link: typeof Anchor = ({ className, ...props }) => {
   )
 }
 
-async function renderMarkdownDefault(description: string): Promise<ReactNode> {
+async function renderMarkdownDefault(description?: string): Promise<ReactNode> {
   if (!description) return
   const rawJs = await compileMdx(description)
   return <MDXRemote compiledSource={rawJs} />
 }
 
-type Entry = {
-  name: string
-  type: string
-  description?: ReactNode
-  default?: string
-  optional?: boolean
-}
-
-export const TSDoc: FC<TSDocProps> = async ({
+export const TSDoc: FC<TSDocProps> = ({
   renderMarkdown = renderMarkdownDefault,
   typeLinkMap = {},
   ...props
 }) => {
   const result = generateDocumentation(props)
-  const mapEntry = async (entry: TypeField): Promise<Entry> => {
-    const tags = entry.tags ?? {}
-    return {
-      name: entry.name,
-      type: entry.type,
-      description: await renderMarkdown(
-        entry.description || tags.description || ''
-      ),
-      default: tags.default || tags.defaultValue,
-      optional: entry.optional
-    }
-  }
   if ('entries' in result) {
-    const promises = result.entries.map(entry => mapEntry(entry))
-    const entries = await Promise.all(promises)
-    return <FieldsTable fields={entries} typeLinkMap={typeLinkMap} />
+    return (
+      <FieldsTable
+        fields={result.entries}
+        typeLinkMap={typeLinkMap}
+        renderMarkdown={renderMarkdown}
+      />
+    )
   }
 
   const withSignatures = result.signatures.length > 1
 
   if (!withSignatures) {
-    return <FunctionSignature signature={result.signatures[0]!} />
+    return (
+      <FunctionSignature signature={result.signatures[0]!} tags={result.tags} />
+    )
   }
 
   return (
@@ -93,7 +74,11 @@ export const TSDoc: FC<TSDocProps> = async ({
     >
       {result.signatures.map((signature, index) => (
         <Tabs.Tab key={index}>
-          <FunctionSignature signature={signature} index={index + 1} />
+          <FunctionSignature
+            signature={signature}
+            index={index + 1}
+            tags={result.tags}
+          />
         </Tabs.Tab>
       ))}
     </Tabs>
@@ -101,100 +86,137 @@ export const TSDoc: FC<TSDocProps> = async ({
 
   async function FunctionSignature({
     signature,
-    index = ''
+    index = '',
+    tags
   }: Readonly<{
     signature: GeneratedFunction['signatures'][number]
     /** Signature index, will be appended to returns anchor. */
     index?: string | number
+    tags: GeneratedFunction['tags']
   }>) {
-    const promises = signature.params.map(entry => mapEntry(entry))
-    const entries = await Promise.all(promises)
     const slugger = new Slugger()
-
-    const promises2 = signature.returns.map(entry =>
-      mapEntry(
-        // @ts-expect-error -- fixme
-        entry
-      )
-    )
-    const returns = await Promise.all(promises2)
-
+    const returns: TypeField[] = Array.isArray(signature.returns)
+      ? signature.returns
+      : [{ name: '', type: signature.returns.type }]
     return (
       <>
         <b className="x:mt-6 x:block">Parameters:</b>
-        {entries.length ? (
-          <FieldsTable fields={entries} typeLinkMap={typeLinkMap} />
+        {signature.params.length ? (
+          <FieldsTable
+            fields={signature.params}
+            typeLinkMap={typeLinkMap}
+            renderMarkdown={renderMarkdown}
+          />
         ) : (
-          <Callout
-            type={null}
-            emoji={<InformationCircleIcon height="16" className="x:mt-1.5" />}
-          >
+          <Callout type="info">
             This function does not accept any parameters.
           </Callout>
         )}
         <b className="x:mt-6 x:block">Returns:</b>
-        <table className="x:my-8 x:w-full x:text-sm">
+        {await renderMarkdown(tags?.returns)}
+        <table className="x:my-6 x:w-full x:text-sm">
           <thead className="nextra-border x:border-b x:text-left x:max-lg:hidden">
             <tr>
               <th className="x:py-1.5">Name</th>
               <th className="x:p-1.5 x:px-3">Type</th>
             </tr>
           </thead>
-          {returns.map(prop => {
-            const id = slugger.slug(prop.name || `returns${index}`)
-            return (
-              <tbody
-                key={id}
-                className={cn(
-                  'x:group nextra-border x:mb-5 x:rounded-xl x:max-lg:block x:max-lg:border',
-                  'x:hover:bg-primary-50 x:dark:hover:bg-primary-500/10'
-                )}
-              >
-                <tr
-                  id={id}
-                  className="nextra-border x:max-lg:block x:lg:border-b x:lg:not-target:[&>td>a]:opacity-0"
-                >
-                  <td className="x:relative x:py-3 x:max-lg:block x:max-lg:px-3">
-                    <a
-                      href={`#${id}`}
-                      className={cn(
-                        'x:absolute x:top-0 x:right-0 x:text-lg x:font-black x:lg:top-1/2 x:lg:right-full x:lg:-translate-y-1/2',
-                        'x:group-hover:opacity-100! x:before:content-["#"] x:hover:text-black x:dark:hover:text-white',
-                        'x:p-3' // Increase click box
-                      )}
-                    />
-                    {prop.name && (
-                      <Code
-                        // add `?` via CSS `content` property so value will be not selectable
-                        className={cn(prop.optional && 'x:after:content-["?"]')}
-                      >
-                        {prop.name}
-                      </Code>
-                    )}
-                  </td>
-                  <td
-                    // add `Type: ` via CSS `content` property so value will be not selectable
-                    className='x:p-3 x:max-lg:block x:max-lg:before:content-["Type:_"]'
-                  >
-                    {linkify(prop.type, typeLinkMap)}
-                    {prop.description && (
-                      <div className="x:mt-2 x:text-sm">{prop.description}</div>
-                    )}
-                  </td>
-                </tr>
-              </tbody>
-            )
-          })}
+          <tbody>
+            {returns.map(async prop => {
+              const id = slugger.slug(prop.name || `returns${index}`)
+              const description =
+                //
+                await renderMarkdown(prop.description || prop.tags?.description)
+              return (
+                <Row key={id} id={id}>
+                  <NameCell id={id} optional={prop.optional} name={prop.name} />
+                  <TypeAndDescriptionCell
+                    type={prop.type}
+                    description={description}
+                    typeLinkMap={typeLinkMap}
+                  />
+                </Row>
+              )
+            })}
+          </tbody>
         </table>
       </>
     )
   }
 }
 
-const FieldsTable: FC<{
-  fields: Entry[]
+const Row: FC<{
+  children: ReactNode
+  id: string
+}> = ({ children, id }) => {
+  return (
+    <tr
+      id={id}
+      className={cn(
+        'x:group x:mb-5 x:rounded-xl x:max-lg:block',
+        'x:hover:bg-primary-50 x:dark:hover:bg-primary-500/10',
+        'nextra-border x:max-lg:border x:lg:border-b',
+        'x:lg:not-target:[&>td>a]:opacity-0'
+      )}
+    >
+      {children}
+    </tr>
+  )
+}
+
+const NameCell: FC<{
+  name: string
+  id: string
+  optional?: boolean
+}> = ({ name, id, optional }) => {
+  return (
+    <td
+      className={cn(
+        'x:relative x:max-lg:block',
+        name && 'x:py-3 x:max-lg:px-3'
+      )}
+    >
+      <a
+        href={`#${id}`}
+        className={cn(
+          'x:absolute x:top-0 x:right-0 x:text-lg x:font-black x:lg:top-1/2 x:lg:right-full x:lg:-translate-y-1/2',
+          'x:group-hover:opacity-100! x:before:content-["#"] x:hover:text-black x:dark:hover:text-white',
+          'x:p-3' // Increase click box
+        )}
+      />
+      {name && (
+        <Code
+          // add `?` via CSS `content` property so value will be not selectable
+          className={optional ? 'x:after:content-["?"]' : ''}
+        >
+          {name}
+        </Code>
+      )}
+    </td>
+  )
+}
+
+const TypeAndDescriptionCell: FC<{
+  type: string
+  description: ReactNode
   typeLinkMap: TSDocProps['typeLinkMap']
-}> = ({ fields, typeLinkMap }) => {
+}> = ({ type, description, typeLinkMap }) => {
+  return (
+    <td
+      // add `Type: ` via CSS `content` property so value will be not selectable
+      className='x:p-3 x:max-lg:block x:max-lg:before:content-["Type:_"]'
+    >
+      {linkify(type, typeLinkMap)}
+      {description && <div className="x:mt-2 x:text-sm">{description}</div>}
+    </td>
+  )
+}
+
+const FieldsTable: FC<
+  {
+    fields: TypeField[]
+  } & Required<Pick<TSDocProps, 'renderMarkdown' | 'typeLinkMap'>>
+> = ({ fields, typeLinkMap, renderMarkdown }) => {
   const slugger = new Slugger()
   return (
     <table className="x:my-8 x:w-full x:text-sm">
@@ -205,63 +227,41 @@ const FieldsTable: FC<{
           <th className="x:py-1.5">Default</th>
         </tr>
       </thead>
-      {fields.map(prop => {
-        const id = slugger.slug(prop.name)
-        return (
-          <tbody
-            key={id}
-            className={cn(
-              'x:group nextra-border x:mb-5 x:rounded-xl x:max-lg:block x:max-lg:border',
-              'x:hover:bg-primary-50 x:dark:hover:bg-primary-500/10'
-            )}
-          >
-            <tr
-              id={id}
-              className="nextra-border x:max-lg:block x:lg:border-b x:lg:not-target:[&>td>a]:opacity-0"
-            >
-              <td className="x:relative x:py-3 x:max-lg:block x:max-lg:px-3">
-                <a
-                  href={`#${id}`}
-                  className={cn(
-                    'x:absolute x:top-0 x:right-0 x:text-lg x:font-black x:lg:top-1/2 x:lg:right-full x:lg:-translate-y-1/2',
-                    'x:group-hover:opacity-100! x:before:content-["#"] x:hover:text-black x:dark:hover:text-white',
-                    'x:p-3' // Increase click box
-                  )}
-                />
-                <Code
-                  // add `?` via CSS `content` property so value will be not selectable
-                  className={cn(prop.optional && 'x:after:content-["?"]')}
-                >
-                  {prop.name}
-                </Code>
-              </td>
-              <td
-                // add `Type: ` via CSS `content` property so value will be not selectable
-                className='x:p-3 x:max-lg:block x:max-lg:before:content-["Type:_"]'
-              >
-                {linkify(prop.type, typeLinkMap)}
-                {prop.description && (
-                  <div className="x:mt-2 x:text-sm">{prop.description}</div>
-                )}
-              </td>
+      <tbody>
+        {fields.map(async field => {
+          const id = slugger.slug(field.name)
+          const tags = field.tags ?? {}
+          const defaultValue = tags.default || tags.defaultValue
+          const description =
+            //
+            await renderMarkdown(field.description || tags.description)
+
+          return (
+            <Row key={id} id={id}>
+              <NameCell id={id} optional={field.optional} name={field.name} />
+              <TypeAndDescriptionCell
+                type={field.type}
+                description={description}
+                typeLinkMap={typeLinkMap}
+              />
               <td
                 className={cn(
                   'x:max-lg:block',
                   // For the mobile view, we want to hide the default column entirely if there is no
                   // content for it. We want this because otherwise the default padding applied to
                   // table cells will add some extra blank space we don't want.
-                  prop.default
+                  defaultValue
                     ? // add `Default: ` via CSS `content` property so value will be not selectable
                       'x:py-3 x:max-lg:px-3 x:max-lg:before:content-["Default:_"]'
                     : 'x:lg:after:content-["–"]'
                 )}
               >
-                {prop.default && linkify(prop.default, typeLinkMap)}
+                {defaultValue && linkify(defaultValue, typeLinkMap)}
               </td>
-            </tr>
-          </tbody>
-        )
-      })}
+            </Row>
+          )
+        })}
+      </tbody>
     </table>
   )
 }

@@ -17,28 +17,11 @@ includes options for adding an icon, title, link and an image to related content
 
 ### Cards
 
-<TSDoc
-  code={`
-import type { ComponentProps } from 'react'
-import type { Cards } from 'nextra/components'
-
-type $ = Omit<
- ComponentProps<typeof Cards>,
- keyof ComponentProps<'div'>
-> & {
- '...props': ComponentProps<'div'>
-}
-
-export default $`}
-/>
+<TSDoc componentName="Cards" groupKeys="ComponentProps<'div'>" />
 
 ### Card
 
-<TSDoc
-  code={`import type { Cards } from 'nextra/components'
-type $ = React.ComponentProps<typeof Cards.Card>
-export default $`}
-/>
+<TSDoc componentName="Cards.Card" />
 
 export async function CardsPage() {
   const mdx2 = `<Cards.Card

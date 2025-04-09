@@ -1,5 +1,24 @@
 # nextra-theme-docs
 
+## 4.3.0-alpha.7
+
+### Minor Changes
+
+- 07debf9: feat(TSDoc): support flattening return object fields
+
+### Patch Changes
+
+- Updated dependencies [07debf9]
+  - nextra@4.3.0-alpha.7
+
+## 4.3.0-alpha.6
+
+### Patch Changes
+
+- a070fdc: Fix `[object Object]` text on hovering breadcrumbs and pagination
+  links
+  - nextra@4.3.0-alpha.6
+
 ## 4.3.0-alpha.5
 
 ### Minor Changes
