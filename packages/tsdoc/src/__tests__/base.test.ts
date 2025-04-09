@@ -7,7 +7,7 @@ import typesFixture from './fixtures/flattened?raw'
 import returnsObjectDescriptionFixture from './fixtures/returns-object-description?raw'
 
 describe('<TSDoc />', () => {
-  it('<Banner />', async () => {
+  test('<Banner />', async () => {
     const code = `import type { Banner } from 'nextra/components'
 type $ = React.ComponentProps<typeof Banner>
 export default $`
@@ -44,14 +44,14 @@ export default $`
       }
     `)
   })
-  it('<Search />', async () => {
+  test('<Search />', async () => {
     const code = `import type { Search } from 'nextra/components'
 type $ = React.ComponentProps<typeof Search>
 export default $`
     const result = generateDocumentation({ code })
     await expect(result).toMatchFileSnapshot('./snapshots/search.json')
   })
-  it('<Callout />', async () => {
+  test('<Callout />', async () => {
     const code = `import type { Callout } from 'nextra/components'
 type $ = React.ComponentProps<typeof Callout>
 export default $`
@@ -97,7 +97,7 @@ export default $`
       }
     `)
   })
-  it('<NotFoundPage />', async () => {
+  test('<NotFoundPage />', async () => {
     const code = `import type { NotFoundPage } from 'nextra-theme-docs'
 type $ = React.ComponentProps<typeof NotFoundPage>
 export default $`
@@ -143,19 +143,19 @@ export default $`
       }
     `)
   })
-  it('<Navbar />', async () => {
+  test('<Navbar />', async () => {
     const code = `type $ = ${generateTsFromZod(NavbarPropsSchema)}
 export default $`
     const result = generateDocumentation({ code })
     await expect(result).toMatchFileSnapshot('./snapshots/navbar.json')
   })
-  it('<Head /> with `flattened: true`', async () => {
+  test('<Head /> with `flattened: true`', async () => {
     const code = `type $ = ${generateTsFromZod(HeadPropsSchema)}
 export default $`
     const result = generateDocumentation({ code, flattened: true })
     await expect(result).toMatchFileSnapshot('./snapshots/head.json')
   })
-  it('<Layout /> with `flattened: true`', async () => {
+  test('<Layout /> with `flattened: true`', async () => {
     const code = `type $ = ${generateTsFromZod(LayoutPropsSchema)}
 export default $`
     const result = generateDocumentation({ code, flattened: true })
@@ -163,7 +163,7 @@ export default $`
       './snapshots/theme-docs-layout.json'
     )
   })
-  it('two declarations', async () => {
+  test('two declarations', async () => {
     const code = `
 type A = { foo: string }
 type A = { bar: string }
@@ -181,7 +181,7 @@ export default A`
       }
     `)
   })
-  it('inline description and @description as tag', async () => {
+  test('inline description and @description as tag', async () => {
     const code = `type $ = {
 /**
  * @description Show or hide breadcrumb navigation.
@@ -217,7 +217,7 @@ export default $`
       }
     `)
   })
-  it('should show null type', async () => {
+  test('should show null type', async () => {
     const code = `
 type Connection = {
   targetHandle: string | null;
@@ -238,7 +238,7 @@ export default Connection`
   })
 
   describe('functions', () => {
-    it('should flatten return type for useThemeConfig', async () => {
+    test('should flatten return type for useThemeConfig', async () => {
       const code =
         'export { useThemeConfig as default } from "nextra-theme-docs"'
       const result = generateDocumentation({ code, flattened: true })
@@ -247,13 +247,13 @@ export default Connection`
       )
     })
 
-    it('should flatten return type for useConfig', async () => {
+    test('should flatten return type for useConfig', async () => {
       const code = 'export { useConfig as default } from "nextra-theme-docs"'
       const result = generateDocumentation({ code, flattened: true })
       await expect(result).toMatchFileSnapshot('./snapshots/use-config.json')
     })
 
-    it('should be parsed in object field', () => {
+    test('should be parsed in object field', () => {
       const code = `type $ = {
   useNodeConnections: typeof import('@xyflow/react').useNodeConnections
 }
@@ -272,7 +272,7 @@ export default $
         }
       `)
     })
-    it('should be parsed as function type', () => {
+    test('should be parsed as function type', () => {
       const code =
         "export { useNodeConnections as default } from '@xyflow/react'"
       const result = generateDocumentation({ code, flattened: true })
@@ -340,7 +340,7 @@ export default $
         }
       `)
     })
-    it('as function with description', () => {
+    test('as function with description', () => {
       const code = "export { useInternalNode as default } from '@xyflow/react'"
       const result = generateDocumentation({ code, flattened: true })
       expect(result).toMatchInlineSnapshot(`
@@ -391,7 +391,7 @@ export default $
       `)
     })
 
-    it("should not throw when symbol isn't found", () => {
+    test("should not throw when symbol isn't found", () => {
       const code = "export { isEdge as default } from '@xyflow/react'"
       const result = generateDocumentation({ code, flattened: true })
       expect(result).toMatchInlineSnapshot(`
@@ -436,7 +436,7 @@ export default $
       `)
     })
 
-    it('should parse multiple function signatures', () => {
+    test('should parse multiple function signatures', () => {
       const code = "export { useNodesData as default } from '@xyflow/react'"
       const result = generateDocumentation({ code, flattened: true })
       expect(result).toMatchInlineSnapshot(`
@@ -487,7 +487,7 @@ export default $
       `)
     })
 
-    it('should parse optional parameters', () => {
+    test('should parse optional parameters', () => {
       const code =
         'function foo(a: string, b?: number, c = true) {}\nexport default foo'
       const result = generateDocumentation({ code, flattened: true })
@@ -521,7 +521,7 @@ export default $
       `)
     })
 
-    it('should not flatten tuple type, set, map', () => {
+    test('should not flatten tuple type, set, map', () => {
       const code = `
 type foo = (params: {
   tuple?: [number, number],
@@ -562,7 +562,7 @@ export default foo`
     })
   })
 
-  it('should exclude {@link ...}', async () => {
+  test('should exclude {@link ...}', async () => {
     const code =
       "export { getViewportForBounds as default } from '@xyflow/react'"
     const result = generateDocumentation({ code, flattened: true })
@@ -571,13 +571,13 @@ export default foo`
     )
   })
 
-  it('should flatten array return type', async () => {
+  test('should flatten array return type', async () => {
     const code = 'export { useEdgesState as default } from "@xyflow/react"'
     const result = generateDocumentation({ code, flattened: true })
     await expect(result).toMatchFileSnapshot('./snapshots/use-edges-state.json')
   })
 
-  it('should parse `unknown` type', () => {
+  test('should parse `unknown` type', () => {
     const code = 'function foo(a?: unknown) {}\nexport default foo'
     const result = generateDocumentation({ code, flattened: true })
     expect(result).toMatchInlineSnapshot(`
@@ -654,7 +654,7 @@ export default $`,
     await expect(result).toMatchFileSnapshot('./snapshots/flattened.json')
   })
 
-  test.only('should returns object description', async () => {
+  test('should returns object description', async () => {
     const result = generateDocumentation({
       code: returnsObjectDescriptionFixture,
       flattened: true
@@ -664,7 +664,7 @@ export default $`,
     )
   })
 
-  it('should exclude JSDoc @link in description', () => {
+  test('should exclude JSDoc @link in description', () => {
     const code = `type $ = {
   /**
    * By default, we render a small attribution in the corner of your flows that links back to the project.
