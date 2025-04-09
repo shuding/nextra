@@ -3,7 +3,7 @@ import { LayoutPropsSchema } from '../../../nextra-theme-docs/src/layout.js'
 import { HeadPropsSchema } from '../../../nextra/src/client/components/head.js'
 import { generateDocumentation } from '../../../nextra/src/server/tsdoc/base.js'
 import { generateTsFromZod } from '../../../nextra/src/server/tsdoc/zod-to-ts.js'
-import typesFixture from './types.fixture.js?raw'
+import typesFixture from './fixtures/flattened?raw'
 
 describe('<TSDoc />', () => {
   it('<Banner />', async () => {
