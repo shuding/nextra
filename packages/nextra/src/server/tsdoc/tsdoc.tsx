@@ -52,7 +52,7 @@ async function renderMarkdownDefault(description?: string): Promise<ReactNode> {
 }
 
 /**
- * Component which render the props table for a TypeScript type or interface.
+ * Component which renders the props table for a TypeScript `type`, `interface` or `function`.
  */
 export const TSDoc: FC<TSDocProps> = ({
   definition,
