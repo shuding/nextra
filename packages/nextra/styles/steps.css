@@ -1,6 +1,7 @@
 .nextra-steps {
   h2,
-  h3,
+  /* Avoid breaking `<Steps>` component numeration when there is `<Tabs>` component inside */
+  h3:not([style^='visibility:']),
   h4,
   h5,
   h6 {
