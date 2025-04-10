@@ -70,7 +70,6 @@
     },
     {
       "name": "reactNode",
-      "optional": true,
       "type": "ReactNode",
     },
     {

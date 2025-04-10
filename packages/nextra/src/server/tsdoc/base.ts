@@ -191,13 +191,10 @@ function getDocEntry({
       symbol.compilerSymbol.getDocumentationComment(compilerObject)
     )
   ).replace(/^- /, '')
-  const isOptional =
-    // If some union type has `undefined` -> mark as optional
-    subType.getUnionTypes().some(t => t.isUndefined()) ||
-    (isFunctionParameter
-      ? // @ts-expect-error -- fixme
-        getDeclaration(symbol).isOptional()
-      : symbol.isOptional())
+  const isOptional = isFunctionParameter
+    ? // @ts-expect-error -- fixme
+      getDeclaration(symbol).isOptional()
+    : symbol.isOptional()
 
   return {
     name: prexify(prefix, name),

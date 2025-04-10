@@ -41,7 +41,11 @@ export const LayoutPropsSchema = z.strictObject({
       labels: z
         .string()
         .default('feedback')
-        .describe('Labels that can be added to the new created issue.')
+        .describe('Labels that can be added to the new created issue.'),
+      link: z.string().optional().describe(`Feedback link URL.
+
+By default, it's a link to the issue creation form of the docs repository, with the current page title prefilled:
+[example](https://github.com/shuding/nextra/issues/new?title=Feedback%20for%20%E2%80%9CTheme%20Configuration%E2%80%9D&labels=feedback).`)
     })
     .default({}),
   footer: reactNode.describe(
