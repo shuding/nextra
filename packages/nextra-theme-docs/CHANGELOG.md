@@ -1,5 +1,17 @@
 # nextra-theme-docs
 
+## 4.3.0-alpha.12
+
+### Patch Changes
+
+- 40267dc: split `TSDoc` component logic to `TSDoc` component and
+  `generateDocumentation` function
+
+  update https://nextra.site/docs/built-ins/tsdoc documentation
+
+- Updated dependencies [40267dc]
+  - nextra@4.3.0-alpha.12
+
 ## 4.3.0-alpha.11
 
 ### Patch Changes
