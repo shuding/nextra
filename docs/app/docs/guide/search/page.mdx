@@ -2,8 +2,8 @@ import { Steps, Tabs } from 'nextra/components'
 
 # Search Engine
 
-Nextra features full-page search, that includes list items, code blocks,
-headings and table cells.
+Nextra includes a full-page search feature that makes it easy for users to find
+relevant content across your entire documentation site.
 
 > [!TIP]
 >
@@ -13,8 +13,9 @@ headings and table cells.
 
 ## Setup
 
-Nextra integrates with [Pagefind](https://pagefind.app) package which performs
-incredibly fast full-text search and requires a few steps to set up:
+Nextra integrates with [Pagefind](https://pagefind.app), a static search library
+that indexes your HTML files and provides lightning-fast, client-side full-text
+search — all with no server required.
 
 <Steps>
 ### Install `pagefind` as a dev dependency
@@ -25,11 +26,10 @@ npm i -D pagefind
 
 ### Add a `postbuild` script
 
-Pagefind search indexing `.html` pages which should be done after building your
-application.
+Pagefind indexes `.html` files, so the indexing must happen **after building**
+your application.
 
-To generate the search indexes add a `postbuild` script to the `package.json`
-file. The script should be:
+Add a `postbuild` script to your `package.json`:
 
 <Tabs items={['Server builds', 'Static exports']}>
   <Tabs.Tab>
@@ -50,15 +50,21 @@ file. The script should be:
 
 ### Ignore generated files
 
-Add `_pagefind/` to `.gitignore` file. This prevents committing the generated
-search index files.
+Add `_pagefind/` to your `.gitignore file` to avoid committing generated index
+files.
+
+### Verify indexing output
+
+After building and running the `postbuild` script, check that a `_pagefind/`
+directory exists in `public/` or `out/`. Start your app and test the search bar
+to confirm everything is working.
 
 </Steps>
 
 ## Configuration
 
-The search feature is enabled by default, but you can disable it entirely by
-setting `search: false{:js}` in `next.config.mjs` file:
+Search is enabled by default. You can disable it entirely by setting
+`search: false{:js}` in your `next.config.mjs` file:
 
 ```js filename="next.config.mjs" {4}
 import nextra from 'nextra'
@@ -69,7 +75,7 @@ const withNextra = nextra({
 export default withNextra()
 ```
 
-To exclude code blocks, but keep search enabled, set
+To disable code block indexing while keeping search enabled set
 `search: { codeblocks: false }{:js}`:
 
 ```js filename="next.config.mjs" {4}
