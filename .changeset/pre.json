@@ -12,6 +12,7 @@
   },
   "changesets": [
     "adapt-original-gh-alerts",
+    "beige-pandas-fail",
     "eight-crabs-turn",
     "full-sloths-stop",
     "lazy-pugs-tie",
