@@ -5,13 +5,16 @@ import { Steps, Tabs } from 'nextra/components'
 Nextra features full-page search, that includes list items, code blocks,
 headings and table cells.
 
-Check the
-[migration guide](https://the-guild.dev/blog/nextra-4#new-search-engine--pagefind)
-for more information.
+> [!TIP]
+>
+> Check the
+> [migration guide](https://the-guild.dev/blog/nextra-4#new-search-engine--pagefind)
+> for more information.
 
 ## Setup
 
-Nextra's search engine requires a few steps to set up:
+Nextra integrates with [Pagefind](https://pagefind.app) package which performs
+incredibly fast full-text search and requires a few steps to set up:
 
 <Steps>
 ### Install `pagefind` as a dev dependency
@@ -22,19 +25,22 @@ npm i -D pagefind
 
 ### Add a `postbuild` script
 
-You need to add a `postbuild` script to the `package.json` file to generate the
-search index. The script should be:
+Pagefind search indexing `.html` pages which should be done after building your
+application.
+
+To generate the search indexes add a `postbuild` script to the `package.json`
+file. The script should be:
 
 <Tabs items={['Server builds', 'Static exports']}>
   <Tabs.Tab>
-    ```json filename="package.json" {2}
+    ```json filename="package.json"
     "scripts": {
       "postbuild": "pagefind --site .next/server/app --output-path public/_pagefind"
     }
     ```
   </Tabs.Tab>
   <Tabs.Tab>
-    ```json filename="package.json" {2}
+    ```json filename="package.json"
     "scripts": {
       "postbuild": "pagefind --site .next/server/app --output-path out/_pagefind"
     }
@@ -42,17 +48,17 @@ search index. The script should be:
   </Tabs.Tab>
 </Tabs>
 
-### Ignore genereated files
+### Ignore generated files
 
-Add `_pagefind/` to `.gitignore`. This prevents committing the generated search
-index files,
+Add `_pagefind/` to `.gitignore` file. This prevents committing the generated
+search index files.
 
 </Steps>
 
 ## Configuration
 
 The search feature is enabled by default, but you can disable it entirely by
-setting `search: false{:js}`:
+setting `search: false{:js}` in `next.config.mjs` file:
 
 ```js filename="next.config.mjs" {4}
 import nextra from 'nextra'
@@ -60,9 +66,10 @@ import nextra from 'nextra'
 const withNextra = nextra({
   search: false
 })
+export default withNextra()
 ```
 
-To keep search enabled but exclude code blocks, set
+To exclude code blocks, but keep search enabled, set
 `search: { codeblocks: false }{:js}`:
 
 ```js filename="next.config.mjs" {4}
@@ -71,4 +78,5 @@ import nextra from 'nextra'
 const withNextra = nextra({
   search: { codeblocks: false }
 })
+export default withNextra()
 ```
