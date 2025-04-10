@@ -1,6 +1,6 @@
 import cn from 'clsx'
 import Slugger from 'github-slugger'
-import type { FC, ReactNode } from 'react'
+import type { FC, ReactElement, ReactNode } from 'react'
 import { Callout } from '../../client/components/callout.js'
 import { Tabs } from '../../client/components/tabs/index.js'
 import { Anchor } from '../../client/mdx-components/anchor.js'
@@ -270,19 +270,24 @@ const FieldsTable: FC<
 // This function takes a string representing some type and attempts to turn any
 // types referenced inside into links, either internal or external.
 function linkify(type: string, typeLinkMap: TSDocProps['typeLinkMap'] = {}) {
-  return (
-    <Code>
-      {type.match(/(\w+|\W+)/g)!.map((chunk, index) => {
-        const href = typeLinkMap[chunk]
-        return href ? (
-          <Link key={index} href={href}>
-            {/* use React fragment to avoid rendering external link icon */}
-            <>{chunk}</>
-          </Link>
-        ) : (
-          chunk
-        )
-      })}
-    </Code>
-  )
+  const result: (string | ReactElement)[] = []
+  for (const chunk of type.match(/(\w+|\W+)/g)!) {
+    const href = typeLinkMap[chunk]
+    if (href) {
+      result.push(
+        <Link key={result.length} href={href}>
+          {/* use React fragment to avoid rendering external link icon */}
+          <>{chunk}</>
+        </Link>
+      )
+      continue
+    }
+    if (typeof result.at(-1) === 'string') {
+      // Concatenate strings to avoid multiple text nodes in DOM
+      result[result.length - 1] += chunk
+      continue
+    }
+    result.push(chunk)
+  }
+  return <Code className="x:whitespace-pre-wrap">{result}</Code>
 }

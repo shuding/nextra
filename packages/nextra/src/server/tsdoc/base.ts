@@ -35,9 +35,7 @@ export function generateDocumentation({
   exportName = 'default',
   flattened = false
 }: BaseArgs): GeneratedType | GeneratedFunction {
-  const sourceFile = project.createSourceFile('temp.ts', code, {
-    overwrite: true
-  })
+  const sourceFile = project.createSourceFile('$.ts', code, { overwrite: true })
   const output: ExportedDeclarations[] = []
   for (const [key, declaration] of sourceFile.getExportedDeclarations()) {
     if (key === exportName) output.push(...declaration)
@@ -118,11 +116,11 @@ export function generateDocumentation({
     const typeName = declarationType.getText()
     if (typeName === 'any') {
       throw new Error(
-        'Your type is resolved as "any", it seems like you have an issue in "TSDoc.code" prop'
+        'Your type is resolved as "any", it seems like you have an issue in "generateDocumentation.code" argument.'
       )
     }
     throw new Error(
-      `No properties found, check if your type "${typeName}" exist`
+      `No properties found, check if your type "${typeName}" exist.`
     )
   }
 
