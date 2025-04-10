@@ -4,23 +4,50 @@ sidebarTitle: TSDoc
 
 # TSDoc Component
 
-The `<TSDoc>` component from `nextra/tsdoc` generates a properties table from TypeScript
-`type` and `interface` that displays:
+Component to generate documentation for properties of `type` and `interface` and
+parameters and return values of `function`.
 
-- **Property name**
-- **TypeScript type**
-- **Property description**
-- **Default value** - are extracted from the `@default` or `@defaultValue` tag.
-- **Permalink** - a `#` anchor link to the property row for easy reference.
+## Usage
+
+### For `type` and `interface`
+
+It generates properties table that displays:
+
+- **name**
+- **type**
+- **description**
+- **default value**
+- **permalink**
+
+### For `function`
+
+It generates parameters signature table that displays:
+
+- **name**
+- **type**
+- **description**
+- **default value**.
+- **permalink**
+
+together with return signature table that displays:
+
+- **return description**
+- **return values table**
 
 > [!TIP]
 >
-> Description is parsed from [TSDoc](https://tsdoc.org) inline description or the `@description` tag.
-> You can use any Markdown/MDX syntax here.
-
-> [!IMPORTANT]
+> Permalink is a `#` anchor link to the table row for easy reference.
 >
-> **Server Component Only** – This cannot be used in a client
+> Descriptions are parsed from [TSDoc](https://tsdoc.org) inline description or
+> the `@description` tag. You can use any Markdown/MDX syntax here.
+>
+> Default values are extracted from the `@default` or `@defaultValue` tag.
+>
+> Return signature descriptions are extracted from `@returns` tag.
+
+> [!WARNING]
+>
+> **Server Component Only** – TSDoc component cannot be used in a client
 > component.<br />{''}**Available from:** Nextra 4.3 (alpha).<br />{''}
 > **Dependency:** Uses TypeScript Compiler API from
 > [`ts-morph`](https://github.com/dsherret/ts-morph).

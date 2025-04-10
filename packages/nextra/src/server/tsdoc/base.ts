@@ -28,7 +28,8 @@ const project = new Project({
 const { compilerObject } = project.getTypeChecker()
 
 /**
- * Generate documentation for properties in an exported type/interface
+ * Generate documentation for properties of `type` and `interface` and parameters and returns
+ * signature of `function`.
  * @returns Parsed TSDoc definition from TypeScript `type`, `interface` or `function`.
  */
 export function generateDocumentation({
