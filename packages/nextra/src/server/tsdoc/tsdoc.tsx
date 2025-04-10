@@ -1,19 +1,28 @@
 import cn from 'clsx'
 import Slugger from 'github-slugger'
-import type { FC, ReactNode } from 'react'
+import type { FC, ReactElement, ReactNode } from 'react'
 import { Callout } from '../../client/components/callout.js'
 import { Tabs } from '../../client/components/tabs/index.js'
 import { Anchor } from '../../client/mdx-components/anchor.js'
 import { Code } from '../../client/mdx-components/code.js'
 import { MDXRemote } from '../../client/mdx-remote.js'
 import { compileMdx } from '../compile.js'
-import { generateDocumentation } from './base.js'
-import type { BaseArgs, GeneratedFunction, TypeField } from './types.js'
+import type { generateDocumentation } from './base.js'
+import type { GeneratedFunction, TypeField } from './types.js'
 
-type TSDocProps = BaseArgs & {
+type TSDocProps = {
+  /**
+   * Parsed `type`, `interface` or `function` definition from `generateDocumentation` function.
+   */
+  definition: ReturnType<typeof generateDocumentation>
   /**
    * Override the function to render markdown into JSX nodes.
-   * @default compileMdx
+   * @default
+   * async function renderMarkdownDefault(description?: string): Promise<ReactNode> {
+   *   if (description) return
+   *   const rawJs = await compileMdx(description)
+   *   return <MDXRemote compiledSource={rawJs} />
+   * }
    */
   renderMarkdown?: typeof renderMarkdownDefault
   /**
@@ -42,43 +51,37 @@ async function renderMarkdownDefault(description?: string): Promise<ReactNode> {
   return <MDXRemote compiledSource={rawJs} />
 }
 
+/**
+ * Component which renders the props table for a TypeScript `type`, `interface` or `function`.
+ */
 export const TSDoc: FC<TSDocProps> = ({
+  definition,
   renderMarkdown = renderMarkdownDefault,
-  typeLinkMap = {},
-  ...props
+  typeLinkMap = {}
 }) => {
-  const result = generateDocumentation(props)
-  if ('entries' in result) {
+  if ('entries' in definition) {
     return (
       <FieldsTable
-        fields={result.entries}
+        fields={definition.entries}
         typeLinkMap={typeLinkMap}
         renderMarkdown={renderMarkdown}
       />
     )
   }
-
-  const withSignatures = result.signatures.length > 1
+  const { signatures, tags } = definition
+  const withSignatures = signatures.length > 1
 
   if (!withSignatures) {
-    return (
-      <FunctionSignature signature={result.signatures[0]!} tags={result.tags} />
-    )
+    return <FunctionSignature signature={signatures[0]!} />
   }
 
   return (
     <Tabs
-      items={result.signatures.map(
-        (_, index) => `Function Signature ${index + 1}`
-      )}
+      items={signatures.map((_, index) => `Function Signature ${index + 1}`)}
     >
-      {result.signatures.map((signature, index) => (
+      {signatures.map((signature, index) => (
         <Tabs.Tab key={index}>
-          <FunctionSignature
-            signature={signature}
-            index={index + 1}
-            tags={result.tags}
-          />
+          <FunctionSignature signature={signature} index={index + 1} />
         </Tabs.Tab>
       ))}
     </Tabs>
@@ -86,13 +89,11 @@ export const TSDoc: FC<TSDocProps> = ({
 
   async function FunctionSignature({
     signature,
-    index = '',
-    tags
+    index = ''
   }: Readonly<{
     signature: GeneratedFunction['signatures'][number]
     /** Signature index, will be appended to returns anchor. */
     index?: string | number
-    tags: GeneratedFunction['tags']
   }>) {
     const slugger = new Slugger()
     const returns: TypeField[] = Array.isArray(signature.returns)
@@ -269,19 +270,24 @@ const FieldsTable: FC<
 // This function takes a string representing some type and attempts to turn any
 // types referenced inside into links, either internal or external.
 function linkify(type: string, typeLinkMap: TSDocProps['typeLinkMap'] = {}) {
-  return (
-    <Code>
-      {type.match(/(\w+|\W+)/g)!.map((chunk, index) => {
-        const href = typeLinkMap[chunk]
-        return href ? (
-          <Link key={index} href={href}>
-            {/* use React fragment to avoid rendering external link icon */}
-            <>{chunk}</>
-          </Link>
-        ) : (
-          chunk
-        )
-      })}
-    </Code>
-  )
+  const result: (string | ReactElement)[] = []
+  for (const chunk of type.match(/(\w+|\W+)/g)!) {
+    const href = typeLinkMap[chunk]
+    if (href) {
+      result.push(
+        <Link key={result.length} href={href}>
+          {/* use React fragment to avoid rendering external link icon */}
+          <>{chunk}</>
+        </Link>
+      )
+      continue
+    }
+    if (typeof result.at(-1) === 'string') {
+      // Concatenate strings to avoid multiple text nodes in DOM
+      result[result.length - 1] += chunk
+      continue
+    }
+    result.push(chunk)
+  }
+  return <Code className="x:whitespace-pre-wrap">{result}</Code>
 }

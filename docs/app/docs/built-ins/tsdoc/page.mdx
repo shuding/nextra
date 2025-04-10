@@ -2,46 +2,97 @@
 sidebarTitle: TSDoc
 ---
 
-# `<TSDoc>` Component
+# TSDoc Component
 
-The `<TSDoc>` component from `nextra/tsdoc` generates a properties table that
-displays:
+A component for generating documentation from `type`, `interface`, and
+`function` definitions using [TSDoc](https://tsdoc.org) annotations.
 
-- **Property name**
-- **TypeScript type**
-- **Property description** - is parsed from [TSDoc](https://tsdoc.org) inline
-  description or the `@description` tag. You can use any Markdown/MDX syntax
-  here.
-- **Default value** - are extracted from the `@default` or `@defaultValue` tag.
-- **Permalink** - a `#` anchor link to the property row for easy reference.
+## What it generates
 
-> [!NOTE]
+### For `type` and `interface`
+
+Generates a **properties table** with:
+
+- Name
+- Type and description
+- Default Value
+- Permalink
+
+### For `function`
+
+1. **Parameters table**, including:
+
+   - Name
+   - Type and description
+   - Default value
+   - Permalink
+
+2. **Return signature table**, including:
+   - Description
+   - Return values table
+
+> [!TIP]
 >
-> **Server Component Only** – This cannot be used in a client
+> - Permalink is a `#` anchor link for easy reference to individual rows.
+> - Descriptions are parsed from inline TSDoc comments or the `@description`
+>   tag.
+> - Supports full Markdown/MDX syntax in descriptions.
+> - Default values are extracted from the `@default` or `@defaultValue` tags.
+> - Return descriptions come from the `@returns` tag.
+
+> [!WARNING]
+>
+> **Server Component Only** – TSDoc component cannot be used in a client
 > component.<br />{''}**Available from:** Nextra 4.3 (alpha).<br />{''}
 > **Dependency:** Uses TypeScript Compiler API from
 > [`ts-morph`](https://github.com/dsherret/ts-morph).
 
-## Props
+## API
 
-<TSDoc componentName="unstable_TSDoc" packageName="nextra/tsdoc" />
+### `TSDoc` props
+
+<APIDocs componentName="TSDoc" packageName="nextra/tsdoc" />
+
+### `generateDocumentation` signature
+
+<APIDocs
+  code="export type { generateDocumentation as default } from 'nextra/tsdoc'"
+  flattened
+/>
 
 ## Example
 
+To generate the props table for the `TSDoc` component shown on this page:
+
 ```mdx
-import { unstable_TSDoc as TSDoc } from 'nextra/tsdoc'
+import { generateDocumentation, TSDoc } from 'nextra/tsdoc'
 
 <TSDoc
-  code={`
-import type { unstable_TSDoc as TSDoc } from 'nextra/tsdoc'
+  definitions={generateDocumentation({
+    code: `
+import type { TSDoc } from 'nextra/tsdoc'
 type MyProps = React.ComponentProps<typeof TSDoc>
-export default MyProps`}
+export default MyProps`
+  })}
 />
 ```
 
-### Overriding a type
+To generate the function signature table for `generateDocumentation` function:
 
-Overridden type can be specified inside the `@remarks` tag using backticks (`).
+```mdx
+import { generateDocumentation, TSDoc } from 'nextra/tsdoc'
+
+<TSDoc
+  definitions={generateDocumentation({
+    code: "export type { generateDocumentation as default } from 'nextra/tsdoc'",
+    flattened: true
+  })}
+/>
+```
+
+## Overriding a type
+
+You can override the inferred type using the `@remarks` tag using backticks (`).
 
 ```ts
 type Example = {
@@ -54,10 +105,10 @@ type Example = {
 }
 ```
 
-This means that while the property `foo` type is `string`, an alternative type
-annotation is described in `@remarks`.
+In this example, while the actual type of the property `foo` is `string`, the
+displayed type will be `"not dimaMachina"` as per the `@remarks` tag.
 
-<TSDoc
+<APIDocs
   code={`
 type Example = {
   /**

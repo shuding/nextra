@@ -2,10 +2,10 @@
 // @ts-nocheck
 
 import { useMDXComponents as getDocsMDXComponents } from 'nextra-theme-docs'
-import { unstable_TSDoc as TSDoc } from 'nextra/tsdoc'
+import { generateDocumentation, TSDoc } from 'nextra/tsdoc'
 
 const { img: Image, ...docsComponents } = getDocsMDXComponents({
-  TSDoc({
+  APIDocs({
     componentName,
     groupKeys,
     packageName = 'nextra/components',
@@ -19,7 +19,7 @@ const { img: Image, ...docsComponents } = getDocsMDXComponents({
         : 'MyProps'
 
       code = `
-import { ComponentProps } from 'react'
+import type { ComponentProps } from 'react'
 import type { ${componentName.split('.')[0]} } from '${packageName}'
 type MyProps = ComponentProps<typeof ${componentName}>
 type $ = ${result}
@@ -28,11 +28,13 @@ export default $`
     } else {
       code = props.code
     }
-
+    const definition = generateDocumentation({
+      code,
+      ...props
+    })
     return (
       <TSDoc
-        {...props}
-        code={code}
+        definition={definition}
         typeLinkMap={{
           GitHubIcon:
             'https://github.com/shuding/nextra/blob/main/packages/nextra/src/client/icons/github.svg',
@@ -55,7 +57,9 @@ export default $`
           ThemeProviderProps:
             'https://github.com/pacocoursey/next-themes/blob/c89d0191ce0f19215d7ddfa9eb28e1e4f94d37e5/next-themes/src/types.ts#L34-L57',
           LastUpdated:
-            'https://github.com/shuding/nextra/blob/main/packages/nextra-theme-docs/src/components/last-updated.tsx'
+            'https://github.com/shuding/nextra/blob/main/packages/nextra-theme-docs/src/components/last-updated.tsx',
+          MDXRemote:
+            'https://github.com/shuding/nextra/blob/main/packages/nextra/src/client/mdx-remote.tsx'
         }}
       />
     )
