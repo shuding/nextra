@@ -1,0 +1,25 @@
+{
+  "mode": "pre",
+  "tag": "alpha",
+  "initialVersions": {
+    "esbuild-react-compiler-plugin": "0.0.0",
+    "@nextra/eslint-config": "0.0.0",
+    "nextra": "4.2.17",
+    "nextra-theme-blog": "4.2.17",
+    "nextra-theme-docs": "4.2.17",
+    "@nextra/prettier-config": "0.0.0",
+    "@nextra/tsdoc": "0.0.0"
+  },
+  "changesets": [
+    "adapt-original-gh-alerts",
+    "eight-crabs-turn",
+    "full-sloths-stop",
+    "lazy-pugs-tie",
+    "lovely-webs-wash",
+    "lucky-apes-teach",
+    "perfect-carrots-rescue",
+    "puny-peas-shout",
+    "rich-symbols-wash",
+    "soft-rocks-dance"
+  ]
+}

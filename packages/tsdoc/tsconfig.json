@@ -1,0 +1,12 @@
+{
+  "extends": ["@tsconfig/strictest/tsconfig.json"],
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "moduleResolution": "bundler",
+    "target": "es2022",
+    "module": "esnext",
+    "noPropertyAccessFromIndexSignature": false,
+    "types": ["vitest/globals"]
+  },
+  "exclude": ["node_modules", "dist"]
+}

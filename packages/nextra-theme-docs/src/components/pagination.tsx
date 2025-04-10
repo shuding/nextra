@@ -37,7 +37,8 @@ export const Pagination: FC = () => {
       {prev && (
         <NextLink
           href={prev.route}
-          title={prev.title}
+          // Fix `[object Object]` tooltip when title is ReactNode
+          title={typeof prev.title === 'string' ? prev.title : undefined}
           className={cn(classes.link, 'x:pe-4')}
         >
           <ArrowRightIcon
@@ -50,7 +51,7 @@ export const Pagination: FC = () => {
       {next && (
         <NextLink
           href={next.route}
-          title={next.title}
+          title={typeof next.title === 'string' ? next.title : undefined}
           className={cn(classes.link, 'x:ps-4 x:ms-auto x:text-end')}
         >
           {next.title}

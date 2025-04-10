@@ -1,19 +1,20 @@
 import fs from 'node:fs/promises'
 import path from 'node:path'
+import type { PluginOptions as ReactCompilerConfig } from 'babel-plugin-react-compiler'
 import reactCompilerLoader from 'react-compiler-webpack/dist/react-compiler-loader.js'
 import type { Options } from 'tsup'
 
-const DEFAULT_REACT_COMPILER_CONFIG = {
+const DEFAULT_REACT_COMPILER_CONFIG: Partial<ReactCompilerConfig> = {
   sources(filename: string) {
     return !filename.includes('node_modules')
   },
   // panicThreshold: 'all_errors',
   target: '18',
   logger: {
-    logEvent(
-      filename: string,
-      result: { kind: 'CompileError' | 'CompileSuccess' }
-    ) {
+    logEvent(filename, result) {
+      if (!filename) {
+        throw new Error('Missing filename')
+      }
       const relativeFilePath = path.relative(process.cwd(), filename)
       if (result.kind === 'CompileSuccess') {
         console.info(

@@ -13,7 +13,7 @@ export const remarkLinkRewrite: Plugin<[RemarkLinkRewriteOptions], Root> =
   ({ pattern, replace, excludeExternalLinks }) =>
   ast => {
     visit(ast, 'link', node => {
-      if (!(excludeExternalLinks && EXTERNAL_URL_RE.test(node.url))) {
+      if (!excludeExternalLinks || !EXTERNAL_URL_RE.test(node.url)) {
         node.url = node.url.replace(pattern, replace)
       }
     })

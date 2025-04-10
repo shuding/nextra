@@ -41,19 +41,16 @@ const createHeading = (
       </Tag>
     )
   }
-const Blockquote = withGitHubAlert(({ type, ...props }) => {
-  const calloutType = (
-    {
-      caution: 'error',
-      important: 'error', // TODO
-      note: 'info',
-      tip: 'default',
-      warning: 'warning'
-    } as const
-  )[type]
-
-  return <Callout type={calloutType} {...props} />
+const CALLOUT_TYPE = Object.freeze({
+  caution: 'error',
+  important: 'important',
+  note: 'info',
+  tip: 'default',
+  warning: 'warning'
 })
+const Blockquote = withGitHubAlert(({ type, ...props }) => (
+  <Callout type={CALLOUT_TYPE[type]} {...props} />
+))
 
 type BlogMDXComponents = Readonly<
   MDXComponents & {
