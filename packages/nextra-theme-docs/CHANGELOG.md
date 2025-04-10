@@ -1,5 +1,15 @@
 # nextra-theme-docs
 
+## 4.3.0-alpha.10
+
+### Minor Changes
+
+- fdeb5fe: feat: add new Layout prop `feedback.link` to customize feedback href
+
+### Patch Changes
+
+- nextra@4.3.0-alpha.10
+
 ## 4.3.0-alpha.9
 
 ### Minor Changes
