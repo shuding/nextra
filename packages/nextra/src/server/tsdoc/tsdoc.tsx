@@ -10,7 +10,7 @@ import { compileMdx } from '../compile.js'
 import type { generateDocumentation } from './base.js'
 import type { GeneratedFunction, TypeField } from './types.js'
 
-type PropsTableProps = {
+type TSDocProps = {
   /**
    * Parsed Type/Interface/Function definition from `generateDocumentation` function.
    */
@@ -54,10 +54,10 @@ async function renderMarkdownDefault(description?: string): Promise<ReactNode> {
 /**
  * Component which render the props table for a TypeScript type or interface.
  */
-export const PropsTable: FC<PropsTableProps> = ({
+export const TSDoc: FC<TSDocProps> = ({
   definition,
   renderMarkdown = renderMarkdownDefault,
-  typeLinkMap = {},
+  typeLinkMap = {}
 }) => {
   if ('entries' in definition) {
     return (
@@ -81,10 +81,7 @@ export const PropsTable: FC<PropsTableProps> = ({
     >
       {signatures.map((signature, index) => (
         <Tabs.Tab key={index}>
-          <FunctionSignature
-            signature={signature}
-            index={index + 1}
-          />
+          <FunctionSignature signature={signature} index={index + 1} />
         </Tabs.Tab>
       ))}
     </Tabs>
@@ -203,7 +200,7 @@ const NameCell: FC<{
 const TypeAndDescriptionCell: FC<{
   type: string
   description: ReactNode
-  typeLinkMap: PropsTableProps['typeLinkMap']
+  typeLinkMap: TSDocProps['typeLinkMap']
 }> = ({ type, description, typeLinkMap }) => {
   return (
     <td
@@ -219,7 +216,7 @@ const TypeAndDescriptionCell: FC<{
 const FieldsTable: FC<
   {
     fields: TypeField[]
-  } & Required<Pick<PropsTableProps, 'renderMarkdown' | 'typeLinkMap'>>
+  } & Required<Pick<TSDocProps, 'renderMarkdown' | 'typeLinkMap'>>
 > = ({ fields, typeLinkMap, renderMarkdown }) => {
   const slugger = new Slugger()
   return (
@@ -272,10 +269,7 @@ const FieldsTable: FC<
 
 // This function takes a string representing some type and attempts to turn any
 // types referenced inside into links, either internal or external.
-function linkify(
-  type: string,
-  typeLinkMap: PropsTableProps['typeLinkMap'] = {}
-) {
+function linkify(type: string, typeLinkMap: TSDocProps['typeLinkMap'] = {}) {
   return (
     <Code>
       {type.match(/(\w+|\W+)/g)!.map((chunk, index) => {

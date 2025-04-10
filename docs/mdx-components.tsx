@@ -2,10 +2,10 @@
 // @ts-nocheck
 
 import { useMDXComponents as getDocsMDXComponents } from 'nextra-theme-docs'
-import { unstable_TSDoc as TSDoc } from 'nextra/tsdoc'
+import { generateDocumentation, TSDoc } from 'nextra/tsdoc'
 
 const { img: Image, ...docsComponents } = getDocsMDXComponents({
-  TSDoc({
+  APIDocs({
     componentName,
     groupKeys,
     packageName = 'nextra/components',
@@ -28,11 +28,13 @@ export default $`
     } else {
       code = props.code
     }
-
+    const definition = generateDocumentation({
+      code,
+      ...props
+    })
     return (
       <TSDoc
-        {...props}
-        code={code}
+        definition={definition}
         typeLinkMap={{
           GitHubIcon:
             'https://github.com/shuding/nextra/blob/main/packages/nextra/src/client/icons/github.svg',
