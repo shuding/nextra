@@ -4,46 +4,43 @@ sidebarTitle: TSDoc
 
 # TSDoc Component
 
-Component to generate documentation for properties of `type` and `interface` and
-parameters and return values of `function`.
+A component for generating documentation from `type`, `interface`, and `function` definitions using
+[TSDoc](https://tsdoc.org) annotations.
 
 ## Usage
 
 ### For `type` and `interface`
 
-It generates properties table that displays:
+Generates a **properties table** with:
 
-- **name**
-- **type**
-- **description**
-- **default value**
-- **permalink**
+- **Name**
+- **Type**
+- **Description**
+- **Default Value**
+- **Permalink**
 
 ### For `function`
 
-It generates parameters signature table that displays:
+1. **Parameters table**, including:
 
-- **name**
-- **type**
-- **description**
-- **default value**.
-- **permalink**
+  - **Name**
+  - **Type**
+  - **Description**
+  - **Default value**
+  - **Permalink**
 
-together with return signature table that displays:
+2. **Return signature table**, including:
 
-- **return description**
-- **return values table**
+  - **Description**
+  - **Return values table**
 
 > [!TIP]
 >
-> Permalink is a `#` anchor link to the table row for easy reference.
->
-> Descriptions are parsed from [TSDoc](https://tsdoc.org) inline description or
-> the `@description` tag. You can use any Markdown/MDX syntax here.
->
-> Default values are extracted from the `@default` or `@defaultValue` tag.
->
-> Return signature descriptions are extracted from `@returns` tag.
+> - Permalink is a `#` anchor link for easy reference to individual rows.
+> - Descriptions are parsed from inline TSDoc comments or the `@description` tag.
+> - Supports full Markdown/MDX syntax in descriptions.
+> - Default values are extracted from the `@default` or `@defaultValue` tags.
+> - Return descriptions come from the `@returns` tag.
 
 > [!WARNING]
 >
@@ -67,7 +64,7 @@ together with return signature table that displays:
 
 ## Example
 
-Props table for `TSDoc` component on this page is generated with following code:
+To generate the props table for the `TSDoc` component shown on this page:
 
 ```mdx
 import { generateDocumentation, TSDoc } from 'nextra/tsdoc'
@@ -82,8 +79,7 @@ export default MyProps`
 />
 ```
 
-Function signature for `generateDocumentation` function on this page is
-generated with following code:
+To generate the function signature table for `generateDocumentation` function:
 
 ```mdx
 import { generateDocumentation, TSDoc } from 'nextra/tsdoc'
@@ -97,7 +93,7 @@ import { generateDocumentation, TSDoc } from 'nextra/tsdoc'
 
 ## Overriding a type
 
-Overridden type can be specified inside the `@remarks` tag using backticks (`).
+You can override the inferred type using the `@remarks` tag using backticks (`).
 
 ```ts
 type Example = {
@@ -110,8 +106,8 @@ type Example = {
 }
 ```
 
-This means that while the property `foo` type is `string`, an alternative type
-annotation is described in `@remarks`.
+In this example, while the actual type of the property `foo` is `string`, the displayed type will be
+`"not dimaMachina"` as per the `@remarks` tag.
 
 <APIDocs
   code={`
