@@ -10,7 +10,7 @@ export const layoutProps = generateTsFromZod(LayoutPropsSchema)
 
 export function PartialTSDoc({ flattened, props }) {
   return (
-    <TSDoc
+    <APIDocs
       flattened={flattened}
       code={`
 type $ = Pick<${layoutProps}, ${props.map(prop => JSON.stringify(prop)).join('|')}>
