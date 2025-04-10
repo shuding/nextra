@@ -41,7 +41,9 @@ Update the Pagefind [search engine setup](./search#add-a-postbuild-script) to
 set the correct output path:
 
 ```json filename="package.json"
-"postbuild": "pagefind --site .next/server/app --output-path out/_pagefind""
+"scripts": {
+  "postbuild": "pagefind --site .next/server/app --output-path out/_pagefind"
+}
 ```
 
 ### Building
