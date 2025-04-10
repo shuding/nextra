@@ -16,7 +16,7 @@ export const TopContent: FC<{
   return (
     <>
       <h1>{title}</h1>
-      <div className="mt-8 mb-16 text-sm text-gray-400">
+      <div className="mb-16 mt-8 text-sm text-gray-400">
         <time dateTime={dateObj.toISOString()}>
           {dateObj.toLocaleDateString(lang, {
             month: 'long',

@@ -11,6 +11,7 @@
     "onlyUpdatePeerDependentsWhenOutOfRange": true
   },
   "ignore": [
+    "@nextra/tsdoc",
     "example-blog",
     "example-docs",
     "swr-site",

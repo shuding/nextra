@@ -94,7 +94,6 @@ describe('generatePageMap()', () => {
         "app/docs/advanced/mermaid/page.mdx",
         "app/docs/advanced/npm2yarn/page.mdx",
         "app/docs/advanced/page.mdx",
-        "app/docs/advanced/playground/page.mdx",
         "app/docs/advanced/remote/page.mdx",
         "app/docs/advanced/table/page.mdx",
         "app/docs/advanced/tailwind-css/page.mdx",
@@ -113,10 +112,12 @@ describe('generatePageMap()', () => {
         "app/docs/built-ins/filetree/page.mdx",
         "app/docs/built-ins/head/page.mdx",
         "app/docs/built-ins/page.mdx",
+        "app/docs/built-ins/playground/page.mdx",
         "app/docs/built-ins/search/page.mdx",
         "app/docs/built-ins/steps/page.mdx",
         "app/docs/built-ins/table/page.mdx",
         "app/docs/built-ins/tabs/page.mdx",
+        "app/docs/built-ins/tsdoc/page.mdx",
         "app/docs/custom-theme/page.mdx",
         "app/docs/docs-theme/api/page.mdx",
         "app/docs/docs-theme/built-ins/footer/page.mdx",
@@ -190,11 +191,6 @@ describe('generatePageMap()', () => {
                   "__pagePath": "app/docs/advanced/page.mdx",
                   "name": "index",
                   "route": "/docs/advanced",
-                },
-                {
-                  "__pagePath": "app/docs/advanced/playground/page.mdx",
-                  "name": "playground",
-                  "route": "/docs/advanced/playground",
                 },
                 {
                   "__pagePath": "app/docs/advanced/remote/page.mdx",
@@ -299,6 +295,11 @@ describe('generatePageMap()', () => {
                   "route": "/docs/built-ins",
                 },
                 {
+                  "__pagePath": "app/docs/built-ins/playground/page.mdx",
+                  "name": "playground",
+                  "route": "/docs/built-ins/playground",
+                },
+                {
                   "__pagePath": "app/docs/built-ins/search/page.mdx",
                   "name": "search",
                   "route": "/docs/built-ins/search",
@@ -317,6 +318,11 @@ describe('generatePageMap()', () => {
                   "__pagePath": "app/docs/built-ins/tabs/page.mdx",
                   "name": "tabs",
                   "route": "/docs/built-ins/tabs",
+                },
+                {
+                  "__pagePath": "app/docs/built-ins/tsdoc/page.mdx",
+                  "name": "tsdoc",
+                  "route": "/docs/built-ins/tsdoc",
                 },
               ],
               "name": "built-ins",
@@ -523,7 +529,6 @@ describe('generatePageMap()', () => {
         import {metadata as app_docs_advanced_mermaid_page} from "private-next-root-dir/app/docs/advanced/mermaid/page.mdx?metadata";
         import {metadata as app_docs_advanced_npm2yarn_page} from "private-next-root-dir/app/docs/advanced/npm2yarn/page.mdx?metadata";
         import {metadata as app_docs_advanced_page} from "private-next-root-dir/app/docs/advanced/page.mdx?metadata";
-        import {metadata as app_docs_advanced_playground_page} from "private-next-root-dir/app/docs/advanced/playground/page.mdx?metadata";
         import {metadata as app_docs_advanced_remote_page} from "private-next-root-dir/app/docs/advanced/remote/page.mdx?metadata";
         import {metadata as app_docs_advanced_table_page} from "private-next-root-dir/app/docs/advanced/table/page.mdx?metadata";
         import {metadata as app_docs_advanced_tailwind_css_page} from "private-next-root-dir/app/docs/advanced/tailwind-css/page.mdx?metadata";
@@ -542,10 +547,12 @@ describe('generatePageMap()', () => {
         import {metadata as app_docs_built_ins_filetree_page} from "private-next-root-dir/app/docs/built-ins/filetree/page.mdx?metadata";
         import {metadata as app_docs_built_ins_head_page} from "private-next-root-dir/app/docs/built-ins/head/page.mdx?metadata";
         import {metadata as app_docs_built_ins_page} from "private-next-root-dir/app/docs/built-ins/page.mdx?metadata";
+        import {metadata as app_docs_built_ins_playground_page} from "private-next-root-dir/app/docs/built-ins/playground/page.mdx?metadata";
         import {metadata as app_docs_built_ins_search_page} from "private-next-root-dir/app/docs/built-ins/search/page.mdx?metadata";
         import {metadata as app_docs_built_ins_steps_page} from "private-next-root-dir/app/docs/built-ins/steps/page.mdx?metadata";
         import {metadata as app_docs_built_ins_table_page} from "private-next-root-dir/app/docs/built-ins/table/page.mdx?metadata";
         import {metadata as app_docs_built_ins_tabs_page} from "private-next-root-dir/app/docs/built-ins/tabs/page.mdx?metadata";
+        import {metadata as app_docs_built_ins_tsdoc_page} from "private-next-root-dir/app/docs/built-ins/tsdoc/page.mdx?metadata";
         import {metadata as app_docs_custom_theme_page} from "private-next-root-dir/app/docs/custom-theme/page.mdx?metadata";
         import {metadata as app_docs_docs_theme_api_page} from "private-next-root-dir/app/docs/docs-theme/api/page.mdx?metadata";
         import {metadata as app_docs_docs_theme_built_ins_footer_page} from "private-next-root-dir/app/docs/docs-theme/built-ins/footer/page.mdx?metadata";
@@ -612,10 +619,6 @@ describe('generatePageMap()', () => {
               name: "index",
               route: "/docs/advanced",
               frontMatter: app_docs_advanced_page
-            }, {
-              name: "playground",
-              route: "/docs/advanced/playground",
-              frontMatter: app_docs_advanced_playground_page
             }, {
               name: "remote",
               route: "/docs/advanced/remote",
@@ -697,6 +700,10 @@ describe('generatePageMap()', () => {
               route: "/docs/built-ins",
               frontMatter: app_docs_built_ins_page
             }, {
+              name: "playground",
+              route: "/docs/built-ins/playground",
+              frontMatter: app_docs_built_ins_playground_page
+            }, {
               name: "search",
               route: "/docs/built-ins/search",
               frontMatter: app_docs_built_ins_search_page
@@ -712,6 +719,10 @@ describe('generatePageMap()', () => {
               name: "tabs",
               route: "/docs/built-ins/tabs",
               frontMatter: app_docs_built_ins_tabs_page
+            }, {
+              name: "tsdoc",
+              route: "/docs/built-ins/tsdoc",
+              frontMatter: app_docs_built_ins_tsdoc_page
             }]
           }, {
             name: "custom-theme",

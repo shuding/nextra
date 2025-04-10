@@ -17,7 +17,7 @@ import { setMenu, useConfig, useMenu, useThemeConfig } from '../../stores'
 const classes = {
   link: cn(
     'x:text-sm x:contrast-more:text-gray-700 x:contrast-more:dark:text-gray-100 x:whitespace-nowrap',
-    'x:text-gray-600 x:hover:text-gray-800 x:dark:text-gray-400 x:dark:hover:text-gray-200',
+    'x:text-gray-600 x:hover:text-black x:dark:text-gray-400 x:dark:hover:text-gray-200',
     'x:ring-inset x:transition-colors'
   )
 }
@@ -50,7 +50,9 @@ const NavbarMenu: FC<{
         transition
         className={cn(
           'x:focus-visible:nextra-focus',
-          'nextra-scrollbar x:origin-top x:transition x:duration-200 x:ease-out x:data-closed:scale-95 x:data-closed:opacity-0 x:motion-reduce:transition-none',
+          'nextra-scrollbar x:motion-reduce:transition-none',
+          // From https://headlessui.com/react/menu#adding-transitions
+          'x:origin-top x:transition x:duration-200 x:ease-out x:data-closed:scale-95 x:data-closed:opacity-0',
           'x:border x:border-black/5 x:dark:border-white/20',
           'x:z-30 x:rounded-md x:py-1 x:text-sm x:shadow-lg',
           'x:backdrop-blur-md x:bg-nextra-bg/70',

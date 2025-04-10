@@ -2,6 +2,7 @@ pnpm-lock.yaml
 .changeset/*.md
 CHANGELOG.md
 generated-page-map.ts
+packages/tsdoc/src/__tests__/snapshots
 
 examples/swr-site/nextra-remote-filepaths/*.json
 

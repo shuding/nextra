@@ -9,22 +9,39 @@ import { z } from 'zod'
 import { fromZodError } from 'zod-validation-error'
 import { ClientNavbar } from './index.client'
 
-const propsSchema = z.strictObject({
-  children: reactNode,
-  logoLink: z.union([z.string(), z.boolean()]).default(true),
-  logo: element,
-  projectLink: z.string().optional(),
-  projectIcon: reactNode.default(<GitHubIcon height="24" />),
-  chatLink: z.string().optional(),
-  chatIcon: reactNode.default(<DiscordIcon width="24" />),
-  className: z.string().optional(),
-  align: z.enum(['left', 'right']).default('right')
+export const NavbarPropsSchema = z.strictObject({
+  children: reactNode.describe(`Extra content after last icon.
+@remarks \`ReactNode\``),
+  logoLink: z
+    .union([z.string(), z.boolean()])
+    .default(true)
+    .describe(
+      "Specifies whether the logo should have a link or provides the URL for the logo's link."
+    ),
+  logo: element.describe(`Logo of the website.
+@remarks \`ReactElement\``),
+  projectLink: z.string().optional().describe('URL of the project homepage.'),
+  projectIcon: reactNode.default(
+    <GitHubIcon height="24" aria-label="Project repository" />
+  ).describe(`Icon of the project link.
+@remarks \`ReactNode\`
+@default <GitHubIcon />`),
+  chatLink: z.string().optional().describe('URL of the chat link.'),
+  chatIcon: reactNode.default(<DiscordIcon width="24" />)
+    .describe(`Icon of the chat link.
+@remarks \`ReactNode\`
+@default <DiscordIcon />`),
+  className: z.string().optional().describe('CSS class name.'),
+  align: z
+    .enum(['left', 'right'])
+    .default('right')
+    .describe('Aligns navigation links to the specified side.')
 })
 
-type NavbarProps = z.input<typeof propsSchema>
+type NavbarProps = z.input<typeof NavbarPropsSchema>
 
 export const Navbar: FC<NavbarProps> = props => {
-  const { data, error } = propsSchema.safeParse(props)
+  const { data, error } = NavbarPropsSchema.safeParse(props)
   if (error) {
     throw fromZodError(error)
   }
@@ -75,6 +92,7 @@ export const Navbar: FC<NavbarProps> = props => {
               logoClass,
               'x:transition-opacity x:focus-visible:nextra-focus x:hover:opacity-75'
             )}
+            aria-label="Home page"
           >
             {logo}
           </NextLink>

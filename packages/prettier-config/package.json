@@ -3,9 +3,12 @@
   "version": "0.0.0",
   "type": "module",
   "private": true,
+  "exports": {
+    ".": "./src/index.js"
+  },
   "dependencies": {
     "@ianvs/prettier-plugin-sort-imports": "4.4.1",
-    "prettier-plugin-pkg": "0.18.1",
+    "prettier-plugin-pkg": "0.19.0",
     "prettier-plugin-tailwindcss": "0.6.11"
   }
 }

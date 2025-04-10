@@ -1,0 +1,71 @@
+---
+sidebarTitle: TSDoc
+---
+
+# `<TSDoc>` Component
+
+The `<TSDoc>` component from `nextra/tsdoc` generates a properties table that
+displays:
+
+- **Property name**
+- **TypeScript type**
+- **Property description** - is parsed from [TSDoc](https://tsdoc.org) inline
+  description or the `@description` tag. You can use any Markdown/MDX syntax
+  here.
+- **Default value** - are extracted from the `@default` or `@defaultValue` tag.
+- **Permalink** - a `#` anchor link to the property row for easy reference.
+
+> [!NOTE]
+>
+> **Server Component Only** – This cannot be used in a client
+> component.<br />{''}**Available from:** Nextra 4.3 (alpha).<br />{''}
+> **Dependency:** Uses TypeScript Compiler API from
+> [`ts-morph`](https://github.com/dsherret/ts-morph).
+
+## Props
+
+<TSDoc componentName="unstable_TSDoc" packageName="nextra/tsdoc" />
+
+## Example
+
+```mdx
+import { unstable_TSDoc as TSDoc } from 'nextra/tsdoc'
+
+<TSDoc
+  code={`
+import type { unstable_TSDoc as TSDoc } from 'nextra/tsdoc'
+type MyProps = React.ComponentProps<typeof TSDoc>
+export default MyProps`}
+/>
+```
+
+### Overriding a type
+
+Overridden type can be specified inside the `@remarks` tag using backticks (`).
+
+```ts
+type Example = {
+  /**
+   * **Foo** description.
+   * @default "dimaMachina"
+   * @remarks `"not dimaMachina"`
+   */
+  foo: string
+}
+```
+
+This means that while the property `foo` type is `string`, an alternative type
+annotation is described in `@remarks`.
+
+<TSDoc
+  code={`
+type Example = {
+  /**
+   * **Foo** description.
+   * @default "dimaMachina"
+   * @remarks \`"not dimaMachina"\`
+   */
+  foo: string
+}
+export default Example`}
+/>

@@ -9,6 +9,7 @@ import type { FileProps } from './file.js'
 
 type FolderProps = FileProps & {
   open?: boolean
+  /** @default false */
   defaultOpen?: boolean
   children: ReactNode
 }

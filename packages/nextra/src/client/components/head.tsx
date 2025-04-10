@@ -1,6 +1,7 @@
-import type { FC, ReactNode } from 'react'
+import type { FC } from 'react'
 import { z } from 'zod'
 import { fromZodError } from 'zod-validation-error'
+import { reactNode } from '../../server/schemas.js'
 
 const darkLightSchema = z
   .union([
@@ -52,29 +53,50 @@ const colorSchema = z
     return value
   })
 
-const headSchema = z.strictObject({
+export const HeadPropsSchema = z.strictObject({
   color: z
     .strictObject({
-      hue: darkLightSchema.default({ dark: 204, light: 212 }),
-      saturation: darkLightSchema.default(100),
-      lightness: darkLightSchema.default({ dark: 55, light: 45 })
+      hue: darkLightSchema
+        .default({ dark: 204, light: 212 })
+        .describe('The hue of the primary theme color.<br/>Range: `0 - 360`'),
+      saturation: darkLightSchema
+        .default(100)
+        .describe(
+          'The saturation of the primary theme color.<br/>Range: `0 - 100`'
+        ),
+      lightness: darkLightSchema
+        .default({ dark: 55, light: 45 })
+        .describe(
+          'The lightness of the primary theme color.<br/>Range: `0 - 100`'
+        )
     })
     .default({}),
-  faviconGlyph: z.string().optional(),
+  faviconGlyph: z
+    .string()
+    .optional()
+    .describe('The glyph to use as the favicon.'),
   backgroundColor: z
     .strictObject({
-      dark: colorSchema.default('rgb(17,17,17)'),
-      light: colorSchema.default('rgb(250,250,250)')
+      dark: colorSchema
+        .default('rgb(17,17,17)')
+        .describe(
+          'Background color for dark theme.<br/>Format: `"rgb(RRR,GGG,BBB)" | "#RRGGBB"`'
+        ),
+      light: colorSchema
+        .default('rgb(250,250,250)')
+        .describe(
+          'Background color for light theme.<br/>Format: `"rgb(RRR,GGG,BBB)" | "#RRGGBB"`'
+        )
     })
-    .default({})
+    .default({}),
+  children: reactNode.describe(`Content of \`<head>\`
+@remarks \`ReactNode\``)
 })
 
-type HeadProps = Partial<z.input<typeof headSchema>> & {
-  children?: ReactNode
-}
+type HeadProps = Partial<z.input<typeof HeadPropsSchema>>
 
 export const Head: FC<HeadProps> = ({ children, ...props }) => {
-  const { data, error } = headSchema.safeParse(props)
+  const { data, error } = HeadPropsSchema.safeParse(props)
   if (error) {
     throw fromZodError(error)
   }

@@ -3,6 +3,21 @@ sidebarTitle: Layout
 ---
 
 import { ToggleVisibilitySection } from 'components/toggle-visibility-section'
+import { generateTsFromZod } from 'nextra/tsdoc'
+import { LayoutPropsSchema } from 'private-next-root-dir/../packages/nextra-theme-docs/src/layout'
+
+export const layoutProps = generateTsFromZod(LayoutPropsSchema)
+
+export function PartialTSDoc({ flattened, props }) {
+  return (
+    <TSDoc
+      flattened={flattened}
+      code={`
+type $ = Pick<${layoutProps}, ${props.map(prop => JSON.stringify(prop)).join('|')}>
+export default $`}
+    />
+  )
+}
 
 # `<Layout>` Component
 
@@ -30,35 +45,31 @@ export default function MyLayout({ children, ...props }) {
 
 Detailed information for each option is listed below.
 
+## Props
+
 ## Page Map
 
-|           |                      |     |                                                               |
-| --------- | -------------------- | --- | ------------------------------------------------------------- |
-| `pageMap` | `PageMapItem[]{:ts}` |     | Page map list. Result of `getPageMap(route = '/'){:ts}` call. |
+<PartialTSDoc props={['pageMap']} />
 
 ## Banner
 
-|          |                  |     |                                                                                                  |
-| -------- | ---------------- | --- | ------------------------------------------------------------------------------------------------ |
-| `banner` | `ReactNode{:ts}` |     | Rendered [`<Banner>` component](/docs/built-ins/banner). E.g. `<Banner {...bannerProps} />{:ts}` |
+<PartialTSDoc props={['banner']} />
 
 ## Navbar
 
-|          |                  |     |                                                                                                             |
-| -------- | ---------------- | --- | ----------------------------------------------------------------------------------------------------------- |
-| `navbar` | `ReactNode{:ts}` |     | Rendered [`<Navbar>` component](/docs/docs-theme/built-ins/navbar). E.g. `<Navbar {...navbarProps} />{:ts}` |
+<PartialTSDoc props={['navbar']} />
+
+<ToggleVisibilitySection element="`<Navbar>`" property="navbar" />
 
 ## Footer
 
-|          |                  |     |                                                                                                             |
-| -------- | ---------------- | --- | ----------------------------------------------------------------------------------------------------------- |
-| `footer` | `ReactNode{:ts}` |     | Rendered [`<Footer>` component](/docs/docs-theme/built-ins/footer). E.g. `<Footer {...footerProps} />{:ts}` |
+<PartialTSDoc props={['footer']} />
+
+<ToggleVisibilitySection element="`<Footer>`" property="footer" />
 
 ## Search
 
-|          |                  |              |                                                                                                  |
-| -------- | ---------------- | ------------ | ------------------------------------------------------------------------------------------------ |
-| `search` | `ReactNode{:ts}` | `<Search />` | Rendered [`<Search>` component](/docs/built-ins/search). E.g. `<Search {...searchProps} />{:ts}` |
+<PartialTSDoc props={['search']} />
 
 ## Docs Repository
 
@@ -67,9 +78,7 @@ Set the repository URL of the documentation. It's used to generate the
 "[Report of broken link](./not-found)" on
 [not found page](https://nextjs.org/docs/app/api-reference/file-conventions/not-found).
 
-|                      |               |                                            |                                      |
-| -------------------- | ------------- | ------------------------------------------ | ------------------------------------ |
-| `docsRepositoryBase` | `string{:ts}` | `'https://github.com/shuding/nextra'{:ts}` | URL of the documentation repository. |
+<PartialTSDoc props={['docsRepositoryBase']} />
 
 ### Specify a Path
 
@@ -89,27 +98,18 @@ Then Nextra will automatically generate the correct file path for all pages.
 
 Customize the theme behavior of the website.
 
-|              |                |                                                                                                             |                                                                                                        |
-| ------------ | -------------- | ----------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
-| `darkMode`   | `boolean{:ts}` | `true{:ts}`                                                                                                 | Show or hide the dark mode select button.                                                              |
-| `nextThemes` | `object{:ts}`  | `{ attribute: 'class', defaultTheme: 'system', disableTransitionOnChange: true, storageKey: 'theme' }{:ts}` | Configuration for the [next-themes](https://github.com/pacocoursey/next-themes#themeprovider) package. |
+<PartialTSDoc props={['darkMode', 'nextThemes']} />
 
 import Old from './old.mdx'
 
 {process.env.NODE_ENV !== 'production' && <Old />}
-
-|              |                            |     |                        |
-| ------------ | -------------------------- | --- | ---------------------- |
-| `components` | `Record<string, React.FC>` |     | Custom MDX components. |
 
 ## Edit Link
 
 Show an "Edit this page" link on the page that points to the file URL on GitHub
 (or other places).
 
-|            |                  |                         |                           |
-| ---------- | ---------------- | ----------------------- | ------------------------- |
-| `editLink` | `ReactNode{:ts}` | `'Edit this page'{:ts}` | Content of the edit link. |
+<PartialTSDoc props={['editLink']} />
 
 > [!TIP]
 >
@@ -118,14 +118,9 @@ Show an "Edit this page" link on the page that points to the file URL on GitHub
 ## Feedback Link
 
 The built-in feedback link provides a way for users to submit feedback about the
-documentation. By default, it's a link that points to the issue creation form of
-the docs repository, with the current website title prefilled:
-[example](https://github.com/shuding/nextra/issues/new?title=Feedback%20for%20%E2%80%9CTheme%20Configuration%E2%80%9D&labels=feedback).
+documentation.
 
-|                    |                  |                                     |                                                    |
-| ------------------ | ---------------- | ----------------------------------- | -------------------------------------------------- |
-| `feedback.content` | `ReactNode{:ts}` | `'Question? Give us feedback'{:ts}` | Content of the feedback link.                      |
-| `feedback.labels`  | `string{:ts}`    | `'feedback'{:ts}`                   | Labels that can be added to the new created issue. |
+<PartialTSDoc props={['feedback']} flattened />
 
 > [!TIP]
 >
@@ -133,22 +128,14 @@ the docs repository, with the current website title prefilled:
 
 ## I18n
 
-Options to configure the language dropdown for
-[the i18n docs website](/docs/guide/i18n).
-
-|                       |               |     |                                                         |
-| --------------------- | ------------- | --- | ------------------------------------------------------- |
-| `i18n[number].locale` | `string{:ts}` |     | Locale from `i18n.locales` field in `next.config` file. |
-| `i18n[number].name`   | `string{:ts}` |     | Locale name in dropdown.                                |
+<PartialTSDoc props={['i18n']} />
 
 ## Last Updated Date
 
 Show the last updated date of a page. It's useful for showing the freshness of
 the content.
 
-|               |                             |                        |                                            |
-| ------------- | --------------------------- | ---------------------- | ------------------------------------------ |
-| `lastUpdated` | `ReactElement \| null{:ts}` | `<LastUpdated />{:ts}` | Component to render the last updated info. |
+<PartialTSDoc props={['lastUpdated']} />
 
 <ToggleVisibilitySection element="last update date" property="timestamp" />
 
@@ -157,11 +144,7 @@ the content.
 Show previous and next page links on the bottom of the content. It's useful for
 navigating between pages.
 
-|                   |                          |             |                                           |
-| ----------------- | ------------------------ | ----------- | ----------------------------------------- |
-| `navigation`      | `boolean \| object{:ts}` | `true{:ts}` | Enable or disable navigation link.        |
-| `navigation.prev` | `boolean{:ts}`           |             | Enable or disable the previous page link. |
-| `navigation.next` | `boolean{:ts}`           |             | Enable or disable the next page link.     |
+<PartialTSDoc props={['navigation']} />
 
 ![Navigation](/assets/docs/navigation.png)
 
@@ -182,12 +165,7 @@ The above is also equivalent to `navigation: true{:js}`.
 
 ## Sidebar
 
-|                                    |                |             |                                                                                    |
-| ---------------------------------- | -------------- | ----------- | ---------------------------------------------------------------------------------- |
-| `sidebar.autoCollapse`             | `boolean{:ts}` |             | If true, automatically collapse inactive folders above `defaultMenuCollapseLevel`. |
-| `sidebar.defaultMenuCollapseLevel` | `number{:ts}`  | `2{:ts}`    | Specifies the folder level at which the menu on the left is collapsed by default.  |
-| `sidebar.toggleButton`             | `boolean{:ts}` | `true{:ts}` | Hide/show sidebar toggle button.                                                   |
-| `sidebar.defaultOpen`              | `boolean{:ts}` | `true{:ts}` | Hide/show sidebar by default.                                                      |
+<PartialTSDoc props={['sidebar']} flattened />
 
 ### Menu Collapse Level
 
@@ -251,9 +229,7 @@ The priority of the sidebar title is as follows:
 
 ## Theme Switch
 
-|               |                                                        |                                                           |                                             |
-| ------------- | ------------------------------------------------------ | --------------------------------------------------------- | ------------------------------------------- |
-| `themeSwitch` | `{ light: string; dark: string; system: string }{:ts}` | `{ light: 'Light', dark: 'Dark', system: 'System' }{:ts}` | Translation of options in the theme switch. |
+<PartialTSDoc props={['themeSwitch']} />
 
 You are able to customize the option names for localization or other purposes:
 
@@ -274,12 +250,7 @@ You are able to customize the option names for localization or other purposes:
 Show a table of contents on the right side of the page. It's useful for
 navigating between headings.
 
-|                  |                  |                        |                                              |
-| ---------------- | ---------------- | ---------------------- | -------------------------------------------- |
-| toc.backToTop    | `ReactNode{:ts}` | `'Scroll to top'{:ts}` | Text of back to top button.                  |
-| toc.extraContent | `ReactNode{:ts}` |                        | Display extra content below the TOC content. |
-| toc.float        | `boolean{:ts}`   | `true{:ts}`            | Float the TOC next to the content.           |
-| toc.title        | `ReactNode{:ts}` | `'On This Page'{:ts}`  | Title of the TOC sidebar.                    |
+<PartialTSDoc props={['toc']} flattened />
 
 ### Floating TOC
 

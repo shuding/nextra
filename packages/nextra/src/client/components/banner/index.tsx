@@ -6,11 +6,26 @@ import { ClientBanner } from './index.client'
 
 const BANNER_CLASS_NAME = 'nextra-banner'
 
-export const Banner: FC<{
+type BannerProps = {
+  /** Content of the banner. */
   children: ReactNode
+  /**
+   * Closable banner or not.
+   * @default true
+   */
   dismissible?: boolean
+  /**
+   * Storage key to keep the banner state.
+   * @default 'nextra-banner'
+   */
   storageKey?: string
-}> = ({ children, dismissible = true, storageKey = BANNER_CLASS_NAME }) => {
+}
+
+export const Banner: FC<BannerProps> = ({
+  children,
+  dismissible = true,
+  storageKey = BANNER_CLASS_NAME
+}) => {
   if (!children) {
     return null
   }
