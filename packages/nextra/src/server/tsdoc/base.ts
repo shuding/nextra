@@ -29,6 +29,7 @@ const { compilerObject } = project.getTypeChecker()
 
 /**
  * Generate documentation for properties in an exported type/interface
+ * @returns Parsed TSDoc definition from TypeScript `type`, `interface` or `function`.
  */
 export function generateDocumentation({
   code,

@@ -22,24 +22,43 @@ displays:
 > **Dependency:** Uses TypeScript Compiler API from
 > [`ts-morph`](https://github.com/dsherret/ts-morph).
 
-## Props
+## `TSDoc` props
 
 <APIDocs componentName="TSDoc" packageName="nextra/tsdoc" />
 
+## `generateDocumentation` signature
+
+<APIDocs
+  code="export type { generateDocumentation as default } from 'nextra/tsdoc'"
+  flattened
+/>
+
 ## Example
 
+Props table for `TSDoc` component on this page is generated with following code:
+
 ```mdx
-import { TSDoc } from 'nextra/tsdoc'
+import { generateDocumentation, TSDoc } from 'nextra/tsdoc'
 
 <TSDoc
-  definitions={
-generateDocumentation({
+  definitions={generateDocumentation({
     code: `
 import type { TSDoc } from 'nextra/tsdoc'
 type MyProps = React.ComponentProps<typeof TSDoc>
 export default MyProps`
-  })
-  }
+  })}
+/>
+```
+
+Function signature for `generateDocumentation` function on this page is generated with following code:
+
+```mdx
+import { generateDocumentation, TSDoc } from 'nextra/tsdoc'
+
+<TSDoc
+  definitions={generateDocumentation({
+    code: "export type { generateDocumentation as default } from 'nextra/tsdoc'"
+  })}
 />
 ```
 
