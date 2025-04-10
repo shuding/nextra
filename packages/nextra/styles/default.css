@@ -46,3 +46,10 @@
       calc(var(--nextra-primary-lightness) - 21%)
   );
 }
+
+/* Fixes extra margin-top inside Tabs.Tab
+ * https://github.com/shuding/nextra/issues/4303#issuecomment-2695040708
+ */
+[data-headlessui-state='selected'] > h3[style^='visibility:'] + * {
+  @apply x:mt-0;
+}
