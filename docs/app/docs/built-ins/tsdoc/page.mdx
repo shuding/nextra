@@ -4,29 +4,34 @@ sidebarTitle: TSDoc
 
 # TSDoc Component
 
-The `<TSDoc>` component from `nextra/tsdoc` generates a properties table that
-displays:
+The `<TSDoc>` component from `nextra/tsdoc` generates a properties table from TypeScript
+`type` and `interface` that displays:
 
 - **Property name**
 - **TypeScript type**
-- **Property description** - is parsed from [TSDoc](https://tsdoc.org) inline
-  description or the `@description` tag. You can use any Markdown/MDX syntax
-  here.
+- **Property description**
 - **Default value** - are extracted from the `@default` or `@defaultValue` tag.
 - **Permalink** - a `#` anchor link to the property row for easy reference.
 
-> [!NOTE]
+> [!TIP]
+>
+> Description is parsed from [TSDoc](https://tsdoc.org) inline description or the `@description` tag.
+> You can use any Markdown/MDX syntax here.
+
+> [!IMPORTANT]
 >
 > **Server Component Only** – This cannot be used in a client
 > component.<br />{''}**Available from:** Nextra 4.3 (alpha).<br />{''}
 > **Dependency:** Uses TypeScript Compiler API from
 > [`ts-morph`](https://github.com/dsherret/ts-morph).
 
-## `TSDoc` props
+## API
+
+### `TSDoc` props
 
 <APIDocs componentName="TSDoc" packageName="nextra/tsdoc" />
 
-## `generateDocumentation` signature
+### `generateDocumentation` signature
 
 <APIDocs
   code="export type { generateDocumentation as default } from 'nextra/tsdoc'"
@@ -50,7 +55,8 @@ export default MyProps`
 />
 ```
 
-Function signature for `generateDocumentation` function on this page is generated with following code:
+Function signature for `generateDocumentation` function on this page is
+generated with following code:
 
 ```mdx
 import { generateDocumentation, TSDoc } from 'nextra/tsdoc'
@@ -62,7 +68,7 @@ import { generateDocumentation, TSDoc } from 'nextra/tsdoc'
 />
 ```
 
-### Overriding a type
+## Overriding a type
 
 Overridden type can be specified inside the `@remarks` tag using backticks (`).
 
