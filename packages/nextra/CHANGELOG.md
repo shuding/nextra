@@ -1,5 +1,12 @@
 # nextra
 
+## 4.3.0-alpha.9
+
+### Minor Changes
+
+- 94b081c: feat: refactor `<Search>` component styles for improved transitions
+  and visibility
+
 ## 4.3.0-alpha.8
 
 ### Minor Changes
