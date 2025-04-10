@@ -17,7 +17,6 @@ export default $`
           {
             "description": "Content of the banner.",
             "name": "children",
-            "optional": true,
             "type": "ReactNode",
           },
           {
@@ -88,7 +87,6 @@ export default $`
           {
             "description": "Content to be displayed inside the callout.",
             "name": "children",
-            "optional": true,
             "type": "ReactNode",
           },
         ],
@@ -631,7 +629,6 @@ export default $`,
           },
           {
             "name": "b",
-            "optional": true,
             "type": "string | undefined",
           },
           {

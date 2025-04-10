@@ -52,6 +52,14 @@ export const TOC: FC<TOCProps> = ({ filePath, pageTitle }) => {
     })
   }, [activeSlug])
 
+  const feedbackLink =
+    themeConfig.feedback.link ??
+    getGitIssueUrl({
+      labels: themeConfig.feedback.labels,
+      repository: themeConfig.docsRepositoryBase,
+      title: `Feedback for “${pageTitle}”`
+    })
+
   return (
     <div
       className={cn(
@@ -108,14 +116,7 @@ export const TOC: FC<TOCProps> = ({ filePath, pageTitle }) => {
           )}
         >
           {themeConfig.feedback.content && (
-            <Anchor
-              className={linkClassName}
-              href={getGitIssueUrl({
-                labels: themeConfig.feedback.labels,
-                repository: themeConfig.docsRepositoryBase,
-                title: `Feedback for “${pageTitle}”`
-              })}
-            >
+            <Anchor className={linkClassName} href={feedbackLink}>
               {themeConfig.feedback.content}
             </Anchor>
           )}
