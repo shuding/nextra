@@ -35,6 +35,11 @@ This hook is useful for dynamically configuring your project based on shared the
           "type": "string",
         },
         {
+          "name": "feedback.link",
+          "optional": true,
+          "type": "string | undefined",
+        },
+        {
           "name": "i18n",
           "type": "{ locale: string; name: string; }[]",
         },
