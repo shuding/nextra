@@ -12,7 +12,7 @@ import type { GeneratedFunction, TypeField } from './types.js'
 
 type TSDocProps = {
   /**
-   * Parsed Type/Interface/Function definition from `generateDocumentation` function.
+   * Parsed `type`, `interface` or `function` definition from `generateDocumentation` function.
    */
   definition: ReturnType<typeof generateDocumentation>
   /**
