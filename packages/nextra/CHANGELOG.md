@@ -1,5 +1,16 @@
 # nextra
 
+## 4.3.0-alpha.11
+
+### Patch Changes
+
+- 71f7b3f: Update https://nextra.site/docs/guide/search page
+
+  Fixes extra margin-top inside `Tabs.Tab`
+
+  Fix breaking `<Steps>` component numeration when there is `<Tabs>` component
+  inside
+
 ## 4.3.0-alpha.10
 
 ## 4.3.0-alpha.9
