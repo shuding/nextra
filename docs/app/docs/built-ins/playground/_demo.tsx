@@ -8,9 +8,7 @@ import { MdxIcon } from 'nextra/icons'
 import type { ComponentProps, FC } from 'react'
 import { useCallback, useEffect, useRef, useState } from 'react'
 
-export const Demo: FC = () => {
-  const [rawMdx, setRawMdx] =
-    useState(`Playground components allow you to write Nextra compatible MDX that renders only on the client. It's modeled after the functionality found in [MDX Playground](https://mdxjs.com/playground).
+const DEFAULT_MDX = `Playground components allow you to write Nextra compatible MDX that renders only on the client. It's modeled after the functionality found in [MDX Playground](https://mdxjs.com/playground).
 
 In some instances where remote loading MDX is not an option, this may work as a great alternative.
 
@@ -45,7 +43,10 @@ C --> Z
 Z --> E
 Z --> F
 Z --> G
-\`\`\``)
+\`\`\``
+
+export const Demo: FC = () => {
+  const [rawMdx, setRawMdx] = useState(DEFAULT_MDX)
   const handleInput: NonNullable<ComponentProps<'span'>['onInput']> =
     useCallback(e => {
       setRawMdx(e.currentTarget.textContent ?? '')
