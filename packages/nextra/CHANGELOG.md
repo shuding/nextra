@@ -1,5 +1,19 @@
 # nextra
 
+## 4.3.0-alpha.13
+
+### Patch Changes
+
+- 47ba5f3: fix: use `em` for padding-y, padding-x and border-radius styles of
+  `<Code>` element
+
+  fix(TSDoc): for return signature without `name` return mobile card instead of
+  table
+
+  feat: use `em` instead `rem` for margins
+
+- d29469e: support Next.js 15.3.0
+
 ## 4.3.0-alpha.12
 
 ### Patch Changes
