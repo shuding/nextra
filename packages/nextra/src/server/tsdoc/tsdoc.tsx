@@ -248,8 +248,8 @@ const TypeAndDescriptionCell: FC<{
       // add `Type: ` via CSS `content` property so value will be not selectable
       className='x:p-3 x:max-lg:block x:max-lg:before:content-["Type:_"]'
     >
-      {linkify(type, typeLinkMap)}
-      {description && <div className="x:mt-2 x:text-sm">{description}</div>}
+      <Code>{linkify(type, typeLinkMap)}</Code>
+      {description && <div className="x:mt-2">{description}</div>}
     </td>
   )
 }
@@ -294,11 +294,15 @@ const FieldsTable: FC<
                   // table cells will add some extra blank space we don't want.
                   defaultValue
                     ? // add `Default: ` via CSS `content` property so value will be not selectable
-                      'x:py-3 x:max-lg:px-3 x:max-lg:before:content-["Default:_"]'
+                      'x:py-3 x:max-lg:pt-0 x:max-lg:px-3 x:max-lg:before:content-["Default:_"]'
                     : 'x:lg:after:content-["–"]'
                 )}
               >
-                {defaultValue && linkify(defaultValue, typeLinkMap)}
+                {defaultValue && (
+                  <Code className="x:whitespace-pre-wrap x:inline-block">
+                    {linkify(defaultValue, typeLinkMap)}
+                  </Code>
+                )}
               </td>
             </Row>
           )
@@ -310,7 +314,10 @@ const FieldsTable: FC<
 
 // This function takes a string representing some type and attempts to turn any
 // types referenced inside into links, either internal or external.
-function linkify(type: string, typeLinkMap: TSDocProps['typeLinkMap'] = {}) {
+function linkify(
+  type: string,
+  typeLinkMap: TSDocProps['typeLinkMap'] = {}
+): ReactNode {
   const result: (string | ReactElement)[] = []
   for (const chunk of type.match(/(\w+|\W+)/g)!) {
     const href = typeLinkMap[chunk]
@@ -330,5 +337,5 @@ function linkify(type: string, typeLinkMap: TSDocProps['typeLinkMap'] = {}) {
     }
     result.push(chunk)
   }
-  return <Code className="x:whitespace-pre-wrap">{result}</Code>
+  return result
 }
