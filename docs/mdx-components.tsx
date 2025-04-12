@@ -74,7 +74,7 @@ export const useMDXComponents: typeof getDocsMDXComponents = components => ({
       className="nextra-border rounded-xl border drop-shadow-sm"
     />
   ),
-  figure: props => <figure className="mt-6" {...props} />,
+  figure: props => <figure className="mt-[1.25em]" {...props} />,
   figcaption: props => (
     <figcaption className="mt-2 text-center text-sm" {...props} />
   ),

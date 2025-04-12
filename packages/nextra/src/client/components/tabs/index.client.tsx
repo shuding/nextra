@@ -185,7 +185,7 @@ export const Tab: FC<TabPanelProps> = ({
       unmount={unmount}
       className={args =>
         cn(
-          'x:rounded x:mt-6',
+          'x:rounded x:mt-[1.25em]',
           args.focus && 'x:nextra-focus',
           typeof className === 'function' ? className(args) : className
         )

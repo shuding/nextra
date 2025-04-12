@@ -65,7 +65,7 @@ Z --> G
     <div className="mt-6 grid grid-cols-1 gap-2 lg:grid-cols-2">
       <Pre
         data-filename="MDX"
-        icon={<MdxIcon height="16" className="shrink-0" />}
+        icon={<MdxIcon height="1em" className="shrink-0" />}
       >
         <Code>
           <span

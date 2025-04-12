@@ -46,7 +46,7 @@ export const Playground: FC<
       <div className="x:[&_svg]:text-red-500">
         <Pre
           data-filename="Could not compile code"
-          icon={<CrossCircledIcon height="16" className="x:shrink-0" />}
+          icon={<CrossCircledIcon height="1em" className="x:shrink-0" />}
           className="x:whitespace-pre-wrap"
         >
           <Code>

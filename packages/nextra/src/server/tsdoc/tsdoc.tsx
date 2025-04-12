@@ -108,10 +108,10 @@ export const TSDoc: FC<TSDocProps> = ({
   }>) {
     const slugger = new Slugger()
     const description = await renderMarkdown(tags?.returns)
-    const unnamedReturnId = `#returns${index}`
+    const unnamedReturnId = `returns${index}`
     return (
       <>
-        <b className="x:mt-6 x:block">Parameters:</b>
+        <b className="x:mt-[1.25em] x:block">Parameters:</b>
         {signature.params.length ? (
           <FieldsTable
             fields={signature.params}
@@ -123,7 +123,7 @@ export const TSDoc: FC<TSDocProps> = ({
             This function does not accept any parameters.
           </Callout>
         )}
-        <b className="x:mt-6 x:block">Returns:</b>
+        <b className="x:mt-[1.25em] x:block">Returns:</b>
         {Array.isArray(signature.returns) ? (
           <>
             {description}
@@ -159,32 +159,21 @@ export const TSDoc: FC<TSDocProps> = ({
             </table>
           </>
         ) : (
-          <MobileCard id={unnamedReturnId}>
-            <a href={unnamedReturnId} className={cn(classes.anchor)} />
+          <div
+            id={unnamedReturnId}
+            className={cn(
+              classes.card,
+              'x:text-sm x:relative x:p-3 x:border x:before:content-["Type:_"] x:mt-5'
+            )}
+          >
+            <a href={`#${unnamedReturnId}`} className={cn(classes.anchor)} />
             <Code>{linkify(signature.returns.type, typeLinkMap)}</Code>
             {description && <div className="x:mt-2">{description}</div>}
-          </MobileCard>
+          </div>
         )}
       </>
     )
   }
-}
-
-const MobileCard: FC<{ children: ReactNode; id: string }> = ({
-  children,
-  id
-}) => {
-  return (
-    <div
-      id={id}
-      className={cn(
-        classes.card,
-        'x:text-sm x:relative x:p-3 x:border x:before:content-["Type:_"] x:mt-5'
-      )}
-    >
-      {children}
-    </div>
-  )
 }
 
 const Row: FC<{

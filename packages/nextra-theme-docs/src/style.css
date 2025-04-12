@@ -37,7 +37,7 @@ html {
 }
 
 .contains-task-list {
-  @apply x:mt-6;
+  @apply x:mt-[1.25em];
 
   input[type='checkbox'] {
     @apply x:me-1;
