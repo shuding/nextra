@@ -3,25 +3,28 @@
 import { useEffect, useState } from 'react'
 import type { FC, ReactElement } from 'react'
 import { evaluate } from '../evaluate.js'
-import { CrossCircledIcon } from '../icons/index.js'
-import { Code } from '../mdx-components/code.js'
-import { Pre } from '../mdx-components/pre/index.js'
 import type { MDXRemoteProps } from '../mdx-remote.js'
+import { Callout } from './callout.js'
 
-export const Playground: FC<
-  {
-    /**
-     * String with source MDX.
-     * @example '# hello world <br /> nice to see you'
-     */
-    source: string
-    /**
-     * Fallback component for loading.
-     * @default null
-     */
-    fallback?: ReactElement | null
-  } & Pick<MDXRemoteProps, 'components' | 'scope'>
-> = ({ source, fallback = null, components, scope }) => {
+type PlaygroundProps = {
+  /**
+   * String with source MDX.
+   * @example '# hello world <br /> nice to see you'
+   */
+  source: string
+  /**
+   * Fallback component for loading.
+   * @default null
+   */
+  fallback?: ReactElement | null
+} & Pick<MDXRemoteProps, 'components' | 'scope'>
+
+export const Playground: FC<PlaygroundProps> = ({
+  source,
+  fallback = null,
+  components,
+  scope
+}) => {
   const [compiledSource, setCompiledSource] = useState('')
   const [error, setError] = useState<unknown>()
 
@@ -43,21 +46,13 @@ export const Playground: FC<
 
   if (error) {
     return (
-      <div className="x:[&_svg]:text-red-500">
-        <Pre
-          data-filename="Could not compile code"
-          icon={<CrossCircledIcon height="1em" className="x:shrink-0" />}
-          className="x:whitespace-pre-wrap"
-        >
-          <Code>
-            <span>
-              {error instanceof Error
-                ? `${error.name}: ${error.message}`
-                : String(error)}
-            </span>
-          </Code>
-        </Pre>
-      </div>
+      <Callout type="error">
+        <b>Could not compile code</b>
+        <br />
+        {error instanceof Error
+          ? `${error.name}: ${error.message}`
+          : String(error)}
+      </Callout>
     )
   }
 
