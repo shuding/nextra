@@ -10,7 +10,7 @@
     "@eslint/compat": "1.2.8",
     "@eslint/js": "9.24.0",
     "@next/eslint-plugin-next": "15.2.4",
-    "eslint-config-prettier": "10.1.1",
+    "eslint-config-prettier": "10.1.2",
     "eslint-plugin-de-morgan": "1.2.1",
     "eslint-plugin-import-x": "4.10.2",
     "eslint-plugin-react": "7.37.5",
