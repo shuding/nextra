@@ -57,7 +57,7 @@ const classes = {
   ),
   anchor: cn(
     'x:absolute x:top-0 x:right-0 x:text-lg x:font-black',
-    'x:group-hover:opacity-100! x:before:content-["#"] x:hover:text-black x:dark:hover:text-white',
+    'x:before:content-["#"] x:hover:text-black x:dark:hover:text-white',
     'x:px-3 x:py-[min(1%,12px)]' // Increase click box
   )
 }
@@ -221,9 +221,8 @@ const NameCell: FC<{
       <a
         href={`#${id}`}
         className={cn(
-          'x:absolute x:top-0 x:right-0 x:text-lg x:font-black x:lg:top-1/2 x:lg:right-full x:lg:-translate-y-1/2',
-          'x:group-hover:opacity-100! x:before:content-["#"] x:hover:text-black x:dark:hover:text-white',
-          'x:p-3' // Increase click box
+          classes.anchor,
+          'x:group-hover:opacity-100! x:lg:top-1/2 x:lg:right-full x:lg:-translate-y-1/2',
         )}
       />
       {name && (
