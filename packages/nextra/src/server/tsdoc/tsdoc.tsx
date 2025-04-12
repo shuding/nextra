@@ -195,9 +195,8 @@ const Row: FC<{
     <tr
       id={id}
       className={cn(
-        'x:group x:mb-5 x:rounded-xl x:max-lg:block',
-        'x:hover:bg-primary-50 x:dark:hover:bg-primary-500/10',
-        'nextra-border x:max-lg:border x:lg:border-b',
+        classes.card,
+        'x:group x:mb-5 x:max-lg:block x:max-lg:border x:lg:border-b',
         'x:lg:not-target:[&>td>a]:opacity-0'
       )}
     >
@@ -222,7 +221,7 @@ const NameCell: FC<{
         href={`#${id}`}
         className={cn(
           classes.anchor,
-          'x:group-hover:opacity-100! x:lg:top-1/2 x:lg:right-full x:lg:-translate-y-1/2',
+          'x:group-hover:opacity-100! x:lg:top-1/2 x:lg:right-full x:lg:-translate-y-1/2'
         )}
       />
       {name && (
