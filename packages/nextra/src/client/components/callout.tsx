@@ -84,7 +84,7 @@ export const Callout: FC<CalloutProps> = ({
       )}
     >
       <div
-        className="x:select-none x:text-xl x:ps-[.75em] x:pe-[.5em]"
+        className="x:select-none x:text-xl x:ps-3 x:pe-2"
         style={{
           fontFamily: '"Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"'
         }}
