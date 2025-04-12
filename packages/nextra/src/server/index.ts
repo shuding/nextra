@@ -3,6 +3,7 @@ import { createRequire } from 'node:module'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import fg from 'fast-glob'
+import type { NextConfig } from 'next'
 import type { RuleSetRule } from 'webpack'
 import { fromZodError } from 'zod-validation-error'
 import type { Nextra } from '../types.js'
@@ -41,6 +42,13 @@ function getContentDirectory() {
   })
   return contentDir
 }
+
+const [nextMajorVersion, nextMinorVersion] = require('next/package.json')
+  .version.split('.', 2)
+  .map(Number)
+
+const shouldUseConfigTurbopack =
+  nextMajorVersion > 15 || (nextMajorVersion === 15 && nextMinorVersion > 2)
 
 const nextra: Nextra = nextraConfig => {
   const { error, data: loaderOptions } =
@@ -82,8 +90,54 @@ const nextra: Nextra = nextraConfig => {
         locales: locales ? [...locales] : ['']
       }
     }
+    const turbopackConfig =
+      (shouldUseConfigTurbopack
+        ? nextConfig.turbopack
+        : // eslint-disable-next-line @typescript-eslint/no-deprecated -- Backwards compatibility
+          nextConfig.experimental?.turbo) ?? {}
+
+    const turbopack = {
+      ...turbopackConfig,
+      rules: {
+        ...turbopackConfig.rules,
+        [`./{src/,}app/**/page.{${MARKDOWN_EXTENSIONS}}`]: {
+          as: '*.tsx',
+          loaders: [pageImportLoader as any]
+        },
+        // Order matter here, pages match first -> after partial files
+        [`*.{${MARKDOWN_EXTENSIONS}}`]: {
+          as: '*.tsx',
+          loaders: [loader as any]
+        },
+        [`**${PAGE_MAP_PLACEHOLDER_PATH}`]: {
+          loaders: [pageMapPlaceholderLoader]
+        },
+        [`**${GET_PAGE_MAP_PATH}`]: {
+          loaders: [pageMapLoader]
+        }
+      },
+      resolveAlias: {
+        ...turbopackConfig.resolveAlias,
+        'next-mdx-import-source-file':
+          '@vercel/turbopack-next/mdx-import-source',
+        'private-next-root-dir/*': './*',
+        'private-next-content-dir/*': `./${CONTENT_DIR}/*`,
+        // Fixes when Turbopack is enabled: Module not found: Can't resolve '@theguild/remark-mermaid/mermaid'
+        '@theguild/remark-mermaid/mermaid': path.relative(
+          CWD,
+          path.join(
+            require.resolve('@theguild/remark-mermaid/package.json'),
+            '..',
+            'dist',
+            'mermaid.js'
+          )
+        )
+      }
+    } satisfies NextConfig['turbopack']
+
     return {
       ...nextConfig,
+      ...(shouldUseConfigTurbopack && { turbopack }),
       transpilePackages: [
         // To import ESM-only packages with `next dev --turbopack`. Source: https://github.com/vercel/next.js/issues/63318#issuecomment-2079677098
         ...(process.env.TURBOPACK === '1' ? ['shiki', 'ts-morph'] : []),
@@ -111,44 +165,7 @@ const nextra: Nextra = nextraConfig => {
           'nextra-theme-blog',
           ...(nextConfig.experimental?.optimizePackageImports || [])
         ],
-        turbo: {
-          ...nextConfig.experimental?.turbo,
-          rules: {
-            ...nextConfig.experimental?.turbo?.rules,
-            [`./{src/,}app/**/page.{${MARKDOWN_EXTENSIONS}}`]: {
-              as: '*.tsx',
-              loaders: [pageImportLoader as any]
-            },
-            // Order matter here, pages match first -> after partial files
-            [`*.{${MARKDOWN_EXTENSIONS}}`]: {
-              as: '*.tsx',
-              loaders: [loader as any]
-            },
-            [`**${PAGE_MAP_PLACEHOLDER_PATH}`]: {
-              loaders: [pageMapPlaceholderLoader]
-            },
-            [`**${GET_PAGE_MAP_PATH}`]: {
-              loaders: [pageMapLoader]
-            }
-          },
-          resolveAlias: {
-            ...nextConfig.experimental?.turbo?.resolveAlias,
-            'next-mdx-import-source-file':
-              '@vercel/turbopack-next/mdx-import-source',
-            'private-next-root-dir/*': './*',
-            'private-next-content-dir/*': `./${CONTENT_DIR}/*`,
-            // Fixes when Turbopack is enabled: Module not found: Can't resolve '@theguild/remark-mermaid/mermaid'
-            '@theguild/remark-mermaid/mermaid': path.relative(
-              CWD,
-              path.join(
-                require.resolve('@theguild/remark-mermaid/package.json'),
-                '..',
-                'dist',
-                'mermaid.js'
-              )
-            )
-          }
-        }
+        ...(!shouldUseConfigTurbopack && { turbo: turbopack })
       },
       webpack(config, options) {
         // Fixes https://github.com/vercel/next.js/issues/55872

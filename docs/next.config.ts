@@ -136,15 +136,15 @@ const nextConfig = withNextra({
     })
     return config
   },
-  experimental: {
-    turbo: {
-      rules: {
-        './components/icons/*.svg': {
-          loaders: ['@svgr/webpack'],
-          as: '*.js'
-        }
+  turbopack: {
+    rules: {
+      './components/icons/*.svg': {
+        loaders: ['@svgr/webpack'],
+        as: '*.js'
       }
-    },
+    }
+  },
+  experimental: {
     optimizePackageImports: ['@components/icons']
   }
 })

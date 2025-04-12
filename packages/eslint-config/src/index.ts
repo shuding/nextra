@@ -111,6 +111,7 @@ const config: Config = tseslint.config(
       'sonarjs/no-unstable-nested-components': 'off', // todo
 
       'sonarjs/no-duplicate-in-composite': 'off', // covered by @typescript-eslint/no-duplicate-type-constituents
+      'sonarjs/deprecation': 'off', // covered by @typescript-eslint/no-deprecated
       'sonarjs/no-unused-vars': 'off',
       'sonarjs/prefer-regexp-exec': 'off',
       'sonarjs/fixme-tag': 'off',

@@ -48,15 +48,15 @@ const nextConfig = withBundleAnalyzer(
       })
       return config
     },
-    experimental: {
-      turbo: {
-        rules: {
-          './app/_icons/*.svg': {
-            loaders: ['@svgr/webpack'],
-            as: '*.js'
-          }
+    turbopack: {
+      rules: {
+        './app/_icons/*.svg': {
+          loaders: ['@svgr/webpack'],
+          as: '*.js'
         }
-      },
+      }
+    },
+    experimental: {
       optimizePackageImports: [
         // '@app/_icons'
       ]
