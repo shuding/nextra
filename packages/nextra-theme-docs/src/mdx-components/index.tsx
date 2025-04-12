@@ -69,7 +69,10 @@ const DEFAULT_COMPONENTS = getNextraMDXComponents({
   summary: Summary,
   table: ({ className, ...props }) => (
     <Table
-      className={cn('nextra-scrollbar x:not-first:mt-[1.25em] x:p-0', className)}
+      className={cn(
+        'nextra-scrollbar x:not-first:mt-[1.25em] x:p-0',
+        className
+      )}
       {...props}
     />
   ),
