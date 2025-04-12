@@ -12,7 +12,9 @@ code.nextra-code {
   @apply x:text-sm;
 
   :not(pre) > &:not([class*='twoslash-']) {
-    @apply x:border-black/[0.04] x:bg-black/[0.03] x:break-words x:rounded-md x:border x:py-0.5 x:px-[.25em] x:text-[.9em];
+    @apply x:p-[.12em_.25em];
+    @apply x:rounded-[.375em];
+    @apply x:border-black/[0.04] x:bg-black/[0.03] x:break-words x:border x:text-[.9em];
     @apply x:dark:border-white/10 x:dark:bg-white/10;
   }
 }
