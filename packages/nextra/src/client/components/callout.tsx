@@ -78,7 +78,7 @@ export const Callout: FC<CalloutProps> = ({
   return (
     <div
       className={cn(
-        'nextra-callout x:overflow-x-auto x:mt-6 x:flex x:rounded-lg x:border x:py-2 x:pe-4',
+        'nextra-callout x:overflow-x-auto x:not-first:mt-[1.25em] x:flex x:rounded-lg x:border x:py-[.5em] x:pe-[1em]',
         'x:contrast-more:border-current!',
         type && classes[type]
       )}
