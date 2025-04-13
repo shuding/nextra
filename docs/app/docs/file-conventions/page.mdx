@@ -7,51 +7,12 @@ description:
   `content` and `src` directories.
 ---
 
-import { Cards } from 'nextra/components'
 import { FileIcon, FolderIcon, MdxIcon } from 'nextra/icons'
-import { getIndexPageMap, getPageMap } from 'nextra/page-map'
-import { useMDXComponents } from '../../../mdx-components'
+import { OverviewPage } from '../../_components/overview-page'
 
 # File Conventions
 
-export async function Page() {
-  const { h2: H2 } = useMDXComponents()
-  const currentRoute = metadata.filePath
-    .replace('app', '')
-    .replace('/page.mdx', '')
-  const pageMap = await getPageMap(currentRoute)
-  const icons = {
-    Cards,
-    FileIcon,
-    FolderIcon,
-    MdxIcon
-  }
-  return getIndexPageMap(pageMap).map((pageItem, index) => {
-    if (!Array.isArray(pageItem)) {
-      return <H2 key={index}>{pageItem.title}</H2>
-    }
-    return (
-      <Cards key={index}>
-        {pageItem.map(item => {
-          const icon = item.frontMatter?.icon
-          const Icon = icons[icon]
-          if (icon && !Icon) {
-            throw new Error(
-              "Icon is defined in front matter but isn't provided"
-            )
-          }
-          return (
-            <Cards.Card
-              key={item.name}
-              title={item.title}
-              href={item.route || item.href}
-              icon={Icon && <Icon />}
-            />
-          )
-        })}
-      </Cards>
-    )
-  })
-}
-
-<Page />
+<OverviewPage
+  filePath={metadata.filePath}
+  icons={{ FileIcon, FolderIcon, MdxIcon }}
+/>
