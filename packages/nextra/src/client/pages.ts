@@ -26,7 +26,7 @@ import type { Heading, NextraMetadata } from '../types.js'
  * ```
  * ```tsx
  * // Usage with i18n
- * const { default: MDXContent } = await importPage(['docs', 'api'], 'en')
+ * const { default: MDXContent } = await importPage(['docs', 'getting-started'], 'en')
  * ```
  * ```ts filename="Import page's front matter in generateMetadata"
  * // app/[[...mdxPath]]/page.tsx
@@ -41,7 +41,7 @@ import type { Heading, NextraMetadata } from '../types.js'
  * ```ts filename="Import page in a catch-all route"
  * // app/[[...mdxPath]]/page.tsx
  * import { generateStaticParamsFor, importPage } from 'nextra/pages'
- * import { useMDXComponents as getMDXComponents } from '../../../../mdx-components'
+ * import { useMDXComponents as getMDXComponents } from 'path/to/your/mdx-components'
  *
  * export const generateStaticParams = generateStaticParamsFor('mdxPath')
  *
