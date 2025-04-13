@@ -1,8 +1,10 @@
 'use no memo'
 
+import type { FC } from 'react'
 import { notFound } from 'next/navigation'
 import { getRouteToFilepath } from '../server/page-map/get.js'
 import { logger } from '../server/utils.js'
+import type { Heading, NextraMetadata } from '../types.js'
 
 /**
  * Helper function to import an MDX/Markdown page from `content` directory.
@@ -18,8 +20,29 @@ import { logger } from '../server/utils.js'
  *   return metadata
  * }
  * ```
+ * ```ts filename="Import page in a catch-all route"
+ * // app/[[...mdxPath]]/page.tsx
+ * import { generateStaticParamsFor, importPage } from 'nextra/pages'
+ * import { useMDXComponents as getMDXComponents } from '../../../../mdx-components'
  *
- * @see [`content` directory](https://nextra.site/docs/file-conventions/content-directory).
+ * export const generateStaticParams = generateStaticParamsFor('mdxPath')
+ *
+ * const Wrapper = getMDXComponents().wrapper
+ *
+ * export default async function Page(props) {
+ *   const params = await props.params
+ *   const result = await importPage(params.mdxPath)
+ *   const { default: MDXContent, toc, metadata } = result
+ *   return (
+ *     <Wrapper toc={toc} metadata={metadata}>
+ *       <MDXContent {...props} params={params} />
+ *     </Wrapper>
+ *   )
+ * }
+ * ```
+ * @see
+ * [`content` directory](https://nextra.site/docs/file-conventions/content-directory).
+ * [catch-all route](https://nextjs.org/docs/app/building-your-application/routing/dynamic-routes#catch-all-segments)
  */
 export async function importPage(
   /**
@@ -33,7 +56,7 @@ export async function importPage(
    * @default ''
    */
   lang = ''
-) {
+): Promise<{ default: FC, toc: Heading[], metadata: NextraMetadata }> {
   const RouteToFilepath = await getRouteToFilepath(lang)
 
   const pathname = pathSegments.join('/')
