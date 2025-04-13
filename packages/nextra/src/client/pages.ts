@@ -41,8 +41,8 @@ import type { Heading, NextraMetadata } from '../types.js'
  * }
  * ```
  * @see
- * [`content` directory](https://nextra.site/docs/file-conventions/content-directory).
- * [catch-all route](https://nextjs.org/docs/app/building-your-application/routing/dynamic-routes#catch-all-segments)
+ * - [`content` directory](https://nextra.site/docs/file-conventions/content-directory).
+ * - [catch-all route](https://nextjs.org/docs/app/building-your-application/routing/dynamic-routes#catch-all-segments)
  */
 export async function importPage(
   /**
@@ -92,8 +92,8 @@ export async function importPage(
  * ```
  *
  * @see
- * [`generateStaticParams` function](https://nextjs.org/docs/app/api-reference/functions/generate-static-params).
- * [`content` directory](https://nextra.site/docs/file-conventions/content-directory).
+ * - [`generateStaticParams` function](https://nextjs.org/docs/app/api-reference/functions/generate-static-params).
+ * - [`content` directory](https://nextra.site/docs/file-conventions/content-directory).
  */
 export const generateStaticParamsFor =
   (
