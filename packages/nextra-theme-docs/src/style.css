@@ -21,7 +21,6 @@
 
 html {
   --nextra-navbar-height: 64px;
-  --nextra-menu-height: 3.75rem;
 
   @apply x:antialiased x:text-base;
   font-feature-settings:
