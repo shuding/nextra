@@ -5,7 +5,7 @@ import { generateDocumentation } from '../../../nextra/src/server/tsdoc/base.js'
 import { generateTsFromZod } from '../../../nextra/src/server/tsdoc/zod-to-ts.js'
 import typesFixture from './fixtures/flattened?raw'
 
-describe('<TSDoc />', () => {
+describe('generateDocumentation()', () => {
   test('<Banner />', async () => {
     const code = `import type { Banner } from 'nextra/components'
 type $ = React.ComponentProps<typeof Banner>

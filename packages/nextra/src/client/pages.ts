@@ -6,10 +6,7 @@ import { logger } from '../server/utils.js'
 import type { EvaluateResult } from '../types.js'
 
 /**
- * Function to import an MDX/Markdown page from the `content` directory and returns
- * - its React component page
- * - front matter (`metadata`)
- * - table of contents (`toc`)
+ * Function to import an MDX/Markdown page from the `content` directory.
  *
  * This function is essential for Nextra's dynamic page loading from a catch-all route.
  *
@@ -67,7 +64,6 @@ import type { EvaluateResult } from '../types.js'
  *   )
  * }
  * ```
- * @throws {Error} when the page cannot be found or loaded.
  *
  * @see
  * - [Content Directory Documentation](https://nextra.site/docs/file-conventions/content-directory)
