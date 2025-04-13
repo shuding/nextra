@@ -1,5 +1,14 @@
 # nextra-theme-blog
 
+## 4.3.0-alpha.14
+
+### Patch Changes
+
+- a506e0b: fix `TypeError: page.generateMetadata is not a function` when using
+  with `withSentryConfig` plugin
+- Updated dependencies [a506e0b]
+  - nextra@4.3.0-alpha.14
+
 ## 4.3.0-alpha.13
 
 ### Patch Changes
