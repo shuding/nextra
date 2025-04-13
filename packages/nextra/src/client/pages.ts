@@ -10,7 +10,7 @@ import type { Heading, NextraMetadata } from '../types.js'
  * Function to import an MDX/Markdown page from the `content` directory and returns
  * - its React component page
  * - front matter (`metadata`)
- * - table of contents (`toc`).
+ * - table of contents (`toc`)
  *
  * This function is essential for Nextra's dynamic page loading from a catch-all route.
  *
@@ -21,7 +21,7 @@ import type { Heading, NextraMetadata } from '../types.js'
  *
  * @example
  * ```tsx
- * // Basic usage in a page component
+ * // Basic usage in a dynamic Next.js route
  * const { default: MDXContent, toc, metadata } = await importPage(['docs', 'getting-started'])
  * ```
  * ```tsx
@@ -67,6 +67,7 @@ import type { Heading, NextraMetadata } from '../types.js'
 export async function importPage(
   /**
    * Array of path segments representing the route to the page.
+   *
    * E.g., for the route `/docs/getting-started/installation`, pass `['docs', 'getting-started', 'installation']`.
    * @default []
    */
