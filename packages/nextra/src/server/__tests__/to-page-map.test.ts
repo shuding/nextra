@@ -133,6 +133,7 @@ describe('generatePageMap()', () => {
         "app/docs/file-conventions/page-file/page.mdx",
         "app/docs/file-conventions/page.mdx",
         "app/docs/file-conventions/src-directory/page.mdx",
+        "app/docs/guide/api/page.mdx",
         "app/docs/guide/custom-css/page.mdx",
         "app/docs/guide/github-alert-syntax/page.mdx",
         "app/docs/guide/i18n/page.mdx",
@@ -424,6 +425,11 @@ describe('generatePageMap()', () => {
             {
               "children": [
                 {
+                  "__pagePath": "app/docs/guide/api/page.mdx",
+                  "name": "api",
+                  "route": "/docs/guide/api",
+                },
+                {
                   "__pagePath": "app/docs/guide/custom-css/page.mdx",
                   "name": "custom-css",
                   "route": "/docs/guide/custom-css",
@@ -568,6 +574,7 @@ describe('generatePageMap()', () => {
         import {metadata as app_docs_file_conventions_page_file_page} from "private-next-root-dir/app/docs/file-conventions/page-file/page.mdx?metadata";
         import {metadata as app_docs_file_conventions_page} from "private-next-root-dir/app/docs/file-conventions/page.mdx?metadata";
         import {metadata as app_docs_file_conventions_src_directory_page} from "private-next-root-dir/app/docs/file-conventions/src-directory/page.mdx?metadata";
+        import {metadata as app_docs_guide_api_page} from "private-next-root-dir/app/docs/guide/api/page.mdx?metadata";
         import {metadata as app_docs_guide_custom_css_page} from "private-next-root-dir/app/docs/guide/custom-css/page.mdx?metadata";
         import {metadata as app_docs_guide_github_alert_syntax_page} from "private-next-root-dir/app/docs/guide/github-alert-syntax/page.mdx?metadata";
         import {metadata as app_docs_guide_i18n_page} from "private-next-root-dir/app/docs/guide/i18n/page.mdx?metadata";
@@ -800,6 +807,10 @@ describe('generatePageMap()', () => {
             name: "guide",
             route: "/docs/guide",
             children: [{
+              name: "api",
+              route: "/docs/guide/api",
+              frontMatter: app_docs_guide_api_page
+            }, {
               name: "custom-css",
               route: "/docs/guide/custom-css",
               frontMatter: app_docs_guide_custom_css_page

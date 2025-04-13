@@ -9,7 +9,40 @@ function importPageMap(lang = ''): Promise<{
 
 const defaultLocale = process.env.NEXTRA_DEFAULT_LOCALE
 
-export async function getPageMap(route = '/') {
+/**
+ * Retrieves the page map structure for a given route handling nested routes.
+ *
+ * The page map structure represents the hierarchical organization of your documentation or content,
+ * where each item can be either a page or a folder containing more pages.
+ *
+ * @returns A Promise that resolves to an array of `PageMapItem` objects representing the page structure
+ * such as `MdxFile`, `Folder` and `MetaJsonFile`.
+ *
+ * @example
+ * ```ts
+ * import { getPageMap } from 'nextra/page-map'
+ *
+ * // Get the root page map
+ * const rootPageMap = await getPageMap()
+ *
+ * // Get the page map for a specific route
+ * const blogPageMap = await getPageMap('/blog')
+ *
+ * // Get the page map for a specific language when using i18n
+ * const enPageMap = await getPageMap('/en')
+ * ```
+ *
+ * @throws {Error} when the specified route segment cannot be found in the page map.
+ *
+ * @see [Page Map Structure Documentation](https://nextra.site/docs/file-conventions/meta-file#pagemap-structure).
+ */
+export async function getPageMap(
+  /**
+   * The route path to retrieve the page map for.
+   * @default "/"
+   */
+  route = '/'
+) {
   const segments = route.split('/')
   // Remove 1 or 2 items from the beginning of the array
   const lang = segments.splice(0, defaultLocale ? 2 : 1).at(-1)!

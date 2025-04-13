@@ -25,6 +25,21 @@ function getHeadersLocale(request: NextRequest): string {
   return locale
 }
 
+/**
+ *
+ * @example
+ * ```ts
+ * // Basic usage
+ * export { middleware } from 'nextra/locales'
+ *
+ * export const config = {
+ *   // Matcher ignoring `/_next/` and `/api/`
+ *   matcher: [
+ *     '/((?!api|_next/static|_next/image|favicon.ico|icon.svg|apple-icon.png|manifest|_pagefind).*)'
+ *   ]
+ * }
+ * ```
+ */
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl
 

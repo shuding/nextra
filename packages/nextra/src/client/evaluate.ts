@@ -2,6 +2,7 @@
 
 import jsxDevRuntime from 'react/jsx-dev-runtime'
 import jsxRuntime from 'react/jsx-runtime'
+import type { EvaluateResult } from '../types.js'
 import type { MDXComponents } from './mdx-components.js'
 
 const runtime =
@@ -11,9 +12,11 @@ export type Scope = Record<string, unknown>
 
 export function evaluate(
   rawJs: string,
+  /** @default {} */
   components: MDXComponents = {},
+  /** @default {} */
   scope: Scope = {}
-) {
+): EvaluateResult {
   // if we're ready to render, we can assemble the component tree and let React do its thing
   // first we set up the scope which has to include the mdx custom
   // create element function as well as any components we're using
