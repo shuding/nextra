@@ -19,13 +19,13 @@ import type { EvaluateResult } from '../types.js'
  * @example
  * #### Basic usage in a dynamic Next.js route
  *
- * ```tsx
+ * ```ts
  * const { default: MDXContent, toc, metadata } = await importPage(['docs', 'getting-started'])
  * ```
  *
  * #### Usage with i18n
  *
- * ```tsx
+ * ```ts
  * const { default: MDXContent } = await importPage(['docs', 'getting-started'], 'en')
  * ```
  *
@@ -44,7 +44,7 @@ import type { EvaluateResult } from '../types.js'
  *
  * #### Import page in a catch-all route
  *
- * ```ts
+ * ```tsx
  * // app/[[...mdxPath]]/page.tsx
  * import { generateStaticParamsFor, importPage } from 'nextra/pages'
  * import { useMDXComponents as getMDXComponents } from 'path/to/your/mdx-components'
@@ -111,14 +111,14 @@ export async function importPage(
  * @example
  * ####  Basic usage with a catch-all route
  *
- * ```tsx
+ * ```ts
  * // app/[[...slug]]/page.tsx
  * export const generateStaticParams = generateStaticParamsFor('slug')
  * ```
  *
  * #### Usage with i18n support
  *
- * ```tsx
+ * ```ts
  * // app/[locale]/[[...mdxPath]]/page.tsx
  * export const generateStaticParams = generateStaticParamsFor('mdxPath', 'locale')
  * ```
