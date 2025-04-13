@@ -1,10 +1,9 @@
 'use no memo'
 
 import { notFound } from 'next/navigation'
-import type { FC } from 'react'
 import { getRouteToFilepath } from '../server/page-map/get.js'
 import { logger } from '../server/utils.js'
-import type { Heading, NextraMetadata } from '../types.js'
+import type { EvaluateResult } from '../types.js'
 
 /**
  * Function to import an MDX/Markdown page from the `content` directory and returns
@@ -77,7 +76,7 @@ export async function importPage(
    * @default ''
    */
   lang = ''
-): Promise<{ default: FC; toc: Heading[]; metadata: NextraMetadata }> {
+): Promise<EvaluateResult> {
   const RouteToFilepath = await getRouteToFilepath(lang)
 
   const pathname = pathSegments.join('/')

@@ -115,7 +115,9 @@ type NormalizedResult = {
 export function normalizePages({
   list,
   route,
+  /** @default '' */
   docsRoot = '',
+  /** @default DEFAULT_PAGE_THEME */
   pageThemeContext = DEFAULT_PAGE_THEME
 }: {
   list: PageMapItem[]

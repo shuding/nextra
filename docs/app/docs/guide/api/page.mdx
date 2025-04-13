@@ -18,11 +18,9 @@ export async function Section({ packageName, functionName }) {
   if (description) result.push(description)
   result.push('<TSDoc definition={definition} />')
   if (tags.throws) {
-    result.push(`<Callout type='warning'>
-**Warning**
-{''}
-Throws an ${tags.throws.replaceAll('{', '`').replaceAll('}', '`')}
-</Callout>`)
+    result.push(`> [!WARNING]
+>
+> Throws an ${tags.throws.replaceAll('{', '`').replaceAll('}', '`')}`)
   }
   if (tags.see) {
     result.push(`<Callout>
@@ -65,3 +63,11 @@ ${tags.example}`)
 ## Nextra i18n `middleware`
 
 <Section functionName="middleware" packageName="nextra/locales" />
+
+## `evaluate`
+
+<Section functionName="evaluate" packageName="nextra/evaluate" />
+
+## `normalizePages`
+
+<Section functionName="normalizePages" packageName="nextra/normalize-pages" />
