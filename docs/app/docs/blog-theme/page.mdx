@@ -9,21 +9,18 @@ import {
   RSSIcon,
   TagsIcon
 } from '@components/icons'
-import { Cards } from 'nextra/components'
 import { FileIcon } from 'nextra/icons'
-import { MDXRemote } from 'nextra/mdx-remote'
-import { createIndexPage, getPageMap } from 'nextra/page-map'
+import { OverviewPage } from '../../_components/overview-page'
 
 # Nextra Blog Theme
 
-<MDXRemote
-  compiledSource={await createIndexPage(await getPageMap('/docs/blog-theme'))}
-  components={{
-    Cards,
+<OverviewPage
+  filePath={metadata.filePath}
+  icons={{
     ChevronRightIcon,
-    FileIcon,
     FilesIcon,
+    FileIcon,
+    TagsIcon,
     RSSIcon,
-    TagsIcon
   }}
 />
