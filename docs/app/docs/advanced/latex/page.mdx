@@ -7,6 +7,8 @@ import { MDXRemote } from 'nextra/mdx-remote'
 import {
   MathJax,
   MathJaxContext,
+  Steps,
+  Callout,
 } from 'nextra/components'
 
 {/* <link rel="stylesheet"> is unsupported in Metadata API https://nextjs.org/docs/app/api-reference/functions/generate-metadata#unsupported-metadata */}
@@ -19,8 +21,16 @@ import {
 
 Nextra can use [KaTeX](https://katex.org) to pre-render LaTeX expressions
 directly in MDX or [MathJax](https://mathjax.org) to dynamically render math in
-the browser. To enable LaTeX support, you must enable the `latex` option in your
-`next.config.mjs` file:
+the browser
+
+## Setup
+
+<Steps>
+
+### Enable the `latex` option
+
+By default, LaTeX is disabled. To enable it, you need to set the `latex` option
+in your `next.config.mjs` file:
 
 ```js filename="next.config.mjs" {4}
 import nextra from 'nextra'
@@ -46,6 +56,28 @@ site, and you can start writing math expressions by enclosing inline math in
 \int x^2
 ```
 ~~~
+
+### Apply styles
+
+<Callout type="warning">This is applicable only to KaTeX as the math renderer.</Callout>
+
+Add `<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex/dist/katex.css" />{:jsx}`
+inside `<head>` element in your root `layout` file since `<link rel="stylesheet" />{:jsx}`
+[isn't supported with Next.js Metadata API](https://nextjs.org/docs/app/api-reference/functions/generate-metadata#unsupported-metadata).
+
+Alternatively, you can include `<link rel="stylesheet" />{:jsx}` directly in your MDX file:
+
+~~~mdx filename="katex.mdx"
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex/dist/katex.css" />
+
+# My page with single usage of KaTeX
+
+```math
+\int_2^3x^3\,\mathrm{d}x
+```
+~~~
+
+</Steps>
 
 ## Example
 
@@ -104,23 +136,6 @@ const withNextra = nextra({
 See [KaTeX's documentation](https://katex.org/docs/supported) for a list of
 supported commands.
 
-#### Apply KaTeX styles
-
-Add `<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex/dist/katex.css" />{:jsx}`
-inside `<head>` element in your root `layout` file since `<link rel="stylesheet" />{:jsx}`
-[isn't supported with Next.js Metadata API](https://nextjs.org/docs/app/api-reference/functions/generate-metadata#unsupported-metadata).
-
-Alternatively, you can include `<link rel="stylesheet" />{:jsx}` directly in your MDX file:
-
-~~~mdx filename="katex.mdx"
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex/dist/katex.css" />
-
-# My page with single usage of KaTeX
-
-```math
-\int_2^3x^3\,\mathrm{d}x
-```
-~~~
 
 ### MathJax
 
