@@ -70,6 +70,7 @@ async function getReference(props: PageProps) {
     `# \`${apiRef.functionName}\` function`,
     // Page description
     description,
+    `Exported from \`${apiRef.packageName}\`.`,
     // Signature
     '## Signature',
     '<TSDoc definition={definition} />',
