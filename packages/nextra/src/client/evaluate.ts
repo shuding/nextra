@@ -2,7 +2,7 @@
 
 import jsxDevRuntime from 'react/jsx-dev-runtime'
 import jsxRuntime from 'react/jsx-runtime'
-import { EvaluateResult } from '../types.js'
+import type { EvaluateResult } from '../types.js'
 import type { MDXComponents } from './mdx-components.js'
 
 const runtime =
