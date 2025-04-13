@@ -74,33 +74,33 @@ export async function importPage(
 }
 
 /**
- * Helper function to generate `generateStaticParams` Next.js function from your `content` directory
- * content.
+ * Generates static parameters based on your `content` directory structure.
+ *
+ * This helper function is designed to work with Next.js' `generateStaticParams` to create
+ * static paths for all your MDX/Markdown pages.
+ *
+ * @returns A function that generates an array of parameters for static page generation.
  *
  * @example
- * ```ts
- * // app/[[...slug]]/page.tsx
- * import { generateStaticParamsFor } from 'nextra/pages'
- *
+ * ```tsx
+ * // Basic usage with a catch-all route (app/[[...slug]]/page.tsx)
  * export const generateStaticParams = generateStaticParamsFor('slug')
  * ```
- * ```ts
- * // app/[locale]/[[...mdxPath]]/page.tsx
- * import { generateStaticParamsFor } from 'nextra/pages'
- *
+ * ```tsx
+ * // Usage with i18n support (app/[locale]/[[...mdxPath]]/page.tsx)
  * export const generateStaticParams = generateStaticParamsFor('mdxPath', 'locale')
  * ```
- *
+ * 
  * @see
- * - [`generateStaticParams` function](https://nextjs.org/docs/app/api-reference/functions/generate-static-params).
- * - [`content` directory](https://nextra.site/docs/file-conventions/content-directory).
+ * - [Next.js `generateStaticParams` function](https://nextjs.org/docs/app/api-reference/functions/generate-static-params)
+ * - [Content Directory Structure](https://nextra.site/docs/file-conventions/content-directory)
  */
 export const generateStaticParamsFor =
   (
-    /** Name of your catch-all segment. */
+    /** The name of your catch-all route segment (e.g., `'slug'`, `'mdxPath'`). */
     segmentKey: string,
     /**
-     * Name of the locale segment. This is only used when you have i18n.
+     * The name of the locale segment when you have i18n.
      * @default "lang"
      */
     localeSegmentKey = 'lang'
