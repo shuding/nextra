@@ -23,7 +23,7 @@ export const OverviewPage: FC<{
           const Icon = icons?.[icon]
           if (icon && !Icon) {
             throw new Error(
-              "Icon is defined in front matter but isn't provided"
+              `Icon "${icon}" is defined in front matter but isn't provided`
             )
           }
           return (
