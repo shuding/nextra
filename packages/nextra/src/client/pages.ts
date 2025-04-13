@@ -128,7 +128,10 @@ export const generateStaticParamsFor =
   ) =>
   async () => {
     const locales = JSON.parse(process.env.NEXTRA_LOCALES!) as string[]
-    const result = []
+    const result: {
+      [localeSegmentKey]?: string
+      [segmentKey]: string[]
+    }[] = []
 
     for (const locale of locales) {
       const RouteToFilepath = await getRouteToFilepath(locale)
