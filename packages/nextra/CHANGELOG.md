@@ -1,5 +1,12 @@
 # nextra
 
+## 4.3.0-alpha.15
+
+### Patch Changes
+
+- b2cba90: improve TSDoc comments for `getPageMap`, `generateStaticParamsFor`
+  and `importPage` functions. Add new https://nextra.site/docs/guide/api page.
+
 ## 4.3.0-alpha.14
 
 ### Patch Changes

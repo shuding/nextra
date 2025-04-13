@@ -1,5 +1,14 @@
 # nextra-theme-blog
 
+## 4.3.0-alpha.15
+
+### Patch Changes
+
+- b2cba90: improve TSDoc comments for `getPageMap`, `generateStaticParamsFor`
+  and `importPage` functions. Add new https://nextra.site/docs/guide/api page.
+- Updated dependencies [b2cba90]
+  - nextra@4.3.0-alpha.15
+
 ## 4.3.0-alpha.14
 
 ### Patch Changes
