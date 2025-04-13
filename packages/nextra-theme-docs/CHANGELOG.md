@@ -1,5 +1,12 @@
 # nextra-theme-docs
 
+## 4.3.0-alpha.17
+
+### Patch Changes
+
+- 8edc715: fix phantom scroll when footer is disabled
+  - nextra@4.3.0-alpha.17
+
 ## 4.3.0-alpha.16
 
 ### Patch Changes
