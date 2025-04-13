@@ -298,7 +298,7 @@ export const Search: FC<SearchProps> = ({
       >
         {error ? (
           <>
-            <InformationCircleIcon height="20" className="x:shrink-0" />
+            <InformationCircleIcon height="1.25em" className="x:shrink-0" />
             <div className="x:grid">
               <b className="x:mb-2">{errorText}</b>
               {error}

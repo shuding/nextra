@@ -9,7 +9,17 @@ export { createIndexPage, getIndexPageMap } from './index-page.js'
 export function getMetadata(
   page:
     | { metadata: Metadata }
-    | { generateMetadata: (props: object) => Promise<Metadata> }
+    | { generateMetadata?: (props: object) => Promise<Metadata> }
 ): Promise<Metadata> | Metadata {
-  return 'generateMetadata' in page ? page.generateMetadata({}) : page.metadata
+  if (
+    'generateMetadata' in page &&
+    // `@sentry/nextjs` makes `generateMetadata` getter function which can be `undefined`
+    page.generateMetadata
+  ) {
+    return page.generateMetadata({})
+  }
+  if ('metadata' in page) {
+    return page.metadata
+  }
+  return {}
 }
