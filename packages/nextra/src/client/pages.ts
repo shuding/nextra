@@ -10,6 +10,14 @@ import type { Heading, NextraMetadata } from '../types.js'
  * Helper function to import an MDX/Markdown page from `content` directory.
  *
  * @example
+ * ```tsx
+ * // Basic usage in a page component
+ * const { default: MDXContent, toc, metadata } = await importPage(['docs', 'getting-started'])
+ * ```
+ * ```tsx
+ * // Usage with i18n
+ * const { default: MDXContent } = await importPage(['docs', 'api'], 'en')
+ * ```
  * ```ts filename="Import page's front matter in generateMetadata"
  * // app/[[...mdxPath]]/page.tsx
  * import { importPage } from 'nextra/pages'
@@ -40,19 +48,21 @@ import type { Heading, NextraMetadata } from '../types.js'
  *   )
  * }
  * ```
+ * @throws {Error} When the page cannot be found or loaded.
+ *
  * @see
- * - [`content` directory](https://nextra.site/docs/file-conventions/content-directory).
- * - [catch-all route](https://nextjs.org/docs/app/building-your-application/routing/dynamic-routes#catch-all-segments)
+ * - [Content Directory Documentation](https://nextra.site/docs/file-conventions/content-directory)
+ * - [Next.js Dynamic Routes](https://nextjs.org/docs/app/building-your-application/routing/dynamic-routes)
  */
 export async function importPage(
   /**
-   * The segments of the path to the page. E.g. `/docs/getting-started/installation`
-   * would be `['docs', 'getting-started', 'installation']`.
+   * Array of path segments representing the route to the page.
+   * E.g., for the route `/docs/getting-started/installation`, pass `['docs', 'getting-started', 'installation']`.
    * @default []
    */
   pathSegments: string[] = [],
   /**
-   * When using i18n, the language segment should be passed here.
+   * The language segment when using i18n.
    * @default ''
    */
   lang = ''
@@ -90,7 +100,7 @@ export async function importPage(
  * // Usage with i18n support (app/[locale]/[[...mdxPath]]/page.tsx)
  * export const generateStaticParams = generateStaticParamsFor('mdxPath', 'locale')
  * ```
- * 
+ *
  * @see
  * - [Next.js `generateStaticParams` function](https://nextjs.org/docs/app/api-reference/functions/generate-static-params)
  * - [Content Directory Structure](https://nextra.site/docs/file-conventions/content-directory)
