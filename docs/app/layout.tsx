@@ -6,6 +6,7 @@ import { Footer, Layout, Link, Navbar } from 'nextra-theme-docs'
 import { Anchor, Banner, Head } from 'nextra/components'
 import { getPageMap } from 'nextra/page-map'
 import type { FC, ReactNode } from 'react'
+import { pageMap as apiPageMap } from './api/[name]/page'
 import xyflow from './showcase/_logos/xyflow.jpg'
 import './globals.css'
 
@@ -94,7 +95,17 @@ const footer = (
 const RootLayout: FC<{
   children: ReactNode
 }> = async ({ children }) => {
-  const pageMap = await getPageMap()
+  const pageMap = [...(await getPageMap())]
+  const apiIndex = pageMap.findIndex(o => 'name' in o && o.name === 'api')
+  // @ts-expect-error -- fixme
+  pageMap[apiIndex].children = [
+    {
+      route: '/api',
+      name: 'index',
+      title: 'Overview'
+    },
+    ...apiPageMap
+  ]
   return (
     <html lang="en" dir="ltr" suppressHydrationWarning>
       <Head />

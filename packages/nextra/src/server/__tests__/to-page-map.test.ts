@@ -88,6 +88,7 @@ describe('generatePageMap()', () => {
       [
         "app/_meta.global.tsx",
         "app/about/page.mdx",
+        "app/api/page.mdx",
         "app/blog/page.mdx",
         "app/docs/advanced/customize-the-cascade-layers/page.mdx",
         "app/docs/advanced/latex/page.mdx",
@@ -133,7 +134,6 @@ describe('generatePageMap()', () => {
         "app/docs/file-conventions/page-file/page.mdx",
         "app/docs/file-conventions/page.mdx",
         "app/docs/file-conventions/src-directory/page.mdx",
-        "app/docs/guide/api/page.mdx",
         "app/docs/guide/custom-css/page.mdx",
         "app/docs/guide/github-alert-syntax/page.mdx",
         "app/docs/guide/i18n/page.mdx",
@@ -158,6 +158,11 @@ describe('generatePageMap()', () => {
           "__pagePath": "app/about/page.mdx",
           "name": "about",
           "route": "/about",
+        },
+        {
+          "__pagePath": "app/api/page.mdx",
+          "name": "api",
+          "route": "/api",
         },
         {
           "__pagePath": "app/blog/page.mdx",
@@ -425,11 +430,6 @@ describe('generatePageMap()', () => {
             {
               "children": [
                 {
-                  "__pagePath": "app/docs/guide/api/page.mdx",
-                  "name": "api",
-                  "route": "/docs/guide/api",
-                },
-                {
                   "__pagePath": "app/docs/guide/custom-css/page.mdx",
                   "name": "custom-css",
                   "route": "/docs/guide/custom-css",
@@ -529,6 +529,7 @@ describe('generatePageMap()', () => {
         "import { normalizePageMap, mergeMetaWithPageMap, getMetadata } from 'nextra/page-map'
         import globalMeta from 'private-next-root-dir/app/_meta.global.tsx'
         import {metadata as app_about_page} from "private-next-root-dir/app/about/page.mdx?metadata";
+        import {metadata as app_api_page} from "private-next-root-dir/app/api/page.mdx?metadata";
         import {metadata as app_blog_page} from "private-next-root-dir/app/blog/page.mdx?metadata";
         import {metadata as app_docs_advanced_customize_the_cascade_layers_page} from "private-next-root-dir/app/docs/advanced/customize-the-cascade-layers/page.mdx?metadata";
         import {metadata as app_docs_advanced_latex_page} from "private-next-root-dir/app/docs/advanced/latex/page.mdx?metadata";
@@ -574,7 +575,6 @@ describe('generatePageMap()', () => {
         import {metadata as app_docs_file_conventions_page_file_page} from "private-next-root-dir/app/docs/file-conventions/page-file/page.mdx?metadata";
         import {metadata as app_docs_file_conventions_page} from "private-next-root-dir/app/docs/file-conventions/page.mdx?metadata";
         import {metadata as app_docs_file_conventions_src_directory_page} from "private-next-root-dir/app/docs/file-conventions/src-directory/page.mdx?metadata";
-        import {metadata as app_docs_guide_api_page} from "private-next-root-dir/app/docs/guide/api/page.mdx?metadata";
         import {metadata as app_docs_guide_custom_css_page} from "private-next-root-dir/app/docs/guide/custom-css/page.mdx?metadata";
         import {metadata as app_docs_guide_github_alert_syntax_page} from "private-next-root-dir/app/docs/guide/github-alert-syntax/page.mdx?metadata";
         import {metadata as app_docs_guide_i18n_page} from "private-next-root-dir/app/docs/guide/i18n/page.mdx?metadata";
@@ -596,6 +596,10 @@ describe('generatePageMap()', () => {
           name: "about",
           route: "/about",
           frontMatter: app_about_page
+        }, {
+          name: "api",
+          route: "/api",
+          frontMatter: app_api_page
         }, {
           name: "blog",
           route: "/blog",
@@ -807,10 +811,6 @@ describe('generatePageMap()', () => {
             name: "guide",
             route: "/docs/guide",
             children: [{
-              name: "api",
-              route: "/docs/guide/api",
-              frontMatter: app_docs_guide_api_page
-            }, {
               name: "custom-css",
               route: "/docs/guide/custom-css",
               frontMatter: app_docs_guide_custom_css_page
