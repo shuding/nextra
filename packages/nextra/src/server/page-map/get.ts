@@ -32,7 +32,7 @@ const defaultLocale = process.env.NEXTRA_DEFAULT_LOCALE
  * const enPageMap = await getPageMap('/en')
  * ```
  *
- * @throws {Error} When the specified route segment cannot be found in the page map.
+ * @throws {Error} when the specified route segment cannot be found in the page map.
  *
  * @see [Page Map Structure Documentation](https://nextra.site/docs/file-conventions/meta-file#pagemap-structure).
  */
