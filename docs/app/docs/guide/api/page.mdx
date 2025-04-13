@@ -6,7 +6,35 @@ import { generateDocumentation, TSDoc } from 'nextra/tsdoc'
 # API
 
 export async function Section({ packageName, functionName }) {
-
+  const {
+    signatures,
+    description,
+    tags = {}
+  } = generateDocumentation({
+    code: `export { ${functionName} as default } from '${packageName}'`,
+    flattened: true
+  })
+  const result = []
+  if (description) result.push(description)
+  result.push('<TSDoc definition={definition} />')
+  if (tags.throws) {
+    result.push(`> [!WARNING]
+>
+> Throws an ${tags.throws.replaceAll('{', '`').replaceAll('}', '`')}`)
+  }
+  if (tags.see) {
+    result.push(`<Callout>
+**See**
+{''}
+${tags.see}
+</Callout>`)
+  }
+  if (tags.example) {
+    result.push(`### Example
+{''}
+${tags.example}`)
+  }
+  const rawJs = await compileMdx(result.join('\n\n'))
   return (
     <MDXRemote
       compiledSource={rawJs}
