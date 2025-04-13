@@ -9,6 +9,7 @@ import {
   MathJaxContext,
   Steps,
   Callout,
+  Tabs,
 } from 'nextra/components'
 
 {/* <link rel="stylesheet"> is unsupported in Metadata API https://nextjs.org/docs/app/api-reference/functions/generate-metadata#unsupported-metadata */}
@@ -61,6 +62,21 @@ site, and you can start writing math expressions by enclosing inline math in
 
 <Callout type="warning">This is applicable only to KaTeX as the math renderer.</Callout>
 
+<Tabs items={['Import CSS from `katex` package', 'Load CSS from CDN']}>
+<Tabs.Tab>
+1. Install the `katex` package
+
+```bash npm2yarn
+npm i katex
+```
+
+2. Import CSS in the root layout
+```js filename="app/layout.jsx"
+import 'katex/dist/katex.min.css'
+```
+
+</Tabs.Tab>
+<Tabs.Tab>
 Add `<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex/dist/katex.css" />{:jsx}`
 inside `<head>` element in your root `layout` file since `<link rel="stylesheet" />{:jsx}`
 [isn't supported with Next.js Metadata API](https://nextjs.org/docs/app/api-reference/functions/generate-metadata#unsupported-metadata).
@@ -77,6 +93,8 @@ Alternatively, you can include `<link rel="stylesheet" />{:jsx}` directly in you
 ```
 ~~~
 
+</Tabs.Tab>
+</Tabs>
 </Steps>
 
 ## Example
