@@ -7,8 +7,15 @@ import { logger } from '../server/utils.js'
 /**
  *
  * @example
- * ```ts
+ * ```ts filename="Import page's front matter in generateMetadata"
+ * // app/[[...mdxPath]]/page.tsx
  * import { importPage } from 'nextra/pages'
+ *
+ * export async function generateMetadata(props) {
+ *   const params = await props.params
+ *   const { metadata } = await importPage(params.mdxPath)
+ *   return metadata
+ * }
  * ```
  */
 export async function importPage(
@@ -58,7 +65,7 @@ export async function importPage(
  * export const generateStaticParams = generateStaticParamsFor('mdxPath', 'locale')
  * ```
  *
- * @see [`generateStaticParams` function](https://nextjs.org/docs/app/api-reference/functions/generate-static-params)
+ * @see [`generateStaticParams` function](https://nextjs.org/docs/app/api-reference/functions/generate-static-params).
  */
 export const generateStaticParamsFor =
   (
