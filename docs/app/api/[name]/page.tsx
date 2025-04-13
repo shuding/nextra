@@ -1,12 +1,12 @@
-// @ts-expect-error
+// @ts-expect-error -- fixme
 import { useMDXComponents as getMDXComponents } from 'next-mdx-import-source-file'
+import type { MdxFile } from 'nextra'
 import { compileMdx } from 'nextra/compile'
 import { Callout } from 'nextra/components'
 import { evaluate } from 'nextra/evaluate'
-import { GeneratedFunction, generateDocumentation, TSDoc } from 'nextra/tsdoc'
+import type { GeneratedFunction } from 'nextra/tsdoc'
+import { generateDocumentation, TSDoc } from 'nextra/tsdoc'
 import type { FC } from 'react'
-
-// export const generateStaticParams = generateStaticParamsFor('mdxPath')
 
 const API_REFERENCE = [
   {
@@ -44,25 +44,25 @@ const API_REFERENCE = [
 
 function toKebabCase(str: string) {
   return str
-    .replace(/([a-z0-9])([A-Z])/g, '$1-$2') // camelCase → camel-Case
+    .replaceAll(/([a-z0-9])([A-Z])/g, '$1-$2') // camelCase → camel-Case
     .toLowerCase()
 }
 
 export const generateStaticParams = () =>
   API_REFERENCE.map(o => ({ name: o.slug }))
 
-export const pageMap = API_REFERENCE.map(o => ({
-  name: o.slug,
-  route: `/api/${o.slug}`,
-  title: o.functionName
-}))
-
-pageMap.unshift({
-  route: '/api',
-  name: 'index',
-  title: 'Overview'
-})
-
+export const pageMap: (MdxFile & { title: string })[] = [
+  {
+    route: '/api',
+    name: 'index',
+    title: 'Overview'
+  },
+  ...API_REFERENCE.map(o => ({
+    name: o.slug,
+    route: `/api/${o.slug}`,
+    title: o.functionName
+  }))
+]
 const { wrapper: Wrapper, ...components } = getMDXComponents({
   TSDoc,
   Callout
@@ -82,28 +82,28 @@ async function getReference(props: PageProps) {
     code: `export { ${apiRef.functionName} as default } from '${apiRef.packageName}'`,
     flattened: true
   }) as GeneratedFunction
-  const result = [`# \`${apiRef.functionName}\` function`]
-  if (description) {
-    result.push(description)
-  }
-  result.push('## Signature', '<TSDoc definition={definition} />')
-  if (tags.throws) {
-    result.push(`> [!WARNING]
+
+  const result = [
+    `# \`${apiRef.functionName}\` function`,
+    description,
+    '## Signature',
+    '<TSDoc definition={definition} />',
+    tags.throws &&
+      `> [!WARNING]
 >
-> Throws an ${tags.throws.replaceAll('{', '`').replaceAll('}', '`')}`)
-  }
-  if (tags.see) {
-    result.push(`<Callout>
+> Throws an ${tags.throws.replaceAll('{', '`').replaceAll('}', '`')}`,
+    tags.see &&
+      `<Callout>
 **See**
-{''}
+
 ${tags.see}
-</Callout>`)
-  }
-  if (tags.example) {
-    result.push(`## Example
-{''}
-${tags.example}`)
-  }
+</Callout>`,
+    tags.example &&
+      `## Example
+
+${tags.example}`
+  ].filter(Boolean)
+
   const rawJs = await compileMdx(result.join('\n\n'))
   return evaluate(rawJs, components, { definition: { signatures, tags } })
 }
@@ -124,7 +124,7 @@ const Page: FC<PageProps> = async props => {
   const { default: MDXContent, toc, metadata } = await getReference(props)
   return (
     <Wrapper toc={toc} metadata={metadata}>
-      <MDXContent {...props} />
+      <MDXContent />
     </Wrapper>
   )
 }

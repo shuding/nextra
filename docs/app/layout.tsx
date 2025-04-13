@@ -95,9 +95,9 @@ const footer = (
 const RootLayout: FC<{
   children: ReactNode
 }> = async ({ children }) => {
-  const pageMap = [...await getPageMap()]
+  const pageMap = [...(await getPageMap())]
   const apiIndex = pageMap.findIndex(o => 'name' in o && o.name === 'api')
-  // @ts-expect-error
+  // @ts-expect-error -- fixme
   pageMap[apiIndex].children = apiPageMap
   return (
     <html lang="en" dir="ltr" suppressHydrationWarning>

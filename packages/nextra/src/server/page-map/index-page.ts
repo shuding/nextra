@@ -4,7 +4,7 @@ import { compileMdx } from '../compile.js'
 function renderCard(item: MdxFile): string {
   const icon = item.frontMatter?.icon
   const Icon = icon ? `<${icon}/>` : 'null'
-  // @ts-expect-error
+  // @ts-expect-error -- fixme
   return `<Cards.Card title="${item.title}" href="${item.route}" icon={${Icon}} />`
 }
 
