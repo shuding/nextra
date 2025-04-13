@@ -109,7 +109,7 @@ export async function importPage(
  * @returns A function that generates an array of parameters for static page generation.
  *
  * @example
- * ####  Basic usage with a catch-all route
+ * #### Basic usage with a catch-all route
  *
  * ```ts
  * // app/[[...slug]]/page.tsx
