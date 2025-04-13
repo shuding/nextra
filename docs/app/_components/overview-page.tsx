@@ -1,14 +1,14 @@
 // @ts-expect-error -- fixme
-import { useMDXComponents } from 'next-mdx-import-source-file'
+import { useMDXComponents as getMDXComponents } from 'next-mdx-import-source-file'
 import { Cards } from 'nextra/components'
 import { getIndexPageMap, getPageMap } from 'nextra/page-map'
-import { FC } from 'react'
+import type { FC } from 'react'
 
 export const OverviewPage: FC<{
   filePath: string
   icons?: Record<string, FC>
 }> = async ({ filePath, icons }) => {
-  const { h2: H2 } = useMDXComponents()
+  const { h2: H2 } = getMDXComponents()
   const currentRoute = filePath.replace('app', '').replace('/page.mdx', '')
   const pageMap = await getPageMap(currentRoute)
 
