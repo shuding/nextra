@@ -1,0 +1,13 @@
+import { Cards } from 'nextra/components'
+import { MDXRemote } from 'nextra/mdx-remote'
+import { createIndexPage } from 'nextra/page-map'
+import { pageMap } from './[name]/page'
+
+# API
+
+<MDXRemote
+  compiledSource={await createIndexPage(pageMap)}
+  components={{
+    Cards
+  }}
+/>

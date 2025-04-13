@@ -37,7 +37,10 @@ const API_REFERENCE = [
     functionName: 'normalizePages',
     packageName: 'nextra/normalize-pages'
   }
-]
+].map(o => ({
+  ...o,
+  slug: toKebabCase(o.functionName)
+}))
 
 function toKebabCase(str: string) {
   return str
@@ -46,7 +49,19 @@ function toKebabCase(str: string) {
 }
 
 export const generateStaticParams = () =>
-  API_REFERENCE.map(o => ({ name: toKebabCase(o.functionName) }))
+  API_REFERENCE.map(o => ({ name: o.slug }))
+
+export const pageMap = API_REFERENCE.map(o => ({
+  name: o.slug,
+  route: `/api/${o.slug}`,
+  title: o.functionName
+}))
+
+pageMap.unshift({
+  route: '/api',
+  name: 'index',
+  title: 'Overview'
+})
 
 const { wrapper: Wrapper, ...components } = getMDXComponents({
   TSDoc,
@@ -55,9 +70,7 @@ const { wrapper: Wrapper, ...components } = getMDXComponents({
 
 async function getReference(props: PageProps) {
   const params = await props.params
-  const apiRef = API_REFERENCE.find(
-    o => toKebabCase(o.functionName) === params.name
-  )
+  const apiRef = API_REFERENCE.find(o => o.slug === params.name)
   if (!apiRef) {
     throw new Error(`API reference not found for "${params.name}"`)
   }
@@ -73,7 +86,7 @@ async function getReference(props: PageProps) {
   if (description) {
     result.push(description)
   }
-  result.push('<TSDoc definition={definition} />')
+  result.push('## Signature', '<TSDoc definition={definition} />')
   if (tags.throws) {
     result.push(`> [!WARNING]
 >
@@ -87,7 +100,7 @@ ${tags.see}
 </Callout>`)
   }
   if (tags.example) {
-    result.push(`### Example
+    result.push(`## Example
 {''}
 ${tags.example}`)
   }

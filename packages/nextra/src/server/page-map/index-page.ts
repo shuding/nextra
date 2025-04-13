@@ -2,12 +2,10 @@ import type { MdxFile, PageMapItem, SeparatorItem } from '../../types.js'
 import { compileMdx } from '../compile.js'
 
 function renderCard(item: MdxFile): string {
-  if (!item.frontMatter) {
-    return ''
-  }
-  const { icon, sidebarTitle, title } = item.frontMatter
+  const icon = item.frontMatter?.icon
   const Icon = icon ? `<${icon}/>` : 'null'
-  return `<Cards.Card title="${sidebarTitle || title}" href="${item.route}" icon={${Icon}} />`
+  // @ts-expect-error
+  return `<Cards.Card title="${item.title}" href="${item.route}" icon={${Icon}} />`
 }
 
 export async function createIndexPage(pageMap: PageMapItem[]): Promise<string> {
