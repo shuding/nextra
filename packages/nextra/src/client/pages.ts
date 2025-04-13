@@ -6,11 +6,22 @@ import { logger } from '../server/utils.js'
 
 /**
  *
+ * @example
+ * ```ts
+ * import { importPage } from 'nextra/pages'
+ * ```
  */
 export async function importPage(
-  /** @default [] */
+  /**
+   * The segments of the path to the page. E.g. `/docs/getting-started/installation`
+   * would be `['docs', 'getting-started', 'installation']`.
+   * @default []
+   */
   pathSegments: string[] = [],
-  /** @default '' */
+  /**
+   * When using i18n, the language segment should be passed here.
+   * @default ''
+   */
   lang = ''
 ) {
   const RouteToFilepath = await getRouteToFilepath(lang)
@@ -30,12 +41,33 @@ export async function importPage(
 }
 
 /**
+ * Helper function to generate `generateStaticParams` Next.js function from your `content` directory
+ * content.
  *
+ * @example
+ * ```ts
+ * // app/[[...slug]]/page.tsx
+ * import { generateStaticParamsFor } from 'nextra/pages'
+ *
+ * export const generateStaticParams = generateStaticParamsFor('slug')
+ * ```
+ * ```ts
+ * // app/[locale]/[[...mdxPath]]/page.tsx
+ * import { generateStaticParamsFor } from 'nextra/pages'
+ *
+ * export const generateStaticParams = generateStaticParamsFor('mdxPath', 'locale')
+ * ```
+ *
+ * @see [`generateStaticParams` function](https://nextjs.org/docs/app/api-reference/functions/generate-static-params)
  */
 export const generateStaticParamsFor =
   (
+    /** Name of your catch-all segment. */
     segmentKey: string,
-    /** @default "lang" */
+    /**
+     * Name of the locale segment. This is only used when you have i18n.
+     * @default "lang"
+     */
     localeSegmentKey = 'lang'
   ) =>
   async () => {
