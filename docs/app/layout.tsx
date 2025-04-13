@@ -98,7 +98,14 @@ const RootLayout: FC<{
   const pageMap = [...(await getPageMap())]
   const apiIndex = pageMap.findIndex(o => 'name' in o && o.name === 'api')
   // @ts-expect-error -- fixme
-  pageMap[apiIndex].children = apiPageMap
+  pageMap[apiIndex].children = [
+    {
+      route: '/api',
+      name: 'index',
+      title: 'Overview'
+    },
+    ...apiPageMap
+  ]
   return (
     <html lang="en" dir="ltr" suppressHydrationWarning>
       <Head />
