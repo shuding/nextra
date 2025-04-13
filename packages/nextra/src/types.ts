@@ -139,7 +139,10 @@ export type NextraMetadata = Metadata & {
 }
 
 export type EvaluateResult = {
+  /** The MDX component to render. */
   default: FC<any>
+  /** Table of contents list. */
   toc: Heading[]
+  /** Page's front matter or `metadata` object including `title`, `description`, etc. */
   metadata: $NextraMetadata
 }

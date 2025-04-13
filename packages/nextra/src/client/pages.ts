@@ -14,7 +14,7 @@ import type { EvaluateResult } from '../types.js'
  * A Promise that resolves to an object containing:
  *  - `default`: The MDX component to render
  *  - `toc`: Table of contents list
- *  - `metadata`: Page front matter including title, description, etc.
+ *  - `metadata`: Page's front matter or `metadata` object including `title`, `description`, etc.
  *
  * @example
  * #### Basic usage in a dynamic Next.js route
@@ -68,6 +68,7 @@ import type { EvaluateResult } from '../types.js'
  * @see
  * - [Content Directory Documentation](https://nextra.site/docs/file-conventions/content-directory)
  * - [Next.js Dynamic Routes](https://nextjs.org/docs/app/building-your-application/routing/dynamic-routes)
+ * - [Next.js Metadata API](https://nextjs.org/docs/app/building-your-application/optimizing/metadata)
  */
 export async function importPage(
   /**
@@ -135,14 +136,9 @@ export function generateStaticParamsFor(
    */
   localeSegmentKey = 'lang'
 ) {
-  type StaticParams = {
-    [localeSegmentKey]: string
-    [segmentKey]: string[]
-  }[]
-
-  return async (): Promise<StaticParams> => {
+  return async () => {
     const locales = JSON.parse(process.env.NEXTRA_LOCALES!) as string[]
-    const result: StaticParams = []
+    const result = []
 
     for (const locale of locales) {
       const RouteToFilepath = await getRouteToFilepath(locale)
