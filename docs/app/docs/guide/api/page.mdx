@@ -1,0 +1,20 @@
+import { generateDocumentation, TSDoc, renderMarkdownDefault } from 'nextra/tsdoc'
+import { useMDXComponents as getMdxComponents } from 'next-mdx-import-source-file'
+
+export const { p: P } = getMdxComponents()
+
+# API
+
+export async function Section({ packageName, functionName }) {
+  const definition = generateDocumentation({
+    code: `export { ${functionName} as default } from '${packageName}'`
+  })
+  return (
+    <>
+      <P>{await renderMarkdownDefault(definition.description)}</P>
+      <TSDoc definition={definition} />
+    </>
+  )
+}
+
+<Section functionName=" getPageMap" packageName="nextra/page-map" />

@@ -9,7 +9,13 @@ function importPageMap(lang = ''): Promise<{
 
 const defaultLocale = process.env.NEXTRA_DEFAULT_LOCALE
 
-export async function getPageMap(route = '/') {
+/**
+ * Function to retrieve [page map structure](https://nextra.site/docs/file-conventions/meta-file#pagemap-structure).
+ */
+export async function getPageMap(
+  /** @default "/" */
+  route = '/'
+) {
   const segments = route.split('/')
   // Remove 1 or 2 items from the beginning of the array
   const lang = segments.splice(0, defaultLocale ? 2 : 1).at(-1)!

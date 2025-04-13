@@ -45,7 +45,7 @@ const Link: typeof Anchor = ({ className, ...props }) => {
   )
 }
 
-async function renderMarkdownDefault(description?: string): Promise<ReactNode> {
+export async function renderMarkdownDefault(description?: string): Promise<ReactNode> {
   if (!description) return
   const rawJs = await compileMdx(description)
   return <MDXRemote compiledSource={rawJs} />
