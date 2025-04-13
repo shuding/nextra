@@ -4,7 +4,15 @@ import { notFound } from 'next/navigation'
 import { getRouteToFilepath } from '../server/page-map/get.js'
 import { logger } from '../server/utils.js'
 
-export async function importPage(pathSegments: string[] = [], lang = '') {
+/**
+ *
+ */
+export async function importPage(
+  /** @default [] */
+  pathSegments: string[] = [],
+  /** @default '' */
+  lang = ''
+) {
   const RouteToFilepath = await getRouteToFilepath(lang)
 
   const pathname = pathSegments.join('/')
@@ -21,8 +29,15 @@ export async function importPage(pathSegments: string[] = [], lang = '') {
   }
 }
 
+/**
+ *
+ */
 export const generateStaticParamsFor =
-  (segmentKey: string, localeSegmentKey = 'lang') =>
+  (
+    segmentKey: string,
+    /** @default "lang" */
+    localeSegmentKey = 'lang'
+  ) =>
   async () => {
     const locales = JSON.parse(process.env.NEXTRA_LOCALES!) as string[]
     const result = []
