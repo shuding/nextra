@@ -9,7 +9,7 @@ const { code: Code } = useMDXComponents()
 const ExternalLink: FC<{ children: ReactNode }> = ({ children }) => {
   return (
     <>
-      <Code>{children}</Code>&thinsp;
+      {children}&thinsp;
       <LinkArrowIcon
         // based on font-size
         height="1em"
@@ -24,8 +24,8 @@ const FILE_CONVENTIONS: MetaRecord = {
     type: 'separator',
     title: 'Files'
   },
-  'page-file': <Code>page.mdx</Code>,
-  'meta-file': <Code>_meta.js</Code>,
+  'page-file': 'page.mdx',
+  'meta-file': '_meta.js',
   _2: {
     href: 'https://nextjs.org/docs/app/api-reference/file-conventions/page',
     title: <ExternalLink>page.jsx</ExternalLink>
@@ -38,13 +38,13 @@ const FILE_CONVENTIONS: MetaRecord = {
     type: 'separator',
     title: 'Top-Level Files'
   },
-  'mdx-components-file': <Code>mdx-components.js</Code>,
+  'mdx-components-file': 'mdx-components.js',
   _5: {
     type: 'separator',
     title: 'Top-Level Folders'
   },
-  'content-directory': <Code>content</Code>,
-  'src-directory': <Code>src</Code>,
+  'content-directory': 'content',
+  'src-directory': 'src',
   _6: {
     href: 'https://nextjs.org/docs/app/getting-started/installation?utm_source=nextra.site&utm_medium=referral&utm_campaign=sidebar#create-the-app-directory',
     title: <ExternalLink>app</ExternalLink>
