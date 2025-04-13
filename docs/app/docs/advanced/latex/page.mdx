@@ -3,16 +3,17 @@ icon: FormulaIcon
 ---
 
 import { compileMdx } from 'nextra/compile'
-import { MDXRemote } from 'nextra/mdx-remote'
 import {
+  Callout,
   MathJax,
   MathJaxContext,
   Steps,
-  Callout,
-  Tabs,
+  Tabs
 } from 'nextra/components'
+import { MDXRemote } from 'nextra/mdx-remote'
 
 {/* <link rel="stylesheet"> is unsupported in Metadata API https://nextjs.org/docs/app/api-reference/functions/generate-metadata#unsupported-metadata */}
+
 <link
   rel="stylesheet"
   href="https://cdn.jsdelivr.net/npm/katex/dist/katex.css"
@@ -52,15 +53,17 @@ When enabled, the required CSS and fonts will be automatically included in your
 site, and you can start writing math expressions by enclosing inline math in
 `$...$` or display math in a `math`-labeled fenced code block:
 
-~~~mdx
+````mdx
 ```math
 \int x^2
 ```
-~~~
+````
 
 ### Apply styles
 
-<Callout type="warning">This is applicable only to KaTeX as the math renderer.</Callout>
+<Callout type="warning">
+  This is applicable only to KaTeX as the math renderer.
+</Callout>
 
 <Tabs items={['Import CSS from `katex` package', 'Load CSS from CDN']}>
 <Tabs.Tab>
@@ -71,6 +74,7 @@ npm i katex
 ```
 
 2. Import CSS in the root layout
+
 ```js filename="app/layout.jsx"
 import 'katex/dist/katex.min.css'
 ```
@@ -81,17 +85,21 @@ Add `<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex/dist/katex.
 inside `<head>` element in your root `layout` file since `<link rel="stylesheet" />{:jsx}`
 [isn't supported with Next.js Metadata API](https://nextjs.org/docs/app/api-reference/functions/generate-metadata#unsupported-metadata).
 
-Alternatively, you can include `<link rel="stylesheet" />{:jsx}` directly in your MDX file:
+Alternatively, you can include `<link rel="stylesheet" />{:jsx}` directly in
+your MDX file:
 
-~~~mdx filename="katex.mdx"
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex/dist/katex.css" />
+````mdx filename="katex.mdx"
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/katex/dist/katex.css"
+/>
 
 # My page with single usage of KaTeX
 
 ```math
 \int_2^3x^3\,\mathrm{d}x
 ```
-~~~
+````
 
 </Tabs.Tab>
 </Tabs>
@@ -101,13 +109,13 @@ Alternatively, you can include `<link rel="stylesheet" />{:jsx}` directly in you
 
 For example, the following Markdown code:
 
-~~~md filename="page.md"
+````md filename="page.md"
 The **Pythagorean equation** is $a=\sqrt{b^2 + c^2}$ and the quadratic formula:
 
 ```math
 x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}
 ```
-~~~
+````
 
 will be rendered as:
 
@@ -125,9 +133,9 @@ your LaTeX expression.
 
 > [!TIP]
 >
->  If you want to display `$` in your content instead of rendering it as an
->  equation, you can escape it with a backslash (`\`). For example `\$e = mc^2\$`
->  will be rendered as \$e = mc^2\$.
+> If you want to display `$` in your content instead of rendering it as an
+> equation, you can escape it with a backslash (`\`). For example `\$e = mc^2\$`
+> will be rendered as \$e = mc^2\$.
 
 ## API
 
@@ -153,7 +161,6 @@ const withNextra = nextra({
 
 See [KaTeX's documentation](https://katex.org/docs/supported) for a list of
 supported commands.
-
 
 ### MathJax
 
@@ -221,8 +228,8 @@ MathJax distribution into your `/public` folder for it to be served locally.
 ## KaTeX vs. MathJax
 
 With KaTeX, math is pre-rendered which means flicker-free and faster page loads.
-However, KaTeX does not support all the features of MathJax, especially
-features related to accessibility.
+However, KaTeX does not support all the features of MathJax, especially features
+related to accessibility.
 
 The following two examples show the same formula rendered with KaTeX (first) and
 MathJax (second).
@@ -241,23 +248,24 @@ export async function MathJaxExample() {
   const rawMdx = `~~~math
 \\int_2^3x^3\\,\\mathrm{d}x
 ~~~`
-  const rawJs = await compileMdx(
-    rawMdx,
-    {
-      latex: {
-        renderer: 'mathjax',
-        options: {
-          config: {
-            tex: {
-              macros: {
-                RR: '\\mathbb{R}'
-              }
+  const rawJs = await compileMdx(rawMdx, {
+    latex: {
+      renderer: 'mathjax',
+      options: {
+        config: {
+          tex: {
+            macros: {
+              RR: '\\mathbb{R}'
             }
           }
         }
-      },
+      }
     }
+  })
+  return (
+    <MDXRemote
+      compiledSource={rawJs}
+      components={{ MathJax, MathJaxContext }}
+    />
   )
-
-  return <MDXRemote compiledSource={rawJs} components={{ MathJax, MathJaxContext }} />
 }
