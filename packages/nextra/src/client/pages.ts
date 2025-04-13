@@ -20,19 +20,19 @@ import type { EvaluateResult } from '../types.js'
  *  - `metadata`: Page front matter including title, description, etc.
  *
  * @example
- * ### Basic usage in a dynamic Next.js route
+ * #### Basic usage in a dynamic Next.js route
  *
  * ```tsx
  * const { default: MDXContent, toc, metadata } = await importPage(['docs', 'getting-started'])
  * ```
  *
- * ### Usage with i18n
+ * #### Usage with i18n
  *
  * ```tsx
  * const { default: MDXContent } = await importPage(['docs', 'getting-started'], 'en')
  * ```
  *
- * ### Import page's front matter in `generateMetadata` function
+ * #### Import page's front matter in `generateMetadata` function
  *
  * ```ts
  * // app/[[...mdxPath]]/page.tsx
@@ -45,7 +45,7 @@ import type { EvaluateResult } from '../types.js'
  * }
  * ```
  *
- * ### Import page in a catch-all route
+ * #### Import page in a catch-all route
  *
  * ```ts
  * // app/[[...mdxPath]]/page.tsx
@@ -112,14 +112,14 @@ export async function importPage(
  * @returns A function that generates an array of parameters for static page generation.
  *
  * @example
- * ###  Basic usage with a catch-all route
+ * ####  Basic usage with a catch-all route
  *
  * ```tsx
  * // app/[[...slug]]/page.tsx
  * export const generateStaticParams = generateStaticParamsFor('slug')
  * ```
  *
- * ### Usage with i18n support
+ * #### Usage with i18n support
  *
  * ```tsx
  * // app/[locale]/[[...mdxPath]]/page.tsx
