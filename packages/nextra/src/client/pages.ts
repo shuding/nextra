@@ -7,7 +7,17 @@ import { logger } from '../server/utils.js'
 import type { Heading, NextraMetadata } from '../types.js'
 
 /**
- * Helper function to import an MDX/Markdown page from `content` directory.
+ * Function to import an MDX/Markdown page from the `content` directory and returns
+ * - its React component page
+ * - front matter (`metadata`)
+ * - table of contents (`toc`).
+ *
+ * This function is essential for Nextra's dynamic page loading from a catch-all route.
+ *
+ * @returns A Promise that resolves to an object containing:
+ *   - `default`: The MDX component to render
+ *   - `toc`: Table of contents list
+ *   - `metadata`: Page front matter including title, description, etc.
  *
  * @example
  * ```tsx
