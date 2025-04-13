@@ -5,6 +5,7 @@ import { getRouteToFilepath } from '../server/page-map/get.js'
 import { logger } from '../server/utils.js'
 
 /**
+ * Helper function to import an MDX/Markdown page from `content` directory.
  *
  * @example
  * ```ts filename="Import page's front matter in generateMetadata"
@@ -17,6 +18,8 @@ import { logger } from '../server/utils.js'
  *   return metadata
  * }
  * ```
+ *
+ * @see [`content` directory](https://nextra.site/docs/file-conventions/content-directory).
  */
 export async function importPage(
   /**
@@ -65,7 +68,9 @@ export async function importPage(
  * export const generateStaticParams = generateStaticParamsFor('mdxPath', 'locale')
  * ```
  *
- * @see [`generateStaticParams` function](https://nextjs.org/docs/app/api-reference/functions/generate-static-params).
+ * @see
+ * [`generateStaticParams` function](https://nextjs.org/docs/app/api-reference/functions/generate-static-params).
+ * [`content` directory](https://nextra.site/docs/file-conventions/content-directory).
  */
 export const generateStaticParamsFor =
   (
