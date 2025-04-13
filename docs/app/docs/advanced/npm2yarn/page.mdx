@@ -19,7 +19,7 @@ page renders.
 
 ## Example
 
-<Page/>
+<Page />
 
 export async function Page() {
   const codeBlock = `\`\`\`sh npm2yarn
@@ -27,7 +27,6 @@ npm i -D @graphql-eslint/eslint-plugin
 \`\`\``
   const rawJs = await compileMdx(`${codeBlock}
 ## Usage
-
 ~~~md filename="Markdown" /npm2yarn/
 ${codeBlock}
 ~~~`)
