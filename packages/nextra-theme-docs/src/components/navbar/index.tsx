@@ -18,17 +18,17 @@ export const NavbarPropsSchema = z.strictObject({
       "Specifies whether the logo should have a link or provides the URL for the logo's link."
   }),
   logo: element.meta({
-    description: `Logo of the website.
-@remarks \`ReactElement\``
+    description: 'Logo of the website.'
   }),
   projectLink: z.string().optional().meta({
     description: 'URL of the project homepage.'
   }),
   projectIcon: reactNode.default(
     <GitHubIcon height="24" aria-label="Project repository" />
-  ).describe(`Icon of the project link.
-@remarks \`ReactNode\`
-@default <GitHubIcon />`),
+  ).meta({
+    description: 'Icon of the project link.',
+    default: '<GitHubIcon />'
+  }),
   chatLink: z.string().optional().meta({
     description: 'URL of the chat link.'
   }),

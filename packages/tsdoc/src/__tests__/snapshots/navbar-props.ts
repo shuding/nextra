@@ -12,7 +12,6 @@ type $ = {
 
   /**
    * Logo of the website.
-@remarks `ReactElement`
    */
   logo: ReactElement
 
@@ -23,9 +22,7 @@ type $ = {
 
   /**
    * Icon of the project link.
-@remarks `ReactNode`
-@default <GitHubIcon />
-   * @default <SvgGithub />
+   * @default <GitHubIcon />
    */
   projectIcon?: ReactNode
 
