@@ -1,5 +1,15 @@
 # nextra
 
+## 4.3.0-alpha.18
+
+### Patch Changes
+
+- 7de40fb: Update Tailwind CSS guide to match v4 version
+  https://nextra.site/docs/advanced/tailwind-css
+- 00f4696: add https://nextra.site/api page generated with TSDoc component
+- 31ddba4: improve LaTeX docs, mention that you need apply styles for KaTeX
+  https://nextra.site/docs/advanced/latex#apply-styles
+
 ## 4.3.0-alpha.17
 
 ## 4.3.0-alpha.16
