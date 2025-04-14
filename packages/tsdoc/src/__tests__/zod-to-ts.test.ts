@@ -1,6 +1,8 @@
 import { reactNode } from 'nextra/schemas'
 import { z } from 'zod'
 import { LayoutPropsSchema } from '../../../nextra-theme-docs/src/layout.js'
+import { NavbarPropsSchema } from '../../../nextra-theme-docs/src/components/navbar/index.js'
+import { HeadPropsSchema } from '../../../nextra/src/client/components/head.js'
 import { generateTsFromZod } from '../../../nextra/src/server/tsdoc/zod-to-ts.js'
 
 describe('generateTsFromZod', () => {
@@ -181,6 +183,16 @@ describe('generateTsFromZod', () => {
   it('should convert LayoutPropsSchema', () => {
     return expect('type $ = ' + generateTsFromZod(LayoutPropsSchema)).toMatchFileSnapshot(
       './snapshots/theme-docs-layout.ts'
+    )
+  })
+  it('should convert NavbarPropsSchema', () => {
+    return expect('type $ = ' + generateTsFromZod(NavbarPropsSchema)).toMatchFileSnapshot(
+      './snapshots/navbar-props.ts'
+    )
+  })
+  it('should convert HeadPropsSchema', () => {
+    return expect('type $ = ' + generateTsFromZod(HeadPropsSchema)).toMatchFileSnapshot(
+      './snapshots/head-props.ts'
     )
   })
 })
