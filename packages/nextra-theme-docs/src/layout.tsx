@@ -125,7 +125,7 @@ export const LayoutPropsSchema = z.strictObject({
   lastUpdated: element
     .default(<LastUpdated />)
     .refine(el => el.type !== Fragment && typeof el.type !== 'string', {
-      message: `\`Layout#lastUpdated\` must be a \`<LastUpdated />\` component:
+      error: `\`Layout#lastUpdated\` must be a \`<LastUpdated />\` component:
 
 \`\`\`js
 import { Layout, LastUpdated } from 'nextra-theme-docs'

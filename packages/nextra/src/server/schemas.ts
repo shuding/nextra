@@ -18,6 +18,14 @@ export const mathJaxOptionsSchema = z.strictObject({
   config: z.custom<MathJax3Config>().optional()
 })
 
+const mdxOptionsSchema = z.strictObject({
+  rehypePlugins: z.custom<ProcessorOptions['rehypePlugins']>(),
+  remarkPlugins: z.custom<ProcessorOptions['remarkPlugins']>(),
+  recmaPlugins: z.custom<ProcessorOptions['recmaPlugins']>(),
+  format: z.enum(['detect', 'mdx', 'md']).default('detect'),
+  rehypePrettyCodeOptions: z.custom<RehypePrettyCodeOptions>().default({})
+})
+
 export const nextraConfigSchema = z.strictObject({
   defaultShowCopyCode: z.boolean().optional(),
   search: z
@@ -47,16 +55,7 @@ export const nextraConfigSchema = z.strictObject({
     ])
     .optional(),
   codeHighlight: z.boolean().default(true),
-  mdxOptions: z
-    .strictObject({
-      rehypePlugins: z.custom<ProcessorOptions['rehypePlugins']>(),
-      remarkPlugins: z.custom<ProcessorOptions['remarkPlugins']>(),
-      recmaPlugins: z.custom<ProcessorOptions['recmaPlugins']>(),
-      format: z.enum(['detect', 'mdx', 'md']).default('detect'),
-      rehypePrettyCodeOptions: z.custom<RehypePrettyCodeOptions>().default({})
-    })
-    // @ts-expect-error -- fixme
-    .default({}),
+  mdxOptions: mdxOptionsSchema.default(mdxOptionsSchema.parse({})),
   whiteListTagsStyling: z.array(z.string()).optional(),
   contentDirBasePath: z
     .string()
@@ -70,7 +69,7 @@ export const nextraConfigSchema = z.strictObject({
 
 export const element = z.custom<ReactElement<Record<string, unknown>>>(
   isValidElement,
-  { message: 'Must be a valid React element' }
+  { error: 'Must be a valid React element' }
 )
 /**
  * https://react.dev/reference/react/isValidElement#react-elements-vs-react-nodes
@@ -95,7 +94,7 @@ export const reactNode = z.custom<ReactNode>(
     // If it's none of the above, it's not a valid React node
     return false
   },
-  { message: 'Must be a valid React node' }
+  { error: 'Must be a valid React node' }
 )
 
 const stringOrElement = z.union([z.string(), element])
