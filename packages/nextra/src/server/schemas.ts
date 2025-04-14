@@ -100,46 +100,37 @@ export const reactNode = z.custom<ReactNode>(
 const stringOrElement = z.union([z.string(), element])
 
 export const pageThemeSchema = z.strictObject({
-  breadcrumb: z
-    .boolean()
-    .optional()
-    .describe('Show or hide breadcrumb navigation.'),
-  collapsed: z
-    .boolean()
-    .optional()
-    .describe('Indicates whether the item in sidebar is collapsed by default.'),
-  footer: z
-    .boolean()
-    .optional()
-    .describe('Specifies whether to display the footer.'),
-  layout: z
-    .enum(['default', 'full'])
-    .optional()
-    .describe('Defines the layout style.'),
-  navbar: z
-    .boolean()
-    .optional()
-    .describe('Specifies whether to display the navbar.'),
-  pagination: z
-    .boolean()
-    .optional()
-    .describe('Determines if pagination controls are shown.'),
-  sidebar: z
-    .boolean()
-    .optional()
-    .describe('Specifies whether to display the sidebar.'),
-  timestamp: z
-    .boolean()
-    .optional()
-    .describe('Indicates if "last updated" timestamps are displayed.'),
-  toc: z
-    .boolean()
-    .optional()
-    .describe('Determines whether a table of contents is displayed.'),
-  typesetting: z
-    .enum(['default', 'article'])
-    .optional()
-    .describe('Configures the text typesetting style.')
+  breadcrumb: z.boolean().optional().meta({
+    description: 'Show or hide breadcrumb navigation.'
+  }),
+  collapsed: z.boolean().optional().meta({
+    description:
+      'Indicates whether the item in sidebar is collapsed by default.'
+  }),
+  footer: z.boolean().optional().meta({
+    description: 'Specifies whether to display the footer.'
+  }),
+  layout: z.enum(['default', 'full']).optional().meta({
+    description: 'Defines the layout style.'
+  }),
+  navbar: z.boolean().optional().meta({
+    description: 'Specifies whether to display the navbar.'
+  }),
+  pagination: z.boolean().optional().meta({
+    description: 'Determines if pagination controls are shown.'
+  }),
+  sidebar: z.boolean().optional().meta({
+    description: 'Specifies whether to display the sidebar.'
+  }),
+  timestamp: z.boolean().optional().meta({
+    description: 'Indicates if "last updated" timestamps are displayed.'
+  }),
+  toc: z.boolean().optional().meta({
+    description: 'Determines whether a table of contents is displayed.'
+  }),
+  typesetting: z.enum(['default', 'article']).optional().meta({
+    description: 'Configures the text typesetting style.'
+  })
 })
 
 const title = stringOrElement.optional()
