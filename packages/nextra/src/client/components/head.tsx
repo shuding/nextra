@@ -68,7 +68,7 @@ const colorSchema = z.strictObject({
     .describe('The lightness of the primary theme color.<br/>Range: `0 - 100`')
 })
 
-const backgroundColorSchema = z.strictObject({
+const bgColorSchema = z.strictObject({
   dark: stringColorSchema
     .default('rgb(17,17,17)')
     .describe(
@@ -87,9 +87,7 @@ export const HeadPropsSchema = z.strictObject({
     .string()
     .optional()
     .describe('The glyph to use as the favicon.'),
-  backgroundColor: backgroundColorSchema.default(
-    backgroundColorSchema.parse({})
-  ),
+  backgroundColor: bgColorSchema.default(bgColorSchema.parse({})),
   children: reactNode.describe(`Content of \`<head>\`
 @remarks \`ReactNode\``)
 })
