@@ -1,5 +1,13 @@
 # nextra-theme-blog
 
+## 4.3.0-alpha.19
+
+### Patch Changes
+
+- 407e0c4: feat(TSDoc): add `TSDoc.noParametersContent` prop
+- Updated dependencies [407e0c4]
+  - nextra@4.3.0-alpha.19
+
 ## 4.3.0-alpha.18
 
 ### Patch Changes
