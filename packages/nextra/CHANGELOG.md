@@ -1,5 +1,11 @@
 # nextra
 
+## 4.3.0-alpha.19
+
+### Patch Changes
+
+- 407e0c4: feat(TSDoc): add `TSDoc.noParametersContent` prop
+
 ## 4.3.0-alpha.18
 
 ### Patch Changes
