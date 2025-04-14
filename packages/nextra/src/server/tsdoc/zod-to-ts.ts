@@ -73,25 +73,29 @@ function generateTsFromZodType(schema: z.ZodType, indent: number): string {
   throw new Error(`Unknown schema type '${name}'`)
 }
 
+function getDefaultValue(schema: z.ZodType): unknown {
+  if (schema instanceof z.ZodDefault) {
+    return schema.def.defaultValue()
+  }
+  if (schema instanceof z.ZodPipe) {
+    // @ts-expect-error fixme
+    return schema.in.def.defaultValue()
+  }
+}
+
 function getDocComment(schema: z.ZodType, indent: number): string {
   const meta = schema.meta() ?? ({} as Record<string, string>)
   const description =
     // @ts-expect-error -- fixme
-    meta.description || schema.def.innerType.description
-  const defaultValue =
-    schema instanceof z.ZodDefault
-      ? schema.def.defaultValue()
-      : schema instanceof z.ZodPipe
-        ? // @ts-expect-error -- fixme
-          schema.in.def.defaultValue()
-        : undefined
+    meta.description || schema.def.innerType?.description
+  const defaultValue = getDefaultValue(schema)
   const comments: string[] = []
 
   if (description) {
     comments.push(` * ${description}`)
   }
   if (defaultValue !== undefined) {
-    comments.push(` * @default ${meta.default || JSON.stringify(defaultValue)}`)
+    comments.push(` * @default ${meta.default ?? JSON.stringify(defaultValue)}`)
   }
   if (!comments.length) {
     return ''
