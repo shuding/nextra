@@ -10,32 +10,39 @@ import { fromZodError } from 'zod-validation-error'
 import { ClientNavbar } from './index.client'
 
 export const NavbarPropsSchema = z.strictObject({
-  children: reactNode.describe(`Extra content after last icon.
-@remarks \`ReactNode\``),
-  logoLink: z
-    .union([z.string(), z.boolean()])
-    .default(true)
-    .describe(
+  children: reactNode.meta({
+    description: 'Extra content after last icon.'
+  }),
+  logoLink: z.union([z.string(), z.boolean()]).default(true).meta({
+    description:
       "Specifies whether the logo should have a link or provides the URL for the logo's link."
-    ),
-  logo: element.describe(`Logo of the website.
-@remarks \`ReactElement\``),
-  projectLink: z.string().optional().describe('URL of the project homepage.'),
+  }),
+  logo: element.meta({
+    description: `Logo of the website.
+@remarks \`ReactElement\``
+  }),
+  projectLink: z.string().optional().meta({
+    description: 'URL of the project homepage.'
+  }),
   projectIcon: reactNode.default(
     <GitHubIcon height="24" aria-label="Project repository" />
   ).describe(`Icon of the project link.
 @remarks \`ReactNode\`
 @default <GitHubIcon />`),
-  chatLink: z.string().optional().describe('URL of the chat link.'),
-  chatIcon: reactNode.default(<DiscordIcon width="24" />)
-    .describe(`Icon of the chat link.
+  chatLink: z.string().optional().meta({
+    description: 'URL of the chat link.'
+  }),
+  chatIcon: reactNode.default(<DiscordIcon width="24" />).meta({
+    description: `Icon of the chat link.
 @remarks \`ReactNode\`
-@default <DiscordIcon />`),
-  className: z.string().optional().describe('CSS class name.'),
-  align: z
-    .enum(['left', 'right'])
-    .default('right')
-    .describe('Aligns navigation links to the specified side.')
+@default <DiscordIcon />`
+  }),
+  className: z.string().optional().meta({
+    description: 'CSS class name.'
+  }),
+  align: z.enum(['left', 'right']).default('right').meta({
+    description: 'Aligns navigation links to the specified side.'
+  })
 })
 
 type NavbarProps = z.input<typeof NavbarPropsSchema>
