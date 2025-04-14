@@ -58,7 +58,6 @@ type $ = {
 
   /**
    * Content of `<head>`
-@remarks `ReactNode`
    */
   children?: ReactNode
 }

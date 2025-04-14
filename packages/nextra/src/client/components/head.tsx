@@ -56,29 +56,33 @@ const stringColorSchema = z
 const colorSchema = z.strictObject({
   hue: darkLightSchema
     .default({ dark: 204, light: 212 })
-    .describe('The hue of the primary theme color.<br/>Range: `0 - 360`'),
+    .meta({
+      description: 'The hue of the primary theme color.<br/>Range: `0 - 360`'
+    }),
   saturation: darkLightSchema
     // @ts-expect-error -- fixme
     .default(100)
-    .describe(
-      'The saturation of the primary theme color.<br/>Range: `0 - 100`'
-    ),
+    .meta({
+      description: 'The saturation of the primary theme color.<br/>Range: `0 - 100`'
+    }),
   lightness: darkLightSchema
     .default({ dark: 55, light: 45 })
-    .describe('The lightness of the primary theme color.<br/>Range: `0 - 100`')
+    .meta({
+      description: 'The lightness of the primary theme color.<br/>Range: `0 - 100`'
+    })
 })
 
 const bgColorSchema = z.strictObject({
   dark: stringColorSchema
     .default('rgb(17,17,17)')
-    .describe(
-      'Background color for dark theme.<br/>Format: `"rgb(RRR,GGG,BBB)" | "#RRGGBB"`'
-    ),
+    .meta({
+      description: 'Background color for dark theme.<br/>Format: `"rgb(RRR,GGG,BBB)" | "#RRGGBB"`'
+    }),
   light: stringColorSchema
     .default('rgb(250,250,250)')
-    .describe(
-      'Background color for light theme.<br/>Format: `"rgb(RRR,GGG,BBB)" | "#RRGGBB"`'
-    )
+    .meta({
+      description: 'Background color for light theme.<br/>Format: `"rgb(RRR,GGG,BBB)" | "#RRGGBB"`'
+    })
 })
 
 export const HeadPropsSchema = z.strictObject({
@@ -86,10 +90,13 @@ export const HeadPropsSchema = z.strictObject({
   faviconGlyph: z
     .string()
     .optional()
-    .describe('The glyph to use as the favicon.'),
+    .meta({
+      description: 'The glyph to use as the favicon.'
+    }),
   backgroundColor: bgColorSchema.default(bgColorSchema.parse({})),
-  children: reactNode.describe(`Content of \`<head>\`
-@remarks \`ReactNode\``)
+  children: reactNode.meta({
+    description: 'Content of `<head>`'
+  })
 })
 
 type HeadProps = Partial<z.input<typeof HeadPropsSchema>>
