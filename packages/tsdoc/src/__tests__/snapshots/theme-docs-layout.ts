@@ -92,7 +92,7 @@ By default, it's a link to the issue creation form of the docs repository, with 
 
   /**
    * Enable or disable navigation link.
-@default true
+   * @default true
    */
   navigation?: boolean | {
     next: boolean

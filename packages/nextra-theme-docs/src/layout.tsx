@@ -153,8 +153,7 @@ import { Layout, LastUpdated } from 'nextra-theme-docs'
     ])
     .default(true)
     .transform(v => (typeof v === 'boolean' ? { next: v, prev: v } : v))
-    .describe(`Enable or disable navigation link.
-@default true`),
+    .describe('Enable or disable navigation link.'),
   nextThemes: nextThemesSchema.default(nextThemesSchema.parse({})).describe(
     `Configuration for the [next-themes](https://github.com/pacocoursey/next-themes#themeprovider) package.
 @default { attribute: "class", defaultTheme: "system", disableTransitionOnChange: true, storageKey: "theme" }
