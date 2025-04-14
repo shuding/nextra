@@ -140,7 +140,8 @@ import { Layout, LastUpdated } from 'nextra-theme-docs'
 `
     })
     .meta({
-      description: 'Component to render the last updated info.'
+      description: 'Component to render the last updated info.',
+      default: '<LastUpdated />'
     }),
   navbar: reactNode.meta({
     description:
@@ -174,7 +175,8 @@ import { Layout, LastUpdated } from 'nextra-theme-docs'
     }),
   search: reactNode.default(<Search />).meta({
     description:
-      'Rendered [`<Search>` component](/docs/built-ins/search). E.g. `<Search {...searchProps} />`'
+      'Rendered [`<Search>` component](/docs/built-ins/search). E.g. `<Search {...searchProps} />`',
+    default: '<Search />'
   }),
   sidebar: sidebarSchema.default(sidebarSchema.parse({})),
   themeSwitch: themeSwitchSchema.default(themeSwitchSchema.parse({})).meta({

@@ -74,21 +74,24 @@ function generateTsFromZodType(schema: z.ZodType, indent: number): string {
 }
 
 function getDocComment(schema: z.ZodType, indent: number): string {
-  // @ts-expect-error -- fixme
-  const description = schema.description || schema.def.innerType.description
+  const meta = schema.meta() ?? ({} as Record<string, string>)
+  const description =
+    // @ts-expect-error -- fixme
+    meta.description || schema.def.innerType.description
   const defaultValue =
-    schema instanceof z.ZodDefault ? schema.def.defaultValue() : undefined
+    schema instanceof z.ZodDefault
+      ? schema.def.defaultValue()
+      : schema instanceof z.ZodPipe
+        ? // @ts-expect-error -- fixme
+          schema.in.def.defaultValue()
+        : undefined
   const comments: string[] = []
 
   if (description) {
     comments.push(` * ${description}`)
   }
-  if (
-    // Do not add zod's `.default()` value, if already exist in TSDoc description
-    !description?.includes('\n@default') &&
-    defaultValue !== undefined
-  ) {
-    comments.push(` * @default ${JSON.stringify(defaultValue)}`)
+  if (defaultValue !== undefined) {
+    comments.push(` * @default ${meta.default || JSON.stringify(defaultValue)}`)
   }
   if (!comments.length) {
     return ''
