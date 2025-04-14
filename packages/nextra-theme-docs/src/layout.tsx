@@ -11,9 +11,11 @@ import { LastUpdated } from './components/last-updated'
 import { MobileNav } from './components/sidebar'
 import { ConfigProvider, ThemeConfigProvider } from './stores'
 
-const attributeSchema = z.custom<'class' | `data-${string}`>(
-  value => value === 'class' || value.startsWith('data-')
-)
+const attributeSchema = z
+  .custom<
+    'class' | `data-${string}`
+  >(value => value === 'class' || value.startsWith('data-'))
+  .meta({ type: "'class' | `data-${string}`" })
 
 const feedbackSchema = z.strictObject({
   content: reactNode.default('Question? Give us feedback').meta({
