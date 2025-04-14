@@ -39,6 +39,53 @@ const nextThemesSchema = z.strictObject({
   storageKey: z.string().optional()
 })
 
+const sidebarSchema = z.strictObject({
+  autoCollapse: z
+    .boolean()
+    .optional()
+    .describe(
+      'If true, automatically collapse inactive folders above `defaultMenuCollapseLevel`.'
+    ),
+  defaultMenuCollapseLevel: z
+    .number()
+    .int()
+    .min(1)
+    .default(2)
+    .describe(
+      'Specifies the folder level at which the menu on the left is collapsed by default.'
+    ),
+  defaultOpen: z
+    .boolean()
+    .default(true)
+    .describe('Hide/show sidebar by default.'),
+  toggleButton: z
+    .boolean()
+    .default(true)
+    .describe('Hide/show sidebar toggle button.')
+})
+
+const themeSwitchSchema = z.strictObject({
+  dark: z.string().default('Dark'),
+  light: z.string().default('Light'),
+  system: z.string().default('System')
+})
+
+const tocSchema = z.strictObject({
+  backToTop: reactNode
+    .default('Scroll to top')
+    .describe('Text of back to top button.\n@remarks `ReactNode`'),
+  extraContent: reactNode.describe(
+    'Display extra content below the TOC content.\n@remarks `ReactNode`'
+  ),
+  float: z
+    .boolean()
+    .default(true)
+    .describe('Float the TOC next to the content.'),
+  title: reactNode
+    .default('On This Page')
+    .describe('Title of the TOC sidebar.\n@remarks `ReactNode`')
+})
+
 export const LayoutPropsSchema = z.strictObject({
   banner: reactNode.describe(
     `Rendered [\`<Banner>\` component](/docs/built-ins/banner). E.g. \`<Banner {...bannerProps} />\`
@@ -122,60 +169,11 @@ import { Layout, LastUpdated } from 'nextra-theme-docs'
 @default <Search />
 @remarks \`ReactNode\``
   ),
-  sidebar: z
-    .strictObject({
-      autoCollapse: z
-        .boolean()
-        .optional()
-        .describe(
-          'If true, automatically collapse inactive folders above `defaultMenuCollapseLevel`.'
-        ),
-      defaultMenuCollapseLevel: z
-        .number()
-        .int()
-        .min(1)
-        .default(2)
-        .describe(
-          'Specifies the folder level at which the menu on the left is collapsed by default.'
-        ),
-      defaultOpen: z
-        .boolean()
-        .default(true)
-        .describe('Hide/show sidebar by default.'),
-      toggleButton: z
-        .boolean()
-        .default(true)
-        .describe('Hide/show sidebar toggle button.')
-    })
-    // @ts-expect-error -- fixme
-    .default({}),
-  themeSwitch: z
-    .strictObject({
-      dark: z.string().default('Dark'),
-      light: z.string().default('Light'),
-      system: z.string().default('System')
-    })
-    // @ts-expect-error -- fixme
-    .default({}).describe(`Translation of options in the theme switch.
+  sidebar: sidebarSchema.default(sidebarSchema.parse({})),
+  themeSwitch: themeSwitchSchema.default(themeSwitchSchema.parse({}))
+    .describe(`Translation of options in the theme switch.
 @default { dark: "Dark", light: "Light", system: "System" }`),
-  toc: z
-    .strictObject({
-      backToTop: reactNode
-        .default('Scroll to top')
-        .describe('Text of back to top button.\n@remarks `ReactNode`'),
-      extraContent: reactNode.describe(
-        'Display extra content below the TOC content.\n@remarks `ReactNode`'
-      ),
-      float: z
-        .boolean()
-        .default(true)
-        .describe('Float the TOC next to the content.'),
-      title: reactNode
-        .default('On This Page')
-        .describe('Title of the TOC sidebar.\n@remarks `ReactNode`')
-    })
-    // @ts-expect-error -- fixme
-    .default({})
+  toc: tocSchema.default(tocSchema.parse({}))
 })
 
 export type ThemeConfigProps = z.infer<typeof LayoutPropsSchema>
