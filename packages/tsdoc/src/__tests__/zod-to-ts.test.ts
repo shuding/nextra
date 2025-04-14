@@ -173,7 +173,7 @@ describe('generateTsFromZod', () => {
          * Extra content after last icon.
          * @default null
          */
-        children?: "@TODO TO IMPLEMENT"
+        children?: ReactNode
       }"
     `)
   })
