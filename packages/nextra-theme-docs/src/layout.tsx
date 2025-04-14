@@ -46,7 +46,7 @@ const nextThemesSchema = z.strictObject({
 const sidebarSchema = z.strictObject({
   autoCollapse: z.boolean().optional().meta({
     description:
-      'If true, automatically collapse inactive folders above `defaultMenuCollapseLevel`.'
+      'If `true`, automatically collapse inactive folders above `defaultMenuCollapseLevel`.'
   }),
   defaultMenuCollapseLevel: z.number().int().min(1).default(2).meta({
     description:
@@ -138,8 +138,7 @@ import { Layout, LastUpdated } from 'nextra-theme-docs'
 `
     })
     .meta({
-      description: `Component to render the last updated info.
-@remarks \`ReactElement\``
+      description: 'Component to render the last updated info.'
     }),
   navbar: reactNode.meta({
     description:

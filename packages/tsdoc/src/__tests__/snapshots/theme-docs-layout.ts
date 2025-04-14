@@ -72,10 +72,9 @@ By default, it's a link to the issue creation form of the docs repository, with 
 
   /**
    * Component to render the last updated info.
-@remarks `ReactElement`
    * @default <LastUpdated />
    */
-  lastUpdated?: "@TODO TO IMPLEMENT"
+  lastUpdated?: ReactElement
 
   /**
    * Rendered [`<Navbar>` component](/docs/docs-theme/built-ins/navbar). E.g. `<Navbar {...navbarProps} />`
@@ -138,7 +137,7 @@ By default, it's a link to the issue creation form of the docs repository, with 
    */
   sidebar?: {
     /**
-     * If true, automatically collapse inactive folders above `defaultMenuCollapseLevel`.
+     * If `true`, automatically collapse inactive folders above `defaultMenuCollapseLevel`.
      */
     autoCollapse?: boolean
 
