@@ -16,17 +16,21 @@ const attributeSchema = z.custom<'class' | `data-${string}`>(
 )
 
 const feedbackSchema = z.strictObject({
-  content: reactNode
-    .default('Question? Give us feedback')
-    .describe('Content of the feedback link.'),
-  labels: z
+  content: reactNode.default('Question? Give us feedback').meta({
+    description: 'Content of the feedback link.'
+  }),
+  labels: z.string().default('feedback').meta({
+    description: 'Labels that can be added to the new created issue.'
+  }),
+  link: z
     .string()
-    .default('feedback')
-    .describe('Labels that can be added to the new created issue.'),
-  link: z.string().optional().describe(`Feedback link URL.
+    .optional()
+    .meta({
+      description: `Feedback link URL.
 
 By default, it's a link to the issue creation form of the docs repository, with the current page title prefilled:
-[example](https://github.com/shuding/nextra/issues/new?title=Feedback%20for%20%E2%80%9CTheme%20Configuration%E2%80%9D&labels=feedback).`)
+[example](https://github.com/shuding/nextra/issues/new?title=Feedback%20for%20%E2%80%9CTheme%20Configuration%E2%80%9D&labels=feedback).`
+    })
 })
 
 const nextThemesSchema = z.strictObject({
@@ -40,28 +44,20 @@ const nextThemesSchema = z.strictObject({
 })
 
 const sidebarSchema = z.strictObject({
-  autoCollapse: z
-    .boolean()
-    .optional()
-    .describe(
+  autoCollapse: z.boolean().optional().meta({
+    description:
       'If true, automatically collapse inactive folders above `defaultMenuCollapseLevel`.'
-    ),
-  defaultMenuCollapseLevel: z
-    .number()
-    .int()
-    .min(1)
-    .default(2)
-    .describe(
+  }),
+  defaultMenuCollapseLevel: z.number().int().min(1).default(2).meta({
+    description:
       'Specifies the folder level at which the menu on the left is collapsed by default.'
-    ),
-  defaultOpen: z
-    .boolean()
-    .default(true)
-    .describe('Hide/show sidebar by default.'),
-  toggleButton: z
-    .boolean()
-    .default(true)
-    .describe('Hide/show sidebar toggle button.')
+  }),
+  defaultOpen: z.boolean().default(true).meta({
+    description: 'Hide/show sidebar by default.'
+  }),
+  toggleButton: z.boolean().default(true).meta({
+    description: 'Hide/show sidebar toggle button.'
+  })
 })
 
 const themeSwitchSchema = z.strictObject({
@@ -71,53 +67,60 @@ const themeSwitchSchema = z.strictObject({
 })
 
 const tocSchema = z.strictObject({
-  backToTop: reactNode
-    .default('Scroll to top')
-    .describe('Text of back to top button.'),
-  extraContent: reactNode.describe(
-    'Display extra content below the TOC content.'
-  ),
-  float: z
-    .boolean()
-    .default(true)
-    .describe('Float the TOC next to the content.'),
-  title: reactNode.default('On This Page').describe('Title of the TOC sidebar.')
+  backToTop: reactNode.default('Scroll to top').meta({
+    description: 'Text of back to top button.'
+  }),
+  extraContent: reactNode.meta({
+    description: 'Display extra content below the TOC content.'
+  }),
+  float: z.boolean().default(true).meta({
+    description: 'Float the TOC next to the content.'
+  }),
+  title: reactNode.default('On This Page').meta({
+    description: 'Title of the TOC sidebar.'
+  })
 })
 
 export const LayoutPropsSchema = z.strictObject({
-  banner: reactNode.describe(
-    'Rendered [`<Banner>\` component](/docs/built-ins/banner). E.g. `<Banner {...bannerProps} />`'
-  ),
+  banner: reactNode.meta({
+    description:
+      'Rendered [`<Banner>\` component](/docs/built-ins/banner). E.g. `<Banner {...bannerProps} />`'
+  }),
   children: reactNode,
-  darkMode: z
-    .boolean()
-    .default(true)
-    .describe('Show or hide the dark mode select button.'),
+  darkMode: z.boolean().default(true).meta({
+    description: 'Show or hide the dark mode select button.'
+  }),
   docsRepositoryBase: z
     .string()
     .startsWith('https://')
     .default('https://github.com/shuding/nextra')
-    .describe('URL of the documentation repository.'),
-  editLink: reactNode
-    .default('Edit this page')
-    .describe('Content of the edit link.'),
+    .meta({
+      description: 'URL of the documentation repository.'
+    }),
+  editLink: reactNode.default('Edit this page').meta({
+    description: 'Content of the edit link.'
+  }),
   feedback: feedbackSchema.default(feedbackSchema.parse({})),
-  footer: reactNode.describe(
-    'Rendered [`<Footer>` component](/docs/docs-theme/built-ins/footer). E.g. `<Footer {...footerProps} />`'
-  ),
+  footer: reactNode.meta({
+    description:
+      'Rendered [`<Footer>` component](/docs/docs-theme/built-ins/footer). E.g. `<Footer {...footerProps} />`'
+  }),
   i18n: z
     .array(
       z.strictObject({
-        locale: z
-          .string()
-          .describe('Locale from `i18n.locales` field in `next.config` file.'),
-        name: z.string().describe('Locale name in dropdown.')
+        locale: z.string().meta({
+          description: 'Locale from `i18n.locales` field in `next.config` file.'
+        }),
+        name: z.string().meta({
+          description: 'Locale name in dropdown.'
+        })
       })
     )
     .default([])
-    .describe(
-      'Options to configure the language dropdown for [the i18n docs website](/docs/guide/i18n).'
-    ),
+    .meta({
+      description:
+        'Options to configure the language dropdown for [the i18n docs website](/docs/guide/i18n).'
+    }),
   lastUpdated: element
     .default(<LastUpdated />)
     .refine(el => el.type !== Fragment && typeof el.type !== 'string', {
@@ -133,11 +136,15 @@ import { Layout, LastUpdated } from 'nextra-theme-docs'
 </Layout>
 \`\`\`
 `
-    }).describe(`Component to render the last updated info.
-@remarks \`ReactElement\``),
-  navbar: reactNode.describe(
-    'Rendered [`<Navbar>` component](/docs/docs-theme/built-ins/navbar). E.g. `<Navbar {...navbarProps} />`'
-  ),
+    })
+    .meta({
+      description: `Component to render the last updated info.
+@remarks \`ReactElement\``
+    }),
+  navbar: reactNode.meta({
+    description:
+      'Rendered [`<Navbar>` component](/docs/docs-theme/built-ins/navbar). E.g. `<Navbar {...navbarProps} />`'
+  }),
   navigation: z
     .union([
       z.boolean(),
@@ -148,24 +155,27 @@ import { Layout, LastUpdated } from 'nextra-theme-docs'
     ])
     .default(true)
     .transform(v => (typeof v === 'boolean' ? { next: v, prev: v } : v))
-    .describe('Enable or disable navigation link.'),
-  nextThemes: nextThemesSchema.default(nextThemesSchema.parse({})).describe(
-    `Configuration for the [next-themes](https://github.com/pacocoursey/next-themes#themeprovider) package.
+    .meta({
+      description: 'Enable or disable navigation link.'
+    }),
+  nextThemes: nextThemesSchema.default(nextThemesSchema.parse({})).meta({
+    description: `Configuration for the [next-themes](https://github.com/pacocoursey/next-themes#themeprovider) package.
 @default { attribute: "class", defaultTheme: "system", disableTransitionOnChange: true, storageKey: "theme" }
 @remarks \`ThemeProviderProps\``
-  ),
-  pageMap: z.array(z.custom<PageMapItem>())
-    .describe(`Page map list. Result of \`getPageMap(route = '/')\` call.
-@remarks \`PageMapItem[]\``),
-  search: reactNode
-    .default(<Search />)
-    .describe(
+  }),
+  pageMap: z.array(z.custom<PageMapItem>()).meta({
+    description: `Page map list. Result of \`getPageMap(route = '/')\` call.
+@remarks \`PageMapItem[]\``
+  }),
+  search: reactNode.default(<Search />).meta({
+    description:
       'Rendered [`<Search>` component](/docs/built-ins/search). E.g. `<Search {...searchProps} />`'
-    ),
+  }),
   sidebar: sidebarSchema.default(sidebarSchema.parse({})),
-  themeSwitch: themeSwitchSchema.default(themeSwitchSchema.parse({}))
-    .describe(`Translation of options in the theme switch.
-@default { dark: "Dark", light: "Light", system: "System" }`),
+  themeSwitch: themeSwitchSchema.default(themeSwitchSchema.parse({})).meta({
+    description: `Translation of options in the theme switch.
+@default { dark: "Dark", light: "Light", system: "System" }`
+  }),
   toc: tocSchema.default(tocSchema.parse({}))
 })
 
