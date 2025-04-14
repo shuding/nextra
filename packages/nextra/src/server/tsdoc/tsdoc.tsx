@@ -30,6 +30,11 @@ type TSDocProps = {
    * @default {}
    */
   typeLinkMap?: Record<string, string>
+  /**
+   * Custom content to display when a function has no parameters.
+   * @default <Callout type="info">This function does not accept any parameters.</Callout>
+   */
+  noParametersContent?: ReactNode
 }
 
 // copied from nextra-theme-docs
@@ -68,7 +73,10 @@ const classes = {
 export const TSDoc: FC<TSDocProps> = ({
   definition,
   renderMarkdown = renderMarkdownDefault,
-  typeLinkMap = {}
+  typeLinkMap = {},
+  noParametersContent = (
+    <Callout type="info">This function does not accept any parameters.</Callout>
+  )
 }) => {
   if ('entries' in definition) {
     return (
@@ -119,9 +127,7 @@ export const TSDoc: FC<TSDocProps> = ({
             renderMarkdown={renderMarkdown}
           />
         ) : (
-          <Callout type="info">
-            This function does not accept any parameters.
-          </Callout>
+          noParametersContent
         )}
         <b className="x:mt-[1.25em] x:block">Returns:</b>
         {Array.isArray(signature.returns) ? (
