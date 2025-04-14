@@ -160,13 +160,18 @@ import { Layout, LastUpdated } from 'nextra-theme-docs'
       description: 'Enable or disable navigation link.'
     }),
   nextThemes: nextThemesSchema.default(nextThemesSchema.parse({})).meta({
-    description: `Configuration for the [next-themes](https://github.com/pacocoursey/next-themes#themeprovider) package.
-@remarks \`ThemeProviderProps\``
+    description:
+      'Configuration for the [next-themes](https://github.com/pacocoursey/next-themes#themeprovider) package.'
   }),
-  pageMap: z.array(z.custom<PageMapItem>()).meta({
-    description: `Page map list. Result of \`getPageMap(route = '/')\` call.
-@remarks \`PageMapItem[]\``
-  }),
+  pageMap: z
+    .array(
+      z.custom<PageMapItem>().meta({
+        type: 'PageMapItem'
+      })
+    )
+    .meta({
+      description: "Page map list. Result of `getPageMap(route = '/')` call."
+    }),
   search: reactNode.default(<Search />).meta({
     description:
       'Rendered [`<Search>` component](/docs/built-ins/search). E.g. `<Search {...searchProps} />`'

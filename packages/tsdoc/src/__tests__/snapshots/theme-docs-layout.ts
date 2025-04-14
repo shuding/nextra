@@ -93,14 +93,13 @@ By default, it's a link to the issue creation form of the docs repository, with 
 
   /**
    * Configuration for the [next-themes](https://github.com/pacocoursey/next-themes#themeprovider) package.
-@remarks `ThemeProviderProps`
    * @default {"attribute":"class","defaultTheme":"system","disableTransitionOnChange":true,"storageKey":"theme"}
    */
   nextThemes?: {
     /**
      * @default "class"
      */
-    attribute?: "@TODO TO IMPLEMENT" | "@TODO TO IMPLEMENT"[]
+    attribute?: 'class' | `data-${string}` | ('class' | `data-${string}`)[]
 
     /**
      * @default "system"
@@ -122,9 +121,8 @@ By default, it's a link to the issue creation form of the docs repository, with 
 
   /**
    * Page map list. Result of `getPageMap(route = '/')` call.
-@remarks `PageMapItem[]`
    */
-  pageMap: "@TODO TO IMPLEMENT"[]
+  pageMap: PageMapItem[]
 
   /**
    * Rendered [`<Search>` component](/docs/built-ins/search). E.g. `<Search {...searchProps} />`
