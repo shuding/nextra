@@ -1,5 +1,6 @@
 import { reactNode } from 'nextra/schemas'
 import { z } from 'zod'
+import { LayoutPropsSchema } from '../../../nextra-theme-docs/src/layout.js'
 import { generateTsFromZod } from '../../../nextra/src/server/tsdoc/zod-to-ts.js'
 
 describe('generateTsFromZod', () => {
@@ -175,5 +176,11 @@ describe('generateTsFromZod', () => {
         children?: "@TODO TO IMPLEMENT"
       }"
     `)
+  })
+
+  it('should convert LayoutPropsSchema', () => {
+    return expect('type $ = ' + generateTsFromZod(LayoutPropsSchema)).toMatchFileSnapshot(
+      './snapshots/theme-docs-layout.ts'
+    )
   })
 })
