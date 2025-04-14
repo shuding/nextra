@@ -15,6 +15,30 @@ const attributeSchema = z.custom<'class' | `data-${string}`>(
   value => value === 'class' || value.startsWith('data-')
 )
 
+const feedbackSchema = z.strictObject({
+  content: reactNode.default('Question? Give us feedback')
+    .describe(`Content of the feedback link.
+@remarks \`ReactNode\``),
+  labels: z
+    .string()
+    .default('feedback')
+    .describe('Labels that can be added to the new created issue.'),
+  link: z.string().optional().describe(`Feedback link URL.
+
+By default, it's a link to the issue creation form of the docs repository, with the current page title prefilled:
+[example](https://github.com/shuding/nextra/issues/new?title=Feedback%20for%20%E2%80%9CTheme%20Configuration%E2%80%9D&labels=feedback).`)
+})
+
+const nextThemesSchema = z.strictObject({
+  attribute: z
+    .union([attributeSchema, z.array(attributeSchema)])
+    .default('class'),
+  defaultTheme: z.string().optional(),
+  disableTransitionOnChange: z.boolean().default(true),
+  forcedTheme: z.string().optional(),
+  storageKey: z.string().optional()
+})
+
 export const LayoutPropsSchema = z.strictObject({
   banner: reactNode.describe(
     `Rendered [\`<Banner>\` component](/docs/built-ins/banner). E.g. \`<Banner {...bannerProps} />\`
@@ -33,22 +57,7 @@ export const LayoutPropsSchema = z.strictObject({
   editLink: reactNode.default('Edit this page')
     .describe(`Content of the edit link.
 @remarks \`ReactNode\``),
-  feedback: z
-    .strictObject({
-      content: reactNode.default('Question? Give us feedback')
-        .describe(`Content of the feedback link.
-@remarks \`ReactNode\``),
-      labels: z
-        .string()
-        .default('feedback')
-        .describe('Labels that can be added to the new created issue.'),
-      link: z.string().optional().describe(`Feedback link URL.
-
-By default, it's a link to the issue creation form of the docs repository, with the current page title prefilled:
-[example](https://github.com/shuding/nextra/issues/new?title=Feedback%20for%20%E2%80%9CTheme%20Configuration%E2%80%9D&labels=feedback).`)
-    })
-    // @ts-expect-error -- fixme
-    .default({}),
+  feedback: feedbackSchema.default(feedbackSchema.parse({})),
   footer: reactNode.describe(
     `Rendered [\`<Footer>\` component](/docs/docs-theme/built-ins/footer). E.g. \`<Footer {...footerProps} />\`
 @remarks \`ReactNode\``
@@ -100,23 +109,11 @@ import { Layout, LastUpdated } from 'nextra-theme-docs'
     .transform(v => (typeof v === 'boolean' ? { next: v, prev: v } : v))
     .describe(`Enable or disable navigation link.
 @default true`),
-  nextThemes: z
-    .strictObject({
-      attribute: z
-        .union([attributeSchema, z.array(attributeSchema)])
-        .default('class'),
-      defaultTheme: z.string().optional(),
-      disableTransitionOnChange: z.boolean().default(true),
-      forcedTheme: z.string().optional(),
-      storageKey: z.string().optional()
-    })
-    // @ts-expect-error -- fixme
-    .default({})
-    .describe(
-      `Configuration for the [next-themes](https://github.com/pacocoursey/next-themes#themeprovider) package.
+  nextThemes: nextThemesSchema.default(nextThemesSchema.parse({})).describe(
+    `Configuration for the [next-themes](https://github.com/pacocoursey/next-themes#themeprovider) package.
 @default { attribute: "class", defaultTheme: "system", disableTransitionOnChange: true, storageKey: "theme" }
 @remarks \`ThemeProviderProps\``
-    ),
+  ),
   pageMap: z.array(z.custom<PageMapItem>())
     .describe(`Page map list. Result of \`getPageMap(route = '/')\` call.
 @remarks \`PageMapItem[]\``),
