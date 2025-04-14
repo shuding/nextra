@@ -103,10 +103,7 @@ export async function generateMetadata(props: PageProps) {
 }
 
 type PageProps = Readonly<{
-  params: Promise<{
-    name: string
-    lang: string
-  }>
+  params: Promise<{ name: string }>
 }>
 
 const Page: FC<PageProps> = async props => {
