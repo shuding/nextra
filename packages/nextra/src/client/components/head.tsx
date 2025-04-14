@@ -32,7 +32,7 @@ function hexToRgb(hex: string): string {
 const RGB_RE = /^rgb\((?<rgb>.*?)\)$/
 const HEX_RE = /^#(?<hex>[0-9a-f]{3,6})$/i
 
-const colorSchema = z
+const stringColorSchema = z
   .string()
   .refine(str => {
     if (HEX_RE.test(str) || RGB_RE.test(str)) {
@@ -53,45 +53,43 @@ const colorSchema = z
     return value
   })
 
-export const HeadPropsSchema = z.strictObject({
-  color: z
-    .strictObject({
-      hue: darkLightSchema
-        .default({ dark: 204, light: 212 })
-        .describe('The hue of the primary theme color.<br/>Range: `0 - 360`'),
-      saturation: darkLightSchema
-        // @ts-expect-error -- fixme
-        .default(100)
-        .describe(
-          'The saturation of the primary theme color.<br/>Range: `0 - 100`'
-        ),
-      lightness: darkLightSchema
-        .default({ dark: 55, light: 45 })
-        .describe(
-          'The lightness of the primary theme color.<br/>Range: `0 - 100`'
-        )
-    })
+const colorSchema = z.strictObject({
+  hue: darkLightSchema
+    .default({ dark: 204, light: 212 })
+    .describe('The hue of the primary theme color.<br/>Range: `0 - 360`'),
+  saturation: darkLightSchema
     // @ts-expect-error -- fixme
-    .default({}),
+    .default(100)
+    .describe(
+      'The saturation of the primary theme color.<br/>Range: `0 - 100`'
+    ),
+  lightness: darkLightSchema
+    .default({ dark: 55, light: 45 })
+    .describe('The lightness of the primary theme color.<br/>Range: `0 - 100`')
+})
+
+const backgroundColorSchema = z.strictObject({
+  dark: stringColorSchema
+    .default('rgb(17,17,17)')
+    .describe(
+      'Background color for dark theme.<br/>Format: `"rgb(RRR,GGG,BBB)" | "#RRGGBB"`'
+    ),
+  light: stringColorSchema
+    .default('rgb(250,250,250)')
+    .describe(
+      'Background color for light theme.<br/>Format: `"rgb(RRR,GGG,BBB)" | "#RRGGBB"`'
+    )
+})
+
+export const HeadPropsSchema = z.strictObject({
+  color: colorSchema.default(colorSchema.parse({})),
   faviconGlyph: z
     .string()
     .optional()
     .describe('The glyph to use as the favicon.'),
-  backgroundColor: z
-    .strictObject({
-      dark: colorSchema
-        .default('rgb(17,17,17)')
-        .describe(
-          'Background color for dark theme.<br/>Format: `"rgb(RRR,GGG,BBB)" | "#RRGGBB"`'
-        ),
-      light: colorSchema
-        .default('rgb(250,250,250)')
-        .describe(
-          'Background color for light theme.<br/>Format: `"rgb(RRR,GGG,BBB)" | "#RRGGBB"`'
-        )
-    })
-    // @ts-expect-error -- fixme
-    .default({}),
+  backgroundColor: backgroundColorSchema.default(
+    backgroundColorSchema.parse({})
+  ),
   children: reactNode.describe(`Content of \`<head>\`
 @remarks \`ReactNode\``)
 })
