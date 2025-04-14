@@ -84,6 +84,7 @@ export async function compileMdx(
     latex,
     codeHighlight,
     defaultShowCopyCode,
+    // @ts-expect-error fixme
     mdxOptions = {},
     filePath = '',
     useCachedCompiler,

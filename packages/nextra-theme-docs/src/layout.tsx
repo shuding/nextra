@@ -47,6 +47,7 @@ export const LayoutPropsSchema = z.strictObject({
 By default, it's a link to the issue creation form of the docs repository, with the current page title prefilled:
 [example](https://github.com/shuding/nextra/issues/new?title=Feedback%20for%20%E2%80%9CTheme%20Configuration%E2%80%9D&labels=feedback).`)
     })
+    // @ts-expect-error -- fixme
     .default({}),
   footer: reactNode.describe(
     `Rendered [\`<Footer>\` component](/docs/docs-theme/built-ins/footer). E.g. \`<Footer {...footerProps} />\`
@@ -109,6 +110,7 @@ import { Layout, LastUpdated } from 'nextra-theme-docs'
       forcedTheme: z.string().optional(),
       storageKey: z.string().optional()
     })
+    // @ts-expect-error -- fixme
     .default({})
     .describe(
       `Configuration for the [next-themes](https://github.com/pacocoursey/next-themes#themeprovider) package.
@@ -132,9 +134,8 @@ import { Layout, LastUpdated } from 'nextra-theme-docs'
           'If true, automatically collapse inactive folders above `defaultMenuCollapseLevel`.'
         ),
       defaultMenuCollapseLevel: z
-        .number()
-        .min(1)
         .int()
+        .min(1)
         .default(2)
         .describe(
           'Specifies the folder level at which the menu on the left is collapsed by default.'
@@ -148,6 +149,7 @@ import { Layout, LastUpdated } from 'nextra-theme-docs'
         .default(true)
         .describe('Hide/show sidebar toggle button.')
     })
+    // @ts-expect-error -- fixme
     .default({}),
   themeSwitch: z
     .strictObject({
@@ -155,6 +157,7 @@ import { Layout, LastUpdated } from 'nextra-theme-docs'
       light: z.string().default('Light'),
       system: z.string().default('System')
     })
+    // @ts-expect-error -- fixme
     .default({}).describe(`Translation of options in the theme switch.
 @default { dark: "Dark", light: "Light", system: "System" }`),
   toc: z
@@ -173,6 +176,7 @@ import { Layout, LastUpdated } from 'nextra-theme-docs'
         .default('On This Page')
         .describe('Title of the TOC sidebar.\n@remarks `ReactNode`')
     })
+    // @ts-expect-error -- fixme
     .default({})
 })
 

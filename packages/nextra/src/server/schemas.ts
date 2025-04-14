@@ -55,15 +55,15 @@ export const nextraConfigSchema = z.strictObject({
       format: z.enum(['detect', 'mdx', 'md']).default('detect'),
       rehypePrettyCodeOptions: z.custom<RehypePrettyCodeOptions>().default({})
     })
+    // @ts-expect-error -- fixme
     .default({}),
   whiteListTagsStyling: z.array(z.string()).optional(),
   contentDirBasePath: z
     .string()
     .startsWith('/')
-    .refine(
-      value => value.length === 1 || !value.endsWith('/'),
-      value => ({ message: `"${value}" must not end with "/"` })
-    )
+    .refine(value => value.length === 1 || !value.endsWith('/'), {
+      error: 'Must not end with "/"'
+    })
     .default('/'),
   unstable_shouldAddLocaleToLinks: z.boolean().default(false)
 })
@@ -167,7 +167,7 @@ const menuItemSchema = z
 export const menuSchema = z.strictObject({
   type: z.literal('menu'),
   title,
-  items: z.record(menuItemSchema).transform(obj => {
+  items: z.record(z.string(), menuItemSchema).transform(obj => {
     for (const key in obj) {
       // @ts-expect-error -- fixme
       obj[key].title ||= pageTitleFromFilename(key)

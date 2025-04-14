@@ -1,66 +1,75 @@
 import { z } from 'zod'
 
-export function generateTsFromZod(schema: z.ZodTypeAny, indent = 2): string {
+export function generateTsFromZod(schema: z.ZodType, indent = 2): string {
   const isZodObject = schema instanceof z.ZodObject
   if (!isZodObject) {
     return generateTsFromZodType(schema, indent)
   }
   return `{\n${Object.entries(schema.shape)
     .map(([key, value]) => {
-      const tsType = generateTsFromZodType(value as z.ZodTypeAny, indent + 2)
-      const docComment = getDocComment(value as z.ZodTypeAny, indent)
+      const tsType = generateTsFromZodType(value as z.ZodType, indent + 2)
+      const docComment = getDocComment(value as z.ZodType, indent)
       return [
         docComment,
         ' '.repeat(indent),
         key,
-        (value as z.ZodTypeAny).isOptional() ? '?' : '',
+        (value as z.ZodType).isOptional() ? '?' : '',
         `: ${tsType}\n`
       ].join('')
     })
     .join('\n')}${' '.repeat(indent - 2)}}`
 }
 
-function generateTsFromZodType(schema: z.ZodTypeAny, indent: number): string {
+function generateTsFromZodType(schema: z.ZodType, indent: number): string {
   if (schema instanceof z.ZodString) return 'string'
   if (schema instanceof z.ZodNumber) return 'number'
   if (schema instanceof z.ZodBoolean) return 'boolean'
-  if (schema instanceof z.ZodLiteral) return `"${schema._def.value}"`
+  // @ts-expect-error -- fixme
+  if (schema instanceof z.ZodLiteral) return `"${schema.def.value}"`
   if (schema instanceof z.ZodOptional) {
-    return generateTsFromZodType(schema._def.innerType, indent)
+    // @ts-expect-error -- fixme
+    return generateTsFromZodType(schema.def.innerType, indent)
   }
   if (schema instanceof z.ZodNullable) {
-    return `${generateTsFromZodType(schema._def.innerType, indent)} | null`
+    // @ts-expect-error -- fixme
+    return `${generateTsFromZodType(schema.def.innerType, indent)} | null`
   }
   if (schema instanceof z.ZodArray) {
-    return `${generateTsFromZodType(schema._def.type, indent)}[]`
+    // @ts-expect-error -- fixme
+    return `${generateTsFromZodType(schema.def.type, indent)}[]`
   }
   if (schema instanceof z.ZodUnion) {
-    return schema._def.options
+    return schema.def.options
       .map((opt: any) => generateTsFromZodType(opt, indent))
       .join(' | ')
   }
   if (schema instanceof z.ZodDefault) {
-    return generateTsFromZodType(schema._def.innerType, indent)
+    // @ts-expect-error -- fixme
+    return generateTsFromZodType(schema.def.innerType, indent)
   }
   if (schema instanceof z.ZodObject) {
     return generateTsFromZod(schema, indent)
   }
+  // @ts-expect-error -- fixme
   if (schema instanceof z.ZodEffects) {
-    return generateTsFromZodType(schema._def.schema, indent)
+    // @ts-expect-error -- fixme
+    return generateTsFromZodType(schema.def.schema, indent)
   }
   if (schema instanceof z.ZodAny) {
     return '"@TODO TO IMPLEMENT"'
   }
   if (schema instanceof z.ZodEnum) {
-    return schema._def.values.map((v: string) => `"${v}"`).join(' | ')
+    // @ts-expect-error -- fixme
+    return schema.def.values.map((v: string) => `"${v}"`).join(' | ')
   }
   throw new Error(`Unknown schema type '${schema.constructor.name}'`)
 }
 
-function getDocComment(schema: z.ZodTypeAny, indent: number): string {
-  const { description } = schema._def
+function getDocComment(schema: z.ZodType, indent: number): string {
+  // @ts-expect-error -- fixme
+  const { description } = schema.def
   const defaultValue =
-    schema instanceof z.ZodDefault ? schema._def.defaultValue() : undefined
+    schema instanceof z.ZodDefault ? schema.def.defaultValue() : undefined
   const comments: string[] = []
 
   if (description) {

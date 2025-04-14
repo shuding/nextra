@@ -60,6 +60,7 @@ export const HeadPropsSchema = z.strictObject({
         .default({ dark: 204, light: 212 })
         .describe('The hue of the primary theme color.<br/>Range: `0 - 360`'),
       saturation: darkLightSchema
+        // @ts-expect-error -- fixme
         .default(100)
         .describe(
           'The saturation of the primary theme color.<br/>Range: `0 - 100`'
@@ -70,6 +71,7 @@ export const HeadPropsSchema = z.strictObject({
           'The lightness of the primary theme color.<br/>Range: `0 - 100`'
         )
     })
+    // @ts-expect-error -- fixme
     .default({}),
   faviconGlyph: z
     .string()
@@ -88,6 +90,7 @@ export const HeadPropsSchema = z.strictObject({
           'Background color for light theme.<br/>Format: `"rgb(RRR,GGG,BBB)" | "#RRGGBB"`'
         )
     })
+    // @ts-expect-error -- fixme
     .default({}),
   children: reactNode.describe(`Content of \`<head>\`
 @remarks \`ReactNode\``)

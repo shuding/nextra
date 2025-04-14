@@ -113,7 +113,7 @@
     "unist-util-visit": "^5.0.0",
     "unist-util-visit-children": "^3.0.0",
     "yaml": "^2.3.2",
-    "zod": "^3.22.3",
+    "zod": "^4.0.0-beta.1",
     "zod-validation-error": "^3.0.0"
   },
   "devDependencies": {
