@@ -134,6 +134,7 @@ import { Layout, LastUpdated } from 'nextra-theme-docs'
           'If true, automatically collapse inactive folders above `defaultMenuCollapseLevel`.'
         ),
       defaultMenuCollapseLevel: z
+        .number()
         .int()
         .min(1)
         .default(2)
