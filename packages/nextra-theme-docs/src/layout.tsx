@@ -138,7 +138,6 @@ import { Layout, LastUpdated } from 'nextra-theme-docs'
 \`\`\`
 `
     }).describe(`Component to render the last updated info.
-@default <LastUpdated />
 @remarks \`ReactElement\``),
   navbar: reactNode.describe(
     `Rendered [\`<Navbar>\` component](/docs/docs-theme/built-ins/navbar). E.g. \`<Navbar {...navbarProps} />\`
@@ -166,7 +165,6 @@ import { Layout, LastUpdated } from 'nextra-theme-docs'
 @remarks \`PageMapItem[]\``),
   search: reactNode.default(<Search />).describe(
     `Rendered [\`<Search>\` component](/docs/built-ins/search). E.g. \`<Search {...searchProps} />\`
-@default <Search />
 @remarks \`ReactNode\``
   ),
   sidebar: sidebarSchema.default(sidebarSchema.parse({})),

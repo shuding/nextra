@@ -79,9 +79,8 @@ By default, it's a link to the issue creation form of the docs repository, with 
 
   /**
    * Component to render the last updated info.
-@default <LastUpdated />
 @remarks `ReactElement`
-   * @default {"key":null,"props":{},"_owner":null,"_store":{}}
+   * @default <LastUpdated />
    */
   lastUpdated?: "@TODO TO IMPLEMENT"
 
@@ -129,9 +128,8 @@ By default, it's a link to the issue creation form of the docs repository, with 
 
   /**
    * Rendered [`<Search>` component](/docs/built-ins/search). E.g. `<Search {...searchProps} />`
-@default <Search />
 @remarks `ReactNode`
-   * @default {"key":null,"props":{},"_owner":null,"_store":{}}
+   * @default <Search />
    */
   search?: "@TODO TO IMPLEMENT"
 
