@@ -19,7 +19,7 @@ type TSDocProps = {
    * Override the function to render markdown into JSX nodes.
    * @default
    * async function renderMarkdownDefault(description?: string): Promise<ReactNode> {
-   *   if (description) return
+   *   if (!description) return
    *   const rawJs = await compileMdx(description)
    *   return <MDXRemote compiledSource={rawJs} />
    * }
@@ -277,7 +277,7 @@ const FieldsTable: FC<
                 className={cn(
                   'x:max-lg:block',
                   // For the mobile view, we want to hide the default column entirely if there is no
-                  // content for it. We want this because otherwise the default padding applied to
+                  // content for it. We want this because otherwise, the default padding applied to
                   // table cells will add some extra blank space we don't want.
                   defaultValue
                     ? // add `Default: ` via CSS `content` property so value will be not selectable
