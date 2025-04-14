@@ -84,10 +84,13 @@ const tocSchema = z.strictObject({
 })
 
 export const LayoutPropsSchema = z.strictObject({
-  banner: reactNode.meta({
-    description:
-      'Rendered [`<Banner>\` component](/docs/built-ins/banner). E.g. `<Banner {...bannerProps} />`'
-  }),
+  banner: reactNode
+    // @TODO added in zod v4
+    .optional()
+    .meta({
+      description:
+        'Rendered [`<Banner>\` component](/docs/built-ins/banner). E.g. `<Banner {...bannerProps} />`'
+    }),
   children: reactNode,
   darkMode: z.boolean().default(true).meta({
     description: 'Show or hide the dark mode select button.'
@@ -103,10 +106,13 @@ export const LayoutPropsSchema = z.strictObject({
     description: 'Content of the edit link.'
   }),
   feedback: feedbackSchema.default(feedbackSchema.parse({})),
-  footer: reactNode.meta({
-    description:
-      'Rendered [`<Footer>` component](/docs/docs-theme/built-ins/footer). E.g. `<Footer {...footerProps} />`'
-  }),
+  footer: reactNode
+    // @TODO added in zod v4
+    .optional()
+    .meta({
+      description:
+        'Rendered [`<Footer>` component](/docs/docs-theme/built-ins/footer). E.g. `<Footer {...footerProps} />`'
+    }),
   i18n: z
     .array(
       z.strictObject({
@@ -143,10 +149,13 @@ import { Layout, LastUpdated } from 'nextra-theme-docs'
       description: 'Component to render the last updated info.',
       default: '<LastUpdated />'
     }),
-  navbar: reactNode.meta({
-    description:
-      'Rendered [`<Navbar>` component](/docs/docs-theme/built-ins/navbar). E.g. `<Navbar {...navbarProps} />`'
-  }),
+  navbar: reactNode
+    // @TODO added in zod v4
+    .optional()
+    .meta({
+      description:
+        'Rendered [`<Navbar>` component](/docs/docs-theme/built-ins/navbar). E.g. `<Navbar {...navbarProps} />`'
+    }),
   navigation: z
     .union([
       z.boolean(),
@@ -157,6 +166,8 @@ import { Layout, LastUpdated } from 'nextra-theme-docs'
     ])
     .default(true)
     .transform(v => (typeof v === 'boolean' ? { next: v, prev: v } : v))
+    // @TODO added in zod v4
+    .optional()
     .meta({
       description: 'Enable or disable navigation link.'
     }),
