@@ -94,7 +94,11 @@ By default, it's a link to the issue creation form of the docs repository, with 
    * Enable or disable navigation link.
 @default true
    */
-  navigation?: "@TODO TO IMPLEMENT"
+  navigation?: boolean | {
+    next: boolean
+
+    prev: boolean
+  }
 
   /**
    * Configuration for the [next-themes](https://github.com/pacocoursey/next-themes#themeprovider) package.
