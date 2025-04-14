@@ -178,8 +178,7 @@ import { Layout, LastUpdated } from 'nextra-theme-docs'
   }),
   sidebar: sidebarSchema.default(sidebarSchema.parse({})),
   themeSwitch: themeSwitchSchema.default(themeSwitchSchema.parse({})).meta({
-    description: `Translation of options in the theme switch.
-@default { dark: "Dark", light: "Light", system: "System" }`
+    description: 'Translation of options in the theme switch.'
   }),
   toc: tocSchema.default(tocSchema.parse({}))
 })

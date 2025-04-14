@@ -160,7 +160,6 @@ By default, it's a link to the issue creation form of the docs repository, with 
 
   /**
    * Translation of options in the theme switch.
-@default { dark: "Dark", light: "Light", system: "System" }
    * @default {"dark":"Dark","light":"Light","system":"System"}
    */
   themeSwitch?: {
