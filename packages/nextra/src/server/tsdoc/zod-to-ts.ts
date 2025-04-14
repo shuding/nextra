@@ -63,6 +63,7 @@ function generateTsFromZodType(schema: z.ZodType, indent: number): string {
 }
 
 function getDocComment(schema: z.ZodType, indent: number): string {
+  // @ts-expect-error -- fixme
   const description = schema.description || schema.def.innerType.description
   const defaultValue =
     schema instanceof z.ZodDefault ? schema.def.defaultValue() : undefined
