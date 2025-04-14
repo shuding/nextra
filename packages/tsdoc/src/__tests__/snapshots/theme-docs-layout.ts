@@ -1,14 +1,10 @@
 type $ = {
   /**
    * Rendered [`<Banner>` component](/docs/built-ins/banner). E.g. `<Banner {...bannerProps} />`
-@remarks `ReactNode`
    */
-  banner?: "@TODO TO IMPLEMENT"
+  banner?: ReactNode
 
-  /**
-   * @remarks `ReactNode`
-   */
-  children?: "@TODO TO IMPLEMENT"
+  children?: ReactNode
 
   /**
    * Show or hide the dark mode select button.
@@ -24,10 +20,9 @@ type $ = {
 
   /**
    * Content of the edit link.
-@remarks `ReactNode`
    * @default "Edit this page"
    */
-  editLink?: "@TODO TO IMPLEMENT"
+  editLink?: ReactNode
 
   /**
    * @default {"content":"Question? Give us feedback","labels":"feedback"}
@@ -35,10 +30,9 @@ type $ = {
   feedback?: {
     /**
      * Content of the feedback link.
-@remarks `ReactNode`
      * @default "Question? Give us feedback"
      */
-    content?: "@TODO TO IMPLEMENT"
+    content?: ReactNode
 
     /**
      * Labels that can be added to the new created issue.
@@ -57,9 +51,8 @@ By default, it's a link to the issue creation form of the docs repository, with 
 
   /**
    * Rendered [`<Footer>` component](/docs/docs-theme/built-ins/footer). E.g. `<Footer {...footerProps} />`
-@remarks `ReactNode`
    */
-  footer?: "@TODO TO IMPLEMENT"
+  footer?: ReactNode
 
   /**
    * Options to configure the language dropdown for [the i18n docs website](/docs/guide/i18n).
@@ -86,9 +79,8 @@ By default, it's a link to the issue creation form of the docs repository, with 
 
   /**
    * Rendered [`<Navbar>` component](/docs/docs-theme/built-ins/navbar). E.g. `<Navbar {...navbarProps} />`
-@remarks `ReactNode`
    */
-  navbar?: "@TODO TO IMPLEMENT"
+  navbar?: ReactNode
 
   /**
    * Enable or disable navigation link.
@@ -132,10 +124,9 @@ By default, it's a link to the issue creation form of the docs repository, with 
 
   /**
    * Rendered [`<Search>` component](/docs/built-ins/search). E.g. `<Search {...searchProps} />`
-@remarks `ReactNode`
    * @default <Search />
    */
-  search?: "@TODO TO IMPLEMENT"
+  search?: ReactNode
 
   /**
    * @default {"defaultMenuCollapseLevel":2,"defaultOpen":true,"toggleButton":true}
@@ -193,16 +184,14 @@ By default, it's a link to the issue creation form of the docs repository, with 
   toc?: {
     /**
      * Text of back to top button.
-@remarks `ReactNode`
      * @default "Scroll to top"
      */
-    backToTop?: "@TODO TO IMPLEMENT"
+    backToTop?: ReactNode
 
     /**
      * Display extra content below the TOC content.
-@remarks `ReactNode`
      */
-    extraContent?: "@TODO TO IMPLEMENT"
+    extraContent?: ReactNode
 
     /**
      * Float the TOC next to the content.
@@ -212,9 +201,8 @@ By default, it's a link to the issue creation form of the docs repository, with 
 
     /**
      * Title of the TOC sidebar.
-@remarks `ReactNode`
      * @default "On This Page"
      */
-    title?: "@TODO TO IMPLEMENT"
+    title?: ReactNode
   }
 }

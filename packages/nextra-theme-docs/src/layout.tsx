@@ -16,9 +16,9 @@ const attributeSchema = z.custom<'class' | `data-${string}`>(
 )
 
 const feedbackSchema = z.strictObject({
-  content: reactNode.default('Question? Give us feedback')
-    .describe(`Content of the feedback link.
-@remarks \`ReactNode\``),
+  content: reactNode
+    .default('Question? Give us feedback')
+    .describe('Content of the feedback link.'),
   labels: z
     .string()
     .default('feedback')
@@ -73,25 +73,22 @@ const themeSwitchSchema = z.strictObject({
 const tocSchema = z.strictObject({
   backToTop: reactNode
     .default('Scroll to top')
-    .describe('Text of back to top button.\n@remarks `ReactNode`'),
+    .describe('Text of back to top button.'),
   extraContent: reactNode.describe(
-    'Display extra content below the TOC content.\n@remarks `ReactNode`'
+    'Display extra content below the TOC content.'
   ),
   float: z
     .boolean()
     .default(true)
     .describe('Float the TOC next to the content.'),
-  title: reactNode
-    .default('On This Page')
-    .describe('Title of the TOC sidebar.\n@remarks `ReactNode`')
+  title: reactNode.default('On This Page').describe('Title of the TOC sidebar.')
 })
 
 export const LayoutPropsSchema = z.strictObject({
   banner: reactNode.describe(
-    `Rendered [\`<Banner>\` component](/docs/built-ins/banner). E.g. \`<Banner {...bannerProps} />\`
-@remarks \`ReactNode\``
+    'Rendered [`<Banner>\` component](/docs/built-ins/banner). E.g. `<Banner {...bannerProps} />`'
   ),
-  children: reactNode.describe('@remarks `ReactNode`'),
+  children: reactNode,
   darkMode: z
     .boolean()
     .default(true)
@@ -101,13 +98,12 @@ export const LayoutPropsSchema = z.strictObject({
     .startsWith('https://')
     .default('https://github.com/shuding/nextra')
     .describe('URL of the documentation repository.'),
-  editLink: reactNode.default('Edit this page')
-    .describe(`Content of the edit link.
-@remarks \`ReactNode\``),
+  editLink: reactNode
+    .default('Edit this page')
+    .describe('Content of the edit link.'),
   feedback: feedbackSchema.default(feedbackSchema.parse({})),
   footer: reactNode.describe(
-    `Rendered [\`<Footer>\` component](/docs/docs-theme/built-ins/footer). E.g. \`<Footer {...footerProps} />\`
-@remarks \`ReactNode\``
+    'Rendered [`<Footer>` component](/docs/docs-theme/built-ins/footer). E.g. `<Footer {...footerProps} />`'
   ),
   i18n: z
     .array(
@@ -140,8 +136,7 @@ import { Layout, LastUpdated } from 'nextra-theme-docs'
     }).describe(`Component to render the last updated info.
 @remarks \`ReactElement\``),
   navbar: reactNode.describe(
-    `Rendered [\`<Navbar>\` component](/docs/docs-theme/built-ins/navbar). E.g. \`<Navbar {...navbarProps} />\`
-@remarks \`ReactNode\``
+    'Rendered [`<Navbar>` component](/docs/docs-theme/built-ins/navbar). E.g. `<Navbar {...navbarProps} />`'
   ),
   navigation: z
     .union([
@@ -162,10 +157,11 @@ import { Layout, LastUpdated } from 'nextra-theme-docs'
   pageMap: z.array(z.custom<PageMapItem>())
     .describe(`Page map list. Result of \`getPageMap(route = '/')\` call.
 @remarks \`PageMapItem[]\``),
-  search: reactNode.default(<Search />).describe(
-    `Rendered [\`<Search>\` component](/docs/built-ins/search). E.g. \`<Search {...searchProps} />\`
-@remarks \`ReactNode\``
-  ),
+  search: reactNode
+    .default(<Search />)
+    .describe(
+      'Rendered [`<Search>` component](/docs/built-ins/search). E.g. `<Search {...searchProps} />`'
+    ),
   sidebar: sidebarSchema.default(sidebarSchema.parse({})),
   themeSwitch: themeSwitchSchema.default(themeSwitchSchema.parse({}))
     .describe(`Translation of options in the theme switch.
