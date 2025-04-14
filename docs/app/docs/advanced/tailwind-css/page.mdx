@@ -13,48 +13,23 @@ to set up Tailwind CSS for your Nextra project.
 
 <Steps>
 
-## Create `tailwind.config.js` file
-
-To use Tailwind classes in your Markdown files, you will also need to add `.md`
-and `.mdx` files to the `content` list in `tailwind.config.js`:
-
-```js filename="tailwind.config.js" /md,mdx/
-/** @type {import('tailwindcss').Config} */
-export default {
-  content: [
-    './app/**/*.{js,jsx,ts,tsx,md,mdx}',
-    './content/**/*.{md,mdx}',
-
-    // Or if using `src` directory:
-    './src/**/*.{js,jsx,ts,tsx,md,mdx}'
-  ],
-  theme: {
-    extend: {}
-  },
-  plugins: []
-}
-```
-
-> [!TIP]
->
-> You can also use a `tailwind.config.ts` file if you prefer TypeScript for your
-> Tailwind CSS configuration.
-
 ## Create the `globals.css` file
 
-Create a CSS file for Tailwind directives, `globals.css` for example:
+Import Tailwind CSS in `globals.css` which includes Tailwind's base styles (Preflight), component styles and utility classes:
 
 ```css filename="globals.css"
-@tailwind base; /* Apply Tailwind's base styles (Preflight) */
-@tailwind components; /* Include component styles */
-@tailwind utilities; /* Include utility classes */
+@import 'tailwindcss';
+
+@variant dark (&:where(.dark *));
 ```
 
-> [!NOTE]
->
-> If you're using `nextra-theme-docs` or `nextra-theme-blog`, you don't need to
-> include the `@tailwind base` directive. These themes already import Tailwind's
-> preflight styles in their `style.css` files.
+## Import Nextra CSS styles
+
+If you are using `nextra-theme-docs` or `nextra-theme-blog`, you can import their styles in this file too:
+
+```css filename="globals.css"
+@import 'nextra-theme-docs/style.css'; /* or nextra-theme-blog/style.css */
+```
 
 ## Import styles in the root layout
 
