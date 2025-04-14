@@ -23,19 +23,18 @@ export const NavbarPropsSchema = z.strictObject({
   projectLink: z.string().optional().meta({
     description: 'URL of the project homepage.'
   }),
-  projectIcon: reactNode.default(
-    <GitHubIcon height="24" aria-label="Project repository" />
-  ).meta({
-    description: 'Icon of the project link.',
-    default: '<GitHubIcon />'
-  }),
+  projectIcon: reactNode
+    .default(<GitHubIcon height="24" aria-label="Project repository" />)
+    .meta({
+      description: 'Icon of the project link.',
+      default: '<GitHubIcon />'
+    }),
   chatLink: z.string().optional().meta({
     description: 'URL of the chat link.'
   }),
   chatIcon: reactNode.default(<DiscordIcon width="24" />).meta({
-    description: `Icon of the chat link.
-@remarks \`ReactNode\`
-@default <DiscordIcon />`
+    description: 'Icon of the chat link.',
+    default: '<DiscordIcon />'
   }),
   className: z.string().optional().meta({
     description: 'CSS class name.'

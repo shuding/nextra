@@ -33,9 +33,7 @@ type $ = {
 
   /**
    * Icon of the chat link.
-@remarks `ReactNode`
-@default <DiscordIcon />
-   * @default <SvgDiscord />
+   * @default <DiscordIcon />
    */
   chatIcon?: ReactNode
 
