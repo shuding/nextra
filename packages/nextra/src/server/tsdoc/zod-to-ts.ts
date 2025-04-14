@@ -22,6 +22,12 @@ export function generateTsFromZod(schema: z.ZodType, indent = 2): string {
 
 function generateTsFromZodType(schema: z.ZodType, indent: number): string {
   const { name } = schema.constructor
+  if (schema instanceof z.ZodCustom) {
+    const typeName = schema.meta()?.type as string | undefined
+    if (typeName) return typeName
+    const fnName = schema.def.fn.name
+    return fnName.startsWith('check') ? fnName.slice(5) : '"@TODO TO IMPLEMENT"'
+  }
   switch (name) {
     case 'ZodString':
       return 'string'
@@ -29,8 +35,10 @@ function generateTsFromZodType(schema: z.ZodType, indent: number): string {
       return 'number'
     case 'ZodBoolean':
       return 'boolean'
-    case 'ZodCustom':
-      return '"@TODO TO IMPLEMENT"'
+  }
+  if (schema instanceof z.ZodPipe) {
+    // @ts-expect-error -- fixme
+    return generateTsFromZodType(schema.in, indent)
   }
   if (schema instanceof z.ZodLiteral) {
     return `"${[...schema.values]}"`
@@ -49,7 +57,10 @@ function generateTsFromZodType(schema: z.ZodType, indent: number): string {
   }
   if (schema instanceof z.ZodUnion) {
     return schema.def.options
-      .map(opt => generateTsFromZodType(opt as z.ZodType, indent))
+      .map(opt => {
+        const r = generateTsFromZodType(opt as z.ZodType, indent)
+        return opt instanceof z.ZodArray ? `(${r.replace('[', ')[')}` : r
+      })
       .join(' | ')
   }
   if (schema instanceof z.ZodObject) {
