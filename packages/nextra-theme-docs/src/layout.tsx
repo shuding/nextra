@@ -37,10 +37,10 @@ const nextThemesSchema = z.strictObject({
   attribute: z
     .union([attributeSchema, z.array(attributeSchema)])
     .default('class'),
-  defaultTheme: z.string().optional(),
+  defaultTheme: z.string().default('system'),
   disableTransitionOnChange: z.boolean().default(true),
   forcedTheme: z.string().optional(),
-  storageKey: z.string().optional()
+  storageKey: z.string().default('theme')
 })
 
 const sidebarSchema = z.strictObject({
@@ -160,7 +160,6 @@ import { Layout, LastUpdated } from 'nextra-theme-docs'
     }),
   nextThemes: nextThemesSchema.default(nextThemesSchema.parse({})).meta({
     description: `Configuration for the [next-themes](https://github.com/pacocoursey/next-themes#themeprovider) package.
-@default { attribute: "class", defaultTheme: "system", disableTransitionOnChange: true, storageKey: "theme" }
 @remarks \`ThemeProviderProps\``
   }),
   pageMap: z.array(z.custom<PageMapItem>()).meta({

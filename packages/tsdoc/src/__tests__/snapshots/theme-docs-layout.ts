@@ -94,9 +94,8 @@ By default, it's a link to the issue creation form of the docs repository, with 
 
   /**
    * Configuration for the [next-themes](https://github.com/pacocoursey/next-themes#themeprovider) package.
-@default { attribute: "class", defaultTheme: "system", disableTransitionOnChange: true, storageKey: "theme" }
 @remarks `ThemeProviderProps`
-   * @default {"attribute":"class","disableTransitionOnChange":true}
+   * @default {"attribute":"class","defaultTheme":"system","disableTransitionOnChange":true,"storageKey":"theme"}
    */
   nextThemes?: {
     /**
@@ -104,6 +103,9 @@ By default, it's a link to the issue creation form of the docs repository, with 
      */
     attribute?: "@TODO TO IMPLEMENT" | "@TODO TO IMPLEMENT"[]
 
+    /**
+     * @default "system"
+     */
     defaultTheme?: string
 
     /**
@@ -113,6 +115,9 @@ By default, it's a link to the issue creation form of the docs repository, with 
 
     forcedTheme?: string
 
+    /**
+     * @default "theme"
+     */
     storageKey?: string
   }
 
