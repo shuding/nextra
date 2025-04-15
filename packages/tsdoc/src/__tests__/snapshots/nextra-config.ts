@@ -27,6 +27,9 @@ The reading time is added to the front matter under the `readingTime` key.
    */
   readingTime?: boolean
 
+  /**
+   * Enable LaTeX either with KaTeX (https://katex.org) to pre-render LaTeX expressions directly in MDX or MathJax (https://mathjax.org) to dynamically render math in the browser.
+   */
   latex?: boolean | {
     renderer: "mathjax"
 
