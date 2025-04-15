@@ -28,13 +28,16 @@ type $ = {
       src?: string
 
       /**
-       * MathJax config. See https://docs.mathjax.org/en/latest/options/index.html
+       * MathJax config. See https://docs.mathjax.org/en/latest/options/index.html.
        */
       config?: "@TODO TO IMPLEMENT"
     }
   } | {
     renderer: "katex"
 
+    /**
+     * KaTeX options. See https://katex.org/docs/options.html.
+     */
     options?: "@TODO TO IMPLEMENT"
   }
 
@@ -47,10 +50,19 @@ type $ = {
    * @default {"format":"detect","rehypePrettyCodeOptions":{}}
    */
   mdxOptions?: {
+    /**
+     * List of rehype plugins.
+     */
     rehypePlugins?: "@TODO TO IMPLEMENT"
 
+    /**
+     * List of remark plugins.
+     */
     remarkPlugins?: "@TODO TO IMPLEMENT"
 
+    /**
+     * List of recma plugins. This is a new ecosystem, currently in beta, to transform esast trees (JavaScript).
+     */
     recmaPlugins?: "@TODO TO IMPLEMENT"
 
     /**

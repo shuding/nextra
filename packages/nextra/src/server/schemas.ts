@@ -9,20 +9,27 @@ import { pageTitleFromFilename } from './utils.js'
 
 export const mathJaxOptionsSchema = z.strictObject({
   src: z.string().optional().meta({
-    description: 'URL for MathJax.',
+    description: 'URL for MathJax.'
     // default: 'https://cdnjs.cloudflare.com'
   }),
   config: z.custom<MathJax3Config>().optional().meta({
     description:
-      'MathJax config. See https://docs.mathjax.org/en/latest/options/index.html',
+      'MathJax config. See https://docs.mathjax.org/en/latest/options/index.html.'
     // type: 'MathJax3Config'
   })
 })
 
 const mdxOptionsSchema = z.strictObject({
-  rehypePlugins: z.custom<ProcessorOptions['rehypePlugins']>().optional(),
-  remarkPlugins: z.custom<ProcessorOptions['remarkPlugins']>().optional(),
-  recmaPlugins: z.custom<ProcessorOptions['recmaPlugins']>().optional(),
+  rehypePlugins: z.custom<ProcessorOptions['rehypePlugins']>().optional().meta({
+    description: 'List of rehype plugins.'
+  }),
+  remarkPlugins: z.custom<ProcessorOptions['remarkPlugins']>().optional().meta({
+    description: 'List of remark plugins.'
+  }),
+  recmaPlugins: z.custom<ProcessorOptions['recmaPlugins']>().optional().meta({
+    description:
+      'List of recma plugins. This is a new ecosystem, currently in beta, to transform esast trees (JavaScript).'
+  }),
   format: z.enum(['detect', 'mdx', 'md']).default('detect'),
   rehypePrettyCodeOptions: z.custom<RehypePrettyCodeOptions>().default({})
 })
@@ -50,7 +57,9 @@ export const nextraConfigSchema = z.strictObject({
       }),
       z.strictObject({
         renderer: z.literal('katex'),
-        options: z.custom<RehypeKatexOptions>()
+        options: z.custom<RehypeKatexOptions>().meta({
+          description: 'KaTeX options. See https://katex.org/docs/options.html.'
+        })
       })
     ])
     .optional(),
