@@ -1,56 +1,39 @@
 import { expectType } from 'tsd'
 import { z } from 'zod'
-import type { NextraConfigSchema } from '../schemas.js'
 import { NextraConfig } from '../../types.generated.js'
+import type { NextraConfigSchema } from '../schemas.js'
 
-type IsOptional<T, K extends keyof T> = {} extends Pick<T, K> ? true : false
-
-type FieldMismatchReport<A, B> = {
-  [K in keyof A | keyof B as K extends keyof A
-    ? K extends keyof B
-      ? IsOptional<A, K> extends IsOptional<B, K>
-        ? [A[K]] extends [B[K]]
-          ? [B[K]] extends [A[K]]
-            ? never
-            : K
-          : K
-        : K
-      : K
-    : K]: {
-    actual: K extends keyof A ? A[K] : never
-    expected: K extends keyof B ? B[K] : never
-  }
-}
-
-type TypeDifferenceDetails<A, B> = keyof FieldMismatchReport<A, B> extends never
-  ? never
-  : FieldMismatchReport<A, B>
-
-type AssertExact<A, B> =
-  TypeDifferenceDetails<A, B> extends never
+type IsEqual<A, B> =
+  (<G>() => G extends (A & G) | G ? 1 : 2) extends <G>() => G extends
+    | (B & G)
+    | G
+    ? 1
+    : 2
     ? true
-    : {
-        ERROR: 'Types are not equal'
-        DETAILS: TypeDifferenceDetails<A, B>
-      }
+    : false
 
-type $1 = AssertExact<{ foo: string }, { foo: number }>
+type $1 = IsEqual<{ foo: string }, { foo: number }>
 
 // @ts-expect-error -- foo should be a string
 expectType<$1>(true)
 
-type $2 = AssertExact<{ foo: { bar: string } }, { foo: { bar: number } }>
+type $2 = IsEqual<{ foo: { bar: string } }, { foo: { bar: number } }>
 
 // @ts-expect-error -- bar should be a string
 expectType<$2>(true)
 
-type $3 = AssertExact<{ foo?: string }, { foo: string }>
+type $3 = IsEqual<{ foo?: string }, { foo: string }>
 
 // @ts-expect-error -- foo should be optional
 expectType<$3>(true)
 
+type $4 = IsEqual<{ foo?: string }, { foo: string | undefined }>
+
+// @ts-expect-error -- foo should be optional, not undefined
+expectType<$4>(true)
+
 type NextraConfigFromZod = z.input<typeof NextraConfigSchema>
 
-type $4 = AssertExact<NextraConfigFromZod, NextraConfig>
+type $5 = IsEqual<NextraConfigFromZod, NextraConfig>
 
-expectType<$4>(true)
+expectType<$5>(true)
