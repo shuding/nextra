@@ -98,7 +98,9 @@ function getDocComment(schema: z.ZodType, indent: number): string {
   const defaultValue = getDefaultValue(schema)
   const def =
     meta.default ??
-    (defaultValue === undefined ? undefined : JSON.stringify(defaultValue, null, 2))
+    (defaultValue === undefined
+      ? undefined
+      : JSON.stringify(defaultValue, null, 2))
   const comments: string[] = []
   if (description) {
     comments.push(description)

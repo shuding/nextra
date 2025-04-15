@@ -77,20 +77,24 @@ export const NextraConfigSchema = z.strictObject({
         'Option to enable search functionality. When enabled, it sets the `data-pagefind-body` attribute on the `<main>` element.\n\
 > When set to `codeblocks: false`, it adds the `data-pagefind-ignore="all"` attribute to all code blocks (`<pre>` elements).'
     }),
-  staticImage: z.boolean().default(true).meta({
-    description:
-      `Option to automatically optimizing your static image imports with the Markdown syntax.
+  staticImage: z
+    .boolean()
+    .default(true)
+    .meta({
+      description: `Option to automatically optimizing your static image imports with the Markdown syntax.
 > [!TIP]
 >
 > Example: \`![Hello](/demo.png)\`.`
-  }),
-  readingTime: z.boolean().optional().meta({
-    description:
-      `Adds estimated reading time of \`.md\` and \`.mdx\` files using [readingTime](https://npmjs.com/package/reading-time) package.
+    }),
+  readingTime: z
+    .boolean()
+    .optional()
+    .meta({
+      description: `Adds estimated reading time of \`.md\` and \`.mdx\` files using [readingTime](https://npmjs.com/package/reading-time) package.
 > [!TIP]
 >
 > The reading time is added to the front matter under the \`readingTime\` key.`
-  }),
+    }),
   latex: z
     .union([
       z.boolean(),
