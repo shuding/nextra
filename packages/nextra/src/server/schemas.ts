@@ -73,8 +73,7 @@ export const NextraConfigSchema = z.strictObject({
     ])
     .default({ codeblocks: false })
     .meta({
-      description:
-        `Option to enable search functionality. When enabled, it sets the \`data-pagefind-body\` attribute on the \`<main>\` element.
+      description: `Option to enable search functionality. When enabled, it sets the \`data-pagefind-body\` attribute on the \`<main>\` element.
 > [!TIP]
 >
 > When set to \`codeblocks: false\`, it adds the \`data-pagefind-ignore="all"\` attribute to all code blocks (\`<pre>\` elements).`
@@ -129,13 +128,15 @@ export const NextraConfigSchema = z.strictObject({
     description: `Options specific to MDX compiling.
 @remarks \`MdxOptions\``
   }),
-  whiteListTagsStyling: z.array(z.string()).optional().meta({
-    description:
-      `Allows you to whitelist HTML elements to be replaced with components defined in the \`mdx-components.js\` file.
+  whiteListTagsStyling: z
+    .array(z.string())
+    .optional()
+    .meta({
+      description: `Allows you to whitelist HTML elements to be replaced with components defined in the \`mdx-components.js\` file.
 > [!TIP]
 >
 > By default, Nextra only replaces \`<details>\` and \`<summary>\` elements.`
-  }),
+    }),
   contentDirBasePath: z
     .string()
     .startsWith('/')
