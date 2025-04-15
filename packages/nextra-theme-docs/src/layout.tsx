@@ -92,7 +92,7 @@ export const LayoutPropsSchema = z.strictObject({
     .optional()
     .meta({
       description:
-        'Rendered [`<Banner>\` component](/docs/built-ins/banner). E.g. `<Banner {...bannerProps} />`'
+        'Rendered [`<Banner>` component](/docs/built-ins/banner). E.g. `<Banner {...bannerProps} />`'
     }),
   children: reactNode,
   darkMode: z.boolean().default(true).meta({
@@ -149,8 +149,8 @@ import { Layout, LastUpdated } from 'nextra-theme-docs'
 `
     })
     .meta({
-      description: 'Component to render the last updated info.',
-      default: '<LastUpdated />'
+      default: '<LastUpdated />',
+      description: 'Component to render the last updated info.'
     }),
   navbar: reactNode
     // @TODO added in zod v4
@@ -186,9 +186,9 @@ import { Layout, LastUpdated } from 'nextra-theme-docs'
       description: "Page map list. Result of `getPageMap(route = '/')` call."
     }),
   search: reactNode.default(<Search />).meta({
+    default: '<Search />',
     description:
-      'Rendered [`<Search>` component](/docs/built-ins/search). E.g. `<Search {...searchProps} />`',
-    default: '<Search />'
+      'Rendered [`<Search>` component](/docs/built-ins/search). E.g. `<Search {...searchProps} />`'
   }),
   sidebar: sidebarSchema.default(sidebarSchema.parse({})),
   themeSwitch: themeSwitchSchema.default(themeSwitchSchema.parse({})).meta({
