@@ -44,7 +44,8 @@ const MdxOptionsSchema = z.strictObject({
     .custom<RehypePrettyCodeOptions>()
     .default({})
     .meta({
-      description: 'Configuration options for [Rehype Pretty Code](https://github.com/rehype-pretty/rehype-pretty-code).\n\
+      description:
+        'Configuration options for [Rehype Pretty Code](https://github.com/rehype-pretty/rehype-pretty-code).\n\
 @remarks `RehypePrettyCodeOptions`',
       type: 'import("rehype-pretty-code").Options'
     })

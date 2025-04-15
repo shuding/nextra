@@ -50,6 +50,9 @@ const [nextMajorVersion, nextMinorVersion] = require('next/package.json')
 const shouldUseConfigTurbopack =
   nextMajorVersion > 15 || (nextMajorVersion === 15 && nextMinorVersion > 2)
 
+/**
+ * @see [`NextConfig` options](https://nextjs.org/docs/pages/api-reference/config/next-config-js).
+ */
 const nextra: Nextra = nextraConfig => {
   const { error, data: loaderOptions } =
     NextraConfigSchema.safeParse(nextraConfig)

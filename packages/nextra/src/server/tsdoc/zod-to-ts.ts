@@ -102,7 +102,9 @@ function getDocComment(schema: z.ZodType, indent: number): string {
     comments.push(` * ${description}`)
   }
   if (defaultValue !== undefined) {
-    comments.push(` * @default ${meta.default ?? JSON.stringify(defaultValue, null, 2)}`)
+    comments.push(
+      ` * @default ${meta.default ?? JSON.stringify(defaultValue, null, 2)}`
+    )
   }
   if (!comments.length) {
     return ''
