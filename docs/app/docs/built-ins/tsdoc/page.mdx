@@ -56,10 +56,10 @@ Generates a **properties table** with:
 To generate the props table for the `TSDoc` component shown on this page:
 
 ```mdx
-import { generateDefinitions, TSDoc } from 'nextra/tsdoc'
+import { generateDefinition, TSDoc } from 'nextra/tsdoc'
 
 <TSDoc
-  definitions={generateDefinitions({
+  definitions={generateDefinition({
     code: `
 import type { TSDoc } from 'nextra/tsdoc'
 type MyProps = React.ComponentProps<typeof TSDoc>

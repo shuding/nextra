@@ -7,15 +7,15 @@ import { Anchor } from '../../client/mdx-components/anchor.js'
 import { Code } from '../../client/mdx-components/code.js'
 import { MDXRemote } from '../../client/mdx-remote.js'
 import { compileMdx } from '../compile.js'
-import type { generateDefinitions } from './base.js'
+import type { generateDefinition } from './base.js'
 import type { GeneratedFunction, TypeField } from './types.js'
 
 type TSDocProps = {
   /**
    * Parsed `type`, `interface` or `function` definition from
-   * [`generateDefinitions` function](https://nextra.site/api/generatedefinitions).
+   * [`generateDefinition` function](https://nextra.site/api/generatedefinition).
    */
-  definition: ReturnType<typeof generateDefinitions>
+  definition: ReturnType<typeof generateDefinition>
   /**
    * Override the function to render markdown into JSX nodes.
    * @default

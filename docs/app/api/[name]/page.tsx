@@ -5,7 +5,7 @@ import { compileMdx } from 'nextra/compile'
 import { Callout } from 'nextra/components'
 import { evaluate } from 'nextra/evaluate'
 import { getPageMap } from 'nextra/page-map'
-import { generateDefinitions, TSDoc } from 'nextra/tsdoc'
+import { generateDefinition, TSDoc } from 'nextra/tsdoc'
 import type { FC } from 'react'
 
 const API_REFERENCE = [
@@ -34,7 +34,7 @@ export default $`,
   { name: 'generateStaticParamsFor', packageName: 'nextra/pages' },
   { name: 'importPage', packageName: 'nextra/pages' },
   { name: 'compileMdx', packageName: 'nextra/compile' },
-  { name: 'generateDefinitions', packageName: 'nextra/tsdoc' },
+  { name: 'generateDefinition', packageName: 'nextra/tsdoc' },
   { name: 'middleware', packageName: 'nextra/locales' },
   { name: 'evaluate', packageName: 'nextra/evaluate' },
   { name: 'normalizePages', packageName: 'nextra/normalize-pages' }
@@ -72,7 +72,7 @@ async function getReference(props: PageProps) {
     // @ts-expect-error -- fixme
     tags = {},
     ...rest
-  } = generateDefinitions({
+  } = generateDefinition({
     code:
       apiRef.code ??
       `export { ${apiRef.name} as default } from '${apiRef.packageName}'`,

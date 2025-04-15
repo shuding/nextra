@@ -5,4 +5,4 @@
 
 update zod to v4
 
-feat(TSDoc): rename `generateDocumentation` to `generateDefinitions`
+feat(TSDoc): rename `generateDocumentation` to `generateDefinition`
