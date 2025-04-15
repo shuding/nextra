@@ -2,16 +2,16 @@ import { NavbarPropsSchema } from '../../../nextra-theme-docs/src/components/nav
 import { LayoutPropsSchema } from '../../../nextra-theme-docs/src/layout.js'
 import { HeadPropsSchema } from '../../../nextra/src/client/components/head.js'
 import { NextraConfigSchema } from '../../../nextra/src/server/schemas.js'
-import { generateDocumentation } from '../../../nextra/src/server/tsdoc/base.js'
+import { generateDefinitions } from '../../../nextra/src/server/tsdoc/base.js'
 import { generateTsFromZod } from '../../../nextra/src/server/tsdoc/zod-to-ts.js'
 import typesFixture from './fixtures/flattened?raw'
 
-describe('generateDocumentation()', () => {
+describe('generateDefinitions()', () => {
   test('<Banner />', async () => {
     const code = `import type { Banner } from 'nextra/components'
 type $ = React.ComponentProps<typeof Banner>
 export default $`
-    const result = generateDocumentation({ code })
+    const result = generateDefinitions({ code })
     expect(result).toMatchInlineSnapshot(`
       {
         "entries": [
@@ -47,14 +47,14 @@ export default $`
     const code = `import type { Search } from 'nextra/components'
 type $ = React.ComponentProps<typeof Search>
 export default $`
-    const result = generateDocumentation({ code })
+    const result = generateDefinitions({ code })
     await expect(result).toMatchFileSnapshot('./snapshots/search.json')
   })
   test('<Callout />', async () => {
     const code = `import type { Callout } from 'nextra/components'
 type $ = React.ComponentProps<typeof Callout>
 export default $`
-    const result = generateDocumentation({ code })
+    const result = generateDefinitions({ code })
     expect(result).toMatchInlineSnapshot(`
       {
         "entries": [
@@ -99,7 +99,7 @@ export default $`
     const code = `import type { NotFoundPage } from 'nextra-theme-docs'
 type $ = React.ComponentProps<typeof NotFoundPage>
 export default $`
-    const result = generateDocumentation({ code })
+    const result = generateDefinitions({ code })
     expect(result).toMatchInlineSnapshot(`
       {
         "entries": [
@@ -144,25 +144,25 @@ export default $`
   test('<Navbar />', async () => {
     const code = `type $ = ${generateTsFromZod(NavbarPropsSchema)}
 export default $`
-    const result = generateDocumentation({ code })
+    const result = generateDefinitions({ code })
     await expect(result).toMatchFileSnapshot('./snapshots/navbar.json')
   })
   test('<Head /> with `flattened: true`', async () => {
     const code = `type $ = ${generateTsFromZod(HeadPropsSchema)}
 export default $`
-    const result = generateDocumentation({ code, flattened: true })
+    const result = generateDefinitions({ code, flattened: true })
     await expect(result).toMatchFileSnapshot('./snapshots/head.json')
   })
   test('DocsLayoutProps with `flattened: true`', async () => {
     const code = `type $ = ${generateTsFromZod(LayoutPropsSchema)}
 export default $`
-    const result = generateDocumentation({ code, flattened: true })
+    const result = generateDefinitions({ code, flattened: true })
     await expect(result).toMatchFileSnapshot('./snapshots/layout-props.json')
   })
   test('NextraConfig with `flattened: true`', async () => {
     const code = `type $ = ${generateTsFromZod(NextraConfigSchema)}
 export default $`
-    const result = generateDocumentation({ code, flattened: true })
+    const result = generateDefinitions({ code, flattened: true })
     await expect(result).toMatchFileSnapshot('./snapshots/nextra-config.json')
   })
   test('two declarations', async () => {
@@ -170,7 +170,7 @@ export default $`
 type A = { foo: string }
 type A = { bar: string }
 export default A`
-    const result = generateDocumentation({ code })
+    const result = generateDefinitions({ code })
     expect(result).toMatchInlineSnapshot(`
       {
         "entries": [
@@ -196,7 +196,7 @@ breadcrumb?: boolean
 collapsed?: boolean
 }
 export default $`
-    const result = generateDocumentation({ code })
+    const result = generateDefinitions({ code })
     expect(result).toMatchInlineSnapshot(`
       {
         "entries": [
@@ -225,7 +225,7 @@ type Connection = {
   targetHandle: string | null;
 };
 export default Connection`
-    const result = generateDocumentation({ code })
+    const result = generateDefinitions({ code })
     expect(result).toMatchInlineSnapshot(`
       {
         "entries": [
@@ -243,7 +243,7 @@ export default Connection`
     test('should flatten return type for useThemeConfig', async () => {
       const code =
         'export { useThemeConfig as default } from "../nextra-theme-docs/src"'
-      const result = generateDocumentation({ code, flattened: true })
+      const result = generateDefinitions({ code, flattened: true })
       await expect(result).toMatchFileSnapshot(
         './snapshots/use-theme-config.json'
       )
@@ -251,7 +251,7 @@ export default Connection`
 
     test('should flatten return type for useConfig', async () => {
       const code = 'export { useConfig as default } from "nextra-theme-docs"'
-      const result = generateDocumentation({ code, flattened: true })
+      const result = generateDefinitions({ code, flattened: true })
       await expect(result).toMatchFileSnapshot('./snapshots/use-config.json')
     })
 
@@ -261,7 +261,7 @@ export default Connection`
 }
 export default $
 `
-      const result = generateDocumentation({ code })
+      const result = generateDefinitions({ code })
       expect(result).toMatchInlineSnapshot(`
         {
           "entries": [
@@ -277,7 +277,7 @@ export default $
     test('should be parsed as function type', () => {
       const code =
         "export { useNodeConnections as default } from '@xyflow/react'"
-      const result = generateDocumentation({ code, flattened: true })
+      const result = generateDefinitions({ code, flattened: true })
       expect(result).toMatchInlineSnapshot(`
         {
           "description": "This hook returns an array of connections on a specific node, handle type ('source', 'target') or handle ID.",
@@ -344,7 +344,7 @@ export default $
     })
     test('as function with description', () => {
       const code = "export { useInternalNode as default } from '@xyflow/react'"
-      const result = generateDocumentation({ code, flattened: true })
+      const result = generateDefinitions({ code, flattened: true })
       expect(result).toMatchInlineSnapshot(`
         {
           "description": "This hook returns the internal representation of a specific node.
@@ -395,7 +395,7 @@ export default $
 
     test("should not throw when symbol isn't found", () => {
       const code = "export { isEdge as default } from '@xyflow/react'"
-      const result = generateDocumentation({ code, flattened: true })
+      const result = generateDefinitions({ code, flattened: true })
       expect(result).toMatchInlineSnapshot(`
         {
           "description": "Test whether an object is usable as an [\`Edge\`](/api-reference/types/edge).
@@ -440,7 +440,7 @@ export default $
 
     test('should parse multiple function signatures', () => {
       const code = "export { useNodesData as default } from '@xyflow/react'"
-      const result = generateDocumentation({ code, flattened: true })
+      const result = generateDefinitions({ code, flattened: true })
       expect(result).toMatchInlineSnapshot(`
         {
           "description": "This hook lets you subscribe to changes of a specific nodes \`data\` object.",
@@ -492,7 +492,7 @@ export default $
     test('should parse optional parameters', () => {
       const code =
         'function foo(a: string, b?: number, c = true) {}\nexport default foo'
-      const result = generateDocumentation({ code, flattened: true })
+      const result = generateDefinitions({ code, flattened: true })
       expect(result).toMatchInlineSnapshot(`
         {
           "name": "foo",
@@ -531,7 +531,7 @@ type foo = (params: {
   map?: Map<string, number>,
 }) => void
 export default foo`
-      const result = generateDocumentation({ code, flattened: true })
+      const result = generateDefinitions({ code, flattened: true })
       expect(result).toMatchInlineSnapshot(`
         {
           "name": "__type",
@@ -567,7 +567,7 @@ export default foo`
   test('should exclude {@link ...}', async () => {
     const code =
       "export { getViewportForBounds as default } from '@xyflow/react'"
-    const result = generateDocumentation({ code, flattened: true })
+    const result = generateDefinitions({ code, flattened: true })
     await expect(result).toMatchFileSnapshot(
       './snapshots/get-viewport-for-bounds.json'
     )
@@ -575,13 +575,13 @@ export default foo`
 
   test('should flatten array return type', async () => {
     const code = 'export { useEdgesState as default } from "@xyflow/react"'
-    const result = generateDocumentation({ code, flattened: true })
+    const result = generateDefinitions({ code, flattened: true })
     await expect(result).toMatchFileSnapshot('./snapshots/use-edges-state.json')
   })
 
   test('should parse `unknown` type', () => {
     const code = 'function foo(a?: unknown) {}\nexport default foo'
-    const result = generateDocumentation({ code, flattened: true })
+    const result = generateDefinitions({ code, flattened: true })
     expect(result).toMatchInlineSnapshot(`
       {
         "name": "foo",
@@ -604,7 +604,7 @@ export default foo`
   })
 
   test('should flatten params', async () => {
-    const result = generateDocumentation({
+    const result = generateDefinitions({
       code: "export { getSmoothStepPath as default } from '@xyflow/react'",
       flattened: true
     })
@@ -614,7 +614,7 @@ export default foo`
   })
 
   test('should remove `undefined` from optional fields', () => {
-    const result = generateDocumentation({
+    const result = generateDefinitions({
       code: `
 type $ = {
   a?: string
@@ -648,7 +648,7 @@ export default $`,
   })
 
   test('should flatten only object', async () => {
-    const result = generateDocumentation({
+    const result = generateDefinitions({
       code: typesFixture,
       flattened: true
     })
@@ -668,7 +668,7 @@ export default $`,
 }
 
 export default $`
-    const result = generateDocumentation({ code })
+    const result = generateDefinitions({ code })
     expect(result).toMatchInlineSnapshot(`
       {
         "entries": [
@@ -698,8 +698,8 @@ type $ = {
   foo: React.ReactNode
 }
 export default $`
-    const result = generateDocumentation({ code })
-    const result2 = generateDocumentation({
+    const result = generateDefinitions({ code })
+    const result2 = generateDefinitions({
       code: code
         .replace('export default $', '')
         .replace('type $ =', 'export default')

@@ -2,7 +2,7 @@
 // @ts-nocheck
 
 import { useMDXComponents as getDocsMDXComponents } from 'nextra-theme-docs'
-import { generateDocumentation, TSDoc } from 'nextra/tsdoc'
+import { generateDefinitions, TSDoc } from 'nextra/tsdoc'
 
 const { img: Image, ...docsComponents } = getDocsMDXComponents({
   APIDocs({
@@ -28,7 +28,7 @@ export default $`
     } else {
       code = props.code
     }
-    const definition = generateDocumentation({
+    const definition = generateDefinitions({
       code,
       ...props
     })

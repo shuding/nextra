@@ -33,10 +33,10 @@ const { compilerObject } = project.getTypeChecker()
  * ### As a `default` export
  *
  * ```mdx
- * import { generateDocumentation, TSDoc } from 'nextra/tsdoc'
+ * import { generateDefinitions, TSDoc } from 'nextra/tsdoc'
  *
  * <TSDoc
- *   definitions={generateDocumentation({
+ *   definitions={generateDefinitions({
  *     code: "export { yourTypeOrFunction as default } from 'your-package'",
  *   })}
  * />
@@ -45,17 +45,17 @@ const { compilerObject } = project.getTypeChecker()
  * ### As a named export
  *
  * ```mdx
- * import { generateDocumentation, TSDoc } from 'nextra/tsdoc'
+ * import { generateDefinitions, TSDoc } from 'nextra/tsdoc'
  *
  * <TSDoc
- *   definitions={generateDocumentation({
+ *   definitions={generateDefinitions({
  *     code: "export { yourTypeOrFunction } from 'your-package'",
  *     exportName: 'yourTypeOrFunction'
  *   })}
  * />
  * ```
  */
-export function generateDocumentation({
+export function generateDefinitions({
   code,
   exportName = 'default',
   flattened = false
@@ -140,7 +140,7 @@ export function generateDocumentation({
     const typeName = declarationType.getText()
     if (typeName === 'any') {
       throw new Error(
-        'Your type is resolved as "any", it seems like you have an issue in "generateDocumentation.code" argument.'
+        'Your type is resolved as "any", it seems like you have an issue in "generateDefinitions.code" argument.'
       )
     }
     throw new Error(
