@@ -15,7 +15,7 @@ export const MathJaxOptionsSchema = z.strictObject({
   config: z.custom<MathJax3Config>().optional().meta({
     description:
       'MathJax config. See https://docs.mathjax.org/en/latest/options/index.html.',
-    type: 'MathJax3Config'
+    type: 'import("better-react-mathjax").MathJax3Config'
   })
 })
 
@@ -44,7 +44,7 @@ const MdxOptionsSchema = z.strictObject({
     .custom<RehypePrettyCodeOptions>()
     .default({})
     .meta({
-      type: 'RehypePrettyCodeOptions'
+      type: 'import("rehype-pretty-code").Options'
     })
 })
 
@@ -94,7 +94,7 @@ The reading time is added to the front matter under the `readingTime` key.'
         options: z.custom<RehypeKatexOptions>().meta({
           description:
             'KaTeX options. See https://katex.org/docs/options.html.',
-          type: 'RehypeKatexOptions'
+          type: 'import("rehype-katex").Options'
         })
       })
     ])

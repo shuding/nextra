@@ -52,7 +52,7 @@ The reading time is added to the front matter under the `readingTime` key.
       /**
        * MathJax config. See https://docs.mathjax.org/en/latest/options/index.html.
        */
-      config?: MathJax3Config
+      config?: import("better-react-mathjax").MathJax3Config
     }
   } | {
     renderer: "katex"
@@ -60,7 +60,7 @@ The reading time is added to the front matter under the `readingTime` key.
     /**
      * KaTeX options. See https://katex.org/docs/options.html.
      */
-    options?: RehypeKatexOptions
+    options?: import("rehype-katex").Options
   }
 
   /**
@@ -101,7 +101,7 @@ The reading time is added to the front matter under the `readingTime` key.
     /**
      * @default {}
      */
-    rehypePrettyCodeOptions?: RehypePrettyCodeOptions
+    rehypePrettyCodeOptions?: import("rehype-pretty-code").Options
   }
 
   /**
