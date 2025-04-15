@@ -21,7 +21,6 @@ type $ = {
 
   /**
    * Option to automatically optimizing your static image imports with the Markdown syntax.
-   * 
    * > E.g. `![Hello](/demo.png)`.
    * @default true
    */
