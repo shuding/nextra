@@ -25,7 +25,8 @@ When set to `codeblocks: false`, it adds the `data-pagefind-ignore="all"` attrib
   staticImage?: boolean
 
   /**
-   * Adds estimated reading time of `.md` and `.mdx` files using https://npmjs.com/package/reading-time.
+   * Adds estimated reading time of `.md` and `.mdx` files using https://npmjs.com/package/reading-time package.
+
 The reading time is added to the front matter under the `readingTime` key.
    */
   readingTime?: boolean

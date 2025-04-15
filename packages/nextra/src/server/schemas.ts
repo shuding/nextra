@@ -73,7 +73,7 @@ When set to `codeblocks: false`, it adds the `data-pagefind-ignore="all"` attrib
   }),
   readingTime: z.boolean().optional().meta({
     description:
-      'Adds estimated reading time of `.md` and `.mdx` files using https://npmjs.com/package/reading-time.\n\
+      'Adds estimated reading time of `.md` and `.mdx` files using https://npmjs.com/package/reading-time package.\n\n\
 The reading time is added to the front matter under the `readingTime` key.'
   }),
   latex: z
