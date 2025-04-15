@@ -66,12 +66,13 @@ export const NextraConfigSchema = z.strictObject({
     .default({ codeblocks: false })
     .meta({
       description:
-        'Option to enable search functionality. When enabled, it sets the `data-pagefind-body` attribute on the `<main>` element.\n\n\
+        'Option to enable search functionality. When enabled, it sets the `data-pagefind-body` attribute on the `<main>` element.\n\
 > When set to `codeblocks: false`, it adds the `data-pagefind-ignore="all"` attribute to all code blocks (`<pre>` elements).'
     }),
   staticImage: z.boolean().default(true).meta({
     description:
-      'Option to automatically optimizing your static image imports with the Markdown syntax.\n\nE.g. `![Hello](/demo.png)`.'
+      'Option to automatically optimizing your static image imports with the Markdown syntax.\n\n\
+> E.g. `![Hello](/demo.png)`.'
   }),
   readingTime: z.boolean().optional().meta({
     description:
@@ -112,8 +113,6 @@ The reading time is added to the front matter under the `readingTime` key.'
   whiteListTagsStyling: z.array(z.string()).optional().meta({
     description:
       'Allows you to whitelist HTML elements to be replaced with components defined in the `mdx-components.js` file.\n\
-> [!TIP]\n\
->\n\
 > By default, Nextra only replaces `<details>` and `<summary>` elements.'
   }),
   contentDirBasePath: z
