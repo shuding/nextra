@@ -21,6 +21,10 @@ You can still disable the button for specific blocks using `copy=false`.
    */
   staticImage?: boolean
 
+  /**
+   * Adds estimated reading time of `.md` and `.mdx` files using https://npmjs.com/package/reading-time.
+The reading time is added to the front matter under the `readingTime` key.
+   */
   readingTime?: boolean
 
   latex?: boolean | {

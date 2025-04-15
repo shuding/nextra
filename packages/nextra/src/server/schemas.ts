@@ -66,7 +66,11 @@ You can still disable the button for specific blocks using `copy=false`.'
     description:
       'Option to automatically optimizing your static image imports with the Markdown syntax. E.g. `![Hello](/demo.png)`.'
   }),
-  readingTime: z.boolean().optional(),
+  readingTime: z.boolean().optional().meta({
+    description:
+      'Adds estimated reading time of `.md` and `.mdx` files using https://npmjs.com/package/reading-time.\n\
+The reading time is added to the front matter under the `readingTime` key.'
+  }),
   latex: z
     .union([
       z.boolean(),
