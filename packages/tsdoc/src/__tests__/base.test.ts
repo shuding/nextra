@@ -1,6 +1,7 @@
 import { NavbarPropsSchema } from '../../../nextra-theme-docs/src/components/navbar/index.js'
 import { LayoutPropsSchema } from '../../../nextra-theme-docs/src/layout.js'
 import { HeadPropsSchema } from '../../../nextra/src/client/components/head.js'
+import { NextraConfigSchema } from '../../../nextra/src/server/schemas.js'
 import { generateDocumentation } from '../../../nextra/src/server/tsdoc/base.js'
 import { generateTsFromZod } from '../../../nextra/src/server/tsdoc/zod-to-ts.js'
 import typesFixture from './fixtures/flattened?raw'
@@ -152,13 +153,17 @@ export default $`
     const result = generateDocumentation({ code, flattened: true })
     await expect(result).toMatchFileSnapshot('./snapshots/head.json')
   })
-  test('<Layout /> with `flattened: true`', async () => {
+  test('DocsLayoutProps with `flattened: true`', async () => {
     const code = `type $ = ${generateTsFromZod(LayoutPropsSchema)}
 export default $`
     const result = generateDocumentation({ code, flattened: true })
-    await expect(result).toMatchFileSnapshot(
-      './snapshots/theme-docs-layout.json'
-    )
+    await expect(result).toMatchFileSnapshot('./snapshots/layout-props.json')
+  })
+  test('NextraConfig with `flattened: true`', async () => {
+    const code = `type $ = ${generateTsFromZod(NextraConfigSchema)}
+export default $`
+    const result = generateDocumentation({ code, flattened: true })
+    await expect(result).toMatchFileSnapshot('./snapshots/nextra-config.json')
   })
   test('two declarations', async () => {
     const code = `

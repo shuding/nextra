@@ -183,7 +183,7 @@ describe('generateTsFromZod', () => {
 
   it('should convert LayoutPropsSchema', () => {
     return expect('type $ = ' + generateTsFromZod(LayoutPropsSchema)).toMatchFileSnapshot(
-      './snapshots/theme-docs-layout.ts'
+      './snapshots/layout-props.ts'
     )
   })
   it('should convert NavbarPropsSchema', () => {
