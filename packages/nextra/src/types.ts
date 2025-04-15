@@ -6,13 +6,13 @@ import type {
   MathJaxOptionsSchema,
   menuSchema,
   metaSchema,
+  NextraConfigSchema,
   separatorItemSchema
 } from './server/schemas.js'
-import type { NextraConfig } from './types.generated.js'
 
-export { NextraConfig }
+export type { NextraConfig } from './types.generated.js'
 
-export interface LoaderOptions extends NextraConfig {
+export interface LoaderOptions extends z.infer<typeof NextraConfigSchema> {
   isPageImport?: boolean
   locales: string[]
   contentDir?: string

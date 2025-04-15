@@ -9,6 +9,8 @@ export type NextraConfig = {
 
   /**
    * Option to enable search functionality. When enabled, it sets the `data-pagefind-body` attribute on the `<main>` element.
+   * > [!TIP]
+   * >
    * > When set to `codeblocks: false`, it adds the `data-pagefind-ignore="all"` attribute to all code blocks (`<pre>` elements).
    * @default {
    *   "codeblocks": false
@@ -114,6 +116,8 @@ export type NextraConfig = {
 
   /**
    * Allows you to whitelist HTML elements to be replaced with components defined in the `mdx-components.js` file.
+   * > [!TIP]
+   * >
    * > By default, Nextra only replaces `<details>` and `<summary>` elements.
    */
   whiteListTagsStyling?: string[]
