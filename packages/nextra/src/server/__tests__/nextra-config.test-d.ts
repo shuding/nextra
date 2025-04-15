@@ -1,4 +1,7 @@
 import { expectType } from 'tsd'
+import { z } from 'zod'
+import type { NextraConfigSchema } from '../schemas.js'
+import { NextraConfig } from '../../types.generated.js'
 
 type IsOptional<T, K extends keyof T> = {} extends Pick<T, K> ? true : false
 
@@ -45,3 +48,9 @@ type $3 = AssertExact<{ foo?: string }, { foo: string }>
 
 // @ts-expect-error -- foo should be optional
 expectType<$3>(true)
+
+type NextraConfigFromZod = z.input<typeof NextraConfigSchema>
+
+type $4 = AssertExact<NextraConfigFromZod, NextraConfig>
+
+expectType<$4>(true)

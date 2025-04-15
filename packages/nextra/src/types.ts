@@ -9,6 +9,7 @@ import type {
   NextraConfigSchema,
   separatorItemSchema
 } from './server/schemas.js'
+import type { NextraConfig } from './types.generated.js'
 
 export interface LoaderOptions extends z.infer<typeof NextraConfigSchema> {
   isPageImport?: boolean
@@ -90,7 +91,7 @@ export type ReadingTime = {
   words: number
 }
 
-export type NextraConfig = z.input<typeof NextraConfigSchema>
+export { NextraConfig }
 
 export type MathJaxOptions = z.infer<typeof MathJaxOptionsSchema>
 

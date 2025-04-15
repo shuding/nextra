@@ -22,7 +22,7 @@ export default defineConfig({
   external: ['shiki', 'webpack'],
   async onSuccess() {
     // Fixes hydration errors in client apps due "type": "module" in root package.json
-    const clientPackageJSON = path.join(CWD, 'dist', 'client', 'package.json')
+    const clientPackageJSON = path.resolve('dist', 'client', 'package.json')
     await fs.writeFile(clientPackageJSON, '{"sideEffects":false}')
 
     const generatedTypes = `export type NextraConfig = ${generateTsFromZod(NextraConfigSchema)}`
