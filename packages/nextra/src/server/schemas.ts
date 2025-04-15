@@ -7,7 +7,7 @@ import type { Options as RehypePrettyCodeOptions } from 'rehype-pretty-code'
 import { z } from 'zod'
 import { pageTitleFromFilename } from './utils.js'
 
-export const mathJaxOptionsSchema = z.strictObject({
+export const MathJaxOptionsSchema = z.strictObject({
   src: z.string().optional().meta({
     description: 'URL for MathJax.'
     // default: 'https://cdnjs.cloudflare.com'
@@ -19,7 +19,7 @@ export const mathJaxOptionsSchema = z.strictObject({
   })
 })
 
-const mdxOptionsSchema = z.strictObject({
+const MdxOptionsSchema = z.strictObject({
   rehypePlugins: z.custom<ProcessorOptions['rehypePlugins']>().optional().meta({
     description: 'List of rehype plugins.'
   }),
@@ -38,7 +38,7 @@ const mdxOptionsSchema = z.strictObject({
   rehypePrettyCodeOptions: z.custom<RehypePrettyCodeOptions>().default({})
 })
 
-export const nextraConfigSchema = z.strictObject({
+export const NextraConfigSchema = z.strictObject({
   defaultShowCopyCode: z.boolean().optional(),
   search: z
     .union([
@@ -57,7 +57,7 @@ export const nextraConfigSchema = z.strictObject({
       z.boolean(),
       z.strictObject({
         renderer: z.literal('mathjax'),
-        options: mathJaxOptionsSchema.optional()
+        options: MathJaxOptionsSchema.optional()
       }),
       z.strictObject({
         renderer: z.literal('katex'),
@@ -68,7 +68,7 @@ export const nextraConfigSchema = z.strictObject({
     ])
     .optional(),
   codeHighlight: z.boolean().default(true),
-  mdxOptions: mdxOptionsSchema.default(mdxOptionsSchema.parse({})),
+  mdxOptions: MdxOptionsSchema.default(MdxOptionsSchema.parse({})),
   whiteListTagsStyling: z.array(z.string()).optional(),
   contentDirBasePath: z
     .string()

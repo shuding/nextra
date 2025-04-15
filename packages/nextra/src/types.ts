@@ -3,14 +3,14 @@ import type { Metadata, NextConfig } from 'next'
 import type { FC, ReactElement, ReactNode } from 'react'
 import type { z } from 'zod'
 import type {
-  mathJaxOptionsSchema,
+  MathJaxOptionsSchema,
   menuSchema,
   metaSchema,
-  nextraConfigSchema,
+  NextraConfigSchema,
   separatorItemSchema
 } from './server/schemas.js'
 
-export interface LoaderOptions extends z.infer<typeof nextraConfigSchema> {
+export interface LoaderOptions extends z.infer<typeof NextraConfigSchema> {
   isPageImport?: boolean
   locales: string[]
   contentDir?: string
@@ -90,9 +90,9 @@ export type ReadingTime = {
   words: number
 }
 
-export type NextraConfig = z.input<typeof nextraConfigSchema>
+export type NextraConfig = z.input<typeof NextraConfigSchema>
 
-export type MathJaxOptions = z.infer<typeof mathJaxOptionsSchema>
+export type MathJaxOptions = z.infer<typeof MathJaxOptionsSchema>
 
 export type Nextra = (
   nextraConfig: NextraConfig

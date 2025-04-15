@@ -3,7 +3,7 @@ import { z } from 'zod'
 import { LayoutPropsSchema } from '../../../nextra-theme-docs/src/layout.js'
 import { NavbarPropsSchema } from '../../../nextra-theme-docs/src/components/navbar/index.js'
 import { HeadPropsSchema } from '../../../nextra/src/client/components/head.js'
-import { nextraConfigSchema } from '../../../nextra/src/server/schemas.js'
+import { NextraConfigSchema } from '../../../nextra/src/server/schemas.js'
 import { generateTsFromZod } from '../../../nextra/src/server/tsdoc/zod-to-ts.js'
 
 describe('generateTsFromZod', () => {
@@ -196,8 +196,8 @@ describe('generateTsFromZod', () => {
       './snapshots/head-props.ts'
     )
   })
-  it('should convert nextraConfigSchema', () => {
-    return expect('type $ = ' + generateTsFromZod(nextraConfigSchema)).toMatchFileSnapshot(
+  it('should convert NextraConfigSchema', () => {
+    return expect('type $ = ' + generateTsFromZod(NextraConfigSchema)).toMatchFileSnapshot(
       './snapshots/nextra-config.ts'
     )
   })

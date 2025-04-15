@@ -8,7 +8,7 @@ import type { RuleSetRule } from 'webpack'
 import { fromZodError } from 'zod-validation-error'
 import type { Nextra } from '../types.js'
 import { CWD, MARKDOWN_EXTENSION_RE } from './constants.js'
-import { nextraConfigSchema } from './schemas.js'
+import { NextraConfigSchema } from './schemas.js'
 import { logger } from './utils.js'
 
 const require = createRequire(import.meta.url)
@@ -52,7 +52,7 @@ const shouldUseConfigTurbopack =
 
 const nextra: Nextra = nextraConfig => {
   const { error, data: loaderOptions } =
-    nextraConfigSchema.safeParse(nextraConfig)
+    NextraConfigSchema.safeParse(nextraConfig)
   if (error) {
     logger.error('Error validating nextraConfig')
     throw fromZodError(error)
