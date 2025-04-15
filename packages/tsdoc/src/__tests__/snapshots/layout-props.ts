@@ -25,7 +25,10 @@ type $ = {
   editLink?: React.ReactNode
 
   /**
-   * @default {"content":"Question? Give us feedback","labels":"feedback"}
+   * @default {
+   *   "content": "Question? Give us feedback",
+   *   "labels": "feedback"
+   * }
    */
   feedback?: {
     /**
@@ -42,9 +45,9 @@ type $ = {
 
     /**
      * Feedback link URL.
-
-By default, it's a link to the issue creation form of the docs repository, with the current page title prefilled:
-[example](https://github.com/shuding/nextra/issues/new?title=Feedback%20for%20%E2%80%9CTheme%20Configuration%E2%80%9D&labels=feedback).
+     * 
+     * By default, it's a link to the issue creation form of the docs repository, with the current page title prefilled:
+     * [example](https://github.com/shuding/nextra/issues/new?title=Feedback%20for%20%E2%80%9CTheme%20Configuration%E2%80%9D&labels=feedback).
      */
     link?: string
   }
@@ -93,7 +96,12 @@ By default, it's a link to the issue creation form of the docs repository, with 
 
   /**
    * Configuration for the [next-themes](https://github.com/pacocoursey/next-themes#themeprovider) package.
-   * @default {"attribute":"class","defaultTheme":"system","disableTransitionOnChange":true,"storageKey":"theme"}
+   * @default {
+   *   "attribute": "class",
+   *   "defaultTheme": "system",
+   *   "disableTransitionOnChange": true,
+   *   "storageKey": "theme"
+   * }
    */
   nextThemes?: {
     /**
@@ -131,7 +139,11 @@ By default, it's a link to the issue creation form of the docs repository, with 
   search?: React.ReactNode
 
   /**
-   * @default {"defaultMenuCollapseLevel":2,"defaultOpen":true,"toggleButton":true}
+   * @default {
+   *   "defaultMenuCollapseLevel": 2,
+   *   "defaultOpen": true,
+   *   "toggleButton": true
+   * }
    */
   sidebar?: {
     /**
@@ -160,7 +172,11 @@ By default, it's a link to the issue creation form of the docs repository, with 
 
   /**
    * Translation of options in the theme switch.
-   * @default {"dark":"Dark","light":"Light","system":"System"}
+   * @default {
+   *   "dark": "Dark",
+   *   "light": "Light",
+   *   "system": "System"
+   * }
    */
   themeSwitch?: {
     /**
@@ -180,7 +196,11 @@ By default, it's a link to the issue creation form of the docs repository, with 
   }
 
   /**
-   * @default {"backToTop":"Scroll to top","float":true,"title":"On This Page"}
+   * @default {
+   *   "backToTop": "Scroll to top",
+   *   "float": true,
+   *   "title": "On This Page"
+   * }
    */
   toc?: {
     /**

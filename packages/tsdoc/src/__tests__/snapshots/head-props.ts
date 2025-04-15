@@ -1,11 +1,27 @@
 type $ = {
   /**
-   * @default {"hue":{"dark":204,"light":212},"saturation":100,"lightness":{"dark":55,"light":45}}
+   * @default {
+   *   "hue": {
+   *     "dark": 204,
+   *     "light": 212
+   *   },
+   *   "saturation": {
+   *     "dark": 100,
+   *     "light": 100
+   *   },
+   *   "lightness": {
+   *     "dark": 55,
+   *     "light": 45
+   *   }
+   * }
    */
   color?: {
     /**
      * The hue of the primary theme color.<br/>Range: `0 - 360`
-     * @default {"dark":204,"light":212}
+     * @default {
+     *   "dark": 204,
+     *   "light": 212
+     * }
      */
     hue?: number | {
       dark: number
@@ -25,7 +41,10 @@ type $ = {
 
     /**
      * The lightness of the primary theme color.<br/>Range: `0 - 100`
-     * @default {"dark":55,"light":45}
+     * @default {
+     *   "dark": 55,
+     *   "light": 45
+     * }
      */
     lightness?: number | {
       dark: number
@@ -40,7 +59,10 @@ type $ = {
   faviconGlyph?: string
 
   /**
-   * @default {"dark":"rgb(17,17,17)","light":"rgb(250,250,250)"}
+   * @default {
+   *   "dark": "rgb(17,17,17)",
+   *   "light": "rgb(250,250,250)"
+   * }
    */
   backgroundColor?: {
     /**

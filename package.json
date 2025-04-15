@@ -3,7 +3,7 @@
   "private": true,
   "packageManager": "pnpm@9.15.9",
   "scripts": {
-    "build": "turbo run build --filter=./packages/\\*",
+    "build": "turbo run build --filter=@nextra/tsdoc...",
     "build:all": "turbo run build",
     "clean": "rm -rf .turbo && pnpm -r exec sh -c 'rm -rf dist .next .turbo'",
     "dev": "turbo run dev --filter=./packages/\\*",

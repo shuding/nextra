@@ -1,31 +1,28 @@
 {
   "entries": [
     {
-      "description": "Enable the copy button for all code blocks by default, without needing to set `copy=true` in the code block metadata.
-> [!TIP]
->
-> You can still disable the button for specific blocks using `copy=false`.",
+      "description": "Enable the copy button for all code blocks by default, without needing to set `copy=true` attribute in the code block metadata.
+> You could still disable the button for specific blocks using `copy=false` attribute.",
       "name": "defaultShowCopyCode",
       "optional": true,
       "type": "boolean",
     },
     {
       "description": "Option to enable search functionality. When enabled, it sets the `data-pagefind-body` attribute on the `<main>` element.
-
-> [!NOTE]
->
 > When set to `codeblocks: false`, it adds the `data-pagefind-ignore="all"` attribute to all code blocks (`<pre>` elements).",
       "name": "search",
       "optional": true,
       "tags": {
-        "default": "{"codeblocks":false}",
+        "default": "{
+"codeblocks": false
+}",
       },
       "type": "boolean | { codeblocks: boolean; }",
     },
     {
       "description": "Option to automatically optimizing your static image imports with the Markdown syntax.
 
-E.g. `![Hello](/demo.png)`.",
+> E.g. `![Hello](/demo.png)`.",
       "name": "staticImage",
       "optional": true,
       "tags": {
@@ -34,7 +31,7 @@ E.g. `![Hello](/demo.png)`.",
       "type": "boolean",
     },
     {
-      "description": "Adds estimated reading time of `.md` and `.mdx` files using https://npmjs.com/package/reading-time package.
+      "description": "Adds estimated reading time of `.md` and `.mdx` files using [readingTime](https://npmjs.com/package/reading-time) package.
 
 The reading time is added to the front matter under the `readingTime` key.",
       "name": "readingTime",
@@ -42,7 +39,7 @@ The reading time is added to the front matter under the `readingTime` key.",
       "type": "boolean",
     },
     {
-      "description": "Enable LaTeX either with KaTeX (https://katex.org) to pre-render LaTeX expressions directly in MDX or MathJax (https://mathjax.org) to dynamically render math in the browser.",
+      "description": "Enable LaTeX either with [KaTeX](https://katex.org) to pre-render LaTeX expressions directly in MDX or [MathJax](https://mathjax.org) to dynamically render math in the browser.",
       "name": "latex",
       "optional": true,
       "type": "boolean | { renderer: "mathjax"; options?: { src?: string; config?: any; }; } | { renderer: "katex"; options?: any; }",
@@ -87,17 +84,17 @@ The reading time is added to the front matter under the `readingTime` key.",
       "type": ""detect" | "mdx" | "md"",
     },
     {
+      "description": "Configuration options for [Rehype Pretty Code](https://github.com/rehype-pretty/rehype-pretty-code).",
       "name": "mdxOptions.rehypePrettyCodeOptions",
       "optional": true,
       "tags": {
         "default": "{}",
+        "remarks": "`RehypePrettyCodeOptions`",
       },
-      "type": "any",
+      "type": "RehypePrettyCodeOptions",
     },
     {
       "description": "Allows you to whitelist HTML elements to be replaced with components defined in the `mdx-components.js` file.
-> [!TIP]
->
 > By default, Nextra only replaces `<details>` and `<summary>` elements.",
       "name": "whiteListTagsStyling",
       "optional": true,
@@ -113,7 +110,7 @@ The reading time is added to the front matter under the `readingTime` key.",
       "type": "string",
     },
     {
-      "description": "Adds locale to all links in page map information. Useful for i18n when you don't want to use Nextra's `middleware` function.",
+      "description": "Prefixes locale to all links in the page map information. Useful for i18n when you don't want to use Nextra's `middleware` function.",
       "name": "unstable_shouldAddLocaleToLinks",
       "optional": true,
       "tags": {
