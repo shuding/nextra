@@ -2,7 +2,7 @@ type $ = {
   /**
    * Extra content after last icon.
    */
-  children?: ReactNode
+  children?: React.ReactNode
 
   /**
    * Specifies whether the logo should have a link or provides the URL for the logo's link.
@@ -13,7 +13,7 @@ type $ = {
   /**
    * Logo of the website.
    */
-  logo: ReactElement
+  logo: React.ReactElement
 
   /**
    * URL of the project homepage.
@@ -24,7 +24,7 @@ type $ = {
    * Icon of the project link.
    * @default <GitHubIcon />
    */
-  projectIcon?: ReactNode
+  projectIcon?: React.ReactNode
 
   /**
    * URL of the chat link.
@@ -35,7 +35,7 @@ type $ = {
    * Icon of the chat link.
    * @default <DiscordIcon />
    */
-  chatIcon?: ReactNode
+  chatIcon?: React.ReactNode
 
   /**
    * CSS class name.

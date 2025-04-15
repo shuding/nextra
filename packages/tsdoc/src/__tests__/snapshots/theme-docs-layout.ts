@@ -2,9 +2,9 @@ type $ = {
   /**
    * Rendered [`<Banner>` component](/docs/built-ins/banner). E.g. `<Banner {...bannerProps} />`
    */
-  banner?: ReactNode
+  banner?: React.ReactNode
 
-  children?: ReactNode
+  children?: React.ReactNode
 
   /**
    * Show or hide the dark mode select button.
@@ -22,7 +22,7 @@ type $ = {
    * Content of the edit link.
    * @default "Edit this page"
    */
-  editLink?: ReactNode
+  editLink?: React.ReactNode
 
   /**
    * @default {"content":"Question? Give us feedback","labels":"feedback"}
@@ -32,7 +32,7 @@ type $ = {
      * Content of the feedback link.
      * @default "Question? Give us feedback"
      */
-    content?: ReactNode
+    content?: React.ReactNode
 
     /**
      * Labels that can be added to the new created issue.
@@ -52,7 +52,7 @@ By default, it's a link to the issue creation form of the docs repository, with 
   /**
    * Rendered [`<Footer>` component](/docs/docs-theme/built-ins/footer). E.g. `<Footer {...footerProps} />`
    */
-  footer?: ReactNode
+  footer?: React.ReactNode
 
   /**
    * Options to configure the language dropdown for [the i18n docs website](/docs/guide/i18n).
@@ -74,12 +74,12 @@ By default, it's a link to the issue creation form of the docs repository, with 
    * Component to render the last updated info.
    * @default <LastUpdated />
    */
-  lastUpdated?: ReactElement
+  lastUpdated?: React.ReactElement
 
   /**
    * Rendered [`<Navbar>` component](/docs/docs-theme/built-ins/navbar). E.g. `<Navbar {...navbarProps} />`
    */
-  navbar?: ReactNode
+  navbar?: React.ReactNode
 
   /**
    * Enable or disable navigation link.
@@ -128,7 +128,7 @@ By default, it's a link to the issue creation form of the docs repository, with 
    * Rendered [`<Search>` component](/docs/built-ins/search). E.g. `<Search {...searchProps} />`
    * @default <Search />
    */
-  search?: ReactNode
+  search?: React.ReactNode
 
   /**
    * @default {"defaultMenuCollapseLevel":2,"defaultOpen":true,"toggleButton":true}
@@ -187,12 +187,12 @@ By default, it's a link to the issue creation form of the docs repository, with 
      * Text of back to top button.
      * @default "Scroll to top"
      */
-    backToTop?: ReactNode
+    backToTop?: React.ReactNode
 
     /**
      * Display extra content below the TOC content.
      */
-    extraContent?: ReactNode
+    extraContent?: React.ReactNode
 
     /**
      * Float the TOC next to the content.
@@ -204,6 +204,6 @@ By default, it's a link to the issue creation form of the docs repository, with 
      * Title of the TOC sidebar.
      * @default "On This Page"
      */
-    title?: ReactNode
+    title?: React.ReactNode
   }
 }

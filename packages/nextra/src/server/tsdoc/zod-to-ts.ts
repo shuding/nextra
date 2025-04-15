@@ -26,7 +26,7 @@ function generateTsFromZodType(schema: z.ZodType, indent: number): string {
     const typeName = schema.meta()?.type as string | undefined
     if (typeName) return typeName
     const fnName = schema.def.fn.name
-    return fnName.startsWith('check') ? fnName.slice(5) : '"@TODO TO IMPLEMENT"'
+    return fnName.startsWith('check') ? 'React.' + fnName.slice(5) : '"@TODO TO IMPLEMENT"'
   }
   switch (name) {
     case 'ZodString':

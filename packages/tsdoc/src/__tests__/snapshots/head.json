@@ -55,9 +55,6 @@
       "description": "Content of `<head>`",
       "name": "children",
       "optional": true,
-      "tags": {
-        "remarks": "`ReactNode`",
-      },
       "type": "ReactNode",
     },
   ],

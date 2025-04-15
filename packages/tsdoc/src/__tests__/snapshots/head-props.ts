@@ -59,5 +59,5 @@ type $ = {
   /**
    * Content of `<head>`
    */
-  children?: ReactNode
+  children?: React.ReactNode
 }
