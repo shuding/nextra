@@ -12,7 +12,8 @@ import type { GeneratedFunction, TypeField } from './types.js'
 
 type TSDocProps = {
   /**
-   * Parsed `type`, `interface` or `function` definition from `generateDocumentation` function.
+   * Parsed `type`, `interface` or `function` definition from
+   * [`generateDocumentation` function](https://nextra.site/api/generatedocumentation).
    */
   definition: ReturnType<typeof generateDocumentation>
   /**

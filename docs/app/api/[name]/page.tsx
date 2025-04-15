@@ -34,6 +34,7 @@ export default $`,
   { name: 'generateStaticParamsFor', packageName: 'nextra/pages' },
   { name: 'importPage', packageName: 'nextra/pages' },
   { name: 'compileMdx', packageName: 'nextra/compile' },
+  { name: 'generateDocumentation', packageName: 'nextra/tsdoc' },
   { name: 'middleware', packageName: 'nextra/locales' },
   { name: 'evaluate', packageName: 'nextra/evaluate' },
   { name: 'normalizePages', packageName: 'nextra/normalize-pages' }
