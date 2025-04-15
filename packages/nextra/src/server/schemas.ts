@@ -61,7 +61,11 @@ You can still disable the button for specific blocks using `copy=false`.'
         })
       })
     ])
-    .default({ codeblocks: false }),
+    .default({ codeblocks: false })
+    .meta({
+      description:
+        'Option to enable search functionality. When enabled, it sets the `data-pagefind-body` attribute on the `<main>` element.'
+    }),
   staticImage: z.boolean().default(true).meta({
     description:
       'Option to automatically optimizing your static image imports with the Markdown syntax. E.g. `![Hello](/demo.png)`.'
