@@ -96,7 +96,6 @@ function getDocComment(schema: z.ZodType, indent: number): string {
     // @ts-expect-error -- fixme
     meta.description || schema.def.innerType?.description
   const defaultValue = getDefaultValue(schema)
-  const spacing = ' '.repeat(indent)
   const comments: string[] = []
 
   if (description) {
@@ -110,10 +109,13 @@ function getDocComment(schema: z.ZodType, indent: number): string {
     return ''
   }
   const comment = [
-    `${spacing}/**`,
-    ...comments.map(line => `${spacing} * ${line}`),
-    `${spacing} */`
-  ].join('\n')
+    //
+    '/**',
+    ...comments.map(line => ` * ${line}`),
+    ' */'
+  ]
+    .map(line => `${' '.repeat(indent)}${line}`)
+    .join('\n')
 
   return comment + '\n'
 }
