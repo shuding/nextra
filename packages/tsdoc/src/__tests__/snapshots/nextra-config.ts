@@ -66,6 +66,8 @@ type $ = {
     recmaPlugins?: "@TODO TO IMPLEMENT"
 
     /**
+     * Format of the file.
+`'md'` means treat as markdown and `'mdx'` means treat as MDX. `'detect'` means try to detect the format based on file path.
      * @default "detect"
      */
     format?: "detect" | "mdx" | "md"

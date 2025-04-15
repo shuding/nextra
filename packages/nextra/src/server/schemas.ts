@@ -30,7 +30,11 @@ const mdxOptionsSchema = z.strictObject({
     description:
       'List of recma plugins. This is a new ecosystem, currently in beta, to transform esast trees (JavaScript).'
   }),
-  format: z.enum(['detect', 'mdx', 'md']).default('detect'),
+  format: z.enum(['detect', 'mdx', 'md']).default('detect').meta({
+    description:
+      "Format of the file.\n\
+`'md'` means treat as markdown and `'mdx'` means treat as MDX. `'detect'` means try to detect the format based on file path."
+  }),
   rehypePrettyCodeOptions: z.custom<RehypePrettyCodeOptions>().default({})
 })
 
