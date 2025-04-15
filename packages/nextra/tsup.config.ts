@@ -5,7 +5,9 @@ import { reactCompilerPlugin } from 'esbuild-react-compiler-plugin'
 import { defineConfig } from 'tsup'
 import { defaultEntry } from './default-entry.js'
 import packageJson from './package.json'
-import { CWD, IS_PRODUCTION } from './src/server/constants.js'
+import { IS_PRODUCTION } from './src/server/constants.js'
+import { NextraConfigSchema } from './src/server/schemas.js'
+import { generateTsFromZod } from './src/server/tsdoc/zod-to-ts.js'
 
 const SEP = path.sep === '/' ? '/' : '\\\\'
 
@@ -20,8 +22,13 @@ export default defineConfig({
   external: ['shiki', 'webpack'],
   async onSuccess() {
     // Fixes hydration errors in client apps due "type": "module" in root package.json
-    const clientPackageJSON = path.join(CWD, 'dist', 'client', 'package.json')
+    const clientPackageJSON = path.resolve('dist', 'client', 'package.json')
     await fs.writeFile(clientPackageJSON, '{"sideEffects":false}')
+
+    await fs.writeFile(
+      path.resolve('src', 'types.generated.ts'),
+      `export type NextraConfig = ${generateTsFromZod(NextraConfigSchema)}`
+    )
   },
   esbuildPlugins: [
     svgr({

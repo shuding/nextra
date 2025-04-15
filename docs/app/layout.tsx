@@ -100,6 +100,19 @@ const RootLayout: FC<{
   // @ts-expect-error -- fixme
   pageMap[apiIndex].children = [
     {
+      data: {
+        _: {
+          type: 'separator',
+          title: 'Type'
+        },
+        'nextra-config': '',
+        _2: {
+          type: 'separator',
+          title: 'Functions'
+        }
+      }
+    },
+    {
       route: '/api',
       name: 'index',
       title: 'Overview'

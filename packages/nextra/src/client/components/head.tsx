@@ -3,15 +3,19 @@ import { z } from 'zod'
 import { fromZodError } from 'zod-validation-error'
 import { reactNode } from '../../server/schemas.js'
 
-const darkLightSchema = z
-  .union([
-    z.number(),
-    z.strictObject({
-      dark: z.number(),
-      light: z.number()
-    })
-  ])
-  .transform(v => (typeof v === 'number' ? { dark: v, light: v } : v))
+const darkLightSchema = z.union([
+  z.number(),
+  z.strictObject({
+    dark: z.number(),
+    light: z.number()
+  })
+])
+// TODO check why in zode v4 this doesn't work
+//.transform(convertColor)
+
+function convertColor(v: z.infer<typeof darkLightSchema>) {
+  return typeof v === 'number' ? { dark: v, light: v } : v
+}
 
 function hexToRgb(hex: string): string {
   hex = hex.slice(1)
@@ -32,7 +36,7 @@ function hexToRgb(hex: string): string {
 const RGB_RE = /^rgb\((?<rgb>.*?)\)$/
 const HEX_RE = /^#(?<hex>[0-9a-f]{3,6})$/i
 
-const colorSchema = z
+const stringColorSchema = z
   .string()
   .refine(str => {
     if (HEX_RE.test(str) || RGB_RE.test(str)) {
@@ -53,44 +57,46 @@ const colorSchema = z
     return value
   })
 
+const colorSchema = z.strictObject({
+  hue: darkLightSchema
+    .default({ dark: 204, light: 212 })
+    .transform(convertColor)
+    .meta({
+      description: 'The hue of the primary theme color.<br/>Range: `0 - 360`'
+    }),
+  saturation: darkLightSchema.default(100).transform(convertColor).meta({
+    description:
+      'The saturation of the primary theme color.<br/>Range: `0 - 100`'
+  }),
+  lightness: darkLightSchema
+    .default({ dark: 55, light: 45 })
+    .transform(convertColor)
+    .meta({
+      description:
+        'The lightness of the primary theme color.<br/>Range: `0 - 100`'
+    })
+})
+
+const bgColorSchema = z.strictObject({
+  dark: stringColorSchema.default('rgb(17,17,17)').meta({
+    description:
+      'Background color for dark theme.<br/>Format: `"rgb(RRR,GGG,BBB)" | "#RRGGBB"`'
+  }),
+  light: stringColorSchema.default('rgb(250,250,250)').meta({
+    description:
+      'Background color for light theme.<br/>Format: `"rgb(RRR,GGG,BBB)" | "#RRGGBB"`'
+  })
+})
+
 export const HeadPropsSchema = z.strictObject({
-  color: z
-    .strictObject({
-      hue: darkLightSchema
-        .default({ dark: 204, light: 212 })
-        .describe('The hue of the primary theme color.<br/>Range: `0 - 360`'),
-      saturation: darkLightSchema
-        .default(100)
-        .describe(
-          'The saturation of the primary theme color.<br/>Range: `0 - 100`'
-        ),
-      lightness: darkLightSchema
-        .default({ dark: 55, light: 45 })
-        .describe(
-          'The lightness of the primary theme color.<br/>Range: `0 - 100`'
-        )
-    })
-    .default({}),
-  faviconGlyph: z
-    .string()
-    .optional()
-    .describe('The glyph to use as the favicon.'),
-  backgroundColor: z
-    .strictObject({
-      dark: colorSchema
-        .default('rgb(17,17,17)')
-        .describe(
-          'Background color for dark theme.<br/>Format: `"rgb(RRR,GGG,BBB)" | "#RRGGBB"`'
-        ),
-      light: colorSchema
-        .default('rgb(250,250,250)')
-        .describe(
-          'Background color for light theme.<br/>Format: `"rgb(RRR,GGG,BBB)" | "#RRGGBB"`'
-        )
-    })
-    .default({}),
-  children: reactNode.describe(`Content of \`<head>\`
-@remarks \`ReactNode\``)
+  color: colorSchema.default(colorSchema.parse({})),
+  faviconGlyph: z.string().optional().meta({
+    description: 'The glyph to use as the favicon.'
+  }),
+  backgroundColor: bgColorSchema.default(bgColorSchema.parse({})),
+  children: reactNode.meta({
+    description: 'Content of `<head>`'
+  })
 })
 
 type HeadProps = Partial<z.input<typeof HeadPropsSchema>>
@@ -100,7 +106,6 @@ export const Head: FC<HeadProps> = ({ children, ...props }) => {
   if (error) {
     throw fromZodError(error)
   }
-
   const { color, backgroundColor, faviconGlyph } = data
 
   const style = `

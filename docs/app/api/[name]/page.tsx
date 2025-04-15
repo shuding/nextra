@@ -4,40 +4,58 @@ import type { MdxFile } from 'nextra'
 import { compileMdx } from 'nextra/compile'
 import { Callout } from 'nextra/components'
 import { evaluate } from 'nextra/evaluate'
-import type { GeneratedFunction } from 'nextra/tsdoc'
-import { generateDocumentation, TSDoc } from 'nextra/tsdoc'
+import { getPageMap } from 'nextra/page-map'
+import { generateDefinition, TSDoc } from 'nextra/tsdoc'
 import type { FC } from 'react'
 
 const API_REFERENCE = [
-  { functionName: 'nextra', packageName: 'nextra' },
-  { functionName: 'getPageMap', packageName: 'nextra/page-map' },
-  { functionName: 'generateStaticParamsFor', packageName: 'nextra/pages' },
-  { functionName: 'importPage', packageName: 'nextra/pages' },
-  { functionName: 'compileMdx', packageName: 'nextra/compile' },
-  { functionName: 'middleware', packageName: 'nextra/locales' },
-  { functionName: 'evaluate', packageName: 'nextra/evaluate' },
-  { functionName: 'normalizePages', packageName: 'nextra/normalize-pages' }
-].map(o => ({
-  ...o,
-  slug: toKebabCase(o.functionName)
-}))
+  { type: 'separator', title: 'Types', name: '_' },
+  {
+    name: 'NextraConfig',
+    packageName: 'nextra',
+    isFlattened: false,
+    isType: true
+  },
+  {
+    name: 'MdxOptions',
+    code: `import type { NextraConfig } from 'nextra'
+type $ = NonNullable<NextraConfig['mdxOptions']>
+export default $`,
+    isFlattened: false
+  },
+  { type: 'separator', title: 'Functions', name: '_2' },
+  {
+    name: 'nextra',
+    packageName: 'nextra',
+    code: "export { default } from 'nextra'",
+    isFlattened: false
+  },
+  { name: 'getPageMap', packageName: 'nextra/page-map' },
+  { name: 'generateStaticParamsFor', packageName: 'nextra/pages' },
+  { name: 'importPage', packageName: 'nextra/pages' },
+  { name: 'compileMdx', packageName: 'nextra/compile' },
+  { name: 'generateDefinition', packageName: 'nextra/tsdoc' },
+  { name: 'middleware', packageName: 'nextra/locales' },
+  { name: 'evaluate', packageName: 'nextra/evaluate' },
+  { name: 'normalizePages', packageName: 'nextra/normalize-pages' }
+]
 
-function toKebabCase(str: string) {
-  return str
-    .replaceAll(/([a-z0-9])([A-Z])/g, '$1-$2') // camelCase → camel-Case
-    .toLowerCase()
-}
+const routes = API_REFERENCE.filter(o => 'name' in o)
 
 export const generateStaticParams = () =>
-  API_REFERENCE.map(o => ({ name: o.slug }))
+  routes.map(o => ({ name: o.name.toLowerCase() }))
 
-export const pageMap: (MdxFile & { title: string })[] = API_REFERENCE.map(
-  o => ({
-    name: o.slug,
-    route: `/api/${o.slug}`,
-    title: o.functionName
-  })
+// @ts-expect-error -- fixme
+export const pageMap: (MdxFile & { title: string })[] = API_REFERENCE.map(o =>
+  'type' in o
+    ? o
+    : {
+        name: o.name.toLowerCase(),
+        route: `/api/${o.name.toLowerCase()}`,
+        title: o.name
+      }
 )
+
 const { wrapper: Wrapper, ...components } = getMDXComponents({
   TSDoc,
   Callout
@@ -45,35 +63,34 @@ const { wrapper: Wrapper, ...components } = getMDXComponents({
 
 async function getReference(props: PageProps) {
   const params = await props.params
-  const apiRef = API_REFERENCE.find(o => o.slug === params.name)
+  const apiRef = routes.find(o => o.name.toLowerCase() === params.name)
   if (!apiRef) {
     throw new Error(`API reference not found for "${params.name}"`)
   }
-  const functionName =
-    apiRef.functionName === 'nextra'
-      ? 'default'
-      : `${apiRef.functionName} as default`
   const {
-    signatures,
     description,
-    tags = {}
-  } = generateDocumentation({
-    code: `export { ${functionName} } from '${apiRef.packageName}'`,
-    flattened: true
-  }) as GeneratedFunction
+    // @ts-expect-error -- fixme
+    tags = {},
+    ...rest
+  } = generateDefinition({
+    code:
+      apiRef.code ??
+      `export { ${apiRef.name} as default } from '${apiRef.packageName}'`,
+    flattened: apiRef.isFlattened !== false
+  })
 
   const result = [
     description &&
       // og:description
       `export const metadata = { description: ${JSON.stringify(description.split('\n', 1)[0])} }`,
     // Title
-    `# \`${apiRef.functionName}\` function`,
+    `# \`${apiRef.name}\` ${apiRef.isType ? 'type' : 'function'}`,
     // Page description
     description,
-    `Exported from \`${apiRef.packageName}\`.`,
+    apiRef.packageName && `Exported from \`${apiRef.packageName}\`.`,
     // Signature
-    '## Signature',
-    '<TSDoc definition={definition} />',
+    `## ${apiRef.isType ? 'Fields' : 'Signature'}`,
+    '<TSDoc definition={definition} typeLinkMap={typeLinkMap} />',
     // Warnings
     tags.throws &&
       `> [!WARNING]
@@ -92,9 +109,25 @@ ${tags.see}
 
 ${tags.example}`
   ].filter(Boolean)
+  const apiPageMap = await getPageMap('/api')
+  const typeLinkMap = apiPageMap
+    .filter(o => 'route' in o && o.name !== 'index')
+    // @ts-expect-error -- fixme
+    .map(o => [o.title, o.route])
+  typeLinkMap.push(
+    [
+      'NextConfig',
+      'https://nextjs.org/docs/pages/api-reference/config/next-config-js'
+    ],
+    ['RehypePrettyCodeOptions', 'https://rehype-pretty.pages.dev/#options'],
+    ['PluggableList', 'https://github.com/unifiedjs/unified#pluggablelist']
+  )
 
   const rawJs = await compileMdx(result.join('\n\n'))
-  return evaluate(rawJs, components, { definition: { signatures, tags } })
+  return evaluate(rawJs, components, {
+    definition: { tags, ...rest },
+    typeLinkMap: Object.fromEntries(typeLinkMap)
+  })
 }
 
 export async function generateMetadata(props: PageProps) {

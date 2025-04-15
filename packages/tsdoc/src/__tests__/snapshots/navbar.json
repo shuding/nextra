@@ -4,9 +4,6 @@
       "description": "Extra content after last icon.",
       "name": "children",
       "optional": true,
-      "tags": {
-        "remarks": "`ReactNode`",
-      },
       "type": "ReactNode",
     },
     {
@@ -21,10 +18,7 @@
     {
       "description": "Logo of the website.",
       "name": "logo",
-      "tags": {
-        "remarks": "`ReactElement`",
-      },
-      "type": "ReactElement",
+      "type": "ReactElement<unknown, string | JSXElementConstructor<any>>",
     },
     {
       "description": "URL of the project homepage.",
@@ -38,7 +32,6 @@
       "optional": true,
       "tags": {
         "default": "<GitHubIcon />",
-        "remarks": "`ReactNode`",
       },
       "type": "ReactNode",
     },
@@ -54,7 +47,6 @@
       "optional": true,
       "tags": {
         "default": "<DiscordIcon />",
-        "remarks": "`ReactNode`",
       },
       "type": "ReactNode",
     },

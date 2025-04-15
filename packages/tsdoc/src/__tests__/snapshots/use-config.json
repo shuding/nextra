@@ -21,11 +21,6 @@ items.",
           "type": "number",
         },
         {
-          "name": "normalizePagesResult.activeThemeContext.pagination",
-          "optional": true,
-          "type": "boolean | undefined",
-        },
-        {
           "name": "normalizePagesResult.activeThemeContext.breadcrumb",
           "optional": true,
           "type": "boolean | undefined",
@@ -47,6 +42,11 @@ items.",
         },
         {
           "name": "normalizePagesResult.activeThemeContext.navbar",
+          "optional": true,
+          "type": "boolean | undefined",
+        },
+        {
+          "name": "normalizePagesResult.activeThemeContext.pagination",
           "optional": true,
           "type": "boolean | undefined",
         },
