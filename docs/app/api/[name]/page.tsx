@@ -4,8 +4,8 @@ import type { MdxFile } from 'nextra'
 import { compileMdx } from 'nextra/compile'
 import { Callout } from 'nextra/components'
 import { evaluate } from 'nextra/evaluate'
-import type { GeneratedFunction } from 'nextra/tsdoc'
-import { generateDocumentation, TSDoc } from 'nextra/tsdoc'
+import { NextraConfigSchema } from 'nextra/schemas'
+import { generateDocumentation, generateTsFromZod, TSDoc } from 'nextra/tsdoc'
 import type { FC } from 'react'
 
 const API_REFERENCE = [
@@ -49,18 +49,23 @@ async function getReference(props: PageProps) {
   if (!apiRef) {
     throw new Error(`API reference not found for "${params.name}"`)
   }
-  const functionName =
+  const code =
     apiRef.functionName === 'nextra'
-      ? 'default'
-      : `${apiRef.functionName} as default`
+      ? ` type $ = ${generateTsFromZod(NextraConfigSchema)}
+export default $`
+      : `export { ${apiRef.functionName} } from '${apiRef.packageName}'`
   const {
-    signatures,
     description,
-    tags = {}
+    // @ts-expect-error -- fixme
+    tags = {},
+    // @ts-expect-error -- fixme
+    signatures,
+    // @ts-expect-error -- fixme
+    entries
   } = generateDocumentation({
-    code: `export { ${functionName} } from '${apiRef.packageName}'`,
+    code,
     flattened: true
-  }) as GeneratedFunction
+  })
 
   const result = [
     description &&
@@ -94,7 +99,9 @@ ${tags.example}`
   ].filter(Boolean)
 
   const rawJs = await compileMdx(result.join('\n\n'))
-  return evaluate(rawJs, components, { definition: { signatures, tags } })
+  return evaluate(rawJs, components, {
+    definition: { signatures, tags, entries }
+  })
 }
 
 export async function generateMetadata(props: PageProps) {

@@ -36,7 +36,9 @@ const MdxOptionsSchema = z.strictObject({
   format: z.enum(['detect', 'mdx', 'md']).default('detect').meta({
     description:
       "Format of the file.\n\
-`'md'` means treat as markdown and `'mdx'` means treat as MDX. `'detect'` means try to detect the format based on file path."
+- `'md'` means treat as markdown\n\
+- `'mdx'` means treat as MDX\n\
+- `'detect'` means try to detect the format based on file path."
   }),
   rehypePrettyCodeOptions: z
     .custom<RehypePrettyCodeOptions>()
@@ -50,7 +52,9 @@ export const NextraConfigSchema = z.strictObject({
   defaultShowCopyCode: z.boolean().optional().meta({
     description:
       'Enable the copy button for all code blocks by default, without needing to set `copy=true` in the code block metadata.\n\
-You can still disable the button for specific blocks using `copy=false`.'
+> [!TIP]\n\
+>\n\
+> You can still disable the button for specific blocks using `copy=false`.'
   }),
   search: z
     .union([
@@ -65,11 +69,13 @@ You can still disable the button for specific blocks using `copy=false`.'
     .meta({
       description:
         'Option to enable search functionality. When enabled, it sets the `data-pagefind-body` attribute on the `<main>` element.\n\n\
-When set to `codeblocks: false`, it adds the `data-pagefind-ignore="all"` attribute to all code blocks (`<pre>` elements).'
+> [!NOTE]\n\
+>\n\
+> When set to `codeblocks: false`, it adds the `data-pagefind-ignore="all"` attribute to all code blocks (`<pre>` elements).'
     }),
   staticImage: z.boolean().default(true).meta({
     description:
-      'Option to automatically optimizing your static image imports with the Markdown syntax. E.g. `![Hello](/demo.png)`.'
+      'Option to automatically optimizing your static image imports with the Markdown syntax.\n\nE.g. `![Hello](/demo.png)`.'
   }),
   readingTime: z.boolean().optional().meta({
     description:
@@ -106,7 +112,9 @@ The reading time is added to the front matter under the `readingTime` key.'
   whiteListTagsStyling: z.array(z.string()).optional().meta({
     description:
       'Allows you to whitelist HTML elements to be replaced with components defined in the `mdx-components.js` file.\n\
-By default, Nextra only replaces `<details>` and `<summary>` elements.'
+> [!TIP]\n\
+>\n\
+> By default, Nextra only replaces `<details>` and `<summary>` elements.'
   }),
   contentDirBasePath: z
     .string()
