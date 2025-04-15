@@ -36,4 +36,5 @@ type NextraConfigFromZod = z.input<typeof NextraConfigSchema>
 
 type $5 = IsEqual<NextraConfigFromZod, NextraConfig>
 
+// Nextra config should be identical
 expectType<$5>(true)

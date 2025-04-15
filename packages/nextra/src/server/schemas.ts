@@ -91,11 +91,15 @@ The reading time is added to the front matter under the `readingTime` key.'
       }),
       z.strictObject({
         renderer: z.literal('katex'),
-        options: z.custom<RehypeKatexOptions>().meta({
-          description:
-            'KaTeX options. See https://katex.org/docs/options.html.',
-          type: 'import("rehype-katex").Options'
-        })
+        options: z
+          .custom<RehypeKatexOptions>()
+          // TODO: check why zod-to-ts generate optional field without `.optional()`
+          .optional()
+          .meta({
+            description:
+              'KaTeX options. See https://katex.org/docs/options.html.',
+            type: 'import("rehype-katex").Options'
+          })
       })
     ])
     .optional()

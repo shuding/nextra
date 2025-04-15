@@ -3,7 +3,7 @@ export type NextraConfig = {
    * Enable the copy button for all code blocks by default, without needing to set `copy=true` in the code block metadata.
 > [!TIP]
 >
-> You can still disable the button for specific blocks using `copy=false`.
+> You could still disable the button for specific blocks using `copy=false`.
    */
   defaultShowCopyCode?: boolean
 
@@ -119,7 +119,7 @@ The reading time is added to the front matter under the `readingTime` key.
   contentDirBasePath?: string
 
   /**
-   * Adds locale to all links in page map information. Useful for i18n when you don't want to use Nextra's `middleware` function.
+   * Prefixes locale to all links in the page map information. Useful for i18n when you don't want to use Nextra's `middleware` function.
    * @default false
    */
   unstable_shouldAddLocaleToLinks?: boolean
