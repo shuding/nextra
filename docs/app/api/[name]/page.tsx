@@ -4,22 +4,26 @@ import type { MdxFile } from 'nextra'
 import { compileMdx } from 'nextra/compile'
 import { Callout } from 'nextra/components'
 import { evaluate } from 'nextra/evaluate'
-import { NextraConfigSchema } from 'nextra/schemas'
-import { generateDocumentation, generateTsFromZod, TSDoc } from 'nextra/tsdoc'
+import { generateDocumentation, TSDoc } from 'nextra/tsdoc'
 import type { FC } from 'react'
 
 const API_REFERENCE = [
-  { functionName: 'nextra', packageName: 'nextra' },
-  { functionName: 'getPageMap', packageName: 'nextra/page-map' },
-  { functionName: 'generateStaticParamsFor', packageName: 'nextra/pages' },
-  { functionName: 'importPage', packageName: 'nextra/pages' },
-  { functionName: 'compileMdx', packageName: 'nextra/compile' },
-  { functionName: 'middleware', packageName: 'nextra/locales' },
-  { functionName: 'evaluate', packageName: 'nextra/evaluate' },
-  { functionName: 'normalizePages', packageName: 'nextra/normalize-pages' }
+  {
+    name: 'nextra',
+    packageName: 'nextra',
+    exportName: 'default',
+    isFlattened: false
+  },
+  { name: 'getPageMap', packageName: 'nextra/page-map' },
+  { name: 'generateStaticParamsFor', packageName: 'nextra/pages' },
+  { name: 'importPage', packageName: 'nextra/pages' },
+  { name: 'compileMdx', packageName: 'nextra/compile' },
+  { name: 'middleware', packageName: 'nextra/locales' },
+  { name: 'evaluate', packageName: 'nextra/evaluate' },
+  { name: 'normalizePages', packageName: 'nextra/normalize-pages' }
 ].map(o => ({
   ...o,
-  slug: toKebabCase(o.functionName)
+  slug: toKebabCase(o.name)
 }))
 
 function toKebabCase(str: string) {
@@ -35,7 +39,7 @@ export const pageMap: (MdxFile & { title: string })[] = API_REFERENCE.map(
   o => ({
     name: o.slug,
     route: `/api/${o.slug}`,
-    title: o.functionName
+    title: o.name
   })
 )
 const { wrapper: Wrapper, ...components } = getMDXComponents({
@@ -49,10 +53,7 @@ async function getReference(props: PageProps) {
   if (!apiRef) {
     throw new Error(`API reference not found for "${params.name}"`)
   }
-  const isNextra = apiRef.functionName === 'nextra'
-  const code = isNextra
-    ? `export { default } from '${apiRef.packageName}'`
-    : `export { ${apiRef.functionName} } from '${apiRef.packageName}'`
+  const code = `export { ${apiRef.exportName ?? apiRef.name} as default } from '${apiRef.packageName}'`
   const {
     description,
     // @ts-expect-error -- fixme
@@ -61,7 +62,7 @@ async function getReference(props: PageProps) {
     signatures
   } = generateDocumentation({
     code,
-    flattened: !isNextra
+    flattened: apiRef.isFlattened !== false
   })
 
   const result = [
@@ -69,7 +70,7 @@ async function getReference(props: PageProps) {
       // og:description
       `export const metadata = { description: ${JSON.stringify(description.split('\n', 1)[0])} }`,
     // Title
-    `# \`${apiRef.functionName}\` function`,
+    `# \`${apiRef.name}\` function`,
     // Page description
     description,
     `Exported from \`${apiRef.packageName}\`.`,
