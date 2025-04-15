@@ -6,8 +6,8 @@ import { defineConfig } from 'tsup'
 import { defaultEntry } from './default-entry.js'
 import packageJson from './package.json'
 import { CWD, IS_PRODUCTION } from './src/server/constants.js'
-import { generateTsFromZod } from './src/server/tsdoc/zod-to-ts.js'
 import { NextraConfigSchema } from './src/server/schemas.js'
+import { generateTsFromZod } from './src/server/tsdoc/zod-to-ts.js'
 
 const SEP = path.sep === '/' ? '/' : '\\\\'
 
@@ -26,7 +26,10 @@ export default defineConfig({
     await fs.writeFile(clientPackageJSON, '{"sideEffects":false}')
 
     const generatedTypes = `export type NextraConfig = ${generateTsFromZod(NextraConfigSchema)}`
-    await fs.writeFile(path.resolve('src', 'types.generated.ts'), generatedTypes)
+    await fs.writeFile(
+      path.resolve('src', 'types.generated.ts'),
+      generatedTypes
+    )
   },
   esbuildPlugins: [
     svgr({
