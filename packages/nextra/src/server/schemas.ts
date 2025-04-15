@@ -170,7 +170,7 @@ export const pageThemeSchema = z.strictObject({
   footer: z.boolean().optional().meta({
     description: 'Specifies whether to display the footer.'
   }),
-  layout: z.enum(['default', 'full']).optional().meta({
+  layout: z.literal(['default', 'full']).optional().meta({
     description: 'Defines the layout style.'
   }),
   navbar: z.boolean().optional().meta({
@@ -188,7 +188,7 @@ export const pageThemeSchema = z.strictObject({
   toc: z.boolean().optional().meta({
     description: 'Determines whether a table of contents is displayed.'
   }),
-  typesetting: z.enum(['default', 'article']).optional().meta({
+  typesetting: z.literal(['default', 'article']).optional().meta({
     description: 'Configures the text typesetting style.'
   })
 })
