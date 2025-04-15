@@ -5,7 +5,7 @@ import { reactCompilerPlugin } from 'esbuild-react-compiler-plugin'
 import { defineConfig } from 'tsup'
 import { defaultEntry } from './default-entry.js'
 import packageJson from './package.json'
-import { CWD, IS_PRODUCTION } from './src/server/constants.js'
+import { IS_PRODUCTION } from './src/server/constants.js'
 import { NextraConfigSchema } from './src/server/schemas.js'
 import { generateTsFromZod } from './src/server/tsdoc/zod-to-ts.js'
 
@@ -25,10 +25,9 @@ export default defineConfig({
     const clientPackageJSON = path.resolve('dist', 'client', 'package.json')
     await fs.writeFile(clientPackageJSON, '{"sideEffects":false}')
 
-    const generatedTypes = `export type NextraConfig = ${generateTsFromZod(NextraConfigSchema)}`
     await fs.writeFile(
       path.resolve('src', 'types.generated.ts'),
-      generatedTypes
+      `export type NextraConfig = ${generateTsFromZod(NextraConfigSchema)}`
     )
   },
   esbuildPlugins: [

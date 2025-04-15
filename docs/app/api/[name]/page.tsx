@@ -108,9 +108,10 @@ ${tags.see}
 
 ${tags.example}`
   ].filter(Boolean)
-  const typeLinkMap = (await getPageMap('/api'))
+  const apiPageMap = await getPageMap('/api')
+  const typeLinkMap = apiPageMap
     .filter(o => 'route' in o && o.name !== 'index')
-    // @ts-expect-error
+    // @ts-expect-error -- fixme
     .map(o => [o.title, o.route])
   typeLinkMap.push(
     [

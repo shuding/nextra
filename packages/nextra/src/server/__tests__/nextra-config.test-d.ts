@@ -1,6 +1,6 @@
 import { expectType } from 'tsd'
-import { z } from 'zod'
-import { NextraConfig } from '../../types.generated.js'
+import type { z } from 'zod'
+import type { NextraConfig } from '../../types.generated.js'
 import type { NextraConfigSchema } from '../schemas.js'
 
 type IsEqual<A, B> =

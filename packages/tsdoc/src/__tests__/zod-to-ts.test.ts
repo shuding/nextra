@@ -198,7 +198,7 @@ describe('generateTsFromZod', () => {
   })
   it('should convert NextraConfigSchema', () => {
     return expect(
-      'type $ = ' + generateTsFromZod(NextraConfigSchema)
-    ).toMatchFileSnapshot('./snapshots/nextra-config.ts')
+      'export type NextraConfig = ' + generateTsFromZod(NextraConfigSchema)
+    ).toMatchFileSnapshot('../../../nextra/src/types.generated.ts')
   })
 })
