@@ -64,6 +64,7 @@ The reading time is added to the front matter under the `readingTime` key.
   codeHighlight?: boolean
 
   /**
+   * Options specific to MDX compiling.
    * @default {"format":"detect","rehypePrettyCodeOptions":{}}
    */
   mdxOptions?: {

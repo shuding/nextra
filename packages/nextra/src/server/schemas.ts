@@ -100,7 +100,9 @@ The reading time is added to the front matter under the `readingTime` key.'
   codeHighlight: z.boolean().default(true).meta({
     description: 'Enable or disable syntax highlighting.'
   }),
-  mdxOptions: MdxOptionsSchema.default(MdxOptionsSchema.parse({})),
+  mdxOptions: MdxOptionsSchema.default(MdxOptionsSchema.parse({})).meta({
+    description: 'Options specific to MDX compiling.'
+  }),
   whiteListTagsStyling: z.array(z.string()).optional().meta({
     description:
       'Allows you to whitelist HTML elements to be replaced with components defined in the `mdx-components.js` file.\n\
