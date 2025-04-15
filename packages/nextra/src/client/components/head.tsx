@@ -3,15 +3,19 @@ import { z } from 'zod'
 import { fromZodError } from 'zod-validation-error'
 import { reactNode } from '../../server/schemas.js'
 
-const darkLightSchema = z
-  .union([
-    z.number(),
-    z.strictObject({
-      dark: z.number(),
-      light: z.number()
-    })
-  ])
-  .transform(v => (typeof v === 'number' ? { dark: v, light: v } : v))
+const darkLightSchema = z.union([
+  z.number(),
+  z.strictObject({
+    dark: z.number(),
+    light: z.number()
+  })
+])
+// TODO check why in zode v4 this doesn't work
+//.transform(convertColor)
+
+function convertColor(v: z.infer<typeof darkLightSchema>) {
+  return typeof v === 'number' ? { dark: v, light: v } : v
+}
 
 function hexToRgb(hex: string): string {
   hex = hex.slice(1)
@@ -54,20 +58,23 @@ const stringColorSchema = z
   })
 
 const colorSchema = z.strictObject({
-  hue: darkLightSchema.default({ dark: 204, light: 212 }).meta({
-    description: 'The hue of the primary theme color.<br/>Range: `0 - 360`'
+  hue: darkLightSchema
+    .default({ dark: 204, light: 212 })
+    .transform(convertColor)
+    .meta({
+      description: 'The hue of the primary theme color.<br/>Range: `0 - 360`'
+    }),
+  saturation: darkLightSchema.default(100).transform(convertColor).meta({
+    description:
+      'The saturation of the primary theme color.<br/>Range: `0 - 100`'
   }),
-  saturation: darkLightSchema
-    // @ts-expect-error -- fixme
-    .default(100)
+  lightness: darkLightSchema
+    .default({ dark: 55, light: 45 })
+    .transform(convertColor)
     .meta({
       description:
-        'The saturation of the primary theme color.<br/>Range: `0 - 100`'
-    }),
-  lightness: darkLightSchema.default({ dark: 55, light: 45 }).meta({
-    description:
-      'The lightness of the primary theme color.<br/>Range: `0 - 100`'
-  })
+        'The lightness of the primary theme color.<br/>Range: `0 - 100`'
+    })
 })
 
 const bgColorSchema = z.strictObject({
@@ -99,7 +106,6 @@ export const Head: FC<HeadProps> = ({ children, ...props }) => {
   if (error) {
     throw fromZodError(error)
   }
-
   const { color, backgroundColor, faviconGlyph } = data
 
   const style = `
