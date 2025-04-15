@@ -166,8 +166,6 @@ import { Layout, LastUpdated } from 'nextra-theme-docs'
     ])
     .default(true)
     .transform(v => (typeof v === 'boolean' ? { next: v, prev: v } : v))
-    // @TODO added in zod v4
-    .optional()
     .meta({
       description: 'Enable or disable navigation link.'
     }),
@@ -198,7 +196,13 @@ import { Layout, LastUpdated } from 'nextra-theme-docs'
 
 export type ThemeConfigProps = z.infer<typeof LayoutPropsSchema>
 
-type LayoutProps = z.input<typeof LayoutPropsSchema>
+type $LayoutProps = z.input<typeof LayoutPropsSchema>
+
+type MakeOptional<T, K extends keyof T> = Omit<T, K> & Partial<Pick<T, K>>
+
+// This is probably a bug in zod v4, `navigation` must be provided,
+// but should be optional since we provided default value
+type LayoutProps = MakeOptional<$LayoutProps, 'navigation'>
 
 export const Layout: FC<LayoutProps> = ({ children, ...themeConfig }) => {
   const { data, error } = LayoutPropsSchema.safeParse(themeConfig)

@@ -19,9 +19,9 @@ export const mathJaxOptionsSchema = z.strictObject({
 })
 
 const mdxOptionsSchema = z.strictObject({
-  rehypePlugins: z.custom<ProcessorOptions['rehypePlugins']>(),
-  remarkPlugins: z.custom<ProcessorOptions['remarkPlugins']>(),
-  recmaPlugins: z.custom<ProcessorOptions['recmaPlugins']>(),
+  rehypePlugins: z.custom<ProcessorOptions['rehypePlugins']>().optional(),
+  remarkPlugins: z.custom<ProcessorOptions['remarkPlugins']>().optional(),
+  recmaPlugins: z.custom<ProcessorOptions['recmaPlugins']>().optional(),
   format: z.enum(['detect', 'mdx', 'md']).default('detect'),
   rehypePrettyCodeOptions: z.custom<RehypePrettyCodeOptions>().default({})
 })
@@ -69,7 +69,7 @@ export const nextraConfigSchema = z.strictObject({
 
 export const element = z.custom<ReactElement<Record<string, unknown>>>(
   function checkReactElement(data) {
-    return (data)
+    return isValidElement(data)
   },
   { error: 'Must be a valid React element' }
 )

@@ -10,9 +10,12 @@ import { fromZodError } from 'zod-validation-error'
 import { ClientNavbar } from './index.client'
 
 export const NavbarPropsSchema = z.strictObject({
-  children: reactNode.meta({
-    description: 'Extra content after last icon.'
-  }),
+  children: reactNode
+    // @TODO added in zod v4
+    .optional()
+    .meta({
+      description: 'Extra content after last icon.'
+    }),
   logoLink: z.union([z.string(), z.boolean()]).default(true).meta({
     description:
       "Specifies whether the logo should have a link or provides the URL for the logo's link."
