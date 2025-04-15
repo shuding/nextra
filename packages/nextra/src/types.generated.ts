@@ -94,12 +94,14 @@ The reading time is added to the front matter under the `readingTime` key.
      * Format of the file.
 - `'md'` means treat as markdown
 - `'mdx'` means treat as MDX
-- `'detect'` means try to detect the format based on file path.@remarks `RehypePrettyCodeOptions`
+- `'detect'` means try to detect the format based on file path.
      * @default "detect"
      */
     format?: "detect" | "mdx" | "md"
 
     /**
+     * Configuration options for [Rehype Pretty Code](https://github.com/rehype-pretty/rehype-pretty-code).
+@remarks `RehypePrettyCodeOptions`
      * @default {}
      */
     rehypePrettyCodeOptions?: import("rehype-pretty-code").Options

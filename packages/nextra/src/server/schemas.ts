@@ -38,13 +38,14 @@ const MdxOptionsSchema = z.strictObject({
       "Format of the file.\n\
 - `'md'` means treat as markdown\n\
 - `'mdx'` means treat as MDX\n\
-- `'detect'` means try to detect the format based on file path.\
-@remarks `RehypePrettyCodeOptions`"
+- `'detect'` means try to detect the format based on file path."
   }),
   rehypePrettyCodeOptions: z
     .custom<RehypePrettyCodeOptions>()
     .default({})
     .meta({
+      description: 'Configuration options for [Rehype Pretty Code](https://github.com/rehype-pretty/rehype-pretty-code).\n\
+@remarks `RehypePrettyCodeOptions`',
       type: 'import("rehype-pretty-code").Options'
     })
 })
