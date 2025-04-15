@@ -6,7 +6,7 @@ import fg from 'fast-glob'
 import type { NextConfig } from 'next'
 import type { RuleSetRule } from 'webpack'
 import { fromZodError } from 'zod-validation-error'
-import type { Nextra } from '../types.js'
+import type { NextraConfig } from '../types.js'
 import { CWD, MARKDOWN_EXTENSION_RE } from './constants.js'
 import { NextraConfigSchema } from './schemas.js'
 import { logger } from './utils.js'
@@ -51,9 +51,28 @@ const shouldUseConfigTurbopack =
   nextMajorVersion > 15 || (nextMajorVersion === 15 && nextMinorVersion > 2)
 
 /**
- * @see [`NextConfig` options](https://nextjs.org/docs/pages/api-reference/config/next-config-js).
+ * Nextra is a Next.js plugin that allows you to create Markdown-based content with ease.
+ *
+ * @example
+ * ```js filename="next.config.mjs"
+ * import nextra from 'nextra'
+ *
+ * // Set up Nextra with its configuration
+ * const withNextra = nextra({
+ *   // ... Add Nextra-specific options here
+ * })
+ *
+ * // Export the final Next.js config with Nextra included
+ * export default withNextra({
+ *   // ... Add regular Next.js options here
+ * })
+ * ```
+ * @see
+ * - [`NextraConfig` options](https://nextra.site/api/nextra)
+ * - [Nextra documentation](https://nextra.site)
+ * - [`NextConfig` options](https://nextjs.org/docs/pages/api-reference/config/next-config-js)
  */
-const nextra: Nextra = nextraConfig => {
+const nextra = (nextraConfig: NextraConfig) => {
   const { error, data: loaderOptions } =
     NextraConfigSchema.safeParse(nextraConfig)
   if (error) {
@@ -79,7 +98,7 @@ const nextra: Nextra = nextraConfig => {
     }
   }
 
-  return function withNextra(nextConfig = {}) {
+  return function withNextra(nextConfig: NextConfig = {}): NextConfig {
     const { locales, defaultLocale } = nextConfig.i18n || {}
     if (locales) {
       logger.info(

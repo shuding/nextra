@@ -1,17 +1,18 @@
 import type { Heading as MDASTHeading } from 'mdast'
-import type { Metadata, NextConfig } from 'next'
+import type { Metadata } from 'next'
 import type { FC, ReactElement, ReactNode } from 'react'
 import type { z } from 'zod'
 import type {
   MathJaxOptionsSchema,
   menuSchema,
   metaSchema,
-  NextraConfigSchema,
   separatorItemSchema
 } from './server/schemas.js'
 import type { NextraConfig } from './types.generated.js'
 
-export interface LoaderOptions extends z.infer<typeof NextraConfigSchema> {
+export { NextraConfig }
+
+export interface LoaderOptions extends NextraConfig {
   isPageImport?: boolean
   locales: string[]
   contentDir?: string
@@ -91,13 +92,7 @@ export type ReadingTime = {
   words: number
 }
 
-export { NextraConfig }
-
 export type MathJaxOptions = z.infer<typeof MathJaxOptionsSchema>
-
-export type Nextra = (
-  nextraConfig: NextraConfig
-) => (nextConfig: NextConfig) => NextConfig
 
 export type MDXWrapper = FC<{
   toc: Heading[]
