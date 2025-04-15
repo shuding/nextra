@@ -25,14 +25,16 @@ export function generateTsFromZod(schema: z.ZodType, indent = 2): string {
 
 function generateTsFromZodType(schema: z.ZodType, indent: number): string {
   const { name } = schema.constructor
+  const typeName = schema.meta()?.type as string | undefined
+  if (typeName) return typeName
+
   if (schema instanceof z.ZodCustom) {
-    const typeName = schema.meta()?.type as string | undefined
-    if (typeName) return typeName
     const fnName = schema.def.fn.name
     return fnName.startsWith('check')
       ? 'React.' + fnName.slice(5)
       : '"@TODO TO IMPLEMENT"'
   }
+
   switch (name) {
     case 'ZodString':
       return 'string'

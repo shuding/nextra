@@ -14,8 +14,8 @@ export const MathJaxOptionsSchema = z.strictObject({
   }),
   config: z.custom<MathJax3Config>().optional().meta({
     description:
-      'MathJax config. See https://docs.mathjax.org/en/latest/options/index.html.'
-    // type: 'MathJax3Config'
+      'MathJax config. See https://docs.mathjax.org/en/latest/options/index.html.',
+    type: 'MathJax3Config'
   })
 })
 

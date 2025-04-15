@@ -30,7 +30,7 @@ type $ = {
       /**
        * MathJax config. See https://docs.mathjax.org/en/latest/options/index.html.
        */
-      config?: "@TODO TO IMPLEMENT"
+      config?: MathJax3Config
     }
   } | {
     renderer: "katex"
