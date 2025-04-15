@@ -8,14 +8,15 @@ import { z } from 'zod'
 import { pageTitleFromFilename } from './utils.js'
 
 export const mathJaxOptionsSchema = z.strictObject({
-  /**
-   * URL for MathJax. Defaults to `https://cdnjs.cloudflare.com`
-   */
-  src: z.string().optional(),
-  /**
-   * MathJax config. See https://docs.mathjax.org/en/latest/options/index.html
-   */
-  config: z.custom<MathJax3Config>().optional()
+  src: z.string().optional().meta({
+    description: 'URL for MathJax.',
+    // default: 'https://cdnjs.cloudflare.com'
+  }),
+  config: z.custom<MathJax3Config>().optional().meta({
+    description:
+      'MathJax config. See https://docs.mathjax.org/en/latest/options/index.html',
+    // type: 'MathJax3Config'
+  })
 })
 
 const mdxOptionsSchema = z.strictObject({
@@ -32,10 +33,9 @@ export const nextraConfigSchema = z.strictObject({
     .union([
       z.boolean(),
       z.strictObject({
-        /**
-         * Whether to index code blocks
-         */
-        codeblocks: z.boolean()
+        codeblocks: z.boolean().meta({
+          description: 'Whether to index code blocks.'
+        })
       })
     ])
     .default({ codeblocks: false }),

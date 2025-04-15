@@ -5,6 +5,9 @@ type $ = {
    * @default {"codeblocks":false}
    */
   search?: boolean | {
+    /**
+     * Whether to index code blocks.
+     */
     codeblocks: boolean
   }
 
@@ -19,8 +22,14 @@ type $ = {
     renderer: "mathjax"
 
     options?: {
+      /**
+       * URL for MathJax.
+       */
       src?: string
 
+      /**
+       * MathJax config. See https://docs.mathjax.org/en/latest/options/index.html
+       */
       config?: "@TODO TO IMPLEMENT"
     }
   } | {
