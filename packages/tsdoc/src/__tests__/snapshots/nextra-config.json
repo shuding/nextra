@@ -2,7 +2,9 @@
   "entries": [
     {
       "description": "Enable the copy button for all code blocks by default, without needing to set `copy=true` in the code block metadata.
-You can still disable the button for specific blocks using `copy=false`.",
+> [!TIP]
+>
+> You can still disable the button for specific blocks using `copy=false`.",
       "name": "defaultShowCopyCode",
       "optional": true,
       "type": "boolean",
@@ -10,7 +12,9 @@ You can still disable the button for specific blocks using `copy=false`.",
     {
       "description": "Option to enable search functionality. When enabled, it sets the `data-pagefind-body` attribute on the `<main>` element.
 
-When set to `codeblocks: false`, it adds the `data-pagefind-ignore="all"` attribute to all code blocks (`<pre>` elements).",
+> [!NOTE]
+>
+> When set to `codeblocks: false`, it adds the `data-pagefind-ignore="all"` attribute to all code blocks (`<pre>` elements).",
       "name": "search",
       "optional": true,
       "tags": {
@@ -19,7 +23,9 @@ When set to `codeblocks: false`, it adds the `data-pagefind-ignore="all"` attrib
       "type": "boolean | { codeblocks: boolean; }",
     },
     {
-      "description": "Option to automatically optimizing your static image imports with the Markdown syntax. E.g. `![Hello](/demo.png)`.",
+      "description": "Option to automatically optimizing your static image imports with the Markdown syntax.
+
+E.g. `![Hello](/demo.png)`.",
       "name": "staticImage",
       "optional": true,
       "tags": {
@@ -70,7 +76,9 @@ The reading time is added to the front matter under the `readingTime` key.",
     },
     {
       "description": "Format of the file.
-`'md'` means treat as markdown and `'mdx'` means treat as MDX. `'detect'` means try to detect the format based on file path.",
+- `'md'` means treat as markdown
+- `'mdx'` means treat as MDX
+- `'detect'` means try to detect the format based on file path.",
       "name": "mdxOptions.format",
       "optional": true,
       "tags": {
@@ -88,7 +96,9 @@ The reading time is added to the front matter under the `readingTime` key.",
     },
     {
       "description": "Allows you to whitelist HTML elements to be replaced with components defined in the `mdx-components.js` file.
-By default, Nextra only replaces `<details>` and `<summary>` elements.",
+> [!TIP]
+>
+> By default, Nextra only replaces `<details>` and `<summary>` elements.",
       "name": "whiteListTagsStyling",
       "optional": true,
       "type": "string[]",
