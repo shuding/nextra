@@ -97,13 +97,12 @@ function getDocComment(schema: z.ZodType, indent: number): string {
     meta.description || schema.def.innerType?.description
   const defaultValue = getDefaultValue(schema)
   const comments: string[] = []
-
   if (description) {
-    comments.push(...description.split('\n'))
+    comments.push(description)
   }
   if (defaultValue !== undefined) {
     const def = meta.default ?? JSON.stringify(defaultValue, null, 2)
-    comments.push(...`@default ${def}`.split('\n'))
+    comments.push(`@default ${def}`)
   }
   if (!comments.length) {
     return ''
@@ -111,7 +110,9 @@ function getDocComment(schema: z.ZodType, indent: number): string {
   const comment = [
     //
     '/**',
-    ...comments.map(line => ` * ${line}`),
+    ...comments.flatMap(comment =>
+      comment.split('\n').map(line => ` * ${line}`)
+    ),
     ' */'
   ]
     .map(line => `${' '.repeat(indent)}${line}`)
