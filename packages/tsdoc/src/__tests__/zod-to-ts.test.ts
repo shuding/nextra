@@ -1,7 +1,7 @@
 import { reactNode } from 'nextra/schemas'
 import { z } from 'zod'
-import { LayoutPropsSchema } from '../../../nextra-theme-docs/src/layout.js'
 import { NavbarPropsSchema } from '../../../nextra-theme-docs/src/components/navbar/index.js'
+import { LayoutPropsSchema } from '../../../nextra-theme-docs/src/layout.js'
 import { HeadPropsSchema } from '../../../nextra/src/client/components/head.js'
 import { NextraConfigSchema } from '../../../nextra/src/server/schemas.js'
 import { generateTsFromZod } from '../../../nextra/src/server/tsdoc/zod-to-ts.js'
@@ -182,23 +182,23 @@ describe('generateTsFromZod', () => {
   })
 
   it('should convert LayoutPropsSchema', () => {
-    return expect('type $ = ' + generateTsFromZod(LayoutPropsSchema)).toMatchFileSnapshot(
-      './snapshots/layout-props.ts'
-    )
+    return expect(
+      'type $ = ' + generateTsFromZod(LayoutPropsSchema)
+    ).toMatchFileSnapshot('./snapshots/layout-props.ts')
   })
   it('should convert NavbarPropsSchema', () => {
-    return expect('type $ = ' + generateTsFromZod(NavbarPropsSchema)).toMatchFileSnapshot(
-      './snapshots/navbar-props.ts'
-    )
+    return expect(
+      'type $ = ' + generateTsFromZod(NavbarPropsSchema)
+    ).toMatchFileSnapshot('./snapshots/navbar-props.ts')
   })
   it('should convert HeadPropsSchema', () => {
-    return expect('type $ = ' + generateTsFromZod(HeadPropsSchema)).toMatchFileSnapshot(
-      './snapshots/head-props.ts'
-    )
+    return expect(
+      'type $ = ' + generateTsFromZod(HeadPropsSchema)
+    ).toMatchFileSnapshot('./snapshots/head-props.ts')
   })
   it('should convert NextraConfigSchema', () => {
-    return expect('type $ = ' + generateTsFromZod(NextraConfigSchema)).toMatchFileSnapshot(
-      './snapshots/nextra-config.ts'
-    )
+    return expect(
+      'type $ = ' + generateTsFromZod(NextraConfigSchema)
+    ).toMatchFileSnapshot('./snapshots/nextra-config.ts')
   })
 })

@@ -54,45 +54,38 @@ const stringColorSchema = z
   })
 
 const colorSchema = z.strictObject({
-  hue: darkLightSchema
-    .default({ dark: 204, light: 212 })
-    .meta({
-      description: 'The hue of the primary theme color.<br/>Range: `0 - 360`'
-    }),
+  hue: darkLightSchema.default({ dark: 204, light: 212 }).meta({
+    description: 'The hue of the primary theme color.<br/>Range: `0 - 360`'
+  }),
   saturation: darkLightSchema
     // @ts-expect-error -- fixme
     .default(100)
     .meta({
-      description: 'The saturation of the primary theme color.<br/>Range: `0 - 100`'
+      description:
+        'The saturation of the primary theme color.<br/>Range: `0 - 100`'
     }),
-  lightness: darkLightSchema
-    .default({ dark: 55, light: 45 })
-    .meta({
-      description: 'The lightness of the primary theme color.<br/>Range: `0 - 100`'
-    })
+  lightness: darkLightSchema.default({ dark: 55, light: 45 }).meta({
+    description:
+      'The lightness of the primary theme color.<br/>Range: `0 - 100`'
+  })
 })
 
 const bgColorSchema = z.strictObject({
-  dark: stringColorSchema
-    .default('rgb(17,17,17)')
-    .meta({
-      description: 'Background color for dark theme.<br/>Format: `"rgb(RRR,GGG,BBB)" | "#RRGGBB"`'
-    }),
-  light: stringColorSchema
-    .default('rgb(250,250,250)')
-    .meta({
-      description: 'Background color for light theme.<br/>Format: `"rgb(RRR,GGG,BBB)" | "#RRGGBB"`'
-    })
+  dark: stringColorSchema.default('rgb(17,17,17)').meta({
+    description:
+      'Background color for dark theme.<br/>Format: `"rgb(RRR,GGG,BBB)" | "#RRGGBB"`'
+  }),
+  light: stringColorSchema.default('rgb(250,250,250)').meta({
+    description:
+      'Background color for light theme.<br/>Format: `"rgb(RRR,GGG,BBB)" | "#RRGGBB"`'
+  })
 })
 
 export const HeadPropsSchema = z.strictObject({
   color: colorSchema.default(colorSchema.parse({})),
-  faviconGlyph: z
-    .string()
-    .optional()
-    .meta({
-      description: 'The glyph to use as the favicon.'
-    }),
+  faviconGlyph: z.string().optional().meta({
+    description: 'The glyph to use as the favicon.'
+  }),
   backgroundColor: bgColorSchema.default(bgColorSchema.parse({})),
   children: reactNode.meta({
     description: 'Content of `<head>`'
