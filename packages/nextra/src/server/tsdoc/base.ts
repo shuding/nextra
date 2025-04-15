@@ -26,6 +26,33 @@ const { compilerObject } = project.getTypeChecker()
  * Generate documentation for properties of `type` and `interface` and parameters and returns
  * signature of `function`.
  * @returns Parsed TSDoc definition from TypeScript `type`, `interface` or `function`.
+ * @example
+ * To generate documentation for `type`, `interface` or `function` export it in `code` argument:
+ *
+ * ### As `default` export
+ *
+ * ```mdx
+ * import { generateDocumentation, TSDoc } from 'nextra/tsdoc'
+ *
+ * <TSDoc
+ *   definitions={generateDocumentation({
+ *     code: "export { yourTypeOrFunction as default } from 'your-package'",
+ *   })}
+ * />
+ * ```
+ *
+ * ### As named export
+ *
+ * ```mdx
+ * import { generateDocumentation, TSDoc } from 'nextra/tsdoc'
+ *
+ * <TSDoc
+ *   definitions={generateDocumentation({
+ *     code: "export { yourTypeOrFunction } from 'your-package'",
+ *     exportName: 'yourTypeOrFunction'
+ *   })}
+ * />
+ * ```
  */
 export function generateDocumentation({
   code,
