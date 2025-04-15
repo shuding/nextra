@@ -42,6 +42,7 @@ type $ = {
   }
 
   /**
+   * Enable or disable syntax highlighting.
    * @default true
    */
   codeHighlight?: boolean
@@ -80,7 +81,7 @@ type $ = {
 
   /**
    * Allows you to whitelist HTML elements to be replaced with components defined in the `mdx-components.js` file.
-By default, Nextra only replaces `<details>` and `<summary>`.
+By default, Nextra only replaces `<details>` and `<summary>` elements.
    */
   whiteListTagsStyling?: string[]
 
