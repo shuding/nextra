@@ -92,27 +92,26 @@ function getDefaultValue(schema: z.ZodType): unknown {
 
 function getDocComment(schema: z.ZodType, indent: number): string {
   const meta = schema.meta() ?? ({} as Record<string, string>)
-  const description =
+  const description: string =
     // @ts-expect-error -- fixme
     meta.description || schema.def.innerType?.description
   const defaultValue = getDefaultValue(schema)
+  const spacing = ' '.repeat(indent + 1)
   const comments: string[] = []
 
   if (description) {
-    comments.push(` * ${description}`)
+    comments.push(...description.split('\n'))
   }
   if (defaultValue !== undefined) {
-    comments.push(
-      ` * @default ${meta.default ?? JSON.stringify(defaultValue, null, 2)}`
-    )
+    const def = meta.default ?? JSON.stringify(defaultValue, null, 2)
+    comments.push(...`@default ${def}`.split('\n'))
   }
   if (!comments.length) {
     return ''
   }
-  const spacing = ' '.repeat(indent)
   const comment = [
     `${spacing}/**`,
-    ...comments.map(line => `${spacing}${line}`),
+    ...comments.map(line => `${spacing}*${line}`),
     `${spacing} */`
   ].join('\n')
 
