@@ -52,8 +52,6 @@ export const NextraConfigSchema = z.strictObject({
   defaultShowCopyCode: z.boolean().optional().meta({
     description:
       'Enable the copy button for all code blocks by default, without needing to set `copy=true` in the code block metadata.\n\
-> [!TIP]\n\
->\n\
 > You could still disable the button for specific blocks using `copy=false`.'
   }),
   search: z
@@ -69,8 +67,6 @@ export const NextraConfigSchema = z.strictObject({
     .meta({
       description:
         'Option to enable search functionality. When enabled, it sets the `data-pagefind-body` attribute on the `<main>` element.\n\n\
-> [!NOTE]\n\
->\n\
 > When set to `codeblocks: false`, it adds the `data-pagefind-ignore="all"` attribute to all code blocks (`<pre>` elements).'
     }),
   staticImage: z.boolean().default(true).meta({

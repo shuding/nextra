@@ -1,8 +1,6 @@
 export type NextraConfig = {
   /**
    * Enable the copy button for all code blocks by default, without needing to set `copy=true` in the code block metadata.
-> [!TIP]
->
 > You could still disable the button for specific blocks using `copy=false`.
    */
   defaultShowCopyCode?: boolean
@@ -10,8 +8,6 @@ export type NextraConfig = {
   /**
    * Option to enable search functionality. When enabled, it sets the `data-pagefind-body` attribute on the `<main>` element.
 
-> [!NOTE]
->
 > When set to `codeblocks: false`, it adds the `data-pagefind-ignore="all"` attribute to all code blocks (`<pre>` elements).
    * @default {"codeblocks":false}
    */
