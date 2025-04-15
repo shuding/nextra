@@ -1,14 +1,16 @@
 export type NextraConfig = {
   /**
-   * Enable the copy button for all code blocks by default, without needing to set `copy=true` in the code block metadata.
-> You could still disable the button for specific blocks using `copy=false`.
+   * Enable the copy button for all code blocks by default, without needing to set `copy=true` attribute in the code block metadata.
+> You could still disable the button for specific blocks using `copy=false` attribute.
    */
   defaultShowCopyCode?: boolean
 
   /**
    * Option to enable search functionality. When enabled, it sets the `data-pagefind-body` attribute on the `<main>` element.
 > When set to `codeblocks: false`, it adds the `data-pagefind-ignore="all"` attribute to all code blocks (`<pre>` elements).
-   * @default {"codeblocks":false}
+   * @default {
+  "codeblocks": false
+}
    */
   search?: boolean | {
     /**
@@ -67,7 +69,10 @@ The reading time is added to the front matter under the `readingTime` key.
   /**
    * Options specific to MDX compiling.
 @remarks `MdxOptions`
-   * @default {"format":"detect","rehypePrettyCodeOptions":{}}
+   * @default {
+  "format": "detect",
+  "rehypePrettyCodeOptions": {}
+}
    */
   mdxOptions?: {
     /**

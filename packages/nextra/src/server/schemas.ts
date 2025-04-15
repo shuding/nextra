@@ -51,8 +51,8 @@ const MdxOptionsSchema = z.strictObject({
 export const NextraConfigSchema = z.strictObject({
   defaultShowCopyCode: z.boolean().optional().meta({
     description:
-      'Enable the copy button for all code blocks by default, without needing to set `copy=true` in the code block metadata.\n\
-> You could still disable the button for specific blocks using `copy=false`.'
+      'Enable the copy button for all code blocks by default, without needing to set `copy=true` attribute in the code block metadata.\n\
+> You could still disable the button for specific blocks using `copy=false` attribute.'
   }),
   search: z
     .union([
