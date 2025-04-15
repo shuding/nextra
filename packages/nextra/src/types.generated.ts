@@ -1,4 +1,4 @@
-type NextraConfig = {
+export type NextraConfig = {
   /**
    * Enable the copy button for all code blocks by default, without needing to set `copy=true` in the code block metadata.
 > [!TIP]
@@ -124,4 +124,3 @@ The reading time is added to the front matter under the `readingTime` key.
    */
   unstable_shouldAddLocaleToLinks?: boolean
 }
-    export default NextraConfig

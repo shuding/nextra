@@ -25,8 +25,7 @@ export default defineConfig({
     const clientPackageJSON = path.join(CWD, 'dist', 'client', 'package.json')
     await fs.writeFile(clientPackageJSON, '{"sideEffects":false}')
 
-    const generatedTypes = `type NextraConfig = ${generateTsFromZod(NextraConfigSchema)}
-    export default NextraConfig`
+    const generatedTypes = `export type NextraConfig = ${generateTsFromZod(NextraConfigSchema)}`
     await fs.writeFile(path.resolve('src', 'types.generated.ts'), generatedTypes)
   },
   esbuildPlugins: [
