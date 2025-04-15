@@ -33,30 +33,33 @@ const MdxOptionsSchema = z.strictObject({
       'List of recma plugins. This is a new ecosystem, currently in beta, to transform esast trees (JavaScript).',
     type: 'import("@mdx-js/mdx").ProcessorOptions["recmaPlugins"]'
   }),
-  format: z.enum(['detect', 'mdx', 'md']).default('detect').meta({
-    description:
-      "Format of the file.\n\
-- `'md'` means treat as markdown\n\
-- `'mdx'` means treat as MDX\n\
-- `'detect'` means try to detect the format based on file path."
-  }),
+  format: z
+    .enum(['detect', 'mdx', 'md'])
+    .default('detect')
+    .meta({
+      description: `Format of the file.
+- \`'md'\` means treat as markdown
+- \`'mdx'\` means treat as MDX
+- \`'detect'\` means try to detect the format based on file path.`
+    }),
   rehypePrettyCodeOptions: z
     .custom<RehypePrettyCodeOptions>()
     .default({})
     .meta({
-      description:
-        'Configuration options for [Rehype Pretty Code](https://github.com/rehype-pretty/rehype-pretty-code).\n\
-@remarks `RehypePrettyCodeOptions`',
+      description: `Configuration options for [Rehype Pretty Code](https://github.com/rehype-pretty/rehype-pretty-code).
+@remarks \`RehypePrettyCodeOptions\``,
       type: 'import("rehype-pretty-code").Options'
     })
 })
 
 export const NextraConfigSchema = z.strictObject({
-  defaultShowCopyCode: z.boolean().optional().meta({
-    description:
-      'Enable the copy button for all code blocks by default, without needing to set `copy=true` attribute in the code block metadata.\n\
-> You could still disable the button for specific blocks using `copy=false` attribute.'
-  }),
+  defaultShowCopyCode: z
+    .boolean()
+    .optional()
+    .meta({
+      description: `Enable the copy button for all code blocks by default, without needing to set \`copy=true\` attribute in the code block metadata.
+> You could still disable the button for specific blocks using \`copy=false\` attribute.`
+    }),
   search: z
     .union([
       z.boolean(),
@@ -74,13 +77,14 @@ export const NextraConfigSchema = z.strictObject({
     }),
   staticImage: z.boolean().default(true).meta({
     description:
-      'Option to automatically optimizing your static image imports with the Markdown syntax.\n\
-> E.g. `![Hello](/demo.png)`.'
+      `Option to automatically optimizing your static image imports with the Markdown syntax.
+> E.g. \`![Hello](/demo.png)\`.`
   }),
   readingTime: z.boolean().optional().meta({
     description:
-      'Adds estimated reading time of `.md` and `.mdx` files using [readingTime](https://npmjs.com/package/reading-time) package.\n\n\
-The reading time is added to the front matter under the `readingTime` key.'
+      `Adds estimated reading time of \`.md\` and \`.mdx\` files using [readingTime](https://npmjs.com/package/reading-time) package.
+
+The reading time is added to the front matter under the \`readingTime\` key.`
   }),
   latex: z
     .union([
