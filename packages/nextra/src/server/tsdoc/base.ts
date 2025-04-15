@@ -1,10 +1,5 @@
-import type {
-  ExportedDeclarations,
-  SyntaxKind,
-  Symbol as TsSymbol,
-  Type
-} from 'ts-morph'
-import { Project, ts } from 'ts-morph'
+import type { ExportedDeclarations, Symbol as TsSymbol, Type } from 'ts-morph'
+import { Project, SyntaxKind, ts } from 'ts-morph'
 import { logger } from '../utils.js'
 import type {
   BaseArgs,
