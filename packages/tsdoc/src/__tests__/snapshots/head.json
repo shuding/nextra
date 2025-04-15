@@ -5,7 +5,10 @@
       "name": "color.hue",
       "optional": true,
       "tags": {
-        "default": "{"dark":204,"light":212}",
+        "default": "{
+"dark": 204,
+"light": 212
+}",
       },
       "type": "number | { dark: number; light: number; }",
     },
@@ -23,7 +26,10 @@
       "name": "color.lightness",
       "optional": true,
       "tags": {
-        "default": "{"dark":55,"light":45}",
+        "default": "{
+"dark": 55,
+"light": 45
+}",
       },
       "type": "number | { dark: number; light: number; }",
     },
