@@ -38,7 +38,9 @@ const MdxOptionsSchema = z.strictObject({
       "Format of the file.\n\
 `'md'` means treat as markdown and `'mdx'` means treat as MDX. `'detect'` means try to detect the format based on file path."
   }),
-  rehypePrettyCodeOptions: z.custom<RehypePrettyCodeOptions>().default({})
+  rehypePrettyCodeOptions: z.custom<RehypePrettyCodeOptions>().default({}).meta({
+    type: 'RehypePrettyCodeOptions'
+  })
 })
 
 export const NextraConfigSchema = z.strictObject({

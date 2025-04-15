@@ -75,7 +75,7 @@ type $ = {
     /**
      * @default {}
      */
-    rehypePrettyCodeOptions?: "@TODO TO IMPLEMENT"
+    rehypePrettyCodeOptions?: RehypePrettyCodeOptions
   }
 
   whiteListTagsStyling?: string[]
