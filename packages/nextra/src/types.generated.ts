@@ -28,14 +28,14 @@ export type NextraConfig = {
   staticImage?: boolean
 
   /**
-   * Adds estimated reading time of `.md` and `.mdx` files using https://npmjs.com/package/reading-time package.
+   * Adds estimated reading time of `.md` and `.mdx` files using [readingTime](https://npmjs.com/package/reading-time) package.
 
 The reading time is added to the front matter under the `readingTime` key.
    */
   readingTime?: boolean
 
   /**
-   * Enable LaTeX either with KaTeX (https://katex.org) to pre-render LaTeX expressions directly in MDX or MathJax (https://mathjax.org) to dynamically render math in the browser.
+   * Enable LaTeX either with [KaTeX](https://katex.org) to pre-render LaTeX expressions directly in MDX or [MathJax](https://mathjax.org) to dynamically render math in the browser.
    */
   latex?: boolean | {
     renderer: "mathjax"
@@ -47,7 +47,7 @@ The reading time is added to the front matter under the `readingTime` key.
       src?: string
 
       /**
-       * MathJax config. See https://docs.mathjax.org/en/latest/options/index.html.
+       * MathJax config. See [configuring MathJax](https://docs.mathjax.org/en/latest/options/index.html).
        */
       config?: import("better-react-mathjax").MathJax3Config
     }

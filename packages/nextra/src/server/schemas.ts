@@ -14,7 +14,7 @@ export const MathJaxOptionsSchema = z.strictObject({
   }),
   config: z.custom<MathJax3Config>().optional().meta({
     description:
-      'MathJax config. See https://docs.mathjax.org/en/latest/options/index.html.',
+      'MathJax config. See [configuring MathJax](https://docs.mathjax.org/en/latest/options/index.html).',
     type: 'import("better-react-mathjax").MathJax3Config'
   })
 })
@@ -78,7 +78,7 @@ export const NextraConfigSchema = z.strictObject({
   }),
   readingTime: z.boolean().optional().meta({
     description:
-      'Adds estimated reading time of `.md` and `.mdx` files using https://npmjs.com/package/reading-time package.\n\n\
+      'Adds estimated reading time of `.md` and `.mdx` files using [readingTime](https://npmjs.com/package/reading-time) package.\n\n\
 The reading time is added to the front matter under the `readingTime` key.'
   }),
   latex: z
@@ -104,7 +104,7 @@ The reading time is added to the front matter under the `readingTime` key.'
     .optional()
     .meta({
       description:
-        'Enable LaTeX either with KaTeX (https://katex.org) to pre-render LaTeX expressions directly in MDX or MathJax (https://mathjax.org) to dynamically render math in the browser.'
+        'Enable LaTeX either with [KaTeX](https://katex.org) to pre-render LaTeX expressions directly in MDX or [MathJax](https://mathjax.org) to dynamically render math in the browser.'
     }),
   codeHighlight: z.boolean().default(true).meta({
     description: 'Enable or disable syntax highlighting.'

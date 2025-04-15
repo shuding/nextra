@@ -117,7 +117,8 @@ ${tags.example}`
       'NextConfig',
       'https://nextjs.org/docs/pages/api-reference/config/next-config-js'
     ],
-    ['RehypePrettyCodeOptions', 'https://rehype-pretty.pages.dev/#options']
+    ['RehypePrettyCodeOptions', 'https://rehype-pretty.pages.dev/#options'],
+    ['PluggableList', 'https://github.com/unifiedjs/unified#pluggablelist']
   )
 
   const rawJs = await compileMdx(result.join('\n\n'))
