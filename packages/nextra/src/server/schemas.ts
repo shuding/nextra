@@ -22,16 +22,16 @@ export const MathJaxOptionsSchema = z.strictObject({
 const MdxOptionsSchema = z.strictObject({
   rehypePlugins: z.custom<ProcessorOptions['rehypePlugins']>().optional().meta({
     description: 'List of rehype plugins.',
-    type: 'PluggableList | null'
+    type: 'import("@mdx-js/mdx").ProcessorOptions["rehypePlugins"]'
   }),
   remarkPlugins: z.custom<ProcessorOptions['remarkPlugins']>().optional().meta({
     description: 'List of remark plugins.',
-    type: 'PluggableList | null'
+    type: 'import("@mdx-js/mdx").ProcessorOptions["remarkPlugins"]'
   }),
   recmaPlugins: z.custom<ProcessorOptions['recmaPlugins']>().optional().meta({
     description:
       'List of recma plugins. This is a new ecosystem, currently in beta, to transform esast trees (JavaScript).',
-    type: 'PluggableList | null'
+    type: 'import("@mdx-js/mdx").ProcessorOptions["recmaPlugins"]'
   }),
   format: z.enum(['detect', 'mdx', 'md']).default('detect').meta({
     description:
@@ -54,7 +54,7 @@ export const NextraConfigSchema = z.strictObject({
       'Enable the copy button for all code blocks by default, without needing to set `copy=true` in the code block metadata.\n\
 > [!TIP]\n\
 >\n\
-> You can still disable the button for specific blocks using `copy=false`.'
+> You could still disable the button for specific blocks using `copy=false`.'
   }),
   search: z
     .union([
@@ -129,7 +129,7 @@ The reading time is added to the front matter under the `readingTime` key.'
     }),
   unstable_shouldAddLocaleToLinks: z.boolean().default(false).meta({
     description:
-      "Adds locale to all links in page map information. Useful for i18n when you don't want to use Nextra's `middleware` function."
+      "Prefixes locale to all links in the page map information. Useful for i18n when you don't want to use Nextra's `middleware` function."
   })
 })
 

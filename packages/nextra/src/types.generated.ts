@@ -77,17 +77,17 @@ The reading time is added to the front matter under the `readingTime` key.
     /**
      * List of rehype plugins.
      */
-    rehypePlugins?: PluggableList | null
+    rehypePlugins?: import("@mdx-js/mdx").ProcessorOptions["rehypePlugins"]
 
     /**
      * List of remark plugins.
      */
-    remarkPlugins?: PluggableList | null
+    remarkPlugins?: import("@mdx-js/mdx").ProcessorOptions["remarkPlugins"]
 
     /**
      * List of recma plugins. This is a new ecosystem, currently in beta, to transform esast trees (JavaScript).
      */
-    recmaPlugins?: PluggableList | null
+    recmaPlugins?: import("@mdx-js/mdx").ProcessorOptions["recmaPlugins"]
 
     /**
      * Format of the file.
