@@ -74,7 +74,7 @@ export const Navbar: FC<NavbarProps> = props => {
           'nextra-navbar-blur',
           'x:absolute x:-z-1 x:size-full',
           'nextra-border x:border-b',
-          'x:backdrop-blur-md x:bg-nextra-bg/70'
+          'x:backdrop-blur-md x:bg-nextra-bg/90'
         )}
       />
       <nav
