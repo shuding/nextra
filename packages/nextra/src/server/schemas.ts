@@ -38,9 +38,12 @@ const MdxOptionsSchema = z.strictObject({
       "Format of the file.\n\
 `'md'` means treat as markdown and `'mdx'` means treat as MDX. `'detect'` means try to detect the format based on file path."
   }),
-  rehypePrettyCodeOptions: z.custom<RehypePrettyCodeOptions>().default({}).meta({
-    type: 'RehypePrettyCodeOptions'
-  })
+  rehypePrettyCodeOptions: z
+    .custom<RehypePrettyCodeOptions>()
+    .default({})
+    .meta({
+      type: 'RehypePrettyCodeOptions'
+    })
 })
 
 export const NextraConfigSchema = z.strictObject({
@@ -74,16 +77,26 @@ export const NextraConfigSchema = z.strictObject({
       })
     ])
     .optional(),
-  codeHighlight: z.boolean().default(true),
+  codeHighlight: z.boolean().default(true).meta({
+    description: 'Enable or disable syntax highlighting.'
+  }),
   mdxOptions: MdxOptionsSchema.default(MdxOptionsSchema.parse({})),
-  whiteListTagsStyling: z.array(z.string()).optional(),
+  whiteListTagsStyling: z.array(z.string()).optional().meta({
+    description:
+      'Allows you to whitelist HTML elements to be replaced with components defined in the `mdx-components.js` file.\n\
+By default, Nextra only replaces `<details>` and `<summary>` elements.'
+  }),
   contentDirBasePath: z
     .string()
     .startsWith('/')
     .refine(value => value.length === 1 || !value.endsWith('/'), {
       error: 'Must not end with "/"'
     })
-    .default('/'),
+    .default('/')
+    .meta({
+      description:
+        'Option to serve your `.md` and `.mdx` files from the `content` directory at a custom path instead of the root (`/`).'
+    }),
   unstable_shouldAddLocaleToLinks: z.boolean().default(false)
 })
 

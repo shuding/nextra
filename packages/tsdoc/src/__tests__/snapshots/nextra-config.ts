@@ -78,9 +78,14 @@ type $ = {
     rehypePrettyCodeOptions?: RehypePrettyCodeOptions
   }
 
+  /**
+   * Allows you to whitelist HTML elements to be replaced with components defined in the `mdx-components.js` file.
+By default, Nextra only replaces `<details>` and `<summary>`.
+   */
   whiteListTagsStyling?: string[]
 
   /**
+   * Option to serve your `.md` and `.mdx` files from the `content` directory at a custom path instead of the root (`/`).
    * @default "/"
    */
   contentDirBasePath?: string
