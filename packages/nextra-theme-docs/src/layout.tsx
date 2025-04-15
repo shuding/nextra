@@ -72,9 +72,12 @@ const tocSchema = z.strictObject({
   backToTop: reactNode.default('Scroll to top').meta({
     description: 'Text of back to top button.'
   }),
-  extraContent: reactNode.meta({
-    description: 'Display extra content below the TOC content.'
-  }),
+  extraContent: reactNode
+    // @TODO added in zod v4
+    .optional()
+    .meta({
+      description: 'Display extra content below the TOC content.'
+    }),
   float: z.boolean().default(true).meta({
     description: 'Float the TOC next to the content.'
   }),

@@ -89,21 +89,21 @@ This hook is useful for dynamically configuring your project based on shared the
           "type": "string",
         },
         {
-          "name": "toc.float",
-          "type": "boolean",
+          "name": "toc.extraContent",
+          "optional": true,
+          "type": "ReactNode",
         },
         {
           "name": "toc.backToTop",
           "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...> | null",
         },
         {
-          "name": "toc.title",
-          "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...> | null",
+          "name": "toc.float",
+          "type": "boolean",
         },
         {
-          "name": "toc.extraContent",
-          "optional": true,
-          "type": "ReactNode",
+          "name": "toc.title",
+          "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...> | null",
         },
       ],
     },
