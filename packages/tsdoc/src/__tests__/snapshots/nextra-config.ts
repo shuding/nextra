@@ -6,7 +6,9 @@ You can still disable the button for specific blocks using `copy=false`.
   defaultShowCopyCode?: boolean
 
   /**
-   * Option to enable search functionality. When enabled, it sets the `data-pagefind-body` attribute on the `<main>` element.When set to `codeblocks: false`, it adds the `data-pagefind-ignore="all"` attribute to all code blocks (`<pre>` elements).
+   * Option to enable search functionality. When enabled, it sets the `data-pagefind-body` attribute on the `<main>` element.
+
+When set to `codeblocks: false`, it adds the `data-pagefind-ignore="all"` attribute to all code blocks (`<pre>` elements).
    * @default {"codeblocks":false}
    */
   search?: boolean | {

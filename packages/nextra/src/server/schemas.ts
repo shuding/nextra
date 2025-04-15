@@ -64,8 +64,7 @@ You can still disable the button for specific blocks using `copy=false`.'
     .default({ codeblocks: false })
     .meta({
       description:
-        'Option to enable search functionality. When enabled, it sets the `data-pagefind-body` attribute on the `<main>` element.\
-\
+        'Option to enable search functionality. When enabled, it sets the `data-pagefind-body` attribute on the `<main>` element.\n\n\
 When set to `codeblocks: false`, it adds the `data-pagefind-ignore="all"` attribute to all code blocks (`<pre>` elements).'
     }),
   staticImage: z.boolean().default(true).meta({
