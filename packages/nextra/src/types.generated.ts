@@ -42,6 +42,7 @@ export type NextraConfig = {
     options?: {
       /**
        * URL for MathJax.
+       * @default "https://cdnjs.cloudflare.com"
        */
       src?: string
 

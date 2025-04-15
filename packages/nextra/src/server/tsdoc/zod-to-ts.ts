@@ -96,12 +96,14 @@ function getDocComment(schema: z.ZodType, indent: number): string {
     // @ts-expect-error -- fixme
     meta.description || schema.def.innerType?.description
   const defaultValue = getDefaultValue(schema)
+  const def =
+    meta.default ??
+    (defaultValue === undefined ? undefined : JSON.stringify(defaultValue, null, 2))
   const comments: string[] = []
   if (description) {
     comments.push(description)
   }
-  if (defaultValue !== undefined) {
-    const def = meta.default ?? JSON.stringify(defaultValue, null, 2)
+  if (def !== undefined) {
     comments.push(`@default ${def}`)
   }
   if (!comments.length) {

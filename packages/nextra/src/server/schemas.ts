@@ -10,7 +10,7 @@ import { pageTitleFromFilename } from './utils.js'
 export const MathJaxOptionsSchema = z.strictObject({
   src: z.string().optional().meta({
     description: 'URL for MathJax.',
-    default: 'https://cdnjs.cloudflare.com'
+    default: '"https://cdnjs.cloudflare.com"'
   }),
   config: z.custom<MathJax3Config>().optional().meta({
     description:
