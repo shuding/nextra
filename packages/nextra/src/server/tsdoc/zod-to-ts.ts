@@ -91,7 +91,7 @@ function getDefaultValue(schema: z.ZodType): unknown {
 }
 
 function getDocComment(schema: z.ZodType, indent: number): string {
-  const meta = schema.meta() ?? ({} as Record<string, string>)
+  const meta = (schema.meta() ?? {}) as Record<string, string>
   const description: string =
     // @ts-expect-error -- fixme
     meta.description || schema.def.innerType?.description
@@ -111,7 +111,7 @@ function getDocComment(schema: z.ZodType, indent: number): string {
   }
   const comment = [
     `${spacing}/**`,
-    ...comments.map(line => `${spacing}* ${line}`),
+    ...comments.map(line => `${spacing} * ${line}`),
     `${spacing} */`
   ].join('\n')
 
