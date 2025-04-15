@@ -5,19 +5,22 @@ export function generateTsFromZod(schema: z.ZodType, indent = 2): string {
   if (!isZodObject) {
     return generateTsFromZodType(schema, indent)
   }
-  return `{\n${Object.entries(schema.shape)
-    .map(([key, value]) => {
-      const tsType = generateTsFromZodType(value as z.ZodType, indent + 2)
-      const docComment = getDocComment(value as z.ZodType, indent)
+  const objectFields = Object.entries(schema.shape)
+    .map(([key, _value]) => {
+      const value = _value as z.ZodType
+      const tsType = generateTsFromZodType(value, indent + 2)
+      const docComment = getDocComment(value, indent)
       return [
         docComment,
         ' '.repeat(indent),
         key,
-        (value as z.ZodType).isOptional() ? '?' : '',
+        value.isOptional() ? '?' : '',
         `: ${tsType}\n`
       ].join('')
     })
-    .join('\n')}${' '.repeat(indent - 2)}}`
+    .join('\n')
+
+  return ['{\n', objectFields, ' '.repeat(indent - 2), '}'].join('')
 }
 
 function generateTsFromZodType(schema: z.ZodType, indent: number): string {
@@ -26,7 +29,9 @@ function generateTsFromZodType(schema: z.ZodType, indent: number): string {
     const typeName = schema.meta()?.type as string | undefined
     if (typeName) return typeName
     const fnName = schema.def.fn.name
-    return fnName.startsWith('check') ? 'React.' + fnName.slice(5) : '"@TODO TO IMPLEMENT"'
+    return fnName.startsWith('check')
+      ? 'React.' + fnName.slice(5)
+      : '"@TODO TO IMPLEMENT"'
   }
   switch (name) {
     case 'ZodString':
