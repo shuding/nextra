@@ -1,7 +1,7 @@
 type $ = {
   /**
-   * Enable for all code blocks showing a copy code button instead of `copy=true` in code block metadata.
-With this option enabled you can still hide a copy code button with `copy=false` option in code block metadata.
+   * Enable the copy button for all code blocks by default, without needing to set `copy=true` in the code block metadata.
+You can still disable the button for specific blocks using `copy=false`.
    */
   defaultShowCopyCode?: boolean
 
