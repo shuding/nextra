@@ -4,14 +4,30 @@ import type { MdxFile } from 'nextra'
 import { compileMdx } from 'nextra/compile'
 import { Callout } from 'nextra/components'
 import { evaluate } from 'nextra/evaluate'
+import { getPageMap } from 'nextra/page-map'
 import { generateDocumentation, TSDoc } from 'nextra/tsdoc'
 import type { FC } from 'react'
 
 const API_REFERENCE = [
+  { type: 'separator', title: 'Types', name: '_' },
+  {
+    name: 'NextraConfig',
+    packageName: 'nextra',
+    isFlattened: false,
+    isType: true
+  },
+  {
+    name: 'MdxOptions',
+    code: `import type { NextraConfig } from 'nextra'
+type $ = NonNullable<NextraConfig['mdxOptions']>
+export default $`,
+    isFlattened: false
+  },
+  { type: 'separator', title: 'Functions', name: '_2' },
   {
     name: 'nextra',
     packageName: 'nextra',
-    exportName: 'default',
+    code: "export { default } from 'nextra'",
     isFlattened: false
   },
   { name: 'getPageMap', packageName: 'nextra/page-map' },
@@ -21,27 +37,24 @@ const API_REFERENCE = [
   { name: 'middleware', packageName: 'nextra/locales' },
   { name: 'evaluate', packageName: 'nextra/evaluate' },
   { name: 'normalizePages', packageName: 'nextra/normalize-pages' }
-].map(o => ({
-  ...o,
-  slug: toKebabCase(o.name)
-}))
+]
 
-function toKebabCase(str: string) {
-  return str
-    .replaceAll(/([a-z0-9])([A-Z])/g, '$1-$2') // camelCase → camel-Case
-    .toLowerCase()
-}
+const routes = API_REFERENCE.filter(o => 'name' in o)
 
 export const generateStaticParams = () =>
-  API_REFERENCE.map(o => ({ name: o.slug }))
+  routes.map(o => ({ name: o.name.toLowerCase() }))
 
-export const pageMap: (MdxFile & { title: string })[] = API_REFERENCE.map(
-  o => ({
-    name: o.slug,
-    route: `/api/${o.slug}`,
-    title: o.name
-  })
+// @ts-expect-error -- fixme
+export const pageMap: (MdxFile & { title: string })[] = API_REFERENCE.map(o =>
+  'type' in o
+    ? o
+    : {
+        name: o.name.toLowerCase(),
+        route: `/api/${o.name.toLowerCase()}`,
+        title: o.name
+      }
 )
+
 const { wrapper: Wrapper, ...components } = getMDXComponents({
   TSDoc,
   Callout
@@ -49,19 +62,19 @@ const { wrapper: Wrapper, ...components } = getMDXComponents({
 
 async function getReference(props: PageProps) {
   const params = await props.params
-  const apiRef = API_REFERENCE.find(o => o.slug === params.name)
+  const apiRef = routes.find(o => o.name.toLowerCase() === params.name)
   if (!apiRef) {
     throw new Error(`API reference not found for "${params.name}"`)
   }
-  const code = `export { ${apiRef.exportName ?? apiRef.name} as default } from '${apiRef.packageName}'`
   const {
     description,
     // @ts-expect-error -- fixme
     tags = {},
-    // @ts-expect-error -- fixme
-    signatures
+    ...rest
   } = generateDocumentation({
-    code,
+    code:
+      apiRef.code ??
+      `export { ${apiRef.name} as default } from '${apiRef.packageName}'`,
     flattened: apiRef.isFlattened !== false
   })
 
@@ -70,13 +83,13 @@ async function getReference(props: PageProps) {
       // og:description
       `export const metadata = { description: ${JSON.stringify(description.split('\n', 1)[0])} }`,
     // Title
-    `# \`${apiRef.name}\` function`,
+    `# \`${apiRef.name}\` ${apiRef.isType ? 'type' : 'function'}`,
     // Page description
     description,
-    `Exported from \`${apiRef.packageName}\`.`,
+    apiRef.packageName && `Exported from \`${apiRef.packageName}\`.`,
     // Signature
-    '## Signature',
-    '<TSDoc definition={definition} />',
+    `## ${apiRef.isType ? 'Fields' : 'Signature'}`,
+    '<TSDoc definition={definition} typeLinkMap={typeLinkMap} />',
     // Warnings
     tags.throws &&
       `> [!WARNING]
@@ -95,10 +108,22 @@ ${tags.see}
 
 ${tags.example}`
   ].filter(Boolean)
+  const typeLinkMap = (await getPageMap('/api'))
+    .filter(o => 'route' in o && o.name !== 'index')
+    // @ts-expect-error
+    .map(o => [o.title, o.route])
+  typeLinkMap.push(
+    [
+      'NextConfig',
+      'https://nextjs.org/docs/pages/api-reference/config/next-config-js'
+    ],
+    ['RehypePrettyCodeOptions', 'https://rehype-pretty.pages.dev/#options']
+  )
 
   const rawJs = await compileMdx(result.join('\n\n'))
   return evaluate(rawJs, components, {
-    definition: { signatures, tags }
+    definition: { tags, ...rest },
+    typeLinkMap: Object.fromEntries(typeLinkMap)
   })
 }
 

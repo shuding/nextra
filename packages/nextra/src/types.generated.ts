@@ -94,7 +94,7 @@ The reading time is added to the front matter under the `readingTime` key.
      * Format of the file.
 - `'md'` means treat as markdown
 - `'mdx'` means treat as MDX
-- `'detect'` means try to detect the format based on file path.
+- `'detect'` means try to detect the format based on file path.@remarks `RehypePrettyCodeOptions`
      * @default "detect"
      */
     format?: "detect" | "mdx" | "md"

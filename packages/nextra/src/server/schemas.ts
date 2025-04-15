@@ -38,7 +38,8 @@ const MdxOptionsSchema = z.strictObject({
       "Format of the file.\n\
 - `'md'` means treat as markdown\n\
 - `'mdx'` means treat as MDX\n\
-- `'detect'` means try to detect the format based on file path."
+- `'detect'` means try to detect the format based on file path.\
+@remarks `RehypePrettyCodeOptions`"
   }),
   rehypePrettyCodeOptions: z
     .custom<RehypePrettyCodeOptions>()
