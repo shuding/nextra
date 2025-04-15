@@ -47,7 +47,10 @@ const MdxOptionsSchema = z.strictObject({
 })
 
 export const NextraConfigSchema = z.strictObject({
-  defaultShowCopyCode: z.boolean().optional(),
+  defaultShowCopyCode: z.boolean().optional().meta({
+    description:
+      'Enable the global feature for showing a copy code button in code blocks.'
+  }),
   search: z
     .union([
       z.boolean(),

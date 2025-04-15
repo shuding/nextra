@@ -1,4 +1,7 @@
 type $ = {
+  /**
+   * Enable the global feature for showing a copy code button in code blocks.
+   */
   defaultShowCopyCode?: boolean
 
   /**
