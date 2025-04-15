@@ -108,7 +108,8 @@ The reading time is added to the front matter under the `readingTime` key.'
     description: 'Enable or disable syntax highlighting.'
   }),
   mdxOptions: MdxOptionsSchema.default(MdxOptionsSchema.parse({})).meta({
-    description: 'Options specific to MDX compiling.'
+    description: `Options specific to MDX compiling.
+@remarks \`MdxOptions\``
   }),
   whiteListTagsStyling: z.array(z.string()).optional().meta({
     description:
