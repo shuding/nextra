@@ -58,7 +58,10 @@ export const NextraConfigSchema = z.strictObject({
       })
     ])
     .default({ codeblocks: false }),
-  staticImage: z.boolean().default(true),
+  staticImage: z.boolean().default(true).meta({
+    description:
+      'Option to automatically optimizing your static image imports with the Markdown syntax. E.g. `![Hello](/demo.png)`.'
+  }),
   readingTime: z.boolean().optional(),
   latex: z
     .union([
