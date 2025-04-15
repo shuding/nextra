@@ -1,10 +1,11 @@
-import type {
+import {
   ExportedDeclarations,
-  Node,
+  Project,
+  SyntaxKind,
+  ts,
   Symbol as TsSymbol,
   Type
 } from 'ts-morph'
-import { Project, ts } from 'ts-morph'
 import { logger } from '../utils.js'
 import type {
   BaseArgs,
@@ -73,8 +74,7 @@ export function generateDocumentation({
           getDocEntry({
             symbol: param,
             declaration,
-            flattened,
-            isFunctionParameter: true
+            flattened
           })
         )
         const returnType = signature.getReturnType()
@@ -137,20 +137,20 @@ function getDocEntry({
   symbol,
   declaration,
   flattened,
-  prefix = '',
-  isFunctionParameter = false
+  prefix = ''
 }: {
   symbol: TsSymbol
   declaration: ExportedDeclarations
   flattened: boolean
   prefix?: string
-  /* @TODO: find a way to remove this */
-  /** @default false */
-  isFunctionParameter?: boolean
 }): TypeField | TypeField[] {
   const originalSubType = project
     .getTypeChecker()
     .getTypeOfSymbolAtLocation(symbol, declaration)
+  const valueDeclaration = symbol.getValueDeclaration()
+  const isFunctionParameter =
+    valueDeclaration && valueDeclaration.getKind() === SyntaxKind.Parameter
+
   const subType = isFunctionParameter
     ? originalSubType.getNonNullableType()
     : originalSubType
@@ -172,7 +172,11 @@ function getDocEntry({
     })
   }
   const tags = getTags(symbol)
-  const typeOf = getDeclaration(symbol).getType()
+
+  const typeOf = valueDeclaration
+    ? valueDeclaration.getType()
+    : symbol.getDeclaredType()
+
   let typeName = typeOf.isUnknown()
     ? typeOf.getText()
     : getFormattedText(subType)
@@ -193,7 +197,7 @@ function getDocEntry({
   ).replace(/^- /, '')
   const isOptional = isFunctionParameter
     ? // @ts-expect-error -- fixme
-      getDeclaration(symbol).isOptional()
+      valueDeclaration.isOptional()
     : symbol.isOptional()
 
   return {
@@ -240,23 +244,6 @@ const IGNORED_TYPES = new Set([
   'Element',
   'CSSProperties'
 ])
-
-function getDeclaration(s: TsSymbol): Node {
-  const parameterName = s.getName()
-  const declarations = s.getDeclarations()
-
-  // @TODO add test for ConnectionState
-  // if (declarations.length > 1) {
-  //   throw new Error(
-  //     `"${parameterName}" should not have more than one type declaration.`
-  //   )
-  // }
-  const declaration = declarations[0]
-  if (!declaration) {
-    throw new Error(`Can't find "${parameterName}" declaration`)
-  }
-  return declaration
-}
 
 function getTags(prop: TsSymbol): Tags {
   return Object.fromEntries(
