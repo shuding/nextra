@@ -21,14 +21,17 @@ export const MathJaxOptionsSchema = z.strictObject({
 
 const MdxOptionsSchema = z.strictObject({
   rehypePlugins: z.custom<ProcessorOptions['rehypePlugins']>().optional().meta({
-    description: 'List of rehype plugins.'
+    description: 'List of rehype plugins.',
+    type: 'PluggableList | null'
   }),
   remarkPlugins: z.custom<ProcessorOptions['remarkPlugins']>().optional().meta({
-    description: 'List of remark plugins.'
+    description: 'List of remark plugins.',
+    type: 'PluggableList | null'
   }),
   recmaPlugins: z.custom<ProcessorOptions['recmaPlugins']>().optional().meta({
     description:
-      'List of recma plugins. This is a new ecosystem, currently in beta, to transform esast trees (JavaScript).'
+      'List of recma plugins. This is a new ecosystem, currently in beta, to transform esast trees (JavaScript).',
+    type: 'PluggableList | null'
   }),
   format: z.enum(['detect', 'mdx', 'md']).default('detect').meta({
     description:
@@ -62,7 +65,9 @@ export const NextraConfigSchema = z.strictObject({
       z.strictObject({
         renderer: z.literal('katex'),
         options: z.custom<RehypeKatexOptions>().meta({
-          description: 'KaTeX options. See https://katex.org/docs/options.html.'
+          description:
+            'KaTeX options. See https://katex.org/docs/options.html.',
+          type: 'RehypeKatexOptions'
         })
       })
     ])

@@ -38,7 +38,7 @@ type $ = {
     /**
      * KaTeX options. See https://katex.org/docs/options.html.
      */
-    options?: "@TODO TO IMPLEMENT"
+    options?: RehypeKatexOptions
   }
 
   /**
@@ -53,17 +53,17 @@ type $ = {
     /**
      * List of rehype plugins.
      */
-    rehypePlugins?: "@TODO TO IMPLEMENT"
+    rehypePlugins?: PluggableList | null
 
     /**
      * List of remark plugins.
      */
-    remarkPlugins?: "@TODO TO IMPLEMENT"
+    remarkPlugins?: PluggableList | null
 
     /**
      * List of recma plugins. This is a new ecosystem, currently in beta, to transform esast trees (JavaScript).
      */
-    recmaPlugins?: "@TODO TO IMPLEMENT"
+    recmaPlugins?: PluggableList | null
 
     /**
      * Format of the file.
