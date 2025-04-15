@@ -49,22 +49,19 @@ async function getReference(props: PageProps) {
   if (!apiRef) {
     throw new Error(`API reference not found for "${params.name}"`)
   }
-  const code =
-    apiRef.functionName === 'nextra'
-      ? ` type $ = ${generateTsFromZod(NextraConfigSchema)}
-export default $`
-      : `export { ${apiRef.functionName} } from '${apiRef.packageName}'`
+  const isNextra = apiRef.functionName === 'nextra'
+  const code = isNextra
+    ? `export { default } from '${apiRef.packageName}'`
+    : `export { ${apiRef.functionName} } from '${apiRef.packageName}'`
   const {
     description,
     // @ts-expect-error -- fixme
     tags = {},
     // @ts-expect-error -- fixme
-    signatures,
-    // @ts-expect-error -- fixme
-    entries
+    signatures
   } = generateDocumentation({
     code,
-    flattened: true
+    flattened: !isNextra
   })
 
   const result = [
@@ -100,7 +97,7 @@ ${tags.example}`
 
   const rawJs = await compileMdx(result.join('\n\n'))
   return evaluate(rawJs, components, {
-    definition: { signatures, tags, entries }
+    definition: { signatures, tags }
   })
 }
 
