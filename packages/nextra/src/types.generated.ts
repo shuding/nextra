@@ -1,6 +1,8 @@
 export type NextraConfig = {
   /**
    * Enable the copy button for all code blocks by default, without needing to set `copy=true` attribute in the code block metadata.
+   * > [!TIP]
+   * >
    * > You could still disable the button for specific blocks using `copy=false` attribute.
    */
   defaultShowCopyCode?: boolean
@@ -21,15 +23,18 @@ export type NextraConfig = {
 
   /**
    * Option to automatically optimizing your static image imports with the Markdown syntax.
-   * > E.g. `![Hello](/demo.png)`.
+   * > [!TIP]
+   * >
+   * > Example: `![Hello](/demo.png)`.
    * @default true
    */
   staticImage?: boolean
 
   /**
    * Adds estimated reading time of `.md` and `.mdx` files using [readingTime](https://npmjs.com/package/reading-time) package.
-   * 
-   * The reading time is added to the front matter under the `readingTime` key.
+   * > [!TIP]
+   * >
+   * > The reading time is added to the front matter under the `readingTime` key.
    */
   readingTime?: boolean
 
