@@ -101,6 +101,7 @@ By default, Nextra only replaces `<details>` and `<summary>` elements.
   contentDirBasePath?: string
 
   /**
+   * Adds locale to all links in page map information. Useful for i18n when you don't want to use Nextra's `middleware` function.
    * @default false
    */
   unstable_shouldAddLocaleToLinks?: boolean

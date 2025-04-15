@@ -108,7 +108,10 @@ By default, Nextra only replaces `<details>` and `<summary>` elements.'
       description:
         'Option to serve your `.md` and `.mdx` files from the `content` directory at a custom path instead of the root (`/`).'
     }),
-  unstable_shouldAddLocaleToLinks: z.boolean().default(false)
+  unstable_shouldAddLocaleToLinks: z.boolean().default(false).meta({
+    description:
+      "Adds locale to all links in page map information. Useful for i18n when you don't want to use Nextra's `middleware` function."
+  })
 })
 
 export const element = z.custom<ReactElement<Record<string, unknown>>>(
