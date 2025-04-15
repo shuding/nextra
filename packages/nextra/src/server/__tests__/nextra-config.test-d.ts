@@ -1,9 +1,9 @@
-import { expectError, expectType } from 'tsd'
+import { expectType } from 'tsd'
 
 type IsOptional<T, K extends keyof T> = {} extends Pick<T, K> ? true : false
 
-type Diff<A, B> = {
-  [K in keyof A | keyof B]: K extends keyof A
+type FieldMismatchReport<A, B> = {
+  [K in keyof A | keyof B as K extends keyof A
     ? K extends keyof B
       ? IsOptional<A, K> extends IsOptional<B, K>
         ? [A[K]] extends [B[K]]
@@ -12,24 +12,36 @@ type Diff<A, B> = {
             : K
           : K
         : K
-      : K // key in A, but not in B
-    : K // key in B, but not in A
-}[keyof A | keyof B]
+      : K
+    : K]: {
+    actual: K extends keyof A ? A[K] : never
+    expected: K extends keyof B ? B[K] : never
+  }
+}
 
-type MissingInA<A, B> = Exclude<keyof B, keyof A>
-type MissingInB<A, B> = Exclude<keyof A, keyof B>
-
-type TypeDifference<A, B> = Diff<A, B> | MissingInA<A, B> | MissingInB<A, B>
+type TypeDifferenceDetails<A, B> = keyof FieldMismatchReport<A, B> extends never
+  ? never
+  : FieldMismatchReport<A, B>
 
 type AssertExact<A, B> =
-  TypeDifference<A, B> extends never
+  TypeDifferenceDetails<A, B> extends never
     ? true
     : {
         ERROR: 'Types are not equal'
-        DIFF_KEYS: TypeDifference<A, B>
+        DETAILS: TypeDifferenceDetails<A, B>
       }
 
-// @ts-expect-error
-expectType<AssertExact<{ foo: string }, { foo: number }>>(true)
+type $1 = AssertExact<{ foo: string }, { foo: number }>
 
-expectType<AssertExact<{ foo: { bar: string } }, { foo: { bar: number } }>>(true)
+// @ts-expect-error -- foo should be a string
+expectType<$1>(true)
+
+type $2 = AssertExact<{ foo: { bar: string } }, { foo: { bar: number } }>
+
+// @ts-expect-error -- bar should be a string
+expectType<$2>(true)
+
+type $3 = AssertExact<{ foo?: string }, { foo: string }>
+
+// @ts-expect-error -- foo should be optional
+expectType<$3>(true)
