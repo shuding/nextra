@@ -27,7 +27,7 @@ const { compilerObject } = project.getTypeChecker()
  * signature of `function`.
  * @returns Parsed TSDoc definition from TypeScript `type`, `interface` or `function`.
  * @example
- * To generate documentation for a `type`, `interface`, or `function`, export it via the code
+ * To generate documentation for a `type`, `interface`, or `function`, export it via the `code`
  * argument.
  *
  * ### As a `default` export

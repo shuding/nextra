@@ -10,7 +10,7 @@ const darkLightSchema = z.union([
     light: z.number()
   })
 ])
-// TODO check why in zode v4 this doesn't work
+// TODO check why in zod v4 this doesn't work
 //.transform(convertColor)
 
 function convertColor(v: z.infer<typeof darkLightSchema>) {
