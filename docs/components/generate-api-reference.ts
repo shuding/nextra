@@ -23,7 +23,7 @@ export type ApiReference = {
 
 export async function generateApiReference(
   apiRef: ApiReference,
-  { title, subtitle }: { title: string, subtitle: string }
+  { title, subtitle }: { title: string; subtitle: string }
 ) {
   const {
     description,
@@ -70,6 +70,6 @@ ${tags.example}`
 
   const rawJs = await compileMdx(result.join('\n\n'))
   return evaluate(rawJs, components, {
-    definition: { tags, ...rest },
+    definition: { tags, ...rest }
   })
 }

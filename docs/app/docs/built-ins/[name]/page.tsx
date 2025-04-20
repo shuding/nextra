@@ -6,11 +6,16 @@ import type { MdxFile } from 'nextra'
 import type { FC } from 'react'
 
 const API_REFERENCE: (
-  | ApiReference
+  | (ApiReference & { groupKeys?: string })
   | { type: 'separator'; title: string; name: string }
 )[] = [
   { type: 'separator', title: 'Layout Components', name: '_' },
-  { name: 'Search', packageName: 'nextra/components', isFlattened: false }
+  { name: 'Search', packageName: 'nextra/components', isFlattened: false },
+  {
+    name: 'Steps',
+    packageName: 'nextra/components',
+    groupKeys: "ComponentProps<'div'>"
+  }
 ]
 
 const routes = API_REFERENCE.filter(o => 'name' in o)
