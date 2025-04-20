@@ -49,7 +49,7 @@ export const pageMap: (MdxFile & { title: string })[] = API_REFERENCE.map(o =>
     ? o
     : {
         name: o.name.toLowerCase(),
-        route: `/api/${o.name.toLowerCase()}`,
+        route: `/docs/built-ins/${o.name.toLowerCase()}`,
         title: o.name
       }
 )
@@ -111,7 +111,6 @@ ${tags.see}
 
 ${tags.example}`
   ].filter(Boolean)
-
   // TODO pass `'/api'` as first argument
   const pageMap = await getEnhancedPageMap()
   const apiPageMap = pageMap.find(
