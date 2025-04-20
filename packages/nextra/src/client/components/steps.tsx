@@ -48,9 +48,9 @@ import { useId } from 'react'
  *
  * ### Excluding Headings from Table of Contents
  *
- * To exclude the headings from the `<Steps>` component (or any other headings) to
- * appear in the Table of Contents, replace the Markdown headings `### ...` with
- * `<h3>` HTML element wrapped in curly braces.
+ * To exclude the headings from the `<Steps>` component (or any other headings)
+ * to appear in the Table of Contents, replace the Markdown headings `### ...`
+ * with `<h3>` HTML element wrapped in curly braces.
  *
  * ```diff filename="MDX"
  * <Steps>

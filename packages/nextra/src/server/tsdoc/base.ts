@@ -84,7 +84,7 @@ export function generateDefinition({
   const callSignatures = declarationType.getCallSignatures()
   const isFunction = callSignatures.length > 0
   if (isFunction) {
-    const tags = getTags(declarationType.getSymbolOrThrow())
+    const tags = getTags(declaration.getSymbolOrThrow())
     tags.returns &&= replaceJsDocLinks(tags.returns)
     return {
       name: declarationType.getSymbolOrThrow().getName(),
@@ -199,18 +199,13 @@ function getDocEntry({
     ? valueDeclaration.getType()
     : symbol.getDeclaredType()
 
-  let typeName = typeOf.isUnknown()
-    ? typeOf.getText()
-    : getFormattedText(subType)
+  const typeNameFromRemarks =
+    tags.remarks?.match(/^`(?<name>.+)`/)?.groups!.name
 
-  const aliasSymbol = subType.getAliasSymbol()
+  const typeName =
+    typeNameFromRemarks ??
+    (typeOf.isUnknown() ? typeOf.getText() : getFormattedText(subType))
 
-  if (aliasSymbol && !subType.getAliasTypeArguments().length) {
-    typeName = aliasSymbol.getEscapedName()
-  }
-  if (tags.remarks) {
-    typeName = /^`(?<name>.+)`/.exec(tags.remarks)?.[1] ?? typeName
-  }
   const name = symbol.getName()
   const typeDescription = replaceJsDocLinks(
     ts.displayPartsToString(

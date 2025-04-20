@@ -29,22 +29,57 @@ describe('generateDefinition()', () => {
           },
         ],
         "tags": {
-          "example": "\`\`\`tsx
-      // With props:
-      type Props = { name: string }
+          "example": "<Steps>
 
-      const MyComponent: FunctionComponent<Props> = (props) => {
-       return <div>{props.name}</div>
-      }
+      ### This is the first step
+
+      This is the first step description.
+
+      ### This is the second step
+
+      This is the second step description.
+
+      ### This is the third step
+
+      This is the third step description.
+
+      </Steps>",
+          "usage": "Wrap a set of Markdown headings (from \`<h2>\` to \`<h6>\`) with the \`<Steps>\`
+      component to display them as visual steps. You can choose the appropriate
+      heading level based on the content hierarchy on the page.
+
+      \`\`\`mdx filename="MDX" {7-15}
+      import { Steps } from 'nextra/components'
+
+      ## Getting Started
+
+      Here is some description.
+
+      <Steps>
+      ### Step 1
+
+      Contents for step 1.
+
+      ### Step 2
+
+      Contents for step 2.
+      </Steps>
       \`\`\`
-      \`\`\`tsx
-      // Without props:
-      const MyComponentWithoutProps: FunctionComponent = () => {
-        return <div>MyComponentWithoutProps</div>
-      }
+
+      ### Excluding Headings from Table of Contents
+
+      To exclude the headings from the \`<Steps>\` component (or any other headings)
+      to appear in the Table of Contents, replace the Markdown headings \`### ...\`
+      with \`<h3>\` HTML element wrapped in curly braces.
+
+      \`\`\`diff filename="MDX"
+      <Steps>
+      - ### Step 1
+      + {<h3>Step 1</h3>}
+
+      Contents for step 1.
+      </Steps>
       \`\`\`",
-          "see": "{@link https://react-typescript-cheatsheet.netlify.app/docs/basic/getting-started/function_components React TypeScript Cheatsheet}",
-          "template": "P The props the component accepts.",
         },
       }
     `)
