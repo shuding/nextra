@@ -10,12 +10,7 @@ import type { FC } from 'react'
 
 const API_REFERENCE = [
   { type: 'separator', title: 'Types', name: '_' },
-  {
-    name: 'NextraConfig',
-    packageName: 'nextra',
-    isFlattened: false,
-    isType: true
-  },
+  { name: 'NextraConfig', packageName: 'nextra', isFlattened: false },
   {
     name: 'MdxOptions',
     code: `import type { NextraConfig } from 'nextra'
@@ -40,6 +35,8 @@ export default $`,
   { name: 'normalizePages', packageName: 'nextra/normalize-pages' }
 ]
 
+const functionsIndex = API_REFERENCE.findIndex(o => o.title === 'Functions')
+
 const routes = API_REFERENCE.filter(o => 'name' in o)
 
 export const generateStaticParams = () =>
@@ -63,7 +60,8 @@ const { wrapper: Wrapper, ...components } = getMDXComponents({
 
 async function getReference(props: PageProps) {
   const params = await props.params
-  const apiRef = routes.find(o => o.name.toLowerCase() === params.name)
+  const apiRefIndex = routes.findIndex(o => o.name.toLowerCase() === params.name)
+  const apiRef = API_REFERENCE[apiRefIndex]
   if (!apiRef) {
     throw new Error(`API reference not found for "${params.name}"`)
   }
@@ -78,18 +76,19 @@ async function getReference(props: PageProps) {
       `export { ${apiRef.name} as default } from '${apiRef.packageName}'`,
     flattened: apiRef.isFlattened !== false
   })
+  const isType = functionsIndex > apiRefIndex
 
   const result = [
     description &&
       // og:description
       `export const metadata = { description: ${JSON.stringify(description.split('\n', 1)[0])} }`,
     // Title
-    `# \`${apiRef.name}\` ${apiRef.isType ? 'type' : 'function'}`,
+    `# \`${apiRef.name}\` ${isType ? 'type' : 'function'}`,
     // Page description
     description,
     apiRef.packageName && `Exported from \`${apiRef.packageName}\`.`,
     // Signature
-    `## ${apiRef.isType ? 'Fields' : 'Signature'}`,
+    `## ${isType ? 'Fields' : 'Signature'}`,
     '<TSDoc definition={definition} typeLinkMap={typeLinkMap} />',
     // Warnings
     tags.throws &&
@@ -109,6 +108,7 @@ ${tags.see}
 
 ${tags.example}`
   ].filter(Boolean)
+
   const apiPageMap = await getPageMap('/api')
   const typeLinkMap = apiPageMap
     .filter(o => 'route' in o && o.name !== 'index')
