@@ -110,7 +110,7 @@ importers:
     dependencies:
       next:
         specifier: 15.3.0
-        version: 15.3.0(patch_hash=7jofu3qtudpcn7yuwfpdpiosuy)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+        version: 15.3.0(patch_hash=7jofu3qtudpcn7yuwfpdpiosuy)(@babel/core@7.26.7)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       nextra:
         specifier: workspace:*
         version: link:../../packages/nextra
@@ -132,7 +132,7 @@ importers:
     dependencies:
       next:
         specifier: 15.3.0
-        version: 15.3.0(patch_hash=7jofu3qtudpcn7yuwfpdpiosuy)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+        version: 15.3.0(patch_hash=7jofu3qtudpcn7yuwfpdpiosuy)(@babel/core@7.26.7)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       nextra:
         specifier: workspace:*
         version: link:../../packages/nextra
@@ -157,7 +157,7 @@ importers:
     dependencies:
       next:
         specifier: 15.3.0
-        version: 15.3.0(patch_hash=7jofu3qtudpcn7yuwfpdpiosuy)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+        version: 15.3.0(patch_hash=7jofu3qtudpcn7yuwfpdpiosuy)(@babel/core@7.26.7)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       nextra:
         specifier: workspace:*
         version: link:../../packages/nextra
@@ -182,7 +182,7 @@ importers:
         version: 7.4.0(react@19.1.0)
       next:
         specifier: 15.3.0
-        version: 15.3.0(patch_hash=7jofu3qtudpcn7yuwfpdpiosuy)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+        version: 15.3.0(patch_hash=7jofu3qtudpcn7yuwfpdpiosuy)(@babel/core@7.26.7)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       nextra:
         specifier: workspace:*
         version: link:../../packages/nextra
@@ -487,7 +487,7 @@ importers:
         version: link:../esbuild-react-compiler-plugin
       next:
         specifier: 15.3.0
-        version: 15.3.0(patch_hash=7jofu3qtudpcn7yuwfpdpiosuy)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+        version: 15.3.0(patch_hash=7jofu3qtudpcn7yuwfpdpiosuy)(@babel/core@7.26.7)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       nextra:
         specifier: workspace:*
         version: link:../nextra
@@ -560,7 +560,7 @@ importers:
         version: 26.0.0
       next:
         specifier: 15.3.0
-        version: 15.3.0(patch_hash=7jofu3qtudpcn7yuwfpdpiosuy)(@babel/core@7.26.10)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+        version: 15.3.0(patch_hash=7jofu3qtudpcn7yuwfpdpiosuy)(@babel/core@7.26.7)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       nextra:
         specifier: workspace:*
         version: link:../nextra
@@ -11844,34 +11844,9 @@ snapshots:
 
   next-view-transitions@0.3.4(next@15.3.0(patch_hash=7jofu3qtudpcn7yuwfpdpiosuy)(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react-dom@19.1.0(react@19.1.0))(react@19.1.0):
     dependencies:
-      next: 15.3.0(patch_hash=7jofu3qtudpcn7yuwfpdpiosuy)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      next: 15.3.0(patch_hash=7jofu3qtudpcn7yuwfpdpiosuy)(@babel/core@7.26.7)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       react: 19.1.0
       react-dom: 19.1.0(react@19.1.0)
-
-  next@15.3.0(patch_hash=7jofu3qtudpcn7yuwfpdpiosuy)(@babel/core@7.26.10)(react-dom@19.1.0(react@19.1.0))(react@19.1.0):
-    dependencies:
-      '@next/env': 15.3.0
-      '@swc/counter': 0.1.3
-      '@swc/helpers': 0.5.15
-      busboy: 1.6.0
-      caniuse-lite: 1.0.30001707
-      postcss: 8.5.3
-      react: 19.1.0
-      react-dom: 19.1.0(react@19.1.0)
-      styled-jsx: 5.1.6(@babel/core@7.26.10)(react@19.1.0)
-    optionalDependencies:
-      '@next/swc-darwin-arm64': 15.3.0
-      '@next/swc-darwin-x64': 15.3.0
-      '@next/swc-linux-arm64-gnu': 15.3.0
-      '@next/swc-linux-arm64-musl': 15.3.0
-      '@next/swc-linux-x64-gnu': 15.3.0
-      '@next/swc-linux-x64-musl': 15.3.0
-      '@next/swc-win32-arm64-msvc': 15.3.0
-      '@next/swc-win32-x64-msvc': 15.3.0
-      sharp: 0.34.1
-    transitivePeerDependencies:
-      - '@babel/core'
-      - babel-plugin-macros
 
   next@15.3.0(patch_hash=7jofu3qtudpcn7yuwfpdpiosuy)(@babel/core@7.26.7)(react-dom@19.1.0(react@19.1.0))(react@19.1.0):
     dependencies:
@@ -11884,31 +11859,6 @@ snapshots:
       react: 19.1.0
       react-dom: 19.1.0(react@19.1.0)
       styled-jsx: 5.1.6(@babel/core@7.26.7)(react@19.1.0)
-    optionalDependencies:
-      '@next/swc-darwin-arm64': 15.3.0
-      '@next/swc-darwin-x64': 15.3.0
-      '@next/swc-linux-arm64-gnu': 15.3.0
-      '@next/swc-linux-arm64-musl': 15.3.0
-      '@next/swc-linux-x64-gnu': 15.3.0
-      '@next/swc-linux-x64-musl': 15.3.0
-      '@next/swc-win32-arm64-msvc': 15.3.0
-      '@next/swc-win32-x64-msvc': 15.3.0
-      sharp: 0.34.1
-    transitivePeerDependencies:
-      - '@babel/core'
-      - babel-plugin-macros
-
-  next@15.3.0(patch_hash=7jofu3qtudpcn7yuwfpdpiosuy)(react-dom@19.1.0(react@19.1.0))(react@19.1.0):
-    dependencies:
-      '@next/env': 15.3.0
-      '@swc/counter': 0.1.3
-      '@swc/helpers': 0.5.15
-      busboy: 1.6.0
-      caniuse-lite: 1.0.30001707
-      postcss: 8.5.3
-      react: 19.1.0
-      react-dom: 19.1.0(react@19.1.0)
-      styled-jsx: 5.1.6(react@19.1.0)
     optionalDependencies:
       '@next/swc-darwin-arm64': 15.3.0
       '@next/swc-darwin-x64': 15.3.0
@@ -12904,24 +12854,12 @@ snapshots:
     dependencies:
       inline-style-parser: 0.2.4
 
-  styled-jsx@5.1.6(@babel/core@7.26.10)(react@19.1.0):
-    dependencies:
-      client-only: 0.0.1
-      react: 19.1.0
-    optionalDependencies:
-      '@babel/core': 7.26.10
-
   styled-jsx@5.1.6(@babel/core@7.26.7)(react@19.1.0):
     dependencies:
       client-only: 0.0.1
       react: 19.1.0
     optionalDependencies:
       '@babel/core': 7.26.7
-
-  styled-jsx@5.1.6(react@19.1.0):
-    dependencies:
-      client-only: 0.0.1
-      react: 19.1.0
 
   stylis@4.3.4: {}
 
