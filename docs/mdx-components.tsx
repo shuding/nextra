@@ -3,14 +3,21 @@
 
 import { useMDXComponents as getDocsMDXComponents } from 'nextra-theme-docs'
 import { generateDefinition, TSDoc } from 'nextra/tsdoc'
+import { getEnhancedPageMap } from '@components/get-page-map'
 
 const { img: Image, ...docsComponents } = getDocsMDXComponents({
-  APIDocs({
+  async APIDocs({
     componentName,
     groupKeys,
     packageName = 'nextra/components',
+    code: $code,
+    flattened,
+    definition: $definition,
     ...props
   }) {
+    if (Object.keys(props).length) {
+      throw new Error(`Unexpected props: ${Object.keys(props)}`)
+    }
     let code: string
 
     if (componentName) {
@@ -26,16 +33,30 @@ type $ = ${result}
 
 export default $`
     } else {
-      code = props.code
+      code = $code
     }
-    const definition = generateDefinition({
-      code,
-      ...props
-    })
+    const definition = $definition ?? generateDefinition({ code, flattened })
+
+    // TODO pass `'/api'` as first argument
+    const pageMap = await getEnhancedPageMap()
+    const apiPageMap = pageMap.find(
+      (o): o is Folder => 'name' in o && o.name === 'api'
+    )!.children
+
     return (
       <TSDoc
         definition={definition}
         typeLinkMap={{
+          ...Object.fromEntries(
+            apiPageMap
+              .filter(o => 'route' in o && o.name !== 'index')
+              // @ts-expect-error -- fixme
+              .map(o => [o.title, o.route])
+          ),
+          NextConfig:
+            'https://nextjs.org/docs/pages/api-reference/config/next-config-js',
+          RehypePrettyCodeOptions: 'https://rehype-pretty.pages.dev/#options',
+          PluggableList: 'https://github.com/unifiedjs/unified#pluggablelist',
           GitHubIcon:
             'https://github.com/shuding/nextra/blob/main/packages/nextra/src/client/icons/github.svg',
           DiscordIcon:

@@ -1,14 +1,11 @@
-import { getEnhancedPageMap } from '@components/get-page-map'
 // @ts-expect-error -- fixme
 import { useMDXComponents as getMDXComponents } from 'next-mdx-import-source-file'
-import { Folder } from 'nextra'
 import { compileMdx } from 'nextra/compile'
 import { Callout } from 'nextra/components'
 import { evaluate } from 'nextra/evaluate'
-import { generateDefinition, TSDoc } from 'nextra/tsdoc'
+import { generateDefinition } from 'nextra/tsdoc'
 
 const { wrapper: Wrapper, ...components } = getMDXComponents({
-  TSDoc,
   Callout
 })
 
@@ -51,7 +48,7 @@ export async function generateApiReference(
     'packageName' in apiRef && `Exported from \`${apiRef.packageName}\`.`,
     // Signature
     `## ${subtitle}`,
-    '<TSDoc definition={definition} typeLinkMap={typeLinkMap} />',
+    '<APIDocs definition={definition} />',
     // Warnings
     tags.throws &&
       `> [!WARNING]
@@ -70,27 +67,9 @@ ${tags.see}
 
 ${tags.example}`
   ].filter(Boolean)
-  // TODO pass `'/api'` as first argument
-  const pageMap = await getEnhancedPageMap()
-  const apiPageMap = pageMap.find(
-    (o): o is Folder => 'name' in o && o.name === 'api'
-  )!.children
-  const typeLinkMap = apiPageMap
-    .filter(o => 'route' in o && o.name !== 'index')
-    // @ts-expect-error -- fixme
-    .map(o => [o.title, o.route])
-  typeLinkMap.push(
-    [
-      'NextConfig',
-      'https://nextjs.org/docs/pages/api-reference/config/next-config-js'
-    ],
-    ['RehypePrettyCodeOptions', 'https://rehype-pretty.pages.dev/#options'],
-    ['PluggableList', 'https://github.com/unifiedjs/unified#pluggablelist']
-  )
 
   const rawJs = await compileMdx(result.join('\n\n'))
   return evaluate(rawJs, components, {
     definition: { tags, ...rest },
-    typeLinkMap: Object.fromEntries(typeLinkMap)
   })
 }
