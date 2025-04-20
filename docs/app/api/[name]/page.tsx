@@ -3,8 +3,6 @@ import type { ApiReference } from '@components/generate-api-reference'
 // @ts-expect-error -- fixme
 import { useMDXComponents as getMDXComponents } from 'next-mdx-import-source-file'
 import type { MdxFile } from 'nextra'
-import { Callout } from 'nextra/components'
-import { TSDoc } from 'nextra/tsdoc'
 import type { FC } from 'react'
 
 const API_REFERENCE: (
@@ -54,10 +52,7 @@ export const pageMap: (MdxFile & { title: string })[] = API_REFERENCE.map(o =>
       }
 )
 
-const { wrapper: Wrapper, ...components } = getMDXComponents({
-  TSDoc,
-  Callout
-})
+const Wrapper = getMDXComponents().wrapper
 
 async function getReference(props: PageProps) {
   const params = await props.params
