@@ -26,7 +26,7 @@ export type ApiReference = {
 
 export async function generateApiReference(
   apiRef: ApiReference,
-  { isType }: { isType?: boolean } = {}
+  { title, subtitle }: { title: string, subtitle: string }
 ) {
   const {
     description,
@@ -45,12 +45,12 @@ export async function generateApiReference(
       // og:description
       `export const metadata = { description: ${JSON.stringify(description.split('\n', 1)[0])} }`,
     // Title
-    `# \`${apiRef.name}\` ${isType ? 'type' : 'function'}`,
+    `# \`${apiRef.name}\` ${title}`,
     // Page description
     description,
     'packageName' in apiRef && `Exported from \`${apiRef.packageName}\`.`,
     // Signature
-    `## ${isType ? 'Fields' : 'Signature'}`,
+    `## ${subtitle}`,
     '<TSDoc definition={definition} typeLinkMap={typeLinkMap} />',
     // Warnings
     tags.throws &&

@@ -10,7 +10,7 @@ const API_REFERENCE: (
   | { type: 'separator'; title: string; name: string }
 )[] = [
   { type: 'separator', title: 'Layout Components', name: '_' },
-  { name: 'Search', packageName: 'nextra' }
+  { name: 'Search', packageName: 'nextra/components', isFlattened: false }
 ]
 
 const routes = API_REFERENCE.filter(o => 'name' in o)
@@ -40,7 +40,22 @@ async function getReference(props: PageProps) {
   if (!apiRef || 'type' in apiRef) {
     throw new Error(`API reference not found for "${params.name}"`)
   }
-  return generateApiReference(apiRef)
+
+  return generateApiReference(
+    {
+      ...apiRef,
+      ...(!('code' in apiRef) && {
+        code: `
+import { ${apiRef.name} } from '${apiRef.packageName}'
+type $ = React.ComponentProps<typeof ${apiRef.name}>
+export default $`
+      })
+    },
+    {
+      title: 'component',
+      subtitle: 'Props'
+    }
+  )
 }
 
 export async function generateMetadata(props: PageProps) {

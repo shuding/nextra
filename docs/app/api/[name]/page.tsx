@@ -65,7 +65,10 @@ async function getReference(props: PageProps) {
   }
   const isType = functionsIndex > apiRefIndex
 
-  return generateApiReference(apiRef, { isType })
+  return generateApiReference(apiRef, {
+    title: isType ? 'type' : 'function',
+    subtitle: isType ? 'Fields' : 'Signature'
+  })
 }
 
 export async function generateMetadata(props: PageProps) {
