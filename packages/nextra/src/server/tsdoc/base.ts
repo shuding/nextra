@@ -268,11 +268,17 @@ const IGNORED_TYPES = new Set([
 ])
 
 function getTags(prop: TsSymbol): Tags {
-  return Object.fromEntries(
-    prop
-      .getJsDocTags()
-      .map(tag => [tag.getName(), ts.displayPartsToString(tag.getText())])
-  )
+  const tags: Record<string, string> = Object.create(null)
+  for (const tag of prop.getJsDocTags()) {
+    const tagName = tag.getName()
+    const tagValue = ts.displayPartsToString(tag.getText())
+    if (tagName in tags) {
+      tags[tagName] += `\n${tagValue}`
+    } else {
+      tags[tagName] = tagValue
+    }
+  }
+  return tags
 }
 
 function getFormattedText(t: Type): string {

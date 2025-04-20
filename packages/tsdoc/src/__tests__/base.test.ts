@@ -7,6 +7,48 @@ import { generateTsFromZod } from '../../../nextra/src/server/tsdoc/zod-to-ts.js
 import typesFixture from './fixtures/flattened?raw'
 
 describe('generateDefinition()', () => {
+  test('<Steps />', async () => {
+    const code = `export type { Steps as default } from 'nextra/components'`
+    const result = generateDefinition({ code })
+    expect(result).toMatchInlineSnapshot(`
+      {
+        "description": "A built-in component to turn a numbered list into a visual representation of
+      steps.",
+        "name": "FunctionComponent",
+        "signatures": [
+          {
+            "params": [
+              {
+                "name": "props",
+                "type": "DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>",
+              },
+            ],
+            "returns": {
+              "type": "ReactNode | Promise<ReactNode>",
+            },
+          },
+        ],
+        "tags": {
+          "example": "\`\`\`tsx
+      // With props:
+      type Props = { name: string }
+
+      const MyComponent: FunctionComponent<Props> = (props) => {
+       return <div>{props.name}</div>
+      }
+      \`\`\`
+      \`\`\`tsx
+      // Without props:
+      const MyComponentWithoutProps: FunctionComponent = () => {
+        return <div>MyComponentWithoutProps</div>
+      }
+      \`\`\`",
+          "see": "{@link https://react-typescript-cheatsheet.netlify.app/docs/basic/getting-started/function_components React TypeScript Cheatsheet}",
+          "template": "P The props the component accepts.",
+        },
+      }
+    `)
+  })
   test('<Banner />', async () => {
     const code = `import type { Banner } from 'nextra/components'
 type $ = React.ComponentProps<typeof Banner>
