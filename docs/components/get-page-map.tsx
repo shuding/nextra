@@ -1,5 +1,6 @@
 import { PageMapItem } from 'nextra'
 import { getPageMap } from 'nextra/page-map'
+import { MetaJsonFile } from 'nextra'
 import { pageMap as apiPageMap } from '../app/api/[name]/page'
 import { pageMap as builtInsPageMap } from '../app/docs/built-ins/[name]/page'
 
@@ -29,6 +30,19 @@ function visitPageMap(
   return visitor(pageMap)
 }
 
+function createMetaItem(pageMap: typeof apiPageMap): MetaJsonFile {
+  return {
+    data: Object.fromEntries(
+      apiPageMap.map(o => {
+        if ('type' in o && o.type === 'separator') {
+          return [o.name, { type: 'separator', title: o.title }]
+        }
+        return [o.name, '']
+      })
+    )
+  }
+}
+
 export const getEnhancedPageMap: typeof getPageMap = async (...args) => {
   const rootPageMap = await getPageMap(...args)
   const modifiedPageMap = visitPageMap(rootPageMap, item => {
@@ -37,19 +51,7 @@ export const getEnhancedPageMap: typeof getPageMap = async (...args) => {
         return {
           ...item,
           children: [
-            {
-              data: {
-                _: {
-                  type: 'separator',
-                  title: 'Type'
-                },
-                'nextra-config': '',
-                _2: {
-                  type: 'separator',
-                  title: 'Functions'
-                }
-              }
-            },
+            createMetaItem(apiPageMap),
             {
               route: '/api',
               name: 'index',
@@ -62,7 +64,11 @@ export const getEnhancedPageMap: typeof getPageMap = async (...args) => {
       if (item.route === '/docs/built-ins' && 'children' in item) {
         return {
           ...item,
-          children: [...item.children, ...builtInsPageMap]
+          children: [
+            createMetaItem(builtInsPageMap),
+            ...builtInsPageMap,
+            ...item.children,
+          ]
         }
       }
     }

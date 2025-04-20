@@ -1,5 +1,5 @@
-// @ts-expect-error -- fixme
 import { getEnhancedPageMap } from '@components/get-page-map'
+// @ts-expect-error -- fixme
 import { useMDXComponents as getMDXComponents } from 'next-mdx-import-source-file'
 import type { MdxFile } from 'nextra'
 import { Folder } from 'nextra'
@@ -10,30 +10,30 @@ import { generateDefinition, TSDoc } from 'nextra/tsdoc'
 import type { FC } from 'react'
 
 const API_REFERENCE = [
-  { type: 'separator', title: 'Types', name: '_' },
-  { name: 'NextraConfig', packageName: 'nextra', isFlattened: false },
-  {
-    name: 'MdxOptions',
-    code: `import type { NextraConfig } from 'nextra'
-type $ = NonNullable<NextraConfig['mdxOptions']>
-export default $`,
-    isFlattened: false
-  },
-  { type: 'separator', title: 'Functions', name: '_2' },
-  {
-    name: 'nextra',
-    packageName: 'nextra',
-    code: "export { default } from 'nextra'",
-    isFlattened: false
-  },
-  { name: 'getPageMap', packageName: 'nextra/page-map' },
-  { name: 'generateStaticParamsFor', packageName: 'nextra/pages' },
-  { name: 'importPage', packageName: 'nextra/pages' },
-  { name: 'compileMdx', packageName: 'nextra/compile' },
-  { name: 'generateDefinition', packageName: 'nextra/tsdoc' },
-  { name: 'middleware', packageName: 'nextra/locales' },
-  { name: 'evaluate', packageName: 'nextra/evaluate' },
-  { name: 'normalizePages', packageName: 'nextra/normalize-pages' }
+  { type: 'separator', title: 'Layout Components', name: '_' },
+  { name: 'Search', packageName: 'nextra' }
+  //   {
+  //     name: 'MdxOptions',
+  //     code: `import type { NextraConfig } from 'nextra'
+  // type $ = NonNullable<NextraConfig['mdxOptions']>
+  // export default $`,
+  //     isFlattened: false
+  //   },
+  //   { type: 'separator', title: 'Functions', name: '_2' },
+  //   {
+  //     name: 'nextra',
+  //     packageName: 'nextra',
+  //     code: "export { default } from 'nextra'",
+  //     isFlattened: false
+  //   },
+  // { name: 'getPageMap', packageName: 'nextra/page-map' },
+  // { name: 'generateStaticParamsFor', packageName: 'nextra/pages' },
+  // { name: 'importPage', packageName: 'nextra/pages' },
+  // { name: 'compileMdx', packageName: 'nextra/compile' },
+  // { name: 'generateDefinition', packageName: 'nextra/tsdoc' },
+  // { name: 'middleware', packageName: 'nextra/locales' },
+  // { name: 'evaluate', packageName: 'nextra/evaluate' },
+  // { name: 'normalizePages', packageName: 'nextra/normalize-pages' }
 ]
 
 const functionsIndex = API_REFERENCE.findIndex(o => o.title === 'Functions')

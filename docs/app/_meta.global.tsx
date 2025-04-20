@@ -139,7 +139,7 @@ export default {
       'file-conventions': { items: FILE_CONVENTIONS },
       guide: { items: GUIDE },
       advanced: { items: ADVANCED },
-      'built-ins': { items: NEXTRA_BUILTINS },
+      'built-ins': '',
       _: {
         type: 'separator',
         title: 'Themes'
