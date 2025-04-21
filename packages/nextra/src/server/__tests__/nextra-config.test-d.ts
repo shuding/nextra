@@ -35,9 +35,9 @@ describe('Assert types', () => {
     return expectTypeOf<Actual>().toEqualTypeOf<Expected>
   })
   it.skip('HeadProps should be identical', () => {
+    type _Expected = z.input<typeof HeadPropsSchema>
+    type _Actual = HeadProps
     // TODO: fix `backgroundColor`
-    type Expected = z.input<typeof HeadPropsSchema>
-    type Actual = HeadProps
     // return expectTypeOf<Actual>().toEqualTypeOf<Expected>
   })
 })
