@@ -11,7 +11,11 @@ const API_REFERENCE: (
   | { type: 'separator'; title: string; name: string }
 )[] = [
   { type: 'separator', title: 'Layout Components', name: '_' },
-  { name: 'Banner', packageName: 'nextra/components' },
+  {
+    name: 'Banner',
+    packageName: 'nextra/components',
+    groupKeys: 'HTMLAttributes<HTMLDivElement>'
+  },
   { name: 'Search', packageName: 'nextra/components', isFlattened: false },
   { type: 'separator', title: 'Content Components', name: '_2' },
   {
