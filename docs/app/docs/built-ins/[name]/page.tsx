@@ -83,7 +83,12 @@ export const pageMap: (MdxFile & { title: string })[] = API_REFERENCE.map(o =>
     : {
         name: o.name.toLowerCase(),
         route: `/docs/built-ins/${o.name.toLowerCase()}`,
-        title: o.name
+        title:
+          o.name === 'TSDoc' ? (
+            <span className="badge-new">{o.name}</span>
+          ) : (
+            o.name
+          )
       }
 )
 

@@ -83,38 +83,6 @@ const ADVANCED: MetaRecord = {
   remote: ''
 }
 
-const NEXTRA_BUILTINS: MetaRecord = {
-  _: {
-    type: 'separator',
-    title: 'Layout Components'
-  },
-  banner: '',
-  head: '',
-  search: '',
-  _2: {
-    type: 'separator',
-    title: 'Content Components'
-  },
-  bleed: '',
-  callout: '',
-  cards: '',
-  filetree: '',
-  steps: '',
-  table: '',
-  tabs: '',
-  _3: {
-    type: 'separator',
-    title: 'Other Components'
-  },
-  playground: {
-    theme: {
-      layout: 'full',
-      toc: false
-    }
-  },
-  tsdoc: <span className="badge-new">TSDoc</span>
-}
-
 const BLOG_THEME: MetaRecord = {
   start: '',
   'get-posts-and-tags': '',

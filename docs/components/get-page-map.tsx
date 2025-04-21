@@ -32,7 +32,7 @@ function visitPageMap(
 function createMetaItem(pageMap: typeof apiPageMap): MetaJsonFile {
   return {
     data: Object.fromEntries(
-      apiPageMap.map(o => {
+      pageMap.map(o => {
         if ('type' in o && o.type === 'separator') {
           return [o.name, { type: 'separator', title: o.title }]
         }
@@ -60,14 +60,10 @@ export const getEnhancedPageMap: typeof getPageMap = async (...args) => {
           ]
         }
       }
-      if (item.route === '/docs/built-ins' && 'children' in item) {
+      if (item.route === '/docs/built-ins') {
         return {
           ...item,
-          children: [
-            createMetaItem(builtInsPageMap),
-            ...builtInsPageMap,
-            ...item.children
-          ]
+          children: [createMetaItem(builtInsPageMap), ...builtInsPageMap]
         }
       }
     }
