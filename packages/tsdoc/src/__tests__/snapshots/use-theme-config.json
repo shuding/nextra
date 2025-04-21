@@ -9,7 +9,7 @@ values, excluding layout-specific elements like:
 - `children`
 
 This hook is useful for dynamically configuring your project based on shared theme values.",
-  "name": "__function",
+  "name": "useThemeConfig",
   "signatures": [
     {
       "params": [],

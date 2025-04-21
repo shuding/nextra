@@ -7,7 +7,7 @@ import { generateTsFromZod } from '../../../nextra/src/server/tsdoc/zod-to-ts.js
 import typesFixture from './fixtures/flattened?raw'
 
 describe('generateDefinition()', () => {
-  test.only('<Tabs />', async () => {
+  test('<Tabs />', async () => {
     const code = `export type { Tabs as default } from 'nextra/components'`
     const result = generateDefinition({ code })
     expect(result).toMatchInlineSnapshot(`
@@ -76,13 +76,13 @@ describe('generateDefinition()', () => {
       {
         "description": "A built-in component to turn a numbered list into a visual representation of
       steps.",
-        "name": "FunctionComponent",
+        "name": "Steps",
         "signatures": [
           {
             "params": [
               {
                 "name": "props",
-                "type": "DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>",
+                "type": "HTMLAttributes<HTMLDivElement>",
               },
             ],
             "returns": {
@@ -540,7 +540,7 @@ export default $
           "description": "Test whether an object is usable as an [\`Edge\`](/api-reference/types/edge).
         In TypeScript this is a type guard that will narrow the type of whatever you pass in to
         [\`Edge\`](/api-reference/types/edge) if it returns \`true\`.",
-          "name": "__type",
+          "name": "isEdge",
           "signatures": [
             {
               "params": [
@@ -673,7 +673,7 @@ export default foo`
       const result = generateDefinition({ code, flattened: true })
       expect(result).toMatchInlineSnapshot(`
         {
-          "name": "__type",
+          "name": "foo",
           "signatures": [
             {
               "params": [

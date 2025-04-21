@@ -87,7 +87,7 @@ export function generateDefinition({
     const tags = getTags(declaration.getSymbolOrThrow())
     tags.returns &&= replaceJsDocLinks(tags.returns)
     return {
-      name: declarationType.getSymbolOrThrow().getName(),
+      name: declaration.getSymbolOrThrow().getName(),
       ...(description && { description }),
       ...(Object.keys(tags).length && { tags }),
       signatures: callSignatures.map(signature => {

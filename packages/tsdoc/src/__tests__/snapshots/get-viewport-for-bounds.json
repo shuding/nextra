@@ -1,6 +1,6 @@
 {
   "description": "Returns a viewport that encloses the given bounds with padding.",
-  "name": "__type",
+  "name": "getViewportForBounds",
   "signatures": [
     {
       "params": [
