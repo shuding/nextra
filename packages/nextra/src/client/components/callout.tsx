@@ -9,11 +9,11 @@ import {
 } from '../icons/index.js'
 
 const TypeToEmoji = {
-  default: <GitHubTipIcon height="16" className="x:mt-1.5" />,
-  error: <GitHubCautionIcon height="16" className="x:mt-1.5" />,
-  info: <GitHubNoteIcon height="16" className="x:mt-1.5" />,
-  warning: <GitHubWarningIcon height="16" className="x:mt-1.5" />,
-  important: <GitHubImportantIcon height="16" className="x:mt-1.5" />
+  default: <GitHubTipIcon height=".8em" className="x:mt-[.3em]" />,
+  error: <GitHubCautionIcon height=".8em" className="x:mt-[.3em]" />,
+  info: <GitHubNoteIcon height=".8em" className="x:mt-[.3em]" />,
+  warning: <GitHubWarningIcon height=".8em" className="x:mt-[.3em]" />,
+  important: <GitHubImportantIcon height=".8em" className="x:mt-[.3em]" />
 }
 
 type CalloutType = keyof typeof TypeToEmoji
@@ -184,15 +184,13 @@ export const Callout: FC<CalloutProps> = ({
       )}
     >
       <div
-        className="x:select-none x:text-xl x:ps-3 x:pe-2"
-        style={{
-          fontFamily: '"Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"'
-        }}
+        className="x:select-none x:text-[1.25em] x:ps-[.6em] x:pe-[.4em]"
+        style={style}
         data-pagefind-ignore="all"
       >
         {emoji}
       </div>
-      <div className="x:w-full x:min-w-0 x:leading-7">{children}</div>
+      <div className={cn('x:w-full x:min-w-0', className)} {...props} />
     </div>
   )
 }
