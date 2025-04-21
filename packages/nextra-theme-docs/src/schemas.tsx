@@ -168,7 +168,7 @@ import { Layout, LastUpdated } from 'nextra-theme-docs'
       })
     ])
     .default(true)
-    .transform(v => (typeof v === 'boolean' ? { next: v, prev: v } : v))
+    .overwrite(v => (typeof v === 'boolean' ? { next: v, prev: v } : v))
     .meta({
       description: 'Enable or disable navigation link.'
     }),

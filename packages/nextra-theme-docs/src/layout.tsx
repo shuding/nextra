@@ -4,18 +4,11 @@ import { SkipNavLink } from 'nextra/components'
 import type { FC } from 'react'
 import { z } from 'zod'
 import { MobileNav } from './components/sidebar'
-import { ConfigProvider, ThemeConfigProvider } from './stores'
 import { LayoutPropsSchema } from './schemas'
+import { ConfigProvider, ThemeConfigProvider } from './stores'
+import { LayoutProps } from './types.generated'
 
 export type ThemeConfigProps = z.infer<typeof LayoutPropsSchema>
-
-type $LayoutProps = z.input<typeof LayoutPropsSchema>
-
-type MakeOptional<T, K extends keyof T> = Omit<T, K> & Partial<Pick<T, K>>
-
-// This is probably a bug in zod v4, `navigation` must be provided,
-// but should be optional since we provided default value
-type LayoutProps = MakeOptional<$LayoutProps, 'navigation'>
 
 export const Layout: FC<LayoutProps> = ({ children, ...themeConfig }) => {
   const { data, error } = LayoutPropsSchema.safeParse(themeConfig)
