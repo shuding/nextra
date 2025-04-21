@@ -1,5 +1,5 @@
 import cn from 'clsx'
-import type { FC, ReactNode } from 'react'
+import type { FC, HTMLAttributes } from 'react'
 
 /**
  * A built-in component to slightly expand content beyond the container's width, `<Bleed>` allows it
@@ -58,11 +58,12 @@ import type { FC, ReactNode } from 'react'
  * </Bleed>
  * ```
  */
-export const Bleed: FC<{
-  /** Extend content to the very edges of its container. */
-  full: boolean
-  children: ReactNode
-}> = ({ full, children }) => {
+export const Bleed: FC<
+  {
+    /** Extend content to the very edges of its container. */
+    full: boolean
+  } & HTMLAttributes<HTMLDivElement>
+> = ({ full, ...props }) => {
   return (
     <div
       className={cn(
@@ -73,8 +74,7 @@ export const Bleed: FC<{
           'x:xl:me-[calc(50%-50vw)] x:xl:ms-[calc(50%-50vw+16rem)]'
         ]
       )}
-    >
-      {children}
-    </div>
+      {...props}
+    />
   )
 }

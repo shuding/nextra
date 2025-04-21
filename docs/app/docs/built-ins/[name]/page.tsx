@@ -18,7 +18,11 @@ const API_REFERENCE: (
     groupKeys: "ComponentProps<'div'>"
   },
   { name: 'Callout', packageName: 'nextra/components' },
-  { name: 'Bleed', packageName: 'nextra/components' }
+  {
+    name: 'Bleed',
+    packageName: 'nextra/components',
+    groupKeys: 'HTMLAttributes<HTMLDivElement>'
+  }
 ]
 
 const routes = API_REFERENCE.filter(o => 'name' in o)
@@ -56,11 +60,12 @@ async function getReference(props: PageProps) {
     ? `Omit<MyProps, keyof ${groupKeys}> & { '...props': ${groupKeys} }>`
     : 'MyProps'
   const code = `
-import type { ComponentProps } from 'react'
+import type { ComponentProps, HTMLAttributes } from 'react'
 import { ${name} as MyComponent } from '${packageName}'
 
 type MyProps = ComponentProps<typeof MyComponent>
 type $ = ${result}
+
 export default $`
   const flattened = isFlattened !== false
   const fcPropsDefinition = generateDefinition({ code, flattened })
