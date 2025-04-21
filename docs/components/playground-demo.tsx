@@ -8,11 +8,11 @@ import { MdxIcon } from 'nextra/icons'
 import type { ComponentProps, FC } from 'react'
 import { useCallback, useEffect, useRef, useState } from 'react'
 
-const DEFAULT_MDX = `Playground components allow you to write Nextra compatible MDX that renders only on the client. It's modeled after the functionality found in [MDX Playground](https://mdxjs.com/playground).
+const DEFAULT_MDX = `Playground component lets you write Nextra-compatible MDX that renders only on the client. It's modeled after the functionality found in [MDX Playground](https://mdxjs.com/playground).
 
 In some instances where remote loading MDX is not an option, this may work as a great alternative.
 
-Here's an example of a codeblock.
+Here's an example of a code block.
 
 \`\`\`ts
 console.log("Hello world, this is a playground component!");
@@ -20,7 +20,7 @@ console.log("Hello world, this is a playground component!");
 
 ## Caveats
 
-Due to the purely client-side nature of this component, features "Table of Contents" and "Frontmatter" will not work.
+Due to the purely client-side nature of this component, features "Table of Contents" and "Front matter" will not work.
 
 ## Mermaid Example
 
@@ -45,7 +45,7 @@ Z --> F
 Z --> G
 \`\`\``
 
-export const Demo: FC = () => {
+export const PlaygroundDemo: FC = () => {
   const [rawMdx, setRawMdx] = useState(DEFAULT_MDX)
   const handleInput: NonNullable<ComponentProps<'span'>['onInput']> =
     useCallback(e => {

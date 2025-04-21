@@ -4,11 +4,13 @@ import { compileMdx } from 'nextra/compile'
 import { Bleed, Callout, Steps } from 'nextra/components'
 import { evaluate } from 'nextra/evaluate'
 import { generateDefinition } from 'nextra/tsdoc'
+import { PlaygroundDemo } from './playground-demo'
 
 const { wrapper: Wrapper, ...components } = getMDXComponents({
   Callout,
   Steps,
-  Bleed
+  Bleed,
+  PlaygroundDemo
 })
 
 export type ApiReference = {
