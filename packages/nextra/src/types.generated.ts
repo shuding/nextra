@@ -168,10 +168,7 @@ export interface HeadProps {
 
     /**
      * The saturation of the primary theme color.<br/>Range: `0 - 100`
-     * @default {
-     *   "dark": 100,
-     *   "light": 100
-     * }
+     * @default 100
      */
     saturation?: number | {
       dark: number
@@ -207,13 +204,13 @@ export interface HeadProps {
   backgroundColor?: {
     /**
      * Background color for dark theme.<br/>Format: `"rgb(RRR,GGG,BBB)" | "#RRGGBB"`
-     * @default "17,17,17"
+     * @default "rgb(17,17,17)"
      */
     dark?: string
 
     /**
      * Background color for light theme.<br/>Format: `"rgb(RRR,GGG,BBB)" | "#RRGGBB"`
-     * @default "250,250,250"
+     * @default "rgb(250,250,250)"
      */
     light?: string
   }
