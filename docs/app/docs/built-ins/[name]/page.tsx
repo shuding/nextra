@@ -17,7 +17,8 @@ const API_REFERENCE: (
     packageName: 'nextra/components',
     groupKeys: "ComponentProps<'div'>"
   },
-  { name: 'Callout', packageName: 'nextra/components' }
+  { name: 'Callout', packageName: 'nextra/components' },
+  { name: 'Bleed', packageName: 'nextra/components' }
 ]
 
 const routes = API_REFERENCE.filter(o => 'name' in o)
@@ -51,17 +52,15 @@ async function getReference(props: PageProps) {
     throw new Error('Should not have `code` prop.')
   }
   const { name, packageName, groupKeys, isFlattened } = apiRef
+  const result = groupKeys
+    ? `Omit<MyProps, keyof ${groupKeys}> & { '...props': ${groupKeys} }>`
+    : 'MyProps'
   const code = `
 import type { ComponentProps } from 'react'
 import { ${name} as MyComponent } from '${packageName}'
 
 type MyProps = ComponentProps<typeof MyComponent>
-type $ = ${
-    groupKeys
-      ? `Omit<MyProps, keyof ${groupKeys}> & { '...props': ${groupKeys} }>`
-      : 'MyProps'
-  }
-
+type $ = ${result}
 export default $`
   const flattened = isFlattened !== false
   const fcPropsDefinition = generateDefinition({ code, flattened })
@@ -78,7 +77,7 @@ export default $`
     ...fcDefinition
   }
   return generateApiReference(apiRef, {
-    title: 'component',
+    title: 'Component',
     subtitle: 'Props',
     definition
   })

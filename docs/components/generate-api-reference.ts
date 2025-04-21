@@ -1,13 +1,14 @@
 // @ts-expect-error -- fixme
 import { useMDXComponents as getMDXComponents } from 'next-mdx-import-source-file'
 import { compileMdx } from 'nextra/compile'
-import { Callout, Steps } from 'nextra/components'
+import { Callout, Steps, Bleed } from 'nextra/components'
 import { evaluate } from 'nextra/evaluate'
 import { generateDefinition } from 'nextra/tsdoc'
 
 const { wrapper: Wrapper, ...components } = getMDXComponents({
   Callout,
-  Steps
+  Steps,
+  Bleed
 })
 
 export type ApiReference = {
