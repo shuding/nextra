@@ -21,6 +21,40 @@ type BannerProps = {
   storageKey?: string
 }
 
+/**
+ * A built-in component to show a banner on the top of the website. It can be used to show a warning
+ * or a notice.
+ *
+ * @example
+ * ### Banner key
+ *
+ * A banner can be dismissed. By default, it's used by
+ * [localStorage](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage)
+ * to keep the banner state on the client.
+ *
+ * If you have updated your banner text, you should change the key to make sure the banner is shown
+ * again. The best practice is to always use a descriptive key for the current text, for example:
+ *
+ * ![Banner](https://nextra.site/assets/docs/banner.png)
+ *
+ * ```jsx filename="app/layout.jsx" {7-11}
+ * import { Layout } from 'my-nextra-theme'
+ * import { Banner } from 'nextra/components'
+ *
+ * export default function MyLayout({ children, ...props }) {
+ *   return (
+ *     <Layout>
+ *       <Banner storageKey="2.0-release">
+ *         <a href="https://nextra.site" target="_blank">
+ *           🎉 Nextra 2.0 is released. Read more →
+ *         </a>
+ *       </Banner>
+ *       {children}
+ *     </Layout>
+ *   )
+ * }
+ * ```
+ */
 export const Banner: FC<BannerProps> = ({
   children,
   dismissible = true,
