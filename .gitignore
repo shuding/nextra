@@ -16,4 +16,3 @@ tsup.config.bundled*
 tsconfig.tsbuildinfo
 _pagefind/
 docs/public/sitemap.xml
-types.generated.ts
