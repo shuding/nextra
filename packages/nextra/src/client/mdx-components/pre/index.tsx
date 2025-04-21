@@ -1,5 +1,5 @@
 import cn from 'clsx'
-import type { ComponentProps, FC, ReactNode } from 'react'
+import type { FC, HTMLAttributes, ReactNode } from 'react'
 import { WordWrapIcon } from '../../icons/index.js'
 import { CopyToClipboard } from './copy-to-clipboard.js'
 import { ToggleWordWrapButton } from './toggle-word-wrap-button.js'
@@ -11,7 +11,7 @@ export const classes = {
   )
 }
 
-export type PreProps = ComponentProps<'pre'> & {
+export type PreProps = HTMLAttributes<HTMLPreElement> & {
   'data-filename'?: string
   'data-copy'?: ''
   'data-language'?: string

@@ -42,6 +42,15 @@ const API_REFERENCE: (
     packageName: 'nextra/components',
     groupKeys: 'HTMLAttributes<HTMLUListElement>'
   },
+  {
+    // TODO: add
+    // <APIDocs componentName="Table.Tr" groupKeys="ComponentProps<'tr'>" />
+    // <APIDocs componentName="Table.Th" groupKeys="ComponentProps<'th'>" />
+    // <APIDocs componentName="Table.Td" groupKeys="ComponentProps<'td'>" />
+    name: 'Table',
+    packageName: 'nextra/components',
+    groupKeys: 'HTMLAttributes<HTMLTableElement>'
+  },
   // { type: 'separator', title: 'Other Components', name: '_3' },
   { name: 'Playground', packageName: 'nextra/components' },
   { name: 'TSDoc', packageName: 'nextra/tsdoc' }
