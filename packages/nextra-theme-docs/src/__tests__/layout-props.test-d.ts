@@ -8,6 +8,6 @@ describe('Assert types', () => {
     type Expected = z.input<typeof LayoutPropsSchema>
     type Actual = LayoutProps
     assertType<IsEqual<Expected, Actual>>(true)
-    expectTypeOf<Actual>().toEqualTypeOf<Expected>
+    return expectTypeOf<Actual>().toEqualTypeOf<Expected>
   })
 })

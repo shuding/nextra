@@ -1,4 +1,4 @@
-import { MetaJsonFile, PageMapItem } from 'nextra'
+import type { MetaJsonFile, PageMapItem } from 'nextra'
 import { getPageMap } from 'nextra/page-map'
 import { pageMap as apiPageMap } from '../app/api/[name]/page'
 import { pageMap as builtInsPageMap } from '../app/docs/built-ins/[name]/page'
