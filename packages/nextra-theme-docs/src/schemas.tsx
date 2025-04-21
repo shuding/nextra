@@ -179,7 +179,7 @@ import { Layout, LastUpdated } from 'nextra-theme-docs'
   pageMap: z
     .array(
       z.custom<PageMapItem>().meta({
-        type: 'PageMapItem'
+        type: 'import("nextra").PageMapItem'
       })
     )
     .meta({

@@ -44,8 +44,6 @@ jobs:
 
       - run: pnpm test
 
-      - run: pnpm test:types
-
       - run: pnpm clean
 
       - run: pnpm types:check

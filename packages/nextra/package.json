@@ -67,7 +67,6 @@
     "dev": "NODE_OPTIONS=--max_old_space_size=8192 tsup --watch",
     "prepublishOnly": "pnpm build",
     "test": "vitest",
-    "test:types": "tsd --files ./src/server/__tests__/**/*.test-d.ts",
     "types:check": "tsc --noEmit"
   },
   "peerDependencies": {
@@ -134,7 +133,7 @@
     "next": "^15.0.2",
     "react": "19.1.0",
     "react-dom": "19.1.0",
-    "tsd": "^0.32.0",
+    "vite-plugin-vitest-typescript-assert": "^1.1.4",
     "unified": "^11.0.5",
     "vitest": "^3.0.0"
   },
