@@ -1,44 +1,40 @@
-import fs from 'node:fs/promises'
-import path from 'node:path'
 import type { z } from 'zod'
 import { HeadPropsSchema } from '../../client/components/head.js'
 import type { HeadProps, NextraConfig } from '../../types.generated.js'
 import { NextraConfigSchema } from '../schemas.js'
-import { generateTsFromZod } from '../tsdoc/zod-to-ts.js'
 import type { IsEqual } from './test-utils.js'
-
-await fs.writeFile(
-  path.resolve('src', 'types.generated.ts'),
-  `export interface NextraConfig ${generateTsFromZod(NextraConfigSchema)}
-
-export interface HeadProps ${generateTsFromZod(HeadPropsSchema)}`
-)
 
 describe('Assert types', () => {
   it('foo should be a `string`', () => {
-    type $ = IsEqual<{ foo: string }, { foo: number }>
-    assertType<$>(false)
+    type Expected = { foo: string }
+    type Actual = { foo: number }
+    assertType<IsEqual<Expected, Actual>>(false)
+    expectTypeOf<Actual>().not.toEqualTypeOf<Expected>
   })
   it('foo.bar should be a `string`', () => {
-    type $ = IsEqual<{ foo: { bar: string } }, { foo: { bar: number } }>
-    assertType<$>(false)
+    type Expected = { foo: { bar: string } }
+    type Actual = { foo: { bar: number } }
+    assertType<IsEqual<Expected, Actual>>(false)
+    expectTypeOf<Actual>().not.toEqualTypeOf<Expected>
   })
   it('foo should be optional', () => {
-    type $ = IsEqual<{ foo?: string }, { foo: string }>
-    assertType<$>(false)
+    type Expected = { foo?: string }
+    type Actual = { foo: string }
+    assertType<IsEqual<Expected, Actual>>(false)
+    expectTypeOf<Actual>().not.toEqualTypeOf<Expected>
   })
   it('foo should be optional, not `undefined`', () => {
-    type $ = IsEqual<{ foo?: string }, { foo: string | undefined }>
-    assertType<$>(false)
+    type Expected = { foo?: string }
+    type Actual = { foo: string | undefined }
+    assertType<IsEqual<Expected, Actual>>(false)
+    expectTypeOf<Actual>().not.toEqualTypeOf<Expected>
   })
   it('NextraConfig should be identical', () => {
     type NextraConfigFromZod = z.input<typeof NextraConfigSchema>
-    type $ = IsEqual<NextraConfigFromZod, NextraConfig>
-    assertType<$>(true)
+    expectTypeOf<NextraConfig>().toEqualTypeOf<NextraConfigFromZod>
   })
   it('HeadProps should be identical', () => {
     type HeadPropsFromZod = z.input<typeof HeadPropsSchema>
-    type $ = IsEqual<HeadPropsFromZod, HeadProps>
-    assertType<$>(true)
+    expectTypeOf<HeadProps>().toEqualTypeOf<HeadPropsFromZod>
   })
 })
