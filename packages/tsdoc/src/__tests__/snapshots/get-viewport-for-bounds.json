@@ -73,7 +73,12 @@
     "example": "const { x, y, zoom } = getViewportForBounds(
 { x: 0, y: 0, width: 100, height: 100},
 1200, 800, 0.5, 2);",
-    "param": "padding - Padding around the bounds.",
+    "param": "bounds - Bounds to fit inside viewport.
+width - Width of the viewport.
+height - Height of the viewport.
+minZoom - Minimum zoom level of the resulting viewport.
+maxZoom - Maximum zoom level of the resulting viewport.
+padding - Padding around the bounds.",
     "public": "",
     "remarks": "You can determine bounds of nodes with {@link getNodesBounds } and {@link getBoundsOfRects}",
     "returns": "A transformed Viewport that encloses the given bounds which you can pass to e.g. setViewport .",

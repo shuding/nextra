@@ -1,12 +1,13 @@
 // @ts-expect-error -- fixme
 import { useMDXComponents as getMDXComponents } from 'next-mdx-import-source-file'
 import { compileMdx } from 'nextra/compile'
-import { Callout } from 'nextra/components'
+import { Callout, Steps } from 'nextra/components'
 import { evaluate } from 'nextra/evaluate'
 import { generateDefinition } from 'nextra/tsdoc'
 
 const { wrapper: Wrapper, ...components } = getMDXComponents({
-  Callout
+  Callout,
+  Steps
 })
 
 export type ApiReference = {
@@ -23,7 +24,13 @@ export type ApiReference = {
 
 export async function generateApiReference(
   apiRef: ApiReference,
-  { title, subtitle }: { title: string; subtitle: string }
+  {
+    title,
+    subtitle
+  }: {
+    title: string
+    subtitle: string
+  }
 ) {
   const {
     description,
@@ -65,7 +72,12 @@ ${tags.see}
     tags.example &&
       `## Example
 
-${tags.example}`
+${tags.example}`,
+    // Usage
+    tags.usage &&
+      `## Usage
+
+${tags.usage}`
   ].filter(Boolean)
 
   const rawJs = await compileMdx(result.join('\n\n'))

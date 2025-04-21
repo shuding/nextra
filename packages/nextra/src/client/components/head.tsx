@@ -36,26 +36,27 @@ function hexToRgb(hex: string): string {
 const RGB_RE = /^rgb\((?<rgb>.*?)\)$/
 const HEX_RE = /^#(?<hex>[0-9a-f]{3,6})$/i
 
-const stringColorSchema = z
-  .string()
-  .refine(str => {
-    if (HEX_RE.test(str) || RGB_RE.test(str)) {
-      return true
-    }
-    throw new Error(
-      'Color format should be in HEX or RGB format. E.g. #000, #112233 or rgb(255,255,255)'
-    )
-  })
-  .transform(value => {
-    if (value.startsWith('#')) {
-      return hexToRgb(value)
-    }
-    const rgb = value.match(RGB_RE)?.groups!.rgb
-    if (rgb) {
-      return rgb.replaceAll(' ', '')
-    }
-    return value
-  })
+function normalizeColor(value: string): string {
+  if (value.startsWith('#')) {
+    return hexToRgb(value)
+  }
+  const rgb = value.match(RGB_RE)?.groups!.rgb
+  if (rgb) {
+    return rgb.replaceAll(' ', '')
+  }
+  return value
+}
+
+const stringColorSchema = z.string().refine(str => {
+  if (HEX_RE.test(str) || RGB_RE.test(str)) {
+    return true
+  }
+  throw new Error(
+    'Color format should be in HEX or RGB format. E.g. #000, #112233 or rgb(255,255,255)'
+  )
+})
+// TODO check why in zod v4 this doesn't work
+//.transform(normalizeColor)
 
 const colorSchema = z.strictObject({
   hue: darkLightSchema
@@ -78,14 +79,20 @@ const colorSchema = z.strictObject({
 })
 
 const bgColorSchema = z.strictObject({
-  dark: stringColorSchema.default('rgb(17,17,17)').meta({
-    description:
-      'Background color for dark theme.<br/>Format: `"rgb(RRR,GGG,BBB)" | "#RRGGBB"`'
-  }),
-  light: stringColorSchema.default('rgb(250,250,250)').meta({
-    description:
-      'Background color for light theme.<br/>Format: `"rgb(RRR,GGG,BBB)" | "#RRGGBB"`'
-  })
+  dark: stringColorSchema
+    .default('rgb(17,17,17)')
+    .transform(normalizeColor)
+    .meta({
+      description:
+        'Background color for dark theme.<br/>Format: `"rgb(RRR,GGG,BBB)" | "#RRGGBB"`'
+    }),
+  light: stringColorSchema
+    .default('rgb(250,250,250)')
+    .transform(normalizeColor)
+    .meta({
+      description:
+        'Background color for light theme.<br/>Format: `"rgb(RRR,GGG,BBB)" | "#RRGGBB"`'
+    })
 })
 
 export const HeadPropsSchema = z.strictObject({
