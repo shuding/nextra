@@ -5,12 +5,15 @@ import { Bleed, Callout, Steps } from 'nextra/components'
 import { evaluate } from 'nextra/evaluate'
 import { generateDefinition } from 'nextra/tsdoc'
 import { PlaygroundDemo } from './playground-demo'
+// @ts-expect-error -- fixme
+import ExampleTSDoc from './example-tsdoc.mdx'
 
 const { wrapper: Wrapper, ...components } = getMDXComponents({
   Callout,
   Steps,
   Bleed,
-  PlaygroundDemo
+  PlaygroundDemo,
+  ExampleTSDoc
 })
 
 export type ApiReference = {

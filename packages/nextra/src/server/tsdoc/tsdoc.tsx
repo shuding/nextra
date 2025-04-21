@@ -69,7 +69,70 @@ const classes = {
 }
 
 /**
- * Component which renders the props table for a TypeScript `type`, `interface` or `function`.
+ * A built-in component ldgx you generate documentation from `type`, `interface`, and `function` definitions
+ * using [TSDoc](https://tsdoc.org) annotations.
+ *
+ * ## What it generates
+ *
+ * ### For `type` and `interface`
+ *
+ * Generates a **properties table** with:
+ *
+ * - Name
+ * - Type and description
+ * - Default Value
+ * - Permalink
+ *
+ * ### For `function`
+ *
+ * 1. **Parameters table**, including:
+ *
+ *    - Name
+ *    - Type and description
+ *    - Default value
+ *    - Permalink
+ *
+ * 2. **Return signature table**, including:
+ *    - Description
+ *    - Return values table
+ *
+ * > [!TIP]
+ * >
+ * > - Permalink is a `#` anchor link for easy reference to individual rows.
+ * > - Descriptions are parsed from inline TSDoc comments or the `@description`
+ * >   tag.
+ * > - Supports full Markdown/MDX syntax in descriptions.
+ * > - Default values are extracted from the `@default` or `@defaultValue` tags.
+ * > - Return descriptions come from the `@returns` tag.
+ *
+ * > [!WARNING]
+ * >
+ * > **Server Component Only** – TSDoc component cannot be used in a client
+ * > component.<br />{''}**Available from:** Nextra 4.3 (alpha).<br />{''}
+ * > **Dependency:** Uses TypeScript Compiler API from
+ * > [`ts-morph`](https://github.com/dsherret/ts-morph).
+ *
+ * @example
+ * To generate the props table for the `TSDoc` component shown on this page:
+ *
+ * ```mdx
+ * import { generateDefinition, TSDoc } from 'nextra/tsdoc'
+ *
+ * <TSDoc
+ *   definitions={generateDefinition({
+ *     code: `
+ * import type { TSDoc } from 'nextra/tsdoc'
+ * type MyProps = React.ComponentProps<typeof TSDoc>
+ * export default MyProps`
+ *   })}
+ * />
+ * ```
+ *
+ * ### Overriding a type
+ *
+ * You can override the inferred type using the `@remarks` tag using backticks (`).
+ *
+ * <ExampleTSDoc />
  */
 export const TSDoc: FC<TSDocProps> = ({
   definition,

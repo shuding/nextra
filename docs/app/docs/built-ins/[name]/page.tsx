@@ -33,8 +33,9 @@ const API_REFERENCE: (
     packageName: 'nextra/components',
     groupKeys: 'HTMLAttributes<HTMLDivElement>'
   },
-  { type: 'separator', title: 'Other Components', name: '_3' },
-  { name: 'Playground', packageName: 'nextra/components' }
+  // { type: 'separator', title: 'Other Components', name: '_3' },
+  { name: 'Playground', packageName: 'nextra/components' },
+  { name: 'TSDoc', packageName: 'nextra/tsdoc' }
 ]
 
 const routes = API_REFERENCE.filter(o => 'name' in o)
