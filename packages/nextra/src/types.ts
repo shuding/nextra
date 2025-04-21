@@ -12,7 +12,9 @@ import type {
 
 export type { NextraConfig } from './types.generated.js'
 
-export interface LoaderOptions extends z.infer<typeof NextraConfigSchema> {
+type NextraConfigFromZod = z.infer<typeof NextraConfigSchema>
+
+export interface LoaderOptions extends NextraConfigFromZod {
   isPageImport?: boolean
   locales: string[]
   contentDir?: string

@@ -150,7 +150,7 @@ export const NextraConfigSchema = z.strictObject({
   })
 })
 
-export const element = z.custom<ReactElement<Record<string, unknown>>>(
+export const element = z.custom<ReactElement>(
   function checkReactElement(data) {
     return isValidElement(data)
   },

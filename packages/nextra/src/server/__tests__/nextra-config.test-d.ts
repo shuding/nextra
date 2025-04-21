@@ -30,11 +30,13 @@ describe('Assert types', () => {
     expectTypeOf<Actual>().not.toEqualTypeOf<Expected>
   })
   it('NextraConfig should be identical', () => {
-    type NextraConfigFromZod = z.input<typeof NextraConfigSchema>
-    expectTypeOf<NextraConfig>().toEqualTypeOf<NextraConfigFromZod>
+    type Expected = z.input<typeof NextraConfigSchema>
+    type Actual = NextraConfig
+    expectTypeOf<Actual>().toEqualTypeOf<Expected>
   })
   it('HeadProps should be identical', () => {
-    type HeadPropsFromZod = z.input<typeof HeadPropsSchema>
-    expectTypeOf<HeadProps>().toEqualTypeOf<HeadPropsFromZod>
+    type Expected = z.input<typeof HeadPropsSchema>
+    type Actual = HeadProps
+    expectTypeOf<Actual>().toEqualTypeOf<Expected>
   })
 })
