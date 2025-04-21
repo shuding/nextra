@@ -68,7 +68,7 @@ To generate the props table for the `TSDoc` component shown on this page:
 import { generateDocumentation, TSDoc } from 'nextra/tsdoc'
 
 <TSDoc
-  definitions={generateDocumentation({
+  definition={generateDocumentation({
     code: `
 import type { TSDoc } from 'nextra/tsdoc'
 type MyProps = React.ComponentProps<typeof TSDoc>
@@ -83,7 +83,7 @@ To generate the function signature table for `generateDocumentation` function:
 import { generateDocumentation, TSDoc } from 'nextra/tsdoc'
 
 <TSDoc
-  definitions={generateDocumentation({
+  definition={generateDocumentation({
     code: "export type { generateDocumentation as default } from 'nextra/tsdoc'",
     flattened: true
   })}
