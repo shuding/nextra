@@ -8,6 +8,7 @@ import packageJson from './package.json'
 import { IS_PRODUCTION } from './src/server/constants.js'
 import { NextraConfigSchema } from './src/server/schemas.js'
 import { generateTsFromZod } from './src/server/tsdoc/zod-to-ts.js'
+import { HeadPropsSchema } from './src/client/components/head'
 
 const SEP = path.sep === '/' ? '/' : '\\\\'
 
@@ -27,7 +28,9 @@ export default defineConfig({
 
     await fs.writeFile(
       path.resolve('src', 'types.generated.ts'),
-      `export type NextraConfig = ${generateTsFromZod(NextraConfigSchema)}`
+      `export interface NextraConfig ${generateTsFromZod(NextraConfigSchema)}
+
+export interface HeadProps ${generateTsFromZod(HeadPropsSchema)}`
     )
   },
   esbuildPlugins: [
