@@ -21,7 +21,7 @@
     "build": "NODE_ENV=production tsup",
     "dev": "tsup --watch . --watch ../nextra/src --watch ../nextra/styles",
     "prepublishOnly": "pnpm build",
-    "test": "vitest run",
+    "test": "vitest --typecheck",
     "types:check": "tsc --noEmit"
   },
   "peerDependencies": {

@@ -6,9 +6,6 @@ import { defineConfig } from 'tsup'
 import { defaultEntry } from './default-entry.js'
 import packageJson from './package.json'
 import { IS_PRODUCTION } from './src/server/constants.js'
-import { NextraConfigSchema } from './src/server/schemas.js'
-import { generateTsFromZod } from './src/server/tsdoc/zod-to-ts.js'
-import { HeadPropsSchema } from './src/client/components/head'
 
 const SEP = path.sep === '/' ? '/' : '\\\\'
 
@@ -25,13 +22,6 @@ export default defineConfig({
     // Fixes hydration errors in client apps due "type": "module" in root package.json
     const clientPackageJSON = path.resolve('dist', 'client', 'package.json')
     await fs.writeFile(clientPackageJSON, '{"sideEffects":false}')
-
-    await fs.writeFile(
-      path.resolve('src', 'types.generated.ts'),
-      `export interface NextraConfig ${generateTsFromZod(NextraConfigSchema)}
-
-export interface HeadProps ${generateTsFromZod(HeadPropsSchema)}`
-    )
   },
   esbuildPlugins: [
     svgr({
