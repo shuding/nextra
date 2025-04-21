@@ -33,6 +33,7 @@ const API_REFERENCE: (
     packageName: 'nextra/components',
     groupKeys: 'HTMLAttributes<HTMLDivElement>'
   },
+  { name: 'Tabs', packageName: 'nextra/components' },
   // { type: 'separator', title: 'Other Components', name: '_3' },
   { name: 'Playground', packageName: 'nextra/components' },
   { name: 'TSDoc', packageName: 'nextra/tsdoc' }
