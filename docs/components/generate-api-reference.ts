@@ -95,7 +95,13 @@ ${tags.usage}`
   ].filter(Boolean)
 
   const rawJs = await compileMdx(result.join('\n\n'))
-  return evaluate(rawJs, components, {
-    definition: { tags, ...rest }
-  })
+
+  return evaluate(
+    rawJs,
+    // @ts-expect-error -- fixme
+    components,
+    {
+      definition: { tags, ...rest }
+    }
+  )
 }

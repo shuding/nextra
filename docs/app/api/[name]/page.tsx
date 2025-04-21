@@ -34,9 +34,11 @@ export default $`,
   { name: 'normalizePages', packageName: 'nextra/normalize-pages' }
 ]
 
-const functionsIndex = API_REFERENCE.findIndex(o => o.title === 'Functions')
+const functionsIndex = API_REFERENCE.findIndex(
+  o => 'title' in o && o.title === 'Functions'
+)
 
-const routes = API_REFERENCE.filter(o => 'name' in o)
+const routes = API_REFERENCE.filter(o => !('type' in o))
 
 export const generateStaticParams = () =>
   routes.map(o => ({ name: o.name.toLowerCase() }))
@@ -59,7 +61,7 @@ async function getReference(props: PageProps) {
   const apiRefIndex = routes.findIndex(
     o => o.name.toLowerCase() === params.name
   )
-  const apiRef = API_REFERENCE[apiRefIndex]
+  const apiRef = routes[apiRefIndex]
   if (!apiRef || 'type' in apiRef) {
     throw new Error(`API reference not found for "${params.name}"`)
   }
@@ -67,9 +69,8 @@ async function getReference(props: PageProps) {
 
   const definition = generateDefinition({
     code:
-      'code' in apiRef
-        ? apiRef.code
-        : `export { ${apiRef.name} as default } from '${apiRef.packageName}'`,
+      apiRef.code ??
+      `export { ${apiRef.name} as default } from '${apiRef.packageName}'`,
     flattened: apiRef.isFlattened !== false
   })
 

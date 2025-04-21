@@ -71,7 +71,7 @@ export default $`
   { name: 'TSDoc', packageName: 'nextra/tsdoc' }
 ]
 
-const routes = API_REFERENCE.filter(o => 'name' in o)
+const routes = API_REFERENCE.filter(o => !('type' in o))
 
 export const generateStaticParams = () =>
   routes.map(o => ({ name: o.name.toLowerCase() }))
@@ -99,7 +99,7 @@ async function getReference(props: PageProps) {
   const apiRefIndex = routes.findIndex(
     o => o.name.toLowerCase() === params.name
   )
-  const apiRef = API_REFERENCE[apiRefIndex]
+  const apiRef = routes[apiRefIndex]
   if (!apiRef || 'type' in apiRef) {
     throw new Error(`API reference not found for "${params.name}"`)
   }
