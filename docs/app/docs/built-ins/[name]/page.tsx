@@ -3,6 +3,7 @@ import type { ApiReference } from '@components/generate-api-reference'
 // @ts-expect-error -- fixme
 import { useMDXComponents as getMDXComponents } from 'next-mdx-import-source-file'
 import type { MdxFile } from 'nextra'
+import { generateDefinition } from 'nextra/tsdoc'
 import type { FC } from 'react'
 
 const API_REFERENCE: (
@@ -45,22 +46,41 @@ async function getReference(props: PageProps) {
   if (!apiRef || 'type' in apiRef) {
     throw new Error(`API reference not found for "${params.name}"`)
   }
+  if ('code' in apiRef) {
+    throw new Error('Should not have `code` prop.')
+  }
+  const { name, packageName, groupKeys, isFlattened } = apiRef
+  const code = `
+import type { ComponentProps } from 'react'
+import { ${name} as MyComponent } from '${packageName}'
 
-  return generateApiReference(
-    {
-      ...apiRef,
-      ...(!('code' in apiRef) && {
-        code: `
-import { ${apiRef.name} } from '${apiRef.packageName}'
-type $ = React.ComponentProps<typeof ${apiRef.name}>
+type MyProps = ComponentProps<typeof MyComponent>
+type $ = ${
+    groupKeys
+      ? `Omit<MyProps, keyof ${groupKeys}> & { '...props': ${groupKeys} }>`
+      : 'MyProps'
+  }
+
 export default $`
-      })
-    },
-    {
-      title: 'component',
-      subtitle: 'Props'
-    }
-  )
+  const flattened = isFlattened !== false
+  const fcPropsDefinition = generateDefinition({ code, flattened })
+  const {
+    // @ts-expect-error -- exist
+    signatures: _signatures,
+    ...fcDefinition
+  } = generateDefinition({
+    code: `export { ${name} as default } from '${packageName}'`,
+    flattened
+  })
+  const definition = {
+    ...fcPropsDefinition,
+    ...fcDefinition
+  }
+  return generateApiReference(apiRef, {
+    title: 'component',
+    subtitle: 'Props',
+    definition
+  })
 }
 
 export async function generateMetadata(props: PageProps) {

@@ -26,24 +26,19 @@ export async function generateApiReference(
   apiRef: ApiReference,
   {
     title,
-    subtitle
+    subtitle,
+    definition: {
+      description,
+      // @ts-expect-error -- fixme
+      tags = {},
+      ...rest
+    }
   }: {
     title: string
     subtitle: string
+    definition: ReturnType<typeof generateDefinition>
   }
 ) {
-  const {
-    description,
-    // @ts-expect-error -- fixme
-    tags = {},
-    ...rest
-  } = generateDefinition({
-    code:
-      'code' in apiRef
-        ? apiRef.code
-        : `export { ${apiRef.name} as default } from '${apiRef.packageName}'`,
-    flattened: apiRef.isFlattened !== false
-  })
   const result = [
     description &&
       // og:description

@@ -3,6 +3,7 @@ import type { ApiReference } from '@components/generate-api-reference'
 // @ts-expect-error -- fixme
 import { useMDXComponents as getMDXComponents } from 'next-mdx-import-source-file'
 import type { MdxFile } from 'nextra'
+import { generateDefinition } from 'nextra/tsdoc'
 import type { FC } from 'react'
 
 const API_REFERENCE: (
@@ -65,9 +66,18 @@ async function getReference(props: PageProps) {
   }
   const isType = functionsIndex > apiRefIndex
 
+  const definition = generateDefinition({
+    code:
+      'code' in apiRef
+        ? apiRef.code
+        : `export { ${apiRef.name} as default } from '${apiRef.packageName}'`,
+    flattened: apiRef.isFlattened !== false
+  })
+
   return generateApiReference(apiRef, {
     title: isType ? 'type' : 'function',
-    subtitle: isType ? 'Fields' : 'Signature'
+    subtitle: isType ? 'Fields' : 'Signature',
+    definition
   })
 }
 
