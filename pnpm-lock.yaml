@@ -394,11 +394,8 @@ importers:
         specifier: ^2.3.2
         version: 2.7.0
       zod:
-        specifier: ^4.0.0-beta.1
-        version: 4.0.0-beta.20250414T061543
-      zod-validation-error:
-        specifier: ^3.0.0
-        version: 3.4.0(zod@4.0.0-beta.20250414T061543)
+        specifier: 4.0.0-beta.20250420T053007
+        version: 4.0.0-beta.20250420T053007
     devDependencies:
       '@svgr/plugin-svgo':
         specifier: ^8.1.0
@@ -528,11 +525,8 @@ importers:
         specifier: ^3.1.0
         version: 3.1.0
       zod:
-        specifier: ^4.0.0-beta.1
-        version: 4.0.0-beta.20250414T061543
-      zod-validation-error:
-        specifier: ^3.0.0
-        version: 3.4.0(zod@4.0.0-beta.20250414T061543)
+        specifier: 4.0.0-beta.20250420T053007
+        version: 4.0.0-beta.20250420T053007
       zustand:
         specifier: ^5.0.1
         version: 5.0.3(@types/react@19.0.12)(react@19.1.0)(use-sync-external-store@1.5.0(react@19.1.0))
@@ -601,8 +595,8 @@ importers:
         specifier: '*'
         version: 5.8.3
       zod:
-        specifier: ^4.0.0-beta.1
-        version: 4.0.0-beta.20250414T061543
+        specifier: 4.0.0-beta.20250420T053007
+        version: 4.0.0-beta.20250420T053007
     devDependencies:
       '@tsconfig/strictest':
         specifier: ^2.0.5
@@ -2905,8 +2899,8 @@ packages:
   '@xyflow/system@0.0.55':
     resolution: {integrity: sha512-6cngWlE4oMXm+zrsbJxerP3wUNUFJcv/cE5kDfu0qO55OWK3fAeSOLW9td3xEVQlomjIW5knds1MzeMnBeCfqw==}
 
-  '@zod/core@0.5.0':
-    resolution: {integrity: sha512-9EW5fOng5558DM68WmVtecPzHuROdB5AcBVOBVqtPIup1quYRxxzwzT9+BPNX5Pr+so0wP/Hxv8+pCrBbjKQeg==}
+  '@zod/core@0.8.1':
+    resolution: {integrity: sha512-djj8hPhxIHcG8ptxITaw/Bout5HJZ9NyRbKr95Eilqwt9R0kvITwUQGDU+n+MVdsBIka5KwztmZSLti22F+P0A==}
 
   acorn-import-assertions@1.8.0:
     resolution: {integrity: sha512-m7VZ3jwz4eK6A4Vtt8Ew1/mNbP24u0FhdyfA7fSvnJR6LMdfOYnmuIrrJAgrYfYJ10F/otaHTtrtrtmHdMNzEw==}
@@ -6525,8 +6519,8 @@ packages:
   zod@3.24.2:
     resolution: {integrity: sha512-lY7CDW43ECgW9u1TcT3IoXHflywfVqDYze4waEz812jR/bZ8FHDsl7pFQoSZTz5N+2NqRXs8GBwnAwo3ZNxqhQ==}
 
-  zod@4.0.0-beta.20250414T061543:
-    resolution: {integrity: sha512-1X7/cVHAWBt9jEIIg2Q2GFEApZy1VYe+YBxsjwVMmDZfMvn09CylsKLGZtfjZ/cwYrJha0OIWOh+MouaOj3Zdg==}
+  zod@4.0.0-beta.20250420T053007:
+    resolution: {integrity: sha512-5pp8Q0PNDaNcUptGiBE9akyioJh3RJpagIxrLtAVMR9IxwcSZiOsJD/1/98CyhItdTlI2H91MfhhLzRlU+fifA==}
 
   zustand@4.5.6:
     resolution: {integrity: sha512-ibr/n1hBzLLj5Y+yUcU7dYw8p6WnIVzdJbnX+1YpaScvZVF2ziugqHs+LAmHw4lWO9c/zRj+K1ncgWDQuthEdQ==}
@@ -9094,7 +9088,7 @@ snapshots:
       d3-selection: 3.0.0
       d3-zoom: 3.0.0
 
-  '@zod/core@0.5.0': {}
+  '@zod/core@0.8.1': {}
 
   acorn-import-assertions@1.8.0(acorn@8.14.0):
     dependencies:
@@ -13599,15 +13593,11 @@ snapshots:
     dependencies:
       zod: 3.24.2
 
-  zod-validation-error@3.4.0(zod@4.0.0-beta.20250414T061543):
-    dependencies:
-      zod: 4.0.0-beta.20250414T061543
-
   zod@3.24.2: {}
 
-  zod@4.0.0-beta.20250414T061543:
+  zod@4.0.0-beta.20250420T053007:
     dependencies:
-      '@zod/core': 0.5.0
+      '@zod/core': 0.8.1
 
   zustand@4.5.6(@types/react@19.1.1)(react@19.1.0):
     dependencies:

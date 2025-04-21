@@ -6,7 +6,6 @@ import { DiscordIcon, GitHubIcon } from 'nextra/icons'
 import { element, reactNode } from 'nextra/schemas'
 import type { FC } from 'react'
 import { z } from 'zod'
-import { fromZodError } from 'zod-validation-error'
 import { ClientNavbar } from './index.client'
 
 export const NavbarPropsSchema = z.strictObject({
@@ -52,7 +51,7 @@ type NavbarProps = z.input<typeof NavbarPropsSchema>
 export const Navbar: FC<NavbarProps> = props => {
   const { data, error } = NavbarPropsSchema.safeParse(props)
   if (error) {
-    throw fromZodError(error)
+    throw z.prettifyError(error)
   }
   const {
     children,

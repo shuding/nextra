@@ -3,7 +3,6 @@ import { ThemeProvider } from 'next-themes'
 import { SkipNavLink } from 'nextra/components'
 import type { FC } from 'react'
 import { z } from 'zod'
-import { fromZodError } from 'zod-validation-error'
 import { MobileNav } from './components/sidebar'
 import { ConfigProvider, ThemeConfigProvider } from './stores'
 import { LayoutPropsSchema } from './schemas'
@@ -21,7 +20,7 @@ type LayoutProps = MakeOptional<$LayoutProps, 'navigation'>
 export const Layout: FC<LayoutProps> = ({ children, ...themeConfig }) => {
   const { data, error } = LayoutPropsSchema.safeParse(themeConfig)
   if (error) {
-    throw fromZodError(error)
+    throw z.prettifyError(error)
   }
   const { footer, navbar, pageMap, nextThemes, banner, ...rest } = data
 

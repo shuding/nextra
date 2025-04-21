@@ -1,7 +1,7 @@
 import type { FC } from 'react'
 import { z } from 'zod'
-import { fromZodError } from 'zod-validation-error'
 import { reactNode } from '../../server/schemas.js'
+import type { HeadProps } from '../../types.generated.js'
 
 const darkLightSchema = z.union([
   z.number(),
@@ -101,8 +101,6 @@ export const HeadPropsSchema = z.strictObject({
     description: 'Content of `<head>`'
   })
 })
-
-type HeadProps = Partial<z.input<typeof HeadPropsSchema>>
 
 /**
  * Configure the `<head>` tags, primary color, background color and favicon glyph
@@ -212,7 +210,7 @@ type HeadProps = Partial<z.input<typeof HeadPropsSchema>>
 export const Head: FC<HeadProps> = ({ children, ...props }) => {
   const { data, error } = HeadPropsSchema.safeParse(props)
   if (error) {
-    throw fromZodError(error)
+    throw z.prettifyError(error)
   }
   const { color, backgroundColor, faviconGlyph } = data
 
