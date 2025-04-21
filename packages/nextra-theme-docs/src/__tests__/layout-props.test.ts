@@ -1,6 +1,5 @@
 import fs from 'node:fs/promises'
 import path from 'node:path'
-import { expectType } from 'vite-plugin-vitest-typescript-assert/tsd'
 import type { z } from 'zod'
 import type { IsEqual } from '../../../nextra/src/server/__tests__/test-utils.js'
 // fixes error from `server-only`
@@ -15,10 +14,9 @@ await fs.writeFile(
 )
 
 describe('Assert types', () => {
-  type LayoutPropsFromZod = z.input<typeof LayoutPropsSchema>
-
-  type $1 = IsEqual<LayoutPropsFromZod, LayoutProps>
-  test('Layout props should be identical', () => {
-    expectType<$1>(true)
+  test('LayoutProps should be identical', () => {
+    type LayoutPropsFromZod = z.input<typeof LayoutPropsSchema>
+    type $ = IsEqual<LayoutPropsFromZod, LayoutProps>
+    assertType<$>(true)
   })
 })
