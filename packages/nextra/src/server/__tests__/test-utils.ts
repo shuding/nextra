@@ -5,6 +5,15 @@ import { findMetaAndPageFilePaths } from '../page-map/find-meta-and-page-file-pa
 import { convertPageMapToJs } from '../page-map/to-js.js'
 import { convertToPageMap } from '../page-map/to-page-map.js'
 
+export type IsEqual<A, B> =
+  (<G>() => G extends (A & G) | G ? 1 : 2) extends <G>() => G extends
+      | (B & G)
+      | G
+      ? 1
+      : 2
+    ? true
+    : false
+
 export async function clean(content: string): Promise<string> {
   const result = await prettier.format(content, {
     parser: 'typescript',

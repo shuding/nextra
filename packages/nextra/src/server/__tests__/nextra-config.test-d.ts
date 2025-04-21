@@ -3,15 +3,7 @@ import type { z } from 'zod'
 import type { HeadPropsSchema } from '../../client/components/head.js'
 import type { HeadProps, NextraConfig } from '../../types.generated.js'
 import type { NextraConfigSchema } from '../schemas.js'
-
-type IsEqual<A, B> =
-  (<G>() => G extends (A & G) | G ? 1 : 2) extends <G>() => G extends
-    | (B & G)
-    | G
-    ? 1
-    : 2
-    ? true
-    : false
+import type { IsEqual } from './test-utils.js'
 
 type $1 = IsEqual<{ foo: string }, { foo: number }>
 

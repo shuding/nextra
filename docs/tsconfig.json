@@ -17,7 +17,10 @@
     "module": "esnext",
     "resolveJsonModule": true,
     "paths": {
-      "@components/*": ["components/*"]
+      "@components/*": ["components/*"],
+      // Following works without specifying in tsconfig file, just to make ts happy
+      "private-next-root-dir/*": ["./*"],
+      "next-mdx-import-source-file": ["./mdx-components.tsx"]
     },
     "plugins": [
       {
