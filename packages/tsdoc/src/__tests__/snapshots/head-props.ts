@@ -60,8 +60,8 @@ type $ = {
 
   /**
    * @default {
-   *   "dark": "rgb(17,17,17)",
-   *   "light": "rgb(250,250,250)"
+   *   "dark": "17,17,17",
+   *   "light": "250,250,250"
    * }
    */
   backgroundColor?: {
