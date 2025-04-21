@@ -14,12 +14,10 @@ import type { FC, HTMLAttributes } from 'react'
  *
  * ### Text
  *
- * <Bleed>
- *   <div className="bg-white dark:bg-neutral-800 px-16 py-10 text-center border">
- *     _There is nothing to writing. All you do is sit down at a typewriter and **bleed**._
+ * <Bleed className="bg-white dark:bg-neutral-800 px-16 py-10 text-center border">
+ *   _There is nothing to writing. All you do is sit down at a typewriter and **bleed**._
  *
- *     — Ernest Hemingway
- *   </div>
+ *   — Ernest Hemingway
  * </Bleed>
  *
  * ### Video
@@ -63,7 +61,7 @@ export const Bleed: FC<
     /** Extend content to the very edges of its container. */
     full: boolean
   } & HTMLAttributes<HTMLDivElement>
-> = ({ full, ...props }) => {
+> = ({ full, className, ...props }) => {
   return (
     <div
       className={cn(
@@ -72,7 +70,8 @@ export const Bleed: FC<
         full && [
           // 'md:mx:[calc(-50vw+50%+8rem)',
           'x:xl:me-[calc(50%-50vw)] x:xl:ms-[calc(50%-50vw+16rem)]'
-        ]
+        ],
+        className
       )}
       {...props}
     />
