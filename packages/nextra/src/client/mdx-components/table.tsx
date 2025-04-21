@@ -7,7 +7,7 @@ const Table_: FC<HTMLAttributes<HTMLTableElement>> = props => (
     className={cn('x:block x:overflow-x-auto', props.className)}
   />
 )
-const Th: FC<HTMLAttributes<HTMLTableHeaderCellElement>> = props => {
+const Th: FC<HTMLAttributes<HTMLTableCellElement>> = props => {
   return (
     <th
       {...props}
@@ -30,7 +30,7 @@ const Tr: FC<HTMLAttributes<HTMLTableRowElement>> = props => {
     />
   )
 }
-const Td: FC<HTMLAttributes<HTMLTableDataCellElement>> = props => {
+const Td: FC<HTMLAttributes<HTMLTableCellElement>> = props => {
   return (
     <td
       {...props}
