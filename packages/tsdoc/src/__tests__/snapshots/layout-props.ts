@@ -4,7 +4,7 @@ type $ = {
    */
   banner?: React.ReactNode
 
-  children?: React.ReactNode
+  children: React.ReactNode
 
   /**
    * Show or hide the dark mode select button.
