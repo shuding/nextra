@@ -98,7 +98,7 @@ export const HeadPropsSchema = z.strictObject({
   }),
   backgroundColor: bgColorSchema.default(bgColorSchema.parse({})),
   children: reactNode.meta({
-    description: 'Content of `<head>`'
+    description: 'Content of `<head>`.'
   })
 })
 

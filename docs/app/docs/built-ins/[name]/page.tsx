@@ -16,6 +16,14 @@ const API_REFERENCE: (
     packageName: 'nextra/components',
     groupKeys: 'HTMLAttributes<HTMLDivElement>'
   },
+  {
+    name: 'Head',
+    packageName: 'nextra/components',
+    isFlattened: true,
+    // We use `code` otherwise, unable use generateDefinition.flattened
+    code: `interface $ ${generateTsFromZod(HeadPropsSchema)}
+export default $`
+  },
   { name: 'Search', packageName: 'nextra/components', isFlattened: false },
   { type: 'separator', title: 'Content Components', name: '_2' },
   {
@@ -29,11 +37,12 @@ const API_REFERENCE: (
     groupKeys: 'HTMLAttributes<HTMLDivElement>'
   },
   {
-    name: 'Steps',
+    // TODO: add
+    // <APIDocs componentName="Cards.Card" />
+    name: 'Cards',
     packageName: 'nextra/components',
     groupKeys: 'HTMLAttributes<HTMLDivElement>'
   },
-  { name: 'Tabs', packageName: 'nextra/components' },
   {
     // TODO: add
     // <APIDocs componentName="FileTree.Folder" />
@@ -41,6 +50,11 @@ const API_REFERENCE: (
     name: 'FileTree',
     packageName: 'nextra/components',
     groupKeys: 'HTMLAttributes<HTMLUListElement>'
+  },
+  {
+    name: 'Steps',
+    packageName: 'nextra/components',
+    groupKeys: 'HTMLAttributes<HTMLDivElement>'
   },
   {
     // TODO: add
@@ -51,22 +65,8 @@ const API_REFERENCE: (
     packageName: 'nextra/components',
     groupKeys: 'HTMLAttributes<HTMLTableElement>'
   },
-  {
-    // TODO: add
-    // <APIDocs componentName="Cards.Card" />
-    name: 'Cards',
-    packageName: 'nextra/components',
-    groupKeys: 'HTMLAttributes<HTMLDivElement>'
-  },
-  {
-    name: 'Head',
-    packageName: 'nextra/components',
-    isFlattened: true,
-    // We use `code` otherwise, unable use generateDefinition.flattened
-    code: `interface $ ${generateTsFromZod(HeadPropsSchema)}
-export default $`
-  },
-  { type: 'separator', title: 'Other Components', name: '_4' },
+  { name: 'Tabs', packageName: 'nextra/components' },
+  { type: 'separator', title: 'Other Components', name: '_3' },
   { name: 'Playground', packageName: 'nextra/components' },
   { name: 'TSDoc', packageName: 'nextra/tsdoc' }
 ]

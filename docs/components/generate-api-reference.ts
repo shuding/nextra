@@ -12,7 +12,7 @@ import {
 } from 'nextra/components'
 import { evaluate } from 'nextra/evaluate'
 import { generateDefinition } from 'nextra/tsdoc'
-import { BackgroundColor, Slider } from '../app/docs/built-ins/head2/_slider'
+import { BackgroundColor, Slider } from './_slider'
 import ExampleTSDoc from './example-tsdoc.mdx'
 import { PlaygroundDemo } from './playground-demo'
 
