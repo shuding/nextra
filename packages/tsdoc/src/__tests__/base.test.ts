@@ -230,9 +230,8 @@ export default $$`
             "type": "ReactNode",
           },
           {
-            "description": "Content to be displayed inside the callout.",
-            "name": "children",
-            "type": "ReactNode",
+            "name": "...props",
+            "type": "HTMLAttributes<HTMLDivElement>",
           },
         ],
         "name": "default",
