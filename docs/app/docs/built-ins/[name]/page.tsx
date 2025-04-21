@@ -16,7 +16,8 @@ const API_REFERENCE: (
     name: 'Steps',
     packageName: 'nextra/components',
     groupKeys: "ComponentProps<'div'>"
-  }
+  },
+  { name: 'Callout', packageName: 'nextra/components' }
 ]
 
 const routes = API_REFERENCE.filter(o => 'name' in o)
