@@ -97,7 +97,7 @@ export const HeadPropsSchema = z.strictObject({
     description: 'The glyph to use as the favicon.'
   }),
   backgroundColor: bgColorSchema.default(bgColorSchema.parse({})),
-  children: reactNode.meta({
+  children: reactNode.optional().meta({
     description: 'Content of `<head>`.'
   })
 })

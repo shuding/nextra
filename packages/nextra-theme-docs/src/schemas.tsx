@@ -44,7 +44,7 @@ const sidebarSchema = z.strictObject({
     description:
       'If `true`, automatically collapse inactive folders above `defaultMenuCollapseLevel`.'
   }),
-  defaultMenuCollapseLevel: z.int().min(1).default(2).meta({
+  defaultMenuCollapseLevel: z.number().int().min(1).default(2).meta({
     description:
       'Specifies the folder level at which the menu on the left is collapsed by default.'
   }),

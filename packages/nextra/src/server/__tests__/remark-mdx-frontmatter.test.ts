@@ -53,7 +53,7 @@ describe('remarkMdxFrontMatter', () => {
   describe('esm frontmatter', async () => {
     const rawJs = await compileMdx(ESM_FRONTMATTER)
     it('should export esm frontmatter', () => {
-      expect(clean(rawJs)).resolves.toMatchInlineSnapshot(`
+      return expect(clean(rawJs)).resolves.toMatchInlineSnapshot(`
         "'use strict'
         const { Fragment: _Fragment, jsx: _jsx } = arguments[0]
         const { useMDXComponents: _provideComponents } = arguments[0]
