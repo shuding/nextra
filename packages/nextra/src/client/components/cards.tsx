@@ -1,6 +1,6 @@
 import cn from 'clsx'
 import NextLink from 'next/link'
-import type { ComponentProps, FC, ReactElement, ReactNode } from 'react'
+import type { FC, HTMLAttributes, ReactElement, ReactNode } from 'react'
 
 const Card: FC<{
   title: string
@@ -57,7 +57,7 @@ const _Cards: FC<
      * @default 3
      */
     num?: number
-  } & ComponentProps<'div'>
+  } & HTMLAttributes<HTMLDivElement>
 > = ({ children, num = 3, className, style, ...props }) => {
   return (
     <div
@@ -77,4 +77,57 @@ const _Cards: FC<
   )
 }
 
+/**
+ * A built-in component that allows you to display content in a visually appealing card format. It
+ * includes options for adding an icon, title, link and an image to related content.
+ *
+ * @usage
+ * ### Grouped cards
+ *
+ * Import the `<Cards>` component to your page, which includes the `<Card>` component.
+ *
+ * Then, optionally import the icons that you want to use. To create a set of cards, follow the
+ * example below where the `<Cards.Card>` component is used to create a card and the `<Cards>`
+ * component is used to group multiple cards together.
+ *
+ * ```mdx filename="MDX"
+ * import { Cards } from 'nextra/components'
+ * import { CardsIcon, OneIcon, WarningIcon } from '../path/with/your/icons'
+ *
+ * <Cards>
+ *   <Cards.Card
+ *     icon={<WarningIcon />}
+ *     title="Callout"
+ *     href="/docs/built-ins/callout"
+ *   />
+ *   <Cards.Card
+ *     icon={<CardsIcon />}
+ *     title="Tabs"
+ *     href="/docs/built-ins/tabs"
+ *   />
+ *   <Cards.Card
+ *     icon={<OneIcon />}
+ *     title="Steps"
+ *     href="/docs/built-ins/steps"
+ *   />
+ * </Cards>
+ * ```
+ *
+ * ### Single card
+ *
+ * A `<Card>` not wrapped in a `<Cards>` component will not be grouped with other cards. This can
+ * be useful if you want to display a single card in a different format than the other cards on the
+ * page.
+ *
+ * ### Usage
+ *
+ * ```mdx filename="MDX"
+ * <Cards.Card
+ *   icon={<BoxIcon />}
+ *   title="About Nextra"
+ *   href="/about"
+ *   arrow
+ * />
+ * ```
+ */
 export const Cards = Object.assign(_Cards, { displayName: 'Cards', Card })
