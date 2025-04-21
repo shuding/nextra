@@ -134,6 +134,7 @@ export interface NextraConfig {
    */
   unstable_shouldAddLocaleToLinks?: boolean
 }
+
 export interface HeadProps {
   /**
    * @default {
