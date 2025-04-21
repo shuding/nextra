@@ -1,6 +1,5 @@
-import { PageMapItem } from 'nextra'
+import { MetaJsonFile, PageMapItem } from 'nextra'
 import { getPageMap } from 'nextra/page-map'
-import { MetaJsonFile } from 'nextra'
 import { pageMap as apiPageMap } from '../app/api/[name]/page'
 import { pageMap as builtInsPageMap } from '../app/docs/built-ins/[name]/page'
 
@@ -67,7 +66,7 @@ export const getEnhancedPageMap: typeof getPageMap = async (...args) => {
           children: [
             createMetaItem(builtInsPageMap),
             ...builtInsPageMap,
-            ...item.children,
+            ...item.children
           ]
         }
       }

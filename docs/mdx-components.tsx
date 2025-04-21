@@ -1,9 +1,9 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
 
+import { getEnhancedPageMap } from '@components/get-page-map'
 import { useMDXComponents as getDocsMDXComponents } from 'nextra-theme-docs'
 import { generateDefinition, TSDoc } from 'nextra/tsdoc'
-import { getEnhancedPageMap } from '@components/get-page-map'
 
 const { img: Image, ...docsComponents } = getDocsMDXComponents({
   async APIDocs({
