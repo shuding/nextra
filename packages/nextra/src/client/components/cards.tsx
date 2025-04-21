@@ -81,6 +81,37 @@ const _Cards: FC<
  * A built-in component that allows you to display content in a visually appealing card format. It
  * includes options for adding an icon, title, link and an image to related content.
  *
+ * @example
+ * ### Grouped cards
+ *
+ * <Cards>
+ *   <Cards.Card
+ *     icon={<WarningIcon />}
+ *     title="Callout"
+ *     href="/docs/built-ins/callout"
+ *   />
+ *   <Cards.Card
+ *     icon={<CardsIcon />}
+ *     title="Tabs"
+ *     href="/docs/built-ins/tabs"
+ *   />
+ *   <Cards.Card
+ *     icon={<OneIcon />}
+ *     title="Steps"
+ *     href="/docs/built-ins/steps"
+ *   />
+ * </Cards>
+ *
+ * ### Single card
+ *
+ * <br />
+ * <Cards.Card
+ *   icon={<BoxIcon />}
+ *   title="About Nextra"
+ *   href="/about"
+ *   arrow
+ * />
+ *
  * @usage
  * ### Grouped cards
  *
@@ -118,8 +149,6 @@ const _Cards: FC<
  * A `<Card>` not wrapped in a `<Cards>` component will not be grouped with other cards. This can
  * be useful if you want to display a single card in a different format than the other cards on the
  * page.
- *
- * ### Usage
  *
  * ```mdx filename="MDX"
  * <Cards.Card

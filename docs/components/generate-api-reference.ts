@@ -1,7 +1,16 @@
+import { BoxIcon, CardsIcon, OneIcon, WarningIcon } from '@components/icons'
 // @ts-expect-error -- fixme
 import { useMDXComponents as getMDXComponents } from 'next-mdx-import-source-file'
 import { compileMdx } from 'nextra/compile'
-import { Bleed, Callout, FileTree, Steps, Table, Tabs } from 'nextra/components'
+import {
+  Bleed,
+  Callout,
+  Cards,
+  FileTree,
+  Steps,
+  Table,
+  Tabs
+} from 'nextra/components'
 import { evaluate } from 'nextra/evaluate'
 import { generateDefinition } from 'nextra/tsdoc'
 // @ts-expect-error -- fixme
@@ -16,7 +25,12 @@ const { wrapper: Wrapper, ...components } = getMDXComponents({
   ExampleTSDoc,
   Tabs,
   FileTree,
-  Table
+  Table,
+  Cards,
+  BoxIcon,
+  CardsIcon,
+  OneIcon,
+  WarningIcon
 })
 
 export type ApiReference = {
