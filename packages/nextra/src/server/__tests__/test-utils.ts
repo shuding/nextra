@@ -7,10 +7,10 @@ import { convertToPageMap } from '../page-map/to-page-map.js'
 
 export type IsEqual<A, B> =
   (<G>() => G extends (A & G) | G ? 1 : 2) extends <G>() => G extends
-      | (B & G)
-      | G
-      ? 1
-      : 2
+    | (B & G)
+    | G
+    ? 1
+    : 2
     ? true
     : false
 

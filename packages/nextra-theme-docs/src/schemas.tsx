@@ -1,9 +1,9 @@
 import type { PageMapItem } from 'nextra'
+import { Search } from 'nextra/components'
 import { element, reactNode } from 'nextra/schemas'
 import { Fragment } from 'react'
 import { z } from 'zod'
 import { LastUpdated } from './components'
-import { Search } from 'nextra/components'
 
 const attributeSchema = z
   .custom<
