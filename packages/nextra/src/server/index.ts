@@ -5,7 +5,7 @@ import { fileURLToPath } from 'node:url'
 import fg from 'fast-glob'
 import type { NextConfig } from 'next'
 import type { RuleSetRule } from 'webpack'
-import { fromZodError } from 'zod-validation-error'
+import { z } from 'zod'
 import type { NextraConfig } from '../types.js'
 import { CWD, MARKDOWN_EXTENSION_RE } from './constants.js'
 import { NextraConfigSchema } from './schemas.js'
@@ -77,7 +77,7 @@ const nextra = (nextraConfig: NextraConfig) => {
     NextraConfigSchema.safeParse(nextraConfig)
   if (error) {
     logger.error('Error validating nextraConfig')
-    throw fromZodError(error)
+    throw z.prettifyError(error)
   }
 
   const loader = {
