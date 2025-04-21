@@ -19,7 +19,7 @@ export const Anchor: FC<ComponentPropsWithoutRef<'a'>> = ({
         {children}
         {typeof children === 'string' && (
           <>
-            &thinsp;
+            &nbsp;
             <LinkArrowIcon
               // based on font-size
               height="1em"

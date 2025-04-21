@@ -69,8 +69,8 @@ const classes = {
 }
 
 /**
- * A built-in component ldgx you generate documentation from `type`, `interface`, and `function` definitions
- * using [TSDoc](https://tsdoc.org) annotations.
+ * A built-in component lets you generate documentation from `type`, `interface`, and `function`
+ * definitions  using [TSDoc](https://tsdoc.org) annotations.
  *
  * ## What it generates
  *
@@ -108,7 +108,8 @@ const classes = {
  * > [!WARNING]
  * >
  * > **Server Component Only** – TSDoc component cannot be used in a client
- * > component.<br />{''}**Available from:** Nextra 4.3 (alpha).<br />{''}
+ * > component.<br />
+ * > **Available from:** Nextra 4.3 (alpha).<br />
  * > **Dependency:** Uses TypeScript Compiler API from
  * > [`ts-morph`](https://github.com/dsherret/ts-morph).
  *
