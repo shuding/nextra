@@ -1,6 +1,5 @@
 import { generateApiReference } from '@components/generate-api-reference'
 import type { ApiReference } from '@components/generate-api-reference'
-// @ts-expect-error -- fixme
 import { useMDXComponents as getMDXComponents } from 'next-mdx-import-source-file'
 import type { MdxFile } from 'nextra'
 import { generateDefinition } from 'nextra/tsdoc'

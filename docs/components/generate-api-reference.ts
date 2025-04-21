@@ -1,5 +1,4 @@
 import { BoxIcon, CardsIcon, OneIcon, WarningIcon } from '@components/icons'
-// @ts-expect-error -- fixme
 import { useMDXComponents as getMDXComponents } from 'next-mdx-import-source-file'
 import { compileMdx } from 'nextra/compile'
 import {
@@ -14,7 +13,6 @@ import {
 import { evaluate } from 'nextra/evaluate'
 import { generateDefinition } from 'nextra/tsdoc'
 import { BackgroundColor, Slider } from '../app/docs/built-ins/head2/_slider'
-// @ts-expect-error -- fixme
 import ExampleTSDoc from './example-tsdoc.mdx'
 import { PlaygroundDemo } from './playground-demo'
 
@@ -36,10 +34,12 @@ const { wrapper: Wrapper, ...components } = getMDXComponents({
   Slider
 })
 
-export type ApiReference = {
+export interface ApiReference {
   name: string
   isFlattened?: boolean
-} & ({ code: string } | { packageName: string })
+  code?: string
+  packageName?: string
+}
 
 export async function generateApiReference(
   apiRef: ApiReference,
@@ -66,7 +66,7 @@ export async function generateApiReference(
     `# \`${apiRef.name}\` ${title}`,
     // Page description
     description,
-    'packageName' in apiRef && `Exported from \`${apiRef.packageName}\`.`,
+    apiRef.packageName && `Exported from \`${apiRef.packageName}\`.`,
     // Signature
     `## ${subtitle}`,
     '<APIDocs definition={definition} />',
