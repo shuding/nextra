@@ -57,17 +57,17 @@ const stringColorSchema = z.string().refine(str => {
 const colorSchema = z.strictObject({
   hue: darkLightSchema
     .default({ dark: 204, light: 212 })
-    .transform(convertColor)
+    .overwrite(convertColor)
     .meta({
       description: 'The hue of the primary theme color.<br/>Range: `0 - 360`'
     }),
-  saturation: darkLightSchema.default(100).transform(convertColor).meta({
+  saturation: darkLightSchema.default(100).overwrite(convertColor).meta({
     description:
       'The saturation of the primary theme color.<br/>Range: `0 - 100`'
   }),
   lightness: darkLightSchema
     .default({ dark: 55, light: 45 })
-    .transform(convertColor)
+    .overwrite(convertColor)
     .meta({
       description:
         'The lightness of the primary theme color.<br/>Range: `0 - 100`'
@@ -212,7 +212,8 @@ export const Head: FC<HeadProps> = ({ children, ...props }) => {
   if (error) {
     throw z.prettifyError(error)
   }
-  const { color, backgroundColor, faviconGlyph } = data
+  // TODO: fix it
+  const { color, backgroundColor, faviconGlyph } = data as any
 
   const style = `
 :root {

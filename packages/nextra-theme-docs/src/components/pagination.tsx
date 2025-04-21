@@ -19,7 +19,9 @@ export const Pagination: FC = () => {
   const { flatDocsDirectories, activeIndex } = useConfig().normalizePagesResult
   const { navigation } = useThemeConfig()
 
+  // @ts-expect-error -- fixme
   let prev = navigation.prev && flatDocsDirectories[activeIndex - 1]
+  // @ts-expect-error -- fixme
   let next = navigation.next && flatDocsDirectories[activeIndex + 1]
 
   if (prev && !prev.isUnderCurrentDocsTree) prev = false

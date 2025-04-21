@@ -46,6 +46,7 @@ export const ClientWrapper: FC<Omit<ComponentProps<MDXWrapper>, 'toc'>> = ({
         {children}
         {date ? (
           <div className="x:mt-12 x:mb-8 x:text-xs x:text-gray-600 x:text-end x:dark:text-gray-400">
+            {/* @ts-expect-error -- fixme */}
             {cloneElement(themeConfig.lastUpdated, { date: new Date(date) })}
           </div>
         ) : (
