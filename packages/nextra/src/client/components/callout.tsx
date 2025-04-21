@@ -1,5 +1,5 @@
 import cn from 'clsx'
-import type { FC, ReactNode } from 'react'
+import type { CSSProperties, FC, HTMLAttributes, ReactNode } from 'react'
 import {
   GitHubCautionIcon,
   GitHubImportantIcon,
@@ -46,7 +46,7 @@ const classes: Record<CalloutType, string> = {
   )
 }
 
-type CalloutProps = {
+type CalloutProps = HTMLAttributes<HTMLDivElement> & {
   /**
    * Defines the style of the callout and determines the default icon if `emoji` is not provided.
    *
@@ -66,8 +66,6 @@ type CalloutProps = {
    * @default Determined by `type`
    */
   emoji?: ReactNode
-  /** Content to be displayed inside the callout. */
-  children: ReactNode
 }
 
 /**
@@ -172,9 +170,10 @@ type CalloutProps = {
  * ```
  */
 export const Callout: FC<CalloutProps> = ({
-  children,
+  className,
   type = 'default',
-  emoji = type && TypeToEmoji[type]
+  emoji = type && TypeToEmoji[type],
+  ...props
 }) => {
   return (
     <div
@@ -196,4 +195,8 @@ export const Callout: FC<CalloutProps> = ({
       <div className="x:w-full x:min-w-0 x:leading-7">{children}</div>
     </div>
   )
+}
+
+const style: CSSProperties = {
+  fontFamily: '"Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"'
 }

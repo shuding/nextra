@@ -23,13 +23,18 @@ const API_REFERENCE: (
     packageName: 'nextra/components',
     groupKeys: 'HTMLAttributes<HTMLDivElement>'
   },
-  { name: 'Callout', packageName: 'nextra/components' },
+  {
+    name: 'Callout',
+    packageName: 'nextra/components',
+    groupKeys: 'HTMLAttributes<HTMLDivElement>'
+  },
   {
     name: 'Steps',
     packageName: 'nextra/components',
     groupKeys: 'HTMLAttributes<HTMLDivElement>'
   },
-  { type: 'separator', title: 'Other Components', name: '_2' }
+  { type: 'separator', title: 'Other Components', name: '_3' },
+  { name: 'Playground', packageName: 'nextra/components' }
 ]
 
 const routes = API_REFERENCE.filter(o => 'name' in o)

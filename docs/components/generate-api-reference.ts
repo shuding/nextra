@@ -1,7 +1,7 @@
 // @ts-expect-error -- fixme
 import { useMDXComponents as getMDXComponents } from 'next-mdx-import-source-file'
 import { compileMdx } from 'nextra/compile'
-import { Callout, Steps, Bleed } from 'nextra/components'
+import { Bleed, Callout, Steps } from 'nextra/components'
 import { evaluate } from 'nextra/evaluate'
 import { generateDefinition } from 'nextra/tsdoc'
 
@@ -14,14 +14,7 @@ const { wrapper: Wrapper, ...components } = getMDXComponents({
 export type ApiReference = {
   name: string
   isFlattened?: boolean
-} & (
-  | {
-      code: string
-    }
-  | {
-      packageName: string
-    }
-)
+} & ({ code: string } | { packageName: string })
 
 export async function generateApiReference(
   apiRef: ApiReference,

@@ -75,7 +75,7 @@ async function getReference(props: PageProps) {
   })
 
   return generateApiReference(apiRef, {
-    title: isType ? 'type' : 'function',
+    title: isType ? 'Type' : 'Function',
     subtitle: isType ? 'Fields' : 'Signature',
     definition
   })
