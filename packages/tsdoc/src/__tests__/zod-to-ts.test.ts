@@ -196,9 +196,11 @@ describe('generateTsFromZod', () => {
       'type $ = ' + generateTsFromZod(HeadPropsSchema)
     ).toMatchFileSnapshot('./snapshots/head-props.ts')
   })
-  it('should convert NextraConfigSchema', () => {
+  it('should convert NextraConfigSchema and HeadPropsSchema', () => {
     return expect(
-      'export type NextraConfig = ' + generateTsFromZod(NextraConfigSchema)
+      `export interface NextraConfig ${generateTsFromZod(NextraConfigSchema)}
+
+export interface HeadProps ${generateTsFromZod(HeadPropsSchema)}`
     ).toMatchFileSnapshot('../../../nextra/src/types.generated.ts')
   })
 })

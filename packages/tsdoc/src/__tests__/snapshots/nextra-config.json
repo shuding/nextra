@@ -48,7 +48,7 @@
       "description": "Enable LaTeX either with [KaTeX](https://katex.org) to pre-render LaTeX expressions directly in MDX or [MathJax](https://mathjax.org) to dynamically render math in the browser.",
       "name": "latex",
       "optional": true,
-      "type": "boolean | { renderer: "mathjax"; options?: { src?: string; config?: any; }; } | { renderer: "katex"; options?: any; }",
+      "type": "boolean | { renderer: "mathjax"; options?: { src?: string; config?: any; }; } | { renderer: "katex"; options: any; }",
     },
     {
       "description": "Enable or disable syntax highlighting.",

@@ -64,7 +64,7 @@ export interface NextraConfig {
     /**
      * KaTeX options. See https://katex.org/docs/options.html.
      */
-    options?: import("rehype-katex").Options
+    options: import("rehype-katex").Options
   }
 
   /**
