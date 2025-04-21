@@ -7,6 +7,68 @@ import { generateTsFromZod } from '../../../nextra/src/server/tsdoc/zod-to-ts.js
 import typesFixture from './fixtures/flattened?raw'
 
 describe('generateDefinition()', () => {
+  test.only('<Tabs />', async () => {
+    const code = `export type { Tabs as default } from 'nextra/components'`
+    const result = generateDefinition({ code })
+    expect(result).toMatchInlineSnapshot(`
+      {
+        "description": "A built-in component for creating tabbed content, helping organize related information in a
+      compact, interactive layout.",
+        "name": "Tabs",
+        "signatures": [
+          {
+            "params": [
+              {
+                "name": "props",
+                "type": "{ items: (TabItem | TabObjectItem)[]; children: ReactNode; storageKey?: string; className?: string | ((bag: ListRenderPropArg) => string) | undefined; tabClassName?: string | ... 1 more ... | undefined; } & Pick<...>",
+              },
+            ],
+            "returns": {
+              "type": "react_jsx_runtime_js.JSX.Element",
+            },
+          },
+        ],
+        "tags": {
+          "example": "<Tabs items={['pnpm', 'npm', 'yarn']}>
+        <Tabs.Tab>**pnpm**: Fast, disk space efficient package manager.</Tabs.Tab>
+        <Tabs.Tab>**npm** is a package manager for the JavaScript programming language.</Tabs.Tab>
+        <Tabs.Tab>**Yarn** is a software packaging system.</Tabs.Tab>
+      </Tabs>",
+          "usage": "### Default
+
+      \`\`\`mdx
+      import { Tabs } from 'nextra/components'
+
+      <Tabs items={['pnpm', 'npm', 'yarn']}>
+        <Tabs.Tab>**pnpm**: Fast, disk space efficient package manager.</Tabs.Tab>
+        <Tabs.Tab>**npm** is a package manager for the JavaScript programming language.</Tabs.Tab>
+        <Tabs.Tab>**Yarn** is a software packaging system.</Tabs.Tab>
+      </Tabs>
+      \`\`\`
+
+      ### Default Selected Index
+
+      You can use the \`defaultIndex\` prop to set the default tab index:
+
+      \`\`\`mdx /defaultIndex="1"/
+      import { Tabs } from 'nextra/components'
+
+      <Tabs items={['pnpm', 'npm', 'yarn']} defaultIndex="1">
+        ...
+      </Tabs>
+      \`\`\`
+
+      And you will have \`npm\` as the default tab:
+
+      <Tabs items={['pnpm', 'npm', 'yarn']} defaultIndex="1">
+        <Tabs.Tab>**pnpm**: Fast, disk space efficient package manager.</Tabs.Tab>
+        <Tabs.Tab>**npm** is a package manager for the JavaScript programming language.</Tabs.Tab>
+        <Tabs.Tab>**Yarn** is a software packaging system.</Tabs.Tab>
+      </Tabs>",
+        },
+      }
+    `)
+  })
   test('<Steps />', async () => {
     const code = `export type { Steps as default } from 'nextra/components'`
     const result = generateDefinition({ code })
