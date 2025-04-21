@@ -1,7 +1,7 @@
 import cn from 'clsx'
-import type { ComponentPropsWithoutRef, FC } from 'react'
+import type { FC, HTMLAttributes } from 'react'
 
-export const Tree: FC<ComponentPropsWithoutRef<'ul'>> = ({
+export const Tree: FC<HTMLAttributes<HTMLUListElement>> = ({
   className,
   ...props
 }) => {

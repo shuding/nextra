@@ -34,6 +34,14 @@ const API_REFERENCE: (
     groupKeys: 'HTMLAttributes<HTMLDivElement>'
   },
   { name: 'Tabs', packageName: 'nextra/components' },
+  {
+    // TODO: add
+    // <APIDocs componentName="FileTree.Folder" />
+    // <APIDocs componentName="FileTree.File" />
+    name: 'FileTree',
+    packageName: 'nextra/components',
+    groupKeys: 'HTMLAttributes<HTMLUListElement>'
+  },
   // { type: 'separator', title: 'Other Components', name: '_3' },
   { name: 'Playground', packageName: 'nextra/components' },
   { name: 'TSDoc', packageName: 'nextra/tsdoc' }
