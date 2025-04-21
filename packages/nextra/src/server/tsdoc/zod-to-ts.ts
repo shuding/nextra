@@ -10,11 +10,14 @@ export function generateTsFromZod(schema: z.ZodType, indent = 2): string {
       const value = _value as z.ZodType
       const tsType = generateTsFromZodType(value, indent + 2)
       const docComment = getDocComment(value, indent)
+      // Check if field explicitly set as optional with .optional(),
+      // otherwise it's optional if it has default value
+      const isOptional = value instanceof z.ZodOptional || value instanceof z.ZodDefault
       return [
         docComment,
         ' '.repeat(indent),
         key,
-        value.isOptional() ? '?' : '',
+        isOptional ? '?' : '',
         `: ${tsType}\n`
       ].join('')
     })

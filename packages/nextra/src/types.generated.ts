@@ -221,5 +221,5 @@ export interface HeadProps {
   /**
    * Content of `<head>`
    */
-  children?: React.ReactNode
+  children: React.ReactNode
 }
