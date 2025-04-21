@@ -6,7 +6,7 @@ import { z } from 'zod'
 import { MobileNav } from './components/sidebar'
 import { LayoutPropsSchema } from './schemas'
 import { ConfigProvider, ThemeConfigProvider } from './stores'
-import { LayoutProps } from './types.generated'
+import type { LayoutProps } from './types.generated'
 
 export type ThemeConfigProps = z.infer<typeof LayoutPropsSchema>
 

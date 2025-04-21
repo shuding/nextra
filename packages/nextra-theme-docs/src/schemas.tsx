@@ -44,16 +44,10 @@ const sidebarSchema = z.strictObject({
     description:
       'If `true`, automatically collapse inactive folders above `defaultMenuCollapseLevel`.'
   }),
-  defaultMenuCollapseLevel: z
-    .number()
-    // eslint-disable-next-line @typescript-eslint/no-deprecated -- TypeError: z.int(...).min is not a function
-    .int()
-    .min(1)
-    .default(2)
-    .meta({
-      description:
-        'Specifies the folder level at which the menu on the left is collapsed by default.'
-    }),
+  defaultMenuCollapseLevel: z.int().min(1).default(2).meta({
+    description:
+      'Specifies the folder level at which the menu on the left is collapsed by default.'
+  }),
   defaultOpen: z.boolean().default(true).meta({
     description: 'Hide/show sidebar by default.'
   }),

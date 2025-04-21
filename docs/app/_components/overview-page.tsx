@@ -7,7 +7,7 @@ import type { FC } from 'react'
 export const OverviewPage: FC<{
   filePath: string
   icons?: Record<string, FC>
-  pageMap: PageMapItem[]
+  pageMap?: PageMapItem[]
 }> = async ({ filePath, icons, pageMap: $pageMap }) => {
   const { h2: H2 } = getMDXComponents()
   const currentRoute = filePath.replace('app', '').replace('/page.mdx', '')

@@ -39,7 +39,12 @@ const REACT_COMPILER_RESTRICT = {
 const config: Config = tseslint.config(
   includeIgnoreFile(path.resolve('.gitignore')),
   {
-    ignores: ['**/generated-page-map.ts', '**/next-env.d.ts', '**/snapshots/**']
+    ignores: [
+      '**/generated-page-map.ts',
+      '**/next-env.d.ts',
+      '**/snapshots/**',
+      '**/types.generated.ts'
+    ]
   },
   // Rules for all files
   {

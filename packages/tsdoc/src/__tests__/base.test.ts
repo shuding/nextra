@@ -1,5 +1,5 @@
 import { NavbarPropsSchema } from '../../../nextra-theme-docs/src/components/navbar/index.js'
-import { LayoutPropsSchema } from '../../../nextra-theme-docs/src/layout.js'
+import { LayoutPropsSchema } from '../../../nextra-theme-docs/src/schemas.js'
 import { HeadPropsSchema } from '../../../nextra/src/client/components/head.js'
 import { NextraConfigSchema } from '../../../nextra/src/server/schemas.js'
 import { generateDefinition } from '../../../nextra/src/server/tsdoc/base.js'
@@ -8,7 +8,7 @@ import typesFixture from './fixtures/flattened?raw'
 
 describe('generateDefinition()', () => {
   test('<Tabs />', async () => {
-    const code = `export type { Tabs as default } from 'nextra/components'`
+    const code = "export type { Tabs as default } from 'nextra/components'"
     const result = generateDefinition({ code })
     expect(result).toMatchInlineSnapshot(`
       {
@@ -70,7 +70,7 @@ describe('generateDefinition()', () => {
     `)
   })
   test('<Steps />', async () => {
-    const code = `export type { Steps as default } from 'nextra/components'`
+    const code = "export type { Steps as default } from 'nextra/components'"
     const result = generateDefinition({ code })
     expect(result).toMatchInlineSnapshot(`
       {
