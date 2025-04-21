@@ -17,7 +17,7 @@ describe('remarkMdxFrontMatter', () => {
     const rawJs = await compileMdx(YAML_FRONTMATTER)
 
     it('should export yaml frontmatter', () => {
-      expect(clean(rawJs)).resolves.toMatchInlineSnapshot(`
+      return expect(clean(rawJs)).resolves.toMatchInlineSnapshot(`
         "'use strict'
         const { Fragment: _Fragment, jsx: _jsx } = arguments[0]
         const { useMDXComponents: _provideComponents } = arguments[0]

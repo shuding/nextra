@@ -17,7 +17,7 @@ title: ${title}
 # Hello`,
         opts
       )
-      expect(clean(rawJs)).resolves.toMatch(`title: '${title}',`)
+      await expect(clean(rawJs)).resolves.toMatch(`title: '${title}',`)
     })
 
     it('esm', async () => {
@@ -28,7 +28,7 @@ title: ${title}
 # Hello`,
         opts
       )
-      expect(clean(rawJs)).resolves.toMatch(`title: '${title}',`)
+      await expect(clean(rawJs)).resolves.toMatch(`title: '${title}',`)
     })
   })
 
@@ -40,16 +40,16 @@ title: ${title}
 `,
       opts
     )
-    expect(clean(rawJs)).resolves.toMatch("title: 'h1 1',")
+    await expect(clean(rawJs)).resolves.toMatch("title: 'h1 1',")
   })
 
   it('should fallback to capitalized filename', async () => {
     const rawJs = await compileMdx('', opts)
-    expect(clean(rawJs)).resolves.toMatch("title: 'My Test File',")
+    await expect(clean(rawJs)).resolves.toMatch("title: 'My Test File',")
   })
 
   it('should not set `metadata.title` if there is no h1 or filename provided', async () => {
     const rawJs = await compileMdx('')
-    expect(clean(rawJs)).resolves.toMatch('const metadata = {}')
+    await expect(clean(rawJs)).resolves.toMatch('const metadata = {}')
   })
 })
