@@ -79,7 +79,7 @@ type $ = {
   }
 
   /**
-   * Content of `<head>`
+   * Content of `<head>`.
    */
-  children: React.ReactNode
+  children?: React.ReactNode
 }

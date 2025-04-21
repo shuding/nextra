@@ -130,7 +130,7 @@ type $ = {
   /**
    * Page map list. Result of `getPageMap(route = '/')` call.
    */
-  pageMap: PageMapItem[]
+  pageMap: import("nextra").PageMapItem[]
 
   /**
    * Rendered [`<Search>` component](/docs/built-ins/search). E.g. `<Search {...searchProps} />`

@@ -58,8 +58,9 @@
       "type": "string",
     },
     {
-      "description": "Content of `<head>`",
+      "description": "Content of `<head>`.",
       "name": "children",
+      "optional": true,
       "type": "ReactNode",
     },
   ],

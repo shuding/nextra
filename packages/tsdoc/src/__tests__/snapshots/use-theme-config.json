@@ -45,15 +45,11 @@ This hook is useful for dynamically configuring your project based on shared the
         },
         {
           "name": "lastUpdated",
-          "type": "ReactElement<Record<string, unknown>, string | JSXElementConstructor<any>>",
+          "type": "ReactElement<unknown, string | JSXElementConstructor<any>>",
         },
         {
-          "name": "navigation.next",
-          "type": "boolean",
-        },
-        {
-          "name": "navigation.prev",
-          "type": "boolean",
+          "name": "navigation",
+          "type": "boolean | { next: boolean; prev: boolean; }",
         },
         {
           "name": "search",

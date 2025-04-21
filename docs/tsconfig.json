@@ -18,7 +18,8 @@
     "resolveJsonModule": true,
     "paths": {
       "@components/*": ["components/*"],
-      // Following works without specifying in tsconfig file, just to make ts happy
+      // These work at runtime due to Next.js internal resolution or custom config,
+      // but we include them here so TypeScript doesn't complain.
       "private-next-root-dir/*": ["./*"],
       "next-mdx-import-source-file": ["./mdx-components.tsx"]
     },
