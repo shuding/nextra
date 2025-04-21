@@ -13,6 +13,7 @@ import {
 } from 'nextra/components'
 import { evaluate } from 'nextra/evaluate'
 import { generateDefinition } from 'nextra/tsdoc'
+import { BackgroundColor, Slider } from '../app/docs/built-ins/head2/_slider'
 // @ts-expect-error -- fixme
 import ExampleTSDoc from './example-tsdoc.mdx'
 import { PlaygroundDemo } from './playground-demo'
@@ -30,7 +31,9 @@ const { wrapper: Wrapper, ...components } = getMDXComponents({
   BoxIcon,
   CardsIcon,
   OneIcon,
-  WarningIcon
+  WarningIcon,
+  BackgroundColor,
+  Slider
 })
 
 export type ApiReference = {
