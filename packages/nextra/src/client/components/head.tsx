@@ -3,19 +3,15 @@ import { z } from 'zod'
 import { fromZodError } from 'zod-validation-error'
 import { reactNode } from '../../server/schemas.js'
 
-const darkLightSchema = z.union([
-  z.number(),
-  z.strictObject({
-    dark: z.number(),
-    light: z.number()
-  })
-])
-// TODO check why in zod v4 this doesn't work
-//.transform(convertColor)
-
-function convertColor(v: z.infer<typeof darkLightSchema>) {
-  return typeof v === 'number' ? { dark: v, light: v } : v
-}
+const darkLightSchema = z
+  .union([
+    z.number(),
+    z.strictObject({
+      dark: z.number(),
+      light: z.number()
+    })
+  ])
+  .transform(v => (typeof v === 'number' ? { dark: v, light: v } : v))
 
 function hexToRgb(hex: string): string {
   hex = hex.slice(1)
@@ -47,52 +43,41 @@ function normalizeColor(value: string): string {
   return value
 }
 
-const stringColorSchema = z.string().refine(str => {
-  if (HEX_RE.test(str) || RGB_RE.test(str)) {
-    return true
-  }
-  throw new Error(
-    'Color format should be in HEX or RGB format. E.g. #000, #112233 or rgb(255,255,255)'
-  )
-})
-// TODO check why in zod v4 this doesn't work
-//.transform(normalizeColor)
+const stringColorSchema = z
+  .string()
+  .refine(str => {
+    if (HEX_RE.test(str) || RGB_RE.test(str)) {
+      return true
+    }
+    throw new Error(
+      'Color format should be in HEX or RGB format. E.g. #000, #112233 or rgb(255,255,255)'
+    )
+  })
+  .transform(normalizeColor)
 
 const colorSchema = z.strictObject({
-  hue: darkLightSchema
-    .default({ dark: 204, light: 212 })
-    .transform(convertColor)
-    .meta({
-      description: 'The hue of the primary theme color.<br/>Range: `0 - 360`'
-    }),
-  saturation: darkLightSchema.default(100).transform(convertColor).meta({
+  hue: darkLightSchema.default({ dark: 204, light: 212 }).meta({
+    description: 'The hue of the primary theme color.<br/>Range: `0 - 360`'
+  }),
+  saturation: darkLightSchema.default({ dark: 100, light: 100 }).meta({
     description:
       'The saturation of the primary theme color.<br/>Range: `0 - 100`'
   }),
-  lightness: darkLightSchema
-    .default({ dark: 55, light: 45 })
-    .transform(convertColor)
-    .meta({
-      description:
-        'The lightness of the primary theme color.<br/>Range: `0 - 100`'
-    })
+  lightness: darkLightSchema.default({ dark: 55, light: 45 }).meta({
+    description:
+      'The lightness of the primary theme color.<br/>Range: `0 - 100`'
+  })
 })
 
 const bgColorSchema = z.strictObject({
-  dark: stringColorSchema
-    .default('rgb(17,17,17)')
-    .transform(normalizeColor)
-    .meta({
-      description:
-        'Background color for dark theme.<br/>Format: `"rgb(RRR,GGG,BBB)" | "#RRGGBB"`'
-    }),
-  light: stringColorSchema
-    .default('rgb(250,250,250)')
-    .transform(normalizeColor)
-    .meta({
-      description:
-        'Background color for light theme.<br/>Format: `"rgb(RRR,GGG,BBB)" | "#RRGGBB"`'
-    })
+  dark: stringColorSchema.default('17,17,17').meta({
+    description:
+      'Background color for dark theme.<br/>Format: `"rgb(RRR,GGG,BBB)" | "#RRGGBB"`'
+  }),
+  light: stringColorSchema.default('250,250,250').meta({
+    description:
+      'Background color for light theme.<br/>Format: `"rgb(RRR,GGG,BBB)" | "#RRGGBB"`'
+  })
 })
 
 export const HeadPropsSchema = z.strictObject({
