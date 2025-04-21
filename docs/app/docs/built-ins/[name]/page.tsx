@@ -2,7 +2,8 @@ import { generateApiReference } from '@components/generate-api-reference'
 import type { ApiReference } from '@components/generate-api-reference'
 import { useMDXComponents as getMDXComponents } from 'next-mdx-import-source-file'
 import type { MdxFile } from 'nextra'
-import { generateDefinition } from 'nextra/tsdoc'
+import { generateDefinition, generateTsFromZod } from 'nextra/tsdoc'
+import { HeadPropsSchema } from 'private-next-root-dir/../packages/nextra/dist/client/components/head'
 import type { FC } from 'react'
 
 const API_REFERENCE: (
@@ -57,7 +58,15 @@ const API_REFERENCE: (
     packageName: 'nextra/components',
     groupKeys: 'HTMLAttributes<HTMLDivElement>'
   },
-  // { type: 'separator', title: 'Other Components', name: '_3' },
+  {
+    name: 'Head',
+    packageName: 'nextra/components',
+    isFlattened: true,
+    // We use `code` otherwise, unable use generateDefinition.flattened
+    code: `interface $ ${generateTsFromZod(HeadPropsSchema)}
+export default $`
+  },
+  { type: 'separator', title: 'Other Components', name: '_4' },
   { name: 'Playground', packageName: 'nextra/components' },
   { name: 'TSDoc', packageName: 'nextra/tsdoc' }
 ]
@@ -89,14 +98,13 @@ async function getReference(props: PageProps) {
   if (!apiRef || 'type' in apiRef) {
     throw new Error(`API reference not found for "${params.name}"`)
   }
-  if ('code' in apiRef) {
-    throw new Error('Should not have `code` prop.')
-  }
   const { name, packageName, groupKeys, isFlattened } = apiRef
   const result = groupKeys
     ? `Omit<MyProps, keyof ${groupKeys}> & { '...props': ${groupKeys} }>`
     : 'MyProps'
-  const code = `
+  const code =
+    apiRef.code ??
+    `
 import type { ComponentProps, HTMLAttributes } from 'react'
 import { ${name} as MyComponent } from '${packageName}'
 
