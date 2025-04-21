@@ -147,18 +147,16 @@ describe('generateDefinition()', () => {
     `)
   })
   test('<Banner />', async () => {
+    // TODO check `tw` prop
+    const groupKeys = 'React.HTMLAttributes<HTMLDivElement>'
     const code = `import type { Banner } from 'nextra/components'
 type $ = React.ComponentProps<typeof Banner>
-export default $`
+type $$ = Omit<$, keyof ${groupKeys} | 'tw'> & { '...props': ${groupKeys} }>
+export default $$`
     const result = generateDefinition({ code })
     expect(result).toMatchInlineSnapshot(`
       {
         "entries": [
-          {
-            "description": "Content of the banner.",
-            "name": "children",
-            "type": "ReactNode",
-          },
           {
             "description": "Closable banner or not.",
             "name": "dismissible",
@@ -177,6 +175,10 @@ export default $`
             },
             "type": "string",
           },
+          {
+            "name": "...props",
+            "type": "HTMLAttributes<HTMLDivElement>",
+          },
         ],
         "name": "default",
       }
@@ -190,9 +192,12 @@ export default $`
     await expect(result).toMatchFileSnapshot('./snapshots/search.json')
   })
   test('<Callout />', async () => {
+    // TODO check `tw` prop
+    const groupKeys = 'React.HTMLAttributes<HTMLDivElement>'
     const code = `import type { Callout } from 'nextra/components'
 type $ = React.ComponentProps<typeof Callout>
-export default $`
+type $$ = Omit<$, keyof ${groupKeys} | 'tw'> & { '...props': ${groupKeys} }>
+export default $$`
     const result = generateDefinition({ code })
     expect(result).toMatchInlineSnapshot(`
       {
