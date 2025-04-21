@@ -15,7 +15,7 @@ const API_REFERENCE: (
   {
     name: 'Steps',
     packageName: 'nextra/components',
-    groupKeys: "ComponentProps<'div'>"
+    groupKeys: 'HTMLAttributes<HTMLDivElement>'
   },
   { name: 'Callout', packageName: 'nextra/components' },
   {

@@ -1,5 +1,5 @@
 import cn from 'clsx'
-import type { ComponentProps, FC } from 'react'
+import type { FC, HTMLAttributes } from 'react'
 import { useId } from 'react'
 
 /**
@@ -61,7 +61,7 @@ import { useId } from 'react'
  * </Steps>
  * ```
  */
-export const Steps: FC<ComponentProps<'div'>> = ({
+export const Steps: FC<HTMLAttributes<HTMLDivElement>> = ({
   children,
   className,
   style,
