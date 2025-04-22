@@ -1,5 +1,11 @@
 # nextra-theme-blog
 
+## 4.3.0-alpha.20
+
+### Patch Changes
+
+- nextra@4.3.0-alpha.20
+
 ## 4.3.0-alpha.19
 
 ### Patch Changes
