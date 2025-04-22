@@ -12,9 +12,7 @@ description:
 The `mdx-components` file is **required**, you use it to customize styles via
 `useMDXComponents` function.
 
-## Exports
-
-### `useMDXComponents` function
+## `useMDXComponents` function
 
 The file must export a single function named `useMDXComponents`.
 
@@ -33,20 +31,43 @@ export function useMDXComponents(components) {
 }
 ```
 
-## Params
+## `useMDXComponents` signature
 
-### `components`
+<APIDocs code="export { useMDXComponents as default } from 'nextra/mdx-components'" />
 
-When defining MDX Components, the export function accepts a single parameter
-`components: MDXComponents`.
+## Errors
 
-- The key is the name of the HTML element to override.
-- The value is the component to render instead.
+### Module not found: Can't resolve `'next-mdx-import-source-file'`
+
+To fix this, update the `turbopack.resolveAlias` section in your `next.config` file:
+
+```diff filename="next.config.mjs"
+import nextra from 'nextra'
+
+const withNextra = nextra()
+
+export default withNextra({
++ turbopack: {
++   resolveAlias: {
++     // Path to your `mdx-components` file with extension
++     'next-mdx-import-source-file': './src/mdx-components.tsx'
++   }
++ }
+})
+```
 
 > [!TIP]
 >
-> You can keep `mdx-components` file in root of your project, or in
+> - You can keep `mdx-components` file in root of your project, or in
 > [`src` directory](./src-directory).
 >
-> The `.js`, `.jsx`, or `.tsx` file extensions can be used for `mdx-components`
+> - The `.js`, `.jsx`, or `.tsx` file extensions can be used for `mdx-components`
 > file.
+>
+>
+> - While importing `useMDXComponents`, alias it as `getMDXComponents` to avoid false positive error
+> from ESLint React Hooks plugin.
+> ``` filename="react-hooks/rules-of-hooks"
+> React Hook "useMDXComponents" cannot be called at the top level.
+> React Hooks must be called in a React function component or a custom React Hook function.
+> ```
