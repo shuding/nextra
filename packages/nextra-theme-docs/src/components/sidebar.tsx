@@ -11,7 +11,8 @@ import type {
   ComponentProps,
   FC,
   FocusEventHandler,
-  MouseEventHandler
+  MouseEventHandler,
+  ReactNode
 } from 'react'
 import { forwardRef, useEffect, useId, useRef, useState } from 'react'
 import scrollIntoView from 'scroll-into-view-if-needed'
@@ -139,14 +140,15 @@ const Folder: FC<FolderProps> = ({ item: _item, anchors, onFocus, level }) => {
   }, [activeRouteInside, focusedRouteInside, item.route, autoCollapse])
 
   const isLink = 'frontMatter' in item
-  // use button when link don't have href because it impacts on SEO
+  // Use a button when a link doesn't have `href` because it impacts on SEO
   const ComponentToUse = isLink ? Anchor : Button
 
   return (
     <li className={cn({ open, active })}>
       <ComponentToUse
-        href={isLink ? item.route : undefined}
-        data-href={isLink ? undefined : item.route}
+        {...(isLink
+          ? { href: item.route, prefetch: false }
+          : { 'data-href': item.route })}
         className={cn(
           'x:items-center x:justify-between x:gap-2',
           !isLink && 'x:text-start x:w-full',
@@ -193,7 +195,7 @@ function getMenuChildren(menu: MenuItem) {
     }))
 }
 
-const Separator: FC<{ title: string }> = ({ title }) => {
+const Separator: FC<{ title: ReactNode }> = ({ title }) => {
   return (
     <li
       className={cn(
@@ -232,6 +234,8 @@ const File: FC<{
         href={(item as PageItem).href || item.route}
         className={cn(classes.link, active ? classes.active : classes.inactive)}
         onFocus={onFocus}
+        // @ts-expect-error
+        prefetch={false}
       >
         {item.title}
       </Anchor>
