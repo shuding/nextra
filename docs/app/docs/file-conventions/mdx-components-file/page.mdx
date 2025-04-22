@@ -39,7 +39,8 @@ export function useMDXComponents(components) {
 
 ### Module not found: Can't resolve `'next-mdx-import-source-file'`
 
-To fix this, update the `turbopack.resolveAlias` section in your `next.config` file:
+To fix this, update the `turbopack.resolveAlias` section in your `next.config`
+file:
 
 ```diff filename="next.config.mjs"
 import nextra from 'nextra'
@@ -59,15 +60,13 @@ export default withNextra({
 > [!TIP]
 >
 > - You can keep `mdx-components` file in root of your project, or in
-> [`src` directory](./src-directory).
+>   [`src` directory](./src-directory).
+> - The `.js`, `.jsx`, or `.tsx` file extensions can be used for
+>   `mdx-components` file.
+> - When importing `useMDXComponents`, alias it as `getMDXComponents` to avoid a
+>   false positive error from the ESLint React Hooks plugin.
 >
-> - The `.js`, `.jsx`, or `.tsx` file extensions can be used for `mdx-components`
-> file.
->
->
-> - While importing `useMDXComponents`, alias it as `getMDXComponents` to avoid false positive error
-> from ESLint React Hooks plugin.
-> ``` filename="react-hooks/rules-of-hooks"
+> ```bash filename="react-hooks/rules-of-hooks"
 > React Hook "useMDXComponents" cannot be called at the top level.
 > React Hooks must be called in a React function component or a custom React Hook function.
 > ```
