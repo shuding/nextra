@@ -139,11 +139,8 @@ const nextra = (nextraConfig: NextraConfig) => {
         }
       },
       resolveAlias: {
-        ...turbopackConfig.resolveAlias,
         'next-mdx-import-source-file':
           '@vercel/turbopack-next/mdx-import-source',
-        'private-next-root-dir/*': './*',
-        'private-next-content-dir/*': `./${CONTENT_DIR}/*`,
         // Fixes when Turbopack is enabled: Module not found: Can't resolve '@theguild/remark-mermaid/mermaid'
         '@theguild/remark-mermaid/mermaid': path.relative(
           CWD,
@@ -153,7 +150,10 @@ const nextra = (nextraConfig: NextraConfig) => {
             'dist',
             'mermaid.js'
           )
-        )
+        ),
+        ...turbopackConfig.resolveAlias,
+        'private-next-root-dir/*': './*',
+        'private-next-content-dir/*': `./${CONTENT_DIR}/*`
       }
     } satisfies NextConfig['turbopack']
 

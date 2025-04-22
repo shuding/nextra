@@ -42,8 +42,8 @@
   },
   "devDependencies": {
     "@tsconfig/strictest": "^2.0.5",
-    "@types/react": "19.1.1",
-    "@xyflow/react": "12.5.5",
+    "@types/react": "19.1.2",
+    "@xyflow/react": "12.6.0",
     "nextra": "workspace:*",
     "nextra-theme-docs": "workspace:*",
     "tsup": "^8.4.0",

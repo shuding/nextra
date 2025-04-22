@@ -1,5 +1,24 @@
 # nextra-theme-docs
 
+## 4.3.0-alpha.21
+
+### Patch Changes
+
+- 6a82e6f: - Fix: Received `false` for a non-boolean attribute `prefetch`.
+  - Allow override `next-mdx-import-source-file` in `turbopack.resolveAlias`
+    option
+- Updated dependencies [6a82e6f]
+  - nextra@4.3.0-alpha.21
+
+## 4.3.0-alpha.20
+
+### Patch Changes
+
+- 2b18c66: - Disable prefetch for sidebar/breadcrumb/pagination links
+  - Add extractStringsFromReactNode to extract strings from breadcrumb links and
+    pagination links
+  - nextra@4.3.0-alpha.20
+
 ## 4.3.0-alpha.19
 
 ### Patch Changes

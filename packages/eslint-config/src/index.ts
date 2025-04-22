@@ -9,7 +9,6 @@ import eslintConfigPrettier from 'eslint-config-prettier'
 import eslintPluginDeMorgan from 'eslint-plugin-de-morgan'
 import eslintPluginImport from 'eslint-plugin-import-x'
 import eslintPluginReact from 'eslint-plugin-react'
-import * as eslintPluginReactCompiler from 'eslint-plugin-react-compiler'
 import eslintPluginReactHooks from 'eslint-plugin-react-hooks'
 import eslintPluginSonarJs from 'eslint-plugin-sonarjs'
 // import eslintPluginTailwindCss from 'eslint-plugin-tailwindcss'
@@ -117,6 +116,7 @@ const config: Config = tseslint.config(
       'sonarjs/no-array-index-key': 'off', // todo
       'sonarjs/no-unstable-nested-components': 'off', // todo
 
+      'sonarjs/no-redundant-optional': 'off', // doesn't work well with tsconfig's `exactOptionalPropertyTypes: true`
       'sonarjs/no-duplicate-in-composite': 'off', // covered by @typescript-eslint/no-duplicate-type-constituents
       'sonarjs/deprecation': 'off', // covered by @typescript-eslint/no-deprecated
       'sonarjs/no-unused-vars': 'off',
@@ -202,12 +202,9 @@ const config: Config = tseslint.config(
   },
   {
     files: ['packages/**'],
-    plugins: {
-      'react-compiler': eslintPluginReactCompiler
-    },
     rules: {
       'no-restricted-imports': ['error', REACT_COMPILER_RESTRICT],
-      'react-compiler/react-compiler': 'error'
+      'react-hooks/react-compiler': 'error'
     }
   },
   // ⚙️ nextra-theme-docs
