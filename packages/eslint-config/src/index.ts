@@ -109,6 +109,7 @@ const config: Config = tseslint.config(
       'sonarjs/no-array-index-key': 'off', // todo
       'sonarjs/no-unstable-nested-components': 'off', // todo
 
+      'sonarjs/no-redundant-optional': 'off', // doesn't work well with tsconfig's `exactOptionalPropertyTypes: true`
       'sonarjs/no-duplicate-in-composite': 'off', // covered by @typescript-eslint/no-duplicate-type-constituents
       'sonarjs/deprecation': 'off', // covered by @typescript-eslint/no-deprecated
       'sonarjs/no-unused-vars': 'off',
