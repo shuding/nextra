@@ -1,5 +1,13 @@
 # nextra
 
+## 4.3.0-alpha.21
+
+### Patch Changes
+
+- 6a82e6f: - Fix: Received `false` for a non-boolean attribute `prefetch`.
+  - Allow override `next-mdx-import-source-file` in `turbopack.resolveAlias`
+    option
+
 ## 4.3.0-alpha.20
 
 ## 4.3.0-alpha.19
