@@ -7,7 +7,7 @@ import { LinkArrowIcon } from '../icons/index.js'
 type NextLinkProps = ComponentPropsWithoutRef<typeof Link>
 
 type Props = Omit<NextLinkProps, 'href'> & {
-  href?: NextLinkProps['href'] | undefined
+  href: NextLinkProps['href'] | undefined
 }
 
 export const Anchor: FC<Props> = ({ href = '', prefetch, ...props }) => {
