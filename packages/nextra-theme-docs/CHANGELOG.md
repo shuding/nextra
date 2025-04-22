@@ -1,5 +1,14 @@
 # nextra-theme-docs
 
+## 4.3.0-alpha.20
+
+### Patch Changes
+
+- 2b18c66: - Disable prefetch for sidebar/breadcrumb/pagination links
+  - Add extractStringsFromReactNode to extract strings from breadcrumb links and
+    pagination links
+  - nextra@4.3.0-alpha.20
+
 ## 4.3.0-alpha.19
 
 ### Patch Changes
