@@ -33,7 +33,7 @@ export type MDXComponents = NestedMDXComponents & {
 
 /**
  * Get current MDX components.
- * @returns The current set of MDX components
+ * @returns The current set of MDX components.
  */
 export const useMDXComponents = <T extends Readonly<MDXComponents>>(
   /**
