@@ -44,7 +44,7 @@ export const Breadcrumb: FC<{
                   'x:focus-visible:nextra-focus x:ring-inset x:hover:text-gray-900 x:dark:hover:text-gray-100'
               )}
               title={extractStringsFromReactNode(item.title)}
-              {...(href && ({ href, prefetch: false }))}
+              {...(href && { href, prefetch: false })}
             >
               {item.title}
             </ComponentToUse>

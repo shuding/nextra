@@ -234,7 +234,7 @@ const File: FC<{
         href={(item as PageItem).href || item.route}
         className={cn(classes.link, active ? classes.active : classes.inactive)}
         onFocus={onFocus}
-        // @ts-expect-error
+        // @ts-expect-error -- ignore
         prefetch={false}
       >
         {item.title}
