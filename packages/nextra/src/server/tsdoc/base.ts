@@ -36,7 +36,7 @@ const { compilerObject } = project.getTypeChecker()
  * import { generateDefinition, TSDoc } from 'nextra/tsdoc'
  *
  * <TSDoc
- *   definitions={generateDefinition({
+ *   definition={generateDefinition({
  *     code: "export { yourTypeOrFunction as default } from 'your-package'",
  *   })}
  * />
@@ -48,7 +48,7 @@ const { compilerObject } = project.getTypeChecker()
  * import { generateDefinition, TSDoc } from 'nextra/tsdoc'
  *
  * <TSDoc
- *   definitions={generateDefinition({
+ *   definition={generateDefinition({
  *     code: "export { yourTypeOrFunction } from 'your-package'",
  *     exportName: 'yourTypeOrFunction'
  *   })}

@@ -120,7 +120,7 @@ const classes = {
  * import { generateDefinition, TSDoc } from 'nextra/tsdoc'
  *
  * <TSDoc
- *   definitions={generateDefinition({
+ *   definition={generateDefinition({
  *     code: `
  * import type { TSDoc } from 'nextra/tsdoc'
  * type MyProps = React.ComponentProps<typeof TSDoc>
