@@ -227,14 +227,13 @@ const File: FC<{
   if (item.type === 'separator') {
     return <Separator title={item.title} />
   }
-
+  const href = (item as PageItem).href || item.route
   return (
     <li className={cn({ active })}>
       <Anchor
-        href={(item as PageItem).href || item.route}
+        href={href}
         className={cn(classes.link, active ? classes.active : classes.inactive)}
         onFocus={onFocus}
-        // @ts-expect-error -- ignore
         prefetch={false}
       >
         {item.title}
