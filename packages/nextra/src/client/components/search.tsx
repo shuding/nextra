@@ -89,6 +89,15 @@ const DEV_SEARCH_NOTICE = (
   </>
 )
 
+/**
+ * A built-in search component provides a seamless and fast search
+ * experience out of the box. Under the hood, it leverages the
+ * [Pagefind package](https://pagefind.app) — a fully client-side search engine optimized for static
+ * sites. Pagefind indexes your content at build time and enables highly performant,
+ * zero-JavaScript-dependency searches at runtime.
+ *
+ * @see [Nextra search setup guide](https://nextra.site/docs/guide/search)
+ */
 export const Search: FC<SearchProps> = ({
   className,
   emptyResult = 'No results found.',

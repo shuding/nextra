@@ -51,8 +51,7 @@ export async function generateApiReference(
   apiRef: ApiReference,
   { title, subtitle, definition }: Options
 ) {
-  const { description } = definition
-  const tags = 'tags' in definition ? definition.tags : {}
+  const { description, tags = {} } = definition
   const result = [
     description &&
       // og:description

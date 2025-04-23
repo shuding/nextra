@@ -66,5 +66,5 @@
       "type": ""left" | "right"",
     },
   ],
-  "name": "default",
+  "name": "$",
 }

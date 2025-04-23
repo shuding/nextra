@@ -245,5 +245,5 @@ By default, it's a link to the issue creation form of the docs repository, with 
       "type": "ReactNode",
     },
   ],
-  "name": "default",
+  "name": "$",
 }

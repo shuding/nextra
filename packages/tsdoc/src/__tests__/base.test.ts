@@ -6,6 +6,75 @@ import { generateTsFromZod } from '../../../nextra/src/server/tsdoc/zod-to-ts.js
 import typesFixture from './fixtures/flattened?raw'
 
 describe('generateDefinition()', () => {
+  test('useMDXComponents', () => {
+    const code =
+      "export { useMDXComponents as default } from 'nextra/mdx-components'"
+    const result = generateDefinition({ code })
+    expect(result).toMatchInlineSnapshot(`
+      {
+        "description": "Get current MDX components.",
+        "name": "useMDXComponents",
+        "signatures": [
+          {
+            "params": [
+              {
+                "description": "An object where:
+      - The key is the name of the HTML element to override.
+      - The value is the component to render instead.",
+                "name": "components",
+                "tags": {
+                  "remarks": "\`MDXComponents\`",
+                },
+                "type": "MDXComponents",
+              },
+            ],
+            "returns": {
+              "type": "DC & T",
+            },
+          },
+          {
+            "params": [],
+            "returns": {
+              "type": "DC",
+            },
+          },
+        ],
+        "tags": {
+          "returns": "The current set of MDX components.",
+        },
+      }
+    `)
+  })
+  test('Should parse type tags', () => {
+    const code = `
+/**
+ * MyType description
+ * @tag MyTag
+ */
+type MyType = {
+  /** MyType.foo */
+  foo?: string
+}
+export default MyType`
+    const result = generateDefinition({ code })
+    expect(result).toMatchInlineSnapshot(`
+      {
+        "description": "MyType description",
+        "entries": [
+          {
+            "description": "MyType.foo",
+            "name": "foo",
+            "optional": true,
+            "type": "string",
+          },
+        ],
+        "name": "MyType",
+        "tags": {
+          "tag": "MyTag",
+        },
+      }
+    `)
+  })
   test('<Tabs />', async () => {
     const code = "export type { Tabs as default } from 'nextra/components'"
     const result = generateDefinition({ code })
@@ -177,7 +246,7 @@ export default $$`
             "type": "HTMLAttributes<HTMLDivElement>",
           },
         ],
-        "name": "default",
+        "name": "$$",
       }
     `)
   })
@@ -231,7 +300,7 @@ export default $$`
             "type": "HTMLAttributes<HTMLDivElement>",
           },
         ],
-        "name": "default",
+        "name": "$$",
       }
     `)
   })
@@ -277,7 +346,7 @@ export default $`
             "type": "string",
           },
         ],
-        "name": "default",
+        "name": "$",
       }
     `)
   })
@@ -320,7 +389,7 @@ export default A`
             "type": "string",
           },
         ],
-        "name": "default",
+        "name": "A",
       }
     `)
   })
@@ -356,7 +425,7 @@ export default $`
             "type": "boolean",
           },
         ],
-        "name": "default",
+        "name": "$",
       }
     `)
   })
@@ -375,7 +444,7 @@ export default Connection`
             "type": "string | null",
           },
         ],
-        "name": "default",
+        "name": "Connection",
       }
     `)
   })
@@ -411,7 +480,7 @@ export default $
               "type": "({ id, handleType, handleId, onConnect, onDisconnect, }?: UseNodeConnectionsParams | undefined) => NodeConnection[]",
             },
           ],
-          "name": "default",
+          "name": "$",
         }
       `)
     })
@@ -783,7 +852,7 @@ export default $`,
             "type": "string | undefined",
           },
         ],
-        "name": "default",
+        "name": "$",
       }
     `)
   })
@@ -824,7 +893,7 @@ export default $`
             "type": "unknown",
           },
         ],
-        "name": "default",
+        "name": "$",
       }
     `)
   })

@@ -3,6 +3,7 @@ import { Project, SyntaxKind, ts } from 'ts-morph'
 import { logger } from '../utils.js'
 import type {
   BaseArgs,
+  GeneratedDefinition,
   GeneratedFunction,
   GeneratedType,
   Tags,
@@ -59,7 +60,7 @@ export function generateDefinition({
   code,
   exportName = 'default',
   flattened = false
-}: BaseArgs): GeneratedType | GeneratedFunction {
+}: BaseArgs): GeneratedDefinition & (GeneratedType | GeneratedFunction) {
   const sourceFile = project.createSourceFile('$.ts', code, { overwrite: true })
   const output: ExportedDeclarations[] = []
   for (const [key, declaration] of sourceFile.getExportedDeclarations()) {
@@ -74,84 +75,112 @@ export function generateDefinition({
   //     `Export "${exportName}" should not have more than one type declaration.`
   //   )
   // }
-
-  const comment = declaration
-    .getSymbolOrThrow()
-    .compilerSymbol.getDocumentationComment(compilerObject)
+  const symbol = declaration.getSymbolOrThrow()
+  const { comment, tags } = getCommentAndTags(declaration)
   const description = ts.displayPartsToString(comment)
+  tags.returns &&= replaceJsDocLinks(tags.returns)
+
+  const definition: GeneratedDefinition = {
+    name: symbol.getName(),
+    ...(description && { description }),
+    ...(Object.keys(tags).length && { tags })
+  }
 
   const declarationType = declaration.getType()
   const callSignatures = declarationType.getCallSignatures()
   const isFunction = callSignatures.length > 0
-  if (isFunction) {
-    const tags = getTags(declaration.getSymbolOrThrow())
-    tags.returns &&= replaceJsDocLinks(tags.returns)
-    return {
-      name: declaration.getSymbolOrThrow().getName(),
-      ...(description && { description }),
-      ...(Object.keys(tags).length && { tags }),
-      signatures: callSignatures.map(signature => {
-        const params = signature.getParameters()
-        const typeParams = params.flatMap(param =>
-          getDocEntry({
-            symbol: param,
-            declaration,
-            flattened
-          })
+
+  if (!isFunction) {
+    const entries = declarationType
+      .getProperties()
+      .flatMap(prop =>
+        getDocEntry({
+          symbol: prop,
+          declaration,
+          flattened
+        })
+      )
+      .filter(entry => !entry.tags || !('internal' in entry.tags))
+    if (!entries.length) {
+      const typeName = declarationType.getText()
+      if (typeName === 'any') {
+        throw new Error(
+          'Your type is resolved as "any", it seems like you have an issue in "generateDefinition.code" argument.'
         )
-        const returnType = signature.getReturnType()
-        let flattenedReturnType: GeneratedFunction['signatures'][number]['returns'] =
-          flattened && shouldFlattenType(returnType)
-            ? returnType.getProperties().flatMap(childProp =>
-                getDocEntry({
-                  symbol: childProp,
-                  declaration,
-                  flattened
-                })
-              )
-            : []
-
-        if (!flattenedReturnType.length) {
-          flattenedReturnType = {
-            type: getFormattedText(returnType)
-          }
-        }
-
-        return {
-          params: typeParams,
-          returns: flattenedReturnType
-        }
-      })
-    }
-  }
-
-  const entries = declarationType
-    .getProperties()
-    .flatMap(prop =>
-      getDocEntry({
-        symbol: prop,
-        declaration,
-        flattened
-      })
-    )
-    .filter(entry => !entry.tags || !('internal' in entry.tags))
-
-  if (!entries.length) {
-    const typeName = declarationType.getText()
-    if (typeName === 'any') {
+      }
       throw new Error(
-        'Your type is resolved as "any", it seems like you have an issue in "generateDefinition.code" argument.'
+        `No properties found, check if your type "${typeName}" exist.`
       )
     }
-    throw new Error(
-      `No properties found, check if your type "${typeName}" exist.`
-    )
-  }
 
+    return {
+      ...definition,
+      entries
+    }
+  }
   return {
-    name: exportName,
-    ...(description && { description }),
-    entries
+    ...definition,
+    signatures: callSignatures.map(signature => {
+      const params = signature.getParameters()
+      const typeParams = params.flatMap(param =>
+        getDocEntry({
+          symbol: param,
+          declaration,
+          flattened
+        })
+      )
+      // signature.getReturnType() evaluates and expands the type fully, we use signature.getDeclaration().getSignature().getReturnType()
+      const returnType = signature
+        .getDeclaration()
+        .getSignature()
+        .getReturnType()
+      let flattenedReturnType: GeneratedFunction['signatures'][number]['returns'] =
+        flattened && shouldFlattenType(returnType)
+          ? returnType.getProperties().flatMap(childProp =>
+              getDocEntry({
+                symbol: childProp,
+                declaration,
+                flattened
+              })
+            )
+          : []
+
+      if (!flattenedReturnType.length) {
+        flattenedReturnType = {
+          type: getFormattedText(returnType)
+        }
+      }
+
+      return {
+        params: typeParams,
+        returns: flattenedReturnType
+      }
+    })
+  }
+}
+
+/**
+ * If no comments are found on the symbol, use the alias symbol's comments.
+ */
+function getCommentAndTags(declaration: ExportedDeclarations): {
+  comment: ts.SymbolDisplayPart[]
+  tags: Tags
+} {
+  const symbol = declaration.getSymbolOrThrow()
+  const comment = symbol.compilerSymbol.getDocumentationComment(compilerObject)
+  if (!comment.length) {
+    const aliasSymbol = declaration.getType().getAliasSymbol()
+    if (aliasSymbol) {
+      return {
+        comment:
+          aliasSymbol.compilerSymbol.getDocumentationComment(compilerObject),
+        tags: getTags(aliasSymbol)
+      }
+    }
+  }
+  return {
+    comment,
+    tags: getTags(symbol)
   }
 }
 

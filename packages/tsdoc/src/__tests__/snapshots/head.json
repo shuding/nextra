@@ -64,5 +64,5 @@
       "type": "ReactNode",
     },
   ],
-  "name": "default",
+  "name": "$",
 }
