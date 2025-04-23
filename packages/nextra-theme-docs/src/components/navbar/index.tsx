@@ -30,7 +30,9 @@ interface NavbarProps {
    * @default <GitHubIcon />
    */
   projectIcon?: ReactNode
-  /** URL of the chat link. */
+  /**
+   * URL of the chat link.
+   */
   chatLink?: string
   /**
    * Icon of the chat link.
@@ -55,23 +57,21 @@ const defaultGitHubIcon = (
 )
 const defaultChatIcon = <DiscordIcon width="24" />
 
-export const Navbar: FC<NavbarProps> = props => {
-  const {
-    children,
-    logoLink,
-    logo,
-    projectLink,
-    projectIcon = defaultGitHubIcon,
-    chatLink,
-    chatIcon = defaultChatIcon,
-    className,
-    align = 'right'
-  } = props
+export const Navbar: FC<NavbarProps> = ({
+  children,
+  logoLink = true,
+  logo,
+  projectLink,
+  projectIcon = defaultGitHubIcon,
+  chatLink,
+  chatIcon = defaultChatIcon,
+  className,
+  align = 'right'
+}) => {
   const logoClass = cn(
     'x:flex x:items-center',
     align === 'left' ? 'x:max-md:me-auto' : 'x:me-auto'
   )
-
   return (
     <header
       className={cn(

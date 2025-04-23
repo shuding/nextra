@@ -6,40 +6,89 @@ import { generateDefinition } from 'nextra/tsdoc'
 import type { FC } from 'react'
 
 const API_REFERENCE: (
-  | ApiReference
+  | (ApiReference & { filePath: string })
   | { type: 'separator'; title: string; name: string }
 )[] = [
   { type: 'separator', title: 'Types', name: '_' },
-  { name: 'NextraConfig', packageName: 'nextra', isFlattened: false },
+  {
+    name: 'NextraConfig',
+    packageName: 'nextra',
+    isFlattened: false,
+    filePath: 'server/schemas.ts'
+  },
   {
     name: 'MdxOptions',
     code: `import type { NextraConfig } from 'nextra'
 type $ = NonNullable<NextraConfig['mdxOptions']>
 export default $`,
-    isFlattened: false
+    isFlattened: false,
+    filePath: 'server/schemas.ts'
   },
   { type: 'separator', title: 'Functions', name: '_2' },
   {
     name: 'nextra',
     code: "export { default } from 'nextra'",
-    isFlattened: false
+    isFlattened: false,
+    filePath: 'server/index.ts'
   },
-  { name: 'useMDXComponents', packageName: 'nextra/mdx-components' },
-  { name: 'getPageMap', packageName: 'nextra/page-map' },
-  { name: 'generateStaticParamsFor', packageName: 'nextra/pages' },
-  { name: 'importPage', packageName: 'nextra/pages' },
-  { name: 'compileMdx', packageName: 'nextra/compile' },
-  { name: 'generateDefinition', packageName: 'nextra/tsdoc' },
-  { name: 'middleware', packageName: 'nextra/locales' },
-  { name: 'evaluate', packageName: 'nextra/evaluate' },
-  { name: 'normalizePages', packageName: 'nextra/normalize-pages' }
+  {
+    name: 'useMDXComponents',
+    packageName: 'nextra/mdx-components',
+    isFlattened: false,
+    filePath: 'client/mdx-components.ts'
+  },
+  {
+    name: 'getPageMap',
+    packageName: 'nextra/page-map',
+    filePath: 'server/page-map/get.ts'
+  },
+  {
+    name: 'generateStaticParamsFor',
+    packageName: 'nextra/pages',
+    filePath: 'client/pages.ts'
+  },
+  {
+    name: 'importPage',
+    packageName: 'nextra/pages',
+    filePath: 'client/pages.ts'
+  },
+  {
+    name: 'compileMdx',
+    packageName: 'nextra/compile',
+    filePath: 'server/compile.ts'
+  },
+  {
+    name: 'generateDefinition',
+    packageName: 'nextra/tsdoc',
+    filePath: 'server/tsdoc/base.ts'
+  },
+  {
+    name: 'middleware',
+    packageName: 'nextra/locales',
+    filePath: 'server/locales.ts'
+  },
+  {
+    name: 'evaluate',
+    packageName: 'nextra/evaluate',
+    filePath: 'client/evaluate.ts'
+  },
+  {
+    name: 'normalizePages',
+    packageName: 'nextra/normalize-pages',
+    filePath: 'client/normalize-pages.ts'
+  }
 ]
 
-const functionsIndex = API_REFERENCE.findIndex(
-  o => 'title' in o && o.title === 'Functions'
+const routes = API_REFERENCE.filter(
+  (o): o is ApiReference & { filePath: string } => !('type' in o)
 )
 
-const routes = API_REFERENCE.filter((o): o is ApiReference => !('type' in o))
+const separatorIndex = API_REFERENCE.findIndex(
+  o => 'title' in o && o.title === 'Functions'
+)
+const functionsIndex = routes.findIndex(
+  o => o === API_REFERENCE[separatorIndex + 1]
+)
 
 export const generateStaticParams = () =>
   routes.map(o => ({ name: o.name.toLowerCase() }))
@@ -75,11 +124,15 @@ async function getReference(props: PageProps) {
     flattened: apiRef.isFlattened !== false
   })
 
-  return generateApiReference(apiRef, {
+  const result = await generateApiReference(apiRef, {
     title: isType ? 'Type' : 'Function',
     subtitle: isType ? 'Fields' : 'Signature',
     definition
   })
+  // Add edit on github link to points on source file
+  result.metadata.filePath = `https://github.com/shuding/nextra/tree/main/packages/nextra/src/${apiRef.filePath}`
+
+  return result
 }
 
 export async function generateMetadata(props: PageProps) {

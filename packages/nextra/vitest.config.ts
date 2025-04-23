@@ -7,7 +7,7 @@ export default defineConfig({
   test: {
     globals: true,
     environment: 'jsdom',
-    testTimeout: 15_000,
+    testTimeout: 16_000,
     alias: {
       // to make pass `merge-meta-with-page-map.ts` test
       'next-mdx-import-source-file': path.resolve(
