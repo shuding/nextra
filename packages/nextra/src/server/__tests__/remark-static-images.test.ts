@@ -19,7 +19,7 @@ describe('remarkStaticImages', () => {
       }
     )
 
-    expect(clean(rawJs)).resolves.toMatchInlineSnapshot(`
+    return expect(clean(rawJs)).resolves.toMatchInlineSnapshot(`
       "/*@jsxRuntime automatic*/
       /*@jsxImportSource react*/
       import { useMDXComponents as _provideComponents } from 'next-mdx-import-source-file'
@@ -81,7 +81,7 @@ describe('remarkStaticImages', () => {
       }
     )
 
-    expect(clean(rawJs)).resolves.toMatchInlineSnapshot(`
+    return expect(clean(rawJs)).resolves.toMatchInlineSnapshot(`
       "/*@jsxRuntime automatic*/
       /*@jsxImportSource react*/
       import { useMDXComponents as _provideComponents } from 'next-mdx-import-source-file'

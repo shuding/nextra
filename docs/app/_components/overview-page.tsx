@@ -1,5 +1,5 @@
-// @ts-expect-error -- fixme
 import { useMDXComponents as getMDXComponents } from 'next-mdx-import-source-file'
+import type { PageMapItem } from 'nextra'
 import { Cards } from 'nextra/components'
 import { getIndexPageMap, getPageMap } from 'nextra/page-map'
 import type { FC } from 'react'
@@ -7,10 +7,11 @@ import type { FC } from 'react'
 export const OverviewPage: FC<{
   filePath: string
   icons?: Record<string, FC>
-}> = async ({ filePath, icons }) => {
+  pageMap?: PageMapItem[]
+}> = async ({ filePath, icons, pageMap: $pageMap }) => {
   const { h2: H2 } = getMDXComponents()
   const currentRoute = filePath.replace('app', '').replace('/page.mdx', '')
-  const pageMap = await getPageMap(currentRoute)
+  const pageMap = $pageMap ?? (await getPageMap(currentRoute))
 
   return getIndexPageMap(pageMap).map((pageItem, index) => {
     if (!Array.isArray(pageItem)) {

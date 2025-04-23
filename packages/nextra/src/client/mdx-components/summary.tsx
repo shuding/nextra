@@ -1,8 +1,8 @@
 import cn from 'clsx'
-import type { ComponentProps, FC } from 'react'
+import type { FC, HTMLAttributes } from 'react'
 import { ArrowRightIcon, LinkIcon } from '../icons/index.js'
 
-export const Summary: FC<ComponentProps<'summary'>> = ({
+export const Summary: FC<HTMLAttributes<HTMLElement>> = ({
   children,
   className,
   id,

@@ -14,8 +14,8 @@ The `mdx-components` file is **required**, you use it to customize styles via
 
 ## Example
 
-The `mdx-components.js` file must export a single function named
-`useMDXComponents`.
+The `mdx-components.js` file must export
+[a single function named `useMDXComponents`](/api/usemdxcomponents).
 
 ```ts filename="mdx-components.js"
 import { useMDXComponents as getThemeComponents } from 'nextra-theme-docs' // nextra-theme-blog or your custom theme
@@ -31,10 +31,6 @@ export function useMDXComponents(components) {
   }
 }
 ```
-
-## `useMDXComponents` signature
-
-<APIDocs code="export { useMDXComponents as default } from 'nextra/mdx-components'" />
 
 ## Errors
 

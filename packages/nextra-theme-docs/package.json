@@ -21,7 +21,7 @@
     "build": "NODE_ENV=production tsup",
     "dev": "tsup --watch . --watch ../nextra/src --watch ../nextra/styles",
     "prepublishOnly": "pnpm build",
-    "test": "vitest run",
+    "test": "vitest --typecheck",
     "types:check": "tsc --noEmit"
   },
   "peerDependencies": {
@@ -36,8 +36,7 @@
     "next-themes": "^0.4.0",
     "react-compiler-runtime": "0.0.0-experimental-e993439-20250328",
     "scroll-into-view-if-needed": "^3.1.0",
-    "zod": "^3.22.3",
-    "zod-validation-error": "^3.0.0",
+    "zod": "4.0.0-beta.20250420T053007",
     "zustand": "^5.0.1"
   },
   "devDependencies": {

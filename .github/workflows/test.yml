@@ -38,17 +38,12 @@ jobs:
           node-version-file: .node-version
           cache: pnpm
 
-      - name: Install Dependencies
-        run: pnpm i
+      - run: pnpm i
 
-      - name: Build All
-        run: pnpm build:all
+      - run: pnpm build:all
 
-      - name: Test
-        run: pnpm test
+      - run: pnpm test
 
-      - name: Clean
-        run: pnpm clean
+      - run: pnpm clean
 
-      - name: Type Check
-        run: pnpm types:check
+      - run: pnpm types:check

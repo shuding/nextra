@@ -16,7 +16,7 @@ describe('Compile', () => {
 export default foo`,
       { mdxOptions }
     )
-    expect(clean(rawJs)).resolves.toMatchInlineSnapshot(`
+    return expect(clean(rawJs)).resolves.toMatchInlineSnapshot(`
       "/*@jsxRuntime automatic*/
       /*@jsxImportSource react*/
       import { HOC_MDXWrapper } from 'nextra/setup-page'
@@ -62,7 +62,7 @@ export default foo`,
 export { foo as default } from './foo'`,
       { mdxOptions }
     )
-    expect(clean(rawJs)).resolves.toMatchInlineSnapshot(`
+    return expect(clean(rawJs)).resolves.toMatchInlineSnapshot(`
       "/*@jsxRuntime automatic*/
       /*@jsxImportSource react*/
       import { useMDXComponents as _provideComponents } from 'next-mdx-import-source-file'
@@ -94,15 +94,15 @@ export { foo as default } from './foo'`,
 describe('Process heading', () => {
   it('code-h1', async () => {
     const rawJs = await compileMdx('# `codegen.yml`', { mdxOptions })
-    expect(clean(rawJs)).resolves.toMatchSnapshot()
+    return expect(clean(rawJs)).resolves.toMatchSnapshot()
   })
   it('code-with-text-h1', async () => {
     const rawJs = await compileMdx('# `codegen.yml` file', { mdxOptions })
-    expect(clean(rawJs)).resolves.toMatchSnapshot()
+    return expect(clean(rawJs)).resolves.toMatchSnapshot()
   })
   it('static-h1', async () => {
     const rawJs = await compileMdx('# Hello World', { mdxOptions })
-    expect(clean(rawJs)).resolves.toMatchSnapshot()
+    return expect(clean(rawJs)).resolves.toMatchSnapshot()
   })
   it('dynamic-h1', async () => {
     const rawJs = await compileMdx(
@@ -118,11 +118,11 @@ export const TagName = () => {
     `,
       { mdxOptions }
     )
-    expect(clean(rawJs)).resolves.toMatchSnapshot()
+    return expect(clean(rawJs)).resolves.toMatchSnapshot()
   })
   it('no-h1', async () => {
     const rawJs = await compileMdx('## H2', { mdxOptions })
-    expect(clean(rawJs)).resolves.toMatchSnapshot()
+    return expect(clean(rawJs)).resolves.toMatchSnapshot()
   })
   it('use custom heading id', async () => {
     const rawJs = await compileMdx(
@@ -136,7 +136,7 @@ export const TagName = () => {
 ###### bar Qux [#]`,
       { mdxOptions }
     )
-    expect(clean(rawJs)).resolves.toMatchInlineSnapshot(`
+    return expect(clean(rawJs)).resolves.toMatchInlineSnapshot(`
       "/*@jsxRuntime automatic*/
       /*@jsxImportSource react*/
       import { useMDXComponents as _provideComponents } from 'next-mdx-import-source-file'
@@ -212,7 +212,7 @@ export const TagName = () => {
   })
   it('use github-slugger', async () => {
     const rawJs = await compileMdx('### My Header', { mdxOptions })
-    expect(clean(rawJs)).resolves.toMatchInlineSnapshot(`
+    return expect(clean(rawJs)).resolves.toMatchInlineSnapshot(`
       "/*@jsxRuntime automatic*/
       /*@jsxImportSource react*/
       import { useMDXComponents as _provideComponents } from 'next-mdx-import-source-file'
@@ -273,7 +273,7 @@ import Last from './three.mdx'
 `,
       { mdxOptions, latex: true }
     )
-    expect(clean(rawJs)).resolves.toMatchInlineSnapshot(`
+    return expect(clean(rawJs)).resolves.toMatchInlineSnapshot(`
       "/*@jsxRuntime automatic*/
       /*@jsxImportSource react*/
       import { useMDXComponents as _provideComponents } from 'next-mdx-import-source-file'
@@ -614,7 +614,7 @@ describe('Code block', () => {
       const rawJs = await compileMdx(rawMdx + rawMdx, {
         mdxOptions
       })
-      expect(clean(rawJs)).resolves.toMatchInlineSnapshot(`
+      return expect(clean(rawJs)).resolves.toMatchInlineSnapshot(`
         "/*@jsxRuntime automatic*/
         /*@jsxImportSource react*/
         import { useMDXComponents as _provideComponents } from 'next-mdx-import-source-file'
@@ -752,7 +752,7 @@ describe('Code block', () => {
 </details>
 `
     const rawJs = await compileMdx(rawMdx, { mdxOptions })
-    expect(clean(rawJs)).resolves.toMatchInlineSnapshot(`
+    return expect(clean(rawJs)).resolves.toMatchInlineSnapshot(`
       "/*@jsxRuntime automatic*/
       /*@jsxImportSource react*/
       import { useMDXComponents as _provideComponents } from 'next-mdx-import-source-file'

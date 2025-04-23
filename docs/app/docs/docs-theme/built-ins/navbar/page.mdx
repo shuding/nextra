@@ -4,16 +4,12 @@ sidebarTitle: Navbar
 
 import { ToggleVisibilitySection } from 'components/toggle-visibility-section'
 import { generateTsFromZod } from 'nextra/tsdoc'
-import { NavbarPropsSchema } from 'private-next-root-dir/../packages/nextra-theme-docs/src/components/navbar'
 
 # Navbar Component
 
 ## Props
 
-<APIDocs
-  code={`type $ = ${generateTsFromZod(NavbarPropsSchema)}
-export default $`}
-/>
+<APIDocs componentName="Navbar" packageName="nextra-theme-docs" />
 
 ### Logo
 

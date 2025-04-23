@@ -1,12 +1,9 @@
 {
   "entries": [
     {
-      "description": "Extra content after last icon.",
+      "description": "Extra content after the last icon.",
       "name": "children",
       "optional": true,
-      "tags": {
-        "remarks": "`ReactNode`",
-      },
       "type": "ReactNode",
     },
     {
@@ -21,10 +18,7 @@
     {
       "description": "Logo of the website.",
       "name": "logo",
-      "tags": {
-        "remarks": "`ReactElement`",
-      },
-      "type": "ReactElement",
+      "type": "ReactNode",
     },
     {
       "description": "URL of the project homepage.",
@@ -38,7 +32,6 @@
       "optional": true,
       "tags": {
         "default": "<GitHubIcon />",
-        "remarks": "`ReactNode`",
       },
       "type": "ReactNode",
     },
@@ -54,7 +47,6 @@
       "optional": true,
       "tags": {
         "default": "<DiscordIcon />",
-        "remarks": "`ReactNode`",
       },
       "type": "ReactNode",
     },
@@ -69,7 +61,7 @@
       "name": "align",
       "optional": true,
       "tags": {
-        "default": ""right"",
+        "default": "'right'",
       },
       "type": ""left" | "right"",
     },

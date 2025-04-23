@@ -1,10 +1,5 @@
-import type {
-  ExportedDeclarations,
-  Node,
-  Symbol as TsSymbol,
-  Type
-} from 'ts-morph'
-import { Project, ts } from 'ts-morph'
+import type { ExportedDeclarations, Symbol as TsSymbol, Type } from 'ts-morph'
+import { Project, SyntaxKind, ts } from 'ts-morph'
 import { logger } from '../utils.js'
 import type {
   BaseArgs,
@@ -31,8 +26,36 @@ const { compilerObject } = project.getTypeChecker()
  * Generate documentation for properties of `type` and `interface` and parameters and returns
  * signature of `function`.
  * @returns Parsed TSDoc definition from TypeScript `type`, `interface` or `function`.
+ * @example
+ * To generate documentation for a `type`, `interface`, or `function`, export it via the `code`
+ * argument.
+ *
+ * ### As a `default` export
+ *
+ * ```mdx
+ * import { generateDefinition, TSDoc } from 'nextra/tsdoc'
+ *
+ * <TSDoc
+ *   definition={generateDefinition({
+ *     code: "export { yourTypeOrFunction as default } from 'your-package'",
+ *   })}
+ * />
+ * ```
+ *
+ * ### As a named export
+ *
+ * ```mdx
+ * import { generateDefinition, TSDoc } from 'nextra/tsdoc'
+ *
+ * <TSDoc
+ *   definition={generateDefinition({
+ *     code: "export { yourTypeOrFunction } from 'your-package'",
+ *     exportName: 'yourTypeOrFunction'
+ *   })}
+ * />
+ * ```
  */
-export function generateDocumentation({
+export function generateDefinition({
   code,
   exportName = 'default',
   flattened = false
@@ -61,10 +84,10 @@ export function generateDocumentation({
   const callSignatures = declarationType.getCallSignatures()
   const isFunction = callSignatures.length > 0
   if (isFunction) {
-    const tags = getTags(declarationType.getSymbolOrThrow())
+    const tags = getTags(declaration.getSymbolOrThrow())
     tags.returns &&= replaceJsDocLinks(tags.returns)
     return {
-      name: declarationType.getSymbolOrThrow().getName(),
+      name: declaration.getSymbolOrThrow().getName(),
       ...(description && { description }),
       ...(Object.keys(tags).length && { tags }),
       signatures: callSignatures.map(signature => {
@@ -73,8 +96,7 @@ export function generateDocumentation({
           getDocEntry({
             symbol: param,
             declaration,
-            flattened,
-            isFunctionParameter: true
+            flattened
           })
         )
         const returnType = signature.getReturnType()
@@ -118,7 +140,7 @@ export function generateDocumentation({
     const typeName = declarationType.getText()
     if (typeName === 'any') {
       throw new Error(
-        'Your type is resolved as "any", it seems like you have an issue in "generateDocumentation.code" argument.'
+        'Your type is resolved as "any", it seems like you have an issue in "generateDefinition.code" argument.'
       )
     }
     throw new Error(
@@ -137,20 +159,20 @@ function getDocEntry({
   symbol,
   declaration,
   flattened,
-  prefix = '',
-  isFunctionParameter = false
+  prefix = ''
 }: {
   symbol: TsSymbol
   declaration: ExportedDeclarations
   flattened: boolean
   prefix?: string
-  /* @TODO: find a way to remove this */
-  /** @default false */
-  isFunctionParameter?: boolean
 }): TypeField | TypeField[] {
   const originalSubType = project
     .getTypeChecker()
     .getTypeOfSymbolAtLocation(symbol, declaration)
+  const valueDeclaration = symbol.getValueDeclaration()
+  const isFunctionParameter =
+    valueDeclaration && valueDeclaration.getKind() === SyntaxKind.Parameter
+
   const subType = isFunctionParameter
     ? originalSubType.getNonNullableType()
     : originalSubType
@@ -172,19 +194,18 @@ function getDocEntry({
     })
   }
   const tags = getTags(symbol)
-  const typeOf = getDeclaration(symbol).getType()
-  let typeName = typeOf.isUnknown()
-    ? typeOf.getText()
-    : getFormattedText(subType)
 
-  const aliasSymbol = subType.getAliasSymbol()
+  const typeOf = valueDeclaration
+    ? valueDeclaration.getType()
+    : symbol.getDeclaredType()
 
-  if (aliasSymbol && !subType.getAliasTypeArguments().length) {
-    typeName = aliasSymbol.getEscapedName()
-  }
-  if (tags.remarks) {
-    typeName = /^`(?<name>.+)`/.exec(tags.remarks)?.[1] ?? typeName
-  }
+  const typeNameFromRemarks =
+    tags.remarks?.match(/^`(?<name>.+)`/)?.groups!.name
+
+  const typeName =
+    typeNameFromRemarks ??
+    (typeOf.isUnknown() ? typeOf.getText() : getFormattedText(subType))
+
   const name = symbol.getName()
   const typeDescription = replaceJsDocLinks(
     ts.displayPartsToString(
@@ -193,7 +214,7 @@ function getDocEntry({
   ).replace(/^- /, '')
   const isOptional = isFunctionParameter
     ? // @ts-expect-error -- fixme
-      getDeclaration(symbol).isOptional()
+      valueDeclaration.isOptional()
     : symbol.isOptional()
 
   return {
@@ -241,29 +262,18 @@ const IGNORED_TYPES = new Set([
   'CSSProperties'
 ])
 
-function getDeclaration(s: TsSymbol): Node {
-  const parameterName = s.getName()
-  const declarations = s.getDeclarations()
-
-  // @TODO add test for ConnectionState
-  // if (declarations.length > 1) {
-  //   throw new Error(
-  //     `"${parameterName}" should not have more than one type declaration.`
-  //   )
-  // }
-  const declaration = declarations[0]
-  if (!declaration) {
-    throw new Error(`Can't find "${parameterName}" declaration`)
-  }
-  return declaration
-}
-
 function getTags(prop: TsSymbol): Tags {
-  return Object.fromEntries(
-    prop
-      .getJsDocTags()
-      .map(tag => [tag.getName(), ts.displayPartsToString(tag.getText())])
-  )
+  const tags: Record<string, string> = Object.create(null)
+  for (const tag of prop.getJsDocTags()) {
+    const tagName = tag.getName()
+    const tagValue = ts.displayPartsToString(tag.getText())
+    if (tagName in tags) {
+      tags[tagName] += `\n${tagValue}`
+    } else {
+      tags[tagName] = tagValue
+    }
+  }
+  return tags
 }
 
 function getFormattedText(t: Type): string {

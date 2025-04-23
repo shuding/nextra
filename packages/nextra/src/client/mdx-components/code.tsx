@@ -1,8 +1,8 @@
 import cn from 'clsx'
-import type { ComponentProps, FC } from 'react'
+import type { FC, HTMLAttributes } from 'react'
 
 export const Code: FC<
-  ComponentProps<'code'> & {
+  HTMLAttributes<HTMLElement> & {
     'data-language'?: string
   }
 > = ({ children, className, 'data-language': _language, ...props }) => {
