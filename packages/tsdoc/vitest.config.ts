@@ -3,6 +3,6 @@ import { defineProject } from 'vitest/config'
 export default defineProject({
   test: {
     globals: true,
-    testTimeout: 6_000,
+    testTimeout: 6000,
   }
 })

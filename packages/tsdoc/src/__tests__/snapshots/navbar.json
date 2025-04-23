@@ -1,7 +1,7 @@
 {
   "entries": [
     {
-      "description": "Extra content after last icon.",
+      "description": "Extra content after the last icon.",
       "name": "children",
       "optional": true,
       "type": "ReactNode",
@@ -18,7 +18,7 @@
     {
       "description": "Logo of the website.",
       "name": "logo",
-      "type": "ReactElement<unknown, string | JSXElementConstructor<any>>",
+      "type": "ReactNode",
     },
     {
       "description": "URL of the project homepage.",
@@ -61,7 +61,7 @@
       "name": "align",
       "optional": true,
       "tags": {
-        "default": ""right"",
+        "default": "'right'",
       },
       "type": ""left" | "right"",
     },
