@@ -92,6 +92,7 @@ function getDefaultValue(schema: z.ZodType): unknown {
     // @ts-expect-error fixme
     return schema.in.def.defaultValue()
   }
+  // eslint-disable-next-line sonarjs/no-redundant-jump -- this fix types-check error in `@nextra-tsdoc` – ../nextra/src/server/tsdoc/zod-to-ts.ts:87:46 - error TS7030: Not all code paths return a value.
   return
 }
 
