@@ -7,7 +7,7 @@ describe('useMDXComponents', () => {
     expectTypeOf(components['a']).toBeFunction()
     expectTypeOf(components['h2']).toBeFunction()
 
-    // @ts-expect-error -- asset does not exist on type
+    // @ts-expect-error -- assert does not exist on type
     expectTypeOf(components['h1']).not.toBeFunction()
   })
   test('when `MDXComponent`s are not provided', () => {
@@ -15,7 +15,7 @@ describe('useMDXComponents', () => {
     expectTypeOf(components['img']).toBeFunction()
     expectTypeOf(components['a']).toBeFunction()
 
-    // @ts-expect-error -- asset does not exist on type
+    // @ts-expect-error -- assert does not exist on type
     expectTypeOf(components['h1']).not.toBeFunction()
   })
 })
