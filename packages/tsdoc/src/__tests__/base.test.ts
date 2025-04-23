@@ -33,9 +33,7 @@ describe('generateDefinition()', () => {
         <Tabs.Tab>**npm** is a package manager for the JavaScript programming language.</Tabs.Tab>
         <Tabs.Tab>**Yarn** is a software packaging system.</Tabs.Tab>
       </Tabs>",
-          "usage": "### Default
-
-      \`\`\`mdx
+          "usage": "\`\`\`mdx
       import { Tabs } from 'nextra/components'
 
       <Tabs items={['pnpm', 'npm', 'yarn']}>
