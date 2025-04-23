@@ -15,7 +15,7 @@ import {
   withIcons
 } from 'nextra/components'
 import { useMDXComponents as getNextraMDXComponents } from 'nextra/mdx-components'
-import type { MDXComponents } from 'nextra/mdx-components'
+import type { UseMDXComponents } from 'nextra/mdx-components'
 import { removeLinks } from 'nextra/remove-links'
 import type { FC, HTMLAttributes } from 'react'
 import { Sidebar } from '../components'
@@ -115,9 +115,13 @@ const DEFAULT_COMPONENTS = getNextraMDXComponents({
   }
 })
 
-export const useMDXComponents = (components?: Readonly<MDXComponents>) => {
+export const useMDXComponents: UseMDXComponents<typeof DEFAULT_COMPONENTS> = <
+  T,
+>(
+  components?: T
+) => {
   return {
     ...DEFAULT_COMPONENTS,
     ...components
-  } satisfies MDXComponents
+  }
 }
