@@ -82,8 +82,8 @@ export function generateDefinition({
   //     `Export "${exportName}" should not have more than one type declaration.`
   //   )
   // }
-  const declarationFilePath = slash(declaration.getSourceFile().getFilePath())
-  const filePath = path.relative(CWD, declarationFilePath)
+  const declarationFilePath = declaration.getSourceFile().getFilePath()
+  const filePath = slash(path.relative(CWD, declarationFilePath))
   const symbol = declaration.getSymbolOrThrow()
   const { comment, tags } = getCommentAndTags(declaration)
   const description = ts.displayPartsToString(comment)
