@@ -6,6 +6,33 @@ import { generateTsFromZod } from '../../../nextra/src/server/tsdoc/zod-to-ts.js
 import typesFixture from './fixtures/flattened?raw'
 
 describe('generateDefinition()', () => {
+  test.only('Should parse type tags', () => {
+    const code = `
+/**
+ * MyType description
+ * @tag MyTag
+ */
+type MyType = {
+  /** MyType.foo */
+  foo?: string
+}
+export default MyType`
+    const result = generateDefinition({ code })
+    expect(result).toMatchInlineSnapshot(`
+      {
+        "description": "MyType description",
+        "entries": [
+          {
+            "description": "MyType.foo",
+            "name": "foo",
+            "optional": true,
+            "type": "string",
+          },
+        ],
+        "name": "default",
+      }
+    `)
+  })
   test('<Tabs />', async () => {
     const code = "export type { Tabs as default } from 'nextra/components'"
     const result = generateDefinition({ code })
