@@ -7,6 +7,7 @@ import { element, reactNode } from 'nextra/schemas'
 import type { FC } from 'react'
 import { z } from 'zod'
 import { fromZodError } from 'zod-validation-error'
+import { ThemeSwitch } from '../theme-switch'
 import { ClientNavbar } from './index.client'
 
 export const NavbarPropsSchema = z.strictObject({
@@ -31,6 +32,10 @@ export const NavbarPropsSchema = z.strictObject({
     .describe(`Icon of the chat link.
 @remarks \`ReactNode\`
 @default <DiscordIcon />`),
+  themeSwitch: z
+    .boolean()
+    .default(true)
+    .describe('Show or hide the theme select button.'),
   className: z.string().optional().describe('CSS class name.'),
   align: z
     .enum(['left', 'right'])
@@ -54,7 +59,8 @@ export const Navbar: FC<NavbarProps> = props => {
     chatLink,
     chatIcon,
     className,
-    align
+    align,
+    themeSwitch
   } = data
 
   const logoClass = cn(
@@ -100,6 +106,7 @@ export const Navbar: FC<NavbarProps> = props => {
           <div className={logoClass}>{logo}</div>
         )}
         <ClientNavbar className={align === 'left' ? 'x:me-auto' : ''}>
+          {themeSwitch && <ThemeSwitch lite />}
           {projectLink && <Anchor href={projectLink}>{projectIcon}</Anchor>}
           {chatLink && <Anchor href={chatLink}>{chatIcon}</Anchor>}
           {children}
