@@ -18,9 +18,6 @@ import { Tabs as _Tabs, Tab } from './index.client.js'
  * </Tabs>
  *
  * @usage
- *
- * ### Default
- *
  * ```mdx
  * import { Tabs } from 'nextra/components'
  *
