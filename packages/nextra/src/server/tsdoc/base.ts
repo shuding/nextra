@@ -1,4 +1,5 @@
 import path from 'node:path'
+import slash from 'slash'
 import type { ExportedDeclarations, Symbol as TsSymbol, Type } from 'ts-morph'
 import { Project, SyntaxKind, ts } from 'ts-morph'
 import { CWD } from '../constants.js'
@@ -81,7 +82,7 @@ export function generateDefinition({
   //     `Export "${exportName}" should not have more than one type declaration.`
   //   )
   // }
-  const declarationFilePath = declaration.getSourceFile().getFilePath()
+  const declarationFilePath = slash(declaration.getSourceFile().getFilePath())
   const filePath = path.relative(CWD, declarationFilePath)
   const symbol = declaration.getSymbolOrThrow()
   const { comment, tags } = getCommentAndTags(declaration)
@@ -89,7 +90,9 @@ export function generateDefinition({
   tags.returns &&= replaceJsDocLinks(tags.returns)
 
   const definition: GeneratedDefinition = {
-    ...(filePath !== DEFAULT_FILENAME && { filePath }),
+    // Skip adding `filePath` to snapshots on test env, since we have tests on Mac and on Windows, they fail
+    ...// process.env.NODE_ENV !== 'test' &&
+    (filePath !== DEFAULT_FILENAME && { filePath }),
     name: symbol.getName(),
     ...(description && { description }),
     ...(Object.keys(tags).length && { tags })
