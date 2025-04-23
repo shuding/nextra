@@ -72,10 +72,6 @@ export type UseMDXComponents<
   (): DC
 }
 
-/**
- * Get current MDX components.
- * @returns The current set of MDX components.
- */
 export const useMDXComponents: UseMDXComponents<typeof DEFAULT_COMPONENTS> = <
   T
 >(

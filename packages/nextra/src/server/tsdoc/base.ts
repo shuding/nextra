@@ -76,9 +76,8 @@ export function generateDefinition({
   //   )
   // }
   const symbol = declaration.getSymbolOrThrow()
-  const comment = symbol.compilerSymbol.getDocumentationComment(compilerObject)
+  const { comment, tags } = getCommentAndTags(declaration)
   const description = ts.displayPartsToString(comment)
-  const tags = getTags(symbol)
   tags.returns &&= replaceJsDocLinks(tags.returns)
 
   const definition: GeneratedDefinition = {
@@ -130,7 +129,11 @@ export function generateDefinition({
           flattened
         })
       )
-      const returnType = signature.getReturnType()
+      // signature.getReturnType() evaluates and expands the type fully, we use signature.getDeclaration().getSignature().getReturnType()
+      const returnType = signature
+        .getDeclaration()
+        .getSignature()
+        .getReturnType()
       let flattenedReturnType: GeneratedFunction['signatures'][number]['returns'] =
         flattened && shouldFlattenType(returnType)
           ? returnType.getProperties().flatMap(childProp =>
@@ -153,6 +156,31 @@ export function generateDefinition({
         returns: flattenedReturnType
       }
     })
+  }
+}
+
+/**
+ * If no comments are found on the symbol, use the alias symbol's comments.
+ */
+function getCommentAndTags(declaration: ExportedDeclarations): {
+  comment: ts.SymbolDisplayPart[]
+  tags: Tags
+} {
+  const symbol = declaration.getSymbolOrThrow()
+  const comment = symbol.compilerSymbol.getDocumentationComment(compilerObject)
+  if (!comment.length) {
+    const aliasSymbol = declaration.getType().getAliasSymbol()
+    if (aliasSymbol) {
+      return {
+        comment:
+          aliasSymbol.compilerSymbol.getDocumentationComment(compilerObject),
+        tags: getTags(aliasSymbol)
+      }
+    }
+  }
+  return {
+    comment,
+    tags: getTags(symbol)
   }
 }
 

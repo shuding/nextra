@@ -28,13 +28,13 @@ describe('generateDefinition()', () => {
               },
             ],
             "returns": {
-              "type": "{ img: FC<ImageProps>; a: FC<Omit<Omit<Omit<AnchorHTMLAttributes<HTMLAnchorElement>, "onClick" | "onMouseEnter" | "onTouchStart" | ... 9 more ... | "onNavigate"> & { ...; } & { ...; } & RefAttributes<...>, "ref">, "href"> & { ...; }>; } & T",
+              "type": "DC & T",
             },
           },
           {
             "params": [],
             "returns": {
-              "type": "{ img: FC<ImageProps>; a: FC<Omit<Omit<Omit<AnchorHTMLAttributes<HTMLAnchorElement>, "onClick" | "onMouseEnter" | "onTouchStart" | ... 9 more ... | "onNavigate"> & { ...; } & { ...; } & RefAttributes<...>, "ref">, "href"> & { ...; }>; }",
+              "type": "DC",
             },
           },
         ],
