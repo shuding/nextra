@@ -1,5 +1,5 @@
 import { getEnhancedPageMap } from '@components/get-page-map'
-import { Folder } from 'nextra'
+import type { Folder } from 'nextra'
 import { useMDXComponents as getDocsMDXComponents } from 'nextra-theme-docs'
 import type { UseMDXComponents } from 'nextra/mdx-components'
 import { generateDefinition, TSDoc } from 'nextra/tsdoc'

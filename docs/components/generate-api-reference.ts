@@ -52,7 +52,7 @@ export async function generateApiReference(
   { title, subtitle, definition }: Options
 ) {
   const { description } = definition
-  const tags = ('tags' in definition && definition.tags) || {}
+  const tags = 'tags' in definition ? definition.tags : {}
   const result = [
     description &&
       // og:description

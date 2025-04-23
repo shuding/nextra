@@ -1,4 +1,4 @@
-import { useMDXComponents } from '../mdx-components'
+import { useMDXComponents } from '../mdx-components.js'
 
 describe('useMDXComponents', () => {
   test('when `MDXComponent`s are provided', () => {
