@@ -2,8 +2,7 @@ import { generateApiReference } from '@components/generate-api-reference'
 import type { ApiReference } from '@components/generate-api-reference'
 import { useMDXComponents as getMDXComponents } from 'next-mdx-import-source-file'
 import type { MdxFile } from 'nextra'
-import { generateDefinition, generateTsFromZod } from 'nextra/tsdoc'
-import { HeadPropsSchema } from 'private-next-root-dir/../packages/nextra/dist/client/components/head'
+import { generateDefinition } from 'nextra/tsdoc'
 import type { FC } from 'react'
 
 type ComponentApiReference = ApiReference & { groupKeys?: string }
@@ -22,9 +21,6 @@ const API_REFERENCE: (
     name: 'Head',
     packageName: 'nextra/components',
     isFlattened: true,
-    // We use `code` otherwise, unable use generateDefinition.flattened
-    code: `interface $ ${generateTsFromZod(HeadPropsSchema)}
-export default $`
   },
   { name: 'Search', packageName: 'nextra/components', isFlattened: false },
   { type: 'separator', title: 'Content Components', name: '_2' },
