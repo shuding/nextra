@@ -24,6 +24,7 @@ export default $`,
     code: "export { default } from 'nextra'",
     isFlattened: false
   },
+  { name: 'useMDXComponents', packageName: 'nextra/mdx-components' },
   { name: 'getPageMap', packageName: 'nextra/page-map' },
   { name: 'generateStaticParamsFor', packageName: 'nextra/pages' },
   { name: 'importPage', packageName: 'nextra/pages' },

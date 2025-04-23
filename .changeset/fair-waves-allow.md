@@ -30,3 +30,4 @@ fix(TSDoc): improve TSDoc comments for functions:
 
 - `nextra`
 - `generateDefinition`
+- `useMDXComponents`

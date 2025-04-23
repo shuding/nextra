@@ -29,14 +29,26 @@ export type MDXComponents = NestedMDXComponents & {
    * If a wrapper component is defined, the MDX content will be wrapped inside it.
    */
   wrapper?: MDXWrapper
+} & DefaultMdxComponents
+
+type DefaultMdxComponents = {
+  /**
+   * Nextra's `<ImageZoom />` component with zoom functionality.
+   * Uses `<NextImage>` for static images and falls back to a standard `<img>` element for others.
+   */
   img?: typeof ImageZoom
+  /**
+   * Nextra's `<Anchor />` component for rendering links.
+   * Uses `<NextLink>` for internal navigation and falls back to a regular `<a>` element for
+   * external links.
+   */
   a?: typeof Anchor
 }
 
 const DEFAULT_COMPONENTS = {
   img: ImageZoom,
   a: Anchor
-}
+} satisfies DefaultMdxComponents
 
 /**
  * Get current MDX components.
@@ -60,6 +72,10 @@ export type UseMDXComponents<
   (): DC
 }
 
+/**
+ * Get current MDX components.
+ * @returns The current set of MDX components.
+ */
 export const useMDXComponents: UseMDXComponents<typeof DEFAULT_COMPONENTS> = <
   T
 >(
