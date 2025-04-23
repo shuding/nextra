@@ -78,80 +78,81 @@ export function generateDefinition({
   const symbol = declaration.getSymbolOrThrow()
   const comment = symbol.compilerSymbol.getDocumentationComment(compilerObject)
   const description = ts.displayPartsToString(comment)
+  const tags = getTags(symbol)
+  tags.returns &&= replaceJsDocLinks(tags.returns)
+
+  const definition: GeneratedDefinition = {
+    name: symbol.getName(),
+    ...(description && { description }),
+    ...(Object.keys(tags).length && { tags })
+  }
 
   const declarationType = declaration.getType()
   const callSignatures = declarationType.getCallSignatures()
   const isFunction = callSignatures.length > 0
-  if (isFunction) {
-    const tags = getTags(declaration.getSymbolOrThrow())
-    tags.returns &&= replaceJsDocLinks(tags.returns)
-    return {
-      name: declaration.getSymbolOrThrow().getName(),
-      ...(description && { description }),
-      ...(Object.keys(tags).length && { tags }),
-      signatures: callSignatures.map(signature => {
-        const params = signature.getParameters()
-        const typeParams = params.flatMap(param =>
-          getDocEntry({
-            symbol: param,
-            declaration,
-            flattened
-          })
+
+  if (!isFunction) {
+    const entries = declarationType
+      .getProperties()
+      .flatMap(prop =>
+        getDocEntry({
+          symbol: prop,
+          declaration,
+          flattened
+        })
+      )
+      .filter(entry => !entry.tags || !('internal' in entry.tags))
+    if (!entries.length) {
+      const typeName = declarationType.getText()
+      if (typeName === 'any') {
+        throw new Error(
+          'Your type is resolved as "any", it seems like you have an issue in "generateDefinition.code" argument.'
         )
-        const returnType = signature.getReturnType()
-        let flattenedReturnType: GeneratedFunction['signatures'][number]['returns'] =
-          flattened && shouldFlattenType(returnType)
-            ? returnType.getProperties().flatMap(childProp =>
-                getDocEntry({
-                  symbol: childProp,
-                  declaration,
-                  flattened
-                })
-              )
-            : []
-
-        if (!flattenedReturnType.length) {
-          flattenedReturnType = {
-            type: getFormattedText(returnType)
-          }
-        }
-
-        return {
-          params: typeParams,
-          returns: flattenedReturnType
-        }
-      })
-    }
-  }
-
-  const entries = declarationType
-    .getProperties()
-    .flatMap(prop =>
-      getDocEntry({
-        symbol: prop,
-        declaration,
-        flattened
-      })
-    )
-    .filter(entry => !entry.tags || !('internal' in entry.tags))
-
-  if (!entries.length) {
-    const typeName = declarationType.getText()
-    if (typeName === 'any') {
+      }
       throw new Error(
-        'Your type is resolved as "any", it seems like you have an issue in "generateDefinition.code" argument.'
+        `No properties found, check if your type "${typeName}" exist.`
       )
     }
-    throw new Error(
-      `No properties found, check if your type "${typeName}" exist.`
-    )
+
+    return {
+      ...definition,
+      entries
+    }
   }
-  const tags = getTags(symbol)
   return {
-    name: exportName,
-    ...(Object.keys(tags).length && { tags }),
-    ...(description && { description }),
-    entries
+    ...definition,
+    signatures: callSignatures.map(signature => {
+      const params = signature.getParameters()
+      const typeParams = params.flatMap(param =>
+        getDocEntry({
+          symbol: param,
+          declaration,
+          flattened
+        })
+      )
+      const returnType = signature.getReturnType()
+      let flattenedReturnType: GeneratedFunction['signatures'][number]['returns'] =
+        flattened && shouldFlattenType(returnType)
+          ? returnType.getProperties().flatMap(childProp =>
+              getDocEntry({
+                symbol: childProp,
+                declaration,
+                flattened
+              })
+            )
+          : []
+
+      if (!flattenedReturnType.length) {
+        flattenedReturnType = {
+          type: getFormattedText(returnType)
+        }
+      }
+
+      return {
+        params: typeParams,
+        returns: flattenedReturnType
+      }
+    })
   }
 }
 
