@@ -86,7 +86,6 @@ export const PlaygroundDemo: FC = () => {
             </div>
           }
           source={rawMdx}
-          // @ts-expect-error -- fixme
           components={useMDXComponents({ Mermaid, $Tabs: Tabs })}
         />
       </div>

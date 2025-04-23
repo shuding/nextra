@@ -41,23 +41,18 @@ export interface ApiReference {
   packageName?: string
 }
 
+interface Options {
+  title: string
+  subtitle: string
+  definition: ReturnType<typeof generateDefinition>
+}
+
 export async function generateApiReference(
   apiRef: ApiReference,
-  {
-    title,
-    subtitle,
-    definition: {
-      description,
-      // @ts-expect-error -- fixme
-      tags = {},
-      ...rest
-    }
-  }: {
-    title: string
-    subtitle: string
-    definition: ReturnType<typeof generateDefinition>
-  }
+  { title, subtitle, definition }: Options
 ) {
+  const { description } = definition
+  const tags = ('tags' in definition && definition.tags) || {}
   const result = [
     description &&
       // og:description
@@ -95,13 +90,5 @@ ${tags.usage}`
   ].filter(Boolean)
 
   const rawJs = await compileMdx(result.join('\n\n'))
-
-  return evaluate(
-    rawJs,
-    // @ts-expect-error -- fixme
-    components,
-    {
-      definition: { tags, ...rest }
-    }
-  )
+  return evaluate(rawJs, components, { definition })
 }

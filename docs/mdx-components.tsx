@@ -1,11 +1,28 @@
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-nocheck
-
 import { getEnhancedPageMap } from '@components/get-page-map'
+import { Folder } from 'nextra'
 import { useMDXComponents as getDocsMDXComponents } from 'nextra-theme-docs'
+import type { UseMDXComponents } from 'nextra/mdx-components'
 import { generateDefinition, TSDoc } from 'nextra/tsdoc'
+import type { ComponentProps } from 'react'
+
+type TSDocProps = ComponentProps<typeof TSDoc>
+type GenerateDefinitionArgs = Parameters<typeof generateDefinition>[0]
+
+interface APIDocsProps
+  extends Partial<TSDocProps>,
+    Pick<GenerateDefinitionArgs, 'code' | 'flattened'> {
+  componentName?: string
+  groupKeys?: string
+  packageName?: string
+}
 
 const { img: Image, ...docsComponents } = getDocsMDXComponents({
+  // @ts-expect-error -- FIXME
+  figure: props => <figure className="mt-[1.25em]" {...props} />,
+  // @ts-expect-error -- FIXME
+  figcaption: props => (
+    <figcaption className="mt-2 text-center text-sm" {...props} />
+  ),
   async APIDocs({
     componentName,
     groupKeys,
@@ -14,7 +31,7 @@ const { img: Image, ...docsComponents } = getDocsMDXComponents({
     flattened,
     definition: $definition,
     ...props
-  }) {
+  }: APIDocsProps) {
     if (Object.keys(props).length) {
       throw new Error(`Unexpected props: ${Object.keys(props)}`)
     }
@@ -35,7 +52,12 @@ export default $`
     } else {
       code = $code
     }
-    const definition = $definition ?? generateDefinition({ code, flattened })
+    const definition =
+      $definition ??
+      generateDefinition(
+        // @ts-expect-error -- exist
+        { code, flattened }
+      )
 
     // TODO pass `'/api'` as first argument
     const pageMap = await getEnhancedPageMap()
@@ -89,17 +111,16 @@ export default $`
   }
 })
 
-export const useMDXComponents: typeof getDocsMDXComponents = components => ({
+export const useMDXComponents: UseMDXComponents<typeof docsComponents> = <T,>(
+  components?: T
+) => ({
   ...docsComponents,
+  // @ts-expect-error -- FIXME
   img: props => (
     <Image
       {...props}
       className="nextra-border rounded-xl border drop-shadow-sm"
     />
-  ),
-  figure: props => <figure className="mt-[1.25em]" {...props} />,
-  figcaption: props => (
-    <figcaption className="mt-2 text-center text-sm" {...props} />
   ),
   ...components
 })
