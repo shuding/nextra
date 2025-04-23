@@ -30,13 +30,13 @@ describe('generateDefinition()', () => {
               },
             ],
             "returns": {
-              "type": "DC & T",
+              "type": "DefaultMDXComponents & components",
             },
           },
           {
             "params": [],
             "returns": {
-              "type": "DC",
+              "type": "DefaultMDXComponents",
             },
           },
         ],

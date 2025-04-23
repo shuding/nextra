@@ -48,9 +48,7 @@ export default $`,
   { name: 'normalizePages', packageName: 'nextra/normalize-pages' }
 ]
 
-const routes = API_REFERENCE.filter(
-  (o): o is AllApiReference => !('type' in o)
-)
+const routes = API_REFERENCE.filter((o): o is AllApiReference => !('type' in o))
 
 const separatorIndex = API_REFERENCE.findIndex(
   o => 'title' in o && o.title === 'Functions'

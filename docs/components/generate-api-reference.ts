@@ -44,7 +44,7 @@ export interface ApiReference {
 interface Options {
   title: string
   subtitle: string
-  definition: ReturnType<typeof generateDefinition>,
+  definition: ReturnType<typeof generateDefinition>
   bottomMdxContent?: string
 }
 
