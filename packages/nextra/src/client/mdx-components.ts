@@ -6,7 +6,7 @@ import { Anchor } from './mdx-components/anchor.js'
 /**
  * A valid JSX string component.
  */
-type StringComponent = keyof JSX.IntrinsicElements
+type StringComponent = Exclude<keyof JSX.IntrinsicElements, 'img' | 'a'>
 
 /**
  * Any allowed JSX component.
@@ -29,6 +29,8 @@ export type MDXComponents = NestedMDXComponents & {
    * If a wrapper component is defined, the MDX content will be wrapped inside it.
    */
   wrapper?: MDXWrapper
+  img?: typeof ImageZoom
+  a?: typeof Anchor
 }
 
 const DEFAULT_COMPONENTS = {
@@ -36,25 +38,33 @@ const DEFAULT_COMPONENTS = {
   a: Anchor
 }
 
-type DefaultComponents = typeof DEFAULT_COMPONENTS
-
 /**
  * Get current MDX components.
  * @returns The current set of MDX components.
  */
-export function useMDXComponents<T extends MDXComponents>(
-  components: T
-): DefaultComponents & T
-export function useMDXComponents(): DefaultComponents
-export function useMDXComponents<T extends MDXComponents>(
+export type UseMDXComponents<
   /**
-   * An object where:
-   * - The key is the name of the HTML element to override.
-   * - The value is the component to render instead.
-   * @remarks `MDXComponents`
+   * Default MDX components
    */
+  DC extends MDXComponents
+> = {
+  <T extends MDXComponents>(
+    /**
+     * An object where:
+     * - The key is the name of the HTML element to override.
+     * - The value is the component to render instead.
+     * @remarks `MDXComponents`
+     */
+    components: T
+  ): DC & T
+  (): DC
+}
+
+export const useMDXComponents: UseMDXComponents<typeof DEFAULT_COMPONENTS> = <
+  T
+>(
   components?: T
-) {
+) => {
   return {
     ...DEFAULT_COMPONENTS,
     ...components
