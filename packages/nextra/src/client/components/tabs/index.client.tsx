@@ -8,14 +8,21 @@ import {
   TabPanels
 } from '@headlessui/react'
 import type {
+  TabPanelProps as HeadlessTabPanelProps,
   TabProps as HeadlessTabProps,
   TabGroupProps,
-  TabListProps,
-  TabPanelProps
+  TabListProps
 } from '@headlessui/react'
 import cn from 'clsx'
 import type { FC, ReactElement, ReactNode } from 'react'
-import { Fragment, useEffect, useRef, useState } from 'react'
+import {
+  Children,
+  Fragment,
+  isValidElement,
+  useEffect,
+  useRef,
+  useState
+} from 'react'
 import { useHash } from '../../hooks/use-hash.js'
 
 type TabItem = string | ReactElement
@@ -29,9 +36,20 @@ function isTabObjectItem(item: unknown): item is TabObjectItem {
   return !!item && typeof item === 'object' && 'label' in item
 }
 
+const warnOnce: ((message: string) => void) & {
+  wasWarned?: boolean
+} = message => {
+  if (warnOnce.wasWarned) return
+  console.warn(message)
+  warnOnce.wasWarned = true
+}
+
 export const Tabs: FC<
   {
-    items: (TabItem | TabObjectItem)[]
+    /*
+     * @deprecated Use `Tabs.Tab#name` and `Tabs.Tab#disabled` props instead
+     **/
+    items?: (TabItem | TabObjectItem)[]
     children: ReactNode
     /** LocalStorage key for persisting the selected tab. */
     storageKey?: string
@@ -117,6 +135,24 @@ export const Tabs: FC<
     onChange?.(index)
   }
 
+  const tabPanels =
+    items ??
+    Children.map(
+      children,
+      child =>
+        isValidElement<TabPanelProps>(child) &&
+        ({
+          label: child.props.name!,
+          disabled: child.props.disabled!
+        } satisfies TabObjectItem)
+    )!
+
+  if (process.env.NODE_ENV !== 'production') {
+    warnOnce(
+      'You are using deprecated `Tabs#items` prop, and which will be removed in Nextra 5. Use `Tabs.Tab#name` and `Tabs.Tab#disabled` props instead.'
+    )
+  }
+
   return (
     <TabGroup
       selectedIndex={selectedIndex}
@@ -134,7 +170,7 @@ export const Tabs: FC<
           )
         }
       >
-        {items.map((item, index) => (
+        {tabPanels.map((item, index) => (
           <HeadlessTab
             key={index}
             disabled={isTabObjectItem(item) && item.disabled}
@@ -172,7 +208,9 @@ export const Tabs: FC<
   )
 }
 
-export const Tab: FC<TabPanelProps> = ({
+type TabPanelProps = { name?: string; disabled?: boolean }
+
+export const Tab: FC<HeadlessTabPanelProps & TabPanelProps> = ({
   children,
   // For SEO display all the Panel in the DOM and set `display: none;` for those that are not selected
   unmount = false,

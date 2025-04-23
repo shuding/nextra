@@ -10,25 +10,25 @@ import { Callout, Tabs } from 'nextra/components'
 
 <Features lang={props.params.lang} title={metadata.title} />
 
-<Tabs items={['JavaScript', 'C++', {label:'C', disabled: true}, 'Python', 'TypeScript', 'GraphQL', 'Rust', 'C#', 'Go', 'HTML', 'CSS', 'plaintext', 'bash']} defaultIndex={1}>
-  <Tabs.Tab>
+<Tabs defaultIndex={1}>
+  <Tabs.Tab name="JavaScript">
     ```js filename="hi.js"
     import { useState, useEffect } from 'react';
     ```
   </Tabs.Tab>
-  <Tabs.Tab>
+  <Tabs.Tab name="C++">
     ```cpp filename="hi.cpp"
     #include <iostream>
     ```
   </Tabs.Tab>
-  <Tabs.Tab>
+  <Tabs.Tab name="C" disabled>
     ```c filename="hi.c"
     #include <stdio.h>
     ```
   </Tabs.Tab>
-  <Tabs.Tab>
-    ```c filename="hi.c"
-    #include <stdio.h>
+  <Tabs.Tab className="Python">
+    ```python filename="hello.py"
+    print('Hello, world!')
     ```
   </Tabs.Tab>
 </Tabs>
