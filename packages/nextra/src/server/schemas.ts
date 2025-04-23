@@ -186,35 +186,45 @@ const stringOrElement = z.union([z.string(), element])
 
 export const pageThemeSchema = z.strictObject({
   breadcrumb: z.boolean().optional().meta({
-    description: 'Show or hide breadcrumb navigation.'
+    description: 'Show or hide breadcrumb navigation.',
+    default: true
   }),
   collapsed: z.boolean().optional().meta({
     description:
-      'Indicates whether the item in sidebar is collapsed by default.'
+      'Indicates whether the item in sidebar is collapsed by default.',
+    default: false
   }),
   footer: z.boolean().optional().meta({
-    description: 'Specifies whether to display the footer.'
+    description: 'Specifies whether to display the footer.',
+    default: true
   }),
   layout: z.literal(['default', 'full']).optional().meta({
-    description: 'Defines the layout style.'
+    description: 'Defines the layout style.',
+    default: "'default'"
   }),
   navbar: z.boolean().optional().meta({
-    description: 'Specifies whether to display the navbar.'
+    description: 'Specifies whether to display the navbar.',
+    default: true
   }),
   pagination: z.boolean().optional().meta({
-    description: 'Determines if pagination controls are shown.'
+    description: 'Determines if pagination controls are shown.',
+    default: true
   }),
   sidebar: z.boolean().optional().meta({
-    description: 'Specifies whether to display the sidebar.'
+    description: 'Specifies whether to display the sidebar.',
+    default: true
   }),
   timestamp: z.boolean().optional().meta({
-    description: 'Indicates if "last updated" timestamps are displayed.'
+    description: 'Indicates if "last updated" timestamps are displayed.',
+    default: true
   }),
   toc: z.boolean().optional().meta({
-    description: 'Determines whether a table of contents is displayed.'
+    description: 'Determines whether a table of contents is displayed.',
+    default: true
   }),
   typesetting: z.literal(['default', 'article']).optional().meta({
-    description: 'Configures the text typesetting style.'
+    description: 'Configures the text typesetting style.',
+    default: "'default'"
   })
 })
 
