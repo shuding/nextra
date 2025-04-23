@@ -26,27 +26,37 @@ export type MDXComponents = NestedMDXComponents & {
   [Key in StringComponent]?: FC<ComponentPropsWithoutRef<Key>>
 } & {
   /**
-   * If a wrapper component is defined, the MDX content will be wrapped inside of it.
+   * If a wrapper component is defined, the MDX content will be wrapped inside it.
    */
   wrapper?: MDXWrapper
 }
+
+const DEFAULT_COMPONENTS = {
+  img: ImageZoom,
+  a: Anchor
+}
+
+type DefaultComponents = typeof DEFAULT_COMPONENTS
 
 /**
  * Get current MDX components.
  * @returns The current set of MDX components.
  */
-export const useMDXComponents = <T extends Readonly<MDXComponents>>(
+export function useMDXComponents<T extends MDXComponents>(
+  components: T
+): DefaultComponents & T
+export function useMDXComponents(): DefaultComponents
+export function useMDXComponents<T extends MDXComponents>(
   /**
    * An object where:
    * - The key is the name of the HTML element to override.
    * - The value is the component to render instead.
    * @remarks `MDXComponents`
    */
-  components: T
-): T => {
+  components?: T
+) {
   return {
-    img: ImageZoom,
-    a: Anchor,
+    ...DEFAULT_COMPONENTS,
     ...components
-  } satisfies T
+  }
 }
