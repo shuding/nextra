@@ -26,7 +26,7 @@ export const Anchor: FC<Props> = ({ href = '', prefetch, ...props }) => {
           {children}
           {typeof children === 'string' && (
             <>
-              &nbsp;;
+              &nbsp;
               <LinkArrowIcon
                 // based on font-size
                 height="1em"
