@@ -1,4 +1,4 @@
-type $ = {
+interface $$ {
   /**
    * @default {
    *   "hue": {

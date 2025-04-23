@@ -92,6 +92,7 @@ function getDefaultValue(schema: z.ZodType): unknown {
     // @ts-expect-error fixme
     return schema.in.def.defaultValue()
   }
+  return
 }
 
 function getDocComment(schema: z.ZodType, indent: number): string {

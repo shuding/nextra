@@ -182,12 +182,12 @@ describe('generateTsFromZod', () => {
 
   it('should convert LayoutPropsSchema', () => {
     return expect(
-      'type $ = ' + generateTsFromZod(LayoutPropsSchema)
+      'interface $ ' + generateTsFromZod(LayoutPropsSchema)
     ).toMatchFileSnapshot('./snapshots/layout-props.ts')
   })
   it('should convert HeadPropsSchema', () => {
     return expect(
-      'type $ = ' + generateTsFromZod(HeadPropsSchema)
+      'interface $$ ' + generateTsFromZod(HeadPropsSchema)
     ).toMatchFileSnapshot('./snapshots/head-props.ts')
   })
   it('should convert NextraConfigSchema and HeadPropsSchema', () => {

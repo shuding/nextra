@@ -1,4 +1,4 @@
-type $ = {
+interface $ {
   /**
    * Rendered [`<Banner>` component](/docs/built-ins/banner). E.g. `<Banner {...bannerProps} />`
    */
