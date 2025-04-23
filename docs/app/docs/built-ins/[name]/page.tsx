@@ -135,11 +135,11 @@ export default $`
   const res = await generateApiReference(apiRef, {
     title: 'Component',
     subtitle: 'Props',
-    definition,
-    bottomMdxContent: `<Callout type="default">
-**Tip for TypeScript users:**<br/>
-You can retrieve the props type for the \`<${name}>\` component using \`React.ComponentProps<typeof ${name}>\`.
-</Callout>`
+    definition
+    //     bottomMdxContent: `<Callout type="default">
+    // **Tip for TypeScript users:**<br/>
+    // You can retrieve the props type for the \`<${name}>\` component using \`React.ComponentProps<typeof ${name}>\`.
+    // </Callout>`
   })
   const filePath =
     fcDefinition.filePath &&
