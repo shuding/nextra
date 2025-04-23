@@ -3,6 +3,7 @@ import { Project, SyntaxKind, ts } from 'ts-morph'
 import { logger } from '../utils.js'
 import type {
   BaseArgs,
+  GeneratedDefinition,
   GeneratedFunction,
   GeneratedType,
   Tags,
@@ -59,7 +60,7 @@ export function generateDefinition({
   code,
   exportName = 'default',
   flattened = false
-}: BaseArgs): GeneratedType | GeneratedFunction {
+}: BaseArgs): GeneratedDefinition & (GeneratedType | GeneratedFunction) {
   const sourceFile = project.createSourceFile('$.ts', code, { overwrite: true })
   const output: ExportedDeclarations[] = []
   for (const [key, declaration] of sourceFile.getExportedDeclarations()) {
@@ -74,10 +75,8 @@ export function generateDefinition({
   //     `Export "${exportName}" should not have more than one type declaration.`
   //   )
   // }
-
-  const comment = declaration
-    .getSymbolOrThrow()
-    .compilerSymbol.getDocumentationComment(compilerObject)
+  const symbol = declaration.getSymbolOrThrow()
+  const comment = symbol.compilerSymbol.getDocumentationComment(compilerObject)
   const description = ts.displayPartsToString(comment)
 
   const declarationType = declaration.getType()
@@ -147,9 +146,10 @@ export function generateDefinition({
       `No properties found, check if your type "${typeName}" exist.`
     )
   }
-
+  const tags = getTags(symbol)
   return {
     name: exportName,
+    ...(Object.keys(tags).length && { tags }),
     ...(description && { description }),
     entries
   }

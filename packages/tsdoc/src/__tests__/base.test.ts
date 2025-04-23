@@ -6,7 +6,7 @@ import { generateTsFromZod } from '../../../nextra/src/server/tsdoc/zod-to-ts.js
 import typesFixture from './fixtures/flattened?raw'
 
 describe('generateDefinition()', () => {
-  test.only('Should parse type tags', () => {
+  test('Should parse type tags', () => {
     const code = `
 /**
  * MyType description
@@ -30,6 +30,9 @@ export default MyType`
           },
         ],
         "name": "default",
+        "tags": {
+          "tag": "MyTag",
+        },
       }
     `)
   })
