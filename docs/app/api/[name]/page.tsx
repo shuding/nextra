@@ -17,7 +17,7 @@ const API_REFERENCE: (
     name: 'NextraConfig',
     packageName: 'nextra',
     isFlattened: false,
-    filePath: 'server/schemas.ts'
+    filePath: 'packages/nextra/src/server/schemas.ts'
   },
   {
     name: 'MdxOptions',
@@ -25,7 +25,7 @@ const API_REFERENCE: (
 type $ = NonNullable<NextraConfig['mdxOptions']>
 export default $`,
     isFlattened: false,
-    filePath: 'server/schemas.ts'
+    filePath: 'packages/nextra/src/server/schemas.ts'
   },
   { type: 'separator', title: 'Functions', name: '_2' },
   {
