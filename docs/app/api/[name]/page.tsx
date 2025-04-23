@@ -86,8 +86,8 @@ const routes = API_REFERENCE.filter(
 const separatorIndex = API_REFERENCE.findIndex(
   o => 'title' in o && o.title === 'Functions'
 )
-const functionsIndex = routes.findIndex(
-  o => o === API_REFERENCE[separatorIndex + 1]
+const functionsIndex = routes.indexOf(
+  API_REFERENCE[separatorIndex + 1] as ApiReference & { filePath: string }
 )
 
 export const generateStaticParams = () =>

@@ -6,8 +6,9 @@ import { generateTsFromZod } from '../../../nextra/src/server/tsdoc/zod-to-ts.js
 import typesFixture from './fixtures/flattened?raw'
 
 describe('generateDefinition()', () => {
-  test.only('useMDXComponents', () => {
-    const code = `export { useMDXComponents as default } from 'nextra/mdx-components'`
+  test('useMDXComponents', () => {
+    const code =
+      "export { useMDXComponents as default } from 'nextra/mdx-components'"
     const result = generateDefinition({ code })
     expect(result).toMatchInlineSnapshot(`
       {
