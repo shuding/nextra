@@ -38,7 +38,7 @@ const functionsIndex = API_REFERENCE.findIndex(
   o => 'title' in o && o.title === 'Functions'
 )
 
-const routes = API_REFERENCE.filter(o => !('type' in o))
+const routes = API_REFERENCE.filter((o): o is ApiReference => !('type' in o))
 
 export const generateStaticParams = () =>
   routes.map(o => ({ name: o.name.toLowerCase() }))
@@ -62,7 +62,7 @@ async function getReference(props: PageProps) {
     o => o.name.toLowerCase() === params.name
   )
   const apiRef = routes[apiRefIndex]
-  if (!apiRef || 'type' in apiRef) {
+  if (!apiRef) {
     throw new Error(`API reference not found for "${params.name}"`)
   }
   const isType = functionsIndex > apiRefIndex

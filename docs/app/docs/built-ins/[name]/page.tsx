@@ -6,8 +6,10 @@ import { generateDefinition, generateTsFromZod } from 'nextra/tsdoc'
 import { HeadPropsSchema } from 'private-next-root-dir/../packages/nextra/dist/client/components/head'
 import type { FC } from 'react'
 
+type ComponentApiReference = ApiReference & { groupKeys?: string }
+
 const API_REFERENCE: (
-  | (ApiReference & { groupKeys?: string })
+  | ComponentApiReference
   | { type: 'separator'; title: string; name: string }
 )[] = [
   { type: 'separator', title: 'Layout Components', name: '_' },
@@ -71,7 +73,9 @@ export default $`
   { name: 'TSDoc', packageName: 'nextra/tsdoc' }
 ]
 
-const routes = API_REFERENCE.filter(o => !('type' in o))
+const routes = API_REFERENCE.filter(
+  (o): o is ComponentApiReference => !('type' in o)
+)
 
 export const generateStaticParams = () =>
   routes.map(o => ({ name: o.name.toLowerCase() }))
@@ -100,7 +104,7 @@ async function getReference(props: PageProps) {
     o => o.name.toLowerCase() === params.name
   )
   const apiRef = routes[apiRefIndex]
-  if (!apiRef || 'type' in apiRef) {
+  if (!apiRef) {
     throw new Error(`API reference not found for "${params.name}"`)
   }
   const { name, packageName, groupKeys, isFlattened } = apiRef
