@@ -3,68 +3,53 @@ import cn from 'clsx'
 import NextLink from 'next/link'
 import { Anchor } from 'nextra/components'
 import { DiscordIcon, GitHubIcon } from 'nextra/icons'
-import { element, reactNode } from 'nextra/schemas'
-import type { FC } from 'react'
-import { z } from 'zod'
+import type { FC, ReactElement, ReactNode } from 'react'
 import { ClientNavbar } from './index.client'
 
-export const NavbarPropsSchema = z.strictObject({
-  children: reactNode
-    // @TODO added in zod v4
-    .optional()
-    .meta({
-      description: 'Extra content after last icon.'
-    }),
-  logoLink: z.union([z.string(), z.boolean()]).default(true).meta({
-    description:
-      "Specifies whether the logo should have a link or provides the URL for the logo's link."
-  }),
-  logo: element.meta({
-    description: 'Logo of the website.'
-  }),
-  projectLink: z.string().optional().meta({
-    description: 'URL of the project homepage.'
-  }),
-  projectIcon: reactNode
-    .default(<GitHubIcon height="24" aria-label="Project repository" />)
-    .meta({
-      description: 'Icon of the project link.',
-      default: '<GitHubIcon />'
-    }),
-  chatLink: z.string().optional().meta({
-    description: 'URL of the chat link.'
-  }),
-  chatIcon: reactNode.default(<DiscordIcon width="24" />).meta({
-    description: 'Icon of the chat link.',
-    default: '<DiscordIcon />'
-  }),
-  className: z.string().optional().meta({
-    description: 'CSS class name.'
-  }),
-  align: z.enum(['left', 'right']).default('right').meta({
-    description: 'Aligns navigation links to the specified side.'
-  })
-})
+interface NavbarProps {
+  /** Extra content after the last icon. */
+  children?: ReactNode
+  /**
+   * Specifies whether the logo should have a link or provides the URL for the logo's link.
+   * @default true
+   */
+  logoLink?: string | boolean
+  /** Logo of the website. */
+  logo: ReactElement
+  /** URL of the project homepage. */
+  projectLink?: string
+  /**
+   * Icon of the project link.
+   * @default <GitHubIcon />
+   */
+  projectIcon?: ReactNode
+  /** URL of the chat link. */
+  chatLink?: string
+  /**
+   * Icon of the chat link.
+   * @default <DiscordIcon />
+   */
+  chatIcon?: ReactNode
+  /** CSS class name. */
+  className?: string
+  /**
+   * Aligns navigation links to the specified side.
+   * @default 'right'
+   */
+  align: 'left' | 'right'
+}
 
-type NavbarProps = z.input<typeof NavbarPropsSchema>
-
-export const Navbar: FC<NavbarProps> = props => {
-  const { data, error } = NavbarPropsSchema.safeParse(props)
-  if (error) {
-    throw z.prettifyError(error)
-  }
-  const {
-    children,
-    logoLink,
-    logo,
-    projectLink,
-    projectIcon,
-    chatLink,
-    chatIcon,
-    className,
-    align
-  } = data
-
+export const Navbar: FC<NavbarProps> = ({
+  children,
+  logoLink,
+  logo,
+  projectLink,
+  projectIcon = <GitHubIcon height="24" aria-label="Project repository" />,
+  chatLink,
+  chatIcon = <DiscordIcon width="24" />,
+  className,
+  align = 'right'
+}) => {
   const logoClass = cn(
     'x:flex x:items-center',
     align === 'left' ? 'x:max-md:me-auto' : 'x:me-auto'

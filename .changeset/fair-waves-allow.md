@@ -23,6 +23,8 @@ fix(TSDoc): improve TSDoc comments for components
 - `Tabs`
 - `Playground`
 - `TSDoc`
+- `Layout`
+- `Navbar`
 
 fix(TSDoc): improve TSDoc comments for functions:
 

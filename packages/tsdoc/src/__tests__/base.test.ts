@@ -1,4 +1,3 @@
-import { NavbarPropsSchema } from '../../../nextra-theme-docs/src/components/navbar/index.js'
 import { LayoutPropsSchema } from '../../../nextra-theme-docs/src/schemas.js'
 import { HeadPropsSchema } from '../../../nextra/src/client/components/head.js'
 import { NextraConfigSchema } from '../../../nextra/src/server/schemas.js'
@@ -285,7 +284,8 @@ export default $`
     `)
   })
   test('<Navbar />', async () => {
-    const code = `type $ = ${generateTsFromZod(NavbarPropsSchema)}
+    const code = `import { Navbar } from 'nextra-theme-docs'
+type $ = React.ComponentProps<typeof Navbar>
 export default $`
     const result = generateDefinition({ code })
     await expect(result).toMatchFileSnapshot('./snapshots/navbar.json')
