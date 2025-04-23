@@ -29,7 +29,7 @@ export default MyType`
             "type": "string",
           },
         ],
-        "name": "default",
+        "name": "MyType",
         "tags": {
           "tag": "MyTag",
         },
@@ -207,7 +207,7 @@ export default $$`
             "type": "HTMLAttributes<HTMLDivElement>",
           },
         ],
-        "name": "default",
+        "name": "$$",
       }
     `)
   })
@@ -261,7 +261,7 @@ export default $$`
             "type": "HTMLAttributes<HTMLDivElement>",
           },
         ],
-        "name": "default",
+        "name": "$$",
       }
     `)
   })
@@ -307,7 +307,7 @@ export default $`
             "type": "string",
           },
         ],
-        "name": "default",
+        "name": "$",
       }
     `)
   })
@@ -350,7 +350,7 @@ export default A`
             "type": "string",
           },
         ],
-        "name": "default",
+        "name": "A",
       }
     `)
   })
@@ -386,7 +386,7 @@ export default $`
             "type": "boolean",
           },
         ],
-        "name": "default",
+        "name": "$",
       }
     `)
   })
@@ -405,7 +405,7 @@ export default Connection`
             "type": "string | null",
           },
         ],
-        "name": "default",
+        "name": "Connection",
       }
     `)
   })
@@ -441,7 +441,7 @@ export default $
               "type": "({ id, handleType, handleId, onConnect, onDisconnect, }?: UseNodeConnectionsParams | undefined) => NodeConnection[]",
             },
           ],
-          "name": "default",
+          "name": "$",
         }
       `)
     })
@@ -813,7 +813,7 @@ export default $`,
             "type": "string | undefined",
           },
         ],
-        "name": "default",
+        "name": "$",
       }
     `)
   })
@@ -854,7 +854,7 @@ export default $`
             "type": "unknown",
           },
         ],
-        "name": "default",
+        "name": "$",
       }
     `)
   })
