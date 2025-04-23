@@ -11,7 +11,7 @@ export function generateTsFromZod(schema: z.ZodType, indent = 2): string {
       const tsType = generateTsFromZodType(value, indent + 2)
       const docComment = getDocComment(value, indent)
       // Check if field explicitly set as optional with .optional(),
-      // otherwise it's optional if it has default value
+      // otherwise it's optional if it has a default value
       const isOptional =
         value instanceof z.ZodOptional || getDefaultValue(value) !== undefined
       return [
