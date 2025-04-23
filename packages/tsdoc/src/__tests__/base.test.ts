@@ -6,6 +6,44 @@ import { generateTsFromZod } from '../../../nextra/src/server/tsdoc/zod-to-ts.js
 import typesFixture from './fixtures/flattened?raw'
 
 describe('generateDefinition()', () => {
+  test.only('useMDXComponents', () => {
+    const code = `export { useMDXComponents as default } from 'nextra/mdx-components'`
+    const result = generateDefinition({ code })
+    expect(result).toMatchInlineSnapshot(`
+      {
+        "description": "Get current MDX components.",
+        "name": "useMDXComponents",
+        "signatures": [
+          {
+            "params": [
+              {
+                "description": "An object where:
+      - The key is the name of the HTML element to override.
+      - The value is the component to render instead.",
+                "name": "components",
+                "tags": {
+                  "remarks": "\`MDXComponents\`",
+                },
+                "type": "MDXComponents",
+              },
+            ],
+            "returns": {
+              "type": "{ img: FC<ImageProps>; a: FC<Omit<Omit<Omit<AnchorHTMLAttributes<HTMLAnchorElement>, "onClick" | "onMouseEnter" | "onTouchStart" | ... 9 more ... | "onNavigate"> & { ...; } & { ...; } & RefAttributes<...>, "ref">, "href"> & { ...; }>; } & T",
+            },
+          },
+          {
+            "params": [],
+            "returns": {
+              "type": "{ img: FC<ImageProps>; a: FC<Omit<Omit<Omit<AnchorHTMLAttributes<HTMLAnchorElement>, "onClick" | "onMouseEnter" | "onTouchStart" | ... 9 more ... | "onNavigate"> & { ...; } & { ...; } & RefAttributes<...>, "ref">, "href"> & { ...; }>; }",
+            },
+          },
+        ],
+        "tags": {
+          "returns": "The current set of MDX components.",
+        },
+      }
+    `)
+  })
   test('Should parse type tags', () => {
     const code = `
 /**
