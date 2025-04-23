@@ -7,7 +7,7 @@ update zod to v4
 
 feat(TSDoc): rename `generateDocumentation` to `generateDefinition`
 
-feat(Bleed): pass all props from `div` element to `<Bleed>` container
+feat(Bleed): pass all props from `div` element to `Bleed`, `Callout`, `Banner` container
 
 fix(TSDoc): improve TSDoc comments for components
 
