@@ -5,8 +5,10 @@ import type { MdxFile } from 'nextra'
 import { generateDefinition } from 'nextra/tsdoc'
 import type { FC } from 'react'
 
+type CurrentReference = ApiReference & { filePath: string }
+
 const API_REFERENCE: (
-  | (ApiReference & { filePath: string })
+  | CurrentReference
   | { type: 'separator'; title: string; name: string }
 )[] = [
   { type: 'separator', title: 'Types', name: '_' },
@@ -80,14 +82,14 @@ export default $`,
 ]
 
 const routes = API_REFERENCE.filter(
-  (o): o is ApiReference & { filePath: string } => !('type' in o)
+  (o): o is CurrentReference => !('type' in o)
 )
 
 const separatorIndex = API_REFERENCE.findIndex(
   o => 'title' in o && o.title === 'Functions'
 )
 const functionsIndex = routes.indexOf(
-  API_REFERENCE[separatorIndex + 1] as ApiReference & { filePath: string }
+  API_REFERENCE[separatorIndex + 1] as CurrentReference
 )
 
 export const generateStaticParams = () =>
@@ -129,7 +131,7 @@ async function getReference(props: PageProps) {
     subtitle: isType ? 'Fields' : 'Signature',
     definition
   })
-  // Add edit on github link to points on source file
+  // Add edit on GitHub link to points on a source file
   result.metadata.filePath = `https://github.com/shuding/nextra/tree/main/packages/nextra/src/${apiRef.filePath}`
 
   return result
