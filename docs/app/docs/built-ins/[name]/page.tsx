@@ -20,7 +20,7 @@ const API_REFERENCE: (
   {
     name: 'Head',
     packageName: 'nextra/components',
-    isFlattened: true,
+    isFlattened: true
   },
   { name: 'Search', packageName: 'nextra/components', isFlattened: false },
   { type: 'separator', title: 'Content Components', name: '_2' },
