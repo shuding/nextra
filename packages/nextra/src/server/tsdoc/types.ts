@@ -11,11 +11,21 @@ export type ReturnField = {
 }
 
 export type GeneratedDefinition = {
-  /** Definition name. */
+  /**
+   * Where type definition is located on disk.
+   */
+  filePath?: string
+  /**
+   * Definition name.
+   */
   name: string
-  /** Definition description. */
+  /**
+   * Definition description.
+   */
   description?: string
-  /** [TSDoc tags](https://tsdoc.org/pages/spec/tag_kinds). */
+  /**
+   * [TSDoc tags](https://tsdoc.org/pages/spec/tag_kinds).
+   */
   tags?: Tags
 }
 
