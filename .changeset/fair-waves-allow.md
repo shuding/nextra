@@ -23,3 +23,8 @@ fix(TSDoc): improve TSDoc comments for components
 - `Tabs`
 - `Playground`
 - `TSDoc`
+
+fix(TSDoc): improve TSDoc comments for functions:
+
+- `nextra`
+- `generateDefinition`

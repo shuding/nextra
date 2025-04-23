@@ -44,7 +44,7 @@ export const MyComponent = () => null
     const result = compileMetadata('export { default } from "./foo.mdx"', {
       filePath: 'bar.mdx'
     })
-    expect(result).resolves.toMatchInlineSnapshot(`
+    return expect(result).resolves.toMatchInlineSnapshot(`
       "import {Fragment as _Fragment, jsx as _jsx} from "react/jsx-runtime";
       export const metadata = {
         "title": "Bar",

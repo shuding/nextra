@@ -19,7 +19,7 @@ export const Test = ({value}) => value
 `,
       opts
     )
-    await expect(clean(rawJs)).resolves.toMatchInlineSnapshot(`
+    return expect(clean(rawJs)).resolves.toMatchInlineSnapshot(`
       "/*@jsxRuntime automatic*/
       /*@jsxImportSource react*/
       'use strict'

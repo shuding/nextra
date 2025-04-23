@@ -10,7 +10,7 @@ describe('LaTeX', () => {
   describe('KaTeX', () => {
     it('should convert ```math code block language', async () => {
       const rawJs = await compileMdx('```math\nx^2\n```', options)
-      expect(clean(rawJs)).resolves.toMatchInlineSnapshot(`
+      return expect(clean(rawJs)).resolves.toMatchInlineSnapshot(`
         "/*@jsxRuntime automatic*/
         /*@jsxImportSource react*/
         'use strict'
@@ -115,7 +115,7 @@ describe('LaTeX', () => {
 
     it('should convert math inline', async () => {
       const rawJs = await compileMdx(INLINE_MATH, options)
-      expect(clean(rawJs)).resolves.toMatchInlineSnapshot(`
+      return expect(clean(rawJs)).resolves.toMatchInlineSnapshot(`
         "/*@jsxRuntime automatic*/
         /*@jsxImportSource react*/
         import { useMDXComponents as _provideComponents } from 'next-mdx-import-source-file'
@@ -146,7 +146,7 @@ describe('LaTeX', () => {
 
     it('should convert ```math code block language', async () => {
       const rawJs = await compileMdx(MATH_LANG, options)
-      expect(clean(rawJs)).resolves.toMatchInlineSnapshot(`
+      return expect(clean(rawJs)).resolves.toMatchInlineSnapshot(`
         "/*@jsxRuntime automatic*/
         /*@jsxImportSource react*/
         import { useMDXComponents as _provideComponents } from 'next-mdx-import-source-file'
@@ -177,7 +177,7 @@ export let bar
 
 ${MATH_LANG}`
       const rawJs = await compileMdx(rawMdx, options)
-      expect(clean(rawJs)).resolves.toMatchInlineSnapshot(`
+      return expect(clean(rawJs)).resolves.toMatchInlineSnapshot(`
         "/*@jsxRuntime automatic*/
         /*@jsxImportSource react*/
         import { useMDXComponents as _provideComponents } from 'next-mdx-import-source-file'

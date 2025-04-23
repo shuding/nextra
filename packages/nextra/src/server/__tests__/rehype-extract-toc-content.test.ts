@@ -20,7 +20,7 @@ bar[^1]
 `,
       opts
     )
-    expect(clean(rawJs)).resolves.toMatchInlineSnapshot(`
+    return expect(clean(rawJs)).resolves.toMatchInlineSnapshot(`
       "/*@jsxRuntime automatic*/
       /*@jsxImportSource react*/
       import { useMDXComponents as _provideComponents } from 'next-mdx-import-source-file'
@@ -113,7 +113,7 @@ import { Steps } from 'nextra/components'
 `,
       opts
     )
-    expect(clean(rawJs)).resolves.toMatchInlineSnapshot(`
+    return expect(clean(rawJs)).resolves.toMatchInlineSnapshot(`
       "/*@jsxRuntime automatic*/
       /*@jsxImportSource react*/
       import { useMDXComponents as _provideComponents } from 'next-mdx-import-source-file'
@@ -186,7 +186,7 @@ export const metadata = {
     `,
       opts
     )
-    expect(clean(rawJs)).resolves.toMatchInlineSnapshot(`
+    return expect(clean(rawJs)).resolves.toMatchInlineSnapshot(`
       "/*@jsxRuntime automatic*/
       /*@jsxImportSource react*/
       import { useMDXComponents as _provideComponents } from 'next-mdx-import-source-file'
@@ -353,7 +353,7 @@ import { MDXRemote } from 'nextra/mdx-remote'
         ...opts,
         filePath: '[[...slug]].mdx'
       })
-      expect(clean(rawJs)).resolves.toMatchInlineSnapshot(`
+      return expect(clean(rawJs)).resolves.toMatchInlineSnapshot(`
         "/*@jsxRuntime automatic*/
         /*@jsxImportSource react*/
         import { useMDXComponents as _provideComponents } from 'next-mdx-import-source-file'
@@ -408,7 +408,7 @@ export const myVar = 123
 ### 123 {myVar}`
 
       const rawJs = await compileMdx(rawMdx)
-      expect(clean(rawJs)).resolves.toMatchInlineSnapshot(`
+      return expect(clean(rawJs)).resolves.toMatchInlineSnapshot(`
         "'use strict'
         const { Fragment: _Fragment, jsx: _jsx, jsxs: _jsxs } = arguments[0]
         const { useMDXComponents: _provideComponents } = arguments[0]
