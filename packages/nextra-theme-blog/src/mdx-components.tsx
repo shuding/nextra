@@ -13,7 +13,7 @@ import {
   withIcons
 } from 'nextra/components'
 import { useMDXComponents as getNextraMDXComponents } from 'nextra/mdx-components'
-import type { MDXComponents } from 'nextra/mdx-components'
+import type { MDXComponents, UseMDXComponents } from 'nextra/mdx-components'
 import type { ComponentProps, FC } from 'react'
 import { Meta } from './components/meta'
 import { isValidDate } from './is-valid-date'
@@ -52,11 +52,9 @@ const Blockquote = withGitHubAlert(({ type, ...props }) => (
   <Callout type={CALLOUT_TYPE[type]} {...props} />
 ))
 
-type BlogMDXComponents = Readonly<
-  MDXComponents & {
-    DateFormatter?: FC<{ date: Date }>
-  }
->
+type BlogMDXComponents = MDXComponents & {
+  DateFormatter?: FC<{ date: Date }>
+}
 
 const DEFAULT_COMPONENTS = getNextraMDXComponents({
   blockquote: Blockquote,
@@ -75,12 +73,15 @@ const DEFAULT_COMPONENTS = getNextraMDXComponents({
   tr: Table.Tr
 })
 
-export const useMDXComponents = ({
-  DateFormatter,
-  ...components
-}: BlogMDXComponents = {}) =>
-  ({
+export const useMDXComponents: UseMDXComponents<typeof DEFAULT_COMPONENTS> = <
+  T extends BlogMDXComponents
+>(
+  comp?: T
+) => {
+  const { DateFormatter, ...components } = comp ?? {}
+  return {
     ...DEFAULT_COMPONENTS,
+    // @ts-expect-error -- fixme
     wrapper({ children, metadata }) {
       const date = (metadata as any).date as string
       if (date && !isValidDate(date)) {
@@ -108,4 +109,5 @@ export const useMDXComponents = ({
       )
     },
     ...components
-  }) satisfies BlogMDXComponents
+  }
+}
