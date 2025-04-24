@@ -325,7 +325,7 @@ export default $`
             "type": "ReactNode",
           },
           {
-            "description": "Labels that can be added to the new created issue.",
+            "description": "Labels that can be added to the newly created issue.",
             "name": "labels",
             "optional": true,
             "tags": {
@@ -334,7 +334,7 @@ export default $`
             "type": "string",
           },
           {
-            "description": "Top content of page.",
+            "description": "Top content of the page.",
             "name": "children",
             "optional": true,
             "tags": {
