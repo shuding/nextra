@@ -58,18 +58,18 @@ export type UseMDXComponents<
   /**
    * Default MDX components
    */
-  DC extends MDXComponents
+  DefaultMDXComponents extends MDXComponents
 > = {
-  <T extends MDXComponents>(
+  <components extends MDXComponents>(
     /**
      * An object where:
      * - The key is the name of the HTML element to override.
      * - The value is the component to render instead.
      * @remarks `MDXComponents`
      */
-    components: T
-  ): DC & T
-  (): DC
+    components: components
+  ): DefaultMDXComponents & components
+  (): DefaultMDXComponents
 }
 
 export const useMDXComponents: UseMDXComponents<typeof DEFAULT_COMPONENTS> = <

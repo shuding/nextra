@@ -45,11 +45,12 @@ interface Options {
   title: string
   subtitle: string
   definition: ReturnType<typeof generateDefinition>
+  bottomMdxContent?: string
 }
 
 export async function generateApiReference(
   apiRef: ApiReference,
-  { title, subtitle, definition }: Options
+  { title, subtitle, definition, bottomMdxContent }: Options
 ) {
   const { description, tags = {} } = definition
   const result = [
@@ -85,7 +86,8 @@ ${tags.example}`,
     tags.usage &&
       `## Usage
 
-${tags.usage}`
+${tags.usage}`,
+    bottomMdxContent
   ].filter(Boolean)
 
   const rawJs = await compileMdx(result.join('\n\n'))

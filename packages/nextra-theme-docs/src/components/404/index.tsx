@@ -10,12 +10,12 @@ type NotFoundPageProps = {
    */
   content?: ReactNode
   /**
-   * Labels that can be added to the new created issue.
+   * Labels that can be added to the newly created issue.
    * @default 'bug'
    */
   labels?: string
   /**
-   * Top content of page.
+   * Top content of the page.
    * @default <H1>404: Page Not Found</H1>
    */
   children?: ReactNode
@@ -23,10 +23,13 @@ type NotFoundPageProps = {
   className?: string
 }
 
+// Fixes react compiler error Expression type `JSXElement` cannot be safely reordered
+const defaultChildren = <H1>404: Page Not Found</H1>
+
 export const NotFoundPage: FC<NotFoundPageProps> = ({
   content = 'Submit an issue about broken link',
   labels = 'bug',
-  children,
+  children = defaultChildren,
   className
 }) => {
   return (
@@ -36,7 +39,7 @@ export const NotFoundPage: FC<NotFoundPageProps> = ({
         className
       )}
     >
-      {children || <H1>404: Page Not Found</H1>}
+      {children}
       <NotFoundLink labels={labels}>{content}</NotFoundLink>
     </div>
   )

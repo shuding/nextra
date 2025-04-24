@@ -1,5 +1,8 @@
+import path from 'node:path'
+import slash from 'slash'
 import type { ExportedDeclarations, Symbol as TsSymbol, Type } from 'ts-morph'
 import { Project, SyntaxKind, ts } from 'ts-morph'
+import { CWD } from '../constants.js'
 import { logger } from '../utils.js'
 import type {
   BaseArgs,
@@ -20,6 +23,8 @@ const project = new Project({
     strictNullChecks: true
   }
 })
+
+const DEFAULT_FILENAME = '$.ts'
 
 const { compilerObject } = project.getTypeChecker()
 
@@ -61,7 +66,9 @@ export function generateDefinition({
   exportName = 'default',
   flattened = false
 }: BaseArgs): GeneratedDefinition & (GeneratedType | GeneratedFunction) {
-  const sourceFile = project.createSourceFile('$.ts', code, { overwrite: true })
+  const sourceFile = project.createSourceFile(DEFAULT_FILENAME, code, {
+    overwrite: true
+  })
   const output: ExportedDeclarations[] = []
   for (const [key, declaration] of sourceFile.getExportedDeclarations()) {
     if (key === exportName) output.push(...declaration)
@@ -75,12 +82,17 @@ export function generateDefinition({
   //     `Export "${exportName}" should not have more than one type declaration.`
   //   )
   // }
+  const declarationFilePath = declaration.getSourceFile().getFilePath()
+  const filePath = slash(path.relative(CWD, declarationFilePath))
   const symbol = declaration.getSymbolOrThrow()
   const { comment, tags } = getCommentAndTags(declaration)
   const description = ts.displayPartsToString(comment)
   tags.returns &&= replaceJsDocLinks(tags.returns)
 
   const definition: GeneratedDefinition = {
+    // Skip adding `filePath` to snapshots on test env, since we have tests on Mac and on Windows, they fail
+    ...// process.env.NODE_ENV !== 'test' &&
+    (filePath !== DEFAULT_FILENAME && { filePath }),
     name: symbol.getName(),
     ...(description && { description }),
     ...(Object.keys(tags).length && { tags })

@@ -2,12 +2,15 @@ import { ThemeProvider } from 'next-themes'
 import { ViewTransitions } from 'next-view-transitions'
 import type { ComponentProps, FC, ReactNode } from 'react'
 
+// Fix react compiler error Expression type `TemplateLiteral` cannot be safely reordered
+const defaultChildren = `CC BY-NC 4.0 ${new Date().getFullYear()} © Shu Ding.`
+
 export const Footer: FC<{
   children?: ReactNode
-}> = ({ children }) => {
+}> = ({ children = defaultChildren }) => {
   return (
     <small className="x:mt-32 x:block" data-pagefind-ignore="all">
-      {children || `CC BY-NC 4.0 ${new Date().getFullYear()} © Shu Ding.`}
+      {children}
     </small>
   )
 }

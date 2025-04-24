@@ -1,3 +1,4 @@
+import path from 'node:path'
 import { generateApiReference } from '@components/generate-api-reference'
 import type { ApiReference } from '@components/generate-api-reference'
 import { useMDXComponents as getMDXComponents } from 'next-mdx-import-source-file'
@@ -131,11 +132,25 @@ export default $`
     ...fcPropsDefinition,
     ...fcDefinition
   }
-  return generateApiReference(apiRef, {
+  const res = await generateApiReference(apiRef, {
     title: 'Component',
     subtitle: 'Props',
     definition
+    //     bottomMdxContent: `<Callout type="default">
+    // **Tip for TypeScript users:**<br/>
+    // You can retrieve the props type for the \`<${name}>\` component using \`React.ComponentProps<typeof ${name}>\`.
+    // </Callout>`
   })
+  const filePath =
+    fcDefinition.filePath &&
+    path
+      .relative('..', fcDefinition.filePath)
+      .replace(/\.d.ts$/, '.tsx')
+      .replace('/dist/', '/src/')
+  // Add edit on GitHub link to points on a source file
+  res.metadata.filePath = `https://github.com/shuding/nextra/tree/main/${filePath}`
+
+  return res
 }
 
 export async function generateMetadata(props: PageProps) {
