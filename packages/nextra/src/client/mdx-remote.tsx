@@ -30,7 +30,7 @@ export type MDXRemoteProps = Readonly<{
  *
  * @returns A rendered React element that renders the MDX content.
  * @example
- * ```mdx
+ * ```mdx filename="example.mdx"
  * import { compileMdx } from 'nextra/compile'
  * import { MDXRemote } from 'nextra/mdx-remote'
  *
