@@ -66,6 +66,7 @@ const API_REFERENCE: (
   },
   { name: 'Tabs', packageName: 'nextra/components' },
   { type: 'separator', title: 'Other Components', name: '_3' },
+  { name: 'MDXRemote', packageName: 'nextra/mdx-remote' },
   { name: 'Playground', packageName: 'nextra/components' },
   { name: 'TSDoc', packageName: 'nextra/tsdoc' }
 ]
