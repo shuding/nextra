@@ -113,7 +113,7 @@
     "unist-util-visit": "^5.0.0",
     "unist-util-visit-children": "^3.0.0",
     "yaml": "^2.3.2",
-    "zod": "4.0.0-beta.20250420T053007"
+    "zod": "4.0.0-beta.20250424T163858"
   },
   "devDependencies": {
     "@svgr/plugin-svgo": "^8.1.0",
