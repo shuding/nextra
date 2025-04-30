@@ -1,5 +1,18 @@
 # nextra-theme-blog
 
+## 4.3.0-alpha.22
+
+### Minor Changes
+
+- b5fab80: add `MDXRemote` component docs page
+  https://nextra.site/docs/built-ins/mdxremote
+
+### Patch Changes
+
+- Updated dependencies [c93fc48]
+- Updated dependencies [b5fab80]
+  - nextra@4.3.0-alpha.22
+
 ## 4.3.0-alpha.21
 
 ### Patch Changes

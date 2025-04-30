@@ -1,5 +1,48 @@
 # nextra-theme-docs
 
+## 4.3.0-alpha.22
+
+### Minor Changes
+
+- c93fc48: update zod to v4
+
+  feat(TSDoc): rename `generateDocumentation` to `generateDefinition`
+
+  feat(Bleed): pass all props from `div` element to `Bleed`, `Callout`, `Banner`
+  container
+
+  fix(TSDoc): improve TSDoc comments for components
+
+  - `Banner`
+  - `Head`
+  - `Search`
+  - `Bleed`
+  - `Callout`
+  - `Cards`
+  - `FileTree`
+  - `Steps`
+  - `Table`
+  - `Tabs`
+  - `Playground`
+  - `TSDoc`
+  - `Layout`
+  - `Navbar`
+
+  fix(TSDoc): improve TSDoc comments for functions:
+
+  - `nextra`
+  - `generateDefinition`
+  - `useMDXComponents`
+
+- b5fab80: add `MDXRemote` component docs page
+  https://nextra.site/docs/built-ins/mdxremote
+
+### Patch Changes
+
+- Updated dependencies [c93fc48]
+- Updated dependencies [b5fab80]
+  - nextra@4.3.0-alpha.22
+
 ## 4.3.0-alpha.21
 
 ### Patch Changes
