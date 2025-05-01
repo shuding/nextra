@@ -54,6 +54,25 @@ export default withNextra({
 })
 ```
 
+For Next 15:
+
+```diff filename="next.config.mjs"
+import nextra from 'nextra'
+
+const withNextra = nextra()
+
+export default withNextra({
++ experimental: {
++   turbo: {
++     resolveAlias: {
++       // Path to your `mdx-components` file with extension
++       '@vercel/turbopack-next/mdx-import-source': './src/mdx-components.tsx'
++     }
++   }
++ }
+})
+```
+
 > [!TIP]
 >
 > - You can keep `mdx-components` file in root of your project, or in
