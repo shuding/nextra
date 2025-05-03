@@ -39,6 +39,11 @@ export function useMDXComponents(components) {
 To fix this, update the `turbopack.resolveAlias` section in your `next.config`
 file:
 
+> [!NOTE]
+>
+> - If you're using Next.js < 15.3, use `experimental.turbopack.resolveAlias`
+> - If you're using Next.js ≥ 15.3, use `turbopack.resolveAlias`
+
 ```diff filename="next.config.mjs"
 import nextra from 'nextra'
 
