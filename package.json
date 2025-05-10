@@ -37,7 +37,7 @@
       "lightningcss": "1.29.3",
       "esbuild": "0.25.3",
       "vite": "6.3.4",
-      "next": "15.3.1"
+      "next": "15.3.2"
     },
     "patchedDependencies": {
       "esbuild-plugin-svgr": "patches/esbuild-plugin-svgr.patch",
