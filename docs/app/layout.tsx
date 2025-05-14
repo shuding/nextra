@@ -6,7 +6,7 @@ import NextImage from 'next/image'
 import { Footer, Layout, Link, Navbar } from 'nextra-theme-docs'
 import { Anchor, Banner, Head } from 'nextra/components'
 import type { FC, ReactNode } from 'react'
-import xyflow from './showcase/_logos/xyflow.jpg'
+import xyflow from './showcase/_logos/xyflow.png'
 import './globals.css'
 
 export const metadata: Metadata = {
