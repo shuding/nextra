@@ -33,8 +33,8 @@ importers:
   .:
     devDependencies:
       '@changesets/cli':
-        specifier: 2.29.2
-        version: 2.29.2
+        specifier: 2.29.4
+        version: 2.29.4
       '@rollup/plugin-alias':
         specifier: 5.1.1
         version: 5.1.1(rollup@4.36.0)
@@ -1238,14 +1238,14 @@ packages:
   '@changesets/apply-release-plan@7.0.12':
     resolution: {integrity: sha512-EaET7As5CeuhTzvXTQCRZeBUcisoYPDDcXvgTE/2jmmypKp0RC7LxKj/yzqeh/1qFTZI7oDGFcL1PHRuQuketQ==}
 
-  '@changesets/assemble-release-plan@6.0.6':
-    resolution: {integrity: sha512-Frkj8hWJ1FRZiY3kzVCKzS0N5mMwWKwmv9vpam7vt8rZjLL1JMthdh6pSDVSPumHPshTTkKZ0VtNbE0cJHZZUg==}
+  '@changesets/assemble-release-plan@6.0.8':
+    resolution: {integrity: sha512-y8+8LvZCkKJdbUlpXFuqcavpzJR80PN0OIfn8HZdwK7Sh6MgLXm4hKY5vu6/NDoKp8lAlM4ERZCqRMLxP4m+MQ==}
 
   '@changesets/changelog-git@0.2.1':
     resolution: {integrity: sha512-x/xEleCFLH28c3bQeQIyeZf8lFXyDFVn1SgcBiR2Tw/r4IAWlk1fzxCEZ6NxQAjF2Nwtczoen3OA2qR+UawQ8Q==}
 
-  '@changesets/cli@2.29.2':
-    resolution: {integrity: sha512-vwDemKjGYMOc0l6WUUTGqyAWH3AmueeyoJa1KmFRtCYiCoY5K3B68ErYpDB6H48T4lLI4czum4IEjh6ildxUeg==}
+  '@changesets/cli@2.29.4':
+    resolution: {integrity: sha512-VW30x9oiFp/un/80+5jLeWgEU6Btj8IqOgI+X/zAYu4usVOWXjPIK5jSSlt5jsCU7/6Z7AxEkarxBxGUqkAmNg==}
     hasBin: true
 
   '@changesets/config@3.1.1':
@@ -1257,8 +1257,8 @@ packages:
   '@changesets/get-dependents-graph@2.1.3':
     resolution: {integrity: sha512-gphr+v0mv2I3Oxt19VdWRRUxq3sseyUpX9DaHpTUmLj92Y10AGy+XOtV+kbM6L/fDcpx7/ISDFK6T8A/P3lOdQ==}
 
-  '@changesets/get-release-plan@4.0.10':
-    resolution: {integrity: sha512-CCJ/f3edYaA3MqoEnWvGGuZm0uMEMzNJ97z9hdUR34AOvajSwySwsIzC/bBu3+kuGDsB+cny4FljG8UBWAa7jg==}
+  '@changesets/get-release-plan@4.0.12':
+    resolution: {integrity: sha512-KukdEgaafnyGryUwpHG2kZ7xJquOmWWWk5mmoeQaSvZTWH1DC5D/Sw6ClgGFYtQnOMSQhgoEbDxAbpIIayKH1g==}
 
   '@changesets/get-version-range-type@0.4.0':
     resolution: {integrity: sha512-hwawtob9DryoGTpixy1D3ZXbGgJu1Rhr+ySH2PvTLHvkZuQ7sRT4oQwMh0hbqZH1weAooedEjRsbrWcGLCeyVQ==}
@@ -7696,7 +7696,7 @@ snapshots:
       resolve-from: 5.0.0
       semver: 7.7.1
 
-  '@changesets/assemble-release-plan@6.0.6(patch_hash=auf2jxmw44xswrllmvngoy3z54)':
+  '@changesets/assemble-release-plan@6.0.8(patch_hash=auf2jxmw44xswrllmvngoy3z54)':
     dependencies:
       '@changesets/errors': 0.2.0
       '@changesets/get-dependents-graph': 2.1.3
@@ -7709,15 +7709,15 @@ snapshots:
     dependencies:
       '@changesets/types': 6.1.0
 
-  '@changesets/cli@2.29.2':
+  '@changesets/cli@2.29.4':
     dependencies:
       '@changesets/apply-release-plan': 7.0.12
-      '@changesets/assemble-release-plan': 6.0.6(patch_hash=auf2jxmw44xswrllmvngoy3z54)
+      '@changesets/assemble-release-plan': 6.0.8(patch_hash=auf2jxmw44xswrllmvngoy3z54)
       '@changesets/changelog-git': 0.2.1
       '@changesets/config': 3.1.1
       '@changesets/errors': 0.2.0
       '@changesets/get-dependents-graph': 2.1.3
-      '@changesets/get-release-plan': 4.0.10
+      '@changesets/get-release-plan': 4.0.12
       '@changesets/git': 3.0.4
       '@changesets/logger': 0.1.1
       '@changesets/pre': 2.0.2
@@ -7761,9 +7761,9 @@ snapshots:
       picocolors: 1.1.1
       semver: 7.7.1
 
-  '@changesets/get-release-plan@4.0.10':
+  '@changesets/get-release-plan@4.0.12':
     dependencies:
-      '@changesets/assemble-release-plan': 6.0.6(patch_hash=auf2jxmw44xswrllmvngoy3z54)
+      '@changesets/assemble-release-plan': 6.0.8(patch_hash=auf2jxmw44xswrllmvngoy3z54)
       '@changesets/config': 3.1.1
       '@changesets/pre': 2.0.2
       '@changesets/read': 0.6.5
