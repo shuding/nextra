@@ -68,6 +68,10 @@ type SearchProps = {
    * @default 'Search documentation…'
    */
   placeholder?: string
+  /**
+   * Auto focus on the search input.
+   */
+  autoFocus?: boolean  
   /** CSS class name. */
   className?: string
   searchOptions?: PagefindSearchOptions
@@ -104,6 +108,7 @@ export const Search: FC<SearchProps> = ({
   errorText = 'Failed to load search index.',
   loading = 'Loading…',
   placeholder = 'Search documentation…',
+  autoFocus = false,
   searchOptions
 }) => {
   const [isLoading, setIsLoading] = useState(true)
@@ -277,6 +282,7 @@ export const Search: FC<SearchProps> = ({
           onBlur={handleFocus}
           value={search}
           placeholder={placeholder}
+          autoFocus={autoFocus}
         />
         {shortcut}
       </div>
