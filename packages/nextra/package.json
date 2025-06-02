@@ -102,7 +102,7 @@
     "remark-frontmatter": "^5.0.0",
     "remark-gfm": "^4.0.0",
     "remark-math": "^6.0.0",
-    "remark-reading-time": "^2.0.1",
+    "remark-reading-time": "^2.0.2",
     "remark-smartypants": "^3.0.0",
     "server-only": "^0.0.1",
     "shiki": "^3.2.1",
