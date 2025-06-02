@@ -1,5 +1,11 @@
 # nextra
 
+## 4.3.0-alpha.23
+
+### Patch Changes
+
+- 9690841: Upgrade remark-reading-time to 2.0.2 in dependencies.
+
 ## 4.3.0-alpha.22
 
 ### Minor Changes
