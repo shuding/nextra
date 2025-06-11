@@ -40,8 +40,8 @@
     "zustand": "^5.0.1"
   },
   "devDependencies": {
-    "@tailwindcss/cli": "4.0.17",
-    "@tailwindcss/postcss": "4.0.17",
+    "@tailwindcss/cli": "4.1.10",
+    "@tailwindcss/postcss": "4.1.10",
     "@testing-library/react": "^16.0.0",
     "@types/react": "^19.0.12",
     "@vitejs/plugin-react": "^4.3.4",
@@ -51,7 +51,7 @@
     "nextra": "workspace:*",
     "postcss": "^8.4.49",
     "react": "19.1.0",
-    "tailwindcss": "4.0.17",
+    "tailwindcss": "4.1.10",
     "vitest": "^3.0.0",
     "zx": "^8.2.4"
   },
