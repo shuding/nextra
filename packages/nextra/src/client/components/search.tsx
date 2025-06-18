@@ -71,6 +71,7 @@ type SearchProps = {
   /** CSS class name. */
   className?: string
   searchOptions?: PagefindSearchOptions
+  /** Callback that fires on every search input change. */
   onSearch?: (query: string) => void
 }
 
