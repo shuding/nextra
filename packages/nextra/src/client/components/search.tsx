@@ -71,7 +71,29 @@ type SearchProps = {
   /** CSS class name. */
   className?: string
   searchOptions?: PagefindSearchOptions
-  /** Callback that fires on every search input change. */
+  /**
+   * Callback that fires on every search input change. This prop is not
+   * serializable, and cannot be added to a server side layout directly.
+   * To use this prop, you can create a client-side wrapper component,
+   * ```tsx
+   * 'use client'
+   *
+   * import { Search } from 'nextra/components'
+   *
+   * export function SearchWithCallback() {
+   *   return (
+   *     <Search
+   *       onSearch={(query) => {
+   *         console.log('Query:', query)
+   *       }}
+   *     />
+   *   )
+   * }
+   * ```
+   * add then add it in the layout:
+   * ```tsx
+   * <Layout search={<SearchWithCallback />} {...rest} />
+   */
   onSearch?: (query: string) => void
 }
 
