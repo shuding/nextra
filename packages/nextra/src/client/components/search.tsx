@@ -71,6 +71,7 @@ type SearchProps = {
   /** CSS class name. */
   className?: string
   searchOptions?: PagefindSearchOptions
+  onSearch?: (query: string) => void
 }
 
 const INPUTS = new Set(['INPUT', 'SELECT', 'BUTTON', 'TEXTAREA'])
@@ -104,7 +105,8 @@ export const Search: FC<SearchProps> = ({
   errorText = 'Failed to load search index.',
   loading = 'Loading…',
   placeholder = 'Search documentation…',
-  searchOptions
+  searchOptions,
+  onSearch
 }) => {
   const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState<ReactElement | string>('')
@@ -224,6 +226,7 @@ export const Search: FC<SearchProps> = ({
   const handleChange = (event: SyntheticEvent<HTMLInputElement>) => {
     const { value } = event.currentTarget
     setSearch(value)
+    onSearch?.(value)
   }
 
   const handleSelect = (searchResult: PagefindResult | null) => {
