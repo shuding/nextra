@@ -1,5 +1,12 @@
 # nextra
 
+## 4.3.0-alpha.27
+
+### Minor Changes
+
+- 01ac538: feat(tsdoc): support @inline tag and fix mobile overflow in <TSDoc />
+  table
+
 ## 4.3.0-alpha.26
 
 ### Patch Changes
