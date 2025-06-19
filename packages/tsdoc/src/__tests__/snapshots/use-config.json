@@ -13,7 +13,7 @@ that determines whether the sidebar should be hidden on the current page.",
           "description": "Active type for current page, used to determine layout in theme.",
           "name": "normalizePagesResult.activeType",
           "optional": true,
-          "type": ""doc" | "page" | "menu"",
+          "type": "'doc' | 'page' | 'menu'",
         },
         {
           "description": "Active index for current page, used for pagination in combination with `flatDocsDirectories`
