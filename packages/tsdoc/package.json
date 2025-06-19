@@ -32,8 +32,8 @@
     "types:check": "tsc --noEmit"
   },
   "peerDependencies": {
-    "nextra": ">=5.0.0-alpha.24",
-    "nextra-theme-docs": ">=5.0.0-alpha.24",
+    "nextra": ">=4.3.0-alpha.0",
+    "nextra-theme-docs": ">=4.3.0-alpha.0",
     "typescript": "*"
   },
   "dependencies": {
