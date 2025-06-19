@@ -494,7 +494,7 @@ export default $
       expect(result).toMatchInlineSnapshot(`
         {
           "description": "This hook returns an array of connections on a specific node, handle type ('source', 'target') or handle ID.",
-          "filePath": "../../node_modules/.pnpm/@xyflow+react@12.6.0_@types+react@19.1.2_react-dom@19.1.0_react@19.1.0__react@19.1.0/node_modules/@xyflow/react/dist/esm/hooks/useNodeConnections.d.ts",
+          "filePath": "../../node_modules/.pnpm/@xyflow+react@12.7.0_@types+react@19.1.2_react-dom@19.1.0_react@19.1.0__react@19.1.0/node_modules/@xyflow/react/dist/esm/hooks/useNodeConnections.d.ts",
           "name": "useNodeConnections",
           "signatures": [
             {
@@ -564,7 +564,7 @@ export default $
           "description": "This hook returns the internal representation of a specific node.
         Components that use this hook will re-render **whenever the node changes**,
         including when a node is selected or moved.",
-          "filePath": "../../node_modules/.pnpm/@xyflow+react@12.6.0_@types+react@19.1.2_react-dom@19.1.0_react@19.1.0__react@19.1.0/node_modules/@xyflow/react/dist/esm/hooks/useInternalNode.d.ts",
+          "filePath": "../../node_modules/.pnpm/@xyflow+react@12.7.0_@types+react@19.1.2_react-dom@19.1.0_react@19.1.0__react@19.1.0/node_modules/@xyflow/react/dist/esm/hooks/useInternalNode.d.ts",
           "name": "useInternalNode",
           "signatures": [
             {
@@ -616,7 +616,7 @@ export default $
           "description": "Test whether an object is usable as an [\`Edge\`](/api-reference/types/edge).
         In TypeScript this is a type guard that will narrow the type of whatever you pass in to
         [\`Edge\`](/api-reference/types/edge) if it returns \`true\`.",
-          "filePath": "../../node_modules/.pnpm/@xyflow+react@12.6.0_@types+react@19.1.2_react-dom@19.1.0_react@19.1.0__react@19.1.0/node_modules/@xyflow/react/dist/esm/utils/general.d.ts",
+          "filePath": "../../node_modules/.pnpm/@xyflow+react@12.7.0_@types+react@19.1.2_react-dom@19.1.0_react@19.1.0__react@19.1.0/node_modules/@xyflow/react/dist/esm/utils/general.d.ts",
           "name": "isEdge",
           "signatures": [
             {
@@ -660,7 +660,7 @@ export default $
       expect(result).toMatchInlineSnapshot(`
         {
           "description": "This hook lets you subscribe to changes of a specific nodes \`data\` object.",
-          "filePath": "../../node_modules/.pnpm/@xyflow+react@12.6.0_@types+react@19.1.2_react-dom@19.1.0_react@19.1.0__react@19.1.0/node_modules/@xyflow/react/dist/esm/hooks/useNodesData.d.ts",
+          "filePath": "../../node_modules/.pnpm/@xyflow+react@12.7.0_@types+react@19.1.2_react-dom@19.1.0_react@19.1.0__react@19.1.0/node_modules/@xyflow/react/dist/esm/hooks/useNodesData.d.ts",
           "name": "useNodesData",
           "signatures": [
             {
