@@ -72,9 +72,12 @@ type SearchProps = {
   className?: string
   searchOptions?: PagefindSearchOptions
   /**
-   * Callback that fires on every search input change. This prop is not
-   * serializable, and cannot be added to a server side layout directly.
-   * To use this prop, you can create a client-side wrapper component,
+   * Callback function that triggers whenever the search input changes.
+   *
+   * This prop is **not serializable** and cannot be used directly in a server-side layout.
+   *
+   * To use this prop, wrap the component in a **client-side** wrapper. Example:
+   *
    * ```tsx
    * 'use client'
    *
@@ -83,16 +86,21 @@ type SearchProps = {
    * export function SearchWithCallback() {
    *   return (
    *     <Search
-   *       onSearch={(query) => {
-   *         console.log('Query:', query)
+   *       onSearch={query => {
+   *         console.log('Search query:', query)
    *       }}
    *     />
    *   )
    * }
    * ```
-   * add then add it in the layout:
+   *
+   * Then pass the wrapper to the layout:
+   *
    * ```tsx
    * <Layout search={<SearchWithCallback />} {...rest} />
+   * ```
+   *
+   * @param query - The current search input string.
    */
   onSearch?: (query: string) => void
 }
