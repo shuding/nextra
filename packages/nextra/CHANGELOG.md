@@ -1,5 +1,11 @@
 # nextra
 
+## 4.3.0-alpha.26
+
+### Patch Changes
+
+- c7d25df: fix(tsdoc): should resolve `Partial` types as declared
+
 ## 4.3.0-alpha.25
 
 ### Minor Changes
