@@ -5,7 +5,6 @@ import js from '@eslint/js'
 import eslintPluginNext from '@next/eslint-plugin-next'
 // import type { Linter } from 'eslint'
 import eslintConfigPrettier from 'eslint-config-prettier'
-// @ts-expect-error -- no types
 import eslintPluginDeMorgan from 'eslint-plugin-de-morgan'
 import eslintPluginImport from 'eslint-plugin-import-x'
 import eslintPluginReact from 'eslint-plugin-react'
