@@ -71,6 +71,38 @@ type SearchProps = {
   /** CSS class name. */
   className?: string
   searchOptions?: PagefindSearchOptions
+  /**
+   * Callback function that triggers whenever the search input changes.
+   *
+   * This prop is **not serializable** and cannot be used directly in a server-side layout.
+   *
+   * To use this prop, wrap the component in a **client-side** wrapper. Example:
+   *
+   * ```tsx
+   * 'use client'
+   *
+   * import { Search } from 'nextra/components'
+   *
+   * export function SearchWithCallback() {
+   *   return (
+   *     <Search
+   *       onSearch={query => {
+   *         console.log('Search query:', query)
+   *       }}
+   *     />
+   *   )
+   * }
+   * ```
+   *
+   * Then pass the wrapper to the layout:
+   *
+   * ```tsx
+   * <Layout search={<SearchWithCallback />} {...rest} />
+   * ```
+   *
+   * @param query - The current search input string.
+   */
+  onSearch?: (query: string) => void
 }
 
 const INPUTS = new Set(['INPUT', 'SELECT', 'BUTTON', 'TEXTAREA'])
@@ -104,7 +136,8 @@ export const Search: FC<SearchProps> = ({
   errorText = 'Failed to load search index.',
   loading = 'Loading…',
   placeholder = 'Search documentation…',
-  searchOptions
+  searchOptions,
+  onSearch
 }) => {
   const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState<ReactElement | string>('')
@@ -224,6 +257,7 @@ export const Search: FC<SearchProps> = ({
   const handleChange = (event: SyntheticEvent<HTMLInputElement>) => {
     const { value } = event.currentTarget
     setSearch(value)
+    onSearch?.(value)
   }
 
   const handleSelect = (searchResult: PagefindResult | null) => {
