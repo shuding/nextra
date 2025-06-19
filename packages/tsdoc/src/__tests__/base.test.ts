@@ -948,7 +948,6 @@ type Foo = {
   bar: string
 }
 
-
 type $ = {
   /**
    * @inline
