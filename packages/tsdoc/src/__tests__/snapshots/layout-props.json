@@ -4,11 +4,11 @@
       "description": "Rendered [`<Banner>` component](/docs/built-ins/banner). E.g. `<Banner {...bannerProps} />`",
       "name": "banner",
       "optional": true,
-      "type": "ReactNode",
+      "type": "React.ReactNode",
     },
     {
       "name": "children",
-      "type": "ReactNode",
+      "type": "React.ReactNode",
     },
     {
       "description": "Show or hide the dark mode select button.",
@@ -35,7 +35,7 @@
       "tags": {
         "default": ""Edit this page"",
       },
-      "type": "ReactNode",
+      "type": "React.ReactNode",
     },
     {
       "description": "Content of the feedback link.",
@@ -44,7 +44,7 @@
       "tags": {
         "default": ""Question? Give us feedback"",
       },
-      "type": "ReactNode",
+      "type": "React.ReactNode",
     },
     {
       "description": "Labels that can be added to the new created issue.",
@@ -68,7 +68,7 @@ By default, it's a link to the issue creation form of the docs repository, with 
       "description": "Rendered [`<Footer>` component](/docs/docs-theme/built-ins/footer). E.g. `<Footer {...footerProps} />`",
       "name": "footer",
       "optional": true,
-      "type": "ReactNode",
+      "type": "React.ReactNode",
     },
     {
       "description": "Options to configure the language dropdown for [the i18n docs website](/docs/guide/i18n).",
@@ -86,13 +86,13 @@ By default, it's a link to the issue creation form of the docs repository, with 
       "tags": {
         "default": "<LastUpdated />",
       },
-      "type": "ReactElement<unknown, string | JSXElementConstructor<any>>",
+      "type": "React.ReactElement",
     },
     {
       "description": "Rendered [`<Navbar>` component](/docs/docs-theme/built-ins/navbar). E.g. `<Navbar {...navbarProps} />`",
       "name": "navbar",
       "optional": true,
-      "type": "ReactNode",
+      "type": "React.ReactNode",
     },
     {
       "description": "Enable or disable navigation link.",
@@ -152,7 +152,7 @@ By default, it's a link to the issue creation form of the docs repository, with 
       "tags": {
         "default": "<Search />",
       },
-      "type": "ReactNode",
+      "type": "React.ReactNode",
     },
     {
       "description": "If `true`, automatically collapse inactive folders above `defaultMenuCollapseLevel`.",
@@ -218,13 +218,13 @@ By default, it's a link to the issue creation form of the docs repository, with 
       "tags": {
         "default": ""Scroll to top"",
       },
-      "type": "ReactNode",
+      "type": "React.ReactNode",
     },
     {
       "description": "Display extra content below the TOC content.",
       "name": "toc.extraContent",
       "optional": true,
-      "type": "ReactNode",
+      "type": "React.ReactNode",
     },
     {
       "description": "Float the TOC next to the content.",
@@ -242,7 +242,7 @@ By default, it's a link to the issue creation form of the docs repository, with 
       "tags": {
         "default": ""On This Page"",
       },
-      "type": "ReactNode",
+      "type": "React.ReactNode",
     },
   ],
   "name": "$",

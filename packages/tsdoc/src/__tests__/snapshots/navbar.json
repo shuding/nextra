@@ -63,7 +63,7 @@
       "tags": {
         "default": "'right'",
       },
-      "type": "'left' | 'right'",
+      "type": ""left" | "right"",
     },
   ],
   "name": "$",
