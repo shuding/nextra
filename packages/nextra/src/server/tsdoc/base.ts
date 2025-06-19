@@ -1,6 +1,11 @@
 import path from 'node:path'
 import slash from 'slash'
-import type { ExportedDeclarations, Symbol as TsSymbol, Type } from 'ts-morph'
+import type {
+  ExportedDeclarations,
+  Node as TsNode,
+  Symbol as TsSymbol,
+  Type
+} from 'ts-morph'
 import { Project, SyntaxKind, ts } from 'ts-morph'
 import { CWD } from '../constants.js'
 import { logger } from '../utils.js'
@@ -236,34 +241,6 @@ function getDocEntry({
   }
   const tags = getTags(symbol)
 
-  let typeName = tags.remarks?.match(/^`(?<name>.+)`/)?.groups!.name
-  if (!typeName) {
-    const declarationNode = symbol
-      .getDeclarations()
-      .find(
-        d =>
-          ts.isPropertySignature(d.compilerNode) ||
-          ts.isParameter(d.compilerNode)
-      )
-    const typeNode =
-      declarationNode?.asKind(SyntaxKind.PropertySignature) ??
-      declarationNode?.asKind(SyntaxKind.Parameter)
-    const t = typeNode?.getTypeNode()?.getText()
-
-    const useTypeNode =
-      t &&
-      (t.startsWith('Partial<') ||
-        ['React.ReactNode', 'React.ReactElement'].includes(t))
-
-    if (useTypeNode) {
-      typeName = t
-    }
-  }
-  if (!typeName) {
-    const typeOf = valueDeclaration?.getType() ?? symbol.getDeclaredType()
-    typeName = typeOf.isUnknown() ? typeOf.getText() : getFormattedText(subType)
-  }
-
   const name = symbol.getName()
   const typeDescription = replaceJsDocLinks(
     ts.displayPartsToString(
@@ -277,11 +254,74 @@ function getDocEntry({
 
   return {
     name: prexify(prefix, name),
-    type: typeName,
+    type: getTypeName({
+      tags,
+      symbol,
+      subType,
+      valueDeclaration
+    }),
     ...(typeDescription && { description: typeDescription }),
     ...(Object.keys(tags).length && { tags }),
     ...(isOptional && { optional: isOptional })
   }
+}
+
+function getTypeName({
+  tags,
+  symbol,
+  subType,
+  valueDeclaration
+}: {
+  tags: Tags
+  symbol: TsSymbol
+  subType: Type
+  valueDeclaration: TsNode | undefined
+}) {
+  const typeName = tags.remarks?.match(/^`(?<name>.+)`/)?.groups!.name
+
+  if (typeName) {
+    return typeName
+  }
+
+  const declarationNode = symbol
+    .getDeclarations()
+    .find(
+      d =>
+        ts.isPropertySignature(d.compilerNode) || ts.isParameter(d.compilerNode)
+    )
+  const typeNode =
+    declarationNode?.asKind(SyntaxKind.PropertySignature) ??
+    declarationNode?.asKind(SyntaxKind.Parameter)
+  const t = typeNode?.getTypeNode()?.getText()
+
+  const useTypeNode =
+    t &&
+    (t.startsWith('Partial<') ||
+      ['React.ReactNode', 'React.ReactElement'].includes(t))
+
+  if (useTypeNode) {
+    return t
+  }
+
+  const isInline = 'inline' in tags
+
+  if (!isInline) {
+    const typeOf = valueDeclaration?.getType() ?? symbol.getDeclaredType()
+    return typeOf.isUnknown() ? 'unknown' : getFormattedText(subType)
+  }
+  const [signature] = subType.getCallSignatures()
+  const isFunction = !!signature
+  if (isFunction) {
+    return signature.getDeclaration().getText()
+  }
+  const [aliasDecl] = subType.getAliasSymbolOrThrow().getDeclarations()
+  if (!aliasDecl) {
+    throw new Error("Can't find alias declaration for type.")
+  }
+  const inlineNode = aliasDecl
+    .asKindOrThrow(SyntaxKind.TypeAliasDeclaration)
+    .getTypeNodeOrThrow()
+  return inlineNode.getText()
 }
 
 function prexify(prefix: string, name: string): string {

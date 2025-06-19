@@ -940,6 +940,52 @@ export default $`
     `)
   })
 
+  it('supports @inline tag', () => {
+    const code = `
+import { ReactFlowInstance } from '@xyflow/react'
+
+type Foo = {
+  bar: string
+}
+
+type $ = {
+  /**
+   * @inline
+   */
+  setViewport: ReactFlowInstance['setViewport']
+  /**
+   * @inline
+   */
+  foo: Foo
+}
+
+export default $`
+    const result = generateDefinition({ code })
+    expect(result).toMatchInlineSnapshot(`
+      {
+        "entries": [
+          {
+            "name": "setViewport",
+            "tags": {
+              "inline": "",
+            },
+            "type": "(viewport: Viewport, options?: ViewportHelperFunctionOptions) => Promise<boolean>",
+          },
+          {
+            "name": "foo",
+            "tags": {
+              "inline": "",
+            },
+            "type": "{
+        bar: string
+      }",
+          },
+        ],
+        "name": "$",
+      }
+    `)
+  })
+
   it.skip('should work with anonymous type', async () => {
     const code = `
 type $ = {
