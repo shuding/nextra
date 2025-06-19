@@ -96,9 +96,9 @@ type SearchProps = {
    *
    * Then pass the wrapper to the layout:
    *
-   * ```tsx
+   * ```tsx filename="app/layout.jsx"
    * import { SearchWithCallback } from '../path/to/your/search-with-callback'
-   *
+   * // ...
    * <Layout search={<SearchWithCallback />} {...rest} />
    * ```
    *
