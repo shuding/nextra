@@ -5,7 +5,7 @@ settings:
   excludeLinksFromLockfile: false
 
 overrides:
-  postcss: 8.5.3
+  postcss: 8.5.6
   lightningcss: 1.30.1
   esbuild: 0.25.5
   vite: 6.3.5
@@ -13,19 +13,19 @@ overrides:
 
 patchedDependencies:
   '@changesets/assemble-release-plan@6.0.8':
-    hash: a9df194f57c8e186bd49a2821d3842b45a44d06fffa45e86217fe2484f351814
+    hash: nesbltn64w2lrictbh7pqpclom
     path: patches/@changesets__assemble-release-plan.patch
   esbuild-plugin-svgr:
-    hash: d50e9f37a7da009597cc73b9ef375e581dcfa6ad23a94d6f868d4b2e51c70e73
+    hash: 556ctonaujh5hcbyug5fzfxura
     path: patches/esbuild-plugin-svgr.patch
   eslint-plugin-tailwindcss@3.17.3:
-    hash: c0a25434f452caaef4f98f274afebb41bc977fd08e8f58c6b73e29367a3a018d
+    hash: quqasx3lkw2fskc7xdiwuschla
     path: patches/eslint-plugin-tailwindcss.patch
   next:
-    hash: 50cce18d7123018948de67ca6a7fec975a9efb878ce48f035b22a36138d8809a
+    hash: 7jofu3qtudpcn7yuwfpdpiosuy
     path: patches/next.patch
   tsup:
-    hash: 1d5c50d801199a78abe7b94c97134bbaf42888e44342b9ecf61854c803385699
+    hash: 4v22aexubuhugu5vxw4ejmgukm
     path: patches/tsup.patch
 
 importers:
@@ -49,7 +49,7 @@ importers:
         version: 6.0.1
       tsup:
         specifier: 8.4.0
-        version: 8.4.0(patch_hash=1d5c50d801199a78abe7b94c97134bbaf42888e44342b9ecf61854c803385699)(jiti@2.4.2)(postcss@8.5.3)(tsx@4.20.3)(typescript@5.8.3)(yaml@2.7.0)
+        version: 8.4.0(patch_hash=4v22aexubuhugu5vxw4ejmgukm)(jiti@2.4.2)(postcss@8.5.6)(tsx@4.20.3)(typescript@5.8.3)(yaml@2.7.0)
       tsx:
         specifier: 4.20.3
         version: 4.20.3
@@ -70,7 +70,7 @@ importers:
         version: 12.6.2(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       next:
         specifier: 15.3.4
-        version: 15.3.4(patch_hash=50cce18d7123018948de67ca6a7fec975a9efb878ce48f035b22a36138d8809a)(@babel/core@7.26.7)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+        version: 15.3.4(patch_hash=7jofu3qtudpcn7yuwfpdpiosuy)(@babel/core@7.26.7)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       nextra:
         specifier: workspace:*
         version: link:../packages/nextra
@@ -98,7 +98,7 @@ importers:
         version: 19.0.12
       next-sitemap:
         specifier: ^4.2.3
-        version: 4.2.3(next@15.3.4(patch_hash=50cce18d7123018948de67ca6a7fec975a9efb878ce48f035b22a36138d8809a)(@babel/core@7.26.7)(react-dom@19.1.0(react@19.1.0))(react@19.1.0))
+        version: 4.2.3(next@15.3.4(patch_hash=7jofu3qtudpcn7yuwfpdpiosuy)(@babel/core@7.26.7)(react-dom@19.1.0(react@19.1.0))(react@19.1.0))
       pagefind:
         specifier: ^1.3.0
         version: 1.3.0
@@ -110,7 +110,7 @@ importers:
     dependencies:
       next:
         specifier: 15.3.4
-        version: 15.3.4(patch_hash=50cce18d7123018948de67ca6a7fec975a9efb878ce48f035b22a36138d8809a)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+        version: 15.3.4(patch_hash=7jofu3qtudpcn7yuwfpdpiosuy)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       nextra:
         specifier: workspace:*
         version: link:../../packages/nextra
@@ -132,7 +132,7 @@ importers:
     dependencies:
       next:
         specifier: 15.3.4
-        version: 15.3.4(patch_hash=50cce18d7123018948de67ca6a7fec975a9efb878ce48f035b22a36138d8809a)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+        version: 15.3.4(patch_hash=7jofu3qtudpcn7yuwfpdpiosuy)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       nextra:
         specifier: workspace:*
         version: link:../../packages/nextra
@@ -157,7 +157,7 @@ importers:
     dependencies:
       next:
         specifier: 15.3.4
-        version: 15.3.4(patch_hash=50cce18d7123018948de67ca6a7fec975a9efb878ce48f035b22a36138d8809a)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+        version: 15.3.4(patch_hash=7jofu3qtudpcn7yuwfpdpiosuy)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       nextra:
         specifier: workspace:*
         version: link:../../packages/nextra
@@ -182,7 +182,7 @@ importers:
         version: 7.4.0(react@19.1.0)
       next:
         specifier: 15.3.4
-        version: 15.3.4(patch_hash=50cce18d7123018948de67ca6a7fec975a9efb878ce48f035b22a36138d8809a)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+        version: 15.3.4(patch_hash=7jofu3qtudpcn7yuwfpdpiosuy)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       nextra:
         specifier: workspace:*
         version: link:../../packages/nextra
@@ -259,7 +259,7 @@ importers:
         version: 3.0.3(eslint@9.29.0(jiti@2.4.2))
       eslint-plugin-tailwindcss:
         specifier: 3.17.3
-        version: 3.17.3(patch_hash=c0a25434f452caaef4f98f274afebb41bc977fd08e8f58c6b73e29367a3a018d)(tailwindcss@4.1.4)
+        version: 3.17.3(patch_hash=quqasx3lkw2fskc7xdiwuschla)(tailwindcss@4.1.4)
       eslint-plugin-typescript-sort-keys:
         specifier: 3.3.0
         version: 3.3.0(@typescript-eslint/parser@8.34.1(eslint@9.29.0(jiti@2.4.2))(typescript@5.8.3))(eslint@9.29.0(jiti@2.4.2))(typescript@5.8.3)
@@ -423,7 +423,7 @@ importers:
         version: 4.3.4(vite@6.3.5(@types/node@22.13.14)(jiti@2.4.2)(lightningcss@1.30.1)(tsx@4.20.3)(yaml@2.7.0))
       esbuild-plugin-svgr:
         specifier: ^3.1.0
-        version: 3.1.0(patch_hash=d50e9f37a7da009597cc73b9ef375e581dcfa6ad23a94d6f868d4b2e51c70e73)(esbuild@0.25.5)(typescript@5.8.3)
+        version: 3.1.0(patch_hash=556ctonaujh5hcbyug5fzfxura)(esbuild@0.25.5)(typescript@5.8.3)
       esbuild-react-compiler-plugin:
         specifier: workspace:*
         version: link:../esbuild-react-compiler-plugin
@@ -435,7 +435,7 @@ importers:
         version: 2.0.1
       next:
         specifier: 15.3.4
-        version: 15.3.4(patch_hash=50cce18d7123018948de67ca6a7fec975a9efb878ce48f035b22a36138d8809a)(@babel/core@7.26.7)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+        version: 15.3.4(patch_hash=7jofu3qtudpcn7yuwfpdpiosuy)(@babel/core@7.26.7)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       react:
         specifier: 19.1.0
         version: 19.1.0
@@ -456,7 +456,7 @@ importers:
         version: 0.4.6(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       next-view-transitions:
         specifier: ^0.3.0
-        version: 0.3.4(next@15.3.4(patch_hash=50cce18d7123018948de67ca6a7fec975a9efb878ce48f035b22a36138d8809a)(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+        version: 0.3.4(next@15.3.4(patch_hash=7jofu3qtudpcn7yuwfpdpiosuy)(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       react-compiler-runtime:
         specifier: 0.0.0-experimental-e993439-20250328
         version: 0.0.0-experimental-e993439-20250328(react@19.1.0)
@@ -481,13 +481,13 @@ importers:
         version: link:../esbuild-react-compiler-plugin
       next:
         specifier: 15.3.4
-        version: 15.3.4(patch_hash=50cce18d7123018948de67ca6a7fec975a9efb878ce48f035b22a36138d8809a)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+        version: 15.3.4(patch_hash=7jofu3qtudpcn7yuwfpdpiosuy)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       nextra:
         specifier: workspace:*
         version: link:../nextra
       postcss:
-        specifier: 8.5.3
-        version: 8.5.3
+        specifier: 8.5.6
+        version: 8.5.6
       react:
         specifier: 19.1.0
         version: 19.1.0
@@ -551,13 +551,13 @@ importers:
         version: 26.0.0
       next:
         specifier: 15.3.4
-        version: 15.3.4(patch_hash=50cce18d7123018948de67ca6a7fec975a9efb878ce48f035b22a36138d8809a)(@babel/core@7.26.10)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+        version: 15.3.4(patch_hash=7jofu3qtudpcn7yuwfpdpiosuy)(@babel/core@7.26.10)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       nextra:
         specifier: workspace:*
         version: link:../nextra
       postcss:
-        specifier: 8.5.3
-        version: 8.5.3
+        specifier: 8.5.6
+        version: 8.5.6
       react:
         specifier: 19.1.0
         version: 19.1.0
@@ -612,7 +612,7 @@ importers:
         version: link:../nextra-theme-docs
       tsup:
         specifier: ^8.4.0
-        version: 8.4.0(patch_hash=1d5c50d801199a78abe7b94c97134bbaf42888e44342b9ecf61854c803385699)(jiti@2.4.2)(postcss@8.5.3)(tsx@4.20.3)(typescript@5.8.3)(yaml@2.7.0)
+        version: 8.4.0(patch_hash=4v22aexubuhugu5vxw4ejmgukm)(jiti@2.4.2)(postcss@8.5.6)(tsx@4.20.3)(typescript@5.8.3)(yaml@2.7.0)
       vitest:
         specifier: ^3.0.9
         version: 3.0.9(@types/node@22.13.14)(jiti@2.4.2)(jsdom@26.0.0)(lightningcss@1.30.1)(tsx@4.20.3)(yaml@2.7.0)
@@ -5247,8 +5247,8 @@ packages:
   mz@2.7.0:
     resolution: {integrity: sha512-z81GNO7nnYMEhrGh9LeymoE4+Yr0Wn5McHIZMK5cfQCl+NDX08sCZgUc9/6MHni9IWuFLm1Z3HTCXu2z9fN62Q==}
 
-  nanoid@3.3.8:
-    resolution: {integrity: sha512-WNLf5Sd8oZxOm+TzppcYk8gVOgP+l58xNy58D0nbUnOxOWRWvlcCV4kUF7ltmI6PsrLl/BgKEyS4mqsGChFN0w==}
+  nanoid@3.3.11:
+    resolution: {integrity: sha512-N8SpfPUnUp1bK+PMYW8qSWdl9U+wwNWI4QKxOYDy9JAro3WMX7p2OeVRF9v+347pnakNevPmiHhNmZ2HbFA76w==}
     engines: {node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1}
     hasBin: true
 
@@ -5532,7 +5532,7 @@ packages:
     engines: {node: '>= 18'}
     peerDependencies:
       jiti: '>=1.21.0'
-      postcss: 8.5.3
+      postcss: 8.5.6
       tsx: ^4.8.1
       yaml: ^2.4.2
     peerDependenciesMeta:
@@ -5549,8 +5549,8 @@ packages:
     resolution: {integrity: sha512-IQ7TZdoaqbT+LCpShg46jnZVlhWD2w6iQYAcYXfHARZ7X1t/UGhhceQDs5X0cGqKvYlHNOuv7Oa1xmb0oQuA3w==}
     engines: {node: '>=4'}
 
-  postcss@8.5.3:
-    resolution: {integrity: sha512-dle9A3yYxlBSrt8Fu+IpjGT8SY8hN0mlaA6GY8t0P5PjIOZemULz/E2Bnm/2dcUOena75OTNkHI76uZBNUUq3A==}
+  postcss@8.5.6:
+    resolution: {integrity: sha512-3Ybi1tAuwAP9s0r1UQ2J4n5Y0G05bJkpUIO0/bI9MhwmD70S5aTWbXGBwxHrelT+XM1k6dM0pk+SwNkpTRN7Pg==}
     engines: {node: ^10 || ^12 || >=14}
 
   prelude-ls@1.2.1:
@@ -6297,7 +6297,7 @@ packages:
     peerDependencies:
       '@microsoft/api-extractor': ^7.36.0
       '@swc/core': ^1
-      postcss: 8.5.3
+      postcss: 8.5.6
       typescript: '>=4.5.0'
     peerDependenciesMeta:
       '@microsoft/api-extractor':
@@ -7684,7 +7684,7 @@ snapshots:
       resolve-from: 5.0.0
       semver: 7.7.1
 
-  '@changesets/assemble-release-plan@6.0.8(patch_hash=a9df194f57c8e186bd49a2821d3842b45a44d06fffa45e86217fe2484f351814)':
+  '@changesets/assemble-release-plan@6.0.8(patch_hash=nesbltn64w2lrictbh7pqpclom)':
     dependencies:
       '@changesets/errors': 0.2.0
       '@changesets/get-dependents-graph': 2.1.3
@@ -7700,7 +7700,7 @@ snapshots:
   '@changesets/cli@2.29.4':
     dependencies:
       '@changesets/apply-release-plan': 7.0.12
-      '@changesets/assemble-release-plan': 6.0.8(patch_hash=a9df194f57c8e186bd49a2821d3842b45a44d06fffa45e86217fe2484f351814)
+      '@changesets/assemble-release-plan': 6.0.8(patch_hash=nesbltn64w2lrictbh7pqpclom)
       '@changesets/changelog-git': 0.2.1
       '@changesets/config': 3.1.1
       '@changesets/errors': 0.2.0
@@ -7751,7 +7751,7 @@ snapshots:
 
   '@changesets/get-release-plan@4.0.12':
     dependencies:
-      '@changesets/assemble-release-plan': 6.0.8(patch_hash=a9df194f57c8e186bd49a2821d3842b45a44d06fffa45e86217fe2484f351814)
+      '@changesets/assemble-release-plan': 6.0.8(patch_hash=nesbltn64w2lrictbh7pqpclom)
       '@changesets/config': 3.1.1
       '@changesets/pre': 2.0.2
       '@changesets/read': 0.6.5
@@ -8926,7 +8926,7 @@ snapshots:
       '@tailwindcss/node': 4.0.17
       '@tailwindcss/oxide': 4.0.17
       lightningcss: 1.30.1
-      postcss: 8.5.3
+      postcss: 8.5.6
       tailwindcss: 4.0.17
 
   '@tailwindcss/postcss@4.1.4':
@@ -8934,7 +8934,7 @@ snapshots:
       '@alloc/quick-lru': 5.2.0
       '@tailwindcss/node': 4.1.4
       '@tailwindcss/oxide': 4.1.4
-      postcss: 8.5.3
+      postcss: 8.5.6
       tailwindcss: 4.1.4
 
   '@tailwindcss/typography@0.5.16(tailwindcss@4.0.17)':
@@ -10406,7 +10406,7 @@ snapshots:
       esast-util-from-estree: 2.0.0
       vfile-message: 4.0.2
 
-  esbuild-plugin-svgr@3.1.0(patch_hash=d50e9f37a7da009597cc73b9ef375e581dcfa6ad23a94d6f868d4b2e51c70e73)(esbuild@0.25.5)(typescript@5.8.3):
+  esbuild-plugin-svgr@3.1.0(patch_hash=556ctonaujh5hcbyug5fzfxura)(esbuild@0.25.5)(typescript@5.8.3):
     dependencies:
       '@svgr/core': 8.1.0(typescript@5.8.3)
       '@svgr/plugin-jsx': 8.1.0(@svgr/core@8.1.0(typescript@5.8.3))
@@ -10532,10 +10532,10 @@ snapshots:
       semver: 7.7.2
       typescript: 5.8.3
 
-  eslint-plugin-tailwindcss@3.17.3(patch_hash=c0a25434f452caaef4f98f274afebb41bc977fd08e8f58c6b73e29367a3a018d)(tailwindcss@4.1.4):
+  eslint-plugin-tailwindcss@3.17.3(patch_hash=quqasx3lkw2fskc7xdiwuschla)(tailwindcss@4.1.4):
     dependencies:
       fast-glob: 3.3.3
-      postcss: 8.5.3
+      postcss: 8.5.6
       tailwindcss: 4.1.4
 
   eslint-plugin-typescript-sort-keys@3.3.0(@typescript-eslint/parser@8.34.1(eslint@9.29.0(jiti@2.4.2))(typescript@5.8.3))(eslint@9.29.0(jiti@2.4.2))(typescript@5.8.3):
@@ -12230,7 +12230,7 @@ snapshots:
       object-assign: 4.1.1
       thenify-all: 1.6.0
 
-  nanoid@3.3.8: {}
+  nanoid@3.3.11: {}
 
   napi-postinstall@0.2.4: {}
 
@@ -12242,33 +12242,33 @@ snapshots:
 
   neo-async@2.6.2: {}
 
-  next-sitemap@4.2.3(next@15.3.4(patch_hash=50cce18d7123018948de67ca6a7fec975a9efb878ce48f035b22a36138d8809a)(@babel/core@7.26.7)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)):
+  next-sitemap@4.2.3(next@15.3.4(patch_hash=7jofu3qtudpcn7yuwfpdpiosuy)(@babel/core@7.26.7)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)):
     dependencies:
       '@corex/deepmerge': 4.0.43
       '@next/env': 13.5.8
       fast-glob: 3.3.3
       minimist: 1.2.8
-      next: 15.3.4(patch_hash=50cce18d7123018948de67ca6a7fec975a9efb878ce48f035b22a36138d8809a)(@babel/core@7.26.7)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      next: 15.3.4(patch_hash=7jofu3qtudpcn7yuwfpdpiosuy)(@babel/core@7.26.7)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
 
   next-themes@0.4.6(react-dom@19.1.0(react@19.1.0))(react@19.1.0):
     dependencies:
       react: 19.1.0
       react-dom: 19.1.0(react@19.1.0)
 
-  next-view-transitions@0.3.4(next@15.3.4(patch_hash=50cce18d7123018948de67ca6a7fec975a9efb878ce48f035b22a36138d8809a)(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react-dom@19.1.0(react@19.1.0))(react@19.1.0):
+  next-view-transitions@0.3.4(next@15.3.4(patch_hash=7jofu3qtudpcn7yuwfpdpiosuy)(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react-dom@19.1.0(react@19.1.0))(react@19.1.0):
     dependencies:
-      next: 15.3.4(patch_hash=50cce18d7123018948de67ca6a7fec975a9efb878ce48f035b22a36138d8809a)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      next: 15.3.4(patch_hash=7jofu3qtudpcn7yuwfpdpiosuy)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       react: 19.1.0
       react-dom: 19.1.0(react@19.1.0)
 
-  next@15.3.4(patch_hash=50cce18d7123018948de67ca6a7fec975a9efb878ce48f035b22a36138d8809a)(@babel/core@7.26.10)(react-dom@19.1.0(react@19.1.0))(react@19.1.0):
+  next@15.3.4(patch_hash=7jofu3qtudpcn7yuwfpdpiosuy)(@babel/core@7.26.10)(react-dom@19.1.0(react@19.1.0))(react@19.1.0):
     dependencies:
       '@next/env': 15.3.4
       '@swc/counter': 0.1.3
       '@swc/helpers': 0.5.15
       busboy: 1.6.0
       caniuse-lite: 1.0.30001707
-      postcss: 8.5.3
+      postcss: 8.5.6
       react: 19.1.0
       react-dom: 19.1.0(react@19.1.0)
       styled-jsx: 5.1.6(@babel/core@7.26.10)(react@19.1.0)
@@ -12286,14 +12286,14 @@ snapshots:
       - '@babel/core'
       - babel-plugin-macros
 
-  next@15.3.4(patch_hash=50cce18d7123018948de67ca6a7fec975a9efb878ce48f035b22a36138d8809a)(@babel/core@7.26.7)(react-dom@19.1.0(react@19.1.0))(react@19.1.0):
+  next@15.3.4(patch_hash=7jofu3qtudpcn7yuwfpdpiosuy)(@babel/core@7.26.7)(react-dom@19.1.0(react@19.1.0))(react@19.1.0):
     dependencies:
       '@next/env': 15.3.4
       '@swc/counter': 0.1.3
       '@swc/helpers': 0.5.15
       busboy: 1.6.0
       caniuse-lite: 1.0.30001707
-      postcss: 8.5.3
+      postcss: 8.5.6
       react: 19.1.0
       react-dom: 19.1.0(react@19.1.0)
       styled-jsx: 5.1.6(@babel/core@7.26.7)(react@19.1.0)
@@ -12311,14 +12311,14 @@ snapshots:
       - '@babel/core'
       - babel-plugin-macros
 
-  next@15.3.4(patch_hash=50cce18d7123018948de67ca6a7fec975a9efb878ce48f035b22a36138d8809a)(react-dom@19.1.0(react@19.1.0))(react@19.1.0):
+  next@15.3.4(patch_hash=7jofu3qtudpcn7yuwfpdpiosuy)(react-dom@19.1.0(react@19.1.0))(react@19.1.0):
     dependencies:
       '@next/env': 15.3.4
       '@swc/counter': 0.1.3
       '@swc/helpers': 0.5.15
       busboy: 1.6.0
       caniuse-lite: 1.0.30001707
-      postcss: 8.5.3
+      postcss: 8.5.6
       react: 19.1.0
       react-dom: 19.1.0(react@19.1.0)
       styled-jsx: 5.1.6(react@19.1.0)
@@ -12554,12 +12554,12 @@ snapshots:
 
   possible-typed-array-names@1.0.0: {}
 
-  postcss-load-config@6.0.1(jiti@2.4.2)(postcss@8.5.3)(tsx@4.20.3)(yaml@2.7.0):
+  postcss-load-config@6.0.1(jiti@2.4.2)(postcss@8.5.6)(tsx@4.20.3)(yaml@2.7.0):
     dependencies:
       lilconfig: 3.1.3
     optionalDependencies:
       jiti: 2.4.2
-      postcss: 8.5.3
+      postcss: 8.5.6
       tsx: 4.20.3
       yaml: 2.7.0
 
@@ -12568,9 +12568,9 @@ snapshots:
       cssesc: 3.0.0
       util-deprecate: 1.0.2
 
-  postcss@8.5.3:
+  postcss@8.5.6:
     dependencies:
-      nanoid: 3.3.8
+      nanoid: 3.3.11
       picocolors: 1.1.1
       source-map-js: 1.2.1
 
@@ -13475,7 +13475,7 @@ snapshots:
 
   tslib@2.8.1: {}
 
-  tsup@8.4.0(patch_hash=1d5c50d801199a78abe7b94c97134bbaf42888e44342b9ecf61854c803385699)(jiti@2.4.2)(postcss@8.5.3)(tsx@4.20.3)(typescript@5.8.3)(yaml@2.7.0):
+  tsup@8.4.0(patch_hash=4v22aexubuhugu5vxw4ejmgukm)(jiti@2.4.2)(postcss@8.5.6)(tsx@4.20.3)(typescript@5.8.3)(yaml@2.7.0):
     dependencies:
       bundle-require: 5.1.0(esbuild@0.25.5)
       cac: 6.7.14
@@ -13485,7 +13485,7 @@ snapshots:
       esbuild: 0.25.5
       joycon: 3.1.1
       picocolors: 1.1.1
-      postcss-load-config: 6.0.1(jiti@2.4.2)(postcss@8.5.3)(tsx@4.20.3)(yaml@2.7.0)
+      postcss-load-config: 6.0.1(jiti@2.4.2)(postcss@8.5.6)(tsx@4.20.3)(yaml@2.7.0)
       resolve-from: 5.0.0
       rollup: 4.41.1
       source-map: 0.8.0-beta.0
@@ -13494,7 +13494,7 @@ snapshots:
       tinyglobby: 0.2.14
       tree-kill: 1.2.2
     optionalDependencies:
-      postcss: 8.5.3
+      postcss: 8.5.6
       typescript: 5.8.3
     transitivePeerDependencies:
       - jiti
@@ -13782,7 +13782,7 @@ snapshots:
       esbuild: 0.25.5
       fdir: 6.4.4(picomatch@4.0.2)
       picomatch: 4.0.2
-      postcss: 8.5.3
+      postcss: 8.5.6
       rollup: 4.36.0
       tinyglobby: 0.2.13
     optionalDependencies:
