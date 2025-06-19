@@ -256,8 +256,8 @@ function getDocEntry({
     name: prexify(prefix, name),
     type: getTypeName({
       tags,
-      subType,
       symbol,
+      subType,
       valueDeclaration
     }),
     ...(typeDescription && { description: typeDescription }),
@@ -268,14 +268,14 @@ function getDocEntry({
 
 function getTypeName({
   tags,
-  subType,
   symbol,
+  subType,
   valueDeclaration
 }: {
   tags: Tags
-  subType: Type
   symbol: TsSymbol
-  valueDeclaration?: TsNode
+  subType: Type
+  valueDeclaration: TsNode | undefined
 }) {
   const typeName = tags.remarks?.match(/^`(?<name>.+)`/)?.groups!.name
 
