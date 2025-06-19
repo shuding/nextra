@@ -1,17 +1,5 @@
 # nextra-theme-blog
 
-## 5.0.0-alpha.24
-
-### Minor Changes
-
-- 0831a1b: Add an `onSearch` callback to the `<Search />` component. This
-  callback, when specified, is called upon every search input change.
-
-### Patch Changes
-
-- Updated dependencies [0831a1b]
-  - nextra@5.0.0-alpha.24
-
 ## 4.3.0-alpha.23
 
 ### Patch Changes
