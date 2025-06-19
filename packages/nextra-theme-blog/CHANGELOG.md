@@ -1,5 +1,50 @@
 # nextra-theme-blog
 
+## 4.3.0-alpha.27
+
+### Patch Changes
+
+- Updated dependencies [01ac538]
+  - nextra@4.3.0-alpha.27
+
+## 4.3.0-alpha.26
+
+### Patch Changes
+
+- Updated dependencies [c7d25df]
+  - nextra@4.3.0-alpha.26
+
+## 4.3.0-alpha.25
+
+### Minor Changes
+
+- d9dd061: update `tailwindcss` to `4.1.10` and `react-compiler-runtime` to
+  `19.1.0-rc.2`
+
+### Patch Changes
+
+- Updated dependencies [d9dd061]
+  - nextra@4.3.0-alpha.25
+
+## 4.3.0-alpha.24
+
+### Minor Changes
+
+- 0831a1b: Add an `onSearch` callback to the `<Search />` component. This
+  callback, when specified, is called upon every search input change.
+
+### Patch Changes
+
+- Updated dependencies [0831a1b]
+  - nextra@4.3.0-alpha.24
+
+## 4.3.0-alpha.23
+
+### Patch Changes
+
+- Updated dependencies [9690841]
+  - nextra@4.3.0-alpha.23
+
 ## 4.3.0-alpha.22
 
 ### Minor Changes

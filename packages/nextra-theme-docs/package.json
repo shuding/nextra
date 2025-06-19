@@ -1,6 +1,6 @@
 {
   "name": "nextra-theme-docs",
-  "version": "4.3.0-alpha.22",
+  "version": "4.3.0-alpha.27",
   "description": "A Nextra theme for documentation sites.",
   "repository": "https://github.com/shuding/nextra",
   "author": "Shu Ding <g@shud.in>",
@@ -34,16 +34,16 @@
     "@headlessui/react": "^2.1.2",
     "clsx": "^2.1.0",
     "next-themes": "^0.4.0",
-    "react-compiler-runtime": "0.0.0-experimental-e993439-20250328",
+    "react-compiler-runtime": "^19.1.0-rc.2",
     "scroll-into-view-if-needed": "^3.1.0",
     "zod": "4.0.0-beta.20250424T163858",
     "zustand": "^5.0.1"
   },
   "devDependencies": {
-    "@tailwindcss/cli": "4.0.17",
-    "@tailwindcss/postcss": "4.0.17",
+    "@tailwindcss/cli": "4.1.10",
+    "@tailwindcss/postcss": "4.1.10",
     "@testing-library/react": "^16.0.0",
-    "@types/react": "^19.0.12",
+    "@types/react": "^19.1.8",
     "@vitejs/plugin-react": "^4.3.4",
     "esbuild-react-compiler-plugin": "workspace:*",
     "jsdom": "^26.0.0",
@@ -51,7 +51,7 @@
     "nextra": "workspace:*",
     "postcss": "^8.4.49",
     "react": "19.1.0",
-    "tailwindcss": "4.0.17",
+    "tailwindcss": "4.1.10",
     "vitest": "^3.0.0",
     "zx": "^8.2.4"
   },

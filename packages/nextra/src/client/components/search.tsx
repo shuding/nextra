@@ -68,13 +68,47 @@ type SearchProps = {
    * @default 'Search documentation…'
    */
   placeholder?: string
-  /**
-   * Auto focus on the search input.
-   */
-  autoFocus?: boolean  
   /** CSS class name. */
   className?: string
   searchOptions?: PagefindSearchOptions
+  /**
+   * Callback function that triggers whenever the search input changes.
+   *
+   * This prop is **not serializable** and cannot be used directly in a server-side layout.
+   *
+   * To use this prop, wrap the component in a **client-side** wrapper. Example:
+   *
+   * ```tsx filename="search-with-callback.jsx"
+   * 'use client'
+   *
+   * import { Search } from 'nextra/components'
+   *
+   * export function SearchWithCallback() {
+   *   return (
+   *     <Search
+   *       onSearch={query => {
+   *         console.log('Search query:', query)
+   *       }}
+   *     />
+   *   )
+   * }
+   * ```
+   *
+   * Then pass the wrapper to the layout:
+   *
+   * ```tsx filename="app/layout.jsx"
+   * import { SearchWithCallback } from '../path/to/your/search-with-callback'
+   * // ...
+   * <Layout search={<SearchWithCallback />} {...rest} />
+   * ```
+   *
+   * @param query - The current search input string.
+   */
+  onSearch?: (query: string) => void
+  /**
+   * Auto focus on the search input.
+   */
+  autoFocus?: boolean
 }
 
 const INPUTS = new Set(['INPUT', 'SELECT', 'BUTTON', 'TEXTAREA'])
@@ -108,8 +142,9 @@ export const Search: FC<SearchProps> = ({
   errorText = 'Failed to load search index.',
   loading = 'Loading…',
   placeholder = 'Search documentation…',
+  searchOptions,
+  onSearch,
   autoFocus = false,
-  searchOptions
 }) => {
   const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState<ReactElement | string>('')
@@ -229,6 +264,7 @@ export const Search: FC<SearchProps> = ({
   const handleChange = (event: SyntheticEvent<HTMLInputElement>) => {
     const { value } = event.currentTarget
     setSearch(value)
+    onSearch?.(value)
   }
 
   const handleSelect = (searchResult: PagefindResult | null) => {

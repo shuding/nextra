@@ -286,8 +286,11 @@ const NameCell: FC<{
       />
       {name && (
         <Code
-          // add `?` via CSS `content` property so value will be not selectable
-          className={optional ? 'x:after:content-["?"]' : ''}
+          className={cn(
+            'x:max-md:break-all',
+            // add `?` via CSS `content` property so value will be not selectable
+            optional && 'x:after:content-["?"]'
+          )}
         >
           {name}
         </Code>
