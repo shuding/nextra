@@ -298,8 +298,8 @@ importers:
         specifier: ^0.3.2
         version: 0.3.3
       better-react-mathjax:
-        specifier: ^2.0.3
-        version: 2.1.0(react@19.0.0)
+        specifier: ^2.3.0
+        version: 2.3.0(react@19.0.0)
       clsx:
         specifier: ^2.1.0
         version: 2.1.1
@@ -5818,8 +5818,8 @@ packages:
       is-windows: 1.0.2
     dev: true
 
-  /better-react-mathjax@2.1.0(react@19.0.0):
-    resolution: {integrity: sha512-RrHudli76sgoVu+YtjHTKhCkjO2eH1B7Xje1sa0YPjhKzq2y/GIwOt9+tuel3s2L+mCPmFbYBFLDFfo3pEa8rQ==}
+  /better-react-mathjax@2.3.0(react@19.0.0):
+    resolution: {integrity: sha512-K0ceQC+jQmB+NLDogO5HCpqmYf18AU2FxDbLdduYgkHYWZApFggkHE4dIaXCV1NqeoscESYXXo1GSkY6fA295w==}
     peerDependencies:
       react: '>=16.8'
     dependencies:
