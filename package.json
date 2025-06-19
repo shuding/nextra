@@ -41,7 +41,7 @@
     },
     "patchedDependencies": {
       "esbuild-plugin-svgr": "patches/esbuild-plugin-svgr.patch",
-      "@changesets/assemble-release-plan": "patches/@changesets__assemble-release-plan.patch",
+      "@changesets/assemble-release-plan@6.0.8": "patches/@changesets__assemble-release-plan.patch",
       "tsup": "patches/tsup.patch",
       "next": "patches/next.patch",
       "eslint-plugin-tailwindcss@3.17.3": "patches/eslint-plugin-tailwindcss.patch"
