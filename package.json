@@ -40,7 +40,7 @@
       "next": "15.3.4"
     },
     "patchedDependencies": {
-      "esbuild-plugin-svgr": "patches/esbuild-plugin-svgr.patch",
+      "esbuild-plugin-svgr@3.1.1": "patches/esbuild-plugin-svgr.patch",
       "@changesets/assemble-release-plan@6.0.8": "patches/@changesets__assemble-release-plan.patch",
       "tsup": "patches/tsup.patch",
       "next": "patches/next.patch",
