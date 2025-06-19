@@ -905,6 +905,30 @@ export default $`
     `)
   })
 
+  it('should not flatten Partial', () => {
+    const code = `
+import { ReactFlowProps } from '@xyflow/react'
+
+type $ = Pick<ReactFlowProps, 'ariaLabelConfig'>
+
+export default $`
+    const result = generateDefinition({ code })
+    expect(result).toMatchInlineSnapshot(`
+      {
+        "entries": [
+          {
+            "description": "Configuration for customizable labels, descriptions, and UI text. Provided keys will override the corresponding defaults.
+      Allows localization, customization of ARIA descriptions, control labels, minimap labels, and other UI strings.",
+            "name": "ariaLabelConfig",
+            "optional": true,
+            "type": "Partial<AriaLabelConfig>",
+          },
+        ],
+        "name": "$",
+      }
+    `)
+  })
+
   it.skip('should work with anonymous type', async () => {
     const code = `
 type $ = {
