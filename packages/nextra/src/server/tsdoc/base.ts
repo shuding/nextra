@@ -314,7 +314,7 @@ function getTypeName({
   if (isFunction) {
     return signature.getDeclaration().getText()
   }
-  const [aliasDecl] = subType.getAliasSymbolOrThrow()?.getDeclarations()
+  const [aliasDecl] = subType.getAliasSymbolOrThrow().getDeclarations()
   if (!aliasDecl) {
     throw new Error("Can't find alias declaration for type.")
   }
