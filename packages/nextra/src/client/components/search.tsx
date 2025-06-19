@@ -78,7 +78,7 @@ type SearchProps = {
    *
    * To use this prop, wrap the component in a **client-side** wrapper. Example:
    *
-   * ```tsx
+   * ```tsx filename="search-with-callback.jsx"
    * 'use client'
    *
    * import { Search } from 'nextra/components'
@@ -97,6 +97,8 @@ type SearchProps = {
    * Then pass the wrapper to the layout:
    *
    * ```tsx
+   * import { SearchWithCallback } from '../path/to/your/search-with-callback'
+   *
    * <Layout search={<SearchWithCallback />} {...rest} />
    * ```
    *
