@@ -1,5 +1,5 @@
 ---
-'nextra': patch
+'nextra': minor
 ---
 
-fix mobile overflow on `<TSDoc />` table
+feat(tsdoc): support @inline tag and fix mobile overflow in <TSDoc /> table
