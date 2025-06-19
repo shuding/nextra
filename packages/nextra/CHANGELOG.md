@@ -1,5 +1,18 @@
 # nextra
 
+## 4.3.0-alpha.26
+
+### Patch Changes
+
+- c7d25df: fix(tsdoc): should resolve `Partial` types as declared
+
+## 4.3.0-alpha.25
+
+### Minor Changes
+
+- d9dd061: update `tailwindcss` to `4.1.10` and `react-compiler-runtime` to
+  `19.1.0-rc.2`
+
 ## 4.3.0-alpha.24
 
 ### Minor Changes

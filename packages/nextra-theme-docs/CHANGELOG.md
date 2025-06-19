@@ -1,5 +1,24 @@
 # nextra-theme-docs
 
+## 4.3.0-alpha.26
+
+### Patch Changes
+
+- Updated dependencies [c7d25df]
+  - nextra@4.3.0-alpha.26
+
+## 4.3.0-alpha.25
+
+### Minor Changes
+
+- d9dd061: update `tailwindcss` to `4.1.10` and `react-compiler-runtime` to
+  `19.1.0-rc.2`
+
+### Patch Changes
+
+- Updated dependencies [d9dd061]
+  - nextra@4.3.0-alpha.25
+
 ## 4.3.0-alpha.24
 
 ### Minor Changes

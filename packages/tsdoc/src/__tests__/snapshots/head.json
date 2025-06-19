@@ -61,7 +61,7 @@
       "description": "Content of `<head>`.",
       "name": "children",
       "optional": true,
-      "type": "ReactNode",
+      "type": "React.ReactNode",
     },
   ],
   "name": "$",

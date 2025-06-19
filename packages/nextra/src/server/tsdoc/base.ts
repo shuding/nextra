@@ -236,16 +236,33 @@ function getDocEntry({
   }
   const tags = getTags(symbol)
 
-  const typeOf = valueDeclaration
-    ? valueDeclaration.getType()
-    : symbol.getDeclaredType()
+  let typeName = tags.remarks?.match(/^`(?<name>.+)`/)?.groups!.name
+  if (!typeName) {
+    const declarationNode = symbol
+      .getDeclarations()
+      .find(
+        d =>
+          ts.isPropertySignature(d.compilerNode) ||
+          ts.isParameter(d.compilerNode)
+      )
+    const typeNode =
+      declarationNode?.asKind(SyntaxKind.PropertySignature) ??
+      declarationNode?.asKind(SyntaxKind.Parameter)
+    const t = typeNode?.getTypeNode()?.getText()
 
-  const typeNameFromRemarks =
-    tags.remarks?.match(/^`(?<name>.+)`/)?.groups!.name
+    const useTypeNode =
+      t &&
+      (t.startsWith('Partial<') ||
+        ['React.ReactNode', 'React.ReactElement'].includes(t))
 
-  const typeName =
-    typeNameFromRemarks ??
-    (typeOf.isUnknown() ? typeOf.getText() : getFormattedText(subType))
+    if (useTypeNode) {
+      typeName = t
+    }
+  }
+  if (!typeName) {
+    const typeOf = valueDeclaration?.getType() ?? symbol.getDeclaredType()
+    typeName = typeOf.isUnknown() ? typeOf.getText() : getFormattedText(subType)
+  }
 
   const name = symbol.getName()
   const typeDescription = replaceJsDocLinks(
@@ -280,7 +297,7 @@ function shouldFlattenType(t: Type): boolean {
     t.getCallSignatures().length > 0 ||
     // Is not `unknown`
     t.getText() === '{}' ||
-    // Is not empty object
+    // Is not an empty object
     !t.getProperties().length
   ) {
     return false
