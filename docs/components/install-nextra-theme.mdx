@@ -45,16 +45,29 @@ following content:
 ```js filename="next.config.mjs"
 import nextra from 'nextra'
 
+// Set up Nextra with its configuration
 const withNextra = nextra({
-  // ... Other Nextra config options
+  // ... Add Nextra-specific options here
 })
 
-// You can include other Next.js configuration options here, in addition to Nextra settings:
+// Export the final Next.js config with Nextra included
 export default withNextra({
-  // ... Other Next.js config options
+  // ... Add regular Next.js options here
 })
 ```
 
 With this configuration, Nextra will handle Markdown files in your Next.js
 project. For more Nextra configuration options, check out the
 [Guide](/docs/guide).
+
+### Add [`mdx-components` file](/docs/file-conventions/mdx-components-file)
+
+### Setup search
+
+To set up search, follow the instructions on the
+[Search Engine](/docs/guide/search#setup) page.
+
+### Create the root layout
+
+Next, create the root layout of your application inside the `app` folder. This
+layout will be used to configure your Nextra Theme:

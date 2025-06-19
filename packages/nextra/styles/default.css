@@ -1,5 +1,6 @@
 @source "../src/client/icons/*.svg";
 @source "../src/client/{components,hocs,mdx-components}/**/*.tsx";
+@source "../src/server/tsdoc/**/*.tsx";
 @variant dark (&:where(.dark *));
 
 @theme {
@@ -44,4 +45,11 @@
     var(--nextra-primary-hue) var(--nextra-primary-saturation)
       calc(var(--nextra-primary-lightness) - 21%)
   );
+}
+
+/* Fixes extra margin-top inside Tabs.Tab
+ * https://github.com/shuding/nextra/issues/4303#issuecomment-2695040708
+ */
+[data-headlessui-state='selected'] > h3[style^='visibility:'] + * {
+  @apply x:mt-0;
 }

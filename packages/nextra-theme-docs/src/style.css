@@ -21,7 +21,6 @@
 
 html {
   --nextra-navbar-height: 64px;
-  --nextra-menu-height: 3.75rem;
 
   @apply x:antialiased x:text-base;
   font-feature-settings:
@@ -37,7 +36,7 @@ html {
 }
 
 .contains-task-list {
-  @apply x:mt-6;
+  @apply x:mt-[1.25em];
 
   input[type='checkbox'] {
     @apply x:me-1;
@@ -62,12 +61,8 @@ html {
 }
 
 .nextra-mask {
-  mask-image: linear-gradient(
-      to bottom,
-      transparent,
-      #000 20px,
-      transparent 100%
-    ),
+  mask-image:
+    linear-gradient(to bottom, transparent, #000 20px, transparent 100%),
     linear-gradient(to top, transparent, #000 20px, transparent 100%);
   @apply x:contrast-more:[mask-image:none];
 }

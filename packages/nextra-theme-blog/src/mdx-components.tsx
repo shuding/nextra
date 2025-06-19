@@ -13,7 +13,7 @@ import {
   withIcons
 } from 'nextra/components'
 import { useMDXComponents as getNextraMDXComponents } from 'nextra/mdx-components'
-import type { MDXComponents } from 'nextra/mdx-components'
+import type { MDXComponents, UseMDXComponents } from 'nextra/mdx-components'
 import type { ComponentProps, FC } from 'react'
 import { Meta } from './components/meta'
 import { isValidDate } from './is-valid-date'
@@ -41,25 +41,20 @@ const createHeading = (
       </Tag>
     )
   }
-const Blockquote = withGitHubAlert(({ type, ...props }) => {
-  const calloutType = (
-    {
-      caution: 'error',
-      important: 'error', // TODO
-      note: 'info',
-      tip: 'default',
-      warning: 'warning'
-    } as const
-  )[type]
-
-  return <Callout type={calloutType} {...props} />
+const CALLOUT_TYPE = Object.freeze({
+  caution: 'error',
+  important: 'important',
+  note: 'info',
+  tip: 'default',
+  warning: 'warning'
 })
+const Blockquote = withGitHubAlert(({ type, ...props }) => (
+  <Callout type={CALLOUT_TYPE[type]} {...props} />
+))
 
-type BlogMDXComponents = Readonly<
-  MDXComponents & {
-    DateFormatter?: FC<{ date: Date }>
-  }
->
+type BlogMDXComponents = MDXComponents & {
+  DateFormatter?: FC<{ date: Date }>
+}
 
 const DEFAULT_COMPONENTS = getNextraMDXComponents({
   blockquote: Blockquote,
@@ -78,14 +73,17 @@ const DEFAULT_COMPONENTS = getNextraMDXComponents({
   tr: Table.Tr
 })
 
-export const useMDXComponents = ({
-  DateFormatter,
-  ...components
-}: BlogMDXComponents = {}) =>
-  ({
+export const useMDXComponents: UseMDXComponents<typeof DEFAULT_COMPONENTS> = <
+  T extends BlogMDXComponents
+>(
+  comp?: T
+) => {
+  const { DateFormatter, ...components } = comp ?? {}
+  return {
     ...DEFAULT_COMPONENTS,
+    // @ts-expect-error -- fixme
     wrapper({ children, metadata }) {
-      const date = (metadata as any).date as string
+      const date = metadata.date as string
       if (date && !isValidDate(date)) {
         throw new Error(
           `Invalid date "${date}". Provide date in "YYYY/M/D", "YYYY/M/D H:m", "YYYY-MM-DD", "[YYYY-MM-DD]T[HH:mm]" or "[YYYY-MM-DD]T[HH:mm:ss.SSS]Z" format.`
@@ -111,4 +109,5 @@ export const useMDXComponents = ({
       )
     },
     ...components
-  }) satisfies BlogMDXComponents
+  }
+}

@@ -1,13 +1,11 @@
-import type { MdxFile, PageMapItem } from '../../types.js'
+import type { MdxFile, PageMapItem, SeparatorItem } from '../../types.js'
 import { compileMdx } from '../compile.js'
 
 function renderCard(item: MdxFile): string {
-  if (!item.frontMatter) {
-    return ''
-  }
-  const { icon, sidebarTitle, title } = item.frontMatter
+  const icon = item.frontMatter?.icon
   const Icon = icon ? `<${icon}/>` : 'null'
-  return `<Cards.Card title="${sidebarTitle || title}" href="${item.route}" icon={${Icon}} />`
+  // @ts-expect-error -- fixme
+  return `<Cards.Card title="${item.title}" href="${item.route}" icon={${Icon}} />`
 }
 
 export async function createIndexPage(pageMap: PageMapItem[]): Promise<string> {
@@ -41,4 +39,26 @@ export async function createIndexPage(pageMap: PageMapItem[]): Promise<string> {
   const rawJs = await compileMdx(rawMdx)
 
   return rawJs
+}
+
+export function getIndexPageMap(pageMap: PageMapItem[]) {
+  const result: (SeparatorItem | MdxFile[])[] = []
+  for (const item of pageMap) {
+    if ('data' in item) {
+      continue
+    }
+    // @ts-expect-error fixme
+    if (item.type === 'separator') {
+      // @ts-expect-error fixme
+      result.push(item)
+    } else {
+      const lastResult = result.at(-1)
+      if (Array.isArray(lastResult)) {
+        lastResult.push(item)
+      } else {
+        result.push([item])
+      }
+    }
+  }
+  return result
 }

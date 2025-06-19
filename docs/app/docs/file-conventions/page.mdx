@@ -7,21 +7,12 @@ description:
   `content` and `src` directories.
 ---
 
-import { Cards } from 'nextra/components'
 import { FileIcon, FolderIcon, MdxIcon } from 'nextra/icons'
-import { MDXRemote } from 'nextra/mdx-remote'
-import { createIndexPage, getPageMap } from 'nextra/page-map'
+import { OverviewPage } from '../../_components/overview-page'
 
 # File Conventions
 
-<MDXRemote
-  compiledSource={await createIndexPage(
-    await getPageMap('/docs/file-conventions')
-  )}
-  components={{
-    Cards,
-    FileIcon,
-    FolderIcon,
-    MdxIcon
-  }}
+<OverviewPage
+  filePath={metadata.filePath}
+  icons={{ FileIcon, FolderIcon, MdxIcon }}
 />

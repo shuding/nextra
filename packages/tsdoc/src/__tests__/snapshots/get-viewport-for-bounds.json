@@ -1,0 +1,87 @@
+{
+  "description": "Returns a viewport that encloses the given bounds with padding.",
+  "filePath": "../../node_modules/.pnpm/@xyflow+system@0.0.57/node_modules/@xyflow/system/dist/esm/utils/general.d.ts",
+  "name": "getViewportForBounds",
+  "signatures": [
+    {
+      "params": [
+        {
+          "description": "Bounds to fit inside viewport.",
+          "name": "bounds",
+          "tags": {
+            "param": "bounds - Bounds to fit inside viewport.",
+          },
+          "type": "Rect",
+        },
+        {
+          "description": "Width of the viewport.",
+          "name": "width",
+          "tags": {
+            "param": "width - Width of the viewport.",
+          },
+          "type": "number",
+        },
+        {
+          "description": "Height of the viewport.",
+          "name": "height",
+          "tags": {
+            "param": "height - Height of the viewport.",
+          },
+          "type": "number",
+        },
+        {
+          "description": "Minimum zoom level of the resulting viewport.",
+          "name": "minZoom",
+          "tags": {
+            "param": "minZoom - Minimum zoom level of the resulting viewport.",
+          },
+          "type": "number",
+        },
+        {
+          "description": "Maximum zoom level of the resulting viewport.",
+          "name": "maxZoom",
+          "tags": {
+            "param": "maxZoom - Maximum zoom level of the resulting viewport.",
+          },
+          "type": "number",
+        },
+        {
+          "description": "Padding around the bounds.",
+          "name": "padding",
+          "tags": {
+            "param": "padding - Padding around the bounds.",
+          },
+          "type": "Padding",
+        },
+      ],
+      "returns": [
+        {
+          "name": "x",
+          "type": "number",
+        },
+        {
+          "name": "y",
+          "type": "number",
+        },
+        {
+          "name": "zoom",
+          "type": "number",
+        },
+      ],
+    },
+  ],
+  "tags": {
+    "example": "const { x, y, zoom } = getViewportForBounds(
+{ x: 0, y: 0, width: 100, height: 100},
+1200, 800, 0.5, 2);",
+    "param": "bounds - Bounds to fit inside viewport.
+width - Width of the viewport.
+height - Height of the viewport.
+minZoom - Minimum zoom level of the resulting viewport.
+maxZoom - Maximum zoom level of the resulting viewport.
+padding - Padding around the bounds.",
+    "public": "",
+    "remarks": "You can determine bounds of nodes with {@link getNodesBounds } and {@link getBoundsOfRects}",
+    "returns": "A transformed Viewport that encloses the given bounds which you can pass to e.g. setViewport .",
+  },
+}

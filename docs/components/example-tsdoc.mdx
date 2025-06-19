@@ -1,0 +1,26 @@
+```ts
+type Example = {
+  /**
+   * **Foo** description.
+   * @default "dimaMachina"
+   * @remarks `"not dimaMachina"`
+   */
+  foo: string
+}
+```
+
+In this example, while the actual type of the property `foo` is `string`, the
+displayed type will be `"not dimaMachina"` as per the `@remarks` tag.
+
+<APIDocs
+  code={`
+type Example = {
+  /**
+   * **Foo** description.
+   * @default "dimaMachina"
+   * @remarks \`"not dimaMachina"\`
+   */
+  foo: string
+}
+export default Example`}
+/>

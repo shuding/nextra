@@ -1,0 +1,119 @@
+{
+  "description": "Provides normalized data for the current page from `ConfigContext`.
+
+This includes the full result of `normalizePages`, along with a derived value `hideSidebar`
+that determines whether the sidebar should be hidden on the current page.",
+  "filePath": "../nextra-theme-docs/dist/stores/config.d.mts",
+  "name": "useConfig",
+  "signatures": [
+    {
+      "params": [],
+      "returns": [
+        {
+          "description": "Active type for current page, used to determine layout in theme.",
+          "name": "normalizePagesResult.activeType",
+          "optional": true,
+          "type": ""doc" | "page" | "menu"",
+        },
+        {
+          "description": "Active index for current page, used for pagination in combination with `flatDocsDirectories`
+items.",
+          "name": "normalizePagesResult.activeIndex",
+          "type": "number",
+        },
+        {
+          "name": "normalizePagesResult.activeThemeContext.breadcrumb",
+          "optional": true,
+          "type": "boolean | undefined",
+        },
+        {
+          "name": "normalizePagesResult.activeThemeContext.collapsed",
+          "optional": true,
+          "type": "boolean | undefined",
+        },
+        {
+          "name": "normalizePagesResult.activeThemeContext.footer",
+          "optional": true,
+          "type": "boolean | undefined",
+        },
+        {
+          "name": "normalizePagesResult.activeThemeContext.layout",
+          "optional": true,
+          "type": ""default" | "full" | undefined",
+        },
+        {
+          "name": "normalizePagesResult.activeThemeContext.navbar",
+          "optional": true,
+          "type": "boolean | undefined",
+        },
+        {
+          "name": "normalizePagesResult.activeThemeContext.pagination",
+          "optional": true,
+          "type": "boolean | undefined",
+        },
+        {
+          "name": "normalizePagesResult.activeThemeContext.sidebar",
+          "optional": true,
+          "type": "boolean | undefined",
+        },
+        {
+          "name": "normalizePagesResult.activeThemeContext.timestamp",
+          "optional": true,
+          "type": "boolean | undefined",
+        },
+        {
+          "name": "normalizePagesResult.activeThemeContext.toc",
+          "optional": true,
+          "type": "boolean | undefined",
+        },
+        {
+          "name": "normalizePagesResult.activeThemeContext.typesetting",
+          "optional": true,
+          "type": ""default" | "article" | undefined",
+        },
+        {
+          "description": "Parsed [front matter](https://jekyllrb.com/docs/front-matter) or exported
+[Metadata](https://nextjs.org/docs/app/building-your-application/optimizing/metadata) from page.",
+          "name": "normalizePagesResult.activeMetadata",
+          "optional": true,
+          "type": "FrontMatter",
+        },
+        {
+          "description": "Active path for current page, used for breadcrumb navigation.",
+          "name": "normalizePagesResult.activePath",
+          "type": "Item[]",
+        },
+        {
+          "description": "All directories in the tree structure.",
+          "name": "normalizePagesResult.directories",
+          "type": "Item[]",
+        },
+        {
+          "description": "Directories with `type: 'doc'` in `_meta` file.",
+          "name": "normalizePagesResult.docsDirectories",
+          "type": "DocsItem[]",
+        },
+        {
+          "description": "Flattened directories with `type: 'doc'` in `_meta` file.",
+          "name": "normalizePagesResult.flatDocsDirectories",
+          "type": "DocsItem[]",
+        },
+        {
+          "description": "Navbar items, items which have `type: 'page'` in `_meta` file.",
+          "name": "normalizePagesResult.topLevelNavbarItems",
+          "type": "(PageItem | MenuItem)[]",
+        },
+        {
+          "description": "Whether the sidebar is shown. If `false`, the theme and locale switchers are displayed in the
+`<Footer>`.",
+          "name": "hideSidebar",
+          "type": "boolean",
+        },
+      ],
+    },
+  ],
+  "tags": {
+    "returns": "An object containing the `normalizePagesResult` and a `hideSidebar` value.",
+    "throws": "If used outside of a `ConfigContext.Provider`.",
+  },
+}

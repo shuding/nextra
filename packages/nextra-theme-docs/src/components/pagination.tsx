@@ -1,9 +1,10 @@
 import cn from 'clsx'
-// eslint-disable-next-line no-restricted-imports -- since we don't need newWindow prop
+// eslint-disable-next-line no-restricted-imports -- since we don't need `newWindow` prop
 import NextLink from 'next/link'
 import { ArrowRightIcon } from 'nextra/icons'
 import type { FC } from 'react'
 import { useConfig, useThemeConfig } from '../stores'
+import { extractStringsFromReactNode } from '../utils'
 
 const classes = {
   link: cn(
@@ -19,7 +20,9 @@ export const Pagination: FC = () => {
   const { flatDocsDirectories, activeIndex } = useConfig().normalizePagesResult
   const { navigation } = useThemeConfig()
 
+  // @ts-expect-error -- fixme
   let prev = navigation.prev && flatDocsDirectories[activeIndex - 1]
+  // @ts-expect-error -- fixme
   let next = navigation.next && flatDocsDirectories[activeIndex + 1]
 
   if (prev && !prev.isUnderCurrentDocsTree) prev = false
@@ -37,8 +40,9 @@ export const Pagination: FC = () => {
       {prev && (
         <NextLink
           href={prev.route}
-          title={prev.title}
+          title={extractStringsFromReactNode(prev.title)}
           className={cn(classes.link, 'x:pe-4')}
+          prefetch={false}
         >
           <ArrowRightIcon
             height="20"
@@ -50,8 +54,9 @@ export const Pagination: FC = () => {
       {next && (
         <NextLink
           href={next.route}
-          title={next.title}
+          title={extractStringsFromReactNode(next.title)}
           className={cn(classes.link, 'x:ps-4 x:ms-auto x:text-end')}
+          prefetch={false}
         >
           {next.title}
           <ArrowRightIcon

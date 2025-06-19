@@ -12,7 +12,9 @@ code.nextra-code {
   @apply x:text-sm;
 
   :not(pre) > &:not([class*='twoslash-']) {
-    @apply x:border-black/[0.04] x:bg-black/[0.03] x:break-words x:rounded-md x:border x:py-0.5 x:px-[.25em] x:text-[.9em];
+    @apply x:p-[.12em_.25em];
+    @apply x:rounded-[.375em];
+    @apply x:border-black/[0.04] x:bg-black/[0.03] x:break-words x:border x:text-[.9em];
     @apply x:dark:border-white/10 x:dark:bg-white/10;
   }
 }
@@ -23,11 +25,11 @@ pre code.nextra-code:not([class*='twoslash-']) {
 
   &[data-line-numbers] > span {
     @apply x:pl-2;
-
+    @apply x:before:text-gray-600 x:dark:before:text-gray-400;
     &::before {
       counter-increment: line;
       content: counter(line);
-      @apply x:inline-block x:pr-4 x:text-right x:min-w-[2.6rem] x:text-gray-500;
+      @apply x:inline-block x:pr-4 x:text-right x:min-w-[2.6rem];
     }
   }
 

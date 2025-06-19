@@ -1,11 +1,13 @@
 import path from 'node:path'
 import type {
+  $NextraMetadata,
   DynamicFolder,
   DynamicMeta,
   DynamicMetaItem,
   Folder,
-  NextraMetadata,
-  PageMapItem
+  MetaJsonFile,
+  PageMapItem,
+  TItem
 } from '../../types.js'
 import { pageTitleFromFilename } from '../utils.js'
 
@@ -19,9 +21,9 @@ function isFolder(value: DynamicMetaItem): value is DynamicFolder {
   )
 }
 
-function normalizeMetaData(
+function normalizeMetaRecord(
   obj: DynamicMeta,
-  map: Record<string, NextraMetadata>
+  map: Record<string, $NextraMetadata>
 ): DynamicMeta {
   return Object.fromEntries(
     Object.entries(obj).map(([key, value]) => {
@@ -39,14 +41,20 @@ function normalizeMetaData(
   )
 }
 
-export function mergeMetaWithPageMap<T extends Folder | PageMapItem[]>(
+export function mergeMetaWithPageMap<T extends Folder | PageMapItem[] | TItem>(
   pageMap: T,
-  meta: DynamicMeta
+  meta: DynamicMeta,
+  shouldCheckIndividualMetaFilesUsage = false
 ): T {
   if ('children' in pageMap) {
     return {
       ...pageMap,
-      children: mergeMetaWithPageMap(pageMap.children, meta)
+      children: mergeMetaWithPageMap(
+        // @ts-expect-error -- fixme
+        pageMap.children,
+        meta,
+        shouldCheckIndividualMetaFilesUsage
+      )
     }
   }
   // @ts-expect-error -- pagePath exist
@@ -61,27 +69,30 @@ export function mergeMetaWithPageMap<T extends Folder | PageMapItem[]>(
     }
     return restParent
   })
-  const hasMeta = 'data' in result[0]!
-  if (hasMeta) {
-    // @ts-expect-error fixme
-    const childRoute = result[1].route
-    const { dir } = path.parse(childRoute)
-    const metaPath = `${dir.replace(/^\/$/, '')}/_meta`
-    throw new Error(
-      [
-        'Merging an `_meta.global` file with a folder-specific `_meta` is unsupported.',
-        `Move content of \`${metaPath}\` file into the \`_meta.global\` file`
-      ].join('\n')
-    )
+  const normalizedMetaRecord = normalizeMetaRecord(
+    meta,
+    // @ts-expect-error -- fixme
+    Object.fromEntries(result.map(key => [key.name, key.frontMatter]))
+  )
+  const metaRecord = result[0] && 'data' in result[0] && result[0].data
+  if (metaRecord) {
+    if (shouldCheckIndividualMetaFilesUsage) {
+      const childRoute = result[1].route
+      const { dir } = path.parse(childRoute)
+      const metaPath = `${dir.replace(/^\/$/, '')}/_meta`
+      throw new Error(
+        [
+          'Merging an `_meta.global` file with a folder-specific `_meta` is unsupported.',
+          `Move content of \`${metaPath}\` file into the \`_meta.global\` file`
+        ].join('\n')
+      )
+    }
+    ;(result[0] as MetaJsonFile).data = {
+      ...metaRecord,
+      ...normalizedMetaRecord
+    }
+  } else {
+    result.unshift({ data: normalizedMetaRecord })
   }
-  result.unshift({
-    data: normalizeMetaData(
-      meta,
-      // @ts-expect-error -- fixme
-      Object.fromEntries(result.map(key => [key.name, key.frontMatter]))
-    )
-  })
-
-  // @ts-expect-error -- fixme
   return result
 }

@@ -7,7 +7,13 @@ import { Anchor, Button, Collapse } from 'nextra/components'
 import { useFSRoute, useHash } from 'nextra/hooks'
 import { ArrowRightIcon, ExpandIcon } from 'nextra/icons'
 import type { Item, MenuItem, PageItem } from 'nextra/normalize-pages'
-import type { FC, FocusEventHandler, MouseEventHandler } from 'react'
+import type {
+  ComponentProps,
+  FC,
+  FocusEventHandler,
+  MouseEventHandler,
+  ReactNode
+} from 'react'
 import { forwardRef, useEffect, useId, useRef, useState } from 'react'
 import scrollIntoView from 'scroll-into-view-if-needed'
 import {
@@ -18,7 +24,7 @@ import {
   useFocusedRoute,
   useMenu,
   useThemeConfig,
-  useToc
+  useTOC
 } from '../stores'
 import { LocaleSwitch } from './locale-switch'
 import { ThemeSwitch } from './theme-switch'
@@ -31,7 +37,7 @@ const classes = {
     'x:cursor-pointer x:contrast-more:border'
   ),
   inactive: cn(
-    'x:text-gray-500 x:hover:bg-gray-100 x:hover:text-gray-900',
+    'x:text-gray-600 x:hover:bg-gray-100 x:hover:text-gray-900',
     'x:dark:text-neutral-400 x:dark:hover:bg-primary-100/5 x:dark:hover:text-gray-50',
     'x:contrast-more:text-gray-900 x:contrast-more:dark:text-gray-50',
     'x:contrast-more:border-transparent x:contrast-more:hover:border-gray-900 x:contrast-more:dark:hover:border-gray-50'
@@ -103,7 +109,11 @@ const Folder: FC<FolderProps> = ({ item: _item, anchors, onFocus, level }) => {
       event.preventDefault()
     }
     const isOpen = el.parentElement!.classList.contains('open')
-    TreeState[item.route] = !isOpen
+    // We don't toggle it if it's:
+    // - a link
+    // - not a click on icon
+    // - not active link
+    TreeState[item.route] = (isLink && !isClickOnIcon && !active) || !isOpen
     rerender({})
   }
 
@@ -130,14 +140,15 @@ const Folder: FC<FolderProps> = ({ item: _item, anchors, onFocus, level }) => {
   }, [activeRouteInside, focusedRouteInside, item.route, autoCollapse])
 
   const isLink = 'frontMatter' in item
-  // use button when link don't have href because it impacts on SEO
+  // Use a button when a link doesn't have `href` because it impacts on SEO
   const ComponentToUse = isLink ? Anchor : Button
 
   return (
     <li className={cn({ open, active })}>
       <ComponentToUse
-        href={isLink ? item.route : undefined}
-        data-href={isLink ? undefined : item.route}
+        {...(isLink
+          ? { href: item.route, prefetch: false }
+          : { 'data-href': item.route })}
         className={cn(
           'x:items-center x:justify-between x:gap-2',
           !isLink && 'x:text-start x:w-full',
@@ -153,8 +164,8 @@ const Folder: FC<FolderProps> = ({ item: _item, anchors, onFocus, level }) => {
           className={cn(
             'x:shrink-0',
             'x:rounded-sm x:p-0.5 x:hover:bg-gray-800/5 x:dark:hover:bg-gray-100/5',
-            'x:motion-reduce:*:transition-none x:*:origin-center x:*:transition-transform x:*:rtl:-rotate-180',
-            open && 'x:*:ltr:rotate-90 x:*:rtl:-rotate-270'
+            'x:motion-reduce:transition-none x:origin-center x:transition-all x:rtl:-rotate-180',
+            open && 'x:ltr:rotate-90 x:rtl:-rotate-270'
           )}
         />
       </ComponentToUse>
@@ -184,7 +195,7 @@ function getMenuChildren(menu: MenuItem) {
     }))
 }
 
-const Separator: FC<{ title: string }> = ({ title }) => {
+const Separator: FC<{ title: ReactNode }> = ({ title }) => {
   return (
     <li
       className={cn(
@@ -194,9 +205,7 @@ const Separator: FC<{ title: string }> = ({ title }) => {
           : 'x:my-4'
       )}
     >
-      {title || (
-        <hr className="x:mx-2 x:border-t x:border-gray-200 x:dark:border-primary-100/10" />
-      )}
+      {title || <hr className="x:mx-2 x:border-t nextra-border" />}
     </li>
   )
 }
@@ -218,13 +227,14 @@ const File: FC<{
   if (item.type === 'separator') {
     return <Separator title={item.title} />
   }
-
+  const href = (item as PageItem).href || item.route
   return (
     <li className={cn({ active })}>
       <Anchor
-        href={(item as PageItem).href || item.route}
+        href={href}
         className={cn(classes.link, active ? classes.active : classes.inactive)}
         onFocus={onFocus}
+        prefetch={false}
       >
         {item.title}
       </Anchor>
@@ -288,7 +298,7 @@ Menu.displayName = 'Menu'
 
 export const MobileNav: FC = () => {
   const { directories } = useConfig().normalizePagesResult
-  const toc = useToc()
+  const toc = useTOC()
 
   const menu = useMenu()
   const pathname = usePathname()
@@ -303,14 +313,15 @@ export const MobileNav: FC = () => {
   const sidebarRef = useRef<HTMLUListElement>(null!)
 
   useEffect(() => {
-    const activeElement = sidebarRef.current.querySelector('li.active')
+    const sidebar = sidebarRef.current
+    const activeLink = sidebar.querySelector('li.active')
 
-    if (activeElement && menu) {
-      scrollIntoView(activeElement, {
+    if (activeLink && menu) {
+      scrollIntoView(activeLink, {
         block: 'center',
         inline: 'center',
         scrollMode: 'always',
-        boundary: sidebarRef.current.parentNode as HTMLElement
+        boundary: sidebar.parentNode as HTMLElement
       })
     }
   }, [menu])
@@ -324,7 +335,7 @@ export const MobileNav: FC = () => {
       className={cn(
         'nextra-mobile-nav', // targeted from userspace
         'x:flex x:flex-col',
-        'x:fixed x:inset-0 x:pt-(--nextra-navbar-height) x:z-10 x:overscroll-contain',
+        'x:fixed x:inset-0 x:pt-(--nextra-navbar-height) x:z-20 x:overscroll-contain',
         'x:[contain:layout_style]',
         'x:md:hidden',
         'x:[.nextra-banner:not([class$=hidden])~&]:pt-[calc(var(--nextra-banner-height)+var(--nextra-navbar-height))]',
@@ -357,33 +368,50 @@ export const MobileNav: FC = () => {
   )
 }
 
-export const Sidebar: FC<{ toc: Heading[] }> = ({ toc }) => {
+let lastScrollPosition = 0
+
+const handleScrollEnd: ComponentProps<'div'>['onScrollEnd'] = event => {
+  lastScrollPosition = event.currentTarget.scrollTop
+}
+
+export const Sidebar: FC = () => {
+  const toc = useTOC()
   const { normalizePagesResult, hideSidebar } = useConfig()
   const themeConfig = useThemeConfig()
   const [isExpanded, setIsExpanded] = useState(themeConfig.sidebar.defaultOpen)
   const [showToggleAnimation, setToggleAnimation] = useState(false)
-  const sidebarRef = useRef<HTMLDivElement>(null)
+  const sidebarRef = useRef<HTMLDivElement>(null!)
   const sidebarControlsId = useId()
 
   const { docsDirectories, activeThemeContext } = normalizePagesResult
   const includePlaceholder = activeThemeContext.layout === 'default'
 
   useEffect(() => {
-    const activeElement = sidebarRef.current?.querySelector('li.active')
+    if (window.innerWidth < 768) {
+      return
+    }
+    const sidebar = sidebarRef.current
 
-    if (activeElement && window.innerWidth > 767) {
-      scrollIntoView(activeElement, {
+    // Since `<Sidebar>` is placed in `useMDXComponents.wrapper` on client side navigation he will
+    // be remounted, this is a workaround to restore the scroll position, and will be fixed in Nextra 5
+    if (lastScrollPosition) {
+      sidebar.scrollTop = lastScrollPosition
+      return
+    }
+
+    const activeLink = sidebar.querySelector('li.active')
+    if (activeLink) {
+      scrollIntoView(activeLink, {
         block: 'center',
         inline: 'center',
         scrollMode: 'always',
-        boundary: sidebarRef.current!.parentNode as HTMLDivElement
+        boundary: sidebar.parentNode as HTMLDivElement
       })
     }
   }, [])
 
   const anchors =
-    // When the viewport size is larger than `md`, hide the anchors in
-    // the sidebar when `floatTOC` is enabled.
+    // hide the anchors in the sidebar when `floatTOC` is enabled.
     themeConfig.toc.float ? [] : toc.filter(v => v.depth === 2)
 
   const hasI18n = themeConfig.i18n.length > 0
@@ -401,7 +429,7 @@ export const Sidebar: FC<{ toc: Heading[] }> = ({ toc }) => {
           'nextra-sidebar x:print:hidden',
           'x:transition-all x:ease-in-out',
           'x:max-md:hidden x:flex x:flex-col',
-          'x:h-[calc(100dvh-var(--nextra-menu-height))]',
+          'x:h-[calc(100dvh-var(--nextra-navbar-height))]',
           'x:top-(--nextra-navbar-height) x:shrink-0',
           isExpanded ? 'x:w-64' : 'x:w-20',
           hideSidebar ? 'x:hidden' : 'x:sticky'
@@ -414,6 +442,7 @@ export const Sidebar: FC<{ toc: Heading[] }> = ({ toc }) => {
             !isExpanded && 'no-scrollbar'
           )}
           ref={sidebarRef}
+          onScrollEnd={handleScrollEnd} // eslint-disable-line react/no-unknown-property
         >
           {/* without !hideSidebar check <Collapse />'s inner.clientWidth on `layout: "raw"` will be 0 and element will not have width on initial loading */}
           {(!hideSidebar || !isExpanded) && (
@@ -458,7 +487,7 @@ export const Sidebar: FC<{ toc: Heading[] }> = ({ toc }) => {
                   cn(
                     'x:rounded-md x:p-2',
                     hover
-                      ? 'x:bg-gray-100 x:text-gray-900 x:dark:bg-primary-100/5 x:dark:text-gray-50'
+                      ? 'x:bg-gray-200 x:text-gray-900 x:dark:bg-primary-100/5 x:dark:text-gray-50'
                       : 'x:text-gray-600 x:dark:text-gray-400'
                   )
                 }

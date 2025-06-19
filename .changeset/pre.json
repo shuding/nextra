@@ -1,0 +1,43 @@
+{
+  "mode": "pre",
+  "tag": "alpha",
+  "initialVersions": {
+    "esbuild-react-compiler-plugin": "0.0.0",
+    "@nextra/eslint-config": "0.0.0",
+    "nextra": "4.2.17",
+    "nextra-theme-blog": "4.2.17",
+    "nextra-theme-docs": "4.2.17",
+    "@nextra/prettier-config": "0.0.0",
+    "@nextra/tsdoc": "0.0.0"
+  },
+  "changesets": [
+    "adapt-original-gh-alerts",
+    "beige-pandas-fail",
+    "eight-crabs-turn",
+    "fair-waves-allow",
+    "few-clowns-bow",
+    "full-sloths-stop",
+    "fuzzy-pandas-ring",
+    "huge-women-grin",
+    "icy-turkeys-search",
+    "lazy-pugs-tie",
+    "lovely-webs-wash",
+    "lucky-apes-teach",
+    "major-bananas-film",
+    "mighty-hoops-fix",
+    "neat-clocks-play",
+    "nine-friends-allow",
+    "open-trains-wait",
+    "perfect-carrots-rescue",
+    "polite-queens-sell",
+    "puny-peas-shout",
+    "quick-pugs-win",
+    "rich-symbols-wash",
+    "shy-shoes-press",
+    "silent-brooms-swim",
+    "soft-rocks-dance",
+    "tender-forks-type",
+    "thick-coins-fetch",
+    "tough-crews-train"
+  ]
+}

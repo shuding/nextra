@@ -88,13 +88,13 @@ describe('generatePageMap()', () => {
       [
         "app/_meta.global.tsx",
         "app/about/page.mdx",
+        "app/api/page.mdx",
         "app/blog/page.mdx",
         "app/docs/advanced/customize-the-cascade-layers/page.mdx",
         "app/docs/advanced/latex/page.mdx",
         "app/docs/advanced/mermaid/page.mdx",
         "app/docs/advanced/npm2yarn/page.mdx",
         "app/docs/advanced/page.mdx",
-        "app/docs/advanced/playground/page.mdx",
         "app/docs/advanced/remote/page.mdx",
         "app/docs/advanced/table/page.mdx",
         "app/docs/advanced/tailwind-css/page.mdx",
@@ -106,17 +106,7 @@ describe('generatePageMap()', () => {
         "app/docs/blog-theme/rss/page.mdx",
         "app/docs/blog-theme/start/page.mdx",
         "app/docs/blog-theme/tags/page.mdx",
-        "app/docs/built-ins/banner/page.mdx",
-        "app/docs/built-ins/bleed/page.mdx",
-        "app/docs/built-ins/callout/page.mdx",
-        "app/docs/built-ins/cards/page.mdx",
-        "app/docs/built-ins/filetree/page.mdx",
-        "app/docs/built-ins/head/page.mdx",
         "app/docs/built-ins/page.mdx",
-        "app/docs/built-ins/search/page.mdx",
-        "app/docs/built-ins/steps/page.mdx",
-        "app/docs/built-ins/table/page.mdx",
-        "app/docs/built-ins/tabs/page.mdx",
         "app/docs/custom-theme/page.mdx",
         "app/docs/docs-theme/api/page.mdx",
         "app/docs/docs-theme/built-ins/footer/page.mdx",
@@ -158,6 +148,11 @@ describe('generatePageMap()', () => {
           "route": "/about",
         },
         {
+          "__pagePath": "app/api/page.mdx",
+          "name": "api",
+          "route": "/api",
+        },
+        {
           "__pagePath": "app/blog/page.mdx",
           "name": "blog",
           "route": "/blog",
@@ -190,11 +185,6 @@ describe('generatePageMap()', () => {
                   "__pagePath": "app/docs/advanced/page.mdx",
                   "name": "index",
                   "route": "/docs/advanced",
-                },
-                {
-                  "__pagePath": "app/docs/advanced/playground/page.mdx",
-                  "name": "playground",
-                  "route": "/docs/advanced/playground",
                 },
                 {
                   "__pagePath": "app/docs/advanced/remote/page.mdx",
@@ -262,63 +252,7 @@ describe('generatePageMap()', () => {
               "route": "/docs/blog-theme",
             },
             {
-              "children": [
-                {
-                  "__pagePath": "app/docs/built-ins/banner/page.mdx",
-                  "name": "banner",
-                  "route": "/docs/built-ins/banner",
-                },
-                {
-                  "__pagePath": "app/docs/built-ins/bleed/page.mdx",
-                  "name": "bleed",
-                  "route": "/docs/built-ins/bleed",
-                },
-                {
-                  "__pagePath": "app/docs/built-ins/callout/page.mdx",
-                  "name": "callout",
-                  "route": "/docs/built-ins/callout",
-                },
-                {
-                  "__pagePath": "app/docs/built-ins/cards/page.mdx",
-                  "name": "cards",
-                  "route": "/docs/built-ins/cards",
-                },
-                {
-                  "__pagePath": "app/docs/built-ins/filetree/page.mdx",
-                  "name": "filetree",
-                  "route": "/docs/built-ins/filetree",
-                },
-                {
-                  "__pagePath": "app/docs/built-ins/head/page.mdx",
-                  "name": "head",
-                  "route": "/docs/built-ins/head",
-                },
-                {
-                  "__pagePath": "app/docs/built-ins/page.mdx",
-                  "name": "index",
-                  "route": "/docs/built-ins",
-                },
-                {
-                  "__pagePath": "app/docs/built-ins/search/page.mdx",
-                  "name": "search",
-                  "route": "/docs/built-ins/search",
-                },
-                {
-                  "__pagePath": "app/docs/built-ins/steps/page.mdx",
-                  "name": "steps",
-                  "route": "/docs/built-ins/steps",
-                },
-                {
-                  "__pagePath": "app/docs/built-ins/table/page.mdx",
-                  "name": "table",
-                  "route": "/docs/built-ins/table",
-                },
-                {
-                  "__pagePath": "app/docs/built-ins/tabs/page.mdx",
-                  "name": "tabs",
-                  "route": "/docs/built-ins/tabs",
-                },
-              ],
+              "__pagePath": "app/docs/built-ins/page.mdx",
               "name": "built-ins",
               "route": "/docs/built-ins",
             },
@@ -514,16 +448,16 @@ describe('generatePageMap()', () => {
 
     expect(convertPageMapToJs({ pageMap, mdxPages, globalMetaPath }))
       .toMatchInlineSnapshot(`
-        "import { normalizePageMap, mergeMetaWithPageMap } from 'nextra/page-map'
+        "import { normalizePageMap, mergeMetaWithPageMap, getMetadata } from 'nextra/page-map'
         import globalMeta from 'private-next-root-dir/app/_meta.global.tsx'
         import {metadata as app_about_page} from "private-next-root-dir/app/about/page.mdx?metadata";
+        import {metadata as app_api_page} from "private-next-root-dir/app/api/page.mdx?metadata";
         import {metadata as app_blog_page} from "private-next-root-dir/app/blog/page.mdx?metadata";
         import {metadata as app_docs_advanced_customize_the_cascade_layers_page} from "private-next-root-dir/app/docs/advanced/customize-the-cascade-layers/page.mdx?metadata";
         import {metadata as app_docs_advanced_latex_page} from "private-next-root-dir/app/docs/advanced/latex/page.mdx?metadata";
         import {metadata as app_docs_advanced_mermaid_page} from "private-next-root-dir/app/docs/advanced/mermaid/page.mdx?metadata";
         import {metadata as app_docs_advanced_npm2yarn_page} from "private-next-root-dir/app/docs/advanced/npm2yarn/page.mdx?metadata";
         import {metadata as app_docs_advanced_page} from "private-next-root-dir/app/docs/advanced/page.mdx?metadata";
-        import {metadata as app_docs_advanced_playground_page} from "private-next-root-dir/app/docs/advanced/playground/page.mdx?metadata";
         import {metadata as app_docs_advanced_remote_page} from "private-next-root-dir/app/docs/advanced/remote/page.mdx?metadata";
         import {metadata as app_docs_advanced_table_page} from "private-next-root-dir/app/docs/advanced/table/page.mdx?metadata";
         import {metadata as app_docs_advanced_tailwind_css_page} from "private-next-root-dir/app/docs/advanced/tailwind-css/page.mdx?metadata";
@@ -535,17 +469,7 @@ describe('generatePageMap()', () => {
         import {metadata as app_docs_blog_theme_rss_page} from "private-next-root-dir/app/docs/blog-theme/rss/page.mdx?metadata";
         import {metadata as app_docs_blog_theme_start_page} from "private-next-root-dir/app/docs/blog-theme/start/page.mdx?metadata";
         import {metadata as app_docs_blog_theme_tags_page} from "private-next-root-dir/app/docs/blog-theme/tags/page.mdx?metadata";
-        import {metadata as app_docs_built_ins_banner_page} from "private-next-root-dir/app/docs/built-ins/banner/page.mdx?metadata";
-        import {metadata as app_docs_built_ins_bleed_page} from "private-next-root-dir/app/docs/built-ins/bleed/page.mdx?metadata";
-        import {metadata as app_docs_built_ins_callout_page} from "private-next-root-dir/app/docs/built-ins/callout/page.mdx?metadata";
-        import {metadata as app_docs_built_ins_cards_page} from "private-next-root-dir/app/docs/built-ins/cards/page.mdx?metadata";
-        import {metadata as app_docs_built_ins_filetree_page} from "private-next-root-dir/app/docs/built-ins/filetree/page.mdx?metadata";
-        import {metadata as app_docs_built_ins_head_page} from "private-next-root-dir/app/docs/built-ins/head/page.mdx?metadata";
         import {metadata as app_docs_built_ins_page} from "private-next-root-dir/app/docs/built-ins/page.mdx?metadata";
-        import {metadata as app_docs_built_ins_search_page} from "private-next-root-dir/app/docs/built-ins/search/page.mdx?metadata";
-        import {metadata as app_docs_built_ins_steps_page} from "private-next-root-dir/app/docs/built-ins/steps/page.mdx?metadata";
-        import {metadata as app_docs_built_ins_table_page} from "private-next-root-dir/app/docs/built-ins/table/page.mdx?metadata";
-        import {metadata as app_docs_built_ins_tabs_page} from "private-next-root-dir/app/docs/built-ins/tabs/page.mdx?metadata";
         import {metadata as app_docs_custom_theme_page} from "private-next-root-dir/app/docs/custom-theme/page.mdx?metadata";
         import {metadata as app_docs_docs_theme_api_page} from "private-next-root-dir/app/docs/docs-theme/api/page.mdx?metadata";
         import {metadata as app_docs_docs_theme_built_ins_footer_page} from "private-next-root-dir/app/docs/docs-theme/built-ins/footer/page.mdx?metadata";
@@ -574,7 +498,7 @@ describe('generatePageMap()', () => {
         import {metadata as app_docs_guide_syntax_highlighting_page} from "private-next-root-dir/app/docs/guide/syntax-highlighting/page.mdx?metadata";
         import {metadata as app_docs_guide_turbopack_page} from "private-next-root-dir/app/docs/guide/turbopack/page.mdx?metadata";
         import {metadata as app_docs_page} from "private-next-root-dir/app/docs/page.mdx?metadata";
-        import {metadata as app_page} from "private-next-root-dir/app/page.tsx";
+        import * as app_page from "private-next-root-dir/app/page.tsx";
         import {metadata as app_showcase_page} from "private-next-root-dir/app/showcase/page.mdx?metadata";
         import {metadata as app_sponsors_page} from "private-next-root-dir/app/sponsors/page.mdx?metadata";
 
@@ -582,6 +506,10 @@ describe('generatePageMap()', () => {
           name: "about",
           route: "/about",
           frontMatter: app_about_page
+        }, {
+          name: "api",
+          route: "/api",
+          frontMatter: app_api_page
         }, {
           name: "blog",
           route: "/blog",
@@ -612,10 +540,6 @@ describe('generatePageMap()', () => {
               name: "index",
               route: "/docs/advanced",
               frontMatter: app_docs_advanced_page
-            }, {
-              name: "playground",
-              route: "/docs/advanced/playground",
-              frontMatter: app_docs_advanced_playground_page
             }, {
               name: "remote",
               route: "/docs/advanced/remote",
@@ -668,51 +592,7 @@ describe('generatePageMap()', () => {
           }, {
             name: "built-ins",
             route: "/docs/built-ins",
-            children: [{
-              name: "banner",
-              route: "/docs/built-ins/banner",
-              frontMatter: app_docs_built_ins_banner_page
-            }, {
-              name: "bleed",
-              route: "/docs/built-ins/bleed",
-              frontMatter: app_docs_built_ins_bleed_page
-            }, {
-              name: "callout",
-              route: "/docs/built-ins/callout",
-              frontMatter: app_docs_built_ins_callout_page
-            }, {
-              name: "cards",
-              route: "/docs/built-ins/cards",
-              frontMatter: app_docs_built_ins_cards_page
-            }, {
-              name: "filetree",
-              route: "/docs/built-ins/filetree",
-              frontMatter: app_docs_built_ins_filetree_page
-            }, {
-              name: "head",
-              route: "/docs/built-ins/head",
-              frontMatter: app_docs_built_ins_head_page
-            }, {
-              name: "index",
-              route: "/docs/built-ins",
-              frontMatter: app_docs_built_ins_page
-            }, {
-              name: "search",
-              route: "/docs/built-ins/search",
-              frontMatter: app_docs_built_ins_search_page
-            }, {
-              name: "steps",
-              route: "/docs/built-ins/steps",
-              frontMatter: app_docs_built_ins_steps_page
-            }, {
-              name: "table",
-              route: "/docs/built-ins/table",
-              frontMatter: app_docs_built_ins_table_page
-            }, {
-              name: "tabs",
-              route: "/docs/built-ins/tabs",
-              frontMatter: app_docs_built_ins_tabs_page
-            }]
+            frontMatter: app_docs_built_ins_page
           }, {
             name: "custom-theme",
             route: "/docs/custom-theme",
@@ -845,7 +725,7 @@ describe('generatePageMap()', () => {
         }, {
           name: "index",
           route: "/",
-          frontMatter: app_page
+          frontMatter: getMetadata(app_page)
         }, {
           name: "showcase",
           route: "/showcase",
@@ -854,7 +734,7 @@ describe('generatePageMap()', () => {
           name: "sponsors",
           route: "/sponsors",
           frontMatter: app_sponsors_page
-        }], globalMeta))
+        }], globalMeta, true))
 
         export const RouteToFilepath = {}"
       `)
@@ -873,6 +753,7 @@ describe('generatePageMap()', () => {
           "src/app/_meta.js",
           "src/app/blog/page.jsx",
           "src/app/page.jsx",
+          "src/app/showcase/(overview)/page.jsx",
           "src/content/_meta.js",
           "src/content/advanced/code-highlighting.mdx",
           "src/content/features/_meta.js",
@@ -1010,6 +891,11 @@ describe('generatePageMap()', () => {
             "__pagePath": "src/content/index.mdx",
             "name": "index",
             "route": "/",
+          },
+          {
+            "__pagePath": "src/app/showcase/(overview)/page.jsx",
+            "name": "showcase",
+            "route": "/showcase",
           },
           {
             "children": [
@@ -1219,6 +1105,11 @@ describe('generatePageMap()', () => {
             "__pagePath": "src/app/page.jsx",
             "name": "index",
             "route": "/",
+          },
+          {
+            "__pagePath": "src/app/showcase/(overview)/page.jsx",
+            "name": "showcase",
+            "route": "/showcase",
           },
         ]
       `)

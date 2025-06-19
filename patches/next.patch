@@ -1,0 +1,12 @@
+diff --git a/dist/lib/pretty-bytes.js b/dist/lib/pretty-bytes.js
+index 7815ec39d7288b7aa79b1c81a3126175aa7a0f7f..480c2389cdc97235083e97f0c1ed1eff25c10170 100644
+--- a/dist/lib/pretty-bytes.js
++++ b/dist/lib/pretty-bytes.js
+@@ -44,6 +44,7 @@ Formats the given number using `Number#toLocaleString`.
+     return result;
+ };
+ function prettyBytes(number, options) {
++    return number/1000 + ' Kb'
+     if (!Number.isFinite(number)) {
+         throw Object.defineProperty(new TypeError(`Expected a finite number, got ${typeof number}: ${number}`), "__NEXT_ERROR_CODE", {
+             value: "E572",

@@ -3,34 +3,31 @@ import { includeIgnoreFile } from '@eslint/compat'
 import js from '@eslint/js'
 // @ts-expect-error -- no types
 import eslintPluginNext from '@next/eslint-plugin-next'
-import type { Linter } from 'eslint'
-// @ts-expect-error -- no types
+// import type { Linter } from 'eslint'
 import eslintConfigPrettier from 'eslint-config-prettier'
+import eslintPluginDeMorgan from 'eslint-plugin-de-morgan'
 import eslintPluginImport from 'eslint-plugin-import-x'
 import eslintPluginReact from 'eslint-plugin-react'
-// @ts-expect-error -- no types
-import * as eslintPluginReactCompiler from 'eslint-plugin-react-compiler'
-// @ts-expect-error -- no types
 import eslintPluginReactHooks from 'eslint-plugin-react-hooks'
 import eslintPluginSonarJs from 'eslint-plugin-sonarjs'
-// @ts-expect-error -- no types
-import eslintPluginTailwindCss from 'eslint-plugin-tailwindcss'
+// import eslintPluginTailwindCss from 'eslint-plugin-tailwindcss'
 // @ts-expect-error -- no types
 import eslintPluginTsSortKeys from 'eslint-plugin-typescript-sort-keys'
 import eslintPluginUnicorn from 'eslint-plugin-unicorn'
 import tseslint from 'typescript-eslint'
 import type { Config } from 'typescript-eslint'
 
-const TAILWIND_CONFIG = {
-  extends: [eslintPluginTailwindCss.configs['flat/recommended']],
-  rules: {
-    'tailwindcss/classnames-order': 'off', // conflicts with prettier-plugin-tailwindcss
-    'tailwindcss/enforces-negative-arbitrary-values': 'error',
-    'tailwindcss/enforces-shorthand': 'error',
-    'tailwindcss/migration-from-tailwind-2': 'error',
-    'tailwindcss/no-custom-classname': 'error'
-  } satisfies Linter.RulesRecord
-}
+// TODO: Enable once `eslint-plugin-tailwindcss` will support Tailwind CSS v4
+// const TAILWIND_CONFIG = {
+//   extends: [eslintPluginTailwindCss.configs['flat/recommended']],
+//   rules: {
+//     'tailwindcss/classnames-order': 'off', // conflicts with prettier-plugin-tailwindcss
+//     'tailwindcss/enforces-negative-arbitrary-values': 'error',
+//     'tailwindcss/enforces-shorthand': 'error',
+//     'tailwindcss/migration-from-tailwind-2': 'error',
+//     'tailwindcss/no-custom-classname': 'error'
+//   } satisfies Linter.RulesRecord
+// }
 
 const REACT_COMPILER_RESTRICT = {
   name: 'react',
@@ -39,15 +36,23 @@ const REACT_COMPILER_RESTRICT = {
 
 const config: Config = tseslint.config(
   includeIgnoreFile(path.resolve('.gitignore')),
-  { ignores: ['**/generated-page-map.ts', '**/next-env.d.ts'] },
+  {
+    ignores: [
+      '**/generated-page-map.ts',
+      '**/next-env.d.ts',
+      '**/snapshots/**',
+      '**/types.generated.ts'
+    ]
+  },
   // Rules for all files
   {
     files: ['**/*.{js,jsx,cjs,mjs,ts,tsx,cts,mts}'],
     extends: [
       js.configs.recommended,
       tseslint.configs.recommended,
-      eslintPluginUnicorn.configs['flat/recommended'],
+      eslintPluginUnicorn.configs.recommended,
       eslintPluginSonarJs.configs.recommended,
+      eslintPluginDeMorgan.configs.recommended,
       eslintConfigPrettier
     ],
     plugins: {
@@ -110,6 +115,9 @@ const config: Config = tseslint.config(
       'sonarjs/no-array-index-key': 'off', // todo
       'sonarjs/no-unstable-nested-components': 'off', // todo
 
+      'sonarjs/no-redundant-optional': 'off', // doesn't work well with tsconfig's `exactOptionalPropertyTypes: true`
+      'sonarjs/no-duplicate-in-composite': 'off', // covered by @typescript-eslint/no-duplicate-type-constituents
+      'sonarjs/deprecation': 'off', // covered by @typescript-eslint/no-deprecated
       'sonarjs/no-unused-vars': 'off',
       'sonarjs/prefer-regexp-exec': 'off',
       'sonarjs/fixme-tag': 'off',
@@ -175,6 +183,8 @@ const config: Config = tseslint.config(
       }
     },
     rules: {
+      '@typescript-eslint/no-duplicate-type-constituents': 'error',
+      '@typescript-eslint/no-redundant-type-constituents': 'error',
       '@typescript-eslint/no-deprecated': 'error',
       '@typescript-eslint/await-thenable': 'error',
       '@typescript-eslint/no-unnecessary-type-assertion': 'error',
@@ -191,17 +201,14 @@ const config: Config = tseslint.config(
   },
   {
     files: ['packages/**'],
-    plugins: {
-      'react-compiler': eslintPluginReactCompiler
-    },
     rules: {
       'no-restricted-imports': ['error', REACT_COMPILER_RESTRICT],
-      'react-compiler/react-compiler': 'error'
+      'react-hooks/react-compiler': 'error'
     }
   },
   // ⚙️ nextra-theme-docs
   {
-    ...TAILWIND_CONFIG,
+    // ...TAILWIND_CONFIG,
     files: ['packages/nextra-theme-docs/**'],
     settings: {
       tailwindcss: {
@@ -217,7 +224,7 @@ const config: Config = tseslint.config(
       }
     },
     rules: {
-      ...TAILWIND_CONFIG.rules,
+      // ...TAILWIND_CONFIG.rules,
       'no-restricted-imports': [
         'error',
         { name: 'next/link', message: 'Use `<Anchor>` instead' },
@@ -229,10 +236,10 @@ const config: Config = tseslint.config(
   },
   // ⚙️ nextra-theme-blog
   {
-    ...TAILWIND_CONFIG,
+    // ...TAILWIND_CONFIG,
     files: ['packages/nextra-theme-blog/**'],
     rules: {
-      ...TAILWIND_CONFIG.rules,
+      // ...TAILWIND_CONFIG.rules,
       'no-restricted-imports': [
         'error',
         {
@@ -252,7 +259,7 @@ const config: Config = tseslint.config(
   },
   // ⚙️ nextra
   {
-    ...TAILWIND_CONFIG,
+    // ...TAILWIND_CONFIG,
     files: ['packages/nextra/**'],
     settings: {
       tailwindcss: {
@@ -267,7 +274,7 @@ const config: Config = tseslint.config(
       }
     },
     rules: {
-      ...TAILWIND_CONFIG.rules,
+      // ...TAILWIND_CONFIG.rules,
       'import/extensions': ['error', 'ignorePackages'],
       // False positive due Tailwind CSS v4
       'tailwindcss/no-custom-classname': 'off'
@@ -275,7 +282,7 @@ const config: Config = tseslint.config(
   },
   // ⚙️ Docs
   {
-    ...TAILWIND_CONFIG,
+    // ...TAILWIND_CONFIG,
     files: ['docs/**'],
     settings: {
       tailwindcss: {
@@ -307,7 +314,7 @@ const config: Config = tseslint.config(
   },
   // ⚙️ SWR-site example
   {
-    ...TAILWIND_CONFIG,
+    // ...TAILWIND_CONFIG,
     files: ['examples/swr-site/**'],
     settings: {
       tailwindcss: {

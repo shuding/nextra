@@ -1,0 +1,111 @@
+{
+  "description": "Accesses the current [theme configuration](https://nextra.site/docs/docs-theme/theme-configuration)
+values, excluding layout-specific elements like:
+- `footer`
+- `navbar`
+- `pageMap`
+- `nextThemes`
+- `banner`
+- `children`
+
+This hook is useful for dynamically configuring your project based on shared theme values.",
+  "filePath": "../nextra-theme-docs/src/stores/theme-config.ts",
+  "name": "useThemeConfig",
+  "signatures": [
+    {
+      "params": [],
+      "returns": [
+        {
+          "name": "darkMode",
+          "type": "boolean",
+        },
+        {
+          "name": "docsRepositoryBase",
+          "type": "string",
+        },
+        {
+          "name": "editLink",
+          "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...> | null",
+        },
+        {
+          "name": "feedback.link",
+          "optional": true,
+          "type": "string | undefined",
+        },
+        {
+          "name": "feedback.content",
+          "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...> | null",
+        },
+        {
+          "name": "feedback.labels",
+          "type": "string",
+        },
+        {
+          "name": "i18n",
+          "type": "{ locale: string; name: string; }[]",
+        },
+        {
+          "name": "lastUpdated",
+          "type": "ReactElement<unknown, string | JSXElementConstructor<any>>",
+        },
+        {
+          "name": "navigation",
+          "type": "boolean | { next: boolean; prev: boolean; }",
+        },
+        {
+          "name": "search",
+          "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...> | null",
+        },
+        {
+          "name": "sidebar.autoCollapse",
+          "optional": true,
+          "type": "boolean | undefined",
+        },
+        {
+          "name": "sidebar.defaultMenuCollapseLevel",
+          "type": "number",
+        },
+        {
+          "name": "sidebar.defaultOpen",
+          "type": "boolean",
+        },
+        {
+          "name": "sidebar.toggleButton",
+          "type": "boolean",
+        },
+        {
+          "name": "themeSwitch.dark",
+          "type": "string",
+        },
+        {
+          "name": "themeSwitch.light",
+          "type": "string",
+        },
+        {
+          "name": "themeSwitch.system",
+          "type": "string",
+        },
+        {
+          "name": "toc.extraContent",
+          "optional": true,
+          "type": "ReactNode",
+        },
+        {
+          "name": "toc.backToTop",
+          "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...> | null",
+        },
+        {
+          "name": "toc.float",
+          "type": "boolean",
+        },
+        {
+          "name": "toc.title",
+          "type": "string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...> | null",
+        },
+      ],
+    },
+  ],
+  "tags": {
+    "returns": "A subset of your theme configuration context.",
+  },
+}

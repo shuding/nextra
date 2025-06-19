@@ -1,10 +1,12 @@
+import { getEnhancedPageMap } from '@components/get-page-map'
 import { NextraLogo, VercelLogo } from '@components/icons'
 import cn from 'clsx'
 import type { Metadata } from 'next'
+import NextImage from 'next/image'
 import { Footer, Layout, Link, Navbar } from 'nextra-theme-docs'
-import { Banner, Head } from 'nextra/components'
-import { getPageMap } from 'nextra/page-map'
+import { Anchor, Banner, Head } from 'nextra/components'
 import type { FC, ReactNode } from 'react'
+import xyflow from './showcase/_logos/xyflow.png'
 import './globals.css'
 
 export const metadata: Metadata = {
@@ -49,8 +51,8 @@ export const metadata: Metadata = {
 
 const banner = (
   <Banner dismissible={false}>
-    🎉 Nextra 4.0 is released. Dima Machina is looking{' '}
-    <Link href="https://github.com/dimaMachina">
+    🎉 Nextra 4.0 is released. dimaMachina is looking{' '}
+    <Link href="https://github.com/dimaMachina" className="text-current!">
       for a new job or consulting
     </Link>
     .
@@ -62,7 +64,7 @@ const navbar = (
       <NextraLogo
         height="20"
         className={cn(
-          'hover:transition-all hover:duration-1000',
+          'hover:transition-all hover:duration-1000 motion-reduce:hover:transition-none',
           '[mask-image:linear-gradient(60deg,#000_25%,rgba(0,0,0,.2)_50%,#000_75%)] [mask-position:0] [mask-size:400%]',
           'hover:[mask-position:100%]'
         )}
@@ -92,6 +94,7 @@ const footer = (
 const RootLayout: FC<{
   children: ReactNode
 }> = async ({ children }) => {
+  const pageMap = await getEnhancedPageMap()
   return (
     <html lang="en" dir="ltr" suppressHydrationWarning>
       <Head />
@@ -99,11 +102,25 @@ const RootLayout: FC<{
         <Layout
           banner={banner}
           navbar={navbar}
-          pageMap={await getPageMap()}
+          pageMap={pageMap}
           docsRepositoryBase="https://github.com/shuding/nextra/tree/main/docs"
           editLink="Edit this page on GitHub"
           sidebar={{ defaultMenuCollapseLevel: 1 }}
           footer={footer}
+          toc={{
+            extraContent: (
+              <>
+                <b className="mt-2 text-xs">Sponsored by:</b>
+                <Anchor href="https://xyflow.com?utm_source=nextra.site&utm_campaign=nextra&utm_content=sidebarLink">
+                  <NextImage
+                    src={xyflow}
+                    alt="Wire your ideas with xyflow!"
+                    className="nextra-border rounded-sm border"
+                  />
+                </Anchor>
+              </>
+            )
+          }}
         >
           {children}
         </Layout>

@@ -10,7 +10,13 @@ import cn from 'clsx'
 import { addBasePath } from 'next/dist/client/add-base-path'
 import NextLink from 'next/link'
 import { useRouter } from 'next/navigation'
-import type { FC, FocusEventHandler, ReactElement, SyntheticEvent } from 'react'
+import type {
+  FC,
+  FocusEventHandler,
+  ReactElement,
+  ReactNode,
+  SyntheticEvent
+} from 'react'
 import { useDeferredValue, useEffect, useRef, useState } from 'react'
 import type { PagefindSearchOptions } from '../../types.js'
 import { useMounted } from '../hooks/use-mounted.js'
@@ -42,12 +48,61 @@ type PagefindResult = {
 }
 
 type SearchProps = {
-  emptyResult?: ReactElement | string
-  errorText?: ReactElement | string
-  loading?: ReactElement | string
+  /**
+   * Not found text.
+   * @default 'No results found.'
+   */
+  emptyResult?: ReactNode
+  /**
+   * Error text.
+   * @default 'Failed to load search index.'
+   * */
+  errorText?: ReactNode
+  /**
+   * Loading text.
+   * @default 'Loading…'
+   */
+  loading?: ReactNode
+  /**
+   * Placeholder text.
+   * @default 'Search documentation…'
+   */
   placeholder?: string
+  /** CSS class name. */
   className?: string
   searchOptions?: PagefindSearchOptions
+  /**
+   * Callback function that triggers whenever the search input changes.
+   *
+   * This prop is **not serializable** and cannot be used directly in a server-side layout.
+   *
+   * To use this prop, wrap the component in a **client-side** wrapper. Example:
+   *
+   * ```tsx
+   * 'use client'
+   *
+   * import { Search } from 'nextra/components'
+   *
+   * export function SearchWithCallback() {
+   *   return (
+   *     <Search
+   *       onSearch={query => {
+   *         console.log('Search query:', query)
+   *       }}
+   *     />
+   *   )
+   * }
+   * ```
+   *
+   * Then pass the wrapper to the layout:
+   *
+   * ```tsx
+   * <Layout search={<SearchWithCallback />} {...rest} />
+   * ```
+   *
+   * @param query - The current search input string.
+   */
+  onSearch?: (query: string) => void
 }
 
 const INPUTS = new Set(['INPUT', 'SELECT', 'BUTTON', 'TEXTAREA'])
@@ -66,13 +121,23 @@ const DEV_SEARCH_NOTICE = (
   </>
 )
 
+/**
+ * A built-in search component provides a seamless and fast search
+ * experience out of the box. Under the hood, it leverages the
+ * [Pagefind package](https://pagefind.app) — a fully client-side search engine optimized for static
+ * sites. Pagefind indexes your content at build time and enables highly performant,
+ * zero-JavaScript-dependency searches at runtime.
+ *
+ * @see [Nextra search setup guide](https://nextra.site/docs/guide/search)
+ */
 export const Search: FC<SearchProps> = ({
   className,
   emptyResult = 'No results found.',
   errorText = 'Failed to load search index.',
   loading = 'Loading…',
   placeholder = 'Search documentation…',
-  searchOptions
+  searchOptions,
+  onSearch
 }) => {
   const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState<ReactElement | string>('')
@@ -89,10 +154,8 @@ export const Search: FC<SearchProps> = ({
         setError('')
         return
       }
-
+      setIsLoading(true)
       if (!window.pagefind) {
-        setIsLoading(true)
-        setError('')
         try {
           await importPagefind()
         } catch (error) {
@@ -115,7 +178,8 @@ export const Search: FC<SearchProps> = ({
       if (!response) return
 
       const data = await Promise.all(response.results.map(o => o.data()))
-
+      setIsLoading(false)
+      setError('')
       setResults(
         data.map(newData => ({
           ...newData,
@@ -126,7 +190,6 @@ export const Search: FC<SearchProps> = ({
           })
         }))
       )
-      setIsLoading(false)
     }
     handleSearch(deferredSearch)
   }, [deferredSearch]) // eslint-disable-line react-hooks/exhaustive-deps -- ignore searchOptions
@@ -164,18 +227,19 @@ export const Search: FC<SearchProps> = ({
     }
   }, [])
 
-  const icon = mounted && !focused && (
+  const shortcut = (
     <kbd
       className={cn(
-        'x:absolute x:my-1.5 x:select-none x:end-1.5',
-        'x:h-5 x:rounded x:bg-nextra-bg x:px-1.5 x:font-mono x:text-[11px] x:font-medium x:text-gray-500',
+        'x:absolute x:my-1.5 x:select-none x:pointer-events-none x:end-1.5 x:transition-all',
+        'x:h-5 x:rounded x:bg-nextra-bg x:px-1.5 x:font-mono x:text-[11px] x:font-medium x:text-gray-600 x:dark:text-gray-400',
         'x:border nextra-border',
         'x:contrast-more:text-current',
         'x:items-center x:gap-1 x:flex',
-        'x:max-sm:hidden not-prose'
+        'x:max-sm:hidden not-prose',
+        (!mounted || focused) && 'x:invisible x:opacity-0'
       )}
     >
-      {navigator.userAgent.includes('Mac') ? (
+      {mounted && navigator.userAgent.includes('Mac') ? (
         <>
           <span className="x:text-xs">⌘</span>K
         </>
@@ -193,6 +257,7 @@ export const Search: FC<SearchProps> = ({
   const handleChange = (event: SyntheticEvent<HTMLInputElement>) => {
     const { value } = event.currentTarget
     setSearch(value)
+    onSearch?.(value)
   }
 
   const handleSelect = (searchResult: PagefindResult | null) => {
@@ -228,13 +293,13 @@ export const Search: FC<SearchProps> = ({
           spellCheck={false}
           className={({ focus }) =>
             cn(
-              'x:rounded-lg x:px-3 x:py-2 x:transition-colors',
+              'x:rounded-lg x:px-3 x:py-2 x:transition-all',
               'x:w-full x:md:w-64',
               'x:text-base x:leading-tight x:md:text-sm',
               focus
                 ? 'x:bg-transparent x:nextra-focus'
                 : 'x:bg-black/[.05] x:dark:bg-gray-50/10',
-              'x:placeholder:text-gray-500 x:dark:placeholder:text-gray-400',
+              'x:placeholder:text-gray-600 x:dark:placeholder:text-gray-400',
               'x:contrast-more:border x:contrast-more:border-current',
               'x:[&::-webkit-search-cancel-button]:appearance-none'
             )
@@ -247,38 +312,36 @@ export const Search: FC<SearchProps> = ({
           value={search}
           placeholder={placeholder}
         />
-        {icon}
+        {shortcut}
       </div>
       <ComboboxOptions
         transition
         anchor={{ to: 'top end', gap: 10, padding: 16 }}
-        className={({ open }) =>
-          cn(
-            'nextra-search-results', // for user styling
-            'nextra-scrollbar x:max-md:h-full',
-            'x:border x:border-gray-200 x:text-gray-100 x:dark:border-neutral-800',
-            'x:z-20 x:rounded-xl x:py-2.5 x:shadow-xl',
-            'x:contrast-more:border x:contrast-more:border-gray-900 x:contrast-more:dark:border-gray-50',
-            'x:backdrop-blur-md x:bg-nextra-bg/70',
-            'x:motion-reduce:transition-none x:transition-opacity',
-            open ? 'x:opacity-100' : 'x:opacity-0',
-            error || isLoading || !results.length
-              ? [
-                  'x:md:min-h-28 x:grow x:flex x:justify-center x:text-sm x:gap-2 x:px-8',
-                  error
-                    ? 'x:text-red-500 x:items-start'
-                    : 'x:text-gray-400 x:items-center'
-                ]
-              : // headlessui adds max-height as style, use !important to override
-                'x:md:max-h-[min(calc(100vh-5rem),400px)]!',
-            'x:w-full x:md:w-[576px]',
-            'x:empty:invisible'
-          )
-        }
+        className={cn(
+          'nextra-search-results', // for user styling
+          'nextra-scrollbar x:max-md:h-full',
+          'x:border x:border-gray-200 x:text-gray-100 x:dark:border-neutral-800',
+          'x:z-30 x:rounded-xl x:py-2.5 x:shadow-xl',
+          'x:contrast-more:border x:contrast-more:border-gray-900 x:contrast-more:dark:border-gray-50',
+          'x:backdrop-blur-md x:bg-nextra-bg/70',
+          'x:motion-reduce:transition-none',
+          // From https://headlessui.com/react/combobox#adding-transitions
+          'x:origin-top x:transition x:duration-200 x:ease-out x:data-closed:scale-95 x:data-closed:opacity-0 x:empty:invisible',
+          error || isLoading || !results.length
+            ? [
+                'x:md:min-h-28 x:grow x:flex x:justify-center x:text-sm x:gap-2 x:px-8',
+                error
+                  ? 'x:text-red-500 x:items-start'
+                  : 'x:text-gray-400 x:items-center'
+              ]
+            : // headlessui adds max-height as style, use !important to override
+              'x:md:max-h-[min(calc(100vh-5rem),400px)]!',
+          'x:w-full x:md:w-[576px]'
+        )}
       >
         {error ? (
           <>
-            <InformationCircleIcon height="20" className="x:shrink-0" />
+            <InformationCircleIcon height="1.25em" className="x:shrink-0" />
             <div className="x:grid">
               <b className="x:mb-2">{errorText}</b>
               {error}
@@ -306,7 +369,7 @@ const Result: FC<{ data: PagefindResult }> = ({ data }) => {
     <>
       <div
         className={cn(
-          'x:mx-2.5 x:mb-2 x:not-first:mt-6 x:select-none x:border-b x:border-black/10 x:px-2.5 x:pb-1.5 x:text-xs x:font-semibold x:uppercase x:text-gray-500 x:dark:border-white/20 x:dark:text-gray-300',
+          'x:mx-2.5 x:mb-2 x:not-first:mt-6 x:select-none x:border-b x:border-black/10 x:px-2.5 x:pb-1.5 x:text-xs x:font-semibold x:uppercase x:text-gray-600 x:dark:border-white/20 x:dark:text-gray-300',
           'x:contrast-more:border-gray-600 x:contrast-more:text-gray-900 x:contrast-more:dark:border-gray-50 x:contrast-more:dark:text-gray-50'
         )}
       >

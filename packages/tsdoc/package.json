@@ -1,0 +1,55 @@
+{
+  "name": "@nextra/tsdoc",
+  "version": "0.0.0",
+  "type": "module",
+  "description": "TSDoc integration for Nextra",
+  "repository": "github:shuding/nextra",
+  "homepage": "https://nextra.site",
+  "author": "Dimitri POSTOLOV",
+  "license": "MIT",
+  "private": true,
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "keywords": [
+    "next.js",
+    "nextra",
+    "docs",
+    "typescript",
+    "tsdoc"
+  ],
+  "scripts": {
+    "build": "NODE_ENV=production tsup",
+    "dev": "tsup --watch",
+    "test": "vitest",
+    "types:check": "tsc --noEmit"
+  },
+  "peerDependencies": {
+    "nextra": ">=4.3.0-alpha.0",
+    "nextra-theme-docs": ">=4.3.0-alpha.0",
+    "typescript": "*"
+  },
+  "dependencies": {
+    "clsx": "^2.1.1",
+    "zod": "4.0.0-beta.20250424T163858"
+  },
+  "devDependencies": {
+    "@tsconfig/strictest": "^2.0.5",
+    "@types/react": "19.1.2",
+    "@xyflow/react": "12.6.0",
+    "nextra": "workspace:*",
+    "nextra-theme-docs": "workspace:*",
+    "tsup": "^8.4.0",
+    "vitest": "^3.0.9"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

@@ -43,13 +43,6 @@ npm i next react react-dom nextra nextra-theme-docs
 
 <InstallNextraTheme />
 
-### Add [`mdx-components` file](/docs/file-conventions/mdx-components-file)
-
-### Create the Root Layout
-
-Next, create the root layout of your application inside the `app` folder. This
-layout will be used to configure the Nextra Docs Theme:
-
 ```jsx filename="app/layout.jsx"
 import { Footer, Layout, Navbar } from 'nextra-theme-docs'
 import { Banner, Head } from 'nextra/components'
@@ -106,5 +99,7 @@ export default async function RootLayout({ children }) {
 
 </Steps>
 
-Next, check out the next section to learn about organizing the documentation
-structure and configuring the website theme.
+See the [File Conventions](/docs/file-conventions) for more details on
+organizing your documentation structure, and check out the
+[Layout Component](/docs/docs-theme/built-ins/layout) for configuring the docs
+site's theme.

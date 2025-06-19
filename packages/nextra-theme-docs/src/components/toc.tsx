@@ -1,17 +1,15 @@
 'use client'
 
 import cn from 'clsx'
-import type { Heading } from 'nextra'
 import { Anchor } from 'nextra/components'
 import type { FC } from 'react'
 import { useEffect, useRef } from 'react'
 import scrollIntoView from 'scroll-into-view-if-needed'
-import { useActiveAnchor, useThemeConfig } from '../stores'
+import { useActiveAnchor, useConfig, useThemeConfig, useTOC } from '../stores'
 import { getGitIssueUrl, gitUrlParse } from '../utils'
 import { BackToTop } from './back-to-top'
 
 type TOCProps = {
-  toc: Heading[]
   filePath: string
   pageTitle: string
 }
@@ -23,18 +21,21 @@ const linkClassName = cn(
   'x:contrast-more:text-gray-700 x:contrast-more:dark:text-gray-100'
 )
 
-export const TOC: FC<TOCProps> = ({ toc, filePath, pageTitle }) => {
+export const TOC: FC<TOCProps> = ({ filePath, pageTitle }) => {
   const activeSlug = useActiveAnchor()
   const tocRef = useRef<HTMLUListElement>(null)
   const themeConfig = useThemeConfig()
-
+  const toc = useTOC()
   const hasMetaInfo =
     themeConfig.feedback.content ||
     themeConfig.editLink ||
     themeConfig.toc.extraContent ||
     themeConfig.toc.backToTop
 
-  const hasHeadings = toc.length > 0
+  const { activeType } = useConfig().normalizePagesResult
+  const anchors = themeConfig.toc.float || activeType === 'page' ? toc : []
+
+  const hasHeadings = anchors.length > 0
   const activeIndex = toc.findIndex(({ id }) => id === activeSlug)
 
   useEffect(() => {
@@ -50,6 +51,14 @@ export const TOC: FC<TOCProps> = ({ toc, filePath, pageTitle }) => {
       boundary: tocRef.current
     })
   }, [activeSlug])
+
+  const feedbackLink =
+    themeConfig.feedback.link ??
+    getGitIssueUrl({
+      labels: themeConfig.feedback.labels,
+      repository: themeConfig.docsRepositoryBase,
+      title: `Feedback for “${pageTitle}”`
+    })
 
   return (
     <div
@@ -71,7 +80,7 @@ export const TOC: FC<TOCProps> = ({ toc, filePath, pageTitle }) => {
               'nextra-mask' // for title/footer shadow
             )}
           >
-            {toc.map(({ id, value, depth }) => (
+            {anchors.map(({ id, value, depth }) => (
               <li className="x:my-2 x:scroll-my-6 x:scroll-py-6" key={id}>
                 <a
                   href={`#${id}`}
@@ -87,7 +96,7 @@ export const TOC: FC<TOCProps> = ({ toc, filePath, pageTitle }) => {
                     'x:block x:transition-colors x:subpixel-antialiased',
                     id === activeSlug
                       ? 'x:text-primary-600 x:contrast-more:text-primary-600!'
-                      : 'x:text-gray-500 x:hover:text-gray-900 x:dark:text-gray-400 x:dark:hover:text-gray-300',
+                      : 'x:text-gray-600 x:hover:text-gray-900 x:dark:text-gray-400 x:dark:hover:text-gray-300',
                     'x:contrast-more:text-gray-900 x:contrast-more:underline x:contrast-more:dark:text-gray-50 x:break-words'
                   )}
                 >
@@ -107,14 +116,7 @@ export const TOC: FC<TOCProps> = ({ toc, filePath, pageTitle }) => {
           )}
         >
           {themeConfig.feedback.content && (
-            <Anchor
-              className={linkClassName}
-              href={getGitIssueUrl({
-                labels: themeConfig.feedback.labels,
-                repository: themeConfig.docsRepositoryBase,
-                title: `Feedback for “${pageTitle}”`
-              })}
-            >
+            <Anchor className={linkClassName} href={feedbackLink}>
               {themeConfig.feedback.content}
             </Anchor>
           )}

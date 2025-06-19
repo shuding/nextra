@@ -37,6 +37,7 @@ export default async function RootLayout({ children }) {
       chatLink="https://discord.gg/hEM84NMkRv"
     />
   )
+  const pageMap = await getPageMap()
   return (
     <html lang="en" dir="ltr" suppressHydrationWarning>
       <Head faviconGlyph="✦" />
@@ -48,7 +49,7 @@ export default async function RootLayout({ children }) {
           editLink="Edit this page on GitHub"
           docsRepositoryBase="https://github.com/shuding/nextra/blob/main/examples/docs"
           sidebar={{ defaultMenuCollapseLevel: 1 }}
-          pageMap={await getPageMap()}
+          pageMap={pageMap}
         >
           {children}
         </Layout>

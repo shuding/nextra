@@ -1,5 +1,6 @@
 import nextra from 'nextra'
 
+// @ts-expect-error -- fixme
 function isExportNode(node, varName: string) {
   if (node.type !== 'mdxjsEsm') return false
   const [n] = node.data.estree.body
@@ -20,6 +21,7 @@ const DEFAULT_PROPERTY_PROPS = {
   computed: false
 }
 
+// @ts-expect-error -- fixme
 export function createAstObject(obj) {
   return {
     type: 'ObjectExpression',
@@ -32,8 +34,13 @@ export function createAstObject(obj) {
   }
 }
 
+type NextraParams = Parameters<typeof nextra>[0]
+type MdxOptions = NonNullable<NextraParams['mdxOptions']>
+type RehypePlugin = NonNullable<MdxOptions['rehypePlugins']>[0]
+
 // eslint-disable-next-line unicorn/consistent-function-scoping
-const rehypeOpenGraphImage = () => ast => {
+const rehypeOpenGraphImage: RehypePlugin = () => (ast: any) => {
+  // @ts-expect-error -- fixme
   const frontMatterNode = ast.children.find(node =>
     isExportNode(node, 'metadata')
   )
@@ -42,6 +49,7 @@ const rehypeOpenGraphImage = () => ast => {
   }
   const { properties } =
     frontMatterNode.data.estree.body[0].declaration.declarations[0].init
+  // @ts-expect-error -- fixme
   const title = properties.find(o => o.key.value === 'title')?.value.value
   if (!title) {
     return
@@ -61,7 +69,7 @@ const withNextra = nextra({
     rehypePlugins: [
       // Provide only on `build` since turbopack on `dev` supports only serializable values
       process.env.NODE_ENV === 'production' && rehypeOpenGraphImage
-    ]
+    ].filter(v => !!v)
   },
   whiteListTagsStyling: ['figure', 'figcaption']
 })
@@ -107,11 +115,17 @@ const nextConfig = withNextra({
       source: '/docs/guide/organize-files',
       destination: '/docs/file-conventions',
       permanent: true
+    },
+    {
+      source: '/docs/advanced/playground',
+      destination: '/docs/built-ins/playground',
+      permanent: true
     }
   ],
   webpack(config) {
     // rule.exclude doesn't work starting from Next.js 15
     const { test: _test, ...imageLoaderOptions } = config.module.rules.find(
+      // @ts-expect-error -- fixme
       rule => rule.test?.test?.('.svg')
     )
     config.module.rules.push({
@@ -126,15 +140,15 @@ const nextConfig = withNextra({
     })
     return config
   },
-  experimental: {
-    turbo: {
-      rules: {
-        './components/icons/*.svg': {
-          loaders: ['@svgr/webpack'],
-          as: '*.js'
-        }
+  turbopack: {
+    rules: {
+      './components/icons/*.svg': {
+        loaders: ['@svgr/webpack'],
+        as: '*.js'
       }
-    },
+    }
+  },
+  experimental: {
     optimizePackageImports: ['@components/icons']
   }
 })

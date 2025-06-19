@@ -20,7 +20,7 @@ export default function Foo(props) {
   describe("outputFormat: 'function-body'", () => {
     it('should work', async () => {
       const rawMdx = await compileMdx(testMdx)
-      expect(clean(rawMdx)).resolves.toMatchInlineSnapshot(`
+      return expect(clean(rawMdx)).resolves.toMatchInlineSnapshot(`
         "'use strict'
         const { Fragment: _Fragment, jsx: _jsx, jsxs: _jsxs } = arguments[0]
         const { useMDXComponents: _provideComponents } = arguments[0]
@@ -93,7 +93,7 @@ export default function Foo(props) {
     })
     it('should work with `export default`', async () => {
       const rawMdx = await compileMdx(testMdxWithDefaultExport)
-      expect(clean(rawMdx)).resolves.toMatchInlineSnapshot(`
+      return expect(clean(rawMdx)).resolves.toMatchInlineSnapshot(`
         "'use strict'
         const { Fragment: _Fragment, jsx: _jsx, jsxs: _jsxs } = arguments[0]
         const { useMDXComponents: _provideComponents } = arguments[0]
@@ -183,7 +183,7 @@ export default function Foo(props) {
 import { MDXRemote } from 'nextra/mdx-remote'
 
 <MDXRemote />`)
-      expect(clean(rawMdx)).resolves.toMatchInlineSnapshot(`
+      return expect(clean(rawMdx)).resolves.toMatchInlineSnapshot(`
         "'use strict'
         const { jsx: _jsx } = arguments[0]
         const { useMDXComponents: _provideComponents } = arguments[0]
@@ -227,7 +227,7 @@ import { MDXRemote } from 'nextra/mdx-remote'
     }
     it('should work', async () => {
       const rawMdx = await compileMdx(testMdx, options)
-      expect(clean(rawMdx)).resolves.toMatchInlineSnapshot(`
+      return expect(clean(rawMdx)).resolves.toMatchInlineSnapshot(`
         "/*@jsxRuntime automatic*/
         /*@jsxImportSource react*/
         import { useMDXComponents as _provideComponents } from 'next-mdx-import-source-file'
@@ -285,7 +285,7 @@ import { MDXRemote } from 'nextra/mdx-remote'
         ...options,
         isPageImport: true
       })
-      expect(clean(rawMdx)).resolves.toMatchInlineSnapshot(`
+      return expect(clean(rawMdx)).resolves.toMatchInlineSnapshot(`
         "/*@jsxRuntime automatic*/
         /*@jsxImportSource react*/
         import { HOC_MDXWrapper } from 'nextra/setup-page'
@@ -345,7 +345,7 @@ import { MDXRemote } from 'nextra/mdx-remote'
 
     it('should work with `export default`', async () => {
       const rawMdx = await compileMdx(testMdxWithDefaultExport, options)
-      expect(clean(rawMdx)).resolves.toMatchInlineSnapshot(`
+      return expect(clean(rawMdx)).resolves.toMatchInlineSnapshot(`
         "/*@jsxRuntime automatic*/
         /*@jsxImportSource react*/
         import { HOC_MDXWrapper } from 'nextra/setup-page'
@@ -424,7 +424,7 @@ import { MDXRemote } from 'nextra/mdx-remote'
           latex: true
         }
       )
-      expect(clean(rawMdx)).resolves.toMatchInlineSnapshot(`
+      return expect(clean(rawMdx)).resolves.toMatchInlineSnapshot(`
         "/*@jsxRuntime automatic*/
         /*@jsxImportSource react*/
         import { useMDXComponents as _provideComponents } from '👍'

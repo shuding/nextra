@@ -33,8 +33,11 @@ export const Tabs: FC<
   {
     items: (TabItem | TabObjectItem)[]
     children: ReactNode
+    /** LocalStorage key for persisting the selected tab. */
     storageKey?: string
+    /** Tabs CSS class name. */
     className?: TabListProps['className']
+    /** Tab CSS class name. */
     tabClassName?: HeadlessTabProps['className']
   } & Pick<TabGroupProps, 'defaultIndex' | 'selectedIndex' | 'onChange'>
 > = ({
@@ -182,7 +185,7 @@ export const Tab: FC<TabPanelProps> = ({
       unmount={unmount}
       className={args =>
         cn(
-          'x:rounded x:mt-6',
+          'x:rounded x:mt-[1.25em]',
           args.focus && 'x:nextra-focus',
           typeof className === 'function' ? className(args) : className
         )

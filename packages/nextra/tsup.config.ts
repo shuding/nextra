@@ -5,7 +5,7 @@ import { reactCompilerPlugin } from 'esbuild-react-compiler-plugin'
 import { defineConfig } from 'tsup'
 import { defaultEntry } from './default-entry.js'
 import packageJson from './package.json'
-import { CWD, IS_PRODUCTION } from './src/server/constants.js'
+import { IS_PRODUCTION } from './src/server/constants.js'
 
 const SEP = path.sep === '/' ? '/' : '\\\\'
 
@@ -15,11 +15,12 @@ export default defineConfig({
   format: 'esm',
   dts: true,
   splitting: IS_PRODUCTION,
+  clean: IS_PRODUCTION,
   bundle: false,
   external: ['shiki', 'webpack'],
   async onSuccess() {
     // Fixes hydration errors in client apps due "type": "module" in root package.json
-    const clientPackageJSON = path.join(CWD, 'dist', 'client', 'package.json')
+    const clientPackageJSON = path.resolve('dist', 'client', 'package.json')
     await fs.writeFile(clientPackageJSON, '{"sideEffects":false}')
   },
   esbuildPlugins: [

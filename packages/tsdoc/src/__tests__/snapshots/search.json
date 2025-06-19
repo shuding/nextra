@@ -1,0 +1,87 @@
+{
+  "entries": [
+    {
+      "description": "Not found text.",
+      "name": "emptyResult",
+      "optional": true,
+      "tags": {
+        "default": "'No results found.'",
+      },
+      "type": "ReactNode",
+    },
+    {
+      "description": "Error text.",
+      "name": "errorText",
+      "optional": true,
+      "tags": {
+        "default": "'Failed to load search index.'",
+      },
+      "type": "ReactNode",
+    },
+    {
+      "description": "Loading text.",
+      "name": "loading",
+      "optional": true,
+      "tags": {
+        "default": "'Loading…'",
+      },
+      "type": "ReactNode",
+    },
+    {
+      "description": "Placeholder text.",
+      "name": "placeholder",
+      "optional": true,
+      "tags": {
+        "default": "'Search documentation…'",
+      },
+      "type": "string",
+    },
+    {
+      "description": "CSS class name.",
+      "name": "className",
+      "optional": true,
+      "type": "string",
+    },
+    {
+      "name": "searchOptions",
+      "optional": true,
+      "type": "PagefindSearchOptions",
+    },
+    {
+      "description": "Callback function that triggers whenever the search input changes.
+
+This prop is **not serializable** and cannot be used directly in a server-side layout.
+
+To use this prop, wrap the component in a **client-side** wrapper. Example:
+
+```tsx
+'use client'
+
+import { Search } from 'nextra/components'
+
+export function SearchWithCallback() {
+  return (
+    <Search
+      onSearch={query => {
+        console.log('Search query:', query)
+      }}
+    />
+  )
+}
+```
+
+Then pass the wrapper to the layout:
+
+```tsx
+<Layout search={<SearchWithCallback />} {...rest} />
+```",
+      "name": "onSearch",
+      "optional": true,
+      "tags": {
+        "param": "query - The current search input string.",
+      },
+      "type": "(query: string) => void",
+    },
+  ],
+  "name": "$",
+}

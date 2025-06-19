@@ -1,0 +1,70 @@
+{
+  "entries": [
+    {
+      "description": "Extra content after the last icon.",
+      "name": "children",
+      "optional": true,
+      "type": "ReactNode",
+    },
+    {
+      "description": "Specifies whether the logo should have a link or provides the URL for the logo's link.",
+      "name": "logoLink",
+      "optional": true,
+      "tags": {
+        "default": "true",
+      },
+      "type": "string | boolean",
+    },
+    {
+      "description": "Logo of the website.",
+      "name": "logo",
+      "type": "ReactNode",
+    },
+    {
+      "description": "URL of the project homepage.",
+      "name": "projectLink",
+      "optional": true,
+      "type": "string",
+    },
+    {
+      "description": "Icon of the project link.",
+      "name": "projectIcon",
+      "optional": true,
+      "tags": {
+        "default": "<GitHubIcon />",
+      },
+      "type": "ReactNode",
+    },
+    {
+      "description": "URL of the chat link.",
+      "name": "chatLink",
+      "optional": true,
+      "type": "string",
+    },
+    {
+      "description": "Icon of the chat link.",
+      "name": "chatIcon",
+      "optional": true,
+      "tags": {
+        "default": "<DiscordIcon />",
+      },
+      "type": "ReactNode",
+    },
+    {
+      "description": "CSS class name.",
+      "name": "className",
+      "optional": true,
+      "type": "string",
+    },
+    {
+      "description": "Aligns navigation links to the specified side.",
+      "name": "align",
+      "optional": true,
+      "tags": {
+        "default": "'right'",
+      },
+      "type": ""left" | "right"",
+    },
+  ],
+  "name": "$",
+}

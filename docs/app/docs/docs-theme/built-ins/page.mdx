@@ -4,15 +4,8 @@ sidebarTitle: Built-In Components
 icon: BoxIcon
 ---
 
-import { Cards } from 'nextra/components'
-import { MDXRemote } from 'nextra/mdx-remote'
-import { createIndexPage, getPageMap } from 'nextra/page-map'
+import { OverviewPage } from '../../../_components/overview-page'
 
-# Built-ins
+# Built-Ins
 
-<MDXRemote
-  compiledSource={await createIndexPage(
-    await getPageMap('/docs/docs-theme/built-ins')
-  )}
-  components={{ Cards }}
-/>
+<OverviewPage filePath={metadata.filePath} />
