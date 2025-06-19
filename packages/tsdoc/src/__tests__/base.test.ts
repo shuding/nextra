@@ -940,7 +940,7 @@ export default $`
     `)
   })
 
-  it.only('supports @inline tag', () => {
+  it('supports @inline tag', () => {
     const code = `
 import { ReactFlowInstance } from '@xyflow/react'
 

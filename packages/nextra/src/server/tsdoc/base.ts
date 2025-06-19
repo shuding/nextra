@@ -1,17 +1,11 @@
-import path from 'node:path'
-import slash from 'slash'
-import type { ExportedDeclarations, Symbol as TsSymbol, Type } from 'ts-morph'
-import { Project, SyntaxKind, ts } from 'ts-morph'
-import { CWD } from '../constants.js'
-import { logger } from '../utils.js'
-import type {
-  BaseArgs,
-  GeneratedDefinition,
-  GeneratedFunction,
-  GeneratedType,
-  Tags,
-  TypeField
-} from './types.js'
+import path from 'node:path';
+import slash from 'slash';
+import type { ExportedDeclarations, Symbol as TsSymbol, Type } from 'ts-morph';
+import { Project, SyntaxKind, ts } from 'ts-morph';
+import { CWD } from '../constants.js';
+import { logger } from '../utils.js';
+import type { BaseArgs, GeneratedDefinition, GeneratedFunction, GeneratedType, Tags, TypeField } from './types.js';
+
 
 const project = new Project({
   tsConfigFilePath: './tsconfig.json',
@@ -261,7 +255,26 @@ function getDocEntry({
   }
   if (!typeName) {
     const typeOf = valueDeclaration?.getType() ?? symbol.getDeclaredType()
-    typeName = typeOf.isUnknown() ? typeOf.getText() : getFormattedText(subType)
+    if ('inline' in tags) {
+      const signatures = subType.getCallSignatures()
+      const isFunction = signatures.length > 0
+      if (isFunction) {
+        typeName = signatures[0]!.getDeclaration().getText()
+      } else {
+        const [aliasDecl] = subType.getAliasSymbolOrThrow()?.getDeclarations()
+        if (!aliasDecl) {
+          throw new Error("Can't find alias declaration for type.")
+        }
+        const inlineNode = aliasDecl
+          .asKindOrThrow(SyntaxKind.TypeAliasDeclaration)
+          .getTypeNodeOrThrow()
+        typeName = inlineNode.getText()
+      }
+    } else {
+      typeName = typeOf.isUnknown()
+        ? typeOf.getText()
+        : getFormattedText(subType)
+    }
   }
 
   const name = symbol.getName()
