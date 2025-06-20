@@ -4,7 +4,8 @@ import {
   Combobox,
   ComboboxInput,
   ComboboxOption,
-  ComboboxOptions
+  ComboboxOptions,
+  type ComboboxInputProps
 } from '@headlessui/react'
 import cn from 'clsx'
 import { addBasePath } from 'next/dist/client/add-base-path'
@@ -47,7 +48,12 @@ type PagefindResult = {
   url: string
 }
 
-type SearchProps = {
+type InputProps = Omit<
+  ComboboxInputProps,
+  'className' | 'onChange' | 'onFocus' | 'onBlur' | 'value' | 'placeholder'
+>
+
+interface SearchProps extends InputProps {
   /**
    * Not found text.
    * @default 'No results found.'
@@ -68,7 +74,7 @@ type SearchProps = {
    * @default 'Search documentation…'
    */
   placeholder?: string
-  /** CSS class name. */
+  /** Input container CSS class name. */
   className?: string
   searchOptions?: PagefindSearchOptions
   /**
@@ -105,10 +111,6 @@ type SearchProps = {
    * @param query - The current search input string.
    */
   onSearch?: (query: string) => void
-  /**
-   * Auto focus on the search input.
-   */
-  autoFocus?: boolean
 }
 
 const INPUTS = new Set(['INPUT', 'SELECT', 'BUTTON', 'TEXTAREA'])
@@ -144,7 +146,7 @@ export const Search: FC<SearchProps> = ({
   placeholder = 'Search documentation…',
   searchOptions,
   onSearch,
-  autoFocus = false,
+  ...props
 }) => {
   const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState<ReactElement | string>('')
@@ -296,8 +298,11 @@ export const Search: FC<SearchProps> = ({
         )}
       >
         <ComboboxInput
-          ref={inputRef}
           spellCheck={false}
+          autoComplete="off"
+          type="search"
+          {...props}
+          ref={inputRef}
           className={({ focus }) =>
             cn(
               'x:rounded-lg x:px-3 x:py-2 x:transition-all',
@@ -311,14 +316,11 @@ export const Search: FC<SearchProps> = ({
               'x:[&::-webkit-search-cancel-button]:appearance-none'
             )
           }
-          autoComplete="off"
-          type="search"
           onChange={handleChange}
           onFocus={handleFocus}
           onBlur={handleFocus}
           value={search}
           placeholder={placeholder}
-          autoFocus={autoFocus}
         />
         {shortcut}
       </div>
