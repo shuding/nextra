@@ -102,7 +102,9 @@ export default $`
           MDXRemote:
             'https://github.com/shuding/nextra/blob/main/packages/nextra/src/client/mdx-remote.tsx',
           MDXComponents:
-            'https://github.com/DefinitelyTyped/DefinitelyTyped/blob/4c3811099cbe9ee60151c11a679b780d0ba785bf/types/mdx/types.d.ts#L65'
+            'https://github.com/DefinitelyTyped/DefinitelyTyped/blob/4c3811099cbe9ee60151c11a679b780d0ba785bf/types/mdx/types.d.ts#L65',
+          ComboboxInputProps:
+            'https://github.com/tailwindlabs/headlessui/blob/0933dd5e5f563675c8a36e4520905bf9b58df00e/packages/%40headlessui-react/src/components/combobox/combobox.tsx#L506'
         }}
       />
     )

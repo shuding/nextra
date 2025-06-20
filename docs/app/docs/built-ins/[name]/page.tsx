@@ -23,7 +23,13 @@ const API_REFERENCE: (
     packageName: 'nextra/components',
     isFlattened: true
   },
-  { name: 'Search', packageName: 'nextra/components', isFlattened: false },
+  {
+    name: 'Search',
+    packageName: 'nextra/components',
+    isFlattened: false,
+    groupKeys:
+      "Omit<ComboboxInputProps, 'className' | 'onChange' | 'onFocus' | 'onBlur' | 'value' | 'placeholder'>"
+  },
   { type: 'separator', title: 'Content Components', name: '_2' },
   {
     name: 'Bleed',
@@ -113,6 +119,7 @@ async function getReference(props: PageProps) {
     apiRef.code ??
     `
 import type { ComponentProps, HTMLAttributes } from 'react'
+import type { ComboboxInputProps } from '../packages/nextra/node_modules/@headlessui/react'
 import { ${name} as MyComponent } from '${packageName}'
 
 type MyProps = ComponentProps<typeof MyComponent>
