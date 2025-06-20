@@ -1,5 +1,11 @@
 # nextra
 
+## 4.3.0-alpha.28
+
+### Minor Changes
+
+- ef35ab9: accept all `ComboboxInputProps` in Nextra's `<Search />` component
+
 ## 4.3.0-alpha.27
 
 ### Minor Changes
