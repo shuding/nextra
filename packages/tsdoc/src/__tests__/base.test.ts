@@ -998,6 +998,10 @@ export default $`
             "name": "bar",
             "type": "() => Promise<boolean>",
           },
+          {
+            "name": "quz",
+            "type": "1337",
+          },
         ],
         "name": "$",
       }

@@ -277,7 +277,8 @@ function getTypeName({
   subType: Type
   valueDeclaration: TsNode | undefined
 }) {
-  const subTypeTags = getTags(subType.getAliasSymbolOrThrow())
+  const aliasSymbol = subType.getAliasSymbol()
+  const subTypeTags = aliasSymbol ? getTags(aliasSymbol) : {}
   const typeName = (tags.remarks || subTypeTags.remarks)?.match(
     /^`(?<name>.+)`/
   )?.groups!.name
@@ -316,7 +317,7 @@ function getTypeName({
   if (isFunction) {
     return signature.getDeclaration().getText()
   }
-  const [aliasDecl] = subType.getAliasSymbolOrThrow().getDeclarations()
+  const [aliasDecl] = aliasSymbol!.getDeclarations()
   if (!aliasDecl) {
     throw new Error("Can't find alias declaration for type.")
   }
