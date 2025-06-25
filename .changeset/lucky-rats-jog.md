@@ -2,4 +2,4 @@
 'nextra': patch
 ---
 
-fix(tsdoc): check `@inline` tag on alias type too in addition to field tags
+fix(tsdoc): check `@inline` and `@remarks` tags on alias type too in addition to field tags
