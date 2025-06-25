@@ -948,6 +948,18 @@ type Foo = {
   bar: string
 }
 
+
+/**
+ * @inline
+ */
+type InlineOnType = () => Promise<boolean>;
+
+/**
+ * @inline
+ * @remarks \`1337\`
+ */
+type InlineAndRemarksOnType = () => Promise<boolean>;
+
 type $ = {
   /**
    * @inline
@@ -957,6 +969,8 @@ type $ = {
    * @inline
    */
   foo: Foo
+  bar: InlineOnType
+  quz: InlineAndRemarksOnType
 }
 
 export default $`
@@ -979,6 +993,14 @@ export default $`
             "type": "{
         bar: string
       }",
+          },
+          {
+            "name": "bar",
+            "type": "() => Promise<boolean>",
+          },
+          {
+            "name": "quz",
+            "type": "1337",
           },
         ],
         "name": "$",
