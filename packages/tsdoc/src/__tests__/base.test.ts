@@ -987,6 +987,10 @@ export default $`
         bar: string
       }",
           },
+          {
+            "name": "bar",
+            "type": "() => Promise<boolean>",
+          },
         ],
         "name": "$",
       }
