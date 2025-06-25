@@ -948,6 +948,12 @@ type Foo = {
   bar: string
 }
 
+
+/**
+ * @inline
+ */
+type OnType = () => Promise<boolean>;
+
 type $ = {
   /**
    * @inline
@@ -957,6 +963,7 @@ type $ = {
    * @inline
    */
   foo: Foo
+  bar: OnType
 }
 
 export default $`

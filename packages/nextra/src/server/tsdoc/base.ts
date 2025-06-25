@@ -302,8 +302,8 @@ function getTypeName({
   if (useTypeNode) {
     return t
   }
-
-  const isInline = 'inline' in tags
+  const subTypeTags = getTags(subType.getAliasSymbolOrThrow())
+  const isInline = 'inline' in tags || 'inline' in subTypeTags
 
   if (!isInline) {
     const typeOf = valueDeclaration?.getType() ?? symbol.getDeclaredType()
