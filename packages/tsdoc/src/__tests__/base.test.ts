@@ -952,7 +952,13 @@ type Foo = {
 /**
  * @inline
  */
-type OnType = () => Promise<boolean>;
+type InlineOnType = () => Promise<boolean>;
+
+/**
+ * @inline
+ * @remarks \`1337\`
+ */
+type InlineAndRemarksOnType = () => Promise<boolean>;
 
 type $ = {
   /**
@@ -963,7 +969,8 @@ type $ = {
    * @inline
    */
   foo: Foo
-  bar: OnType
+  bar: InlineOnType
+  quz: InlineAndRemarksOnType
 }
 
 export default $`

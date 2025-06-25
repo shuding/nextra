@@ -277,7 +277,10 @@ function getTypeName({
   subType: Type
   valueDeclaration: TsNode | undefined
 }) {
-  const typeName = tags.remarks?.match(/^`(?<name>.+)`/)?.groups!.name
+  const subTypeTags = getTags(subType.getAliasSymbolOrThrow())
+  const typeName = (tags.remarks || subTypeTags.remarks)?.match(
+    /^`(?<name>.+)`/
+  )?.groups!.name
 
   if (typeName) {
     return typeName
@@ -302,7 +305,6 @@ function getTypeName({
   if (useTypeNode) {
     return t
   }
-  const subTypeTags = getTags(subType.getAliasSymbolOrThrow())
   const isInline = 'inline' in tags || 'inline' in subTypeTags
 
   if (!isInline) {
