@@ -1,5 +1,12 @@
 # nextra
 
+## 4.3.0-alpha.29
+
+### Patch Changes
+
+- a6a1f97: fix(tsdoc): check `@inline` and `@remarks` tags on alias type too in
+  addition to field tags
+
 ## 4.3.0-alpha.28
 
 ### Minor Changes
