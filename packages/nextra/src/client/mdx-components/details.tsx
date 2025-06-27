@@ -13,6 +13,57 @@ import { Children, cloneElement, useEffect, useRef, useState } from 'react'
 import { Collapse } from '../components/collapse.js'
 import { useHash } from '../hooks/index.js'
 
+/**
+ * A vertically stacked, interactive heading component that reveals or hides content when toggled.
+ *
+ * > [!NOTE]
+ * >
+ * > This Accordion uses native HTML `<details>` and `<summary>` elements, which are
+ * > collapsible by default and fully compatible with platforms like GitHub.
+ *
+ * @usage
+ * ```mdx filename="page.mdx"
+ * <details>
+ *   <summary>Section 1</summary>
+ *   Content for section 1.
+ *   <details>
+ *     <summary>Section 2</summary>
+ *     Content for section 2.
+ *   </details>
+ * </details>
+ * ```
+ *
+ * ```jsx filename="page.jsx"
+ * import {
+ *   Details as Accordion,
+ *   Summary as AccordionTrigger
+ * } from 'nextra/components'
+ *
+ * export function Demo() {
+ *   return (
+ *     <Accordion>
+ *       <AccordionTrigger>Section 1</AccordionTrigger>
+ *       Content for section 1.
+ *
+ *       <Accordion>
+ *         <AccordionTrigger>Section 2</AccordionTrigger>
+ *         Content for section 2.
+ *       </Accordion>
+ *     </Accordion>
+ *   )
+ * }
+ * ```
+ *
+ * @example
+ * <details>
+ *   <summary>Summary</summary>
+ *   Details
+ *   <details>
+ *     <summary>Summary 2</summary>
+ *     Details 2
+ *   </details>
+ * </details>
+ */
 export const Details: FC<ComponentProps<'details'>> = ({
   children,
   open,
