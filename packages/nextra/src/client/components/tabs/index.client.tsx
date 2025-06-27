@@ -63,29 +63,38 @@ export const Tabs: FC<
     }
   }, [_selectedIndex])
 
+  const hasLabelPropInTab = Children.toArray(children).some(
+    child => (child as any).props.label
+  )
+  const items: TabObjectItem[] = hasLabelPropInTab
+    ? (children as any).map((child: any) => child.props as TabObjectItem)
+    : props.items!.map(item => {
+        if (!isTabObjectItem(item)) {
+          return { id: item }
+        }
+        return {
+          id: item.label,
+          disabled: item.disabled
+        }
+      })
+
   useEffect(() => {
     if (!hash) return
-    const tabPanel = tabPanelsRef.current.querySelector(
-      `[role=tabpanel]:has([id="${hash}"])`
-    )
-    if (!tabPanel) return
+    const index = items.findIndex(item => item.label === hash)
+    if (index === -1) return
+    setSelectedIndex(index)
 
-    for (const [index, el] of Object.entries(tabPanelsRef.current.children)) {
-      if (el === tabPanel) {
-        setSelectedIndex(Number(index))
-        // Clear hash first, otherwise page isn't scrolled
-        location.hash = ''
-        // Execute on next tick after `selectedIndex` update
-        requestAnimationFrame(() => {
-          location.hash = `#${hash}`
-        })
-      }
-    }
+    // Clear hash first, otherwise the page isn't scrolled
+    location.hash = ''
+    // Execute on next tick after `selectedIndex` update
+    requestAnimationFrame(() => {
+      location.hash = `#${hash}`
+    })
   }, [hash])
 
   useEffect(() => {
     if (!storageKey) {
-      // Do not listen storage events if there is no storage key
+      // Do not listen to storage events if there is no storage key
       return
     }
 
@@ -119,20 +128,6 @@ export const Tabs: FC<
     setSelectedIndex(index)
     onChange?.(index)
   }
-  const hasLabelPropInTab = Children.toArray(children).some(
-    child => (child as any).props.label
-  )
-  const items: TabObjectItem[] = hasLabelPropInTab
-    ? (children as any).map((child: any) => child.props as TabObjectItem)
-    : props.items!.map(item => {
-        if (!isTabObjectItem(item)) {
-          return { id: item }
-        }
-        return {
-          id: item.label,
-          disabled: item.disabled
-        }
-      })
 
   return (
     <TabGroup
@@ -154,8 +149,9 @@ export const Tabs: FC<
         {items.map((item, index) => {
           return (
             <HeadlessTab
-              as="a"
-              href={`#${item.label}`}
+              onClick={() => {
+                history.replaceState(null, '', `#${item.label}`)
+              }}
               key={index}
               disabled={item.disabled}
               className={args => {
@@ -195,7 +191,7 @@ export const Tabs: FC<
           )
         })}
       </TabList>
-      <TabPanels ref={tabPanelsRef}>{children}</TabPanels>
+      <TabPanels>{children}</TabPanels>
     </TabGroup>
   )
 }
@@ -205,6 +201,7 @@ export const Tab: FC<TabPanelProps & { label: string }> = ({
   // For SEO display all the Panel in the DOM and set `display: none;` for those that are not selected
   unmount = false,
   className,
+  label: _label,
   ...props
 }) => {
   return (
