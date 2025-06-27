@@ -2,7 +2,7 @@ import cn from 'clsx'
 import type { FC, HTMLAttributes } from 'react'
 import { ArrowRightIcon, LinkIcon } from '../icons/index.js'
 
-export const Summary: FC<HTMLAttributes<HTMLElement>> = ({
+export const AccordionTrigger: FC<HTMLAttributes<HTMLElement>> = ({
   children,
   className,
   id,

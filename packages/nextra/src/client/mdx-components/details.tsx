@@ -34,10 +34,7 @@ import { useHash } from '../hooks/index.js'
  * ```
  *
  * ```jsx filename="page.jsx"
- * import {
- *   Details as Accordion,
- *   Summary as AccordionTrigger
- * } from 'nextra/components'
+ * import { Accordion, AccordionTrigger } from 'nextra/components'
  *
  * export function Demo() {
  *   return (
@@ -64,7 +61,7 @@ import { useHash } from '../hooks/index.js'
  *   </details>
  * </details>
  */
-export const Details: FC<ComponentProps<'details'>> = ({
+export const Accordion: FC<ComponentProps<'details'>> = ({
   children,
   open,
   className,
@@ -160,7 +157,7 @@ function findSummary(
         return
       }
       // @ts-expect-error -- fixme
-      if (child.type !== Details && child.props.children) {
+      if (child.type !== Accordion && child.props.children) {
         // @ts-expect-error -- fixme
         ;[summary, child] = findSummary(child.props.children, setIsOpen)
       }
