@@ -35,7 +35,7 @@ const API_REFERENCE: (
     name: 'Accordion',
     packageName: 'nextra/components',
     groupKeys: 'Omit<ComponentProps<"details">, "open" | "className">',
-    isFlattened: false,
+    isFlattened: false
   },
   {
     name: 'Bleed',
