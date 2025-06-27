@@ -63,7 +63,9 @@ import { useHash } from '../hooks/index.js'
  */
 export const Accordion: FC<ComponentProps<'details'>> = ({
   children,
+  /** Default open state. */
   open,
+  /** CSS class name. */
   className,
   ...props
 }) => {
