@@ -15,7 +15,7 @@ import type {
 } from '@headlessui/react'
 import cn from 'clsx'
 import type { FC, ReactNode } from 'react'
-import { Children, Fragment, useEffect, useRef, useState } from 'react'
+import { Children, Fragment, useEffect, useState } from 'react'
 import { useHash } from '../../hooks/use-hash.js'
 
 type TabItem = string
@@ -55,7 +55,6 @@ export const Tabs: FC<
 }) => {
   const [selectedIndex, setSelectedIndex] = useState(defaultIndex)
   const hash = useHash()
-  const tabPanelsRef = useRef<HTMLDivElement>(null!)
 
   useEffect(() => {
     if (_selectedIndex !== undefined) {
