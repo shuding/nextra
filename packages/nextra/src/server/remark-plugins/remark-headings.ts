@@ -1,16 +1,10 @@
 import Slugger from 'github-slugger'
-import type { Literal } from 'hast'
 import type { Parent, Root } from 'mdast'
-import type {
-  MdxJsxAttribute,
-  MdxJsxExpressionAttribute
-} from 'mdast-util-mdx-jsx'
 import type { Plugin } from 'unified'
 import { visit } from 'unist-util-visit'
 import { visitChildren } from 'unist-util-visit-children'
 import type { Heading } from '../../types.js'
 import { MARKDOWN_EXTENSION_RE } from '../constants.js'
-import { createAstObject } from '../utils.js'
 import type { HProperties } from './remark-custom-heading-id.js'
 
 export const getFlattenedValue = (node: Parent): string =>
@@ -44,7 +38,7 @@ export const remarkHeadings: Plugin<
         // verify .md/.mdx exports and attach named `toc` export
         'mdxjsEsm'
       ],
-      (node, index, parent) => {
+      node => {
         if (node.type === 'heading') {
           if (node.depth === 1) {
             return

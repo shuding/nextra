@@ -18,9 +18,10 @@ import type { FC, ReactNode } from 'react'
 import { Children, Fragment, useEffect, useState } from 'react'
 import { useHash } from '../../hooks/use-hash.js'
 
+// eslint-disable-next-line sonarjs/redundant-type-aliases
 type TabItem = string
 
-type TabObjectItem = {
+interface TabObjectItem {
   label: TabItem
   disabled: boolean
 }
@@ -67,7 +68,8 @@ export const Tabs: FC<
   )
   const items: TabObjectItem[] = hasLabelPropInTab
     ? (children as any).map((child: any) => child.props as TabObjectItem)
-    : props.items!.map(item => {
+    : // eslint-disable-next-line @typescript-eslint/no-deprecated
+      props.items!.map(item => {
         if (!isTabObjectItem(item)) {
           return { id: item }
         }
