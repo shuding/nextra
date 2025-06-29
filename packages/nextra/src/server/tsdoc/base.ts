@@ -252,14 +252,15 @@ function getDocEntry({
       valueDeclaration.isOptional()
     : symbol.isOptional()
 
+  const typeName = getTypeName({
+    tags,
+    symbol,
+    subType,
+    valueDeclaration
+  })
   return {
     name: prexify(prefix, name),
-    type: getTypeName({
-      tags,
-      symbol,
-      subType,
-      valueDeclaration
-    }),
+    type: typeName,
     ...(typeDescription && { description: typeDescription }),
     ...(Object.keys(tags).length && { tags }),
     ...(isOptional && { optional: isOptional })
@@ -315,7 +316,33 @@ function getTypeName({
   const [signature] = subType.getCallSignatures()
   const isFunction = !!signature
   if (isFunction) {
-    return signature.getDeclaration().getText()
+    const params = signature.getParameters().map(param => {
+      const paramDecl = param.getDeclarations()[0]!
+      const paramType = project
+        .getTypeChecker()
+        .getTypeOfSymbolAtLocation(param, paramDecl)
+      const inlineParamAlias = paramType
+        .getNonNullableType()
+        .getAliasSymbolOrThrow()
+      const paramTags = inlineParamAlias && getTags(inlineParamAlias)
+
+      const shouldInlineParam = paramTags && 'inline' in paramTags
+      const paramTypeStr = shouldInlineParam
+        ? inlineParamAlias!
+            .getDeclarations()[0]!
+            .asKindOrThrow(SyntaxKind.TypeAliasDeclaration)
+            .getTypeNodeOrThrow()
+            .getText()
+        : getFormattedText(paramType)
+
+      const optional = paramDecl
+        .asKindOrThrow(SyntaxKind.Parameter)
+        .isOptional()
+
+      return `${param.getName()}${optional ? '?' : ''}: ${paramTypeStr}`
+    })
+
+    return `(${params.join(', ')}) => ${getFormattedText(signature.getReturnType())}`
   }
   const [aliasDecl] = aliasSymbol!.getDeclarations()
   if (!aliasDecl) {
