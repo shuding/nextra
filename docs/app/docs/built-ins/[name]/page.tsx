@@ -32,6 +32,12 @@ const API_REFERENCE: (
   },
   { type: 'separator', title: 'Content Components', name: '_2' },
   {
+    name: 'Accordion',
+    packageName: 'nextra/components',
+    groupKeys: 'Omit<ComponentProps<"details">, "open" | "className">',
+    isFlattened: false
+  },
+  {
     name: 'Bleed',
     packageName: 'nextra/components',
     groupKeys: 'HTMLAttributes<HTMLDivElement>'

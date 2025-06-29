@@ -90,7 +90,7 @@ export default MyType`
             "params": [
               {
                 "name": "props",
-                "type": "{ items: (TabItem | TabObjectItem)[]; children: ReactNode; storageKey?: string; className?: string | ((bag: ListRenderPropArg) => string) | undefined; tabClassName?: string | ... 1 more ... | undefined; } & Pick<...>",
+                "type": "{ items?: (string | TabObjectItem)[]; children: ReactNode; storageKey?: string; className?: string | ((bag: ListRenderPropArg) => string) | undefined; tabClassName?: string | ... 1 more ... | undefined; } & Pick<...>",
               },
             ],
             "returns": {
@@ -99,18 +99,18 @@ export default MyType`
           },
         ],
         "tags": {
-          "example": "<Tabs items={['pnpm', 'npm', 'yarn']}>
-        <Tabs.Tab>**pnpm**: Fast, disk space efficient package manager.</Tabs.Tab>
-        <Tabs.Tab>**npm** is a package manager for the JavaScript programming language.</Tabs.Tab>
-        <Tabs.Tab>**Yarn** is a software packaging system.</Tabs.Tab>
+          "example": "<Tabs>
+        <Tabs.Tab label="pnpm">**pnpm**: Fast, disk space efficient package manager.</Tabs.Tab>
+        <Tabs.Tab label="npm">**npm** is a package manager for the JavaScript programming language.</Tabs.Tab>
+        <Tabs.Tab label="yarn">**Yarn** is a software packaging system.</Tabs.Tab>
       </Tabs>",
           "usage": "\`\`\`mdx
       import { Tabs } from 'nextra/components'
 
-      <Tabs items={['pnpm', 'npm', 'yarn']}>
-        <Tabs.Tab>**pnpm**: Fast, disk space efficient package manager.</Tabs.Tab>
-        <Tabs.Tab>**npm** is a package manager for the JavaScript programming language.</Tabs.Tab>
-        <Tabs.Tab>**Yarn** is a software packaging system.</Tabs.Tab>
+      <Tabs>
+        <Tabs.Tab label="pnpm">**pnpm**: Fast, disk space efficient package manager.</Tabs.Tab>
+        <Tabs.Tab label="npm">**npm** is a package manager for the JavaScript programming language.</Tabs.Tab>
+        <Tabs.Tab label="yarn">**Yarn** is a software packaging system.</Tabs.Tab>
       </Tabs>
       \`\`\`
 
@@ -121,17 +121,17 @@ export default MyType`
       \`\`\`mdx /defaultIndex="1"/
       import { Tabs } from 'nextra/components'
 
-      <Tabs items={['pnpm', 'npm', 'yarn']} defaultIndex="1">
+      <Tabs defaultIndex="1">
         ...
       </Tabs>
       \`\`\`
 
       And you will have \`npm\` as the default tab:
 
-      <Tabs items={['pnpm', 'npm', 'yarn']} defaultIndex="1">
-        <Tabs.Tab>**pnpm**: Fast, disk space efficient package manager.</Tabs.Tab>
-        <Tabs.Tab>**npm** is a package manager for the JavaScript programming language.</Tabs.Tab>
-        <Tabs.Tab>**Yarn** is a software packaging system.</Tabs.Tab>
+      <Tabs defaultIndex="1">
+        <Tabs.Tab label="pnpm">**pnpm**: Fast, disk space efficient package manager.</Tabs.Tab>
+        <Tabs.Tab label="npm">**npm** is a package manager for the JavaScript programming language.</Tabs.Tab>
+        <Tabs.Tab label="yarn">**Yarn** is a software packaging system.</Tabs.Tab>
       </Tabs>",
         },
       }
@@ -960,6 +960,18 @@ type InlineOnType = () => Promise<boolean>;
  */
 type InlineAndRemarksOnType = () => Promise<boolean>;
 
+/**
+ * @inline
+ */
+type InlineParam = {
+  baz: string
+}
+
+/**
+ * @inline
+ */
+type InlineFunctionParamOnType = (options?: InlineParam) => Promise<boolean>;
+
 type $ = {
   /**
    * @inline
@@ -971,6 +983,7 @@ type $ = {
   foo: Foo
   bar: InlineOnType
   quz: InlineAndRemarksOnType
+  zz: InlineFunctionParamOnType
 }
 
 export default $`
@@ -983,7 +996,11 @@ export default $`
             "tags": {
               "inline": "",
             },
-            "type": "(viewport: Viewport, options?: ViewportHelperFunctionOptions) => Promise<boolean>",
+            "type": "(viewport: Viewport, options?: {
+          duration?: number;
+          ease?: (t: number) => number;
+          interpolate?: 'smooth' | 'linear';
+      }) => Promise<boolean>",
           },
           {
             "name": "foo",
@@ -1001,6 +1018,12 @@ export default $`
           {
             "name": "quz",
             "type": "1337",
+          },
+          {
+            "name": "zz",
+            "type": "(options?: {
+        baz: string
+      }) => Promise<boolean>",
           },
         ],
         "name": "$",

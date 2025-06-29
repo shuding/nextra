@@ -1,16 +1,10 @@
 import Slugger from 'github-slugger'
-import type { Literal } from 'hast'
 import type { Parent, Root } from 'mdast'
-import type {
-  MdxJsxAttribute,
-  MdxJsxExpressionAttribute
-} from 'mdast-util-mdx-jsx'
 import type { Plugin } from 'unified'
 import { visit } from 'unist-util-visit'
 import { visitChildren } from 'unist-util-visit-children'
 import type { Heading } from '../../types.js'
 import { MARKDOWN_EXTENSION_RE } from '../constants.js'
-import { createAstObject } from '../utils.js'
 import type { HProperties } from './remark-custom-heading-id.js'
 
 export const getFlattenedValue = (node: Parent): string =>
@@ -44,7 +38,7 @@ export const remarkHeadings: Plugin<
         // verify .md/.mdx exports and attach named `toc` export
         'mdxjsEsm'
       ],
-      (node, index, parent) => {
+      node => {
         if (node.type === 'heading') {
           if (node.depth === 1) {
             return
@@ -58,61 +52,6 @@ export const remarkHeadings: Plugin<
           headingProps.id = id
           headings.push({ depth: node.depth, value, id })
           return
-        }
-
-        const isTab =
-          node.type === 'mdxJsxFlowElement' && node.name === 'Tabs.Tab'
-        if (isTab) {
-          const itemsAttr: any =
-            parent &&
-            parent.type === 'mdxJsxFlowElement' &&
-            parent.name === 'Tabs' &&
-            parent.attributes.find(
-              (
-                attr: MdxJsxExpressionAttribute | MdxJsxAttribute
-              ): attr is MdxJsxAttribute =>
-                attr.type === 'mdxJsxAttribute' && attr.name === 'items'
-            )
-          if (!itemsAttr) return
-          const tabName =
-            itemsAttr.value.data.estree.body[0].expression.elements.map(
-              (el: Literal) => el.value
-            )[index!]
-          const id = slugger.slug(tabName)
-          node.children.unshift({
-            type: 'mdxJsxFlowElement',
-            name: 'h3',
-            data: { _mdxExplicitJsx: true },
-            children: [{ type: 'text', value: tabName }],
-            attributes: [
-              { type: 'mdxJsxAttribute', name: 'id', value: id },
-              {
-                type: 'mdxJsxAttribute',
-                name: 'style',
-                value: {
-                  type: 'mdxJsxAttributeValueExpression',
-                  value: '',
-                  data: {
-                    estree: {
-                      type: 'Program',
-                      sourceType: 'module',
-                      comments: [],
-                      body: [
-                        {
-                          type: 'ExpressionStatement',
-                          expression: createAstObject({
-                            visibility: 'hidden',
-                            width: 0,
-                            height: 0
-                          })
-                        }
-                      ]
-                    }
-                  }
-                }
-              }
-            ] satisfies MdxJsxAttribute[]
-          } as any)
         }
 
         const isDetails =
