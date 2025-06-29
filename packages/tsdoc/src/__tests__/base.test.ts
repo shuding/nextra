@@ -960,6 +960,18 @@ type InlineOnType = () => Promise<boolean>;
  */
 type InlineAndRemarksOnType = () => Promise<boolean>;
 
+/**
+ * @inline
+ */
+type InlineParam = {
+  baz: string
+}
+
+/**
+ * @inline
+ */
+type InlineFunctionParamOnType = (options?: InlineParam) => Promise<boolean>;
+
 type $ = {
   /**
    * @inline
@@ -971,6 +983,7 @@ type $ = {
   foo: Foo
   bar: InlineOnType
   quz: InlineAndRemarksOnType
+  zz: InlineFunctionParamOnType
 }
 
 export default $`
@@ -983,7 +996,11 @@ export default $`
             "tags": {
               "inline": "",
             },
-            "type": "(viewport: Viewport, options?: ViewportHelperFunctionOptions) => Promise<boolean>",
+            "type": "(viewport: Viewport, options?: {
+          duration?: number;
+          ease?: (t: number) => number;
+          interpolate?: 'smooth' | 'linear';
+      }) => Promise<boolean>",
           },
           {
             "name": "foo",
@@ -1001,6 +1018,12 @@ export default $`
           {
             "name": "quz",
             "type": "1337",
+          },
+          {
+            "name": "zz",
+            "type": "(options?: {
+        baz: string
+      }) => Promise<boolean>",
           },
         ],
         "name": "$",
