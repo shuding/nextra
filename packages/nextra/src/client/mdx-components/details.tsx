@@ -13,6 +13,16 @@ import { Children, cloneElement, useEffect, useRef, useState } from 'react'
 import { Collapse } from '../components/collapse.js'
 import { useHash } from '../hooks/index.js'
 
+type DetailsProps = ComponentProps<'details'>
+
+interface AccordionProps extends DetailsProps {
+  /** Default open state. */
+  open?: DetailsProps['open']
+
+  /** CSS class name. */
+  className?: DetailsProps['className']
+}
+
 /**
  * A vertically stacked, interactive heading component that reveals or hides content when toggled.
  *
@@ -61,16 +71,14 @@ import { useHash } from '../hooks/index.js'
  *   </details>
  * </details>
  */
-export const Accordion: FC<ComponentProps<'details'>> = ({
+export const Accordion: FC<AccordionProps> = ({
   children,
-  /** Default open state. */
   open,
-  /** CSS class name. */
   className,
   ...props
 }) => {
   const [isOpen, setIsOpen] = useState(!!open)
-  // To animate the close animation we have to delay the DOM node state here.
+  // To animate the close animation, we have to delay the DOM node state here.
   const [delayedOpenState, setDelayedOpenState] = useState(isOpen)
   const animationRef = useRef(0)
 
