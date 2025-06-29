@@ -1,5 +1,11 @@
 # nextra
 
+## 4.3.0-alpha.30
+
+### Minor Changes
+
+- b0afee7: feat(tsdoc): add support for `@inline` tag on function parameters
+
 ## 4.3.0-alpha.29
 
 ### Patch Changes
