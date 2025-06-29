@@ -335,10 +335,14 @@ const FieldsTable: FC<
           const id = slugger.slug(field.name)
           const tags = field.tags ?? {}
           const defaultValue = tags.default || tags.defaultValue
-          const description =
-            //
-            await renderMarkdown(field.description || tags.description)
-
+          const description = await renderMarkdown(
+            [
+              field.description || tags.description,
+              tags.deprecated && `**Deprecated**: ${tags.deprecated}`
+            ]
+              .filter(Boolean)
+              .join('\n')
+          )
           return (
             <Row key={id} id={id}>
               <NameCell id={id} optional={field.optional} name={field.name} />
