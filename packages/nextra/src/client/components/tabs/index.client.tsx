@@ -91,7 +91,7 @@ export const Tabs: FC<
     requestAnimationFrame(() => {
       location.hash = `#${hash}`
     })
-  }, [hash])
+  }, [hash]) // eslint-disable-line react-hooks/exhaustive-deps -- check only hash
 
   useEffect(() => {
     if (!storageKey) {
