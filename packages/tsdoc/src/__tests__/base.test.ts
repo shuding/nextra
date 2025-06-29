@@ -90,7 +90,7 @@ export default MyType`
             "params": [
               {
                 "name": "props",
-                "type": "{ items?: (string | TabObjectItem)[]; children: ReactNode; storageKey?: string; className?: string | ((bag: ListRenderPropArg) => string) | undefined; tabClassName?: string | ... 1 more ... | undefined; } & Pick<...>",
+                "type": "{ items: (TabItem | TabObjectItem)[]; children: ReactNode; storageKey?: string; className?: string | ((bag: ListRenderPropArg) => string) | undefined; tabClassName?: string | ... 1 more ... | undefined; } & Pick<...>",
               },
             ],
             "returns": {
@@ -99,18 +99,18 @@ export default MyType`
           },
         ],
         "tags": {
-          "example": "<Tabs>
-        <Tabs.Tab label="pnpm">**pnpm**: Fast, disk space efficient package manager.</Tabs.Tab>
-        <Tabs.Tab label="npm">**npm** is a package manager for the JavaScript programming language.</Tabs.Tab>
-        <Tabs.Tab label="yarn">**Yarn** is a software packaging system.</Tabs.Tab>
+          "example": "<Tabs items={['pnpm', 'npm', 'yarn']}>
+        <Tabs.Tab>**pnpm**: Fast, disk space efficient package manager.</Tabs.Tab>
+        <Tabs.Tab>**npm** is a package manager for the JavaScript programming language.</Tabs.Tab>
+        <Tabs.Tab>**Yarn** is a software packaging system.</Tabs.Tab>
       </Tabs>",
           "usage": "\`\`\`mdx
       import { Tabs } from 'nextra/components'
 
-      <Tabs>
-        <Tabs.Tab label="pnpm">**pnpm**: Fast, disk space efficient package manager.</Tabs.Tab>
-        <Tabs.Tab label="npm">**npm** is a package manager for the JavaScript programming language.</Tabs.Tab>
-        <Tabs.Tab label="yarn">**Yarn** is a software packaging system.</Tabs.Tab>
+      <Tabs items={['pnpm', 'npm', 'yarn']}>
+        <Tabs.Tab>**pnpm**: Fast, disk space efficient package manager.</Tabs.Tab>
+        <Tabs.Tab>**npm** is a package manager for the JavaScript programming language.</Tabs.Tab>
+        <Tabs.Tab>**Yarn** is a software packaging system.</Tabs.Tab>
       </Tabs>
       \`\`\`
 
@@ -121,17 +121,17 @@ export default MyType`
       \`\`\`mdx /defaultIndex="1"/
       import { Tabs } from 'nextra/components'
 
-      <Tabs defaultIndex="1">
+      <Tabs items={['pnpm', 'npm', 'yarn']} defaultIndex="1">
         ...
       </Tabs>
       \`\`\`
 
       And you will have \`npm\` as the default tab:
 
-      <Tabs defaultIndex="1">
-        <Tabs.Tab label="pnpm">**pnpm**: Fast, disk space efficient package manager.</Tabs.Tab>
-        <Tabs.Tab label="npm">**npm** is a package manager for the JavaScript programming language.</Tabs.Tab>
-        <Tabs.Tab label="yarn">**Yarn** is a software packaging system.</Tabs.Tab>
+      <Tabs items={['pnpm', 'npm', 'yarn']} defaultIndex="1">
+        <Tabs.Tab>**pnpm**: Fast, disk space efficient package manager.</Tabs.Tab>
+        <Tabs.Tab>**npm** is a package manager for the JavaScript programming language.</Tabs.Tab>
+        <Tabs.Tab>**Yarn** is a software packaging system.</Tabs.Tab>
       </Tabs>",
         },
       }
