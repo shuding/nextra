@@ -636,44 +636,14 @@ describe('Code block', () => {
             <>
               <Tabs items={['pnpm', 'npm', 'yarn']} defaultIndex="1">
                 <Tabs.Tab>
-                  <h3
-                    id="pnpm"
-                    style={{
-                      visibility: 'hidden',
-                      width: 0,
-                      height: 0
-                    }}
-                  >
-                    {'pnpm'}
-                  </h3>
                   <_components.strong>{'pnpm'}</_components.strong>
                   {': Fast, disk space efficient package manager.'}
                 </Tabs.Tab>
                 <Tabs.Tab>
-                  <h3
-                    id="npm"
-                    style={{
-                      visibility: 'hidden',
-                      width: 0,
-                      height: 0
-                    }}
-                  >
-                    {'npm'}
-                  </h3>
                   <_components.strong>{'npm'}</_components.strong>
                   {' is a package manager for the JavaScript programming language.'}
                 </Tabs.Tab>
                 <Tabs.Tab>
-                  <h3
-                    id="yarn"
-                    style={{
-                      visibility: 'hidden',
-                      width: 0,
-                      height: 0
-                    }}
-                  >
-                    {'yarn'}
-                  </h3>
                   <_components.strong>{'Yarn'}</_components.strong>
                   {' is a software packaging system.'}
                 </Tabs.Tab>
@@ -681,44 +651,14 @@ describe('Code block', () => {
               {'\\n'}
               <Tabs items={['pnpm', 'npm', 'yarn']} defaultIndex="1">
                 <Tabs.Tab>
-                  <h3
-                    id="pnpm-1"
-                    style={{
-                      visibility: 'hidden',
-                      width: 0,
-                      height: 0
-                    }}
-                  >
-                    {'pnpm'}
-                  </h3>
                   <_components.strong>{'pnpm'}</_components.strong>
                   {': Fast, disk space efficient package manager.'}
                 </Tabs.Tab>
                 <Tabs.Tab>
-                  <h3
-                    id="npm-1"
-                    style={{
-                      visibility: 'hidden',
-                      width: 0,
-                      height: 0
-                    }}
-                  >
-                    {'npm'}
-                  </h3>
                   <_components.strong>{'npm'}</_components.strong>
                   {' is a package manager for the JavaScript programming language.'}
                 </Tabs.Tab>
                 <Tabs.Tab>
-                  <h3
-                    id="yarn-1"
-                    style={{
-                      visibility: 'hidden',
-                      width: 0,
-                      height: 0
-                    }}
-                  >
-                    {'yarn'}
-                  </h3>
                   <_components.strong>{'Yarn'}</_components.strong>
                   {' is a software packaging system.'}
                 </Tabs.Tab>
