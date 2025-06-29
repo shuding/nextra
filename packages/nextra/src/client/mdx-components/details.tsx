@@ -15,7 +15,7 @@ import { useHash } from '../hooks/index.js'
 
 type DetailsProps = ComponentProps<'details'>
 
-interface AccordionProps extends DetailsProps {
+export interface AccordionProps extends DetailsProps {
   /** Default open state. */
   open?: DetailsProps['open']
 
