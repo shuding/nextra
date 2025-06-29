@@ -324,16 +324,16 @@ function getTypeName({
       const inlineParamAlias = paramType
         .getNonNullableType()
         .getAliasSymbolOrThrow()
-      const paramTags = inlineParamAlias && getTags(inlineParamAlias)
+      const paramTags = getTags(inlineParamAlias)
 
-      const shouldInlineParam = paramTags && 'inline' in paramTags
-      const paramTypeStr = shouldInlineParam
-        ? inlineParamAlias!
-            .getDeclarations()[0]!
-            .asKindOrThrow(SyntaxKind.TypeAliasDeclaration)
-            .getTypeNodeOrThrow()
-            .getText()
-        : getFormattedText(paramType)
+      const paramTypeStr =
+        'inline' in paramTags
+          ? inlineParamAlias
+              .getDeclarations()[0]!
+              .asKindOrThrow(SyntaxKind.TypeAliasDeclaration)
+              .getTypeNodeOrThrow()
+              .getText()
+          : getFormattedText(paramType)
 
       const optional = paramDecl
         .asKindOrThrow(SyntaxKind.Parameter)
