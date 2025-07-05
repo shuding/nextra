@@ -14,13 +14,14 @@ import type {
   TabPanelProps
 } from '@headlessui/react'
 import cn from 'clsx'
-import type { FC, ReactElement, ReactNode } from 'react'
-import { Fragment, useEffect, useRef, useState } from 'react'
+import type { FC, ReactNode } from 'react'
+import { Children, Fragment, useEffect, useState } from 'react'
 import { useHash } from '../../hooks/use-hash.js'
 
-type TabItem = string | ReactElement
+// eslint-disable-next-line sonarjs/redundant-type-aliases
+type TabItem = string
 
-type TabObjectItem = {
+interface TabObjectItem {
   label: TabItem
   disabled: boolean
 }
@@ -31,7 +32,10 @@ function isTabObjectItem(item: unknown): item is TabObjectItem {
 
 export const Tabs: FC<
   {
-    items: (TabItem | TabObjectItem)[]
+    /**
+     * @deprecated Use `Tabs.Tab#label` and `Tabs.Tab#disabled` props instead.
+     */
+    items?: (TabItem | TabObjectItem)[]
     children: ReactNode
     /** LocalStorage key for persisting the selected tab. */
     storageKey?: string
@@ -41,18 +45,17 @@ export const Tabs: FC<
     tabClassName?: HeadlessTabProps['className']
   } & Pick<TabGroupProps, 'defaultIndex' | 'selectedIndex' | 'onChange'>
 > = ({
-  items,
   children,
   storageKey,
   defaultIndex = 0,
   selectedIndex: _selectedIndex,
   onChange,
   className,
-  tabClassName
+  tabClassName,
+  ...props
 }) => {
   const [selectedIndex, setSelectedIndex] = useState(defaultIndex)
   const hash = useHash()
-  const tabPanelsRef = useRef<HTMLDivElement>(null!)
 
   useEffect(() => {
     if (_selectedIndex !== undefined) {
@@ -60,29 +63,39 @@ export const Tabs: FC<
     }
   }, [_selectedIndex])
 
+  const hasLabelPropInTab = Children.toArray(children).some(
+    child => (child as any).props.label
+  )
+  const items: TabObjectItem[] = hasLabelPropInTab
+    ? (children as any).map((child: any) => child.props as TabObjectItem)
+    : // eslint-disable-next-line @typescript-eslint/no-deprecated
+      props.items!.map(item => {
+        if (!isTabObjectItem(item)) {
+          return { id: item }
+        }
+        return {
+          id: item.label,
+          disabled: item.disabled
+        }
+      })
+
   useEffect(() => {
     if (!hash) return
-    const tabPanel = tabPanelsRef.current.querySelector(
-      `[role=tabpanel]:has([id="${hash}"])`
-    )
-    if (!tabPanel) return
+    const index = items.findIndex(item => item.label === hash)
+    if (index === -1) return
+    setSelectedIndex(index)
 
-    for (const [index, el] of Object.entries(tabPanelsRef.current.children)) {
-      if (el === tabPanel) {
-        setSelectedIndex(Number(index))
-        // Clear hash first, otherwise page isn't scrolled
-        location.hash = ''
-        // Execute on next tick after `selectedIndex` update
-        requestAnimationFrame(() => {
-          location.hash = `#${hash}`
-        })
-      }
-    }
-  }, [hash])
+    // Clear hash first, otherwise the page isn't scrolled
+    location.hash = ''
+    // Execute on next tick after `selectedIndex` update
+    requestAnimationFrame(() => {
+      location.hash = `#${hash}`
+    })
+  }, [hash]) // eslint-disable-line react-hooks/exhaustive-deps -- check only hash
 
   useEffect(() => {
     if (!storageKey) {
-      // Do not listen storage events if there is no storage key
+      // Do not listen to storage events if there is no storage key
       return
     }
 
@@ -134,49 +147,62 @@ export const Tabs: FC<
           )
         }
       >
-        {items.map((item, index) => (
-          <HeadlessTab
-            key={index}
-            disabled={isTabObjectItem(item) && item.disabled}
-            className={args => {
-              const { selected, disabled, hover, focus } = args
-              return cn(
-                focus && 'x:nextra-focus x:ring-inset',
-                'x:whitespace-nowrap x:cursor-pointer',
-                'x:rounded-t x:p-2 x:font-medium x:leading-5 x:transition-colors',
-                'x:-mb-0.5 x:select-none x:border-b-2',
-                selected
-                  ? 'x:border-current x:outline-none'
-                  : hover
-                    ? 'x:border-gray-200 x:dark:border-neutral-800'
-                    : 'x:border-transparent',
-                selected
-                  ? 'x:text-primary-600'
-                  : disabled
-                    ? 'x:text-gray-400 x:dark:text-neutral-600 x:pointer-events-none'
+        {items.map((item, index) => {
+          return (
+            <HeadlessTab
+              onClick={() => {
+                history.replaceState(null, '', `#${item.label}`)
+              }}
+              key={index}
+              disabled={item.disabled}
+              className={args => {
+                const { selected, disabled, hover, focus } = args
+                return cn(
+                  focus && 'x:nextra-focus x:ring-inset',
+                  'x:whitespace-nowrap x:cursor-pointer',
+                  'x:rounded-t x:p-2 x:font-medium x:leading-5 x:transition-colors',
+                  'x:-mb-0.5 x:select-none x:border-b-2',
+                  selected
+                    ? 'x:border-current x:outline-none'
                     : hover
-                      ? 'x:text-black x:dark:text-white'
-                      : 'x:text-gray-600 x:dark:text-gray-200',
-                typeof tabClassName === 'function'
-                  ? tabClassName(args)
-                  : tabClassName
-              )
-            }}
-          >
-            {isTabObjectItem(item) ? item.label : item}
-          </HeadlessTab>
-        ))}
+                      ? 'x:border-gray-200 x:dark:border-neutral-800'
+                      : 'x:border-transparent',
+                  selected
+                    ? 'x:text-primary-600'
+                    : disabled
+                      ? 'x:text-gray-400 x:dark:text-neutral-600 x:pointer-events-none'
+                      : hover
+                        ? 'x:text-black x:dark:text-white'
+                        : 'x:text-gray-600 x:dark:text-gray-200',
+                  typeof tabClassName === 'function'
+                    ? tabClassName(args)
+                    : tabClassName
+                )
+              }}
+            >
+              <h3
+                // Subtitle for pagefind search
+                id={item.label}
+                className="x:size-0 x:invisible"
+              >
+                {item.label}
+              </h3>
+              {item.label}
+            </HeadlessTab>
+          )
+        })}
       </TabList>
-      <TabPanels ref={tabPanelsRef}>{children}</TabPanels>
+      <TabPanels>{children}</TabPanels>
     </TabGroup>
   )
 }
 
-export const Tab: FC<TabPanelProps> = ({
+export const Tab: FC<TabPanelProps & { label: string }> = ({
   children,
   // For SEO display all the Panel in the DOM and set `display: none;` for those that are not selected
   unmount = false,
   className,
+  label: _label,
   ...props
 }) => {
   return (
