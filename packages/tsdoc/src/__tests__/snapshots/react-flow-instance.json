@@ -208,7 +208,7 @@ nodeId - the node id the handle belongs to",
     },
     {
       "name": "fitView",
-      "type": "FitView<NodeType>",
+      "type": "(fitViewOptions?: FitViewOptionsBase<NodeType>) => Promise<boolean>",
     },
     {
       "description": "Zooms viewport in by 1.2.",
@@ -216,7 +216,11 @@ nodeId - the node id the handle belongs to",
       "tags": {
         "param": "options.duration - optional duration. If set, a transition will be applied",
       },
-      "type": "ZoomInOut",
+      "type": "(options?: {
+    duration?: number;
+    ease?: (t: number) => number;
+    interpolate?: 'smooth' | 'linear';
+}) => Promise<boolean>",
     },
     {
       "description": "Zooms viewport out by 1 / 1.2.",
@@ -224,7 +228,11 @@ nodeId - the node id the handle belongs to",
       "tags": {
         "param": "options.duration - optional duration. If set, a transition will be applied",
       },
-      "type": "ZoomInOut",
+      "type": "(options?: {
+    duration?: number;
+    ease?: (t: number) => number;
+    interpolate?: 'smooth' | 'linear';
+}) => Promise<boolean>",
     },
     {
       "description": "Zoom the viewport to a given zoom level. Passing in a `duration` will animate the viewport to
@@ -234,7 +242,11 @@ the new zoom level.",
         "param": "zoomLevel - the zoom level to set
 options.duration - optional duration. If set, a transition will be applied",
       },
-      "type": "ZoomTo",
+      "type": "(zoomLevel: number, options?: {
+    duration?: number;
+    ease?: (t: number) => number;
+    interpolate?: 'smooth' | 'linear';
+}) => Promise<boolean>",
     },
     {
       "description": "Get the current zoom level of the viewport.",
@@ -242,7 +254,7 @@ options.duration - optional duration. If set, a transition will be applied",
       "tags": {
         "returns": "current zoom as a number",
       },
-      "type": "GetZoom",
+      "type": "() => number",
     },
     {
       "description": "Sets the current viewport.",
@@ -252,7 +264,11 @@ options.duration - optional duration. If set, a transition will be applied",
 options.duration - optional duration. If set, a transition will be applied
 options.ease - optional ease function.",
       },
-      "type": "SetViewport",
+      "type": "(viewport: Viewport, options?: {
+    duration?: number;
+    ease?: (t: number) => number;
+    interpolate?: 'smooth' | 'linear';
+}) => Promise<boolean>",
     },
     {
       "description": "Returns the current viewport.",
@@ -260,7 +276,7 @@ options.ease - optional ease function.",
       "tags": {
         "returns": "Viewport",
       },
-      "type": "GetViewport",
+      "type": "() => Viewport",
     },
     {
       "description": "Center the viewport on a given position. Passing in a `duration` will animate the viewport to
@@ -273,7 +289,9 @@ options.zoom - optional zoom
 options.duration - optional duration. If set, a transition will be applied
 options.ease - optional ease function.",
       },
-      "type": "SetCenter",
+      "type": "(x: number, y: number, options?: ViewportHelperFunctionOptions & {
+    zoom?: number;
+}) => Promise<boolean>",
     },
     {
       "description": "A low-level utility function to fit the viewport to a given rectangle. By passing in a
@@ -286,7 +304,9 @@ options.padding - optional padding
 options.duration - optional duration. If set, a transition will be applied
 options.ease - optional ease function.",
       },
-      "type": "FitBounds",
+      "type": "(bounds: Rect, options?: ViewportHelperFunctionOptions & {
+    padding?: number;
+}) => Promise<boolean>",
     },
     {
       "description": "With this function you can translate a screen pixel position to a flow position. It is useful
@@ -317,7 +337,7 @@ This property tells you when viewport is initialized.",
       "type": "boolean",
     },
   ],
-  "filePath": "../../node_modules/.pnpm/@xyflow+react@12.7.0_@types+react@19.1.8_react-dom@19.1.0_react@19.1.0__react@19.1.0/node_modules/@xyflow/react/dist/esm/types/instance.d.ts",
+  "filePath": "../../node_modules/.pnpm/@xyflow+react@12.8.1_@types+react@19.1.8_react-dom@19.1.0_react@19.1.0__react@19.1.0/node_modules/@xyflow/react/dist/esm/types/instance.d.ts",
   "name": "ReactFlowInstance",
   "tags": {
     "public": "",
