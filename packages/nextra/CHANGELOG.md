@@ -1,5 +1,12 @@
 # nextra
 
+## 4.3.0-alpha.31
+
+### Patch Changes
+
+- f40e018: fix TSDoc error `Expected to find an alias symbol` when using
+  `@inline` comment
+
 ## 4.3.0-alpha.30
 
 ### Minor Changes
