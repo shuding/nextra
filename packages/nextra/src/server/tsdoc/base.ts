@@ -321,20 +321,17 @@ function getTypeName({
       const paramType = project
         .getTypeChecker()
         .getTypeOfSymbolAtLocation(param, paramDecl)
-      const inlineParamAlias = paramType
-        .getNonNullableType()
-        .getAliasSymbolOrThrow()
-      const paramTags = getTags(inlineParamAlias)
+      const inlineParamAlias = paramType.getNonNullableType().getAliasSymbol()
+      const paramTags = inlineParamAlias && getTags(inlineParamAlias)
 
       const paramTypeStr =
-        'inline' in paramTags
+        paramTags && 'inline' in paramTags
           ? inlineParamAlias
               .getDeclarations()[0]!
               .asKindOrThrow(SyntaxKind.TypeAliasDeclaration)
               .getTypeNodeOrThrow()
               .getText()
           : getFormattedText(paramType)
-
       const optional = paramDecl
         .asKindOrThrow(SyntaxKind.Parameter)
         .isOptional()

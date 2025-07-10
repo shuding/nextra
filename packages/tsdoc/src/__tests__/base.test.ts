@@ -461,6 +461,14 @@ export default Connection`
         './snapshots/use-theme-config.json'
       )
     })
+    test('ReactFlowInstance', async () => {
+      const code =
+        'export { ReactFlowInstance as default } from "@xyflow/react"'
+      const result = generateDefinition({ code, flattened: true })
+      await expect(result).toMatchFileSnapshot(
+        './snapshots/react-flow-instance.json'
+      )
+    })
 
     test('should flatten return type for useConfig', async () => {
       const code = 'export { useConfig as default } from "nextra-theme-docs"'

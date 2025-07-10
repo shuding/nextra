@@ -1,0 +1,345 @@
+{
+  "description": "The `ReactFlowInstance` provides a collection of methods to query and manipulate
+the internal state of your flow. You can get an instance by using the
+[`useReactFlow`](/api-reference/hooks/use-react-flow) hook or attaching a listener
+to the [`onInit`](/api-reference/react-flow#event-oninit) event.",
+  "entries": [
+    {
+      "description": "Returns nodes.",
+      "name": "getNodes",
+      "tags": {
+        "returns": "nodes array",
+      },
+      "type": "() => NodeType[]",
+    },
+    {
+      "description": "Set your nodes array to something else by either overwriting it with a new array or by passing
+in a function to update the existing array. If using a function, it is important to make sure a
+new array is returned instead of mutating the existing array. Calling this function will
+trigger the `onNodesChange` handler in a controlled flow.",
+      "name": "setNodes",
+      "tags": {
+        "param": "payload - the nodes to set or a function that receives the current nodes and returns the new nodes",
+      },
+      "type": "(payload: NodeType[] | ((nodes: NodeType[]) => NodeType[])) => void",
+    },
+    {
+      "description": "Add one or many nodes to your existing nodes array. Calling this function will trigger the
+`onNodesChange` handler in a controlled flow.",
+      "name": "addNodes",
+      "tags": {
+        "param": "payload - the nodes to add",
+      },
+      "type": "(payload: NodeType | NodeType[]) => void",
+    },
+    {
+      "description": "Returns a node by id.",
+      "name": "getNode",
+      "tags": {
+        "param": "id - the node id",
+        "returns": "the node or undefined if no node was found",
+      },
+      "type": "(id: string) => NodeType | undefined",
+    },
+    {
+      "description": "Returns an internal node by id.",
+      "name": "getInternalNode",
+      "tags": {
+        "param": "id - the node id",
+        "returns": "the internal node or undefined if no node was found",
+      },
+      "type": "(id: string) => InternalNode<NodeType> | undefined",
+    },
+    {
+      "description": "Returns edges.",
+      "name": "getEdges",
+      "tags": {
+        "returns": "edges array",
+      },
+      "type": "() => EdgeType[]",
+    },
+    {
+      "description": "Set your edges array to something else by either overwriting it with a new array or by passing
+in a function to update the existing array. If using a function, it is important to make sure a
+new array is returned instead of mutating the existing array. Calling this function will
+trigger the `onEdgesChange` handler in a controlled flow.",
+      "name": "setEdges",
+      "tags": {
+        "param": "payload - the edges to set or a function that receives the current edges and returns the new edges",
+      },
+      "type": "(payload: EdgeType[] | ((edges: EdgeType[]) => EdgeType[])) => void",
+    },
+    {
+      "description": "Add one or many edges to your existing edges array. Calling this function will trigger the
+`onEdgesChange` handler in a controlled flow.",
+      "name": "addEdges",
+      "tags": {
+        "param": "payload - the edges to add",
+      },
+      "type": "(payload: EdgeType | EdgeType[]) => void",
+    },
+    {
+      "description": "Returns an edge by id.",
+      "name": "getEdge",
+      "tags": {
+        "param": "id - the edge id",
+        "returns": "the edge or undefined if no edge was found",
+      },
+      "type": "(id: string) => EdgeType | undefined",
+    },
+    {
+      "description": "Returns the nodes, edges and the viewport as a JSON object.",
+      "name": "toObject",
+      "tags": {
+        "returns": "the nodes, edges and the viewport as a JSON object",
+      },
+      "type": "() => ReactFlowJsonObject<NodeType, EdgeType>",
+    },
+    {
+      "description": "Deletes nodes and edges.",
+      "name": "deleteElements",
+      "tags": {
+        "param": "params.nodes - optional nodes array to delete
+params.edges - optional edges array to delete",
+        "returns": "a promise that resolves with the deleted nodes and edges",
+      },
+      "type": "(params: DeleteElementsOptions) => Promise<{ deletedNodes: Node[]; deletedEdges: Edge[]; }>",
+    },
+    {
+      "description": "Find all the nodes currently intersecting with a given node or rectangle. The `partially`
+parameter can be set to `true` to include nodes that are only partially intersecting.",
+      "name": "getIntersectingNodes",
+      "tags": {
+        "param": "node - the node or rect to check for intersections
+partially - if true, the node is considered to be intersecting if it partially overlaps with the passed node or rect
+nodes - optional nodes array to check for intersections",
+        "returns": "an array of intersecting nodes",
+      },
+      "type": "(node: NodeType | Rect | { id: string; }, partially?: boolean | undefined, nodes?: NodeType[] | undefined) => NodeType[]",
+    },
+    {
+      "description": "Determine if a given node or rectangle is intersecting with another rectangle. The `partially`
+parameter can be set to true return `true` even if the node is only partially intersecting.",
+      "name": "isNodeIntersecting",
+      "tags": {
+        "param": "node - the node or rect to check for intersections
+area - the rect to check for intersections
+partially - if true, the node is considered to be intersecting if it partially overlaps with the passed react",
+        "returns": "true if the node or rect intersects with the given area",
+      },
+      "type": "(node: NodeType | Rect | { id: string; }, area: Rect, partially?: boolean | undefined) => boolean",
+    },
+    {
+      "description": "Updates a node.",
+      "name": "updateNode",
+      "tags": {
+        "example": "updateNode('node-1', (node) => ({ position: { x: node.position.x + 10, y: node.position.y } }));",
+        "param": "id - id of the node to update
+nodeUpdate - the node update as an object or a function that receives the current node and returns the node update
+options.replace - if true, the node is replaced with the node update, otherwise the changes get merged",
+      },
+      "type": "(id: string, nodeUpdate: Partial<NodeType> | ((node: NodeType) => Partial<NodeType>), options?: { replace: boolean; } | undefined) => void",
+    },
+    {
+      "description": "Updates the data attribute of a node.",
+      "name": "updateNodeData",
+      "tags": {
+        "example": "updateNodeData('node-1', { label: 'A new label' });",
+        "param": "id - id of the node to update
+dataUpdate - the data update as an object or a function that receives the current data and returns the data update
+options.replace - if true, the data is replaced with the data update, otherwise the changes get merged",
+      },
+      "type": "(id: string, dataUpdate: Partial<NodeType["data"]> | ((node: NodeType) => Partial<NodeType["data"]>), options?: { replace: boolean; } | undefined) => void",
+    },
+    {
+      "description": "Updates an edge.",
+      "name": "updateEdge",
+      "tags": {
+        "example": "updateEdge('edge-1', (edge) => ({ label: 'A new label' }));",
+        "param": "id - id of the edge to update
+edgeUpdate - the edge update as an object or a function that receives the current edge and returns the edge update
+options.replace - if true, the edge is replaced with the edge update, otherwise the changes get merged",
+      },
+      "type": "(id: string, edgeUpdate: Partial<EdgeType> | ((edge: EdgeType) => Partial<EdgeType>), options?: { replace: boolean; } | undefined) => void",
+    },
+    {
+      "description": "Updates the data attribute of a edge.",
+      "name": "updateEdgeData",
+      "tags": {
+        "example": "updateEdgeData('edge-1', { label: 'A new label' });",
+        "param": "id - id of the edge to update
+dataUpdate - the data update as an object or a function that receives the current data and returns the data update
+options.replace - if true, the data is replaced with the data update, otherwise the changes get merged",
+      },
+      "type": "(id: string, dataUpdate: Partial<EdgeType["data"]> | ((edge: EdgeType) => Partial<EdgeType["data"]>), options?: { replace: boolean; } | undefined) => void",
+    },
+    {
+      "description": "Returns the bounds of the given nodes or node ids.",
+      "name": "getNodesBounds",
+      "tags": {
+        "param": "nodes - the nodes or node ids to calculate the bounds for",
+        "returns": "the bounds of the given nodes",
+      },
+      "type": "(nodes: (string | NodeType | InternalNode)[]) => Rect",
+    },
+    {
+      "description": "Get all the connections of a handle belonging to a specific node. The type parameter be either
+`'source'` or `'target'`.",
+      "name": "getHandleConnections",
+      "tags": {
+        "deprecated": "",
+        "param": "type - handle type 'source' or 'target'
+id - the handle id (this is only needed if you have multiple handles of the same type, meaning you have to provide a unique id for each handle)
+nodeId - the node id the handle belongs to",
+        "returns": "an array with handle connections",
+      },
+      "type": "({ type, id, nodeId, }: { type: HandleType; nodeId: string; id?: string | null; }) => HandleConnection[]",
+    },
+    {
+      "description": "Gets all connections to a node. Can be filtered by handle type and id.",
+      "name": "getNodeConnections",
+      "tags": {
+        "param": "type - handle type 'source' or 'target'
+handleId - the handle id (this is only needed if you have multiple handles of the same type, meaning you have to provide a unique id for each handle)
+nodeId - the node id the handle belongs to",
+        "returns": "an array with handle connections",
+      },
+      "type": "({ type, handleId, nodeId, }: { type?: HandleType; nodeId: string; handleId?: string | null; }) => NodeConnection[]",
+    },
+    {
+      "name": "fitView",
+      "type": "(fitViewOptions?: FitViewOptionsBase<NodeType>) => Promise<boolean>",
+    },
+    {
+      "description": "Zooms viewport in by 1.2.",
+      "name": "zoomIn",
+      "tags": {
+        "param": "options.duration - optional duration. If set, a transition will be applied",
+      },
+      "type": "(options?: {
+    duration?: number;
+    ease?: (t: number) => number;
+    interpolate?: 'smooth' | 'linear';
+}) => Promise<boolean>",
+    },
+    {
+      "description": "Zooms viewport out by 1 / 1.2.",
+      "name": "zoomOut",
+      "tags": {
+        "param": "options.duration - optional duration. If set, a transition will be applied",
+      },
+      "type": "(options?: {
+    duration?: number;
+    ease?: (t: number) => number;
+    interpolate?: 'smooth' | 'linear';
+}) => Promise<boolean>",
+    },
+    {
+      "description": "Zoom the viewport to a given zoom level. Passing in a `duration` will animate the viewport to
+the new zoom level.",
+      "name": "zoomTo",
+      "tags": {
+        "param": "zoomLevel - the zoom level to set
+options.duration - optional duration. If set, a transition will be applied",
+      },
+      "type": "(zoomLevel: number, options?: {
+    duration?: number;
+    ease?: (t: number) => number;
+    interpolate?: 'smooth' | 'linear';
+}) => Promise<boolean>",
+    },
+    {
+      "description": "Get the current zoom level of the viewport.",
+      "name": "getZoom",
+      "tags": {
+        "returns": "current zoom as a number",
+      },
+      "type": "() => number",
+    },
+    {
+      "description": "Sets the current viewport.",
+      "name": "setViewport",
+      "tags": {
+        "param": "viewport - the viewport to set
+options.duration - optional duration. If set, a transition will be applied
+options.ease - optional ease function.",
+      },
+      "type": "(viewport: Viewport, options?: {
+    duration?: number;
+    ease?: (t: number) => number;
+    interpolate?: 'smooth' | 'linear';
+}) => Promise<boolean>",
+    },
+    {
+      "description": "Returns the current viewport.",
+      "name": "getViewport",
+      "tags": {
+        "returns": "Viewport",
+      },
+      "type": "() => Viewport",
+    },
+    {
+      "description": "Center the viewport on a given position. Passing in a `duration` will animate the viewport to
+the new position.",
+      "name": "setCenter",
+      "tags": {
+        "param": "x - x position
+y - y position
+options.zoom - optional zoom
+options.duration - optional duration. If set, a transition will be applied
+options.ease - optional ease function.",
+      },
+      "type": "(x: number, y: number, options?: ViewportHelperFunctionOptions & {
+    zoom?: number;
+}) => Promise<boolean>",
+    },
+    {
+      "description": "A low-level utility function to fit the viewport to a given rectangle. By passing in a
+`duration`, the viewport will animate from its current position to the new position. The
+`padding` option can be used to add space around the bounds.",
+      "name": "fitBounds",
+      "tags": {
+        "param": "bounds - the bounds ({ x: number, y: number, width: number, height: number }) to fit the view to
+options.padding - optional padding
+options.duration - optional duration. If set, a transition will be applied
+options.ease - optional ease function.",
+      },
+      "type": "(bounds: Rect, options?: ViewportHelperFunctionOptions & {
+    padding?: number;
+}) => Promise<boolean>",
+    },
+    {
+      "description": "With this function you can translate a screen pixel position to a flow position. It is useful
+for implementing drag and drop from a sidebar for example.",
+      "name": "screenToFlowPosition",
+      "tags": {
+        "example": "const flowPosition = screenToFlowPosition({ x: event.clientX, y: event.clientY })",
+        "param": "clientPosition - the screen / client position. When you are working with events you can use event.clientX and event.clientY
+options.snapToGrid - if true, the converted position will be snapped to the grid",
+        "returns": "position as { x: number, y: number }",
+      },
+      "type": "(clientPosition: XYPosition, options?: { snapToGrid: boolean; } | undefined) => XYPosition",
+    },
+    {
+      "description": "Translate a position inside the flow's canvas to a screen pixel position.",
+      "name": "flowToScreenPosition",
+      "tags": {
+        "example": "const clientPosition = flowToScreenPosition({ x: node.position.x, y: node.position.y })",
+        "param": "flowPosition - the screen / client position. When you are working with events you can use event.clientX and event.clientY",
+        "returns": "position as { x: number, y: number }",
+      },
+      "type": "(flowPosition: XYPosition) => XYPosition",
+    },
+    {
+      "description": "React Flow needs to mount the viewport to the DOM and initialize its zoom and pan behavior.
+This property tells you when viewport is initialized.",
+      "name": "viewportInitialized",
+      "type": "boolean",
+    },
+  ],
+  "filePath": "../../node_modules/.pnpm/@xyflow+react@12.8.1_@types+react@19.1.8_react-dom@19.1.0_react@19.1.0__react@19.1.0/node_modules/@xyflow/react/dist/esm/types/instance.d.ts",
+  "name": "ReactFlowInstance",
+  "tags": {
+    "public": "",
+  },
+}
