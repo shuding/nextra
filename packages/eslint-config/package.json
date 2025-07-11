@@ -15,11 +15,11 @@
     "eslint-plugin-import-x": "4.16.1",
     "eslint-plugin-react": "7.37.5",
     "eslint-plugin-react-hooks": "6.0.0-rc1",
-    "eslint-plugin-sonarjs": "3.0.3",
+    "eslint-plugin-sonarjs": "3.0.4",
     "eslint-plugin-tailwindcss": "3.17.3",
     "eslint-plugin-typescript-sort-keys": "3.3.0",
     "eslint-plugin-unicorn": "59.0.1",
-    "typescript-eslint": "8.34.1"
+    "typescript-eslint": "8.36.0"
   },
   "devDependencies": {
     "@types/node": "^22.10.5"
