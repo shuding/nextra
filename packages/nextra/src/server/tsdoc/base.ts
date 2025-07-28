@@ -71,7 +71,7 @@ export function generateDefinition({
   exportName = 'default',
   flattened = false
 }: BaseArgs): GeneratedDefinition & (GeneratedType | GeneratedFunction) {
-  // Can't access at top level, fix File not found: /var/task/.../tsconfig.json
+  // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- Can't access at top level, fix File not found: /var/task/.../tsconfig.json
   compilerObject ??= project.getTypeChecker().compilerObject
   const sourceFile = project.createSourceFile(DEFAULT_FILENAME, code, {
     overwrite: true
