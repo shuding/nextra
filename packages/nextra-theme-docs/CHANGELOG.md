@@ -1,5 +1,166 @@
 # nextra-theme-docs
 
+## 4.3.0
+
+### Minor Changes
+
+- eed8328: feat: adapt colors and icons from original GitHub alerts syntax
+
+  feat: new Callout type `important`
+
+  fix: inconsistent built-in Callout's icons size
+
+  feat: improve Callout's accessibility colors
+
+- 0831a1b: Add an `onSearch` callback to the `<Search />` component. This
+  callback, when specified, is called upon every search input change.
+- c93fc48: update zod to v4
+
+  feat(TSDoc): rename `generateDocumentation` to `generateDefinition`
+
+  feat(Bleed): pass all props from `div` element to `Bleed`, `Callout`, `Banner`
+  container
+
+  fix(TSDoc): improve TSDoc comments for components
+
+  - `Banner`
+  - `Head`
+  - `Search`
+  - `Bleed`
+  - `Callout`
+  - `Cards`
+  - `FileTree`
+  - `Steps`
+  - `Table`
+  - `Tabs`
+  - `Playground`
+  - `TSDoc`
+  - `Layout`
+  - `Navbar`
+
+  fix(TSDoc): improve TSDoc comments for functions:
+
+  - `nextra`
+  - `generateDefinition`
+  - `useMDXComponents`
+
+- 94b081c: feat: refactor `<Search>` component styles for improved transitions
+  and visibility
+- b5fab80: add `MDXRemote` component docs page
+  https://nextra.site/docs/built-ins/mdxremote
+- d9dd061: update `tailwindcss` to `4.1.10` and `react-compiler-runtime` to
+  `19.1.0-rc.2`
+- c134abe: feat: improve overall accessibility, makes text/colors easier to read
+  and achieves WCAG Level AAA compliance in many places
+- 83f6c57: feat: introduce new `<TSDoc />` component
+
+  The `<TSDoc>` component from `nextra/tsdoc` generates a properties table that
+  displays:
+
+  - **Property name**
+  - **TypeScript type**
+  - **Property description** - is parsed from [TSDoc](https://tsdoc.org) inline
+    description or the `@description` tag. You can use any Markdown/MDX syntax
+    here.
+  - **Default value** - are extracted from the `@default` or `@defaultValue`
+    tag.
+  - **Permalink** - a `#` anchor link to the property row for easy reference.
+
+  More info can be found in https://nextra.site/docs/built-ins/tsdoc
+
+  > [!IMPORTANT]
+  >
+  > Huge thanks to
+  > [xyflow - Node Based UIs for React and Svelte](https://xyflow.com/?utm_source=github&utm_campaign=nextra-4.3&utm_content=changelog)
+  > for sponsoring this feature!
+
+- 07debf9: feat(TSDoc): support flattening return object fields
+- fdeb5fe: feat: add new Layout prop `feedback.link` to customize feedback href
+
+### Patch Changes
+
+- 71f7b3f: Update https://nextra.site/docs/guide/search page
+
+  Fixes extra margin-top inside `Tabs.Tab`
+
+  Fix breaking `<Steps>` component numeration when there is `<Tabs>` component
+  inside
+
+- a070fdc: Fix `[object Object]` text on hovering breadcrumbs and pagination
+  links
+- 47ba5f3: fix: use `em` for padding-y, padding-x and border-radius styles of
+  `<Code>` element
+
+  fix(TSDoc): for return signature without `name` return mobile card instead of
+  table
+
+  feat: use `em` instead `rem` for margins
+
+- 40267dc: split `TSDoc` component logic to `TSDoc` component and
+  `generateDocumentation` function
+
+  update https://nextra.site/docs/built-ins/tsdoc documentation
+
+- b0dde33: Fix collapse behaviour of sidebar
+
+  - When a nested route item is active, clicking the parent route item should
+    not collapse the section.
+  - When the collapsible section is open, clicking the parent route item should
+    not cause it to collapse.
+  - Switching to another route should not trigger an unexpected reopening.
+
+- 8ac2506: chore: bump `babel-plugin-react-compiler` and
+  `react-compiler-runtime`, remove custom pnpm patch for
+  `babel-plugin-react-compiler`
+- 8edc715: fix phantom scroll when footer is disabled
+- b2cba90: improve TSDoc comments for `getPageMap`, `generateStaticParamsFor`
+  and `importPage` functions. Add new https://nextra.site/docs/guide/api page.
+- d29469e: support Next.js 15.3.0
+- 2b18c66: - Disable prefetch for sidebar/breadcrumb/pagination links
+  - Add extractStringsFromReactNode to extract strings from breadcrumb links and
+    pagination links
+- 6a82e6f: - Fix: Received `false` for a non-boolean attribute `prefetch`.
+  - Allow override `next-mdx-import-source-file` in `turbopack.resolveAlias`
+    option
+- 4547eb9: feat(TSDoc): add support for functions and functions with multiple
+  signatures
+- 407e0c4: feat(TSDoc): add `TSDoc.noParametersContent` prop
+- a506e0b: fix `TypeError: page.generateMetadata is not a function` when using
+  with `withSentryConfig` plugin
+- Updated dependencies [eed8328]
+- Updated dependencies [71f7b3f]
+- Updated dependencies [0831a1b]
+- Updated dependencies [b0afee7]
+- Updated dependencies [c93fc48]
+- Updated dependencies [47ba5f3]
+- Updated dependencies [01ac538]
+- Updated dependencies [94b081c]
+- Updated dependencies [b5fab80]
+- Updated dependencies [40267dc]
+- Updated dependencies [ef35ab9]
+- Updated dependencies [f717156]
+- Updated dependencies [9f449e5]
+- Updated dependencies [8ac2506]
+- Updated dependencies [a6a1f97]
+- Updated dependencies [fda0355]
+- Updated dependencies [b2cba90]
+- Updated dependencies [f40e018]
+- Updated dependencies [d29469e]
+- Updated dependencies [d9dd061]
+- Updated dependencies [6a82e6f]
+- Updated dependencies [c134abe]
+- Updated dependencies [7de40fb]
+- Updated dependencies [c7d25df]
+- Updated dependencies [4547eb9]
+- Updated dependencies [407e0c4]
+- Updated dependencies [83f6c57]
+- Updated dependencies [00f4696]
+- Updated dependencies [31ddba4]
+- Updated dependencies [07debf9]
+- Updated dependencies [a506e0b]
+- Updated dependencies [9690841]
+  - nextra@4.3.0
+
 ## 4.3.0-alpha.31
 
 ### Patch Changes
