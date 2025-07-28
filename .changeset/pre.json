@@ -1,5 +1,5 @@
 {
-  "mode": "pre",
+  "mode": "exit",
   "tag": "alpha",
   "initialVersions": {
     "esbuild-react-compiler-plugin": "0.0.0",
