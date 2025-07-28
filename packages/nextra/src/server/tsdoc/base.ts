@@ -31,7 +31,7 @@ const project = new Project({
 
 const DEFAULT_FILENAME = '$.ts'
 
-const { compilerObject } = project.getTypeChecker()
+let compilerObject: ts.TypeChecker
 
 /**
  * Generate documentation for properties of `type` and `interface` and parameters and returns
@@ -71,6 +71,8 @@ export function generateDefinition({
   exportName = 'default',
   flattened = false
 }: BaseArgs): GeneratedDefinition & (GeneratedType | GeneratedFunction) {
+  // Can't access at top level, fix File not found: /var/task/.../tsconfig.json
+  compilerObject ??= project.getTypeChecker().compilerObject
   const sourceFile = project.createSourceFile(DEFAULT_FILENAME, code, {
     overwrite: true
   })
