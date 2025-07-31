@@ -8,11 +8,11 @@ const Item: FC<{
   description: string
 }> = ({ icon: Icon, title, description }) => {
   return (
-    <div className="x:flex x:gap-2">
-      <Icon width="16" />
-      <div>
-        <span>{title}</span>
-        <span>{description}</span>
+    <div className="x:flex x:gap-2 x:items-center">
+      <Icon width="16" height="auto" />
+      <div className="x:flex x:flex-col">
+        <span className="x:font-medium">{title}</span>
+        <span className="x:text-xs">{description}</span>
       </div>
     </div>
   )
@@ -21,7 +21,7 @@ const Item: FC<{
 export const CopyPage: FC = () => {
   return (
     <div className="x:border x:inline-flex x:rounded-md x:items-center nextra-border x:float-end">
-      <Button className="x:ps-2 x:pe-1 x:flex x:gap-2">
+      <Button className="x:ps-2 x:pe-1 x:flex x:gap-2 x:text-sm x:font-medium">
         <CopyIcon width="16" />
         Copy page
       </Button>
