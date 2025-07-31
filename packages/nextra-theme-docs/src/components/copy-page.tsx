@@ -1,6 +1,22 @@
 import { Button, Select } from 'nextra/components'
 import { ArrowRightIcon, ChatGPTIcon, ClaudeIcon, CopyIcon } from 'nextra/icons'
-import { FC } from 'react'
+import type { FC, SVGProps } from 'react'
+
+const Item: FC<{
+  icon: FC<SVGProps<SVGElement>>
+  title: string
+  description: string
+}> = ({ icon: Icon, title, description }) => {
+  return (
+    <div className="x:flex x:gap-2">
+      <Icon width="16" />
+      <div>
+        <span>{title}</span>
+        <span>{description}</span>
+      </div>
+    </div>
+  )
+}
 
 export const CopyPage: FC = () => {
   return (
@@ -15,28 +31,31 @@ export const CopyPage: FC = () => {
           {
             id: 'light',
             name: (
-              <div className="x:flex x:gap-2">
-                <CopyIcon width="16" />
-                Copy page
-              </div>
+              <Item
+                icon={CopyIcon}
+                title="Copy page"
+                description="Copy page as Markdown for LLMs"
+              />
             )
           },
           {
             id: 'dark',
             name: (
-              <div className="x:flex x:gap-2">
-                <ChatGPTIcon width="16" />
-                Open in ChatGPT
-              </div>
+              <Item
+                icon={ChatGPTIcon}
+                title="Open in ChatGPT"
+                description="Ask questions about this page"
+              />
             )
           },
           {
             id: 'system',
             name: (
-              <div className="x:flex x:gap-2">
-                <ClaudeIcon width="16" />
-                Open in Claude
-              </div>
+              <Item
+                icon={ClaudeIcon}
+                title="Open in Claude"
+                description="Ask questions about this page"
+              />
             )
           }
         ]}

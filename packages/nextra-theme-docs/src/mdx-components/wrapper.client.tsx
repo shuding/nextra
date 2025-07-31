@@ -4,7 +4,7 @@ import cn from 'clsx'
 import type { MDXWrapper } from 'nextra'
 import type { ComponentProps, FC } from 'react'
 import { cloneElement } from 'react'
-import { Breadcrumb, Pagination, TOC, CopyPage } from '../components'
+import { Breadcrumb, CopyPage, Pagination, TOC } from '../components'
 import { useConfig, useThemeConfig } from '../stores'
 
 export const ClientWrapper: FC<Omit<ComponentProps<MDXWrapper>, 'toc'>> = ({
@@ -43,7 +43,7 @@ export const ClientWrapper: FC<Omit<ComponentProps<MDXWrapper>, 'toc'>> = ({
         {themeContext.breadcrumb && activeType !== 'page' && (
           <Breadcrumb activePath={activePath} />
         )}
-        <CopyPage/>
+        <CopyPage />
         {children}
         {date ? (
           <div className="x:mt-12 x:mb-8 x:text-xs x:text-gray-600 x:text-end x:dark:text-gray-400">
