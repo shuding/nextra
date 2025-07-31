@@ -1,3 +1,4 @@
+import cn from 'clsx'
 import { Button, Select } from 'nextra/components'
 import {
   ArrowRightIcon,
@@ -6,7 +7,7 @@ import {
   CopyIcon,
   LinkArrowIcon
 } from 'nextra/icons'
-import type { FC, SVGProps } from 'react'
+import { FC, SVGProps, useEffect, useState } from 'react'
 
 const Item: FC<{
   icon: FC<SVGProps<SVGElement>>
@@ -15,7 +16,7 @@ const Item: FC<{
   isExternal?: boolean
 }> = ({ icon: Icon, title, description, isExternal }) => {
   return (
-    <div className="x:flex x:gap-2 x:items-center">
+    <div className="x:flex x:gap-3 x:items-center">
       <Icon width="16" />
       <div className="x:flex x:flex-col">
         <span className="x:font-medium x:flex x:gap-1">
@@ -29,11 +30,34 @@ const Item: FC<{
 }
 
 export const CopyPage: FC = () => {
+  const [isCopied, setCopied] = useState(false)
+
+  useEffect(() => {
+    if (!isCopied) return
+    const timerId = setTimeout(() => {
+      setCopied(false)
+    }, 2000)
+
+    return () => {
+      clearTimeout(timerId)
+    }
+  }, [isCopied])
+
+  function handleCopy() {
+    setCopied(true)
+  }
+
   return (
     <div className="x:border x:inline-flex x:rounded-md x:items-center nextra-border x:float-end">
-      <Button className="x:ps-2 x:pe-1 x:flex x:gap-2 x:text-sm x:font-medium">
+      <Button
+        className={cn(
+          'x:ps-2 x:pe-1 x:flex x:gap-2 x:text-sm x:font-medium',
+          isCopied && 'x:opacity-70'
+        )}
+        onClick={handleCopy}
+      >
         <CopyIcon width="16" />
-        Copy page
+        {isCopied ? 'Copied' : 'Copy page'}
       </Button>
       <Select
         anchor={{ to: 'bottom end', gap: 10 }}
@@ -73,7 +97,11 @@ export const CopyPage: FC = () => {
         ]}
         value=""
         selectedOption={<ArrowRightIcon width="12" className="x:rotate-90" />}
-        onChange={console.log}
+        onChange={value => {
+          if (value === 'copy') {
+            handleCopy()
+          }
+        }}
       />
     </div>
   )
