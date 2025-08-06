@@ -95,7 +95,14 @@ export const CopyPage: FC<{ sourceCode: string }> = ({ sourceCode }) => {
         onChange={value => {
           if (value === 'copy') {
             handleCopy()
+            return
           }
+          const url =
+            value === 'chatgpt'
+              ? 'chatgpt.com/?hints=search&prompt'
+              : 'claude.ai/new?q'
+          const query = `Read from ${location.href} so I can ask questions about it.`
+          window.open(`https://${url}=${encodeURIComponent(query)}`, '_blank')
         }}
       />
     </div>
