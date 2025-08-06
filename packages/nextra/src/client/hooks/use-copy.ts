@@ -17,7 +17,7 @@ export function useCopy({
     return () => {
       clearTimeout(timerId)
     }
-  }, [isCopied])
+  }, [isCopied]) // eslint-disable-line react-hooks/exhaustive-deps -- ignore timeout
 
   async function copy(content: string) {
     setCopied(true)

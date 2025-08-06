@@ -119,7 +119,7 @@ function createHocCallAst(componentName: string): CallExpression {
             ...DEFAULT_PROPERTY_PROPS,
             key: { type: 'Identifier', name: 'sourceCode' },
             value: { type: 'Identifier', name: '__sourceCode' }
-          },
+          }
         ]
       }
     ]
