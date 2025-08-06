@@ -462,7 +462,7 @@ export default Connection`
       )
     })
     test('ReactFlowInstance', async () => {
-      const code =
+      const { filePath: _, ...result } =
         'export { ReactFlowInstance as default } from "@xyflow/react"'
       const result = generateDefinition({ code, flattened: true })
       await expect(result).toMatchFileSnapshot(
