@@ -35,8 +35,8 @@
     "react-compiler-runtime": "^19.1.0-rc.2"
   },
   "devDependencies": {
-    "@tailwindcss/cli": "4.1.10",
-    "@tailwindcss/postcss": "4.1.10",
+    "@tailwindcss/cli": "4.1.11",
+    "@tailwindcss/postcss": "4.1.11",
     "@tailwindcss/typography": "^0.5.15",
     "@types/react": "^19.1.8",
     "esbuild-react-compiler-plugin": "workspace:*",
@@ -44,7 +44,7 @@
     "nextra": "workspace:*",
     "postcss": "^8.4.33",
     "react": "19.1.0",
-    "tailwindcss": "4.1.10",
+    "tailwindcss": "4.1.11",
     "vitest": "^3.0.0",
     "zx": "^8.2.4"
   },
