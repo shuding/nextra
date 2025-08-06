@@ -337,7 +337,6 @@ This property tells you when viewport is initialized.",
       "type": "boolean",
     },
   ],
-  "filePath": "../../node_modules/.pnpm/@xyflow+react@12.8.1_@types+react@19.1.8_react-dom@19.1.0_react@19.1.0__react@19.1.0/node_modules/@xyflow/react/dist/esm/types/instance.d.ts",
   "name": "ReactFlowInstance",
   "tags": {
     "public": "",
