@@ -171,9 +171,14 @@ type PageProps = Readonly<{
 }>
 
 const Page: FC<PageProps> = async props => {
-  const { default: MDXContent, toc, metadata } = await getReference(props)
+  const {
+    default: MDXContent,
+    toc,
+    metadata,
+    sourceCode
+  } = await getReference(props)
   return (
-    <Wrapper toc={toc} metadata={metadata}>
+    <Wrapper toc={toc} metadata={metadata} sourceCode={sourceCode}>
       <MDXContent />
     </Wrapper>
   )
