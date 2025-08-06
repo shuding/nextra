@@ -1,8 +1,8 @@
 import path from 'node:path'
 import { includeIgnoreFile } from '@eslint/compat'
 import js from '@eslint/js'
-// @ts-expect-error -- no types
 import eslintPluginNext from '@next/eslint-plugin-next'
+import { Linter } from 'eslint'
 // import type { Linter } from 'eslint'
 import eslintConfigPrettier from 'eslint-config-prettier'
 import eslintPluginDeMorgan from 'eslint-plugin-de-morgan'
@@ -33,6 +33,8 @@ const REACT_COMPILER_RESTRICT = {
   name: 'react',
   importNames: ['memo', 'useCallback', 'useMemo']
 }
+
+type RuleRecord = Record<string, Linter.RuleEntry>
 
 const config: Config = tseslint.config(
   includeIgnoreFile(path.resolve('.gitignore')),
@@ -144,8 +146,8 @@ const config: Config = tseslint.config(
     ],
     rules: {
       ...eslintPluginReactHooks.configs.recommended.rules,
-      ...eslintPluginNext.configs.recommended.rules,
-      ...eslintPluginNext.configs['core-web-vitals'].rules,
+      ...(eslintPluginNext.configs.recommended.rules as RuleRecord),
+      ...(eslintPluginNext.configs['core-web-vitals'].rules as RuleRecord),
       'react/prop-types': 'off',
       'react/no-unknown-property': ['error', { ignore: ['jsx'] }],
       'react-hooks/exhaustive-deps': 'error',
