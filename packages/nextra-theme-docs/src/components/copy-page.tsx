@@ -1,5 +1,6 @@
 import cn from 'clsx'
 import { Button, Select } from 'nextra/components'
+import { useCopy } from 'nextra/hooks'
 import {
   ArrowRightIcon,
   ChatGPTIcon,
@@ -7,7 +8,7 @@ import {
   CopyIcon,
   LinkArrowIcon
 } from 'nextra/icons'
-import { FC, SVGProps, useEffect, useState } from 'react'
+import type { FC, SVGProps } from 'react'
 
 const Item: FC<{
   icon: FC<SVGProps<SVGElement>>
@@ -29,22 +30,11 @@ const Item: FC<{
   )
 }
 
-export const CopyPage: FC = () => {
-  const [isCopied, setCopied] = useState(false)
-
-  useEffect(() => {
-    if (!isCopied) return
-    const timerId = setTimeout(() => {
-      setCopied(false)
-    }, 2000)
-
-    return () => {
-      clearTimeout(timerId)
-    }
-  }, [isCopied])
+export const CopyPage: FC<{ sourceCode: string }> = ({ sourceCode }) => {
+  const { copy, isCopied } = useCopy()
 
   function handleCopy() {
-    setCopied(true)
+    copy(sourceCode)
   }
 
   return (
@@ -61,6 +51,7 @@ export const CopyPage: FC = () => {
       </Button>
       <Select
         anchor={{ to: 'bottom end', gap: 10 }}
+        className="x:rounded-none"
         options={[
           {
             id: 'copy',
