@@ -24,7 +24,7 @@ export const remarkExportSourceCode: Plugin<[{ sourceCode: string }], Root> =
                     id: { type: 'Identifier', name: '__sourceCode' },
                     init: {
                       type: 'Literal',
-                      value: sourceCode,
+                      value: sourceCode.trim(),
                     }
                   }
                 ]

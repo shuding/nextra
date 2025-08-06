@@ -27,7 +27,7 @@ export default function Foo(props) {
         const metadata = {
           title: 'h1'
         }
-        const __sourceCode = '\\n# h1\\n## h2 content\\n### h3 content\\n\\n- list 1\\n- list 2\\n  '
+        const __sourceCode = '# h1\\n## h2 content\\n### h3 content\\n\\n- list 1\\n- list 2'
         function useTOC(props) {
           return [
             {
@@ -108,7 +108,7 @@ export default function Foo(props) {
           })
         }
         const __sourceCode =
-          '\\n# h1\\n## h2 content\\n### h3 content\\n\\n- list 1\\n- list 2\\n  \\nexport default function Foo(props) {\\n  return <div>Default Export {props.children}</div>\\n}\\n'
+          '# h1\\n## h2 content\\n### h3 content\\n\\n- list 1\\n- list 2\\n  \\nexport default function Foo(props) {\\n  return <div>Default Export {props.children}</div>\\n}'
         function useTOC(props) {
           return [
             {
@@ -193,7 +193,7 @@ import { MDXRemote } from 'nextra/mdx-remote'
         const { jsx: _jsx } = arguments[0]
         const { useMDXComponents: _provideComponents } = arguments[0]
         const metadata = {}
-        const __sourceCode = "\\nimport { MDXRemote } from 'nextra/mdx-remote'\\n\\n<MDXRemote />"
+        const __sourceCode = "import { MDXRemote } from 'nextra/mdx-remote'\\n\\n<MDXRemote />"
         function useTOC(props) {
           return []
         }
@@ -241,7 +241,7 @@ import { MDXRemote } from 'nextra/mdx-remote'
         export const metadata = {
           title: 'h1'
         }
-        export const __sourceCode = '\\n# h1\\n## h2 content\\n### h3 content\\n\\n- list 1\\n- list 2\\n  '
+        export const __sourceCode = '# h1\\n## h2 content\\n### h3 content\\n\\n- list 1\\n- list 2'
         function useTOC(props) {
           return [
             {
@@ -301,7 +301,7 @@ import { MDXRemote } from 'nextra/mdx-remote'
         export const metadata = {
           title: 'h1'
         }
-        export const __sourceCode = '\\n# h1\\n## h2 content\\n### h3 content\\n\\n- list 1\\n- list 2\\n  '
+        export const __sourceCode = '# h1\\n## h2 content\\n### h3 content\\n\\n- list 1\\n- list 2'
         function useTOC(props) {
           return [
             {
@@ -367,7 +367,7 @@ import { MDXRemote } from 'nextra/mdx-remote'
           return <div>Default Export {props.children}</div>
         }
         export const __sourceCode =
-          '\\n# h1\\n## h2 content\\n### h3 content\\n\\n- list 1\\n- list 2\\n  \\nexport default function Foo(props) {\\n  return <div>Default Export {props.children}</div>\\n}\\n'
+          '# h1\\n## h2 content\\n### h3 content\\n\\n- list 1\\n- list 2\\n  \\nexport default function Foo(props) {\\n  return <div>Default Export {props.children}</div>\\n}'
         function useTOC(props) {
           return [
             {
