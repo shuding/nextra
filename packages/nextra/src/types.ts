@@ -96,12 +96,12 @@ export type ReadingTime = {
 
 export type MathJaxOptions = z.infer<typeof MathJaxOptionsSchema>
 
-export type MDXWrapper = FC<{
-  toc: Heading[]
-  children: ReactNode
-  metadata: $NextraMetadata
-  bottomContent?: ReactNode
-}>
+export type MDXWrapper = FC<
+  {
+    children: ReactNode
+    bottomContent?: ReactNode
+  } & Omit<EvaluateResult, 'default'>
+>
 
 export type MetaRecord = Record<string, z.infer<typeof metaSchema>>
 
@@ -143,4 +143,6 @@ export type EvaluateResult = {
   toc: Heading[]
   /** Page's front matter or `metadata` object including `title`, `description`, etc. */
   metadata: $NextraMetadata
+  /** Raw MDX source code */
+  sourceCode: string
 }

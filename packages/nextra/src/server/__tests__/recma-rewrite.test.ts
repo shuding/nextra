@@ -27,6 +27,7 @@ export default function Foo(props) {
         const metadata = {
           title: 'h1'
         }
+        const sourceCode = '# h1\\n## h2 content\\n### h3 content\\n\\n- list 1\\n- list 2'
         function useTOC(props) {
           return [
             {
@@ -86,6 +87,7 @@ export default function Foo(props) {
         }
         return {
           metadata,
+          sourceCode,
           toc,
           default: _createMdxContent
         }"
@@ -105,6 +107,8 @@ export default function Foo(props) {
             children: ['Default Export ', props.children]
           })
         }
+        const sourceCode =
+          '# h1\\n## h2 content\\n### h3 content\\n\\n- list 1\\n- list 2\\n  \\nexport default function Foo(props) {\\n  return <div>Default Export {props.children}</div>\\n}'
         function useTOC(props) {
           return [
             {
@@ -172,6 +176,7 @@ export default function Foo(props) {
         }
         return {
           metadata,
+          sourceCode,
           toc,
           default: MDXContent
         }"
@@ -188,6 +193,7 @@ import { MDXRemote } from 'nextra/mdx-remote'
         const { jsx: _jsx } = arguments[0]
         const { useMDXComponents: _provideComponents } = arguments[0]
         const metadata = {}
+        const sourceCode = "import { MDXRemote } from 'nextra/mdx-remote'\\n\\n<MDXRemote />"
         function useTOC(props) {
           return []
         }
@@ -202,6 +208,7 @@ import { MDXRemote } from 'nextra/mdx-remote'
         }
         return {
           metadata,
+          sourceCode,
           toc,
           default: _createMdxContent
         }
@@ -234,6 +241,7 @@ import { MDXRemote } from 'nextra/mdx-remote'
         export const metadata = {
           title: 'h1'
         }
+        export const sourceCode = '# h1\\n## h2 content\\n### h3 content\\n\\n- list 1\\n- list 2'
         function useTOC(props) {
           return [
             {
@@ -293,6 +301,7 @@ import { MDXRemote } from 'nextra/mdx-remote'
         export const metadata = {
           title: 'h1'
         }
+        export const sourceCode = '# h1\\n## h2 content\\n### h3 content\\n\\n- list 1\\n- list 2'
         function useTOC(props) {
           return [
             {
@@ -338,7 +347,8 @@ import { MDXRemote } from 'nextra/mdx-remote'
         }
         export default HOC_MDXWrapper(_createMdxContent, {
           metadata,
-          toc
+          toc,
+          sourceCode
         })"
       `)
     })
@@ -356,6 +366,8 @@ import { MDXRemote } from 'nextra/mdx-remote'
         const MDXLayout = function Foo(props) {
           return <div>Default Export {props.children}</div>
         }
+        export const sourceCode =
+          '# h1\\n## h2 content\\n### h3 content\\n\\n- list 1\\n- list 2\\n  \\nexport default function Foo(props) {\\n  return <div>Default Export {props.children}</div>\\n}'
         function useTOC(props) {
           return [
             {
@@ -408,7 +420,8 @@ import { MDXRemote } from 'nextra/mdx-remote'
         }
         export default HOC_MDXWrapper(MDXContent, {
           metadata,
-          toc
+          toc,
+          sourceCode
         })"
       `)
     })
@@ -429,6 +442,7 @@ import { MDXRemote } from 'nextra/mdx-remote'
         /*@jsxImportSource react*/
         import { useMDXComponents as _provideComponents } from '👍'
         export const metadata = {}
+        export const sourceCode = '## A \`Theme\` [google](https://google.com) $e = mc^2$'
         function useTOC(props) {
           const _components = {
             a: 'a',

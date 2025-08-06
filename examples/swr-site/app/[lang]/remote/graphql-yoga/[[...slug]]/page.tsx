@@ -89,7 +89,7 @@ export default async function Page(props: PageProps) {
 
   const { default: MDXContent, toc, metadata } = evaluate(rawJs, components)
   return (
-    <Wrapper toc={toc} metadata={metadata}>
+    <Wrapper toc={toc} metadata={metadata} sourceCode={rawJs}>
       <MDXContent />
     </Wrapper>
   )
