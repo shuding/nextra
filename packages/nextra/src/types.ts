@@ -101,6 +101,8 @@ export type MDXWrapper = FC<{
   children: ReactNode
   metadata: $NextraMetadata
   bottomContent?: ReactNode
+  /** Raw MDX source code */
+  sourceCode: string
 }>
 
 export type MetaRecord = Record<string, z.infer<typeof metaSchema>>

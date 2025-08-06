@@ -85,7 +85,7 @@ const DEFAULT_COMPONENTS = getNextraMDXComponents({
       {...props}
     />
   ),
-  wrapper({ toc, children, metadata, bottomContent, ...props }) {
+  wrapper({ toc, children, metadata, bottomContent, sourceCode, ...props }) {
     // @ts-expect-error fixme
     toc = toc.map(item => ({
       ...item,
@@ -99,7 +99,11 @@ const DEFAULT_COMPONENTS = getNextraMDXComponents({
       >
         <TOCProvider value={toc}>
           <Sidebar />
-          <ClientWrapper metadata={metadata} bottomContent={bottomContent}>
+          <ClientWrapper
+            metadata={metadata}
+            bottomContent={bottomContent}
+            sourceCode={sourceCode}
+          >
             <SkipNavContent />
             <main
               data-pagefind-body={
