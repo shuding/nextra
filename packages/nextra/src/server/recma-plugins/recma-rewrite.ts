@@ -114,7 +114,12 @@ function createHocCallAst(componentName: string): CallExpression {
             shorthand: true,
             key: { type: 'Identifier', name: 'toc' },
             value: { type: 'Identifier', name: 'toc' }
-          }
+          },
+          {
+            ...DEFAULT_PROPERTY_PROPS,
+            key: { type: 'Identifier', name: 'sourceCode' },
+            value: { type: 'Identifier', name: '__sourceCode' }
+          },
         ]
       }
     ]

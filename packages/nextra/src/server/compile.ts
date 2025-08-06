@@ -25,6 +25,7 @@ import {
 import {
   remarkAssignFrontMatter,
   remarkCustomHeadingId,
+  remarkExportSourceCode,
   remarkHeadings,
   remarkLinkRewrite,
   remarkMdxDisableExplicitJsx,
@@ -174,7 +175,8 @@ export async function compileMdx(
             excludeExternalLinks: true
           }
         ] satisfies Pluggable,
-        remarkSmartypants
+        remarkSmartypants,
+        [remarkExportSourceCode, { sourceCode: rawMdx }] satisfies Pluggable
       ].filter(v => !!v),
       rehypePlugins: [
         ...(rehypePlugins || []),

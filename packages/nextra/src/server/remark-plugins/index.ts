@@ -1,5 +1,6 @@
 export { remarkCustomHeadingId } from './remark-custom-heading-id.js'
 export { remarkExportOnlyMetadata } from './remark-export-only-metadata.js'
+export { remarkExportSourceCode } from './remark-export-source-code.js'
 export { remarkMdxFrontMatter } from './remark-mdx-frontmatter.js'
 export { remarkMdxTitle } from './remark-mdx-title.js'
 export { remarkHeadings } from './remark-headings.js'
