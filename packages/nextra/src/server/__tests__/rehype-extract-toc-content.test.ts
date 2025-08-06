@@ -25,7 +25,7 @@ bar[^1]
       /*@jsxImportSource react*/
       import { useMDXComponents as _provideComponents } from 'next-mdx-import-source-file'
       export const metadata = {}
-      export const __sourceCode = '## foo\\nbar[^1]\\n\\n[^1]: bar description'
+      export const sourceCode = '## foo\\nbar[^1]\\n\\n[^1]: bar description'
       function useTOC(props) {
         return [
           {
@@ -121,7 +121,7 @@ import { Steps } from 'nextra/components'
       import { useMDXComponents as _provideComponents } from 'next-mdx-import-source-file'
       export const metadata = {}
       import { Steps } from 'nextra/components'
-      export const __sourceCode =
+      export const sourceCode =
         "import { Steps } from 'nextra/components'\\n\\n## baz qux\\n\\n<Steps>\\n  <div>\\n  ### foo bar\\n  </div>\\n</Steps>"
       function useTOC(props) {
         return [
@@ -200,7 +200,7 @@ export const metadata = {
         test: 'extract toc content',
         title: 'Heading 1'
       }
-      export const __sourceCode =
+      export const sourceCode =
         "# Heading 1\\n\\nexport const myVar = 'interpolated'\\n\\n## Heading {myVar}\\n\\n### Heading $latex$\\n\\n### Heading \`<Code />:{jsx}\`\\n\\nexport const Test = () => <span>Hello</span>\\n\\n#### <Test /> World\\n\\n##### String\\n\\n###### 123\\n\\n###### Dada 123 true\\n\\nexport const metadata = {\\n  test: 'extract toc content'\\n}"
       function useTOC(props) {
         const _components = {
@@ -368,7 +368,7 @@ import { MDXRemote } from 'nextra/mdx-remote'
           filePath: '[[...slug]].mdx'
         }
         import { MDXRemote } from 'nextra/mdx-remote'
-        export const __sourceCode =
+        export const sourceCode =
           "import { MDXRemote } from 'nextra/mdx-remote'\\n\\n## hello\\n\\n<MDXRemote components={{ Callout, $Tabs: Tabs }} />"
         function useTOC(props) {
           return [
@@ -422,7 +422,7 @@ export const myVar = 123
         const { useMDXComponents: _provideComponents } = arguments[0]
         const metadata = {}
         const myVar = 123
-        const __sourceCode = "import { Foo } from 'foo'\\n\\n## bar\\n\\n<Foo />\\n\\nexport const myVar = 123\\n\\n### 123 {myVar}"
+        const sourceCode = "import { Foo } from 'foo'\\n\\n## bar\\n\\n<Foo />\\n\\nexport const myVar = 123\\n\\n### 123 {myVar}"
         function useTOC(props) {
           return [
             {
@@ -469,7 +469,7 @@ export const myVar = 123
         return {
           metadata,
           myVar,
-          __sourceCode,
+          sourceCode,
           toc,
           default: _createMdxContent
         }

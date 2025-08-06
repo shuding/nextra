@@ -16,7 +16,7 @@ describe('LaTeX', () => {
         'use strict'
         const { useMDXComponents: _provideComponents } = arguments[0]
         const metadata = {}
-        const __sourceCode = '\`\`\`math\\nx^2\\n\`\`\`'
+        const sourceCode = '\`\`\`math\\nx^2\\n\`\`\`'
         function useTOC(props) {
           return []
         }
@@ -98,7 +98,7 @@ describe('LaTeX', () => {
         }
         return {
           metadata,
-          __sourceCode,
+          sourceCode,
           toc,
           default: _createMdxContent
         }"
@@ -122,7 +122,7 @@ describe('LaTeX', () => {
         /*@jsxImportSource react*/
         import { useMDXComponents as _provideComponents } from 'next-mdx-import-source-file'
         export const metadata = {}
-        export const __sourceCode = '$a=\\\\sqrt{b^2 + c^2}$'
+        export const sourceCode = '$a=\\\\sqrt{b^2 + c^2}$'
         import { MathJax, MathJaxContext } from 'nextra/components'
         function useTOC(props) {
           return []
@@ -155,7 +155,7 @@ describe('LaTeX', () => {
         /*@jsxImportSource react*/
         import { useMDXComponents as _provideComponents } from 'next-mdx-import-source-file'
         export const metadata = {}
-        export const __sourceCode = '\`\`\`math\\nx^2\\n\`\`\`'
+        export const sourceCode = '\`\`\`math\\nx^2\\n\`\`\`'
         import { MathJax, MathJaxContext } from 'nextra/components'
         function useTOC(props) {
           return []
@@ -190,7 +190,7 @@ ${MATH_LANG}`
         export const metadata = {}
         import foo from 'foo'
         export let bar
-        export const __sourceCode = "$a=\\\\sqrt{b^2 + c^2}$\\n\\nimport foo from 'foo'\\n\\nexport let bar\\n\\n\`\`\`math\\nx^2\\n\`\`\`"
+        export const sourceCode = "$a=\\\\sqrt{b^2 + c^2}$\\n\\nimport foo from 'foo'\\n\\nexport let bar\\n\\n\`\`\`math\\nx^2\\n\`\`\`"
         import { MathJax, MathJaxContext } from 'nextra/components'
         function useTOC(props) {
           return []

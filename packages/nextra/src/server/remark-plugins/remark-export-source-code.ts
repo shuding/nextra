@@ -21,7 +21,7 @@ export const remarkExportSourceCode: Plugin<[{ sourceCode: string }], Root> =
                 declarations: [
                   {
                     type: 'VariableDeclarator',
-                    id: { type: 'Identifier', name: '__sourceCode' },
+                    id: { type: 'Identifier', name: 'sourceCode' },
                     init: {
                       type: 'Literal',
                       value: sourceCode.trim()

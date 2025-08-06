@@ -24,7 +24,7 @@ export default foo`,
       export const metadata = {}
       import foo from './foo'
       const MDXLayout = foo
-      export const __sourceCode = "import foo from './foo'\\n      \\n## heading\\n\\nexport default foo"
+      export const sourceCode = "import foo from './foo'\\n      \\n## heading\\n\\nexport default foo"
       function useTOC(props) {
         return [
           {
@@ -53,7 +53,7 @@ export default foo`,
       export default HOC_MDXWrapper(MDXContent, {
         metadata,
         toc,
-        sourceCode: __sourceCode
+        sourceCode
       })"
     `)
   })
@@ -70,7 +70,7 @@ export { foo as default } from './foo'`,
       import { useMDXComponents as _provideComponents } from 'next-mdx-import-source-file'
       export const metadata = {}
       import { foo as MDXLayout } from './foo'
-      export const __sourceCode = "## heading\\n      \\nexport { foo as default } from './foo'"
+      export const sourceCode = "## heading\\n      \\nexport { foo as default } from './foo'"
       function useTOC(props) {
         return [
           {
@@ -146,7 +146,7 @@ export const TagName = () => {
       export const metadata = {
         title: 'My Header'
       }
-      export const __sourceCode =
+      export const sourceCode =
         '# My Header [#test-id]\\n## Some extra space [#extra-space]&nbsp;\\n### Some extra space in heading    [#extra-space-in-heading]\\n### nospace[#without-space]\\n#### foo [#другой язык]\\n##### bar Baz []\\n###### bar Qux [#]'
       function useTOC(props) {
         return [
@@ -222,7 +222,7 @@ export const TagName = () => {
       /*@jsxImportSource react*/
       import { useMDXComponents as _provideComponents } from 'next-mdx-import-source-file'
       export const metadata = {}
-      export const __sourceCode = '### My Header'
+      export const sourceCode = '### My Header'
       function useTOC(props) {
         return [
           {
@@ -288,7 +288,7 @@ import Last from './three.mdx'
       import FromMarkdown, { toc as toc1 } from './two.md'
       import IgnoreMe from './foo'
       import Last, { toc as toc2 } from './three.mdx'
-      export const __sourceCode =
+      export const sourceCode =
         "import FromMdx from './one.mdx'\\nimport FromMarkdown from './two.md'\\nimport IgnoreMe from './foo'\\n\\n## ❤️\\n\\n<FromMdx />\\n\\n## ✅\\n\\n<FromMarkdown />\\n\\nimport Last from './three.mdx'\\n\\n<Last />\\n\\n<IgnoreMe />\\n\\n## 👋\\n\\n## kek <Kek />\\n\\n## \`try\` me\\n\\n## latex $l$\\n\\n## {'interpolate'} {1} {true} {null} {variable}"
       function useTOC(props) {
         const _components = {
@@ -627,7 +627,7 @@ describe('Code block', () => {
         /*@jsxImportSource react*/
         import { useMDXComponents as _provideComponents } from 'next-mdx-import-source-file'
         export const metadata = {}
-        export const __sourceCode =
+        export const sourceCode =
           "<Tabs items={['pnpm', 'npm', 'yarn']} defaultIndex=\\"1\\">\\n  <Tabs.Tab>**pnpm**: Fast, disk space efficient package manager.</Tabs.Tab>\\n  <Tabs.Tab>**npm** is a package manager for the JavaScript programming language.</Tabs.Tab>\\n  <Tabs.Tab>**Yarn** is a software packaging system.</Tabs.Tab>\\n</Tabs>\\n<Tabs items={['pnpm', 'npm', 'yarn']} defaultIndex=\\"1\\">\\n  <Tabs.Tab>**pnpm**: Fast, disk space efficient package manager.</Tabs.Tab>\\n  <Tabs.Tab>**npm** is a package manager for the JavaScript programming language.</Tabs.Tab>\\n  <Tabs.Tab>**Yarn** is a software packaging system.</Tabs.Tab>\\n</Tabs>"
         function useTOC(props) {
           return []
@@ -767,7 +767,7 @@ describe('Code block', () => {
       /*@jsxImportSource react*/
       import { useMDXComponents as _provideComponents } from 'next-mdx-import-source-file'
       export const metadata = {}
-      export const __sourceCode =
+      export const sourceCode =
         '<details>\\n  <summary>foo</summary>\\n  bar\\n</details>\\n<details>\\n  <summary>foo</summary>\\n  bar\\n</details>'
       function useTOC(props) {
         return []
