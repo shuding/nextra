@@ -34,8 +34,6 @@ const REACT_COMPILER_RESTRICT = {
   importNames: ['memo', 'useCallback', 'useMemo']
 }
 
-type RuleRecord = Record<string, Linter.RuleEntry>
-
 const config: Config = tseslint.config(
   includeIgnoreFile(path.resolve('.gitignore')),
   {
@@ -146,8 +144,9 @@ const config: Config = tseslint.config(
     ],
     rules: {
       ...eslintPluginReactHooks.configs.recommended.rules,
-      ...(eslintPluginNext.configs.recommended.rules as RuleRecord),
-      ...(eslintPluginNext.configs['core-web-vitals'].rules as RuleRecord),
+      ...(eslintPluginNext.configs.recommended.rules as Linter.RulesRecord),
+      ...(eslintPluginNext.configs['core-web-vitals']
+        .rules as Linter.RulesRecord),
       'react/prop-types': 'off',
       'react/no-unknown-property': ['error', { ignore: ['jsx'] }],
       'react-hooks/exhaustive-deps': 'error',
