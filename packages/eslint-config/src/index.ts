@@ -1,8 +1,8 @@
 import path from 'node:path'
 import { includeIgnoreFile } from '@eslint/compat'
 import js from '@eslint/js'
-// @ts-expect-error -- no types
 import eslintPluginNext from '@next/eslint-plugin-next'
+import type { Linter } from 'eslint'
 // import type { Linter } from 'eslint'
 import eslintConfigPrettier from 'eslint-config-prettier'
 import eslintPluginDeMorgan from 'eslint-plugin-de-morgan'
@@ -144,8 +144,9 @@ const config: Config = tseslint.config(
     ],
     rules: {
       ...eslintPluginReactHooks.configs.recommended.rules,
-      ...eslintPluginNext.configs.recommended.rules,
-      ...eslintPluginNext.configs['core-web-vitals'].rules,
+      ...(eslintPluginNext.configs.recommended.rules as Linter.RulesRecord),
+      ...(eslintPluginNext.configs['core-web-vitals']
+        .rules as Linter.RulesRecord),
       'react/prop-types': 'off',
       'react/no-unknown-property': ['error', { ignore: ['jsx'] }],
       'react-hooks/exhaustive-deps': 'error',
