@@ -147,7 +147,7 @@ const meta: MetaRecord = {
   // ...
 }
 
-export default meta
+export default meta;
 ```
 
 ### `title` type
@@ -208,11 +208,13 @@ the following file structure:
   <FileTree.File name="index.mdx" />
 </ContentAndAppFileTee>
 ```js filename="_meta.js" copy=false
-export default {
+const meta = {
   index: 'My Homepage',
   contact: 'Contact Us',
   about: 'About Us'
 }
+
+export default meta;
 ```
 </Block>
 
@@ -258,7 +260,7 @@ instead of a normal sidebar item:
   <FileTree.File name="index.mdx" />
 </ContentAndAppFileTee>
 ```js filename="_meta.js" copy=false {4,8,12,16}
-export default {
+const meta = {
   index: {
     title: 'Home',
     type: 'page'
@@ -276,6 +278,8 @@ export default {
     type: 'page'
   }
 }
+
+export default meta;
 ```
 </Block>
 
@@ -296,13 +300,14 @@ And it will look like this:
 > [links section](#links):
 >
 > ```js filename="_meta.js" {4-5}
-> export default {
+> const meta = {
 >   contact: {
 >     title: 'Contact Us',
 >     type: 'page',
 >     href: 'https://example.com/contact'
 >   }
 > }
+> export default meta;
 > ```
 
 #### `display: 'hidden'` option
@@ -312,11 +317,13 @@ you can hide a specific pages or folders by using the `display: 'hidden'{:ts}`
 configuration:
 
 ```js filename="_meta.js" {3}
-export default {
+const meta = {
   contact: {
     display: 'hidden'
   }
 }
+
+export default meta;
 ```
 
 > [!NOTE]
@@ -330,13 +337,15 @@ You can configure the theme for each page using the `theme` option. For example,
 you can disable or enable specific components for specific pages:
 
 ```js filename="_meta.js" {4}
-export default {
+const meta = {
   about: {
     theme: {
       sidebar: false
     }
   }
 }
+
+export default meta;
 ```
 
 > [!WARNING]
@@ -356,13 +365,15 @@ container width and height, but keep all the other styles. You can use the
 `'full'{:js}` layout to do that:
 
 ```js filename="_meta.js" {4}
-export default {
+const meta = {
   about: {
     theme: {
       layout: 'full'
     }
   }
 }
+
+export default meta;
 ```
 
 ##### Typesetting [#typesetting-section]
@@ -376,13 +387,15 @@ the `'article'{:js}` typesetting to make it look like an elegant article page:
 
 <figure>
 ```js filename="_meta.js" {4}
-export default {
+const meta = {
   about: {
     theme: {
       typesetting: 'article'
     }
   }
 }
+
+export default meta;
 ```
   <figcaption>[Live example on StackBlitz](https://stackblitz.com/edit/nextra-2-docs-hg77h3?file=pages%2F_meta.js,pages%2Findex.mdx)</figcaption>
 </figure>
@@ -408,18 +421,22 @@ meta information for pages in the same folder:
 </ContentAndAppFileTee>
 <div className='mt-6'>
 ```js filename="_meta.js" copy=false
-export default {
+const meta = {
   index: 'My Homepage',
   contact: 'Contact Us',
   fruits: 'Delicious Fruits',
   about: 'About Us'
 }
+
+export default meta;
 ```
 ```js filename="fruits/_meta.js" copy=false
-export default {
+const meta = {
   apple: 'Apple',
   banana: 'Banana'
 }
+
+export default meta;
 ```
 </div>
 </Block>
@@ -474,12 +491,14 @@ You can add external links to the sidebar by adding an item with `href` in
 `_meta` file:
 
 ```js filename="_meta.js" {2-5}
-export default {
+const meta = {
   github_link: {
     title: 'Nextra',
     href: 'https://github.com/shuding/nextra'
   }
 }
+
+export default meta;
 ```
 
 > [!TIP]
@@ -499,12 +518,14 @@ You can use a "placeholder" item with `type: 'separator'{:js}` to create a
 separator line between items in the sidebar:
 
 ```js filename="_meta.js" {3-4}
-export default {
+const meta = {
   '###': {
     type: 'separator',
     title: 'My Items' // Title is optional
   }
 }
+
+export default meta;
 ```
 
 ### Menus
@@ -533,7 +554,7 @@ type MenuSchema = {
 ```
 
 ```js filename="_meta.js"
-export default {
+const meta = {
   company: {
     title: 'Company',
     type: 'menu',
@@ -549,6 +570,8 @@ export default {
     }
   }
 }
+
+export default meta;
 ```
 
 ### Fallbacks
@@ -558,7 +581,7 @@ the `type: 'page'{:js}` option for every page. To make it easier, you can use
 the `'*'` key to define the fallback configuration for all items in this folder:
 
 ```js filename="_meta.js" {2-4}
-export default {
+const meta = {
   '*': {
     type: 'page'
   },
@@ -567,6 +590,8 @@ export default {
   fruits: 'Fruits',
   about: 'About'
 }
+
+export default meta;
 ```
 
 They are equivalent where all items have `type: 'page'{:js}` set.
@@ -592,18 +617,22 @@ For the following structure, you might use the following `_meta` files:
 </ContentAndAppFileTee>
 <div className='mt-6'>
 ```js filename="_meta.js" copy=false
-export default {
+const meta = {
   fruits: {
     type: 'page',
     title: '✨ Fruits'
   }
 }
+
+export default meta;
 ```
 ```js filename="fruits/_meta.js" copy=false
-export default {
+const meta = {
   apple: '🍎 Apple',
   banana: '🍌 BaNaNa'
 }
+
+export default meta;
 ```
 </div>
 </Block>
@@ -611,7 +640,7 @@ export default {
 With single `_meta.global` file it can be defined as below:
 
 ```js filename="_meta.global.js" copy=false
-export default {
+const meta = {
   fruits: {
     type: 'page',
     title: '✨ Fruits',
@@ -621,6 +650,8 @@ export default {
     }
   }
 }
+
+export default meta;
 ```
 
 > [!WARNING]
@@ -645,22 +676,26 @@ in JavaScript objects.
 For example, consider the following:
 
 ```js filename="_meta.js" copy=false
-export default {
+const meta = {
   foo: '',
   1992_10_21: '',
   1: ''
 }
+
+export default meta;
 ```
 
 will be converted to:
 
 {/* prettier-ignore */}
 ```js filename="_meta.js" copy=false
-export default {
+const meta = {
   '1': '',
   '19921021': '',
   foo: ''
 }
+
+export default meta;
 ```
 
 > [!TIP]
