@@ -45,7 +45,7 @@ export const ClientWrapper: FC<Omit<ComponentProps<MDXWrapper>, 'toc'>> = ({
           <Breadcrumb activePath={activePath} />
         )}
         <div className="x:flex x:justify-end">
-        {sourceCode && <CopyPage sourceCode={sourceCode} />}
+          {sourceCode && <CopyPage sourceCode={sourceCode} />}
         </div>
         {children}
         {date ? (

@@ -1,4 +1,4 @@
-"use client"
+'use client'
 
 import cn from 'clsx'
 import Link from 'next/link'
@@ -8,9 +8,9 @@ import {
   ArrowRightIcon,
   ChatGPTIcon,
   ClaudeIcon,
+  CopyCheckIcon,
   CopyIcon,
-  LinkArrowIcon,
-  CopyCheckIcon
+  LinkArrowIcon
 } from 'nextra/icons'
 import type { FC, SVGProps } from 'react'
 
@@ -34,9 +34,9 @@ const Item: FC<{
   )
 }
 
-export const CopyPage: FC<{ 
+export const CopyPage: FC<{
   sourceCode: string
-}> = ({ sourceCode}) => {
+}> = ({ sourceCode }) => {
   const { copy, isCopied } = useCopy()
 
   function handleCopy() {
@@ -56,7 +56,7 @@ export const CopyPage: FC<{
         }
         onClick={handleCopy}
       >
-        {(isCopied ? <CopyCheckIcon width="16" /> : <CopyIcon width="16" />)}
+        {isCopied ? <CopyCheckIcon width="16" /> : <CopyIcon width="16" />}
       </Button>
       <Select
         anchor={{ to: 'bottom end', gap: 10 }}
@@ -75,18 +75,20 @@ export const CopyPage: FC<{
           {
             id: 'chatgpt',
             name: (
-              <Link href={(()=>{
-                if(typeof window === 'undefined') return ''
-          const query = `Read from ${location.href} so I can ask questions about it.`
-                return `https://chatgpt.com/?hints=search&prompt=${encodeURIComponent(query)}`
-                })()} 
-                target="_blank">
-              <Item
-                icon={ChatGPTIcon}
-                title="Open in ChatGPT"
-                description="Ask questions about this page"
-                isExternal
-              />
+              <Link
+                href={(() => {
+                  if (typeof window === 'undefined') return ''
+                  const query = `Read from ${location.href} so I can ask questions about it.`
+                  return `https://chatgpt.com/?hints=search&prompt=${encodeURIComponent(query)}`
+                })()}
+                target="_blank"
+              >
+                <Item
+                  icon={ChatGPTIcon}
+                  title="Open in ChatGPT"
+                  description="Ask questions about this page"
+                  isExternal
+                />
               </Link>
             )
           },
@@ -94,18 +96,19 @@ export const CopyPage: FC<{
             id: 'claude',
             name: (
               <Link
-              href={(()=>{
-                if(typeof window === 'undefined') return ''
-          const query = `Read from ${location.href} so I can ask questions about it.`
-                return `https://claude.ai/new?q=${encodeURIComponent(query)}`
-                })()} 
-                 target="_blank">
-              <Item
-                icon={ClaudeIcon}
-                title="Open in Claude"
-                description="Ask questions about this page"
-                isExternal
-              />
+                href={(() => {
+                  if (typeof window === 'undefined') return ''
+                  const query = `Read from ${location.href} so I can ask questions about it.`
+                  return `https://claude.ai/new?q=${encodeURIComponent(query)}`
+                })()}
+                target="_blank"
+              >
+                <Item
+                  icon={ClaudeIcon}
+                  title="Open in Claude"
+                  description="Ask questions about this page"
+                  isExternal
+                />
               </Link>
             )
           }
