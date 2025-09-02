@@ -1,4 +1,7 @@
+"use client"
+
 import cn from 'clsx'
+import Link from 'next/link'
 import { Button, Select } from 'nextra/components'
 import { useCopy } from 'nextra/hooks'
 import {
@@ -6,7 +9,8 @@ import {
   ChatGPTIcon,
   ClaudeIcon,
   CopyIcon,
-  LinkArrowIcon
+  LinkArrowIcon,
+  CopyCheckIcon
 } from 'nextra/icons'
 import type { FC, SVGProps } from 'react'
 
@@ -30,7 +34,9 @@ const Item: FC<{
   )
 }
 
-export const CopyPage: FC<{ sourceCode: string }> = ({ sourceCode }) => {
+export const CopyPage: FC<{ 
+  sourceCode: string
+}> = ({ sourceCode}) => {
   const { copy, isCopied } = useCopy()
 
   function handleCopy() {
@@ -50,8 +56,7 @@ export const CopyPage: FC<{ sourceCode: string }> = ({ sourceCode }) => {
         }
         onClick={handleCopy}
       >
-        <CopyIcon width="16" />
-        {isCopied ? 'Copied' : 'Copy page'}
+        {(isCopied ? <CopyCheckIcon width="16" /> : <CopyIcon width="16" />)}
       </Button>
       <Select
         anchor={{ to: 'bottom end', gap: 10 }}
@@ -70,40 +75,43 @@ export const CopyPage: FC<{ sourceCode: string }> = ({ sourceCode }) => {
           {
             id: 'chatgpt',
             name: (
+              <Link href={(()=>{
+                if(typeof window === 'undefined') return ''
+          const query = `Read from ${location.href} so I can ask questions about it.`
+                return `https://chatgpt.com/?hints=search&prompt=${encodeURIComponent(query)}`
+                })()} 
+                target="_blank">
               <Item
                 icon={ChatGPTIcon}
                 title="Open in ChatGPT"
                 description="Ask questions about this page"
                 isExternal
               />
+              </Link>
             )
           },
           {
             id: 'claude',
             name: (
+              <Link
+              href={(()=>{
+                if(typeof window === 'undefined') return ''
+          const query = `Read from ${location.href} so I can ask questions about it.`
+                return `https://claude.ai/new?q=${encodeURIComponent(query)}`
+                })()} 
+                 target="_blank">
               <Item
                 icon={ClaudeIcon}
                 title="Open in Claude"
                 description="Ask questions about this page"
                 isExternal
               />
+              </Link>
             )
           }
         ]}
         value=""
         selectedOption={<ArrowRightIcon width="12" className="x:rotate-90" />}
-        onChange={value => {
-          if (value === 'copy') {
-            handleCopy()
-            return
-          }
-          const url =
-            value === 'chatgpt'
-              ? 'chatgpt.com/?hints=search&prompt'
-              : 'claude.ai/new?q'
-          const query = `Read from ${location.href} so I can ask questions about it.`
-          window.open(`https://${url}=${encodeURIComponent(query)}`, '_blank')
-        }}
       />
     </div>
   )
