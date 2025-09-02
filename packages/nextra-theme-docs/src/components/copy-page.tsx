@@ -38,7 +38,7 @@ export const CopyPage: FC<{ sourceCode: string }> = ({ sourceCode }) => {
   }
 
   return (
-    <div className="x:border x:inline-flex x:rounded-md x:items-stretch nextra-border x:float-end x:overflow-hidden">
+    <div className="x:border x:inline-flex x:rounded-md nextra-border x:overflow-hidden">
       <Button
         className={({ hover }) =>
           cn(
