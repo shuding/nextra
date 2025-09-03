@@ -1,8 +1,7 @@
 'use client'
 
 import cn from 'clsx'
-import Link from 'next/link'
-import { Button, Select } from 'nextra/components'
+import { Anchor, Button, Select } from 'nextra/components'
 import { useCopy } from 'nextra/hooks'
 import {
   ArrowRightIcon,
@@ -75,7 +74,7 @@ export const CopyPage: FC<{
           {
             id: 'chatgpt',
             name: (
-              <Link
+              <Anchor
                 href={(() => {
                   if (typeof window === 'undefined') return ''
                   const query = `Read from ${location.href} so I can ask questions about it.`
@@ -89,13 +88,13 @@ export const CopyPage: FC<{
                   description="Ask questions about this page"
                   isExternal
                 />
-              </Link>
+              </Anchor>
             )
           },
           {
             id: 'claude',
             name: (
-              <Link
+              <Anchor
                 href={(() => {
                   if (typeof window === 'undefined') return ''
                   const query = `Read from ${location.href} so I can ask questions about it.`
@@ -109,7 +108,7 @@ export const CopyPage: FC<{
                   description="Ask questions about this page"
                   isExternal
                 />
-              </Link>
+              </Anchor>
             )
           }
         ]}
