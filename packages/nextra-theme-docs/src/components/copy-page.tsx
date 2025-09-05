@@ -56,6 +56,7 @@ export const CopyPage: FC<{
         onClick={handleCopy}
       >
         {isCopied ? <CopyCheckIcon width="16" /> : <CopyIcon width="16" />}
+        Copy page
       </Button>
       <Select
         anchor={{ to: 'bottom end', gap: 10 }}
