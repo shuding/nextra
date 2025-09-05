@@ -1,5 +1,434 @@
 # nextra-theme-docs
 
+## 4.4.0
+
+### Minor Changes
+
+- 26b1281: feat: add Copy Documentation button/dropdown feature as LLM-Optimized
+  Prompt
+
+  ![](https://private-user-images.githubusercontent.com/7361780/473206831-aa851d94-3b83-46e8-8b00-5bf06c33314f.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3NTQ0NjgwNzUsIm5iZiI6MTc1NDQ2Nzc3NSwicGF0aCI6Ii83MzYxNzgwLzQ3MzIwNjgzMS1hYTg1MWQ5NC0zYjgzLTQ2ZTgtOGIwMC01YmYwNmMzMzMxNGYucG5nP1gtQW16LUFsZ29yaXRobT1BV1M0LUhNQUMtU0hBMjU2JlgtQW16LUNyZWRlbnRpYWw9QUtJQVZDT0RZTFNBNTNQUUs0WkElMkYyMDI1MDgwNiUyRnVzLWVhc3QtMSUyRnMzJTJGYXdzNF9yZXF1ZXN0JlgtQW16LURhdGU9MjAyNTA4MDZUMDgwOTM1WiZYLUFtei1FeHBpcmVzPTMwMCZYLUFtei1TaWduYXR1cmU9MjgwZTI3YWMzODYwNjEwNTgwNGUyOTJkMDg5MzNjOGRjZWE0MWYzMWQwZmM3ZDJkMjQzMDc2ZDRjMzQ4ZTRlZSZYLUFtei1TaWduZWRIZWFkZXJzPWhvc3QifQ.C7LZXaay7uuPQsDBb3MKLrbiBWxTPM2q9nfSqUGp3_0)
+
+  > **Note**
+  >
+  > If you are using
+  > [`content` directory](https://nextra.site/docs/file-conventions/content-directory),
+  > you **must** pass the `sourceCode` prop to enable this feature.
+  >
+  > ```diff
+  > const {
+  >   default: MDXContent,
+  >   toc,
+  >   metadata,
+  > + sourceCode
+  > } = await importPage(params.mdxPath)
+  > return (
+  > - <Wrapper toc={toc} metadata={metadata}>
+  > + <Wrapper toc={toc} metadata={metadata} sourceCode={sourceCode}>
+  >     <MDXContent {...props} params={params} />
+  >   </Wrapper>
+  > )
+  > ```
+
+### Patch Changes
+
+- Updated dependencies [26b1281]
+  - nextra@4.4.0
+
+## 4.3.0
+
+### Minor Changes
+
+- eed8328: feat: adapt colors and icons from original GitHub alerts syntax
+
+  feat: new Callout type `important`
+
+  fix: inconsistent built-in Callout's icons size
+
+  feat: improve Callout's accessibility colors
+
+- 0831a1b: Add an `onSearch` callback to the `<Search />` component. This
+  callback, when specified, is called upon every search input change.
+- c93fc48: update zod to v4
+
+  feat(TSDoc): rename `generateDocumentation` to `generateDefinition`
+
+  feat(Bleed): pass all props from `div` element to `Bleed`, `Callout`, `Banner`
+  container
+
+  fix(TSDoc): improve TSDoc comments for components
+
+  - `Banner`
+  - `Head`
+  - `Search`
+  - `Bleed`
+  - `Callout`
+  - `Cards`
+  - `FileTree`
+  - `Steps`
+  - `Table`
+  - `Tabs`
+  - `Playground`
+  - `TSDoc`
+  - `Layout`
+  - `Navbar`
+
+  fix(TSDoc): improve TSDoc comments for functions:
+
+  - `nextra`
+  - `generateDefinition`
+  - `useMDXComponents`
+
+- 94b081c: feat: refactor `<Search>` component styles for improved transitions
+  and visibility
+- b5fab80: add `MDXRemote` component docs page
+  https://nextra.site/docs/built-ins/mdxremote
+- d9dd061: update `tailwindcss` to `4.1.10` and `react-compiler-runtime` to
+  `19.1.0-rc.2`
+- c134abe: feat: improve overall accessibility, makes text/colors easier to read
+  and achieves WCAG Level AAA compliance in many places
+- 83f6c57: feat: introduce new `<TSDoc />` component
+
+  The `<TSDoc>` component from `nextra/tsdoc` generates a properties table that
+  displays:
+
+  - **Property name**
+  - **TypeScript type**
+  - **Property description** - is parsed from [TSDoc](https://tsdoc.org) inline
+    description or the `@description` tag. You can use any Markdown/MDX syntax
+    here.
+  - **Default value** - are extracted from the `@default` or `@defaultValue`
+    tag.
+  - **Permalink** - a `#` anchor link to the property row for easy reference.
+
+  More info can be found in https://nextra.site/docs/built-ins/tsdoc
+
+  > [!IMPORTANT]
+  >
+  > Huge thanks to
+  > [xyflow - Node Based UIs for React and Svelte](https://xyflow.com/?utm_source=github&utm_campaign=nextra-4.3&utm_content=changelog)
+  > for sponsoring this feature!
+
+- 07debf9: feat(TSDoc): support flattening return object fields
+- fdeb5fe: feat: add new Layout prop `feedback.link` to customize feedback href
+
+### Patch Changes
+
+- 71f7b3f: Update https://nextra.site/docs/guide/search page
+
+  Fixes extra margin-top inside `Tabs.Tab`
+
+  Fix breaking `<Steps>` component numeration when there is `<Tabs>` component
+  inside
+
+- a070fdc: Fix `[object Object]` text on hovering breadcrumbs and pagination
+  links
+- 47ba5f3: fix: use `em` for padding-y, padding-x and border-radius styles of
+  `<Code>` element
+
+  fix(TSDoc): for return signature without `name` return mobile card instead of
+  table
+
+  feat: use `em` instead `rem` for margins
+
+- 40267dc: split `TSDoc` component logic to `TSDoc` component and
+  `generateDocumentation` function
+
+  update https://nextra.site/docs/built-ins/tsdoc documentation
+
+- b0dde33: Fix collapse behaviour of sidebar
+
+  - When a nested route item is active, clicking the parent route item should
+    not collapse the section.
+  - When the collapsible section is open, clicking the parent route item should
+    not cause it to collapse.
+  - Switching to another route should not trigger an unexpected reopening.
+
+- 8ac2506: chore: bump `babel-plugin-react-compiler` and
+  `react-compiler-runtime`, remove custom pnpm patch for
+  `babel-plugin-react-compiler`
+- 8edc715: fix phantom scroll when footer is disabled
+- b2cba90: improve TSDoc comments for `getPageMap`, `generateStaticParamsFor`
+  and `importPage` functions. Add new https://nextra.site/docs/guide/api page.
+- d29469e: support Next.js 15.3.0
+- 2b18c66: - Disable prefetch for sidebar/breadcrumb/pagination links
+  - Add extractStringsFromReactNode to extract strings from breadcrumb links and
+    pagination links
+- 6a82e6f: - Fix: Received `false` for a non-boolean attribute `prefetch`.
+  - Allow override `next-mdx-import-source-file` in `turbopack.resolveAlias`
+    option
+- 4547eb9: feat(TSDoc): add support for functions and functions with multiple
+  signatures
+- 407e0c4: feat(TSDoc): add `TSDoc.noParametersContent` prop
+- a506e0b: fix `TypeError: page.generateMetadata is not a function` when using
+  with `withSentryConfig` plugin
+- Updated dependencies [eed8328]
+- Updated dependencies [71f7b3f]
+- Updated dependencies [0831a1b]
+- Updated dependencies [b0afee7]
+- Updated dependencies [c93fc48]
+- Updated dependencies [47ba5f3]
+- Updated dependencies [01ac538]
+- Updated dependencies [94b081c]
+- Updated dependencies [b5fab80]
+- Updated dependencies [40267dc]
+- Updated dependencies [ef35ab9]
+- Updated dependencies [f717156]
+- Updated dependencies [9f449e5]
+- Updated dependencies [8ac2506]
+- Updated dependencies [a6a1f97]
+- Updated dependencies [fda0355]
+- Updated dependencies [b2cba90]
+- Updated dependencies [f40e018]
+- Updated dependencies [d29469e]
+- Updated dependencies [d9dd061]
+- Updated dependencies [6a82e6f]
+- Updated dependencies [c134abe]
+- Updated dependencies [7de40fb]
+- Updated dependencies [c7d25df]
+- Updated dependencies [4547eb9]
+- Updated dependencies [407e0c4]
+- Updated dependencies [83f6c57]
+- Updated dependencies [00f4696]
+- Updated dependencies [31ddba4]
+- Updated dependencies [07debf9]
+- Updated dependencies [a506e0b]
+- Updated dependencies [9690841]
+  - nextra@4.3.0
+
+## 4.3.0-alpha.31
+
+### Patch Changes
+
+- Updated dependencies [f40e018]
+  - nextra@4.3.0-alpha.31
+
+## 4.3.0-alpha.30
+
+### Patch Changes
+
+- Updated dependencies [b0afee7]
+  - nextra@4.3.0-alpha.30
+
+## 4.3.0-alpha.29
+
+### Patch Changes
+
+- Updated dependencies [a6a1f97]
+  - nextra@4.3.0-alpha.29
+
+## 4.3.0-alpha.28
+
+### Patch Changes
+
+- Updated dependencies [ef35ab9]
+  - nextra@4.3.0-alpha.28
+
+## 4.3.0-alpha.27
+
+### Patch Changes
+
+- Updated dependencies [01ac538]
+  - nextra@4.3.0-alpha.27
+
+## 4.3.0-alpha.26
+
+### Patch Changes
+
+- Updated dependencies [c7d25df]
+  - nextra@4.3.0-alpha.26
+
+## 4.3.0-alpha.25
+
+### Minor Changes
+
+- d9dd061: update `tailwindcss` to `4.1.10` and `react-compiler-runtime` to
+  `19.1.0-rc.2`
+
+### Patch Changes
+
+- Updated dependencies [d9dd061]
+  - nextra@4.3.0-alpha.25
+
+## 4.3.0-alpha.24
+
+### Minor Changes
+
+- 0831a1b: Add an `onSearch` callback to the `<Search />` component. This
+  callback, when specified, is called upon every search input change.
+
+### Patch Changes
+
+- Updated dependencies [0831a1b]
+  - nextra@4.3.0-alpha.24
+
+## 4.3.0-alpha.23
+
+### Patch Changes
+
+- Updated dependencies [9690841]
+  - nextra@4.3.0-alpha.23
+
+## 4.3.0-alpha.22
+
+### Minor Changes
+
+- c93fc48: update zod to v4
+
+  feat(TSDoc): rename `generateDocumentation` to `generateDefinition`
+
+  feat(Bleed): pass all props from `div` element to `Bleed`, `Callout`, `Banner`
+  container
+
+  fix(TSDoc): improve TSDoc comments for components
+
+  - `Banner`
+  - `Head`
+  - `Search`
+  - `Bleed`
+  - `Callout`
+  - `Cards`
+  - `FileTree`
+  - `Steps`
+  - `Table`
+  - `Tabs`
+  - `Playground`
+  - `TSDoc`
+  - `Layout`
+  - `Navbar`
+
+  fix(TSDoc): improve TSDoc comments for functions:
+
+  - `nextra`
+  - `generateDefinition`
+  - `useMDXComponents`
+
+- b5fab80: add `MDXRemote` component docs page
+  https://nextra.site/docs/built-ins/mdxremote
+
+### Patch Changes
+
+- Updated dependencies [c93fc48]
+- Updated dependencies [b5fab80]
+  - nextra@4.3.0-alpha.22
+
+## 4.3.0-alpha.21
+
+### Patch Changes
+
+- 6a82e6f: - Fix: Received `false` for a non-boolean attribute `prefetch`.
+  - Allow override `next-mdx-import-source-file` in `turbopack.resolveAlias`
+    option
+- Updated dependencies [6a82e6f]
+  - nextra@4.3.0-alpha.21
+
+## 4.3.0-alpha.20
+
+### Patch Changes
+
+- 2b18c66: - Disable prefetch for sidebar/breadcrumb/pagination links
+  - Add extractStringsFromReactNode to extract strings from breadcrumb links and
+    pagination links
+  - nextra@4.3.0-alpha.20
+
+## 4.3.0-alpha.19
+
+### Patch Changes
+
+- 407e0c4: feat(TSDoc): add `TSDoc.noParametersContent` prop
+- Updated dependencies [407e0c4]
+  - nextra@4.3.0-alpha.19
+
+## 4.3.0-alpha.18
+
+### Patch Changes
+
+- Updated dependencies [7de40fb]
+- Updated dependencies [00f4696]
+- Updated dependencies [31ddba4]
+  - nextra@4.3.0-alpha.18
+
+## 4.3.0-alpha.17
+
+### Patch Changes
+
+- 8edc715: fix phantom scroll when footer is disabled
+  - nextra@4.3.0-alpha.17
+
+## 4.3.0-alpha.16
+
+### Patch Changes
+
+- b0dde33: Fix collapse behaviour of sidebar
+
+  - When a nested route item is active, clicking the parent route item should
+    not collapse the section.
+  - When the collapsible section is open, clicking the parent route item should
+    not cause it to collapse.
+  - Switching to another route should not trigger an unexpected reopening.
+  - nextra@4.3.0-alpha.16
+
+## 4.3.0-alpha.15
+
+### Patch Changes
+
+- b2cba90: improve TSDoc comments for `getPageMap`, `generateStaticParamsFor`
+  and `importPage` functions. Add new https://nextra.site/docs/guide/api page.
+- Updated dependencies [b2cba90]
+  - nextra@4.3.0-alpha.15
+
+## 4.3.0-alpha.14
+
+### Patch Changes
+
+- a506e0b: fix `TypeError: page.generateMetadata is not a function` when using
+  with `withSentryConfig` plugin
+- Updated dependencies [a506e0b]
+  - nextra@4.3.0-alpha.14
+
+## 4.3.0-alpha.13
+
+### Patch Changes
+
+- 47ba5f3: fix: use `em` for padding-y, padding-x and border-radius styles of
+  `<Code>` element
+
+  fix(TSDoc): for return signature without `name` return mobile card instead of
+  table
+
+  feat: use `em` instead `rem` for margins
+
+- d29469e: support Next.js 15.3.0
+- Updated dependencies [47ba5f3]
+- Updated dependencies [d29469e]
+  - nextra@4.3.0-alpha.13
+
+## 4.3.0-alpha.12
+
+### Patch Changes
+
+- 40267dc: split `TSDoc` component logic to `TSDoc` component and
+  `generateDocumentation` function
+
+  update https://nextra.site/docs/built-ins/tsdoc documentation
+
+- Updated dependencies [40267dc]
+  - nextra@4.3.0-alpha.12
+
+## 4.3.0-alpha.11
+
+### Patch Changes
+
+- 71f7b3f: Update https://nextra.site/docs/guide/search page
+
+  Fixes extra margin-top inside `Tabs.Tab`
+
+  Fix breaking `<Steps>` component numeration when there is `<Tabs>` component
+  inside
+
+- Updated dependencies [71f7b3f]
+  - nextra@4.3.0-alpha.11
+
 ## 4.3.0-alpha.10
 
 ### Minor Changes

@@ -11,7 +11,10 @@ Export your pages statically, and deploy with [Nginx](https://nginx.org),
 
 ### Configuration
 
-```js filename="next.config.mjs"
+To enable a static export, update the options in `next.config.mjs` file as
+follows:
+
+```js filename="next.config.mjs" {7-10}
 import nextra from 'nextra'
 
 /**
@@ -30,6 +33,17 @@ const withNextra = nextra({
 })
 
 export default withNextra(nextConfig)
+```
+
+### Update `postbuild` script
+
+Update the Pagefind [search engine setup](./search#add-a-postbuild-script) to
+set the correct output path:
+
+```json filename="package.json"
+"scripts": {
+  "postbuild": "pagefind --site .next/server/app --output-path out/_pagefind"
+}
 ```
 
 ### Building

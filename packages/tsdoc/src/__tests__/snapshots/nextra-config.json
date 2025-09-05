@@ -1,0 +1,131 @@
+{
+  "entries": [
+    {
+      "description": "Enable the copy button for all code blocks by default, without needing to set `copy=true` attribute in the code block metadata.
+> [!TIP]
+>
+> You could still disable the button for specific blocks using `copy=false` attribute.",
+      "name": "defaultShowCopyCode",
+      "optional": true,
+      "type": "boolean",
+    },
+    {
+      "description": "Option to enable search functionality. When enabled, it sets the `data-pagefind-body` attribute on the `<main>` element.
+> [!TIP]
+>
+> When set to `codeblocks: false`, it adds the `data-pagefind-ignore="all"` attribute to all code blocks (`<pre>` elements).",
+      "name": "search",
+      "optional": true,
+      "tags": {
+        "default": "{
+"codeblocks": false
+}",
+      },
+      "type": "boolean | { codeblocks: boolean; }",
+    },
+    {
+      "description": "Option to automatically optimizing your static image imports with the Markdown syntax.
+> [!TIP]
+>
+> Example: `![Hello](/demo.png)`.",
+      "name": "staticImage",
+      "optional": true,
+      "tags": {
+        "default": "true",
+      },
+      "type": "boolean",
+    },
+    {
+      "description": "Adds estimated reading time of `.md` and `.mdx` files using [readingTime](https://npmjs.com/package/reading-time) package.
+> [!TIP]
+>
+> The reading time is added to the front matter under the `readingTime` key.",
+      "name": "readingTime",
+      "optional": true,
+      "type": "boolean",
+    },
+    {
+      "description": "Enable LaTeX either with [KaTeX](https://katex.org) to pre-render LaTeX expressions directly in MDX or [MathJax](https://mathjax.org) to dynamically render math in the browser.",
+      "name": "latex",
+      "optional": true,
+      "type": "boolean | { renderer: "mathjax"; options?: { src?: string; config?: any; }; } | { renderer: "katex"; options: any; }",
+    },
+    {
+      "description": "Enable or disable syntax highlighting.",
+      "name": "codeHighlight",
+      "optional": true,
+      "tags": {
+        "default": "true",
+      },
+      "type": "boolean",
+    },
+    {
+      "description": "List of rehype plugins.",
+      "name": "mdxOptions.rehypePlugins",
+      "optional": true,
+      "type": "any",
+    },
+    {
+      "description": "List of remark plugins.",
+      "name": "mdxOptions.remarkPlugins",
+      "optional": true,
+      "type": "any",
+    },
+    {
+      "description": "List of recma plugins. This is a new ecosystem, currently in beta, to transform esast trees (JavaScript).",
+      "name": "mdxOptions.recmaPlugins",
+      "optional": true,
+      "type": "any",
+    },
+    {
+      "description": "Format of the file.
+- `'md'` means treat as markdown
+- `'mdx'` means treat as MDX
+- `'detect'` means try to detect the format based on file path.",
+      "name": "mdxOptions.format",
+      "optional": true,
+      "tags": {
+        "default": ""detect"",
+      },
+      "type": ""detect" | "mdx" | "md"",
+    },
+    {
+      "description": "Configuration options for [Rehype Pretty Code](https://github.com/rehype-pretty/rehype-pretty-code).",
+      "name": "mdxOptions.rehypePrettyCodeOptions",
+      "optional": true,
+      "tags": {
+        "default": "{}",
+        "remarks": "`RehypePrettyCodeOptions`",
+      },
+      "type": "RehypePrettyCodeOptions",
+    },
+    {
+      "description": "Allows you to whitelist HTML elements to be replaced with components defined in the `mdx-components.js` file.
+> [!TIP]
+>
+> By default, Nextra only replaces `<details>` and `<summary>` elements.",
+      "name": "whiteListTagsStyling",
+      "optional": true,
+      "type": "string[]",
+    },
+    {
+      "description": "Option to serve your `.md` and `.mdx` files from the `content` directory at a custom path instead of the root (`/`).",
+      "name": "contentDirBasePath",
+      "optional": true,
+      "tags": {
+        "default": ""/"",
+      },
+      "type": "string",
+    },
+    {
+      "description": "Prefixes locale to all links in the page map information. Useful for i18n when you don't want to use Nextra's `middleware` function.",
+      "name": "unstable_shouldAddLocaleToLinks",
+      "optional": true,
+      "tags": {
+        "default": "false",
+      },
+      "type": "boolean",
+    },
+  ],
+  "name": "$",
+}

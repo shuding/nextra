@@ -72,7 +72,7 @@ const IndexPage: FC = () => {
                   Next.js Link
                 </Link>{' '}
                 and{' '}
-                <Link href="https://nextjs.org/docs/basic-features/image-optimization#local-images">
+                <Link href="https://nextjs.org/docs/app/getting-started/images#local-images">
                   Next.js Image
                 </Link>{' '}
                 when possible. No slow navigation or layout shift.

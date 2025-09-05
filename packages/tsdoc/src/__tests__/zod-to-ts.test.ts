@@ -1,5 +1,8 @@
 import { reactNode } from 'nextra/schemas'
 import { z } from 'zod'
+import { LayoutPropsSchema } from '../../../nextra-theme-docs/src/schemas.js'
+import { HeadPropsSchema } from '../../../nextra/src/client/components/head.js'
+import { NextraConfigSchema } from '../../../nextra/src/server/schemas.js'
 import { generateTsFromZod } from '../../../nextra/src/server/tsdoc/zod-to-ts.js'
 
 describe('generateTsFromZod', () => {
@@ -172,8 +175,26 @@ describe('generateTsFromZod', () => {
          * Extra content after last icon.
          * @default null
          */
-        children?: "@TODO TO IMPLEMENT"
+        children?: React.ReactNode
       }"
     `)
+  })
+
+  it('should convert LayoutPropsSchema', () => {
+    return expect(
+      'interface $ ' + generateTsFromZod(LayoutPropsSchema)
+    ).toMatchFileSnapshot('./snapshots/layout-props.ts')
+  })
+  it('should convert HeadPropsSchema', () => {
+    return expect(
+      'interface $$ ' + generateTsFromZod(HeadPropsSchema)
+    ).toMatchFileSnapshot('./snapshots/head-props.ts')
+  })
+  it('should convert NextraConfigSchema and HeadPropsSchema', () => {
+    return expect(
+      `export interface NextraConfig ${generateTsFromZod(NextraConfigSchema)}
+
+export interface HeadProps ${generateTsFromZod(HeadPropsSchema)}`
+    ).toMatchFileSnapshot('../../../nextra/src/types.generated.ts')
   })
 })

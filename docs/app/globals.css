@@ -1,5 +1,8 @@
-@import 'tailwindcss';
 @import 'nextra-theme-docs/style.css';
+@import 'tailwindcss';
+/* Whitelist Tailwind CSS classes from <Bleed> TSDoc examples */
+@source inline('aspect-video');
+@source inline('py-10');
 
 @variant dark (&:where(.dark *));
 

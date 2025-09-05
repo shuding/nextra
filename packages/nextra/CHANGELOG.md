@@ -1,5 +1,341 @@
 # nextra
 
+## 4.4.0
+
+### Minor Changes
+
+- 26b1281: feat: add Copy Documentation button/dropdown feature as LLM-Optimized
+  Prompt
+
+  ![](https://private-user-images.githubusercontent.com/7361780/473206831-aa851d94-3b83-46e8-8b00-5bf06c33314f.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3NTQ0NjgwNzUsIm5iZiI6MTc1NDQ2Nzc3NSwicGF0aCI6Ii83MzYxNzgwLzQ3MzIwNjgzMS1hYTg1MWQ5NC0zYjgzLTQ2ZTgtOGIwMC01YmYwNmMzMzMxNGYucG5nP1gtQW16LUFsZ29yaXRobT1BV1M0LUhNQUMtU0hBMjU2JlgtQW16LUNyZWRlbnRpYWw9QUtJQVZDT0RZTFNBNTNQUUs0WkElMkYyMDI1MDgwNiUyRnVzLWVhc3QtMSUyRnMzJTJGYXdzNF9yZXF1ZXN0JlgtQW16LURhdGU9MjAyNTA4MDZUMDgwOTM1WiZYLUFtei1FeHBpcmVzPTMwMCZYLUFtei1TaWduYXR1cmU9MjgwZTI3YWMzODYwNjEwNTgwNGUyOTJkMDg5MzNjOGRjZWE0MWYzMWQwZmM3ZDJkMjQzMDc2ZDRjMzQ4ZTRlZSZYLUFtei1TaWduZWRIZWFkZXJzPWhvc3QifQ.C7LZXaay7uuPQsDBb3MKLrbiBWxTPM2q9nfSqUGp3_0)
+
+  > **Note**
+  >
+  > If you are using
+  > [`content` directory](https://nextra.site/docs/file-conventions/content-directory),
+  > you **must** pass the `sourceCode` prop to enable this feature.
+  >
+  > ```diff
+  > const {
+  >   default: MDXContent,
+  >   toc,
+  >   metadata,
+  > + sourceCode
+  > } = await importPage(params.mdxPath)
+  > return (
+  > - <Wrapper toc={toc} metadata={metadata}>
+  > + <Wrapper toc={toc} metadata={metadata} sourceCode={sourceCode}>
+  >     <MDXContent {...props} params={params} />
+  >   </Wrapper>
+  > )
+  > ```
+
+## 4.3.0
+
+### Minor Changes
+
+- eed8328: feat: adapt colors and icons from original GitHub alerts syntax
+
+  feat: new Callout type `important`
+
+  fix: inconsistent built-in Callout's icons size
+
+  feat: improve Callout's accessibility colors
+
+- 0831a1b: Add an `onSearch` callback to the `<Search />` component. This
+  callback, when specified, is called upon every search input change.
+- b0afee7: feat(tsdoc): add support for `@inline` tag on function parameters
+- c93fc48: update zod to v4
+
+  feat(TSDoc): rename `generateDocumentation` to `generateDefinition`
+
+  feat(Bleed): pass all props from `div` element to `Bleed`, `Callout`, `Banner`
+  container
+
+  fix(TSDoc): improve TSDoc comments for components
+
+  - `Banner`
+  - `Head`
+  - `Search`
+  - `Bleed`
+  - `Callout`
+  - `Cards`
+  - `FileTree`
+  - `Steps`
+  - `Table`
+  - `Tabs`
+  - `Playground`
+  - `TSDoc`
+  - `Layout`
+  - `Navbar`
+
+  fix(TSDoc): improve TSDoc comments for functions:
+
+  - `nextra`
+  - `generateDefinition`
+  - `useMDXComponents`
+
+- 01ac538: feat(tsdoc): support @inline tag and fix mobile overflow in <TSDoc />
+  table
+- 94b081c: feat: refactor `<Search>` component styles for improved transitions
+  and visibility
+- b5fab80: add `MDXRemote` component docs page
+  https://nextra.site/docs/built-ins/mdxremote
+- ef35ab9: accept all `ComboboxInputProps` in Nextra's `<Search />` component
+- d9dd061: update `tailwindcss` to `4.1.10` and `react-compiler-runtime` to
+  `19.1.0-rc.2`
+- c134abe: feat: improve overall accessibility, makes text/colors easier to read
+  and achieves WCAG Level AAA compliance in many places
+- 83f6c57: feat: introduce new `<TSDoc />` component
+
+  The `<TSDoc>` component from `nextra/tsdoc` generates a properties table that
+  displays:
+
+  - **Property name**
+  - **TypeScript type**
+  - **Property description** - is parsed from [TSDoc](https://tsdoc.org) inline
+    description or the `@description` tag. You can use any Markdown/MDX syntax
+    here.
+  - **Default value** - are extracted from the `@default` or `@defaultValue`
+    tag.
+  - **Permalink** - a `#` anchor link to the property row for easy reference.
+
+  More info can be found in https://nextra.site/docs/built-ins/tsdoc
+
+  > [!IMPORTANT]
+  >
+  > Huge thanks to
+  > [xyflow - Node Based UIs for React and Svelte](https://xyflow.com/?utm_source=github&utm_campaign=nextra-4.3&utm_content=changelog)
+  > for sponsoring this feature!
+
+- 07debf9: feat(TSDoc): support flattening return object fields
+
+### Patch Changes
+
+- 71f7b3f: Update https://nextra.site/docs/guide/search page
+
+  Fixes extra margin-top inside `Tabs.Tab`
+
+  Fix breaking `<Steps>` component numeration when there is `<Tabs>` component
+  inside
+
+- 47ba5f3: fix: use `em` for padding-y, padding-x and border-radius styles of
+  `<Code>` element
+
+  fix(TSDoc): for return signature without `name` return mobile card instead of
+  table
+
+  feat: use `em` instead `rem` for margins
+
+- 40267dc: split `TSDoc` component logic to `TSDoc` component and
+  `generateDocumentation` function
+
+  update https://nextra.site/docs/built-ins/tsdoc documentation
+
+- f717156: feat(TSDoc): enable `exactOptionalPropertyTypes` and
+  `strictNullChecks` in ts-morph `compilerOptions`
+- 9f449e5: fix(TSDoc): should show `null` type in properties table
+- 8ac2506: chore: bump `babel-plugin-react-compiler` and
+  `react-compiler-runtime`, remove custom pnpm patch for
+  `babel-plugin-react-compiler`
+- a6a1f97: fix(tsdoc): check `@inline` and `@remarks` tags on alias type too in
+  addition to field tags
+- fda0355: fix tsdoc File not found: /var/task/.../tsconfig.json
+- b2cba90: improve TSDoc comments for `getPageMap`, `generateStaticParamsFor`
+  and `importPage` functions. Add new https://nextra.site/docs/guide/api page.
+- f40e018: fix TSDoc error `Expected to find an alias symbol` when using
+  `@inline` comment
+- d29469e: support Next.js 15.3.0
+- 6a82e6f: - Fix: Received `false` for a non-boolean attribute `prefetch`.
+  - Allow override `next-mdx-import-source-file` in `turbopack.resolveAlias`
+    option
+- 7de40fb: Update Tailwind CSS guide to match v4 version
+  https://nextra.site/docs/advanced/tailwind-css
+- c7d25df: fix(tsdoc): should resolve `Partial` types as declared
+- 4547eb9: feat(TSDoc): add support for functions and functions with multiple
+  signatures
+- 407e0c4: feat(TSDoc): add `TSDoc.noParametersContent` prop
+- 00f4696: add https://nextra.site/api page generated with TSDoc component
+- 31ddba4: improve LaTeX docs, mention that you need apply styles for KaTeX
+  https://nextra.site/docs/advanced/latex#apply-styles
+- a506e0b: fix `TypeError: page.generateMetadata is not a function` when using
+  with `withSentryConfig` plugin
+- 9690841: Upgrade remark-reading-time to 2.0.2 in dependencies.
+
+## 4.3.0-alpha.31
+
+### Patch Changes
+
+- f40e018: fix TSDoc error `Expected to find an alias symbol` when using
+  `@inline` comment
+
+## 4.3.0-alpha.30
+
+### Minor Changes
+
+- b0afee7: feat(tsdoc): add support for `@inline` tag on function parameters
+
+## 4.3.0-alpha.29
+
+### Patch Changes
+
+- a6a1f97: fix(tsdoc): check `@inline` and `@remarks` tags on alias type too in
+  addition to field tags
+
+## 4.3.0-alpha.28
+
+### Minor Changes
+
+- ef35ab9: accept all `ComboboxInputProps` in Nextra's `<Search />` component
+
+## 4.3.0-alpha.27
+
+### Minor Changes
+
+- 01ac538: feat(tsdoc): support @inline tag and fix mobile overflow in <TSDoc />
+  table
+
+## 4.3.0-alpha.26
+
+### Patch Changes
+
+- c7d25df: fix(tsdoc): should resolve `Partial` types as declared
+
+## 4.3.0-alpha.25
+
+### Minor Changes
+
+- d9dd061: update `tailwindcss` to `4.1.10` and `react-compiler-runtime` to
+  `19.1.0-rc.2`
+
+## 4.3.0-alpha.24
+
+### Minor Changes
+
+- 0831a1b: Add an `onSearch` callback to the `<Search />` component. This
+  callback, when specified, is called upon every search input change.
+
+## 4.3.0-alpha.23
+
+### Patch Changes
+
+- 9690841: Upgrade remark-reading-time to 2.0.2 in dependencies.
+
+## 4.3.0-alpha.22
+
+### Minor Changes
+
+- c93fc48: update zod to v4
+
+  feat(TSDoc): rename `generateDocumentation` to `generateDefinition`
+
+  feat(Bleed): pass all props from `div` element to `Bleed`, `Callout`, `Banner`
+  container
+
+  fix(TSDoc): improve TSDoc comments for components
+
+  - `Banner`
+  - `Head`
+  - `Search`
+  - `Bleed`
+  - `Callout`
+  - `Cards`
+  - `FileTree`
+  - `Steps`
+  - `Table`
+  - `Tabs`
+  - `Playground`
+  - `TSDoc`
+  - `Layout`
+  - `Navbar`
+
+  fix(TSDoc): improve TSDoc comments for functions:
+
+  - `nextra`
+  - `generateDefinition`
+  - `useMDXComponents`
+
+- b5fab80: add `MDXRemote` component docs page
+  https://nextra.site/docs/built-ins/mdxremote
+
+## 4.3.0-alpha.21
+
+### Patch Changes
+
+- 6a82e6f: - Fix: Received `false` for a non-boolean attribute `prefetch`.
+  - Allow override `next-mdx-import-source-file` in `turbopack.resolveAlias`
+    option
+
+## 4.3.0-alpha.20
+
+## 4.3.0-alpha.19
+
+### Patch Changes
+
+- 407e0c4: feat(TSDoc): add `TSDoc.noParametersContent` prop
+
+## 4.3.0-alpha.18
+
+### Patch Changes
+
+- 7de40fb: Update Tailwind CSS guide to match v4 version
+  https://nextra.site/docs/advanced/tailwind-css
+- 00f4696: add https://nextra.site/api page generated with TSDoc component
+- 31ddba4: improve LaTeX docs, mention that you need apply styles for KaTeX
+  https://nextra.site/docs/advanced/latex#apply-styles
+
+## 4.3.0-alpha.17
+
+## 4.3.0-alpha.16
+
+## 4.3.0-alpha.15
+
+### Patch Changes
+
+- b2cba90: improve TSDoc comments for `getPageMap`, `generateStaticParamsFor`
+  and `importPage` functions. Add new https://nextra.site/docs/guide/api page.
+
+## 4.3.0-alpha.14
+
+### Patch Changes
+
+- a506e0b: fix `TypeError: page.generateMetadata is not a function` when using
+  with `withSentryConfig` plugin
+
+## 4.3.0-alpha.13
+
+### Patch Changes
+
+- 47ba5f3: fix: use `em` for padding-y, padding-x and border-radius styles of
+  `<Code>` element
+
+  fix(TSDoc): for return signature without `name` return mobile card instead of
+  table
+
+  feat: use `em` instead `rem` for margins
+
+- d29469e: support Next.js 15.3.0
+
+## 4.3.0-alpha.12
+
+### Patch Changes
+
+- 40267dc: split `TSDoc` component logic to `TSDoc` component and
+  `generateDocumentation` function
+
+  update https://nextra.site/docs/built-ins/tsdoc documentation
+
+## 4.3.0-alpha.11
+
+### Patch Changes
+
+- 71f7b3f: Update https://nextra.site/docs/guide/search page
+
+  Fixes extra margin-top inside `Tabs.Tab`
+
+  Fix breaking `<Steps>` component numeration when there is `<Tabs>` component
+  inside
+
 ## 4.3.0-alpha.10
 
 ## 4.3.0-alpha.9

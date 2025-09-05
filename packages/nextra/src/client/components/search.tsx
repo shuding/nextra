@@ -4,7 +4,8 @@ import {
   Combobox,
   ComboboxInput,
   ComboboxOption,
-  ComboboxOptions
+  ComboboxOptions,
+  type ComboboxInputProps
 } from '@headlessui/react'
 import cn from 'clsx'
 import { addBasePath } from 'next/dist/client/add-base-path'
@@ -47,7 +48,12 @@ type PagefindResult = {
   url: string
 }
 
-type SearchProps = {
+type InputProps = Omit<
+  ComboboxInputProps,
+  'className' | 'onChange' | 'onFocus' | 'onBlur' | 'value' | 'placeholder'
+>
+
+interface SearchProps extends InputProps {
   /**
    * Not found text.
    * @default 'No results found.'
@@ -68,9 +74,43 @@ type SearchProps = {
    * @default 'Search documentation…'
    */
   placeholder?: string
-  /** CSS class name. */
+  /** Input container CSS class name. */
   className?: string
   searchOptions?: PagefindSearchOptions
+  /**
+   * Callback function that triggers whenever the search input changes.
+   *
+   * This prop is **not serializable** and cannot be used directly in a server-side layout.
+   *
+   * To use this prop, wrap the component in a **client-side** wrapper. Example:
+   *
+   * ```tsx filename="search-with-callback.jsx"
+   * 'use client'
+   *
+   * import { Search } from 'nextra/components'
+   *
+   * export function SearchWithCallback() {
+   *   return (
+   *     <Search
+   *       onSearch={query => {
+   *         console.log('Search query:', query)
+   *       }}
+   *     />
+   *   )
+   * }
+   * ```
+   *
+   * Then pass the wrapper to the layout:
+   *
+   * ```tsx filename="app/layout.jsx"
+   * import { SearchWithCallback } from '../path/to/your/search-with-callback'
+   * // ...
+   * <Layout search={<SearchWithCallback />} {...rest} />
+   * ```
+   *
+   * @param query - The current search input string.
+   */
+  onSearch?: (query: string) => void
 }
 
 const INPUTS = new Set(['INPUT', 'SELECT', 'BUTTON', 'TEXTAREA'])
@@ -89,13 +129,24 @@ const DEV_SEARCH_NOTICE = (
   </>
 )
 
+/**
+ * A built-in search component provides a seamless and fast search
+ * experience out of the box. Under the hood, it leverages the
+ * [Pagefind package](https://pagefind.app) — a fully client-side search engine optimized for static
+ * sites. Pagefind indexes your content at build time and enables highly performant,
+ * zero-JavaScript-dependency searches at runtime.
+ *
+ * @see [Nextra search setup guide](https://nextra.site/docs/guide/search)
+ */
 export const Search: FC<SearchProps> = ({
   className,
   emptyResult = 'No results found.',
   errorText = 'Failed to load search index.',
   loading = 'Loading…',
   placeholder = 'Search documentation…',
-  searchOptions
+  searchOptions,
+  onSearch,
+  ...props
 }) => {
   const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState<ReactElement | string>('')
@@ -215,6 +266,7 @@ export const Search: FC<SearchProps> = ({
   const handleChange = (event: SyntheticEvent<HTMLInputElement>) => {
     const { value } = event.currentTarget
     setSearch(value)
+    onSearch?.(value)
   }
 
   const handleSelect = (searchResult: PagefindResult | null) => {
@@ -246,8 +298,11 @@ export const Search: FC<SearchProps> = ({
         )}
       >
         <ComboboxInput
-          ref={inputRef}
           spellCheck={false}
+          autoComplete="off"
+          type="search"
+          {...props}
+          ref={inputRef}
           className={({ focus }) =>
             cn(
               'x:rounded-lg x:px-3 x:py-2 x:transition-all',
@@ -261,8 +316,6 @@ export const Search: FC<SearchProps> = ({
               'x:[&::-webkit-search-cancel-button]:appearance-none'
             )
           }
-          autoComplete="off"
-          type="search"
           onChange={handleChange}
           onFocus={handleFocus}
           onBlur={handleFocus}
@@ -298,7 +351,7 @@ export const Search: FC<SearchProps> = ({
       >
         {error ? (
           <>
-            <InformationCircleIcon height="20" className="x:shrink-0" />
+            <InformationCircleIcon height="1.25em" className="x:shrink-0" />
             <div className="x:grid">
               <b className="x:mb-2">{errorText}</b>
               {error}

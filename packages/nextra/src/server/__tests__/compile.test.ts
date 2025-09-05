@@ -16,7 +16,7 @@ describe('Compile', () => {
 export default foo`,
       { mdxOptions }
     )
-    expect(clean(rawJs)).resolves.toMatchInlineSnapshot(`
+    return expect(clean(rawJs)).resolves.toMatchInlineSnapshot(`
       "/*@jsxRuntime automatic*/
       /*@jsxImportSource react*/
       import { HOC_MDXWrapper } from 'nextra/setup-page'
@@ -24,6 +24,7 @@ export default foo`,
       export const metadata = {}
       import foo from './foo'
       const MDXLayout = foo
+      export const sourceCode = "import foo from './foo'\\n      \\n## heading\\n\\nexport default foo"
       function useTOC(props) {
         return [
           {
@@ -51,7 +52,8 @@ export default foo`,
       }
       export default HOC_MDXWrapper(MDXContent, {
         metadata,
-        toc
+        toc,
+        sourceCode
       })"
     `)
   })
@@ -62,12 +64,13 @@ export default foo`,
 export { foo as default } from './foo'`,
       { mdxOptions }
     )
-    expect(clean(rawJs)).resolves.toMatchInlineSnapshot(`
+    return expect(clean(rawJs)).resolves.toMatchInlineSnapshot(`
       "/*@jsxRuntime automatic*/
       /*@jsxImportSource react*/
       import { useMDXComponents as _provideComponents } from 'next-mdx-import-source-file'
       export const metadata = {}
       import { foo as MDXLayout } from './foo'
+      export const sourceCode = "## heading\\n      \\nexport { foo as default } from './foo'"
       function useTOC(props) {
         return [
           {
@@ -94,15 +97,15 @@ export { foo as default } from './foo'`,
 describe('Process heading', () => {
   it('code-h1', async () => {
     const rawJs = await compileMdx('# `codegen.yml`', { mdxOptions })
-    expect(clean(rawJs)).resolves.toMatchSnapshot()
+    return expect(clean(rawJs)).resolves.toMatchSnapshot()
   })
   it('code-with-text-h1', async () => {
     const rawJs = await compileMdx('# `codegen.yml` file', { mdxOptions })
-    expect(clean(rawJs)).resolves.toMatchSnapshot()
+    return expect(clean(rawJs)).resolves.toMatchSnapshot()
   })
   it('static-h1', async () => {
     const rawJs = await compileMdx('# Hello World', { mdxOptions })
-    expect(clean(rawJs)).resolves.toMatchSnapshot()
+    return expect(clean(rawJs)).resolves.toMatchSnapshot()
   })
   it('dynamic-h1', async () => {
     const rawJs = await compileMdx(
@@ -118,11 +121,11 @@ export const TagName = () => {
     `,
       { mdxOptions }
     )
-    expect(clean(rawJs)).resolves.toMatchSnapshot()
+    return expect(clean(rawJs)).resolves.toMatchSnapshot()
   })
   it('no-h1', async () => {
     const rawJs = await compileMdx('## H2', { mdxOptions })
-    expect(clean(rawJs)).resolves.toMatchSnapshot()
+    return expect(clean(rawJs)).resolves.toMatchSnapshot()
   })
   it('use custom heading id', async () => {
     const rawJs = await compileMdx(
@@ -136,13 +139,15 @@ export const TagName = () => {
 ###### bar Qux [#]`,
       { mdxOptions }
     )
-    expect(clean(rawJs)).resolves.toMatchInlineSnapshot(`
+    return expect(clean(rawJs)).resolves.toMatchInlineSnapshot(`
       "/*@jsxRuntime automatic*/
       /*@jsxImportSource react*/
       import { useMDXComponents as _provideComponents } from 'next-mdx-import-source-file'
       export const metadata = {
         title: 'My Header'
       }
+      export const sourceCode =
+        '# My Header [#test-id]\\n## Some extra space [#extra-space]&nbsp;\\n### Some extra space in heading    [#extra-space-in-heading]\\n### nospace[#without-space]\\n#### foo [#другой язык]\\n##### bar Baz []\\n###### bar Qux [#]'
       function useTOC(props) {
         return [
           {
@@ -212,11 +217,12 @@ export const TagName = () => {
   })
   it('use github-slugger', async () => {
     const rawJs = await compileMdx('### My Header', { mdxOptions })
-    expect(clean(rawJs)).resolves.toMatchInlineSnapshot(`
+    return expect(clean(rawJs)).resolves.toMatchInlineSnapshot(`
       "/*@jsxRuntime automatic*/
       /*@jsxImportSource react*/
       import { useMDXComponents as _provideComponents } from 'next-mdx-import-source-file'
       export const metadata = {}
+      export const sourceCode = '### My Header'
       function useTOC(props) {
         return [
           {
@@ -273,7 +279,7 @@ import Last from './three.mdx'
 `,
       { mdxOptions, latex: true }
     )
-    expect(clean(rawJs)).resolves.toMatchInlineSnapshot(`
+    return expect(clean(rawJs)).resolves.toMatchInlineSnapshot(`
       "/*@jsxRuntime automatic*/
       /*@jsxImportSource react*/
       import { useMDXComponents as _provideComponents } from 'next-mdx-import-source-file'
@@ -282,6 +288,8 @@ import Last from './three.mdx'
       import FromMarkdown, { toc as toc1 } from './two.md'
       import IgnoreMe from './foo'
       import Last, { toc as toc2 } from './three.mdx'
+      export const sourceCode =
+        "import FromMdx from './one.mdx'\\nimport FromMarkdown from './two.md'\\nimport IgnoreMe from './foo'\\n\\n## ❤️\\n\\n<FromMdx />\\n\\n## ✅\\n\\n<FromMarkdown />\\n\\nimport Last from './three.mdx'\\n\\n<Last />\\n\\n<IgnoreMe />\\n\\n## 👋\\n\\n## kek <Kek />\\n\\n## \`try\` me\\n\\n## latex $l$\\n\\n## {'interpolate'} {1} {true} {null} {variable}"
       function useTOC(props) {
         const _components = {
             annotation: 'annotation',
@@ -614,11 +622,13 @@ describe('Code block', () => {
       const rawJs = await compileMdx(rawMdx + rawMdx, {
         mdxOptions
       })
-      expect(clean(rawJs)).resolves.toMatchInlineSnapshot(`
+      return expect(clean(rawJs)).resolves.toMatchInlineSnapshot(`
         "/*@jsxRuntime automatic*/
         /*@jsxImportSource react*/
         import { useMDXComponents as _provideComponents } from 'next-mdx-import-source-file'
         export const metadata = {}
+        export const sourceCode =
+          "<Tabs items={['pnpm', 'npm', 'yarn']} defaultIndex=\\"1\\">\\n  <Tabs.Tab>**pnpm**: Fast, disk space efficient package manager.</Tabs.Tab>\\n  <Tabs.Tab>**npm** is a package manager for the JavaScript programming language.</Tabs.Tab>\\n  <Tabs.Tab>**Yarn** is a software packaging system.</Tabs.Tab>\\n</Tabs>\\n<Tabs items={['pnpm', 'npm', 'yarn']} defaultIndex=\\"1\\">\\n  <Tabs.Tab>**pnpm**: Fast, disk space efficient package manager.</Tabs.Tab>\\n  <Tabs.Tab>**npm** is a package manager for the JavaScript programming language.</Tabs.Tab>\\n  <Tabs.Tab>**Yarn** is a software packaging system.</Tabs.Tab>\\n</Tabs>"
         function useTOC(props) {
           return []
         }
@@ -752,11 +762,13 @@ describe('Code block', () => {
 </details>
 `
     const rawJs = await compileMdx(rawMdx, { mdxOptions })
-    expect(clean(rawJs)).resolves.toMatchInlineSnapshot(`
+    return expect(clean(rawJs)).resolves.toMatchInlineSnapshot(`
       "/*@jsxRuntime automatic*/
       /*@jsxImportSource react*/
       import { useMDXComponents as _provideComponents } from 'next-mdx-import-source-file'
       export const metadata = {}
+      export const sourceCode =
+        '<details>\\n  <summary>foo</summary>\\n  bar\\n</details>\\n<details>\\n  <summary>foo</summary>\\n  bar\\n</details>'
       function useTOC(props) {
         return []
       }

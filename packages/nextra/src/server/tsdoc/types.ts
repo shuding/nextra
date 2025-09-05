@@ -1,8 +1,4 @@
 export type GeneratedType = {
-  /** Type name. */
-  name: string
-  /** Type description. */
-  description?: string
   /** Type fields. */
   entries: TypeField[]
 }
@@ -14,13 +10,26 @@ export type ReturnField = {
   type: string
 }
 
-export type GeneratedFunction = {
-  /** Function name. */
+export type GeneratedDefinition = {
+  /**
+   * Where type definition is located on disk.
+   */
+  filePath?: string
+  /**
+   * Definition name.
+   */
   name: string
-  /** Function description. */
+  /**
+   * Definition description.
+   */
   description?: string
-  /** Function tags. */
+  /**
+   * [TSDoc tags](https://tsdoc.org/pages/spec/tag_kinds).
+   */
   tags?: Tags
+}
+
+export type GeneratedFunction = {
   signatures: {
     /** Function parameters. */
     params: TypeField[]

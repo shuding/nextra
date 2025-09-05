@@ -3,23 +3,20 @@ sidebarTitle: Layout
 ---
 
 import { ToggleVisibilitySection } from 'components/toggle-visibility-section'
-import { generateTsFromZod } from 'nextra/tsdoc'
-import { LayoutPropsSchema } from 'private-next-root-dir/../packages/nextra-theme-docs/src/layout'
-
-export const layoutProps = generateTsFromZod(LayoutPropsSchema)
 
 export function PartialTSDoc({ flattened, props }) {
   return (
-    <TSDoc
+    <APIDocs
       flattened={flattened}
       code={`
-type $ = Pick<${layoutProps}, ${props.map(prop => JSON.stringify(prop)).join('|')}>
+import { Layout } from 'nextra-theme-docs'
+type $ = Pick<React.ComponentProps<typeof Layout>, ${props.map(prop => JSON.stringify(prop)).join('|')}>
 export default $`}
     />
   )
 }
 
-# `<Layout>` Component
+# Layout Component
 
 The theme is configured with the `<Layout>` component. You should pass your
 config options as Layout's `props`, for example:

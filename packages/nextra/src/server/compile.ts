@@ -25,6 +25,7 @@ import {
 import {
   remarkAssignFrontMatter,
   remarkCustomHeadingId,
+  remarkExportSourceCode,
   remarkHeadings,
   remarkLinkRewrite,
   remarkMdxDisableExplicitJsx,
@@ -54,15 +55,29 @@ type CompileMdxOptions = Pick<
   | 'codeHighlight'
   | 'whiteListTagsStyling'
 > & {
+  /** @default {} */
   mdxOptions: MdxOptions
+  /** @default '' */
   filePath: string
   useCachedCompiler: boolean
+  /** @default false */
   isPageImport: boolean
   lastCommitTime: number
 }
 
+/**
+ * @example
+ * ```ts
+ * // Usage with MDXRemote
+ * import { compileMdx } from 'nextra/compile'
+ * import { MDXRemote } from 'nextra/mdx-remote'
+ *
+ * const rawJs = await compileMdx(rawMdx)
+ * const content = <MDXRemote compiledSource={rawJs} components={...} scope={...} />
+ * ```
+ */
 export async function compileMdx(
-  source: string,
+  rawMdx: string,
   {
     staticImage,
     search,
@@ -92,7 +107,7 @@ export async function compileMdx(
   const format =
     _format === 'detect' ? (filePath.endsWith('.mdx') ? 'mdx' : 'md') : _format
 
-  const fileCompatible = filePath ? { value: source, path: filePath } : source
+  const fileCompatible = filePath ? { value: rawMdx, path: filePath } : rawMdx
 
   const isRemoteContent = outputFormat === 'function-body'
 
@@ -160,7 +175,8 @@ export async function compileMdx(
             excludeExternalLinks: true
           }
         ] satisfies Pluggable,
-        remarkSmartypants
+        remarkSmartypants,
+        [remarkExportSourceCode, { sourceCode: rawMdx }] satisfies Pluggable
       ].filter(v => !!v),
       rehypePlugins: [
         ...(rehypePlugins || []),

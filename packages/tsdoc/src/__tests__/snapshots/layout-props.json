@@ -1,0 +1,249 @@
+{
+  "entries": [
+    {
+      "description": "Rendered [`<Banner>` component](/docs/built-ins/banner). E.g. `<Banner {...bannerProps} />`",
+      "name": "banner",
+      "optional": true,
+      "type": "React.ReactNode",
+    },
+    {
+      "name": "children",
+      "type": "React.ReactNode",
+    },
+    {
+      "description": "Show or hide the dark mode select button.",
+      "name": "darkMode",
+      "optional": true,
+      "tags": {
+        "default": "true",
+      },
+      "type": "boolean",
+    },
+    {
+      "description": "URL of the documentation repository.",
+      "name": "docsRepositoryBase",
+      "optional": true,
+      "tags": {
+        "default": ""https://github.com/shuding/nextra"",
+      },
+      "type": "string",
+    },
+    {
+      "description": "Content of the edit link.",
+      "name": "editLink",
+      "optional": true,
+      "tags": {
+        "default": ""Edit this page"",
+      },
+      "type": "React.ReactNode",
+    },
+    {
+      "description": "Content of the feedback link.",
+      "name": "feedback.content",
+      "optional": true,
+      "tags": {
+        "default": ""Question? Give us feedback"",
+      },
+      "type": "React.ReactNode",
+    },
+    {
+      "description": "Labels that can be added to the new created issue.",
+      "name": "feedback.labels",
+      "optional": true,
+      "tags": {
+        "default": ""feedback"",
+      },
+      "type": "string",
+    },
+    {
+      "description": "Feedback link URL.
+
+By default, it's a link to the issue creation form of the docs repository, with the current page title prefilled:
+[example](https://github.com/shuding/nextra/issues/new?title=Feedback%20for%20%E2%80%9CTheme%20Configuration%E2%80%9D&labels=feedback).",
+      "name": "feedback.link",
+      "optional": true,
+      "type": "string",
+    },
+    {
+      "description": "Rendered [`<Footer>` component](/docs/docs-theme/built-ins/footer). E.g. `<Footer {...footerProps} />`",
+      "name": "footer",
+      "optional": true,
+      "type": "React.ReactNode",
+    },
+    {
+      "description": "Options to configure the language dropdown for [the i18n docs website](/docs/guide/i18n).",
+      "name": "i18n",
+      "optional": true,
+      "tags": {
+        "default": "[]",
+      },
+      "type": "{ locale: string; name: string; }[]",
+    },
+    {
+      "description": "Component to render the last updated info.",
+      "name": "lastUpdated",
+      "optional": true,
+      "tags": {
+        "default": "<LastUpdated />",
+      },
+      "type": "React.ReactElement",
+    },
+    {
+      "description": "Rendered [`<Navbar>` component](/docs/docs-theme/built-ins/navbar). E.g. `<Navbar {...navbarProps} />`",
+      "name": "navbar",
+      "optional": true,
+      "type": "React.ReactNode",
+    },
+    {
+      "description": "Enable or disable navigation link.",
+      "name": "navigation",
+      "optional": true,
+      "tags": {
+        "default": "true",
+      },
+      "type": "boolean | { next: boolean; prev: boolean; }",
+    },
+    {
+      "name": "nextThemes.attribute",
+      "optional": true,
+      "tags": {
+        "default": ""class"",
+      },
+      "type": ""class" | `data-${string}` | ("class" | `data-${string}`)[]",
+    },
+    {
+      "name": "nextThemes.defaultTheme",
+      "optional": true,
+      "tags": {
+        "default": ""system"",
+      },
+      "type": "string",
+    },
+    {
+      "name": "nextThemes.disableTransitionOnChange",
+      "optional": true,
+      "tags": {
+        "default": "true",
+      },
+      "type": "boolean",
+    },
+    {
+      "name": "nextThemes.forcedTheme",
+      "optional": true,
+      "type": "string",
+    },
+    {
+      "name": "nextThemes.storageKey",
+      "optional": true,
+      "tags": {
+        "default": ""theme"",
+      },
+      "type": "string",
+    },
+    {
+      "description": "Page map list. Result of `getPageMap(route = '/')` call.",
+      "name": "pageMap",
+      "type": "PageMapItem[]",
+    },
+    {
+      "description": "Rendered [`<Search>` component](/docs/built-ins/search). E.g. `<Search {...searchProps} />`",
+      "name": "search",
+      "optional": true,
+      "tags": {
+        "default": "<Search />",
+      },
+      "type": "React.ReactNode",
+    },
+    {
+      "description": "If `true`, automatically collapse inactive folders above `defaultMenuCollapseLevel`.",
+      "name": "sidebar.autoCollapse",
+      "optional": true,
+      "type": "boolean",
+    },
+    {
+      "description": "Specifies the folder level at which the menu on the left is collapsed by default.",
+      "name": "sidebar.defaultMenuCollapseLevel",
+      "optional": true,
+      "tags": {
+        "default": "2",
+      },
+      "type": "number",
+    },
+    {
+      "description": "Hide/show sidebar by default.",
+      "name": "sidebar.defaultOpen",
+      "optional": true,
+      "tags": {
+        "default": "true",
+      },
+      "type": "boolean",
+    },
+    {
+      "description": "Hide/show sidebar toggle button.",
+      "name": "sidebar.toggleButton",
+      "optional": true,
+      "tags": {
+        "default": "true",
+      },
+      "type": "boolean",
+    },
+    {
+      "name": "themeSwitch.dark",
+      "optional": true,
+      "tags": {
+        "default": ""Dark"",
+      },
+      "type": "string",
+    },
+    {
+      "name": "themeSwitch.light",
+      "optional": true,
+      "tags": {
+        "default": ""Light"",
+      },
+      "type": "string",
+    },
+    {
+      "name": "themeSwitch.system",
+      "optional": true,
+      "tags": {
+        "default": ""System"",
+      },
+      "type": "string",
+    },
+    {
+      "description": "Text of back to top button.",
+      "name": "toc.backToTop",
+      "optional": true,
+      "tags": {
+        "default": ""Scroll to top"",
+      },
+      "type": "React.ReactNode",
+    },
+    {
+      "description": "Display extra content below the TOC content.",
+      "name": "toc.extraContent",
+      "optional": true,
+      "type": "React.ReactNode",
+    },
+    {
+      "description": "Float the TOC next to the content.",
+      "name": "toc.float",
+      "optional": true,
+      "tags": {
+        "default": "true",
+      },
+      "type": "boolean",
+    },
+    {
+      "description": "Title of the TOC sidebar.",
+      "name": "toc.title",
+      "optional": true,
+      "tags": {
+        "default": ""On This Page"",
+      },
+      "type": "React.ReactNode",
+    },
+  ],
+  "name": "$",
+}

@@ -3,25 +3,79 @@
 import { useEffect, useState } from 'react'
 import type { FC, ReactElement } from 'react'
 import { evaluate } from '../evaluate.js'
-import { CrossCircledIcon } from '../icons/index.js'
-import { Code } from '../mdx-components/code.js'
-import { Pre } from '../mdx-components/pre/index.js'
 import type { MDXRemoteProps } from '../mdx-remote.js'
+import { Callout } from './callout.js'
 
-export const Playground: FC<
-  {
-    /**
-     * String with source MDX.
-     * @example '# hello world <br /> nice to see you'
-     */
-    source: string
-    /**
-     * Fallback component for loading.
-     * @default null
-     */
-    fallback?: ReactElement | null
-  } & Pick<MDXRemoteProps, 'components' | 'scope'>
-> = ({ source, fallback = null, components, scope }) => {
+type PlaygroundProps = {
+  /**
+   * String with source MDX.
+   * @example '# hello world <br /> nice to see you'
+   */
+  source: string
+  /**
+   * Fallback component for loading.
+   * @default null
+   */
+  fallback?: ReactElement | null
+} & Pick<MDXRemoteProps, 'components' | 'scope'>
+
+/**
+ * A built-in component lets you write Nextra-compatible MDX that renders only on the client.
+ * @example
+ * <PlaygroundDemo />
+ *
+ * @usage
+ * ```mdx filename="Basic Usage"
+ * import { Playground } from 'nextra/components'
+ *
+ * # Playground
+ *
+ * Below is a playground component. It mixes into the rest of your MDX perfectly.
+ *
+ * <Playground
+ *   source="## Hello world"
+ *   components={{ h2: props => <h2 {...props} className="myClass" /> }}
+ * />
+ * ```
+ *
+ * You may also specify a fallback component like so:
+ *
+ * ```mdx filename="Usage with Fallback"
+ * import { Playground } from 'nextra/components'
+ *
+ * <Playground
+ *   source="## Hello world"
+ *   components={{ h2: props => <h2 {...props} className="myClass" /> }}
+ *   fallback={<div>Loading playground...</div>}
+ * />
+ * ```
+ *
+ * ### Avoiding unstyled outputs
+ *
+ * To prevent unstyled elements, import `useMDXComponents` from your
+ * `mdx-components` file. Call this function and pass the returned components to
+ * the `components` prop. You can also include your custom components as the first
+ * argument:
+ *
+ * ```mdx {1,6-8}
+ * import { Playground } from 'nextra/components'
+ * import { useMDXComponents } from '../path/to/my/mdx-components'
+ *
+ * <Playground
+ *   source="## Hello world"
+ *   components={useMDXComponents({
+ *     h2: props => <h2 {...props} className="myClass" />
+ *   })}
+ *   fallback={<div>Loading playground...</div>}
+ * />
+ * ```
+ */
+export const Playground: FC<PlaygroundProps> = ({
+  source,
+  fallback = null,
+  components,
+  scope
+}) => {
   const [compiledSource, setCompiledSource] = useState('')
   const [error, setError] = useState<unknown>()
 
@@ -43,21 +97,13 @@ export const Playground: FC<
 
   if (error) {
     return (
-      <div className="x:[&_svg]:text-red-500">
-        <Pre
-          data-filename="Could not compile code"
-          icon={<CrossCircledIcon height="16" className="x:shrink-0" />}
-          className="x:whitespace-pre-wrap"
-        >
-          <Code>
-            <span>
-              {error instanceof Error
-                ? `${error.name}: ${error.message}`
-                : String(error)}
-            </span>
-          </Code>
-        </Pre>
-      </div>
+      <Callout type="error">
+        <b>Could not compile code</b>
+        <br />
+        {error instanceof Error
+          ? `${error.name}: ${error.message}`
+          : String(error)}
+      </Callout>
     )
   }
 

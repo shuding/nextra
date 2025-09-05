@@ -8,27 +8,39 @@ import {
   FolderTreeIcon,
   IdCardIcon,
   OneIcon,
-  TableIcon,
-  WarningIcon
+  TableIcon
 } from '@components/icons'
-import { Cards } from 'nextra/components'
-import { MDXRemote } from 'nextra/mdx-remote'
-import { createIndexPage, getPageMap } from 'nextra/page-map'
+import { Callout } from 'nextra/components'
+import { GitHubWarningIcon } from 'nextra/icons'
+import { OverviewPage } from '../../_components/overview-page'
+import { getEnhancedPageMap } from '../../../components/get-page-map'
 
-# Built-ins
+# Built-Ins
+
+<Callout type="info">
+  This API reference is automatically generated from the catch-all route file
+  `/docs/built-ins/[name]/page.tsx` using the new [Nextra `<TSDoc />`
+  component](/docs/built-ins/tsdoc).
+</Callout>
 
 Nextra includes a couple of built-in components that you can use to better style
 your content:
 
-<MDXRemote
-  compiledSource={await createIndexPage(await getPageMap('/docs/built-ins'))}
-  components={{
-    Cards,
-    WarningIcon,
-    CardsIcon,
+{/* `pageMap` prop will be removed once Nextra will add dynamic routes in pageMap */}
+
+<OverviewPage
+  filePath={metadata.filePath}
+  pageMap={
+    (await getEnhancedPageMap())
+      .find(o => o.name === 'docs')
+      .children.find(o => o.name === 'built-ins').children
+  }
+  icons={{
+    WarningIcon: GitHubWarningIcon,
     IdCardIcon,
-    OneIcon,
     FolderTreeIcon,
-    TableIcon
+    OneIcon,
+    TableIcon,
+    CardsIcon
   }}
 />

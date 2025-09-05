@@ -1,16 +1,20 @@
 import type { Heading as MDASTHeading } from 'mdast'
-import type { Metadata, NextConfig } from 'next'
+import type { Metadata } from 'next'
 import type { FC, ReactElement, ReactNode } from 'react'
 import type { z } from 'zod'
 import type {
-  mathJaxOptionsSchema,
+  MathJaxOptionsSchema,
   menuSchema,
   metaSchema,
-  nextraConfigSchema,
+  NextraConfigSchema,
   separatorItemSchema
 } from './server/schemas.js'
 
-export interface LoaderOptions extends z.infer<typeof nextraConfigSchema> {
+export type { NextraConfig } from './types.generated.js'
+
+type NextraConfigFromZod = z.infer<typeof NextraConfigSchema>
+
+export interface LoaderOptions extends NextraConfigFromZod {
   isPageImport?: boolean
   locales: string[]
   contentDir?: string
@@ -90,40 +94,55 @@ export type ReadingTime = {
   words: number
 }
 
-export type NextraConfig = z.input<typeof nextraConfigSchema>
+export type MathJaxOptions = z.infer<typeof MathJaxOptionsSchema>
 
-export type MathJaxOptions = z.infer<typeof mathJaxOptionsSchema>
-
-export type Nextra = (
-  nextraConfig: NextraConfig
-) => (nextConfig: NextConfig) => NextConfig
-
-export type MDXWrapper = FC<{
-  toc: Heading[]
-  children: ReactNode
-  metadata: $NextraMetadata
-  bottomContent?: ReactNode
-}>
+export type MDXWrapper = FC<
+  {
+    children: ReactNode
+    bottomContent?: ReactNode
+  } & Omit<EvaluateResult, 'default'>
+>
 
 export type MetaRecord = Record<string, z.infer<typeof metaSchema>>
 
 export type SeparatorItem = z.infer<typeof separatorItemSchema>
 export type MenuItem = z.infer<typeof menuSchema>
 
-// Copied from https://github.com/CloudCannon/pagefind/blob/2a0aa90cfb78bb8551645ac9127a1cd49cf54add/pagefind_web_js/types/index.d.ts#L72-L82
-/** Options that can be passed to pagefind.search() */
+/**
+ * Options that can be passed to `pagefind.search()`.
+ * @remarks Copied from https://github.com/CloudCannon/pagefind/blob/2a0aa90cfb78bb8551645ac9127a1cd49cf54add/pagefind_web_js/types/index.d.ts#L72-L82
+ */
 export type PagefindSearchOptions = {
-  /** If set, this call will load all assets but return before searching. Prefer using pagefind.preload() instead */
+  /**
+   * If set, this call will load all assets but return before searching. Prefer using `pagefind.preload()` instead.
+   */
   preload?: boolean
-  /** Add more verbose console logging for this search query */
+  /**
+   * Add more verbose console logging for this search query.
+   */
   verbose?: boolean
-  /** The set of filters to execute with this search. Input type is extremely flexible, see the filtering docs for details */
+  /**
+   * The set of filters to execute with this search. Input type is extremely flexible, see the filtering docs for details.
+   */
   filters?: object
-  /** The set of sorts to use for this search, instead of relevancy */
+  /**
+   * The set of sorts to use for this search, instead of relevancy.
+   */
   sort?: object
 }
 
 export type NextraMetadata = Metadata & {
   asIndexPage?: boolean
   sidebarTitle?: string
+}
+
+export type EvaluateResult = {
+  /** The MDX component to render. */
+  default: FC<any>
+  /** Table of contents list. */
+  toc: Heading[]
+  /** Page's front matter or `metadata` object including `title`, `description`, etc. */
+  metadata: $NextraMetadata
+  /** Raw MDX source code */
+  sourceCode: string
 }

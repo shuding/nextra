@@ -1,12 +1,12 @@
+import { getEnhancedPageMap } from '@components/get-page-map'
 import { NextraLogo, VercelLogo } from '@components/icons'
 import cn from 'clsx'
 import type { Metadata } from 'next'
 import NextImage from 'next/image'
 import { Footer, Layout, Link, Navbar } from 'nextra-theme-docs'
 import { Anchor, Banner, Head } from 'nextra/components'
-import { getPageMap } from 'nextra/page-map'
 import type { FC, ReactNode } from 'react'
-import xyflow from './showcase/_logos/xyflow.jpg'
+import xyflow from './showcase/_logos/xyflow.png'
 import './globals.css'
 
 export const metadata: Metadata = {
@@ -94,7 +94,7 @@ const footer = (
 const RootLayout: FC<{
   children: ReactNode
 }> = async ({ children }) => {
-  const pageMap = await getPageMap()
+  const pageMap = await getEnhancedPageMap()
   return (
     <html lang="en" dir="ltr" suppressHydrationWarning>
       <Head />

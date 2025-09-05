@@ -10,12 +10,13 @@ describe('LaTeX', () => {
   describe('KaTeX', () => {
     it('should convert ```math code block language', async () => {
       const rawJs = await compileMdx('```math\nx^2\n```', options)
-      expect(clean(rawJs)).resolves.toMatchInlineSnapshot(`
+      return expect(clean(rawJs)).resolves.toMatchInlineSnapshot(`
         "/*@jsxRuntime automatic*/
         /*@jsxImportSource react*/
         'use strict'
         const { useMDXComponents: _provideComponents } = arguments[0]
         const metadata = {}
+        const sourceCode = '\`\`\`math\\nx^2\\n\`\`\`'
         function useTOC(props) {
           return []
         }
@@ -97,6 +98,7 @@ describe('LaTeX', () => {
         }
         return {
           metadata,
+          sourceCode,
           toc,
           default: _createMdxContent
         }"
@@ -115,11 +117,12 @@ describe('LaTeX', () => {
 
     it('should convert math inline', async () => {
       const rawJs = await compileMdx(INLINE_MATH, options)
-      expect(clean(rawJs)).resolves.toMatchInlineSnapshot(`
+      return expect(clean(rawJs)).resolves.toMatchInlineSnapshot(`
         "/*@jsxRuntime automatic*/
         /*@jsxImportSource react*/
         import { useMDXComponents as _provideComponents } from 'next-mdx-import-source-file'
         export const metadata = {}
+        export const sourceCode = '$a=\\\\sqrt{b^2 + c^2}$'
         import { MathJax, MathJaxContext } from 'nextra/components'
         function useTOC(props) {
           return []
@@ -137,6 +140,7 @@ describe('LaTeX', () => {
               <_components.p>
                 <MathJax inline>{'\\\\(a=\\\\sqrt{b^2 + c^2}\\\\)'}</MathJax>
               </_components.p>
+              {'\\n'}
             </MathJaxContext>
           )
         }
@@ -146,11 +150,12 @@ describe('LaTeX', () => {
 
     it('should convert ```math code block language', async () => {
       const rawJs = await compileMdx(MATH_LANG, options)
-      expect(clean(rawJs)).resolves.toMatchInlineSnapshot(`
+      return expect(clean(rawJs)).resolves.toMatchInlineSnapshot(`
         "/*@jsxRuntime automatic*/
         /*@jsxImportSource react*/
         import { useMDXComponents as _provideComponents } from 'next-mdx-import-source-file'
         export const metadata = {}
+        export const sourceCode = '\`\`\`math\\nx^2\\n\`\`\`'
         import { MathJax, MathJaxContext } from 'nextra/components'
         function useTOC(props) {
           return []
@@ -161,6 +166,7 @@ describe('LaTeX', () => {
             <MathJaxContext>
               {'\\n'}
               <MathJax>{'\\\\[x^2\\n\\\\]'}</MathJax>
+              {'\\n'}
             </MathJaxContext>
           )
         }
@@ -177,13 +183,14 @@ export let bar
 
 ${MATH_LANG}`
       const rawJs = await compileMdx(rawMdx, options)
-      expect(clean(rawJs)).resolves.toMatchInlineSnapshot(`
+      return expect(clean(rawJs)).resolves.toMatchInlineSnapshot(`
         "/*@jsxRuntime automatic*/
         /*@jsxImportSource react*/
         import { useMDXComponents as _provideComponents } from 'next-mdx-import-source-file'
         export const metadata = {}
         import foo from 'foo'
         export let bar
+        export const sourceCode = "$a=\\\\sqrt{b^2 + c^2}$\\n\\nimport foo from 'foo'\\n\\nexport let bar\\n\\n\`\`\`math\\nx^2\\n\`\`\`"
         import { MathJax, MathJaxContext } from 'nextra/components'
         function useTOC(props) {
           return []
@@ -205,6 +212,7 @@ ${MATH_LANG}`
               {'\\n'}
               {'\\n'}
               <MathJax>{'\\\\[x^2\\n\\\\]'}</MathJax>
+              {'\\n'}
             </MathJaxContext>
           )
         }

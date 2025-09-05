@@ -97,7 +97,7 @@ export function withIcons(
 
     return (
       <Component
-        icon={Icon && <Icon height="16" className="x:max-w-6 x:shrink-0" />}
+        icon={Icon && <Icon height="1em" className="x:max-w-6 x:shrink-0" />}
         {...props}
       />
     )

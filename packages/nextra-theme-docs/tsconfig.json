@@ -12,7 +12,12 @@
     "moduleResolution": "bundler",
     "lib": ["ESNext", "DOM"],
     "types": ["vitest/globals"],
-    "noUncheckedIndexedAccess": true
+    "noUncheckedIndexedAccess": true,
+    "paths": {
+      // For type tests
+      "unified": ["../nextra/node_modules/unified"],
+      "rehype-katex": ["../nextra/node_modules/rehype-katex/lib/index.d.js"]
+    }
   },
   "exclude": ["dist"]
 }

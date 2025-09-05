@@ -1,4 +1,4 @@
-import { fromZodError } from 'zod-validation-error'
+import { z } from 'zod'
 import type {
   Folder,
   FrontMatter,
@@ -61,7 +61,7 @@ function sortFolder(pageMap: PageMapItem[] | Folder | TItem) {
       for (const [key, titleOrObject] of Object.entries(item.data)) {
         const { data, error } = metaSchema.safeParse(titleOrObject)
         if (error) {
-          throw fromZodError(error)
+          throw z.prettifyError(error)
         }
         if (key === '*') {
           // @ts-expect-error -- fixme

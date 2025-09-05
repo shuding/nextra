@@ -34,8 +34,12 @@ export function createAstObject(obj) {
   }
 }
 
+type NextraParams = Parameters<typeof nextra>[0]
+type MdxOptions = NonNullable<NextraParams['mdxOptions']>
+type RehypePlugin = NonNullable<MdxOptions['rehypePlugins']>[0]
+
 // eslint-disable-next-line unicorn/consistent-function-scoping
-const rehypeOpenGraphImage = () => (ast: any) => {
+const rehypeOpenGraphImage: RehypePlugin = () => (ast: any) => {
   // @ts-expect-error -- fixme
   const frontMatterNode = ast.children.find(node =>
     isExportNode(node, 'metadata')
@@ -65,7 +69,7 @@ const withNextra = nextra({
     rehypePlugins: [
       // Provide only on `build` since turbopack on `dev` supports only serializable values
       process.env.NODE_ENV === 'production' && rehypeOpenGraphImage
-    ]
+    ].filter(v => !!v)
   },
   whiteListTagsStyling: ['figure', 'figcaption']
 })
@@ -136,15 +140,15 @@ const nextConfig = withNextra({
     })
     return config
   },
-  experimental: {
-    turbo: {
-      rules: {
-        './components/icons/*.svg': {
-          loaders: ['@svgr/webpack'],
-          as: '*.js'
-        }
+  turbopack: {
+    rules: {
+      './components/icons/*.svg': {
+        loaders: ['@svgr/webpack'],
+        as: '*.js'
       }
-    },
+    }
+  },
+  experimental: {
     optimizePackageImports: ['@components/icons']
   }
 })

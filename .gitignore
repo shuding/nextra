@@ -14,5 +14,7 @@ out/
 
 tsup.config.bundled*
 tsconfig.tsbuildinfo
+tsconfig.vitest-temp.json
+
 _pagefind/
 docs/public/sitemap.xml

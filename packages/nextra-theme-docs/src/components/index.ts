@@ -1,4 +1,5 @@
 export { Breadcrumb } from './breadcrumb'
+export { CopyPage } from './copy-page'
 export { Footer } from './footer'
 export { LastUpdated } from './last-updated'
 export { LocaleSwitch } from './locale-switch'

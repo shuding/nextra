@@ -1,13 +1,13 @@
 import cn from 'clsx'
-import type { ComponentProps, FC } from 'react'
+import type { FC, HTMLAttributes } from 'react'
 
-const Table_: FC<ComponentProps<'table'>> = props => (
+const Table_: FC<HTMLAttributes<HTMLTableElement>> = props => (
   <table
     {...props}
     className={cn('x:block x:overflow-x-auto', props.className)}
   />
 )
-const Th: FC<ComponentProps<'th'>> = props => {
+const Th: FC<HTMLAttributes<HTMLTableCellElement>> = props => {
   return (
     <th
       {...props}
@@ -18,7 +18,7 @@ const Th: FC<ComponentProps<'th'>> = props => {
     />
   )
 }
-const Tr: FC<ComponentProps<'tr'>> = props => {
+const Tr: FC<HTMLAttributes<HTMLTableRowElement>> = props => {
   return (
     <tr
       {...props}
@@ -30,7 +30,7 @@ const Tr: FC<ComponentProps<'tr'>> = props => {
     />
   )
 }
-const Td: FC<ComponentProps<'td'>> = props => {
+const Td: FC<HTMLAttributes<HTMLTableCellElement>> = props => {
   return (
     <td
       {...props}
@@ -42,6 +42,54 @@ const Td: FC<ComponentProps<'td'>> = props => {
   )
 }
 
+/**
+ * A collection of built-in components designed to create styled, non-markdown
+ * (i.e., literal) HTML tables.
+ *
+ * @example
+ * <Table className="mt-6">
+ *   <thead>
+ *     <Table.Tr>
+ *       <Table.Th>Country</Table.Th>
+ *       <Table.Th>Flag</Table.Th>
+ *     </Table.Tr>
+ *   </thead>
+ *   <tbody>
+ *     <Table.Tr>
+ *       <Table.Td>France</Table.Td>
+ *       <Table.Td>🇫🇷</Table.Td>
+ *     </Table.Tr>
+ *     <Table.Tr>
+ *       <Table.Td>Ukraine</Table.Td>
+ *       <Table.Td>🇺🇦</Table.Td>
+ *     </Table.Tr>
+ *   </tbody>
+ * </Table>
+ *
+ * @usage
+ * ```mdx
+ * import { Table } from 'nextra/components'
+ *
+ * <Table>
+ *   <thead>
+ *     <Table.Tr>
+ *       <Table.Th>Country</Table.Th>
+ *       <Table.Th>Flag</Table.Th>
+ *     </Table.Tr>
+ *   </thead>
+ *   <tbody>
+ *     <Table.Tr>
+ *       <Table.Td>France</Table.Td>
+ *       <Table.Td>🇫🇷</Table.Td>
+ *     </Table.Tr>
+ *     <Table.Tr>
+ *       <Table.Td>Ukraine</Table.Td>
+ *       <Table.Td>🇺🇦</Table.Td>
+ *     </Table.Tr>
+ *   </tbody>
+ * </Table>
+ * ```
+ */
 export const Table = Object.assign(Table_, {
   Th,
   Tr,

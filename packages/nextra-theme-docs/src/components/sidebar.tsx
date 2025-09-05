@@ -11,7 +11,8 @@ import type {
   ComponentProps,
   FC,
   FocusEventHandler,
-  MouseEventHandler
+  MouseEventHandler,
+  ReactNode
 } from 'react'
 import { forwardRef, useEffect, useId, useRef, useState } from 'react'
 import scrollIntoView from 'scroll-into-view-if-needed'
@@ -108,7 +109,11 @@ const Folder: FC<FolderProps> = ({ item: _item, anchors, onFocus, level }) => {
       event.preventDefault()
     }
     const isOpen = el.parentElement!.classList.contains('open')
-    TreeState[item.route] = !isOpen
+    // We don't toggle it if it's:
+    // - a link
+    // - not a click on icon
+    // - not active link
+    TreeState[item.route] = (isLink && !isClickOnIcon && !active) || !isOpen
     rerender({})
   }
 
@@ -135,14 +140,15 @@ const Folder: FC<FolderProps> = ({ item: _item, anchors, onFocus, level }) => {
   }, [activeRouteInside, focusedRouteInside, item.route, autoCollapse])
 
   const isLink = 'frontMatter' in item
-  // use button when link don't have href because it impacts on SEO
+  // Use a button when a link doesn't have `href` because it impacts on SEO
   const ComponentToUse = isLink ? Anchor : Button
 
   return (
     <li className={cn({ open, active })}>
       <ComponentToUse
-        href={isLink ? item.route : undefined}
-        data-href={isLink ? undefined : item.route}
+        {...(isLink
+          ? { href: item.route, prefetch: false }
+          : { 'data-href': item.route })}
         className={cn(
           'x:items-center x:justify-between x:gap-2',
           !isLink && 'x:text-start x:w-full',
@@ -189,7 +195,7 @@ function getMenuChildren(menu: MenuItem) {
     }))
 }
 
-const Separator: FC<{ title: string }> = ({ title }) => {
+const Separator: FC<{ title: ReactNode }> = ({ title }) => {
   return (
     <li
       className={cn(
@@ -221,13 +227,14 @@ const File: FC<{
   if (item.type === 'separator') {
     return <Separator title={item.title} />
   }
-
+  const href = (item as PageItem).href || item.route
   return (
     <li className={cn({ active })}>
       <Anchor
-        href={(item as PageItem).href || item.route}
+        href={href}
         className={cn(classes.link, active ? classes.active : classes.inactive)}
         onFocus={onFocus}
+        prefetch={false}
       >
         {item.title}
       </Anchor>
@@ -422,7 +429,7 @@ export const Sidebar: FC = () => {
           'nextra-sidebar x:print:hidden',
           'x:transition-all x:ease-in-out',
           'x:max-md:hidden x:flex x:flex-col',
-          'x:h-[calc(100dvh-var(--nextra-menu-height))]',
+          'x:h-[calc(100dvh-var(--nextra-navbar-height))]',
           'x:top-(--nextra-navbar-height) x:shrink-0',
           isExpanded ? 'x:w-64' : 'x:w-20',
           hideSidebar ? 'x:hidden' : 'x:sticky'

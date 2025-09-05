@@ -21,7 +21,6 @@
 
 html {
   --nextra-navbar-height: 64px;
-  --nextra-menu-height: 3.75rem;
 
   @apply x:antialiased x:text-base;
   font-feature-settings:
@@ -37,7 +36,7 @@ html {
 }
 
 .contains-task-list {
-  @apply x:mt-6;
+  @apply x:mt-[1.25em];
 
   input[type='checkbox'] {
     @apply x:me-1;

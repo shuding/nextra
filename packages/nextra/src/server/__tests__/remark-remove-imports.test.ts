@@ -19,7 +19,7 @@ export const Test = ({value}) => value
 `,
       opts
     )
-    expect(clean(rawJs)).resolves.toMatchInlineSnapshot(`
+    return expect(clean(rawJs)).resolves.toMatchInlineSnapshot(`
       "/*@jsxRuntime automatic*/
       /*@jsxImportSource react*/
       'use strict'
@@ -27,6 +27,8 @@ export const Test = ({value}) => value
       const metadata = {}
       const myVar = 123
       const Test = ({ value }) => value
+      const sourceCode =
+        'import { Steps } from \\'nextra/components\\'\\n\\nexport const myVar = 123\\n\\nexport const Test = ({value}) => value\\n\\n## <Test value="Hello" /> {myVar}'
       function useTOC(props) {
         return [
           {
@@ -53,6 +55,7 @@ export const Test = ({value}) => value
         metadata,
         myVar,
         Test,
+        sourceCode,
         toc,
         default: _createMdxContent
       }"

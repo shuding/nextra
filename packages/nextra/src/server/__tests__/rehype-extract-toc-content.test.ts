@@ -20,11 +20,12 @@ bar[^1]
 `,
       opts
     )
-    expect(clean(rawJs)).resolves.toMatchInlineSnapshot(`
+    return expect(clean(rawJs)).resolves.toMatchInlineSnapshot(`
       "/*@jsxRuntime automatic*/
       /*@jsxImportSource react*/
       import { useMDXComponents as _provideComponents } from 'next-mdx-import-source-file'
       export const metadata = {}
+      export const sourceCode = '## foo\\nbar[^1]\\n\\n[^1]: bar description'
       function useTOC(props) {
         return [
           {
@@ -64,6 +65,7 @@ bar[^1]
                 </_components.a>
               </_components.sup>
             </_components.p>
+            {'\\n'}
             {'\\n'}
             <_components.section data-footnotes className="footnotes">
               <_components.h2 className="sr-only" id="footnote-label">
@@ -113,12 +115,14 @@ import { Steps } from 'nextra/components'
 `,
       opts
     )
-    expect(clean(rawJs)).resolves.toMatchInlineSnapshot(`
+    return expect(clean(rawJs)).resolves.toMatchInlineSnapshot(`
       "/*@jsxRuntime automatic*/
       /*@jsxImportSource react*/
       import { useMDXComponents as _provideComponents } from 'next-mdx-import-source-file'
       export const metadata = {}
       import { Steps } from 'nextra/components'
+      export const sourceCode =
+        "import { Steps } from 'nextra/components'\\n\\n## baz qux\\n\\n<Steps>\\n  <div>\\n  ### foo bar\\n  </div>\\n</Steps>"
       function useTOC(props) {
         return [
           {
@@ -186,7 +190,7 @@ export const metadata = {
     `,
       opts
     )
-    expect(clean(rawJs)).resolves.toMatchInlineSnapshot(`
+    return expect(clean(rawJs)).resolves.toMatchInlineSnapshot(`
       "/*@jsxRuntime automatic*/
       /*@jsxImportSource react*/
       import { useMDXComponents as _provideComponents } from 'next-mdx-import-source-file'
@@ -196,6 +200,8 @@ export const metadata = {
         test: 'extract toc content',
         title: 'Heading 1'
       }
+      export const sourceCode =
+        "# Heading 1\\n\\nexport const myVar = 'interpolated'\\n\\n## Heading {myVar}\\n\\n### Heading $latex$\\n\\n### Heading \`<Code />:{jsx}\`\\n\\nexport const Test = () => <span>Hello</span>\\n\\n#### <Test /> World\\n\\n##### String\\n\\n###### 123\\n\\n###### Dada 123 true\\n\\nexport const metadata = {\\n  test: 'extract toc content'\\n}"
       function useTOC(props) {
         const _components = {
           annotation: 'annotation',
@@ -353,7 +359,7 @@ import { MDXRemote } from 'nextra/mdx-remote'
         ...opts,
         filePath: '[[...slug]].mdx'
       })
-      expect(clean(rawJs)).resolves.toMatchInlineSnapshot(`
+      return expect(clean(rawJs)).resolves.toMatchInlineSnapshot(`
         "/*@jsxRuntime automatic*/
         /*@jsxImportSource react*/
         import { useMDXComponents as _provideComponents } from 'next-mdx-import-source-file'
@@ -362,6 +368,8 @@ import { MDXRemote } from 'nextra/mdx-remote'
           filePath: '[[...slug]].mdx'
         }
         import { MDXRemote } from 'nextra/mdx-remote'
+        export const sourceCode =
+          "import { MDXRemote } from 'nextra/mdx-remote'\\n\\n## hello\\n\\n<MDXRemote components={{ Callout, $Tabs: Tabs }} />"
         function useTOC(props) {
           return [
             {
@@ -408,12 +416,13 @@ export const myVar = 123
 ### 123 {myVar}`
 
       const rawJs = await compileMdx(rawMdx)
-      expect(clean(rawJs)).resolves.toMatchInlineSnapshot(`
+      return expect(clean(rawJs)).resolves.toMatchInlineSnapshot(`
         "'use strict'
         const { Fragment: _Fragment, jsx: _jsx, jsxs: _jsxs } = arguments[0]
         const { useMDXComponents: _provideComponents } = arguments[0]
         const metadata = {}
         const myVar = 123
+        const sourceCode = "import { Foo } from 'foo'\\n\\n## bar\\n\\n<Foo />\\n\\nexport const myVar = 123\\n\\n### 123 {myVar}"
         function useTOC(props) {
           return [
             {
@@ -460,6 +469,7 @@ export const myVar = 123
         return {
           metadata,
           myVar,
+          sourceCode,
           toc,
           default: _createMdxContent
         }
