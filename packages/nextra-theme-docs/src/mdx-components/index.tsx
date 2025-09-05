@@ -15,16 +15,16 @@ import {
   withIcons
 } from 'nextra/components'
 import { useMDXComponents as getNextraMDXComponents } from 'nextra/mdx-components'
-import type { MDXComponents } from 'nextra/mdx-components'
+import type { UseMDXComponents } from 'nextra/mdx-components'
 import { removeLinks } from 'nextra/remove-links'
-import type { ComponentProps, FC } from 'react'
+import type { FC, HTMLAttributes } from 'react'
 import { Sidebar } from '../components'
 import { TOCProvider } from '../stores'
 import { H1, H2, H3, H4, H5, H6 } from './heading'
 import { Link } from './link'
 import { ClientWrapper } from './wrapper.client'
 
-const Blockquote: FC<ComponentProps<'blockquote'>> = props => (
+const Blockquote: FC<HTMLAttributes<HTMLQuoteElement>> = props => (
   <blockquote
     className={cn(
       'x:not-first:mt-[1.25em] x:border-gray-300 x:italic x:text-gray-700 x:dark:border-gray-700 x:dark:text-gray-400',
@@ -85,7 +85,7 @@ const DEFAULT_COMPONENTS = getNextraMDXComponents({
       {...props}
     />
   ),
-  wrapper({ toc, children, metadata, bottomContent, ...props }) {
+  wrapper({ toc, children, metadata, bottomContent, sourceCode, ...props }) {
     // @ts-expect-error fixme
     toc = toc.map(item => ({
       ...item,
@@ -99,7 +99,11 @@ const DEFAULT_COMPONENTS = getNextraMDXComponents({
       >
         <TOCProvider value={toc}>
           <Sidebar />
-          <ClientWrapper metadata={metadata} bottomContent={bottomContent}>
+          <ClientWrapper
+            metadata={metadata}
+            bottomContent={bottomContent}
+            sourceCode={sourceCode}
+          >
             <SkipNavContent />
             <main
               data-pagefind-body={
@@ -115,9 +119,13 @@ const DEFAULT_COMPONENTS = getNextraMDXComponents({
   }
 })
 
-export const useMDXComponents = (components?: Readonly<MDXComponents>) => {
+export const useMDXComponents: UseMDXComponents<typeof DEFAULT_COMPONENTS> = <
+  T,
+>(
+  components?: T
+) => {
   return {
     ...DEFAULT_COMPONENTS,
     ...components
-  } satisfies MDXComponents
+  }
 }

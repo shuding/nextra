@@ -1,15 +1,13 @@
 import path from 'node:path'
 import { includeIgnoreFile } from '@eslint/compat'
 import js from '@eslint/js'
-// @ts-expect-error -- no types
 import eslintPluginNext from '@next/eslint-plugin-next'
+import type { Linter } from 'eslint'
 // import type { Linter } from 'eslint'
 import eslintConfigPrettier from 'eslint-config-prettier'
-// @ts-expect-error -- no types
 import eslintPluginDeMorgan from 'eslint-plugin-de-morgan'
 import eslintPluginImport from 'eslint-plugin-import-x'
 import eslintPluginReact from 'eslint-plugin-react'
-import * as eslintPluginReactCompiler from 'eslint-plugin-react-compiler'
 import eslintPluginReactHooks from 'eslint-plugin-react-hooks'
 import eslintPluginSonarJs from 'eslint-plugin-sonarjs'
 // import eslintPluginTailwindCss from 'eslint-plugin-tailwindcss'
@@ -38,7 +36,14 @@ const REACT_COMPILER_RESTRICT = {
 
 const config: Config = tseslint.config(
   includeIgnoreFile(path.resolve('.gitignore')),
-  { ignores: ['**/generated-page-map.ts', '**/next-env.d.ts'] },
+  {
+    ignores: [
+      '**/generated-page-map.ts',
+      '**/next-env.d.ts',
+      '**/snapshots/**',
+      '**/types.generated.ts'
+    ]
+  },
   // Rules for all files
   {
     files: ['**/*.{js,jsx,cjs,mjs,ts,tsx,cts,mts}'],
@@ -110,6 +115,7 @@ const config: Config = tseslint.config(
       'sonarjs/no-array-index-key': 'off', // todo
       'sonarjs/no-unstable-nested-components': 'off', // todo
 
+      'sonarjs/no-redundant-optional': 'off', // doesn't work well with tsconfig's `exactOptionalPropertyTypes: true`
       'sonarjs/no-duplicate-in-composite': 'off', // covered by @typescript-eslint/no-duplicate-type-constituents
       'sonarjs/deprecation': 'off', // covered by @typescript-eslint/no-deprecated
       'sonarjs/no-unused-vars': 'off',
@@ -138,8 +144,9 @@ const config: Config = tseslint.config(
     ],
     rules: {
       ...eslintPluginReactHooks.configs.recommended.rules,
-      ...eslintPluginNext.configs.recommended.rules,
-      ...eslintPluginNext.configs['core-web-vitals'].rules,
+      ...(eslintPluginNext.configs.recommended.rules as Linter.RulesRecord),
+      ...(eslintPluginNext.configs['core-web-vitals']
+        .rules as Linter.RulesRecord),
       'react/prop-types': 'off',
       'react/no-unknown-property': ['error', { ignore: ['jsx'] }],
       'react-hooks/exhaustive-deps': 'error',
@@ -195,12 +202,9 @@ const config: Config = tseslint.config(
   },
   {
     files: ['packages/**'],
-    plugins: {
-      'react-compiler': eslintPluginReactCompiler
-    },
     rules: {
       'no-restricted-imports': ['error', REACT_COMPILER_RESTRICT],
-      'react-compiler/react-compiler': 'error'
+      'react-hooks/react-compiler': 'error'
     }
   },
   // ⚙️ nextra-theme-docs

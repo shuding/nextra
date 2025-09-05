@@ -7,14 +7,15 @@ import { Anchor } from '../../client/mdx-components/anchor.js'
 import { Code } from '../../client/mdx-components/code.js'
 import { MDXRemote } from '../../client/mdx-remote.js'
 import { compileMdx } from '../compile.js'
-import type { generateDocumentation } from './base.js'
+import type { generateDefinition } from './base.js'
 import type { GeneratedFunction, TypeField } from './types.js'
 
 type TSDocProps = {
   /**
-   * Parsed `type`, `interface` or `function` definition from `generateDocumentation` function.
+   * Parsed `type`, `interface` or `function` definition from
+   * [`generateDefinition` function](https://nextra.site/api/generatedefinition).
    */
-  definition: ReturnType<typeof generateDocumentation>
+  definition: ReturnType<typeof generateDefinition>
   /**
    * Override the function to render markdown into JSX nodes.
    * @default
@@ -68,7 +69,71 @@ const classes = {
 }
 
 /**
- * Component which renders the props table for a TypeScript `type`, `interface` or `function`.
+ * A built-in component lets you generate documentation from `type`, `interface`, and `function`
+ * definitions  using [TSDoc](https://tsdoc.org) annotations.
+ *
+ * ## What it generates
+ *
+ * ### For `type` and `interface`
+ *
+ * Generates a **properties table** with:
+ *
+ * - Name
+ * - Type and description
+ * - Default Value
+ * - Permalink
+ *
+ * ### For `function`
+ *
+ * 1. **Parameters table**, including:
+ *
+ *    - Name
+ *    - Type and description
+ *    - Default value
+ *    - Permalink
+ *
+ * 2. **Return signature table**, including:
+ *    - Description
+ *    - Return values table
+ *
+ * > [!TIP]
+ * >
+ * > - Permalink is a `#` anchor link for easy reference to individual rows.
+ * > - Descriptions are parsed from inline TSDoc comments or the `@description`
+ * >   tag.
+ * > - Supports full Markdown/MDX syntax in descriptions.
+ * > - Default values are extracted from the `@default` or `@defaultValue` tags.
+ * > - Return descriptions come from the `@returns` tag.
+ *
+ * > [!WARNING]
+ * >
+ * > **Server Component Only** – TSDoc component cannot be used in a client
+ * > component.<br />
+ * > **Available from:** Nextra 4.3 (alpha).<br />
+ * > **Dependency:** Uses TypeScript Compiler API from
+ * > [`ts-morph`](https://github.com/dsherret/ts-morph).
+ *
+ * @example
+ * To generate the props table for the `TSDoc` component shown on this page:
+ *
+ * ```mdx
+ * import { generateDefinition, TSDoc } from 'nextra/tsdoc'
+ *
+ * <TSDoc
+ *   definition={generateDefinition({
+ *     code: `
+ * import type { TSDoc } from 'nextra/tsdoc'
+ * type MyProps = React.ComponentProps<typeof TSDoc>
+ * export default MyProps`
+ *   })}
+ * />
+ * ```
+ *
+ * ### Overriding a type
+ *
+ * You can override the inferred type using the `@remarks` tag using backticks (`).
+ *
+ * <ExampleTSDoc />
  */
 export const TSDoc: FC<TSDocProps> = ({
   definition,
@@ -221,8 +286,11 @@ const NameCell: FC<{
       />
       {name && (
         <Code
-          // add `?` via CSS `content` property so value will be not selectable
-          className={optional ? 'x:after:content-["?"]' : ''}
+          className={cn(
+            'x:max-md:break-all',
+            // add `?` via CSS `content` property so value will be not selectable
+            optional && 'x:after:content-["?"]'
+          )}
         >
           {name}
         </Code>
@@ -267,10 +335,14 @@ const FieldsTable: FC<
           const id = slugger.slug(field.name)
           const tags = field.tags ?? {}
           const defaultValue = tags.default || tags.defaultValue
-          const description =
-            //
-            await renderMarkdown(field.description || tags.description)
-
+          const description = await renderMarkdown(
+            [
+              field.description || tags.description,
+              tags.deprecated && `**Deprecated**: ${tags.deprecated}`
+            ]
+              .filter(Boolean)
+              .join('\n')
+          )
           return (
             <Row key={id} id={id}>
               <NameCell id={id} optional={field.optional} name={field.name} />

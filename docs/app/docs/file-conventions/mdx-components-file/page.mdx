@@ -12,11 +12,10 @@ description:
 The `mdx-components` file is **required**, you use it to customize styles via
 `useMDXComponents` function.
 
-## Exports
+## Example
 
-### `useMDXComponents` function
-
-The file must export a single function named `useMDXComponents`.
+The `mdx-components.js` file must export
+[a single function named `useMDXComponents`](/api/usemdxcomponents).
 
 ```ts filename="mdx-components.js"
 import { useMDXComponents as getThemeComponents } from 'nextra-theme-docs' // nextra-theme-blog or your custom theme
@@ -33,20 +32,43 @@ export function useMDXComponents(components) {
 }
 ```
 
-## Params
+## Errors
 
-### `components`
+### Module not found: Can't resolve `'next-mdx-import-source-file'`
 
-When defining MDX Components, the export function accepts a single parameter
-`components: MDXComponents`.
+To fix this, update the `turbopack.resolveAlias` section in your `next.config`
+file:
 
-- The key is the name of the HTML element to override.
-- The value is the component to render instead.
+> [!NOTE]
+>
+> - If you're using Next.js < 15.3, use `experimental.turbopack.resolveAlias`
+> - If you're using Next.js ≥ 15.3, use `turbopack.resolveAlias`
+
+```diff filename="next.config.mjs"
+import nextra from 'nextra'
+
+const withNextra = nextra()
+
+export default withNextra({
++ turbopack: {
++   resolveAlias: {
++     // Path to your `mdx-components` file with extension
++     'next-mdx-import-source-file': './src/mdx-components.tsx'
++   }
++ }
+})
+```
 
 > [!TIP]
 >
-> You can keep `mdx-components` file in root of your project, or in
-> [`src` directory](./src-directory).
+> - You can keep `mdx-components` file in root of your project, or in
+>   [`src` directory](./src-directory).
+> - The `.js`, `.jsx`, or `.tsx` file extensions can be used for
+>   `mdx-components` file.
+> - When importing `useMDXComponents`, alias it as `getMDXComponents` to avoid a
+>   false positive error from the ESLint React Hooks plugin.
 >
-> The `.js`, `.jsx`, or `.tsx` file extensions can be used for `mdx-components`
-> file.
+> ```bash filename="react-hooks/rules-of-hooks"
+> React Hook "useMDXComponents" cannot be called at the top level.
+> React Hooks must be called in a React function component or a custom React Hook function.
+> ```

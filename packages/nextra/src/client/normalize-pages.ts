@@ -1,5 +1,6 @@
 'use no memo'
 
+import type { ReactNode } from 'react'
 import type { z } from 'zod'
 import type { itemSchema, menuSchema } from '../server/schemas.js'
 import type { Folder, FrontMatter, MdxFile, PageMapItem } from '../types.js'
@@ -43,7 +44,7 @@ function extendMeta(
 type FolderWithoutChildren = Omit<Folder, 'children'>
 
 export type Item = (MdxFile | FolderWithoutChildren) & {
-  title: string
+  title: ReactNode
   type: string
   children: Item[]
   display?: Display
@@ -53,7 +54,7 @@ export type Item = (MdxFile | FolderWithoutChildren) & {
 }
 
 export type PageItem = (MdxFile | FolderWithoutChildren) & {
-  title: string
+  title: ReactNode
   type: string
   href?: string
   children?: PageItem[]
@@ -68,7 +69,7 @@ export type MenuItem = (MdxFile | FolderWithoutChildren) &
   }
 
 type DocsItem = (MdxFile | FolderWithoutChildren) & {
-  title: string
+  title: ReactNode
   type: string
   children: DocsItem[]
   firstChildRoute?: string

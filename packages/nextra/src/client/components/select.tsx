@@ -6,6 +6,7 @@ import {
   ListboxOption,
   ListboxOptions
 } from '@headlessui/react'
+import type { AnchorPropsWithSelection } from '@headlessui/react/dist/internal/floating'
 import cn from 'clsx'
 import type { Dispatch, FC, ReactNode } from 'react'
 import { Fragment } from 'react'
@@ -13,7 +14,7 @@ import { CheckIcon } from '../icons/index.js'
 
 interface MenuOption {
   id: string
-  name: string
+  name: ReactNode
 }
 
 interface MenuProps {
@@ -23,6 +24,7 @@ interface MenuProps {
   options: MenuOption[]
   title?: string
   className?: string
+  anchor?: AnchorPropsWithSelection
 }
 
 export const Select: FC<MenuProps> = ({
@@ -31,7 +33,8 @@ export const Select: FC<MenuProps> = ({
   selectedOption,
   value,
   title,
-  className
+  className,
+  anchor = { to: 'top start', gap: 10 }
 }) => {
   return (
     <Listbox value={value} onChange={onChange}>
@@ -56,12 +59,12 @@ export const Select: FC<MenuProps> = ({
       <ListboxOptions
         as="ul"
         transition
-        anchor={{ to: 'top start', gap: 10 }}
+        anchor={anchor}
         className={({ open }) =>
           cn(
             'x:focus-visible:nextra-focus',
             open ? 'x:opacity-100' : 'x:opacity-0',
-            'x:motion-reduce:transition-none x:transition-opacity x:min-w-(--button-width) x:z-20 x:max-h-64 x:rounded-md x:border x:border-black/5 x:backdrop-blur-md x:bg-nextra-bg/90 x:py-1 x:text-sm x:shadow-lg x:dark:border-white/20'
+            'x:motion-reduce:transition-none x:transition-opacity x:min-w-(--button-width) x:z-30 x:max-h-64 x:rounded-md x:border x:border-black/5 x:backdrop-blur-md x:bg-nextra-bg/90 x:py-1 x:text-sm x:shadow-lg x:dark:border-white/20'
           )
         }
       >

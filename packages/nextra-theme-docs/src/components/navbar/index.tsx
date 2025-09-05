@@ -1,67 +1,77 @@
+/* TODO: eslint typescript-sort-keys/interface: error */
 import cn from 'clsx'
-// eslint-disable-next-line no-restricted-imports -- since we don't need newWindow prop
+// eslint-disable-next-line no-restricted-imports -- since we don't need `newWindow` prop
 import NextLink from 'next/link'
 import { Anchor } from 'nextra/components'
 import { DiscordIcon, GitHubIcon } from 'nextra/icons'
-import { element, reactNode } from 'nextra/schemas'
-import type { FC } from 'react'
-import { z } from 'zod'
-import { fromZodError } from 'zod-validation-error'
+import type { FC, ReactNode } from 'react'
 import { ClientNavbar } from './index.client'
 
-export const NavbarPropsSchema = z.strictObject({
-  children: reactNode.describe(`Extra content after last icon.
-@remarks \`ReactNode\``),
-  logoLink: z
-    .union([z.string(), z.boolean()])
-    .default(true)
-    .describe(
-      "Specifies whether the logo should have a link or provides the URL for the logo's link."
-    ),
-  logo: element.describe(`Logo of the website.
-@remarks \`ReactElement\``),
-  projectLink: z.string().optional().describe('URL of the project homepage.'),
-  projectIcon: reactNode.default(
-    <GitHubIcon height="24" aria-label="Project repository" />
-  ).describe(`Icon of the project link.
-@remarks \`ReactNode\`
-@default <GitHubIcon />`),
-  chatLink: z.string().optional().describe('URL of the chat link.'),
-  chatIcon: reactNode.default(<DiscordIcon width="24" />)
-    .describe(`Icon of the chat link.
-@remarks \`ReactNode\`
-@default <DiscordIcon />`),
-  className: z.string().optional().describe('CSS class name.'),
-  align: z
-    .enum(['left', 'right'])
-    .default('right')
-    .describe('Aligns navigation links to the specified side.')
-})
+interface NavbarProps {
+  /**
+   * Extra content after the last icon.
+   */
+  children?: ReactNode
+  /**
+   * Specifies whether the logo should have a link or provides the URL for the logo's link.
+   * @default true
+   */
+  logoLink?: string | boolean
+  /**
+   * Logo of the website.
+   */
+  logo: ReactNode
+  /**
+   * URL of the project homepage.
+   */
+  projectLink?: string
+  /**
+   * Icon of the project link.
+   * @default <GitHubIcon />
+   */
+  projectIcon?: ReactNode
+  /**
+   * URL of the chat link.
+   */
+  chatLink?: string
+  /**
+   * Icon of the chat link.
+   * @default <DiscordIcon />
+   */
+  chatIcon?: ReactNode
+  /**
+   * CSS class name.
+   */
+  className?: string
+  /**
+   * Aligns navigation links to the specified side.
+   * @default 'right'
+   */
+  align?: 'left' | 'right'
+}
 
-type NavbarProps = z.input<typeof NavbarPropsSchema>
+// Fix compiler error
+// Expression type `JSXElement` cannot be safely reordered
+const defaultGitHubIcon = (
+  <GitHubIcon height="24" aria-label="Project repository" />
+)
+const defaultChatIcon = <DiscordIcon width="24" />
 
-export const Navbar: FC<NavbarProps> = props => {
-  const { data, error } = NavbarPropsSchema.safeParse(props)
-  if (error) {
-    throw fromZodError(error)
-  }
-  const {
-    children,
-    logoLink,
-    logo,
-    projectLink,
-    projectIcon,
-    chatLink,
-    chatIcon,
-    className,
-    align
-  } = data
-
+export const Navbar: FC<NavbarProps> = ({
+  children,
+  logoLink = true,
+  logo,
+  projectLink,
+  projectIcon = defaultGitHubIcon,
+  chatLink,
+  chatIcon = defaultChatIcon,
+  className,
+  align = 'right'
+}) => {
   const logoClass = cn(
     'x:flex x:items-center',
     align === 'left' ? 'x:max-md:me-auto' : 'x:me-auto'
   )
-
   return (
     <header
       className={cn(

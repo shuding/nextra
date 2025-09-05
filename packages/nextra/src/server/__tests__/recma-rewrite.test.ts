@@ -20,13 +20,14 @@ export default function Foo(props) {
   describe("outputFormat: 'function-body'", () => {
     it('should work', async () => {
       const rawMdx = await compileMdx(testMdx)
-      expect(clean(rawMdx)).resolves.toMatchInlineSnapshot(`
+      return expect(clean(rawMdx)).resolves.toMatchInlineSnapshot(`
         "'use strict'
         const { Fragment: _Fragment, jsx: _jsx, jsxs: _jsxs } = arguments[0]
         const { useMDXComponents: _provideComponents } = arguments[0]
         const metadata = {
           title: 'h1'
         }
+        const sourceCode = '# h1\\n## h2 content\\n### h3 content\\n\\n- list 1\\n- list 2'
         function useTOC(props) {
           return [
             {
@@ -86,6 +87,7 @@ export default function Foo(props) {
         }
         return {
           metadata,
+          sourceCode,
           toc,
           default: _createMdxContent
         }"
@@ -93,7 +95,7 @@ export default function Foo(props) {
     })
     it('should work with `export default`', async () => {
       const rawMdx = await compileMdx(testMdxWithDefaultExport)
-      expect(clean(rawMdx)).resolves.toMatchInlineSnapshot(`
+      return expect(clean(rawMdx)).resolves.toMatchInlineSnapshot(`
         "'use strict'
         const { Fragment: _Fragment, jsx: _jsx, jsxs: _jsxs } = arguments[0]
         const { useMDXComponents: _provideComponents } = arguments[0]
@@ -105,6 +107,8 @@ export default function Foo(props) {
             children: ['Default Export ', props.children]
           })
         }
+        const sourceCode =
+          '# h1\\n## h2 content\\n### h3 content\\n\\n- list 1\\n- list 2\\n  \\nexport default function Foo(props) {\\n  return <div>Default Export {props.children}</div>\\n}'
         function useTOC(props) {
           return [
             {
@@ -172,6 +176,7 @@ export default function Foo(props) {
         }
         return {
           metadata,
+          sourceCode,
           toc,
           default: MDXContent
         }"
@@ -183,11 +188,12 @@ export default function Foo(props) {
 import { MDXRemote } from 'nextra/mdx-remote'
 
 <MDXRemote />`)
-      expect(clean(rawMdx)).resolves.toMatchInlineSnapshot(`
+      return expect(clean(rawMdx)).resolves.toMatchInlineSnapshot(`
         "'use strict'
         const { jsx: _jsx } = arguments[0]
         const { useMDXComponents: _provideComponents } = arguments[0]
         const metadata = {}
+        const sourceCode = "import { MDXRemote } from 'nextra/mdx-remote'\\n\\n<MDXRemote />"
         function useTOC(props) {
           return []
         }
@@ -202,6 +208,7 @@ import { MDXRemote } from 'nextra/mdx-remote'
         }
         return {
           metadata,
+          sourceCode,
           toc,
           default: _createMdxContent
         }
@@ -227,13 +234,14 @@ import { MDXRemote } from 'nextra/mdx-remote'
     }
     it('should work', async () => {
       const rawMdx = await compileMdx(testMdx, options)
-      expect(clean(rawMdx)).resolves.toMatchInlineSnapshot(`
+      return expect(clean(rawMdx)).resolves.toMatchInlineSnapshot(`
         "/*@jsxRuntime automatic*/
         /*@jsxImportSource react*/
         import { useMDXComponents as _provideComponents } from 'next-mdx-import-source-file'
         export const metadata = {
           title: 'h1'
         }
+        export const sourceCode = '# h1\\n## h2 content\\n### h3 content\\n\\n- list 1\\n- list 2'
         function useTOC(props) {
           return [
             {
@@ -285,7 +293,7 @@ import { MDXRemote } from 'nextra/mdx-remote'
         ...options,
         isPageImport: true
       })
-      expect(clean(rawMdx)).resolves.toMatchInlineSnapshot(`
+      return expect(clean(rawMdx)).resolves.toMatchInlineSnapshot(`
         "/*@jsxRuntime automatic*/
         /*@jsxImportSource react*/
         import { HOC_MDXWrapper } from 'nextra/setup-page'
@@ -293,6 +301,7 @@ import { MDXRemote } from 'nextra/mdx-remote'
         export const metadata = {
           title: 'h1'
         }
+        export const sourceCode = '# h1\\n## h2 content\\n### h3 content\\n\\n- list 1\\n- list 2'
         function useTOC(props) {
           return [
             {
@@ -338,14 +347,15 @@ import { MDXRemote } from 'nextra/mdx-remote'
         }
         export default HOC_MDXWrapper(_createMdxContent, {
           metadata,
-          toc
+          toc,
+          sourceCode
         })"
       `)
     })
 
     it('should work with `export default`', async () => {
       const rawMdx = await compileMdx(testMdxWithDefaultExport, options)
-      expect(clean(rawMdx)).resolves.toMatchInlineSnapshot(`
+      return expect(clean(rawMdx)).resolves.toMatchInlineSnapshot(`
         "/*@jsxRuntime automatic*/
         /*@jsxImportSource react*/
         import { HOC_MDXWrapper } from 'nextra/setup-page'
@@ -356,6 +366,8 @@ import { MDXRemote } from 'nextra/mdx-remote'
         const MDXLayout = function Foo(props) {
           return <div>Default Export {props.children}</div>
         }
+        export const sourceCode =
+          '# h1\\n## h2 content\\n### h3 content\\n\\n- list 1\\n- list 2\\n  \\nexport default function Foo(props) {\\n  return <div>Default Export {props.children}</div>\\n}'
         function useTOC(props) {
           return [
             {
@@ -408,7 +420,8 @@ import { MDXRemote } from 'nextra/mdx-remote'
         }
         export default HOC_MDXWrapper(MDXContent, {
           metadata,
-          toc
+          toc,
+          sourceCode
         })"
       `)
     })
@@ -424,11 +437,12 @@ import { MDXRemote } from 'nextra/mdx-remote'
           latex: true
         }
       )
-      expect(clean(rawMdx)).resolves.toMatchInlineSnapshot(`
+      return expect(clean(rawMdx)).resolves.toMatchInlineSnapshot(`
         "/*@jsxRuntime automatic*/
         /*@jsxImportSource react*/
         import { useMDXComponents as _provideComponents } from '👍'
         export const metadata = {}
+        export const sourceCode = '## A \`Theme\` [google](https://google.com) $e = mc^2$'
         function useTOC(props) {
           const _components = {
             a: 'a',

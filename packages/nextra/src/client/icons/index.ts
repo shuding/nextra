@@ -1,5 +1,7 @@
 export { ReactComponent as ArrowRightIcon } from './arrow-right.svg'
+export { ReactComponent as ChatGPTIcon } from './chatgpt.svg'
 export { ReactComponent as CheckIcon } from './check.svg'
+export { ReactComponent as ClaudeIcon } from './claude.svg'
 export { ReactComponent as CopyIcon } from './copy.svg'
 export { ReactComponent as DiscordIcon } from './discord.svg'
 export { ReactComponent as ExpandIcon } from './expand.svg'

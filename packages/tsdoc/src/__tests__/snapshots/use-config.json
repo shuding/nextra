@@ -3,6 +3,7 @@
 
 This includes the full result of `normalizePages`, along with a derived value `hideSidebar`
 that determines whether the sidebar should be hidden on the current page.",
+  "filePath": "../nextra-theme-docs/dist/stores/config.d.mts",
   "name": "useConfig",
   "signatures": [
     {
@@ -19,11 +20,6 @@ that determines whether the sidebar should be hidden on the current page.",
 items.",
           "name": "normalizePagesResult.activeIndex",
           "type": "number",
-        },
-        {
-          "name": "normalizePagesResult.activeThemeContext.pagination",
-          "optional": true,
-          "type": "boolean | undefined",
         },
         {
           "name": "normalizePagesResult.activeThemeContext.breadcrumb",
@@ -47,6 +43,11 @@ items.",
         },
         {
           "name": "normalizePagesResult.activeThemeContext.navbar",
+          "optional": true,
+          "type": "boolean | undefined",
+        },
+        {
+          "name": "normalizePagesResult.activeThemeContext.pagination",
           "optional": true,
           "type": "boolean | undefined",
         },
