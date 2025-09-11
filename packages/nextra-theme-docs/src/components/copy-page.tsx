@@ -9,7 +9,8 @@ import {
   ClaudeIcon,
   CopyCheckIcon,
   CopyIcon,
-  LinkArrowIcon
+  LinkArrowIcon,
+  MarkdownIcon
 } from 'nextra/icons'
 import type { FC, SVGProps } from 'react'
 
@@ -65,7 +66,7 @@ export const CopyPage: FC<{
             id: 'copy',
             name: (
               <Item
-                icon={CopyIcon}
+                icon={MarkdownIcon}
                 title="Copy page"
                 description="Copy page as Markdown for LLMs"
               />
@@ -114,6 +115,12 @@ export const CopyPage: FC<{
         ]}
         value=""
         selectedOption={<ArrowRightIcon width="12" className="x:rotate-90" />}
+        onChange={value => {
+          if (value === 'copy') {
+            handleCopy()
+            return
+          }
+        }}
       />
     </div>
   )
