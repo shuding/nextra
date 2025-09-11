@@ -118,7 +118,6 @@ export const CopyPage: FC<{
         onChange={value => {
           if (value === 'copy') {
             handleCopy()
-            return
           }
         }}
       />
