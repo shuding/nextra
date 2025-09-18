@@ -18,7 +18,7 @@ import type { FC, SVGProps } from 'react'
 const Item: FC<{
   icon: FC<SVGProps<SVGElement>>
   title: string
-  description: string
+  description?: string
   isExternal?: boolean
 }> = ({ icon: Icon, title, description, isExternal }) => {
   return (
@@ -29,7 +29,7 @@ const Item: FC<{
           {title}
           {isExternal && <LinkArrowIcon height="1em" />}
         </span>
-        <span className="x:text-xs">{description}</span>
+        {!!description && <span className="x:text-xs">{description}</span>}
       </div>
     </div>
   )
