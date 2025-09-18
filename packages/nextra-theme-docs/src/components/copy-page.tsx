@@ -7,6 +7,7 @@ import {
   ArrowRightIcon,
   ChatGPTIcon,
   ClaudeIcon,
+  Copilot365Icon,
   CopyCheckIcon,
   CopyIcon,
   LinkArrowIcon,
@@ -106,6 +107,26 @@ export const CopyPage: FC<{
                 <Item
                   icon={ClaudeIcon}
                   title="Open in Claude"
+                  description="Ask questions about this page"
+                  isExternal
+                />
+              </Anchor>
+            )
+          },
+          {
+            id: 'copilot',
+            name: (
+              <Anchor
+                href={(() => {
+                  if (typeof window === 'undefined') return ''
+                  const query = `Read from ${location.href} so I can ask questions about it.`
+                  return `https://copilot.microsoft.com/?q=${encodeURIComponent(query)}`
+                })()}
+                target="_blank"
+              >
+                <Item
+                  icon={Copilot365Icon}
+                  title="Open in Copilot"
                   description="Ask questions about this page"
                   isExternal
                 />
