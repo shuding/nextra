@@ -176,7 +176,7 @@ export async function compileMdx(
           }
         ] satisfies Pluggable,
         remarkSmartypants,
-        [remarkExportSourceCode, { sourceCode: rawMdx }] satisfies Pluggable
+        remarkExportSourceCode
       ].filter(v => !!v),
       rehypePlugins: [
         ...(rehypePlugins || []),

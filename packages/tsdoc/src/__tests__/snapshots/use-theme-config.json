@@ -16,6 +16,10 @@ This hook is useful for dynamically configuring your project based on shared the
       "params": [],
       "returns": [
         {
+          "name": "copyPageButton",
+          "type": "boolean",
+        },
+        {
           "name": "darkMode",
           "type": "boolean",
         },
