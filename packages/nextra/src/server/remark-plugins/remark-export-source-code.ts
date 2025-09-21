@@ -1,7 +1,8 @@
 import type { Root } from 'mdast'
 import type { Plugin } from 'unified'
 
-export const remarkExportSourceCode: Plugin<[], Root> = () => ast => {
+// eslint-disable-next-line unicorn/consistent-function-scoping
+export const remarkExportSourceCode: Plugin<[], Root> = () => (ast, file) => {
   ast.children.push({
     type: 'mdxjsEsm',
     value: '',
@@ -22,7 +23,7 @@ export const remarkExportSourceCode: Plugin<[], Root> = () => ast => {
                   id: { type: 'Identifier', name: 'sourceCode' },
                   init: {
                     type: 'Literal',
-                    value: ''
+                    value: String(file.value).trim()
                   }
                 }
               ]

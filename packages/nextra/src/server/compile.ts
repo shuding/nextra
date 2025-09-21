@@ -123,10 +123,6 @@ export async function compileMdx(
     const rawJs = (vFile.value as string)
       // https://github.com/shuding/nextra/issues/1032
       .replaceAll('__esModule', String.raw`_\_esModule`)
-      .replace(
-        'const sourceCode = ""',
-        `const sourceCode = ${JSON.stringify(rawMdx.trim())}`
-      )
     return rawJs
   } catch (error) {
     console.error(`[nextra] Error compiling ${filePath}.`)
@@ -180,7 +176,6 @@ export async function compileMdx(
           }
         ] satisfies Pluggable,
         remarkSmartypants,
-        // Since we cache compiler, we can't pass `rawMdx` in the remark plugin
         remarkExportSourceCode
       ].filter(v => !!v),
       rehypePlugins: [
