@@ -89,6 +89,9 @@ export const LayoutPropsSchema = z.strictObject({
         'Rendered [`<Banner>` component](/docs/built-ins/banner). E.g. `<Banner {...bannerProps} />`'
     }),
   children: reactNode,
+  copyPageButton: z.boolean().default(true).meta({
+    description: 'Hide/show copy page content button.'
+  }),
   darkMode: z.boolean().default(true).meta({
     description: 'Show or hide the dark mode select button.'
   }),
