@@ -1,5 +1,14 @@
 # nextra
 
+## 4.5.0
+
+### Minor Changes
+
+- 356a782: fix copy page button does not return the correct page contents due to
+  cached MDX compiler
+
+  add a `copyPageButton` layout prop which show/hide copy page content button
+
 ## 4.4.0
 
 ### Minor Changes
