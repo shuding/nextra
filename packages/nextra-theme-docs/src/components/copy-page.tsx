@@ -37,7 +37,7 @@ async function html2md(html: string) {
   return htmlToMarkdown(html)
 }
 
-export const CopyPage: FC<{ sourceCode: string }> = ({ sourceCode }) => {
+export const CopyPage: FC = () => {
   const { copy, isCopied } = useCopy()
 
   function handleCopy() {
