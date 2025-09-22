@@ -11,6 +11,15 @@
       "type": "React.ReactNode",
     },
     {
+      "description": "Hide/show copy page content button.",
+      "name": "copyPageButton",
+      "optional": true,
+      "tags": {
+        "default": "true",
+      },
+      "type": "boolean",
+    },
+    {
       "description": "Show or hide the dark mode select button.",
       "name": "darkMode",
       "optional": true,
