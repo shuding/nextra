@@ -24,7 +24,6 @@ describe('remarkMdxFrontMatter', () => {
         const metadata = {
           foo: 'bar'
         }
-        const sourceCode = '---\\nfoo: bar\\n---'
         function useTOC(props) {
           return []
         }
@@ -34,7 +33,6 @@ describe('remarkMdxFrontMatter', () => {
         }
         return {
           metadata,
-          sourceCode,
           toc,
           default: _createMdxContent
         }"
@@ -62,7 +60,6 @@ describe('remarkMdxFrontMatter', () => {
         const metadata = {
           foo: 'bar'
         }
-        const sourceCode = "export const metadata = { foo: 'bar' }"
         function useTOC(props) {
           return []
         }
@@ -72,7 +69,6 @@ describe('remarkMdxFrontMatter', () => {
         }
         return {
           metadata,
-          sourceCode,
           toc,
           default: _createMdxContent
         }"

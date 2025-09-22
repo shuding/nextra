@@ -26,7 +26,6 @@ describe('remarkStaticImages', () => {
       import __img0 from '../foo.png'
       import __img1 from '../bar.jpeg'
       export const metadata = {}
-      export const sourceCode = '![](../foo.png)\\n\\n![](../bar.jpeg)\\n\\n![](../foo.png)'
       function useTOC(props) {
         return []
       }
@@ -89,8 +88,6 @@ describe('remarkStaticImages', () => {
       import __img0 from '../foo.png'
       import __img1 from './bar.svg'
       export const metadata = {}
-      export const sourceCode =
-        '![One][link-def]\\n\\n![](../foo.png)\\n\\n![](./bar.svg)\\n\\n![Two][link-def]\\n\\n![External][external-link-def]\\n\\n[link-def]: ../foo.png\\n[external-link-def]: https://foo.png'
       function useTOC(props) {
         return []
       }

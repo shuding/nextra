@@ -7,7 +7,6 @@ import { useMDXComponents as _provideComponents } from 'next-mdx-import-source-f
 export const metadata = {
   title: 'codegen.yml'
 }
-export const sourceCode = '# \`codegen.yml\`'
 function useTOC(props) {
   return []
 }
@@ -35,7 +34,6 @@ import { useMDXComponents as _provideComponents } from 'next-mdx-import-source-f
 export const metadata = {
   title: 'codegen.yml file'
 }
-export const sourceCode = '# \`codegen.yml\` file'
 function useTOC(props) {
   return []
 }
@@ -69,8 +67,6 @@ export const TagName = () => {
   const { tag } = useRouter().query
   return tag || null
 }
-export const sourceCode =
-  'import { useRouter } from \\'next/router\\'\\n\\nexport const TagName = () => {\\n  const { tag } = useRouter().query\\n  return tag || null\\n}\\n\\n# Posts Tagged with "<TagName/>"'
 function useTOC(props) {
   return []
 }
@@ -97,7 +93,6 @@ exports[`Process heading > no-h1 1`] = `
 /*@jsxImportSource react*/
 import { useMDXComponents as _provideComponents } from 'next-mdx-import-source-file'
 export const metadata = {}
-export const sourceCode = '## H2'
 function useTOC(props) {
   return [
     {
@@ -126,7 +121,6 @@ import { useMDXComponents as _provideComponents } from 'next-mdx-import-source-f
 export const metadata = {
   title: 'Hello World'
 }
-export const sourceCode = '# Hello World'
 function useTOC(props) {
   return []
 }
