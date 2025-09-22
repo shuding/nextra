@@ -35,7 +35,11 @@
     "clsx": "^2.1.0",
     "next-themes": "^0.4.0",
     "react-compiler-runtime": "^19.1.0-rc.2",
+    "rehype-parse": "^9.0.1",
+    "rehype-remark": "^10.0.1",
+    "remark-stringify": "^11.0.0",
     "scroll-into-view-if-needed": "^3.1.0",
+    "unified": "^11.0.5",
     "zod": "4.0.0-beta.20250424T163858",
     "zustand": "^5.0.1"
   },

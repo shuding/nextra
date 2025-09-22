@@ -47,7 +47,7 @@ export const ClientWrapper: FC<Omit<ComponentProps<MDXWrapper>, 'toc'>> = ({
         {themeConfig.copyPageButton && sourceCode && (
           <CopyPage sourceCode={sourceCode} />
         )}
-        {children}
+        <div className="nextra-content">{children}</div>
         {date ? (
           <div className="x:mt-12 x:mb-8 x:text-xs x:text-gray-600 x:text-end x:dark:text-gray-400">
             {/* @ts-expect-error -- fixme */}

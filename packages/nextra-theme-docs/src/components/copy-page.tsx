@@ -30,11 +30,25 @@ const Item: FC<{
   )
 }
 
+// fix compiler error Handle Import expressions'
+async function html2md(html: string) {
+  // dynamically import to avoid increasing bundle size
+  const { htmlToMarkdown } = await import('../utils/html-to-md')
+  return htmlToMarkdown(html)
+}
+
 export const CopyPage: FC<{ sourceCode: string }> = ({ sourceCode }) => {
   const { copy, isCopied } = useCopy()
 
   function handleCopy() {
-    copy(sourceCode)
+    const contentEl = document.querySelector('.nextra-content')
+    if (contentEl) {
+      // dynamically import to avoid increasing bundle size
+      html2md(contentEl.innerHTML).then(md => {
+        console.log(md)
+        copy(md)
+      })
+    }
   }
 
   return (
