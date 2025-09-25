@@ -1045,6 +1045,27 @@ export default $`
     `)
   })
 
+  it.only('should recursively @inline', () => {
+    const code = `
+import { ReactFlowInstance } from '@xyflow/react'
+
+type $ = Pick<ReactFlowInstance, 'fitView'>
+
+export default $`
+    const result = generateDefinition({ code })
+    expect(result).toMatchInlineSnapshot(`
+      {
+        "entries": [
+          {
+            "name": "fitView",
+            "type": "(fitViewOptions?: FitViewOptionsBase<NodeType>) => Promise<boolean>",
+          },
+        ],
+        "name": "$",
+      }
+    `)
+  })
+
   it.skip('should work with anonymous type', async () => {
     const code = `
 type $ = {
