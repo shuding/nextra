@@ -276,7 +276,7 @@ function getTypeNode(t: TsSymbol) {
     .getTypeNodeOrThrow()
 }
 
-function flatInline(paramType: Type): string {
+function flatInline(paramType: Type, visited = new Set<string>()): string {
   const inlineParamAlias = paramType.getNonNullableType().getAliasSymbol()
   const paramTags = inlineParamAlias && getTags(inlineParamAlias)
   const hasLine = paramTags && 'inline' in paramTags
@@ -284,9 +284,56 @@ function flatInline(paramType: Type): string {
     return getFormattedText(paramType)
   }
   const typeNode = getTypeNode(inlineParamAlias)
+  const type = typeNode.getType()
 
-  const text = typeNode.getText()
-  return text
+  // Check if the type being referenced also has @inline
+  const alias = type.getNonNullableType().getAliasSymbol()
+  const aliasTags = alias && getTags(alias)
+  const aliasHasInline = aliasTags && 'inline' in aliasTags
+
+  if (aliasHasInline) {
+    // Prevent infinite recursion
+    const typeKey = type.getText()
+    if (visited.has(typeKey)) {
+      // If we've already visited this type, try to get the actual type definition
+      const typeText = typeNode.getText()
+      const sourceFile = project.getSourceFile(DEFAULT_FILENAME)
+      if (sourceFile && typeText.includes('<')) {
+        const typeName = typeText.split('<')[0]
+        const typeAlias = sourceFile.getTypeAlias(typeName)
+        if (typeAlias) {
+          try {
+            return typeAlias.getTypeNodeOrThrow().getText()
+          } catch {
+            // Fall through
+          }
+        }
+      }
+      return typeNode.getText()
+    }
+    visited.add(typeKey)
+
+    // Recursively expand the nested @inline type
+    return flatInline(type, visited)
+  }
+
+  // If this is a type reference, try to get the actual type definition
+  const typeText = typeNode.getText()
+  const sourceFile = project.getSourceFile(DEFAULT_FILENAME)
+  if (sourceFile && typeText.includes('<')) {
+    // Extract the base type name (e.g., "FitViewOptionsBase" from "FitViewOptionsBase<NodeType>")
+    const typeName = typeText.split('<')[0]
+    const typeAlias = sourceFile.getTypeAlias(typeName)
+    if (typeAlias) {
+      try {
+        return typeAlias.getTypeNodeOrThrow().getText()
+      } catch {
+        // Fall through to return typeNode.getText()
+      }
+    }
+  }
+
+  return typeNode.getText()
 }
 
 function getTypeName({
