@@ -269,6 +269,26 @@ function getDocEntry({
   }
 }
 
+function getTypeNode(t: TsSymbol) {
+  return t
+    .getDeclarations()[0]!
+    .asKindOrThrow(SyntaxKind.TypeAliasDeclaration)
+    .getTypeNodeOrThrow()
+}
+
+function flatInline(paramType: Type): string {
+  const inlineParamAlias = paramType.getNonNullableType().getAliasSymbol()
+  const paramTags = inlineParamAlias && getTags(inlineParamAlias)
+  const hasLine = paramTags && 'inline' in paramTags
+  if (!hasLine) {
+    return getFormattedText(paramType)
+  }
+  const typeNode = getTypeNode(inlineParamAlias)
+
+  const text = typeNode.getText()
+  return text
+}
+
 function getTypeName({
   tags,
   symbol,
@@ -310,7 +330,6 @@ function getTypeName({
     return t
   }
   const isInline = 'inline' in tags || 'inline' in subTypeTags
-
   if (!isInline) {
     const typeOf = valueDeclaration?.getType() ?? symbol.getDeclaredType()
     return typeOf.isUnknown() ? 'unknown' : getFormattedText(subType)
@@ -323,17 +342,7 @@ function getTypeName({
       const paramType = project
         .getTypeChecker()
         .getTypeOfSymbolAtLocation(param, paramDecl)
-      const inlineParamAlias = paramType.getNonNullableType().getAliasSymbol()
-      const paramTags = inlineParamAlias && getTags(inlineParamAlias)
-
-      const paramTypeStr =
-        paramTags && 'inline' in paramTags
-          ? inlineParamAlias
-              .getDeclarations()[0]!
-              .asKindOrThrow(SyntaxKind.TypeAliasDeclaration)
-              .getTypeNodeOrThrow()
-              .getText()
-          : getFormattedText(paramType)
+      const paramTypeStr = flatInline(paramType)
       const optional = paramDecl
         .asKindOrThrow(SyntaxKind.Parameter)
         .isOptional()
