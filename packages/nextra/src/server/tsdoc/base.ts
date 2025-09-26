@@ -276,64 +276,47 @@ function getTypeNode(t: TsSymbol) {
     .getTypeNodeOrThrow()
 }
 
-function flatInline(paramType: Type, visited = new Set<string>()): string {
-  const inlineParamAlias = paramType.getNonNullableType().getAliasSymbol()
-  const paramTags = inlineParamAlias && getTags(inlineParamAlias)
-  const hasLine = paramTags && 'inline' in paramTags
-  if (!hasLine) {
+function flatInline(paramType: Type): string {
+  const start = paramType.getNonNullableType().getAliasSymbol()
+  if (!start || !('inline' in getTags(start))) {
     return getFormattedText(paramType)
   }
-  const typeNode = getTypeNode(inlineParamAlias)
-  const type = typeNode.getType()
 
-  // Check if the type being referenced also has @inline
-  const alias = type.getNonNullableType().getAliasSymbol()
-  const aliasTags = alias && getTags(alias)
-  const aliasHasInline = aliasTags && 'inline' in aliasTags
+  let current: TsSymbol | undefined = start
+  const visited = new Set<string>()
 
-  if (aliasHasInline) {
-    // Prevent infinite recursion
-    const typeKey = type.getText()
-    if (visited.has(typeKey)) {
-      // If we've already visited this type, try to get the actual type definition
-      const typeText = typeNode.getText()
-      const sourceFile = project.getSourceFile(DEFAULT_FILENAME)
-      if (sourceFile && typeText.includes('<')) {
-        const typeName = typeText.split('<')[0]
-        const typeAlias = sourceFile.getTypeAlias(typeName)
-        if (typeAlias) {
-          try {
-            return typeAlias.getTypeNodeOrThrow().getText()
-          } catch {
-            // Fall through
-          }
-        }
-      }
-      return typeNode.getText()
+  for (let depth = 0; depth < 8 && current; depth++) {
+    const node = getTypeNode(current)
+    const nextType = node.getType().getNonNullableType()
+    const next = nextType.getAliasSymbol() ?? nextType.getSymbol()
+
+    // Reached concrete inline definition
+    if (!next) return node.getText()
+
+    const nextName = next.getName()
+    if (visited.has(nextName)) {
+      // Break cycles by resolving plain type reference Foo<...> back to its alias definition
+      const baseName = node.getText().split('<')[0]
+      const ta = project.getSourceFile(DEFAULT_FILENAME)?.getTypeAlias(baseName)
+      return ta ? ta.getTypeNodeOrThrow().getText() : node.getText()
     }
-    visited.add(typeKey)
+    visited.add(nextName)
 
-    // Recursively expand the nested @inline type
-    return flatInline(type, visited)
-  }
-
-  // If this is a type reference, try to get the actual type definition
-  const typeText = typeNode.getText()
-  const sourceFile = project.getSourceFile(DEFAULT_FILENAME)
-  if (sourceFile && typeText.includes('<')) {
-    // Extract the base type name (e.g., "FitViewOptionsBase" from "FitViewOptionsBase<NodeType>")
-    const typeName = typeText.split('<')[0]
-    const typeAlias = sourceFile.getTypeAlias(typeName)
-    if (typeAlias) {
+    // If next isn't marked @inline, prefer its declared definition text
+    if (!('inline' in getTags(next))) {
       try {
-        return typeAlias.getTypeNodeOrThrow().getText()
+        return getTypeNode(next).getText()
       } catch {
-        // Fall through to return typeNode.getText()
+        const baseName = node.getText().split('<')[0]
+        const ta = project.getSourceFile(DEFAULT_FILENAME)?.getTypeAlias(baseName)
+        return ta ? ta.getTypeNodeOrThrow().getText() : node.getText()
       }
     }
+
+    current = next
   }
 
-  return typeNode.getText()
+  return getFormattedText(paramType)
 }
 
 function getTypeName({
