@@ -33,7 +33,7 @@ const Item: FC<{
 // fix compiler error Handle Import expressions'
 async function html2md(html: string) {
   // dynamically import to avoid increasing bundle size
-  const { htmlToMarkdown } = await import('../utils/html-to-md')
+  const { htmlToMarkdown } = await import('nextra/html-to-md')
   return htmlToMarkdown(html)
 }
 
