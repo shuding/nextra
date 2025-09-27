@@ -26,3 +26,8 @@ declare module 'next-mdx-import-source-file' {
   // eslint-disable-next-line import/extensions -- false positive, should be without extension
   export { useMDXComponents } from 'nextra/mdx-components'
 }
+
+declare module '*.txt?raw' {
+  const content: string
+  export default content
+}

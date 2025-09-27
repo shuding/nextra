@@ -30,11 +30,28 @@ const Item: FC<{
   )
 }
 
-export const CopyPage: FC<{ sourceCode: string }> = ({ sourceCode }) => {
+// fix compiler error Handle Import expressions'
+async function html2md(html: string) {
+  // dynamically import to avoid increasing bundle size
+  const { htmlToMarkdown } = await import('nextra/html-to-md')
+  return htmlToMarkdown(html)
+}
+
+export const CopyPage: FC = () => {
   const { copy, isCopied } = useCopy()
 
-  function handleCopy() {
-    copy(sourceCode)
+  async function handleCopy() {
+    const contentEl = document.querySelector<HTMLDivElement>('.nextra-content')
+    if (!contentEl) {
+      return
+    }
+    try {
+      // dynamically import to avoid increasing bundle size
+      const md = await html2md(contentEl.innerHTML)
+      copy(md)
+    } catch (error) {
+      console.error('Failed to convert HTML to Markdown:', error)
+    }
   }
 
   return (

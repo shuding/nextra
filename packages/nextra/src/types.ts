@@ -143,6 +143,9 @@ export type EvaluateResult = {
   toc: Heading[]
   /** Page's front matter or `metadata` object including `title`, `description`, etc. */
   metadata: $NextraMetadata
-  /** Raw MDX source code */
-  sourceCode: string
+  /**
+   * Raw MDX source code
+   * @deprecated no longer used, will be removed in Nextra 5
+   */
+  sourceCode?: string
 }

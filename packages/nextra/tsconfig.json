@@ -12,9 +12,6 @@
     "lib": ["esnext", "dom"],
     "moduleResolution": "node",
     "types": ["vitest/globals"],
-    "paths": {
-      "unified": ["./node_modules/unified"]
-    },
     "resolveJsonModule": true,
     "noUncheckedIndexedAccess": true
   },
