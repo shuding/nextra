@@ -269,13 +269,6 @@ function getDocEntry({
   }
 }
 
-// function getTypeNode(t: TsSymbol) {
-//   const decls = t.getDeclarations()
-//   return decls[0]!
-//     .asKindOrThrow(SyntaxKind.TypeAliasDeclaration)
-//     .getTypeNodeOrThrow()
-// }
-
 function flatInline(paramType: Type): string {
   const inlineParamAlias = paramType.getNonNullableType().getAliasSymbol()
   const paramTags = inlineParamAlias && getTags(inlineParamAlias)
@@ -291,23 +284,6 @@ function flatInline(paramType: Type): string {
       undefined,
       ts.TypeFormatFlags.NoTruncation | ts.TypeFormatFlags.InTypeAlias
     )
-
-  // Try to use the TypeScript compiler to expand the type
-  // try {
-  //   const nodeType = typeNode.getType()
-  //
-  //   // Try to expand aliases completely using TypeScript compiler
-  //   const fullyExpandedType = compilerObject.typeToString(
-  //     nodeType.compilerType,
-  //     undefined,
-  //     ts.TypeFormatFlags.NoTruncation | ts.TypeFormatFlags.InTypeAlias
-  //   )
-  //
-  //   return fullyExpandedType
-  // } catch (error) {
-  //   // Silently fall back to original type text if expansion fails
-  // }
-
   return typeText
 }
 

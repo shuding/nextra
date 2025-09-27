@@ -1045,7 +1045,7 @@ export default $`
     `)
   })
 
-  it.only('should recursively @inline', () => {
+  it('should recursively @inline', () => {
     const code = `
 import { ReactFlowInstance } from '@xyflow/react'
 
