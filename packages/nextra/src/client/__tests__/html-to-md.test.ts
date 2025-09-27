@@ -1,4 +1,3 @@
-import { describe } from 'vitest'
 import { htmlToMarkdown } from '../html-to-md'
 import metaPage from './fixtures/meta-page.txt?raw'
 import pagePage from './fixtures/page-page.txt?raw'
