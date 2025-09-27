@@ -269,20 +269,21 @@ function getDocEntry({
   }
 }
 
-function flatInline(paramType: Type): string {
+function printType(paramType: Type): string {
   const inlineParamAlias = paramType.getNonNullableType().getAliasSymbol()
   const paramTags = inlineParamAlias && getTags(inlineParamAlias)
   const hasLine = paramTags && 'inline' in paramTags
   if (!hasLine) {
     return getFormattedText(paramType)
   }
-
-  // const typeNode = getTypeNode(inlineParamAlias)
   const typeText = inlineParamAlias
     ?.getDeclaredType()
     .getText(
       undefined,
-      ts.TypeFormatFlags.NoTruncation | ts.TypeFormatFlags.InTypeAlias
+      ts.TypeFormatFlags.NoTruncation |
+      ts.TypeFormatFlags.InTypeAlias
+      // | ts.TypeFormatFlags.WriteArrayAsGenericType
+      // | ts.TypeFormatFlags.UseFullyQualifiedType
     )
   return typeText
 }
@@ -340,7 +341,7 @@ function getTypeName({
       const paramType = project
         .getTypeChecker()
         .getTypeOfSymbolAtLocation(param, paramDecl)
-      const paramTypeStr = flatInline(paramType)
+      const paramTypeStr = printType(paramType)
       const optional = paramDecl
         .asKindOrThrow(SyntaxKind.Parameter)
         .isOptional()

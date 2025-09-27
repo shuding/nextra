@@ -1010,11 +1010,7 @@ export default $`
             "tags": {
               "inline": "",
             },
-            "type": "(viewport: Viewport, options?: {
-          duration?: number;
-          ease?: (t: number) => number;
-          interpolate?: 'smooth' | 'linear';
-      }) => Promise<boolean>",
+            "type": "(viewport: Viewport, options?: { duration?: number; ease?: (t: number) => number; interpolate?: "smooth" | "linear"; }) => Promise<boolean>",
           },
           {
             "name": "foo",
@@ -1035,9 +1031,7 @@ export default $`
           },
           {
             "name": "zz",
-            "type": "(options?: {
-    baz: string;
-}) => Promise<boolean>",
+            "type": "(options?: { baz: string; }) => Promise<boolean>",
           },
         ],
         "name": "$",
