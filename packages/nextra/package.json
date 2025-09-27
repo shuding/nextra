@@ -108,7 +108,7 @@
     "shiki": "^3.2.1",
     "slash": "^5.1.0",
     "title": "^4.0.1",
-    "ts-morph": "^26.0.0",
+    "ts-morph": "^27.0.0",
     "unist-util-remove": "^4.0.0",
     "unist-util-visit": "^5.0.0",
     "unist-util-visit-children": "^3.0.0",

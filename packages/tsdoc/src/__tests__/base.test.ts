@@ -1036,8 +1036,8 @@ export default $`
           {
             "name": "zz",
             "type": "(options?: {
-        baz: string
-      }) => Promise<boolean>",
+    baz: string;
+}) => Promise<boolean>",
           },
         ],
         "name": "$",
@@ -1058,7 +1058,7 @@ export default $`
         "entries": [
           {
             "name": "fitView",
-            "type": "(fitViewOptions?: FitViewOptionsBase<NodeType>) => Promise<boolean>",
+            "type": "(fitViewOptions?: { padding?: Padding; includeHiddenNodes?: boolean; minZoom?: number; maxZoom?: number; duration?: number; ease?: (t: number) => number; interpolate?: "smooth" | "linear"; nodes?: (NodeType | { id: string; })[]; }) => Promise<boolean>",
           },
         ],
         "name": "$",
