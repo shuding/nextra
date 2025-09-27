@@ -2,7 +2,6 @@
   "description": "The `getSmoothStepPath` util returns everything you need to render a stepped path
 between two nodes. The `borderRadius` property can be used to choose how rounded
 the corners of those steps are.",
-  "filePath": "../../node_modules/.pnpm/@xyflow+system@0.0.65/node_modules/@xyflow/system/dist/esm/utils/edges/smoothstep-edge.d.ts",
   "name": "getSmoothStepPath",
   "signatures": [
     {
@@ -68,6 +67,16 @@ the corners of those steps are.",
           "optional": true,
           "tags": {
             "default": "20",
+          },
+          "type": "number",
+        },
+        {
+          "description": "Controls where the bend occurs along the path.
+0 = at source, 1 = at target, 0.5 = midpoint",
+          "name": "[0].stepPosition",
+          "optional": true,
+          "tags": {
+            "default": "0.5",
           },
           "type": "number",
         },
