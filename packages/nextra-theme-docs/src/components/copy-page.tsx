@@ -45,10 +45,9 @@ export const CopyPage: FC = () => {
     if (!contentEl) {
       return
     }
-    // dynamically import to avoid increasing bundle size
     try {
+      // dynamically import to avoid increasing bundle size
       const md = await html2md(contentEl.innerHTML)
-      console.log(md)
       copy(md)
     } catch (error) {
       console.error('Failed to convert HTML to Markdown:', error)
