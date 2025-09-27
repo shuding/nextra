@@ -3,4 +3,4 @@
 'nextra': patch
 ---
 
-fix TSDoc `@inline` tag didn't inline properly deep level types
+fix TSDoc `@inline` tag to properly expand nested type aliases
