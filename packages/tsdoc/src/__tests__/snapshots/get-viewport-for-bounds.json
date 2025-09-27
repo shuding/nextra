@@ -1,6 +1,5 @@
 {
   "description": "Returns a viewport that encloses the given bounds with padding.",
-  "filePath": "../../node_modules/.pnpm/@xyflow+system@0.0.65/node_modules/@xyflow/system/dist/esm/utils/general.d.ts",
   "name": "getViewportForBounds",
   "signatures": [
     {

@@ -52,6 +52,10 @@
       "types": "./dist/server/tsdoc/index.d.ts",
       "import": "./dist/server/tsdoc/index.js"
     },
+    "./merge-meta-with-page-map": {
+      "types": "./dist/server/page-map/merge-meta-with-page-map.d.ts",
+      "import": "./dist/server/page-map/merge-meta-with-page-map.js"
+    },
     "./*": {
       "types": "./dist/client/*.d.ts",
       "import": "./dist/client/*.js"
@@ -108,7 +112,7 @@
     "shiki": "^3.2.1",
     "slash": "^5.1.0",
     "title": "^4.0.1",
-    "ts-morph": "^26.0.0",
+    "ts-morph": "^27.0.0",
     "unist-util-remove": "^4.0.0",
     "unist-util-visit": "^5.0.0",
     "unist-util-visit-children": "^3.0.0",

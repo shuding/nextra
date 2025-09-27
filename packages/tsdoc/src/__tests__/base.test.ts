@@ -464,7 +464,10 @@ export default Connection`
     test('ReactFlowInstance', async () => {
       const code =
         'export { ReactFlowInstance as default } from "@xyflow/react"'
-      const result = generateDefinition({ code, flattened: true })
+      const { filePath: _, ...result } = generateDefinition({
+        code,
+        flattened: true
+      })
       await expect(result).toMatchFileSnapshot(
         './snapshots/react-flow-instance.json'
       )
@@ -519,7 +522,7 @@ export default $
                   "description": "What type of handle connections do you want to observe?",
                   "name": "[0]?.handleType",
                   "optional": true,
-                  "type": "HandleType",
+                  "type": "'source' | 'target'",
                 },
                 {
                   "description": "Filter by handle id (this is only needed if the node has multiple handles of the same type).",
@@ -531,13 +534,13 @@ export default $
                   "description": "Gets called when a connection is established.",
                   "name": "[0]?.onConnect",
                   "optional": true,
-                  "type": "(connections: Connection[]) => void",
+                  "type": "(connections: HandleConnection[]) => void",
                 },
                 {
                   "description": "Gets called when a connection is removed.",
                   "name": "[0]?.onDisconnect",
                   "optional": true,
-                  "type": "(connections: Connection[]) => void",
+                  "type": "(connections: HandleConnection[]) => void",
                 },
               ],
               "returns": {
@@ -800,7 +803,10 @@ export default foo`
   test('should exclude {@link ...}', async () => {
     const code =
       "export { getViewportForBounds as default } from '@xyflow/react'"
-    const result = generateDefinition({ code, flattened: true })
+    const { filePath: _, ...result } = generateDefinition({
+      code,
+      flattened: true
+    })
     await expect(result).toMatchFileSnapshot(
       './snapshots/get-viewport-for-bounds.json'
     )
@@ -840,7 +846,7 @@ export default foo`
   })
 
   test('should flatten params', async () => {
-    const result = generateDefinition({
+    const { filePath: _, ...result } = generateDefinition({
       code: "export { getSmoothStepPath as default } from '@xyflow/react'",
       flattened: true
     })
@@ -1004,11 +1010,7 @@ export default $`
             "tags": {
               "inline": "",
             },
-            "type": "(viewport: Viewport, options?: {
-          duration?: number;
-          ease?: (t: number) => number;
-          interpolate?: 'smooth' | 'linear';
-      }) => Promise<boolean>",
+            "type": "(viewport: Viewport, options?: { duration?: number; ease?: (t: number) => number; interpolate?: "smooth" | "linear"; }) => Promise<boolean>",
           },
           {
             "name": "foo",
@@ -1029,9 +1031,28 @@ export default $`
           },
           {
             "name": "zz",
-            "type": "(options?: {
-        baz: string
-      }) => Promise<boolean>",
+            "type": "(options?: { baz: string; }) => Promise<boolean>",
+          },
+        ],
+        "name": "$",
+      }
+    `)
+  })
+
+  it('should recursively @inline', () => {
+    const code = `
+import { ReactFlowInstance } from '@xyflow/react'
+
+type $ = Pick<ReactFlowInstance, 'fitView'>
+
+export default $`
+    const result = generateDefinition({ code })
+    expect(result).toMatchInlineSnapshot(`
+      {
+        "entries": [
+          {
+            "name": "fitView",
+            "type": "(fitViewOptions?: { padding?: Padding; includeHiddenNodes?: boolean; minZoom?: number; maxZoom?: number; duration?: number; ease?: (t: number) => number; interpolate?: "smooth" | "linear"; nodes?: (NodeType | { id: string; })[]; }) => Promise<boolean>",
           },
         ],
         "name": "$",
