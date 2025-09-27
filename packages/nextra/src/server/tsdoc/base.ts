@@ -276,15 +276,12 @@ function printType(paramType: Type): string {
   if (!hasLine) {
     return getFormattedText(paramType)
   }
-  const typeText = inlineParamAlias
-    ?.getDeclaredType()
-    .getText(
-      undefined,
-      ts.TypeFormatFlags.NoTruncation |
-      ts.TypeFormatFlags.InTypeAlias
-      // | ts.TypeFormatFlags.WriteArrayAsGenericType
-      // | ts.TypeFormatFlags.UseFullyQualifiedType
-    )
+  const typeText = inlineParamAlias?.getDeclaredType().getText(
+    undefined,
+    ts.TypeFormatFlags.NoTruncation | ts.TypeFormatFlags.InTypeAlias
+    // | ts.TypeFormatFlags.WriteArrayAsGenericType
+    // | ts.TypeFormatFlags.UseFullyQualifiedType
+  )
   return typeText
 }
 
