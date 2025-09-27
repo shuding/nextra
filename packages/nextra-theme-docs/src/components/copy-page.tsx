@@ -40,14 +40,18 @@ async function html2md(html: string) {
 export const CopyPage: FC = () => {
   const { copy, isCopied } = useCopy()
 
-  function handleCopy() {
-    const contentEl = document.querySelector('.nextra-content')
-    if (contentEl) {
-      // dynamically import to avoid increasing bundle size
-      html2md(contentEl.innerHTML).then(md => {
-        console.log(md)
-        copy(md)
-      })
+  async function handleCopy() {
+    const contentEl = document.querySelector<HTMLDivElement>('.nextra-content')
+    if (!contentEl) {
+      return
+    }
+    // dynamically import to avoid increasing bundle size
+    try {
+      const md = await html2md(contentEl.innerHTML)
+      console.log(md)
+      copy(md)
+    } catch (error) {
+      console.error('Failed to convert HTML to Markdown:', error)
     }
   }
 
