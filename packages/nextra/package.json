@@ -52,6 +52,10 @@
       "types": "./dist/server/tsdoc/index.d.ts",
       "import": "./dist/server/tsdoc/index.js"
     },
+    "./merge-meta-with-page-map": {
+      "types": "./dist/server/page-map/merge-meta-with-page-map.d.ts",
+      "import": "./dist/server/page-map/merge-meta-with-page-map.js"
+    },
     "./*": {
       "types": "./dist/client/*.d.ts",
       "import": "./dist/client/*.js"
