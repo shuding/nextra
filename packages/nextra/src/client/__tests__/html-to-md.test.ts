@@ -8,10 +8,10 @@ import pagePage from './fixtures/page-page.txt?raw'
 describe('html-to-md', () => {
   it.only('meta page', async () => {
     const md = await htmlToMarkdown(metaPage)
-    expect(md).toMatchFileSnapshot('./fixtures/meta-page.md')
+    await expect(md).toMatchFileSnapshot('./fixtures/meta-page.md')
   })
   it.only('page page', async () => {
     const md = await htmlToMarkdown(pagePage)
-    expect(md).toMatchFileSnapshot('./fixtures/page-page.md')
+    await expect(md).toMatchFileSnapshot('./fixtures/page-page.md')
   })
 })
