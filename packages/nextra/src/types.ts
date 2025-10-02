@@ -127,7 +127,7 @@ export type PagefindIndexOptions = {
    *
    * Only applies in multisite setups.
    */
-  mergeFilter?: Object
+  mergeFilter?: object
   /**
    * If set, will ass the search term as a query parameter under this key, for use with Pagefind's highlighting script.
    */
