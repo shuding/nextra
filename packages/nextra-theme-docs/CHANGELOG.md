@@ -1,5 +1,16 @@
 # nextra-theme-docs
 
+## 4.6.0
+
+### Minor Changes
+
+- e1d0ebd: Support disabling the "Copy Page" button through the `theme.copyPage`
+  setting in `_meta` files
+
+### Patch Changes
+
+- nextra@4.6.0
+
 ## 4.5.1
 
 ### Patch Changes
