@@ -7,6 +7,12 @@ export interface LayoutProps {
   children: React.ReactNode
 
   /**
+   * Hide/show copy page content button.
+   * @default true
+   */
+  copyPageButton?: boolean
+
+  /**
    * Show or hide the dark mode select button.
    * @default true
    */

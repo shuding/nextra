@@ -176,8 +176,12 @@ export const reactNode = z.custom<ReactNode>(
     if (Array.isArray(data)) {
       return data.every(item => checkReactNode(item))
     }
+    const isServerComponent =
+      typeof data === 'object' &&
+      '$$typeof' in data &&
+      data.$$typeof === Symbol.for('react.lazy')
     // If it's none of the above, it's not a valid React node
-    return false
+    return isServerComponent
   },
   { error: 'Must be a valid React node' }
 )

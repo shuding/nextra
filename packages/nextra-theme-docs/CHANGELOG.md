@@ -1,5 +1,27 @@
 # nextra-theme-docs
 
+## 4.5.1
+
+### Patch Changes
+
+- 8a4d176: fix TSDoc `@inline` tag to properly expand nested type aliases
+- Updated dependencies [8a4d176]
+  - nextra@4.5.1
+
+## 4.5.0
+
+### Minor Changes
+
+- 356a782: fix copy page button does not return the correct page contents due to
+  cached MDX compiler
+
+  add a `copyPageButton` layout prop which show/hide copy page content button
+
+### Patch Changes
+
+- Updated dependencies [356a782]
+  - nextra@4.5.0
+
 ## 4.4.0
 
 ### Minor Changes
