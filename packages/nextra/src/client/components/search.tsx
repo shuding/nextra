@@ -19,18 +19,24 @@ import type {
   SyntheticEvent
 } from 'react'
 import { useDeferredValue, useEffect, useRef, useState } from 'react'
-import type { PagefindSearchOptions } from '../../types.js'
+import type {
+  PagefindIndexOptions,
+  PagefindSearchOptions
+} from '../../types.js'
 import { useMounted } from '../hooks/use-mounted.js'
 import { InformationCircleIcon, SpinnerIcon } from '../icons/index.js'
 
 // Fix React Compiler (BuildHIR::lowerExpression) Handle Import expressions
-export async function importPagefind() {
+export async function importPagefind(
+  pageFindIndexOptions?: PagefindIndexOptions
+) {
   window.pagefind = await import(
     /* webpackIgnore: true */ addBasePath('/_pagefind/pagefind.js')
   )
   await window.pagefind!.options({
-    baseUrl: '/'
+    baseUrl: '/',
     // ... more search options
+    ...pageFindIndexOptions
   })
 }
 
@@ -76,6 +82,8 @@ interface SearchProps extends InputProps {
   placeholder?: string
   /** Input container CSS class name. */
   className?: string
+  /** Options that can be passed to pagefind.options() */
+  pageFindIndexOptions?: PagefindIndexOptions
   searchOptions?: PagefindSearchOptions
   /**
    * Callback function that triggers whenever the search input changes.
@@ -144,6 +152,7 @@ export const Search: FC<SearchProps> = ({
   errorText = 'Failed to load search index.',
   loading = 'Loading…',
   placeholder = 'Search documentation…',
+  pageFindIndexOptions,
   searchOptions,
   onSearch,
   ...props
@@ -166,7 +175,7 @@ export const Search: FC<SearchProps> = ({
       setIsLoading(true)
       if (!window.pagefind) {
         try {
-          await importPagefind()
+          await importPagefind(pageFindIndexOptions)
         } catch (error) {
           const message =
             error instanceof Error
