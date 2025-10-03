@@ -43,7 +43,7 @@
     "next": "^15.0.2",
     "nextra": "workspace:*",
     "postcss": "^8.4.33",
-    "react": "19.1.0",
+    "react": "19.2.0",
     "tailwindcss": "4.1.10",
     "vitest": "^3.0.0",
     "zx": "^8.2.4"
