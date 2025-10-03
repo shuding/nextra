@@ -6,6 +6,6 @@ export default {
   advanced: {
     theme: {
       copyPage: false
-    } 
+    }
   }
 }

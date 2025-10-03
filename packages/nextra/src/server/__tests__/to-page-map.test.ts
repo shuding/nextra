@@ -129,6 +129,7 @@ describe('generatePageMap()', () => {
         "app/docs/guide/link/page.mdx",
         "app/docs/guide/markdown/page.mdx",
         "app/docs/guide/page.mdx",
+        "app/docs/guide/search/ai/page.mdx",
         "app/docs/guide/search/page.mdx",
         "app/docs/guide/ssg/page.mdx",
         "app/docs/guide/static-exports/page.mdx",
@@ -387,7 +388,18 @@ describe('generatePageMap()', () => {
                   "route": "/docs/guide",
                 },
                 {
-                  "__pagePath": "app/docs/guide/search/page.mdx",
+                  "children": [
+                    {
+                      "__pagePath": "app/docs/guide/search/ai/page.mdx",
+                      "name": "ai",
+                      "route": "/docs/guide/search/ai",
+                    },
+                    {
+                      "__pagePath": "app/docs/guide/search/page.mdx",
+                      "name": "index",
+                      "route": "/docs/guide/search",
+                    },
+                  ],
                   "name": "search",
                   "route": "/docs/guide/search",
                 },
@@ -492,6 +504,7 @@ describe('generatePageMap()', () => {
         import {metadata as app_docs_guide_link_page} from "private-next-root-dir/app/docs/guide/link/page.mdx?metadata";
         import {metadata as app_docs_guide_markdown_page} from "private-next-root-dir/app/docs/guide/markdown/page.mdx?metadata";
         import {metadata as app_docs_guide_page} from "private-next-root-dir/app/docs/guide/page.mdx?metadata";
+        import {metadata as app_docs_guide_search_ai_page} from "private-next-root-dir/app/docs/guide/search/ai/page.mdx?metadata";
         import {metadata as app_docs_guide_search_page} from "private-next-root-dir/app/docs/guide/search/page.mdx?metadata";
         import {metadata as app_docs_guide_ssg_page} from "private-next-root-dir/app/docs/guide/ssg/page.mdx?metadata";
         import {metadata as app_docs_guide_static_exports_page} from "private-next-root-dir/app/docs/guide/static-exports/page.mdx?metadata";
@@ -699,7 +712,15 @@ describe('generatePageMap()', () => {
             }, {
               name: "search",
               route: "/docs/guide/search",
-              frontMatter: app_docs_guide_search_page
+              children: [{
+                name: "ai",
+                route: "/docs/guide/search/ai",
+                frontMatter: app_docs_guide_search_ai_page
+              }, {
+                name: "index",
+                route: "/docs/guide/search",
+                frontMatter: app_docs_guide_search_page
+              }]
             }, {
               name: "ssg",
               route: "/docs/guide/ssg",
