@@ -1,5 +1,6 @@
 import { getEnhancedPageMap } from '@components/get-page-map'
 import { NextraLogo, VercelLogo } from '@components/icons'
+import { ChatButton } from '@components/inkeep-chat-button'
 import cn from 'clsx'
 import type { Metadata } from 'next'
 import NextImage from 'next/image'
@@ -50,12 +51,11 @@ export const metadata: Metadata = {
 }
 
 const banner = (
-  <Banner dismissible={false}>
-    🎉 Nextra 4.0 is released. dimaMachina is looking{' '}
-    <Link href="https://github.com/dimaMachina" className="text-current!">
-      for a new job or consulting
+  <Banner>
+    🎉 Nextra 4.0 has been released.{' '}
+    <Link href="https://the-guild.dev/blog/nextra-4" className="text-current!">
+      Read blogpost
     </Link>
-    .
   </Banner>
 )
 const navbar = (
@@ -122,6 +122,7 @@ const RootLayout: FC<{
             )
           }}
         >
+          <ChatButton />
           {children}
         </Layout>
       </body>

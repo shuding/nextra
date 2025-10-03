@@ -176,6 +176,7 @@ export default {
   showcase: {
     type: 'page',
     theme: {
+      copyPage: false,
       typesetting: 'article',
       layout: 'full',
       timestamp: false,
@@ -185,6 +186,7 @@ export default {
   sponsors: {
     type: 'page',
     theme: {
+      copyPage: false,
       typesetting: 'article',
       layout: 'full',
       timestamp: false,
