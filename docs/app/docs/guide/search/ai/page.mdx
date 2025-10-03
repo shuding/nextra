@@ -2,34 +2,37 @@ import { Steps } from 'nextra/components'
 
 # Ask AI
 
-You can easily integrate [Inkeep](https://docs.inkeep.com/cloud)'s chat button
-into your site for real-time user assistance.
+Enhance your Nextra documentation site with AI-powered chat assistance using
+[Inkeep](https://docs.inkeep.com/cloud). This integration allows users to get
+instant help and answers directly within your documentation, improving user
+experience and reducing support burden.
 
 ## Setup
 
 <Steps>
 ### Get an API key
 
-Follow [these steps](/projects/overview#create-a-web-assistant) to create an API
-key for your web assistant.
+Follow
+[these steps](https://docs.inkeep.com/cloud/projects/overview#create-a-web-assistant)
+to create an API key for your web assistant.
 
 Copy and add the API key to your environment variables:
 
 ```dotenv filename=".env"
-NEXT_PUBLIC_INKEEP_API_KEY="YOUR_INKEEP_API_KEY"
+NEXT_PUBLIC_INKEEP_API_KEY="your_actual_api_key_here"
 ```
 
 ### Install the component library
+
+Install the Inkeep React component library:
 
 ```sh npm2yarn
 npm i @inkeep/cxkit-react
 ```
 
-### Define the component
+### Create the chat button component
 
-Next, create an `inkeep-chat-button.tsx` file for the
-[`Chat Button`](https://docs.inkeep.com/ui-components/react/chat-button)
-component.
+Create a new file `inkeep-chat-button.tsx`:
 
 ```tsx filename="inkeep-chat-button.tsx"
 'use client'
@@ -41,11 +44,14 @@ export const ChatButton: FC = () => {
   return (
     <InkeepChatButton
       aiChatSettings={{
-        aiAssistantAvatar: '/icon.svg',
-        aiAssistantName: 'Inkeep'
+        // Customize your AI assistant's appearance
+        aiAssistantAvatar: '/icon.svg', // Path to your assistant's avatar
+        aiAssistantName: 'Nextra Assistant' // Name shown to users
       }}
       baseSettings={{
+        // Match your site's brand colors
         primaryBrandColor: '#238aff',
+        // Sync with your site's dark/light mode
         colorMode: {
           sync: {
             target: 'html',
@@ -61,9 +67,11 @@ export const ChatButton: FC = () => {
 }
 ```
 
-### Import in root layout
+### Add to your root layout
 
-```tsx
+Import and add the `ChatButton` component to your root layout file:
+
+```tsx filename="app/layout.tsx"
 import { Layout } from 'nextra-theme-docs' // or nextra-theme-blog or your custom theme
 import { Head } from 'nextra/components'
 import { getPageMap } from 'nextra/page-map'
@@ -72,13 +80,15 @@ import { ChatButton } from '../path/to/your/inkeep-chat-button'
 
 const RootLayout: FC<LayoutProps<'/'>> = async ({ children }) => {
   const pageMap = await getPageMap()
+
   return (
     <html lang="en" dir="ltr" suppressHydrationWarning>
       <Head />
       <body>
         <ChatButton />
         <Layout
-        // ... layout props
+          pageMap={pageMap}
+          // ... other layout props
         >
           {children}
         </Layout>
@@ -90,8 +100,14 @@ const RootLayout: FC<LayoutProps<'/'>> = async ({ children }) => {
 export default RootLayout
 ```
 
+> [!IMPORTANT]
+>
+> The chat button will appear on all pages of your documentation site.
+
 </Steps>
 
-> [!NOTE]
->
-> Visit [Inkeep's official docs integration](https://docs.inkeep.com/cloud/integrations/nextra) for Nextra
+## Additional resources
+
+- [Inkeep's official Nextra integration guide](https://docs.inkeep.com/cloud/integrations/nextra)
+- [Inkeep React component documentation](https://docs.inkeep.com/cloud/ui-components/react/chat-button)
+- [Inkeep Dashboard](https://portal.inkeep.com) for configuration and analytics
