@@ -11,6 +11,7 @@ export const ChatButton: FC = () => {
         aiAssistantName: 'Inkeep'
       }}
       baseSettings={{
+        apiKey: process.env.NEXT_PUBLIC_INKEEP_API_KEY!,
         primaryBrandColor: '#238aff',
         colorMode: {
           sync: {
