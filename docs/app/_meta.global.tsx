@@ -64,7 +64,17 @@ const GUIDE: MetaRecord = {
   i18n: '',
   'custom-css': '',
   'static-exports': '',
-  search: '',
+  search: {
+    items: {
+      index: '',
+      ai: {
+        title: <span className="badge-new">Ask AI</span>
+      }
+    },
+    theme: {
+      collapsed: false
+    }
+  },
   'github-alert-syntax': '',
   turbopack: '',
   _: {
