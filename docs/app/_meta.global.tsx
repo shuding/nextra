@@ -154,7 +154,6 @@ export default {
   },
   api: {
     type: 'page',
-    title: <span className="badge-new">API</span>
   },
   versions: {
     type: 'menu',
