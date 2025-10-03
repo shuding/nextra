@@ -34,8 +34,8 @@ component.
 ```tsx filename="inkeep-chat-button.tsx"
 'use client'
 
-import type { FC } from 'react'
 import { InkeepChatButton } from '@inkeep/cxkit-react'
+import type { FC } from 'react'
 
 export const ChatButton: FC = () => {
   return (
@@ -64,9 +64,9 @@ export const ChatButton: FC = () => {
 ### Import in root layout
 
 ```tsx
-import type { FC } from 'react'
-import { getPageMap } from 'nextra/page-map'
 import { Layout } from 'nextra-theme-docs' // or nextra-theme-blog or your custom theme
+import { getPageMap } from 'nextra/page-map'
+import type { FC } from 'react'
 import { ChatButton } from '../path/to/your/inkeep-chat-button'
 
 const RootLayout: FC<LayoutProps<'/'>> = async ({ children }) => {
@@ -77,6 +77,7 @@ const RootLayout: FC<LayoutProps<'/'>> = async ({ children }) => {
       <body>
         <ChatButton />
         <Layout
+        // ... layout props
         >
           {children}
         </Layout>
