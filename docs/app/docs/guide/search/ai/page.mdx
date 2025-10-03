@@ -44,6 +44,7 @@ export const ChatButton: FC = () => {
   return (
     <InkeepChatButton
       aiChatSettings={{
+        apiKey: process.env.NEXT_PUBLIC_INKEEP_API_KEY!,
         // Customize your AI assistant's appearance
         aiAssistantAvatar: '/icon.svg', // Path to your assistant's avatar
         aiAssistantName: 'Nextra Assistant' // Name shown to users
