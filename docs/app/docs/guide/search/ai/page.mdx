@@ -1,0 +1,91 @@
+import { Steps } from 'nextra/components'
+
+# Ask AI
+
+You can easily integrate [Inkeep](https://docs.inkeep.com/cloud)'s chat button
+into your site for real-time user assistance.
+
+## Setup
+
+<Steps>
+### Get an API key
+
+Follow [these steps](/projects/overview#create-a-web-assistant) to create an API
+key for your web assistant.
+
+Copy and add the API key to your environment variables:
+
+```dotenv filename=".env"
+NEXT_PUBLIC_INKEEP_API_KEY="YOUR_INKEEP_API_KEY"
+```
+
+### Install the component library
+
+```sh npm2yarn
+npm i @inkeep/cxkit-react
+```
+
+### Define the component
+
+Next, create an `inkeep-chat-button.tsx` file for the
+[`Chat Button`](https://docs.inkeep.com/ui-components/react/chat-button)
+component.
+
+```tsx filename="inkeep-chat-button.tsx"
+'use client'
+
+import type { FC } from 'react'
+import { InkeepChatButton } from '@inkeep/cxkit-react'
+
+export const ChatButton: FC = () => {
+  return (
+    <InkeepChatButton
+      aiChatSettings={{
+        aiAssistantAvatar: '/icon.svg',
+        aiAssistantName: 'Inkeep'
+      }}
+      baseSettings={{
+        primaryBrandColor: '#238aff',
+        colorMode: {
+          sync: {
+            target: 'html',
+            attributes: ['class'],
+            isDarkMode(attrs) {
+              return attrs.class === 'dark'
+            }
+          }
+        }
+      }}
+    />
+  )
+}
+```
+
+### Import in root layout
+
+```tsx
+import type { FC } from 'react'
+import { getPageMap } from 'nextra/page-map'
+import { Layout } from 'nextra-theme-docs' // or nextra-theme-blog or your custom theme
+import { ChatButton } from '../path/to/your/inkeep-chat-button'
+
+const RootLayout: FC<LayoutProps<'/'>> = async ({ children }) => {
+  const pageMap = await getPageMap()
+  return (
+    <html lang="en" dir="ltr" suppressHydrationWarning>
+      <Head />
+      <body>
+        <ChatButton />
+        <Layout
+        >
+          {children}
+        </Layout>
+      </body>
+    </html>
+  )
+}
+
+export default RootLayout
+```
+
+</Steps>

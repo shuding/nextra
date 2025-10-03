@@ -81,7 +81,8 @@ const nextConfig = withNextra({
     ignoreDuringBuilds: true
   },
   env: {
-    NEXT_PUBLIC_INKEEP_API_KEY: 'dee399c7f7ac40b9de0d0b85ca32959953b9ff7c9fc8d96c'
+    NEXT_PUBLIC_INKEEP_API_KEY:
+      'dee399c7f7ac40b9de0d0b85ca32959953b9ff7c9fc8d96c'
   },
   redirects: async () => [
     {

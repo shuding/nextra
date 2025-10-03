@@ -198,7 +198,7 @@ export const pageThemeSchema = z.strictObject({
       'Indicates whether the item in sidebar is collapsed by default.',
     default: false
   }),
-  copyPage: z.boolean().default(true).meta({
+  copyPage: z.boolean().optional().default(true).meta({
     description: 'Specifies whether to display the copy page button.',
     default: true
   }),

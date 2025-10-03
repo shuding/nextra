@@ -6,7 +6,7 @@ import type { Metadata } from 'next'
 import NextImage from 'next/image'
 import { Footer, Layout, Link, Navbar } from 'nextra-theme-docs'
 import { Anchor, Banner, Head } from 'nextra/components'
-import type { FC, ReactNode } from 'react'
+import type { FC } from 'react'
 import xyflow from './showcase/_logos/xyflow.png'
 import './globals.css'
 
@@ -91,14 +91,13 @@ const footer = (
   </Footer>
 )
 
-const RootLayout: FC<{
-  children: ReactNode
-}> = async ({ children }) => {
+const RootLayout: FC<LayoutProps<'/'>> = async ({ children }) => {
   const pageMap = await getEnhancedPageMap()
   return (
     <html lang="en" dir="ltr" suppressHydrationWarning>
       <Head />
       <body>
+        <ChatButton />
         <Layout
           banner={banner}
           navbar={navbar}
@@ -122,7 +121,6 @@ const RootLayout: FC<{
             )
           }}
         >
-          <ChatButton />
           {children}
         </Layout>
       </body>
