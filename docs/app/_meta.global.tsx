@@ -153,7 +153,7 @@ export default {
     }
   },
   api: {
-    type: 'page',
+    type: 'page'
   },
   versions: {
     type: 'menu',
