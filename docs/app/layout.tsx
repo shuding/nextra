@@ -7,7 +7,7 @@ import NextImage from 'next/image'
 import { Footer, Layout, Link, Navbar } from 'nextra-theme-docs'
 import { Anchor, Banner, Head } from 'nextra/components'
 import type { FC } from 'react'
-import xyflow from './showcase/_logos/xyflow.png'
+import inkeep from './showcase/_logos/inkeep.png'
 import './globals.css'
 
 export const metadata: Metadata = {
@@ -110,10 +110,11 @@ const RootLayout: FC<LayoutProps<'/'>> = async ({ children }) => {
             extraContent: (
               <>
                 <b className="mt-2 text-xs">Sponsored by:</b>
-                <Anchor href="https://xyflow.com?utm_source=nextra.site&utm_campaign=nextra&utm_content=sidebarLink">
+                <Anchor href="https://inkeep.com?utm_source=nextra.site&utm_campaign=nextra&utm_content=sidebarLink">
                   <NextImage
-                    src={xyflow}
-                    alt="Wire your ideas with xyflow!"
+                    src={inkeep}
+                    title="AI Agents that get real work done"
+                    alt="AI Agents that get real work done"
                     className="nextra-border rounded-sm border"
                   />
                 </Anchor>
