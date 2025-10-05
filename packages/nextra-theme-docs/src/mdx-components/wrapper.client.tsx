@@ -44,7 +44,9 @@ export const ClientWrapper: FC<Omit<ComponentProps<MDXWrapper>, 'toc'>> = ({
         {themeContext.breadcrumb && activeType !== 'page' && (
           <Breadcrumb activePath={activePath} />
         )}
-        {sourceCode && <CopyPage sourceCode={sourceCode} />}
+        {themeConfig.copyPageButton && themeContext.copyPage && sourceCode && (
+          <CopyPage sourceCode={sourceCode} />
+        )}
         {children}
         {date ? (
           <div className="x:mt-12 x:mb-8 x:text-xs x:text-gray-600 x:text-end x:dark:text-gray-400">

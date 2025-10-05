@@ -145,6 +145,7 @@ exports[`normalize-page > en-US getting-started 1`] = `
   "activeThemeContext": {
     "breadcrumb": true,
     "collapsed": undefined,
+    "copyPage": true,
     "footer": true,
     "layout": "default",
     "navbar": true,
@@ -839,6 +840,7 @@ exports[`normalize-page > en-US home 1`] = `
   "activeThemeContext": {
     "breadcrumb": true,
     "collapsed": undefined,
+    "copyPage": true,
     "footer": true,
     "layout": "default",
     "navbar": true,
@@ -1521,6 +1523,7 @@ exports[`normalize-page > should keep \`activeThemeContext\`, \`activeType\` for
   "activeThemeContext": {
     "breadcrumb": true,
     "collapsed": undefined,
+    "copyPage": true,
     "footer": true,
     "layout": "full",
     "navbar": true,

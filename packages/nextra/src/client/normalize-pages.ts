@@ -8,6 +8,7 @@ import type { Folder, FrontMatter, MdxFile, PageMapItem } from '../types.js'
 const DEFAULT_PAGE_THEME: PageTheme = {
   breadcrumb: true,
   collapsed: undefined,
+  copyPage: true,
   footer: true,
   layout: 'default',
   navbar: true,

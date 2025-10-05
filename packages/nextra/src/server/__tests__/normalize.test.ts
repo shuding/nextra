@@ -140,6 +140,7 @@ describe('normalize-page', () => {
       activeThemeContext: {
         breadcrumb: true,
         collapsed: undefined,
+        copyPage: true,
         footer: true,
         layout: 'default',
         navbar: true,

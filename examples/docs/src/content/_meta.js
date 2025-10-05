@@ -3,5 +3,9 @@ export default {
   'get-started': '',
   features: '',
   themes: '',
-  advanced: ''
+  advanced: {
+    theme: {
+      copyPage: false
+    }
+  }
 }
