@@ -35,7 +35,7 @@ export const NotFoundPage: FC<NotFoundPageProps> = ({
   return (
     <div
       className={cn(
-        'x:flex x:flex-col x:justify-center x:items-center x:h-[calc(100dvh-var(--nextra-navbar-height))]',
+        'nextra-404',
         className
       )}
     >

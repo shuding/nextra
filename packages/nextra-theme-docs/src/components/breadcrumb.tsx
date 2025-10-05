@@ -11,7 +11,7 @@ export const Breadcrumb: FC<{
   activePath: Item[]
 }> = ({ activePath }) => {
   return (
-    <div className="nextra-breadcrumb x:mt-1.5 x:flex x:items-center x:gap-1 x:overflow-hidden x:text-sm x:text-gray-600 x:dark:text-gray-400 x:contrast-more:text-current">
+    <div className="nextra-breadcrumb">
       {activePath.map((item, index, arr) => {
         const nextItem = arr[index + 1]
         const href = nextItem
@@ -31,17 +31,17 @@ export const Breadcrumb: FC<{
             {index > 0 && (
               <ArrowRightIcon
                 height="14"
-                className="x:shrink-0 x:rtl:rotate-180"
+                className="nextra-breadcrumb-arrow"
               />
             )}
             <ComponentToUse
               className={cn(
-                'x:whitespace-nowrap x:transition-colors',
+                'nextra-breadcrumb-item',
                 nextItem
-                  ? 'x:min-w-6 x:overflow-hidden x:text-ellipsis'
-                  : 'x:font-medium x:text-black x:dark:text-gray-100',
+                  ? 'nextra-breadcrumb-item-parent'
+                  : 'nextra-breadcrumb-item-child',
                 href &&
-                  'x:focus-visible:nextra-focus x:ring-inset x:hover:text-gray-900 x:dark:hover:text-gray-100'
+                  'nextra-breadcrumb-item-link'
               )}
               title={extractStringsFromReactNode(item.title)}
               {...(href && { href, prefetch: false })}
