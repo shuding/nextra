@@ -118,6 +118,15 @@
       "type": "string",
     },
     {
+      "description": "Option to serve `.md` and `.mdx` files from a directory other than `content`.",
+      "name": "contentDirName",
+      "optional": true,
+      "tags": {
+        "default": ""content"",
+      },
+      "type": "string",
+    },
+    {
       "description": "Prefixes locale to all links in the page map information. Useful for i18n when you don't want to use Nextra's `middleware` function.",
       "name": "unstable_shouldAddLocaleToLinks",
       "optional": true,

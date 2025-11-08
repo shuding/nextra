@@ -47,9 +47,21 @@ Hello, world!
 > You can keep `content` directory in root of your project, or in
 > [`src` directory](./src-directory).
 
-### Set `contentDirBasePath` option in `next.config` file (_optional_)
+### Set `contentDirBasePath` and `contentDirName` options in `next.config` file (_optional_)
 
-If you want to serve your content from a different path, you can set
+If you want to serve your content at a different route or from a different 
+path, you can set the `contentDirBasePath` and `contentDirName` options:
+
+```js filename="next.config.mjs" {4}
+import nextra from 'nextra'
+
+const withNextra = nextra({
+  contentDirBasePath: '/docs', // Or even nested e.g. `/docs/advanced`.
+  contentDirName: 'cms/markdown' // Nextra will look in the `/cms/markdown` and `/src/cms/markdown` folders for content.
+})
+```
+
+If you want to serve your content at a different path, you can set
 `contentDirBasePath` option:
 
 ```js filename="next.config.mjs" {4}
