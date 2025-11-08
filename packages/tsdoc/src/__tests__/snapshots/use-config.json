@@ -32,6 +32,11 @@ items.",
           "type": "boolean | undefined",
         },
         {
+          "name": "normalizePagesResult.activeThemeContext.copyPage",
+          "optional": true,
+          "type": "boolean | undefined",
+        },
+        {
           "name": "normalizePagesResult.activeThemeContext.footer",
           "optional": true,
           "type": "boolean | undefined",

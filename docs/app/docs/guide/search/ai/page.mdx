@@ -1,0 +1,114 @@
+import { Steps } from 'nextra/components'
+
+# Ask AI
+
+Enhance your Nextra documentation site with AI-powered chat assistance using
+[Inkeep](https://docs.inkeep.com/cloud). This integration allows users to get
+instant help and answers directly within your documentation, improving user
+experience and reducing support burden.
+
+## Setup
+
+<Steps>
+### Get an API key
+
+Follow
+[these steps](https://docs.inkeep.com/cloud/projects/overview#create-a-web-assistant)
+to create an API key for your web assistant.
+
+Copy and add the API key to your environment variables:
+
+```dotenv filename=".env"
+NEXT_PUBLIC_INKEEP_API_KEY="your_actual_api_key_here"
+```
+
+### Install the component library
+
+Install the Inkeep React component library:
+
+```sh npm2yarn
+npm i @inkeep/cxkit-react
+```
+
+### Create the chat button component
+
+Create a new file `inkeep-chat-button.tsx`:
+
+```tsx filename="inkeep-chat-button.tsx"
+'use client'
+
+import { InkeepChatButton } from '@inkeep/cxkit-react'
+import type { FC } from 'react'
+
+export const ChatButton: FC = () => {
+  return (
+    <InkeepChatButton
+      aiChatSettings={{
+        apiKey: process.env.NEXT_PUBLIC_INKEEP_API_KEY!,
+        // Customize your AI assistant's appearance
+        aiAssistantAvatar: '/icon.svg', // Path to your assistant's avatar
+        aiAssistantName: 'Nextra Assistant' // Name shown to users
+      }}
+      baseSettings={{
+        // Match your site's brand colors
+        primaryBrandColor: '#238aff',
+        // Sync with your site's dark/light mode
+        colorMode: {
+          sync: {
+            target: 'html',
+            attributes: ['class'],
+            isDarkMode(attrs) {
+              return attrs.class === 'dark'
+            }
+          }
+        }
+      }}
+    />
+  )
+}
+```
+
+### Add to your root layout
+
+Import and add the `ChatButton` component to your root layout file:
+
+```tsx filename="app/layout.tsx"
+import { Layout } from 'nextra-theme-docs' // or nextra-theme-blog or your custom theme
+import { Head } from 'nextra/components'
+import { getPageMap } from 'nextra/page-map'
+import type { FC } from 'react'
+import { ChatButton } from '../path/to/your/inkeep-chat-button'
+
+const RootLayout: FC<LayoutProps<'/'>> = async ({ children }) => {
+  const pageMap = await getPageMap()
+
+  return (
+    <html lang="en" dir="ltr" suppressHydrationWarning>
+      <Head />
+      <body>
+        <ChatButton />
+        <Layout
+          pageMap={pageMap}
+          // ... other layout props
+        >
+          {children}
+        </Layout>
+      </body>
+    </html>
+  )
+}
+
+export default RootLayout
+```
+
+> [!IMPORTANT]
+>
+> The chat button will appear on all pages of your documentation site.
+
+</Steps>
+
+## Additional resources
+
+- [Inkeep's official Nextra integration guide](https://docs.inkeep.com/cloud/integrations/nextra)
+- [Inkeep React component documentation](https://docs.inkeep.com/cloud/ui-components/react/chat-button)
+- [Inkeep Dashboard](https://portal.inkeep.com) for configuration and analytics

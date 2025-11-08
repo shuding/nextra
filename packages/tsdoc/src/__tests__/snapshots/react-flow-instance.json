@@ -111,7 +111,7 @@ parameter can be set to `true` to include nodes that are only partially intersec
       "name": "getIntersectingNodes",
       "tags": {
         "param": "node - the node or rect to check for intersections
-partially - if true, the node is considered to be intersecting if it partially overlaps with the passed node or rect
+partially - true by default, if set to false, only nodes that are fully intersecting will be returned
 nodes - optional nodes array to check for intersections",
         "returns": "an array of intersecting nodes",
       },
@@ -208,7 +208,7 @@ nodeId - the node id the handle belongs to",
     },
     {
       "name": "fitView",
-      "type": "(fitViewOptions?: FitViewOptionsBase<NodeType>) => Promise<boolean>",
+      "type": "(fitViewOptions?: { padding?: Padding; includeHiddenNodes?: boolean; minZoom?: number; maxZoom?: number; duration?: number; ease?: (t: number) => number; interpolate?: "smooth" | "linear"; nodes?: (NodeType | { id: string; })[]; }) => Promise<boolean>",
     },
     {
       "description": "Zooms viewport in by 1.2.",
@@ -216,11 +216,7 @@ nodeId - the node id the handle belongs to",
       "tags": {
         "param": "options.duration - optional duration. If set, a transition will be applied",
       },
-      "type": "(options?: {
-    duration?: number;
-    ease?: (t: number) => number;
-    interpolate?: 'smooth' | 'linear';
-}) => Promise<boolean>",
+      "type": "(options?: { duration?: number; ease?: (t: number) => number; interpolate?: "smooth" | "linear"; }) => Promise<boolean>",
     },
     {
       "description": "Zooms viewport out by 1 / 1.2.",
@@ -228,11 +224,7 @@ nodeId - the node id the handle belongs to",
       "tags": {
         "param": "options.duration - optional duration. If set, a transition will be applied",
       },
-      "type": "(options?: {
-    duration?: number;
-    ease?: (t: number) => number;
-    interpolate?: 'smooth' | 'linear';
-}) => Promise<boolean>",
+      "type": "(options?: { duration?: number; ease?: (t: number) => number; interpolate?: "smooth" | "linear"; }) => Promise<boolean>",
     },
     {
       "description": "Zoom the viewport to a given zoom level. Passing in a `duration` will animate the viewport to
@@ -242,11 +234,7 @@ the new zoom level.",
         "param": "zoomLevel - the zoom level to set
 options.duration - optional duration. If set, a transition will be applied",
       },
-      "type": "(zoomLevel: number, options?: {
-    duration?: number;
-    ease?: (t: number) => number;
-    interpolate?: 'smooth' | 'linear';
-}) => Promise<boolean>",
+      "type": "(zoomLevel: number, options?: { duration?: number; ease?: (t: number) => number; interpolate?: "smooth" | "linear"; }) => Promise<boolean>",
     },
     {
       "description": "Get the current zoom level of the viewport.",
@@ -264,11 +252,7 @@ options.duration - optional duration. If set, a transition will be applied",
 options.duration - optional duration. If set, a transition will be applied
 options.ease - optional ease function.",
       },
-      "type": "(viewport: Viewport, options?: {
-    duration?: number;
-    ease?: (t: number) => number;
-    interpolate?: 'smooth' | 'linear';
-}) => Promise<boolean>",
+      "type": "(viewport: Viewport, options?: { duration?: number; ease?: (t: number) => number; interpolate?: "smooth" | "linear"; }) => Promise<boolean>",
     },
     {
       "description": "Returns the current viewport.",
@@ -289,9 +273,7 @@ options.zoom - optional zoom
 options.duration - optional duration. If set, a transition will be applied
 options.ease - optional ease function.",
       },
-      "type": "(x: number, y: number, options?: ViewportHelperFunctionOptions & {
-    zoom?: number;
-}) => Promise<boolean>",
+      "type": "(x: number, y: number, options?: ViewportHelperFunctionOptions & { zoom?: number; }) => Promise<boolean>",
     },
     {
       "description": "A low-level utility function to fit the viewport to a given rectangle. By passing in a
@@ -304,9 +286,7 @@ options.padding - optional padding
 options.duration - optional duration. If set, a transition will be applied
 options.ease - optional ease function.",
       },
-      "type": "(bounds: Rect, options?: ViewportHelperFunctionOptions & {
-    padding?: number;
-}) => Promise<boolean>",
+      "type": "(bounds: Rect, options?: ViewportHelperFunctionOptions & { padding?: number; }) => Promise<boolean>",
     },
     {
       "description": "With this function you can translate a screen pixel position to a flow position. It is useful
@@ -337,7 +317,6 @@ This property tells you when viewport is initialized.",
       "type": "boolean",
     },
   ],
-  "filePath": "../../node_modules/.pnpm/@xyflow+react@12.8.1_@types+react@19.1.8_react-dom@19.1.0_react@19.1.0__react@19.1.0/node_modules/@xyflow/react/dist/esm/types/instance.d.ts",
   "name": "ReactFlowInstance",
   "tags": {
     "public": "",

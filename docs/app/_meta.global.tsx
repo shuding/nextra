@@ -64,7 +64,17 @@ const GUIDE: MetaRecord = {
   i18n: '',
   'custom-css': '',
   'static-exports': '',
-  search: '',
+  search: {
+    items: {
+      index: '',
+      ai: {
+        title: <span className="badge-new">Ask AI</span>
+      }
+    },
+    theme: {
+      collapsed: false
+    }
+  },
   'github-alert-syntax': '',
   turbopack: '',
   _: {
@@ -143,8 +153,7 @@ export default {
     }
   },
   api: {
-    type: 'page',
-    title: <span className="badge-new">API</span>
+    type: 'page'
   },
   versions: {
     type: 'menu',
@@ -176,6 +185,7 @@ export default {
   showcase: {
     type: 'page',
     theme: {
+      copyPage: false,
       typesetting: 'article',
       layout: 'full',
       timestamp: false,
@@ -185,6 +195,7 @@ export default {
   sponsors: {
     type: 'page',
     theme: {
+      copyPage: false,
       typesetting: 'article',
       layout: 'full',
       timestamp: false,
