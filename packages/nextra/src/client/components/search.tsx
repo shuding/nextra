@@ -333,7 +333,7 @@ export const Search: FC<SearchProps> = ({
           'x:border x:border-gray-200 x:text-gray-100 x:dark:border-neutral-800',
           'x:z-30 x:rounded-xl x:py-2.5 x:shadow-xl',
           'x:contrast-more:border x:contrast-more:border-gray-900 x:contrast-more:dark:border-gray-50',
-          'x:backdrop-blur-md x:bg-nextra-bg/70',
+          'x:backdrop-blur-md x:bg-nextra-bg/90',
           'x:motion-reduce:transition-none',
           // From https://headlessui.com/react/combobox#adding-transitions
           'x:origin-top x:transition x:duration-200 x:ease-out x:data-closed:scale-95 x:data-closed:opacity-0 x:empty:invisible',
