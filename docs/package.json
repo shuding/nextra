@@ -16,8 +16,8 @@
     "next": "^15.0.2",
     "nextra": "workspace:*",
     "nextra-theme-docs": "workspace:*",
-    "react": "19.1.0",
-    "react-dom": "19.1.0"
+    "react": "19.2.0",
+    "react-dom": "19.2.0"
   },
   "devDependencies": {
     "@svgr/webpack": "^8.0.1",
