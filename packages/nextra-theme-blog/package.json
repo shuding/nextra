@@ -46,7 +46,7 @@
     "react": "19.1.0",
     "tailwindcss": "4.1.10",
     "vitest": "^3.0.0",
-    "zx": "^8.2.4"
+    "zx": "^8.8.5"
   },
   "sideEffects": false
 }
