@@ -96,7 +96,7 @@
     "katex": "^0.16.21",
     "mdast-util-from-markdown": "^2.0.1",
     "mdast-util-gfm": "^3.0.0",
-    "mdast-util-to-hast": "^13.2.0",
+    "mdast-util-to-hast": "^13.2.1",
     "negotiator": "^1.0.0",
     "react-compiler-runtime": "^19.1.0-rc.2",
     "react-medium-image-zoom": "^5.2.12",
