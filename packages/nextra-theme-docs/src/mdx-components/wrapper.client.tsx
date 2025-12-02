@@ -44,7 +44,7 @@ export const ClientWrapper: FC<Omit<ComponentProps<MDXWrapper>, 'toc'>> = ({
         {themeContext.breadcrumb && activeType !== 'page' && (
           <Breadcrumb activePath={activePath} />
         )}
-        {themeConfig.copyPageButton && sourceCode && (
+        {themeConfig.copyPageButton && themeContext.copyPage && sourceCode && (
           <div className="x:flex x:justify-end">
             <CopyPage sourceCode={sourceCode} />
           </div>

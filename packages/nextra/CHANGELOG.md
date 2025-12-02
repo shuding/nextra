@@ -1,5 +1,13 @@
 # nextra
 
+## 4.6.0
+
+## 4.5.1
+
+### Patch Changes
+
+- 8a4d176: fix TSDoc `@inline` tag to properly expand nested type aliases
+
 ## 4.5.0
 
 ### Minor Changes

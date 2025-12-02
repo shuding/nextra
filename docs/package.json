@@ -4,12 +4,13 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "build": "VERCEL_FORCE_NO_BUILD_CACHE=1 next build",
+    "build": "next build",
     "dev": "next --turbopack",
     "postbuild": "next-sitemap && pagefind --site .next/server/app --output-path public/_pagefind",
     "start": "next start"
   },
   "dependencies": {
+    "@inkeep/cxkit-react": "^0.5.98",
     "clsx": "^2.1.0",
     "framer-motion": "^12.0.0",
     "next": "^15.0.2",
