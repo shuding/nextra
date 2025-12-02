@@ -20,7 +20,7 @@ interface MenuOption {
 interface MenuProps {
   selectedOption: ReactNode
   value: string
-  onChange: Dispatch<string>
+  onChange?: Dispatch<string>
   options: MenuOption[]
   title?: string
   className?: string
@@ -60,11 +60,11 @@ export const Select: FC<MenuProps> = ({
         as="ul"
         transition
         anchor={anchor}
-        className={({ open }) =>
+        className={() =>
           cn(
             'x:focus-visible:nextra-focus',
-            open ? 'x:opacity-100' : 'x:opacity-0',
-            'x:motion-reduce:transition-none x:transition-opacity x:min-w-(--button-width) x:z-30 x:max-h-64 x:rounded-md x:border x:border-black/5 x:backdrop-blur-md x:bg-nextra-bg/70 x:py-1 x:text-sm x:shadow-lg x:dark:border-white/20'
+            'x:min-w-(--button-width) x:z-30 x:max-h-64 x:rounded-md x:border x:border-black/5 x:backdrop-blur-md x:bg-nextra-bg/70 x:py-1 x:text-sm x:shadow-lg x:dark:border-white/20',
+            'x:motion-reduce:transition-none x:origin-top x:transition x:duration-200 x:ease-out x:data-closed:scale-95 x:data-closed:opacity-0'
           )
         }
       >
