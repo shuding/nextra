@@ -3,6 +3,7 @@ import { includeIgnoreFile } from '@eslint/compat'
 import js from '@eslint/js'
 import eslintPluginNext from '@next/eslint-plugin-next'
 import type { Linter } from 'eslint'
+import { defineConfig } from 'eslint/config'
 // import type { Linter } from 'eslint'
 import eslintConfigPrettier from 'eslint-config-prettier'
 import eslintPluginDeMorgan from 'eslint-plugin-de-morgan'
@@ -15,7 +16,6 @@ import eslintPluginSonarJs from 'eslint-plugin-sonarjs'
 import eslintPluginTsSortKeys from 'eslint-plugin-typescript-sort-keys'
 import eslintPluginUnicorn from 'eslint-plugin-unicorn'
 import tseslint from 'typescript-eslint'
-import type { Config } from 'typescript-eslint'
 
 // TODO: Enable once `eslint-plugin-tailwindcss` will support Tailwind CSS v4
 // const TAILWIND_CONFIG = {
@@ -34,7 +34,7 @@ const REACT_COMPILER_RESTRICT = {
   importNames: ['memo', 'useCallback', 'useMemo']
 }
 
-const config: Config = tseslint.config(
+export default defineConfig(
   includeIgnoreFile(path.resolve('.gitignore')),
   {
     ignores: [
@@ -56,6 +56,7 @@ const config: Config = tseslint.config(
       eslintConfigPrettier
     ],
     plugins: {
+      // @ts-expect-error -- fixme
       import: eslintPluginImport
     },
     rules: {
@@ -89,8 +90,9 @@ const config: Config = tseslint.config(
       'prefer-const': ['error', { destructuring: 'all' }],
       eqeqeq: ['error', 'always', { null: 'ignore' }],
       'unicorn/switch-case-braces': ['error', 'avoid'],
-      '@next/next/no-html-link-for-pages': 'off', // we use App Router
+      'no-undef': 'off', // https://typescript-eslint.io/troubleshooting/faqs/eslint/#i-get-errors-from-the-no-undef-rule-about-global-variables-not-being-defined-even-though-there-are-no-typescript-errors
 
+      'unicorn/no-array-sort': 'off', // todo
       'sonarjs/unused-named-groups': 'off', // todo
       'sonarjs/cognitive-complexity': 'off', // todo
       'sonarjs/prefer-nullish-coalescing': 'off', // todo
@@ -138,9 +140,7 @@ const config: Config = tseslint.config(
       '@next/next': eslintPluginNext
     },
     extends: [
-      // @ts-expect-error -- always exist
       eslintPluginReact.configs.flat.recommended,
-      // @ts-expect-error -- always exist
       eslintPluginReact.configs.flat['jsx-runtime']
     ],
     rules: {
@@ -165,7 +165,8 @@ const config: Config = tseslint.config(
         { extensions: ['.tsx', '.jsx'], allow: 'as-needed' }
       ],
       'react/jsx-curly-brace-presence': 'error',
-      'react/jsx-boolean-value': 'error'
+      'react/jsx-boolean-value': 'error',
+      '@next/next/no-html-link-for-pages': 'off', // we use App Router
     },
     settings: {
       react: { version: 'detect' }
@@ -353,5 +354,3 @@ const config: Config = tseslint.config(
     }
   }
 )
-
-export default config
