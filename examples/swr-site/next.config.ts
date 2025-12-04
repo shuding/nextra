@@ -14,16 +14,11 @@ const withBundleAnalyzer = bundleAnalyzer({
 const nextConfig = withBundleAnalyzer(
   withNextra({
     reactStrictMode: true,
-    eslint: {
-      // Warning: This allows production builds to successfully complete even if
-      // your project has ESLint errors.
-      ignoreDuringBuilds: true
-    },
     i18n: {
       locales: ['en', 'es', 'ru'],
       defaultLocale: 'en'
     },
-    redirects: async () => [
+    redirects: () => [
       {
         source: '/docs',
         destination: '/docs/getting-started',

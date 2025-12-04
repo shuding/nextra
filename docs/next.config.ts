@@ -76,15 +76,11 @@ const withNextra = nextra({
 
 const nextConfig = withNextra({
   reactStrictMode: true,
-  eslint: {
-    // ESLint behaves weirdly in this monorepo.
-    ignoreDuringBuilds: true
-  },
   env: {
     NEXT_PUBLIC_INKEEP_API_KEY:
       'dee399c7f7ac40b9de0d0b85ca32959953b9ff7c9fc8d96c'
   },
-  redirects: async () => [
+  redirects: () => [
     {
       source: '/docs/guide/:slug(typescript|latex|tailwind-css|mermaid)',
       destination: '/docs/advanced/:slug',
