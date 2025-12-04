@@ -1,6 +1,6 @@
-@source "../src/client/icons/*.svg";
-@source "../src/client/{components,hocs,mdx-components}/**/*.tsx";
-@source "../src/server/tsdoc/**/*.tsx";
+@source '../src/client/icons/*.svg';
+@source '../src/client/{components,hocs,mdx-components}/**/*.tsx';
+@source '../src/server/tsdoc/**/*.tsx';
 @variant dark (&:where(.dark *));
 
 @theme {

@@ -9,7 +9,8 @@ type TSDocProps = ComponentProps<typeof TSDoc>
 type GenerateDefinitionArgs = Parameters<typeof generateDefinition>[0]
 
 interface APIDocsProps
-  extends Partial<TSDocProps>,
+  extends
+    Partial<TSDocProps>,
     Pick<GenerateDefinitionArgs, 'code' | 'flattened'> {
   componentName?: string
   groupKeys?: string
