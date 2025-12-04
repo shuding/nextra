@@ -2,7 +2,7 @@
 
 @source './**/*.{ts,tsx}';
 
-@plugin "@tailwindcss/typography";
+@plugin '@tailwindcss/typography';
 
 @import '../../nextra/styles/default.css';
 @import '../../nextra/styles/code-block.css';

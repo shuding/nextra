@@ -40,7 +40,7 @@
     "@tailwindcss/typography": "^0.5.15",
     "@types/react": "^19.1.8",
     "esbuild-react-compiler-plugin": "workspace:*",
-    "next": "^15.0.2",
+    "next": "^16.0.7",
     "nextra": "workspace:*",
     "postcss": "^8.4.33",
     "react": "19.1.0",

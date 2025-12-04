@@ -75,7 +75,7 @@ const RootLayout: FC<LayoutProps> = async ({ children, params }) => {
         <>
           <SwrIcon height="12" />
           <span
-            className="ms-2 select-none font-extrabold max-md:hidden"
+            className="ms-2 font-extrabold select-none max-md:hidden"
             title={`SWR: ${dictionary.logo.title}`}
           >
             SWR

@@ -86,11 +86,11 @@ function generateTsFromZodType(schema: z.ZodType, indent: number): string {
 
 function getDefaultValue(schema: z.ZodType): unknown {
   if (schema instanceof z.ZodDefault) {
-    return schema.def.defaultValue()
+    return schema.def.defaultValue
   }
   if (schema instanceof z.ZodPipe) {
     // @ts-expect-error fixme
-    return schema.in.def.defaultValue()
+    return schema.in.def.defaultValue
   }
   // eslint-disable-next-line sonarjs/no-redundant-jump -- this fix types-check error in `@nextra-tsdoc` – ../nextra/src/server/tsdoc/zod-to-ts.ts:87:46 - error TS7030: Not all code paths return a value.
   return

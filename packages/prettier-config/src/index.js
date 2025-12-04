@@ -1,7 +1,3 @@
-import prettierPluginSortImport from '@ianvs/prettier-plugin-sort-imports'
-import prettierPluginPkg from 'prettier-plugin-pkg'
-import * as prettierPluginTailwindCss from 'prettier-plugin-tailwindcss'
-
 export default {
   semi: false,
   singleQuote: true,
@@ -9,10 +5,10 @@ export default {
   arrowParens: 'avoid',
   plugins: [
     // For sort fields in package.json
-    prettierPluginPkg,
+    'prettier-plugin-pkg',
     // For sorting imports
-    prettierPluginSortImport,
-    prettierPluginTailwindCss // MUST come last
+    '@ianvs/prettier-plugin-sort-imports',
+    'prettier-plugin-tailwindcss' // MUST come last
   ],
   overrides: [
     {

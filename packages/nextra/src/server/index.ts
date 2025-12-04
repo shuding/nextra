@@ -115,7 +115,7 @@ const nextra = (nextraConfig: NextraConfig) => {
     const turbopackConfig =
       (shouldUseConfigTurbopack
         ? nextConfig.turbopack
-        : // eslint-disable-next-line @typescript-eslint/no-deprecated -- Backwards compatibility
+        : // @ts-expect-error -- Backwards compatibility
           nextConfig.experimental?.turbo) ?? {}
 
     const turbopack = {
@@ -162,7 +162,12 @@ const nextra = (nextraConfig: NextraConfig) => {
       ...(shouldUseConfigTurbopack && { turbopack }),
       transpilePackages: [
         // To import ESM-only packages with `next dev --turbopack`. Source: https://github.com/vercel/next.js/issues/63318#issuecomment-2079677098
-        ...(process.env.TURBOPACK === '1' ? ['shiki', 'ts-morph'] : []),
+        ...// Next.js 15
+        (process.env.TURBOPACK === '1' ||
+        // Next.js 16
+        process.env.TURBOPACK === 'auto'
+          ? ['shiki', 'ts-morph']
+          : []),
         ...(nextConfig.transpilePackages || [])
       ],
       pageExtensions: [

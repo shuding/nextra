@@ -17,14 +17,14 @@ describe('remarkMdxFrontMatter', () => {
     const rawJs = await compileMdx(YAML_FRONTMATTER)
 
     it('should export yaml frontmatter', () => {
-      return expect(clean(rawJs)).resolves.toMatchInlineSnapshot(`
+      return expect(clean(rawJs)).resolves.toMatchInlineSnapshot(String.raw`
         "'use strict'
         const { Fragment: _Fragment, jsx: _jsx } = arguments[0]
         const { useMDXComponents: _provideComponents } = arguments[0]
         const metadata = {
           foo: 'bar'
         }
-        const sourceCode = '---\\nfoo: bar\\n---'
+        const sourceCode = '---\nfoo: bar\n---'
         function useTOC(props) {
           return []
         }

@@ -8,7 +8,7 @@ import { LastUpdated } from './components'
 const attributeSchema = z
   .custom<
     'class' | `data-${string}`
-  >(value => value === 'class' || value.startsWith('data-'))
+  >(value => value === 'class' || (value as string).startsWith('data-'))
   .meta({ type: "'class' | `data-${string}`" })
 
 const feedbackSchema = z.strictObject({
@@ -130,7 +130,7 @@ export const LayoutPropsSchema = z.strictObject({
         'Options to configure the language dropdown for [the i18n docs website](/docs/guide/i18n).'
     }),
   lastUpdated: element
-    .default(<LastUpdated />)
+    .default(() => <LastUpdated />)
     .refine(el => el.type !== Fragment && typeof el.type !== 'string', {
       error: `\`Layout#lastUpdated\` must be a \`<LastUpdated />\` component:
 
@@ -182,11 +182,13 @@ import { Layout, LastUpdated } from 'nextra-theme-docs'
     .meta({
       description: "Page map list. Result of `getPageMap(route = '/')` call."
     }),
-  search: reactNode.default(<Search />).meta({
-    default: '<Search />',
-    description:
-      'Rendered [`<Search>` component](/docs/built-ins/search). E.g. `<Search {...searchProps} />`'
-  }),
+  search: reactNode
+    .default(() => <Search />)
+    .meta({
+      default: '<Search />',
+      description:
+        'Rendered [`<Search>` component](/docs/built-ins/search). E.g. `<Search {...searchProps} />`'
+    }),
   sidebar: sidebarSchema.default(sidebarSchema.parse({})),
   themeSwitch: themeSwitchSchema.default(themeSwitchSchema.parse({})).meta({
     description: 'Translation of options in the theme switch.'

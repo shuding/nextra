@@ -19,14 +19,14 @@ describe('remarkStaticImages', () => {
       }
     )
 
-    return expect(clean(rawJs)).resolves.toMatchInlineSnapshot(`
+    return expect(clean(rawJs)).resolves.toMatchInlineSnapshot(String.raw`
       "/*@jsxRuntime automatic*/
       /*@jsxImportSource react*/
       import { useMDXComponents as _provideComponents } from 'next-mdx-import-source-file'
       import __img0 from '../foo.png'
       import __img1 from '../bar.jpeg'
       export const metadata = {}
-      export const sourceCode = '![](../foo.png)\\n\\n![](../bar.jpeg)\\n\\n![](../foo.png)'
+      export const sourceCode = '![](../foo.png)\n\n![](../bar.jpeg)\n\n![](../foo.png)'
       function useTOC(props) {
         return []
       }
@@ -43,11 +43,11 @@ describe('remarkStaticImages', () => {
             <_components.p>
               <_components.img placeholder="blur" src={__img0} />
             </_components.p>
-            {'\\n'}
+            {'\n'}
             <_components.p>
               <_components.img placeholder="blur" src={__img1} />
             </_components.p>
-            {'\\n'}
+            {'\n'}
             <_components.p>
               <_components.img placeholder="blur" src={__img0} />
             </_components.p>
@@ -82,7 +82,7 @@ describe('remarkStaticImages', () => {
       }
     )
 
-    return expect(clean(rawJs)).resolves.toMatchInlineSnapshot(`
+    return expect(clean(rawJs)).resolves.toMatchInlineSnapshot(String.raw`
       "/*@jsxRuntime automatic*/
       /*@jsxImportSource react*/
       import { useMDXComponents as _provideComponents } from 'next-mdx-import-source-file'
@@ -90,7 +90,7 @@ describe('remarkStaticImages', () => {
       import __img1 from './bar.svg'
       export const metadata = {}
       export const sourceCode =
-        '![One][link-def]\\n\\n![](../foo.png)\\n\\n![](./bar.svg)\\n\\n![Two][link-def]\\n\\n![External][external-link-def]\\n\\n[link-def]: ../foo.png\\n[external-link-def]: https://foo.png'
+        '![One][link-def]\n\n![](../foo.png)\n\n![](./bar.svg)\n\n![Two][link-def]\n\n![External][external-link-def]\n\n[link-def]: ../foo.png\n[external-link-def]: https://foo.png'
       function useTOC(props) {
         return []
       }
@@ -107,19 +107,19 @@ describe('remarkStaticImages', () => {
             <_components.p>
               <_components.img alt="One" placeholder="blur" src={__img0} />
             </_components.p>
-            {'\\n'}
+            {'\n'}
             <_components.p>
               <_components.img placeholder="blur" src={__img0} />
             </_components.p>
-            {'\\n'}
+            {'\n'}
             <_components.p>
               <_components.img src={__img1} />
             </_components.p>
-            {'\\n'}
+            {'\n'}
             <_components.p>
               <_components.img alt="Two" placeholder="blur" src={__img0} />
             </_components.p>
-            {'\\n'}
+            {'\n'}
             <_components.p>
               <_components.img src="https://foo.png" alt="External" />
             </_components.p>

@@ -9,7 +9,7 @@ export type HProperties = {
 const transformer: Transformer<Root> = ast => {
   visit(ast, 'heading', node => {
     const lastChild = node.children.at(-1)
-    if (!lastChild || lastChild.type !== 'text') return
+    if (lastChild?.type !== 'text') return
 
     const heading = lastChild.value
     const matched = heading.match(/\s*\[#([^]+?)]\s*$/)

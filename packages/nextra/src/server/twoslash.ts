@@ -55,8 +55,7 @@ function renderMarkdownInline(
   const [firstChild] = children
   if (
     children.length === 1 &&
-    firstChild &&
-    firstChild.type === 'element' &&
+    firstChild?.type === 'element' &&
     firstChild.tagName === 'p'
   )
     return firstChild.children
