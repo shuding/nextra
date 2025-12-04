@@ -762,13 +762,13 @@ describe('Code block', () => {
 </details>
 `
     const rawJs = await compileMdx(rawMdx, { mdxOptions })
-    return expect(clean(rawJs)).resolves.toMatchInlineSnapshot(`
+    return expect(clean(rawJs)).resolves.toMatchInlineSnapshot(String.raw`
       "/*@jsxRuntime automatic*/
       /*@jsxImportSource react*/
       import { useMDXComponents as _provideComponents } from 'next-mdx-import-source-file'
       export const metadata = {}
       export const sourceCode =
-        '<details>\\n  <summary>foo</summary>\\n  bar\\n</details>\\n<details>\\n  <summary>foo</summary>\\n  bar\\n</details>'
+        '<details>\n  <summary>foo</summary>\n  bar\n</details>\n<details>\n  <summary>foo</summary>\n  bar\n</details>'
       function useTOC(props) {
         return []
       }
@@ -786,14 +786,14 @@ describe('Code block', () => {
             <_components.details>
               <_components.p>
                 <_components.summary id="foo">{'foo'}</_components.summary>
-                {'\\nbar'}
+                {'\nbar'}
               </_components.p>
             </_components.details>
-            {'\\n'}
+            {'\n'}
             <_components.details>
               <_components.p>
                 <_components.summary id="foo-1">{'foo'}</_components.summary>
-                {'\\nbar'}
+                {'\nbar'}
               </_components.p>
             </_components.details>
           </>

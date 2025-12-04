@@ -84,11 +84,6 @@ export function generateDefinition({
   if (!declaration) {
     throw new Error(`Can't find "${exportName}" declaration`)
   }
-  // if (output.length > 1) {
-  //   throw new Error(
-  //     `Export "${exportName}" should not have more than one type declaration.`
-  //   )
-  // }
   const declarationFilePath = declaration.getSourceFile().getFilePath()
   const filePath = slash(path.relative(CWD, declarationFilePath))
   const symbol = declaration.getSymbolOrThrow()

@@ -49,7 +49,7 @@ export const PlaygroundDemo: FC = () => {
   const [rawMdx, setRawMdx] = useState(DEFAULT_MDX)
   const handleInput: NonNullable<ComponentProps<'span'>['onInput']> =
     useCallback(e => {
-      setRawMdx(e.currentTarget.textContent ?? '')
+      setRawMdx(e.currentTarget.textContent)
     }, [])
 
   const spanRef = useRef<HTMLSpanElement>(null!)

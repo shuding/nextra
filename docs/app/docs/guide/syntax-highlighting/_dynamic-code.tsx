@@ -23,7 +23,7 @@ export const DynamicCode: FC<{ children: ReactNode }> = ({ children }) => {
           variant="outline"
           onClick={() => {
             const token = tokenRef.current!
-            const prev = token.textContent!
+            const prev = token.textContent
             token.textContent = String((+prev || 0) + 1)
           }}
         >
