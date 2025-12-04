@@ -20,14 +20,14 @@ export default function Foo(props) {
   describe("outputFormat: 'function-body'", () => {
     it('should work', async () => {
       const rawMdx = await compileMdx(testMdx)
-      return expect(clean(rawMdx)).resolves.toMatchInlineSnapshot(`
+      return expect(clean(rawMdx)).resolves.toMatchInlineSnapshot(String.raw`
         "'use strict'
         const { Fragment: _Fragment, jsx: _jsx, jsxs: _jsxs } = arguments[0]
         const { useMDXComponents: _provideComponents } = arguments[0]
         const metadata = {
           title: 'h1'
         }
-        const sourceCode = '# h1\\n## h2 content\\n### h3 content\\n\\n- list 1\\n- list 2'
+        const sourceCode = '# h1\n## h2 content\n### h3 content\n\n- list 1\n- list 2'
         function useTOC(props) {
           return [
             {
@@ -58,28 +58,28 @@ export default function Foo(props) {
               _jsx(_components.h1, {
                 children: 'h1'
               }),
-              '\\n',
+              '\n',
               _jsx(_components.h2, {
                 id: toc[0].id,
                 children: toc[0].value
               }),
-              '\\n',
+              '\n',
               _jsx(_components.h3, {
                 id: toc[1].id,
                 children: toc[1].value
               }),
-              '\\n',
+              '\n',
               _jsxs(_components.ul, {
                 children: [
-                  '\\n',
+                  '\n',
                   _jsx(_components.li, {
                     children: 'list 1'
                   }),
-                  '\\n',
+                  '\n',
                   _jsx(_components.li, {
                     children: 'list 2'
                   }),
-                  '\\n'
+                  '\n'
                 ]
               })
             ]
@@ -95,7 +95,7 @@ export default function Foo(props) {
     })
     it('should work with `export default`', async () => {
       const rawMdx = await compileMdx(testMdxWithDefaultExport)
-      return expect(clean(rawMdx)).resolves.toMatchInlineSnapshot(`
+      return expect(clean(rawMdx)).resolves.toMatchInlineSnapshot(String.raw`
         "'use strict'
         const { Fragment: _Fragment, jsx: _jsx, jsxs: _jsxs } = arguments[0]
         const { useMDXComponents: _provideComponents } = arguments[0]
@@ -108,7 +108,7 @@ export default function Foo(props) {
           })
         }
         const sourceCode =
-          '# h1\\n## h2 content\\n### h3 content\\n\\n- list 1\\n- list 2\\n  \\nexport default function Foo(props) {\\n  return <div>Default Export {props.children}</div>\\n}'
+          '# h1\n## h2 content\n### h3 content\n\n- list 1\n- list 2\n  \nexport default function Foo(props) {\n  return <div>Default Export {props.children}</div>\n}'
         function useTOC(props) {
           return [
             {
@@ -139,28 +139,28 @@ export default function Foo(props) {
               _jsx(_components.h1, {
                 children: 'h1'
               }),
-              '\\n',
+              '\n',
               _jsx(_components.h2, {
                 id: toc[0].id,
                 children: toc[0].value
               }),
-              '\\n',
+              '\n',
               _jsx(_components.h3, {
                 id: toc[1].id,
                 children: toc[1].value
               }),
-              '\\n',
+              '\n',
               _jsxs(_components.ul, {
                 children: [
-                  '\\n',
+                  '\n',
                   _jsx(_components.li, {
                     children: 'list 1'
                   }),
-                  '\\n',
+                  '\n',
                   _jsx(_components.li, {
                     children: 'list 2'
                   }),
-                  '\\n'
+                  '\n'
                 ]
               })
             ]
@@ -234,14 +234,14 @@ import { MDXRemote } from 'nextra/mdx-remote'
     }
     it('should work', async () => {
       const rawMdx = await compileMdx(testMdx, options)
-      return expect(clean(rawMdx)).resolves.toMatchInlineSnapshot(`
+      return expect(clean(rawMdx)).resolves.toMatchInlineSnapshot(String.raw`
         "/*@jsxRuntime automatic*/
         /*@jsxImportSource react*/
         import { useMDXComponents as _provideComponents } from 'next-mdx-import-source-file'
         export const metadata = {
           title: 'h1'
         }
-        export const sourceCode = '# h1\\n## h2 content\\n### h3 content\\n\\n- list 1\\n- list 2'
+        export const sourceCode = '# h1\n## h2 content\n### h3 content\n\n- list 1\n- list 2'
         function useTOC(props) {
           return [
             {
@@ -270,17 +270,17 @@ import { MDXRemote } from 'nextra/mdx-remote'
           return (
             <>
               <_components.h1>{'h1'}</_components.h1>
-              {'\\n'}
+              {'\n'}
               <_components.h2 id={toc[0].id}>{toc[0].value}</_components.h2>
-              {'\\n'}
+              {'\n'}
               <_components.h3 id={toc[1].id}>{toc[1].value}</_components.h3>
-              {'\\n'}
+              {'\n'}
               <_components.ul>
-                {'\\n'}
+                {'\n'}
                 <_components.li>{'list 1'}</_components.li>
-                {'\\n'}
+                {'\n'}
                 <_components.li>{'list 2'}</_components.li>
-                {'\\n'}
+                {'\n'}
               </_components.ul>
             </>
           )
@@ -293,7 +293,7 @@ import { MDXRemote } from 'nextra/mdx-remote'
         ...options,
         isPageImport: true
       })
-      return expect(clean(rawMdx)).resolves.toMatchInlineSnapshot(`
+      return expect(clean(rawMdx)).resolves.toMatchInlineSnapshot(String.raw`
         "/*@jsxRuntime automatic*/
         /*@jsxImportSource react*/
         import { HOC_MDXWrapper } from 'nextra/setup-page'
@@ -301,7 +301,7 @@ import { MDXRemote } from 'nextra/mdx-remote'
         export const metadata = {
           title: 'h1'
         }
-        export const sourceCode = '# h1\\n## h2 content\\n### h3 content\\n\\n- list 1\\n- list 2'
+        export const sourceCode = '# h1\n## h2 content\n### h3 content\n\n- list 1\n- list 2'
         function useTOC(props) {
           return [
             {
@@ -330,17 +330,17 @@ import { MDXRemote } from 'nextra/mdx-remote'
           return (
             <>
               <_components.h1>{'h1'}</_components.h1>
-              {'\\n'}
+              {'\n'}
               <_components.h2 id={toc[0].id}>{toc[0].value}</_components.h2>
-              {'\\n'}
+              {'\n'}
               <_components.h3 id={toc[1].id}>{toc[1].value}</_components.h3>
-              {'\\n'}
+              {'\n'}
               <_components.ul>
-                {'\\n'}
+                {'\n'}
                 <_components.li>{'list 1'}</_components.li>
-                {'\\n'}
+                {'\n'}
                 <_components.li>{'list 2'}</_components.li>
-                {'\\n'}
+                {'\n'}
               </_components.ul>
             </>
           )
@@ -355,7 +355,7 @@ import { MDXRemote } from 'nextra/mdx-remote'
 
     it('should work with `export default`', async () => {
       const rawMdx = await compileMdx(testMdxWithDefaultExport, options)
-      return expect(clean(rawMdx)).resolves.toMatchInlineSnapshot(`
+      return expect(clean(rawMdx)).resolves.toMatchInlineSnapshot(String.raw`
         "/*@jsxRuntime automatic*/
         /*@jsxImportSource react*/
         import { HOC_MDXWrapper } from 'nextra/setup-page'
@@ -367,7 +367,7 @@ import { MDXRemote } from 'nextra/mdx-remote'
           return <div>Default Export {props.children}</div>
         }
         export const sourceCode =
-          '# h1\\n## h2 content\\n### h3 content\\n\\n- list 1\\n- list 2\\n  \\nexport default function Foo(props) {\\n  return <div>Default Export {props.children}</div>\\n}'
+          '# h1\n## h2 content\n### h3 content\n\n- list 1\n- list 2\n  \nexport default function Foo(props) {\n  return <div>Default Export {props.children}</div>\n}'
         function useTOC(props) {
           return [
             {
@@ -396,17 +396,17 @@ import { MDXRemote } from 'nextra/mdx-remote'
           return (
             <>
               <_components.h1>{'h1'}</_components.h1>
-              {'\\n'}
+              {'\n'}
               <_components.h2 id={toc[0].id}>{toc[0].value}</_components.h2>
-              {'\\n'}
+              {'\n'}
               <_components.h3 id={toc[1].id}>{toc[1].value}</_components.h3>
-              {'\\n'}
+              {'\n'}
               <_components.ul>
-                {'\\n'}
+                {'\n'}
                 <_components.li>{'list 1'}</_components.li>
-                {'\\n'}
+                {'\n'}
                 <_components.li>{'list 2'}</_components.li>
-                {'\\n'}
+                {'\n'}
               </_components.ul>
             </>
           )

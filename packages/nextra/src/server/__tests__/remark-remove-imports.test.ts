@@ -19,7 +19,7 @@ export const Test = ({value}) => value
 `,
       opts
     )
-    return expect(clean(rawJs)).resolves.toMatchInlineSnapshot(`
+    return expect(clean(rawJs)).resolves.toMatchInlineSnapshot(String.raw`
       "/*@jsxRuntime automatic*/
       /*@jsxImportSource react*/
       'use strict'
@@ -28,7 +28,7 @@ export const Test = ({value}) => value
       const myVar = 123
       const Test = ({ value }) => value
       const sourceCode =
-        'import { Steps } from \\'nextra/components\\'\\n\\nexport const myVar = 123\\n\\nexport const Test = ({value}) => value\\n\\n## <Test value="Hello" /> {myVar}'
+        'import { Steps } from \'nextra/components\'\n\nexport const myVar = 123\n\nexport const Test = ({value}) => value\n\n## <Test value="Hello" /> {myVar}'
       function useTOC(props) {
         return [
           {

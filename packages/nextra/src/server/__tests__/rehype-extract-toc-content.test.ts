@@ -20,12 +20,12 @@ bar[^1]
 `,
       opts
     )
-    return expect(clean(rawJs)).resolves.toMatchInlineSnapshot(`
+    return expect(clean(rawJs)).resolves.toMatchInlineSnapshot(String.raw`
       "/*@jsxRuntime automatic*/
       /*@jsxImportSource react*/
       import { useMDXComponents as _provideComponents } from 'next-mdx-import-source-file'
       export const metadata = {}
-      export const sourceCode = '## foo\\nbar[^1]\\n\\n[^1]: bar description'
+      export const sourceCode = '## foo\nbar[^1]\n\n[^1]: bar description'
       function useTOC(props) {
         return [
           {
@@ -51,7 +51,7 @@ bar[^1]
         return (
           <>
             <_components.h2 id={toc[0].id}>{toc[0].value}</_components.h2>
-            {'\\n'}
+            {'\n'}
             <_components.p>
               {'bar'}
               <_components.sup>
@@ -65,17 +65,17 @@ bar[^1]
                 </_components.a>
               </_components.sup>
             </_components.p>
-            {'\\n'}
-            {'\\n'}
+            {'\n'}
+            {'\n'}
             <_components.section data-footnotes className="footnotes">
               <_components.h2 className="sr-only" id="footnote-label">
                 {'Footnotes'}
               </_components.h2>
-              {'\\n'}
+              {'\n'}
               <_components.ol>
-                {'\\n'}
+                {'\n'}
                 <_components.li id="user-content-fn-1">
-                  {'\\n'}
+                  {'\n'}
                   <_components.p>
                     {'bar description '}
                     <_components.a
@@ -87,11 +87,11 @@ bar[^1]
                       {'↩'}
                     </_components.a>
                   </_components.p>
-                  {'\\n'}
+                  {'\n'}
                 </_components.li>
-                {'\\n'}
+                {'\n'}
               </_components.ol>
-              {'\\n'}
+              {'\n'}
             </_components.section>
           </>
         )
@@ -115,14 +115,14 @@ import { Steps } from 'nextra/components'
 `,
       opts
     )
-    return expect(clean(rawJs)).resolves.toMatchInlineSnapshot(`
+    return expect(clean(rawJs)).resolves.toMatchInlineSnapshot(String.raw`
       "/*@jsxRuntime automatic*/
       /*@jsxImportSource react*/
       import { useMDXComponents as _provideComponents } from 'next-mdx-import-source-file'
       export const metadata = {}
       import { Steps } from 'nextra/components'
       export const sourceCode =
-        "import { Steps } from 'nextra/components'\\n\\n## baz qux\\n\\n<Steps>\\n  <div>\\n  ### foo bar\\n  </div>\\n</Steps>"
+        "import { Steps } from 'nextra/components'\n\n## baz qux\n\n<Steps>\n  <div>\n  ### foo bar\n  </div>\n</Steps>"
       function useTOC(props) {
         return [
           {
@@ -148,7 +148,7 @@ import { Steps } from 'nextra/components'
         return (
           <>
             <_components.h2 id={toc[0].id}>{toc[0].value}</_components.h2>
-            {'\\n'}
+            {'\n'}
             <Steps>
               <div>
                 <_components.h3 id={toc[1].id}>{toc[1].value}</_components.h3>
@@ -359,7 +359,7 @@ import { MDXRemote } from 'nextra/mdx-remote'
         ...opts,
         filePath: '[[...slug]].mdx'
       })
-      return expect(clean(rawJs)).resolves.toMatchInlineSnapshot(`
+      return expect(clean(rawJs)).resolves.toMatchInlineSnapshot(String.raw`
         "/*@jsxRuntime automatic*/
         /*@jsxImportSource react*/
         import { useMDXComponents as _provideComponents } from 'next-mdx-import-source-file'
@@ -369,7 +369,7 @@ import { MDXRemote } from 'nextra/mdx-remote'
         }
         import { MDXRemote } from 'nextra/mdx-remote'
         export const sourceCode =
-          "import { MDXRemote } from 'nextra/mdx-remote'\\n\\n## hello\\n\\n<MDXRemote components={{ Callout, $Tabs: Tabs }} />"
+          "import { MDXRemote } from 'nextra/mdx-remote'\n\n## hello\n\n<MDXRemote components={{ Callout, $Tabs: Tabs }} />"
         function useTOC(props) {
           return [
             {
@@ -389,7 +389,7 @@ import { MDXRemote } from 'nextra/mdx-remote'
           return (
             <>
               <_components.h2 id={toc[0].id}>{toc[0].value}</_components.h2>
-              {'\\n'}
+              {'\n'}
               <MDXRemote
                 components={{
                   Callout,
