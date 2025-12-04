@@ -115,7 +115,7 @@ const nextra = (nextraConfig: NextraConfig) => {
     const turbopackConfig =
       (shouldUseConfigTurbopack
         ? nextConfig.turbopack
-        : // eslint-disable-next-line @typescript-eslint/no-deprecated -- Backwards compatibility
+        : // @ts-expect-error -- Backwards compatibility
           nextConfig.experimental?.turbo) ?? {}
 
     const turbopack = {
