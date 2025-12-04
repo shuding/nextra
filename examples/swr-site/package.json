@@ -8,7 +8,7 @@
     "analyze": "ANALYZE=true pnpm build",
     "build": "next build",
     "debug": "NODE_OPTIONS='--inspect' next dev",
-    "dev": "next --turbopack",
+    "dev": "next",
     "postbuild": "pagefind --site .next/server/app --output-path public/_pagefind",
     "prebuild": "node nextra-remote-filepaths/fetch.js",
     "predev": "pnpm prebuild",
@@ -17,7 +17,7 @@
   },
   "dependencies": {
     "markdown-to-jsx": "^7.4.0",
-    "next": "^15.0.2",
+    "next": "^16.0.7",
     "nextra": "workspace:*",
     "nextra-theme-docs": "workspace:*",
     "react": "19.1.0",

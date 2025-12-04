@@ -5,7 +5,7 @@
   "private": true,
   "scripts": {
     "build": "next build",
-    "dev": "next --turbopack",
+    "dev": "next",
     "postbuild": "next-sitemap && pagefind --site .next/server/app --output-path public/_pagefind",
     "start": "next start"
   },
@@ -13,7 +13,7 @@
     "@inkeep/cxkit-react": "^0.5.98",
     "clsx": "^2.1.0",
     "framer-motion": "^12.0.0",
-    "next": "^15.0.2",
+    "next": "^16.0.7",
     "nextra": "workspace:*",
     "nextra-theme-docs": "workspace:*",
     "react": "19.1.0",
