@@ -33,12 +33,11 @@ const GET_PAGE_MAP_RE = new RegExp(
 const PAGE_MAP_PLACEHOLDER_RE = new RegExp(
   PAGE_MAP_PLACEHOLDER_PATH.replaceAll('/', SEP).replaceAll('.', String.raw`\.`)
 )
-const CONTENT_DIR = getContentDirectory()
 
-function getContentDirectory() {
-  // Next.js gives priority to `app` over `src/app`, we do the same for `content` directory
-  const [contentDir = 'content'] = fg.sync(['{src/,}content'], {
-    onlyDirectories: true
+function getContentDirectory(dirName: string) {
+  // Next.js gives priority to `app` over `src/app`, we do the same for the `content` directory
+  const [contentDir = dirName] = fg.sync([`{src/,}${dirName}`], {
+    onlyDirectories: true,
   })
   return contentDir
 }
@@ -88,6 +87,7 @@ const nextra = (nextraConfig: NextraConfig) => {
     loader: LOADER_PATH,
     options: { ...loaderOptions, isPageImport: true }
   }
+  const CONTENT_DIR = getContentDirectory(loaderOptions.contentDirName);
   const pageMapPlaceholderLoader = {
     loader: LOADER_PATH,
     options: {
