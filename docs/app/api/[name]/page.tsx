@@ -43,7 +43,7 @@ export default $`,
   { name: 'importPage', packageName: 'nextra/pages' },
   { name: 'compileMdx', packageName: 'nextra/compile' },
   { name: 'generateDefinition', packageName: 'nextra/tsdoc' },
-  { name: 'middleware', packageName: 'nextra/locales' },
+  { name: 'proxy', packageName: 'nextra/locales' },
   { name: 'evaluate', packageName: 'nextra/evaluate' },
   { name: 'normalizePages', packageName: 'nextra/normalize-pages' }
 ]
