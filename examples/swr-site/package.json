@@ -6,7 +6,7 @@
   "private": true,
   "scripts": {
     "analyze": "ANALYZE=true pnpm build",
-    "build": "next build --webpack",
+    "build": "next build",
     "debug": "NODE_OPTIONS='--inspect' next dev",
     "dev": "next",
     "postbuild": "pagefind --site .next/server/app --output-path public/_pagefind",
