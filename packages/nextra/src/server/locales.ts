@@ -8,7 +8,7 @@ const locales = JSON.parse(process.env.NEXTRA_LOCALES!) as string[]
 
 const defaultLocale = process.env.NEXTRA_DEFAULT_LOCALE!
 
-const HAS_LOCALE_RE = new RegExp(`^\\/(${locales.join('|')})(\\/|$)`)
+const HAS_LOCALE_RE = new RegExp(String.raw`^\/(${locales.join('|')})(\/|$)`)
 
 const COOKIE_NAME = 'NEXT_LOCALE'
 

@@ -89,6 +89,7 @@ const config: Config = tseslint.config(
       'prefer-const': ['error', { destructuring: 'all' }],
       eqeqeq: ['error', 'always', { null: 'ignore' }],
       'unicorn/switch-case-braces': ['error', 'avoid'],
+      '@next/next/no-html-link-for-pages': 'off', // we use App Router
 
       'sonarjs/unused-named-groups': 'off', // todo
       'sonarjs/cognitive-complexity': 'off', // todo

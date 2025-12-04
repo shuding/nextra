@@ -117,12 +117,12 @@ describe('LaTeX', () => {
 
     it('should convert math inline', async () => {
       const rawJs = await compileMdx(INLINE_MATH, options)
-      return expect(clean(rawJs)).resolves.toMatchInlineSnapshot(`
+      return expect(clean(rawJs)).resolves.toMatchInlineSnapshot(String.raw`
         "/*@jsxRuntime automatic*/
         /*@jsxImportSource react*/
         import { useMDXComponents as _provideComponents } from 'next-mdx-import-source-file'
         export const metadata = {}
-        export const sourceCode = '$a=\\\\sqrt{b^2 + c^2}$'
+        export const sourceCode = '$a=\\sqrt{b^2 + c^2}$'
         import { MathJax, MathJaxContext } from 'nextra/components'
         function useTOC(props) {
           return []
@@ -136,11 +136,11 @@ describe('LaTeX', () => {
           }
           return (
             <MathJaxContext>
-              {'\\n'}
+              {'\n'}
               <_components.p>
-                <MathJax inline>{'\\\\(a=\\\\sqrt{b^2 + c^2}\\\\)'}</MathJax>
+                <MathJax inline>{'\\(a=\\sqrt{b^2 + c^2}\\)'}</MathJax>
               </_components.p>
-              {'\\n'}
+              {'\n'}
             </MathJaxContext>
           )
         }

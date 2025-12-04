@@ -16,7 +16,7 @@ describe('Compile', () => {
 export default foo`,
       { mdxOptions }
     )
-    return expect(clean(rawJs)).resolves.toMatchInlineSnapshot(`
+    return expect(clean(rawJs)).resolves.toMatchInlineSnapshot(String.raw`
       "/*@jsxRuntime automatic*/
       /*@jsxImportSource react*/
       import { HOC_MDXWrapper } from 'nextra/setup-page'
@@ -24,7 +24,7 @@ export default foo`,
       export const metadata = {}
       import foo from './foo'
       const MDXLayout = foo
-      export const sourceCode = "import foo from './foo'\\n      \\n## heading\\n\\nexport default foo"
+      export const sourceCode = "import foo from './foo'\n      \n## heading\n\nexport default foo"
       function useTOC(props) {
         return [
           {
@@ -64,13 +64,13 @@ export default foo`,
 export { foo as default } from './foo'`,
       { mdxOptions }
     )
-    return expect(clean(rawJs)).resolves.toMatchInlineSnapshot(`
+    return expect(clean(rawJs)).resolves.toMatchInlineSnapshot(String.raw`
       "/*@jsxRuntime automatic*/
       /*@jsxImportSource react*/
       import { useMDXComponents as _provideComponents } from 'next-mdx-import-source-file'
       export const metadata = {}
       import { foo as MDXLayout } from './foo'
-      export const sourceCode = "## heading\\n      \\nexport { foo as default } from './foo'"
+      export const sourceCode = "## heading\n      \nexport { foo as default } from './foo'"
       function useTOC(props) {
         return [
           {
@@ -139,7 +139,7 @@ export const TagName = () => {
 ###### bar Qux [#]`,
       { mdxOptions }
     )
-    return expect(clean(rawJs)).resolves.toMatchInlineSnapshot(`
+    return expect(clean(rawJs)).resolves.toMatchInlineSnapshot(String.raw`
       "/*@jsxRuntime automatic*/
       /*@jsxImportSource react*/
       import { useMDXComponents as _provideComponents } from 'next-mdx-import-source-file'
@@ -147,7 +147,7 @@ export const TagName = () => {
         title: 'My Header'
       }
       export const sourceCode =
-        '# My Header [#test-id]\\n## Some extra space [#extra-space]&nbsp;\\n### Some extra space in heading    [#extra-space-in-heading]\\n### nospace[#without-space]\\n#### foo [#другой язык]\\n##### bar Baz []\\n###### bar Qux [#]'
+        '# My Header [#test-id]\n## Some extra space [#extra-space]&nbsp;\n### Some extra space in heading    [#extra-space-in-heading]\n### nospace[#without-space]\n#### foo [#другой язык]\n##### bar Baz []\n###### bar Qux [#]'
       function useTOC(props) {
         return [
           {
@@ -197,17 +197,17 @@ export const TagName = () => {
         return (
           <>
             <_components.h1 id="test-id">{'My Header'}</_components.h1>
-            {'\\n'}
+            {'\n'}
             <_components.h2 id={toc[0].id}>{toc[0].value}</_components.h2>
-            {'\\n'}
+            {'\n'}
             <_components.h3 id={toc[1].id}>{toc[1].value}</_components.h3>
-            {'\\n'}
+            {'\n'}
             <_components.h3 id={toc[2].id}>{toc[2].value}</_components.h3>
-            {'\\n'}
+            {'\n'}
             <_components.h4 id={toc[3].id}>{toc[3].value}</_components.h4>
-            {'\\n'}
+            {'\n'}
             <_components.h5 id={toc[4].id}>{toc[4].value}</_components.h5>
-            {'\\n'}
+            {'\n'}
             <_components.h6 id={toc[5].id}>{toc[5].value}</_components.h6>
           </>
         )

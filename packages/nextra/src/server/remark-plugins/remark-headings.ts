@@ -64,8 +64,7 @@ export const remarkHeadings: Plugin<
           node.type === 'mdxJsxFlowElement' && node.name === 'Tabs.Tab'
         if (isTab) {
           const itemsAttr: any =
-            parent &&
-            parent.type === 'mdxJsxFlowElement' &&
+            parent?.type === 'mdxJsxFlowElement' &&
             parent.name === 'Tabs' &&
             parent.attributes.find(
               (
