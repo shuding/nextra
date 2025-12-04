@@ -30,7 +30,7 @@ function getHeadersLocale(request: NextRequest): string {
  * @example
  * ```ts
  * // Basic usage
- * export { middleware } from 'nextra/locales'
+ * export { proxy } from 'nextra/locales'
  *
  * export const config = {
  *   // Matcher ignoring `/_next/` and `/api/`
@@ -40,7 +40,7 @@ function getHeadersLocale(request: NextRequest): string {
  * }
  * ```
  */
-export function middleware(request: NextRequest) {
+export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl
 
   // Check if there is any supported locale in the pathname
@@ -65,3 +65,6 @@ export function middleware(request: NextRequest) {
     return response
   }
 }
+
+/** @deprecated Use `export { proxy } from 'nextra/locales'` instead. */
+export const middleware = proxy
