@@ -18,3 +18,4 @@ tsconfig.vitest-temp.json
 
 _pagefind/
 docs/public/sitemap.xml
+next-env.d.ts
