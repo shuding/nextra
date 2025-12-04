@@ -1,5 +1,14 @@
 # nextra-theme-blog
 
+## 4.6.1
+
+### Patch Changes
+
+- 261fcdc: - update zod to v4 stable
+  - fix compatibility with Next.js 16
+- Updated dependencies [261fcdc]
+  - nextra@4.6.1
+
 ## 4.6.0
 
 ### Patch Changes
@@ -53,7 +62,6 @@
 
   The `<TSDoc>` component from `nextra/tsdoc` generates a properties table that
   displays:
-
   - **Property name**
   - **TypeScript type**
   - **Property description** - is parsed from [TSDoc](https://tsdoc.org) inline
@@ -434,7 +442,6 @@
 
   The `<TSDoc>` component from `nextra/tsdoc` generates a properties table that
   displays:
-
   - **Property name**
   - **TypeScript type**
   - **Property description** - is parsed from [TSDoc](https://tsdoc.org) inline
@@ -837,7 +844,6 @@
   ```
 
 - 283320f: - sync with nextra 3.0.15
-
   - bump to Next 15
   - remove importing of `style.css` in themes, you need to import now manually
     by
@@ -1387,7 +1393,6 @@
 ### Patch Changes
 
 - 2c8a8ab: - sync with nextra 3.0.15
-
   - bump to Next 15
   - remove importing of `style.css` in themes, you need to import now manually
     by
@@ -1751,7 +1756,6 @@
 
 - c2ad837: update to MDX3
 - 16ab7f7: - remove `legacyBehavior` from `NextLink`
-
   - remove `config.cusdis`. Instead, now you need to pass cusdis options as
     props in `Cusdis` component
 
@@ -1768,7 +1772,6 @@
 - 128e195: fix React warning, remove PageOpts.toc, use `toc` prop from
   `components.wrapper`
 - 191e6c4: - use `shikiji` instead of `shiki`
-
   - rename `useSSG` to `useData`
 
 - c7f03e5: rename `pageOpts.headings` to `toc`
@@ -1778,7 +1781,6 @@
 - 6ec3241: Add Terraform/Move icon https://github.com/shuding/nextra/pull/2811
   https://github.com/shuding/nextra/pull/2808
 - 5a63701: add icons for following languages:
-
   - GraphQL (`graphql`)
   - C++ (`c++`, `cpp`)
   - C# (`csharp`, `c#`, `cs`)
@@ -2149,7 +2151,6 @@
 ### Minor Changes
 
 - 5a637010: add icons for following languages:
-
   - GraphQL (`graphql`)
   - C++ (`c++`, `cpp`)
   - C# (`csharp`, `c#`, `cs`)
@@ -2286,7 +2287,6 @@
 - 128e195f: fix React warning, remove PageOpts.toc, use `toc` prop from
   `components.wrapper`
 - 191e6c41: - use `shikiji` instead of `shiki`
-
   - rename `useSSG` to `useData`
 
 - c7f03e54: rename `pageOpts.headings` to `toc`
@@ -2316,7 +2316,6 @@
 ### Major Changes
 
 - 16ab7f78: - remove `legacyBehavior` from `NextLink`
-
   - remove `config.cusdis`. Instead, now you need to pass cusdis options as
     props in `Cusdis` component
 
@@ -2401,7 +2400,6 @@
 
 - 8962597e: - allow override static image component that was hardcoded to
   `import Image from 'next/image'` now it's plain `<img />`
-
   - support `<details />`/`<summary />` for `.md` files
 
 ### Patch Changes
@@ -2449,7 +2447,6 @@
 - e54b008: - add `@theguild/remark-npm2yarn` package that replaces the code
   block that has `npm2yarn` metadata with `<Tabs />` and `<Tab />` components
   from `nextra/components`.
-
   - `<Tabs />` now has `selectedKey` prop, the chosen tab is saved in the local
     storage, which will be chosen in future page renders.
 
@@ -2465,7 +2462,6 @@
 ### Minor Changes
 
 - 16bbb88: Move below packages to nextra package
-
   - `<Cards />` and `<Card />`
   - `<Tabs />` and `<Tab />`
   - `<Steps />`

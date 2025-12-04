@@ -1,5 +1,12 @@
 # nextra
 
+## 4.6.1
+
+### Patch Changes
+
+- 261fcdc: - update zod to v4 stable
+  - fix compatibility with Next.js 16
+
 ## 4.6.0
 
 ## 4.5.1
@@ -70,7 +77,6 @@
   container
 
   fix(TSDoc): improve TSDoc comments for components
-
   - `Banner`
   - `Head`
   - `Search`
@@ -87,7 +93,6 @@
   - `Navbar`
 
   fix(TSDoc): improve TSDoc comments for functions:
-
   - `nextra`
   - `generateDefinition`
   - `useMDXComponents`
@@ -107,7 +112,6 @@
 
   The `<TSDoc>` component from `nextra/tsdoc` generates a properties table that
   displays:
-
   - **Property name**
   - **TypeScript type**
   - **Property description** - is parsed from [TSDoc](https://tsdoc.org) inline
@@ -250,7 +254,6 @@
   container
 
   fix(TSDoc): improve TSDoc comments for components
-
   - `Banner`
   - `Head`
   - `Search`
@@ -267,7 +270,6 @@
   - `Navbar`
 
   fix(TSDoc): improve TSDoc comments for functions:
-
   - `nextra`
   - `generateDefinition`
   - `useMDXComponents`
@@ -425,7 +427,6 @@
 
   The `<TSDoc>` component from `nextra/tsdoc` generates a properties table that
   displays:
-
   - **Property name**
   - **TypeScript type**
   - **Property description** - is parsed from [TSDoc](https://tsdoc.org) inline
@@ -803,7 +804,6 @@
   ```
 
 - 283320f: - sync with nextra 3.0.15
-
   - bump to Next 15
   - remove importing of `style.css` in themes, you need to import now manually
     by
@@ -1202,7 +1202,6 @@
 ### Patch Changes
 
 - 2c8a8ab: - sync with nextra 3.0.15
-
   - bump to Next 15
   - remove importing of `style.css` in themes, you need to import now manually
     by
@@ -1407,7 +1406,6 @@
   `frontMatter.title` set
 
   now priority for sidebar title is:
-
   1. `title` property from `_meta` file
   1. `frontMatter.sidebarTitle`
   1. `frontMatter.title`
@@ -1450,7 +1448,6 @@
 ### Patch Changes
 
 - f9cc160: - fix `Module not found: Can't resolve 'module'` in yarn@4.5.0
-
   - disable `twoslash` in browser because he never worked in this environment
 
 ## 3.0.8
@@ -1499,13 +1496,11 @@
 
 - e7e8e84: show react components, variable interpolation and latex in toc
 - 7188278: - insert `frontMatter` as export node via custom remark plugin
-
   - remove `frontMatter.mdxOptions` support
 
 - 023d37b: add `"type": "module"` to `nextra` package
 - 50a52fd: - ❌ remove `_app.mdx`, use `_app.{js,jsx}` or `_app.{ts,tsx}` for
   TypeScript projects instead
-
   - ❌ remove Nextra middleware `nextra/locales`
   - ❌ remove `parseFileName` from `nextra/utils`
   - ❌ remove `nextra/filter-route-locale`
@@ -1536,7 +1531,6 @@
 - ad4823d: add zod validation for nextraConfig
 - ab07609: remove `locale` and `defaultLocale` from `normalizePages`
 - 2f3be33: - set `"engines.node": ">=18"`
-
   - remove `Tab` export, use `Tabs.Tab` instead
   - remove `Card` export, use `Cards.Card` instead
   - disallow import md/mdx files that are outside the working directory, use
@@ -1547,7 +1541,6 @@
   > ⚠️⚠️⚠️ use `next.config.mjs` or `next.config.js` with `"type": "module"`
 
 - b9f88e3: - remove `use-internals.ts`
-
   - remove `layout.tsx`, move directly to `setup-page.tsx`
   - remove `kind: 'Meta' | 'Folder' | 'MdxPage'` to keep page map smaller
 
@@ -1555,7 +1548,6 @@
   `components.wrapper`
 - 576cb6f: - rename `nextraConfig.flexsearch` to `nextraConfig.search`
 - 1f3e7cd: - remove `__nextraPageOptions.hot`
-
   - remove `__nextraPageOptions.pageOptsChecksum`
   - remove `__nextra_internal__.refreshListeners` (no longer needed since we
     insert toc as esm node in remark plugin)
@@ -1563,7 +1555,6 @@
 
 - 198dbcc: use toc with JSX elements for remote content
 - 191e6c4: - use `shikiji` instead of `shiki`
-
   - rename `useSSG` to `useData`
 
 - c7f03e5: rename `pageOpts.headings` to `toc`
@@ -1577,7 +1568,6 @@
 - c7f03e5: should not add virtual `_meta` file if missing
 - 3644e1c: add `remark-smartypants`
 - 5a63701: add icons for following languages:
-
   - GraphQL (`graphql`)
   - C++ (`c++`, `cpp`)
   - C# (`csharp`, `c#`, `cs`)
@@ -1587,7 +1577,6 @@
   meta data setting
 
 - 60ec68c: improvements for remarkStaticImage:
-
   - import same image only once
   - support importing images by markdown image definitions
 
@@ -1872,7 +1861,6 @@
 ### Minor Changes
 
 - 5a637010: add icons for following languages:
-
   - GraphQL (`graphql`)
   - C++ (`c++`, `cpp`)
   - C# (`csharp`, `c#`, `cs`)
@@ -1899,7 +1887,6 @@
 ### Minor Changes
 
 - 60ec68c4: improvements for remarkStaticImage:
-
   - import same image only once
   - support importing images by markdown image definitions
 
@@ -1995,7 +1982,6 @@
 
 - e7e8e849: show react components, variable interpolation and latex in toc
 - 71882780: - insert `frontMatter` as export node via custom remark plugin
-
   - remove `frontMatter.mdxOptions` support
 
 - 023d37b1: add `"type": "module"` to `nextra` package
@@ -2004,14 +1990,12 @@
 - 63ca28be: Remove support of "\_meta.json", use "\_meta.{js,jsx,ts,tsx}"
   instead.
 - b9f88e34: - remove `use-internals.ts`
-
   - remove `layout.tsx`, move directly to `setup-page.tsx`
   - remove `kind: 'Meta' | 'Folder' | 'MdxPage'` to keep page map smaller
 
 - 128e195f: fix React warning, remove PageOpts.toc, use `toc` prop from
   `components.wrapper`
 - 1f3e7cd4: - remove `__nextraPageOptions.hot`
-
   - remove `__nextraPageOptions.pageOptsChecksum`
   - remove `__nextra_internal__.refreshListeners` (no longer needed since we
     insert toc as esm node in remark plugin)
@@ -2019,7 +2003,6 @@
 
 - 198dbcca: use toc with JSX elements for remote content
 - 191e6c41: - use `shikiji` instead of `shiki`
-
   - rename `useSSG` to `useData`
 
 - c7f03e54: rename `pageOpts.headings` to `toc`
@@ -2041,7 +2024,6 @@
 
 - 50a52fd1: - ❌ remove `_app.mdx`, use `_app.{js,jsx}` or `_app.{ts,tsx}` for
   TypeScript projects instead
-
   - ❌ remove Nextra middleware `nextra/locales`
   - ❌ remove `parseFileName` from `nextra/utils`
   - ❌ remove `nextra/filter-route-locale`
@@ -2058,7 +2040,6 @@
 - ad4823d9: add zod validation for nextraConfig
 - ab07609c: remove `locale` and `defaultLocale` from `normalizePages`
 - 2f3be336: - set `"engines.node": ">=18"`
-
   - remove `Tab` export, use `Tabs.Tab` instead
   - remove `Card` export, use `Cards.Card` instead
   - disallow import md/mdx files that are outside the working directory, use
@@ -2113,7 +2094,6 @@
 - ffb6d808: - Fix
   `TypeError: Cannot read properties of null (reading 'classList')` while
   navigating to route that doesn't have toc with `router.push` for example
-
   - Add alias `Tabs.Tab` to `Tab` component
   - Add alias `Cards.Card` to `Card` component
   - should not attach custom heading id as id attribute if parent is `Tabs.Tab`
@@ -2132,7 +2112,6 @@
 
 - 52ae8fc5: - always cache md/mdx compiler for non-remote content and never
   cache for remote content
-
   - refactor function arguments for `compileMdx`
   - fix source code from loader was stripped starting from last match
     `export default MDXContent;` and until the end, so `transform` function was
@@ -2144,12 +2123,10 @@
 ### Minor Changes
 
 - d9820746: - show headings for partial md/mdx in toc
-
   - hide headings in toc when parent `<Tab />` or `<Tabs.Tab />`
 
 - 8962597e: - allow override static image component that was hardcoded to
   `import Image from 'next/image'` now it's plain `<img />`
-
   - support `<details />`/`<summary />` for `.md` files
 
 ### Patch Changes
@@ -2192,7 +2169,6 @@
 - e54b008: - add `@theguild/remark-npm2yarn` package that replaces the code
   block that has `npm2yarn` metadata with `<Tabs />` and `<Tab />` components
   from `nextra/components`.
-
   - `<Tabs />` now has `selectedKey` prop, the chosen tab is saved in the local
     storage, which will be chosen in future page renders.
 
@@ -2203,7 +2179,6 @@
 ### Minor Changes
 
 - 16bbb88: Move below packages to nextra package
-
   - `<Cards />` and `<Card />`
   - `<Tabs />` and `<Tab />`
   - `<Steps />`
