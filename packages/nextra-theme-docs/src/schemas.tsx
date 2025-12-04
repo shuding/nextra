@@ -8,7 +8,7 @@ import { LastUpdated } from './components'
 const attributeSchema = z
   .custom<
     'class' | `data-${string}`
-  >(value => value === 'class' || value.startsWith('data-'))
+  >(value => value === 'class' || (value as string).startsWith('data-'))
   .meta({ type: "'class' | `data-${string}`" })
 
 const feedbackSchema = z.strictObject({
