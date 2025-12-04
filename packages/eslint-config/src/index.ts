@@ -3,7 +3,6 @@ import { includeIgnoreFile } from '@eslint/compat'
 import js from '@eslint/js'
 import eslintPluginNext from '@next/eslint-plugin-next'
 import type { Linter } from 'eslint'
-import { defineConfig } from 'eslint/config'
 // import type { Linter } from 'eslint'
 import eslintConfigPrettier from 'eslint-config-prettier'
 import eslintPluginDeMorgan from 'eslint-plugin-de-morgan'
@@ -15,6 +14,7 @@ import eslintPluginSonarJs from 'eslint-plugin-sonarjs'
 // @ts-expect-error -- no types
 import eslintPluginTsSortKeys from 'eslint-plugin-typescript-sort-keys'
 import eslintPluginUnicorn from 'eslint-plugin-unicorn'
+import { defineConfig } from 'eslint/config'
 import tseslint from 'typescript-eslint'
 
 // TODO: Enable once `eslint-plugin-tailwindcss` will support Tailwind CSS v4
@@ -166,7 +166,7 @@ export default defineConfig(
       ],
       'react/jsx-curly-brace-presence': 'error',
       'react/jsx-boolean-value': 'error',
-      '@next/next/no-html-link-for-pages': 'off', // we use App Router
+      '@next/next/no-html-link-for-pages': 'off' // we use App Router
     },
     settings: {
       react: { version: 'detect' }
