@@ -20,6 +20,10 @@ const DEFAULT_EXTENSIONS = ['js', 'jsx', 'ts', 'tsx'] as const
 const FILENAME = fileURLToPath(import.meta.url)
 
 const LOADER_PATH = path.join(FILENAME, '..', '..', '..', 'loader.cjs')
+const META_LOADER_PATH = path.join(FILENAME, '..', 'meta-loader.js')
+
+// Regex to match _meta files
+const META_FILE_RE = /_meta\.[jt]sx?$/
 
 const SEP = path.sep === '/' ? '/' : '\\\\'
 
@@ -116,7 +120,11 @@ const nextra = (nextraConfig: NextraConfig) => {
       (shouldUseConfigTurbopack
         ? nextConfig.turbopack
         : // @ts-expect-error -- Backwards compatibility
-          nextConfig.experimental?.turbo) ?? {}
+        nextConfig.experimental?.turbo) ?? {}
+
+    const metaLoader = {
+      loader: META_LOADER_PATH
+    }
 
     const turbopack = {
       ...turbopackConfig,
@@ -136,6 +144,11 @@ const nextra = (nextraConfig: NextraConfig) => {
         },
         [`**${GET_PAGE_MAP_PATH}`]: {
           loaders: [pageMapLoader]
+        },
+        // Meta files need to be processed to preserve key order for numeric string keys
+        // See: https://github.com/shuding/nextra/issues/4834
+        ['**/_meta.{js,jsx,ts,tsx}']: {
+          loaders: [metaLoader]
         }
       },
       resolveAlias: {
@@ -164,8 +177,8 @@ const nextra = (nextraConfig: NextraConfig) => {
         // To import ESM-only packages with `next dev --turbopack`. Source: https://github.com/vercel/next.js/issues/63318#issuecomment-2079677098
         ...// Next.js 15
         (process.env.TURBOPACK === '1' ||
-        // Next.js 16
-        process.env.TURBOPACK === 'auto'
+          // Next.js 16
+          process.env.TURBOPACK === 'auto'
           ? ['shiki', 'ts-morph']
           : []),
         ...(nextConfig.transpilePackages || [])
@@ -246,6 +259,12 @@ const nextra = (nextraConfig: NextraConfig) => {
                 use: [options.defaultLoaders.babel, loader]
               }
             ]
+          },
+          // Meta files need to be processed to preserve key order for numeric string keys
+          // See: https://github.com/shuding/nextra/issues/4834
+          {
+            test: META_FILE_RE,
+            use: [options.defaultLoaders.babel, { loader: META_LOADER_PATH }]
           }
         )
 
