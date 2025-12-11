@@ -43,6 +43,7 @@
     "@tailwindcss/cli": "4.1.10",
     "@tailwindcss/postcss": "4.1.10",
     "@testing-library/react": "^16.0.0",
+    "@types/node": "^25.0.0",
     "@types/react": "^19.1.8",
     "@vitejs/plugin-react": "^4.3.4",
     "esbuild-react-compiler-plugin": "workspace:*",

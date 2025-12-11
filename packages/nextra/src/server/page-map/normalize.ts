@@ -47,6 +47,11 @@ function sortFolder(pageMap: PageMapItem[] | Folder | TItem) {
   ) as ParsedFolder
 
   const meta: Record<string, Record<string, any>> = {}
+  // Store the original key order from _meta files to handle numeric string keys
+  // JavaScript reorders numeric string keys (e.g., '1140', '1130' become '1130', '1140')
+  // See: https://github.com/shuding/nextra/issues/4834
+  let originalKeyOrder: string[] | undefined
+
   for (const item of folder.children) {
     if (
       isFolder &&
@@ -58,7 +63,14 @@ function sortFolder(pageMap: PageMapItem[] | Folder | TItem) {
     } else if ('children' in item) {
       newChildren.push(normalizePageMap(item))
     } else if ('data' in item) {
+      // Check if __order__ was injected by the meta-loader
+      if (Array.isArray(item.data.__order__)) {
+        originalKeyOrder = item.data.__order__
+      }
       for (const [key, titleOrObject] of Object.entries(item.data)) {
+        // Skip the __order__ helper property
+        if (key === '__order__') continue
+
         const { data, error } = metaSchema.safeParse(titleOrObject)
         if (error) {
           throw z.prettifyError(error)
@@ -77,7 +89,9 @@ function sortFolder(pageMap: PageMapItem[] | Folder | TItem) {
     }
   }
 
-  const metaKeys = Object.keys(meta)
+  // Use original key order if available (from meta-loader), otherwise fall back to Object.keys
+  // Object.keys reorders numeric string keys, so we prefer the original order
+  const metaKeys = originalKeyOrder || Object.keys(meta)
   const hasIndexKey = metaKeys.includes('index')
 
   // Normalize items based on files and _meta.json.
@@ -160,10 +174,10 @@ The field key "${metaKey}" in \`_meta\` file refers to a page that cannot be fou
 
   const result = isFolder
     ? {
-        ...folder,
-        title: titlize(folder, {}),
-        children: itemsWithTitle
-      }
+      ...folder,
+      title: titlize(folder, {}),
+      children: itemsWithTitle
+    }
     : itemsWithTitle
   return result
 }
