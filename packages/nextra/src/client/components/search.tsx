@@ -29,7 +29,7 @@ export async function importPagefind() {
     /* webpackIgnore: true */ addBasePath('/_pagefind/pagefind.js')
   )
   await window.pagefind!.options({
-    baseUrl: '/'
+    baseUrl: addBasePath('/')
     // ... more search options
   })
 }
