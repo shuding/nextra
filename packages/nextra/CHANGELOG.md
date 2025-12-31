@@ -1,5 +1,16 @@
 # nextra
 
+## 4.6.2
+
+### Patch Changes
+
+- 9e6f5af: Fix Pagefind search not working when using `basePath` in Next.js
+  config
+
+  When deploying Nextra to a subpath (e.g., `basePath: '/docs'`), the Pagefind
+  search would fail to load index files because `baseUrl` was hardcoded to `'/'`
+  instead of using `addBasePath('/')`.
+
 ## 4.6.1
 
 ### Patch Changes
