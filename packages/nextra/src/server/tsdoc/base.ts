@@ -114,7 +114,7 @@ export function generateDefinition({
           flattened
         })
       )
-      .filter(entry => !entry.tags || !('internal' in entry.tags))
+      .filter(entry => (!entry.tags || !('internal' in entry.tags)) && !entry.private)
     if (!entries.length) {
       const typeName = declarationType.getText()
       if (typeName === 'any') {
@@ -248,6 +248,7 @@ function getDocEntry({
     ? // @ts-expect-error -- fixme
       valueDeclaration.isOptional()
     : symbol.isOptional()
+  const isPrivate = valueDeclaration.getNameNode().getKind() === SyntaxKind.PrivateIdentifier;
 
   const typeName = getTypeName({
     tags,
@@ -260,7 +261,8 @@ function getDocEntry({
     type: typeName,
     ...(typeDescription && { description: typeDescription }),
     ...(Object.keys(tags).length && { tags }),
-    ...(isOptional && { optional: isOptional })
+    ...(isOptional && { optional: isOptional }),
+    ...(isPrivate && { private: isPrivate })
   }
 }
 
