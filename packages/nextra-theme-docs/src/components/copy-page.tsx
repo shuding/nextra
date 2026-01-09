@@ -38,14 +38,11 @@ export const CopyPage: FC<{ sourceCode: string }> = ({ sourceCode }) => {
   }
 
   return (
-    <div className="x:border x:inline-flex x:rounded-md x:items-stretch nextra-border x:float-end x:overflow-hidden">
+    <div className={cn("nextra-copy-page nextra-border")}>
       <Button
-        className={({ hover }) =>
-          cn(
-            'x:ps-2 x:pe-1 x:flex x:gap-2 x:text-sm x:font-medium x:items-center',
-            isCopied && 'x:opacity-70',
-            hover &&
-              'x:bg-gray-200 x:text-gray-900 x:dark:bg-primary-100/5 x:dark:text-gray-50'
+        className={cn(
+            'nextra-copy-page-button',
+            isCopied && 'nextra-copy-page-button-copied'
           )
         }
         onClick={handleCopy}
@@ -55,7 +52,7 @@ export const CopyPage: FC<{ sourceCode: string }> = ({ sourceCode }) => {
       </Button>
       <Select
         anchor={{ to: 'bottom end', gap: 10 }}
-        className="x:rounded-none"
+        className={cn("nextra-copy-page-select")}
         options={[
           {
             id: 'copy',

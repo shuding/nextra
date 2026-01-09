@@ -10,9 +10,9 @@ export const Footer: FC<ComponentProps<'footer'>> = ({
   ...props
 }) => {
   return (
-    <div className="x:bg-gray-100 x:pb-[env(safe-area-inset-bottom)] x:dark:bg-neutral-900 x:print:bg-transparent">
+    <div className="nextra-footer">
       <Switchers>
-        <div className="x:mx-auto x:flex x:max-w-(--nextra-content-width) x:gap-2 x:py-2 x:px-4">
+        <div className="nextra-footer-switchers">
           <LocaleSwitch />
           <ThemeSwitch />
         </div>
@@ -21,8 +21,7 @@ export const Footer: FC<ComponentProps<'footer'>> = ({
       {children && (
         <footer
           className={cn(
-            'x:mx-auto x:flex x:max-w-(--nextra-content-width) x:justify-center x:py-12 x:text-gray-600 x:dark:text-gray-400 x:md:justify-start',
-            'x:pl-[max(env(safe-area-inset-left),1.5rem)] x:pr-[max(env(safe-area-inset-right),1.5rem)]',
+            'nextra-footer-footer',
             className
           )}
           {...props}
