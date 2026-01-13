@@ -36,7 +36,13 @@ const nextThemesSchema = z.strictObject({
   defaultTheme: z.string().default('system'),
   disableTransitionOnChange: z.boolean().default(true),
   forcedTheme: z.string().optional(),
-  storageKey: z.string().default('theme')
+  storageKey: z.string().default('theme'),
+  enableSystem: z.boolean().optional(),
+  enableColorScheme: z.boolean().optional(),
+  themes: z.array(z.string()).optional(),
+  value: z.record(z.string(), z.string()).optional(),
+  nonce: z.string().optional(),
+  scriptProps: z.object().optional(),
 })
 
 const sidebarSchema = z.strictObject({
