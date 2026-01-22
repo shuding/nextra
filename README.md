@@ -5,7 +5,9 @@ from Next.js.
 
 ## Documentation
 
-https://nextra.site
+English: https://nextra.site  
+
+中文: http://nextra-zh.readme-i18n.com
 
 ## Development
 
