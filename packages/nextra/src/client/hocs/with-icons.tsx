@@ -4,6 +4,7 @@
 import path from 'node:path'
 import type { FC, SVGProps } from 'react'
 import {
+  CIcon,
   CPPIcon,
   CsharpIcon,
   CssIcon,
@@ -48,6 +49,8 @@ function getIcon(language: string) {
       return TerminalIcon
     case 'css':
       return CssIcon
+    case 'c':
+      return CIcon
     case 'c++':
     case 'cpp':
       return CPPIcon
