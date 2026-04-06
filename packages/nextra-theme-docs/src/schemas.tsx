@@ -6,8 +6,9 @@ import { z } from 'zod'
 import { LastUpdated } from './components'
 
 const attributeSchema = z
-  .string()
-  .refine(value => value === 'class' || value.startsWith('data-'))
+  .custom<
+    'class' | `data-${string}`
+  >(value => value === 'class' || (value as string).startsWith('data-'))
   .meta({ type: "'class' | `data-${string}`" })
 
 const feedbackSchema = z.strictObject({
