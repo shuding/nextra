@@ -29,9 +29,9 @@ By default, it's a link to the issue creation form of the docs repository, with 
     })
 })
 
-const nextThemesSchema = z.strictObject({
+const nextThemesSchema = z.looseObject({
   attribute: z
-    .union([attributeSchema, z.array(attributeSchema)])
+    .union([z.array(attributeSchema), attributeSchema])
     .default('class'),
   defaultTheme: z.string().default('system'),
   disableTransitionOnChange: z.boolean().default(true),
