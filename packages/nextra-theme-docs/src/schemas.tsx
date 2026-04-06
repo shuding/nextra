@@ -6,9 +6,8 @@ import { z } from 'zod'
 import { LastUpdated } from './components'
 
 const attributeSchema = z
-  .custom<
-    'class' | `data-${string}`
-  >(value => value === 'class' || (value as string).startsWith('data-'))
+  .string()
+  .refine(value => value === 'class' || value.startsWith('data-'))
   .meta({ type: "'class' | `data-${string}`" })
 
 const feedbackSchema = z.strictObject({
@@ -29,20 +28,14 @@ By default, it's a link to the issue creation form of the docs repository, with 
     })
 })
 
-const nextThemesSchema = z.strictObject({
+const nextThemesSchema = z.looseObject({
   attribute: z
     .union([attributeSchema, z.array(attributeSchema)])
     .default('class'),
   defaultTheme: z.string().default('system'),
   disableTransitionOnChange: z.boolean().default(true),
   forcedTheme: z.string().optional(),
-  storageKey: z.string().default('theme'),
-  enableSystem: z.boolean().optional(),
-  enableColorScheme: z.boolean().optional(),
-  themes: z.array(z.string()).optional(),
-  value: z.record(z.string(), z.string()).optional(),
-  nonce: z.string().optional(),
-  scriptProps: z.object().optional(),
+  storageKey: z.string().default('theme')
 })
 
 const sidebarSchema = z.strictObject({
