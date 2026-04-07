@@ -1,5 +1,12 @@
 # nextra-theme-docs
 
+## 4.6.3
+
+### Patch Changes
+
+- c1a6a48: fix zod schema for `nextThemes`
+  - nextra@4.6.3
+
 ## 4.6.2
 
 ### Patch Changes
