@@ -47,6 +47,8 @@ export type TypeField = {
   description?: string
   /** Is field optional. */
   optional?: boolean
+  /** Is field private. */
+  private?: boolean
   /** Field tags. */
   tags?: Tags
 }
