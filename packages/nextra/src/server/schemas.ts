@@ -186,7 +186,7 @@ export const reactNode = z.custom<ReactNode>(
   { error: 'Must be a valid React node' }
 )
 
-const stringOrElement = z.union([z.string(), element])
+export const stringOrElement = z.union([z.string(), element])
 
 export const pageThemeSchema = z.strictObject({
   breadcrumb: z.boolean().optional().meta({
@@ -238,7 +238,7 @@ export const pageThemeSchema = z.strictObject({
 
 const title = stringOrElement.optional()
 
-const linkSchema = z.strictObject({
+export const linkSchema = z.strictObject({
   title,
   href: z.string()
 })
@@ -294,6 +294,6 @@ export const metaSchema = z.union([
   menuSchema
 ])
 
-function transformTitle<T>(title: T) {
+export function transformTitle<T>(title: T) {
   return typeof title === 'string' || isValidElement(title) ? { title } : title
 }

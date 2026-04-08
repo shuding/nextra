@@ -1,3 +1,4 @@
+import { isValidElement, type ReactElement } from 'react'
 import { z } from 'zod'
 import type {
   Folder,
@@ -6,7 +7,14 @@ import type {
   PageMapItem,
   TItem
 } from '../../types.js'
-import { metaSchema } from '../schemas.js'
+import {
+  itemSchema,
+  linkSchema,
+  menuSchema,
+  separatorItemSchema,
+  stringOrElement,
+  transformTitle
+} from '../schemas.js'
 import { pageTitleFromFilename } from '../utils.js'
 
 export function normalizePageMap(pageMap: PageMapItem[] | Folder | TItem): any {
@@ -59,10 +67,7 @@ function sortFolder(pageMap: PageMapItem[] | Folder | TItem) {
       newChildren.push(normalizePageMap(item))
     } else if ('data' in item) {
       for (const [key, titleOrObject] of Object.entries(item.data)) {
-        const { data, error } = metaSchema.safeParse(titleOrObject)
-        if (error) {
-          throw z.prettifyError(error)
-        }
+        const data = parseMetaValue(titleOrObject)
         if (key === '*') {
           // @ts-expect-error -- fixme
           delete data.title
@@ -166,4 +171,69 @@ The field key "${metaKey}" in \`_meta\` file refers to a page that cannot be fou
       }
     : itemsWithTitle
   return result
+}
+
+// Helper to check if it's a string/ReactElement (title-only)
+function isSimpleTitle(value: unknown): value is string | ReactElement {
+  return typeof value === 'string' || isValidElement(value)
+}
+
+// Helper to check if it's a separator
+function isSeparator(value: unknown): value is { type: 'separator' } {
+  return (
+    typeof value === 'object' &&
+    value !== null &&
+    'type' in value &&
+    value.type === 'separator'
+  )
+}
+
+// Helper to check if it's a menu
+function isMenu(value: unknown): value is { type: 'menu' } {
+  return (
+    typeof value === 'object' &&
+    value !== null &&
+    'type' in value &&
+    value.type === 'menu'
+  )
+}
+
+// Helper to check if it has href (link)
+function isLink(value: unknown): value is { href: string } {
+  return typeof value === 'object' && value !== null && 'href' in value
+}
+
+function parseMetaValue(titleOrObject: unknown) {
+  // Try simple title first
+  if (isSimpleTitle(titleOrObject)) {
+    return stringOrElement.transform(transformTitle).parse(titleOrObject)
+  }
+
+  // Check what type of object it is
+  if (isSeparator(titleOrObject)) {
+    const result = separatorItemSchema.safeParse(titleOrObject)
+    if (!result.success) throw z.prettifyError(result.error)
+    return result.data
+  }
+
+  if (isMenu(titleOrObject)) {
+    const result = menuSchema.safeParse(titleOrObject)
+    if (!result.success) throw z.prettifyError(result.error)
+    return result.data
+  }
+
+  if (isLink(titleOrObject)) {
+    const linkWithExtras = linkSchema.extend({
+      type: z.enum(['page', 'doc']).optional(),
+      display: z.enum(['normal', 'hidden']).optional()
+    })
+    const result = linkWithExtras.safeParse(titleOrObject)
+    if (!result.success) throw z.prettifyError(result.error)
+    return result.data
+  }
+
+  // Default to itemSchema
+  const result = itemSchema.safeParse(titleOrObject)
+  if (!result.success) throw z.prettifyError(result.error)
+  return result.data
 }
