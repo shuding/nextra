@@ -24,7 +24,7 @@ export const LocaleSwitch: FC<LocaleSwitchProps> = ({ lite, className }) => {
   return (
     <Select
       title="Change language"
-      className={cn('x:flex x:items-center x:gap-2', className)}
+      className={cn('nextra-locale-switch', className)}
       onChange={lang => {
         const date = new Date(Date.now() + ONE_YEAR)
         document.cookie = `NEXT_LOCALE=${lang}; expires=${date.toUTCString()}; path=/`

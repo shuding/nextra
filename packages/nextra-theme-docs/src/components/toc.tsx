@@ -15,10 +15,7 @@ type TOCProps = {
 }
 
 const linkClassName = cn(
-  'x:text-xs x:font-medium x:transition',
-  'x:text-gray-600 x:dark:text-gray-400',
-  'x:hover:text-gray-800 x:dark:hover:text-gray-200',
-  'x:contrast-more:text-gray-700 x:contrast-more:dark:text-gray-100'
+  'x:text-xs x:font-medium x:transition x:text-gray-600 x:dark:text-gray-400 x:hover:text-gray-800 x:dark:hover:text-gray-200 x:contrast-more:text-gray-700 x:contrast-more:dark:text-gray-100'
 )
 
 export const TOC: FC<TOCProps> = ({ filePath, pageTitle }) => {
@@ -62,30 +59,25 @@ export const TOC: FC<TOCProps> = ({ filePath, pageTitle }) => {
 
   return (
     <div
-      className={cn(
-        'x:grid x:grid-rows-[min-content_1fr_min-content]', // 1fr: toc headings, min-content: title/footer
-        'x:sticky x:top-(--nextra-navbar-height) x:text-sm',
-        'x:max-h-[calc(100vh-var(--nextra-navbar-height))]'
-      )}
+      className='nextra-toc'
     >
       {hasHeadings && (
         <>
-          <p className="x:pt-6 x:px-4 x:font-semibold x:tracking-tight">
+          <p className="nextra-toc-title">
             {themeConfig.toc.title}
           </p>
           <ul
             ref={tocRef}
             className={cn(
-              'x:p-4 nextra-scrollbar x:overscroll-y-contain x:overflow-y-auto x:hyphens-auto',
-              'nextra-mask' // for title/footer shadow
+              'nextra-scrollbar nextra-mask' // for title/footer shadow
             )}
           >
             {anchors.map(({ id, value, depth }) => (
-              <li className="x:my-2 x:scroll-my-6 x:scroll-py-6" key={id}>
+              <li key={id}>
                 <a
                   href={`#${id}`}
                   className={cn(
-                    'x:focus-visible:nextra-focus',
+                    'nextra-toc-link',
                     {
                       2: 'x:font-semibold',
                       3: 'x:ms-3',
@@ -93,11 +85,9 @@ export const TOC: FC<TOCProps> = ({ filePath, pageTitle }) => {
                       5: 'x:ms-9',
                       6: 'x:ms-12'
                     }[depth],
-                    'x:block x:transition-colors x:subpixel-antialiased',
                     id === activeSlug
-                      ? 'x:text-primary-600 x:contrast-more:text-primary-600!'
-                      : 'x:text-gray-600 x:hover:text-gray-900 x:dark:text-gray-400 x:dark:hover:text-gray-300',
-                    'x:contrast-more:text-gray-900 x:contrast-more:underline x:contrast-more:dark:text-gray-50 x:break-words'
+                      ? 'nextra-toc-link-active'
+                      : 'nextra-toc-link-inactive',
                   )}
                 >
                   {value}
@@ -111,7 +101,7 @@ export const TOC: FC<TOCProps> = ({ filePath, pageTitle }) => {
       {hasMetaInfo && (
         <div
           className={cn(
-            'x:grid x:gap-2 x:py-4 x:mx-4',
+            'nextra-toc-meta',
             hasHeadings && 'x:border-t nextra-border'
           )}
         >
