@@ -245,23 +245,33 @@ You can provide these grammars by overriding the `getHighlighter` function in
 `next.config.mjs`:
 
 ```js copy=false filename="next.config.mjs" {13-18}
-import { BUNDLED_LANGUAGES } from 'shiki'
+import { createHighlighter } from 'shiki'
+import { readFileSync } from 'fs'
+import { join } from 'path'
+
+const myLangGrammar = JSON.parse(
+  readFileSync(
+    join(import.meta.dirname, "./grammars/myLang.tmLanguage.json"),
+    "utf8",
+  ),
+);
+
 
 nextra({
   // ... other Nextra config options
   mdxOptions: {
     rehypePrettyCodeOptions: {
       getHighlighter: options =>
-        getHighlighter({
+        createHighlighter({
           ...options,
           langs: [
-            ...BUNDLED_LANGUAGES,
             // custom grammar options, see the Shiki documentation for how to provide these options
             {
-              id: 'my-lang',
+              name: 'my-lang',
               scopeName: 'source.my-lang',
               aliases: ['mylang'], // Along with id, aliases will be included in the allowed names you can use when writing Markdown
-              path: '../../public/syntax/grammar.tmLanguage.json'
+              // See https://shiki.style/guide/load-lang#migrate-from-v0-14
+              ...myLangGrammar,
             }
           ]
         })
