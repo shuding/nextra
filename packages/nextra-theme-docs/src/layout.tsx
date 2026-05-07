@@ -10,11 +10,8 @@ import type { LayoutProps } from './types.generated'
 
 export type ThemeConfigProps = z.infer<typeof LayoutPropsSchema>
 
-export const Layout: FC<LayoutProps> = ({ children, ...themeConfig }) => {
-  const { data, error } = LayoutPropsSchema.safeParse({
-    children,
-    ...themeConfig
-  })
+export const Layout: FC<LayoutProps> = (props) => {
+  const { data, error } = LayoutPropsSchema.safeParse(props)
   if (error) {
     throw z.prettifyError(error)
   }
@@ -24,7 +21,7 @@ export const Layout: FC<LayoutProps> = ({ children, ...themeConfig }) => {
     pageMap,
     nextThemes,
     banner,
-    children: _,
+    children,
     ...rest
   } = data
 
