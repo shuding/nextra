@@ -5,14 +5,14 @@ import type { LayoutProps } from '../types.generated'
 
 describe('Assert types', () => {
   test('LayoutProps should be identical', () => {
-    const WithoutLoose = z.strictObject({
+    const _WithoutLoose = z.strictObject({
       ...LayoutPropsSchema.shape,
       nextThemes: z
         .strictObject(LayoutPropsSchema.shape.nextThemes.unwrap().shape)
         .optional()
     })
 
-    type Expected = z.input<typeof WithoutLoose>
+    type Expected = z.input<typeof _WithoutLoose>
     type Actual = LayoutProps
     assertType<IsEqual<Expected, Actual>>(true)
     return expectTypeOf<Actual>().toEqualTypeOf<Expected>

@@ -113,7 +113,7 @@ export interface LayoutProps {
     /**
      * @default "class"
      */
-    attribute?: 'class' | `data-${string}` | ('class' | `data-${string}`)[]
+    attribute?: ('class' | `data-${string}`)[] | 'class' | `data-${string}`
 
     /**
      * @default "system"

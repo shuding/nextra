@@ -11,11 +11,22 @@ import type { LayoutProps } from './types.generated'
 export type ThemeConfigProps = z.infer<typeof LayoutPropsSchema>
 
 export const Layout: FC<LayoutProps> = ({ children, ...themeConfig }) => {
-  const { data, error } = LayoutPropsSchema.safeParse({ children, ...themeConfig })
+  const { data, error } = LayoutPropsSchema.safeParse({
+    children,
+    ...themeConfig
+  })
   if (error) {
     throw z.prettifyError(error)
   }
-  const { footer, navbar, pageMap, nextThemes, banner, children: _, ...rest } = data
+  const {
+    footer,
+    navbar,
+    pageMap,
+    nextThemes,
+    banner,
+    children: _,
+    ...rest
+  } = data
 
   return (
     <ThemeConfigProvider value={rest}>
