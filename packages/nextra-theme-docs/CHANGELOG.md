@@ -1,5 +1,13 @@
 # nextra-theme-docs
 
+## 4.6.4
+
+### Patch Changes
+
+- f5fe77f: Fix Zod 4.4.x compatibility: include `children` in
+  `LayoutPropsSchema.safeParse` so it is not treated as non-optional
+  - nextra@4.6.4
+
 ## 4.6.3
 
 ### Patch Changes
