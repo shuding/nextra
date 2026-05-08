@@ -5,7 +5,7 @@ settings:
   excludeLinksFromLockfile: false
 
 overrides:
-  postcss: 8.5.6
+  postcss: 8.5.10
   lightningcss: 1.30.1
   esbuild: 0.25.8
   vite: 6.3.5
@@ -49,7 +49,7 @@ importers:
         version: 6.0.1
       tsup:
         specifier: 8.4.0
-        version: 8.4.0(patch_hash=4v22aexubuhugu5vxw4ejmgukm)(jiti@2.4.2)(postcss@8.5.6)(tsx@4.20.3)(typescript@5.9.3)(yaml@2.7.0)
+        version: 8.4.0(patch_hash=4v22aexubuhugu5vxw4ejmgukm)(jiti@2.4.2)(postcss@8.5.10)(tsx@4.20.3)(typescript@5.9.3)(yaml@2.7.0)
       turbo:
         specifier: 2.6.2
         version: 2.6.2
@@ -486,8 +486,8 @@ importers:
         specifier: workspace:*
         version: link:../nextra
       postcss:
-        specifier: 8.5.6
-        version: 8.5.6
+        specifier: 8.5.10
+        version: 8.5.10
       react:
         specifier: 19.1.0
         version: 19.1.0
@@ -556,8 +556,8 @@ importers:
         specifier: workspace:*
         version: link:../nextra
       postcss:
-        specifier: 8.5.6
-        version: 8.5.6
+        specifier: 8.5.10
+        version: 8.5.10
       react:
         specifier: 19.1.0
         version: 19.1.0
@@ -612,7 +612,7 @@ importers:
         version: link:../nextra-theme-docs
       tsup:
         specifier: ^8.4.0
-        version: 8.4.0(patch_hash=4v22aexubuhugu5vxw4ejmgukm)(jiti@2.4.2)(postcss@8.5.6)(tsx@4.20.3)(typescript@5.9.3)(yaml@2.7.0)
+        version: 8.4.0(patch_hash=4v22aexubuhugu5vxw4ejmgukm)(jiti@2.4.2)(postcss@8.5.10)(tsx@4.20.3)(typescript@5.9.3)(yaml@2.7.0)
       vitest:
         specifier: ^3.0.9
         version: 3.0.9(@types/node@22.13.14)(jiti@2.4.2)(jsdom@26.0.0)(lightningcss@1.30.1)(tsx@4.20.3)(yaml@2.7.0)
@@ -642,6 +642,10 @@ packages:
 
   '@babel/code-frame@7.27.1':
     resolution: {integrity: sha512-cjQ7ZlQ0Mv3b47hABuTevyTuYN4i+loJKGeV9flcCgIK37cCXRh+L1bd3iBHlynerhQ7BhCkn2BPbQUL+rGqFg==}
+    engines: {node: '>=6.9.0'}
+
+  '@babel/code-frame@7.29.0':
+    resolution: {integrity: sha512-9NhCeYjq9+3uxgdtp20LSiJXJvN0FeCtNGpJxuMFZ1Kv3cWUNb6DOhJwUvcVCzKGR66cw4njwM6hrJLqgOwbcw==}
     engines: {node: '>=6.9.0'}
 
   '@babel/compat-data@7.26.5':
@@ -1226,6 +1230,10 @@ packages:
 
   '@babel/runtime@7.28.4':
     resolution: {integrity: sha512-Q/N6JNWvIvPnLDvjlE1OUBLPQHH6l3CltCEsHIujp45zQUSSh8K+gHnaEX45yAT1nyngnINhvWtzN+Nb9D8RAQ==}
+    engines: {node: '>=6.9.0'}
+
+  '@babel/runtime@7.29.2':
+    resolution: {integrity: sha512-JiDShH45zKHWyGe4ZNVRrCjBz8Nh9TMmZG1kh4QTK8hCBTWBi8Da+i7s1fJw7/lYpM4ccepSNfqzZ/QvABBi5g==}
     engines: {node: '>=6.9.0'}
 
   '@babel/template@7.25.9':
@@ -3597,6 +3605,7 @@ packages:
 
   '@ungap/structured-clone@1.3.0':
     resolution: {integrity: sha512-WmoN8qaIAo7WTYWbAZuG8PYEhn5fkz7dZrqTBZ7dtt//lL2Gwms1IcnQ5yHqjDfX8Ft5j4YzDM23f87zBfDe9g==}
+    deprecated: Potential CWE-502 - Update to 1.3.1 or higher
 
   '@unrs/resolver-binding-android-arm-eabi@1.9.2':
     resolution: {integrity: sha512-tS+lqTU3N0kkthU+rYp0spAYq15DU8ld9kXkaKg9sbQqJNF+WPMuNHZQGCgdxrUOEO0j22RKMwRVhF1HTl+X8A==}
@@ -5063,8 +5072,8 @@ packages:
   get-tsconfig@4.10.1:
     resolution: {integrity: sha512-auHyJ4AgMz7vgS8Hp3N6HXSmlMdUyhSUrfBF16w153rxtLIEOE+HGqaBppczZvnHLqQJfiHotCYpNhl0lUROFQ==}
 
-  get-tsconfig@4.13.0:
-    resolution: {integrity: sha512-1VKTZJCwBrvbd+Wn3AOgQP/2Av+TfTCOlE4AcRJE72W1ksZXbAx8PPBR9RzgTeSPzlPMHrbANMH3LbltH73wxQ==}
+  get-tsconfig@4.14.0:
+    resolution: {integrity: sha512-yTb+8DXzDREzgvYmh6s9vHsSVCHeC0G3PI5bEXNBHtmshPnO+S5O7qgLEOn0I5QvMy6kpZN8K1NKGyilLb93wA==}
 
   github-slugger@2.0.0:
     resolution: {integrity: sha512-IaOQ9puYtjrkq7Y0Ygl9KDZnrf/aiUJYUpVf89y8kyaxbRG7Y1SrX/jaumrv81vc61+kiMempujsM3Yw7w5qcw==}
@@ -5082,11 +5091,13 @@ packages:
 
   glob@10.4.5:
     resolution: {integrity: sha512-7Bv8RF0k6xjo7d4A/PxYLbUCfb6c+Vpd2/mB2yRDlew7Jb5hEXiCD9ibfO7wpk8i4sevK6DFny9h7EYbM3/sHg==}
+    deprecated: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
     hasBin: true
 
   glob@11.0.0:
     resolution: {integrity: sha512-9UiX/Bl6J2yaBbxKoEBRm4Cipxgok8kQYcOPEhScPwebu2I0HoQOuYdIO6S3hLuWoZgpDpwQZMzTFxgpkyT76g==}
     engines: {node: 20 || >=22}
+    deprecated: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
     hasBin: true
 
   globals@11.12.0:
@@ -5150,6 +5161,10 @@ packages:
 
   hasown@2.0.2:
     resolution: {integrity: sha512-0hJU9SCPvmMzIBdZFqNPXWa6dqh7WdH0cII9y+CyS8rG3nL48Bclra9HmKhVVUHyPWNH5Y7xDwAB7bfgSjkUMQ==}
+    engines: {node: '>= 0.4'}
+
+  hasown@2.0.3:
+    resolution: {integrity: sha512-ej4AhfhfL2Q2zpMmLo7U1Uv9+PyhIZpgQLGT1F9miIGmiCJIoCgSmczFdrc97mWT4kVY72KA+WnnhJ5pghSvSg==}
     engines: {node: '>= 0.4'}
 
   hast-util-from-dom@5.0.0:
@@ -5317,8 +5332,8 @@ packages:
     resolution: {integrity: sha512-urTSINYfAYgcbLb0yDQ6egFm6h3Mo1DcF9EkyXSRjjzdHbsulg01qhwWuXdOoUBuTkbQ80KDboXa0vFJ+BDH+g==}
     engines: {node: '>= 0.4'}
 
-  is-core-module@2.16.1:
-    resolution: {integrity: sha512-UfoeMA6fIJ8wTYFEUjelnaGI67v6+N7qXJEvQuIGa99l4xsCruSYOVSQ0uPANn4dAzm8lkYPaKLrrijLq7x23w==}
+  is-core-module@2.16.2:
+    resolution: {integrity: sha512-evOr8xfXKxE6qSR0hSXL2r3sd7ALj8+7jQEUvPYcm5sgZFdJ+AYzT6yNmJenvIYQBgIGwfwz08sL8zoL7yq2BA==}
     engines: {node: '>= 0.4'}
 
   is-data-view@1.0.2:
@@ -6046,8 +6061,8 @@ packages:
   mz@2.7.0:
     resolution: {integrity: sha512-z81GNO7nnYMEhrGh9LeymoE4+Yr0Wn5McHIZMK5cfQCl+NDX08sCZgUc9/6MHni9IWuFLm1Z3HTCXu2z9fN62Q==}
 
-  nanoid@3.3.11:
-    resolution: {integrity: sha512-N8SpfPUnUp1bK+PMYW8qSWdl9U+wwNWI4QKxOYDy9JAro3WMX7p2OeVRF9v+347pnakNevPmiHhNmZ2HbFA76w==}
+  nanoid@3.3.12:
+    resolution: {integrity: sha512-ZB9RH/39qpq5Vu6Y+NmUaFhQR6pp+M2Xt76XBnEwDaGcVAqhlvxrl3B2bKS5D3NH3QR76v3aSrKaF/Kiy7lEtQ==}
     engines: {node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1}
     hasBin: true
 
@@ -6361,7 +6376,7 @@ packages:
     engines: {node: '>= 18'}
     peerDependencies:
       jiti: '>=1.21.0'
-      postcss: 8.5.6
+      postcss: 8.5.10
       tsx: ^4.8.1
       yaml: ^2.4.2
     peerDependenciesMeta:
@@ -6378,8 +6393,8 @@ packages:
     resolution: {integrity: sha512-IQ7TZdoaqbT+LCpShg46jnZVlhWD2w6iQYAcYXfHARZ7X1t/UGhhceQDs5X0cGqKvYlHNOuv7Oa1xmb0oQuA3w==}
     engines: {node: '>=4'}
 
-  postcss@8.5.6:
-    resolution: {integrity: sha512-3Ybi1tAuwAP9s0r1UQ2J4n5Y0G05bJkpUIO0/bI9MhwmD70S5aTWbXGBwxHrelT+XM1k6dM0pk+SwNkpTRN7Pg==}
+  postcss@8.5.10:
+    resolution: {integrity: sha512-pMMHxBOZKFU6HgAZ4eyGnwXF/EvPGGqUr0MnZ5+99485wwW41kW91A4LOGxSHhgugZmSChL5AlElNdwlNgcnLQ==}
     engines: {node: ^10 || ^12 || >=14}
 
   prelude-ls@1.2.1:
@@ -6729,8 +6744,8 @@ packages:
     engines: {node: '>= 0.4'}
     hasBin: true
 
-  resolve@1.22.11:
-    resolution: {integrity: sha512-RfqAvLnMl313r7c9oclB1HhUEAezcpLjz95wFH4LVuhk9JF/r22qmVP9AMmOU4vMX7Q8pN8jwNg/CSpdFnMjTQ==}
+  resolve@1.22.12:
+    resolution: {integrity: sha512-TyeJ1zif53BPfHootBGwPRYT1RUt6oGWsaQr8UyZW/eAm9bKoijtvruSDEmZHm92CwS9nj7/fWttqPCgzep8CA==}
     engines: {node: '>= 0.4'}
     hasBin: true
 
@@ -7074,6 +7089,7 @@ packages:
   tar@7.4.3:
     resolution: {integrity: sha512-5S7Va8hKfV7W5U6g3aYxXmlPoZVAwUMy9AOKyF2fVuZa2UD3qZjg578OrLRt8PcNN1PleVaL/5/yYATNL0ICUw==}
     engines: {node: '>=18'}
+    deprecated: Old versions of tar are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
 
   term-size@2.2.1:
     resolution: {integrity: sha512-wK0Ri4fOGjv/XPy8SBHZChl8CM7uMc5VML7SqiQ0zG7+J5Vr+RMQDoHa2CNT6KHUnTGIXH34UDMkPzAUyapBZg==}
@@ -7213,7 +7229,7 @@ packages:
     peerDependencies:
       '@microsoft/api-extractor': ^7.36.0
       '@swc/core': ^1
-      postcss: 8.5.6
+      postcss: 8.5.10
       typescript: '>=4.5.0'
     peerDependenciesMeta:
       '@microsoft/api-extractor':
@@ -7463,6 +7479,7 @@ packages:
 
   uuid@9.0.1:
     resolution: {integrity: sha512-b+1eJOlsR9K8HJpow9Ok3fiWOWSIcIzXodvv0rQjVoOVNpWMpxf1wZNpt4y9h10odCNrqnYp1OBzRktckBe3sA==}
+    deprecated: uuid@10 and below is no longer supported.  For ESM codebases, update to uuid@latest.  For CommonJS codebases, use uuid@11 (but be aware this version will likely be deprecated in 2028).
     hasBin: true
 
   vfile-location@5.0.2:
@@ -7614,6 +7631,7 @@ packages:
   whatwg-encoding@3.1.1:
     resolution: {integrity: sha512-6qN4hJdMwfYBtE3YBTTHhoeuUrDBPZmbQaxWAqSALV/MeEnR5z1xd8UKud2RAkFoPkmB+hli1TZSnyi84xz1vQ==}
     engines: {node: '>=18'}
+    deprecated: Use @exodus/bytes instead for a more spec-conformant and faster implementation
 
   whatwg-mimetype@4.0.0:
     resolution: {integrity: sha512-QaKxh0eNIi2mE9p2vEdzfagOKHCcj1pJ56EEHGQOVxp8r9/iszLUUV7v89x9O1p/T+NlTM5W7jW6+cz4Fq1YVg==}
@@ -7807,6 +7825,12 @@ snapshots:
   '@babel/code-frame@7.27.1':
     dependencies:
       '@babel/helper-validator-identifier': 7.27.1
+      js-tokens: 4.0.0
+      picocolors: 1.1.1
+
+  '@babel/code-frame@7.29.0':
+    dependencies:
+      '@babel/helper-validator-identifier': 7.28.5
       js-tokens: 4.0.0
       picocolors: 1.1.1
 
@@ -8604,6 +8628,8 @@ snapshots:
   '@babel/runtime@7.27.6': {}
 
   '@babel/runtime@7.28.4': {}
+
+  '@babel/runtime@7.29.2': {}
 
   '@babel/template@7.25.9':
     dependencies:
@@ -10540,7 +10566,7 @@ snapshots:
       '@alloc/quick-lru': 5.2.0
       '@tailwindcss/node': 4.1.10
       '@tailwindcss/oxide': 4.1.10
-      postcss: 8.5.6
+      postcss: 8.5.10
       tailwindcss: 4.1.10
 
   '@tailwindcss/typography@0.5.16(tailwindcss@4.1.10)':
@@ -10567,8 +10593,8 @@ snapshots:
 
   '@testing-library/dom@10.4.0':
     dependencies:
-      '@babel/code-frame': 7.27.1
-      '@babel/runtime': 7.28.4
+      '@babel/code-frame': 7.29.0
+      '@babel/runtime': 7.29.2
       '@types/aria-query': 5.0.4
       aria-query: 5.3.0
       chalk: 4.1.2
@@ -12133,8 +12159,8 @@ snapshots:
   eslint-import-resolver-node@0.3.9:
     dependencies:
       debug: 3.2.7
-      is-core-module: 2.16.1
-      resolve: 1.22.11
+      is-core-module: 2.16.2
+      resolve: 1.22.12
     transitivePeerDependencies:
       - supports-color
     optional: true
@@ -12212,7 +12238,7 @@ snapshots:
   eslint-plugin-tailwindcss@3.17.3(patch_hash=quqasx3lkw2fskc7xdiwuschla)(tailwindcss@4.1.10):
     dependencies:
       fast-glob: 3.3.3
-      postcss: 8.5.6
+      postcss: 8.5.10
       tailwindcss: 4.1.10
 
   eslint-plugin-typescript-sort-keys@3.3.0(@typescript-eslint/parser@8.48.1(eslint@9.39.1(jiti@2.4.2))(typescript@5.9.3))(eslint@9.39.1(jiti@2.4.2))(typescript@5.9.3):
@@ -12586,7 +12612,7 @@ snapshots:
     dependencies:
       resolve-pkg-maps: 1.0.0
 
-  get-tsconfig@4.13.0:
+  get-tsconfig@4.14.0:
     dependencies:
       resolve-pkg-maps: 1.0.0
     optional: true
@@ -12674,6 +12700,11 @@ snapshots:
   hasown@2.0.2:
     dependencies:
       function-bind: 1.1.2
+
+  hasown@2.0.3:
+    dependencies:
+      function-bind: 1.1.2
+    optional: true
 
   hast-util-from-dom@5.0.0:
     dependencies:
@@ -12930,9 +12961,9 @@ snapshots:
     dependencies:
       hasown: 2.0.2
 
-  is-core-module@2.16.1:
+  is-core-module@2.16.2:
     dependencies:
-      hasown: 2.0.2
+      hasown: 2.0.3
     optional: true
 
   is-data-view@1.0.2:
@@ -13961,7 +13992,7 @@ snapshots:
       object-assign: 4.1.1
       thenify-all: 1.6.0
 
-  nanoid@3.3.11: {}
+  nanoid@3.3.12: {}
 
   napi-postinstall@0.2.4: {}
 
@@ -13997,7 +14028,7 @@ snapshots:
       '@next/env': 16.0.10
       '@swc/helpers': 0.5.15
       caniuse-lite: 1.0.30001760
-      postcss: 8.5.6
+      postcss: 8.5.10
       react: 19.1.0
       react-dom: 19.1.0(react@19.1.0)
       styled-jsx: 5.1.6(@babel/core@7.26.10)(react@19.1.0)
@@ -14020,7 +14051,7 @@ snapshots:
       '@next/env': 16.0.10
       '@swc/helpers': 0.5.15
       caniuse-lite: 1.0.30001760
-      postcss: 8.5.6
+      postcss: 8.5.10
       react: 19.1.0
       react-dom: 19.1.0(react@19.1.0)
       styled-jsx: 5.1.6(@babel/core@7.26.7)(react@19.1.0)
@@ -14043,7 +14074,7 @@ snapshots:
       '@next/env': 16.0.10
       '@swc/helpers': 0.5.15
       caniuse-lite: 1.0.30001760
-      postcss: 8.5.6
+      postcss: 8.5.10
       react: 19.1.0
       react-dom: 19.1.0(react@19.1.0)
       styled-jsx: 5.1.6(react@19.1.0)
@@ -14303,12 +14334,12 @@ snapshots:
 
   possible-typed-array-names@1.0.0: {}
 
-  postcss-load-config@6.0.1(jiti@2.4.2)(postcss@8.5.6)(tsx@4.20.3)(yaml@2.7.0):
+  postcss-load-config@6.0.1(jiti@2.4.2)(postcss@8.5.10)(tsx@4.20.3)(yaml@2.7.0):
     dependencies:
       lilconfig: 3.1.3
     optionalDependencies:
       jiti: 2.4.2
-      postcss: 8.5.6
+      postcss: 8.5.10
       tsx: 4.20.3
       yaml: 2.7.0
 
@@ -14317,9 +14348,9 @@ snapshots:
       cssesc: 3.0.0
       util-deprecate: 1.0.2
 
-  postcss@8.5.6:
+  postcss@8.5.10:
     dependencies:
-      nanoid: 3.3.11
+      nanoid: 3.3.12
       picocolors: 1.1.1
       source-map-js: 1.2.1
 
@@ -14714,9 +14745,10 @@ snapshots:
       path-parse: 1.0.7
       supports-preserve-symlinks-flag: 1.0.0
 
-  resolve@1.22.11:
+  resolve@1.22.12:
     dependencies:
-      is-core-module: 2.16.1
+      es-errors: 1.3.0
+      is-core-module: 2.16.2
       path-parse: 1.0.7
       supports-preserve-symlinks-flag: 1.0.0
     optional: true
@@ -15327,7 +15359,7 @@ snapshots:
 
   tslib@2.8.1: {}
 
-  tsup@8.4.0(patch_hash=4v22aexubuhugu5vxw4ejmgukm)(jiti@2.4.2)(postcss@8.5.6)(tsx@4.20.3)(typescript@5.9.3)(yaml@2.7.0):
+  tsup@8.4.0(patch_hash=4v22aexubuhugu5vxw4ejmgukm)(jiti@2.4.2)(postcss@8.5.10)(tsx@4.20.3)(typescript@5.9.3)(yaml@2.7.0):
     dependencies:
       bundle-require: 5.1.0(esbuild@0.25.8)
       cac: 6.7.14
@@ -15337,7 +15369,7 @@ snapshots:
       esbuild: 0.25.8
       joycon: 3.1.1
       picocolors: 1.1.1
-      postcss-load-config: 6.0.1(jiti@2.4.2)(postcss@8.5.6)(tsx@4.20.3)(yaml@2.7.0)
+      postcss-load-config: 6.0.1(jiti@2.4.2)(postcss@8.5.10)(tsx@4.20.3)(yaml@2.7.0)
       resolve-from: 5.0.0
       rollup: 4.41.1
       source-map: 0.8.0-beta.0
@@ -15346,7 +15378,7 @@ snapshots:
       tinyglobby: 0.2.14
       tree-kill: 1.2.2
     optionalDependencies:
-      postcss: 8.5.6
+      postcss: 8.5.10
       typescript: 5.9.3
     transitivePeerDependencies:
       - jiti
@@ -15362,7 +15394,7 @@ snapshots:
   tsx@4.20.3:
     dependencies:
       esbuild: 0.25.8
-      get-tsconfig: 4.13.0
+      get-tsconfig: 4.14.0
     optionalDependencies:
       fsevents: 2.3.3
     optional: true
@@ -15678,7 +15710,7 @@ snapshots:
       esbuild: 0.25.8
       fdir: 6.4.4(picomatch@4.0.2)
       picomatch: 4.0.2
-      postcss: 8.5.6
+      postcss: 8.5.10
       rollup: 4.36.0
       tinyglobby: 0.2.13
     optionalDependencies:
