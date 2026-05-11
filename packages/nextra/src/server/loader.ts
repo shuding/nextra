@@ -45,8 +45,17 @@ const repository = await (async () => {
   }
 })()
 
-// repository.path() returns the `/path/to/repo/.git`, we need the parent directory of it
-const GIT_ROOT = repository ? path.join(repository.path(), '..') : ''
+// `repository.workdir()` returns the working directory for both regular checkouts
+// and git worktrees. Fall back to `path.join(repository.path(), '..')` for bare
+// repositories where `workdir()` is undefined. In a worktree, `repository.path()`
+// points at `<repo>/.git/worktrees/<name>/`, so joining with `..` resolves to the
+// wrong directory and breaks `getFileLatestModifiedDateAsync`.
+const GIT_ROOT = repository
+  ? (repository.workdir() || path.join(repository.path(), '..')).replace(
+      /\/$/,
+      ''
+    )
+  : ''
 
 const DEFAULT_TRANSFORMERS = transformerTwoslash({
   renderer: twoslashRenderer(),
