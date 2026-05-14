@@ -24,7 +24,7 @@ export const ThemeSwitch: FC<ThemeSwitchProps> = ({ lite, className }) => {
   const id = mounted ? (theme as keyof typeof themeSwitch) : 'light'
   return (
     <Select
-      className={cn('x:flex x:items-center x:gap-2', className)}
+      className={cn('nextra-theme-switch', className)}
       title="Change theme"
       options={[
         { id: 'light', name: themeSwitch.light },

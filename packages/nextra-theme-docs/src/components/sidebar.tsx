@@ -31,32 +31,6 @@ import { ThemeSwitch } from './theme-switch'
 
 const TreeState: Record<string, boolean> = Object.create(null)
 
-const classes = {
-  link: cn(
-    'x:flex x:rounded x:px-2 x:py-1.5 x:text-sm x:transition-colors x:[word-break:break-word]',
-    'x:cursor-pointer x:contrast-more:border'
-  ),
-  inactive: cn(
-    'x:text-gray-600 x:hover:bg-gray-100 x:hover:text-gray-900',
-    'x:dark:text-neutral-400 x:dark:hover:bg-primary-100/5 x:dark:hover:text-gray-50',
-    'x:contrast-more:text-gray-900 x:contrast-more:dark:text-gray-50',
-    'x:contrast-more:border-transparent x:contrast-more:hover:border-gray-900 x:contrast-more:dark:hover:border-gray-50'
-  ),
-  active: cn(
-    'x:bg-primary-100 x:font-semibold x:text-primary-800 x:dark:bg-primary-400/10 x:dark:text-primary-600',
-    'x:contrast-more:border-primary-500!'
-  ),
-  list: cn('x:grid x:gap-1'),
-  border: cn(
-    'x:relative x:before:absolute x:before:inset-y-1',
-    'x:before:w-px x:before:bg-gray-200 x:before:content-[""] x:dark:before:bg-neutral-800',
-    'x:ps-3 x:before:start-0 x:pt-1 x:ms-3'
-  ),
-  wrapper: cn('x:p-4 x:overflow-y-auto nextra-scrollbar nextra-mask'),
-  footer: cn(
-    'nextra-sidebar-footer x:border-t nextra-border x:flex x:items-center x:gap-2 x:py-4 x:mx-4'
-  )
-}
 
 type FolderProps = {
   item: PageItem | MenuItem | Item
@@ -150,10 +124,10 @@ const Folder: FC<FolderProps> = ({ item: _item, anchors, onFocus, level }) => {
           ? { href: item.route, prefetch: false }
           : { 'data-href': item.route })}
         className={cn(
-          'x:items-center x:justify-between x:gap-2',
-          !isLink && 'x:text-start x:w-full',
-          classes.link,
-          active ? classes.active : classes.inactive
+          'nextra-sidebar-folder-item',
+          !isLink && 'nextra-sidebar-folder-item-button',
+          'nextra-sidebar-link',
+          active ? 'nextra-sidebar-active' : 'nextra-sidebar-inactive'
         )}
         onClick={handleClick}
         onFocus={onFocus}
@@ -162,17 +136,15 @@ const Folder: FC<FolderProps> = ({ item: _item, anchors, onFocus, level }) => {
         <ArrowRightIcon
           height="18"
           className={cn(
-            'x:shrink-0',
-            'x:rounded-sm x:p-0.5 x:hover:bg-gray-800/5 x:dark:hover:bg-gray-100/5',
-            'x:motion-reduce:transition-none x:origin-center x:transition-all x:rtl:-rotate-180',
-            open && 'x:ltr:rotate-90 x:rtl:-rotate-270'
+            'nextra-sidebar-folder-arrow',
+            open && 'nextra-sidebar-folder-arrow-expanded'
           )}
         />
       </ComponentToUse>
       {item.children && (
         <Collapse isOpen={open}>
           <Menu
-            className={classes.border}
+            className='nextra-sidebar-border'
             // @ts-expect-error -- fixme
             directories={item.children}
             anchors={anchors}
@@ -232,22 +204,22 @@ const File: FC<{
     <li className={cn({ active })}>
       <Anchor
         href={href}
-        className={cn(classes.link, active ? classes.active : classes.inactive)}
+        className={cn('nextra-sidebar-link', active ? 'nextra-sidebar-active' : 'nextra-sidebar-inactive')}
         onFocus={onFocus}
         prefetch={false}
       >
         {item.title}
       </Anchor>
       {active && anchors.length > 0 && (
-        <ul className={cn(classes.list, classes.border)}>
+        <ul className='nextra-sidebar-list nextra-sidebar-border'>
           {anchors.map(({ id, value }) => (
             <li key={id}>
               <a
                 href={`#${id}`}
                 className={cn(
-                  classes.link,
+                  'nextra-sidebar-link',
                   'x:focus-visible:nextra-focus x:flex x:gap-2 x:before:opacity-25 x:before:content-["#"]',
-                  id === activeSlug ? classes.active : classes.inactive
+                  id === activeSlug ? 'nextra-sidebar-active' : 'nextra-sidebar-inactive'
                 )}
                 onClick={handleClick}
               >
@@ -276,7 +248,7 @@ const handleFocus: FocusEventHandler<HTMLAnchorElement> = event => {
 
 const Menu = forwardRef<HTMLUListElement, MenuProps>(
   ({ directories, anchors, className, level }, forwardedRef) => (
-    <ul className={cn(classes.list, className)} ref={forwardedRef}>
+    <ul className={cn('nextra-sidebar-list', className)} ref={forwardedRef}>
       {directories.map(item => {
         const ComponentToUse =
           item.type === 'menu' || item.children?.length ? Folder : File
@@ -333,24 +305,18 @@ export const MobileNav: FC = () => {
   return (
     <aside
       className={cn(
-        'nextra-mobile-nav', // targeted from userspace
-        'x:flex x:flex-col',
-        'x:fixed x:inset-0 x:pt-(--nextra-navbar-height) x:z-20 x:overscroll-contain',
-        'x:[contain:layout_style]',
-        'x:md:hidden',
-        'x:[.nextra-banner:not([class$=hidden])~&]:pt-[calc(var(--nextra-banner-height)+var(--nextra-navbar-height))]',
-        'x:bg-nextra-bg',
+        'nextra-mobile-nav',
         menu
-          ? 'x:[transform:translate3d(0,0,0)]'
-          : 'x:[transform:translate3d(0,-100%,0)]'
+          ? 'nextra-mobile-nav-menu'
+          : 'nextra-mobile-nav-no-menu'
       )}
     >
       {themeConfig.search && (
-        <div className="x:px-4 x:pt-4">{themeConfig.search}</div>
+        <div className="nextra-mobile-nav-search">{themeConfig.search}</div>
       )}
       <Menu
         ref={sidebarRef}
-        className={classes.wrapper}
+        className='nextra-sidebar-wrapper nextra-scrollbar nextra-mask'
         // The mobile dropdown menu, shows all the directories.
         directories={directories}
         // Always show the anchor links on mobile (`md`).
@@ -359,7 +325,7 @@ export const MobileNav: FC = () => {
       />
 
       {hasMenu && (
-        <div className={cn(classes.footer, 'x:mt-auto')}>
+        <div className='nextra-sidebar-footer nextra-border'>
           <ThemeSwitch className="x:grow" />
           <LocaleSwitch className="x:grow x:justify-end" />
         </div>
@@ -421,24 +387,19 @@ export const Sidebar: FC = () => {
   return (
     <>
       {includePlaceholder && hideSidebar && (
-        <div className="x:max-xl:hidden x:h-0 x:w-64 x:shrink-0" />
+        <div className="nextra-sidebar-placeholder" />
       )}
       <aside
         id={sidebarControlsId}
         className={cn(
-          'nextra-sidebar x:print:hidden',
-          'x:transition-all x:ease-in-out',
-          'x:max-md:hidden x:flex x:flex-col',
-          'x:h-[calc(100dvh-var(--nextra-navbar-height))]',
-          'x:top-(--nextra-navbar-height) x:shrink-0',
-          isExpanded ? 'x:w-64' : 'x:w-20',
-          hideSidebar ? 'x:hidden' : 'x:sticky'
+          'nextra-sidebar',
+          isExpanded ? 'nextra-sidebar-expanded' : '',
+          hideSidebar ? 'nextra-sidebar-hidden' : ''
         )}
       >
         <div
           className={cn(
-            classes.wrapper,
-            'x:grow',
+            'nextra-sidebar-wrapper nextra-scrollbar nextra-mask',
             !isExpanded && 'no-scrollbar'
           )}
           ref={sidebarRef}
@@ -460,7 +421,7 @@ export const Sidebar: FC = () => {
           <div
             className={cn(
               'x:sticky x:bottom-0 x:bg-nextra-bg',
-              classes.footer,
+              'nextra-sidebar-footer nextra-border ',
               !isExpanded && 'x:flex-wrap x:justify-center',
               showToggleAnimation && [
                 'x:*:opacity-0',

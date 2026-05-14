@@ -14,13 +14,6 @@ import type { MenuItem } from 'nextra/normalize-pages'
 import type { FC, ReactNode } from 'react'
 import { setMenu, useConfig, useMenu, useThemeConfig } from '../../stores'
 
-const classes = {
-  link: cn(
-    'x:text-sm x:contrast-more:text-gray-700 x:contrast-more:dark:text-gray-100 x:whitespace-nowrap',
-    'x:text-gray-600 x:hover:text-black x:dark:text-gray-400 x:dark:hover:text-gray-200',
-    'x:ring-inset x:transition-colors'
-  )
-}
 
 const NavbarMenu: FC<{
   menu: MenuItem
@@ -34,8 +27,7 @@ const NavbarMenu: FC<{
       <MenuButton
         className={({ focus }) =>
           cn(
-            classes.link,
-            'x:items-center x:flex x:gap-1.5 x:cursor-pointer',
+            'nextra-navbar-link nextra-navbar-menu-button',
             focus && 'x:nextra-focus'
           )
         }
@@ -43,21 +35,13 @@ const NavbarMenu: FC<{
         {children}
         <ArrowRightIcon
           height="14"
-          className="x:*:origin-center x:*:transition-transform x:*:rotate-90"
+          className="nextra-navbar-menu-button-icon"
         />
       </MenuButton>
       <MenuItems
         transition
         className={cn(
-          'x:focus-visible:nextra-focus',
-          'nextra-scrollbar x:motion-reduce:transition-none',
-          // From https://headlessui.com/react/menu#adding-transitions
-          'x:origin-top x:transition x:duration-200 x:ease-out x:data-closed:scale-95 x:data-closed:opacity-0',
-          'x:border x:border-black/5 x:dark:border-white/20',
-          'x:z-30 x:rounded-md x:py-1 x:text-sm x:shadow-lg',
-          'x:backdrop-blur-md x:bg-nextra-bg/70',
-          // headlessui adds max-height as style, use !important to override
-          'x:max-h-[min(calc(100vh-5rem),256px)]!'
+          'nextra-scrollbar nextra-navbar-menu-items'
         )}
         anchor={{ to: 'bottom', gap: 10, padding: 16 }}
       >
@@ -69,14 +53,7 @@ const NavbarMenu: FC<{
             key={key}
             as={Anchor}
             href={item.href || routes[key]?.route}
-            className={({ focus }) =>
-              cn(
-                'x:block x:py-1.5 x:transition-colors x:ps-3 x:pe-9',
-                focus
-                  ? 'x:text-gray-900 x:dark:text-gray-100'
-                  : 'x:text-gray-600 x:dark:text-gray-400'
-              )
-            }
+            className='nextra-navbar-menu-item'
           >
             {item.title}
           </_MenuItem>
@@ -102,7 +79,7 @@ export const ClientNavbar: FC<{
     <>
       <div
         className={cn(
-          'x:flex x:gap-4 x:overflow-x-auto nextra-scrollbar x:py-1.5 x:max-md:hidden',
+          'nextra-navbar-menu',
           className
         )}
       >
@@ -132,8 +109,7 @@ export const ClientNavbar: FC<{
               href={href}
               key={page.name}
               className={cn(
-                classes.link,
-                'x:aria-[current]:font-medium x:aria-[current]:subpixel-antialiased x:aria-[current]:text-current'
+                'nextra-navbar-link nextra-navbar-menu-anchor'
               )}
               aria-current={isCurrentPage}
             >
