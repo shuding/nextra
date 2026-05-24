@@ -38,7 +38,8 @@ export const ClientWrapper: FC<Omit<ComponentProps<MDXWrapper>, 'toc'>> = ({
           'x:w-full x:min-w-0 x:break-words x:min-h-[calc(100vh-var(--nextra-navbar-height))]',
           'x:text-slate-700 x:dark:text-slate-200 x:pb-8 x:px-4 x:pt-4 x:md:px-12',
           themeContext.typesetting === 'article' &&
-            'nextra-body-typesetting-article'
+            'nextra-body-typesetting-article',
+          'x:relative'
         )}
       >
         {themeContext.breadcrumb && activeType !== 'page' && (
