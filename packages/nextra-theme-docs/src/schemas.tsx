@@ -88,7 +88,10 @@ export const LayoutPropsSchema = z.strictObject({
       description:
         'Rendered [`<Banner>` component](/docs/built-ins/banner). E.g. `<Banner {...bannerProps} />`'
     }),
-  children: reactNode,
+  // Optional so schema validation succeeds when the React Compiler hoists
+  // `children` out of props before `LayoutPropsSchema.safeParse` is called
+  // (compiled `Layout` parses `themeConfig` without `children`).
+  children: reactNode.optional(),
   copyPageButton: z.boolean().default(true).meta({
     description: 'Hide/show copy page content button.'
   }),
