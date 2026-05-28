@@ -42,7 +42,7 @@
     "esbuild-react-compiler-plugin": "workspace:*",
     "next": "^16.0.7",
     "nextra": "workspace:*",
-    "postcss": "^8.4.33",
+    "postcss": "^8.5.10",
     "react": "19.1.0",
     "tailwindcss": "4.1.10",
     "vitest": "^3.0.0",
