@@ -1,6 +1,10 @@
 .nextra-code span {
   @apply x:bg-(--shiki-light-bg) x:text-(--shiki-light);
   @apply x:dark:bg-(--shiki-dark-bg) x:dark:text-(--shiki-dark);
+
+  &:empty::after {
+    content: ' ';
+  }
 }
 
 code.nextra-code {
