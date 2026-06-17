@@ -20,6 +20,69 @@
       "type": "boolean",
     },
     {
+      "description": "Description for AI assistant copy page menu items.",
+      "name": "copyPage.askDescription",
+      "optional": true,
+      "tags": {
+        "default": ""Ask questions about this page"",
+      },
+      "type": "string",
+    },
+    {
+      "description": "Label for the copy page button.",
+      "name": "copyPage.button",
+      "optional": true,
+      "tags": {
+        "default": ""Copy page"",
+      },
+      "type": "string",
+    },
+    {
+      "description": "Title for the ChatGPT copy page menu item.",
+      "name": "copyPage.chatgptTitle",
+      "optional": true,
+      "tags": {
+        "default": ""Open in ChatGPT"",
+      },
+      "type": "string",
+    },
+    {
+      "description": "Title for the Claude copy page menu item.",
+      "name": "copyPage.claudeTitle",
+      "optional": true,
+      "tags": {
+        "default": ""Open in Claude"",
+      },
+      "type": "string",
+    },
+    {
+      "description": "Label shown after page content is copied.",
+      "name": "copyPage.copied",
+      "optional": true,
+      "tags": {
+        "default": ""Copied"",
+      },
+      "type": "string",
+    },
+    {
+      "description": "Description for the copy page menu item.",
+      "name": "copyPage.menuDescription",
+      "optional": true,
+      "tags": {
+        "default": ""Copy page as Markdown for LLMs"",
+      },
+      "type": "string",
+    },
+    {
+      "description": "Title for the copy page menu item.",
+      "name": "copyPage.menuTitle",
+      "optional": true,
+      "tags": {
+        "default": ""Copy page"",
+      },
+      "type": "string",
+    },
+    {
       "description": "Show or hide the dark mode select button.",
       "name": "darkMode",
       "optional": true,

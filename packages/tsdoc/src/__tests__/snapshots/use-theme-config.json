@@ -20,6 +20,34 @@ This hook is useful for dynamically configuring your project based on shared the
           "type": "boolean",
         },
         {
+          "name": "copyPage.askDescription",
+          "type": "string",
+        },
+        {
+          "name": "copyPage.button",
+          "type": "string",
+        },
+        {
+          "name": "copyPage.chatgptTitle",
+          "type": "string",
+        },
+        {
+          "name": "copyPage.claudeTitle",
+          "type": "string",
+        },
+        {
+          "name": "copyPage.copied",
+          "type": "string",
+        },
+        {
+          "name": "copyPage.menuDescription",
+          "type": "string",
+        },
+        {
+          "name": "copyPage.menuTitle",
+          "type": "string",
+        },
+        {
           "name": "darkMode",
           "type": "boolean",
         },

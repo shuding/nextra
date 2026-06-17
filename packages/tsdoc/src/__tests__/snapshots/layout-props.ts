@@ -13,6 +13,62 @@ interface $ {
   copyPageButton?: boolean
 
   /**
+   * Labels for the copy page button and menu.
+   * @default {
+   *   "askDescription": "Ask questions about this page",
+   *   "button": "Copy page",
+   *   "chatgptTitle": "Open in ChatGPT",
+   *   "claudeTitle": "Open in Claude",
+   *   "copied": "Copied",
+   *   "menuDescription": "Copy page as Markdown for LLMs",
+   *   "menuTitle": "Copy page"
+   * }
+   */
+  copyPage?: {
+    /**
+     * Description for AI assistant copy page menu items.
+     * @default "Ask questions about this page"
+     */
+    askDescription?: string
+
+    /**
+     * Label for the copy page button.
+     * @default "Copy page"
+     */
+    button?: string
+
+    /**
+     * Title for the ChatGPT copy page menu item.
+     * @default "Open in ChatGPT"
+     */
+    chatgptTitle?: string
+
+    /**
+     * Title for the Claude copy page menu item.
+     * @default "Open in Claude"
+     */
+    claudeTitle?: string
+
+    /**
+     * Label shown after page content is copied.
+     * @default "Copied"
+     */
+    copied?: string
+
+    /**
+     * Description for the copy page menu item.
+     * @default "Copy page as Markdown for LLMs"
+     */
+    menuDescription?: string
+
+    /**
+     * Title for the copy page menu item.
+     * @default "Copy page"
+     */
+    menuTitle?: string
+  }
+
+  /**
    * Show or hide the dark mode select button.
    * @default true
    */
