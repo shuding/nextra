@@ -47,7 +47,7 @@
     "nextra": "workspace:*",
     "nextra-theme-docs": "workspace:*",
     "tsup": "^8.4.0",
-    "vitest": "^3.0.9"
+    "vitest": "^3.2.6"
   },
   "publishConfig": {
     "access": "public"

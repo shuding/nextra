@@ -45,7 +45,7 @@
     "postcss": "^8.4.33",
     "react": "19.1.0",
     "tailwindcss": "4.1.10",
-    "vitest": "^3.0.0",
+    "vitest": "^3.2.6",
     "zx": "^8.2.4"
   },
   "sideEffects": false
