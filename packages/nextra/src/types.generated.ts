@@ -129,6 +129,12 @@ export interface NextraConfig {
   contentDirBasePath?: string
 
   /**
+   * Option to serve `.md` and `.mdx` files from a directory other than `content`.
+   * @default "content"
+   */
+  contentDirName?: string
+
+  /**
    * Prefixes locale to all links in the page map information. Useful for i18n when you don't want to use Nextra's `middleware` function.
    * @default false
    */
