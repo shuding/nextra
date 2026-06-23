@@ -37,10 +37,8 @@ import {
 
 type Processor = ReturnType<typeof createProcessor>
 
-const cachedCompilerForFormat: Record<
-  `${NonNullable<ProcessorOptions['format']>}:${boolean}`,
-  Processor | void
-> = Object.create(null)
+const cachedCompilerForFormat: Record<string, Processor | void> =
+  Object.create(null)
 
 type MdxOptions = NextraConfig['mdxOptions'] &
   Pick<ProcessorOptions, 'jsx' | 'outputFormat' | 'providerImportSource'>
@@ -107,7 +105,9 @@ export async function compileMdx(
   const format =
     _format === 'detect' ? (filePath.endsWith('.mdx') ? 'mdx' : 'md') : _format
 
-  const fileCompatible = filePath ? { value: rawMdx, path: filePath } : rawMdx
+  const fileCompatible = filePath
+    ? { value: rawMdx, path: filePath, data: { lastCommitTime } }
+    : rawMdx
 
   const isRemoteContent = outputFormat === 'function-body'
 
@@ -155,7 +155,7 @@ export async function compileMdx(
         // before mdx title
         remarkCustomHeadingId,
         remarkMdxTitle,
-        [remarkAssignFrontMatter, { lastCommitTime }] satisfies Pluggable,
+        remarkAssignFrontMatter,
         remarkGfm,
         format !== 'md' &&
           ([
