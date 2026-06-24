@@ -23,6 +23,17 @@ const LOADER_PATH = path.join(FILENAME, '..', '..', '..', 'loader.cjs')
 
 const SEP = path.sep === '/' ? '/' : '\\\\'
 
+// Print-once helper for noisy dev logs (i18n tip)
+const I18N_LOG_ONCE_KEY = Symbol.for('nextra.i18n.log.once')
+function logI18nOnce(msg: string) {
+  if (process.env.NODE_ENV === 'production') return
+  const g = globalThis as any
+  if (!g[I18N_LOG_ONCE_KEY]) {
+    logger.info(msg)
+    g[I18N_LOG_ONCE_KEY] = true
+  }
+}
+
 const GET_PAGE_MAP_PATH = '/nextra/dist/server/page-map/get.js'
 
 const PAGE_MAP_PLACEHOLDER_PATH = '/nextra/dist/server/page-map/placeholder.js'
@@ -101,7 +112,7 @@ const nextra = (nextraConfig: NextraConfig) => {
   return function withNextra(nextConfig: NextConfig = {}): NextConfig {
     const { locales, defaultLocale } = nextConfig.i18n || {}
     if (locales) {
-      logger.info(
+      logI18nOnce(
         'You have Next.js i18n enabled, read here https://nextjs.org/docs/app/building-your-application/routing/internationalization for the docs.'
       )
     }
