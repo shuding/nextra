@@ -29,6 +29,30 @@ By default, it's a link to the issue creation form of the docs repository, with 
     })
 })
 
+const copyPageSchema = z.strictObject({
+  askDescription: z.string().default('Ask questions about this page').meta({
+    description: 'Description for AI assistant copy page menu items.'
+  }),
+  button: z.string().default('Copy page').meta({
+    description: 'Label for the copy page button.'
+  }),
+  chatgptTitle: z.string().default('Open in ChatGPT').meta({
+    description: 'Title for the ChatGPT copy page menu item.'
+  }),
+  claudeTitle: z.string().default('Open in Claude').meta({
+    description: 'Title for the Claude copy page menu item.'
+  }),
+  copied: z.string().default('Copied').meta({
+    description: 'Label shown after page content is copied.'
+  }),
+  menuDescription: z.string().default('Copy page as Markdown for LLMs').meta({
+    description: 'Description for the copy page menu item.'
+  }),
+  menuTitle: z.string().default('Copy page').meta({
+    description: 'Title for the copy page menu item.'
+  })
+})
+
 const nextThemesSchema = z.looseObject({
   attribute: z
     .union([z.array(attributeSchema), attributeSchema])
@@ -91,6 +115,9 @@ export const LayoutPropsSchema = z.strictObject({
   children: reactNode,
   copyPageButton: z.boolean().default(true).meta({
     description: 'Hide/show copy page content button.'
+  }),
+  copyPage: copyPageSchema.default(copyPageSchema.parse({})).meta({
+    description: 'Labels for the copy page button and menu.'
   }),
   darkMode: z.boolean().default(true).meta({
     description: 'Show or hide the dark mode select button.'

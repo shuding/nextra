@@ -9,6 +9,7 @@ import {
   LinkArrowIcon
 } from 'nextra/icons'
 import type { FC, SVGProps } from 'react'
+import { useThemeConfig } from '../stores'
 
 const Item: FC<{
   icon: FC<SVGProps<SVGElement>>
@@ -32,6 +33,7 @@ const Item: FC<{
 
 export const CopyPage: FC<{ sourceCode: string }> = ({ sourceCode }) => {
   const { copy, isCopied } = useCopy()
+  const { copyPage } = useThemeConfig()
 
   function handleCopy() {
     copy(sourceCode)
@@ -51,7 +53,7 @@ export const CopyPage: FC<{ sourceCode: string }> = ({ sourceCode }) => {
         onClick={handleCopy}
       >
         <CopyIcon width="16" />
-        {isCopied ? 'Copied' : 'Copy page'}
+        {isCopied ? copyPage.copied : copyPage.button}
       </Button>
       <Select
         anchor={{ to: 'bottom end', gap: 10 }}
@@ -62,8 +64,8 @@ export const CopyPage: FC<{ sourceCode: string }> = ({ sourceCode }) => {
             name: (
               <Item
                 icon={CopyIcon}
-                title="Copy page"
-                description="Copy page as Markdown for LLMs"
+                title={copyPage.menuTitle}
+                description={copyPage.menuDescription}
               />
             )
           },
@@ -72,8 +74,8 @@ export const CopyPage: FC<{ sourceCode: string }> = ({ sourceCode }) => {
             name: (
               <Item
                 icon={ChatGPTIcon}
-                title="Open in ChatGPT"
-                description="Ask questions about this page"
+                title={copyPage.chatgptTitle}
+                description={copyPage.askDescription}
                 isExternal
               />
             )
@@ -83,8 +85,8 @@ export const CopyPage: FC<{ sourceCode: string }> = ({ sourceCode }) => {
             name: (
               <Item
                 icon={ClaudeIcon}
-                title="Open in Claude"
-                description="Ask questions about this page"
+                title={copyPage.claudeTitle}
+                description={copyPage.askDescription}
                 isExternal
               />
             )
