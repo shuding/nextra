@@ -69,6 +69,9 @@ const GUIDE: MetaRecord = {
       index: '',
       ai: {
         title: <span className="badge-new">Ask AI</span>
+      },
+      typesense: {
+        title: <span className="badge-new">Typesense</span>
       }
     },
     theme: {

@@ -1,0 +1,127 @@
+import { Steps } from 'nextra/components'
+
+# Typesense
+
+You can replace Nextra's built-in search with
+[Typesense](https://typesense.org/), an open-source, typo-tolerant search engine
+that you can self-host or run as a managed cloud service.
+
+The adapter indexes your documentation automatically as part of your build's
+postbuild step.
+
+> [!NOTE]
+>
+> This is a community-maintained integration provided by the
+> [`typesense-nextra-adapter`](https://github.com/typesense/typesense-nextra-adapter)
+> package.
+
+## Setup
+
+<Steps>
+
+### Start Typesense server
+
+You can either self-host the Typesense server or use the
+[Typesense Cloud service](https://cloud.typesense.org/). Follow their
+[getting started guide](https://typesense.org/docs/guide/install-typesense.html)
+to set up your server and obtain the API keys and server URL.
+
+### Installation
+
+```sh npm2yarn
+npm i typesense-nextra-adapter
+```
+
+### Configure the indexing script
+
+The adapter must index your documentation into Typesense **after building** your
+application.
+
+Create a file at `scripts/indexTypesense.ts`. You must provide your Typesense
+server details and an API key with **write permissions** so the script can
+create collections and index your documents.
+
+```ts filename="scripts/indexTypesense.ts"
+import { indexNextraToTypesense } from 'typesense-nextra-adapter'
+
+indexNextraToTypesense({
+  serverConfig: {
+    nodes: [{ url: 'YOUR_TYPESENSE_SERVER_URL' }],
+    apiKey: 'YOUR_TYPESENSE_ADMIN_API_KEY' // Requires Write permissions
+  },
+  collectionName: 'nextra-docs'
+})
+```
+
+Then, add a `postbuild` script to your `package.json`:
+
+```jsonc filename="package.json" {4}
+{
+  "scripts": {
+    // for Node.js < v23.6.0 use `npx tsx scripts/indexTypesense.ts`
+    "postbuild": "node scripts/indexTypesense.ts"
+  }
+}
+```
+
+### Override the search component
+
+Next, override Nextra's default search component via a custom theme layout.
+
+Provide a **Search-Only API Key** here. For security reasons, **never expose
+your Admin API Key in the frontend**.
+
+```tsx filename="app/layout.tsx" {3,6-13,23}
+import { Layout } from 'nextra-theme-docs'
+// Import the adapter's custom Search component
+import { Search } from 'typesense-nextra-adapter/client'
+
+const search = (
+  <Search
+    docSearchProps={{
+      typesenseServerConfig: {
+        nodes: [{ url: 'YOUR_TYPESENSE_SERVER_URL' }],
+        apiKey: 'YOUR_TYPESENSE_SEARCH_ONLY_API_KEY' // Safe for browsers
+      }
+    }}
+    collectionName="nextra-docs"
+  />
+)
+
+export default function RootLayout({ children }) {
+  return (
+    <html lang="en">
+      <body>
+        <Layout
+          // replace Nextra's default search with our Typesense-powered search component
+          search={search}
+          // ...other layout props
+        >
+          {children}
+        </Layout>
+      </body>
+    </html>
+  )
+}
+```
+
+### Build and index
+
+Run the build command to generate your site and automatically index your content
+into Typesense.
+
+```sh npm2yarn
+npm run build
+```
+
+Start your app and search for a term, results should now come from your
+Typesense collection instead of Nextra's default index.
+
+</Steps>
+
+## Advanced Configuration
+
+For more advanced configuration, such as customizing the collection schema,
+injecting custom data for faceted search, indexing code blocks, or customizing
+internationalized translations, please refer to the
+[typesense-nextra-adapter README](https://github.com/typesense/typesense-nextra-adapter).
