@@ -28,7 +28,7 @@
     "prettier": "3.7.4",
     "rimraf": "6.0.1",
     "tsup": "8.4.0",
-    "turbo": "2.6.2",
+    "turbo": "2.9.14",
     "typescript": "5.9.3"
   },
   "pnpm": {
