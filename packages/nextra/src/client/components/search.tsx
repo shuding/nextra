@@ -78,6 +78,14 @@ interface SearchProps extends InputProps {
   className?: string
   searchOptions?: PagefindSearchOptions
   /**
+   * Maximum number of Pagefind results to hydrate and render. Caps how many
+   * result fragments are fetched via `.data()` and turned into DOM nodes per
+   * query, preventing browser freezes ("Page Unresponsive") on large docs
+   * sites where a short query can match hundreds of pages.
+   * @default 12
+   */
+  maxResults?: number
+  /**
    * Callback function that triggers whenever the search input changes.
    *
    * This prop is **not serializable** and cannot be used directly in a server-side layout.
@@ -145,6 +153,7 @@ export const Search: FC<SearchProps> = ({
   loading = 'Loading…',
   placeholder = 'Search documentation…',
   searchOptions,
+  maxResults = 12,
   onSearch,
   ...props
 }) => {
@@ -186,7 +195,9 @@ export const Search: FC<SearchProps> = ({
       )
       if (!response) return
 
-      const data = await Promise.all(response.results.map(o => o.data()))
+      const data = await Promise.all(
+        response.results.slice(0, maxResults).map(o => o.data())
+      )
       setIsLoading(false)
       setError('')
       setResults(
