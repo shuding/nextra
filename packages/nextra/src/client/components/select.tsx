@@ -57,6 +57,7 @@ export const Select: FC<MenuProps> = ({
         {selectedOption}
       </ListboxButton>
       <ListboxOptions
+        modal={false}
         as="ul"
         transition
         anchor={anchor}
