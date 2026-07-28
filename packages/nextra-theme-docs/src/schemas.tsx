@@ -88,7 +88,7 @@ export const LayoutPropsSchema = z.strictObject({
       description:
         'Rendered [`<Banner>` component](/docs/built-ins/banner). E.g. `<Banner {...bannerProps} />`'
     }),
-  children: reactNode,
+  children: reactNode.optional(),
   copyPageButton: z.boolean().default(true).meta({
     description: 'Hide/show copy page content button.'
   }),
