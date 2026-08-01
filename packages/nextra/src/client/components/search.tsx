@@ -350,18 +350,21 @@ export const Search: FC<SearchProps> = ({
         )}
       >
         {error ? (
-          <>
+          // `ComboboxOptions` wraps its children in `Frozen`, which clones a single
+          // element child with a `ref` (headlessui >= 2.2.10). A `Fragment` can't hold
+          // a `ref`, so React 19 warns in dev. Render real elements instead.
+          <div className="x:flex x:items-start x:gap-2">
             <InformationCircleIcon height="1.25em" className="x:shrink-0" />
             <div className="x:grid">
               <b className="x:mb-2">{errorText}</b>
               {error}
             </div>
-          </>
+          </div>
         ) : isLoading ? (
-          <>
+          <div className="x:flex x:items-center x:gap-2">
             <SpinnerIcon height="20" className="x:shrink-0 x:animate-spin" />
             {loading}
-          </>
+          </div>
         ) : results.length ? (
           results.map(searchResult => (
             <Result key={searchResult.url} data={searchResult} />
