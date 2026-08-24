@@ -3,6 +3,7 @@
 import { usePathname } from 'next/navigation'
 import type { FC, ReactNode } from 'react'
 import { useThemeConfig } from '../stores'
+import { getLocaleFromPathname } from '../utils/locale'
 
 export const LastUpdated: FC<{
   date?: Date
@@ -16,7 +17,13 @@ export const LastUpdated: FC<{
     return null
   }
 
-  const dateLocale = i18n.length ? pathname.split('/', 2)[1] : locale
+  const dateLocale = i18n.length
+    ? getLocaleFromPathname(
+        pathname,
+        i18n.map(({ locale }) => locale),
+        locale
+      ).locale
+    : locale
   return (
     <>
       {children}{' '}
