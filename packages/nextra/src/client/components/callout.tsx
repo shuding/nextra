@@ -41,7 +41,7 @@ const classes: Record<CalloutType, string> = {
   ),
   important: cn(
     'x:bg-purple-100 x:dark:bg-purple-900/30',
-    'x:text-purple-600 x:dark:text-purple-400',
+    'x:text-purple-700 x:dark:text-purple-400',
     'x:border-purple-600'
   )
 }
