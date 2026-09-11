@@ -79,7 +79,8 @@ export async function loader(
     contentDir,
     locales,
     whiteListTagsStyling,
-    shouldAddLocaleToLinks
+    shouldAddLocaleToLinks,
+    gitTimestamp
   } = this.getOptions()
   const { resourcePath, resourceQuery } = this
 
@@ -126,9 +127,12 @@ export async function loader(
 
   // Run only on production because it can slow down Fast Refresh for uncommitted files
   // https://github.com/shuding/nextra/issues/3675#issuecomment-2466416366
-  const lastCommitTime = IS_PRODUCTION
-    ? await getLastCommitTime(resourcePath)
-    : NOW
+  const lastCommitTime =
+    gitTimestamp === false
+      ? undefined
+      : IS_PRODUCTION
+        ? await getLastCommitTime(resourcePath)
+        : NOW
 
   if (!IS_PRODUCTION && resourceQuery === METADATA_ONLY_RQ) {
     return compileMetadata(source, {

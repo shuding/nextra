@@ -133,6 +133,15 @@ export interface NextraConfig {
    * @default false
    */
   unstable_shouldAddLocaleToLinks?: boolean
+
+  /**
+   * Get the last modified timestamp from Git for each page.
+   * > [!TIP]
+   * >
+   * > Set to `false` to skip Git lookups, for example when content lives in a Git submodule.
+   * @default true
+   */
+  gitTimestamp?: boolean
 }
 
 export interface HeadProps {

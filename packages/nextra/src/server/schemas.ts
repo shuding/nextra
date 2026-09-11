@@ -147,7 +147,16 @@ export const NextraConfigSchema = z.strictObject({
   unstable_shouldAddLocaleToLinks: z.boolean().default(false).meta({
     description:
       "Prefixes locale to all links in the page map information. Useful for i18n when you don't want to use Nextra's `middleware` function."
-  })
+  }),
+  gitTimestamp: z
+    .boolean()
+    .default(true)
+    .meta({
+      description: `Get the last modified timestamp from Git for each page.
+> [!TIP]
+>
+> Set to \`false\` to skip Git lookups, for example when content lives in a Git submodule.`
+    })
 })
 
 export const element = z.custom<ReactElement>(
