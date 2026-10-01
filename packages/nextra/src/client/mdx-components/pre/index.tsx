@@ -15,7 +15,10 @@ export type PreProps = HTMLAttributes<HTMLPreElement> & {
   'data-filename'?: string
   'data-copy'?: ''
   'data-language'?: string
+  /** Show mobile word-wrap toggle. */
   'data-word-wrap'?: ''
+  /** Soft-wrap this block at all breakpoints (stays on the DOM <pre>). */
+  'data-wrap'?: ''
   'data-pagefind-ignore'?: string
   icon?: ReactNode
 }

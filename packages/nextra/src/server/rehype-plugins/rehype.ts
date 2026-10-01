@@ -8,7 +8,10 @@ import type { NextraConfig } from '../../types.js'
 type PreElement = Element & {
   __filename?: string
   __hasCopyCode?: boolean
+  /** Show mobile word-wrap toggle (not always-on wrap). */
   __hasWordWrap?: boolean
+  /** Soft-wrap this code block at all breakpoints. */
+  __wrapEnabled?: boolean
 }
 
 const CODE_BLOCK_FILENAME_RE = /filename="([^"]+)"/
@@ -43,10 +46,10 @@ export const DEFAULT_REHYPE_PRETTY_CODE_OPTIONS: RehypePrettyCodeOptions = {
 }
 
 export const rehypeParseCodeMeta: Plugin<
-  [{ defaultShowCopyCode?: boolean }],
+  [{ defaultShowCopyCode?: boolean; defaultWordWrap?: boolean }],
   Root
 > =
-  ({ defaultShowCopyCode }) =>
+  ({ defaultShowCopyCode, defaultWordWrap }) =>
   ast => {
     visit(ast, { tagName: 'pre' }, (node: PreElement) => {
       const [codeEl] = node.children as Element[]
@@ -55,7 +58,19 @@ export const rehypeParseCodeMeta: Plugin<
       node.__filename = meta!.match(CODE_BLOCK_FILENAME_RE)?.[1]
       node.properties['data-filename'] = node.__filename
 
-      node.__hasWordWrap = !meta!.includes('word-wrap=false')
+      // Always-on soft wrap (all breakpoints). Mirrors copy-button meta rules.
+      node.__wrapEnabled = meta
+        ? (Boolean(defaultWordWrap) &&
+            !/( |^)word-wrap=false($| )/.test(meta)) ||
+          /( |^)word-wrap($| )/.test(meta)
+        : Boolean(defaultWordWrap)
+      if (node.__wrapEnabled) {
+        node.properties['data-wrap'] = ''
+      }
+
+      // Mobile toggle: only when wrap is not always-on and not opted out.
+      node.__hasWordWrap =
+        !node.__wrapEnabled && !meta!.includes('word-wrap=false')
       if (node.__hasWordWrap) {
         node.properties['data-word-wrap'] = ''
       }
@@ -96,6 +111,10 @@ export const rehypeAttachCodeMeta: Plugin<
           const codeEl = preEl.children[0] as Element
           delete codeEl.properties['data-theme']
           delete codeEl.properties['data-language']
+
+          if (preEl.__wrapEnabled) {
+            preEl.properties['data-wrap'] = ''
+          }
 
           if (preEl.__hasWordWrap) {
             preEl.properties['data-word-wrap'] = ''

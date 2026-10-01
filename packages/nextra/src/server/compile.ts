@@ -50,6 +50,7 @@ type CompileMdxOptions = Pick<
   | 'staticImage'
   | 'search'
   | 'defaultShowCopyCode'
+  | 'defaultWordWrap'
   | 'readingTime'
   | 'latex'
   | 'codeHighlight'
@@ -85,6 +86,7 @@ export async function compileMdx(
     latex,
     codeHighlight,
     defaultShowCopyCode,
+    defaultWordWrap,
     mdxOptions = {},
     filePath = '',
     useCachedCompiler,
@@ -188,7 +190,7 @@ export async function compileMdx(
             passThrough: ['mdxjsEsm', 'mdxJsxFlowElement', 'mdxTextExpression']
           }
         ],
-        [rehypeParseCodeMeta, { defaultShowCopyCode }],
+        [rehypeParseCodeMeta, { defaultShowCopyCode, defaultWordWrap }],
         // Should be before `rehypePrettyCode`
         latex &&
           (typeof latex === 'object'

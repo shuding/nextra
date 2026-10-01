@@ -611,6 +611,53 @@ describe('Code block', () => {
     }
   })
 
+  describe('Word wrap', () => {
+    for (const codeHighlight of [true, false]) {
+      describe(`codeHighlight: ${codeHighlight}`, () => {
+        it('attach data-wrap with "word-wrap" meta', async () => {
+          const rawJs = await compileMdx('```js word-wrap\n```', {
+            mdxOptions,
+            codeHighlight,
+            search: true
+          })
+          expect(rawJs).toMatch('data-wrap=""')
+          expect(rawJs).not.toMatch('data-word-wrap=""')
+        })
+
+        it('attach data-wrap with "defaultWordWrap: true"', async () => {
+          const rawJs = await compileMdx('```js\n```', {
+            mdxOptions,
+            defaultWordWrap: true,
+            codeHighlight,
+            search: true
+          })
+          expect(rawJs).toMatch('data-wrap=""')
+          expect(rawJs).not.toMatch('data-word-wrap=""')
+        })
+
+        it('not attach data-wrap with "defaultWordWrap: true" and "word-wrap=false"', async () => {
+          const rawJs = await compileMdx('```js word-wrap=false\n```', {
+            mdxOptions,
+            defaultWordWrap: true,
+            codeHighlight
+          })
+          expect(rawJs).not.toMatch('data-wrap=""')
+          expect(rawJs).not.toMatch('data-word-wrap=""')
+        })
+
+        it('keep toggle (data-word-wrap) by default without always-on wrap', async () => {
+          const rawJs = await compileMdx('```js\n```', {
+            mdxOptions,
+            codeHighlight,
+            search: true
+          })
+          expect(rawJs).toMatch('data-word-wrap=""')
+          expect(rawJs).not.toMatch('data-wrap=""')
+        })
+      })
+    }
+  })
+
   describe('toc', () => {
     it('should attach heading', async () => {
       const rawMdx = `<Tabs items={['pnpm', 'npm', 'yarn']} defaultIndex="1">

@@ -62,6 +62,15 @@ export const NextraConfigSchema = z.strictObject({
 >
 > You could still disable the button for specific blocks using \`copy=false\` attribute.`
     }),
+  defaultWordWrap: z
+    .boolean()
+    .optional()
+    .meta({
+      description: `Enable soft-wrapping for all code blocks by default (including desktop), without needing to set \`word-wrap\` attribute in the code block metadata.
+> [!TIP]
+>
+> You could still disable wrapping for specific blocks using \`word-wrap=false\` attribute.`
+    }),
   search: z
     .union([
       z.boolean(),

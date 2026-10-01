@@ -8,6 +8,14 @@ export interface NextraConfig {
   defaultShowCopyCode?: boolean
 
   /**
+   * Enable soft-wrapping for all code blocks by default (including desktop), without needing to set `word-wrap` attribute in the code block metadata.
+   * > [!TIP]
+   * >
+   * > You could still disable wrapping for specific blocks using `word-wrap=false` attribute.
+   */
+  defaultWordWrap?: boolean
+
+  /**
    * Option to enable search functionality. When enabled, it sets the `data-pagefind-body` attribute on the `<main>` element.
    * > [!TIP]
    * >
