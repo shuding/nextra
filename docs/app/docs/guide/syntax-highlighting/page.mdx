@@ -113,6 +113,34 @@ console.log('hello, world')
 >  your Nextra configuration (`next.config.mjs` file). Once it's enabled
 >  globally, you can disable it via the `copy=false` attribute.
 
+### Word wrap
+
+By default, long lines in code blocks scroll horizontally. Add a `word-wrap`
+attribute to soft-wrap a block at all breakpoints (including desktop):
+
+````md copy=false filename="Markdown"
+```js word-wrap
+console.log('a very long line that will soft-wrap instead of forcing horizontal scroll')
+```
+````
+
+Renders:
+
+```js word-wrap
+console.log('a very long line that will soft-wrap instead of forcing horizontal scroll')
+```
+
+> [!NOTE]
+>
+> You can enable soft-wrapping globally by setting `defaultWordWrap: true` in
+> your Nextra configuration (`next.config.mjs` file). Once it's enabled
+> globally, you can disable it for a specific block via the `word-wrap=false`
+> attribute.
+>
+> On viewports below `md`, code blocks also expose a word-wrap toggle button
+> unless wrapping is disabled with `word-wrap=false` or already enabled for that
+> block.
+
 ### Line numbers
 
 You can add line numbers to your code blocks by adding a `showLineNumbers`

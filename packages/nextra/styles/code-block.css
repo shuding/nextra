@@ -46,9 +46,15 @@ pre code.nextra-code:not([class*='twoslash-']) {
     }
   }
 
+  /* Mobile toggle: page-level html flag (max-md only). */
   html[data-nextra-word-wrap] & {
     @apply x:max-md:whitespace-pre-wrap;
   }
+}
+
+/* Always-on soft wrap via per-<pre> signal (all breakpoints). */
+pre[data-wrap] code.nextra-code:not([class*='twoslash-']) {
+  @apply x:whitespace-pre-wrap;
 }
 
 .nextra-copy-icon {

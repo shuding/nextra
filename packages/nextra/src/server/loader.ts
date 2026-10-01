@@ -69,6 +69,7 @@ export async function loader(
   const {
     isPageImport,
     defaultShowCopyCode,
+    defaultWordWrap,
     search,
     staticImage,
     readingTime: _readingTime,
@@ -151,6 +152,7 @@ export async function loader(
     },
     readingTime: _readingTime,
     defaultShowCopyCode,
+    defaultWordWrap,
     staticImage,
     search,
     latex,
