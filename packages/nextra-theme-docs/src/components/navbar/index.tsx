@@ -5,6 +5,7 @@ import NextLink from 'next/link'
 import { Anchor } from 'nextra/components'
 import { DiscordIcon, GitHubIcon } from 'nextra/icons'
 import type { FC, ReactNode } from 'react'
+import { getLogoLinkLabel } from '../../utils'
 import { ClientNavbar } from './index.client'
 
 interface NavbarProps {
@@ -102,7 +103,7 @@ export const Navbar: FC<NavbarProps> = ({
               logoClass,
               'x:transition-opacity x:focus-visible:nextra-focus x:hover:opacity-75'
             )}
-            aria-label="Home page"
+            aria-label={getLogoLinkLabel(logo)}
           >
             {logo}
           </NextLink>
