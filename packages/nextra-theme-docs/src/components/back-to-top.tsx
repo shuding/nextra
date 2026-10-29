@@ -2,15 +2,18 @@ import cn from 'clsx'
 import { Button } from 'nextra/components'
 import { ArrowRightIcon } from 'nextra/icons'
 import type { ComponentProps, FC, ReactNode } from 'react'
-
-const SCROLL_TO_OPTIONS = { top: 0, behavior: 'smooth' } as const
+import { getScrollBehavior } from '../utils'
 
 const scrollToTop: ComponentProps<'button'>['onClick'] = event => {
   const buttonElement = event.currentTarget
   const tocElement = buttonElement.parentElement!.parentElement!
 
-  window.scrollTo(SCROLL_TO_OPTIONS)
-  tocElement.scrollTo(SCROLL_TO_OPTIONS)
+  const scrollToOptions: ScrollToOptions = {
+    top: 0,
+    behavior: getScrollBehavior()
+  }
+  window.scrollTo(scrollToOptions)
+  tocElement.scrollTo(scrollToOptions)
 
   // Fixes https://github.com/facebook/react/issues/20770
   // Fixes https://github.com/shuding/nextra/issues/2917

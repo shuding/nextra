@@ -6,7 +6,7 @@ import type { FC } from 'react'
 import { useEffect, useRef } from 'react'
 import scrollIntoView from 'scroll-into-view-if-needed'
 import { useActiveAnchor, useConfig, useThemeConfig, useTOC } from '../stores'
-import { getGitIssueUrl, gitUrlParse } from '../utils'
+import { getGitIssueUrl, getScrollBehavior, gitUrlParse } from '../utils'
 import { BackToTop } from './back-to-top'
 
 type TOCProps = {
@@ -44,7 +44,7 @@ export const TOC: FC<TOCProps> = ({ filePath, pageTitle }) => {
     if (!anchor) return
 
     scrollIntoView(anchor, {
-      behavior: 'smooth',
+      behavior: getScrollBehavior(),
       block: 'center',
       inline: 'center',
       scrollMode: 'if-needed',
