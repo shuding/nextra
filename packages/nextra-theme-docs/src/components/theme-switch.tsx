@@ -26,6 +26,7 @@ export const ThemeSwitch: FC<ThemeSwitchProps> = ({ lite, className }) => {
     <Select
       className={cn('x:flex x:items-center x:gap-2', className)}
       title="Change theme"
+      aria-label={lite ? `Change theme (${themeSwitch[id]})` : undefined}
       options={[
         { id: 'light', name: themeSwitch.light },
         { id: 'dark', name: themeSwitch.dark },

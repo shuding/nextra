@@ -23,6 +23,7 @@ interface MenuProps {
   onChange: Dispatch<string>
   options: MenuOption[]
   title?: string
+  'aria-label'?: string
   className?: string
   anchor?: AnchorPropsWithSelection
 }
@@ -33,12 +34,14 @@ export const Select: FC<MenuProps> = ({
   selectedOption,
   value,
   title,
+  'aria-label': ariaLabel,
   className,
   anchor = { to: 'top start', gap: 10 }
 }) => {
   return (
     <Listbox value={value} onChange={onChange}>
       <ListboxButton
+        aria-label={ariaLabel}
         title={title}
         className={({ hover, open, focus }) =>
           cn(
